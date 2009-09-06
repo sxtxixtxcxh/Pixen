@@ -1,0 +1,14 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = FlatButtonCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
+        {CLASS = FlatButtonControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {CLASS = FlatButtonControlPalette; LANGUAGE = ObjC; SUPERCLASS = IBPalette; }, 
+        {CLASS = FlatButtonPopupCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
+        {CLASS = FlatButtonPopupControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {CLASS = NSObject; LANGUAGE = ObjC; }, 
+        {CLASS = TEst; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = TEstPalette; LANGUAGE = ObjC; SUPERCLASS = IBPalette; }
+    ); 
+    IBVersion = 1; 
+}

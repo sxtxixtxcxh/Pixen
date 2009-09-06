@@ -1,0 +1,375 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6164099A087D9BE9002CB5F7 /* PXColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 61640999087D9BE9002CB5F7 /* PXColorPicker.m */; };
+		616409AD087D9ECB002CB5F7 /* PXPaletteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 616409AC087D9ECB002CB5F7 /* PXPaletteView.m */; };
+		616409B2087DA00D002CB5F7 /* PXColorPickerColorWell.m in Sources */ = {isa = PBXBuildFile; fileRef = 616409B1087DA00D002CB5F7 /* PXColorPickerColorWell.m */; };
+		616409B7087DA2CD002CB5F7 /* PXColorPicker.nib in Resources */ = {isa = PBXBuildFile; fileRef = 616409B5087DA2CD002CB5F7 /* PXColorPicker.nib */; };
+		61640A1D087DA416002CB5F7 /* PXPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 61640A1C087DA416002CB5F7 /* PXPalette.m */; };
+		61640A34087DA51C002CB5F7 /* PXNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 61640A33087DA51C002CB5F7 /* PXNotifications.m */; };
+		61E0669B087DADA200DDAB02 /* gradienthing.png in Resources */ = {isa = PBXBuildFile; fileRef = 61E0669A087DADA200DDAB02 /* gradienthing.png */; };
+		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
+		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		014CEA420018CDE011CA2923 /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		014CEA430018CDE011CA2923 /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXFileReference section */
+		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		32DBCF630370AF2F00C91783 /* PXColorPicker_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXColorPicker_Prefix.pch; sourceTree = "<group>"; };
+		61640998087D9BE9002CB5F7 /* PXColorPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXColorPicker.h; sourceTree = "<group>"; };
+		61640999087D9BE9002CB5F7 /* PXColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXColorPicker.m; sourceTree = "<group>"; };
+		616409AB087D9ECB002CB5F7 /* PXPaletteView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PXPaletteView.h; path = ../PXPaletteView.h; sourceTree = SOURCE_ROOT; };
+		616409AC087D9ECB002CB5F7 /* PXPaletteView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PXPaletteView.m; path = ../PXPaletteView.m; sourceTree = SOURCE_ROOT; };
+		616409B0087DA00D002CB5F7 /* PXColorPickerColorWell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXColorPickerColorWell.h; sourceTree = "<group>"; };
+		616409B1087DA00D002CB5F7 /* PXColorPickerColorWell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXColorPickerColorWell.m; sourceTree = "<group>"; };
+		616409B6087DA2CD002CB5F7 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXColorPicker.nib; sourceTree = "<group>"; };
+		61640A1B087DA416002CB5F7 /* PXPalette.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PXPalette.h; path = ../PXPalette.h; sourceTree = SOURCE_ROOT; };
+		61640A1C087DA416002CB5F7 /* PXPalette.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PXPalette.m; path = ../PXPalette.m; sourceTree = SOURCE_ROOT; };
+		61640A32087DA51C002CB5F7 /* PXNotifications.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PXNotifications.h; path = ../PXNotifications.h; sourceTree = SOURCE_ROOT; };
+		61640A33087DA51C002CB5F7 /* PXNotifications.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PXNotifications.m; path = ../PXNotifications.m; sourceTree = SOURCE_ROOT; };
+		61E0669A087DADA200DDAB02 /* gradienthing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradienthing.png; sourceTree = "<group>"; };
+		8D5B49B6048680CD000E48DA /* PXColorPicker.colorPicker */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PXColorPicker.colorPicker; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D5B49B3048680CD000E48DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* PXColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AFFE84173DC02AAC07 /* Classes */,
+				32C88E010371C26100C91783 /* Other Sources */,
+				089C167CFE841241C02AAC07 /* Resources */,
+				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
+				19C28FB8FE9D52D311CA2CBB /* Products */,
+			);
+			name = PXColorPicker;
+			sourceTree = "<group>";
+		};
+		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
+				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
+			);
+			name = "Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				61E0669A087DADA200DDAB02 /* gradienthing.png */,
+				616409B5087DA2CD002CB5F7 /* PXColorPicker.nib */,
+				8D5B49B7048680CD000E48DA /* Info.plist */,
+				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77AFFE84173DC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				61640A32087DA51C002CB5F7 /* PXNotifications.h */,
+				61640A33087DA51C002CB5F7 /* PXNotifications.m */,
+				61640A1B087DA416002CB5F7 /* PXPalette.h */,
+				61640A1C087DA416002CB5F7 /* PXPalette.m */,
+				61640998087D9BE9002CB5F7 /* PXColorPicker.h */,
+				61640999087D9BE9002CB5F7 /* PXColorPicker.m */,
+				616409AB087D9ECB002CB5F7 /* PXPaletteView.h */,
+				616409AC087D9ECB002CB5F7 /* PXPaletteView.m */,
+				616409B0087DA00D002CB5F7 /* PXColorPickerColorWell.h */,
+				616409B1087DA00D002CB5F7 /* PXColorPickerColorWell.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7AEFEA557BF11CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				089C167FFE841241C02AAC07 /* AppKit.framework */,
+				D2F7E65807B2D6F200F64583 /* CoreData.framework */,
+				089C1672FE841209C02AAC07 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FB8FE9D52D311CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D5B49B6048680CD000E48DA /* PXColorPicker.colorPicker */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		32C88E010371C26100C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32DBCF630370AF2F00C91783 /* PXColorPicker_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D5B49AC048680CD000E48DA /* PXColorPicker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6164099B087D9BEA002CB5F7 /* Build configuration list for PBXNativeTarget "PXColorPicker" */;
+			buildPhases = (
+				8D5B49AF048680CD000E48DA /* Resources */,
+				8D5B49B1048680CD000E48DA /* Sources */,
+				8D5B49B3048680CD000E48DA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PXColorPicker_Prefix.pch;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				PREBINDING = NO;
+				PRODUCT_NAME = PXColorPicker;
+				WRAPPER_EXTENSION = bundle;
+			};
+			dependencies = (
+			);
+			name = PXColorPicker;
+			productInstallPath = "$(HOME)/Library/Bundles";
+			productName = PXColorPicker;
+			productReference = 8D5B49B6048680CD000E48DA /* PXColorPicker.colorPicker */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 6164099F087D9BEA002CB5F7 /* Build configuration list for PBXProject "PXColorPicker" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				014CEA420018CDE011CA2923 /* Debug */,
+				014CEA430018CDE011CA2923 /* Release */,
+			);
+			hasScannedForEncodings = 1;
+			mainGroup = 089C166AFE841209C02AAC07 /* PXColorPicker */;
+			projectDirPath = "";
+			targets = (
+				8D5B49AC048680CD000E48DA /* PXColorPicker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D5B49AF048680CD000E48DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
+				616409B7087DA2CD002CB5F7 /* PXColorPicker.nib in Resources */,
+				61E0669B087DADA200DDAB02 /* gradienthing.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D5B49B1048680CD000E48DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6164099A087D9BE9002CB5F7 /* PXColorPicker.m in Sources */,
+				616409AD087D9ECB002CB5F7 /* PXPaletteView.m in Sources */,
+				616409B2087DA00D002CB5F7 /* PXColorPickerColorWell.m in Sources */,
+				61640A1D087DA416002CB5F7 /* PXPalette.m in Sources */,
+				61640A34087DA51C002CB5F7 /* PXNotifications.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C167DFE841241C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C167EFE841241C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		616409B5087DA2CD002CB5F7 /* PXColorPicker.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				616409B6087DA2CD002CB5F7 /* English */,
+			);
+			name = PXColorPicker.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6164099C087D9BEA002CB5F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PXColorPicker_Prefix.pch;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/ColorPickers";
+				PREBINDING = YES;
+				PRODUCT_NAME = PXColorPicker;
+				WRAPPER_EXTENSION = colorPicker;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		6164099D087D9BEA002CB5F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PXColorPicker_Prefix.pch;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/ColorPickers";
+				PREBINDING = YES;
+				PRODUCT_NAME = PXColorPicker;
+				WRAPPER_EXTENSION = colorPicker;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		6164099E087D9BEA002CB5F7 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PXColorPicker_Prefix.pch;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/ColorPickers";
+				PREBINDING = YES;
+				PRODUCT_NAME = PXColorPicker;
+				WRAPPER_EXTENSION = colorPicker;
+			};
+			name = Default;
+		};
+		616409A0087D9BEA002CB5F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		616409A1087D9BEA002CB5F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		616409A2087D9BEA002CB5F7 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6164099B087D9BEA002CB5F7 /* Build configuration list for PBXNativeTarget "PXColorPicker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6164099C087D9BEA002CB5F7 /* Debug */,
+				6164099D087D9BEA002CB5F7 /* Release */,
+				6164099E087D9BEA002CB5F7 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		6164099F087D9BEA002CB5F7 /* Build configuration list for PBXProject "PXColorPicker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				616409A0087D9BEA002CB5F7 /* Debug */,
+				616409A1087D9BEA002CB5F7 /* Release */,
+				616409A2087D9BEA002CB5F7 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

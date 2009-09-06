@@ -1,0 +1,29 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {cancel = id; }; 
+            CLASS = OSProgressPopup; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                cancelButton = id; 
+                progressIndicator = NSProgressIndicator; 
+                statusField = NSTextField; 
+                window = NSWindow; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = OSProgressThread; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                progress = NSProgressIndicator; 
+                statusField = NSTextField; 
+                window = NSWindow; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = OSProgressWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }
+    ); 
+    IBVersion = 1; 
+}

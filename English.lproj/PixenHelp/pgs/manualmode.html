@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/sgml/loosedtd.html">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link media="all" rel="stylesheet" href="../css/task_style.css">
+<title>Using the manual palette mode for low-color images</title>
+<meta name="keywords" content="manual mode, low-color, low color, palette, quantize, reduce colors, color scheme, color">
+<meta name="description" content="Learn how to use Pixen's manual palette mode to make low-color images.">
+</head>
+<body>
+<div id="banner">
+<div id="machelp">
+<a name="manualmode"></a>
+<a name="palette"></a>
+<a class="bread" href="help:anchor='access' bookID=Pixen Help">Pixen Help</a>
+</div>
+<div id="index">
+<a class="leftborder" href="help:anchor='xall' bookID=Pixen Help">Index</a>
+</div>
+</div>
+<div id="mainbox">
+<div id="caticon">
+<img class="icon" src="../gfx/pixenicon.png" alt="Pixen icon" height="30" width="36" border="0" /></div>
+<div id="pagetitle">
+<h1>Using the manual palette mode for low-color images</h1>
+</div>
+
+<p>Pixen's default behavior is to add colors to the document palette as you use them, which is the most convenient for most kinds of work. But if you're trying to make, say, a sprite for a cell phone game where you have 32 very specific colors you can use, you need Pixen to be more strict. Fortunately, it's willing.</p>
+
+<p>In the manual palette mode, Pixen will not automaticaly add any colors to your palette or touch it in any way. If you want to use a new color, you'll have to add it yourself. If you start drawing with a color that is not in the palette you've specified, Pixen will draw with the closest one.</p>
+
+<div id="taskbox">
+<p>
+<strong>To enable manual palette mode:</strong><p>
+<ul>
+<li>Choose Switch to Manual Mode... from the Palette menu.</li>
+<li>Choose the palette you want to lock the document to and specify any parameters you'd like to customize.</li>
+<li>Click Restrict.</li>
+</ul>
+</p>
+</div>
+
+<p>Alpha values are not supported in manual palette mode because they can result in adverse colors through blending. For the same reason, layer opacity cannot be adjusted in manual palette mode.</p>
+
+<p>If you specify a number of colors fewer than the number in the document, Pixen will create a new palette with the specified number by quantizing the document. This can result in some loss of detail.</p>
+
+<h2 class="seealso">See also</h2>
+<p class="seealso">
+<a href="workingwithpalettes.html">Working with palettes</a><br />
+<a href="help:topic_list=palette bookID=Pixen Help template=css/genlist.html stylesheet=css/genlist_style.css Other=Palette Topics">Palette Topics</a>
+</p>	
+</div>
+</body>
+</html>

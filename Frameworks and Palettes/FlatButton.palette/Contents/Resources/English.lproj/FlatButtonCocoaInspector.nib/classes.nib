@@ -1,0 +1,56 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                continuousButton = id; 
+                hiddenButton = id; 
+                iconOnlyButton = id; 
+                metalButton = id; 
+                setControlEnable = id; 
+                tabsButton = id; 
+                textAlignButton = id; 
+                toggleButton = id; 
+            }; 
+            CLASS = FlatButtonControlInspector; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                controlContinuousMode = NSButton; 
+                controlEnableMode = NSButton; 
+                controlHiddenMode = NSButton; 
+                controlIconNameTextField = NSTextField; 
+                controlIconOnly = NSButton; 
+                controlMetalMode = NSButton; 
+                controlTabMode = NSButton; 
+                controlTagTextField = NSTextField; 
+                controlTextAlign = NSPopUpButton; 
+                controlTitleTextField = NSTextField; 
+                controlToggleMode = NSButton; 
+            }; 
+            SUPERCLASS = IBInspector; 
+        }, 
+        {
+            ACTIONS = {
+                continuousButton = id; 
+                hiddenButton = id; 
+                setControlEnable = id; 
+                stretchButton = id; 
+                toggleButton = id; 
+            }; 
+            CLASS = MembraneCocoaInspector; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                controlContinuousMode = NSButton; 
+                controlEnableMode = NSButton; 
+                controlHiddenMode = NSButton; 
+                controlIconNameTextField = NSTextField; 
+                controlStretchMode = NSButton; 
+                controlTagTextField = NSTextField; 
+                controlTitleTextField = NSTextField; 
+                controlToggleMode = NSButton; 
+            }; 
+            SUPERCLASS = IBInspector; 
+        }
+    ); 
+    IBVersion = 1; 
+}

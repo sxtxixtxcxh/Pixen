@@ -1,0 +1,38 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NSObject; LANGUAGE = ObjC; }, 
+        {CLASS = PXActionButton; LANGUAGE = ObjC; SUPERCLASS = NSPopUpButton; }, 
+        {
+            ACTIONS = {
+                deletePalette = id; 
+                displayHelp = id; 
+                duplicatePalette = id; 
+                exportPalette = id; 
+                installPalette = id; 
+                newPalette = id; 
+                popOut = id; 
+                renamePalette = id; 
+            }; 
+            CLASS = PXColorPicker; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                gearMenu = id; 
+                paletteSelector = PXPaletteSelector; 
+                paletteView = PXPaletteView; 
+                pickerView = NSView; 
+            }; 
+            SUPERCLASS = NSColorPicker; 
+        }, 
+        {
+            ACTIONS = {selectionChanged = id; }; 
+            CLASS = PXPaletteSelector; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {delegate = id; selectionPopup = NSPopUpButton; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = PXPaletteView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = PXPaletteViewScrollView; LANGUAGE = ObjC; SUPERCLASS = NSScrollView; }
+    ); 
+    IBVersion = 1; 
+}

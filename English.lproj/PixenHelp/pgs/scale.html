@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/sgml/loosedtd.html">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link media="all" rel="stylesheet" href="../css/task_style.css">
+<title>Scaling the canvas</title>
+<meta name="keywords" content="scale canvas, scale, scaling, stretch, resize">
+<meta name="description" content="The scaling sheet allows you to stretch the image to a new size.">
+</head>
+<body>
+<div id="banner">
+<div id="machelp">
+<a name="scale"></a>
+<a name="canvas"></a>
+<a class="bread" href="help:anchor='access' bookID=Pixen Help">Pixen Help</a>
+</div>
+<div id="index">
+<a class="leftborder" href="help:anchor='xall' bookID=Pixen Help">Index</a>
+</div>
+</div>
+<div id="mainbox">
+<div id="caticon">
+<img class="icon" src="../gfx/pixenicon.png" alt="Pixen icon" height="30" width="36" border="0" /></div>
+<div id="pagetitle">
+<h1>Scaling the canvas</h1>
+</div>
+<p>Though it is rarely suitable for pixel art, Pixen does provide a sheet for scaling your canvas. If you'd rather merely pad it, <a href="resize.html">resizing the canvas</a> is what you need. The scaling sheet is accessible by Edit > Scale Canvas... We provide several algorithms for scaling, and it's important to choose the right one to get a good result.</p>
+
+<div summary="To change the size of the canvas" id="taskbox">
+<p>
+<strong>To double the size of the canvas:</strong><p>
+If you just wish to double the size of the canvas in each dimension, Scale2x will yield spectacular results without destroying your palette. Unfortunately, this algorithm cannot be used for any scaling factors that aren't powers of two (2x, 4x, 8x, 16x, etc)<p>
+<strong>To multiply the dimensions by integer scaling factors:</strong><p>
+If you're multiplying the width and the height by integer scale factors (it doesn't have to be the same one), Nearest Neighbor will yield results that are the least lossy to your palette, which is desirable in most cases of pixel art.<p>
+<strong>For anything else:</strong><p>
+For non-integer scaling factors or more "fuzzy" results, the bicubic algorithm will yield good results, but be warned: it will add many, many colors to your palette in its attempts to approximate the scale.
+</p>
+</div>
+
+<h2 class="seealso">See also</h2>
+<p class="seealso">
+<a href="resize.html">Resizing the canvas</a><br />
+<a href="help:topic_list=canvas bookID=Pixen Help template=css/genlist.html stylesheet=css/genlist_style.css Other=Manipulating the canvas">Manipulating the canvas</a>
+</p>
+</div>
+</body>
+</html>

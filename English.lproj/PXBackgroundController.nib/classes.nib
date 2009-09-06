@@ -1,0 +1,50 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NSObject; LANGUAGE = ObjC; }, 
+        {
+            CLASS = OSStackedView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {delegate = id; }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {
+            CLASS = PXBackgroundController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                alternateBackgroundView = PXBackgroundInfoView; 
+                defaultsStack = OSStackedView; 
+                delegate = id; 
+                mainBackgroundView = PXBackgroundInfoView; 
+                mainStack = OSStackedView; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {
+            ACTIONS = {nameChanged = id; }; 
+            CLASS = PXBackgroundInfoView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                configuratorContainer = NSView; 
+                delegate = id; 
+                imageView = PXNSImageView; 
+                nameField = NSTextField; 
+            }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {CLASS = PXBackgroundPreviewView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            CLASS = PXBackgroundTableHeader; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = FlatButtonControl; 
+        }, 
+        {
+            CLASS = PXBackgroundTemplateScrollView; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSScrollView; 
+        }, 
+        {CLASS = PXBackgroundsPanel; LANGUAGE = ObjC; SUPERCLASS = NSPanel; }, 
+        {CLASS = PXNSImageView; LANGUAGE = ObjC; SUPERCLASS = NSImageView; }
+    ); 
+    IBVersion = 1; 
+}

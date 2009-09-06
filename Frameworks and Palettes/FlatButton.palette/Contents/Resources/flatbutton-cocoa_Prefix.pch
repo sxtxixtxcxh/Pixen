@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'membrane-cocoa' target in the 'membrane-cocoa' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+    #import <InterfaceBuilder/InterfaceBuilder.h>
+#endif
