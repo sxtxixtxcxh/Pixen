@@ -47,7 +47,6 @@
 #import "PXIconExporter.h"
 #import "gif_lib.h"
 #import "PXAnimatedGifExporter.h"
-#import "PXJPEGSizePrompter.h"
 #import "PXLayer.h"
 #import "PXBitmapImporter.h"
 #import <AppKit/NSAlert.h>
