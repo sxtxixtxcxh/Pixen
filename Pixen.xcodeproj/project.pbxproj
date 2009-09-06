@@ -1050,7 +1050,7 @@
 		EACDBD800878B37100564512 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXBackgroundTemplateView.nib; sourceTree = "<group>"; };
 		EAE126D0054F41A9001208D9 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXImageBackgroundConfigurator.nib; sourceTree = "<group>"; };
 		EAF21E2A08AD0CFD0037A23B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPalettePanel.nib; sourceTree = "<group>"; };
-		EAF6951606A9AE0B0019D8D7 /* Info-Pixen__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Pixen__Upgraded_.plist"; sourceTree = "<group>"; };
+		EAF6951606A9AE0B0019D8D7 /* Info-Pixen.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Pixen.plist"; sourceTree = "<group>"; };
 		EAF6951706A9AE0B0019D8D7 /* Pixen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pixen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1117,7 +1117,7 @@
 				EA90F6CC06D1239C001755A6 /* Localizable Resources */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
-				EAF6951606A9AE0B0019D8D7 /* Info-Pixen__Upgraded_.plist */,
+				EAF6951606A9AE0B0019D8D7 /* Info-Pixen.plist */,
 			);
 			name = Pixen;
 			sourceTree = "<group>";
