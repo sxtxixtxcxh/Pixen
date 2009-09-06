@@ -95,15 +95,17 @@ fromCanvasController:(PXCanvasController *) controller
 	if (shouldFill)
     {
 		// careful about backwards-drawn rectangles...
-		unsigned int oldColor = [self colorIndexForCanvas:canvas];
-		PXPalette *palette = [canvas palette];
-		if (![propertiesView shouldUseMainColorForFill]) { colorIndex = PXPalette_indexOfColorAddingIfNotPresent(palette, [propertiesView fillColor]); }
+		NSColor * oldColor = [self colorForCanvas:canvas];
+		if (![propertiesView shouldUseMainColorForFill]) 
+		{ 
+			color = [propertiesView fillColor];
+		}
 		[self drawRect:NSMakeRect(leftMost + borderWidth,
 								  bottomMost + borderWidth,
 								  rightMost - leftMost - 2*borderWidth,
 								  topMost - bottomMost - 2*borderWidth)
 			  inCanvas:canvas];
-		colorIndex = oldColor;
+		color = oldColor;
     }
 	[self drawRect:NSMakeRect(leftMost, bottomMost, rightMost - leftMost, borderWidth) inCanvas:canvas];
 	[self drawRect:NSMakeRect(leftMost, topMost-borderWidth, rightMost - leftMost, borderWidth) inCanvas:canvas];
@@ -115,9 +117,7 @@ fromCanvasController:(PXCanvasController *) controller
 				   toPoint:(NSPoint)aPoint
 				  inCanvas:(PXCanvas *)canvas
 {
-	[canvas beginOptimizedSetting];
 	[self drawFromPoint:origin toPoint:aPoint inCanvas:canvas shouldFill:[propertiesView shouldFill]];
-	[canvas endOptimizedSetting];
 }
 
 - (void)drawFromPoint:(NSPoint)origin 
@@ -132,7 +132,6 @@ fromCanvasController:(PXCanvasController *) controller
 					  to:(NSPoint)finalPoint
     fromCanvasController:(PXCanvasController *)controller
 {
-	[self recacheColorIfNecessaryFromController:controller];
     NSPoint backupOrigin = _origin;
     [super mouseDraggedFrom:initialPoint 
 						 to:finalPoint

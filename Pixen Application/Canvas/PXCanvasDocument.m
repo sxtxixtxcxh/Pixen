@@ -45,21 +45,12 @@
 #import "PXCanvasPrintView.h"
 #import "PXLayerController.h"
 #import "PXIconExporter.h"
-#ifdef __COCOA__
 #import "gif_lib.h"
-#endif
 #import "PXAnimatedGifExporter.h"
+#import "PXJPEGSizePrompter.h"
 #import "PXLayer.h"
 #import "PXBitmapImporter.h"
-#ifdef __COCOA__
 #import <AppKit/NSAlert.h>
-#endif
-
-#ifndef __COCOA__
-#include <math.h>
-#import "NSArray_DeepMutableCopy.h"
-#import "PXNotifications.h"
-#endif
 
 
 @implementation PXCanvasDocument
@@ -86,7 +77,9 @@
 
 - (void)dealloc
 {
-    [canvas release];
+	[windowController releaseCanvas];
+	[canvas release];
+//	[[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }
 
@@ -113,6 +106,10 @@ BOOL isPowerOfTwo(int num)
 
 - (void)saveToFile:(NSString *)fileName saveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo
 {
+	if(fileName == nil) 
+	{
+		return;
+	}
 	// this kind of stuff should probably be factored out to some kind of archiving object
 	if ([[self fileTypeFromLastRunSavePanel] isEqualToString:JPEGFileType])
 	{
@@ -162,11 +159,8 @@ BOOL isPowerOfTwo(int num)
 	if([aType isEqualToString:GIFFileType])
     {	
 		id exportCanvas = canvas;
-		if (PXPalette_colorCount([canvas palette]))
-		{
-			exportCanvas = [canvas copy];
-			[exportCanvas reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
-		}
+		exportCanvas = [canvas copy];
+		[exportCanvas reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
 		id exporter = [[PXAnimatedGifExporter alloc] initWithSize:[canvas size] iterations:1];
 		[exporter writeCanvas:exportCanvas withDuration:0 transparentColor:nil];
 		[exporter finalizeExport];
@@ -254,12 +248,6 @@ BOOL isPowerOfTwo(int num)
 	{
 		[canvas release];
 		canvas = [[PXCanvas alloc] initWithoutBackgroundColor];
-		id colorArray = [[PXBitmapImporter sharedBitmapImporter] colorsInBMPData:data];
-		id enumerator = [colorArray objectEnumerator], current;
-		while (current = [enumerator nextObject])
-		{
-			PXPalette_addColor([canvas palette], current);
-		}
 		[canvas replaceActiveLayerWithImage:[[[NSImage alloc] initWithData:data] autorelease]];
 	}
 	else

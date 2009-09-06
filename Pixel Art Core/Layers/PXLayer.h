@@ -27,6 +27,7 @@
 //
 #import <AppKit/AppKit.h>
 #import "PXImage.h"
+#import "PXPalette.h"
 @class PXLayerController, PXCanvas;
 @interface PXLayer : NSObject <NSCoding, NSCopying> {
 	id name;
@@ -38,16 +39,18 @@
 	NSBezierPath *meldedBezier;
 	NSColor *meldedColor;
 	
+	NSImage *cachedSourceOutImage;
+	
 //	NSUndoManager *undoManager;
 	
 	PXCanvas *canvas;
 }
-+ (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image origin:(NSPoint)origin size:(NSSize)sz palette:(PXPalette *)pal;
-+ (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image size:(NSSize)sz palette:(PXPalette *)pal;
++ (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image origin:(NSPoint)origin size:(NSSize)sz;
++ (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image size:(NSSize)sz;
 
 - (id) initWithName:(NSString *)aName image:(PXImage *)anImage;
 - (id)initWithName:(NSString *)aName size:(NSSize)size;
-- initWithName:(NSString *)aName size:(NSSize)size fillWithColorIndex:(unsigned int)index;
+- initWithName:(NSString *)aName size:(NSSize)size fillWithColor:(NSColor *)c;
 - (NSString *)name;
 - (void)setName:(NSString *) aName;
 - (PXImage *)image;
@@ -72,11 +75,8 @@ backgroundColor:(NSColor *)color;
 
 - (NSColor *)colorAtIndex:(unsigned int)index;
 - (NSColor *)colorAtPoint:(NSPoint)aPoint;
-- (unsigned int)colorIndexAtPoint:(NSPoint)point;
 - (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint;
-- (void)setColorIndex:(unsigned int)colorIndex atPoint:(NSPoint)aPoint;
-- (unsigned int)colorIndexAtIndex:(unsigned)index;
-- (void)setColorIndex:(unsigned int)index atIndex:(unsigned int)loc;
+- (void)setColor:(NSColor *)c atIndex:(unsigned int)loc;
 
 - (void)moveToPoint:(NSPoint)newOrigin;
 - (void)translateXBy:(float)amountX yBy:(float)amountY;
@@ -89,7 +89,7 @@ backgroundColor:(NSColor *)color;
 - (void)compositeNoBlendUnder:(PXLayer *)aLayer inRect:(NSRect)aRect;
 - (NSImage *)displayImage;
 - (NSImage *)exportImage;
-- (void)adaptToPaletteWithTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
+- (void)adaptToPalette:(PXPalette *)p withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
 
 - (void)meldBezier:(NSBezierPath *)path ofColor:(NSColor *)color;
 - (void)unmeldBezier;
@@ -98,21 +98,9 @@ backgroundColor:(NSColor *)color;
 - (void)flipVertically;
 - (void)rotateByDegrees:(int)degrees;
 
-- (void)beginOptimizedSettingWithPremadeImage:(NSImage *)premade;
-- (void)beginOptimizedSetting;
-- (void)endOptimizedSetting;
-
-- (void)removeColorIndicesAfter:(unsigned)index;
-
-- (void)setPalette:(PXPalette *)palette recache:(BOOL)recache;
-- (void)setPalette:(PXPalette *)palette;
 - (void)rotateByDegrees:(int)degrees;
 
 - (void)applyImage:(NSImage *)img;
 
 - (PXLayer *)layerAfterApplyingMove;
-- (void)recache;
-
-//- (void)incrementColorIndices:(NSArray *)indices;
-//- (void)decrementColorIndices:(NSArray *)indices;
 @end

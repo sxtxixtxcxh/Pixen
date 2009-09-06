@@ -35,10 +35,6 @@
 #import "PXPencilToolPropertiesView.h"
 #import "InterpolatePoint.h"
 
-#ifndef __COCOA__
-#include <math.h>
-#endif
-
 @implementation PXPencilTool
 
 - (NSString *)name
@@ -87,46 +83,12 @@
 				 atPoint:(NSPoint)aPoint
 				 inLayer:(PXLayer *)aLayer 
 				ofCanvas:(PXCanvas *) aCanvas
-		  calledFromUndo:(BOOL)calledFromUndo
 {
-	NSLog(@"-[PXPencilTool drawWithOldColor:newColor:atPoint:inLayer:ofCanvas:calledFromUndo:] is deprecated.  Please use something else.");
-	if(![aCanvas canDrawAtPoint:aPoint])
-		return; 
-#warning move undo to canvas!
-	id setColor = newColor;
-	[[[aCanvas undoManager] prepareWithInvocationTarget:self]
-    drawWithOldColor:newColor 
-			newColor:oldColor 
-			 atPoint:aPoint 
-			 inLayer:aLayer 
-			ofCanvas:aCanvas
-	  calledFromUndo:YES];
-	
-    [aLayer setColor:setColor atPoint:aPoint];
-    if (calledFromUndo) {
-		[aCanvas changedInRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
-	} else {
-		if (!NSEqualRects(changedRect, NSZeroRect)) {
-			changedRect = NSUnionRect(changedRect, NSMakeRect(aPoint.x, aPoint.y, 1, 1));
-		} else {
-			changedRect = NSMakeRect(aPoint.x, aPoint.y, 1, 1);
-		}
-	}
-}
-
-- (void)drawWithOldIndex:(unsigned int)oldIndex
-				newIndex:(unsigned int)newIndex
-				 atPoint:(NSPoint)aPoint
-				 inLayer:(PXLayer *)aLayer
-				ofCanvas:(PXCanvas *) aCanvas
-		  calledFromUndo:(BOOL)calledFromUndo
-{
-#warning move undo to canvas!  another warning because we really should do it.
 	if(![aCanvas canDrawAtPoint:aPoint]) 
     {
 		return; 
     }
-	if (!calledFromUndo && [self shouldUseBezierDrawing])
+	if ([self shouldUseBezierDrawing])
 	{
 		[path appendBezierPathWithRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
 		if ([aCanvas wraps]) {
@@ -146,25 +108,15 @@
 			[wrappedPath appendBezierPathWithRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
 		}
 	}
-	else if (oldIndex!=newIndex)
+	else// if (![oldColor isEqualTo:newColor])
 	{
-		[[[aCanvas undoManager] prepareWithInvocationTarget:self]
-    drawWithOldIndex:newIndex
-			newIndex:oldIndex
-			 atPoint:aPoint
-			 inLayer:aLayer
-			ofCanvas:aCanvas
-	  calledFromUndo:YES];
-		
-		[aLayer setColorIndex:newIndex atPoint:aPoint];
-		if (calledFromUndo) {
-			[aCanvas changedInRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
+		[aCanvas bufferUndoAtPoint:aPoint fromColor:oldColor toColor:newColor];
+		[aLayer setColor:newColor atPoint:aPoint];
+
+		if (!NSEqualRects(changedRect, NSZeroRect)) {
+			changedRect = NSUnionRect(changedRect, NSMakeRect(aPoint.x, aPoint.y, 1, 1));
 		} else {
-			if (!NSEqualRects(changedRect, NSZeroRect)) {
-				changedRect = NSUnionRect(changedRect, NSMakeRect(aPoint.x, aPoint.y, 1, 1));
-			} else {
-				changedRect = NSMakeRect(aPoint.x, aPoint.y, 1, 1);
-			}
+			changedRect = NSMakeRect(aPoint.x, aPoint.y, 1, 1);
 		}
 	}
 }
@@ -172,12 +124,11 @@
 - (void)drawPixelAtPoint:(NSPoint)aPoint inCanvas:(PXCanvas *)aCanvas
 {
 	if (![propertiesView respondsToSelector:@selector(lineThickness)]) {
-		[self drawWithOldIndex:[aCanvas colorIndexAtPoint:aPoint] 
-					  newIndex:[self colorIndexForCanvas:aCanvas] 
+		[self drawWithOldColor:[aCanvas colorAtPoint:aPoint] 
+					  newColor:[self colorForCanvas:aCanvas] 
 					   atPoint:aPoint 
 					   inLayer:[aCanvas activeLayer] 
-					  ofCanvas:aCanvas
-				calledFromUndo:NO];
+					  ofCanvas:aCanvas];
 		return;
 	}
 	
@@ -190,12 +141,11 @@
 			point.x += ceilf(aPoint.x - ([propertiesView patternSize].width / 2));
 			point.y += ceilf(aPoint.y - ([propertiesView patternSize].height / 2));
 			
-			[self drawWithOldIndex:[aCanvas colorIndexAtPoint:point] 
-						  newIndex:[self colorIndexForCanvas:aCanvas] 
+			[self drawWithOldColor:[aCanvas colorAtPoint:point] 
+						  newColor:[self colorForCanvas:aCanvas] 
 						   atPoint:point 
 						   inLayer:[aCanvas activeLayer]
-						  ofCanvas:aCanvas
-						 calledFromUndo:NO];
+						  ofCanvas:aCanvas];
 		}
 		
 		return;
@@ -209,13 +159,11 @@
 	for (x=NSMinX(rect); x<NSMaxX(rect); x++) {
 		for (y=NSMinY(rect); y<NSMaxY(rect); y++) {
 			NSPoint loc = NSMakePoint(x,y);
-#warning make pencil tool undo less obnoxious so we don't have to write atrocities like this
-			[self drawWithOldIndex:[aCanvas colorIndexAtPoint:loc] 
-						  newIndex:[self colorIndexForCanvas:aCanvas] 
+			[self drawWithOldColor:[aCanvas colorAtPoint:loc] 
+						  newColor:[self colorForCanvas:aCanvas] 
 						   atPoint:loc 
 						   inLayer:[aCanvas activeLayer] 
-						  ofCanvas:aCanvas 
-					calledFromUndo:NO];
+						  ofCanvas:aCanvas];
 		}
 	}
 }
@@ -225,9 +173,7 @@
 			inCanvas:(PXCanvas *) canvas
 {
 	NSPoint differencePoint = NSMakePoint(finalPoint.x - initialPoint.x, finalPoint.y - initialPoint.y);
-    NSPoint currentPoint = initialPoint;
-	[canvas beginOptimizedSetting];
-    
+    NSPoint currentPoint = initialPoint;    
     while(!NSEqualPoints(finalPoint, currentPoint))
     {
 		currentPoint = InterpolatePointFromPointByPoint(currentPoint, initialPoint, differencePoint);
@@ -236,7 +182,6 @@
 			[self drawPixelAtPoint:currentPoint inCanvas:canvas]; 
 		}
     }
-	[canvas endOptimizedSetting];
 }
 
 - (BOOL)drawsInitialPixel
@@ -251,6 +196,7 @@ fromCanvasController:(PXCanvasController*) controller
 	shouldUseBezierDrawing = NO;
 	[[[controller canvas] undoManager] setActionName:[self actionName]];
 	isDragging = YES;
+	[[controller canvas] clearUndoBuffers];
 	if (![self drawsInitialPixel]) { return; }
 	if (!shiftDown || [controller lastDrawnPoint].x == -1) {
 		[self drawPixelAtPoint:aPoint inCanvas:[controller canvas]];
@@ -311,7 +257,6 @@ fromCanvasController:(PXCanvasController *)controller
 					  to:(NSPoint)finalPoint
     fromCanvasController:(PXCanvasController *)controller
 {
-	[self recacheColorIfNecessaryFromController:controller];
 	if (!shiftDown) {
 		[controller setLastDrawnPoint:finalPoint];
 		[self drawLineFrom:initialPoint to:finalPoint inCanvas:[controller canvas]];
@@ -327,6 +272,7 @@ fromCanvasController:(PXCanvasController *)controller
 - (void)mouseUpAt:(NSPoint)aPoint 
 fromCanvasController:(PXCanvasController *) controller
 {
+	[[controller canvas] registerForUndo];
 	[super mouseUpAt:aPoint fromCanvasController:controller];
 	isDragging = NO;
 	shouldUseBezierDrawing = NO;

@@ -1,38 +1,142 @@
-{
-    IBClasses = (
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {CLASS = NSObject; LANGUAGE = ObjC; }, 
-        {CLASS = PXActionButton; LANGUAGE = ObjC; SUPERCLASS = NSPopUpButton; }, 
-        {
-            ACTIONS = {
-                deletePalette = id; 
-                displayHelp = id; 
-                duplicatePalette = id; 
-                exportPalette = id; 
-                installPalette = id; 
-                newPalette = id; 
-                popOut = id; 
-                renamePalette = id; 
-            }; 
-            CLASS = PXColorPicker; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {
-                gearMenu = id; 
-                paletteSelector = PXPaletteSelector; 
-                paletteView = PXPaletteView; 
-                pickerView = NSView; 
-            }; 
-            SUPERCLASS = NSColorPicker; 
-        }, 
-        {
-            ACTIONS = {selectionChanged = id; }; 
-            CLASS = PXPaletteSelector; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {delegate = id; selectionPopup = NSPopUpButton; }; 
-            SUPERCLASS = NSObject; 
-        }, 
-        {CLASS = PXPaletteView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
-        {CLASS = PXPaletteViewScrollView; LANGUAGE = ObjC; SUPERCLASS = NSScrollView; }
-    ); 
-    IBVersion = 1; 
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IBClasses</key>
+	<array>
+		<dict>
+			<key>CLASS</key>
+			<string>RBSplitView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>delegate</key>
+				<string>id</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>RBSplitSubview</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>RBSplitSubview</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>didAdjustSubviews</key>
+				<string>RBSplitView</string>
+				<key>willAdjustSubviews</key>
+				<string>RBSplitView</string>
+			</dict>
+			<key>CLASS</key>
+			<string>NSObject</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>PXPaletteViewScrollView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSScrollView</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>selectionChanged</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>PXPaletteSelector</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>delegate</key>
+				<string>id</string>
+				<key>selectionPopup</key>
+				<string>NSPopUpButton</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>PXActionButton</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSPopUpButton</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>FirstResponder</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>deletePalette</key>
+				<string>id</string>
+				<key>displayHelp</key>
+				<string>id</string>
+				<key>duplicatePalette</key>
+				<string>id</string>
+				<key>exportPalette</key>
+				<string>id</string>
+				<key>installPalette</key>
+				<string>id</string>
+				<key>newPalette</key>
+				<string>id</string>
+				<key>popOut</key>
+				<string>id</string>
+				<key>renamePalette</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>PXColorPicker</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>gearMenu</key>
+				<string>NSPopUpButton</string>
+				<key>namePrompter</key>
+				<string>id</string>
+				<key>paletteSelector</key>
+				<string>PXPaletteSelector</string>
+				<key>paletteView</key>
+				<string>PXPaletteView</string>
+				<key>pickerView</key>
+				<string>NSView</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSColorPicker</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>PXPaletteView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>delegate</key>
+				<string>id</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+	</array>
+	<key>IBVersion</key>
+	<string>1</string>
+</dict>
+</plist>

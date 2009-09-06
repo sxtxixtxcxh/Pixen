@@ -28,35 +28,19 @@
 
 #import "PXCheckeredBackground.h"
 #import <Foundation/NSString.h>
-#ifndef __COCOA__
-#import <GNUstepBase/GNUstep.h>
-#endif
 
 @implementation PXCheckeredBackground
 
 - (NSString *) defaultName
 {
-#ifdef __COCOA__
   return NSLocalizedString(@"CHECKERED_BACKGROUND", @"Checkered Background");
-#else
-#warning GNUSTEP TODO
-  return @"Checkered Background";
-#endif
 }
 
 - (void)drawRect:(NSRect)rect withinRect:(NSRect)wholeRect
 {
-#ifdef __COCOA__
     [backColor set];
-#else
-    [[backWell color] set];
-#endif
     NSRectFill(wholeRect);
-#ifdef __COCOA__
     [color set];
-#else
-    [[colorWell color] set];
-#endif
     int i, j;
     BOOL drawForeground = NO;
     

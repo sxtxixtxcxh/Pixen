@@ -66,8 +66,8 @@
 - (NSDragOperation)stackedView:(OSStackedView *)aStackedView 
 				  validateDrop:(id <NSDraggingInfo>)info;
 
-- (BOOL)stackedView:(OSStackedView *)aStackedView
-		 updateDrag:(id <NSDraggingInfo>)info;
+- (NSDragOperation)stackedView:(OSStackedView *)aStackedView
+					updateDrag:(id <NSDraggingInfo>)info;
 
 - (BOOL)stackedView:(OSStackedView *)aStackedView
 	 draggingExited:(id <NSDraggingInfo>)info;

@@ -97,7 +97,7 @@ fromCanvasController:(PXCanvasController*)controller
 	[super mouseDownAt:aPoint fromCanvasController:controller];
 	if([self shouldAbandonFillingAtPoint:aPoint fromCanvasController:controller] || ([self checkSelectionOnCanvas:[controller canvas]] == YES && [[controller canvas] pointIsSelected:aPoint] == NO))
 		return;
-		
+	
 	[self fillPointsFromPoint:aPoint forCanvasController:controller];
 	
 }
@@ -126,6 +126,7 @@ fromCanvasController:(PXCanvasController*)controller
 			return;
 		}	
 	}	
+	[canvas clearUndoBuffers];
 	[consideredPoints addObject:[NSNumber numberWithInt:CombineAxis(aPoint.x, aPoint.y, canvasWidth, canvasHeight)]];
 	[pointsToFill addObject:[NSNumber numberWithInt:CombineAxis(aPoint.x, aPoint.y, canvasWidth, canvasHeight)]];
 	int xPointAxis;
@@ -223,6 +224,7 @@ fromCanvasController:(PXCanvasController*)controller
 	}
 	else
 	{
+		[pointsToFill removeAllObjects];
 		int i;
 		leftBound = 0;
 		lowerBound = 0;
@@ -238,7 +240,8 @@ fromCanvasController:(PXCanvasController*)controller
 	}
 	NSRect bounds = NSMakeRect(leftBound, lowerBound, rightBound - leftBound + 1, upperBound - lowerBound + 1);
 	[self fillPixelsInBOOLArray:pointsToFill withColor:fillColor withBoundsRect:bounds ofCanvas:canvas];
-	[consideredPoints release];	
+	[consideredPoints release];
+	[canvas registerForUndo];
 	return;
 }
 
@@ -252,7 +255,6 @@ fromCanvasController:(PXCanvasController*)controller
 - (void)fillPixelsInBOOLArray:(NSArray *)fillPoints withColor:(NSColor *)newColor withBoundsRect:(NSRect)bounds ofCanvas:(PXCanvas *)canvas
 {
 	int canvasWidth = [canvas size].width;
-	int newColorIndex = PXPalette_indexOfColorAddingIfNotPresent([canvas palette], newColor);
 	id indices = [NSMutableArray arrayWithCapacity:[fillPoints count]];
 	id enumerator = [fillPoints objectEnumerator], current;
 	while(current = [enumerator nextObject])
@@ -262,14 +264,7 @@ fromCanvasController:(PXCanvasController*)controller
 		int yLoc = (val - (val % canvasWidth))/canvasWidth - 1;
 		[indices addObject:[NSNumber numberWithInt:xLoc + (yLoc * canvasWidth)]];
 	}
-	if([propertiesView tolerance] == 0)
-	{
-		[canvas setColorIndex:newColorIndex atIndices:indices updateIn:bounds simpleUndo:YES];
-	}
-	else
-	{
-		[canvas setColorIndex:newColorIndex atIndices:indices updateIn:bounds simpleUndo:NO];
-	}
+	[canvas setColor:newColor atIndices:indices updateIn:bounds];
 	[canvas changedInRect:bounds];
 }
 

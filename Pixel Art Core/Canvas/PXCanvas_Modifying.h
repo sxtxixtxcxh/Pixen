@@ -12,13 +12,11 @@
 @interface PXCanvas(Modifying)
 - (BOOL)canDrawAtPoint:(NSPoint) aPoint;
 - (NSColor*) colorAtPoint:(NSPoint) aPoint;
-- (unsigned int)colorIndexAtPoint:(NSPoint)aPoint;
 - (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint;
 - (void)setColor:(NSColor *)aColor atPoints:(NSArray *)points;
-- (void)setColorIndex:(unsigned int)index atPoint:(NSPoint)aPoint;
-- (void)setColorIndex:(unsigned int)index atIndex:(unsigned int)loc;
-- (void)setColorIndex:(unsigned int)index atIndices:(NSArray *)indices updateIn:(NSRect)bounds simpleUndo:(BOOL)assumeIndicesAreTheSameColor;
-- (void)setColorIndex:(unsigned int)index atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer simpleUndo:(BOOL)assumeIndicesAreTheSameColor;
+- (void)setColor:(NSColor *)color atPoint:(NSPoint)aPoint;
+- (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds;
+- (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer;
 - (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
 + (void)reduceColorsInCanvases:(NSArray*)canvases 
 				  toColorCount:(int)colors
@@ -29,9 +27,6 @@
 - (BOOL)containsPoint:(NSPoint)aPoint;
 - (void)rotateByDegrees:(int)degrees;
 
-- (void)beginOptimizedSetting;
-- (void)endOptimizedSetting;
-
 - (BOOL)wraps;
 - (void)setWraps:(BOOL)newWraps;
 - (void)setWraps:(BOOL)newWraps suppressRedraw:(BOOL)suppress;
@@ -40,4 +35,16 @@
 
 - (void)flipHorizontally;
 - (void)flipVertically;
+
+
+- (void)clearUndoBuffers;
+- (void)registerForUndo;
+- (void)registerForUndoWithDrawnPoints:(NSArray *)pts
+							 oldColors:(NSArray *)oldC
+							 newColors:(NSArray *)newC
+							   inLayer:(PXLayer *)layer
+							   undoing:(BOOL)undoing;
+- (void)replaceColorsAtPoints:(NSArray *)pts withColors:(NSArray *)colors inLayer:layer;
+- (void)bufferUndoAtPoint:(NSPoint)pt fromColor:(NSColor *)oldColor toColor:(NSColor *)newColor;
+
 @end

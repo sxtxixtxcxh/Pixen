@@ -121,7 +121,7 @@
 {
 	NSPoint roundedPosition = position;
 	roundedPosition.x = round(roundedPosition.x);
-	roundedPosition.y = round(-1*roundedPosition.y);
+	roundedPosition.y = round((newSize.height-oldSize.height)-roundedPosition.y);
 	return roundedPosition;
 }
 
@@ -172,10 +172,10 @@
 
 - (void)mouseDragged:(NSEvent *)event
 {
-	//lol.  thanks, ian.  this made my day (:  --joe
-	NSAffineTransform *muffineTransform = [scaleTransform copy];
-	[muffineTransform invert];
-	NSPoint deltaVector = [muffineTransform transformPoint:NSMakePoint([event deltaX], [event deltaY])];
+#warning this is kind of clumsy, doesn't move enough
+	NSAffineTransform *affineTransform = [scaleTransform copy];
+	[affineTransform invert];
+	NSPoint deltaVector = [affineTransform transformPoint:NSMakePoint([event deltaX], [event deltaY])];
 	[self setLeftOffset:[self leftOffset] + deltaVector.x];
 	[self setTopOffset:[self topOffset] + deltaVector.y];
 	[self setNeedsDisplay:YES];

@@ -13,12 +13,6 @@
 #import "PXBitmapExporter.h"
 #import "PXCanvas_ImportingExporting.h"
 #import "PXLayer.h"
-#ifndef __COCOA__
-#include <math.h>
-#import "PXNotifications.h"
-#import "PXDefaults.h"
-#endif
-
 
 @implementation PXCanvas(Selection)
 
@@ -72,7 +66,7 @@
 	[self beginUndoGrouping]; {
 #warning fix this line once we have canvas-level undo for PXCanvas_Modifying
 		[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];
-		PXLayer *newLayer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Promoted Selection", @"Promoted Selection") size:[self size] fillWithColorIndex:PXPalette_indexOfColorAddingIfNotPresent([self palette], [NSColor clearColor])] autorelease];
+		PXLayer *newLayer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Promoted Selection", @"Promoted Selection") size:[self size] fillWithColor:[NSColor clearColor]] autorelease];
 		int i, j;
 		NSPoint point;
 		[newLayer setCanvas:self];
@@ -84,9 +78,9 @@
 				if ([self pointIsSelected:NSMakePoint(i, j)])
 				{
 					point = NSMakePoint(i, j);
-					[newLayer setColorIndex:[self colorIndexAtPoint:point] atPoint:point];
-					[[um prepareWithInvocationTarget:self] setColorIndex:[self colorIndexAtPoint:point] atPoint:point];
-					[self setColorIndex:[self eraseColorIndex] atPoint:point];
+					[newLayer setColor:[self colorAtPoint:point] atPoint:point];
+					[[um prepareWithInvocationTarget:self] setColor:[self colorAtPoint:point] atPoint:point];
+					[self setColor:[self eraseColor] atPoint:point];
 				}
 			}
 		}
@@ -264,8 +258,8 @@
 		{
 			NSPoint point = NSMakePoint(i, j);
 			if (![self pointIsSelected:point]) { continue; }
-			[tempLayer setColorIndex:[[self activeLayer] colorIndexAtPoint:point]
-							 atPoint:point];
+			[tempLayer setColor:[[self activeLayer] colorAtPoint:point]
+						atPoint:point];
 		}
 	}
 	return [NSKeyedArchiver archivedDataWithRootObject:tempLayer];
@@ -298,7 +292,6 @@
 - (void)updateSelectionSwitch
 {
 	int i, j;
-	BOOL newHasSelection = NO;
 	int width = [self size].width, height = [self size].height;
 	for (i = 0; i < width; i++)
 	{
@@ -306,14 +299,11 @@
 		{
 			if (selectionMask[i + (j * width)] == YES)
 			{
-				newHasSelection = YES;
-#warning replace with another fn and a return
-				goto afterLoop; // yeah, it's a goto, but it makes deselection tons faster on large images
+				[self setHasSelection:YES];
+				return;
 			}
 		}
 	}
-afterLoop:
-	[self setHasSelection:newHasSelection];
 }
 
 - (NSRect)selectedRect
@@ -454,12 +444,7 @@ afterLoop:
 	if (storageType == NSBMPFileType)
 	{
 		[tempImage unlockFocus];
-#ifdef __COCOA__
 		return [PXBitmapExporter BMPDataForImage:tempImage];
-#else
-#warning GNUstep / COCOA implement that without Quicktime 
-		return nil;
-#endif
 	}
 	else
 	{
@@ -503,8 +488,8 @@ afterLoop:
 	if (![self hasSelection]) return; 
 	[self beginUndoGrouping]; {
 		PXLayer *newLayer = [[activeLayer copy] autorelease];
-		int i, j, index;
-		index = [self eraseColorIndex];
+		int i, j;
+		NSColor *color = [self eraseColor];
 		for (i = 0; i < [self size].width; i++)
 		{
 			for (j = 0; j < [self size].height; j++)
@@ -512,11 +497,10 @@ afterLoop:
 				NSPoint point = NSMakePoint(i, j);
 				if ([self pointIsSelected:point])
 				{
-					[newLayer setColorIndex:index atPoint:point];
+					[newLayer setColor:color atPoint:point];
 				}
 			}
 		}
-		[newLayer recache];
 		[self replaceLayer:activeLayer withLayer:newLayer actionName:NSLocalizedString(@"Delete Selection", @"Delete Selection")];
 		[self activateLayer:newLayer];
 		[self deselect];

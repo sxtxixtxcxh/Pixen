@@ -36,7 +36,7 @@ NSString *PXBackgroundConfigurator = @"PXBackgroundConfigurator";
 NSString *PXLayerDrawer = @"PXLayerDrawer";
 NSString *PXPreview = @"PXPreview";
 NSString *PXToolProperties = @"PXToolProperties";
-NSString *PXGrid = @"PXGrid";
+NSString *PXGridConfigurator = @"PXGridConfigurator";
 NSString *PXZoomFit = @"PXZoomFit";
 NSString *PXZoom100 = @"PXZoom100";
 NSString *PXScale = @"PXScale";
@@ -88,7 +88,7 @@ NSString *PXDocumentPalette = @"PXDocumentPalette";
 		[item setAction:@selector(toggleLeftToolProperties:)];
 		[item setImage:[NSImage imageNamed:@"toolproperties"]];
 	}
-	else if ([itemIdentifier isEqualToString:PXGrid])
+	else if ([itemIdentifier isEqualToString:PXGridConfigurator])
 	{
 		[item setLabel:NSLocalizedString(@"GRID_LABEL", @"Grid Label")];
 		[item setToolTip:NSLocalizedString(@"GRID_TOOLTIP", @"Grid Tooltip")];
@@ -160,7 +160,7 @@ NSString *PXDocumentPalette = @"PXDocumentPalette";
 		PXPreview, PXZoom, 
 		PXZoomFit, PXZoom100,
 		PXResize, PXScale,
-		PXFeedback, PXGrid,
+		PXFeedback, PXGridConfigurator,
 		PXDocumentPalette,
 		NSToolbarCustomizeToolbarItemIdentifier, 
 		NSToolbarSpaceItemIdentifier,
@@ -171,20 +171,10 @@ NSString *PXDocumentPalette = @"PXDocumentPalette";
 
 - (NSArray *) toolbarDefaultItemIdentifiers:(NSToolbar *) toolbar
 {
-#ifdef __COCOA__
-	return [NSArray arrayWithObjects:PXBackgroundConfigurator, PXGrid, 
+	return [NSArray arrayWithObjects:PXBackgroundConfigurator, PXGridConfigurator, 
 		NSToolbarSeparatorItemIdentifier, PXLayerDrawer, PXPreview, PXDocumentPalette,
 		NSToolbarFlexibleSpaceItemIdentifier, PXFeedback,
 		PXZoom,
 		nil];
-#else
-	//Forget Zoom for GNUstep (TODO)
-	return [NSArray arrayWithObjects:PXBackgroundConfigurator, PXGrid, 
-		NSToolbarSeparatorItemIdentifier, PXLayerDrawer,
-		PXPreview,
-		NSToolbarFlexibleSpaceItemIdentifier,
-		PXFeedback,
-		nil];
-#endif
 }
 @end

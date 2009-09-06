@@ -27,10 +27,6 @@
 //
 
 #import "PXGrid.h"
-#ifndef __COCOA__
-#import <AppKit/NSGraphicsContext.h>
-#import <AppKit/NSBezierPath.h>
-#endif
 
 @implementation PXGrid
 

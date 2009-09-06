@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Joe Osborn on 2005.08.12.
-//  Copyright 2005 __MyCompanyName__. All rights reserved.
+//  Copyright 2005 Open Sword Group. All rights reserved.
 //
 
 #import "PXPalettePanel.h"
@@ -14,13 +14,10 @@
 #import "PXCanvas.h"
 #import "PXToolSwitcher.h"
 #import "PXToolPaletteController.h"
-#import "PXModalColorPanel.h"
 #import "PXNamePrompter.h"
 #import "PathUtilities.h"
 #import "PXPaletteExporter.h"
 #import "PXPaletteImporter.h"
-
-extern void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *userInfo);
 
 @implementation PXPalettePanel
 
@@ -49,13 +46,11 @@ extern void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *use
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paletteChanged:) name:PXPaletteChangedNotificationName object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidBecomeMain:) name:NSWindowDidBecomeMainNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paletteChanged:) name:PXUserPalettesChangedNotificationName object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toolColorChanged:) name:PXToolColorDidChangeNotificationName object:nil];
 	[NSBundle loadNibNamed:@"PXPalettePanel" owner:self];
 	[gearMenu setImage:[NSImage imageNamed:@"actiongear"]];
 	[self setContentView:contents];
 	namePrompter = [[PXNamePrompter alloc] init];
 	[namePrompter setDelegate:self];
-	[paletteView setEditable:NO];
 	[paletteView setDelegate:self];
 	[self reloadDataAndShow:pal];
 	return self;
@@ -89,7 +84,9 @@ extern void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *use
 
 - (void)documentClosed:(NSNotification *)notification
 {
-	if([notification object] && ([[[notification object] canvas] palette] == palette))
+	#warning palette panels need a canvas reference, probably
+	id canvas = nil;
+	if([notification object] && ([[notification object] canvas] == canvas))
 	{
 		[self close];
 		return;
@@ -135,29 +132,11 @@ extern void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *use
 	[paletteView setDocument:nil];
 	[paletteView setPalette:palette];
 	[paletteSelector showPalette:palette];
-	
-	// Update the selection indices.
-	[paletteView setSelectedIndex:PXPalette_indexOfColor(palette, [[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] color])];
-	[paletteView setRightIndex:PXPalette_indexOfColor(palette, [[[PXToolPaletteController sharedToolPaletteController] rightSwitcher] color])];
 }
 
 - (IBAction)displayHelp:sender
 {
     [[NSHelpManager sharedHelpManager] openHelpAnchor:@"workingwithpalettes" inBook:@"Pixen Help"];
-}
-
-- (void)toolColorChanged:(NSNotification *)notification
-{
-	id switcher = [notification object];
-	int index = PXPalette_indexOfColor(palette, [switcher color]);
-	if (switcher == [[PXToolPaletteController sharedToolPaletteController] leftSwitcher])
-	{
-		[paletteView setSelectedIndex:index];
-	}
-	else
-	{
-		[paletteView setRightIndex:index];
-	}
 }
 
 - (void)useColorAtIndex:(unsigned)index event:(NSEvent *)e
@@ -168,24 +147,6 @@ extern void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *use
 		switcher = [[PXToolPaletteController sharedToolPaletteController] rightSwitcher];
 	}
 	[switcher setColor:PXPalette_colorAtIndex(palette, index)];
-}
-
-- (void)modifyColorAtIndex:(unsigned)index
-{
-	[[PXModalColorPanel sharedColorPanel] setShowsAlpha:!(palette->locked)];
-	NSColor *color = PXPalette_colorAtIndex(palette, index);
-	while(index >= PXPalette_colorCount(palette))
-	{
-		color = [NSColor whiteColor];
-		PXPalette_addColor(palette, color);
-	}
-	[[PXModalColorPanel sharedColorPanel] setColor:color];
-	[palette->undoManager beginUndoGrouping];
-	PXPalette_setColorAtIndex(palette, [[PXModalColorPanel sharedColorPanel] run], index);
-	[palette->undoManager endUndoGrouping];
-	// coupling ftw
-	[[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] setColor:PXPalette_colorAtIndex(palette, index)];
-	PXPalette_postChangedNotification(palette,nil);
 }
 
 - (IBAction)renamePalette:sender
@@ -260,8 +221,6 @@ extern void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *use
 {
 	PXPalette *newPal = PXPalette_copy(palette);
 	newPal->isSystemPalette = NO;
-	newPal->undoManager = nil;
-	newPal->locked = NO;
 	newPal->canSave = NO;
 #warning might not work for other languages
 	NSString *base = [NSString stringWithFormat:@"%@ Copy", newPal->name];

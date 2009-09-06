@@ -103,13 +103,11 @@
 			[path stroke];
 		}
 		[[NSColor whiteColor] set];
-#ifdef __COCOA__
 		NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
 		[shadow setShadowOffset:NSMakeSize(0, -2)];
 		[shadow setShadowBlurRadius:4];
 		[shadow setShadowColor:[NSColor blackColor]];
 		[shadow set];
-#endif
 		[path fill];
 	}
 }
@@ -119,9 +117,9 @@
 	return [self draggingUpdated:sender];
 }
 
-- (NSDragOperation)draggingExited:(id <NSDraggingInfo>)sender
+- (void)draggingExited:(id <NSDraggingInfo>)sender
 {
-	return [self draggingUpdated:sender];
+	[self draggingUpdated:sender];
 }
 
 - (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender

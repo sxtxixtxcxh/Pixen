@@ -7,9 +7,7 @@
 //
 
 #import "UKFeedbackProvider.h"
-#ifdef __COCOA__
 #import <Message/NSMailDelivery.h>
-#endif
 
 @implementation UKFeedbackProvider
 
@@ -40,7 +38,6 @@
 	NSString*		msgSubj = [msgSubjPre stringByAppendingString: [subjectField stringValue]];
 	NSString*		msgDest = NSLocalizedString(@"FEEDBACK_EMAIL", @"E-Mail address user's feedack should be sent to.");
 	
-#ifdef __COCOA__
 	if ([[msgText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqual:@""]) {
 		NSBeep();
 		return;
@@ -54,9 +51,6 @@
 	}
 	else
 		[self closeFeedbackWindow: sender];
-#else
-#warning GNUstep use Pantomime here ?
-#endif
 }
 
 

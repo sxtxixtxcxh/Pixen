@@ -50,7 +50,6 @@
 	IBOutlet NSTextField *green;
 	IBOutlet NSTextField *blue;
 	IBOutlet NSTextField *alpha;
-	IBOutlet NSTextField *colorIndex;
 	IBOutlet NSTextField *hex;
 }
 
@@ -58,7 +57,7 @@
 + (id) sharedInfoPanelController;
 
 - (void)setCursorPosition: (NSPoint)point;
-- (void)setColorInfo:(NSColor *) color withIndex:(int)index;
+- (void)setColorInfo:(NSColor *) color;
 - (void)setCanvasSize: (NSSize)size;
 - (void)setDraggingOrigin: (NSPoint)point;
 

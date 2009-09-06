@@ -44,12 +44,7 @@
 
 - (NSColor *) colorForCanvas:(PXCanvas *)canvas
 {
-	return [canvas palette]->colors[[self colorIndexForCanvas:canvas]];
-}
-
-- (unsigned int)colorIndexForCanvas:(PXCanvas *)canvas
-{
-	return [canvas eraseColorIndex];	
+	return [canvas eraseColor];
 }
 
 @end

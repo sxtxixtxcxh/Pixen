@@ -240,13 +240,14 @@ typedef struct tagBITMAPINFOHEADER
 	id data = [NSMutableData data];
 	BITMAPFILEHEADER fileHeader;
 	fileHeader.bfType = CFSwapInt16HostToLittle(19778);
-	fileHeader.bfSize = CFSwapInt32HostToLittle(sizeof(BITMAPINFOHEADER) + PXPalette_colorCount([canvas palette])*4 + [canvas size].width*[canvas size].height);
+	PXPalette *pal = [canvas createFrequencyPalette];
+	fileHeader.bfSize = CFSwapInt32HostToLittle(sizeof(BITMAPINFOHEADER) + PXPalette_colorCount(pal)*4 + [canvas size].width*[canvas size].height);
 	fileHeader.bfReserved1 = 0;
 	fileHeader.bfReserved2 = 0;
-	fileHeader.bfOffBits = CFSwapInt32HostToLittle(sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + PXPalette_colorCount([canvas palette])*4);
+	fileHeader.bfOffBits = CFSwapInt32HostToLittle(sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + PXPalette_colorCount(pal)*4);
 	[data appendBytes:&fileHeader length:sizeof(BITMAPFILEHEADER)];
 	
-	int colorCount = PXPalette_colorCount([canvas palette]);
+	int colorCount = PXPalette_colorCount(pal);
 	BITMAPINFOHEADER infoHeader;
 	infoHeader.biSize = CFSwapInt32HostToLittle(sizeof(BITMAPINFOHEADER));
 	infoHeader.biWidth = CFSwapInt32HostToLittle([canvas size].width);
@@ -264,7 +265,7 @@ typedef struct tagBITMAPINFOHEADER
 	int i;
 	for (i = 0; i < colorCount; i++)
 	{
-		NSColor *color = PXPalette_colorAtIndex([canvas palette], i);
+		NSColor *color = PXPalette_colorAtIndex(pal, i);
 		unsigned char outputColor[4];
 		if ([color alphaComponent] < 0.5)
 		{
@@ -294,7 +295,7 @@ typedef struct tagBITMAPINFOHEADER
 		{
 			int base = j * [bitmapRep bytesPerRow] + (hasAlpha ? i*4 : i*3);
 			NSColor *color = [NSColor colorWithCalibratedRed:bitmapData[base]/255.0 green:bitmapData[base + 1]/255.0 blue:bitmapData[base + 2]/255.0 alpha:(hasAlpha ? bitmapData[base + 3]/255.0 : 1)];
-			unsigned char index = PXPalette_indexOfColor([canvas palette], color);
+			unsigned char index = PXPalette_indexOfColor(pal, color);
 			[data appendBytes:&index length:1];
 			bytesWritten++;
 		}
@@ -306,7 +307,7 @@ typedef struct tagBITMAPINFOHEADER
 			bytesWritten++;
 		}
 	}
-	
+	PXPalette_release(pal);
 	return data;
 }
 
@@ -328,7 +329,7 @@ typedef struct tagBITMAPINFOHEADER
 		{
 			NSPoint point = NSMakePoint(i, j);
 			NSLog(@"Before (%dx%d): %@", i, j, NSReadPixel(point));
-			[[NSReadPixel(point) colorUsingColorSpaceName:NSDeviceRGBColorSpace] set];
+			[[NSReadPixel(point) colorUsingColorSpaceName:NSCalibratedRGBColorSpace] set];
 			NSLog(@"After (%dx%d): %@", i, j, NSReadPixel(point));
 			NSRectFill((NSRect){point, {1, 1}});
 		}

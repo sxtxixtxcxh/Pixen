@@ -37,12 +37,8 @@ typedef struct {
 	NSColor **colors;
 	unsigned int colorCount;
 	unsigned int size;
-	BOOL locked;
 	PXColorBucket **reverseHashTable;
 	NSString *name;
-	NSUndoManager *undoManager;
-	BOOL postponingNotifications;
-	BOOL postedNotificationWhilePostponing;
 	
 	BOOL isSystemPalette;
 	BOOL canSave;
@@ -66,9 +62,6 @@ PXPalette *PXPalette_release(PXPalette *self);
 NSString *PXPalette_name(PXPalette *self);
 void PXPalette_setName(PXPalette *self, NSString *name);
 
-void PXPalette_postponeNotifications(PXPalette *self, BOOL postpone);
-void PXPalette_postponeNotificationsSilently(PXPalette *self, BOOL postpone, BOOL silent);
-
 void PXPalette_resize(PXPalette *self, unsigned int newSize);
 void PXPalette_addColor(PXPalette *self, NSColor *color);
 void PXPalette_addBackgroundColor(PXPalette *self);
@@ -76,9 +69,6 @@ void PXPalette_addColorWithoutDuplicating(PXPalette *self, NSColor *color);
 void PXPalette_removeColorAtIndex(PXPalette *self, unsigned int index);
 void PXPalette_insertColorAtIndex(PXPalette *self, NSColor *color, unsigned index, BOOL adjust);
 PXColorBucket *PXPalette_bucketForColor(PXPalette *self, NSColor *color);
-
-void PXPalette_lock(PXPalette *self);
-void PXPalette_unlock(PXPalette *self);
 
 void PXPalette_swapColorsAtIndex(PXPalette* self, unsigned int colorIndex1, unsigned int colorIndex2);
 void PXPalette_swapColors(PXPalette* self, NSColor *color1, NSColor *color2);
@@ -88,7 +78,6 @@ void PXPalette_moveColorAtIndexToIndex(PXPalette *self, unsigned int index1, uns
 
 unsigned int PXPalette_indexOfColor(PXPalette *self, NSColor *color);
 inline NSColor *PXPalette_colorAtIndex(PXPalette *self, unsigned index);
-unsigned int PXPalette_indexOfEraseColorAddingIfNotPresent(PXPalette *self);
 unsigned int PXPalette_indexOfColorAddingIfNotPresent(PXPalette *self, NSColor *color);
 unsigned int PXPalette_indexOfColorClosestTo(PXPalette *self, NSColor *color);
 NSColor *PXPalette_colorClosestTo(PXPalette *self, NSColor *color);

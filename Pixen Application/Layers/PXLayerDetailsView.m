@@ -49,11 +49,6 @@
 		return nil;
 	
 	[NSBundle loadNibNamed:@"PXLayerDetailsView" owner:self];
-#ifndef __COCOA__
-	myView = [[window contentView] retain];
-	view = [[PXLayerDetailsSubView alloc] initWithFrame:[myView frame]];
-	[view addSubview:myView];
-#endif
     [self setAutoresizesSubviews:NO];
 	[self addSubview:view];
 	[self setLayer:aLayer];
@@ -76,11 +71,6 @@
 - (void)resizeSubviewsWithOldSize:(NSSize)size
 {
 	[view setFrameSize:[self frame].size];
-}
-
-- (NSTextField *)opacityField
-{
-	return opacity;
 }
 
 - opacityText
@@ -204,14 +194,12 @@
 		[view setMenu:menu];
 		[name setMenu:menu];
 		[opacity setMenu:menu];
-		[opacityField setMenu:menu];
 		[visibility setMenu:menu];
 		[opacityText setMenu:menu];
 		[thumbnail setMenu:menu];
 		
 		[name setStringValue:[layer name]];
 		[opacity setFloatValue:[layer opacity]];
-		[opacityField setFloatValue:[layer opacity]];
 		[self updatePreview:nil];
 		[visibility setState:[layer visible]];
 		[nc addObserver:self 
@@ -220,27 +208,12 @@
 				 object:[layer canvas]];
 		
 		[nc addObserver:self selector:@selector(paletteChanged:) name:PXPaletteChangedNotificationName object:nil];
-		
-		[self willChangeValueForKey:@"opacityEnabled"];
-		[self didChangeValueForKey:@"opacityEnabled"];
 	}
 	[self setNeedsDisplay:YES];
 }
 
-- (BOOL)opacityEnabled
-{
-	if (!layer || ![[layer canvas] palette]) { return YES; }
-	return (![[layer canvas] palette]->locked);
-}
-
 - (void)paletteChanged:note
 {
-	NSString *realName = [[note userInfo] objectForKey:PXSubNotificationNameKey];
-	if([realName isEqualToString:PXPaletteLockedNotificationName] || [realName isEqualToString:PXPaletteUnlockedNotificationName])
-	{
-		[self willChangeValueForKey:@"opacityEnabled"];
-		[self didChangeValueForKey:@"opacityEnabled"];
-	}
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)anItem
@@ -279,20 +252,15 @@
 
 - (BOOL)isHidden
 {
-#ifdef __COCOA__
 	if([super respondsToSelector:@selector(isHidden)])
     {
 		return [super isHidden];
     }
 	return isHidden;
-#else
-	return NO;
-#endif
 }
 
 - (void)setHidden:(BOOL)newHidden
 {
-#ifdef __COCOA__
 	if([self isHidden] == newHidden) 
 	{
 		return; 
@@ -305,7 +273,6 @@
 	
 	isHidden = newHidden;
 	[self updatePreview:nil];
-#endif
 }
 
 - (void)rightMouseDown:(NSEvent *)event
@@ -316,7 +283,6 @@
 - (IBAction)opacityDidChange:(id)sender
 {
 	[opacity setFloatValue:[sender floatValue]];
-	[opacityField setFloatValue:[sender floatValue]];
 	[layer setOpacity:[sender floatValue]];
 	[[layer canvas] changed];
 }

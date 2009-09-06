@@ -31,9 +31,6 @@
 #import "PXCanvas_ImportingExporting.h"
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Drawing.h"
-#ifndef __COCOA__
-#include <math.h>
-#endif
 #import "PathUtilities.h"
 
 @implementation PXImageBackground

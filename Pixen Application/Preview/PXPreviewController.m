@@ -41,9 +41,6 @@
 #import "PXPreviewBezelView.h"
 #import "PXPreviewResizePrompter.h"
 #import "PXNotifications.h"
-#ifndef __COCOA__
-#include "math.h"
-#endif
 
 static PXPreviewController *instance = nil;
 
@@ -283,6 +280,7 @@ static PXPreviewController *instance = nil;
 	[[self window] setFrameTopLeftPoint:topLeft];
 	[view setFrameSize:size];
 	[self updateViewPercentage];
+	updateRect = NSMakeRect(0, 0, size.width, size.height);
 	[[[self window] contentView] setNeedsDisplay:YES];
 }
 
@@ -386,13 +384,9 @@ static PXPreviewController *instance = nil;
 		return;
     }
 	
-#ifdef __COCOA__
 	if (![[resizeSizeWindow contentView] updateScale:[view zoomPercentage]/100]) {
 		return;
 	}
-#else
-	[[resizeSizeWindow contentView] updateScale:6.0];
-#endif
 	
 	[resizeSizeWindow setContentSize:[[resizeSizeWindow contentView] scaleStringSize]];
 	
@@ -540,12 +534,6 @@ static PXPreviewController *instance = nil;
 
 - (void)initializeWindow
 {
-#ifdef __COCOA__
-	//[[self window] setContentResizeIncrements:NSMakeSize(1.0,1.0)];
-	//[[self window] setContentAspectRatio:[canvas size]];
-#else
-	[[self window] setResizeIncrements:NSMakeSize(1.0,1.0)];
-#endif
 	[view setCanvas:canvas];
 	[view setDrawsWrappedCanvases:NO];
 	[view setShouldDrawGrid:NO];
@@ -560,6 +548,7 @@ static PXPreviewController *instance = nil;
 	[self sizeToCanvas];
 	[self centerContent];
 	[self updateTrackingRectAssumingInside:NO];
+	[view setNeedsDisplay:YES];
 	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:PXPreviewWindowIsOpenKey];
 }
 
@@ -594,6 +583,7 @@ static PXPreviewController *instance = nil;
 	}
 	[self updateTrackingRectAssumingInside:NO];
 	[self centerContent];
+	updateRect = NSMakeRect(0, 0, [canvas size].width, [canvas size].height);
 }
 
 - (void)canvasDidChange:(NSNotification *)aNotification

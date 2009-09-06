@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Joe Osborn on 2007.11.17.
-//  Copyright 2007 __MyCompanyName__. All rights reserved.
+//  Copyright 2007 Open Sword Group. All rights reserved.
 //
 
 #import "PXDocument.h"
@@ -63,7 +63,6 @@
 
 - (void)close
 {
-#warning The palette flips out sometimes after having gotten this notification... perhaps the canvas is being freed too early?
 	if ([[[self canvas] layers] count])
 	{
 		[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentWillCloseNotificationName

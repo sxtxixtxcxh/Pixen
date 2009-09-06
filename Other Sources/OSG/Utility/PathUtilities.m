@@ -32,10 +32,8 @@ NSString *GetApplicationSupportDirectory()
 {
 	//Check the Library user path
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-#ifdef __COCOA__
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	BOOL isDir;
-#endif
 	NSString *path; 
 	
 	if (  [paths count] == 0 ) 
@@ -45,7 +43,6 @@ NSString *GetApplicationSupportDirectory()
 	}
 	path = [paths objectAtIndex:0];
 	//Application Support
-#ifdef __COCOA__
 	path = [path stringByAppendingPathComponent: @"Application Support"];
 	
 	if ( ( ! [fileManager fileExistsAtPath:path isDirectory:&isDir] )
@@ -54,7 +51,6 @@ NSString *GetApplicationSupportDirectory()
 		[NSException raise:@"Directory Error" format:@"Surprisingly, there was no Application Support directory."];
 		return @"";
 	}
-#endif
 	return path;
 }
 

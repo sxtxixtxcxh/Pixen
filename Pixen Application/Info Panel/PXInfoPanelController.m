@@ -84,7 +84,7 @@ static PXInfoPanelController *singleInstance = nil;
 	[height setStringValue:[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"HEIGHT", @"Height"), (int)(size.height)]];
 }
 
-- (void)setColorInfo:(NSColor *) color withIndex:(int)index
+- (void)setColorInfo:(NSColor *) color
 {
 	if (color)
 	{
@@ -110,10 +110,6 @@ static PXInfoPanelController *singleInstance = nil;
 		[alpha setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"ALPHA", @"Alpha")]];
 		[hex setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"Hex", @"Hex")]];
 	}
-	if (index >= 0)
-		[colorIndex setStringValue:[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index]];
-	else
-		[colorIndex setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"Index", @"Index")]];
 }
 
 - (void)setDraggingOrigin:(NSPoint)point

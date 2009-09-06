@@ -61,15 +61,8 @@
 	float r, g, b, a, deltaR, deltaG, deltaB, deltaA;
 	int colorCount = [colorsField intValue];
 
-#ifdef __COCOA__
 	NSColor *startColor = [[startColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 	NSColor *endColor = [[endColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-
-#else
-#warning GNUstep TODO
-	NSColor *startColor = [startColorWell color];
-	NSColor *endColor = [endColorWell color];
-#endif
 	
 	r = [startColor redComponent];
 	g = [startColor greenComponent];
@@ -90,11 +83,7 @@
 	
 //	PXColorBank *bank = [[[PXColorBank alloc] initWithName:[nameField stringValue] colors:colors] autorelease];
 	
-//#warning TODO import delegate header
-//Eh?
-#ifdef __COCOA__
 //	[delegate gradientBuilderBuiltColorBank:bank]; 
-#endif
 	[NSApp endSheet:[self window]];
 	[self close];
 }

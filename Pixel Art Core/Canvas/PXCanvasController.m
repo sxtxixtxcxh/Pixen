@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 __MyCompanyName__. All rights reserved.
+//  Copyright 2005 Open Sword Group. All rights reserved.
 //
 
 #import "PXCanvasController.h"
@@ -28,11 +28,6 @@
 #import "PXGrid.h"
 #import "PXToolSwitcher.h"
 #import "TabletEvents.h"
-
-#ifndef __COCOA__
-#include "math.h"
-#import "NSArray_DeepMutableCopy.h"
-#endif
 
 @implementation PXCanvasController
 
@@ -107,9 +102,7 @@
 	[clip setBackgroundColor:[NSColor lightGrayColor]];
 	[clip setCopiesOnScroll:NO];
 	
-#ifdef __COCOA__
 	[(NSScrollView *)scrollView setContentView:clip];
-#endif
 	[scrollView setDocumentView:view];
 	[view setCanvas:canvas];
 	[layerController setCanvas:canvas];
@@ -190,11 +183,14 @@
 				 object:canvas];
 	}
 	[view setCanvas:canvas];
-	[[PXInfoPanelController sharedInfoPanelController] setCanvasSize:[canvas size]];
-	[canvas changed];	
 	[layerController setCanvas:canvas];
-	[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasLayersChangedNotificationName 
-					  object:canvas];
+	if(canvas)
+	{
+		[[PXInfoPanelController sharedInfoPanelController] setCanvasSize:[canvas size]];
+		[canvas changed];	
+		[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasLayersChangedNotificationName 
+															object:canvas];
+	}
 }
 
 - (void)canvasDidChange:(NSNotification *) aNotification
@@ -466,12 +462,12 @@
 	
 	if(! [aTool respondsToSelector:@selector(mouseDownAt:fromCanvasController:)]) 
 		return; 
-	oldColor = [aTool colorForCanvas:canvas];
+	[oldColor autorelease];
+	oldColor = [[aTool colorForCanvas:canvas] retain];
 	if([event isTabletPointerEvent] && [self caresAboutPressure])
 	{
 		id color = [oldColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 		float pressure = [event scaledTabletPressure];
-		[aTool setCachesColorIndex:NO];
 		[aTool setColor:[NSColor colorWithCalibratedRed:[color redComponent] green:[color greenComponent] blue:[color blueComponent] alpha:pressure * [color alphaComponent]]];
 	}
 	initialPoint = [event locationInWindow];
@@ -513,7 +509,6 @@
 	
 	[aTool mouseUpAt:loc fromCanvasController:self];
 	[aTool setColor:oldColor];
-	[aTool setCachesColorIndex:YES];
 }
 
 - (void)mouseMovedTo:(NSPoint)point forTool:aTool

@@ -51,7 +51,6 @@
 		path = [[NSBezierPath bezierPath] retain];
 		wrappedPath = [[NSBezierPath bezierPath] retain];
 		color = [[NSColor clearColor] retain];
-		colorIndex = 0;
 	}
 	return self;
 }
@@ -72,10 +71,8 @@
 - (void)mouseDownAt:(NSPoint)aPoint 
 fromCanvasController:(PXCanvasController*)controller
 {
-	PXPalette *palette = [[controller canvas] palette];
 #warning move undo
 	[[controller canvas] beginUndoGrouping];
-	colorIndex = PXPalette_indexOfColorAddingIfNotPresent(palette, [self colorForCanvas:[controller canvas]]);
 	isClicking = YES;
 }
 
@@ -99,11 +96,6 @@ fromCanvasController:(PXCanvasController*)controller
 	return color;
 }
 
-- (unsigned int)colorIndexForCanvas:(PXCanvas *)aCanvas
-{
-	return colorIndex;
-}
-
 - (void)setColor:(NSColor *) aColor
 {
 	[aColor retain];
@@ -118,11 +110,6 @@ fromCanvasController:(PXCanvasController*)controller
 
 - (void)recacheColorIfNecessaryFromController:(PXCanvasController*)controller
 {
-	if(!cachesColorIndex)
-	{
-		PXPalette *palette = [[controller canvas] palette];
-		colorIndex = PXPalette_indexOfColorAddingIfNotPresent(palette, color);
-	}	
 }
 
 - (void)mouseDraggedFrom:(NSPoint)origin 
@@ -146,7 +133,6 @@ fromCanvasController:(PXCanvasController *)controller
 fromCanvasController:(PXCanvasController *)controller
 {
 	isClicking = NO;
-	colorIndex = 0;
 #warning move undo
 	if ([[[controller canvas] undoManager] groupingLevel] > 0) {
 		[[controller canvas] endUndoGrouping:[self actionName]];
@@ -191,11 +177,6 @@ fromCanvasController:(PXCanvasController *)controller
 - (BOOL)supportsPatterns
 {
 	return NO;
-}
-
-- (void)setCachesColorIndex:(BOOL)cache
-{
-	cachesColorIndex = cache;
 }
 
 - (void)clearBezier { }

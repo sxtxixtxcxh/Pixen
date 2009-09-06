@@ -33,11 +33,53 @@
 #import "PXCanvas_Layers.h"
 #import "PXLayer.h"
 #import "PXBackgroundConfig.h"
-#ifndef __COCOA__
-#include <math.h>
-#import "PXNotifications.h"
-#import "PXDefaults.h"
-#endif
+
+@interface PXFrequencyEntry : NSObject
+{
+	int count;
+	NSColor *color;
+}
++ withColor:c;
+- initWithColor:c;
+- (int)count;
+- (NSColor *)color;
+- (void)increment;
+@end
+@implementation PXFrequencyEntry
++ withColor:c
+{
+	return [[[self alloc] initWithColor:c] autorelease];
+}
+- initWithColor:c
+{
+	[super init];
+	count = 1;
+	color = [c retain];
+	return self;
+}
+- (void)dealloc
+{
+	[color release];
+	[super dealloc];
+}
+- (int)count
+{
+	return count;
+}
+- (NSColor *)color
+{
+	return color;
+}
+- (void)increment
+{
+	count++;
+}
+- (NSComparisonResult)compare:other
+{
+	return count < [other count];
+}
+@end
+
 
 @implementation PXCanvas
 
@@ -60,7 +102,6 @@
 - (id)duplicateWithinAnimation
 {
 	PXCanvas *canvas = [[[self class] alloc] _rawInit];
-	[canvas setPalette:[self palette]];
 	[canvas setLayers:[[self layers] deepMutableCopy]];
 	[canvas recacheSize];
 	[canvas setMainBackground:[self mainBackground]];
@@ -79,17 +120,18 @@
 {
 	if (![super init]) return nil;
 	layers = [[NSMutableArray alloc] initWithCapacity:23];
-	palette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
 	grid = [[PXGrid alloc] init];
 	bgConfig = [[PXBackgroundConfig alloc] init];
 	wraps = NO;
+	drawnPoints = nil;
+	oldColors = nil;
+	newColors = nil;
 	return self;
 }
 
 - (id)init
 {
 	if (![self initWithoutBackgroundColor]) { return nil; }
-	PXPalette_addBackgroundColor(palette);
 	return self;
 }
 
@@ -100,33 +142,13 @@
 		free(selectionMask);
 	}
 	
+	[drawnPoints release];
+	[oldColors release];
+	[newColors release];
 	[layers release];
-	PXPalette_release(palette);
 	[bgConfig release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
-}
-
-- (PXPalette *)palette
-{
-	return palette;
-}
-
-- (void)setPalette:(PXPalette *)pal recache:(BOOL)recache
-{
-	PXPalette_retain(pal);
-	PXPalette_release(palette);
-	palette = pal;
-	id enumerator = [layers objectEnumerator], current;
-	while(current = [enumerator nextObject])
-	{
-		[current setPalette:palette recache:recache];
-	}
-}
-
-- (void)setPalette:(PXPalette *)pal
-{
-	[self setPalette:pal recache:YES];
 }
 
 - (PXGrid *)grid 
@@ -144,7 +166,6 @@
 - (void)setUndoManager:(NSUndoManager *)manager
 {
 	undoManager = manager;
-	palette->undoManager = manager;
 	[undoManager setGroupsByEvent:NO];
 //	[layers setValue:manager forKey:@"undoManager"];
 }
@@ -229,15 +250,12 @@ backgroundColor:(NSColor *)color
 	}
 	else 
 	{
-		unsigned int ind = PXPalette_indexOfColorAddingIfNotPresent(palette, color);
-		[self insertLayer:[[[PXLayer alloc] initWithName:NSLocalizedString(@"Main Layer", @"Main Layer") size:aSize fillWithColorIndex:ind] autorelease] atIndex:0];
-		[[layers lastObject] setPalette:palette];
+		[self insertLayer:[[[PXLayer alloc] initWithName:NSLocalizedString(@"Main Layer", @"Main Layer") size:aSize fillWithColor:color] autorelease] atIndex:0];
 		[self activateLayer:[layers objectAtIndex:0]];
 		[[self undoManager] removeAllActions];
 		selectionMask = newMask;
 		[self updateSelectionSwitch];
 	}
-	[[self layers] makeObjectsPerformSelector:@selector(recache)];
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXSelectionMaskChangedNotificationName object:self];
 	selectedRect = NSZeroRect;
 	[self updatePreviewSize];
@@ -281,12 +299,49 @@ backgroundColor:(NSColor *)color
 	[[self undoManager] endUndoGrouping];
 }
 
-- (unsigned)eraseColorIndex
+- (NSColor *)eraseColor
 {
-	return PXPalette_indexOfEraseColorAddingIfNotPresent([self palette]);
-//	return PXPalette_indexOfColorAddingIfNotPresent([self palette], [NSColor clearColor]);
-//friendly version, sux for jpgs etc - we really need a 'background layer'
-//	return ([self activeLayer] == [[self layers] objectAtIndex:0]) ? 0 : PXPalette_indexOfColorAddingIfNotPresent([self palette], [NSColor clearColor]);
+	if([layers count] > 0)
+	{
+		return PXImage_backgroundColor([(PXLayer *)[layers objectAtIndex:0] image]);
+	}
+	return [NSColor clearColor];
+}
+
+- (PXPalette *)createFrequencyPalette
+{
+	PXPalette *frequencyPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
+	id freqs = [NSMutableDictionary dictionaryWithCapacity:4000];
+	id enumerator = [[self layers] objectEnumerator], current;
+	while(current = [enumerator nextObject])
+	{
+		int i;
+		for(i = 0; i < [current size].width; i++)
+		{
+			int j;
+			for(j = 0; j < [current size].height; j++)
+			{
+				id color = [current colorAtPoint:NSMakePoint(i, j)];
+				id hash = [NSNumber numberWithInt:[color hash]];
+				PXFrequencyEntry *freq = [freqs objectForKey:hash];
+				if(freq)
+				{
+					[freq increment];
+				}
+				else
+				{
+					[freqs setObject:[PXFrequencyEntry withColor:color] forKey:hash];
+				}
+			}
+		}
+	}
+	id sorted = [[freqs allValues] sortedArrayUsingSelector:@selector(compare:)];
+	enumerator = [sorted objectEnumerator];
+	while(current = [enumerator nextObject])
+	{
+		PXPalette_addColor(frequencyPalette, [current color]);
+	}
+	return frequencyPalette;
 }
 
 @end

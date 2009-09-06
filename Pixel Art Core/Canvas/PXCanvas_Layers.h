@@ -17,6 +17,7 @@
 
 - (void)setLayers:(NSArray *) newLayers;
 - (void)setLayers:(NSArray*)layers fromLayers:(NSArray *)oldLayers;
+- (void)setLayers:(NSArray *) newLayers fromLayers:(NSArray *)oldLayers withDescription:(NSString *)desc;
 - (void)setLayersNoResize:(NSArray *) newLayers fromLayers:(NSArray *)oldLayers;
 
 - (void)addLayer:(PXLayer *) aLayer suppressingNotification:(BOOL)suppress;
@@ -41,6 +42,4 @@
 
 - (void)moveLayer:(PXLayer *)aLayer byX:(int)x y:(int)y;
 - (void)replaceLayer:(PXLayer *)old withLayer:(PXLayer *)new actionName:(NSString *)act;
-
-- (void)removeColorIndicesAfter:(unsigned)index;
 @end

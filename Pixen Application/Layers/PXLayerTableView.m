@@ -19,6 +19,11 @@
 	[super keyDown:theEvent];
 }
 
+- (BOOL)acceptsFirstResponder
+{
+	return NO;
+}
+
 - (void)resizeWithOldSuperviewSize:(NSSize)size
 {
 	[super resizeWithOldSuperviewSize:size];

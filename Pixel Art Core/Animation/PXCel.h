@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 __MyCompanyName__. All rights reserved.
+//  Copyright 2005 Open Sword Group. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
@@ -17,9 +17,6 @@
 - initWithImage:(NSImage *)image animation:(PXAnimation *)animation;
 - (PXCanvas *)canvas;
 - (void)setCanvas:(PXCanvas *)canv;
-- (PXPalette *)palette;
-- (void)setPalette:(PXPalette *)pal;
-- (void)setPalette:(PXPalette *)pal recache:(BOOL)recache;
 - (NSSize)size;
 - (void)setSize:(NSSize)size;
 - (void)setSize:(NSSize)aSize withOrigin:(NSPoint)origin backgroundColor:(NSColor *)bgcolor;

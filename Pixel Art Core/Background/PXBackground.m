@@ -60,7 +60,7 @@
 
 - (void)dealloc
 {
-	[name release];
+	[self setName:nil];
 	[super dealloc];
 }
 

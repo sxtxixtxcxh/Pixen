@@ -11,7 +11,6 @@
 #import "PXPaletteSelector.h"
 #import "PXCanvas.h"
 #import "PXCanvasDocument.h"
-#import "PXModalColorPanel.h"
 #import "PXPalettePanel.h"
 #import "PXNamePrompter.h"
 #import "PathUtilities.h"
@@ -21,11 +20,9 @@
 
 int kPXColorPickerMode = 23421337;
 
-extern void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *info);
-
 @implementation PXColorPicker
 
-- initWithPickerMask:(int)mask colorPanel:(NSColorPanel *)owningColorPanel
+- initWithPickerMask:(NSUInteger)mask colorPanel:(NSColorPanel *)owningColorPanel
 {
 	if (!(mask & NSColorPanelRGBModeMask))
 	{
@@ -35,9 +32,8 @@ extern void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *inf
 	[super initWithPickerMask:mask colorPanel:owningColorPanel];
 	[NSBundle loadNibNamed:@"PXColorPicker" owner:self];
 	[gearMenu setImage:[NSImage imageNamed:@"actiongear"]];
-	[gearMenu setEnabled:![owningColorPanel isModal]];
+	[gearMenu setEnabled:YES];
 	icon = [[NSImage imageNamed:@"colorpalette"] retain];
-	[paletteView setEditable:![owningColorPanel isModal]];
 	[paletteView setDelegate:self];
 	namePrompter = [[PXNamePrompter alloc] init];
 	[namePrompter setDelegate:self];
@@ -84,30 +80,14 @@ extern void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *inf
 
 - (void)setColor:(NSColor *)aColor
 {
-	[paletteView setSelectedIndex:PXPalette_indexOfColor([paletteView palette], aColor)];
+
 }
 
 - (void)useColorAtIndex:(unsigned)index event:(NSEvent *)e
 {
 	PXPalette *palette = [paletteView palette];
-	[[self colorPanel] setShowsAlpha:!(palette->locked)];
+	[[self colorPanel] setShowsAlpha:YES];
 	[[self colorPanel] setColor:PXPalette_colorAtIndex(palette, index)];
-}
-
-- (void)modifyColorAtIndex:(unsigned)index
-{
-	PXPalette *palette = [paletteView palette];
-	[[PXModalColorPanel sharedColorPanel] setShowsAlpha:!(palette->locked)];
-	NSColor *color = PXPalette_colorAtIndex(palette, index);
-	while(index >= PXPalette_colorCount(palette))
-	{
-		color = [NSColor whiteColor];
-		PXPalette_addColor(palette, color);
-	}
-	[[PXModalColorPanel sharedColorPanel] setColor:color];
-	PXPalette_setColorAtIndex(palette, [[PXModalColorPanel sharedColorPanel] run], index);
-	[[self colorPanel] setColor:PXPalette_colorAtIndex(palette, index)];
-	PXPalette_postChangedNotification(palette,nil);
 }
 
 - (NSImage *)provideNewButtonImage
@@ -118,16 +98,6 @@ extern void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *inf
 - (void)showPalette:(PXPalette *)palette
 {
 	PXPalette *currentPalette = palette;
-	id enumerator = [[[NSDocumentController sharedDocumentController] documents] objectEnumerator], current;
-	[paletteView setDocument:nil];
-	while(current = [enumerator nextObject])
-	{
-		if([[current canvas] palette] == currentPalette)
-		{
-			[paletteView setDocument:current];
-			break;
-		}
-	}
 	if ([paletteView palette] != palette)
 	{
 		[paletteView setPalette:palette];
@@ -136,8 +106,7 @@ extern void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *inf
 	{
 		[paletteSelector showPalette:palette];
 	}
-	[gearMenu setEnabled:![[self colorPanel] isModal]];
-	[paletteView setSelectedIndex:PXPalette_indexOfColor([paletteView palette], [[self colorPanel] color])];
+	[gearMenu setEnabled:YES];
 }
 
 - (void)reloadDataExcluding:aDoc
@@ -212,10 +181,18 @@ extern void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *inf
 	[self reloadData];
 	[self showPalette:pal];
 }
+- (void)reloadDataAndShowCanvas:(PXCanvas *)canvas
+{
+	[self reloadData];
+	#warning find the palette
+	PXPalette *pal = PXPalette_init(PXPalette_alloc());
+	[self showPalette:pal];
+}
+
 
 - (void)documentAdded:(NSNotification *)notification
 {
-	[self reloadDataAndShow:[[[notification object] canvas] palette]];
+	[self reloadDataAndShowCanvas:[[notification object] canvas]];
 }
 
 - (void)windowDidBecomeMain:(NSNotification *)notification
@@ -223,7 +200,7 @@ extern void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *inf
 	if (![paletteView palette] || !PXPalette_isDocumentPalette([paletteView palette])) { return; }
 	id object = [notification object];
 	if ([[object delegate] respondsToSelector:@selector(document)] && [[[object delegate] document] respondsToSelector:@selector(canvas)]) {
-		[self reloadDataAndShow:[[[[object delegate] document] canvas] palette]];
+		[self reloadDataAndShowCanvas:[[[object delegate] document] canvas]];
 	}
 }
 
@@ -320,8 +297,6 @@ extern void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *inf
 {
 	PXPalette *newPal = PXPalette_copy([paletteView palette]);
 	newPal->isSystemPalette = NO;
-	newPal->undoManager = nil;
-	newPal->locked = NO;
 	newPal->canSave = NO;
 	NSString *base = [NSString stringWithFormat:@"%@ Copy", newPal->name];
 #warning might not work for other languages

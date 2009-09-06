@@ -39,8 +39,6 @@
 	id switcher;
 	id propertiesView;
 	id color;
-	unsigned int colorIndex;
-	BOOL cachesColorIndex;
 }
 
 - (NSString *)name;
@@ -69,7 +67,6 @@ fromCanvasController:(PXCanvasController *)controller;
 - (NSBezierPath *)path;
 - (NSBezierPath *)wrappedPath;
 - (NSColor *)colorForCanvas:(PXCanvas *)canvas;
-- (unsigned int)colorIndexForCanvas:(PXCanvas *)canvas;
 - (void)setColor:(NSColor *)aColor;
 
 - (BOOL)shiftKeyDown;
@@ -82,9 +79,6 @@ fromCanvasController:(PXCanvasController *)controller;
 - (void)clearBezier;
 - (BOOL)shouldUseBezierDrawing;
 - (BOOL)supportsPatterns;
-
-- (void)setCachesColorIndex:(BOOL)cache;
-- (void)recacheColorIfNecessaryFromController:(PXCanvasController*)controller;
 
 - (void)setPattern:(PXPattern *)pat;
 

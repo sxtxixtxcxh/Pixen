@@ -45,9 +45,7 @@
 
 - (IBAction)configuratorBackColorChanged:(id)sender
 {
-#ifdef __COCOA__
     [self setBackColor:[sender color]];
-#endif
     [self changed];
 	[cachedImage release];
 	cachedImage = nil;

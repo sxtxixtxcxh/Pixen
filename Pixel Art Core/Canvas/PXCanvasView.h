@@ -32,7 +32,7 @@
 {
 	PXCanvas * canvas;
 
-	id crosshair;
+	PXCrosshair * crosshair;
 	NSAffineTransform * transform;
 	
 	NSBezierPath *cachedMarqueePath;
@@ -88,7 +88,6 @@
 - (void)panByX:(float)x y:(float)y;
 
 - (void)drawSelectionMarqueeWithRect:(NSRect)rect offset:(NSPoint)off;
-
 - (void)scrollUpBy:(int)amount;
 - (void)scrollRightBy:(int)amount;
 - (void)scrollDownBy:(int)amount;

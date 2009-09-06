@@ -6,7 +6,7 @@
 //
 #import <AppKit/AppKit.h>
 
-@class PXCanvasController, PXCanvas, PXCanvasView, PXBackground, PXPaletteRestrictor, RBSplitView, RBSplitSubview;
+@class PXCanvasController, PXCanvas, PXCanvasView, PXBackground, RBSplitView, RBSplitSubview;
 
 @interface PXCanvasWindowController : NSWindowController
 {
@@ -19,11 +19,13 @@
 	id resizePrompter;
 	id scaleController;
 	id layerController;
+	
+	id paletteController;
+	
 	id toolbar;
 	IBOutlet PXCanvasController *canvasController;
-	PXPaletteRestrictor *paletteRestrictor;
 	IBOutlet RBSplitView *splitView;
-	IBOutlet RBSplitSubview *layerSplit, *canvasSplit;
+	IBOutlet RBSplitSubview *layerSplit, *canvasSplit, *paletteSplit;
 }
 - canvasController;
 - (PXCanvasView *)view;
@@ -35,6 +37,7 @@
 - (PXCanvas *) canvas;
 - (void)windowWillClose:note;
 - (void)setCanvas:(PXCanvas *) aCanvas;
+- (void)releaseCanvas;
 - (void)setDocument:(NSDocument *)doc;
 - (void)windowDidResignMain:note;
 - (void)windowDidBecomeMain:(NSNotification *) aNotification;

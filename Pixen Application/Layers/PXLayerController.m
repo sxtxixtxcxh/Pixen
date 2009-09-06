@@ -214,14 +214,7 @@
 	if ([tableView respondsToSelector:@selector(selectRowIndexes:byExtendingSelection:)])
 	{
 		
-#ifdef __COCOA__
 		[tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
-#else
-		if ( index > 0 )
-		{
-			[tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
-		}
-#endif
 	}
 	else
 	{
@@ -284,7 +277,7 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 - (IBAction)addLayer:(id)sender
 {
 	layersCreated++;
-	PXLayer *layer =[[PXLayer alloc] initWithName:[NSString stringWithFormat:NSLocalizedString(@"New Layer %d", @"New Layer %d"), layersCreated] size:[canvas size] fillWithColorIndex:[canvas eraseColorIndex]];
+	PXLayer *layer =[[PXLayer alloc] initWithName:[NSString stringWithFormat:NSLocalizedString(@"New Layer %d", @"New Layer %d"), layersCreated] size:[canvas size] fillWithColor:[NSColor clearColor]];
 	
 	//[[[self document] undoManager] beginUndoGrouping];
 	[canvas addLayer:layer];
@@ -376,9 +369,18 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 	}
 	if (index == 0) 
 		return;
+	BOOL wasActive = [[canvas layers] objectAtIndex:index] == [canvas activeLayer];
 	[canvas mergeDownLayer:[[canvas layers] objectAtIndex:index]];
-	[self selectRow:[self invertLayerIndex:index]];
-	[self selectLayer:[[canvas layers] objectAtIndex:index]];
+	if(wasActive)
+	{
+		[self selectRow:[self invertLayerIndex:index-1]];
+		[self selectLayer:[[canvas layers] objectAtIndex:index-1]];
+	}
+	else
+	{
+		[self selectRow:[self invertLayerIndex:[canvas indexOfLayer:[canvas activeLayer]]]];
+		[self selectLayer:[canvas activeLayer]];
+	}
 }
 
 - (void)mergeDownLayerObject:(PXLayer *) layer

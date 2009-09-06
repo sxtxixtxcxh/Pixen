@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 __MyCompanyName__. All rights reserved.
+//  Copyright 2005 Open Sword Group. All rights reserved.
 //
 
 #import "PXAnimationDocument.h"
@@ -74,7 +74,7 @@
 		NSData *xmlData = [NSPropertyListSerialization dataFromPropertyList:celData format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
 		if(!xmlData)
 		{
-			NSLog(error);
+			NSLog(@"%@", error);
 			[error release];
 			return nil;
 		}
@@ -100,11 +100,8 @@
 		[popup beginOperationWithStatusText:[NSString stringWithFormat:@"Exporting GIF... (1 of %d)", numberOfCels] parentWindow:[windowController window]];
 		[popup setProgress:0];
 		id exportAnimation = animation;
-		if (PXPalette_colorCount([animation palette]) > 256)
-		{
-			exportAnimation = [[animation copy] autorelease];
-			[exportAnimation reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
-		}
+		exportAnimation = [[animation copy] autorelease];
+		[exportAnimation reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
 		NSColor *transparentColor = nil;
 		for (i = 0; i < numberOfCels; i++)
 		{
@@ -150,7 +147,6 @@
 				[[cel canvas] setGrid:firstGrid];
 			}
 			[cel setInfo:[plist objectAtIndex:i]];
-			[animation setPalette:[cel palette]];
 			[animation addCel:cel];
 		}
 		[[self undoManager] removeAllActions];

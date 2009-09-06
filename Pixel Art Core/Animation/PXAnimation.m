@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 __MyCompanyName__. All rights reserved.
+//  Copyright 2005 Open Sword Group. All rights reserved.
 //
 
 #import "PXAnimation.h"
@@ -22,15 +22,12 @@
 	[super init];
 	cels = [[NSMutableArray alloc] initWithCapacity:100];
 	[cels addObject:[[[PXCel alloc] init] autorelease]];
-	palette = PXPalette_init(PXPalette_alloc());
-	[self setPalette:palette];
 	return self;
 }
 
 - (void)dealloc
 {
 	[cels release];
-	PXPalette_release(palette);
 	[super dealloc];
 }
 
@@ -38,8 +35,6 @@
 {
 	PXAnimation *newAnimation = [[PXAnimation alloc] init];
 	[newAnimation setValue:[cels deepMutableCopy] forKey:@"cels"];
-	PXPalette *paletteCopy = PXPalette_copy(palette);
-	[newAnimation setPalette:paletteCopy recache:NO];
 	[newAnimation setUndoManager:undoManager];
 	return newAnimation;
 }
@@ -62,28 +57,6 @@
 - (NSSize)size
 {
 	return [[cels lastObject] size];
-}
-
-- (PXPalette *)palette
-{
-	return palette;
-}
-
-- (void)setPalette:(PXPalette *)pal recache:(BOOL)recache
-{
-	PXPalette_retain(pal);
-	PXPalette_release(palette);
-	palette = pal;
-	id enumerator = [cels objectEnumerator], current;
-	while(current = [enumerator nextObject])
-	{
-		[current setPalette:palette recache:recache];
-	}
-}
-
-- (void)setPalette:(PXPalette *)pal
-{
-	[self setPalette:pal recache:YES];
 }
 
 - (void)setSizeNoUndo:(NSSize)aSize
@@ -160,7 +133,6 @@
 	[undoManager beginUndoGrouping];
 	[[undoManager prepareWithInvocationTarget:self] removeCel:cel];
 	[cel setUndoManager:undoManager];
-	[cel setPalette:palette];
 	[cels insertObject:cel atIndex:index];
 	[undoManager setActionName:NSLocalizedString(@"Add Cel", @"Add Cel")];
 	[undoManager endUndoGrouping];
@@ -176,7 +148,6 @@
 {
 	PXCel *newCel = [[[PXCel alloc] init] autorelease];
 	[newCel setSize:[self size]];
-	[newCel setPalette:palette];
 	if(index <= [cels count] && index > 0)
 	{
 		[[newCel canvas] setGrid:[[[cels objectAtIndex:index - 1] canvas] grid]];
@@ -214,7 +185,6 @@
 	[undoManager beginUndoGrouping];
 	PXCel *cel = [[[self objectInCelsAtIndex:originalIndex] copy] autorelease];
 	[cel setUndoManager:undoManager];
-	[cel setPalette:palette];
 	[[undoManager prepareWithInvocationTarget:self] removeCel:cel];
 	[cels insertObject:cel atIndex:insertionIndex];
 	[undoManager setActionName:NSLocalizedString(@"Copy Cel", @"Copy Cel")];

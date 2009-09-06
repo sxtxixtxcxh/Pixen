@@ -34,9 +34,7 @@
 @interface PXPreviewResizeSizeView : NSView 
 {
 	NSAttributedString *scaleString;
-#ifdef __COCOA__
 	NSShadow *shadow;
-#endif
 }
 
 - (BOOL)updateScale:(float)scale;

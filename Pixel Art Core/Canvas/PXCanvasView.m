@@ -44,11 +44,6 @@
 
 #import "SBCenteringClipView.h"
 
-#ifndef __COCOA__
-#include "math.h"
-#import <Foundation/NSTimer.h>
-#endif
-
 #import "PXApplication.h"
 #import "TabletEvents.h"
 #import "Wacom.h"
@@ -60,6 +55,11 @@
 - (void)drawRectOnTop:(NSRect)rect inView:(PXCanvasView *)view;
 @end
 
+void PXDebugRect(NSRect r, float alpha)
+{
+	[[NSColor colorWithCalibratedRed:(rand() % 255) / 255.0 green:(rand() % 255) / 255.0 blue:(rand() % 255) / 255.0 alpha:alpha] set];
+	NSRectFillUsingOperation(r, NSCompositeSourceOver);
+}
 
 @implementation PXCanvasView
 
@@ -153,7 +153,23 @@
 {	
 	if ([canvas wraps])
 	{
-		[self setNeedsDisplayInRect:[self visibleRect]];
+		int xTiles = 0;
+		int yTiles = 0;
+		NSRect r = [self convertFromViewToCanvasRect:[self visibleRect]];
+		while(((xTiles * [canvas size].width)) < NSWidth(r)) { xTiles++; }
+		if(xTiles % 2 == 0) { xTiles += 1; }
+		while(((yTiles * [canvas size].height)) < NSHeight(r)) { yTiles++; }
+		if(yTiles % 2 == 0) { yTiles += 1; }
+		float i, j;
+		for(i = 0; i < xTiles; i++)
+		{
+			for(j = 0; j < yTiles; j++)
+			{
+				float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(r)) / 2.0);
+				float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(r)) / 2.0);
+				[self setNeedsDisplayInRect:[self convertFromCanvasToViewRect:NSInsetRect(NSMakeRect(xLoc + NSMinX(rect), yLoc + NSMinY(rect), NSWidth(rect), NSHeight(rect)), -1, -1)]];
+			}
+		}	
 	}
 	else
 	{
@@ -341,7 +357,7 @@
 	toPoint.x = MIN(toPoint.x, NSWidth([self frame]) - 1);
 	fromPoint.y = MIN(fromPoint.y, NSHeight([self frame]) - 1);
 	toPoint.y = MIN(toPoint.y, NSHeight([self frame]) - 1);
-
+	
 	[cachedMarqueePath moveToPoint:fromPoint];
 	[cachedMarqueePath lineToPoint:toPoint];
 }
@@ -471,176 +487,251 @@
 	[translationTransform concat];
 }
 
-- transform
+- (NSAffineTransform *)transform
 {
 	return transform;
 }
 
+//- (BOOL)shouldCombineRect:(NSRect)a withRect:(NSRect)b
+//{
+//	NSPoint ca = NSMakePoint(NSMidX(a), NSMidY(a));
+//	NSPoint cb = NSMakePoint(NSMidX(b), NSMidY(b));
+//	float distance = sqrt((ca.x-cb.x)*(ca.x-cb.x)+((ca.y-cb.y)*(ca.y-cb.y)));
+//	float szA = sqrt(a.size.width*a.size.width+a.size.height*a.size.height);
+//	float szB = sqrt(b.size.width*b.size.width+b.size.height*b.size.height);
+//	return !NSEqualRects(a, NSZeroRect) && !NSEqualRects(b, NSZeroRect) && (NSIntersectsRect(a,b) || (distance < szA) || (distance < szB));
+//}
+//
+//- (void)drawRect:(NSRect)rect
+//{
+//	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
+//	[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
+//	if(canvas != nil && !NSEqualSizes([canvas size], NSZeroSize)) {
+//		int rectCount;
+//		[self getRectsBeingDrawn:NULL count:&rectCount];
+//		const NSRect * rects = calloc(rectCount, sizeof(NSRect));
+//		[self getRectsBeingDrawn:&rects count:&rectCount];
+//		int i;
+//		//need to get non-overlapping rects - this multiple-drawing-over sucks!
+//		NSRect *realRects = calloc(rectCount, sizeof(NSRect));
+//		int realRectCount = 0;
+//		for(i = 0; i < rectCount; i++)
+//		{
+//			int j;
+//			BOOL found = NO;
+//			for(j = 0; j < realRectCount; j++)
+//			{
+//				if([self shouldCombineRect:rects[i] withRect:realRects[j]])
+//				{
+//					found = YES;
+//					realRects[j] = NSUnionRect(rects[i], realRects[j]);
+//					break;
+//				}
+//			}
+//			if(!found)
+//			{
+//				realRects[realRectCount] = rects[i];
+//				realRectCount++;
+//			}
+//		}
+//		//combine realRects
+//		BOOL foundAny;
+//		do {
+//			foundAny = NO;
+//			for(i = 0; i < realRectCount; i++)
+//			{
+//				int j;
+//				for(j = 0; j < realRectCount; j++)
+//				{
+//					if((i != j) && [self shouldCombineRect:realRects[i] withRect:realRects[j]])
+//					{
+//						realRects[i] = NSUnionRect(realRects[i], realRects[j]);						
+//						realRects[j] = NSZeroRect;
+//						foundAny = YES;
+//					}
+//				}
+//			}
+//		} while(foundAny);
+//		for(i = 0; i < realRectCount; i++)
+//		{
+//			NSRect r = realRects[i];
+//			//Using NSEraseRect of the whole dirty rect here fixes the particular problem but introduces a new one, so it's not a solution.
+//			//But!  That means that coalescing close groups of rects is a great solution
+//			[self drawDirtyRect:r];
+//			//PXDebugRect(r, 1.0);
+//		}
+//	}
+//	else
+//	{
+//		[[NSColor lightGrayColor] set];
+//		NSRectFill(rect);
+//	}	
+//}
+
+//- (void)drawDirtyRect:(NSRect)rect
 - (void)drawRect:(NSRect)rect
 {
+	if(canvas == nil || NSEqualSizes([canvas size], NSZeroSize)) { return; }
+
 	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
 	[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
-
-	if(canvas != nil && !NSEqualSizes([canvas size], NSZeroSize)) {
-		transform = [self setupTransform];
-		
-		NSRect canvasRect = [self convertFromViewToCanvasRect:[self bounds]];
-		
-		float xCenter = [canvas wraps] ? (NSWidth(canvasRect) - [canvas size].width) / 2.0 : 0;
-		float yCenter = [canvas wraps] ? (NSHeight(canvasRect) - [canvas size].height) / 2.0 : 0;
-		int xTiles = 0;
-		int yTiles = 0;
-		BOOL oldCanvasWraps = [canvas wraps];
-		[canvas setWraps:[canvas wraps] && drawsWrappedCanvases suppressRedraw:YES];
-		if([canvas wraps])
-		{
-			while(((xTiles * [canvas size].width)) < NSWidth(canvasRect)) { xTiles++; }
-			if(xTiles % 2 == 0) { xTiles += 1; }
-			while(((yTiles * [canvas size].height)) < NSHeight(canvasRect)) { yTiles++; }
-			if(yTiles % 2 == 0) { yTiles += 1; }
-		}
-		
-		NSAffineTransform *bgTransform = [self setupTransform];
-		[bgTransform translateXBy:xCenter yBy:yCenter];
-		[bgTransform concat];
-		if(shouldDrawMainBackground || [self alternateBackground] == nil) 
-		{ 
-			[[self mainBackground] drawRect:rect withinRect:[self visibleRect] withTransform:bgTransform onCanvas:canvas]; 
-		}
-		else 
-		{ 
-			[[self alternateBackground] drawRect:rect withinRect:[self visibleRect] withTransform:bgTransform onCanvas:canvas]; 
-		}
-		[bgTransform invert];
-		[bgTransform concat];
+	transform = [self setupTransform];
 	
-		
-		// High coupling alert.
-		PXToolPaletteController *paletteController = [PXToolPaletteController sharedToolPaletteController];
-		PXTool *currentTool = [paletteController currentTool];
-		if(erasing)
+	NSRect canvasRect = [self convertFromViewToCanvasRect:[self bounds]];
+	
+	float xCenter = [canvas wraps] ? (NSWidth(canvasRect) - [canvas size].width) / 2.0 : 0;
+	float yCenter = [canvas wraps] ? (NSHeight(canvasRect) - [canvas size].height) / 2.0 : 0;
+	int xTiles = 0;
+	int yTiles = 0;
+	BOOL oldCanvasWraps = [canvas wraps];
+	[canvas setWraps:[canvas wraps] && drawsWrappedCanvases suppressRedraw:YES];
+	if([canvas wraps])
+	{
+		while(((xTiles * [canvas size].width)) < NSWidth(canvasRect)) { xTiles++; }
+		if(xTiles % 2 == 0) { xTiles += 1; }
+		while(((yTiles * [canvas size].height)) < NSHeight(canvasRect)) { yTiles++; }
+		if(yTiles % 2 == 0) { yTiles += 1; }
+	}
+	
+	NSAffineTransform *bgTransform = [self setupTransform];
+	[bgTransform translateXBy:xCenter yBy:yCenter];
+	[bgTransform concat];
+	if(shouldDrawMainBackground || [self alternateBackground] == nil) 
+	{ 
+		[[self mainBackground] drawRect:rect withinRect:[self visibleRect] withTransform:bgTransform onCanvas:canvas]; 
+	}
+	else 
+	{ 
+		[[self alternateBackground] drawRect:rect withinRect:[self visibleRect] withTransform:bgTransform onCanvas:canvas]; 
+	}
+	[bgTransform invert];
+	[bgTransform concat];
+	
+	
+	// High coupling alert.
+	PXToolPaletteController *paletteController = [PXToolPaletteController sharedToolPaletteController];
+	PXTool *currentTool = [paletteController currentTool];
+	if(erasing)
+	{
+		currentTool = [[paletteController leftSwitcher] toolWithTag:PXEraserToolTag];
+	}
+	if(!currentTool)
+	{
+		currentTool = [paletteController leftTool];
+	}
+	if (drawsToolBeziers && [currentTool shouldUseBezierDrawing] && [[self window] isMainWindow]) {
+		[canvas meldBezier:([canvas wraps] ? [currentTool wrappedPath] : [currentTool path]) ofColor:[[currentTool colorForCanvas:canvas] colorWithAlphaComponent:([[canvas activeLayer] opacity] / 100.0f) * [[currentTool colorForCanvas:canvas] alphaComponent]]];
+	}
+	
+	float factor = (zoomPercentage / 100.0);
+	if ([canvas wraps])
+	{
+		NSRect destination = NSMakeRect(0, 0, [canvas size].width * factor, [canvas size].height * factor);
+		NSRect source = NSMakeRect(0, 0, [canvas size].width, [canvas size].height);
+		float i, j;
+		for(i = 0; i < xTiles; i++)
 		{
-			currentTool = [[paletteController leftSwitcher] toolWithTag:PXEraserToolTag];
-		}
-		if(!currentTool)
-		{
-			currentTool = [paletteController leftTool];
-		}
-		if (drawsToolBeziers && [currentTool shouldUseBezierDrawing] && [[self window] isMainWindow]) {
-			[canvas meldBezier:([canvas wraps] ? [currentTool wrappedPath] : [currentTool path]) ofColor:[[currentTool colorForCanvas:canvas] colorWithAlphaComponent:([[canvas activeLayer] opacity] / 100.0f) * [[currentTool colorForCanvas:canvas] alphaComponent]]];
-		}		
-				
-		if ([canvas wraps])
-		{
-			float factor = (zoomPercentage / 100.0);
-			NSRect destination = NSMakeRect(0, 0, [canvas size].width * factor, [canvas size].height * factor);
-			NSRect source = NSMakeRect(0, 0, [canvas size].width, [canvas size].height);
-			float i, j;
-			for(i = 0; i < xTiles; i++)
+			for(j = 0; j < yTiles; j++)
 			{
-				for(j = 0; j < yTiles; j++)
+				float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(canvasRect)) / 2.0);
+				float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(canvasRect)) / 2.0);
+				if(NSIntersectsRect(rect, NSMakeRect(xLoc*factor, yLoc*factor, [canvas size].width*factor, [canvas size].height*factor)))
 				{
-					float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(canvasRect)) / 2.0);
-					float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(canvasRect)) / 2.0);
-					NSAffineTransform *tileTransform = [NSAffineTransform transform];
-					[tileTransform translateXBy:xLoc * factor yBy:yLoc * factor];
-					[tileTransform concat];
+					//					CGContextScaleCTM([[NSGraphicsContext currentContext] graphicsPort], factor, factor);
+					CGContextTranslateCTM([[NSGraphicsContext currentContext] graphicsPort], xLoc*factor, yLoc*factor);
 					[canvas drawInRect:destination fromRect:source];
-					[tileTransform invert];
-					[tileTransform concat];
+					CGContextTranslateCTM([[NSGraphicsContext currentContext] graphicsPort], -xLoc*factor, -yLoc*factor);
+					//					CGContextScaleCTM([[NSGraphicsContext currentContext] graphicsPort], 1.0/factor, 1.0/factor);
 				}
 			}
 		}
-		else
-		{
-			[canvas drawInRect:rect fromRect:[self convertFromViewToCanvasRect:rect]];      
-		}
-		[transform concat];
-		[canvas unmeldBezier];
-	
-		
-		if ([canvas wraps])
-		{
-			float i, j;
-			for(i = 0; i < xTiles; i++)
-			{
-				for(j = 0; j < yTiles; j++)
-				{
-					float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(canvasRect)) / 2.0);
-					float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(canvasRect)) / 2.0);
-					NSAffineTransform *toolTransform = [NSAffineTransform transform];
-					[toolTransform translateXBy:xLoc yBy:yLoc];
-					[toolTransform concat];
-					if (drawsToolBeziers && [currentTool respondsToSelector:@selector(drawRectOnTop:inView:)]) {
-						[currentTool drawRectOnTop:rect inView:self];
-					}
-					[toolTransform invert];
-					[toolTransform concat];
-				}
-			}
-		}
-		else
-		{
-			if (drawsToolBeziers && [currentTool respondsToSelector:@selector(drawRectOnTop:inView:)]) {
-				[currentTool drawRectOnTop:rect inView:self];
-			}
-		}
-		
-		NSRect gridRect = canvasRect;
-		if(shouldDrawGrid) 
-		{
-			NSAffineTransform *gridTransform = [NSAffineTransform transform];
-			//		[gridTransform translateXBy:-xCenter yBy:-yCenter];
-			[gridTransform concat];
-			//		gridRect.size.width += xCenter;
-			//		gridRect.size.height += yCenter;
-			//		gridRect.size.width = ceilf(NSWidth(gridRect));
-			//		gridRect.size.height = ceilf(NSHeight(gridRect));
-			if ((zoomPercentage / 100.0f) * [[canvas grid] unitSize].width >= 4 && (zoomPercentage / 100.0f) * [[canvas grid] unitSize].height >= 4)
-			{
-				[[canvas grid] drawRect:gridRect];
-			}
-			[gridTransform invert];
-			[gridTransform concat];			
-		}
-		if ([[self window] isMainWindow])
-		{	
-			[crosshair drawRect:gridRect withTool:currentTool tileOffset:NSMakePoint(xCenter, yCenter)];
-		}
-		[transform invert];
-		[transform concat];
-		[transform invert];
-		
-		// the selection unfortunately needs to be drawn outside the transform
-		// so that the pattern renders correctly. this creates a lot of ugly
-		// code. sorry.
-		if ([canvas hasSelection] && drawsSelectionMarquee)
-		{
-			if ([canvas wraps])
-			{
-				float i, j;
-				for(i = 0; i < xTiles; i++)
-				{
-					for(j = 0; j < yTiles; j++)
-					{
-						float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(canvasRect)) / 2.0);
-						float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(canvasRect)) / 2.0);
-						[self drawSelectionMarqueeWithRect:rect offset:NSMakePoint(xLoc, yLoc)];
-					}
-				}
-			}
-			else
-			{
-				[self drawSelectionMarqueeWithRect:rect offset:NSMakePoint(xCenter, yCenter)];
-			}
-		}
-		[canvas setWraps:oldCanvasWraps suppressRedraw:YES];
 	}
 	else
 	{
-		[[NSColor lightGrayColor] set];
-		NSRectFill(rect);
+		//			CGContextScaleCTM([[NSGraphicsContext currentContext] graphicsPort], factor, factor);
+		[canvas drawInRect:rect fromRect:[self convertFromViewToCanvasRect:rect]];      
+		//			CGContextScaleCTM([[NSGraphicsContext currentContext] graphicsPort], 1.0/factor, 1.0/factor);
 	}
+	[canvas unmeldBezier];
+	[transform concat];
+	
+	
+	if ([canvas wraps])
+	{
+		float i, j;
+		for(i = 0; i < xTiles; i++)
+		{
+			for(j = 0; j < yTiles; j++)
+			{
+				float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(canvasRect)) / 2.0);
+				float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(canvasRect)) / 2.0);
+				NSAffineTransform *toolTransform = [NSAffineTransform transform];
+				[toolTransform translateXBy:xLoc yBy:yLoc];
+				[toolTransform concat];
+				if (drawsToolBeziers && [currentTool respondsToSelector:@selector(drawRectOnTop:inView:)]) {
+					[currentTool drawRectOnTop:rect inView:self];
+				}
+				[toolTransform invert];
+				[toolTransform concat];
+			}
+		}
+	}
+	else
+	{
+		if (drawsToolBeziers && [currentTool respondsToSelector:@selector(drawRectOnTop:inView:)]) {
+			[currentTool drawRectOnTop:rect inView:self];
+		}
+	}
+	
+	NSRect gridRect = canvasRect;
+	if(shouldDrawGrid) 
+	{
+		NSAffineTransform *gridTransform = [NSAffineTransform transform];
+		//		[gridTransform translateXBy:-xCenter yBy:-yCenter];
+		[gridTransform concat];
+		//		gridRect.size.width += xCenter;
+		//		gridRect.size.height += yCenter;
+		//		gridRect.size.width = ceilf(NSWidth(gridRect));
+		//		gridRect.size.height = ceilf(NSHeight(gridRect));
+		if ((zoomPercentage / 100.0f) * [[canvas grid] unitSize].width >= 4 && (zoomPercentage / 100.0f) * [[canvas grid] unitSize].height >= 4)
+		{
+			[[canvas grid] drawRect:gridRect];
+		}
+		[gridTransform invert];
+		[gridTransform concat];			
+	}
+	if ([[self window] isMainWindow])
+	{	
+		[crosshair drawRect:gridRect withTool:currentTool tileOffset:NSMakePoint(xCenter, yCenter)];
+	}
+	[transform invert];
+	[transform concat];
+	[transform invert];
+	
+	// the selection unfortunately needs to be drawn outside the transform
+	// so that the pattern renders correctly. this creates a lot of ugly
+	// code. sorry.
+	if ([canvas hasSelection] && drawsSelectionMarquee)
+	{
+		if ([canvas wraps])
+		{
+			float i, j;
+			for(i = 0; i < xTiles; i++)
+			{
+				for(j = 0; j < yTiles; j++)
+				{
+					float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(canvasRect)) / 2.0);
+					float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(canvasRect)) / 2.0);
+					[self drawSelectionMarqueeWithRect:rect offset:NSMakePoint(xLoc, yLoc)];
+				}
+			}
+		}
+		else
+		{
+			[self drawSelectionMarqueeWithRect:rect offset:NSMakePoint(xCenter, yCenter)];
+		}
+	}
+	[canvas setWraps:oldCanvasWraps suppressRedraw:YES];
 }
 
 - (void)setDrawsWrappedCanvases:(BOOL)draws
@@ -650,9 +741,6 @@
 
 - (NSAffineTransform *)setupScaleTransform
 {
-#ifndef __COCOA__
-	zoomPercentage = 600;
-#endif
 	id transformation = [NSAffineTransform transform];
 	
 	[transformation scaleBy:zoomPercentage/100.0f];
@@ -735,13 +823,12 @@
 	}
 	
 	[crosshair setCursorPosition:newLocation];
-	[self setNeedsDisplayInRect:[self visibleRect]];
 }
 
 - (void)updateInfoPanelWithMousePosition:(NSPoint)point dragging:(BOOL)dragging
 {
 	if (![[[PXInfoPanelController sharedInfoPanelController] infoPanel] isVisible]) { return; }
-
+	
 	NSPoint cursorPoint = point;
 	cursorPoint.y = [canvas size].height - cursorPoint.y - 1;
 	if (!dragging) {
@@ -749,7 +836,7 @@
 	}
 	[[PXInfoPanelController sharedInfoPanelController] setCursorPosition:cursorPoint];
 	NSColor *currentColor = [[[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEyedropperToolTag] compositeColorAtPoint:point fromCanvas:canvas];
-	[[PXInfoPanelController sharedInfoPanelController] setColorInfo:currentColor withIndex:PXPalette_indexOfColor([canvas palette], currentColor)]; // eeew HACK: METHOD SHOULD BE MOVED TO CANVAS
+	[[PXInfoPanelController sharedInfoPanelController] setColorInfo:currentColor];
 }
 
 - (void)scrollWheel:(NSEvent *)event
@@ -779,19 +866,11 @@
 {
 	if(erasing)
 	{
-#ifdef __COCOA__
 		[delegate eraserDown:event];
-#else
-		[[[NSApp keyWindow] delegate] eraserDown: event];
-#endif
 	}
 	else
 	{
-#ifdef __COCOA__
 		[delegate mouseDown:event];
-#else
-		[[[NSApp keyWindow] delegate] mouseDown: event];
-#endif
 	}
 	[self updateInfoPanelWithMousePosition:[self convertFromWindowToCanvasPoint:[event locationInWindow]] dragging:NO];	
 }
@@ -800,8 +879,29 @@
 {
 	NSPoint coords = [self convertFromWindowToCanvasPoint:locationInWindow];
 	if (!NSEqualPoints(coords, lastMousePosition)) {
+		NSPoint oldCursorLoc = [crosshair cursorPosition];
 		[self updateCrosshairs:coords];
 		[self updateInfoPanelWithMousePosition:coords dragging:dragging];
+		
+		if([crosshair shouldDraw])
+		{
+			float x = NSMinX([self visibleRect]);
+			float y = NSMinY([self visibleRect]);
+			float w = NSWidth([self visibleRect]);
+			float h = NSHeight([self visibleRect]);
+			float unitSize = zoomPercentage / 100.0;
+			NSPoint oldLoc = [self convertFromCanvasToViewPoint:oldCursorLoc];
+			NSPoint newLoc = [self convertPoint:locationInWindow fromView:nil];
+			
+			NSRect oldHorizontal = NSMakeRect(x, oldLoc.y-unitSize*2, w, unitSize*4);
+			NSRect oldVertical = NSMakeRect(oldLoc.x-unitSize*2, y, unitSize*4, h);
+			NSRect newHorizontal = NSMakeRect(x, newLoc.y-unitSize*2, w, unitSize*4);
+			NSRect newVertical = NSMakeRect(newLoc.x-unitSize*2, y, unitSize*4, h);
+			[self setNeedsDisplayInRect:oldHorizontal];
+			[self setNeedsDisplayInRect:newHorizontal];
+			[self setNeedsDisplayInRect:oldVertical];
+			[self setNeedsDisplayInRect:newVertical];
+		}
 		lastMousePosition = coords;
 	}
 }
@@ -838,7 +938,9 @@
 	else
 	{
 		[delegate mouseMoved:event];
-	}	
+	}
+//	NSPoint loc = [self convertPoint:[event locationInWindow] fromView:nil];
+//	[self setNeedsDisplayInRect:NSInsetRect(NSMakeRect(loc.x, loc.y, 0, 0), -32, -32)];
 }
 
 - (void)mouseDragged:(NSEvent *)event

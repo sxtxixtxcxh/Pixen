@@ -26,7 +26,11 @@
 
 - (void)panelDidEnd:(NSSavePanel *)panel returnCode:(int)code contextInfo:(void *)info
 {
-	if (code == NSCancelButton) { return; }
+	if (code == NSCancelButton) 
+	{
+		PXPalette_release(palette);
+		return; 
+	}
 	NSString *type = [[(NSPopUpButton *)[panel accessoryView] selectedItem] title];
 	if ([type isEqualToString:PixenPaletteType])
 	{
@@ -43,6 +47,7 @@
 		if (data == nil) { return; }
 		[data writeToFile:[panel filename] atomically:YES];
 	}
+	PXPalette_release(palette);
 }
 
 - (void)typeChanged:sender
@@ -63,7 +68,7 @@
 - (void)runWithPalette:(PXPalette *)aPalette inWindow:(NSWindow *)window
 {
 	if (aPalette == NULL) { return; }
-	palette = aPalette;
+	palette = PXPalette_retain(aPalette);
 	savePanel = [NSSavePanel savePanel];
 	[savePanel setAllowedFileTypes:[NSArray arrayWithObjects:PXPaletteSuffix, MicrosoftPaletteSuffix, AdobePaletteSuffix, nil]];
 	[savePanel setPrompt:@"Export"];

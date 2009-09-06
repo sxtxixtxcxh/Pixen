@@ -8,14 +8,7 @@
 #import "PXBackgroundTableHeader.h"
 #import "PXBuiltinBackgroundTemplateView.h"
 #import "PXDefaultBackgroundTemplateView.h"
-#ifdef __COCOA__
-//#warning GNUstep == no Carbon ; don't care~
 #import <Carbon/Carbon.h>
-#else
-#import "Constants.h"
-#import "PXNotifications.h"
-#import <AppKit/NSAlert.h>
-#endif
 
 typedef enum _PXStackType
 {

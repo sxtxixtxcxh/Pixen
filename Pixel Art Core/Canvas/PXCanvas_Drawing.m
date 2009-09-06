@@ -9,11 +9,6 @@
 #import "PXCanvas_Drawing.h"
 #import "PXLayer.h"
 #import "PXCanvas_Selection.h"
-#ifndef __COCOA__
-#include <math.h>
-#import "PXNotifications.h"
-#import "PXDefaults.h"
-#endif
 
 @implementation PXCanvas(Drawing)
 

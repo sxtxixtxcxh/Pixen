@@ -69,7 +69,6 @@
 	while ( (layer = [layerEnumerator nextObject]) ) {
 		layerCopy = [[layer copy] autorelease];
 		[layer setSize:size];
-		[layer beginOptimizedSetting];
 		for (x=0; x<size.width; x++) {
 			for (y=0; y<size.height; y++) {
 				currentPoint = NSMakePoint((int)(x/xScale),(int)(y/yScale));
@@ -77,7 +76,6 @@
 						atPoint:NSMakePoint(x, y)];
 			}
 		}
-		[layer endOptimizedSetting];
 	}
 	
 	[canvas layersChanged];

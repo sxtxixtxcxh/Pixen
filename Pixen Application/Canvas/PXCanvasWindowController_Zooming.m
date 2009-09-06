@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 __MyCompanyName__. All rights reserved.
+//  Copyright 2005 Open Sword Group. All rights reserved.
 //
 
 #import "PXCanvasWindowController_Zooming.h"
@@ -14,13 +14,6 @@
 
 - (void)prepareZoom
 {
-#ifndef __COCOA__
-	[zoomPercentageBox setEditable: YES];
-	[zoomPercentageBox setEnabled:YES];
-	[zoomPercentageBox setUsesDataSource:NO];
-	[zoomPercentageBox setNumberOfVisibleItems:10];
-	[zoomPercentageBox setCompletes:NO];
-#endif
 	NSArray *itemsObjects = [NSArray arrayWithObjects:
 		[NSNumber numberWithInt:3000], 
 		[NSNumber numberWithInt:2000], 
@@ -47,10 +40,7 @@
 - (void)zoomToIndex:(float)index
 {
 	if(index < 0 || index >= [zoomPercentageBox numberOfItems]) { 
-#ifdef __COCOA__
 		NSBeep();
-#endif
-		return; 
 	}
 	
 	[zoomPercentageBox selectItemAtIndex:index];
@@ -143,9 +133,7 @@
 {
 	if([zoomStepper intValue] >= [zoomPercentageBox numberOfItems]) 
 	{ 
-#ifdef __COCOA__
 		NSBeep();
-#endif
 		[zoomStepper setIntValue:[zoomPercentageBox numberOfItems]-1]; 
 		return; 
 	}

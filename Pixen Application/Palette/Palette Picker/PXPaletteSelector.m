@@ -71,7 +71,8 @@
 	{
 		[docs removeObject:aDoc];
 	}
-	int docPaletteCount = [docs count];	
+//	int docPaletteCount = [docs count];	
+	int docPaletteCount = 0;
 	int userPaletteCount = PXPalette_getUserPalettes(NULL, 0);
 	int sysPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
 	[selectionPopup setEnabled:YES];
@@ -86,8 +87,10 @@
 	
 	for(i = 0; i < docPaletteCount; i++)
 	{
+	#warning no palette
+/*	assert(0);
 		PXCanvasDocument *doc = [docs objectAtIndex:i];
-		PXPalette *pal = [[doc canvas] palette];
+		PXPalette *pal = PXPalette_init(PXPalette_alloc());
 		if([PXPalette_name(pal) isEqual:@""])
 		{
 			PXPalette_setName(pal, [doc displayName]);
@@ -96,7 +99,7 @@
 		[item setRepresentedObject:[NSValue valueWithPointer:pal]];
 		[[selectionPopup menu] addItem:item];
 		[item setTarget:self];
-		palettes[i] = pal;
+		palettes[i] = pal;*/
 	}
 	if((docPaletteCount > 0) && ((userPaletteCount > 0) || (sysPaletteCount > 0)))
 	{
@@ -132,7 +135,8 @@
 		[[selectionPopup menu] addItem:item];
 		[item setTarget:self];
 	}
-	if(((docPaletteCount + sysPaletteCount) == 0) || (palettes[index] == [[aDoc canvas] palette]))
+	#warning this should do something about showing the document's palette
+	if((docPaletteCount + sysPaletteCount) == 0)
 	{
 		return NULL;
 	}

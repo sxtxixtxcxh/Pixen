@@ -30,25 +30,14 @@
 
 @end
 
-typedef enum
-{
-	PXNoToolColor,
-	PXLeftToolColor,
-	PXRightToolColor,
-	PXSelectedColor, // for not caring about tools, just the highlight
-	PXBothToolColor
-} PXColorCelState;
-
 @interface PXColorPickerColorWellCell : NSCell {
 	int index;
 	NSColor *color;
-	PXColorCelState state;
 	NSImage *smallNewColorImage, *bigNewColorImage;
 }
 
 - (int)index;
 - (void)setIndex:(int)newIndex;
-- (void)setState:(PXColorCelState)state;
 - (NSColor *)color;
 - (void)setColor:(NSColor *)newColor;
 

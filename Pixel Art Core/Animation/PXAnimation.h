@@ -3,16 +3,14 @@
 //  Pixen
 //
 //  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 __MyCompanyName__. All rights reserved.
+//  Copyright 2005 Open Sword Group. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PXPalette.h"
 
 @class PXCel;
 @interface PXAnimation : NSObject <NSCopying> {
 	NSMutableArray *cels;
-	PXPalette *palette;
 	NSUndoManager *undoManager;
 }
 - init;
@@ -20,9 +18,6 @@
 - (unsigned)indexOfObjectInCels:(PXCel *)cel;
 - (unsigned)countOfCels;
 - (NSSize)size;
-- (PXPalette *)palette;
-- (void)setPalette:(PXPalette *)pal recache:(BOOL)recache;
-- (void)setPalette:(PXPalette *)pal;
 - (void)setSize:(NSSize)aSize;
 - (void)setSizeNoUndo:(NSSize)aSize;
 - (void)setSize:(NSSize)aSize withOrigin:(NSPoint)origin backgroundColor:(NSColor *)bgcolor;

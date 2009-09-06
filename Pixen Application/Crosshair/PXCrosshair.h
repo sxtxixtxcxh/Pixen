@@ -38,7 +38,6 @@
 - (NSColor *) color;
 - (BOOL)shouldDraw;
 - (NSPoint)cursorPosition;
-
 - (void)setCursorPosition:(NSPoint)position;
 
 @end

@@ -29,15 +29,12 @@
 #import "PXCrosshair.h"
 #import "PXToolPaletteController.h"
 #import "PXTool.h"
-#ifndef __COCOA__
 #import "PXDefaults.h"
 #import <AppKit/NSGraphicsContext.h>
 #import <AppKit/NSBezierPath.h>
 #import <AppKit/NSColor.h>
-#endif
 
 @implementation PXCrosshair
-
 
 - (void)drawRect:(NSRect)drawingRect withTool:tool tileOffset:(NSPoint)offset
 {

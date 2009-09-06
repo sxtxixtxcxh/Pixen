@@ -11,11 +11,6 @@
 #import "PXBitmapExporter.h"
 #import "PXPSDHandler.h"
 #import "PXLayer.h"
-#ifndef __COCOA__
-#include <math.h>
-#import "PXNotifications.h"
-#import "PXDefaults.h"
-#endif
 
 @implementation PXCanvas(ImportingExporting)
 
@@ -58,8 +53,8 @@
 	
 	if (storageType == NSBMPFileType)
 	{
-#ifdef __COCOA__
-		if (PXPalette_colorCount([self palette]) <= 256)
+		PXPalette *pal = [self createFrequencyPalette];
+		if (PXPalette_colorCount(pal) <= 256)
 		{
 			return [PXBitmapExporter indexedBitmapDataForCanvas:self];
 		}
@@ -67,10 +62,7 @@
 		{
 			return [PXBitmapExporter BMPDataForImage:outputImage];
 		}
-#else
-#warning GNUstep / COCOA implement that without Quicktime 
-		return nil;
-#endif
+		PXPalette_release(pal);
 	}
 	else
 	{
@@ -81,12 +73,7 @@
 - PICTData
 {
 	id outputImage = [self exportImage];
-#ifdef __COCOA__
 	return [PXBitmapExporter PICTDataForImage:outputImage];
-#else
-#warning GNUstep/Cocoa implement that without Quicktime
-	return nil;
-#endif
 }
 
 - (void)replaceActiveLayerWithImage:(NSImage *)anImage
@@ -103,28 +90,6 @@
 	free(selectionMask);
 	selectionMask = calloc(newSize.width * newSize.height, sizeof(BOOL));
 	selectedRect = NSZeroRect;
-	// if we're using a gif, let's set up the color table in the originally specified order
-	NSData *table = nil;
-	if ([firstRep respondsToSelector:@selector(valueForProperty:)]) {
-		table = [(NSBitmapImageRep *)firstRep valueForProperty:NSImageRGBColorTable];
-	}
-	if (table)
-	{
-		int colors = [table length] / 3;
-		int i;
-		const unsigned char *bytes = [table bytes];
-		BOOL checkForDuplicates = (PXPalette_colorCount(palette) > 0);
-		for (i = 0; i < colors; i++)
-		{
-			float red = bytes[i*3] / 255.0;
-			float green = bytes[i*3 + 1] / 255.0;
-			float blue = bytes[i*3 + 2] / 255.0;
-			if (checkForDuplicates)
-				PXPalette_addColorWithoutDuplicating(palette, [NSColor colorWithCalibratedRed:red green:green blue:blue alpha:1]);
-			else
-				PXPalette_addColor(palette, [NSColor colorWithCalibratedRed:red green:green blue:blue alpha:1]);
-		}
-	}
 	if([layers count] == 0)
 	{
 		[layers addObject:[[[PXLayer alloc] initWithName:@"Main Layer" size:newSize] autorelease]];
@@ -150,7 +115,6 @@
 
 - initWithPSDData:(NSData *)data
 {
-#ifdef __COCOA__
 	[self init];
 	id images = [PXPSDHandler imagesForPSDData:data];
 	[self setSize:[[images objectAtIndex:0] size]];
@@ -163,10 +127,6 @@
 	}
 	[[self undoManager] removeAllActions];
 	return self;
-#else
-#warning GNUstep implement that without QUICKTIME
-	return nil;
-#endif
 }
 
 - (NSImage *)displayImage
@@ -192,7 +152,10 @@
 	PXLayer *layer;
 	while (layer = [layerEnumerator nextObject])
 	{
-		[[layer exportImage] compositeToPoint:canvasRect.origin fromRect:canvasRect operation:NSCompositeDestinationOver fraction:[layer opacity] / 100.0f];
+		if([layer visible])
+		{
+			[[layer exportImage] compositeToPoint:canvasRect.origin fromRect:canvasRect operation:NSCompositeDestinationOver fraction:[layer opacity] / 100.0f];
+		}
 	}
 	// We fill the color (if necessary) after because of the backwards order in which we're doing this
 	if (color)

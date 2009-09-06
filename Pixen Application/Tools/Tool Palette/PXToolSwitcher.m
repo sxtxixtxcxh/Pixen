@@ -82,40 +82,6 @@ NSMutableArray * toolNames;
 	[toolsMatrix setDoubleAction:@selector(toolDoubleClicked:)];
 }
 
-- (void)setPalette:(PXPalette *)palette locked:(BOOL)lock
-{
-	if(lock) { [self setColor:PXPalette_colorClosestTo(palette,[self color])]; }
-	[[NSColorPanel sharedColorPanel] setShowsAlpha:!lock];
-	//[[NSColorPanel sharedColorPanel] setMode:kPXColorPickerMode];
-	//private key!
-//	[[[NSColorPanel sharedColorPanel] valueForKey:@"_magnifyButton"] setEnabled:!lock];
-	[[[NSColorPanel sharedColorPanel] standardWindowButton:NSWindowToolbarButton] setHidden:lock];
-	[[[NSColorPanel sharedColorPanel] toolbar] setVisible:!lock];
-}
-
-- (void)windowDidBecomeMain:note
-{
-	id object = [note object];
-	if ([[object delegate] respondsToSelector:@selector(canvas)]) {
-		PXPalette *palette = [[[object delegate] canvas] palette];
-		if(!palette) { return; }
-		[self setPalette:palette locked:palette->locked];
-	}
-}
-
-- (void)paletteChanged:note
-{
-	NSString *realName = [[note userInfo] objectForKey:PXSubNotificationNameKey];
-	if([realName isEqual:PXPaletteLockedNotificationName])
-	{
-		[self setPalette:[[note object] pointerValue] locked:YES];
-	}
-	else if([realName isEqual:PXPaletteUnlockedNotificationName])
-	{
-		[self setPalette:[[note object] pointerValue] locked:NO];
-	}
-}
-
 -(id) init
 {
 	if ( ! ( self = [super init] ) ) 
@@ -134,28 +100,11 @@ NSMutableArray * toolNames;
 	[tools makeObjectsPerformSelector:@selector(setSwitcher:) withObject:self];
 	[self setColor:[NSColor blackColor]];
 	[self useToolTagged:PXPencilToolTag];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paletteChanged:) name:PXPaletteChangedNotificationName object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentOpened:) name:PXDocumentOpenedNotificationName object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentWillClose:) name:PXDocumentWillCloseNotificationName object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidBecomeMain:) name:NSWindowDidBecomeMainNotification object:nil];
 
 	_locked = NO;
 	[self checkUserDefaults];
 
 	return self;
-}
-
-- (void)documentOpened:note
-{
-	[self setPalette:NULL locked:NO];
-}
-
-- (void)documentWillClose:note
-{
-	if ([[[NSDocumentController sharedDocumentController] documents] count] == 1)
-	{
-		[self setPalette:NULL locked:NO];
-	}
 }
 
 //#warning private ? 
@@ -271,12 +220,7 @@ NSMutableArray * toolNames;
 - (void)setColor:(NSColor *)col
 {
 #warning coupled
-	PXPalette *palette = [[[[NSDocumentController sharedDocumentController] currentDocument] canvas] palette];
 	NSColor *aColor = [col colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	if(palette && palette->locked)
-	{
-		aColor = PXPalette_colorClosestTo(palette,aColor);
-	}
     [aColor retain];
     [_color release];
     _color = aColor;

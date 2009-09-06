@@ -31,9 +31,6 @@
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_Modifying.h"
 #import "PXLayer.h"
-#ifndef __COCOA__
-#include "math.h"
-#endif
 
 @implementation PXScale2xScaleAlgorithm
 
@@ -84,7 +81,6 @@
 			pool = [[NSAutoreleasePool alloc] init];
 			layerCopy = [[layer copy] autorelease];
 			[layer setSize:NSMakeSize(layerWidth, layerHeight)];
-			[layer beginOptimizedSetting];
 			for (x=0; x<[canvas size].width; x++) {
 				for (y=0; y<[canvas size].height; y++) {
 					// A B C
@@ -119,7 +115,6 @@
 					[layer setColor:E3 atPoint:NSMakePoint(x*2 + 1, y*2 + 1)];
 				}
 			}
-			[layer endOptimizedSetting];
 			[pool release];
 		}
 		xScale = xScale >> 1;

@@ -20,18 +20,13 @@ All rights reserved.
 -----------------------------------------------------------------------------*/
 
 #import <Cocoa/Cocoa.h>
-#ifdef __COCOA__
 #import <Carbon/Carbon.h>
-#endif
 #import "PXApplication.h"
-#ifdef __COCOA__
 #import "TabletEvents.h"
 #import "Wacom.h"
 #import "TAEHelpers.h"
-#endif
 #import "PXCanvasDocument.h"
 #import "PXCanvasWindowController.h"
-#import "PXModalColorPanel.h"
 
 typedef struct UPoint32
 {
@@ -110,13 +105,6 @@ typedef struct UPoint32
 		case kEventMouseMoved:
 		case kEventMouseDragged:
 			//we need this hack to prevent the normal color picker from being used when the modal picker is out.
-			if([self modalWindow] == [PXModalColorPanel sharedColorPanel])
-			{
-				if(!NSPointInRect([NSEvent mouseLocation], [[PXModalColorPanel sharedColorPanel] frame]))
-				{
-					return;
-				}
-			}
 			inEvent = (EventRef)[theEvent eventRef];
 			result = GetEventParameter(inEvent, kEventParamTabletEventType, 
 									   typeUInt32, NULL, 

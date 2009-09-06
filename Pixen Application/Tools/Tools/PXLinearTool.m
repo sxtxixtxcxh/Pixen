@@ -35,10 +35,6 @@
 #import "PXCanvasController.h"
 #import "PXCanvasDocument.h"
 
-#ifndef __COCOA__
-#include <math.h>
-#endif
-
 @implementation PXLinearTool
 -(id) init
 {
@@ -200,7 +196,6 @@ fromCanvasController:(PXCanvasController *)controller
     fromCanvasController:(PXCanvasController *)controller
 {
 	_lastPoint = finalPoint;
-	[self recacheColorIfNecessaryFromController:controller];
 	NSPoint origin = [self transformOrigin:_origin withDrawingPoint:[self lockedPointFromUnlockedPoint:finalPoint withOrigin:_origin]];
 	if (!NSEqualPoints(initialPoint, finalPoint)) 
     {

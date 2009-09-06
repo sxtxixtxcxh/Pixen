@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 __MyCompanyName__. All rights reserved.
+//  Copyright 2005 Open Sword Group. All rights reserved.
 //
 
 #import "PXCanvasWindowController_IBActions.h"
@@ -19,7 +19,6 @@
 #import "PXCanvasController.h"
 #import "PXScaleController.h"
 #import "PXTool.h"
-#import "PXPaletteRestrictor.h"
 #import "PXPaletteExporter.h"
 #import "PXPalettePanel.h"
 
@@ -115,7 +114,9 @@
 - (IBAction)exportDocumentPalette:sender
 {
 	id exporter = [[PXPaletteExporter alloc] init];
-	[exporter runWithPalette:[canvas palette] inWindow:[self window]];
+	PXPalette *p = [canvas createFrequencyPalette];
+	[exporter runWithPalette:p inWindow:[self window]];
+	PXPalette_release(p);
 }
 
 - (IBAction)mergeDown:(id) sender
@@ -142,12 +143,6 @@
 	{
 		[anItem setTitle:([canvas wraps]) ? NSLocalizedString(@"HIDE_TILED_VIEW", @"Hide Tiled View") :
 			NSLocalizedString(@"SHOW_TILED_VIEW", @"Show Tiled View")];
-		return YES;
-	}
-	else if([anItem action] == @selector(toggleAutomaticPalette:))
-	{
-		[anItem setTitle:([canvas palette]->locked) ? NSLocalizedString(@"Use Automatic Mode", @"Use Automatic Mode") :
-			NSLocalizedString(@"Use Manual Mode...", @"Use Manual Mode...")];
 		return YES;
 	}
 	else if ([anItem action] == @selector(cut:) || [anItem action] == @selector(copy:) ||
@@ -186,20 +181,6 @@
 	else if ([anItem action] == @selector(setPatternToSelection:))
 		return [[self canvas] hasSelection] && [[[PXToolPaletteController sharedToolPaletteController] currentTool] supportsPatterns];
 	return YES;
-}
-
-- (IBAction)toggleAutomaticPalette:sender
-{
-	if([canvas palette]->locked)
-    {
-		[canvas beginUndoGrouping];
-		PXPalette_unlock([canvas palette]);
-		[canvas endUndoGrouping:NSLocalizedString(@"Toggle Palette Mode", @"Toggle Palette Mode")];
-    }
-	else
-	{
-		[paletteRestrictor runRestrictionSheetForPalette:[canvas palette] canvas:canvas inWindow:[self window]];
-	}
 }
 
 - (IBAction)promoteSelection:(id) sender
@@ -371,7 +352,9 @@ didFinishWithSize:(NSSize)aSize
 
 - (IBAction)popDocumentPalette:sender
 {
-	[PXPalettePanel popWithPalette:[canvas palette] fromWindow:[NSColorPanel sharedColorPanel]];
+	#warning no palette, memory concerns, change this architecture some
+	assert(0);
+//	[PXPalettePanel popWithPalette:[canvas palette] fromWindow:[NSColorPanel sharedColorPanel]];
 }
 
 @end

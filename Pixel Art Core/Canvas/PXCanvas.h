@@ -34,7 +34,6 @@ typedef BOOL * PXSelectionMask;
 
 @interface PXCanvas : NSObject <NSCopying>
 {
-	PXPalette * palette;
 	id layers;
 	
 //I want to move these to the document somehow, eventually.
@@ -51,6 +50,7 @@ typedef BOOL * PXSelectionMask;
 	NSRect canvasRect;  //Cached because [self size] and NSMakeRect slow things down when containsPoint is called a bunch
 	NSRect selectedRect;
 	NSUndoManager *undoManager; // Cached from PXCanvasDocument
+	NSMutableArray *drawnPoints, *oldColors, *newColors;
 
 //these are slightly easier to move, but will still suck to move.
 	PXBackgroundConfig *bgConfig;
@@ -65,10 +65,6 @@ typedef BOOL * PXSelectionMask;
 
 - (id)duplicateWithinAnimation;
 - (void)recacheSize;
-
-- (PXPalette *)palette;
-- (void)setPalette:(PXPalette *)pal recache:(BOOL)recache;
-- (void)setPalette:(PXPalette *)pal;
 
 - (NSSize)size;
 - (void)setSize:(NSSize)newSize 
@@ -86,6 +82,8 @@ backgroundColor:(NSColor *)color;
 - (void)endUndoGrouping;
 - (void)endUndoGrouping:(NSString *)action;
 - (void)updatePreviewSize;
-- (unsigned)eraseColorIndex;
+- (NSColor *)eraseColor;
+
+- (PXPalette *)createFrequencyPalette;
 
 @end

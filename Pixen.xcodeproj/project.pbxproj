@@ -11,10 +11,22 @@
 		610F37DE0899A5DE00567E90 /* PixenHelp in Resources */ = {isa = PBXBuildFile; fileRef = 610F37D30899A5DD00567E90 /* PixenHelp */; };
 		6117816108ABA7F30098DCC4 /* PXAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6117815F08ABA7F30098DCC4 /* PXAnimationView.h */; };
 		6117816208ABA7F30098DCC4 /* PXAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6117816008ABA7F30098DCC4 /* PXAnimationView.m */; };
+		615C3B180D14F42800ACFA33 /* CTGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = 615C3B140D14F42800ACFA33 /* CTGradient.h */; };
+		615C3B190D14F42800ACFA33 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 615C3B150D14F42800ACFA33 /* CTGradient.m */; };
+		615C3B1A0D14F42800ACFA33 /* CTGradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = 615C3B160D14F42800ACFA33 /* CTGradientView.h */; };
+		615C3B1B0D14F42800ACFA33 /* CTGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 615C3B170D14F42800ACFA33 /* CTGradientView.m */; };
+		615C3B610D15038F00ACFA33 /* PXLayerPaneBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */; };
+		615C3B620D15038F00ACFA33 /* PXLayerPaneBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */; };
 		616AA52608611A8800FD2CB9 /* PXJPEGSizePrompt.nib in Resources */ = {isa = PBXBuildFile; fileRef = 616AA52408611A8800FD2CB9 /* PXJPEGSizePrompt.nib */; };
 		618AE491087E5C3D00A9FA9B /* PXEyedropperToolPropertiesView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 618AE48F087E5C3D00A9FA9B /* PXEyedropperToolPropertiesView.nib */; };
 		618AE591087E6FEA00A9FA9B /* PXColorPicker.nib in Resources */ = {isa = PBXBuildFile; fileRef = 618AE58F087E6FEA00A9FA9B /* PXColorPicker.nib */; };
 		619DC353085BCD37007EF7F7 /* PXPreviewResizePrompt.nib in Resources */ = {isa = PBXBuildFile; fileRef = 619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.nib */; };
+		61A22A070D20715100430CCD /* History.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A22A060D20715000430CCD /* History.tiff */; };
+		61A22A240D2073E500430CCD /* Frequency.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A22A230D2073E500430CCD /* Frequency.tiff */; };
+		61A22A860D2303EE00430CCD /* OSRectAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A22A840D2303EE00430CCD /* OSRectAdditions.h */; };
+		61A22A870D2303EE00430CCD /* OSRectAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A22A850D2303EE00430CCD /* OSRectAdditions.m */; };
+		61A22B920D2323B500430CCD /* OSPlasticButtonCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A22B900D2323B500430CCD /* OSPlasticButtonCell.h */; };
+		61A22B930D2323B500430CCD /* OSPlasticButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A22B910D2323B500430CCD /* OSPlasticButtonCell.m */; };
 		61A956BC08AD76CF009BB89F /* OSProgressPopup.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61A956BA08AD76CF009BB89F /* OSProgressPopup.nib */; };
 		61ED25AD06BD63DA00264DA2 /* PXAbout.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61ED25AB06BD63DA00264DA2 /* PXAbout.nib */; };
 		61FED6C408BCC646005E51EA /* PXSequenceExportPrompter.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61FED6C208BCC646005E51EA /* PXSequenceExportPrompter.nib */; };
@@ -97,10 +109,6 @@
 		EA31F97D0CE7CD9300EC481B /* PXLayerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */; };
 		EA31F97E0CE7CD9300EC481B /* PXInfoPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */; };
 		EA31F97F0CE7CD9300EC481B /* PXInfoPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9750CE7CD9300EC481B /* PXInfoPanelController.m */; };
-		EA31F9A50CE7CE4800EC481B /* PXModalColorPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9830CE7CE4800EC481B /* PXModalColorPanel.h */; };
-		EA31F9A60CE7CE4800EC481B /* PXModalColorPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9840CE7CE4800EC481B /* PXModalColorPanel.m */; };
-		EA31F9A70CE7CE4800EC481B /* PXModalColorWell.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9850CE7CE4800EC481B /* PXModalColorWell.h */; };
-		EA31F9A80CE7CE4800EC481B /* PXModalColorWell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9860CE7CE4800EC481B /* PXModalColorWell.m */; };
 		EA31F9A90CE7CE4800EC481B /* PXGradientBuilderController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9870CE7CE4800EC481B /* PXGradientBuilderController.h */; };
 		EA31F9AA0CE7CE4800EC481B /* PXGradientBuilderController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9880CE7CE4800EC481B /* PXGradientBuilderController.m */; };
 		EA31F9AB0CE7CE4800EC481B /* PXPaletteSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9890CE7CE4800EC481B /* PXPaletteSelector.h */; };
@@ -115,8 +123,6 @@
 		EA31F9B60CE7CE4800EC481B /* PXPaletteViewScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F99B0CE7CE4800EC481B /* PXPaletteViewScrollView.m */; };
 		EA31F9B70CE7CE4800EC481B /* PXPaletteViewSizeSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F99C0CE7CE4800EC481B /* PXPaletteViewSizeSelector.h */; };
 		EA31F9B80CE7CE4800EC481B /* PXPaletteViewSizeSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F99D0CE7CE4800EC481B /* PXPaletteViewSizeSelector.m */; };
-		EA31F9B90CE7CE4800EC481B /* PXPaletteRestrictor.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F99F0CE7CE4800EC481B /* PXPaletteRestrictor.h */; };
-		EA31F9BA0CE7CE4800EC481B /* PXPaletteRestrictor.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9A00CE7CE4800EC481B /* PXPaletteRestrictor.m */; };
 		EA31F9BB0CE7CE4800EC481B /* PXPalettePanel.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9A10CE7CE4800EC481B /* PXPalettePanel.h */; };
 		EA31F9BC0CE7CE4800EC481B /* PXPalettePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9A20CE7CE4800EC481B /* PXPalettePanel.m */; };
 		EA31F9BD0CE7CE4800EC481B /* PXPalettePanelPaletteView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9A30CE7CE4800EC481B /* PXPalettePanelPaletteView.h */; };
@@ -153,8 +159,6 @@
 		EA31FA800CE7D1A700EC481B /* PXToolPropertiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA440CE7D1A700EC481B /* PXToolPropertiesController.m */; };
 		EA31FA810CE7D1A700EC481B /* PXToolPropertiesView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA450CE7D1A700EC481B /* PXToolPropertiesView.h */; };
 		EA31FA820CE7D1A700EC481B /* PXToolPropertiesView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA460CE7D1A700EC481B /* PXToolPropertiesView.m */; };
-		EA31FA830CE7D1A700EC481B /* PXToolButtonCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA480CE7D1A700EC481B /* PXToolButtonCell.h */; };
-		EA31FA840CE7D1A700EC481B /* PXToolButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA490CE7D1A700EC481B /* PXToolButtonCell.m */; };
 		EA31FA850CE7D1A700EC481B /* PXToolPaletteController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA4A0CE7D1A700EC481B /* PXToolPaletteController.h */; };
 		EA31FA860CE7D1A700EC481B /* PXToolPaletteController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA4B0CE7D1A700EC481B /* PXToolPaletteController.m */; };
 		EA31FA870CE7D1A700EC481B /* PXToolSwitcher.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA4C0CE7D1A700EC481B /* PXToolSwitcher.h */; };
@@ -297,12 +301,6 @@
 		EA31FCD50CE7D7C200EC481B /* PXAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC570CE7D7C200EC481B /* PXAboutController.m */; };
 		EA31FCD60CE7D7C200EC481B /* PXAboutPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC580CE7D7C200EC481B /* PXAboutPanel.h */; };
 		EA31FCD70CE7D7C200EC481B /* PXAboutPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC590CE7D7C200EC481B /* PXAboutPanel.m */; };
-		EA31FCD80CE7D7C200EC481B /* OSGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC5B0CE7D7C200EC481B /* OSGradient.h */; };
-		EA31FCD90CE7D7C200EC481B /* OSGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC5C0CE7D7C200EC481B /* OSGradient.m */; };
-		EA31FCDA0CE7D7C200EC481B /* OSLinearGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC5D0CE7D7C200EC481B /* OSLinearGradient.h */; };
-		EA31FCDB0CE7D7C200EC481B /* OSLinearGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC5E0CE7D7C200EC481B /* OSLinearGradient.m */; };
-		EA31FCDC0CE7D7C200EC481B /* OSRadialGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC5F0CE7D7C200EC481B /* OSRadialGradient.h */; };
-		EA31FCDD0CE7D7C200EC481B /* OSRadialGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC600CE7D7C200EC481B /* OSRadialGradient.m */; };
 		EA31FCDE0CE7D7C200EC481B /* OSProgressPopup.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC620CE7D7C200EC481B /* OSProgressPopup.h */; };
 		EA31FCDF0CE7D7C200EC481B /* OSProgressPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC630CE7D7C200EC481B /* OSProgressPopup.m */; };
 		EA31FCE00CE7D7C200EC481B /* OSStackedView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC650CE7D7C200EC481B /* OSStackedView.h */; };
@@ -333,7 +331,6 @@
 		EA4A6C3F08A98133007BAC7F /* PXAnimationDocument.nib in Resources */ = {isa = PBXBuildFile; fileRef = EA4A6C3D08A98133007BAC7F /* PXAnimationDocument.nib */; };
 		EA4A6C4F08A98259007BAC7F /* PXCel.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4A6C4D08A98259007BAC7F /* PXCel.h */; };
 		EA4A6C5008A98259007BAC7F /* PXCel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4A6C4E08A98259007BAC7F /* PXCel.m */; };
-		EA4A725A08AA7E74007BAC7F /* PXPaletteRestrictor.nib in Resources */ = {isa = PBXBuildFile; fileRef = EA4A725808AA7E74007BAC7F /* PXPaletteRestrictor.nib */; };
 		EA561870089DB48400C12231 /* PXCanvas_Drawing.h in Headers */ = {isa = PBXBuildFile; fileRef = EA56186E089DB48400C12231 /* PXCanvas_Drawing.h */; };
 		EA561871089DB48400C12231 /* PXCanvas_Drawing.m in Sources */ = {isa = PBXBuildFile; fileRef = EA56186F089DB48400C12231 /* PXCanvas_Drawing.m */; };
 		EA56188B089DB5FE00C12231 /* PXCanvas_ImportingExporting.h in Headers */ = {isa = PBXBuildFile; fileRef = EA561889089DB5FE00C12231 /* PXCanvas_ImportingExporting.h */; };
@@ -356,6 +353,9 @@
 		EA5E9EE80877237800FCE6FE /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5E9EE70877237800FCE6FE /* Carbon.framework */; };
 		EAAB76760CEF54F300F2EF66 /* PXDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAB76740CEF54F300F2EF66 /* PXDocument.h */; };
 		EAAB76770CEF54F300F2EF66 /* PXDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAB76750CEF54F300F2EF66 /* PXDocument.m */; };
+		EAB6506F0D108D0F00274070 /* PXPaletteController.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB6506D0D108D0F00274070 /* PXPaletteController.h */; };
+		EAB650700D108D0F00274070 /* PXPaletteController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB6506E0D108D0F00274070 /* PXPaletteController.m */; };
+		EAB650860D108D9000274070 /* PXPaletteController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAB650840D108D9000274070 /* PXPaletteController.xib */; };
 		EABD60B90CE986E3008A1B1E /* PXCanvasPreviewView.h in Headers */ = {isa = PBXBuildFile; fileRef = EABD60B70CE986E3008A1B1E /* PXCanvasPreviewView.h */; };
 		EABD60BA0CE986E3008A1B1E /* PXCanvasPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = EABD60B80CE986E3008A1B1E /* PXCanvasPreviewView.m */; };
 		EAC917480CE7DC7300E519E1 /* actiongear.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916E10CE7DC7300E519E1 /* actiongear.png */; };
@@ -418,7 +418,6 @@
 		EAC917810CE7DC7300E519E1 /* righttoolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9171E0CE7DC7300E519E1 /* righttoolbar.png */; };
 		EAC917820CE7DC7300E519E1 /* tilingscreenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9171F0CE7DC7300E519E1 /* tilingscreenshot.png */; };
 		EAC917830CE7DC7300E519E1 /* toolpropertiesscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917200CE7DC7300E519E1 /* toolpropertiesscreen.png */; };
-		EAC917840CE7DC7300E519E1 /* MacPAD.url in Resources */ = {isa = PBXBuildFile; fileRef = EAC917210CE7DC7300E519E1 /* MacPAD.url */; };
 		EAC917850CE7DC7300E519E1 /* Pixen.scriptSuite in Resources */ = {isa = PBXBuildFile; fileRef = EAC917230CE7DC7300E519E1 /* Pixen.scriptSuite */; };
 		EAC917860CE7DC7300E519E1 /* Pixen.scriptTerminology in Resources */ = {isa = PBXBuildFile; fileRef = EAC917240CE7DC7300E519E1 /* Pixen.scriptTerminology */; };
 		EAC917870CE7DC7300E519E1 /* Pixen.suiteModel in Resources */ = {isa = PBXBuildFile; fileRef = EAC917250CE7DC7300E519E1 /* Pixen.suiteModel */; };
@@ -490,7 +489,6 @@
 		EAF6949D06A9AE0B0019D8D7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 61BD25D3067A1E1D0054A2BB /* Localizable.strings */; };
 		EAF694A006A9AE0B0019D8D7 /* UKFeedbackProvider.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61EBB565067A2C5900FF5C2E /* UKFeedbackProvider.nib */; };
 		EAF694A706A9AE0B0019D8D7 /* PXDiscoverPixen.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61163708067D286900AE87D7 /* PXDiscoverPixen.nib */; };
-		EAF694B506A9AE0B0019D8D7 /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6115D16A0687472F003ACF8A /* License.txt */; };
 		EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61F598B9067949D500B8C8CA /* PXScalePrompt.nib */; };
 		EAF694BC06A9AE0B0019D8D7 /* PXCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5482DD0513E2DB000101DE /* PXCanvasView.m */; };
 		EAF694C806A9AE0B0019D8D7 /* PXCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = EA495594054C6943009A8EE7 /* PXCanvas.m */; };
@@ -536,18 +534,29 @@
 		6103626B060A07B700D5450C /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXGridSettingsPrompter.nib; sourceTree = "<group>"; };
 		610865F606B988F400733B2D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXInfoPanel.nib; sourceTree = "<group>"; };
 		610F37D40899A5DD00567E90 /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = English.lproj/PixenHelp; sourceTree = "<group>"; };
-		6115D16A0687472F003ACF8A /* License.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		61163709067D286900AE87D7 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXDiscoverPixen.nib; sourceTree = "<group>"; };
 		6117815F08ABA7F30098DCC4 /* PXAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PXAnimationView.h; sourceTree = "<group>"; };
 		6117816008ABA7F30098DCC4 /* PXAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PXAnimationView.m; sourceTree = "<group>"; };
 		611B104F067789560047ECE7 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
 		6151D0150677C8E3009E3BE4 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXCanvasResizePrompt.nib; sourceTree = "<group>"; };
+		615C3B140D14F42800ACFA33 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
+		615C3B150D14F42800ACFA33 /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
+		615C3B160D14F42800ACFA33 /* CTGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradientView.h; sourceTree = "<group>"; };
+		615C3B170D14F42800ACFA33 /* CTGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGradientView.m; sourceTree = "<group>"; };
+		615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerPaneBackgroundView.h; sourceTree = "<group>"; };
+		615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerPaneBackgroundView.m; sourceTree = "<group>"; };
 		615DEC2C060950260011F3F8 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPencilToolPropertiesView.nib; sourceTree = "<group>"; };
 		616AA52508611A8800FD2CB9 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXJPEGSizePrompt.nib; sourceTree = "<group>"; };
 		618AE490087E5C3D00A9FA9B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXEyedropperToolPropertiesView.nib; sourceTree = "<group>"; };
 		618AE590087E6FEA00A9FA9B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXColorPicker.nib; sourceTree = "<group>"; };
 		619DC352085BCD37007EF7F7 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPreviewResizePrompt.nib; sourceTree = "<group>"; };
 		619E871906051901007D2A05 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXEllipseToolPropertiesView.nib; sourceTree = "<group>"; };
+		61A22A060D20715000430CCD /* History.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = History.tiff; sourceTree = "<group>"; };
+		61A22A230D2073E500430CCD /* Frequency.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Frequency.tiff; sourceTree = "<group>"; };
+		61A22A840D2303EE00430CCD /* OSRectAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSRectAdditions.h; sourceTree = "<group>"; };
+		61A22A850D2303EE00430CCD /* OSRectAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSRectAdditions.m; sourceTree = "<group>"; };
+		61A22B900D2323B500430CCD /* OSPlasticButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPlasticButtonCell.h; sourceTree = "<group>"; };
+		61A22B910D2323B500430CCD /* OSPlasticButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPlasticButtonCell.m; sourceTree = "<group>"; };
 		61A6F50C060E8151008FA11F /* PXCanvas_ApplescriptAdditions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PXCanvas_ApplescriptAdditions.h; sourceTree = "<group>"; };
 		61A6F50D060E8151008FA11F /* PXCanvas_ApplescriptAdditions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PXCanvas_ApplescriptAdditions.m; sourceTree = "<group>"; };
 		61A956BB08AD76CF009BB89F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/OSProgressPopup.nib; sourceTree = "<group>"; };
@@ -644,16 +653,12 @@
 		EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerTextField.m; sourceTree = "<group>"; };
 		EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXInfoPanelController.h; sourceTree = "<group>"; };
 		EA31F9750CE7CD9300EC481B /* PXInfoPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXInfoPanelController.m; sourceTree = "<group>"; };
-		EA31F9830CE7CE4800EC481B /* PXModalColorPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXModalColorPanel.h; sourceTree = "<group>"; };
-		EA31F9840CE7CE4800EC481B /* PXModalColorPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXModalColorPanel.m; sourceTree = "<group>"; };
-		EA31F9850CE7CE4800EC481B /* PXModalColorWell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXModalColorWell.h; sourceTree = "<group>"; };
-		EA31F9860CE7CE4800EC481B /* PXModalColorWell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXModalColorWell.m; sourceTree = "<group>"; };
 		EA31F9870CE7CE4800EC481B /* PXGradientBuilderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGradientBuilderController.h; sourceTree = "<group>"; };
 		EA31F9880CE7CE4800EC481B /* PXGradientBuilderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGradientBuilderController.m; sourceTree = "<group>"; };
 		EA31F9890CE7CE4800EC481B /* PXPaletteSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteSelector.h; sourceTree = "<group>"; };
 		EA31F98A0CE7CE4800EC481B /* PXPaletteSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteSelector.m; sourceTree = "<group>"; };
 		EA31F98B0CE7CE4800EC481B /* PXPaletteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteView.h; sourceTree = "<group>"; };
-		EA31F98C0CE7CE4800EC481B /* PXPaletteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteView.m; sourceTree = "<group>"; };
+		EA31F98C0CE7CE4800EC481B /* PXPaletteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteView.m; sourceTree = "<group>"; wrapsLines = 1; };
 		EA31F9960CE7CE4800EC481B /* PXColorPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXColorPicker.h; sourceTree = "<group>"; };
 		EA31F9970CE7CE4800EC481B /* PXColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXColorPicker.m; sourceTree = "<group>"; };
 		EA31F9980CE7CE4800EC481B /* PXColorPickerColorWellCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXColorPickerColorWellCell.h; sourceTree = "<group>"; };
@@ -662,8 +667,6 @@
 		EA31F99B0CE7CE4800EC481B /* PXPaletteViewScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteViewScrollView.m; sourceTree = "<group>"; };
 		EA31F99C0CE7CE4800EC481B /* PXPaletteViewSizeSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteViewSizeSelector.h; sourceTree = "<group>"; };
 		EA31F99D0CE7CE4800EC481B /* PXPaletteViewSizeSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteViewSizeSelector.m; sourceTree = "<group>"; };
-		EA31F99F0CE7CE4800EC481B /* PXPaletteRestrictor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteRestrictor.h; sourceTree = "<group>"; };
-		EA31F9A00CE7CE4800EC481B /* PXPaletteRestrictor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteRestrictor.m; sourceTree = "<group>"; };
 		EA31F9A10CE7CE4800EC481B /* PXPalettePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPalettePanel.h; sourceTree = "<group>"; };
 		EA31F9A20CE7CE4800EC481B /* PXPalettePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPalettePanel.m; sourceTree = "<group>"; };
 		EA31F9A30CE7CE4800EC481B /* PXPalettePanelPaletteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPalettePanelPaletteView.h; sourceTree = "<group>"; };
@@ -700,8 +703,6 @@
 		EA31FA440CE7D1A700EC481B /* PXToolPropertiesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXToolPropertiesController.m; sourceTree = "<group>"; };
 		EA31FA450CE7D1A700EC481B /* PXToolPropertiesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXToolPropertiesView.h; sourceTree = "<group>"; };
 		EA31FA460CE7D1A700EC481B /* PXToolPropertiesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXToolPropertiesView.m; sourceTree = "<group>"; };
-		EA31FA480CE7D1A700EC481B /* PXToolButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXToolButtonCell.h; sourceTree = "<group>"; };
-		EA31FA490CE7D1A700EC481B /* PXToolButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXToolButtonCell.m; sourceTree = "<group>"; };
 		EA31FA4A0CE7D1A700EC481B /* PXToolPaletteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXToolPaletteController.h; sourceTree = "<group>"; };
 		EA31FA4B0CE7D1A700EC481B /* PXToolPaletteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXToolPaletteController.m; sourceTree = "<group>"; };
 		EA31FA4C0CE7D1A700EC481B /* PXToolSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXToolSwitcher.h; sourceTree = "<group>"; };
@@ -717,7 +718,7 @@
 		EA31FA570CE7D1A700EC481B /* PXEyedropperToolPropertiesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXEyedropperToolPropertiesView.h; sourceTree = "<group>"; };
 		EA31FA580CE7D1A700EC481B /* PXEyedropperToolPropertiesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXEyedropperToolPropertiesView.m; sourceTree = "<group>"; };
 		EA31FA590CE7D1A700EC481B /* PXFillTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXFillTool.h; sourceTree = "<group>"; };
-		EA31FA5A0CE7D1A700EC481B /* PXFillTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXFillTool.m; sourceTree = "<group>"; };
+		EA31FA5A0CE7D1A700EC481B /* PXFillTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXFillTool.m; sourceTree = "<group>"; wrapsLines = 1; };
 		EA31FA5B0CE7D1A700EC481B /* PXFillToolPropertiesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXFillToolPropertiesView.h; sourceTree = "<group>"; };
 		EA31FA5C0CE7D1A700EC481B /* PXFillToolPropertiesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXFillToolPropertiesView.m; sourceTree = "<group>"; };
 		EA31FA5D0CE7D1A700EC481B /* PXLassoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLassoTool.h; sourceTree = "<group>"; };
@@ -844,12 +845,6 @@
 		EA31FC570CE7D7C200EC481B /* PXAboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAboutController.m; sourceTree = "<group>"; };
 		EA31FC580CE7D7C200EC481B /* PXAboutPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAboutPanel.h; sourceTree = "<group>"; };
 		EA31FC590CE7D7C200EC481B /* PXAboutPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAboutPanel.m; sourceTree = "<group>"; };
-		EA31FC5B0CE7D7C200EC481B /* OSGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSGradient.h; sourceTree = "<group>"; };
-		EA31FC5C0CE7D7C200EC481B /* OSGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSGradient.m; sourceTree = "<group>"; };
-		EA31FC5D0CE7D7C200EC481B /* OSLinearGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSLinearGradient.h; sourceTree = "<group>"; };
-		EA31FC5E0CE7D7C200EC481B /* OSLinearGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSLinearGradient.m; sourceTree = "<group>"; };
-		EA31FC5F0CE7D7C200EC481B /* OSRadialGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSRadialGradient.h; sourceTree = "<group>"; };
-		EA31FC600CE7D7C200EC481B /* OSRadialGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSRadialGradient.m; sourceTree = "<group>"; };
 		EA31FC620CE7D7C200EC481B /* OSProgressPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSProgressPopup.h; sourceTree = "<group>"; };
 		EA31FC630CE7D7C200EC481B /* OSProgressPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSProgressPopup.m; sourceTree = "<group>"; };
 		EA31FC650CE7D7C200EC481B /* OSStackedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSStackedView.h; sourceTree = "<group>"; };
@@ -875,7 +870,6 @@
 		EA31FC7D0CE7D7C200EC481B /* PathUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathUtilities.h; sourceTree = "<group>"; };
 		EA31FC7E0CE7D7C200EC481B /* PathUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathUtilities.m; sourceTree = "<group>"; };
 		EA31FC7F0CE7D7C200EC481B /* Pixen_Prefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pixen_Prefix.h; sourceTree = "<group>"; };
-		EA35563806A4A485004DE6AE /* Read Me.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Read Me.rtf"; sourceTree = "<group>"; };
 		EA35564306A4AD7B004DE6AE /* PXCanvasPrintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvasPrintView.h; sourceTree = "<group>"; };
 		EA35564406A4AD7B004DE6AE /* PXCanvasPrintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasPrintView.m; sourceTree = "<group>"; };
 		EA495593054C6943009A8EE7 /* PXCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvas.h; sourceTree = "<group>"; };
@@ -886,13 +880,12 @@
 		EA4A6C4208A9813B007BAC7F /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXAnimationDocument.nib; sourceTree = "<group>"; };
 		EA4A6C4D08A98259007BAC7F /* PXCel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCel.h; sourceTree = "<group>"; };
 		EA4A6C4E08A98259007BAC7F /* PXCel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCel.m; sourceTree = "<group>"; };
-		EA4A725908AA7E74007BAC7F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPaletteRestrictor.nib; sourceTree = "<group>"; };
 		EA5482DC0513E2DB000101DE /* PXCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvasView.h; sourceTree = "<group>"; };
-		EA5482DD0513E2DB000101DE /* PXCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasView.m; sourceTree = "<group>"; };
+		EA5482DD0513E2DB000101DE /* PXCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasView.m; sourceTree = "<group>"; wrapsLines = 1; };
 		EA56186E089DB48400C12231 /* PXCanvas_Drawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvas_Drawing.h; sourceTree = "<group>"; };
 		EA56186F089DB48400C12231 /* PXCanvas_Drawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvas_Drawing.m; sourceTree = "<group>"; };
 		EA561889089DB5FE00C12231 /* PXCanvas_ImportingExporting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvas_ImportingExporting.h; sourceTree = "<group>"; };
-		EA56188A089DB5FE00C12231 /* PXCanvas_ImportingExporting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvas_ImportingExporting.m; sourceTree = "<group>"; };
+		EA56188A089DB5FE00C12231 /* PXCanvas_ImportingExporting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvas_ImportingExporting.m; sourceTree = "<group>"; wrapsLines = 1; };
 		EA561899089DB67B00C12231 /* PXCanvas_CopyPaste.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvas_CopyPaste.h; sourceTree = "<group>"; };
 		EA56189A089DB67B00C12231 /* PXCanvas_CopyPaste.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvas_CopyPaste.m; sourceTree = "<group>"; };
 		EA5618A3089DB6FA00C12231 /* PXCanvas_Backgrounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvas_Backgrounds.h; sourceTree = "<group>"; };
@@ -900,7 +893,7 @@
 		EA5618B3089DB7C900C12231 /* PXCanvas_Selection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvas_Selection.h; sourceTree = "<group>"; };
 		EA5618B4089DB7C900C12231 /* PXCanvas_Selection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvas_Selection.m; sourceTree = "<group>"; };
 		EA5618CB089DB8CD00C12231 /* PXCanvas_Modifying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvas_Modifying.h; sourceTree = "<group>"; };
-		EA5618CC089DB8CD00C12231 /* PXCanvas_Modifying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvas_Modifying.m; sourceTree = "<group>"; };
+		EA5618CC089DB8CD00C12231 /* PXCanvas_Modifying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvas_Modifying.m; sourceTree = "<group>"; wrapsLines = 1; };
 		EA5618D8089DB93100C12231 /* PXCanvas_Layers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvas_Layers.h; sourceTree = "<group>"; };
 		EA5618D9089DB93100C12231 /* PXCanvas_Layers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvas_Layers.m; sourceTree = "<group>"; };
 		EA5618EC089DB96D00C12231 /* PXCanvas_Archiving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvas_Archiving.h; sourceTree = "<group>"; };
@@ -946,6 +939,9 @@
 		EAA79F2906D173CF000513FD /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXImageSizePrompt.nib; sourceTree = "<group>"; };
 		EAAB76740CEF54F300F2EF66 /* PXDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXDocument.h; sourceTree = "<group>"; };
 		EAAB76750CEF54F300F2EF66 /* PXDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXDocument.m; sourceTree = "<group>"; };
+		EAB6506D0D108D0F00274070 /* PXPaletteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteController.h; sourceTree = "<group>"; };
+		EAB6506E0D108D0F00274070 /* PXPaletteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteController.m; sourceTree = "<group>"; };
+		EAB650850D108D9000274070 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPaletteController.xib; sourceTree = "<group>"; };
 		EABC7DCF05D2FE4700CDB5BB /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXLayerDetailsView.nib; sourceTree = "<group>"; };
 		EABD60B70CE986E3008A1B1E /* PXCanvasPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvasPreviewView.h; sourceTree = "<group>"; };
 		EABD60B80CE986E3008A1B1E /* PXCanvasPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasPreviewView.m; sourceTree = "<group>"; };
@@ -1009,7 +1005,6 @@
 		EAC9171E0CE7DC7300E519E1 /* righttoolbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = righttoolbar.png; sourceTree = "<group>"; };
 		EAC9171F0CE7DC7300E519E1 /* tilingscreenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tilingscreenshot.png; sourceTree = "<group>"; };
 		EAC917200CE7DC7300E519E1 /* toolpropertiesscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolpropertiesscreen.png; sourceTree = "<group>"; };
-		EAC917210CE7DC7300E519E1 /* MacPAD.url */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MacPAD.url; sourceTree = "<group>"; };
 		EAC917230CE7DC7300E519E1 /* Pixen.scriptSuite */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pixen.scriptSuite; sourceTree = "<group>"; };
 		EAC917240CE7DC7300E519E1 /* Pixen.scriptTerminology */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pixen.scriptTerminology; sourceTree = "<group>"; };
 		EAC917250CE7DC7300E519E1 /* Pixen.suiteModel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Pixen.suiteModel; sourceTree = "<group>"; };
@@ -1050,7 +1045,7 @@
 		EACDBD800878B37100564512 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXBackgroundTemplateView.nib; sourceTree = "<group>"; };
 		EAE126D0054F41A9001208D9 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXImageBackgroundConfigurator.nib; sourceTree = "<group>"; };
 		EAF21E2A08AD0CFD0037A23B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPalettePanel.nib; sourceTree = "<group>"; };
-		EAF6951606A9AE0B0019D8D7 /* Info-Pixen.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Pixen.plist"; sourceTree = "<group>"; };
+		EAF6951606A9AE0B0019D8D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 		EAF6951706A9AE0B0019D8D7 /* Pixen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pixen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1106,9 +1101,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* Pixen */ = {
 			isa = PBXGroup;
 			children = (
-				EA35563806A4A485004DE6AE /* Read Me.rtf */,
 				EA68641E054C583900EE395F /* Release Notes.rtf */,
-				6115D16A0687472F003ACF8A /* License.txt */,
 				2A37F4ABFDCFA73011CA2CEA /* Pixen Application */,
 				EA31F7380CE7B79A00EC481B /* Pixel Art Core */,
 				EA31FB690CE7D59700EC481B /* Archiving */,
@@ -1117,7 +1110,7 @@
 				EA90F6CC06D1239C001755A6 /* Localizable Resources */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
-				EAF6951606A9AE0B0019D8D7 /* Info-Pixen.plist */,
+				EAF6951606A9AE0B0019D8D7 /* Info.plist */,
 			);
 			name = Pixen;
 			sourceTree = "<group>";
@@ -1152,6 +1145,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		615C3B090D14F40E00ACFA33 /* CTGradient */ = {
+			isa = PBXGroup;
+			children = (
+				615C3B140D14F42800ACFA33 /* CTGradient.h */,
+				615C3B150D14F42800ACFA33 /* CTGradient.m */,
+				615C3B160D14F42800ACFA33 /* CTGradientView.h */,
+				615C3B170D14F42800ACFA33 /* CTGradientView.m */,
+			);
+			path = CTGradient;
+			sourceTree = "<group>";
+		};
+		61A22B8F0D2323B500430CCD /* OSPlasticButtonCell */ = {
+			isa = PBXGroup;
+			children = (
+				61A22B900D2323B500430CCD /* OSPlasticButtonCell.h */,
+				61A22B910D2323B500430CCD /* OSPlasticButtonCell.m */,
+			);
+			path = OSPlasticButtonCell;
+			sourceTree = "<group>";
+		};
 		EA31F6640CE7A69D00EC481B /* Grid */ = {
 			isa = PBXGroup;
 			children = (
@@ -1164,10 +1177,10 @@
 		EA31F7380CE7B79A00EC481B /* Pixel Art Core */ = {
 			isa = PBXGroup;
 			children = (
-				EA686509054C630200EE395F /* Canvas */,
-				EAB2F5EE08A967A0001BFFFC /* Animation */,
 				EA31FB5B0CE7D44B00EC481B /* Palette */,
 				EA31FB5E0CE7D44B00EC481B /* Layers */,
+				EA686509054C630200EE395F /* Canvas */,
+				EAB2F5EE08A967A0001BFFFC /* Animation */,
 				EA31FB400CE7D42000EC481B /* Background */,
 				EA31F6640CE7A69D00EC481B /* Grid */,
 			);
@@ -1315,6 +1328,8 @@
 				EA31F96C0CE7CD9300EC481B /* PXLayerController.m */,
 				EA31F96D0CE7CD9300EC481B /* PXLayerDetailsView.h */,
 				EA31F96E0CE7CD9300EC481B /* PXLayerDetailsView.m */,
+				615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */,
+				615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */,
 				EA31F96F0CE7CD9300EC481B /* PXLayerTableView.h */,
 				EA31F9700CE7CD9300EC481B /* PXLayerTableView.m */,
 				EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */,
@@ -1336,11 +1351,12 @@
 			isa = PBXGroup;
 			children = (
 				EA31F9810CE7CE4800EC481B /* Palette Picker */,
-				EA31F99E0CE7CE4800EC481B /* Palette Restrictor */,
 				EA31F9A10CE7CE4800EC481B /* PXPalettePanel.h */,
 				EA31F9A20CE7CE4800EC481B /* PXPalettePanel.m */,
 				EA31F9A30CE7CE4800EC481B /* PXPalettePanelPaletteView.h */,
 				EA31F9A40CE7CE4800EC481B /* PXPalettePanelPaletteView.m */,
+				EAB6506D0D108D0F00274070 /* PXPaletteController.h */,
+				EAB6506E0D108D0F00274070 /* PXPaletteController.m */,
 			);
 			path = Palette;
 			sourceTree = "<group>";
@@ -1348,7 +1364,6 @@
 		EA31F9810CE7CE4800EC481B /* Palette Picker */ = {
 			isa = PBXGroup;
 			children = (
-				EA31F9820CE7CE4800EC481B /* Modal Panel */,
 				EA31F9870CE7CE4800EC481B /* PXGradientBuilderController.h */,
 				EA31F9880CE7CE4800EC481B /* PXGradientBuilderController.m */,
 				EA31F9890CE7CE4800EC481B /* PXPaletteSelector.h */,
@@ -1358,17 +1373,6 @@
 				EA31F98D0CE7CE4800EC481B /* Widgets */,
 			);
 			path = "Palette Picker";
-			sourceTree = "<group>";
-		};
-		EA31F9820CE7CE4800EC481B /* Modal Panel */ = {
-			isa = PBXGroup;
-			children = (
-				EA31F9830CE7CE4800EC481B /* PXModalColorPanel.h */,
-				EA31F9840CE7CE4800EC481B /* PXModalColorPanel.m */,
-				EA31F9850CE7CE4800EC481B /* PXModalColorWell.h */,
-				EA31F9860CE7CE4800EC481B /* PXModalColorWell.m */,
-			);
-			path = "Modal Panel";
 			sourceTree = "<group>";
 		};
 		EA31F98D0CE7CE4800EC481B /* Widgets */ = {
@@ -1384,15 +1388,6 @@
 				EA31F99D0CE7CE4800EC481B /* PXPaletteViewSizeSelector.m */,
 			);
 			path = Widgets;
-			sourceTree = "<group>";
-		};
-		EA31F99E0CE7CE4800EC481B /* Palette Restrictor */ = {
-			isa = PBXGroup;
-			children = (
-				EA31F99F0CE7CE4800EC481B /* PXPaletteRestrictor.h */,
-				EA31F9A00CE7CE4800EC481B /* PXPaletteRestrictor.m */,
-			);
-			path = "Palette Restrictor";
 			sourceTree = "<group>";
 		};
 		EA31F9FD0CE7D02C00EC481B /* Preview */ = {
@@ -1463,8 +1458,6 @@
 		EA31FA470CE7D1A700EC481B /* Tool Palette */ = {
 			isa = PBXGroup;
 			children = (
-				EA31FA480CE7D1A700EC481B /* PXToolButtonCell.h */,
-				EA31FA490CE7D1A700EC481B /* PXToolButtonCell.m */,
 				EA31FA4A0CE7D1A700EC481B /* PXToolPaletteController.h */,
 				EA31FA4B0CE7D1A700EC481B /* PXToolPaletteController.m */,
 				EA31FA4C0CE7D1A700EC481B /* PXToolSwitcher.h */,
@@ -1669,6 +1662,7 @@
 		EA31FBF30CE7D7C200EC481B /* Foreign Code */ = {
 			isa = PBXGroup;
 			children = (
+				615C3B090D14F40E00ACFA33 /* CTGradient */,
 				EA31FC110CE7D7C200EC481B /* libungif */,
 				EA31FC1F0CE7D7C200EC481B /* RBSplitView */,
 				EA31FC3C0CE7D7C200EC481B /* SBCenteringClipView */,
@@ -1769,7 +1763,7 @@
 			isa = PBXGroup;
 			children = (
 				EA31FC550CE7D7C200EC481B /* About Panel */,
-				EA31FC5A0CE7D7C200EC481B /* OSGradient */,
+				61A22B8F0D2323B500430CCD /* OSPlasticButtonCell */,
 				EA31FC610CE7D7C200EC481B /* OSProgressPopup */,
 				EA31FC640CE7D7C200EC481B /* OSStackedView */,
 				EA31FC670CE7D7C200EC481B /* PXActionButton */,
@@ -1789,19 +1783,6 @@
 				EA31FC590CE7D7C200EC481B /* PXAboutPanel.m */,
 			);
 			path = "About Panel";
-			sourceTree = "<group>";
-		};
-		EA31FC5A0CE7D7C200EC481B /* OSGradient */ = {
-			isa = PBXGroup;
-			children = (
-				EA31FC5B0CE7D7C200EC481B /* OSGradient.h */,
-				EA31FC5C0CE7D7C200EC481B /* OSGradient.m */,
-				EA31FC5D0CE7D7C200EC481B /* OSLinearGradient.h */,
-				EA31FC5E0CE7D7C200EC481B /* OSLinearGradient.m */,
-				EA31FC5F0CE7D7C200EC481B /* OSRadialGradient.h */,
-				EA31FC600CE7D7C200EC481B /* OSRadialGradient.m */,
-			);
-			path = OSGradient;
 			sourceTree = "<group>";
 		};
 		EA31FC610CE7D7C200EC481B /* OSProgressPopup */ = {
@@ -1864,6 +1845,8 @@
 				EA31FC7A0CE7D7C200EC481B /* NSMutableArray+ReorderingAdditions.m */,
 				EA31FC7B0CE7D7C200EC481B /* NSString_DegreeString.h */,
 				EA31FC7C0CE7D7C200EC481B /* NSString_DegreeString.m */,
+				61A22A840D2303EE00430CCD /* OSRectAdditions.h */,
+				61A22A850D2303EE00430CCD /* OSRectAdditions.m */,
 				EA31FC7D0CE7D7C200EC481B /* PathUtilities.h */,
 				EA31FC7E0CE7D7C200EC481B /* PathUtilities.m */,
 			);
@@ -1908,8 +1891,8 @@
 		EA90F6CB06D12380001755A6 /* NIBs */ = {
 			isa = PBXGroup;
 			children = (
+				EAB650840D108D9000274070 /* PXPaletteController.xib */,
 				618AE58F087E6FEA00A9FA9B /* PXColorPicker.nib */,
-				EA4A725808AA7E74007BAC7F /* PXPaletteRestrictor.nib */,
 				EAF21E2908AD0CFD0037A23B /* PXPalettePanel.nib */,
 				B9EBC23808BB813F00C4892E /* PXFillToolPropertiesView.nib */,
 				2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */,
@@ -1981,7 +1964,6 @@
 			children = (
 				EAC916E00CE7DC7300E519E1 /* Icons */,
 				EAC917140CE7DC7300E519E1 /* Intro */,
-				EAC917210CE7DC7300E519E1 /* MacPAD.url */,
 				EAC917220CE7DC7300E519E1 /* Scripting */,
 				EAC917260CE7DC7300E519E1 /* Widget Parts */,
 			);
@@ -2102,12 +2084,14 @@
 				EAC917270CE7DC7300E519E1 /* Add.tiff */,
 				EAC917280CE7DC7300E519E1 /* ants.tiff */,
 				EAC917290CE7DC7300E519E1 /* colorWellBackground.png */,
+				61A22A230D2073E500430CCD /* Frequency.tiff */,
 				EAC9172A0CE7DC7300E519E1 /* glass-h-graphite.tif */,
 				EAC9172B0CE7DC7300E519E1 /* glass-h.tif */,
 				EAC9172C0CE7DC7300E519E1 /* glass.tif */,
 				EAC9172D0CE7DC7300E519E1 /* highlight_blue.tiff */,
 				EAC9172E0CE7DC7300E519E1 /* highlight_graphite.tiff */,
 				EAC9172F0CE7DC7300E519E1 /* highlight_grey.tiff */,
+				61A22A060D20715000430CCD /* History.tiff */,
 				EAC917300CE7DC7300E519E1 /* HUD */,
 				EAC917370CE7DC7300E519E1 /* newcolorbig.tif */,
 				EAC917380CE7DC7300E519E1 /* newcolorsmall.tif */,
@@ -2202,8 +2186,6 @@
 				EA31F97A0CE7CD9300EC481B /* PXLayerTableView.h in Headers */,
 				EA31F97C0CE7CD9300EC481B /* PXLayerTextField.h in Headers */,
 				EA31F97E0CE7CD9300EC481B /* PXInfoPanelController.h in Headers */,
-				EA31F9A50CE7CE4800EC481B /* PXModalColorPanel.h in Headers */,
-				EA31F9A70CE7CE4800EC481B /* PXModalColorWell.h in Headers */,
 				EA31F9A90CE7CE4800EC481B /* PXGradientBuilderController.h in Headers */,
 				EA31F9AB0CE7CE4800EC481B /* PXPaletteSelector.h in Headers */,
 				EA31F9AD0CE7CE4800EC481B /* PXPaletteView.h in Headers */,
@@ -2211,7 +2193,6 @@
 				EA31F9B30CE7CE4800EC481B /* PXColorPickerColorWellCell.h in Headers */,
 				EA31F9B50CE7CE4800EC481B /* PXPaletteViewScrollView.h in Headers */,
 				EA31F9B70CE7CE4800EC481B /* PXPaletteViewSizeSelector.h in Headers */,
-				EA31F9B90CE7CE4800EC481B /* PXPaletteRestrictor.h in Headers */,
 				EA31F9BB0CE7CE4800EC481B /* PXPalettePanel.h in Headers */,
 				EA31F9BD0CE7CE4800EC481B /* PXPalettePanelPaletteView.h in Headers */,
 				EA31FA130CE7D02C00EC481B /* PXPreviewBezelView.h in Headers */,
@@ -2230,7 +2211,6 @@
 				EA31FA7D0CE7D1A700EC481B /* PXSavedPatternMatrix.h in Headers */,
 				EA31FA7F0CE7D1A700EC481B /* PXToolPropertiesController.h in Headers */,
 				EA31FA810CE7D1A700EC481B /* PXToolPropertiesView.h in Headers */,
-				EA31FA830CE7D1A700EC481B /* PXToolButtonCell.h in Headers */,
 				EA31FA850CE7D1A700EC481B /* PXToolPaletteController.h in Headers */,
 				EA31FA870CE7D1A700EC481B /* PXToolSwitcher.h in Headers */,
 				EA31FA890CE7D1A700EC481B /* PXEllipseTool.h in Headers */,
@@ -2300,9 +2280,6 @@
 				EA31FCD20CE7D7C200EC481B /* Wacom.h in Headers */,
 				EA31FCD40CE7D7C200EC481B /* PXAboutController.h in Headers */,
 				EA31FCD60CE7D7C200EC481B /* PXAboutPanel.h in Headers */,
-				EA31FCD80CE7D7C200EC481B /* OSGradient.h in Headers */,
-				EA31FCDA0CE7D7C200EC481B /* OSLinearGradient.h in Headers */,
-				EA31FCDC0CE7D7C200EC481B /* OSRadialGradient.h in Headers */,
 				EA31FCDE0CE7D7C200EC481B /* OSProgressPopup.h in Headers */,
 				EA31FCE00CE7D7C200EC481B /* OSStackedView.h in Headers */,
 				EA31FCE20CE7D7C200EC481B /* PXActionButton.h in Headers */,
@@ -2320,6 +2297,12 @@
 				EA041A190CE8F72F0095DAA9 /* PXBackgroundConfig.h in Headers */,
 				EABD60B90CE986E3008A1B1E /* PXCanvasPreviewView.h in Headers */,
 				EAAB76760CEF54F300F2EF66 /* PXDocument.h in Headers */,
+				EAB6506F0D108D0F00274070 /* PXPaletteController.h in Headers */,
+				615C3B180D14F42800ACFA33 /* CTGradient.h in Headers */,
+				615C3B1A0D14F42800ACFA33 /* CTGradientView.h in Headers */,
+				615C3B610D15038F00ACFA33 /* PXLayerPaneBackgroundView.h in Headers */,
+				61A22A860D2303EE00430CCD /* OSRectAdditions.h in Headers */,
+				61A22B920D2323B500430CCD /* OSPlasticButtonCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2393,7 +2376,6 @@
 				EAF6949D06A9AE0B0019D8D7 /* Localizable.strings in Resources */,
 				EAF694A006A9AE0B0019D8D7 /* UKFeedbackProvider.nib in Resources */,
 				EAF694A706A9AE0B0019D8D7 /* PXDiscoverPixen.nib in Resources */,
-				EAF694B506A9AE0B0019D8D7 /* License.txt in Resources */,
 				EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.nib in Resources */,
 				610865F706B988F400733B2D /* PXInfoPanel.nib in Resources */,
 				61ED25AD06BD63DA00264DA2 /* PXAbout.nib in Resources */,
@@ -2407,7 +2389,6 @@
 				610F37DE0899A5DE00567E90 /* PixenHelp in Resources */,
 				EA5D218508A90697006D4AE9 /* PXCanvasDocument.nib in Resources */,
 				EA4A6C3F08A98133007BAC7F /* PXAnimationDocument.nib in Resources */,
-				EA4A725A08AA7E74007BAC7F /* PXPaletteRestrictor.nib in Resources */,
 				EAF21E2B08AD0CFD0037A23B /* PXPalettePanel.nib in Resources */,
 				BFB1440608AD1D1800CE29EF /* PXSpriteSheetExporter.nib in Resources */,
 				61A956BC08AD76CF009BB89F /* OSProgressPopup.nib in Resources */,
@@ -2474,7 +2455,6 @@
 				EAC917810CE7DC7300E519E1 /* righttoolbar.png in Resources */,
 				EAC917820CE7DC7300E519E1 /* tilingscreenshot.png in Resources */,
 				EAC917830CE7DC7300E519E1 /* toolpropertiesscreen.png in Resources */,
-				EAC917840CE7DC7300E519E1 /* MacPAD.url in Resources */,
 				EAC917850CE7DC7300E519E1 /* Pixen.scriptSuite in Resources */,
 				EAC917860CE7DC7300E519E1 /* Pixen.scriptTerminology in Resources */,
 				EAC917870CE7DC7300E519E1 /* Pixen.suiteModel in Resources */,
@@ -2510,6 +2490,9 @@
 				EAC917A50CE7DC7300E519E1 /* prevcelpressed.png in Resources */,
 				EAC917A60CE7DC7300E519E1 /* Remove.tiff in Resources */,
 				EAC917A70CE7DC7300E519E1 /* titlebargradient.tif in Resources */,
+				EAB650860D108D9000274070 /* PXPaletteController.xib in Resources */,
+				61A22A070D20715100430CCD /* History.tiff in Resources */,
+				61A22A240D2073E500430CCD /* Frequency.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2573,8 +2556,6 @@
 				EA31F97B0CE7CD9300EC481B /* PXLayerTableView.m in Sources */,
 				EA31F97D0CE7CD9300EC481B /* PXLayerTextField.m in Sources */,
 				EA31F97F0CE7CD9300EC481B /* PXInfoPanelController.m in Sources */,
-				EA31F9A60CE7CE4800EC481B /* PXModalColorPanel.m in Sources */,
-				EA31F9A80CE7CE4800EC481B /* PXModalColorWell.m in Sources */,
 				EA31F9AA0CE7CE4800EC481B /* PXGradientBuilderController.m in Sources */,
 				EA31F9AC0CE7CE4800EC481B /* PXPaletteSelector.m in Sources */,
 				EA31F9AE0CE7CE4800EC481B /* PXPaletteView.m in Sources */,
@@ -2582,7 +2563,6 @@
 				EA31F9B40CE7CE4800EC481B /* PXColorPickerColorWellCell.m in Sources */,
 				EA31F9B60CE7CE4800EC481B /* PXPaletteViewScrollView.m in Sources */,
 				EA31F9B80CE7CE4800EC481B /* PXPaletteViewSizeSelector.m in Sources */,
-				EA31F9BA0CE7CE4800EC481B /* PXPaletteRestrictor.m in Sources */,
 				EA31F9BC0CE7CE4800EC481B /* PXPalettePanel.m in Sources */,
 				EA31F9BE0CE7CE4800EC481B /* PXPalettePanelPaletteView.m in Sources */,
 				EA31FA140CE7D02C00EC481B /* PXPreviewBezelView.m in Sources */,
@@ -2601,7 +2581,6 @@
 				EA31FA7E0CE7D1A700EC481B /* PXSavedPatternMatrix.m in Sources */,
 				EA31FA800CE7D1A700EC481B /* PXToolPropertiesController.m in Sources */,
 				EA31FA820CE7D1A700EC481B /* PXToolPropertiesView.m in Sources */,
-				EA31FA840CE7D1A700EC481B /* PXToolButtonCell.m in Sources */,
 				EA31FA860CE7D1A700EC481B /* PXToolPaletteController.m in Sources */,
 				EA31FA880CE7D1A700EC481B /* PXToolSwitcher.m in Sources */,
 				EA31FA8A0CE7D1A700EC481B /* PXEllipseTool.m in Sources */,
@@ -2674,9 +2653,6 @@
 				EA31FCD30CE7D7C200EC481B /* main.m in Sources */,
 				EA31FCD50CE7D7C200EC481B /* PXAboutController.m in Sources */,
 				EA31FCD70CE7D7C200EC481B /* PXAboutPanel.m in Sources */,
-				EA31FCD90CE7D7C200EC481B /* OSGradient.m in Sources */,
-				EA31FCDB0CE7D7C200EC481B /* OSLinearGradient.m in Sources */,
-				EA31FCDD0CE7D7C200EC481B /* OSRadialGradient.m in Sources */,
 				EA31FCDF0CE7D7C200EC481B /* OSProgressPopup.m in Sources */,
 				EA31FCE10CE7D7C200EC481B /* OSStackedView.m in Sources */,
 				EA31FCE30CE7D7C200EC481B /* PXActionButton.m in Sources */,
@@ -2692,6 +2668,12 @@
 				EA041A1A0CE8F72F0095DAA9 /* PXBackgroundConfig.m in Sources */,
 				EABD60BA0CE986E3008A1B1E /* PXCanvasPreviewView.m in Sources */,
 				EAAB76770CEF54F300F2EF66 /* PXDocument.m in Sources */,
+				EAB650700D108D0F00274070 /* PXPaletteController.m in Sources */,
+				615C3B190D14F42800ACFA33 /* CTGradient.m in Sources */,
+				615C3B1B0D14F42800ACFA33 /* CTGradientView.m in Sources */,
+				615C3B620D15038F00ACFA33 /* PXLayerPaneBackgroundView.m in Sources */,
+				61A22A870D2303EE00430CCD /* OSRectAdditions.m in Sources */,
+				61A22B930D2323B500430CCD /* OSPlasticButtonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2976,14 +2958,6 @@
 			name = PXAnimationDocument.nib;
 			sourceTree = "<group>";
 		};
-		EA4A725808AA7E74007BAC7F /* PXPaletteRestrictor.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EA4A725908AA7E74007BAC7F /* English */,
-			);
-			name = PXPaletteRestrictor.nib;
-			sourceTree = "<group>";
-		};
 		EA5482E40513E419000101DE /* PXImageSizePrompt.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3038,6 +3012,14 @@
 			name = PXMonotoneBackgroundConfigurator.nib;
 			sourceTree = "<group>";
 		};
+		EAB650840D108D9000274070 /* PXPaletteController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EAB650850D108D9000274070 /* English */,
+			);
+			name = PXPaletteController.xib;
+			sourceTree = "<group>";
+		};
 		EACDBD7F0878B37100564512 /* PXBackgroundTemplateView.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3066,9 +3048,10 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		616BAEA608553EFB004CF172 /* Debug */ = {
+		616BAEA608553EFB004CF172 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = i386;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
@@ -3080,8 +3063,9 @@
 				GCC_PREFIX_HEADER = "Other Sources/Pixen_Prefix.h";
 				GCC_PREPROCESSOR_DEFINITIONS = __COCOA__;
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-Pixen.plist";
+				INFOPLIST_FILE = Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = Pixen;
 				WARNING_CFLAGS = (
@@ -3091,11 +3075,15 @@
 				);
 				WRAPPER_EXTENSION = app;
 			};
-			name = Debug;
+			name = Development;
 		};
-		616BAEA708553EFB004CF172 /* Release */ = {
+		616BAEA708553EFB004CF172 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
 				COPY_PHASE_STRIP = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3112,10 +3100,11 @@
 				GCC_PREFIX_HEADER = "Other Sources/Pixen_Prefix.h";
 				GCC_PREPROCESSOR_DEFINITIONS = __COCOA__;
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-Pixen.plist";
+				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = /Applications;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				LIBRARY_STYLE = STATIC;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_CFLAGS = "-funroll-loops";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Pixen;
@@ -3128,9 +3117,9 @@
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
-			name = Release;
+			name = Deployment;
 		};
-		616BAEAA08553EFB004CF172 /* Debug */ = {
+		616BAEAA08553EFB004CF172 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
@@ -3141,17 +3130,16 @@
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GENERATE_PROFILING_CODE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = ".//**";
 				WARNING_CFLAGS = "-Winline";
 				ZERO_LINK = NO;
 			};
-			name = Debug;
+			name = Development;
 		};
-		616BAEAB08553EFB004CF172 /* Release */ = {
+		616BAEAB08553EFB004CF172 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
@@ -3160,12 +3148,67 @@
 				);
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = s;
-				MACOSX_DEPLOYMENT_TARGET = 10.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				SKIP_INSTALL = NO;
 				UNSTRIPPED_PRODUCT = YES;
 			};
-			name = Release;
+			name = Deployment;
+		};
+		BF71262208B910480087422A /* Profiling */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks and Palettes\"";
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Pixen_Prefix.h;
+				GCC_PREPROCESSOR_DEFINITIONS = __COCOA__;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Resources/Info.plist;
+				INSTALL_PATH = /Applications;
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				LIBRARY_STYLE = STATIC;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_CFLAGS = "-funroll-loops";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = Pixen;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Profiling;
+		};
+		BF71262308B910480087422A /* Profiling */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				COPY_PHASE_STRIP = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SKIP_INSTALL = NO;
+				UNSTRIPPED_PRODUCT = YES;
+			};
+			name = Profiling;
 		};
 /* End XCBuildConfiguration section */
 
@@ -3173,20 +3216,22 @@
 		616BAEA508553EFB004CF172 /* Build configuration list for PBXNativeTarget "Pixen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				616BAEA608553EFB004CF172 /* Debug */,
-				616BAEA708553EFB004CF172 /* Release */,
+				616BAEA608553EFB004CF172 /* Development */,
+				616BAEA708553EFB004CF172 /* Deployment */,
+				BF71262208B910480087422A /* Profiling */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Development;
 		};
 		616BAEA908553EFB004CF172 /* Build configuration list for PBXProject "Pixen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				616BAEAA08553EFB004CF172 /* Debug */,
-				616BAEAB08553EFB004CF172 /* Release */,
+				616BAEAA08553EFB004CF172 /* Development */,
+				616BAEAB08553EFB004CF172 /* Deployment */,
+				BF71262308B910480087422A /* Profiling */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Development;
 		};
 /* End XCConfigurationList section */
 	};

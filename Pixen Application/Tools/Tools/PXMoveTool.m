@@ -59,15 +59,13 @@
 	lastSelectedRect = selectedRect;
 	selectionOrigin = selectedRect.origin;
 	moveLayer = [[PXLayer alloc] initWithName:NSLocalizedString(@"Temp Layer", @"Temp Layer") size:selectedRect.size];
-	[moveLayer setPalette:[canvas palette]];
 	[moveLayer setCanvas:canvas];
 	[moveLayer setOpacity:[[canvas activeLayer] opacity]];
 	// we clear the selected area in the active layer and copy the selected pixels
 	// into a pximage of our own to be drawn each frame. whoo.
 	// this is O(N), incidentally. but just over selected pixels, not the whole canvas.
 	int i, j;
-	int clearIndex = [canvas eraseColorIndex];
-	[moveLayer beginOptimizedSetting];
+	NSColor *clear = [canvas eraseColor];
 	for (i = NSMinX(selectedRect); i < NSMaxX(selectedRect); i++)
 	{
 		for (j = NSMinY(selectedRect); j < NSMaxY(selectedRect); j++)
@@ -76,12 +74,10 @@
 			if (![canvas pointIsSelected:point])
 				continue;
 			
-			int index = [canvas colorIndexAtPoint:point];
-			[canvas setColorIndex:clearIndex atPoint:point];
-			[moveLayer setColorIndex:index atPoint:NSMakePoint(i - selectedRect.origin.x, j - selectedRect.origin.y)];
+			[moveLayer setColor:[canvas colorAtPoint:point] atPoint:NSMakePoint(i - selectedRect.origin.x, j - selectedRect.origin.y)];
+			[canvas setColor:clear atPoint:point];
 		}
 	}
-	[moveLayer endOptimizedSetting];
 	[moveLayer moveToPoint:selectedRect.origin]; // move to initial point
 	[canvas insertLayer:moveLayer atIndex:[[canvas layers] indexOfObject:realLayer]+1];
 }
@@ -243,6 +239,10 @@ fromCanvasController:(PXCanvasController *) controller
 - (BOOL)optionKeyDown
 {
 	isCopying = YES;
+	if(moveLayer == nil || realLayer == nil)
+	{
+		return YES;
+	}
 	[self fakeMouseDraggedIfNecessary];
 	return YES;
 }
@@ -250,6 +250,10 @@ fromCanvasController:(PXCanvasController *) controller
 - (BOOL)optionKeyUp
 {
 	isCopying = NO;
+	if(moveLayer == nil || realLayer == nil)
+	{
+		return YES;
+	}
 	[self fakeMouseDraggedIfNecessary];
 	return YES;
 }

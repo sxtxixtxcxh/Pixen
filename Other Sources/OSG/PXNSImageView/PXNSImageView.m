@@ -13,7 +13,7 @@
 // The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// THE SOFTWdARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
 // IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
@@ -23,8 +23,25 @@
 
 
 #import "PXNSImageView.h"
+#import "OSRectAdditions.h"
 
 @implementation PXNSImageView
+
+- (void)initialize
+{
+	functionalRect = NSZeroRect;
+	shadow = [[NSShadow alloc] init];
+	[shadow setShadowBlurRadius:4];
+	[shadow setShadowOffset:NSMakeSize(0, -2)];
+	[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.2 alpha:1]];	
+}
+
+- initWithFrame:(NSRect)rect
+{
+	[super initWithFrame:rect];
+	[self initialize];
+	return self;
+}
 
 - (void)mouseDown:(NSEvent *) event
 {
@@ -58,7 +75,7 @@
 
 - (void)awakeFromNib
 {
-	functionalRect = NSZeroRect;
+	[self initialize];
 }
 
 - (void)dealloc
@@ -100,18 +117,7 @@
 - (void)setImage:(NSImage *)image
 {
 	[super setImage:image];
-	NSSize viewSize = [self bounds].size;
-	viewSize.width -= 8;
-	viewSize.height -= 8;
-	functionalRect.origin = NSZeroPoint;
-	functionalRect.size = [self scaledSizeForImage:image];
-	if (NSWidth(functionalRect) < viewSize.width)
-		functionalRect.origin.x = ceilf((viewSize.width / 2) - (NSWidth(functionalRect) / 2));
-	if (NSHeight(functionalRect) < viewSize.height)
-		functionalRect.origin.y = ceilf((viewSize.height / 2) - (NSHeight(functionalRect) / 2));
-	functionalRect.origin.x += 4;
-	functionalRect.origin.y += 4;
-	
+	functionalRect = OSCenterRectInRect((NSRect){NSZeroPoint, [image size]}, [self bounds], 4);	
 	scaleFactor = [[self image] size].width / NSWidth(functionalRect);
 }
 
@@ -123,29 +129,17 @@
 - (void)drawRect:(NSRect)rect
 {
 	[NSGraphicsContext saveGraphicsState];
-	if (shadow == nil)
-	{
-		shadow = [[NSShadow alloc] init];
-		[shadow setShadowBlurRadius:4];
-		[shadow setShadowOffset:NSMakeSize(0, -2)];
-		[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.2 alpha:1]];
-	}
+	// We'll create a blank clipped region to draw a shadow under; we don't want to shadow the image itself.
 	[shadow set];
 	NSEraseRect(functionalRect);
 	[NSGraphicsContext restoreGraphicsState];
 	
-	//NSLog(@"Updating image view in rect: %fx%fx%fx%f", NSMinX(rect), NSMinY(rect), NSWidth(rect), NSHeight(rect));
-	//NSLog(@"Scale factor: %f", scaleFactor);
-	//NSLog(@"Functional rect: %fx%fx%fx%f", NSMinX(functionalRect), NSMinY(functionalRect), NSWidth(functionalRect), NSHeight(functionalRect));
-
 	NSRect inRect = NSIntersectionRect(rect, functionalRect);
 	NSRect fromRect = NSOffsetRect(inRect, -NSMinX(functionalRect), -NSMinY(functionalRect));
 	fromRect.origin.x *= scaleFactor;
 	fromRect.origin.y *= scaleFactor;
 	fromRect.size.width *= scaleFactor;
 	fromRect.size.height *= scaleFactor;
-	//NSLog(@"In rect: %fx%fx%fx%f", NSMinX(inRect), NSMinY(inRect), NSWidth(inRect), NSHeight(inRect));
-	//NSLog(@"From rect: %fx%fx%fx%f", NSMinX(fromRect), NSMinY(fromRect), NSWidth(fromRect), NSHeight(fromRect));
 	
 	[[self image] drawInRect:inRect
 					fromRect:fromRect

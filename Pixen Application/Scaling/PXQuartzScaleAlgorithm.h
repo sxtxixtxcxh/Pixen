@@ -24,7 +24,7 @@
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 //  Created by Andy Matuschak on 7/21/06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
+//  Copyright 2006 Open Sword Group. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

@@ -34,11 +34,6 @@
 #import "PXCanvas_Modifying.h"
 #import "PXToolSwitcher.h"
 
-#ifndef __COCOA__
-#import "NSArray_DeepMutableCopy.h"
-#include <math.h>
-#endif
-
 @implementation PXLassoTool
 
 - (NSString *)name

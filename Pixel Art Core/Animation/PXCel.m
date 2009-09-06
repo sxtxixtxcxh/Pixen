@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 __MyCompanyName__. All rights reserved.
+//  Copyright 2005 Open Sword Group. All rights reserved.
 //
 
 #import "PXCel.h"
@@ -58,10 +58,7 @@
 	}
 	canvas = [[PXCanvas alloc] init];
 	[canvas setUndoManager:[animation undoManager]];
-	[canvas setPalette:[animation palette]];
-	PXPalette_postponeNotifications([animation palette], YES);
 	[canvas replaceActiveLayerWithImage:image];
-	PXPalette_postponeNotifications([animation palette], NO);
 	duration = 1;
 	[animation insertObject:self inCelsAtIndex:index];
 	return self;
@@ -101,18 +98,6 @@
 - (void)setUndoManager:man
 {
 	[canvas setUndoManager:man];
-}
-- (PXPalette *)palette
-{
-	return [canvas palette];
-}
-- (void)setPalette:(PXPalette *)pal recache:(BOOL)recache
-{
-	[canvas setPalette:pal recache:recache];
-}
-- (void)setPalette:(PXPalette *)pal
-{
-	[self setPalette:pal recache:YES];
 }
 - (void)setSize:(NSSize)size
 {

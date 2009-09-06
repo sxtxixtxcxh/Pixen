@@ -36,10 +36,6 @@
 #import "PXScale2xScaleAlgorithm.h"
 #import "PXQuartzScaleAlgorithm.h"
 
-#ifndef __COCOA__
-#import <math.h>
-#endif
-
 @implementation PXScaleController
 
 static NSArray *algorithms = nil;
@@ -215,17 +211,16 @@ static NSArray *algorithms = nil;
 	
 	if (directSizeInput.width != 0 && directSizeInput.width != newSize.width) {
 		if (scaleProportionally) {
-			newSize.height = directSizeInput.width * oldSize.height / oldSize.width;
+			newSize.height = rintf(directSizeInput.width * oldSize.height / oldSize.width);
 		} 
 		else {
 			newSize.height = directSizeInput.height;
 		}
-		
 		newSize.width = directSizeInput.width;
 	} 
 	else if (directSizeInput.height != 0 && directSizeInput.height != newSize.height) {
 		if (scaleProportionally) {
-			newSize.width = directSizeInput.height * oldSize.width / oldSize.height;
+			newSize.width = rintf(directSizeInput.height * oldSize.width / oldSize.height);
 		} else {
 			newSize.width = directSizeInput.width;
 		}
@@ -266,7 +261,7 @@ static NSArray *algorithms = nil;
 
 - (void)scaleCanvas:(PXCanvas *)canvas
 {
-	[canvas beginUndoGrouping];
+	[canvas beginUndoGrouping]; {
 #warning move undo
 	// Do we really have to deselect when we change size? We can't adapt?
 	// Ohhhh, the memory cost. The pain.
@@ -274,7 +269,9 @@ static NSArray *algorithms = nil;
 	PXSelectionMask oldMask = malloc([canvas selectionMaskSize]);
 	memcpy(oldMask, [canvas selectionMask], [canvas selectionMaskSize]);
 	PXSelectionMask newMask = (PXSelectionMask)calloc(newSize.width * newSize.height, sizeof(BOOL));
-	[canvas setLayers:[[canvas layers] deepMutableCopy] fromLayers:[canvas layers]];
+	[canvas setLayers:[[canvas layers] deepMutableCopy] 
+		   fromLayers:[canvas layers]
+	  withDescription:NSLocalizedString(@"Set Layers", @"Set Layers")];
 	//this seems wrong.  you'd think we'd want to use the actual old canvas size, but whatever...
 	NSData *oldMaskData = [NSData dataWithBytesNoCopy:oldMask length:[canvas selectionMaskSize]];
 	NSData *newMaskData = [NSData dataWithBytesNoCopy:newMask length:newSize.width * newSize.height * sizeof(BOOL)];
@@ -283,7 +280,7 @@ static NSArray *algorithms = nil;
 								  toSize:newSize];
 	[canvas setHasSelection:NO];
 	
-	[canvas endUndoGrouping:NSLocalizedString(@"Scale Canvas", @"Scale Canvas")];	
+	} [canvas endUndoGrouping:NSLocalizedString(@"Scale Canvas", @"Scale Canvas")];	
 }
 
 - (IBAction)scale:(id) sender
@@ -298,9 +295,7 @@ static NSArray *algorithms = nil;
     } 
 	else 
     {
-#ifdef __COCOA__
 		NSBeep();
-#endif
     }
 	
 	if (delegate)

@@ -34,12 +34,7 @@
 
 -(NSString *) defaultName
 {
-#ifdef __COCOA__
 	return NSLocalizedString(@"FLAT_BACKGROUND", @"Flat Background");
-#else
-#warning GNUSTEP TODO
-	return @"Flat Background";
-#endif 
 }
 
 - (NSString *)nibName
@@ -54,9 +49,7 @@
 
 - (IBAction)configuratorColorChanged:(id) sender
 {
-#ifdef __COCOA__
     [self setColor:[sender color]];
-#endif
     [self changed];
 	[cachedImage release];
 	cachedImage = nil;
@@ -102,11 +95,7 @@
 
 - (void)drawRect:(NSRect)rect withinRect:(NSRect)wholeRect
 {
-#ifdef __COCOA__
 	[color set];
-#else
-	[[colorWell color] set];
-#endif
 	NSRectFill(rect);
 }
 

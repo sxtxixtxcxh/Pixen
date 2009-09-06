@@ -14,23 +14,7 @@
 - initWithFrame:(NSRect)frame
 {
 	[super initWithFrame:frame];
-	rightIndex = -1;
 	return self;
-}
-
-- (void)setRightIndex:(int)index
-{
-	rightIndex = index;
-	[self setNeedsDisplayInRect:[self visibleRect]];
-}
-
-- (PXColorCelState)stateForCelIndex:(int)index
-{
-	if (index == -1) { return PXNoToolColor; }
-	if ((selectedIndex == index) && (rightIndex == index)) { return PXBothToolColor; }
-	else if (selectedIndex == index) { return PXLeftToolColor; }
-	else if (rightIndex == index) { return PXRightToolColor; }
-	else { return PXNoToolColor; }
 }
 
 - (void)mouseDown:(NSEvent *)event
@@ -64,8 +48,6 @@
 	if (paletteIndex == -1) { return; }
 
 	[delegate useColorAtIndex:paletteIndex event:event];
-	rightIndex = paletteIndex;
-	[self setNeedsDisplayInRect:[self visibleRect]];
 }
 
 // Intentionally no-op:

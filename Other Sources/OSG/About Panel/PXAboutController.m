@@ -92,14 +92,10 @@ static PXAboutController *singleInstance = nil;
 									  range:NSMakeRange(0,[(NSString *)plainString length])];
 	
 	
-#ifdef __COCOA__
 	NSData *htmlData = [NSData dataWithBytes:[plainString cString] length:[(NSString *)plainString length]];
 	NSDictionary *attributedOptions = [NSDictionary dictionaryWithObject:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]] forKey:@"BaseURL"];
 	NSAttributedString *attributedString = [[[NSMutableAttributedString alloc] initWithHTML:htmlData options:attributedOptions documentAttributes:nil] autorelease];
 	[[credits textStorage] setAttributedString:attributedString];
-#else
-	[credits setString :plainString];
-#endif
 }
 
 

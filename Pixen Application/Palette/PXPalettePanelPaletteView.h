@@ -10,9 +10,9 @@
 #import "PXPaletteView.h"
 
 @interface PXPalettePanelPaletteView : PXPaletteView {
-	int rightIndex;
+
 }
 
-- (void)setRightIndex:(int)index;
+
 
 @end

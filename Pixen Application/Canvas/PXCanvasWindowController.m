@@ -39,8 +39,8 @@
 #import "PXCanvasDocument.h"
 #import "PXPreviewController.h"
 #import "PXInfoPanelController.h"
-#import "PXPaletteRestrictor.h"
 #import "RBSplitView.h"
+#import "PXPaletteController.h"
 
 //Taken from a man calling himself "BROCK BRANDENBERG" 
 //who is here to save the day.
@@ -59,12 +59,11 @@
 		return nil;
 	layerController = [[PXLayerController alloc] init];
 	[layerController setNextResponder:self];
-	
+	paletteController = [[PXPaletteController alloc] init];
 	resizePrompter = [[PXCanvasResizePrompter alloc] init];
 	previewController = [PXPreviewController sharedPreviewController];
 	scaleController = [[PXScaleController alloc] init];
 
-	paletteRestrictor = [[PXPaletteRestrictor alloc] init];
 	return self;
 }
 
@@ -80,6 +79,8 @@
 
 - (void)awakeFromNib
 {
+	id paletteView = [paletteController view];
+	[paletteSplit addSubview:paletteView];
 	[canvasController setLayerController:layerController];
 	[layerController setSubview:layerSplit];
 	[layerSplit addSubview:[layerController view]];
@@ -90,18 +91,20 @@
 
 - (void)updateFrameSizes
 {
-	[[layerController view] setFrame:[layerSplit frame]];
+	[[layerController view] setFrameSize:[layerSplit frame].size];
+	[[layerController view] setFrameOrigin:NSZeroPoint];
+
+	[[paletteController view] setFrameSize:[paletteSplit frame].size];
+	[[paletteController view] setFrameOrigin:NSZeroPoint];
 	[[canvasController scrollView] setFrameOrigin:NSZeroPoint];
 	[[canvasController scrollView] setFrameSize:[[self canvasSplit] frame].size];
 }
 
 - (void)dealloc
 {
+	[canvasController deactivate];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[self setCanvas:nil];
-
 	[layerController release];
-	
 	[resizePrompter release];
 	[scaleController release];
 	[toolbar release];
@@ -118,6 +121,12 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[self setCanvas:nil];
+}
+
+- (void)releaseCanvas
+{
+	canvas = nil;
+	[canvasController setCanvas:nil];
 }
 
 - (void)setCanvas:(PXCanvas *) aCanvas
@@ -137,6 +146,7 @@
 	[super setDocument:doc];
 	[canvasController setDocument:doc];
 	[layerController setDocument:doc];
+	[paletteController setDocument:doc];
 }
 
 - (void)windowDidResignMain:note
@@ -203,7 +213,9 @@
 
 - (void)rightMouseDown:event
 {
-	[[canvasController view] rightMouseDown:event];
+	if(NSPointInRect([event locationInWindow], [[canvasController view] convertRect:[[canvasController view] bounds] toView:nil])) {
+		[[canvasController view] rightMouseDown:event];
+	}
 }
 
 - (void)rightMouseDragged:event
@@ -218,7 +230,9 @@
 
 - (void)mouseDown:event
 {
-	[[canvasController view] mouseDown:event];
+	if(NSPointInRect([event locationInWindow], [[canvasController view] convertRect:[[canvasController view] bounds] toView:nil])) {
+		[[canvasController view] mouseDown:event];
+	}
 }
 
 - (void)mouseDragged:event
@@ -228,6 +242,14 @@
 
 - (void)keyDown:event
 {
+	if([[event characters] characterAtIndex:0] == 'p')
+	{
+		[paletteController updateFrequencies];
+	}
+	if([paletteController isPaletteIndexKey:event])
+	{
+		[paletteController keyDown:event];
+	}
 	[canvasController keyDown:event];
 }
 

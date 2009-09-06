@@ -207,8 +207,6 @@
 				<string>id</string>
 				<key>showPreviewWindow</key>
 				<string>id</string>
-				<key>toggleAutomaticPalette</key>
-				<string>id</string>
 				<key>toggleLayersDrawer</key>
 				<string>id</string>
 				<key>togglePreviousCelOverlay</key>

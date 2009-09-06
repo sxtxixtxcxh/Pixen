@@ -41,23 +41,17 @@
 	if ( ! ( self = [super initWithFrame:frame]) ) 
 		return nil;
 	
-#ifdef __COCOA__
 	shadow = [[NSShadow alloc] init];
 	[shadow setShadowBlurRadius:1];
 	[shadow setShadowOffset:NSMakeSize(0, 0)];
 	[shadow setShadowColor:[NSColor blackColor]];
-#else
-#warning GNUstep TODO
-#endif
 	[self updateScale:0];
 	return self;
 }
 
 - (void)dealloc
 {
-#ifdef __COCOA__
 	[shadow release];
-#endif
 	[super dealloc];
 }
 
@@ -67,15 +61,11 @@
 		return NO;
 	}
 	[scaleString release];
-#ifdef __COCOA__
 	scaleString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d%%", (int)(scale * 100)] attributes:[NSDictionary dictionaryWithObjectsAndKeys:
 		[NSFont fontWithName:@"Verdana" size:20], NSFontAttributeName,
 		[NSColor blackColor], NSForegroundColorAttributeName,
 		//shadow, NSShadowAttributeName,
 		nil]];
-#else
-#warning GNUstep TODO
-#endif
 	[self setNeedsDisplay:YES];
 	return YES;
 }

@@ -33,7 +33,6 @@
 	IBOutlet id name;
 	IBOutlet id thumbnail;
 	IBOutlet id opacity;
-	IBOutlet id opacityField;
 	IBOutlet id opacityText;
 	IBOutlet id view;
 	IBOutlet id visibility;
@@ -47,7 +46,6 @@
 - (void)setLayerController:cont;
 - layer;
 - (void)focusOnName;
-- (NSTextField *)opacityField;
 - opacityText;
 - (NSTextField *)name;
 - (id) initWithLayer:(PXLayer *) aLayer;

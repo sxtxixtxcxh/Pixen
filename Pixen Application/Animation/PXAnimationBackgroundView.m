@@ -3,34 +3,38 @@
 //  Pixen
 //
 //  Created by Andy Matuschak on 10/16/05.
-//  Copyright 2005 __MyCompanyName__. All rights reserved.
+//  Copyright 2005 Open Sword Group. All rights reserved.
 //
 
-#import "OSLinearGradient.h"
+#import "CTGradient.h"
 #import "PXAnimationBackgroundView.h"
-
+		
 @implementation PXAnimationBackgroundView
 
 - (void)awakeFromNib
 {
-	horizontalGradient = [[OSLinearGradient alloc] initWithStartColor:[NSColor blackColor] endColor:[NSColor colorWithCalibratedRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1]];
+	horizontalGradient = [[CTGradient gradientWithBeginningColor:[NSColor blackColor] endingColor:[NSColor colorWithCalibratedRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1]] retain];
+}
+
+- (void)dealloc
+{
+	[horizontalGradient release];
+	[super dealloc];
 }
 
 - (void)drawRect:(NSRect)rect {
-	NSRect visibleRect = [self bounds];
-	NSPoint start = NSMakePoint(NSMinX(visibleRect), NSMidY(visibleRect));
+	NSRect visibleRect = [self bounds];	
 	NSPoint middle = NSMakePoint(NSMidX(visibleRect), NSMidY(visibleRect));
-	NSPoint leftMiddle = middle;
-	leftMiddle.x = floorf(leftMiddle.x - NSWidth(visibleRect)*0.2);
-	NSPoint rightMiddle = middle;
-	rightMiddle.x = floorf(rightMiddle.x + NSWidth(visibleRect)*0.2);
-	NSPoint end = NSMakePoint(NSMaxX(visibleRect), NSMidY(visibleRect));
+	double leftMiddle = floorf(middle.x - NSWidth(visibleRect)*0.2);
+	double rightMiddle = floorf(middle.x + NSWidth(visibleRect)*0.2);
 	
-	[horizontalGradient drawFromPoint:start toPoint:leftMiddle inRect:rect];
-	[horizontalGradient drawFromPoint:end toPoint:rightMiddle inRect:rect];
+	[horizontalGradient fillRect:NSMakeRect(NSMinX(visibleRect), NSMinY(visibleRect), leftMiddle - NSMinX(visibleRect), NSHeight(visibleRect)) angle:0];
+	[horizontalGradient fillRect:NSMakeRect(rightMiddle, NSMinY(visibleRect), NSWidth(visibleRect) - rightMiddle, NSHeight(visibleRect)) angle:180];
+	
 	
 	[[NSColor colorWithCalibratedRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1] set];
-	NSRectFill(NSMakeRect(leftMiddle.x, NSMinY(visibleRect), rightMiddle.x - leftMiddle.x, NSHeight(visibleRect)));
+	NSRectFill(NSMakeRect(leftMiddle, NSMinY(visibleRect), rightMiddle - leftMiddle, NSHeight(visibleRect)));
+	
 	
 	NSRect lowerRect = visibleRect;
 	lowerRect.size.height /= 2.0;

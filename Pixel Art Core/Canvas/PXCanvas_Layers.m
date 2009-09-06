@@ -8,29 +8,39 @@
 
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_Modifying.h"
+#import "PXCanvas_Selection.h"
 #import "PXLayer.h"
-#ifndef __COCOA__
-#include <math.h>
-#import "PXNotifications.h"
-#import "PXDefaults.h"
-#endif
 #import "NSString_DegreeString.h"
 
 @implementation PXCanvas(Layers)
 
 - (void)setLayers:(NSArray *) newLayers fromLayers:(NSArray *)oldLayers
 {
+	[self setLayers:newLayers fromLayers:oldLayers withDescription:NSLocalizedString(@"Set Layers", @"Set Layers")];
+}
+
+- (void)setLayers:(NSArray *) newLayers fromLayers:(NSArray *)oldLayers withDescription:(NSString *)desc
+{
 	[self beginUndoGrouping]; {
 		[[[self undoManager] prepareWithInvocationTarget:self] setLayers:oldLayers 
-															  fromLayers:newLayers];
+															  fromLayers:newLayers
+														 withDescription:desc];
 		NSSize oldSize = [self size];
 		[self setLayers:newLayers];
-		if (!NSEqualSizes(oldSize, [self size]))
+		NSSize sz = [self size];
+		if (!NSEqualSizes(oldSize, sz))
 		{
-			[self setSize:[self size]];
+			unsigned newMaskLength = sizeof(BOOL) * sz.width * sz.height;
+			PXSelectionMask newMask = calloc(sz.width * sz.height, sizeof(BOOL));
+			id newData = [NSData dataWithBytes:newMask length:newMaskLength];
+			id oldData = [NSData dataWithBytes:selectionMask length:[self selectionMaskSize]];
+			[self setMaskData:newData withOldMaskData:oldData];
+			free(newMask);
+			[[NSNotificationCenter defaultCenter] postNotificationName:PXSelectionMaskChangedNotificationName object:self];
+			selectedRect = NSZeroRect;
 			[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasSizeChangedNotificationName object:self];
 		}
-	} [self endUndoGrouping:NSLocalizedString(@"Set Layers", @"Set Layers")];
+	} [self endUndoGrouping:desc];
 }
 
 - (void)setLayersNoResize:(NSArray *) newLayers fromLayers:(NSArray *)oldLayers
@@ -56,7 +66,7 @@
 - (void)activateLayer:(PXLayer *)aLayer
 {
 	if( (activeLayer == aLayer) || (aLayer == nil) ) return; 
-	if([[self undoManager] groupingLevel] != 0) { [[[self undoManager] prepareWithInvocationTarget:self] activateLayer:activeLayer]; }
+	//if([[self undoManager] groupingLevel] != 0) { [[[self undoManager] prepareWithInvocationTarget:self] activateLayer:activeLayer]; }
 	activeLayer = aLayer;
 }
 
@@ -88,17 +98,16 @@
 	int i;
 	
 	if ( [newLayers count] <= oldActiveIndex ) 
-		oldActiveIndex = 0; 
+		oldActiveIndex = [newLayers count]-1; 
 	
 	
 	for (i=0; i<[newLayers count]; i++) 
 	{
 		[[newLayers objectAtIndex:i] setCanvas:self];
 	}
-	[self activateLayer:[newLayers objectAtIndex:oldActiveIndex]];
-	[layers autorelease];
-	
+	[layers autorelease];	
 	layers = newLayers;
+	[self activateLayer:[newLayers objectAtIndex:oldActiveIndex]];
 	
 	[self layersChanged];
 }
@@ -142,7 +151,6 @@
 		{
 			[self activateLayer:new];
 		}
-		[new recache];
 		[self layersChanged];
 		[self changed];
 	} [self endUndoGrouping:act];
@@ -183,6 +191,7 @@
 
 - (void)removeLayerAtIndex:(int)index suppressingNotification:(BOOL)suppress
 {
+	BOOL wasActive = ([self indexOfLayer:activeLayer] == index);
 	id layer = [layers objectAtIndex:index];
 	[self beginUndoGrouping]; {
 		int newIndex = [layers indexOfObject:layer];
@@ -197,7 +206,7 @@
 		{
 			[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasLayersChangedNotificationName object:self];
 		}
-		if(activeLayer == layer)
+		if(wasActive)
 		{
 			[self activateLayer:[layers objectAtIndex:newIndex]];
 		}
@@ -277,30 +286,25 @@
 
 - (void)mergeDownLayer:aLayer
 {
+	BOOL wasActive = aLayer == activeLayer;
 	int index = [layers indexOfObject:aLayer];
 	[self beginUndoGrouping]; {
 		[self setLayers:[layers deepMutableCopy] fromLayers:layers];
 		[[layers objectAtIndex:index-1] compositeUnder:[layers objectAtIndex:index] flattenOpacity:YES];
 		[self removeLayerAtIndex:index];
+		if(wasActive)
+		{
+			[self activateLayer:[layers objectAtIndex:index - 1]];		
+		}
 	} [self endUndoGrouping:NSLocalizedString(@"Merge Down", @"Merge Down")];
 }
 
-- (void)moveLayer:(PXLayer *)aLayer byX:(int)x y:(int)y
+- (void)moveLayer:(PXLayer *)layer byX:(int)x y:(int)y
 {
-	PXLayer *new = [activeLayer layerAfterApplyingMove];
-	[activeLayer setOrigin:NSZeroPoint];
-	[self replaceLayer:activeLayer withLayer:new actionName:NSLocalizedString(@"Move", @"Move")];
-}
-
-- (void)removeColorIndicesAfter:(unsigned)maxIndex
-{
-#warning stupid undo
-	[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];
-	id enumerator = [layers objectEnumerator], current;
-	while(current = [enumerator nextObject])
-	{
-		[current removeColorIndicesAfter:maxIndex];
-	}
+	[layer setOrigin:NSMakePoint(x, y)];
+	PXLayer *new = [layer layerAfterApplyingMove];
+	[new setOrigin:NSZeroPoint];
+	[self replaceLayer:layer withLayer:new actionName:NSLocalizedString(@"Move", @"Move")];
 }
 
 @end

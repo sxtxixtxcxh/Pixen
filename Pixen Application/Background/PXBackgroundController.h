@@ -20,7 +20,7 @@
 @end
 
 @interface NSObject(PXBackgroundControllerDelegate)
-- (void)backgroundChanged:(PXBackground *)changed;
+- (void)backgroundChanged:(NSNotification *)changed;
 
 - (PXBackground *)mainBackground;
 - (PXBackground *)alternateBackground;

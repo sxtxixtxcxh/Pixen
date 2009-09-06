@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 __MyCompanyName__. All rights reserved.
+//  Copyright 2005 Open Sword Group. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
@@ -59,6 +59,4 @@ didFinishWithSize:(NSSize)aSize
 - (IBAction)cutLayer:sender;
 - (IBAction)copyLayer:sender;
 - (IBAction)pasteLayer:sender;
-
-- (IBAction)toggleAutomaticPalette:sender;
 @end

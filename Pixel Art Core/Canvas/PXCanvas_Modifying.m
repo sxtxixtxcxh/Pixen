@@ -12,11 +12,6 @@
 #import "PXLayer.h"
 #import "PXCanvas_Selection.h"
 #import "gif_lib.h"
-#ifndef __COCOA__
-#include <math.h>
-#import "PXNotifications.h"
-#import "PXDefaults.h"
-#endif
 #import "NSString_DegreeString.h"
 
 
@@ -61,58 +56,30 @@
 	return corrected;	
 }
 
-- (void)setColorIndex:(unsigned int)index atPoint:(NSPoint)aPoint
+- (void)setColor:(NSColor *)color atPoint:(NSPoint)aPoint
 {
 	if(![self containsPoint:aPoint]) { return; }
-	[activeLayer setColorIndex:index atPoint:[self correct:aPoint]];
+	[activeLayer setColor:color atPoint:[self correct:aPoint]];
 }
 
-- (void)setColorIndex:(unsigned int)index atIndex:(unsigned int)loc ofLayer:(PXLayer *)layer
-{
-	[[undoManager prepareWithInvocationTarget:self] setColorIndex:[layer colorIndexAtIndex:loc] atIndex:loc ofLayer:layer];
-	[layer setColorIndex:index atIndex:loc];
-	int x = loc % (int)[self size].width;
-	int y = [self size].height - ((loc - x)/[self size].width) - 1;
-	[self changedInRect:NSMakeRect( x, y, 1, 1)];
-}
-
-- (void)setColorIndex:(unsigned int)index atIndex:(unsigned int)loc
-{
-	[self setColorIndex:index atIndex:loc ofLayer:activeLayer];
-}
-
-- (void)setColorIndex:(unsigned int)index atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer simpleUndo:(BOOL)assumeIndicesAreTheSameColor
+- (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer
 {
 	if([indices count] == 0) { return; }
-	[self beginUndoGrouping]; {
-		if(assumeIndicesAreTheSameColor)
-		{
-			unsigned oldColorIndex = [layer colorIndexAtIndex:[[indices objectAtIndex:0] intValue]];
-			[[undoManager prepareWithInvocationTarget:self] setColorIndex:oldColorIndex atIndices:indices updateIn:bounds onLayer:layer simpleUndo:assumeIndicesAreTheSameColor];
-		}
-		[self beginOptimizedSetting]; {
-			id enumerator = [indices objectEnumerator], current;
-			while(current = [enumerator nextObject])
-			{
-				int val = [current intValue];
-				if(assumeIndicesAreTheSameColor)
-				{
-					[layer setColorIndex:index atIndex:val];
-				}
-				else
-				{
-					[self setColorIndex:index atIndex:val ofLayer:layer];
-				}
-			}
-		} [self endOptimizedSetting];
-	//
-	} [self endUndoGrouping:assumeIndicesAreTheSameColor ? NSLocalizedString(@"Fill", @"Fill") : NSLocalizedString(@"Drawing", @"Drawing")];
+	id enumerator = [indices objectEnumerator], current;
+	while(current = [enumerator nextObject])
+	{
+		int val = [current intValue];
+		int x = val % (int)[self size].width;
+		int y = [self size].height - ((val - x)/[self size].width) - 1;
+		[self bufferUndoAtPoint:NSMakePoint(x, y) fromColor:[layer colorAtIndex:val] toColor:color];
+		[layer setColor:color atIndex:val];
+	}
 	[self changedInRect:bounds]; 		
 }
 
-- (void)setColorIndex:(unsigned int)index atIndices:(NSArray *)indices updateIn:(NSRect)bounds simpleUndo:(BOOL)assumeIndicesAreTheSameColor
+- (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds
 {
-	[self setColorIndex:index atIndices:indices updateIn:bounds onLayer:activeLayer simpleUndo:assumeIndicesAreTheSameColor];
+	[self setColor:color atIndices:indices updateIn:bounds onLayer:activeLayer];
 }
 
 - (NSColor*) colorAtPoint:(NSPoint)aPoint
@@ -121,22 +88,6 @@
 		return nil; 
 	
 	return [activeLayer colorAtPoint:aPoint];
-}
-
-- (unsigned int) colorIndexAtPoint:(NSPoint)aPoint
-{
-	if( ! [self containsPoint:aPoint] ) 
-		return 0;
-	
-	return [activeLayer colorIndexAtPoint:aPoint];
-}
-
-- (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint
-{
-	if(![self containsPoint:aPoint]) 
-		return;
-	
-	[activeLayer setColor:aColor atPoint:[self correct:aPoint]];
 }
 
 - (void)setColor:(NSColor *) aColor atPoints:(NSArray *)points
@@ -157,24 +108,12 @@
 	}
 	int i;
 	NSPoint point;
-	//violates law of demeter, but is needed for the optimized setting.
-	PXImage_beginOptimizedSetting([activeLayer image]);
 	for (i=0; i<[points count]; i++) {
 		point = [self correct:[[points objectAtIndex:i] pointValue]];
-		PXImage_setColorAtXY([activeLayer image], (int)(point.x), (int)(point.y), aColor);		
+		PXImage_setColorAtXY([activeLayer image], aColor, (int)(point.x), (int)(point.y));		
 	}
-	PXImage_endOptimizedSetting([activeLayer image]);	
 }
 
-- (void)beginOptimizedSetting
-{
-	[activeLayer beginOptimizedSetting];
-}
-
-- (void)endOptimizedSetting
-{
-	[activeLayer endOptimizedSetting];
-}
 
 - (void)rotateByDegrees:(int)degrees
 {
@@ -198,10 +137,10 @@
 	if(NSEqualSizes([self size], NSZeroSize) || NSEqualRects(rect, NSZeroRect)) { return; }
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-		[NSValue valueWithRect:rect],
-		PXChangedRectKey, 
-		activeLayer, PXActiveLayerKey, 
-		nil];
+						  [NSValue valueWithRect:rect],
+						  PXChangedRectKey, 
+						  activeLayer, PXActiveLayerKey, 
+						  nil];
 	
 	[nc postNotificationName:PXCanvasChangedNotificationName
 					  object:self
@@ -261,7 +200,6 @@
 	unsigned char *red = calloc([first size].width * [first size].height * [canvases count], sizeof(unsigned char));
 	unsigned char *green = calloc([first size].width * [first size].height * [canvases count], sizeof(unsigned char));
 	unsigned char *blue = calloc([first size].width * [first size].height * [canvases count], sizeof(unsigned char));
-	PXPalette *palette = [first palette];
 	int i;
 	int quantizedPixels = 0;
 	
@@ -271,10 +209,6 @@
 		if(!NSEqualSizes([first size], [current size]))
 		{
 			[NSException raise:@"Reduction Exception" format:@"Canvas sizes not equal!"];
-		}
-		if(palette != [current palette])
-		{
-			[NSException raise:@"Reduction Exception" format:@"Canvas palettes not identical!"];
 		}
 		NSImage *image = [[[current displayImage] copy] autorelease];
 		id bitmapRep = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
@@ -322,33 +256,88 @@
 	if (quantizedPixels)
 		QuantizeBuffer(quantizedPixels, &size, red, green, blue, output, map);
 	//NSLog(@"Quantized to %d colors", size);
-	PXPalette_postponeNotifications(palette, YES);
-	[palette->undoManager beginUndoGrouping]; {
-		if (colors < PXPalette_colorCount(palette))
+
+	PXPalette *palette = PXPalette_init(PXPalette_alloc());
+	for (i = 0; i < size; i++)
+	{
+		PXPalette_addColor(palette, [NSColor colorWithCalibratedRed:map[i].Red / 255.0f green:map[i].Green / 255.0f blue:map[i].Blue / 255.0f alpha:1]);
+	}
+	if (transparency)
+		PXPalette_addColorWithoutDuplicating(palette, [NSColor clearColor]);
+	
+	enumerator = [canvases objectEnumerator];
+	while (current = [enumerator nextObject])
+	{
+		id layerEnumerator = [[current layers] objectEnumerator], currentLayer;
+		while(currentLayer = [layerEnumerator nextObject])
 		{
-			while(palette->colorCount > 0)
-			{
-				PXPalette_removeColorAtIndex(palette, palette->colorCount - 1);
-			}
-			for (i = 0; i < size; i++)
-			{
-				PXPalette_addColor(palette, [NSColor colorWithCalibratedRed:map[i].Red / 255.0f green:map[i].Green / 255.0f blue:map[i].Blue / 255.0f alpha:1]);
-			}
+			[currentLayer adaptToPalette:palette withTransparency:transparency matteColor:matteColor];
 		}
-		if (transparency)
-			PXPalette_addColorWithoutDuplicating(palette, [NSColor clearColor]);
-		
-		enumerator = [canvases objectEnumerator];
-		while (current = [enumerator nextObject])
-		{
-			id layerEnumerator = [[current layers] objectEnumerator], currentLayer;
-			while(currentLayer = [layerEnumerator nextObject])
-			{
-				[currentLayer adaptToPaletteWithTransparency:transparency matteColor:matteColor];
-			}
+		[current changed];
+	}
+	free(red); free(green); free(blue); free(output); free(map);
+}
+
+- (void)clearUndoBuffers
+{
+	[drawnPoints release];
+	drawnPoints = [[NSMutableArray alloc] initWithCapacity:200];
+	oldColors = [[NSMutableArray alloc] initWithCapacity:200];
+	newColors = [[NSMutableArray alloc] initWithCapacity:200];
+}
+
+- (void)registerForUndo
+{
+	[self registerForUndoWithDrawnPoints:drawnPoints
+							   oldColors:oldColors 
+							   newColors:newColors 
+								 inLayer:[self activeLayer] 
+								 undoing:NO];
+}
+
+- (void)registerForUndoWithDrawnPoints:(NSArray *)pts
+							 oldColors:(NSArray *)oldC
+							 newColors:(NSArray *)newC
+							   inLayer:(PXLayer *)layer
+							   undoing:(BOOL)undoing
+{
+	[[[self undoManager] prepareWithInvocationTarget:self] registerForUndoWithDrawnPoints:pts
+																				oldColors:newC
+																				newColors:oldC
+																				  inLayer:layer
+																				  undoing:YES];
+	if(undoing)
+	{
+		[self replaceColorsAtPoints:pts withColors:newC inLayer:layer];
+	}
+}
+
+- (void)replaceColorsAtPoints:(NSArray *)pts withColors:(NSArray *)colors inLayer:layer
+{
+	NSRect changedRect = NSZeroRect;
+	NSPoint pt;
+	if([pts count] > 0) {
+		pt = [[pts objectAtIndex:0] pointValue];
+		changedRect = NSMakeRect(pt.x, pt.y, 1, 1);
+	}
+	int i;
+	for(i = [pts count]-1; i >= 0; i--) 
+	{
+		pt = [[pts objectAtIndex:i] pointValue];
+		NSColor *c = [colors objectAtIndex:i];
+		if([c isEqual:[NSNull null]]) {
+			c = [NSColor clearColor];
 		}
-	} [palette->undoManager endUndoGrouping];
-	PXPalette_postponeNotifications(palette, NO);	
-	free(red); free(green); free(blue); free(output); free(map);		
+		[layer setColor:c atPoint:pt];
+		changedRect = NSUnionRect(changedRect, NSMakeRect(pt.x, pt.y, 1, 1));
+	}
+	[self changedInRect:changedRect];
+}
+
+- (void)bufferUndoAtPoint:(NSPoint)pt fromColor:(NSColor *)oldColor toColor:(NSColor *)newColor
+{
+	[drawnPoints addObject:[NSValue valueWithPoint:pt]];
+	[oldColors addObject:((oldColor == nil) ? (id)[NSNull null] : (id)oldColor)];
+	[newColors addObject:(newColor == nil) ? (id)[NSNull null] : (id)newColor];
 }
 @end

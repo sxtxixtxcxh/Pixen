@@ -26,12 +26,6 @@
 //
 
 #import "PXSlashyBackground.h"
-#ifndef __COCOA__
-#import <Foundation/NSString.h>
-#import <AppKit/NSBezierPath.h>
-#import <AppKit/NSGraphicsContext.h>
-#import <AppKit/NSColorWell.h>
-#endif
 
 @implementation PXSlashyBackground
 
@@ -49,11 +43,7 @@
     [[NSGraphicsContext currentContext] setShouldAntialias:NO];
     [NSBezierPath setDefaultLineWidth:10];
 	
-#ifdef __COCOA__
     [color set];
-#else
-    [[colorWell color] set];
-#endif
     int higherOrigin = (int)((rect.size.width >= rect.size.height) ? rect.origin.x : rect.origin.y);
     int higherDimension = 2*(int)((rect.size.width >= rect.size.height) ? rect.size.width : rect.size.height);
     int i = (int)(higherOrigin-higherDimension);
@@ -76,11 +66,7 @@
 
 - (void)drawRect:(NSRect)rect withinRect:(NSRect)wholeRect
 {
-#ifdef __COCOA__
     [backColor set];
-#else
-    [[backWell color] set];
-#endif
     
     NSRectFill(wholeRect);
     [self drawBackgroundLinesInRect:wholeRect];

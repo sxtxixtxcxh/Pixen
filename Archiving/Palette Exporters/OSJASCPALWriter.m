@@ -42,7 +42,7 @@
 	int i;
 	for (i = 0; i < colorCount; i++)
 	{
-		NSColor *color = [palette->colors[i] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+		NSColor *color = [palette->colors[i] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 		char colorString[12];
 		sprintf(colorString, "%d %d %d\n", (int)([color redComponent] * 255), (int)([color greenComponent] * 255), (int)([color blueComponent] * 255));
 		[data appendBytes:colorString length:strlen(colorString)];

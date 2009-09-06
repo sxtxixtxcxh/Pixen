@@ -92,11 +92,6 @@
 	}
 }
 
-- (void)setState:(PXColorCelState)newState
-{
-	state = newState;
-}
-
 - (void)drawWithFrame:(NSRect)frame inView:(NSView *)aView
 {
 	BOOL flipped = [aView isFlipped];
@@ -116,9 +111,6 @@
 	{
 		[self drawColorSwatchWithFrame:frame inView:aView];
 	}
-	
-	// Exceuse me for my mdrfkr hardcoded numbers and ternary operators.
-	[(state != PXNoToolColor ? [NSColor keyboardFocusIndicatorColor] : [[NSColor grayColor] colorWithAlphaComponent:0.5]) set];
 	int fontSize = [NSFont systemFontSizeForControlSize:NSMiniControlSize];
 	if (index > 9999)
 		fontSize = floorf(fontSize * .85);
@@ -127,86 +119,17 @@
 	NSSize badgeSize = [badgeString size];	
 	badgeSize.width += 6.5;
 	badgeSize.height += 0;
+	[[[NSColor grayColor] colorWithAlphaComponent:0.5] set];
 	NSRect badgeRect = NSMakeRect(NSMaxX(frame) - badgeSize.width - 1.5, flipped ? NSMaxY(frame) - badgeSize.height - 2 : 2, badgeSize.width, badgeSize.height);
-	if (state == PXNoToolColor)
-	{
-		NSFrameRectWithWidthUsingOperation(NSInsetRect(frame, 0, 0), 2, NSCompositeSourceOver);
-	}
-	else
-	{
-		if (!flipped)
-			badgeRect.origin.y--;
-		badgeRect.size.height+=2;
-		badgeRect.size.width+=1.5;
-	}
+	NSFrameRectWithWidthUsingOperation(NSInsetRect(frame, 0, 0), 2, NSCompositeSourceOver);
 	
+	// Exceuse me for my mdrfkr hardcoded numbers and ternary operators.	
 	int verticalTextOffset = (index > 9999) ? 1 : 2;	
-
 	NSBezierPath *indexBadge = [NSBezierPath bezierPathWithRoundedRect:badgeRect cornerRadius:5 inCorners:flipped ? OSBottomLeftCorner : OSTopLeftCorner];
-	if (state != PXNoToolColor)
-	{
-		[[NSGraphicsContext currentContext] saveGraphicsState];
-		NSSetFocusRingStyle(NSFocusRingOnly);
-		NSRectFill(frame);
-		if ([self controlSize] == NSRegularControlSize)
-		{
-			[[NSBezierPath bezierPathWithRect:NSOffsetRect(badgeRect, -1, (flipped ? -1 : 1))] addClip];
-			[indexBadge fill];
-		}
-		[[NSGraphicsContext currentContext] restoreGraphicsState];
-	}
 	
 	if ([self controlSize] != NSRegularControlSize) { return; }
 	
-	if ((state != PXNoToolColor) && (state != PXSelectedColor))
-	{
-		NSString *activeTool;
-		if (state == PXLeftToolColor) { activeTool = @"left"; }
-		else if (state == PXRightToolColor) { activeTool = @"right"; }
-		else { activeTool = @"both"; }
-		NSAttributedString *activeToolString = [[[NSAttributedString alloc] initWithString:activeTool attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor whiteColor], NSForegroundColorAttributeName, [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSMiniControlSize]], NSFontAttributeName, nil]] autorelease];
-		NSSize stringSize = [activeToolString size];
-		stringSize.width += 6.5;
-		
-		NSRect toolBadgeRect;
-		NSRect toolClipRect;
-		NSBezierPath *toolBadgePath = nil;
-		NSPoint toolStringPoint = NSZeroPoint;
-		switch (state)
-		{
-			case PXLeftToolColor:
-				toolBadgeRect = NSMakeRect(NSMinX(frame), flipped ? NSMinY(frame) : NSMaxY(frame) - badgeSize.height - 2, stringSize.width, stringSize.height);
-				toolClipRect = NSOffsetRect(toolBadgeRect, 1, (flipped ? 1 : -1));
-				toolBadgePath = [NSBezierPath bezierPathWithRoundedRect:toolBadgeRect cornerRadius:5 inCorners:flipped ? OSTopRightCorner : OSBottomRightCorner];
-				toolStringPoint = NSMakePoint(NSMinX(frame) + 3, flipped ? NSMinY(frame) : NSMaxY(frame) - badgeSize.height - verticalTextOffset);
-				break;
-			case PXRightToolColor:
-				toolBadgeRect = NSMakeRect(NSMaxX(frame) - stringSize.width, flipped ? NSMinY(frame) : NSMaxY(frame) - badgeSize.height - 2, stringSize.width, stringSize.height);
-				toolClipRect = NSOffsetRect(toolBadgeRect, -1, (flipped ? 1 : -1));
-				toolBadgePath = [NSBezierPath bezierPathWithRoundedRect:toolBadgeRect cornerRadius:5 inCorners:flipped ? OSTopLeftCorner : OSBottomLeftCorner];
-				toolStringPoint = NSMakePoint(NSMaxX(frame) - stringSize.width + 4, flipped ? NSMinY(frame) : NSMaxY(frame) - badgeSize.height - verticalTextOffset);				
-				break;
-			case PXBothToolColor:
-				toolBadgeRect = NSMakeRect(NSMinX(frame), flipped ? NSMinY(frame) : NSMaxY(frame) - badgeSize.height - 2, NSWidth(frame), stringSize.height);
-				toolClipRect = NSOffsetRect(toolBadgeRect, 0, (flipped ? 1 : -1));
-				toolClipRect.origin.x++;
-				toolClipRect.size.width-=2;
-				toolBadgePath = [NSBezierPath bezierPathWithRect:toolBadgeRect];
-				toolStringPoint = NSMakePoint(NSMidX(frame) - ([activeToolString size].width / 2), flipped ? NSMinY(frame) : NSMaxY(frame) - badgeSize.height - verticalTextOffset);				
-				break;
-			default:
-				break;
-		}
-		[[NSGraphicsContext currentContext] saveGraphicsState];
-		NSSetFocusRingStyle(NSFocusRingOnly);
-		[[NSBezierPath bezierPathWithRect:toolClipRect] addClip];
-		[toolBadgePath fill];
-		[[NSGraphicsContext currentContext] restoreGraphicsState];
-		[toolBadgePath fill];
-		[activeToolString drawAtPoint:toolStringPoint];
-	}
-	
-	[(state != PXNoToolColor ? [NSColor keyboardFocusIndicatorColor] : [[NSColor grayColor] colorWithAlphaComponent:0.5]) set];
+	[[[NSColor grayColor] colorWithAlphaComponent:0.5] set];
 	[indexBadge fill];
 	
 	[badgeString drawAtPoint:NSMakePoint(NSMaxX(frame) - badgeSize.width + 3, flipped ? NSMaxY(frame) - badgeSize.height - verticalTextOffset : verticalTextOffset)];

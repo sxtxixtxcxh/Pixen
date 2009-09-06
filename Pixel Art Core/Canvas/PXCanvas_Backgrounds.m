@@ -10,11 +10,6 @@
 #import "PXBackgrounds.h"
 #import "PXBackgroundConfig.h"
 #import "PXLayer.h"
-#ifndef __COCOA__
-#include <math.h>
-#import "PXNotifications.h"
-#import "PXDefaults.h"
-#endif
 
 @implementation PXCanvas(Backgrounds)
 

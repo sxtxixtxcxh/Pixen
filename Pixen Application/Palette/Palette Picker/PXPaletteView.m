@@ -13,11 +13,9 @@ const int viewMargin = 1;
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
-		insertionIndex = -1;
-		floatingIndex = -1;
-		selectedIndex = -1;
 		paletteIndices = [[NSMutableArray alloc] initWithCapacity:32000];
 		colorCell = [[PXColorPickerColorWellCell alloc] init];
+		palette = NULL;
 		[self setEnabled:YES];
 		controlSize = NSRegularControlSize;
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paletteChanged:) name:PXPaletteChangedNotificationName object:nil];
@@ -55,10 +53,6 @@ const int viewMargin = 1;
 	{
 		[paletteIndices addObject:[NSNumber numberWithInt:i]];
 	}
-	if(showsNewSwatch)
-	{
-		[paletteIndices addObject:[NSNumber numberWithInt:-1]];
-	}
 }
 
 - (void)resizeWithOldSuperviewSize:(NSSize)size
@@ -72,7 +66,7 @@ const int viewMargin = 1;
 	width = (controlSize == NSRegularControlSize ? 32 : 16) + viewMargin;
 	height = width;
 	columns = NSWidth([self bounds]) / width;
-	rows = palette ? ceilf((float)((PXPalette_colorCount(palette) + (showsNewSwatch ? 1 : 0))) / columns) : 0;
+	rows = palette ? ceilf((float)((PXPalette_colorCount(palette))) / columns) : 0;
 	
 	float difference = NSWidth([self bounds]) - columns * width - viewMargin*2;
 	float additional = difference / (float)(columns);
@@ -100,20 +94,21 @@ const int viewMargin = 1;
 
 - (void)setPalette:(PXPalette *)pal
 {
-	[self floatIndex:-1];
+	if(!pal)
+	{
+		if(palette)
+		{
+			PXPalette_release(palette);
+			palette = nil;
+		}
+		return;
+	}
 	PXPalette_retain(pal);
 	PXPalette_release(palette);
 	palette = pal;		
-	showsNewSwatch = (!(pal->locked) || (pal->canSave)) && !(pal->isSystemPalette);
-	[self setEditable:!(pal->isSystemPalette)];
 	[self retile];
 	[self reloadData];
 	[self setNeedsDisplay:YES];
-}
-
-- (PXColorCelState)stateForCelIndex:(int)index
-{
-	return (selectedIndex == index && index != -1) ? PXSelectedColor : PXNoToolColor;
 }
 
 - (void)drawRect:(NSRect)rect
@@ -140,48 +135,29 @@ const int viewMargin = 1;
 			for (i = 0; i < columns; i++)
 			{
 				int index = j * columns + i;
-				if (index >= (PXPalette_colorCount(palette) + (showsNewSwatch ? 1 : 0))) { break; }
+				if (index >= (PXPalette_colorCount(palette))) { break; }
 				int paletteIndex = [[paletteIndices objectAtIndex:index] intValue];
 				[colorCell setIndex:paletteIndex];
 				NSColor *color = [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0];
-				if(paletteIndex == -1)
-				{
-					[colorCell setHighlighted:newSwatchTinted];
-				}
-				else
+				if(paletteIndex != -1)
 				{
 					color = colors[paletteIndex];
 					[colorCell setHighlighted:NO];
 				}
 				[colorCell setColor:color];
-				[colorCell setState:[self stateForCelIndex:paletteIndex]];
 				[colorCell drawWithFrame:NSMakeRect(viewMargin*2 + i*width, viewMargin*2 + j*height, width - viewMargin*2, height - viewMargin*2) inView:self];
 			}
 		}
 	} @catch(NSException *e) {
 		[self reloadData];
 		[self retile];
-		[self display];
+		[self setNeedsDisplay:YES];
 	}
 	if(!enabled)
 	{
 		[[NSColor colorWithCalibratedWhite:1 alpha:.2] set];
 		NSRectFillUsingOperation([self visibleRect], NSCompositeSourceOver);
 	}
-}
-
-- (void)floatIndex:(int)index
-{
-	floatingIndex = index;
-	[self retile];
-	[self setNeedsDisplay:YES];	
-}
-
-- (void)setEditable:(BOOL)ed
-{
-	[self floatIndex:-1];
-	isEditable = ed;
-	[self reloadData];
 }
 
 - (void)rightMouseDown:event
@@ -209,7 +185,7 @@ const int viewMargin = 1;
 		for (i = 0; i < columns; i++)
 		{
 			int index = j * columns + i;
-			if (index >= (PXPalette_colorCount(palette) + (showsNewSwatch ? 1 : 0))) { break; }
+			if (index >= (PXPalette_colorCount(palette))) { break; }
 			NSRect frame = NSMakeRect(viewMargin*2 + i*width, viewMargin*2 + j*height, width - viewMargin*2, height - viewMargin*2);
 			if(NSPointInRect(point, frame))
 			{
@@ -241,73 +217,31 @@ const int viewMargin = 1;
 	}
 }
 
-- (void)mouseDown:event
+- (void)activateIndexWithEvent:e
 {
-	if(!enabled) { return; }
-	int paletteIndex = [self indexOfCelAtPoint:	[self convertPoint:[event locationInWindow] fromView:nil]];
-	if (paletteIndex == -1)
+	NSPoint p = [self convertPoint:[e locationInWindow] fromView:nil];
+	if(!palette || !enabled) { return; }
+	int index = [self indexOfCelAtPoint:p];
+	if(index == -1)
 	{
-		if (NSPointInRect([self convertPoint:[event locationInWindow] fromView:nil], NSMakeRect(viewMargin*2 + (PXPalette_colorCount([self palette]) % columns)*width, viewMargin*2 + (rows-1)*height, width - viewMargin*2, height - viewMargin*2)))
-		{
-			newSwatchTinted = YES;
-			[self setNeedsDisplayInRect:[self visibleRect]];
-		}
 		return;
 	}
-	
-	if (isEditable)
+	int paletteIndex = index;
+	if (paletteIndex == -1)
 	{
-		[self floatIndex:paletteIndex];
+		return;
 	}
-	else
-	{
-		[delegate useColorAtIndex:paletteIndex event:event];
-		[self floatIndex:-1];
-	}
-	selectedIndex = paletteIndex;
-	[self setNeedsDisplayInRect:[self visibleRect]];
+	[delegate useColorAtIndex:paletteIndex event:e];	
+}
+
+- (void)mouseDown:event
+{
+	[self activateIndexWithEvent:event];
 }
 
 - (void)mouseDragged:event
 {
-	if (!palette || !isEditable || !enabled) { return; }
-	
-	if(floatingIndex == (PXPalette_colorCount(palette)) || floatingIndex == -1) { return; }
-	NSPoint loc = [self convertPoint:[event locationInWindow] fromView:nil];
-	if(!NSPointInRect(loc, [self bounds]))
-	{
-		if(PXPalette_colorCount(palette) <= 1) { return; }
-		outside = YES;
-	}
-	else
-	{
-		outside = NO;
-		int firstRow = MAX(floorf(NSMinY([self visibleRect]) / height), 0);
-		int lastRow = MIN(ceilf(NSMaxY([self visibleRect]) / height), rows-1);
-		int i, j;
-		for (j = firstRow; j <= lastRow; j++)
-		{
-			for (i = 0; i < columns; i++)
-			{
-				int index = j * columns + i;
-				NSRect frame = NSMakeRect(viewMargin*2 + i*width, viewMargin*2 + j*height, width - viewMargin*2, height - viewMargin*2);
-				if(NSPointInRect(loc, frame))
-				{
-					insertionIndex = index;					
-					if(insertionIndex >= PXPalette_colorCount(palette))
-					{
-						insertionIndex = PXPalette_colorCount(palette) - 1;
-					}
-					int floatIndex = [paletteIndices indexOfObject:[NSNumber numberWithInt:floatingIndex]];
-					[paletteIndices removeObjectAtIndex:floatIndex];
-					[paletteIndices insertObject:[NSNumber numberWithInt:floatingIndex] atIndex:insertionIndex];
-					break;
-				}
-			}
-		}
-	}
-	[self retile];
-	[self setNeedsDisplay:YES];
+	[self activateIndexWithEvent:event];
 	[self autoscroll:event];
 }
 
@@ -318,91 +252,7 @@ const int viewMargin = 1;
 
 - (void)mouseUp:event
 {
-	if(!enabled) { return; }
-	if(outside)
-	{
-		if(PXPalette_colorCount(palette) <= 1) { return; }
-		[[document undoManager] beginUndoGrouping];
-		PXPalette_setColorAtIndex(palette, [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0], floatingIndex);
-		[[document undoManager] setActionName:NSLocalizedString(@"Modify Palette", @"Modify Palette")];
-		[[document undoManager] endUndoGrouping];	
-		previousFloatingIndex = -1;
-		[self floatIndex:-1];
-		insertionIndex = -1;
-		outside = NO;
-		[self reloadData];
-		[self setNeedsDisplay:YES];
-		return;
-	}
-	previousFloatingIndex = floatingIndex;
-	int firstRow = MAX(floorf(NSMinY([self visibleRect]) / height), 0);
-	int lastRow = MIN(ceilf(NSMaxY([self visibleRect]) / height), rows-1);
-	int i, j;
-	for (j = firstRow; j <= lastRow; j++)
-	{
-		for (i = 0; i < columns; i++)
-		{
-			int index = j * columns + i;
-			if (index >= (PXPalette_colorCount(palette) + (showsNewSwatch ? 1 : 0))) { break; }
-			NSRect frame = NSMakeRect(viewMargin*2 + i*width, viewMargin*2 + j*height, width - viewMargin*2, height - viewMargin*2);
-			if(NSPointInRect([self convertPoint:[event locationInWindow] fromView:nil], frame))
-			{
-				if(insertionIndex == -1)
-				{
-					previousFloatingIndex = index;
-					if([event clickCount] >= 2 && isEditable)
-					{
-						[[document undoManager] beginUndoGrouping];
-						[delegate modifyColorAtIndex:index];
-						[[document undoManager] setActionName:NSLocalizedString(@"Modify Palette", @"Modify Palette")];
-						[[document undoManager] endUndoGrouping];
-					}
-					else
-					{
-						if([[paletteIndices objectAtIndex:index] intValue] != -1)
-						{
-							[delegate useColorAtIndex:index event:event];
-						}
-						else
-						{
-							[[document undoManager] beginUndoGrouping];
-							newSwatchTinted = NO;
-							[self setNeedsDisplayInRect:[self visibleRect]];
-							PXPalette_addColor(palette, [NSColor colorWithCalibratedRed:1 green:1 blue:1 alpha:1]);
-							[self setSelectedIndex:index];
-							[delegate modifyColorAtIndex:index];
-							[[document undoManager] setActionName:NSLocalizedString(@"Modify Palette", @"Modify Palette")];
-							[[document undoManager] endUndoGrouping];
-						}
-					}	
-					return;
-				}
-				BOOL adjustIndices = (document && !([event modifierFlags] & NSAlternateKeyMask));
-				[[document undoManager] beginUndoGrouping];
-				PXPalette_moveColorAtIndexToIndex(palette,floatingIndex,insertionIndex,adjustIndices);
-				[[document undoManager] setActionName:NSLocalizedString(@"Modify Palette", @"Modify Palette")];
-				[[document undoManager] endUndoGrouping];
-				break;
-			}
-		}
-	}
-	if (insertionIndex != -1 && insertionIndex != floatingIndex)
-	{
-		[self setSelectedIndex:insertionIndex];
-		[delegate useColorAtIndex:insertionIndex event:event];
-	}
-	[self floatIndex:-1];
-	insertionIndex = -1;
-	outside = NO;
-	newSwatchTinted = NO;
-	[self reloadData];
-	[self setNeedsDisplayInRect:[self visibleRect]];
-}
-
-- (void)setSelectedIndex:(int)index
-{
-	selectedIndex = index;
-	[self setNeedsDisplayInRect:[self visibleRect]];
+	[self activateIndexWithEvent:event];
 }
 
 @end

@@ -1,5 +1,5 @@
 //
-//  PXToolButtonCell.h
+//  OSPlasticButtonCell.h
 //  Pixen
 //
 //  Created by Andy Matuschak on 7/18/05.
@@ -9,8 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface PXToolButtonCell : NSButtonCell {
-	NSImage *glass, *glassHighlighted, *glassDivider;
+@interface OSPlasticButtonCell : NSButtonCell {
+	NSImage *glass, *glassHighlighted;
 }
 
 @end

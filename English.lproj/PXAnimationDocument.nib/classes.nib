@@ -240,6 +240,8 @@
 				<string>id</string>
 				<key>increaseOpacity</key>
 				<string>id</string>
+				<key>invertSelection</key>
+				<string>id</string>
 				<key>mergeDown</key>
 				<string>id</string>
 				<key>newLayer</key>
@@ -319,6 +321,12 @@
 				<string>id</string>
 				<key>layerSplit</key>
 				<string>RBSplitSubview</string>
+				<key>paletteController</key>
+				<string>id</string>
+				<key>paletteSplit</key>
+				<string>RBSplitSubview</string>
+				<key>paletteView</key>
+				<string>id</string>
 				<key>previewController</key>
 				<string>id</string>
 				<key>resizePrompter</key>

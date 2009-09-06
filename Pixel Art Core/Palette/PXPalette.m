@@ -41,57 +41,6 @@
 
 @end
 
-//this is a class because NSUndoManager likes to play with objects.
-@interface PXPaletteUndo : NSObject {}
-+ (void)palette:(PXPalette *)pal setLocked:(BOOL)lock;
-+ (void)palette:(PXPalette *)pal postponeNotifications:(BOOL)post;
-+ (void)palette:(PXPalette *)pal addColor:(NSColor *)col;
-+ (void)palette:(PXPalette *)pal removeColorAtIndex:(unsigned)ind;
-+ (void)palette:(PXPalette *)pal swapColorAtIndex:(unsigned)src withColorAtIndex:(unsigned)dst;
-+ (void)palette:(PXPalette *)pal moveColorAtIndex:(unsigned)src toIndex:(unsigned)dst adjustIndices:(BOOL)adjust;
-+ (void)palette:(PXPalette *)pal setColor:(NSColor *)col atIndex:(unsigned)index;
-@end
-
-@implementation PXPaletteUndo
-+ (void)palette:(PXPalette *)pal setLocked:(BOOL)lock
-{
-	if(lock)
-	{
-		PXPalette_lock(pal);
-	}
-	else
-	{
-		PXPalette_unlock(pal);
-	}
-}
-+ (void)palette:(PXPalette *)pal postponeNotifications:(BOOL)post
-{
-	PXPalette_postponeNotifications(pal,post);
-}
-+ (void)palette:(PXPalette *)pal addColor:(NSColor *)col
-{
-	PXPalette_addColor(pal, [col autorelease]);
-}
-+ (void)palette:(PXPalette *)pal removeColorAtIndex:(unsigned)ind
-{
-	PXPalette_removeColorAtIndex(pal, ind);
-}
-+ (void)palette:(PXPalette *)pal swapColorAtIndex:(unsigned)src withColorAtIndex:(unsigned)dst
-{
-	PXPalette_swapColorsAtIndex(pal,src,dst);
-}
-+ (void)palette:(PXPalette *)pal moveColorAtIndex:(unsigned)src toIndex:(unsigned)dst adjustIndices:(BOOL)adjust
-{
-	PXPalette_moveColorAtIndexToIndex(pal,src,dst,adjust);
-}
-+ (void)palette:(PXPalette *)pal setColor:(NSColor *)col atIndex:(unsigned)index
-{
-	PXPalette_setColorAtIndex(pal,col,index);
-}
-@end
-
-static id paletteUndoer = nil;
-
 PXColorBucket *PXColorBucket_alloc()
 {
 	return (PXColorBucket *)calloc(1, sizeof(PXColorBucket));
@@ -107,10 +56,16 @@ PXColorBucket *PXColorBucket_init(PXColorBucket *self, NSColor *color, unsigned 
 
 void PXColorBucket_dealloc(PXColorBucket *self)
 {
+	if(!self) {
+		return;
+	}
 	if (self->next != NULL) {
 		PXColorBucket_dealloc(self->next);
+		self->next = NULL;
 	}
-	[self->color release];
+	if(self->color) {
+		[self->color release];
+	}
 	free(self);
 }
 
@@ -172,7 +127,6 @@ NSDictionary *PXPalette_dictForArchiving(PXPalette *self)
 	{
 		[tempArray addObject:[[self->colors[i] copy] autorelease]];
 	}
-	[paletteDict setObject:[NSNumber numberWithBool:self->locked] forKey:@"locked"];
 	[paletteDict setObject:self->name forKey:@"name"];
 	[paletteDict setObject:tempArray forKey:@"colors"];
 	return paletteDict;
@@ -191,7 +145,6 @@ void PXPalette_saveChanges(PXPalette *self)
 PXPalette *PXPalette_initWithDictionary(PXPalette *self, NSDictionary *dict)
 {
 	PXPalette_initWithoutBackgroundColor(self);
-	PXPalette_postponeNotificationsSilently(self,YES,YES);
 	PXPalette_setName(self, [dict objectForKey:@"name"]);
 	PXPalette_resize(self, [[dict objectForKey:@"size"] intValue]);
 	id array = [dict objectForKey:@"colors"];
@@ -200,8 +153,6 @@ PXPalette *PXPalette_initWithDictionary(PXPalette *self, NSDictionary *dict)
 	{
 		PXPalette_addColor(self, current);
 	}
-	self->locked = [[dict objectForKey:@"locked"] boolValue];
-	PXPalette_postponeNotificationsSilently(self,NO,YES);
 	return self;
 }
 
@@ -284,14 +235,12 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 			NSString *currentKey;
 			PXPalette *palette = PXPalette_alloc();
 			PXPalette_initWithoutBackgroundColor(palette);
-			PXPalette_postponeNotificationsSilently(palette,YES,YES);
 			PXPalette_setName(palette, [current name]);
 			keyEnumerator = [[current allKeys] objectEnumerator];
 			while((currentKey = [keyEnumerator nextObject]))
 			{
 				PXPalette_addColor(palette,[current colorWithKey:currentKey]);
 			}
-			PXPalette_postponeNotificationsSilently(palette,NO,YES);
 			palette->isSystemPalette = YES;
 			palette->canSave = NO;
 			systemPalettes[i] = palette;
@@ -299,7 +248,6 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 		NSMutableArray *grays = [NSMutableArray arrayWithArray:CreateGrayList()];
 		PXPalette *palette = PXPalette_alloc();
 		PXPalette_initWithoutBackgroundColor(palette);
-		PXPalette_postponeNotificationsSilently(palette,YES,YES);
 #ifdef COCOA
 		PXPalette_setName(palette, NSLocalizedString(@"GRAYSCALE", @"Grayscale"));
 #else
@@ -313,7 +261,6 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 		{
 			PXPalette_addColor(palette, current);
 		}
-		PXPalette_postponeNotificationsSilently(palette,NO,YES);
 		systemPalettes[[lists count]] = palette;
 		systemPalettesCount = newCount;
 	}
@@ -356,7 +303,6 @@ unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex)
 			palette = PXPalette_initWithDictionary(PXPalette_alloc(), object);
 			palette->isSystemPalette = NO;
 			palette->canSave = YES;
-			palette->locked = NO;
 			userPalettes[i] = palette;
 		}
 		userPalettesCount = newCount;
@@ -373,36 +319,36 @@ PXPalette *PXPalette_alloc()
 {
 	PXPalette *palette = (PXPalette *)calloc(1, sizeof(PXPalette));
 	palette->retainCount = 1;
-	if(!paletteUndoer)
-	{
-		paletteUndoer = [PXPaletteUndo class];
-	}
 	return palette;
 }
 
 void PXPalette_dealloc(PXPalette *self)
 {
-	self->undoManager = nil;
-	PXPalette_postponeNotificationsSilently(self,YES,YES);
 	int i;
-	for (i=0; i<65536; i++) {
-		if (self->reverseHashTable[i] != NULL) {
-			PXColorBucket_dealloc(self->reverseHashTable[i]);
+	if(self->reverseHashTable) {
+		for (i=0; i<65536; i++) {
+			if (self->reverseHashTable[i] != NULL) {
+				PXColorBucket_dealloc(self->reverseHashTable[i]);
+			}
 		}
+		free(self->reverseHashTable);
+		self->reverseHashTable = nil;
 	}
-	for(i = 0; i < self->size; i++)
-	{
-		if(self->colors[i])
+	if(self->colors) {
+		for(i = 0; i < self->size; i++)
 		{
-			[self->colors[i] release];
+			if(self->colors[i])
+			{
+				[self->colors[i] release];
+			}
 		}
+		free(self->colors);		
+		self->colors = nil;
 	}
-	free(self->colors);
-	free(self->reverseHashTable);
-	self->colors = nil;
-	self->reverseHashTable = nil;
-	[self->name release];
-	self->name = nil;
+	if(self->name) {		
+		[self->name release];
+		self->name = nil;
+	}
 	free(self);
 }
 
@@ -412,9 +358,7 @@ PXPalette *PXPalette_initWithoutBackgroundColor(PXPalette *self)
 	self->isSystemPalette = NO;
 	self->size = 0;
 	self->colorCount = 0;
-	self->undoManager = nil;
 	self->reverseHashTable = (PXColorBucket **)calloc(65536, sizeof(PXColorBucket *));
-	self->locked = NO;
 	self->name = @"";
 	return self;
 }
@@ -429,15 +373,11 @@ PXPalette *PXPalette_init(PXPalette *self)
 PXPalette *PXPalette_copy(PXPalette *self)
 {
 	PXPalette *newPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
-	newPalette->undoManager = self->undoManager;
 	newPalette->name = [self->name copy];
-	PXPalette_postponeNotificationsSilently(newPalette,YES,YES);
 	int i;
 	for (i = 0; i < self->colorCount; i++) {
 		PXPalette_addColor(newPalette, self->colors[i]);
 	}
-	PXPalette_postponeNotificationsSilently(self,NO,YES);
-	newPalette->locked = self->locked;
 	return newPalette;
 }
 
@@ -468,18 +408,9 @@ PXPalette *PXPalette_release(PXPalette *self)
 	self->retainCount--;
 	if (self->retainCount <= 0) {
 		PXPalette_dealloc(self);
+		return NULL;
 	}
 	return self;
-}
-
-// special for adding, so we don't build a userInfo dictionary for each pixel when loading a full-color image
-void PXPalette_postAddedNotification(PXPalette *self)
-{
-	if (self->postponingNotifications) {
-		self->postedNotificationWhilePostponing = YES;
-		return;
-	}
-	[[NSNotificationCenter defaultCenter] postNotificationName:PXPaletteChangedNotificationName object:[NSValue valueWithPointer:(void *)self] userInfo:[NSDictionary dictionaryWithObjectsAndKeys:PXPaletteAddedColorNotificationName, PXSubNotificationNameKey, [NSNumber numberWithUnsignedInt:self->colorCount - 1], PXChangedIndexKey, nil]];
 }
 
 void PXPalette_insertColorAtIndex(PXPalette *self, NSColor *color, unsigned index, BOOL adjust)
@@ -488,18 +419,8 @@ void PXPalette_insertColorAtIndex(PXPalette *self, NSColor *color, unsigned inde
 	PXPalette_moveColorAtIndexToIndex(self,self->colorCount-1,index,adjust);
 }
 
-void PXPalette_postChangedNotification(PXPalette *self, NSDictionary *userInfo)
-{
-	if (self->postponingNotifications) {
-		self->postedNotificationWhilePostponing = YES;
-		return;
-	}
-	[[NSNotificationCenter defaultCenter] postNotificationName:PXPaletteChangedNotificationName object:[NSValue valueWithPointer:(void *)self] userInfo:userInfo];
-}
-
 void PXPalette_removeAlphaComponents(PXPalette *self)
 {
-	PXPalette_postponeNotifications(self,YES);
 	int i;
 	for(i = 0; i < self->colorCount; i++)
 	{
@@ -507,25 +428,6 @@ void PXPalette_removeAlphaComponents(PXPalette *self)
 		if([color alphaComponent] == 0 || [color alphaComponent] == 1) { continue; }
 		PXPalette_setColorAtIndex(self,[color colorWithAlphaComponent:1],i);
 	}
-	PXPalette_postponeNotifications(self,NO);
-}
-
-void PXPalette_postponeNotificationsSilently(PXPalette *self, BOOL postpone, BOOL silent)
-{
-	if (!silent && self->postponingNotifications && !postpone && self->postedNotificationWhilePostponing) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:PXPaletteChangedNotificationName object:[NSValue valueWithPointer:(void *)self] userInfo:nil];
-	}
-	self->postedNotificationWhilePostponing = NO;
-	self->postponingNotifications = postpone;	
-}
-
-void PXPalette_postponeNotifications(PXPalette *self, BOOL postpone)
-{
-	if([self->undoManager groupingLevel] > 0)
-	{
-		[[self->undoManager prepareWithInvocationTarget:paletteUndoer] palette:self postponeNotifications:!postpone];
-	}
-	PXPalette_postponeNotificationsSilently(self, postpone, NO);
 }
 
 NSString *PXPalette_name(PXPalette *self)
@@ -565,14 +467,10 @@ void PXPalette_setName(PXPalette *self, NSString *name)
 
 void PXPalette_addColor(PXPalette *self, NSColor *color)
 {
-	if (self->locked) {
+	if(!self) {
 		return;
 	}
 	NSColor *colorToAdd = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	if([self->undoManager groupingLevel] > 0)
-	{
-		[[self->undoManager prepareWithInvocationTarget:paletteUndoer] palette:self removeColorAtIndex:self->colorCount];
-	}
 	if(!colorToAdd) { return; }
 	if (self->size - self->colorCount <= 0) {
 		if (self->size < 64) {
@@ -585,7 +483,6 @@ void PXPalette_addColor(PXPalette *self, NSColor *color)
 	PXPalette_insertColorBucket(self, PXColorBucket_init(PXColorBucket_alloc(), colorToAdd, self->colorCount));
 	self->colorCount++;
 	PXPalette_saveChanges(self);
-	PXPalette_postAddedNotification(self); // so we don't build a dictionary every freakin' time
 }
 
 void PXPalette_resize(PXPalette *self, unsigned int newSize)
@@ -623,7 +520,6 @@ void PXPalette_resize(PXPalette *self, unsigned int newSize)
 	if (self->colorCount > self->size) {
 		self->colorCount = self->size;
 	}
-	PXPalette_postChangedNotification(self, [NSDictionary dictionaryWithObjectsAndKeys:PXPaletteResizedNotificationName, PXSubNotificationNameKey, nil]);
 }
 
 inline NSColor *PXPalette_colorAtIndex(PXPalette *self, unsigned index)
@@ -635,10 +531,6 @@ void PXPalette_swapColorsAtIndex(PXPalette* self, unsigned int colorIndex1, unsi
 {
 	if (colorIndex1 >= self->colorCount || colorIndex2 >= self->colorCount) {
 		return;
-	}
-	if([self->undoManager groupingLevel] > 0)
-	{
-		[[self->undoManager prepareWithInvocationTarget:paletteUndoer] palette:self swapColorAtIndex:colorIndex2 withColorAtIndex:colorIndex1];
 	}
 	NSColor *color1 = self->colors[colorIndex1];
 	NSColor *color2 = self->colors[colorIndex2];
@@ -652,7 +544,6 @@ void PXPalette_swapColorsAtIndex(PXPalette* self, unsigned int colorIndex1, unsi
 	}
 	self->colors[colorIndex1] = color2;
 	self->colors[colorIndex2] = color1;
-	PXPalette_postChangedNotification(self, [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:colorIndex1], PXChangedIndexKey, [NSNumber numberWithUnsignedInt:colorIndex2], @"changedIndex2", PXPaletteSwappedColorsNotificationName, PXSubNotificationNameKey, nil]);
 	PXPalette_saveChanges(self);
 }
 
@@ -663,61 +554,14 @@ void PXPalette_swapColors(PXPalette* self, NSColor *color1, NSColor *color2)
 								PXPalette_indexOfColorAddingIfNotPresent(self, color2));
 }
 
-//void PXPalette_cycleColors(PXPalette *self)
-//{
-//#warning ian is to implement undo for this.
-//	if (self->locked || self->colorCount < 2) {
-//		return;
-//	}
-//	unsigned int i;
-//	NSColor *firstColor = self->colors[1];
-//	PXColorBucket *bucket;
-//	for (i=1; i<(self->colorCount-1); i++) {
-//		self->colors[i] = self->colors[i+1];
-//		bucket = PXPalette_bucketForColor(self, self->colors[i+1]);
-//		if (bucket != NULL) {
-//			bucket->index=i;
-//		}
-//	}
-//	bucket = PXPalette_bucketForColor(self, firstColor);
-//	if (bucket != NULL) {
-//		bucket->index = self->colorCount-1;
-//	}
-//	self->colors[self->colorCount-1] = firstColor;
-//	PXPalette_postChangedNotification(self, [NSDictionary dictionaryWithObject:PXPaletteCycledColorsNotificationName forKey:PXSubNotificationNameKey]);
-//	PXPalette_saveChanges(self);
-//}
-//
 void PXPalette_addBackgroundColor(PXPalette *self)
 {
-	PXPalette_addColor(self, [NSColor clearColor]);
+	PXPalette_addColorWithoutDuplicating(self, [NSColor clearColor]);
 }
 
 void PXPalette_addColorWithoutDuplicating(PXPalette *self, NSColor *color)
 {
 	PXPalette_indexOfColorAddingIfNotPresent(self, color);
-}
-
-void PXPalette_lock(PXPalette *self)
-{
-	if([self->undoManager groupingLevel] > 0)
-	{
-		[[self->undoManager prepareWithInvocationTarget:paletteUndoer] palette:self setLocked:NO];
-	}
-	self->locked = YES;
-	PXPalette_postChangedNotification(self,[NSDictionary dictionaryWithObject:PXPaletteLockedNotificationName forKey:PXSubNotificationNameKey]);
-	PXPalette_saveChanges(self);
-}
-
-void PXPalette_unlock(PXPalette *self)
-{
-	if([self->undoManager groupingLevel] > 0)
-	{
-		[[self->undoManager prepareWithInvocationTarget:paletteUndoer] palette:self setLocked:YES];
-	}
-	self->locked = NO;
-	PXPalette_postChangedNotification(self,[NSDictionary dictionaryWithObject:PXPaletteUnlockedNotificationName forKey:PXSubNotificationNameKey]);
-	PXPalette_saveChanges(self);
 }
 
 unsigned int PXPalette_indexOfColorClosestTo(PXPalette *self, NSColor *color)
@@ -767,11 +611,6 @@ unsigned int PXPalette_indexOfColor(PXPalette *self, NSColor *color)
 	return _PXPalette_indexOfCorrectedColor(self, _PXPalette_correctColor(color));
 }
 
-unsigned int PXPalette_indexOfEraseColorAddingIfNotPresent(PXPalette *self)
-{
-	return PXPalette_indexOfColorAddingIfNotPresent(self, [NSColor clearColor]);
-}
-
 unsigned int PXPalette_indexOfColorAddingIfNotPresent(PXPalette *self, NSColor *color)
 {
 	NSColor *correctedColor = _PXPalette_correctColor(color);
@@ -779,20 +618,13 @@ unsigned int PXPalette_indexOfColorAddingIfNotPresent(PXPalette *self, NSColor *
 	if (index != -1) {
 		return index;
 	}
-	if (self->locked) {
-		return PXPalette_indexOfColorClosestTo(self, correctedColor);
-	}
 	PXPalette_addColor(self, correctedColor);
 	return self->colorCount - 1;
 }
 
 NSColor *PXPalette_restrictColor(PXPalette *self, NSColor *color)
 {
-	if (self->locked) {
-		return PXPalette_colorClosestTo(self, color);
-	} else {
-		return color;
-	}
+	return color;
 }
 
 double PXPalette_hashEfficiency(PXPalette *self)
@@ -819,15 +651,7 @@ NSArray *PXPalette_colors(PXPalette *self)
 
 void PXPalette_removeColorAtIndex(PXPalette *self, unsigned int index)
 {
-	if (self->locked) {
-		return;
-	}
 	NSColor *color = self->colors[index];
-	if([self->undoManager groupingLevel] > 0)
-	{
-		[[self->undoManager prepareWithInvocationTarget:paletteUndoer] palette:self addColor:[color retain]];
-		[[self->undoManager prepareWithInvocationTarget:paletteUndoer] palette:self moveColorAtIndex:self->colorCount - 1 toIndex:index adjustIndices:NO];
-	}
 	PXPalette_removeBucketForColor(self, color);
 	[color release];
 	int i;
@@ -839,7 +663,6 @@ void PXPalette_removeColorAtIndex(PXPalette *self, unsigned int index)
 	self->colors[self->colorCount] = nil;
 	self->colorCount -= 1;
 	PXPalette_saveChanges(self);
-	PXPalette_postChangedNotification(self, [NSDictionary dictionaryWithObjectsAndKeys:PXPaletteRemovedColorNotificationName, PXSubNotificationNameKey, [NSNumber numberWithUnsignedInt:index], PXChangedIndexKey, nil]);
 }
 
 void PXPalette_setColorAtIndex(PXPalette *self, NSColor *color, unsigned int index)
@@ -848,15 +671,10 @@ void PXPalette_setColorAtIndex(PXPalette *self, NSColor *color, unsigned int ind
 		return;
 	}
 	NSColor *oldColor = self->colors[index];
-	if([self->undoManager groupingLevel] > 0)
-	{
-		[[self->undoManager prepareWithInvocationTarget:paletteUndoer] palette:self setColor:oldColor atIndex:index];
-	}
 	PXPalette_removeBucketForColor(self, oldColor);
 	[oldColor release];
 	self->colors[index] = [color retain];
 	PXPalette_insertColorBucket(self, PXColorBucket_init(PXColorBucket_alloc(), color, index));
-	PXPalette_postChangedNotification(self, [NSDictionary dictionaryWithObject:PXPaletteChangedColorNotificationName forKey:PXSubNotificationNameKey]);
 	PXPalette_saveChanges(self);
 }
 
@@ -876,10 +694,6 @@ void PXPalette_moveColorAtIndexToIndex(PXPalette *self, unsigned int index1, uns
 {
 	int i;
 	NSColor *color = self->colors[index1];
-	if([self->undoManager groupingLevel] > 0)
-	{
-		[[self->undoManager prepareWithInvocationTarget:paletteUndoer] palette:self moveColorAtIndex:index2 toIndex:index1 adjustIndices:adjustIndices];
-	}
 	int start;
 	int end;
 	int shift;
@@ -898,6 +712,5 @@ void PXPalette_moveColorAtIndexToIndex(PXPalette *self, unsigned int index1, uns
 		self->colors[i] = self->colors[i+shift];
 	}
 	self->colors[index2] = color;
-	PXPalette_postChangedNotification(self, [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:index2], PXChangedIndexKey, [NSNumber numberWithUnsignedInt:index1], PXSourceIndexKey, [NSNumber numberWithBool:adjustIndices], PXAdjustIndicesKey, PXPaletteMovedColorNotificationName, PXSubNotificationNameKey, nil]);
 	PXPalette_saveChanges(self);
 }

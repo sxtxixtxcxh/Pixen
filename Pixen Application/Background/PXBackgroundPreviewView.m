@@ -80,27 +80,19 @@
 - (void)drawRect:(NSRect)rect
 {
 	[NSGraphicsContext saveGraphicsState];
-#ifdef __COCOA__
 	NSShadow *shadow = [[NSShadow alloc] init];
-#endif
 	NSRect rectBounds = NSIntersectionRect(NSInsetRect([self bounds], 5, 5), functionalRect);
-#ifdef __COCOA__
 	[shadow setShadowBlurRadius:5];
 	[shadow setShadowOffset:NSMakeSize(0, -2)];
 	[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.2 alpha:1]];
-#endif
 	[[NSColor blackColor] setStroke];
 	[[NSColor whiteColor] setFill];
 	NSBezierPath *path = [NSBezierPath bezierPathWithRect:rectBounds];
 	[path setLineWidth:1.5];
 	[path setLineJoinStyle:NSMiterLineJoinStyle];
-#ifdef __COCOA__
 	[shadow set];
-#endif
 	[path fill];
-#ifdef __COCOA__
 	[shadow release];
-#endif
 	[NSGraphicsContext restoreGraphicsState];
 	[[self image] drawInRect:rectBounds
 					fromRect:NSMakeRect(0, 0, [[self image] size].width, [[self image] size].height)

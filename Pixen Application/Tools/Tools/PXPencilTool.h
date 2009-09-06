@@ -53,8 +53,7 @@ fromCanvasController:(PXCanvasController *) controller;
 				newColor:(NSColor *)newColor
 				 atPoint:(NSPoint)aPoint
 				 inLayer:(PXLayer *)aLayer
-				ofCanvas:(PXCanvas *) aCanvas
-		  calledFromUndo:(BOOL)calledFromUndo;
+				ofCanvas:(PXCanvas *) aCanvas;
 
 - (void)drawPixelAtPoint:(NSPoint)aPoint
 				inCanvas:(PXCanvas *)aCanvas;
@@ -63,10 +62,4 @@ fromCanvasController:(PXCanvasController *) controller;
 				  to:(NSPoint)finalPoint
 			inCanvas:(PXCanvas *) canvas;
 
-- (void)drawWithOldIndex:(unsigned int)oldIndex
-				newIndex:(unsigned int)newIndex
-				 atPoint:(NSPoint)aPoint
-				 inLayer:(PXLayer *)aLayer
-				ofCanvas:(PXCanvas *) aCanvas
-		  calledFromUndo:(BOOL)calledFromUndo;
 @end

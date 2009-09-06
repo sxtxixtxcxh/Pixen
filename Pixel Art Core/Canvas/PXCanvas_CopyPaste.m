@@ -10,11 +10,6 @@
 #import "PXCanvas_Selection.h"
 #import "PXCanvas_Layers.h"
 #import "PXLayer.h"
-#ifndef __COCOA__
-#include <math.h>
-#import "PXNotifications.h"
-#import "PXDefaults.h"
-#endif
 
 @implementation PXCanvas(CopyPaste)
 
@@ -33,7 +28,6 @@
 {
 	if (aSize.width > [self size].width || aSize.height > [self size].height)
 	{
-#ifdef __COCOA__
 		switch ([self runPasteTooBigAlert:pastedThing size:aSize])
 		{
 			case NSAlertDefaultReturn:
@@ -47,9 +41,6 @@
 			default:
 				break;
 		}
-#else
-#warning GNUstep TODO
-#endif
 	}
 	return YES;
 }
@@ -70,7 +61,7 @@
 	NSImage *image = [layerDict objectForKey:PXLayerImageKey];
 	if(![self canContinuePasteOf:NSLocalizedString(@"layer", @"layer") size:[image size]]) { return; }
 	NSString *name = [layerDict objectForKey:PXLayerNameKey];
-	PXLayer *layer = [PXLayer layerWithName:name image:image size:[self size] palette:[self palette]];
+	PXLayer *layer = [PXLayer layerWithName:name image:image size:[self size]];
 	[layer setOpacity:[[layerDict objectForKey:PXLayerOpacityKey] floatValue]];
 	[self pasteLayer:layer];
 	[self layersChanged];
@@ -82,7 +73,6 @@
 	if([type isEqualToString:PXLayerPboardType]) {
 		layer = [NSKeyedUnarchiver unarchiveObjectWithData:[board dataForType:type]];
 		[layer setSize:[self size]];
-		[layer setPalette:[self palette]];
 	}
 	else if([type isEqualToString:PXNSImagePboardType]) {
 		id image = [[[NSImage alloc] initWithPasteboard:board] autorelease];
@@ -98,7 +88,7 @@
 			origin.x = MIN([self size].width - [image size].width, pOrigin.x);
 			origin.y = MIN([self size].height - [image size].height, pOrigin.y);
 		}
-		layer = [PXLayer layerWithName:NSLocalizedString(@"Pasted Layer", @"Pasted Layer") image:image origin:origin size:[self size] palette:palette];
+		layer = [PXLayer layerWithName:NSLocalizedString(@"Pasted Layer", @"Pasted Layer") image:image origin:origin size:[self size]];
 	}
 	[self pasteLayer:layer];
 	[self layersChanged];

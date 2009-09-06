@@ -11,11 +11,6 @@
 #import "PXCanvas_Selection.h"
 #import "PXLayer.h"
 #import "PXBackgroundConfig.h"
-#ifndef __COCOA__
-#include <math.h>
-#import "PXNotifications.h"
-#import "PXDefaults.h"
-#endif
 
 @implementation PXCanvas(Archiving)
 
@@ -23,7 +18,6 @@
 {
 	[coder encodeInt:3 forKey:@"version"];
 	[coder encodeObject:layers forKey:@"layers"];
-	PXPalette_encodeWithCoder(palette, coder);
 
 	[coder encodeObject:bgConfig forKey:@"bgConfig"];
 	[coder encodeBool:wraps forKey:@"wraps"];
@@ -40,17 +34,11 @@
 	int version = [coder decodeIntForKey:@"version"];
 	if(version < 4)
 	{
-		palette = PXPalette_alloc();
-		if(!PXPalette_initWithCoder(palette, coder))
-		{
-			PXPalette_release(palette);
-		}		
 		layers = [[coder decodeObjectForKey:@"layers"] retain];
 		id enumerator = [layers objectEnumerator], current;
 		while(current = [enumerator nextObject])
 		{
 			[current setCanvas:self];
-			[current setPalette:palette];
 		}
 	
 		bgConfig = [[coder decodeObjectForKey:@"bgConfig"] retain];

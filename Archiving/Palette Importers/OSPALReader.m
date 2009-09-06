@@ -43,7 +43,6 @@
 	int i;
 	PXPalette *palette = PXPalette_alloc();
 	PXPalette_initWithoutBackgroundColor(palette);
-	PXPalette_postponeNotificationsSilently(palette,YES,YES);
 	PXPalette_setName(palette, @"Imported palette");
 	for (i = 0; i < colorCount; i++)
 	{
@@ -52,7 +51,6 @@
 		float blue = bytes[24 + (i * 4) + 2] / 255.0;
 		PXPalette_addColor(palette, [NSColor colorWithDeviceRed:red green:green blue:blue alpha:1]);
 	}
-	PXPalette_postponeNotificationsSilently(palette,NO,YES);
 	return palette;
 }
 
