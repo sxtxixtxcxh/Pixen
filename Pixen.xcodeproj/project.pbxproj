@@ -3066,10 +3066,9 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		616BAEA608553EFB004CF172 /* Development */ = {
+		616BAEA608553EFB004CF172 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = i386;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
@@ -3081,9 +3080,8 @@
 				GCC_PREFIX_HEADER = "Other Sources/Pixen_Prefix.h";
 				GCC_PREPROCESSOR_DEFINITIONS = __COCOA__;
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-Pixen__Upgraded_.plist";
+				INFOPLIST_FILE = "Info-Pixen.plist";
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = Pixen;
 				WARNING_CFLAGS = (
@@ -3093,15 +3091,11 @@
 				);
 				WRAPPER_EXTENSION = app;
 			};
-			name = Development;
+			name = Debug;
 		};
-		616BAEA708553EFB004CF172 /* Deployment */ = {
+		616BAEA708553EFB004CF172 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
 				COPY_PHASE_STRIP = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3118,11 +3112,10 @@
 				GCC_PREFIX_HEADER = "Other Sources/Pixen_Prefix.h";
 				GCC_PREPROCESSOR_DEFINITIONS = __COCOA__;
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-Pixen__Upgraded_.plist";
+				INFOPLIST_FILE = "Info-Pixen.plist";
 				INSTALL_PATH = /Applications;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				LIBRARY_STYLE = STATIC;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_CFLAGS = "-funroll-loops";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Pixen;
@@ -3135,9 +3128,9 @@
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
-			name = Deployment;
+			name = Release;
 		};
-		616BAEAA08553EFB004CF172 /* Development */ = {
+		616BAEAA08553EFB004CF172 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
@@ -3156,9 +3149,9 @@
 				WARNING_CFLAGS = "-Winline";
 				ZERO_LINK = NO;
 			};
-			name = Development;
+			name = Debug;
 		};
-		616BAEAB08553EFB004CF172 /* Deployment */ = {
+		616BAEAB08553EFB004CF172 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
@@ -3172,63 +3165,7 @@
 				SKIP_INSTALL = NO;
 				UNSTRIPPED_PRODUCT = YES;
 			};
-			name = Deployment;
-		};
-		BF71262208B910480087422A /* Profiling */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				COPY_PHASE_STRIP = YES;
-				DEPLOYMENT_POSTPROCESSING = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
-				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks and Palettes\"";
-				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_ENABLE_CPP_RTTI = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Pixen_Prefix.h;
-				GCC_PREPROCESSOR_DEFINITIONS = __COCOA__;
-				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-Pixen__Upgraded_.plist";
-				INSTALL_PATH = /Applications;
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
-				LIBRARY_STYLE = STATIC;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				OTHER_CFLAGS = "-funroll-loops";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = Pixen;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
-			};
-			name = Profiling;
-		};
-		BF71262308B910480087422A /* Profiling */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
-				COPY_PHASE_STRIP = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GENERATE_PROFILING_CODE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.3;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-				SKIP_INSTALL = NO;
-				UNSTRIPPED_PRODUCT = YES;
-			};
-			name = Profiling;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -3236,22 +3173,20 @@
 		616BAEA508553EFB004CF172 /* Build configuration list for PBXNativeTarget "Pixen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				616BAEA608553EFB004CF172 /* Development */,
-				616BAEA708553EFB004CF172 /* Deployment */,
-				BF71262208B910480087422A /* Profiling */,
+				616BAEA608553EFB004CF172 /* Debug */,
+				616BAEA708553EFB004CF172 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Release;
 		};
 		616BAEA908553EFB004CF172 /* Build configuration list for PBXProject "Pixen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				616BAEAA08553EFB004CF172 /* Development */,
-				616BAEAB08553EFB004CF172 /* Deployment */,
-				BF71262308B910480087422A /* Profiling */,
+				616BAEAA08553EFB004CF172 /* Debug */,
+				616BAEAB08553EFB004CF172 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
