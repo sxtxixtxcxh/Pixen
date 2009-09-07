@@ -147,7 +147,6 @@
 {
 	NSImage *imageCopy = [[NSImage alloc] initWithSize:[self size]];
 	[imageCopy lockFocus];
-	[[[imageCopy representations] objectAtIndex:0] setColorSpaceName:NSCalibratedRGBColorSpace]; // Tell the image to write out calibrated-ly; let's avoid any conversion.
 	NSEnumerator *layerEnumerator = [layers reverseObjectEnumerator];
 	PXLayer *layer;
 	while (layer = [layerEnumerator nextObject])
@@ -164,6 +163,8 @@
 		NSRectFillUsingOperation(canvasRect, NSCompositeDestinationOver);
 	}
 	[imageCopy unlockFocus];
+	//this probably won't do any good... but there aren't any reps before the above execute.  Replace with ImageIO!
+	[[[imageCopy representations] objectAtIndex:0] setColorSpaceName:NSCalibratedRGBColorSpace];
 	return [imageCopy autorelease];	
 }
 

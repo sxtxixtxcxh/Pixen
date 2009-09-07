@@ -96,9 +96,9 @@
 {
 	[self initWithName:aName image:nil];
 	image = PXImage_initWithSize(PXImage_alloc(), size);
-	if (index != 0) // we do this instead of use the normal methods in order to get around error checking: this layer and image don't have a palette yet.
+	if (image)
 	{
-#warning this is unconscionable - just RectFill into the CGImage!
+#warning this is unconscionable - just RectFill into the CGImages!
 		int i;
 		for (i = 0; i < size.width * size.height; i++)
 		{

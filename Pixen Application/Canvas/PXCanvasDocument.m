@@ -116,7 +116,7 @@ BOOL isPowerOfTwo(int num)
 		[super saveToFile:fileName
 			saveOperation:saveOperation
 				 delegate:delegate
-		  didSaveSelector:NULL
+		  didSaveSelector:didSaveSelector
 			  contextInfo:contextInfo];
 	}
 	else
@@ -134,7 +134,7 @@ BOOL isPowerOfTwo(int num)
 	
 	if ([aType isEqualToString:JPEGFileType])
 	{
-		return [canvas imageDataWithType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:.75]
+		return [canvas imageDataWithType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0]
 																							   forKey:NSImageCompressionFactor]];
 	}
 
