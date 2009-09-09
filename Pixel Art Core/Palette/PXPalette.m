@@ -251,7 +251,7 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 #ifdef COCOA
 		PXPalette_setName(palette, NSLocalizedString(@"GRAYSCALE", @"Grayscale"));
 #else
-//#warning GNUSTEP TODO -- don't care
+////FIXME:  GNUSTEP TODO -- don't care
 		PXPalette_setName(palette, @"Grayscale");
 #endif
 		palette->isSystemPalette = YES;
@@ -274,7 +274,7 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 
 unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex)
 {
-#warning this code will leak or worse(probably just leak) if palettes are removed at runtime.
+//FIXME:  this code will leak or worse(probably just leak) if palettes are removed at runtime.
 	NSMutableArray *paths = [NSMutableArray array];
 	id enumerator = [[NSFileManager defaultManager] enumeratorAtPath:GetPixenPaletteDirectory()], current;
 	while(current = [enumerator nextObject])

@@ -172,7 +172,7 @@
 
 - (void)mouseDragged:(NSEvent *)event
 {
-#warning this is kind of clumsy, doesn't move enough
+//FIXME:  this is kind of clumsy, doesn't move enough
 	NSAffineTransform *affineTransform = [scaleTransform copy];
 	[affineTransform invert];
 	NSPoint deltaVector = [affineTransform transformPoint:NSMakePoint([event deltaX], [event deltaY])];

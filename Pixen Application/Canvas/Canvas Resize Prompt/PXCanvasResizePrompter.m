@@ -104,7 +104,7 @@
 
 - (IBAction)updateSize:sender
 {
-//#warning  Why not float ? 
+////FIXME:   Why not float ? 
 //Because a canvas that is 32.5 px by 38.2 px doesn't really make sense.
 	int width = [[self widthField] intValue];
 	int height = [[self heightField] intValue];

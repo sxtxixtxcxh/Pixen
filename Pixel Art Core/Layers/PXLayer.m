@@ -98,7 +98,7 @@
 	image = PXImage_initWithSize(PXImage_alloc(), size);
 	if (image)
 	{
-#warning this is unconscionable - just RectFill into the CGImages!
+//FIXME:  this is unconscionable - just RectFill into the CGImages!
 		int i;
 		for (i = 0; i < size.width * size.height; i++)
 		{
@@ -341,7 +341,7 @@
 - (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(float)frac
 {
 	if (!visible || opacity == 0) { return; }
-#warning this shouldn't be here
+//FIXME:  this shouldn't be here
 	float widthScale = NSWidth(dst) / NSWidth(src);
 	float heightScale = NSHeight(dst) / NSHeight(src);
 	float xOff = widthScale*origin.x+(dst.origin.x-(src.origin.x*widthScale));
@@ -351,7 +351,7 @@
 	CGContextTranslateCTM([[NSGraphicsContext currentContext] graphicsPort], -xOff, -yOff);
 }
 
-//#warning maybye should not be here ? 
+////FIXME:  maybye should not be here ? 
 //It's called, it makes the calling simpler, it's worth keeping.
 - (void)compositeUnder:(PXLayer *)aLayer flattenOpacity:(BOOL)flattenOpacity
 {

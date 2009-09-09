@@ -242,7 +242,7 @@ NSString *palettesSubdirName = @"Palettes";
 	PXCanvasDocument *doc = [self currentDocument];
 	if(doc)
 	{
-#warning coupled to canvas controller
+//FIXME:  coupled to canvas controller
 		PXCanvasController *canvasController = [doc canvasController];
 		NSWindow *window = [canvasController window];
 		if (![window isKeyWindow]) {
@@ -328,7 +328,7 @@ NSString *palettesSubdirName = @"Palettes";
 	BOOL showCrosshairs = [[NSUserDefaults standardUserDefaults] boolForKey:PXCrosshairEnabledKey];
 	showCrosshairs = !showCrosshairs;
 	[[NSUserDefaults standardUserDefaults] setBool:showCrosshairs forKey:PXCrosshairEnabledKey];
-#warning coupled to canvas window controller
+//FIXME:  coupled to canvas window controller
 	[[[[self currentDocument] windowControllers] objectAtIndex:0] redrawCanvas:self];
 }
 
@@ -346,7 +346,7 @@ NSString *palettesSubdirName = @"Palettes";
 		[[PXToolPaletteController sharedToolPaletteController] clearBeziers];
 	}
 	[[NSUserDefaults standardUserDefaults] setBool:cachedShowsToolPreview forKey:PXToolPreviewEnabledKey];
-#warning coupled to canvas window controller 
+//FIXME:  coupled to canvas window controller 
 	[[[[self currentDocument] windowControllers] objectAtIndex:0] redrawCanvas:self];
 }
 
@@ -360,7 +360,7 @@ NSString *palettesSubdirName = @"Palettes";
 	BOOL showPreviousCelOverlay = [[NSUserDefaults standardUserDefaults] boolForKey:PXPreviousCelOverlayEnabledKey];
 	cachedShowsPreviousCelOverlay = !showPreviousCelOverlay;
 	[[NSUserDefaults standardUserDefaults] setBool:cachedShowsPreviousCelOverlay forKey:PXPreviousCelOverlayEnabledKey];
-#warning coupled to canvas window controller
+//FIXME:  coupled to canvas window controller
 	[[[self currentDocument] windowControllers] makeObjectsPerformSelector:@selector(redrawCanvas:) withObject:self];
 }
 

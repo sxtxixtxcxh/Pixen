@@ -84,7 +84,7 @@
 
 - (void)documentClosed:(NSNotification *)notification
 {
-	#warning palette panels need a canvas reference, probably
+	//FIXME:  palette panels need a canvas reference, probably
 	id canvas = nil;
 	if([notification object] && ([[notification object] canvas] == canvas))
 	{
@@ -222,7 +222,7 @@
 	PXPalette *newPal = PXPalette_copy(palette);
 	newPal->isSystemPalette = NO;
 	newPal->canSave = NO;
-#warning might not work for other languages
+//FIXME:  might not work for other languages
 	NSString *base = [NSString stringWithFormat:@"%@ Copy", newPal->name];
 	if([newPal->name rangeOfString:@" Copy"].location != NSNotFound)
 	{

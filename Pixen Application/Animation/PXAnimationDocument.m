@@ -30,7 +30,7 @@
 	[super dealloc];
 }
 
-#warning consider removing these three once coupling decreases
+//FIXME:  consider removing these three once coupling decreases
 - (PXAnimation *)animation
 {
 	return animation;

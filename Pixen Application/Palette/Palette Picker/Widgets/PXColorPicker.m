@@ -184,7 +184,7 @@ int kPXColorPickerMode = 23421337;
 - (void)reloadDataAndShowCanvas:(PXCanvas *)canvas
 {
 	[self reloadData];
-	#warning find the palette
+	//FIXME:  find the palette
 	PXPalette *pal = PXPalette_init(PXPalette_alloc());
 	[self showPalette:pal];
 }
@@ -299,7 +299,7 @@ int kPXColorPickerMode = 23421337;
 	newPal->isSystemPalette = NO;
 	newPal->canSave = NO;
 	NSString *base = [NSString stringWithFormat:@"%@ Copy", newPal->name];
-#warning might not work for other languages
+//FIXME:  might not work for other languages
 	if([newPal->name rangeOfString:@" Copy"].location != NSNotFound)
 	{
 		base = [newPal->name substringToIndex:NSMaxRange([newPal->name rangeOfString:@" Copy"])];

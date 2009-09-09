@@ -183,7 +183,7 @@ BOOL isPowerOfTwo(int num)
     }
 	
 #else
-#warning implement that without Quicktime !!
+//FIXME:  implement that without Quicktime !!
 #endif
 	
 	return nil;
@@ -290,7 +290,7 @@ BOOL isPowerOfTwo(int num)
 				  didRunSelector:NULL 
 					 contextInfo:NULL];
 #else
-#warning GNUstep TODO
+//FIXME:  GNUstep TODO
 #endif
 }
 

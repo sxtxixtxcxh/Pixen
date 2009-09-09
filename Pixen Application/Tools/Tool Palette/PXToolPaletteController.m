@@ -209,7 +209,7 @@ static PXToolPaletteController *singleInstance = nil;
 		[self _openRightToolSwitcher];
 	}
 	
-#warning use named constant?
+//FIXME:  use named constant?
 	[[self window] setFrameAutosaveName:@"PXToolPaletteFrame"];
 	keyMask = 0x0;
 }

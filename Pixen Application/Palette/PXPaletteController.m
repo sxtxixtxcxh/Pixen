@@ -62,7 +62,7 @@
 
 - (void)modifyColorAtIndex:(unsigned)index;
 {
-#warning put palette adds here
+//FIXME:  put palette adds here
 }
 
 - (void)paletteViewSizeChangedTo:(NSControlSize)size

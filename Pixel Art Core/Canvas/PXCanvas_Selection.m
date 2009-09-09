@@ -64,7 +64,7 @@
 - (void)promoteSelection
 {
 	[self beginUndoGrouping]; {
-#warning fix this line once we have canvas-level undo for PXCanvas_Modifying
+//FIXME:  fix this line once we have canvas-level undo for PXCanvas_Modifying
 		[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];
 		PXLayer *newLayer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Promoted Selection", @"Promoted Selection") size:[self size] fillWithColor:[NSColor clearColor]] autorelease];
 		int i, j;
@@ -135,7 +135,7 @@
 		[self setMask:newMask];
 		[[NSNotificationCenter defaultCenter] postNotificationName:PXSelectionMaskChangedNotificationName object:self];
 		[self setHasSelection:NO];
-#warning redraw more intelligently
+//FIXME:  redraw more intelligently
 		[self changed];
 	} [self endUndoGrouping:NSLocalizedString(@"Select None", @"Select None")];
 }
@@ -170,7 +170,7 @@
 		{
 			[self updateSelectionSwitch];
 		}
-#warning find a way not to redraw the whole canvas
+//FIXME:  find a way not to redraw the whole canvas
 		[self changed];
 		[[[self undoManager] prepareWithInvocationTarget:self] setSelectionMaskBit:!bit atIndices:changedIndices];
 		selectedRect = NSZeroRect;
@@ -187,7 +187,7 @@
 - (void)setSelectionMaskBit:(BOOL)maskValue inRect:(NSRect)rect
 {
 	[self beginUndoGrouping]; {
-#warning NSIndexSet a better choice?  maybe use bitfields?
+//FIXME:  NSIndexSet a better choice?  maybe use bitfields?
 		NSMutableArray *changedIndices = [NSMutableArray arrayWithCapacity:1024];
 		int i, j;
 		int width = [self size].width;
@@ -270,7 +270,7 @@
 	[self beginUndoGrouping]; {
 		PXSelectionMask newMask = malloc([self selectionMaskSize]);
 		memset(newMask, YES, [self selectionMaskSize]);
-#warning slow in large images, can it be avoided?
+//FIXME:  slow in large images, can it be avoided?
 		[self setMask:newMask];
 	} [self endUndoGrouping:NSLocalizedString(@"Select All", @"Select All")];
 }
@@ -386,11 +386,11 @@
 		{
 			free(sourceMask);
 		}
-#warning slow in large images, can it be avoided?
+//FIXME:  slow in large images, can it be avoided?
 		[self setMaskData:[NSData dataWithBytes:selectionMask length:[self selectionMaskSize]] withOldMaskData:oldMask];
 	} [self endUndoGrouping:NSLocalizedString(@"Move Selection", @"Move Selection")];
 	selectionOrigin = NSZeroPoint;
-#warning redraw more intelligently, change the selected rect appropriately rather than force its recaching
+//FIXME:  redraw more intelligently, change the selected rect appropriately rather than force its recaching
 //	selectedRect.origin.x += xOffset;
 //	selectedRect.origin.y -= yOffset;
 //	if([self wraps])

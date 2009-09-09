@@ -216,7 +216,7 @@
 	
 	// we turn off all the other documents' acceptance of first mouse; we can't do
 	// this on windowDidResignMain because that'd cause problems with panels
-#warning refactor to nix dependency on PXCanvasDocument
+//FIXME:  refactor to nix dependency on PXCanvasDocument
 	NSEnumerator *enumerator = [[[NSDocumentController sharedDocumentController] documents] objectEnumerator];
 	PXCanvasDocument *doc;
 	while (doc = [enumerator nextObject])
@@ -334,7 +334,7 @@
 			}
 		}
 	}
-#warning undo goes here?
+//FIXME:  undo goes here?
 	PXPattern *pattern = [[[PXPattern alloc] init] autorelease];
 	[pattern setSize:patternRect.size];
 	// now we loop through again and actually set the points

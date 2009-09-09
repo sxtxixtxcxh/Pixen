@@ -87,7 +87,7 @@
 	
 	for(i = 0; i < docPaletteCount; i++)
 	{
-	#warning no palette
+	//FIXME:  no palette
 /*	assert(0);
 		PXCanvasDocument *doc = [docs objectAtIndex:i];
 		PXPalette *pal = PXPalette_init(PXPalette_alloc());
@@ -135,7 +135,7 @@
 		[[selectionPopup menu] addItem:item];
 		[item setTarget:self];
 	}
-	#warning this should do something about showing the document's palette
+	//FIXME:  this should do something about showing the document's palette
 	if((docPaletteCount + sysPaletteCount) == 0)
 	{
 		return NULL;

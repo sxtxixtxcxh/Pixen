@@ -60,7 +60,7 @@
 	// kind of a HACK
 	if (isClicking)
 	{
-#warning coupled
+//FIXME:  coupled
 		[self mouseDraggedFrom:_origin to:_lastPoint fromCanvasController:[[[NSDocumentController sharedDocumentController] currentDocument] canvasController]];
 	}
 }

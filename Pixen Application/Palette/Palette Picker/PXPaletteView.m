@@ -124,7 +124,7 @@ const int viewMargin = 1;
 	// worried about drawing all of the cells that are only partially showing: drawing
 	// cells is cheap.
 	
-#warning Hacky workaround.  But the real problem seems very hard to locate.
+//FIXME:  Hacky workaround.  But the real problem seems very hard to locate.
 	@try {
 		// Draw the appropriate cells.
 		int i, j;
