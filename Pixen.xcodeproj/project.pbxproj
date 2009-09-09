@@ -3072,6 +3072,7 @@
 					"-Wmost",
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
+					"-Wall",
 				);
 				WRAPPER_EXTENSION = app;
 			};
@@ -3113,6 +3114,7 @@
 					"-Wmost",
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
+					"-Wall",
 				);
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
@@ -3134,7 +3136,10 @@
 				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = ".//**";
-				WARNING_CFLAGS = "-Winline";
+				WARNING_CFLAGS = (
+					"-Winline",
+					"-Wall",
+				);
 				ZERO_LINK = NO;
 			};
 			name = Debug;
@@ -3152,6 +3157,7 @@
 				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				SKIP_INSTALL = NO;
 				UNSTRIPPED_PRODUCT = YES;
+				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
 		};
