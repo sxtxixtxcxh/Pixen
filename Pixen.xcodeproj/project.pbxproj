@@ -3051,7 +3051,7 @@
 		616BAEA608553EFB004CF172 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = i386;
+				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
@@ -3067,6 +3067,7 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = Pixen;
 				WARNING_CFLAGS = (
@@ -3082,10 +3083,8 @@
 		616BAEA708553EFB004CF172 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				COPY_PHASE_STRIP = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3126,7 +3125,7 @@
 		616BAEAA08553EFB004CF172 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -3136,6 +3135,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = 4.2;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
 				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = ".//**";
@@ -3150,10 +3150,8 @@
 		616BAEAB08553EFB004CF172 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_VERSION = 4.2;
