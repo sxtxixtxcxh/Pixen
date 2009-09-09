@@ -2,7 +2,7 @@
 //  CTGradientView.h
 //
 //  Created by Chad Weider on 12/2/05.
-//  Copyright (c) 2005 Cotingent.
+//  Copyright (c) 2005 Chad Weider.
 //  Some rights reserved: <http://creativecommons.org/licenses/by/2.5/>
 //
 

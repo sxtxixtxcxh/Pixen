@@ -1,10 +1,12 @@
 //
 //  CTGradient.h
 //
-//  Created by Chad Weider on 12/3/05.
-//  Copyright (c) 2005 Cotingent.
-//  Some rights reserved: <http://creativecommons.org/licenses/by/2.5/>
+//  Created by Chad Weider on 2/14/07.
+//  Writtin by Chad Weider.
 //
+//  Released into public domain on 4/10/08.
+//  
+//  Version: 1.8
 
 #import <Cocoa/Cocoa.h>
 
@@ -16,10 +18,18 @@ typedef struct _CTGradientElement
 	struct _CTGradientElement *nextElement;
 	} CTGradientElement;
 
+typedef enum  _CTBlendingMode
+	{
+	CTLinearBlendingMode,
+	CTChromaticBlendingMode,
+	CTInverseChromaticBlendingMode
+	} CTGradientBlendingMode;
+
 
 @interface CTGradient : NSObject <NSCopying, NSCoding>
 	{
 	CTGradientElement* elementList;
+	CTGradientBlendingMode blendingMode;
 	
 	CGFunctionRef gradientFunction;
 	}
@@ -35,13 +45,19 @@ typedef struct _CTGradientElement
 + (id)unifiedPressedGradient;
 + (id)unifiedDarkGradient;
 
++ (id)sourceListSelectedGradient;
++ (id)sourceListUnselectedGradient;
+
++ (id)rainbowGradient;
++ (id)hydrogenSpectrumGradient;
+
 - (CTGradient *)gradientWithAlphaComponent:(float)alpha;
 
 - (CTGradient *)addColorStop:(NSColor *)color atPosition:(float)position;	//positions given relative to [0,1]
 - (CTGradient *)removeColorStopAtIndex:(unsigned)index;
 - (CTGradient *)removeColorStopAtPosition:(float)position;
 
-
+- (CTGradientBlendingMode)blendingMode;
 - (NSColor *)colorStopAtIndex:(unsigned)index;
 - (NSColor *)colorAtPosition:(float)position;
 
@@ -51,4 +67,7 @@ typedef struct _CTGradientElement
 																	//	angle in degrees
 - (void)radialFillRect:(NSRect)rect;								//fills rect with radial gradient
 																	//  gradient from center outwards
+- (void)fillBezierPath:(NSBezierPath *)path angle:(float)angle;
+- (void)radialFillBezierPath:(NSBezierPath *)path;
+
 @end
