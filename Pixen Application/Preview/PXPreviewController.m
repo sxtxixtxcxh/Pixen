@@ -655,7 +655,7 @@ static PXPreviewController *instance = nil;
 
 // backgrounds delegate stuff
 
-- (void)backgroundChanged:(PXBackground *)changed
+- (void)backgroundChanged:(id)changed
 {
 	[view resetCursorRects];
 	[[[self window] contentView] setNeedsDisplay:YES];

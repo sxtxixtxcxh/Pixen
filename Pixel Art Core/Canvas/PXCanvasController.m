@@ -352,7 +352,7 @@
 	[canvas changedInRect:NSInsetRect([canvas selectedRect], -2, -2)];	
 }
 
-- (void)backgroundChanged:(PXBackground *)changed
+- (void)backgroundChanged:(id)changed
 {
 	[self canvasDidChange:nil]; 
 }
