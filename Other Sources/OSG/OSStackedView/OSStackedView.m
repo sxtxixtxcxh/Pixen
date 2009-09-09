@@ -344,8 +344,7 @@
 - (float)height
 {
 	float totalHeight = 0;
-	id enumerator = [views objectEnumerator], current;
-	while(current = [enumerator nextObject])
+	for(id current in views)
 	{
 		totalHeight += NSHeight([current frame]);
 	}
@@ -383,8 +382,7 @@
 
 - (void)unstackSubview:(NSView *)view
 {
-	id enumerator = [views objectEnumerator], current;
-	while(current = [enumerator nextObject])
+	for(id current in views)
 	{	
 		if([current view] == view)
 		{
@@ -419,8 +417,7 @@
 {
 	[selectedElement setHighlighted:NO];
 	selectedElement = nil;
-	id enumerator = [views objectEnumerator], current;
-	while(current = [enumerator nextObject])
+	for(id current in views)
 	{
 		[current removeFromSuperview];
 		[views removeObject:current];

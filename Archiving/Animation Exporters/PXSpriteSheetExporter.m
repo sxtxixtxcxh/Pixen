@@ -37,13 +37,11 @@ PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
 	NSArray *animationDocuments = [[PXDocumentController sharedDocumentController] animationDocuments];
 	NSArray *oldRepresentations = documentRepresentations;
 	documentRepresentations = [[NSMutableArray alloc] init];
-	NSEnumerator *aniDocEnumerator = [animationDocuments objectEnumerator];
-	id doc;
-	while (doc = [aniDocEnumerator nextObject]) {
+	for(id doc in animationDocuments)
+    {
 		BOOL included = NO;
-		NSEnumerator *oldRepEnumerator = [oldRepresentations objectEnumerator];
-		NSDictionary *oldRep;
-		while (oldRep = [oldRepEnumerator nextObject]) {
+		for(NSDictionary *oldRep in oldRepresentations)
+        {
 			if ([oldRep objectForKey:@"document"] == doc) {
 				included = [[oldRep objectForKey:@"included"] boolValue];
 				break;
@@ -88,11 +86,10 @@ PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
 	int interAnimationMargin = 5;
 	int interCelMargin = 2;
 	int padding = 10;
-	NSEnumerator *docRepEnumerator = [documentRepresentations objectEnumerator];
-	NSDictionary *docRep;
 	NSMutableArray *animationSheets = [NSMutableArray array];
 	NSSize sheetSize = NSMakeSize(padding*2, padding*2);
-	while (docRep = [docRepEnumerator nextObject]) {
+	for(NSDictionary *docRep in documentRepresentations)
+    {
 		PXAnimation *animation = [[docRep objectForKey:@"document"] animation];
 		if ([[docRep objectForKey:@"included"] boolValue]) {
 			NSImage *spriteSheetRow = [animation spriteSheetWithinWidth:maxWidth celMargin:interCelMargin];
@@ -112,10 +109,9 @@ PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
 	[spriteSheet lockFocus];
 	[[NSColor whiteColor] set];
 	NSRectFill(NSMakeRect(0,0,sheetSize.width,sheetSize.height));
-	NSEnumerator *rowEnumerator = [animationSheets objectEnumerator];
-	NSImage *row;
 	NSPoint currentPoint = NSMakePoint(padding, sheetSize.height - padding);
-	while (row = [rowEnumerator nextObject]) {
+	for(NSImage *row in animationSheets)
+    {
 		currentPoint.y -= [row size].height;
 		[row compositeToPoint:currentPoint operation:NSCompositeSourceOver];
 		currentPoint.y -= interAnimationMargin;

@@ -187,8 +187,7 @@ fromCanvasController:(PXCanvasController *)controller
 	}
 	else
 	{
-		id enumerator = [[[controller canvas] boundedRectsFromRect:selectedRect] objectEnumerator], current;
-		while(current = [enumerator nextObject])
+		for(id current in [[controller canvas] boundedRectsFromRect: selectedRect])
 		{
 			if (isSubtracting) {
 				[[controller canvas] deselectPixelsInRect:NSRectFromString(current)];

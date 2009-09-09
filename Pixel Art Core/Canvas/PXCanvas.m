@@ -237,9 +237,7 @@ backgroundColor:(NSColor *)color
 			id oldData = [NSData dataWithBytes:selectionMask length:[self selectionMaskSize]];
 			
 			[self setLayersNoResize:[[layers deepMutableCopy] autorelease] fromLayers:layers];
-			id enumerator = [layers objectEnumerator];
-			id current;
-			while(current = [enumerator nextObject])
+			for(id current in layers)
 			{
 				[current setSize:aSize withOrigin:origin backgroundColor:color];
 			}
@@ -312,8 +310,7 @@ backgroundColor:(NSColor *)color
 {
 	PXPalette *frequencyPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
 	id freqs = [NSMutableDictionary dictionaryWithCapacity:4000];
-	id enumerator = [[self layers] objectEnumerator], current;
-	while(current = [enumerator nextObject])
+	for(id current in layers)
 	{
 		int i;
 		for(i = 0; i < [current size].width; i++)
@@ -336,8 +333,7 @@ backgroundColor:(NSColor *)color
 		}
 	}
 	id sorted = [[freqs allValues] sortedArrayUsingSelector:@selector(compare:)];
-	enumerator = [sorted objectEnumerator];
-	while(current = [enumerator nextObject])
+	for(id current in sorted)
 	{
 		PXPalette_addColor(frequencyPalette, [current color]);
 	}

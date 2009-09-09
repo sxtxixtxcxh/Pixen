@@ -41,8 +41,7 @@
 
 - layerNamed:aName
 {
-	id enumerator = [layers objectEnumerator], current;
-	while (current = [enumerator nextObject])
+	for(id current in layers)
 	{
 		if ([[current name] isEqualToString:aName])
 		{

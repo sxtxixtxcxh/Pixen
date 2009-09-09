@@ -176,8 +176,7 @@ PXImage *PXImage_initWithCoder(PXImage *self, NSCoder *coder)
 	self->tileCount = 0;
 	NSArray *tileArray = [dict objectForKey:@"tiles"];
 	self->tiles = calloc([tileArray count], sizeof(PXTile *));
-	id enumerator = [tileArray objectEnumerator], current;
-	while(current = [enumerator nextObject])
+	for(id current in tileArray)
 	{
 		NSPoint pt = NSPointFromString([current objectForKey:@"location"]);
 		int bytesPerRow = PXTileComponentsPerPixel * PXTileDimension;

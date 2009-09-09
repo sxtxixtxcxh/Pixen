@@ -65,8 +65,7 @@
 - (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer
 {
 	if([indices count] == 0) { return; }
-	id enumerator = [indices objectEnumerator], current;
-	while(current = [enumerator nextObject])
+	for(id current in indices)
 	{
 		int val = [current intValue];
 		int x = val % (int)[self size].width;
@@ -117,14 +116,12 @@
 
 - (void)rotateByDegrees:(int)degrees
 {
-	[self beginUndoGrouping]; {
-		NSEnumerator *enumerator = [layers objectEnumerator];
-		PXLayer *current;
-		while (current = [enumerator nextObject])
-		{
-			[self rotateLayer:current byDegrees:degrees];
-		}
-	} [self endUndoGrouping:[NSString stringWithFormat:NSLocalizedString(@"Rotate %d%@", @"Rotate %d%@"), degrees, [NSString degreeString]]];
+	[self beginUndoGrouping];
+    for(PXLayer *current in layers)
+    {
+        [self rotateLayer:current byDegrees:degrees];
+    }
+    [self endUndoGrouping:[NSString stringWithFormat:NSLocalizedString(@"Rotate %d%@", @"Rotate %d%@"), degrees, [NSString degreeString]]];
 }
 
 - (void)changed
@@ -161,26 +158,22 @@
 
 - (void)flipHorizontally
 {
-	[self beginUndoGrouping]; {
-		NSEnumerator *enumerator = [layers objectEnumerator];
-		PXLayer *current;
-		while (current = [enumerator nextObject])
-		{
-			[self flipLayerHorizontally:current];
-		}
-	} [self endUndoGrouping:NSLocalizedString(@"Flip Canvas Horizontally", @"Flip Canvas Horizontally")];
+	[self beginUndoGrouping];
+    for(PXLayer *current in layers)
+    {
+        [self flipLayerHorizontally:current];
+    }
+    [self endUndoGrouping:NSLocalizedString(@"Flip Canvas Horizontally", @"Flip Canvas Horizontally")];
 }
 
 - (void)flipVertically
 {
-	[self beginUndoGrouping]; {
-		NSEnumerator *enumerator = [layers objectEnumerator];
-		PXLayer *current;
-		while (current = [enumerator nextObject])
-		{
-			[self flipLayerVertically:current];
-		}
-	} [self endUndoGrouping:NSLocalizedString(@"Flip Canvas Vertically", @"Flip Canvas Vertically")];
+	[self beginUndoGrouping];
+    for(PXLayer *current in layers)
+    {
+        [self flipLayerVertically:current];
+    }
+	[self endUndoGrouping:NSLocalizedString(@"Flip Canvas Vertically", @"Flip Canvas Vertically")];
 }
 
 - (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor
@@ -203,8 +196,7 @@
 	int i;
 	int quantizedPixels = 0;
 	
-	id enumerator = [canvases objectEnumerator], current;
-	while (current = [enumerator nextObject])
+	for(id current in canvases)
 	{
 		if(!NSEqualSizes([first size], [current size]))
 		{
@@ -265,11 +257,9 @@
 	if (transparency)
 		PXPalette_addColorWithoutDuplicating(palette, [NSColor clearColor]);
 	
-	enumerator = [canvases objectEnumerator];
-	while (current = [enumerator nextObject])
+	for(id current in canvases)
 	{
-		id layerEnumerator = [[current layers] objectEnumerator], currentLayer;
-		while(currentLayer = [layerEnumerator nextObject])
+		for(id currentLayer in [current layers])
 		{
 			[currentLayer adaptToPalette:palette withTransparency:transparency matteColor:matteColor];
 		}

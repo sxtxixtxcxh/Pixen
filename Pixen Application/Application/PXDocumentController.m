@@ -229,9 +229,7 @@ NSString *palettesSubdirName = @"Palettes";
 
 - (void)applicationWillResignActive:(NSNotification *)aNotification
 {
-	NSEnumerator *enumerator = [[self documents] objectEnumerator];
-	PXCanvasDocument *current;
-	while (current = [enumerator nextObject])
+	for(PXCanvasDocument *current in [self documents])
 	{
 		[[[current canvasController] view] setAcceptsFirstMouse:NO];
 	}
@@ -460,9 +458,8 @@ NSString *palettesSubdirName = @"Palettes";
 - (NSArray *)animationDocuments
 {
 	NSMutableArray *animationDocuments = [NSMutableArray array];
-	NSEnumerator *docEnumerator = [[self documents] objectEnumerator];
-	NSDocument *document;
-	while (document = [docEnumerator nextObject]) {
+	for(NSDocument *document in [self documents])
+    {
 		if ([document isKindOfClass:[PXAnimationDocument class]]) {
 			[animationDocuments addObject:document];
 		}
@@ -479,10 +476,8 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	// Determine the appropriate extensions for the open panel.
 	NSArray *longTypes = [PXCanvasDocument readableTypes];
-	NSEnumerator *typeEnumerator = [longTypes objectEnumerator];
-	NSString *currentType;
 	NSMutableArray *types = [[[NSMutableArray alloc] initWithCapacity:[longTypes count]] autorelease];
-	while (currentType = [typeEnumerator nextObject])
+	for(NSString *currentType in longTypes)
 	{
 		[types addObjectsFromArray:[[NSDocumentController sharedDocumentController] fileExtensionsFromType:currentType]];
 	}
@@ -497,18 +492,14 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	// First we load all the specified images into an array.
 	NSMutableArray *images = [[[NSMutableArray alloc] initWithCapacity:[[openPanel filenames] count]] autorelease];
-	NSEnumerator *fileEnumerator = [[openPanel filenames] objectEnumerator];
-	NSString *currentFile;
-	while (currentFile = [fileEnumerator nextObject])
+    for(NSString *currentFile in [openPanel filenames])
 	{
 		[images addObject:[[[NSImage alloc] initWithContentsOfFile:currentFile] autorelease]];
 	}
 	
 	// But they might not all be the same size. Find the max size.
-	NSEnumerator *imageEnumerator = [images objectEnumerator];
-	NSImage *currentImage;
 	NSSize biggestSize = NSZeroSize;
-	while (currentImage = [imageEnumerator nextObject])
+	for(NSImage *currentImage in images)
 	{
 		NSSize currentSize = [currentImage size];
 		biggestSize = NSMakeSize(MAX(currentSize.width, biggestSize.width), MAX(currentSize.height, biggestSize.height));
@@ -516,8 +507,7 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	// Now we can stick them into the document.
 	int loadedImages = 0;
-	imageEnumerator = [images objectEnumerator]; // Restart the enumerator
-	while (currentImage = [imageEnumerator nextObject])
+	for(NSImage *currentImage in images)
 	{
 		NSImage *celImage = currentImage;
 		NSSize imageSize = [currentImage size];

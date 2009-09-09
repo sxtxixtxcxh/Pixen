@@ -147,9 +147,7 @@ PXPalette *PXPalette_initWithDictionary(PXPalette *self, NSDictionary *dict)
 	PXPalette_initWithoutBackgroundColor(self);
 	PXPalette_setName(self, [dict objectForKey:@"name"]);
 	PXPalette_resize(self, [[dict objectForKey:@"size"] intValue]);
-	id array = [dict objectForKey:@"colors"];
-	id enumerator = [array objectEnumerator], current;
-	while (current = [enumerator nextObject])
+	for(id current in [dict objectForKey:@"colors"])
 	{
 		PXPalette_addColor(self, current);
 	}
@@ -256,8 +254,7 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 #endif
 		palette->isSystemPalette = YES;
 		palette->canSave = NO;
-		id enumerator = [grays objectEnumerator], current;
-		while(current = [enumerator nextObject])
+		for(id current in grays)
 		{
 			PXPalette_addColor(palette, current);
 		}
@@ -277,7 +274,7 @@ unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex)
 //FIXME:  this code will leak or worse(probably just leak) if palettes are removed at runtime.
 	NSMutableArray *paths = [NSMutableArray array];
 	id enumerator = [[NSFileManager defaultManager] enumeratorAtPath:GetPixenPaletteDirectory()], current;
-	while(current = [enumerator nextObject])
+	while((current = [enumerator nextObject]))
 	{
 		if([[current pathExtension] isEqual:PXPaletteSuffix])
 		{

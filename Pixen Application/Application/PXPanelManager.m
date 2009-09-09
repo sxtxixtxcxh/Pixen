@@ -101,8 +101,7 @@ static PXPanelManager *sharedManager = nil;
 	PXPalette **userPalettes = malloc(sizeof(PXPalette *) * userPalettesCount);
 	PXPalette_getUserPalettes(userPalettes, 0);
 	NSArray *palettePanels = [defaults objectForKey:PXPalettePanelsKey];
-	id enumerator = [palettePanels objectEnumerator], current;
-	while (current = [enumerator nextObject])
+	for(id current in palettePanels)
 	{
 		BOOL isSystemPalette = [[current objectForKey:PXPalettePanelIsSystemPaletteKey] boolValue];
 		int index = [[current objectForKey:PXPalettePanelPaletteIndexKey] intValue];
@@ -143,7 +142,6 @@ static PXPanelManager *sharedManager = nil;
 	[defaults setBool:boolTmp forKey:PXInfoPanelIsOpenKey];
 	
 	// Popout color panels
-	id enumerator = [[NSApp windows] objectEnumerator], current;
 	NSMutableArray *palettePanels = [NSMutableArray array];
 	
 	int systemPalettesCount = PXPalette_getSystemPalettes(NULL, 0);
@@ -153,7 +151,7 @@ static PXPanelManager *sharedManager = nil;
 	PXPalette **userPalettes = malloc(sizeof(PXPalette *) * userPalettesCount);
 	PXPalette_getUserPalettes(userPalettes, 0);
 	
-	while (current = [enumerator nextObject])
+	for(id current in [NSApp windows])
 	{
 		if (![current isKindOfClass:[PXPalettePanel class]]) { continue; }
 		if (![current isVisible]) { continue; }

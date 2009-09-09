@@ -151,9 +151,7 @@
 	[self beginUndoGrouping]; {
 		NSMutableArray *changedIndices = [NSMutableArray arrayWithCapacity:[indices count]];
 		unsigned currentValue;
-		NSEnumerator *enumerator = [indices objectEnumerator];
-		id current;
-		while (current = [enumerator nextObject])
+		for(id current in indices)
 		{
 			currentValue = [current unsignedIntValue];
 			if(selectionMask[currentValue] != bit)

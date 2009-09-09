@@ -35,8 +35,7 @@
 	if(version < 4)
 	{
 		layers = [[coder decodeObjectForKey:@"layers"] retain];
-		id enumerator = [layers objectEnumerator], current;
-		while(current = [enumerator nextObject])
+		for(id current in layers)
 		{
 			[current setCanvas:self];
 		}

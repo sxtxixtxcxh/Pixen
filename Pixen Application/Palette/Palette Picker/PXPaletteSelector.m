@@ -33,8 +33,7 @@
 
 - (void)showPalette:(PXPalette *)pal
 {
-	id enumerator = [[[selectionPopup menu] itemArray] objectEnumerator], current;
-	while(current = [enumerator nextObject])
+	for(id current in [[selectionPopup menu] itemArray])
 	{
 		if([[current representedObject] pointerValue] == pal)
 		{
@@ -42,8 +41,7 @@
 			return;
 		}
 	}
-	enumerator = [[[selectionPopup menu] itemArray] objectEnumerator];
-	while(current = [enumerator nextObject])
+	for(id current in [[selectionPopup menu] itemArray])
 	{
 		if([[current title] isEqual:pal->name])
 		{

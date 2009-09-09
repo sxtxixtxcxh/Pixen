@@ -184,8 +184,7 @@
 	if(newLayer)
 	{
 		[tableView display];
-		id enumerator = [views objectEnumerator], current;
-		while(current = [enumerator nextObject])
+		for(id current in views)
 		{
 			if([current layer] == newLayer)
 			{

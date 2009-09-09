@@ -35,7 +35,7 @@ typedef enum _PXStackType
 {
 	NSMutableArray *results = [NSMutableArray array];
 	id enumerator = [[NSFileManager defaultManager] enumeratorAtPath:GetBackgroundPresetsDirectory()], current;
-    while(current = [enumerator nextObject])
+    while((current = [enumerator nextObject]))
     {
         if([[current pathExtension] isEqualToString:PXBackgroundSuffix])
         {

@@ -61,8 +61,7 @@
 
 - (void)setSizeNoUndo:(NSSize)aSize
 {
-	id enumerator = [cels objectEnumerator], current;
-	while(current = [enumerator nextObject])
+	for(id current in cels)
 	{
 		[current setSize:aSize];
 	}
@@ -103,8 +102,7 @@
 		[undoManager beginUndoGrouping];
 	}
 	[self _willChangeSize:undo];
-	id enumerator = [cels objectEnumerator], current;
-	while(current = [enumerator nextObject])
+	for(id current in cels)
 	{
 		[current setSize:aSize withOrigin:origin backgroundColor:bgcolor];
 	}

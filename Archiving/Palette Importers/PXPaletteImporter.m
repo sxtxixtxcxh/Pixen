@@ -91,8 +91,7 @@
 - (void)panelDidEnd:(NSOpenPanel *)panel returnCode:(int)code contextInfo:(void *)info
 {
 	if (code == NSCancelButton) { return; }
-	id enumerator = [[panel filenames] objectEnumerator], current;
-	while (current = [enumerator nextObject])
+	for(id current in [panel filenames])
 	{
 		[self importPaletteAtPath:current];
 	}

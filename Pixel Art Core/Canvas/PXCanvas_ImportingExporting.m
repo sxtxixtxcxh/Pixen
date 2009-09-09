@@ -81,9 +81,7 @@
 	NSImageRep *firstRep = [[anImage representations] objectAtIndex:0];
 	//some PNGs have ... fractional sizes.  So I put in this ceilfing.
 	NSSize newSize = NSMakeSize([firstRep pixelsWide], [firstRep pixelsHigh]);
-	id enumerator = [layers objectEnumerator];
-	id current;
-	while(current = [enumerator nextObject])
+	for(id current in layers)
 	{
 		[current setSize:newSize withOrigin:NSZeroPoint backgroundColor:[NSColor clearColor]];
 	}
@@ -118,8 +116,7 @@
 	[self init];
 	id images = [PXPSDHandler imagesForPSDData:data];
 	[self setSize:[[images objectAtIndex:0] size]];
-	id enumerator = [images objectEnumerator], current;
-	while (current = [enumerator nextObject])
+	for(id current in images)
 	{
 		id layer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Imported Layer", @"Imported Layer") size:[current size]] autorelease];
 		[self addLayer:layer];
@@ -135,7 +132,7 @@
 	[imageCopy lockFocus];
 	NSEnumerator *layerEnumerator = [layers reverseObjectEnumerator];
 	PXLayer *layer;
-	while (layer = [layerEnumerator nextObject])
+	while ((layer = [layerEnumerator nextObject]))
 	{
 		[[layer displayImage] compositeToPoint:canvasRect.origin fromRect:canvasRect operation:NSCompositeDestinationOver fraction:[layer opacity] / 100.0f];
 	}
@@ -149,7 +146,7 @@
 	[imageCopy lockFocus];
 	NSEnumerator *layerEnumerator = [layers reverseObjectEnumerator];
 	PXLayer *layer;
-	while (layer = [layerEnumerator nextObject])
+	while ((layer = [layerEnumerator nextObject]))
 	{
 		if([layer visible])
 		{

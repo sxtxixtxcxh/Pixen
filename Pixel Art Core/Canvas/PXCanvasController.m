@@ -217,9 +217,7 @@
 	// we turn off all the other documents' acceptance of first mouse; we can't do
 	// this on windowDidResignMain because that'd cause problems with panels
 //FIXME:  refactor to nix dependency on PXCanvasDocument
-	NSEnumerator *enumerator = [[[NSDocumentController sharedDocumentController] documents] objectEnumerator];
-	PXCanvasDocument *doc;
-	while (doc = [enumerator nextObject])
+	for(PXCanvasDocument *doc in [[NSDocumentController sharedDocumentController] documents])
 	{
 		if ([doc canvasController] == self)
 			// if we don't have a slight delay, the click that activates the window goes through. a bit of a hack.
