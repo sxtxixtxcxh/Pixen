@@ -153,7 +153,7 @@
 		PXLayer *layer = [[canvas layers] objectAtIndex:i];
 		if([views count] > i)
 		{
-			[[views objectAtIndex:i] setLayer:layer];
+			[[views objectAtIndex:i] setLayer: (CALayer *)layer];
 			[[views objectAtIndex:i] updatePreview:nil];
 		}
 		else
