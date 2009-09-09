@@ -21,8 +21,8 @@
 	[super init];
 	iterations = someIterations;
 	EGifSetGifVersion("89a");
-	tempFilePath = [[NSString stringWithCString:tmpnam(nil) encoding:[NSString defaultCStringEncoding]] retain];
-	gifFile = EGifOpenFileName([tempFilePath cString], NO);
+	tempFilePath = NSTemporaryDirectory();
+	gifFile = EGifOpenFileName([tempFilePath UTF8String], NO);
 	firstImage = YES;
 	return self;
 }
@@ -214,7 +214,7 @@
 {
 	EGifCloseFile(gifFile);
 	finalData = [[NSData dataWithContentsOfFile:tempFilePath] retain];
-	remove([tempFilePath cString]);
+	remove([tempFilePath UTF8String]);
 	[tempFilePath release];
 }
 
