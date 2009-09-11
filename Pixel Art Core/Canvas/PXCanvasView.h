@@ -109,6 +109,8 @@
 - (PXBackground *)alternateBackground;
 @end
 
+void PXDebugRect(NSRect r, float alpha);
+
 @interface NSObject(PXCanvasViewDelegate)
 - (void)mouseDown:(NSEvent *)event;
 - (void)mouseUp:(NSEvent *)event;

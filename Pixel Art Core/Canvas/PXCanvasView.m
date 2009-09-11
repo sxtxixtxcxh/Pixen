@@ -398,7 +398,7 @@ void PXDebugRect(NSRect r, float alpha)
 						[self drawBezierFromPoint:NSMakePoint(i+1, j) toPoint:NSMakePoint(i+1, j + 1)];
 					}
 				}
-				if ((((i - 1) + (j * width)) >= 0) && (((i - 1) + (j * width)) < (width * height)))
+				if ((((i - 1) + (j * width)) < (width * height)))
 				{
 					if (!mask[(i - 1) + (j * width)]) 
 					{
@@ -410,7 +410,7 @@ void PXDebugRect(NSRect r, float alpha)
 					[self drawBezierFromPoint:NSMakePoint(i, j) toPoint:NSMakePoint(i, j + 1)];
 				}
 				
-				if ((((i + 1) + (j * width)) >= 0) && (((i + 1) + (j * width)) < (width * height)))
+				if ((((i + 1) + (j * width)) < (width * height)))
 				{
 					if (!mask[(i + 1) + (j * width)]) 
 					{
@@ -422,7 +422,7 @@ void PXDebugRect(NSRect r, float alpha)
 					[self drawBezierFromPoint:NSMakePoint(i + 1, j) toPoint:NSMakePoint(i + 1, j + 1)];
 				}
 				
-				if (((i + ((j - 1) * width)) >= 0) && ((i+ ((j - 1) * width)) < (width * height)))
+				if (((i+ ((j - 1) * width)) < (width * height)))
 				{
 					if (!mask[i + ((j - 1) * width)]) 
 					{
@@ -434,7 +434,7 @@ void PXDebugRect(NSRect r, float alpha)
 					[self drawBezierFromPoint:NSMakePoint(i, j) toPoint:NSMakePoint(i + 1, j)];
 				}
 				
-				if (((i + ((j + 1) * width)) >= 0) && ((i + ((j + 1) * width)) < (width * height)))
+				if (((i + ((j + 1) * width)) < (width * height)))
 				{
 					if (!mask[i + ((j + 1) * width)]) 
 					{
