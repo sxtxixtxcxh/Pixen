@@ -38,12 +38,11 @@ typedef struct UPoint32
 /////////////////////////////////////////////////////////////////////////////
 - (id)init
 {
-	if((self = [super init]))
-	{
-		//_needToWatchMouseEvents = [self checkIfNeedToWatchMouseEvents];
-		//ignore that checkIfNeedToWatch junk - it's pretty ancient.
-		_needToWatchMouseEvents = true;
-	}
+    if (!(self = [super init]))
+        return nil;
+    //_needToWatchMouseEvents = [self checkIfNeedToWatchMouseEvents];
+    //ignore that checkIfNeedToWatch junk - it's pretty ancient.
+    _needToWatchMouseEvents = true;
 	return self;
 }
 
