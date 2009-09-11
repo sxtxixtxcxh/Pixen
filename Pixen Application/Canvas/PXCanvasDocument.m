@@ -154,7 +154,6 @@ BOOL isPowerOfTwo(int num)
 		return [canvas imageDataWithType:NSTIFFFileType properties:nil];
     }
 	
-#ifdef __COCOA__
 	if([aType isEqualToString:GIFFileType])
     {	
 		id exportCanvas = canvas;
@@ -181,10 +180,6 @@ BOOL isPowerOfTwo(int num)
 		[imageView setImage:[canvas displayImage]];
 		return [imageView dataWithEPSInsideRect:NSMakeRect(0, 0, canvasSize.width, canvasSize.height)];
     }
-	
-#else
-//FIXME:  implement that without Quicktime !!
-#endif
 	
 	return nil;
 }

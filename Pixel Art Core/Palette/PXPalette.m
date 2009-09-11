@@ -246,12 +246,7 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 		NSMutableArray *grays = [NSMutableArray arrayWithArray:CreateGrayList()];
 		PXPalette *palette = PXPalette_alloc();
 		PXPalette_initWithoutBackgroundColor(palette);
-#ifdef COCOA
 		PXPalette_setName(palette, NSLocalizedString(@"GRAYSCALE", @"Grayscale"));
-#else
-////FIXME:  GNUSTEP TODO -- don't care
-		PXPalette_setName(palette, @"Grayscale");
-#endif
 		palette->isSystemPalette = YES;
 		palette->canSave = NO;
 		for(id current in grays)

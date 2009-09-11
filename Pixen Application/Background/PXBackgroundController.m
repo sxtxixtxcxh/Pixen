@@ -184,9 +184,7 @@ typedef enum _PXStackType
 
 - (IBAction)displayHelp:sender
 {
-#ifdef __COCOA__
 	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"workingwithbackgrounds" inBook:@"Pixen Help"];
-#endif
 }
 
 - (void)dragFailedForInfoView:(PXBackgroundInfoView *)infoView
