@@ -71,7 +71,7 @@
 - (void)mouseDownAt:(NSPoint)aPoint 
 fromCanvasController:(PXCanvasController*)controller
 {
-//FIXME:  move undo
+//FIXME: move undo
 	[[controller canvas] beginUndoGrouping];
 	isClicking = YES;
 }
@@ -133,7 +133,7 @@ fromCanvasController:(PXCanvasController *)controller
 fromCanvasController:(PXCanvasController *)controller
 {
 	isClicking = NO;
-//FIXME:  move undo
+//FIXME: move undo
 	if ([[[controller canvas] undoManager] groupingLevel] > 0) {
 		[[controller canvas] endUndoGrouping:[self actionName]];
 	}

@@ -153,7 +153,7 @@ void PXImage_encodeWithCoder(PXImage *self, NSCoder *coder)
 	[dict setObject:[NSNumber numberWithInt:(self->height)] forKey:@"height"];
 	NSMutableArray *tiles = [NSMutableArray arrayWithCapacity:self->tileCount];
 	int i;
-	for(i = 0; i < self->tileCount; i++)
+	for (i = 0; i < self->tileCount; i++)
 	{
 		PXTile *t = self->tiles[i];
 		unsigned char *bytes;
@@ -176,7 +176,7 @@ PXImage *PXImage_initWithCoder(PXImage *self, NSCoder *coder)
 	self->tileCount = 0;
 	NSArray *tileArray = [dict objectForKey:@"tiles"];
 	self->tiles = calloc([tileArray count], sizeof(PXTile *));
-	for(id current in tileArray)
+	for (id current in tileArray)
 	{
 		NSPoint pt = NSPointFromString([current objectForKey:@"location"]);
 		int bytesPerRow = PXTileComponentsPerPixel * PXTileDimension;
@@ -202,7 +202,7 @@ void PXImage_dealloc(PXImage *self)
 	if(self->tiles)
 	{
 		unsigned i;
-		for(i = 0; i < self->tileCount; i++)
+		for (i = 0; i < self->tileCount; i++)
 		{
 			if(self->tiles[i])
 			{
@@ -223,7 +223,7 @@ PXImage *PXImage_copy(PXImage *self)
 	free(image->tiles);
 	image->tiles = calloc(self->tileCount, sizeof(PXTile *));
 	int i;
-	for(i = 0; i < self->tileCount; i++)
+	for (i = 0; i < self->tileCount; i++)
 	{
 		PXTile *t = self->tiles[i];
 		unsigned char *bytes;
@@ -265,7 +265,7 @@ PXTile *PXImage_tileAtXY(PXImage *self, int xv, int yv)
 	PXTile *t;
 	BOOL found = NO;
 	int i;
-	for(i = 0; i < self->tileCount; i++)
+	for (i = 0; i < self->tileCount; i++)
 	{
 		t = self->tiles[i];
 		if(CGPointEqualToPoint(t->location, tileLocation))
@@ -474,9 +474,9 @@ void PXImage_compositeUnderInRect(PXImage *self, PXImage *other, NSRect aRect, B
 	NSColor * bottomColor;
 	NSColor * usedColor;
 	
-    for(i = NSMinX(aRect); i < NSMaxX(aRect); i++)
+    for (i = NSMinX(aRect); i < NSMaxX(aRect); i++)
     {
-        for(j = NSMinY(aRect); j < NSMaxY(aRect); j++)
+        for (j = NSMinY(aRect); j < NSMaxY(aRect); j++)
         {
 			topColor = PXImage_colorAtXY(other, i, j);
 			bottomColor = PXImage_colorAtXY(self, i, j);
@@ -524,7 +524,7 @@ void PXImage_drawInRectFromRectWithOperationFraction(PXImage *self, NSRect dst, 
 	CGContextTranslateCTM(target, -fullDest.origin.x, -fullDest.origin.y);
 	NSSize drawSize = [transform transformSize:NSMakeSize(PXTileDimension, PXTileDimension)];
 	unsigned i;
-	for(i = 0; i < self->tileCount; i++)
+	for (i = 0; i < self->tileCount; i++)
 	{
 		CGPoint tileLoc = self->tiles[i]->location;
 		NSPoint drawPoint = [transform transformPoint:(*(NSPoint *)&(tileLoc))];

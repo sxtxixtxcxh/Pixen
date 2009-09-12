@@ -237,7 +237,7 @@ backgroundColor:(NSColor *)color
 			id oldData = [NSData dataWithBytes:selectionMask length:[self selectionMaskSize]];
 			
 			[self setLayersNoResize:[[layers deepMutableCopy] autorelease] fromLayers:layers];
-			for(id current in layers)
+			for (id current in layers)
 			{
 				[current setSize:aSize withOrigin:origin backgroundColor:color];
 			}
@@ -310,13 +310,13 @@ backgroundColor:(NSColor *)color
 {
 	PXPalette *frequencyPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
 	id freqs = [NSMutableDictionary dictionaryWithCapacity:4000];
-	for(id current in layers)
+	for (id current in layers)
 	{
 		int i;
-		for(i = 0; i < [current size].width; i++)
+		for (i = 0; i < [current size].width; i++)
 		{
 			int j;
-			for(j = 0; j < [current size].height; j++)
+			for (j = 0; j < [current size].height; j++)
 			{
 				id color = [current colorAtPoint:NSMakePoint(i, j)];
 				id hash = [NSNumber numberWithInt:[color hash]];
@@ -333,7 +333,7 @@ backgroundColor:(NSColor *)color
 		}
 	}
 	id sorted = [[freqs allValues] sortedArrayUsingSelector:@selector(compare:)];
-	for(id current in sorted)
+	for (id current in sorted)
 	{
 		PXPalette_addColor(frequencyPalette, [current color]);
 	}

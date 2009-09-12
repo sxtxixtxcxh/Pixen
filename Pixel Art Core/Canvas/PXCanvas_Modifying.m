@@ -65,7 +65,7 @@
 - (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer
 {
 	if([indices count] == 0) { return; }
-	for(id current in indices)
+	for (id current in indices)
 	{
 		int val = [current intValue];
 		int x = val % (int)[self size].width;
@@ -117,7 +117,7 @@
 - (void)rotateByDegrees:(int)degrees
 {
 	[self beginUndoGrouping];
-    for(PXLayer *current in layers)
+    for (PXLayer *current in layers)
     {
         [self rotateLayer:current byDegrees:degrees];
     }
@@ -159,7 +159,7 @@
 - (void)flipHorizontally
 {
 	[self beginUndoGrouping];
-    for(PXLayer *current in layers)
+    for (PXLayer *current in layers)
     {
         [self flipLayerHorizontally:current];
     }
@@ -169,7 +169,7 @@
 - (void)flipVertically
 {
 	[self beginUndoGrouping];
-    for(PXLayer *current in layers)
+    for (PXLayer *current in layers)
     {
         [self flipLayerVertically:current];
     }
@@ -196,7 +196,7 @@
 	int i;
 	int quantizedPixels = 0;
 	
-	for(id current in canvases)
+	for (id current in canvases)
 	{
 		if(!NSEqualSizes([first size], [current size]))
 		{
@@ -257,9 +257,9 @@
 	if (transparency)
 		PXPalette_addColorWithoutDuplicating(palette, [NSColor clearColor]);
 	
-	for(id current in canvases)
+	for (id current in canvases)
 	{
-		for(id currentLayer in [current layers])
+		for (id currentLayer in [current layers])
 		{
 			[currentLayer adaptToPalette:palette withTransparency:transparency matteColor:matteColor];
 		}
@@ -311,7 +311,7 @@
 		changedRect = NSMakeRect(pt.x, pt.y, 1, 1);
 	}
 	int i;
-	for(i = [pts count]-1; i >= 0; i--) 
+	for (i = [pts count]-1; i >= 0; i--) 
 	{
 		pt = [[pts objectAtIndex:i] pointValue];
 		NSColor *c = [colors objectAtIndex:i];

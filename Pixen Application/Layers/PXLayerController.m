@@ -148,7 +148,7 @@
 	}
 	
 	selectedRow = [self invertLayerIndex:[tableView selectedRow]];
-	for(i = 0; i < [[canvas layers] count]; i++)
+	for (i = 0; i < [[canvas layers] count]; i++)
 	{
 		PXLayer *layer = [[canvas layers] objectAtIndex:i];
 		if([views count] > i)
@@ -164,7 +164,7 @@
 			[newView updatePreview:nil];
 		}
 	}
-	for(i = [[canvas layers] count]; i < [views count]; i++)
+	for (i = [[canvas layers] count]; i < [views count]; i++)
 	{
 		[[views objectAtIndex:i] setLayer:nil];
 	}
@@ -184,7 +184,7 @@
 	if(newLayer)
 	{
 		[tableView display];
-		for(id current in views)
+		for (id current in views)
 		{
 			if([current layer] == newLayer)
 			{

@@ -161,9 +161,9 @@ void PXDebugRect(NSRect r, float alpha)
 		while(((yTiles * [canvas size].height)) < NSHeight(r)) { yTiles++; }
 		if(yTiles % 2 == 0) { yTiles += 1; }
 		float i, j;
-		for(i = 0; i < xTiles; i++)
+		for (i = 0; i < xTiles; i++)
 		{
-			for(j = 0; j < yTiles; j++)
+			for (j = 0; j < yTiles; j++)
 			{
 				float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(r)) / 2.0);
 				float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(r)) / 2.0);
@@ -515,11 +515,11 @@ void PXDebugRect(NSRect r, float alpha)
 //		//need to get non-overlapping rects - this multiple-drawing-over sucks!
 //		NSRect *realRects = calloc(rectCount, sizeof(NSRect));
 //		int realRectCount = 0;
-//		for(i = 0; i < rectCount; i++)
+//		for (i = 0; i < rectCount; i++)
 //		{
 //			int j;
 //			BOOL found = NO;
-//			for(j = 0; j < realRectCount; j++)
+//			for (j = 0; j < realRectCount; j++)
 //			{
 //				if([self shouldCombineRect:rects[i] withRect:realRects[j]])
 //				{
@@ -538,10 +538,10 @@ void PXDebugRect(NSRect r, float alpha)
 //		BOOL foundAny;
 //		do {
 //			foundAny = NO;
-//			for(i = 0; i < realRectCount; i++)
+//			for (i = 0; i < realRectCount; i++)
 //			{
 //				int j;
-//				for(j = 0; j < realRectCount; j++)
+//				for (j = 0; j < realRectCount; j++)
 //				{
 //					if((i != j) && [self shouldCombineRect:realRects[i] withRect:realRects[j]])
 //					{
@@ -552,7 +552,7 @@ void PXDebugRect(NSRect r, float alpha)
 //				}
 //			}
 //		} while(foundAny);
-//		for(i = 0; i < realRectCount; i++)
+//		for (i = 0; i < realRectCount; i++)
 //		{
 //			NSRect r = realRects[i];
 //			//Using NSEraseRect of the whole dirty rect here fixes the particular problem but introduces a new one, so it's not a solution.
@@ -629,9 +629,9 @@ void PXDebugRect(NSRect r, float alpha)
 		NSRect destination = NSMakeRect(0, 0, [canvas size].width * factor, [canvas size].height * factor);
 		NSRect source = NSMakeRect(0, 0, [canvas size].width, [canvas size].height);
 		float i, j;
-		for(i = 0; i < xTiles; i++)
+		for (i = 0; i < xTiles; i++)
 		{
-			for(j = 0; j < yTiles; j++)
+			for (j = 0; j < yTiles; j++)
 			{
 				float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(canvasRect)) / 2.0);
 				float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(canvasRect)) / 2.0);
@@ -659,9 +659,9 @@ void PXDebugRect(NSRect r, float alpha)
 	if ([canvas wraps])
 	{
 		float i, j;
-		for(i = 0; i < xTiles; i++)
+		for (i = 0; i < xTiles; i++)
 		{
-			for(j = 0; j < yTiles; j++)
+			for (j = 0; j < yTiles; j++)
 			{
 				float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(canvasRect)) / 2.0);
 				float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(canvasRect)) / 2.0);
@@ -716,9 +716,9 @@ void PXDebugRect(NSRect r, float alpha)
 		if ([canvas wraps])
 		{
 			float i, j;
-			for(i = 0; i < xTiles; i++)
+			for (i = 0; i < xTiles; i++)
 			{
-				for(j = 0; j < yTiles; j++)
+				for (j = 0; j < yTiles; j++)
 				{
 					float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(canvasRect)) / 2.0);
 					float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(canvasRect)) / 2.0);

@@ -37,10 +37,10 @@ PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
 	NSArray *animationDocuments = [[PXDocumentController sharedDocumentController] animationDocuments];
 	NSArray *oldRepresentations = documentRepresentations;
 	documentRepresentations = [[NSMutableArray alloc] init];
-	for(id doc in animationDocuments)
+	for (id doc in animationDocuments)
     {
 		BOOL included = NO;
-		for(NSDictionary *oldRep in oldRepresentations)
+		for (NSDictionary *oldRep in oldRepresentations)
         {
 			if ([oldRep objectForKey:@"document"] == doc) {
 				included = [[oldRep objectForKey:@"included"] boolValue];
@@ -88,7 +88,7 @@ PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
 	int padding = 10;
 	NSMutableArray *animationSheets = [NSMutableArray array];
 	NSSize sheetSize = NSMakeSize(padding*2, padding*2);
-	for(NSDictionary *docRep in documentRepresentations)
+	for (NSDictionary *docRep in documentRepresentations)
     {
 		PXAnimation *animation = [[docRep objectForKey:@"document"] animation];
 		if ([[docRep objectForKey:@"included"] boolValue]) {
@@ -110,7 +110,7 @@ PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
 	[[NSColor whiteColor] set];
 	NSRectFill(NSMakeRect(0,0,sheetSize.width,sheetSize.height));
 	NSPoint currentPoint = NSMakePoint(padding, sheetSize.height - padding);
-	for(NSImage *row in animationSheets)
+	for (NSImage *row in animationSheets)
     {
 		currentPoint.y -= [row size].height;
 		[row compositeToPoint:currentPoint operation:NSCompositeSourceOver];

@@ -30,7 +30,7 @@
 
 #import "PXNamePrompter.h"
 #import "PXCanvasView.h"
-////FIXME:  obsolete, should be removed - I think this is false, since it's still used in PXPalettePanel and PXColorPicker
+//FIXME: obsolete, should be removed - I think this is false, since it's still used in PXPalettePanel and PXColorPicker
 
 @implementation PXNamePrompter
 

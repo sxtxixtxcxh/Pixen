@@ -81,7 +81,7 @@
 			NSArray * layers = [canvas layers];
 			NSColor * currentColor = [[layers objectAtIndex:0] colorAtPoint:aPoint];
 			int x;
-			for(x = 1; x < [layers count]; x++)
+			for (x = 1; x < [layers count]; x++)
 			{
 				currentColor = PXImage_blendColors(nil, currentColor, [[layers objectAtIndex:x] colorAtPoint:aPoint]);
 			}

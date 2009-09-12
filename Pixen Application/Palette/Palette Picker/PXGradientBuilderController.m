@@ -33,7 +33,7 @@
 #import <AppKit/NSTextField.h>
 
 @implementation PXGradientBuilderController
-////FIXME:  unused, but kept because we'll probably use it with the new palette ui
+//FIXME: unused, but kept because we'll probably use it with the new palette ui
 -(id)  init
 {
 	return [super initWithWindowNibName:@"PXGradientBuilder"];

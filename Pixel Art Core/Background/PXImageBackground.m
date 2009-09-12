@@ -157,10 +157,10 @@
 		int yTiles = (size.height / imageSize.height) + 1;
 		int i, j;
 		NSRect imgRect = NSMakeRect(imageLocation.x, imageLocation.y, imageSize.width, imageSize.height);
-		for(i = 0; i < xTiles; i++)
+		for (i = 0; i < xTiles; i++)
 		{
 			imgRect.origin.x = i * imageSize.width + imageLocation.x;
-			for(j = 0; j < yTiles; j++)
+			for (j = 0; j < yTiles; j++)
 			{
 				imgRect.origin.y = j * imageSize.height + imageLocation.y;
 				[image drawInRect:imgRect fromRect:NSMakeRect(0, 0, [image size].width, [image size].height) operation:NSCompositeSourceOver fraction:1];

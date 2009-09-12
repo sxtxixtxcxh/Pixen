@@ -216,8 +216,8 @@
 	
 	// we turn off all the other documents' acceptance of first mouse; we can't do
 	// this on windowDidResignMain because that'd cause problems with panels
-//FIXME:  refactor to nix dependency on PXCanvasDocument
-	for(PXCanvasDocument *doc in [[NSDocumentController sharedDocumentController] documents])
+//FIXME: refactor to nix dependency on PXCanvasDocument
+	for (PXCanvasDocument *doc in [[NSDocumentController sharedDocumentController] documents])
 	{
 		if ([doc canvasController] == self)
 			// if we don't have a slight delay, the click that activates the window goes through. a bit of a hack.
@@ -332,7 +332,7 @@
 			}
 		}
 	}
-//FIXME:  undo goes here?
+//FIXME: undo goes here?
 	PXPattern *pattern = [[[PXPattern alloc] init] autorelease];
 	[pattern setSize:patternRect.size];
 	// now we loop through again and actually set the points

@@ -230,10 +230,10 @@
 		[linePath closePath];
 		int i, j;
 		//go from left to right
-		for(i = leftMost; i <= rightMost; i++)
+		for (i = leftMost; i <= rightMost; i++)
 		{
 			//go from bottom to top
-			for(j = bottomMost; j <= topMost; j++)
+			for (j = bottomMost; j <= topMost; j++)
 			{
 				NSPoint point = NSMakePoint(i, j);
 				if([linePath containsPoint:point])

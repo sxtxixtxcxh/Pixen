@@ -64,16 +64,16 @@
 - (void)promoteSelection
 {
 	[self beginUndoGrouping]; {
-//FIXME:  fix this line once we have canvas-level undo for PXCanvas_Modifying
+//FIXME: fix this line once we have canvas-level undo for PXCanvas_Modifying
 		[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];
 		PXLayer *newLayer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Promoted Selection", @"Promoted Selection") size:[self size] fillWithColor:[NSColor clearColor]] autorelease];
 		int i, j;
 		NSPoint point;
 		[newLayer setCanvas:self];
 		NSUndoManager *um = [self undoManager];
-		for(i = 0; i < [self size].width; i++)
+		for (i = 0; i < [self size].width; i++)
 		{
-			for(j = 0; j < [self size].height; j++)
+			for (j = 0; j < [self size].height; j++)
 			{
 				if ([self pointIsSelected:NSMakePoint(i, j)])
 				{
@@ -135,7 +135,7 @@
 		[self setMask:newMask];
 		[[NSNotificationCenter defaultCenter] postNotificationName:PXSelectionMaskChangedNotificationName object:self];
 		[self setHasSelection:NO];
-//FIXME:  redraw more intelligently
+//FIXME: redraw more intelligently
 		[self changed];
 	} [self endUndoGrouping:NSLocalizedString(@"Select None", @"Select None")];
 }
@@ -151,7 +151,7 @@
 	[self beginUndoGrouping]; {
 		NSMutableArray *changedIndices = [NSMutableArray arrayWithCapacity:[indices count]];
 		unsigned currentValue;
-		for(id current in indices)
+		for (id current in indices)
 		{
 			currentValue = [current unsignedIntValue];
 			if(selectionMask[currentValue] != bit)
@@ -168,7 +168,7 @@
 		{
 			[self updateSelectionSwitch];
 		}
-//FIXME:  find a way not to redraw the whole canvas
+//FIXME: find a way not to redraw the whole canvas
 		[self changed];
 		[[[self undoManager] prepareWithInvocationTarget:self] setSelectionMaskBit:!bit atIndices:changedIndices];
 		selectedRect = NSZeroRect;
@@ -185,7 +185,7 @@
 - (void)setSelectionMaskBit:(BOOL)maskValue inRect:(NSRect)rect
 {
 	[self beginUndoGrouping]; {
-//FIXME:  NSIndexSet a better choice?  maybe use bitfields?
+//FIXME: NSIndexSet a better choice?  maybe use bitfields?
 		NSMutableArray *changedIndices = [NSMutableArray arrayWithCapacity:1024];
 		int i, j;
 		int width = [self size].width;
@@ -268,7 +268,7 @@
 	[self beginUndoGrouping]; {
 		PXSelectionMask newMask = malloc([self selectionMaskSize]);
 		memset(newMask, YES, [self selectionMaskSize]);
-//FIXME:  slow in large images, can it be avoided?
+//FIXME: slow in large images, can it be avoided?
 		[self setMask:newMask];
 	} [self endUndoGrouping:NSLocalizedString(@"Select All", @"Select All")];
 }
@@ -279,7 +279,7 @@
 		PXSelectionMask newMask = malloc([self selectionMaskSize]);
 		memcpy(newMask, selectionMask, [self selectionMaskSize]);
 		int i;
-		for(i = 0; i < [self selectionMaskSize]; i++)
+		for (i = 0; i < [self selectionMaskSize]; i++)
 		{
 			newMask[i] = !(newMask[i]);
 		}
@@ -314,9 +314,9 @@
 	if (NSEqualRects(selectedRect, NSZeroRect))
 	{
 		int i, j;
-		for(i = 0; i < width; i++)
+		for (i = 0; i < width; i++)
 		{
-			for(j = 0; j < height; j++)
+			for (j = 0; j < height; j++)
 			{
 				if(selectionMask[i + (height - j - 1) * width])
 				{
@@ -384,11 +384,11 @@
 		{
 			free(sourceMask);
 		}
-//FIXME:  slow in large images, can it be avoided?
+//FIXME: slow in large images, can it be avoided?
 		[self setMaskData:[NSData dataWithBytes:selectionMask length:[self selectionMaskSize]] withOldMaskData:oldMask];
 	} [self endUndoGrouping:NSLocalizedString(@"Move Selection", @"Move Selection")];
 	selectionOrigin = NSZeroPoint;
-//FIXME:  redraw more intelligently, change the selected rect appropriately rather than force its recaching
+//FIXME: redraw more intelligently, change the selected rect appropriately rather than force its recaching
 //	selectedRect.origin.x += xOffset;
 //	selectedRect.origin.y -= yOffset;
 //	if([self wraps])

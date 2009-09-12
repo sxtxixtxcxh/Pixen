@@ -2,7 +2,7 @@
 //Created by Brock Brandenberg
 //Who is much cooler than we are.  Maybe.
 //See http://www.bergdesign.com/missing_cocoa_docs/nsclipview.html
-////FIXME:  licence ???
+//FIXME: licence ???
 
 #import <AppKit/NSClipView.h>
 

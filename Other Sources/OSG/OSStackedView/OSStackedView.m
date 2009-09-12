@@ -344,7 +344,7 @@
 - (float)height
 {
 	float totalHeight = 0;
-	for(id current in views)
+	for (id current in views)
 	{
 		totalHeight += NSHeight([current frame]);
 	}
@@ -355,7 +355,7 @@
 {
 	float totalHeight = [self height];
 	int i;
-	for(i = [views count] - 1; i >= 0; i--)
+	for (i = [views count] - 1; i >= 0; i--)
 	{
 		OSStackedViewElement *current = [views objectAtIndex:i];
 		totalHeight -= NSHeight([current frame]);
@@ -382,7 +382,7 @@
 
 - (void)unstackSubview:(NSView *)view
 {
-	for(id current in views)
+	for (id current in views)
 	{	
 		if([current view] == view)
 		{
@@ -417,7 +417,7 @@
 {
 	[selectedElement setHighlighted:NO];
 	selectedElement = nil;
-	for(id current in views)
+	for (id current in views)
 	{
 		[current removeFromSuperview];
 		[views removeObject:current];

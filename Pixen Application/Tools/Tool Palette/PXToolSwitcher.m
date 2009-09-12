@@ -107,7 +107,7 @@ NSMutableArray * toolNames;
 	return self;
 }
 
-////FIXME:  private ? 
+//FIXME: private ? 
 //Not sure what this was warning about -- though we do in general mix private and 'public' methods a bit much, we should make use of categories.
 - (void)checkUserDefaults
 {
@@ -219,7 +219,7 @@ NSMutableArray * toolNames;
 
 - (void)setColor:(NSColor *)col
 {
-//FIXME:  coupled
+//FIXME: coupled
 	NSColor *aColor = [col colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     [aColor retain];
     [_color release];

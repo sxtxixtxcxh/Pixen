@@ -35,7 +35,7 @@
 	if(version < 4)
 	{
 		layers = [[coder decodeObjectForKey:@"layers"] retain];
-		for(id current in layers)
+		for (id current in layers)
 		{
 			[current setCanvas:self];
 		}

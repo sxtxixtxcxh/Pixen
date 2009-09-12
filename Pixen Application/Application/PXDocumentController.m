@@ -229,7 +229,7 @@ NSString *palettesSubdirName = @"Palettes";
 
 - (void)applicationWillResignActive:(NSNotification *)aNotification
 {
-	for(PXCanvasDocument *current in [self documents])
+	for (PXCanvasDocument *current in [self documents])
 	{
 		[[[current canvasController] view] setAcceptsFirstMouse:NO];
 	}
@@ -240,7 +240,7 @@ NSString *palettesSubdirName = @"Palettes";
 	PXCanvasDocument *doc = [self currentDocument];
 	if(doc)
 	{
-//FIXME:  coupled to canvas controller
+//FIXME: coupled to canvas controller
 		PXCanvasController *canvasController = [doc canvasController];
 		NSWindow *window = [canvasController window];
 		if (![window isKeyWindow]) {
@@ -326,7 +326,7 @@ NSString *palettesSubdirName = @"Palettes";
 	BOOL showCrosshairs = [[NSUserDefaults standardUserDefaults] boolForKey:PXCrosshairEnabledKey];
 	showCrosshairs = !showCrosshairs;
 	[[NSUserDefaults standardUserDefaults] setBool:showCrosshairs forKey:PXCrosshairEnabledKey];
-//FIXME:  coupled to canvas window controller
+//FIXME: coupled to canvas window controller
 	[[[[self currentDocument] windowControllers] objectAtIndex:0] redrawCanvas:self];
 }
 
@@ -344,7 +344,7 @@ NSString *palettesSubdirName = @"Palettes";
 		[[PXToolPaletteController sharedToolPaletteController] clearBeziers];
 	}
 	[[NSUserDefaults standardUserDefaults] setBool:cachedShowsToolPreview forKey:PXToolPreviewEnabledKey];
-//FIXME:  coupled to canvas window controller 
+//FIXME: coupled to canvas window controller 
 	[[[[self currentDocument] windowControllers] objectAtIndex:0] redrawCanvas:self];
 }
 
@@ -358,7 +358,7 @@ NSString *palettesSubdirName = @"Palettes";
 	BOOL showPreviousCelOverlay = [[NSUserDefaults standardUserDefaults] boolForKey:PXPreviousCelOverlayEnabledKey];
 	cachedShowsPreviousCelOverlay = !showPreviousCelOverlay;
 	[[NSUserDefaults standardUserDefaults] setBool:cachedShowsPreviousCelOverlay forKey:PXPreviousCelOverlayEnabledKey];
-//FIXME:  coupled to canvas window controller
+//FIXME: coupled to canvas window controller
 	[[[self currentDocument] windowControllers] makeObjectsPerformSelector:@selector(redrawCanvas:) withObject:self];
 }
 
@@ -458,7 +458,7 @@ NSString *palettesSubdirName = @"Palettes";
 - (NSArray *)animationDocuments
 {
 	NSMutableArray *animationDocuments = [NSMutableArray array];
-	for(NSDocument *document in [self documents])
+	for (NSDocument *document in [self documents])
     {
 		if ([document isKindOfClass:[PXAnimationDocument class]]) {
 			[animationDocuments addObject:document];
@@ -477,7 +477,7 @@ NSString *palettesSubdirName = @"Palettes";
 	// Determine the appropriate extensions for the open panel.
 	NSArray *longTypes = [PXCanvasDocument readableTypes];
 	NSMutableArray *types = [[[NSMutableArray alloc] initWithCapacity:[longTypes count]] autorelease];
-	for(NSString *currentType in longTypes)
+	for (NSString *currentType in longTypes)
 	{
 		[types addObjectsFromArray:[[NSDocumentController sharedDocumentController] fileExtensionsFromType:currentType]];
 	}
@@ -492,14 +492,14 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	// First we load all the specified images into an array.
 	NSMutableArray *images = [[[NSMutableArray alloc] initWithCapacity:[[openPanel filenames] count]] autorelease];
-    for(NSString *currentFile in [openPanel filenames])
+    for (NSString *currentFile in [openPanel filenames])
 	{
 		[images addObject:[[[NSImage alloc] initWithContentsOfFile:currentFile] autorelease]];
 	}
 	
 	// But they might not all be the same size. Find the max size.
 	NSSize biggestSize = NSZeroSize;
-	for(NSImage *currentImage in images)
+	for (NSImage *currentImage in images)
 	{
 		NSSize currentSize = [currentImage size];
 		biggestSize = NSMakeSize(MAX(currentSize.width, biggestSize.width), MAX(currentSize.height, biggestSize.height));
@@ -507,7 +507,7 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	// Now we can stick them into the document.
 	int loadedImages = 0;
-	for(NSImage *currentImage in images)
+	for (NSImage *currentImage in images)
 	{
 		NSImage *celImage = currentImage;
 		NSSize imageSize = [currentImage size];

@@ -262,7 +262,7 @@ static NSArray *algorithms = nil;
 - (void)scaleCanvas:(PXCanvas *)canvas
 {
 	[canvas beginUndoGrouping]; {
-//FIXME:  move undo
+//FIXME: move undo
 	// Do we really have to deselect when we change size? We can't adapt?
 	// Ohhhh, the memory cost. The pain.
 

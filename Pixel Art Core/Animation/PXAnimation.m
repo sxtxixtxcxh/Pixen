@@ -61,7 +61,7 @@
 
 - (void)setSizeNoUndo:(NSSize)aSize
 {
-	for(id current in cels)
+	for (id current in cels)
 	{
 		[current setSize:aSize];
 	}
@@ -102,7 +102,7 @@
 		[undoManager beginUndoGrouping];
 	}
 	[self _willChangeSize:undo];
-	for(id current in cels)
+	for (id current in cels)
 	{
 		[current setSize:aSize withOrigin:origin backgroundColor:bgcolor];
 	}

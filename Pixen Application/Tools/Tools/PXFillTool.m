@@ -256,7 +256,7 @@ fromCanvasController:(PXCanvasController*)controller
 {
 	int canvasWidth = [canvas size].width;
 	id indices = [NSMutableArray arrayWithCapacity:[fillPoints count]];
-	for(id current in fillPoints)
+	for (id current in fillPoints)
 	{
 		int val = [current intValue];
 		int xLoc = val % canvasWidth;

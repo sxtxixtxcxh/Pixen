@@ -30,7 +30,7 @@
 	[super dealloc];
 }
 
-//FIXME:  consider removing these three once coupling decreases
+//FIXME: consider removing these three once coupling decreases
 - (PXAnimation *)animation
 {
 	return animation;
@@ -63,7 +63,7 @@
 		NSMutableDictionary *files = [NSMutableDictionary dictionaryWithCapacity:[animation countOfCels]];
 		NSMutableArray *celData = [NSMutableArray arrayWithCapacity:[animation countOfCels]];
 		int i;
-		for(i = 0; i < [animation countOfCels]; i++)
+		for (i = 0; i < [animation countOfCels]; i++)
 		{
 			PXCel *current = [animation objectInCelsAtIndex:i];
 			NSFileWrapper *file = [[[NSFileWrapper alloc] initRegularFileWithContents:[NSKeyedArchiver archivedDataWithRootObject:[current canvas]]] autorelease];
@@ -136,7 +136,7 @@
 		if([plist count] == 0) { return NO; }
 		PXGrid *firstGrid = nil;
 		int i;
-		for(i = 0; i < [plist count]; i++)
+		for (i = 0; i < [plist count]; i++)
 		{
 			NSFileWrapper *currentFile = [files objectForKey:[NSString stringWithFormat:@"%d.%@", i, PXISuffix]];
 			PXCel *cel = [[PXCel alloc] init];

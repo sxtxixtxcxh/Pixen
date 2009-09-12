@@ -76,7 +76,7 @@
 {
 	[resizePrompter loadWindow];
 	[resizePrompter setDelegate:self];
-//FIXME:  this stuff should use the canvas's mainbackground to draw the resize area stuffies.  otherwise the matte color won't show up very well
+//FIXME: this stuff should use the canvas's mainbackground to draw the resize area stuffies.  otherwise the matte color won't show up very well
 	[resizePrompter setBackgroundColor:
 	 [NSKeyedUnarchiver unarchiveObjectWithData:
 	  [[NSUserDefaults standardUserDefaults] objectForKey:PXDefaultNewDocumentBackgroundColor]]];
@@ -352,7 +352,7 @@ didFinishWithSize:(NSSize)aSize
 
 - (IBAction)popDocumentPalette:sender
 {
-	//FIXME:  no palette, memory concerns, change this architecture some
+	//FIXME: no palette, memory concerns, change this architecture some
 	assert(0);
 //	[PXPalettePanel popWithPalette:[canvas palette] fromWindow:[NSColorPanel sharedColorPanel]];
 }

@@ -50,7 +50,7 @@
 	[filmStrip setNeedsDelayedDisplayInRect:changedRect];
 	if([notification object] == [activeCel canvas]) { return; }
 	int i;
-	for(i = 0; i < [self numberOfCels]; i++)
+	for (i = 0; i < [self numberOfCels]; i++)
 	{
 		PXCel *current = [self celAtIndex:i];
 		if([current canvas] == [notification object])

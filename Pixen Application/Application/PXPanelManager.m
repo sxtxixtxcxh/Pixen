@@ -101,7 +101,7 @@ static PXPanelManager *sharedManager = nil;
 	PXPalette **userPalettes = malloc(sizeof(PXPalette *) * userPalettesCount);
 	PXPalette_getUserPalettes(userPalettes, 0);
 	NSArray *palettePanels = [defaults objectForKey:PXPalettePanelsKey];
-	for(id current in palettePanels)
+	for (id current in palettePanels)
 	{
 		BOOL isSystemPalette = [[current objectForKey:PXPalettePanelIsSystemPaletteKey] boolValue];
 		int index = [[current objectForKey:PXPalettePanelPaletteIndexKey] intValue];
@@ -151,7 +151,7 @@ static PXPanelManager *sharedManager = nil;
 	PXPalette **userPalettes = malloc(sizeof(PXPalette *) * userPalettesCount);
 	PXPalette_getUserPalettes(userPalettes, 0);
 	
-	for(id current in [NSApp windows])
+	for (id current in [NSApp windows])
 	{
 		if (![current isKindOfClass:[PXPalettePanel class]]) { continue; }
 		if (![current isVisible]) { continue; }

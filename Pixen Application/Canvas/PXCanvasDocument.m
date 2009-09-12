@@ -285,7 +285,7 @@ BOOL isPowerOfTwo(int num)
 				  didRunSelector:NULL 
 					 contextInfo:NULL];
 #else
-//FIXME:  GNUstep TODO
+//FIXME: GNUstep TODO
 #endif
 }
 

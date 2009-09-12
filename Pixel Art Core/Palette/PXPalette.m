@@ -147,7 +147,7 @@ PXPalette *PXPalette_initWithDictionary(PXPalette *self, NSDictionary *dict)
 	PXPalette_initWithoutBackgroundColor(self);
 	PXPalette_setName(self, [dict objectForKey:@"name"]);
 	PXPalette_resize(self, [[dict objectForKey:@"size"] intValue]);
-	for(id current in [dict objectForKey:@"colors"])
+	for (id current in [dict objectForKey:@"colors"])
 	{
 		PXPalette_addColor(self, current);
 	}
@@ -220,13 +220,13 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 	if(newCount != systemPalettesCount)
 	{
 		int i;
-		for(i = 0; i < systemPalettesCount; i++)
+		for (i = 0; i < systemPalettesCount; i++)
 		{
 			PXPalette_release(systemPalettes[i]);
 		}
 		free(systemPalettes);
 		systemPalettes = calloc(newCount, sizeof(PXPalette *));
-		for(i = 0; i < [lists count]; i++)
+		for (i = 0; i < [lists count]; i++)
 		{
 			NSEnumerator *keyEnumerator;
 			NSColorList *current = [lists objectAtIndex:i];
@@ -249,7 +249,7 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 		PXPalette_setName(palette, NSLocalizedString(@"GRAYSCALE", @"Grayscale"));
 		palette->isSystemPalette = YES;
 		palette->canSave = NO;
-		for(id current in grays)
+		for (id current in grays)
 		{
 			PXPalette_addColor(palette, current);
 		}
@@ -257,7 +257,7 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 		systemPalettesCount = newCount;
 	}
 	int i;
-	for(i = initialIndex; i < (initialIndex + systemPalettesCount); i++)
+	for (i = initialIndex; i < (initialIndex + systemPalettesCount); i++)
 	{
 		pals[i] = systemPalettes[i - initialIndex];
 	}
@@ -266,7 +266,7 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 
 unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex)
 {
-//FIXME:  this code will leak or worse(probably just leak) if palettes are removed at runtime.
+//FIXME: this code will leak or worse(probably just leak) if palettes are removed at runtime.
 	NSMutableArray *paths = [NSMutableArray array];
 	id enumerator = [[NSFileManager defaultManager] enumeratorAtPath:GetPixenPaletteDirectory()], current;
 	while((current = [enumerator nextObject]))
@@ -287,7 +287,7 @@ unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex)
 	if(newCount != userPalettesCount)
 	{
 		int i;
-		for(i = 0; i < [paths count]; i++)
+		for (i = 0; i < [paths count]; i++)
 		{
 			NSString *path = [[GetPixenPaletteDirectory() stringByAppendingPathComponent:[paths objectAtIndex:i]] stringByAppendingPathExtension:PXPaletteSuffix];
 			id object = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
@@ -300,7 +300,7 @@ unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex)
 		userPalettesCount = newCount;
 	}
 	int i;
-	for(i = initialIndex; i < (initialIndex + userPalettesCount); i++)
+	for (i = initialIndex; i < (initialIndex + userPalettesCount); i++)
 	{
 		pals[i] = userPalettes[i - initialIndex];
 	}
@@ -327,7 +327,7 @@ void PXPalette_dealloc(PXPalette *self)
 		self->reverseHashTable = nil;
 	}
 	if(self->colors) {
-		for(i = 0; i < self->size; i++)
+		for (i = 0; i < self->size; i++)
 		{
 			if(self->colors[i])
 			{
@@ -414,7 +414,7 @@ void PXPalette_insertColorAtIndex(PXPalette *self, NSColor *color, unsigned inde
 void PXPalette_removeAlphaComponents(PXPalette *self)
 {
 	int i;
-	for(i = 0; i < self->colorCount; i++)
+	for (i = 0; i < self->colorCount; i++)
 	{
 		NSColor *color = [[PXPalette_colorAtIndex(self, i) retain] autorelease];
 		if([color alphaComponent] == 0 || [color alphaComponent] == 1) { continue; }
@@ -647,7 +647,7 @@ void PXPalette_removeColorAtIndex(PXPalette *self, unsigned int index)
 	PXPalette_removeBucketForColor(self, color);
 	[color release];
 	int i;
-	for(i = index + 1; i < self->colorCount; i++)
+	for (i = index + 1; i < self->colorCount; i++)
 	{
 		self->colors[i - 1] = self->colors[i];
 		PXPalette_bucketForColor(self, self->colors[i])->index--;
@@ -698,7 +698,7 @@ void PXPalette_moveColorAtIndexToIndex(PXPalette *self, unsigned int index1, uns
 		end = index2+1;
 		shift = -1;
 	}
-	for(i = start; i*shift <= end*shift; i+=shift)
+	for (i = start; i*shift <= end*shift; i+=shift)
 	{
 		PXPalette_bucketForColor(self, self->colors[i])->index += shift;
 		self->colors[i] = self->colors[i+shift];

@@ -81,7 +81,7 @@
 	NSImageRep *firstRep = [[anImage representations] objectAtIndex:0];
 	//some PNGs have ... fractional sizes.  So I put in this ceilfing.
 	NSSize newSize = NSMakeSize([firstRep pixelsWide], [firstRep pixelsHigh]);
-	for(id current in layers)
+	for (id current in layers)
 	{
 		[current setSize:newSize withOrigin:NSZeroPoint backgroundColor:[NSColor clearColor]];
 	}
@@ -116,7 +116,7 @@
 	[self init];
 	id images = [PXPSDHandler imagesForPSDData:data];
 	[self setSize:[[images objectAtIndex:0] size]];
-	for(id current in images)
+	for (id current in images)
 	{
 		id layer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Imported Layer", @"Imported Layer") size:[current size]] autorelease];
 		[self addLayer:layer];

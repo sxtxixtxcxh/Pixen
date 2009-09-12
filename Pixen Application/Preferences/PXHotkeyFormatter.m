@@ -78,7 +78,7 @@
   return YES;
 }
 
-////FIXME:  why attributes param is for ? 
+//FIXME: why attributes param is for ? 
 //Required argument of this method for NSFormatter subclasses to implement.
 - (NSAttributedString *)attributedStringForObjectValue:(id)anObject
 				     defaultAttributes:attributes

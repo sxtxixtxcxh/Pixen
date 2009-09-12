@@ -169,7 +169,7 @@ fromCanvasController:(PXCanvasController *)controller
 - (void)fillPixelsInBOOLArray:(NSArray *)fillPoints withColor:(NSColor *)newColor withBoundsRect:(NSRect)bounds ofCanvas:(PXCanvas *)canvas
 {
 	id indices = [NSMutableArray arrayWithCapacity:[fillPoints count]];
-	for(id current in fillPoints)
+	for (id current in fillPoints)
 	{
 		[indices addObject:[NSNumber numberWithInt:[current intValue] - [canvas size].width]];
 	}

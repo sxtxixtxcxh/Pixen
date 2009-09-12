@@ -91,7 +91,7 @@
 - (void)panelDidEnd:(NSOpenPanel *)panel returnCode:(int)code contextInfo:(void *)info
 {
 	if (code == NSCancelButton) { return; }
-	for(id current in [panel filenames])
+	for (id current in [panel filenames])
 	{
 		[self importPaletteAtPath:current];
 	}

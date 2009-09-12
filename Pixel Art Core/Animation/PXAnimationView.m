@@ -45,9 +45,9 @@
 		NSRect destination = NSMakeRect(0, 0, previousCelSize.width * factor, previousCelSize.height * factor);
 		NSRect source = NSMakeRect(0, 0, previousCelSize.width, previousCelSize.height);
 		float i, j;
-		for(i = 0; i < xTiles; i++)
+		for (i = 0; i < xTiles; i++)
 		{
-			for(j = 0; j < yTiles; j++)
+			for (j = 0; j < yTiles; j++)
 			{
 				float xLoc = i * previousCelSize.width - ((xTiles * previousCelSize.width - NSWidth(canvasRect)) / 2.0);
 				float yLoc = j * previousCelSize.height - ((yTiles * previousCelSize.height - NSHeight(canvasRect)) / 2.0);

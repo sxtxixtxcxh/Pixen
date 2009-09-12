@@ -33,7 +33,7 @@
 
 - (void)showPalette:(PXPalette *)pal
 {
-	for(id current in [[selectionPopup menu] itemArray])
+	for (id current in [[selectionPopup menu] itemArray])
 	{
 		if([[current representedObject] pointerValue] == pal)
 		{
@@ -41,7 +41,7 @@
 			return;
 		}
 	}
-	for(id current in [[selectionPopup menu] itemArray])
+	for (id current in [[selectionPopup menu] itemArray])
 	{
 		if([[current title] isEqual:pal->name])
 		{
@@ -56,7 +56,7 @@
 	[selectionPopup removeAllItems];
 	int index = 0;
 	int i;
-	for(i = 0; i < paletteCount; i++)
+	for (i = 0; i < paletteCount; i++)
 	{
 		if(palettes[i] == currentPalette)
 		{
@@ -83,9 +83,9 @@
 	paletteCount = docPaletteCount + userPaletteCount + sysPaletteCount;
 	palettes = (PXPalette **)calloc(paletteCount, sizeof(PXPalette *));
 	
-	for(i = 0; i < docPaletteCount; i++)
+	for (i = 0; i < docPaletteCount; i++)
 	{
-	//FIXME:  no palette
+	//FIXME: no palette
 /*	assert(0);
 		PXCanvasDocument *doc = [docs objectAtIndex:i];
 		PXPalette *pal = PXPalette_init(PXPalette_alloc());
@@ -109,7 +109,7 @@
 	}
 	
 	PXPalette_getUserPalettes(palettes, docPaletteCount);
-	for(i = 0; i < userPaletteCount; i++)
+	for (i = 0; i < userPaletteCount; i++)
 	{
 		NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:PXPalette_name(palettes[i + docPaletteCount]) action:@selector(selectionChanged:) keyEquivalent:@""] autorelease];
 		[item setRepresentedObject:[NSValue valueWithPointer:palettes[i + docPaletteCount]]];
@@ -126,14 +126,14 @@
 	}
 	
 	PXPalette_getSystemPalettes(palettes, docPaletteCount + userPaletteCount);
-	for(i = 0; i < sysPaletteCount; i++)
+	for (i = 0; i < sysPaletteCount; i++)
 	{
 		NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:PXPalette_name(palettes[i + docPaletteCount + userPaletteCount]) action:@selector(selectionChanged:) keyEquivalent:@""] autorelease];
 		[item setRepresentedObject:[NSValue valueWithPointer:palettes[i + docPaletteCount + userPaletteCount]]];
 		[[selectionPopup menu] addItem:item];
 		[item setTarget:self];
 	}
-	//FIXME:  this should do something about showing the document's palette
+	//FIXME: this should do something about showing the document's palette
 	if((docPaletteCount + sysPaletteCount) == 0)
 	{
 		return NULL;
@@ -147,7 +147,7 @@
 - (IBAction)selectionChanged:sender
 {
 	int i;
-	for(i = 0; i < paletteCount; i++)
+	for (i = 0; i < paletteCount; i++)
 	{
 		if([[sender representedObject] pointerValue] == palettes[i])
 		{
