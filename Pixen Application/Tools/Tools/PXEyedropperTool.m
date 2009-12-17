@@ -78,7 +78,7 @@
 		}
 		else
 		{
-      return [canvas mergedColorAtPoint:aPoint];
+      return [canvas surfaceColorAtPoint:aPoint];
 		}
 	}
 }	

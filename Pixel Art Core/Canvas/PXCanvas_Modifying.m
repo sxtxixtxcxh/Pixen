@@ -96,6 +96,24 @@
   return currentColor;  
 }
 
+
+- (NSColor *) surfaceColorAtPoint:(NSPoint)aPoint
+{
+  for(PXLayer *layer in [layers reverseObjectEnumerator])
+  {
+    if([layer visible] && [layer opacity] > 0)
+    {
+      NSColor *layerColor = [layer colorAtPoint:aPoint];
+      if([layerColor alphaComponent] > 0)
+      {
+        return layerColor;
+      }
+    }
+  }
+  return [NSColor clearColor];  
+}
+
+
 - (NSColor*) colorAtPoint:(NSPoint)aPoint
 {
 	if( ! [self containsPoint:aPoint] ) 

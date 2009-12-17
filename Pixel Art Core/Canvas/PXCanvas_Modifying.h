@@ -12,6 +12,7 @@
 @interface PXCanvas(Modifying)
 - (BOOL)canDrawAtPoint:(NSPoint) aPoint;
 - (NSColor *) mergedColorAtPoint:(NSPoint)aPoint;
+- (NSColor *) surfaceColorAtPoint:(NSPoint)aPoint;
 - (NSColor*) colorAtPoint:(NSPoint) aPoint;
 - (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint;
 - (void)setColor:(NSColor *)aColor atPoints:(NSArray *)points;
