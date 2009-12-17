@@ -139,7 +139,7 @@ fromCanvasController:(PXCanvasController *)controller
 	}
 }
 
-- propertiesView 
+- (PXToolPropertiesView *)propertiesView 
 { 
 	return propertiesView; 
 }

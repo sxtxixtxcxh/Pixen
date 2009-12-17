@@ -225,7 +225,7 @@
 				if (bitmapData[base + 3] == 0 && transparency) { continue; }
 				if (bitmapData[base + 3] < 255 && matteColor)
 				{
-					NSColor *sourceColor = [NSColor colorWithCalibratedRed:bitmapData[base + 0] / 255.0f green:bitmapData[base + 1] / 255.0f blue:bitmapData[base + 2] / 255.0f alpha:1];
+					NSColor *sourceColor = [NSColor colorWithDeviceRed:bitmapData[base + 0] / 255.0f green:bitmapData[base + 1] / 255.0f blue:bitmapData[base + 2] / 255.0f alpha:1];
 					NSColor *resultColor = [matteColor blendedColorWithFraction:(bitmapData[base + 3] / 255.0f) ofColor:sourceColor];
 					red[quantizedPixels] = [resultColor redComponent] * 255;
 					green[quantizedPixels] = [resultColor greenComponent] * 255;
@@ -252,7 +252,7 @@
 	PXPalette *palette = PXPalette_init(PXPalette_alloc());
 	for (i = 0; i < size; i++)
 	{
-		PXPalette_addColor(palette, [NSColor colorWithCalibratedRed:map[i].Red / 255.0f green:map[i].Green / 255.0f blue:map[i].Blue / 255.0f alpha:1]);
+		PXPalette_addColor(palette, [NSColor colorWithDeviceRed:map[i].Red / 255.0f green:map[i].Green / 255.0f blue:map[i].Blue / 255.0f alpha:1]);
 	}
 	if (transparency)
 		PXPalette_addColorWithoutDuplicating(palette, [NSColor clearColor]);

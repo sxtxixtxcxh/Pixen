@@ -689,7 +689,7 @@ static void resolveHSV(float *color1, float *color2);
 	  #if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_4
 		CGColorSpaceRef colorspace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
 	  #else
-		CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+		CGColorSpaceRef colorspace = CGColorSpaceCreateCalibratedRGB();
 	  #endif
 	  CGShadingRef myCGShading = CGShadingCreateAxial(colorspace, startPoint, endPoint, gradientFunction, false, false);
 	  
@@ -733,7 +733,7 @@ static void resolveHSV(float *color1, float *color2);
 	  #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 		CGColorSpaceRef colorspace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
 	  #else
-		CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+		CGColorSpaceRef colorspace = CGColorSpaceCreateCalibratedRGB();
 	  #endif
   	  CGShadingRef myCGShading = CGShadingCreateRadial(colorspace, startPoint, startRadius, endPoint, endRadius, gradientFunction, true, true);
 

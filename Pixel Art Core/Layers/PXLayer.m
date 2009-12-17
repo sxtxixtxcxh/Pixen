@@ -32,17 +32,6 @@
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Layers.h"
 
-@interface NSCalibratedRGBColor:NSColor
-{
-	float redComponent, greenComponent, blueComponent, alphaComponent;
-	struct CGColor *cachedColor;
-}
-- (id)initWithRed:(float)r green:(float)g blue:(float)b alpha:(float)a;
-@end
-
-@interface NSDeviceRGBColor : NSCalibratedRGBColor
-@end
-
 @implementation PXLayer
 
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image origin:(NSPoint)origin size:(NSSize)sz
@@ -467,11 +456,10 @@
 
 - (void)applyImage:(NSImage *)anImage
 {
-	int i = 0, j = 0;
-	NSPoint point = NSZeroPoint, dest = NSZeroPoint;
-	Class colorClass = [NSCalibratedRGBColor class];
-	id imageRep = [[anImage representations] objectAtIndex:0];
-	if (![imageRep isKindOfClass:[NSBitmapImageRep class]])
+  NSBitmapImageRep *imageRep=nil;
+    //this is probably pretty fragile.  there should be a better way of doing this, no?
+	NSImageRep *ir = [[anImage representations] objectAtIndex:0];
+	if (![ir isKindOfClass:[NSBitmapImageRep class]])
 	{
 		[anImage lockFocus];
 		id oldRep = imageRep;
@@ -479,63 +467,23 @@
 		[anImage unlockFocus];
 		[anImage removeRepresentation:oldRep];
 		[anImage addRepresentation:imageRep];
-		
 	}
-	
-	unsigned char * bitmapData = [imageRep bitmapData];
-	
-	BOOL hasAlpha = ([imageRep samplesPerPixel] > 3);
-	BOOL alphaFirst = [imageRep bitmapFormat] & NSAlphaFirstBitmapFormat;
-	
-	int width = floorf([imageRep pixelsWide]);
+  else
+  {
+    imageRep = (NSBitmapImageRep *)ir;
+  }
+  int width = floorf([imageRep pixelsWide]);
 	int height = floorf([imageRep pixelsHigh]);
-	unsigned long long baseIndex;
-	NSAutoreleasePool *pool;
-	unsigned char a,r,g,b;
-	int bytesPerRow = [imageRep bytesPerRow];
-	int bytesPerPixel = [imageRep bitsPerPixel] / 8;
-	for (j = 0; j < height; j++)
-	{
-		point.y = j;
-		dest.y = height - j - 1;
-		pool = [[NSAutoreleasePool alloc] init];
-		for (i = 0; i < width; i++)
-		{
-			point.x = i;
-			dest.x = i;
-			if (bytesPerPixel == 4)
-			{
-				baseIndex = (j * bytesPerRow) + i*bytesPerPixel;
-				if(alphaFirst)
-				{
-					a = hasAlpha ? bitmapData[baseIndex+0] : 255;
-					r = bitmapData[baseIndex+1];
-					g = bitmapData[baseIndex+2];
-					b = bitmapData[baseIndex+3];
-				}
-				else
-				{
-					r = bitmapData[baseIndex+0];
-					g = bitmapData[baseIndex+1];
-					b = bitmapData[baseIndex+2];
-					a = hasAlpha ? bitmapData[baseIndex+3] : 255;
-				}
-			}
-			else if(bytesPerPixel == 3)
-			{
-				baseIndex = (j * bytesPerRow) + i*bytesPerPixel;
-				r = bitmapData[baseIndex+0];
-				g = bitmapData[baseIndex+1];
-				b = bitmapData[baseIndex+2];
-				a = 255;
-			}
-			[self setColor:[[[colorClass allocWithZone:[self zone]] initWithRed:r / 255.0f
-																		  green:g / 255.0f
-																		   blue:b / 255.0f
-																		  alpha:a / 255.0f] autorelease] atPoint:dest];
-		}
-		[pool release];
-	}
+	NSPoint dest = NSZeroPoint;
+  for(int i = 0; i < width; i++)
+  {
+    dest.x = i;
+    for (int j = 0; j < height; j++)
+    {
+      dest.y = height - j - 1;
+      [self setColor:[imageRep colorAtX:i y:j] atPoint:dest]; 
+    }
+  }
 }
 
 - (void)adaptToPalette:(PXPalette *)p withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor
@@ -544,7 +492,7 @@
 	id rep = [NSBitmapImageRep imageRepWithData:[outputImage TIFFRepresentation]];
 	unsigned char *bitmapData = [rep bitmapData];
 	int i;
-	id calibratedClear = [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	id calibratedClear = [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 	for (i = 0; i < [self size].width * [self size].height; i++)
 	{
 		int base = i * [rep samplesPerPixel];
@@ -555,12 +503,12 @@
 		}
 		else if (transparency && matteColor && bitmapData[base + 3] < 255)
 		{
-			NSColor *sourceColor = [NSColor colorWithCalibratedRed:bitmapData[base + 0] / 255.0f green:bitmapData[base + 1] / 255.0f blue:bitmapData[base + 2] / 255.0f alpha:1];
+			NSColor *sourceColor = [NSColor colorWithDeviceRed:bitmapData[base + 0] / 255.0f green:bitmapData[base + 1] / 255.0f blue:bitmapData[base + 2] / 255.0f alpha:1];
 			color = [matteColor blendedColorWithFraction:(bitmapData[base + 3] / 255.0f) ofColor:sourceColor];
 		}
 		else
 		{
-			color = [NSColor colorWithCalibratedRed:bitmapData[base + 0] / 255.0f green:bitmapData[base + 1] / 255.0f blue:bitmapData[base + 2] / 255.0f alpha:1];
+			color = [NSColor colorWithDeviceRed:bitmapData[base + 0] / 255.0f green:bitmapData[base + 1] / 255.0f blue:bitmapData[base + 2] / 255.0f alpha:1];
 		}
 		[self setColor:PXPalette_colorClosestTo(p, color) atIndex:i];
 	}

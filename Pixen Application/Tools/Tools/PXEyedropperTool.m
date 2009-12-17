@@ -57,9 +57,9 @@
 {
 	// immense HACK ohgodimsorry
 	if ([[PXToolPaletteController sharedToolPaletteController] leftTool] == self)
-		[propertiesView setButtonType:PXLeftButtonTool];
+		[(PXEyedropperToolPropertiesView *) propertiesView setButtonType:PXLeftButtonTool];
 	else
-		[propertiesView setButtonType:PXRightButtonTool];
+		[(PXEyedropperToolPropertiesView *)propertiesView setButtonType:PXRightButtonTool];
 	return propertiesView;	
 }
 
@@ -72,7 +72,7 @@
     }
 	else 
     {
-		if ([propertiesView colorSource] == PXActiveLayerColorSource)
+		if ([(PXEyedropperToolPropertiesView *)propertiesView colorSource] == PXActiveLayerColorSource)
 		{
 			return [[canvas activeLayer] colorAtPoint:aPoint];
 		}
@@ -95,7 +95,7 @@
 {
 	if(![[controller canvas] containsPoint:aPoint]) { return; }
 	id usedSwitcher;
-	if ([propertiesView targetToolButton] == PXLeftButtonTool)
+	if ([(PXEyedropperToolPropertiesView *)propertiesView targetToolButton] == PXLeftButtonTool)
 		usedSwitcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
 	else
 		usedSwitcher = [[PXToolPaletteController sharedToolPaletteController] rightSwitcher];

@@ -261,7 +261,7 @@ backgroundColor:(NSColor *)color
 
 - (void)setSize:(NSSize)aSize
 {
-	NSColor *color = [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0];
+	NSColor *color = [NSColor colorWithDeviceRed:0 green:0 blue:0 alpha:0];
 	
 	[self setSize:aSize
 	   withOrigin:NSZeroPoint 

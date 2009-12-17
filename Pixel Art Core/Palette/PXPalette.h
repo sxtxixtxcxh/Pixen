@@ -77,7 +77,7 @@ void PXPalette_setColorAtIndex(PXPalette *self, NSColor *color, unsigned int ind
 void PXPalette_moveColorAtIndexToIndex(PXPalette *self, unsigned int index1, unsigned int index2, BOOL adjustIndices);
 
 unsigned int PXPalette_indexOfColor(PXPalette *self, NSColor *color);
-inline NSColor *PXPalette_colorAtIndex(PXPalette *self, unsigned index);
+NSColor *PXPalette_colorAtIndex(PXPalette *self, unsigned index);
 unsigned int PXPalette_indexOfColorAddingIfNotPresent(PXPalette *self, NSColor *color);
 unsigned int PXPalette_indexOfColorClosestTo(PXPalette *self, NSColor *color);
 NSColor *PXPalette_colorClosestTo(PXPalette *self, NSColor *color);

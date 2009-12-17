@@ -108,7 +108,7 @@
 	{
 		// Check to see if the current color is transparent; if so, don't deal with it now: we'll add the sole transparent color at the end.
 		if ([palette->colors[i] alphaComponent] < 0.5) { continue; }
-		NSColor *color = [palette->colors[i] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+		NSColor *color = [palette->colors[i] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 		colorMap->Colors[mapIndex].Red = (int)([color redComponent] * 255);
 		colorMap->Colors[mapIndex].Green = (int)([color greenComponent] * 255);
 		colorMap->Colors[mapIndex].Blue = (int)([color blueComponent] * 255);
@@ -141,7 +141,7 @@
 				// If we're using alpha, we could potentially have changed around index ordering due to the removal of partially or multiple transparent colors. Thus, we must go through the color map and find the appropriate color... but since that's kind of slow, we'll still use PXCanvas's functionality here so long as we're not using alpha.
 				//if (hasAlpha)
 				//{
-					NSColor *color = [[canvas colorAtPoint:point] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+					NSColor *color = [[canvas colorAtPoint:point] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 					for (mapIndex = 0; mapIndex < colorMapSize; mapIndex++)
 					{
 						if ((floorf([color redComponent] * 255) == colorMap->Colors[mapIndex].Red) && (floorf([color greenComponent] * 255) == colorMap->Colors[mapIndex].Green) && (floorf([color blueComponent] * 255) == colorMap->Colors[mapIndex].Blue))

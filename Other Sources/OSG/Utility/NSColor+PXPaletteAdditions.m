@@ -22,8 +22,8 @@
 
 - (float)distanceTo:(NSColor *)other
 {
-	NSColor *here = [self colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	NSColor *there = [other colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	NSColor *here = [self colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+	NSColor *there = [other colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 	
 	float r = [here redComponent] - [there redComponent];
 	float g = [here greenComponent] - [there greenComponent];

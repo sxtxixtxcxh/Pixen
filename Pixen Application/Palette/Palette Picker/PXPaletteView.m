@@ -138,7 +138,7 @@ const int viewMargin = 1;
 				if (index >= (PXPalette_colorCount(palette))) { break; }
 				int paletteIndex = [[paletteIndices objectAtIndex:index] intValue];
 				[colorCell setIndex:paletteIndex];
-				NSColor *color = [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0];
+				NSColor *color = [NSColor colorWithDeviceRed:0 green:0 blue:0 alpha:0];
 				if(paletteIndex != -1)
 				{
 					color = colors[paletteIndex];
@@ -155,7 +155,7 @@ const int viewMargin = 1;
 	}
 	if(!enabled)
 	{
-		[[NSColor colorWithCalibratedWhite:1 alpha:.2] set];
+		[[NSColor colorWithDeviceWhite:1 alpha:.2] set];
 		NSRectFillUsingOperation([self visibleRect], NSCompositeSourceOver);
 	}
 }

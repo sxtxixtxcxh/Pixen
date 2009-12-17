@@ -46,7 +46,7 @@
 	rep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:frame] autorelease];
 	[outputImage unlockFocus];
 	unsigned char *bitmapData = [rep bitmapData];
-	rep = [[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&bitmapData pixelsWide:[self size].width pixelsHigh:[self size].height bitsPerSample:8 samplesPerPixel:[rep samplesPerPixel] hasAlpha:[rep hasAlpha] isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:[rep bytesPerRow] bitsPerPixel:[rep bitsPerPixel]] autorelease];
+	rep = [[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&bitmapData pixelsWide:[self size].width pixelsHigh:[self size].height bitsPerSample:8 samplesPerPixel:[rep samplesPerPixel] hasAlpha:[rep hasAlpha] isPlanar:NO colorSpaceName:NSDeviceRGBColorSpace bytesPerRow:[rep bytesPerRow] bitsPerPixel:[rep bitsPerPixel]] autorelease];
 	
 	// And now, we interrupt our regularly scheduled codegram for a hack: remove color profile info from the rep because we don't handle it on loading.
 	[rep setProperty:NSImageColorSyncProfileData withValue:nil];
@@ -79,8 +79,7 @@
 - (void)replaceActiveLayerWithImage:(NSImage *)anImage
 {
 	NSImageRep *firstRep = [[anImage representations] objectAtIndex:0];
-	//some PNGs have ... fractional sizes.  So I put in this ceilfing.
-	NSSize newSize = NSMakeSize([firstRep pixelsWide], [firstRep pixelsHigh]);
+	NSSize newSize = NSMakeSize((int)[firstRep pixelsWide], (int)[firstRep pixelsHigh]);
 	for (id current in layers)
 	{
 		[current setSize:newSize withOrigin:NSZeroPoint backgroundColor:[NSColor clearColor]];
@@ -161,7 +160,7 @@
 	}
 	[imageCopy unlockFocus];
 	//this probably won't do any good... but there aren't any reps before the above execute.  Replace with ImageIO!
-	[[[imageCopy representations] objectAtIndex:0] setColorSpaceName:NSCalibratedRGBColorSpace];
+	[[[imageCopy representations] objectAtIndex:0] setColorSpaceName:NSDeviceRGBColorSpace];
 	return [imageCopy autorelease];	
 }
 

@@ -184,25 +184,25 @@ NSArray *CreateGrayList()
 	//Maybe we can factor these into a series of function calls?
 	for (i=0; i<64; i++) {
 		rgb = (float)i / 64.0;
-		color = [NSColor colorWithCalibratedRed:rgb green:rgb blue:rgb alpha:alpha];
+		color = [NSColor colorWithDeviceRed:rgb green:rgb blue:rgb alpha:alpha];
 		[grays addObject:color];
 	}
 	rgb = 0;
 	for (i=0; i<64; i++) {
 		alpha = log2(64 - i) * 0.1667;
-		color = [NSColor colorWithCalibratedRed:rgb green:rgb blue:rgb alpha:alpha];
+		color = [NSColor colorWithDeviceRed:rgb green:rgb blue:rgb alpha:alpha];
 		[grays addObject:color];
 	}
 	rgb = .5;
 	for (i=0; i<64; i++) {
 		alpha = log2(64 - i) * 0.1667;
-		color = [NSColor colorWithCalibratedRed:rgb green:rgb blue:rgb alpha:alpha];
+		color = [NSColor colorWithDeviceRed:rgb green:rgb blue:rgb alpha:alpha];
 		[grays addObject:color];
 	}
 	rgb = 1;
 	for (i=0; i<64; i++) {
 		alpha = log2(64 - i) * 0.1667;
-		color = [NSColor colorWithCalibratedRed:rgb green:rgb blue:rgb alpha:alpha];
+		color = [NSColor colorWithDeviceRed:rgb green:rgb blue:rgb alpha:alpha];
 		[grays addObject:color];
 	}
 	return grays;
@@ -462,7 +462,7 @@ void PXPalette_addColor(PXPalette *self, NSColor *color)
 	if(!self) {
 		return;
 	}
-	NSColor *colorToAdd = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	NSColor *colorToAdd = [color colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 	if(!colorToAdd) { return; }
 	if (self->size - self->colorCount <= 0) {
 		if (self->size < 64) {
@@ -514,10 +514,10 @@ void PXPalette_resize(PXPalette *self, unsigned int newSize)
 	}
 }
 
-inline NSColor *PXPalette_colorAtIndex(PXPalette *self, unsigned index)
-{
+NSColor *PXPalette_colorAtIndex(PXPalette *self, unsigned index) {
 	return self->colors[index];
 }
+
 
 void PXPalette_swapColorsAtIndex(PXPalette* self, unsigned int colorIndex1, unsigned int colorIndex2)
 {
@@ -579,9 +579,9 @@ NSColor *PXPalette_colorClosestTo(PXPalette *self, NSColor *color)
 
 NSColor *_PXPalette_correctColor(NSColor *color)
 {
-	NSColor *colorToCheck = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	NSColor *colorToCheck = [color colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 	if ([colorToCheck alphaComponent] == 0) {
-		colorToCheck = [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]; // so we don't get lots of clear colors
+		colorToCheck = [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]; // so we don't get lots of clear colors
 	}
 	return colorToCheck;
 }
