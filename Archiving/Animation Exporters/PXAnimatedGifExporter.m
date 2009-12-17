@@ -21,7 +21,7 @@
 	[super init];
 	iterations = someIterations;
 	EGifSetGifVersion("89a");
-	tempFilePath = NSTemporaryDirectory();
+	tempFilePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"pxa_gif_export.gif"] retain];
 	gifFile = EGifOpenFileName([tempFilePath UTF8String], NO);
 	firstImage = YES;
 	return self;
@@ -29,7 +29,7 @@
 
 - (void)dealloc
 {
-//	EGifCloseFile(gifFile);
+	EGifCloseFile(gifFile);
 	[finalData release];
 	[super dealloc];
 }
