@@ -1,10 +1,10 @@
-//
-//  PXCanvas_CopyPaste.m
-//  Pixen
-//
-//  Created by Joe Osborn on 2005.07.31.
-//  Copyright 2005 Open Sword Group. All rights reserved.
-//
+  //
+  //  PXCanvas_CopyPaste.m
+  //  Pixen
+  //
+  //  Created by Joe Osborn on 2005.07.31.
+  //  Copyright 2005 Open Sword Group. All rights reserved.
+  //
 
 #import "PXCanvas_CopyPaste.h"
 #import "PXCanvas_Selection.h"
@@ -16,12 +16,12 @@
 - (int)runPasteTooBigAlert:(NSString *)pastedThing size:(NSSize)aSize
 {
 	return [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"The pasted %@ is too big!", @"The pasted %@ is too big!"), pastedThing]
-							defaultButton:NSLocalizedString(@"Resize Canvas to Fit", @"Resize Canvas to Fit")
-						  alternateButton:NSLocalizedString(@"Cancel Paste", @"Cancel Paste")
-							  otherButton:NSLocalizedString(@"Paste Anyway", @"Paste Anyway")
-				informativeTextWithFormat:NSLocalizedString(@"The pasted %@ is %dx%d, while the canvas is only %dx%d.", @"The pasted %@ is %dx%d, while the canvas is only %dx%d."), pastedThing,
-		(int)(aSize.width), (int)(aSize.height),
-		(int)([self size].width), (int)([self size].height)] runModal];
+                          defaultButton:NSLocalizedString(@"Resize Canvas to Fit", @"Resize Canvas to Fit")
+                        alternateButton:NSLocalizedString(@"Cancel Paste", @"Cancel Paste")
+                            otherButton:NSLocalizedString(@"Paste Anyway", @"Paste Anyway")
+              informativeTextWithFormat:NSLocalizedString(@"The pasted %@ is %dx%d, while the canvas is only %dx%d.", @"The pasted %@ is %dx%d, while the canvas is only %dx%d."), pastedThing,
+           (int)(aSize.width), (int)(aSize.height),
+           (int)([self size].width), (int)([self size].height)] runModal];
 }
 
 - (BOOL)canContinuePasteOf:(NSString *)pastedThing size:(NSSize)aSize
@@ -102,17 +102,17 @@
 		[board addTypes:[NSArray arrayWithObject:PXLayerPboardType] owner:self];
 	}
 	if(! [[board types] containsObject:NSTIFFPboardType]) 
-    { 
+  { 
 		[board addTypes:[NSArray arrayWithObject:NSTIFFPboardType] owner:self]; 
-    }	
+  }	
 	
 	NSImage *layerImage = [layer exportImage];
 	[layerImage lockFocus];
 	NSBitmapImageRep *bitmapRep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0, 0, [layerImage size].width, [layerImage size].height)] autorelease];
 	[layerImage unlockFocus];
 	NSDictionary *dataDict = [NSDictionary dictionaryWithObjectsAndKeys:layerImage, PXLayerImageKey,
-		[NSNumber numberWithFloat:[layer opacity]], PXLayerOpacityKey,
-		[layer name], PXLayerNameKey, nil];
+                            [NSNumber numberWithFloat:[layer opacity]], PXLayerOpacityKey,
+                            [layer name], PXLayerNameKey, nil];
 	[board setData:[NSKeyedArchiver archivedDataWithRootObject:dataDict] forType:PXLayerPboardType];
 	[board setData:[bitmapRep representationUsingType:NSTIFFFileType properties:nil] forType:NSTIFFPboardType];	
 }
@@ -122,14 +122,14 @@
 	id board = [NSPasteboard generalPasteboard];
 	[board declareTypes:[NSArray arrayWithObjects:NSTIFFPboardType, PXSelectionOriginPboardType, nil] owner:self];	
 	if(! [[board types] containsObject:NSTIFFPboardType]) 
-    { 
+  { 
 		[board addTypes:[NSArray arrayWithObject:NSTIFFPboardType] owner:self]; 
-    }
+  }
 	if (![[board types] containsObject:PXSelectionOriginPboardType])
 		[board addTypes:[NSArray arrayWithObject:PXSelectionOriginPboardType] owner: self];
 	
 	[board setData:[self selectionDataWithType:NSTIFFFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:merge] forKey:PXMergeLayersKey]]
-		   forType:NSTIFFPboardType];
+         forType:NSTIFFPboardType];
 	[board setString:NSStringFromPoint([self selectedRect].origin) forType:PXSelectionOriginPboardType];
 }
 
