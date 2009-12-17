@@ -40,6 +40,7 @@
 	[[[[animationDocument animation] objectInCelsAtIndex:0] canvas] replaceActiveLayerWithImage:cocoaImage];
 	[animationDocument makeWindowControllers];
 	[animationDocument showWindows];
+  [animationDocument updateChangeCount:NSChangeReadOtherContents];
 }
 
 - (void)rotateLayerCounterclockwise:sender

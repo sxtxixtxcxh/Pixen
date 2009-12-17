@@ -29,7 +29,7 @@
 
 - (void)dealloc
 {
-	EGifCloseFile(gifFile);
+    //the GIF file gets closed on export
 	[finalData release];
 	[super dealloc];
 }

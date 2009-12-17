@@ -32,6 +32,6 @@
 - (void)removeCel:(PXCel *)cel;
 - (void)moveCelFromIndex:(int)index1 toIndex:(int)index2;
 - (void)copyCelFromIndex:(int)originalIndex toIndex:(int)insertionIndex;
-- (NSImage *)spriteSheetWithinWidth:(int)width celMargin:(int)margin;
+- (NSImage *)spriteSheetWithCelMargin:(int)margin;
 - (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
 @end
