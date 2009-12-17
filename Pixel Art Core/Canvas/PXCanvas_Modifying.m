@@ -81,6 +81,21 @@
 	[self setColor:color atIndices:indices updateIn:bounds onLayer:activeLayer];
 }
 
+- (NSColor *) mergedColorAtPoint:(NSPoint)aPoint
+{
+  NSColor * currentColor = [NSColor clearColor];
+  for(PXLayer *layer in layers)
+  {
+    if([layer visible] && [layer opacity] > 0)
+    {
+      NSColor *layerColor = [layer colorAtPoint:aPoint];
+      layerColor = [layerColor colorWithAlphaComponent:([layer opacity]/100.0f) * [layerColor alphaComponent]];
+      currentColor = PXImage_blendColors(nil, currentColor, layerColor);
+    }
+  }
+  return currentColor;  
+}
+
 - (NSColor*) colorAtPoint:(NSPoint)aPoint
 {
 	if( ! [self containsPoint:aPoint] ) 
