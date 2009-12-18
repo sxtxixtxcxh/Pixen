@@ -151,7 +151,7 @@
 		[anItem action] == @selector(delete:)) {
 		return [canvas hasSelection];
 	}
-	else if ([anItem action] == @selector(paste:))
+	else if ([anItem action] == @selector(paste:) || [anItem action] == @selector(pasteIntoActiveLayer:))
 	{
 		NSPasteboard *board = [NSPasteboard generalPasteboard];
 		
@@ -330,6 +330,12 @@ didFinishWithSize:(NSSize)aSize
 {
 	[canvas paste];
 }
+
+- (IBAction) pasteIntoActiveLayer: (id) sender
+{
+	[canvas pasteIntoLayer:[canvas activeLayer]];
+}
+
 
 - (IBAction)delete:(id) sender
 {

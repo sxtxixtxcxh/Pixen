@@ -356,7 +356,6 @@
 		{
 			for (j=NSMinY(aRect); j < NSMaxY(aRect); j++)
 			{
-				// this can probably be optimized with some sort of palette index caching. maybe.
 				NSPoint point = NSMakePoint(i, j);
 				id color1 = PXImage_colorAtXY(image,point.x,point.y), color2 = PXImage_colorAtXY([aLayer image],point.x,point.y);
 				PXImage_setColorAtXY(image,((flattenOpacity) ? [color1 colorWithAlphaComponent:[color1 alphaComponent]*([self opacity]/100.00)] : color1),point.x,point.y);
@@ -367,7 +366,7 @@
 	PXImage_compositeUnderInRect(image, [aLayer image], aRect, YES);
 	if (flattenOpacity) 
 	{ 
-		[self setOpacity:100]; 
+		[self setOpacity:MAX(opacity, [aLayer opacity])]; 
 	}
 }
 

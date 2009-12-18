@@ -67,16 +67,16 @@
 	[self layersChanged];
 }
 
-- (void)pasteFromPasteboard:(NSPasteboard *) board type:type
+- (PXLayer *)layerForPastingFromPasteboard:(NSPasteboard *)board type:type
 {
-	PXLayer *layer = nil;
+  PXLayer *layer = nil;
 	if([type isEqualToString:PXLayerPboardType]) {
 		layer = [NSKeyedUnarchiver unarchiveObjectWithData:[board dataForType:type]];
 		[layer setSize:[self size]];
 	}
 	else if([type isEqualToString:PXNSImagePboardType]) {
 		id image = [[[NSImage alloc] initWithPasteboard:board] autorelease];
-		if(![self canContinuePasteOf:NSLocalizedString(@"image", @"image") size:[image size]]) { return; }
+		if(![self canContinuePasteOf:NSLocalizedString(@"image", @"image") size:[image size]]) { return nil; }
 		NSPoint origin;
 		if (![board stringForType:PXSelectionOriginPboardType])
 		{	
@@ -89,7 +89,25 @@
 			origin.y = MIN([self size].height - [image size].height, pOrigin.y);
 		}
 		layer = [PXLayer layerWithName:NSLocalizedString(@"Pasted Layer", @"Pasted Layer") image:image origin:origin size:[self size]];
-	}
+ 	}
+  return layer;
+}
+
+- (void)pasteFromPasteboard:(NSPasteboard *) board type:type intoLayer:(PXLayer *)layer
+{
+  PXLayer *newLayer = [self layerForPastingFromPasteboard:board type:type];
+  int idx = [layers indexOfObject:layer];
+  [self beginUndoGrouping]; {
+      //FIXME wasteful copy
+		[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];
+		[self deselect];
+    [[layers objectAtIndex:idx] compositeUnder:newLayer flattenOpacity:YES];
+	} [self endUndoGrouping];		
+}
+
+- (void)pasteFromPasteboard:(NSPasteboard *) board type:type
+{
+	PXLayer *layer = [self layerForPastingFromPasteboard:board type:type];
 	[self pasteLayer:layer];
 	[self layersChanged];
 }
@@ -180,6 +198,12 @@
 {
 	[self beginUndoGrouping]; {
 		[self pasteFromPasteboard:[NSPasteboard generalPasteboard] type:PXNSImagePboardType];
+	} [self endUndoGrouping:NSLocalizedString(@"Paste Selection", @"Paste Selection")];
+}
+- (void)pasteIntoLayer:(PXLayer *)layer
+{
+	[self beginUndoGrouping]; {
+		[self pasteFromPasteboard:[NSPasteboard generalPasteboard] type:PXNSImagePboardType intoLayer:layer];
 	} [self endUndoGrouping:NSLocalizedString(@"Paste Selection", @"Paste Selection")];
 }
 
