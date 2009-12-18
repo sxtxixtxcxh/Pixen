@@ -548,7 +548,7 @@ void PXPalette_swapColors(PXPalette* self, NSColor *color1, NSColor *color2)
 
 void PXPalette_addBackgroundColor(PXPalette *self)
 {
-	PXPalette_addColorWithoutDuplicating(self, [NSColor clearColor]);
+	PXPalette_addColorWithoutDuplicating(self, [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]);
 }
 
 void PXPalette_addColorWithoutDuplicating(PXPalette *self, NSColor *color)

@@ -98,7 +98,7 @@ NSMutableArray * toolNames;
   }
 	
 	[tools makeObjectsPerformSelector:@selector(setSwitcher:) withObject:self];
-	[self setColor:[NSColor blackColor]];
+	[self setColor:[[NSColor blackColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
 	[self useToolTagged:PXPencilToolTag];
   
 	_locked = NO;
@@ -234,7 +234,7 @@ NSMutableArray * toolNames;
 			[current setColor:_color]; 
 		}
 	}
-  [colorWell setColor:aColor];
+  [colorWell setColor:_color];
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXToolColorDidChangeNotificationName object:self];
 }
 

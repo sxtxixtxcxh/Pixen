@@ -93,7 +93,7 @@
       currentColor = PXImage_blendColors(nil, currentColor, layerColor);
     }
   }
-  return currentColor;  
+  return [currentColor colorUsingColorSpaceName:NSDeviceRGBColorSpace];  
 }
 
 
@@ -110,7 +110,7 @@
       }
     }
   }
-  return [NSColor clearColor];  
+  return [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];  
 }
 
 
@@ -288,7 +288,7 @@
 		PXPalette_addColor(palette, [NSColor colorWithDeviceRed:map[i].Red / 255.0f green:map[i].Green / 255.0f blue:map[i].Blue / 255.0f alpha:1]);
 	}
 	if (transparency)
-		PXPalette_addColorWithoutDuplicating(palette, [NSColor clearColor]);
+		PXPalette_addColorWithoutDuplicating(palette, [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]);
 	
 	for (id current in canvases)
 	{
@@ -349,7 +349,7 @@
 		pt = [[pts objectAtIndex:i] pointValue];
 		NSColor *c = [colors objectAtIndex:i];
 		if([c isEqual:[NSNull null]]) {
-			c = [NSColor clearColor];
+			c = [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 		}
 		[layer setColor:c atPoint:pt];
 		changedRect = NSUnionRect(changedRect, NSMakeRect(pt.x, pt.y, 1, 1));

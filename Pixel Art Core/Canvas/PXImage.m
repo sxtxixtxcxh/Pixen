@@ -293,7 +293,7 @@ NSColor *PXImage_colorAtIndex(PXImage *self, int loc)
 
 NSColor *PXImage_backgroundColor(PXImage *self)
 {
-	return [NSColor clearColor];
+	return [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 }
 
 NSColor *PXImage_colorAtXY(PXImage *self, int x, int y)

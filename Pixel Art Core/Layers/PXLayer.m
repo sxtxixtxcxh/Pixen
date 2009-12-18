@@ -78,7 +78,7 @@
 
 -(id) initWithName:(NSString *) aName size:(NSSize)size
 {
-	return [self initWithName:aName size:size fillWithColor:[NSColor clearColor]];
+	return [self initWithName:aName size:size fillWithColor:[[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
 }
 
 - initWithName:(NSString *)aName size:(NSSize)size fillWithColor:(NSColor *)c
@@ -160,7 +160,7 @@
 		   point.y >= [self size].height ||
 		   point.y < 0)
 		{
-			return [NSColor clearColor];
+			return [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 		}
 	}
 	return PXImage_colorAtXY(image, point.x, point.y);

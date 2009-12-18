@@ -303,7 +303,7 @@ backgroundColor:(NSColor *)color
 	{
 		return PXImage_backgroundColor([(PXLayer *)[layers objectAtIndex:0] image]);
 	}
-	return [NSColor clearColor];
+	return [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 }
 
 - (PXPalette *)createFrequencyPalette

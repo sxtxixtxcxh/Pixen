@@ -81,7 +81,7 @@
 	NSSize newSize = NSMakeSize((int)[firstRep pixelsWide], (int)[firstRep pixelsHigh]);
 	for (id current in layers)
 	{
-		[current setSize:newSize withOrigin:NSZeroPoint backgroundColor:[NSColor clearColor]];
+		[current setSize:newSize withOrigin:NSZeroPoint backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
 	}
 	free(selectionMask);
 	selectionMask = calloc(newSize.width * newSize.height, sizeof(BOOL));
