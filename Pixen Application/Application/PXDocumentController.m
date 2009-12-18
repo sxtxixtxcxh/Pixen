@@ -489,7 +489,8 @@ NSString *palettesSubdirName = @"Palettes";
 	int returnCode = [openPanel runModalForTypes:types];
 	if (returnCode == NSFileHandlingPanelCancelButton) { return; }
 
-	PXAnimationDocument *animationDocument = [[PXAnimationDocument alloc] init];
+	PXAnimationDocument *animationDocument = (PXAnimationDocument *)[self makeUntitledDocumentOfType:PixenAnimationFileType error:NULL];
+  
 	[[animationDocument animation] removeCel:[[animationDocument animation] objectInCelsAtIndex:0]];
 	
 	NSMutableArray *images = [[[NSMutableArray alloc] initWithCapacity:[[openPanel filenames] count]] autorelease];
@@ -503,6 +504,7 @@ NSString *palettesSubdirName = @"Palettes";
   {
     [[animationDocument animation] addCel:[[[PXCel alloc] initWithCanvas:current duration:defaultDuration] autorelease]];
   }	
+  [self addDocument:animationDocument];
 	[animationDocument makeWindowControllers];
 	[animationDocument showWindows];
   [animationDocument updateChangeCount:NSChangeReadOtherContents];
