@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="248"/>
+			<integer value="329"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -624,8 +624,8 @@
 											<object class="NSMenuItem" id="459057928">
 												<reference key="NSMenu" ref="98747512"/>
 												<string key="NSTitle">90° Left</string>
-												<string key="NSKeyEquiv">{</string>
-												<int key="NSKeyEquivModMask">1441792</int>
+												<string key="NSKeyEquiv">[</string>
+												<int key="NSKeyEquivModMask">1835008</int>
 												<int key="NSMnemonicLoc">2147483647</int>
 												<reference key="NSOnImage" ref="130733852"/>
 												<reference key="NSMixedImage" ref="295545801"/>
@@ -633,8 +633,8 @@
 											<object class="NSMenuItem" id="716135241">
 												<reference key="NSMenu" ref="98747512"/>
 												<string key="NSTitle">90° Right</string>
-												<string key="NSKeyEquiv">}</string>
-												<int key="NSKeyEquivModMask">1441792</int>
+												<string key="NSKeyEquiv">]</string>
+												<int key="NSKeyEquivModMask">1835008</int>
 												<int key="NSMnemonicLoc">2147483647</int>
 												<reference key="NSOnImage" ref="130733852"/>
 												<reference key="NSMixedImage" ref="295545801"/>
@@ -3402,6 +3402,7 @@
 					<string>319.ImportedFromIB2</string>
 					<string>327.IBPluginDependency</string>
 					<string>327.ImportedFromIB2</string>
+					<string>329.IBEditorWindowLastContentRect</string>
 					<string>329.IBPluginDependency</string>
 					<string>329.ImportedFromIB2</string>
 					<string>333.IBPluginDependency</string>
@@ -3472,6 +3473,7 @@
 					<string>440.ImportedFromIB2</string>
 					<string>442.IBPluginDependency</string>
 					<string>442.ImportedFromIB2</string>
+					<string>443.IBEditorWindowLastContentRect</string>
 					<string>443.IBPluginDependency</string>
 					<string>443.ImportedFromIB2</string>
 					<string>445.IBPluginDependency</string>
@@ -3632,7 +3634,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{187, 222}, {253, 393}}</string>
+					<string>{{91, 203}, {253, 393}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3662,7 +3664,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{142, 263}, {273, 333}}</string>
+					<string>{{185, 263}, {273, 333}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3685,7 +3687,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{-43, 596}, {531, 20}}</string>
+					<string>{{0, 596}, {531, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3720,6 +3722,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
+					<string>{{344, 163}, {162, 63}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3790,6 +3793,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
+					<string>{{344, 203}, {187, 43}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3926,6 +3930,7 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
 					<string key="className">FirstResponder</string>
+					<string key="superclassName">NSObject</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
