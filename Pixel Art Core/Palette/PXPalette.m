@@ -27,19 +27,7 @@
 #import "PXPalette.h"
 #import "PathUtilities.h"
 #import "NSColor+PXPaletteAdditions.h"
-
-@interface NSString(CompareNumeric)
-- (NSComparisonResult)compareNumeric:other;
-@end
-
-@implementation NSString(CompareNumeric)
-
-- (NSComparisonResult)compareNumeric:other
-{
-	return [self compare:other options:NSNumericSearch];
-}
-
-@end
+#import "NSString+Comparison.h"
 
 PXColorBucket *PXColorBucket_alloc()
 {

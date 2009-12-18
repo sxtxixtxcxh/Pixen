@@ -131,7 +131,21 @@
 	[undoManager beginUndoGrouping];
 	[[undoManager prepareWithInvocationTarget:self] removeCel:cel];
 	[cel setUndoManager:undoManager];
+  NSSize oldSize = [self size];
 	[cels insertObject:cel atIndex:index];
+  if(!NSEqualSizes([cel size], oldSize))
+  {
+    NSSize resultSize = oldSize;
+    if([cel size].width > resultSize.width) 
+    {
+      resultSize.width = [cel size].width;
+    }
+    if([cel size].height > resultSize.height) 
+    {
+      resultSize.height = [cel size].height;
+    }
+    [self setSize:resultSize];
+  }
 	[undoManager setActionName:NSLocalizedString(@"Add Cel", @"Add Cel")];
 	[undoManager endUndoGrouping];
 	[self didChangeValueForKey:@"countOfCels"];

@@ -39,6 +39,8 @@
 		BFFC21B906DED6F8008EC4CC /* PXGradientBuilder.nib in Resources */ = {isa = PBXBuildFile; fileRef = BFFC21B706DED6F8008EC4CC /* PXGradientBuilder.nib */; };
 		EA041A190CE8F72F0095DAA9 /* PXBackgroundConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = EA041A170CE8F72F0095DAA9 /* PXBackgroundConfig.h */; };
 		EA041A1A0CE8F72F0095DAA9 /* PXBackgroundConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EA041A180CE8F72F0095DAA9 /* PXBackgroundConfig.m */; };
+		EA2EA41B10DB37E50065090C /* NSString+Comparison.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2EA41910DB37E50065090C /* NSString+Comparison.h */; };
+		EA2EA41C10DB37E50065090C /* NSString+Comparison.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2EA41A10DB37E50065090C /* NSString+Comparison.m */; };
 		EA31F8700CE7BD8B00EC481B /* PXApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8620CE7BD8B00EC481B /* PXApplication.h */; };
 		EA31F8710CE7BD8B00EC481B /* PXApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F8630CE7BD8B00EC481B /* PXApplication.m */; };
 		EA31F8720CE7BD8B00EC481B /* PXDocumentController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8640CE7BD8B00EC481B /* PXDocumentController.h */; };
@@ -583,6 +585,8 @@
 		BFFC221A06DEDE63008EC4CC /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXGradientBuilder.nib; sourceTree = "<group>"; };
 		EA041A170CE8F72F0095DAA9 /* PXBackgroundConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXBackgroundConfig.h; sourceTree = "<group>"; };
 		EA041A180CE8F72F0095DAA9 /* PXBackgroundConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXBackgroundConfig.m; sourceTree = "<group>"; };
+		EA2EA41910DB37E50065090C /* NSString+Comparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Comparison.h"; sourceTree = "<group>"; };
+		EA2EA41A10DB37E50065090C /* NSString+Comparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Comparison.m"; sourceTree = "<group>"; };
 		EA31F8620CE7BD8B00EC481B /* PXApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXApplication.h; sourceTree = "<group>"; };
 		EA31F8630CE7BD8B00EC481B /* PXApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXApplication.m; sourceTree = "<group>"; };
 		EA31F8640CE7BD8B00EC481B /* PXDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXDocumentController.h; sourceTree = "<group>"; };
@@ -1849,6 +1853,8 @@
 				61A22A850D2303EE00430CCD /* OSRectAdditions.m */,
 				EA31FC7D0CE7D7C200EC481B /* PathUtilities.h */,
 				EA31FC7E0CE7D7C200EC481B /* PathUtilities.m */,
+				EA2EA41910DB37E50065090C /* NSString+Comparison.h */,
+				EA2EA41A10DB37E50065090C /* NSString+Comparison.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -2303,6 +2309,7 @@
 				61A22B920D2323B500430CCD /* OSPlasticButtonCell.h in Headers */,
 				31E907B5105757C700ADB171 /* CTGradient.h in Headers */,
 				31E907B7105757C700ADB171 /* CTGradientView.h in Headers */,
+				EA2EA41B10DB37E50065090C /* NSString+Comparison.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2674,6 +2681,7 @@
 				61A22B930D2323B500430CCD /* OSPlasticButtonCell.m in Sources */,
 				31E907B6105757C700ADB171 /* CTGradient.m in Sources */,
 				31E907B8105757C700ADB171 /* CTGradientView.m in Sources */,
+				EA2EA41C10DB37E50065090C /* NSString+Comparison.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
