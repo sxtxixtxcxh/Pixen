@@ -93,6 +93,9 @@
   return layer;
 }
 
+  //really, this should keep around an invisible paste-layer until the selection is removed, or something...
+  //this way, it will lead to data garbling when people move their selections around.  save it for the rewrite!
+
 - (void)pasteFromPasteboard:(NSPasteboard *) board type:type intoLayer:(PXLayer *)layer
 {
   PXLayer *newLayer = [self layerForPastingFromPasteboard:board type:type];
