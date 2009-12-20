@@ -20,11 +20,12 @@
 - view;
 - (BOOL)isPaletteIndexKey:(NSEvent *)event;
 - (void)keyDown:(NSEvent *)event;
-- (void)updateFrequencies;
 
 - (IBAction)useMostRecentColors:sender;
 - (IBAction)useMostFrequentColors:sender;
 - (IBAction)useColorListColors:sender;
 
+- (void)refreshPalette:(NSNotification *)note;
+- (void)updatePalette:(NSNotification *)note;
 
 @end

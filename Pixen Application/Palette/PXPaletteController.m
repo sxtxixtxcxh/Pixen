@@ -22,6 +22,7 @@
 {
 	[super init];
 	[NSBundle loadNibNamed:@"PXPaletteController" owner:self];
+  frequencyPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
 	return self;
 }
 
@@ -39,15 +40,33 @@
 - (void)setDocument:(PXDocument *)doc
 {
 	[paletteView setDocument:doc];
+  if(canvas)
+  {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PXCanvasFrequencyPaletteRefresh" object:canvas];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PXCanvasPaletteUpdate" object:canvas];
+  }
 	canvas = [doc canvas];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPalette:) name:@"PXCanvasFrequencyPaletteRefresh" object:canvas];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePalette:) name:@"PXCanvasPaletteUpdate" object:canvas];
+  [self refreshPalette:nil];
 }
 
-- (void)updateFrequencies
+- (void)refreshPalette:(NSNotification *)note
 {
-	PXPalette *oldPalette = frequencyPalette;
-	frequencyPalette = [canvas createFrequencyPalette];
-	[paletteView setPalette:frequencyPalette];
-	PXPalette_release(oldPalette);
+  PXPalette *oldPal = frequencyPalette;
+  frequencyPalette = [canvas createFrequencyPalette];
+  PXPalette_release(oldPal);
+  [paletteView setPalette:frequencyPalette];
+}
+
+- (void)updatePalette:(NSNotification *)note
+{
+  NSDictionary *changes = [note userInfo];
+  NSColor *oldC = [changes objectForKey:@"PXCanvasPaletteUpdateRemoved"];
+  NSColor *newC = [changes objectForKey:@"PXCanvasPaletteUpdateAdded"];
+  PXPalette_decrementColorCount(frequencyPalette, oldC);
+  PXPalette_incrementColorCount(frequencyPalette, newC);
+  [paletteView retile];
 }
 
 - (void)useColorAtIndex:(unsigned)index event:(NSEvent *)e;
@@ -73,6 +92,7 @@
 - (BOOL)isPaletteIndexKey:(NSEvent *)event
 {
 	NSString *chars = [event characters];
+    //not sure why numpad is unacceptable, but whatever
 	BOOL numpad = [event modifierFlags] & NSNumericPadKeyMask;
 	return (([chars intValue] != 0) || ([chars characterAtIndex:0] == '0')) && !numpad;
 }
@@ -80,23 +100,20 @@
 - (void)keyDown:(NSEvent *)event
 {
 	NSString *chars = [event characters];
-	unsigned index = [chars intValue];
-	[self useColorAtIndex:index event:event];
+  unsigned index = [chars intValue];
+  [self useColorAtIndex:index event:event];
 }
 
 - (IBAction)useMostRecentColors:sender;
 {
-	
 }
 
 - (IBAction)useMostFrequentColors:sender;
 {
-	
 }
 
 - (IBAction)useColorListColors:sender;
 {
-	
 }
 
 @end

@@ -59,6 +59,9 @@ typedef BOOL * PXSelectionMask;
 	NSSize previewSize;
 }
 
+- (void)refreshWholePalette;
+- (void)refreshPaletteDecreaseColorCount:(NSColor *)down increaseColorCount:(NSColor *)up;
+
 - (id)initWithoutBackgroundColor;
 - (void)setUndoManager:(NSUndoManager *)manager;
 - (NSUndoManager *)undoManager;

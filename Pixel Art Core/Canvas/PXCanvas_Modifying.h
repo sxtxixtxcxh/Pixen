@@ -15,8 +15,7 @@
 - (NSColor *) surfaceColorAtPoint:(NSPoint)aPoint;
 - (NSColor*) colorAtPoint:(NSPoint) aPoint;
 - (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint;
-- (void)setColor:(NSColor *)aColor atPoints:(NSArray *)points;
-- (void)setColor:(NSColor *)color atPoint:(NSPoint)aPoint;
+- (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint onLayer:(PXLayer *)l;
 - (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds;
 - (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer;
 - (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
@@ -49,4 +48,6 @@
 - (void)replaceColorsAtPoints:(NSArray *)pts withColors:(NSArray *)colors inLayer:layer;
 - (void)bufferUndoAtPoint:(NSPoint)pt fromColor:(NSColor *)oldColor toColor:(NSColor *)newColor;
 
+
+- (void)applyImage:(NSImage *)img toLayer:(PXLayer *)layer;
 @end

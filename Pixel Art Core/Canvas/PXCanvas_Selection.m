@@ -78,7 +78,7 @@
 				if ([self pointIsSelected:NSMakePoint(i, j)])
 				{
 					point = NSMakePoint(i, j);
-					[newLayer setColor:[self colorAtPoint:point] atPoint:point];
+					[self setColor:[self colorAtPoint:point] atPoint:point onLayer:newLayer];
 					[[um prepareWithInvocationTarget:self] setColor:[self colorAtPoint:point] atPoint:point];
 					[self setColor:[self eraseColor] atPoint:point];
 				}
@@ -256,8 +256,9 @@
 		{
 			NSPoint point = NSMakePoint(i, j);
 			if (![self pointIsSelected:point]) { continue; }
-			[tempLayer setColor:[[self activeLayer] colorAtPoint:point]
-						atPoint:point];
+			[self setColor:[[self activeLayer] colorAtPoint:point]
+						atPoint:point
+             onLayer:tempLayer];
 		}
 	}
 	return [NSKeyedArchiver archivedDataWithRootObject:tempLayer];
@@ -495,7 +496,7 @@
 				NSPoint point = NSMakePoint(i, j);
 				if ([self pointIsSelected:point])
 				{
-					[newLayer setColor:color atPoint:point];
+					[self setColor:color atPoint:point onLayer:newLayer];
 				}
 			}
 		}

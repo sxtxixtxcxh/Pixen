@@ -7,6 +7,7 @@
 //
 
 #import "PXCanvas_ImportingExporting.h"
+#import "PXCanvas_Modifying.h"
 #import "PXCanvas_Layers.h"
 #import "PXBitmapExporter.h"
 #import "PXPSDHandler.h"
@@ -92,7 +93,7 @@
 		[[layers lastObject] setCanvas:self];
 		[self activateLayer:[layers lastObject]];
 	}
-	[activeLayer applyImage:anImage];
+  [self applyImage:anImage toLayer:activeLayer];
 	[self updatePreviewSize];
 	[self layersChanged];
 }
@@ -118,7 +119,7 @@
 	{
 		id layer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Imported Layer", @"Imported Layer") size:[current size]] autorelease];
 		[self addLayer:layer];
-		[layer applyImage:current];
+		[self applyImage:current toLayer:layer];
 	}
 	[[self undoManager] removeAllActions];
 	return self;

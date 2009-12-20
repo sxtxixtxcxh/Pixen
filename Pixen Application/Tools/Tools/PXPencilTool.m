@@ -111,7 +111,7 @@
 	else// if (![oldColor isEqualTo:newColor])
 	{
 		[aCanvas bufferUndoAtPoint:aPoint fromColor:oldColor toColor:newColor];
-		[aLayer setColor:newColor atPoint:aPoint];
+		[aCanvas setColor:newColor atPoint:aPoint onLayer:aLayer];
 
 		if (!NSEqualRects(changedRect, NSZeroRect)) {
 			changedRect = NSUnionRect(changedRect, NSMakeRect(aPoint.x, aPoint.y, 1, 1));

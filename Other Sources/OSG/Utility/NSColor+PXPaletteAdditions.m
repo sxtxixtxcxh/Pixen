@@ -11,12 +11,15 @@
 
 @implementation NSColor(PXPaletteAdditions)
 
+  //we have to use this to keep the hash in the 0..65535 range
 - (unsigned int)paletteHash
 {
-	unsigned int r = [self redComponent]*255;
-	unsigned int g = [self greenComponent]*255;
-	unsigned int b = [self blueComponent]*255;
-	unsigned int a = [self alphaComponent]*255;
+  CGFloat comps[4];
+  [self getComponents:comps];
+	unsigned int r = comps[0]*255;
+	unsigned int g = comps[1]*255;
+	unsigned int b = comps[2]*255;
+	unsigned int a = comps[3]*255;
 	return (r * g) ^ (b * a);
 }
 

@@ -87,7 +87,7 @@
 	for (i = 0; i < colorCount; i++)
 	{
 		// We're only including colors that are (or will be) opaque.
-		if ([palette->colors[i] alphaComponent] >= .5)
+		if ([palette->colors[i].color alphaComponent] >= .5)
 			colorMapSize++;
 	}
 	if (hasAlpha)
@@ -107,8 +107,8 @@
 	for (i = 0; i < colorCount; i++)
 	{
 		// Check to see if the current color is transparent; if so, don't deal with it now: we'll add the sole transparent color at the end.
-		if ([palette->colors[i] alphaComponent] < 0.5) { continue; }
-		NSColor *color = [palette->colors[i] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+		if ([palette->colors[i].color alphaComponent] < 0.5) { continue; }
+		NSColor *color = [palette->colors[i].color colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 		colorMap->Colors[mapIndex].Red = (int)([color redComponent] * 255);
 		colorMap->Colors[mapIndex].Green = (int)([color greenComponent] * 255);
 		colorMap->Colors[mapIndex].Blue = (int)([color blueComponent] * 255);

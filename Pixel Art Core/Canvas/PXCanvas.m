@@ -209,6 +209,21 @@
 	[self layersChanged];
 }
 
+- (void)refreshWholePalette
+{
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasFrequencyPaletteRefresh" object:self userInfo:nil];
+}
+
+  //later, aggregate these in NSCountedSets?
+- (void)refreshPaletteDecreaseColorCount:(NSColor *)down increaseColorCount:(NSColor *)up
+{
+  if([down isEqual:up]) 
+  {
+    return;
+  }
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasPaletteUpdate" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:down, @"PXCanvasPaletteUpdateRemoved", up, @"PXCanvasPaletteUpdateAdded", nil]];
+}
+
 - (void)setSize:(NSSize)aSize 
 	 withOrigin:(NSPoint)origin
 backgroundColor:(NSColor *)color
@@ -256,6 +271,7 @@ backgroundColor:(NSColor *)color
 	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXSelectionMaskChangedNotificationName object:self];
 	selectedRect = NSZeroRect;
+  [self refreshWholePalette];
 	[self updatePreviewSize];
 }
 
@@ -306,38 +322,29 @@ backgroundColor:(NSColor *)color
 	return [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 }
 
+  //have to break this up into chunkables by image region.  only way to do it without threading or watching every added/removed pixel 
+  //(which still might be best)
+
 - (PXPalette *)createFrequencyPalette
 {
-	PXPalette *frequencyPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
-	id freqs = [NSMutableDictionary dictionaryWithCapacity:4000];
-	for (id current in layers)
+	PXPalette *freqPal = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
+  NSSize sz = [self size];
+  float w = sz.width;
+  float h = sz.height;
+	for (PXLayer * current in layers)
 	{
 		int i;
-		for (i = 0; i < [current size].width; i++)
+		for (i = 0; i < w; i++)
 		{
 			int j;
-			for (j = 0; j < [current size].height; j++)
+			for (j = 0; j < h; j++)
 			{
 				id color = [current colorAtPoint:NSMakePoint(i, j)];
-				id hash = [NSNumber numberWithInt:[color hash]];
-				PXFrequencyEntry *freq = [freqs objectForKey:hash];
-				if(freq)
-				{
-					[freq increment];
-				}
-				else
-				{
-					[freqs setObject:[PXFrequencyEntry withColor:color] forKey:hash];
-				}
+        PXPalette_incrementColorCount(freqPal, color);
 			}
 		}
 	}
-	id sorted = [[freqs allValues] sortedArrayUsingSelector:@selector(compare:)];
-	for (id current in sorted)
-	{
-		PXPalette_addColor(frequencyPalette, [current color]);
-	}
-	return frequencyPalette;
+  return freqPal;
 }
 
 @end

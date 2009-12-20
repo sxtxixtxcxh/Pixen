@@ -50,6 +50,7 @@
 #import "PXLayer.h"
 #import "PXBitmapImporter.h"
 #import <AppKit/NSAlert.h>
+#import "PXCanvasWindowController_IBActions.h"
 
 
 @implementation PXCanvasDocument
@@ -222,6 +223,11 @@ BOOL isPowerOfTwo(int num)
 	}
 	[[self undoManager] removeAllActions];
 	[self updateChangeCount:NSChangeCleared]; 
+}
+
+- (void)delete:sender
+{
+  [windowController delete:sender];
 }
 
 - (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)aType
