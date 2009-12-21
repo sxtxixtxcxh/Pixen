@@ -34,7 +34,7 @@ typedef struct _PXColorBucket {
 
 typedef struct _PXPaletteColorPair {
   NSColor *color;
-  NSUInteger frequency;
+  NSInteger frequency;
 } PXPaletteColorPair;
 
 typedef struct {
@@ -101,5 +101,5 @@ double PXPalette_hashEfficiency(PXPalette *self);
 int PXPalette_colorCount(PXPalette *self);
 NSArray *PXPalette_colors(PXPalette *self);
 
-void PXPalette_decrementColorCount(PXPalette *self, NSColor *color);
-void PXPalette_incrementColorCount(PXPalette *self, NSColor *color);
+void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, int amt);
+void PXPalette_incrementColorCount(PXPalette *self, NSColor *color, int amt);

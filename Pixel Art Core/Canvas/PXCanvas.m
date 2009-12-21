@@ -91,6 +91,9 @@
 - (id)_rawInit
 {
 	if (![super init]) return nil;
+  plusColors = [[NSCountedSet alloc] init];
+  minusColors = [[NSCountedSet alloc] init];
+  frequencyPaletteDirty = NO;
 	return self;
 }
 
@@ -116,9 +119,12 @@
 	return canvas;
 }
 
-- (id)initWithoutBackgroundColor
+- (id)init
 {
 	if (![super init]) return nil;
+  plusColors = [[NSCountedSet alloc] init];
+  minusColors = [[NSCountedSet alloc] init];
+  frequencyPaletteDirty = NO;
 	layers = [[NSMutableArray alloc] initWithCapacity:23];
 	grid = [[PXGrid alloc] init];
 	bgConfig = [[PXBackgroundConfig alloc] init];
@@ -126,12 +132,6 @@
 	drawnPoints = nil;
 	oldColors = nil;
 	newColors = nil;
-	return self;
-}
-
-- (id)init
-{
-	if (![self initWithoutBackgroundColor]) { return nil; }
 	return self;
 }
 
@@ -147,6 +147,8 @@
 	[newColors release];
 	[layers release];
 	[bgConfig release];
+  [minusColors release];
+  [plusColors release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
 }
@@ -209,19 +211,52 @@
 	[self layersChanged];
 }
 
-- (void)refreshWholePalette
+- (void)clearIncrementalPaletteRefresh
 {
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasFrequencyPaletteRefresh" object:self userInfo:nil];
+  [minusColors removeAllObjects];
+  [plusColors removeAllObjects];
 }
 
-  //later, aggregate these in NSCountedSets?
+//could be coalesced by timer or update/undo group
+- (void)reallyRefreshWholePalette:ignored
+{
+  [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(reallyRefreshWholePalette:) object:nil];
+  [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(reallyRefreshIncrementalPalette:) object:nil];
+  
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasFrequencyPaletteRefresh" object:self userInfo:nil];
+  frequencyPaletteDirty = NO;
+  [self clearIncrementalPaletteRefresh];
+}
+
+- (void)reallyRefreshIncrementalPalette:ignored
+{
+    //NSLog(@"incremental update");
+  [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(reallyRefreshIncrementalPalette:) object:nil];
+
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasPaletteUpdate" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:minusColors, @"PXCanvasPaletteUpdateRemoved", plusColors, @"PXCanvasPaletteUpdateAdded", nil]];
+  [self clearIncrementalPaletteRefresh];
+}
+
+- (void)refreshWholePalette
+{
+  if(!frequencyPaletteDirty)
+  {
+    frequencyPaletteDirty = YES;
+      //time isn't the best way to do this.  should be undo group-based.
+    [self performSelector:@selector(reallyRefreshWholePalette:) withObject:nil afterDelay:0.5f];
+  }
+}
 - (void)refreshPaletteDecreaseColorCount:(NSColor *)down increaseColorCount:(NSColor *)up
 {
   if([down isEqual:up]) 
   {
     return;
   }
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasPaletteUpdate" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:down, @"PXCanvasPaletteUpdateRemoved", up, @"PXCanvasPaletteUpdateAdded", nil]];
+    //NSLog(@"change color %@ to %@", down, up);
+    //time isn't the best way to do this.  should be undo group-based.
+  [self performSelector:@selector(reallyRefreshIncrementalPalette:) withObject:nil afterDelay:0.5f];
+  [minusColors addObject:down];
+  [plusColors addObject:up];
 }
 
 - (void)setSize:(NSSize)aSize 
@@ -257,13 +292,15 @@ backgroundColor:(NSColor *)color
 				[current setSize:aSize withOrigin:origin backgroundColor:color];
 			}
 			[self setMaskData:newData withOldMaskData:oldData];
-			NSLog(@"Mask data updated - copied %@", [[layers lastObject] name]);
+        //NSLog(@"Mask data updated - copied %@", [[layers lastObject] name]);
 			free(newMask);
+      [self refreshWholePalette];
 		} [self endUndoGrouping:NSLocalizedString(@"Change Canvas Size", @"Change Canvas Size")];
 	}
 	else 
 	{
 		[self insertLayer:[[[PXLayer alloc] initWithName:NSLocalizedString(@"Main Layer", @"Main Layer") size:aSize fillWithColor:color] autorelease] atIndex:0];
+    [self reallyRefreshWholePalette:nil];
 		[self activateLayer:[layers objectAtIndex:0]];
 		[[self undoManager] removeAllActions];
 		selectionMask = newMask;
@@ -271,7 +308,6 @@ backgroundColor:(NSColor *)color
 	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXSelectionMaskChangedNotificationName object:self];
 	selectedRect = NSZeroRect;
-  [self refreshWholePalette];
 	[self updatePreviewSize];
 }
 
@@ -299,6 +335,7 @@ backgroundColor:(NSColor *)color
 
 - (void)beginUndoGrouping
 {
+    //ready palette change coalesce groups?
 	[[self undoManager] beginUndoGrouping];
 }
 
@@ -310,6 +347,7 @@ backgroundColor:(NSColor *)color
 
 - (void)endUndoGrouping
 {
+    //tried to push palette change groups here, but it doesn't seem to get called during an undo or redo
 	[[self undoManager] endUndoGrouping];
 }
 
@@ -322,15 +360,13 @@ backgroundColor:(NSColor *)color
 	return [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 }
 
-  //have to break this up into chunkables by image region.  only way to do it without threading or watching every added/removed pixel 
-  //(which still might be best)
-
 - (PXPalette *)createFrequencyPalette
 {
 	PXPalette *freqPal = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
   NSSize sz = [self size];
   float w = sz.width;
   float h = sz.height;
+  NSCountedSet *colors = [NSCountedSet set];
 	for (PXLayer * current in layers)
 	{
 		int i;
@@ -340,10 +376,14 @@ backgroundColor:(NSColor *)color
 			for (j = 0; j < h; j++)
 			{
 				id color = [current colorAtPoint:NSMakePoint(i, j)];
-        PXPalette_incrementColorCount(freqPal, color);
+        [colors addObject:color];
 			}
 		}
 	}
+  for(NSColor *c in colors)
+  {
+    PXPalette_incrementColorCount(freqPal, c, [colors countForObject:c]);
+  }
   return freqPal;
 }
 

@@ -560,7 +560,7 @@ void PXPalette_addColorWithoutDuplicating(PXPalette *self, NSColor *color)
 	PXPalette_indexOfColorAddingIfNotPresent(self, color);
 }
 
-unsigned int PXPalette_indexOfColorClosestToAddingIfTooFar(PXPalette *self, NSColor *color, float threshold)
+unsigned int PXPalette_indexOfColorClosestToAddingIfTooFar(PXPalette *self, NSColor *color, float threshold, BOOL *added)
 {
 	unsigned int i;
 	float distance, minDistance=INFINITY;
@@ -574,8 +574,10 @@ unsigned int PXPalette_indexOfColorClosestToAddingIfTooFar(PXPalette *self, NSCo
 	}
   if(minDistance <= threshold)
   {
+    *added=NO;
     return closestIndex;
   }
+  *added=YES;
   PXPalette_addColor(self, color);
   return self->colorCount-1;
 }
@@ -630,15 +632,20 @@ unsigned int PXPalette_indexOfColorAddingIfNotPresent(PXPalette *self, NSColor *
 }
 
   //this one keeps the colors sorted, as long as it's the only way used to take colors out.
-void PXPalette_decrementColorCount(PXPalette *self, NSColor *color)
+void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, int amt)
 {
 	NSColor *correctedColor = _PXPalette_correctColor(color);
-	unsigned int idx = PXPalette_indexOfColorClosestToAddingIfTooFar(self, correctedColor, 0.05f);
+  BOOL added = NO;
+	unsigned int idx = PXPalette_indexOfColorClosestToAddingIfTooFar(self, correctedColor, 0.05f, &added);
+  if(added)
+  {
+    self->colors[idx].frequency = 0;
+  }
   if(idx != -1)
   {
-    unsigned int freq = self->colors[idx].frequency;
-    freq--;
-    if(freq == 0) 
+    NSInteger freq = self->colors[idx].frequency;
+    freq-=amt;
+    if(freq <= 0) 
     {
       PXPalette_removeColorAtIndex(self, idx);
       return;
@@ -659,15 +666,20 @@ void PXPalette_decrementColorCount(PXPalette *self, NSColor *color)
   }
 }
   //this one keeps the colors sorted, as long as it's the only way used to put colors in.
-void PXPalette_incrementColorCount(PXPalette *self, NSColor *color)
+void PXPalette_incrementColorCount(PXPalette *self, NSColor *color, int amt)
 {
     //this could be hilariously accelerated if we were coalescing color updates.
 	NSColor *correctedColor = _PXPalette_correctColor(color);
-	unsigned int idx = PXPalette_indexOfColorClosestToAddingIfTooFar(self, correctedColor, 0.05f);
+  BOOL added = NO;
+	unsigned int idx = PXPalette_indexOfColorClosestToAddingIfTooFar(self, correctedColor, 0.05f, &added);
+  if(added)
+  {
+    self->colors[idx].frequency = 0;
+  }
   if(idx != -1)
   {
-    unsigned int freq = self->colors[idx].frequency;
-    freq++;
+    NSInteger freq = self->colors[idx].frequency;
+    freq+=amt;
     self->colors[idx].frequency=freq;
     if(idx > 0)
     {

@@ -53,20 +53,31 @@
 
 - (void)refreshPalette:(NSNotification *)note
 {
+    //NSLog(@"whole palette refreshed");
   PXPalette *oldPal = frequencyPalette;
   frequencyPalette = [canvas createFrequencyPalette];
   PXPalette_release(oldPal);
   [paletteView setPalette:frequencyPalette];
+  [paletteView setNeedsDisplay:YES];
 }
 
 - (void)updatePalette:(NSNotification *)note
 {
   NSDictionary *changes = [note userInfo];
-  NSColor *oldC = [changes objectForKey:@"PXCanvasPaletteUpdateRemoved"];
-  NSColor *newC = [changes objectForKey:@"PXCanvasPaletteUpdateAdded"];
-  PXPalette_decrementColorCount(frequencyPalette, oldC);
-  PXPalette_incrementColorCount(frequencyPalette, newC);
+  NSCountedSet *oldC = [changes objectForKey:@"PXCanvasPaletteUpdateRemoved"];
+  NSCountedSet *newC = [changes objectForKey:@"PXCanvasPaletteUpdateAdded"];
+  for(NSColor *old in oldC)
+  {
+      // NSLog(@"Color %@ was removed %d times", old, [oldC countForObject:old]);
+    PXPalette_decrementColorCount(frequencyPalette, old, [oldC countForObject:old]);
+  }
+  for(NSColor *new in newC)
+  {
+      //NSLog(@"Color %@ was added %d times", new, [newC countForObject:new]);
+    PXPalette_incrementColorCount(frequencyPalette, new, [newC countForObject:new]);
+  }
   [paletteView retile];
+  [paletteView setNeedsDisplay:YES];
 }
 
 - (void)useColorAtIndex:(unsigned)index event:(NSEvent *)e;

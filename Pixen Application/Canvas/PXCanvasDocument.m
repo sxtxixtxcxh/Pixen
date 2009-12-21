@@ -240,7 +240,7 @@ BOOL isPowerOfTwo(int num)
 	else if ([aType isEqualTo:BMPFileType])
 	{
 		[canvas release];
-		canvas = [[PXCanvas alloc] initWithoutBackgroundColor];
+		canvas = [[PXCanvas alloc] init];
 		[canvas replaceActiveLayerWithImage:[[[NSImage alloc] initWithData:data] autorelease]];
 	}
 	else

@@ -100,7 +100,7 @@
 
 - initWithImage:(NSImage *)anImage type:(NSString *)type
 {
-	[self initWithoutBackgroundColor];
+	[self init];
 	[self replaceActiveLayerWithImage:anImage];
 	return self;
 }
