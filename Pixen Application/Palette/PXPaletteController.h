@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PXCanvas.h"
-@class PXCanvas, PXPalettePanelPaletteView;
+@class PXCanvas, PXDocument, PXPalettePanelPaletteView;
 
 typedef enum {
   PXPaletteModeRecent,
@@ -19,7 +19,7 @@ typedef enum {
 @interface PXPaletteController : NSObject
 {
   PXPaletteMode mode;
-	PXCanvas *canvas;
+	PXDocument *document;
   int recentLimit;
 	PXPalette *frequencyPalette, *recentPalette, *listPalette;
 	IBOutlet PXPalettePanelPaletteView *paletteView;

@@ -47,6 +47,11 @@
 	return [[animation objectInCelsAtIndex:0] canvas];
 }
 
+- (NSArray *)canvases
+{
+  return [animation canvases];
+}
+
 - (void)delete:sender
 {
   [windowController delete:sender];

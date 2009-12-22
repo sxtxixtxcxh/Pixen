@@ -54,6 +54,11 @@
 	return [cels count];
 }
 
+- (NSArray *)canvases
+{
+  return [cels valueForKey:@"canvas"];
+}
+
 - (NSSize)size
 {
 	return [[cels lastObject] size];

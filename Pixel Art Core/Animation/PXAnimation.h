@@ -14,6 +14,7 @@
 	NSUndoManager *undoManager;
 }
 - init;
+- (NSArray *)canvases;
 - (PXCel *)objectInCelsAtIndex:(unsigned int)index;
 - (unsigned)indexOfObjectInCels:(PXCel *)cel;
 - (unsigned)countOfCels;
