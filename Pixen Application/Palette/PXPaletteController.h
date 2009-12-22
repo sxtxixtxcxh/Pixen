@@ -9,9 +9,18 @@
 #import <Cocoa/Cocoa.h>
 #import "PXCanvas.h"
 @class PXCanvas, PXPalettePanelPaletteView;
+
+typedef enum {
+  PXPaletteModeRecent,
+  PXPaletteModeFrequency,
+  PXPaletteModeColorList
+} PXPaletteMode;
+
 @interface PXPaletteController : NSObject
 {
+  PXPaletteMode mode;
 	PXCanvas *canvas;
+  int recentLimit;
 	PXPalette *frequencyPalette, *recentPalette, *listPalette;
 	IBOutlet PXPalettePanelPaletteView *paletteView;
 	IBOutlet NSView *view;

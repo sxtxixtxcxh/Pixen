@@ -217,7 +217,7 @@
   [plusColors removeAllObjects];
 }
 
-//could be coalesced by timer or update/undo group
+//could be coalesced by timer or update/undo group; would rather do it with undo.
 - (void)reallyRefreshWholePalette:ignored
 {
   [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(reallyRefreshWholePalette:) object:nil];
@@ -335,7 +335,6 @@ backgroundColor:(NSColor *)color
 
 - (void)beginUndoGrouping
 {
-    //ready palette change coalesce groups?
 	[[self undoManager] beginUndoGrouping];
 }
 

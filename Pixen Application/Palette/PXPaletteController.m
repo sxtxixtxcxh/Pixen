@@ -23,12 +23,16 @@
 	[super init];
 	[NSBundle loadNibNamed:@"PXPaletteController" owner:self];
   frequencyPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
+  recentLimit = 32;
+  recentPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
+  mode = PXPaletteModeFrequency;
 	return self;
 }
 
 - (void)dealloc
 {
 	PXPalette_release(frequencyPalette);
+	PXPalette_release(recentPalette);
 	[super dealloc];
 }
 
@@ -57,8 +61,32 @@
   PXPalette *oldPal = frequencyPalette;
   frequencyPalette = [canvas createFrequencyPalette];
   PXPalette_release(oldPal);
-  [paletteView setPalette:frequencyPalette];
-  [paletteView setNeedsDisplay:YES];
+  if(mode == PXPaletteModeFrequency)
+  {
+    [paletteView setPalette:frequencyPalette];
+    [paletteView setNeedsDisplay:YES];
+  }
+}
+
+- (void)addRecentColor:(NSColor *)c
+{
+  int idx = PXPalette_indexOfColor(recentPalette, c);
+  if(idx != -1)
+  {
+    if(idx != 0)
+    {
+      PXPalette_removeColorAtIndex(recentPalette, idx);
+      PXPalette_insertColorAtIndex(recentPalette, c, 0);
+    }
+  }
+  else
+  {
+    PXPalette_insertColorAtIndex(recentPalette, c, 0);
+    while(PXPalette_colorCount(recentPalette) > recentLimit)
+    {
+      PXPalette_removeColorAtIndex(recentPalette, PXPalette_colorCount(recentPalette)-1);
+    }
+  }
 }
 
 - (void)updatePalette:(NSNotification *)note
@@ -71,10 +99,12 @@
       // NSLog(@"Color %@ was removed %d times", old, [oldC countForObject:old]);
     PXPalette_decrementColorCount(frequencyPalette, old, [oldC countForObject:old]);
   }
+    //can do 'recent palette' stuff here too. most draws will consist of one new and many old, so just consider the last 100 new?
   for(NSColor *new in newC)
   {
       //NSLog(@"Color %@ was added %d times", new, [newC countForObject:new]);
     PXPalette_incrementColorCount(frequencyPalette, new, [newC countForObject:new]);
+    [self addRecentColor:new];
   }
   [paletteView retile];
   [paletteView setNeedsDisplay:YES];
@@ -117,14 +147,19 @@
 
 - (IBAction)useMostRecentColors:sender;
 {
+  mode = PXPaletteModeRecent;
+  [paletteView setPalette:recentPalette];
 }
 
 - (IBAction)useMostFrequentColors:sender;
 {
+  mode = PXPaletteModeFrequency;
+  [paletteView setPalette:frequencyPalette];
 }
 
 - (IBAction)useColorListColors:sender;
 {
+  mode = PXPaletteModeColorList;
 }
 
 @end
