@@ -103,6 +103,7 @@
 }
 NSString *appSupportSubdirName = @"Pixen";
 NSString *backgroundsSubdirName = @"Backgrounds";
+NSString *backgroundPresetSubdirName = @"Presets";
 NSString *presetsSubdirName = @"Presets";
 NSString *palettesSubdirName = @"Palettes";
 
@@ -119,7 +120,7 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	
 	// ./Pixen/Backgrounds/Presets 
-	[self _createApplicationSupportSubdirectory:appSupportSubdirName
+	[self _createApplicationSupportSubdirectory:backgroundPresetSubdirName
 									inDirectory:[path stringByAppendingPathComponent:backgroundsSubdirName]]; 
 	
 	// ./Pixen/Palettes
