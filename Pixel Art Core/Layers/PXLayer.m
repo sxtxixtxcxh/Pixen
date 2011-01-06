@@ -492,6 +492,8 @@
 	unsigned char *bitmapData = [rep bitmapData];
 	int i;
 	id calibratedClear = [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+	if (![rep hasAlpha])
+		transparency = NO;
 	for (i = 0; i < [self size].width * [self size].height; i++)
 	{
 		int base = i * [rep samplesPerPixel];
