@@ -32,7 +32,7 @@
 
 
 
-@interface PXGrid : NSObject <NSCopying>
+@interface PXGrid : NSObject <NSCopying, NSCoding>
 {
 	NSSize unitSize;
 	id color;

@@ -10,7 +10,7 @@
 
 @class PXBackground;
 
-@interface PXBackgroundConfig : NSObject {
+@interface PXBackgroundConfig : NSObject < NSCoding > {
 	PXBackground *mainBackground;
 	PXBackground *alternateBackground;
 	PXBackground *mainPreviewBackground;
