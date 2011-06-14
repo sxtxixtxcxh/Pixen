@@ -155,14 +155,10 @@
 	{
 		NSPasteboard *board = [NSPasteboard generalPasteboard];
 		
-		NSEnumerator *enumerator = [[NSImage imagePasteboardTypes] objectEnumerator];
-		id current;
-		while ((current = [enumerator nextObject]))
+		for (NSString *type in [NSImage imagePasteboardTypes])
 		{
-			if ([[board types] containsObject:current])
-			{
+			if ([[board types] containsObject:type])
 				return YES;
-			}
 		}
 		
 		return NO;

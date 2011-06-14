@@ -191,20 +191,17 @@ BOOL isPowerOfTwo(int num)
 
 - (void)loadFromPasteboard:(NSPasteboard *)board
 {	
-	if([[board types] containsObject:PXLayerPboardType])
-  {
+	if ([[board types] containsObject:PXLayerPboardType])
+	{
 		PXLayer *layer = [NSKeyedUnarchiver unarchiveObjectWithData:[board dataForType:PXLayerPboardType]];
 		[canvas setSize:[layer size]];
 		[canvas pasteFromPasteboard:board type:PXLayerPboardType];
-  }
+	}
 	else 
 	{
-		NSEnumerator *enumerator = [[NSImage imagePasteboardTypes] objectEnumerator];
-		id current;
-		
-		while ((current = [enumerator nextObject]))
+		for (NSString *type in [NSImage imagePasteboardTypes])
 		{
-			if ([[board types] containsObject:current])
+			if ([[board types] containsObject:type])
 			{
 				id image = [[[NSImage alloc] initWithPasteboard:board] autorelease];
 				[canvas setSize:NSMakeSize(ceilf([image size].width), ceilf([image size].height))];
@@ -213,21 +210,23 @@ BOOL isPowerOfTwo(int num)
 			}
 		}
 	}
+	
 	if (canvas)
 	{
 		[canvas setUndoManager:[self undoManager]];
 		[self makeWindowControllers];
-      // remove the auto-created main layer
+		// remove the auto-created main layer
 		if ([[canvas layers] count] > 1)
 			[canvas removeLayerAtIndex:0];
 	}
+	
 	[[self undoManager] removeAllActions];
-	[self updateChangeCount:NSChangeCleared]; 
+	[self updateChangeCount:NSChangeCleared];
 }
 
 - (void)delete:sender
 {
-  [windowController delete:sender];
+	[windowController delete:sender];
 }
 
 - (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)aType

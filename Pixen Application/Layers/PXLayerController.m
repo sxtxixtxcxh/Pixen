@@ -100,9 +100,7 @@
 {
 	BOOL shouldBeHidden = [subview isCollapsed];
 	
-	NSEnumerator *enumerator = [views objectEnumerator];
-	id current;
-	while ( (current = [enumerator nextObject] ) )
+	for (NSView *current in views)
 	{
 		[current setHidden:shouldBeHidden];
 	}
@@ -113,12 +111,12 @@
 	return view;
 }
 
-- document
+- (id)document
 {
 	return document;
 }
 
-- (void)setDocument:doc
+- (void)setDocument:(id)doc
 {
 	document = doc;
 }

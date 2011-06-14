@@ -370,17 +370,14 @@ NSString *palettesSubdirName = @"Palettes";
 	if ([anItem action] == @selector(newFromClipboard:))
 	{
 		NSPasteboard *board = [NSPasteboard generalPasteboard];
+		
 		if ([[board types] containsObject:PXLayerPboardType])
 			return YES;
 		
-		NSEnumerator *enumerator = [[NSImage imagePasteboardTypes] objectEnumerator];
-		id current;
-		while ((current = [enumerator nextObject]))
+		for (NSString *type in [NSImage imagePasteboardTypes])
 		{
-			if ([[board types] containsObject:current])
-			{
+			if ([[board types] containsObject:type])
 				return YES;
-			}
 		}
 		
 		return NO;
@@ -389,20 +386,20 @@ NSString *palettesSubdirName = @"Palettes";
 	{
 		BOOL showCrosshairs = [[NSUserDefaults standardUserDefaults] boolForKey:PXCrosshairEnabledKey];
 		[anItem setTitle:(showCrosshairs) ? NSLocalizedString(@"HIDE_ALIGNMENT_CROSSHAIRS", @"Hide Alignment Crosshairs") :
-			NSLocalizedString(@"SHOW_ALIGNMENT_CROSSHAIRS", @"Show Alignment Crosshairs")];
+		 NSLocalizedString(@"SHOW_ALIGNMENT_CROSSHAIRS", @"Show Alignment Crosshairs")];
 		return YES;
 	}
 	else if ([anItem action] == @selector(toggleToolPreview:))
 	{
 		BOOL showsToolPreview = [self showsToolPreview];
 		[anItem setTitle:(showsToolPreview) ? NSLocalizedString(@"HIDE_TOOL_PREVIEW", @"Hide Tool Preview") :
-			NSLocalizedString(@"SHOW_TOOL_PREVIEW", @"Show Tool Preview")];
+		 NSLocalizedString(@"SHOW_TOOL_PREVIEW", @"Show Tool Preview")];
 		return YES;
 	}
 	else if ([anItem action] == @selector(togglePreviousCelOverlay:))
 	{
 		[anItem setTitle:([self showsPreviousCelOverlay]) ? NSLocalizedString(@"HIDE_PREVIOUS_CEL_OVERLAY", @"Hide Previous Cel Overlay") :
-			NSLocalizedString(@"SHOW_PREVIOUS_CEL_OVERLAY", @"Show Previous Cel Overlay")];
+		 NSLocalizedString(@"SHOW_PREVIOUS_CEL_OVERLAY", @"Show Previous Cel Overlay")];
 		return YES;
 	}
 	else {
