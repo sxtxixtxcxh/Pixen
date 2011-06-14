@@ -17,6 +17,8 @@
 
 @implementation PXAnimationDocument
 
+@synthesize animation;
+
 - init
 {
 	[super init];
@@ -32,10 +34,6 @@
 }
 
 //FIXME: consider removing these three once coupling decreases
-- (PXAnimation *)animation
-{
-	return animation;
-}
 
 - canvasController
 {

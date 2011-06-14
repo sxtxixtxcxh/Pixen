@@ -31,15 +31,12 @@
 
 @implementation PXDefaultBackgroundTemplateView
 
+@synthesize backgroundTypeText;
+
 - (void)dealloc
 {
 	[backgroundTypeText release];
 	[super dealloc];
-}
-
-- (NSString *)backgroundTypeText
-{
-	return backgroundTypeText;
 }
 
 - (void)setBackgroundTypeText:(NSString *)typeText;

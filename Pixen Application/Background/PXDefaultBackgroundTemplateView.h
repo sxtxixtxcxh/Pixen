@@ -35,8 +35,8 @@
 	BOOL activeDragTarget;
 }
 
-- (NSString *)backgroundTypeText;
-- (void)setBackgroundTypeText:(NSString *)typeText;
+@property (nonatomic, retain) NSString *backgroundTypeText;
+
 - (void)setActiveDragTarget:(BOOL)activeDragTarget;
 
 @end
