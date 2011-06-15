@@ -46,7 +46,6 @@
 - (id)init
 {
 	if(!(self = [super init])) {
-		[self release];
 		return nil;
 	}
 	views = [[NSMutableArray alloc] init];
