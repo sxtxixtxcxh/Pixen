@@ -17,9 +17,9 @@
 
 @implementation PXAnimation
 
-- init
+- (id)init
 {
-	[super init];
+	self = [super init];
 	cels = [[NSMutableArray alloc] initWithCapacity:100];
 	[cels addObject:[[[PXCel alloc] init] autorelease]];
 	return self;
@@ -31,7 +31,7 @@
 	[super dealloc];
 }
 
-- copyWithZone:(NSZone *)zone
+- (id)copyWithZone:(NSZone *)zone
 {
 	PXAnimation *newAnimation = [[PXAnimation alloc] init];
 	[newAnimation setValue:[[cels deepMutableCopy] autorelease] forKey:@"cels"];

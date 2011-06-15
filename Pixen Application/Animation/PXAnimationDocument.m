@@ -153,22 +153,29 @@
 		}
 		if([plist count] == 0) { return NO; }
 		PXGrid *firstGrid = nil;
+		
 		int i;
 		for (i = 0; i < [plist count]; i++)
 		{
 			NSFileWrapper *currentFile = [files objectForKey:[NSString stringWithFormat:@"%d.%@", i, PXISuffix]];
+			
 			PXCel *cel = [[PXCel alloc] init];
 			[cel setCanvas:[NSKeyedUnarchiver unarchiveObjectWithData:[currentFile regularFileContents]]];
-			if(firstGrid == nil) {
+			[cel setInfo:[plist objectAtIndex:i]];
+			
+			if (firstGrid == nil) {
 				firstGrid = [[cel canvas] grid];
 			} else {
 				[[cel canvas] setGrid:firstGrid];
 			}
-			[cel setInfo:[plist objectAtIndex:i]];
+			
 			[animation addCel:cel];
+			[cel release];
 		}
+		
 		[[self undoManager] removeAllActions];
 		[self updateChangeCount:NSChangeCleared];
+		
 		return (animation != nil) && ([animation countOfCels] > 0);
 	}
 	else if ([docType isEqualToString:GIFFileType])
