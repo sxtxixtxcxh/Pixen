@@ -84,7 +84,7 @@ static PXToolPropertiesController *rightInstance = nil;
 
 @implementation PXToolPropertiesController
 
--(void) awakeFromNib
+- (void)awakeFromNib
 {
 	[panel setBecomesKeyOnlyIfNeeded:YES];
 	
@@ -105,8 +105,7 @@ static PXToolPropertiesController *rightInstance = nil;
 	//
 	//      -Ian
 	
-	[self setPropertiesView: [[PXToolPropertiesView alloc] init]];
-	
+	[self setPropertiesView: [[[PXToolPropertiesView alloc] init] autorelease]];
 }						 
 
 - (void)dealloc

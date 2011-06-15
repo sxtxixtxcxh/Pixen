@@ -40,9 +40,9 @@
 	return NSLocalizedString(@"EYEDROPPER_NAME", @"Eyedropper Tool");
 }
 
-- init
+- (id)init
 {
-	[super init];
+	self = [super init];
 	propertiesView = [[PXEyedropperToolPropertiesView alloc] init];
 	return self;
 }

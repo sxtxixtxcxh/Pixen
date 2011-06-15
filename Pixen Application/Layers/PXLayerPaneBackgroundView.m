@@ -11,9 +11,9 @@
 
 @implementation PXLayerPaneBackgroundView
 
-- initWithFrame:(NSRect)frame
+- (id)initWithFrame:(NSRect)frame
 {
-	[super initWithFrame:frame];
+	self = [super initWithFrame:frame];
 	gradient = [[CTGradient aquaNormalGradient] retain];
 	return self;
 }

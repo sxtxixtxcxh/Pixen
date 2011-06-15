@@ -21,7 +21,7 @@
 
 - init
 {
-	[super init];
+	self = [super init];
 	animation = [[PXAnimation alloc] init];
 	return self;
 }
