@@ -23,11 +23,15 @@
 	return self;
 }
 
-+ sharedACTReader
++ (id)sharedACTReader
 {
 	static OSACTReader *sharedACTReader = nil;
-	if (sharedACTReader) { return sharedACTReader; }
-	sharedACTReader = [[OSACTReader alloc] _init];
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		sharedACTReader = [[OSACTReader alloc] _init];
+	});
+	
 	return sharedACTReader;
 }
 

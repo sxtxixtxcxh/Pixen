@@ -11,7 +11,7 @@
 @class CTGradient;
 @interface PXAnimationBackgroundView : NSView {
 	CTGradient *horizontalGradient;
-	id filmStrip;
+	NSScrollView *filmStrip;
 }
 
 @end

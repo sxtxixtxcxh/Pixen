@@ -40,7 +40,7 @@
 	IBOutlet PXToolSwitcher *leftSwitcher;
 	IBOutlet PXToolSwitcher *rightSwitcher;
 	IBOutlet id minimalView;
-	IBOutlet id rightSwitchView;
+	IBOutlet NSBox *rightSwitchView;
 	IBOutlet NSButton *triangle;
 	IBOutlet NSImageView *rightToolGradient;
 	
