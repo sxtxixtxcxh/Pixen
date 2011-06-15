@@ -94,6 +94,7 @@
 		[textCell setTextColor:[NSColor disabledControlTextColor]];
 		[textCell setStringValue:NSLocalizedString(@"Drag a template here, and it will be displayed when the mouse is outside of the canvas.", @"ALTERNATE_BACKGROUND_INFO")];
 		[textCell drawWithFrame:drawFrame inView:self];
+        [textCell release];
 	}
 	else
 	{

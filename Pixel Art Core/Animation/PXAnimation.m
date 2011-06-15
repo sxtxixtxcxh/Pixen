@@ -34,7 +34,7 @@
 - copyWithZone:(NSZone *)zone
 {
 	PXAnimation *newAnimation = [[PXAnimation alloc] init];
-	[newAnimation setValue:[cels deepMutableCopy] forKey:@"cels"];
+	[newAnimation setValue:[[cels deepMutableCopy] autorelease] forKey:@"cels"];
 	[newAnimation setUndoManager:undoManager];
 	return newAnimation;
 }

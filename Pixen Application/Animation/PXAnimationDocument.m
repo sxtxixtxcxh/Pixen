@@ -118,8 +118,7 @@
 		[popup setMaxProgress:numberOfCels];
 		[popup beginOperationWithStatusText:[NSString stringWithFormat:@"Exporting GIF... (1 of %d)", numberOfCels] parentWindow:[windowController window]];
 		[popup setProgress:0];
-		id exportAnimation = animation;
-		exportAnimation = [[animation copy] autorelease];
+		id exportAnimation = [[animation copy] autorelease];
 		[exportAnimation reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
 		NSColor *transparentColor = nil;
 		for (i = 0; i < numberOfCels; i++)
