@@ -66,7 +66,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	[super dealloc];
 }
 
-- (NSRect)closeButtonRectForCelIndex:(unsigned int)index
+- (NSRect)closeButtonRectForCelIndex:(int)index
 {
 	if (index >= celRectsCount || index < 0) { return NSZeroRect; }
 	NSRect celRect = celRects[index];
@@ -84,7 +84,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	return closeButtonRect;
 }
 
-- (NSRect)fieldCellRectForCelIndex:(unsigned int)index editing:(BOOL)editing
+- (NSRect)fieldCellRectForCelIndex:(int)index editing:(BOOL)editing
 {
 	NSAttributedString *string = [[[NSMutableAttributedString alloc] initWithString:[fieldCell stringValue] attributes:[NSDictionary dictionaryWithObject:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSMiniControlSize]] forKey:NSFontAttributeName]] autorelease];
 	if (index >= celRectsCount) { return NSZeroRect; }
@@ -247,7 +247,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	}
 }
 
-- (void)drawCloseButtonAtIndex:(unsigned int)index highlighted:(BOOL)highlighted pressed:(BOOL)pressed
+- (void)drawCloseButtonAtIndex:(int)index highlighted:(BOOL)highlighted pressed:(BOOL)pressed
 {
 	NSRect bounds = [self closeButtonRectForCelIndex:index];
 	NSColor *circleColor = [NSColor colorWithDeviceWhite:.86 alpha:1];
@@ -268,7 +268,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMinX(xBounds), NSMaxY(xBounds)) toPoint:NSMakePoint(NSMaxX(xBounds), NSMinY(xBounds))];
 }
 
-- (void)badgeCelAtIndex:(unsigned int)index
+- (void)badgeCelAtIndex:(int)index
 {
 	int fontSize = [NSFont systemFontSizeForControlSize:NSMiniControlSize];
 	if (index > 9999)
@@ -727,7 +727,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	}
 }
 
-- (unsigned int)selectedIndex
+- (int)selectedIndex
 {
 	return [selectedIndices firstIndex];
 }
@@ -755,7 +755,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	return [NSArray arrayWithArray:tempCels];
 }
 
-- (void)selectCelAtIndex:(unsigned)index byExtendingSelection:(BOOL)extend
+- (void)selectCelAtIndex:(int)index byExtendingSelection:(BOOL)extend
 {
 	BOOL same = [selectedIndices containsIndex:index] && ([selectedIndices count] == 1);
 	if (index < celRectsCount)
@@ -798,7 +798,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	allowsMultipleSelection = newAllows;
 }
 
-- (NSRect)rectOfCelIndex:(unsigned int)index
+- (NSRect)rectOfCelIndex:(int)index
 {
 	if (index >= [dataSource numberOfCels] || index >= celRectsCount) { return NSZeroRect; }
 	return celRects[index];

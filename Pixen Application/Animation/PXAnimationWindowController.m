@@ -408,9 +408,15 @@
 	{
 		NSString *filePath = [[directoryPath copy] autorelease];
 		if ([filePath characterAtIndex:[filePath length] - 1] != '/')
+    {
 			filePath = [filePath stringByAppendingString:@"/"];
+    }
 		filePath = [filePath stringByAppendingString:[NSString stringWithFormat:finalString, i + 1]];
-		[[PXCanvasDocument dataRepresentationOfType:[prompter valueForKey:@"fileType"] withCanvas:[[animation objectInCelsAtIndex:i] canvas]] writeToFile:filePath atomically:YES];
+    NSString *type = [prompter valueForKey:@"fileType"];
+    PXCanvas *cnv = [[animation objectInCelsAtIndex:i] canvas];
+    NSData *data = [PXCanvasDocument dataRepresentationOfType:type 
+                                                   withCanvas:cnv];
+		[data writeToFile:filePath atomically:YES];
 	}
 }
 

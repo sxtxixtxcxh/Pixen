@@ -14,7 +14,7 @@
 
 - (void)keyDown:(NSEvent*)theEvent { 
 	if ([[theEvent characters] isEqualToString: @"\177"]) {
-		[[self delegate] deleteKeyPressedInTableView:self];
+		[(id <PXLayerTableViewDelegate>)[self delegate] deleteKeyPressedInTableView:self];
 	}
 	[super keyDown:theEvent];
 }
@@ -32,7 +32,7 @@
 
 - (NSImage *)dragImageForRows:(NSArray *)dragRows event:(NSEvent *)dragEvent dragImageOffset:(NSPointPointer)dragImageOffset
 {
-	PXLayerDetailsView *view = (PXLayerDetailsView *)[[self delegate] tableView:self viewForRow:[[dragRows objectAtIndex:0] intValue]];
+	PXLayerDetailsView *view = (PXLayerDetailsView *)[(id <PXLayerTableViewDelegate>)[self delegate] tableView:self viewForRow:[[dragRows objectAtIndex:0] intValue]];
 	
 	NSColor *oldOpacityColor = [[view opacityText] textColor];
 	NSColor *oldNameColor = [[view name] textColor];

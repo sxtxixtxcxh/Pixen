@@ -165,10 +165,24 @@
 	tempPath = [[NSString stringWithCString:tmpnam(nil) encoding:[NSString defaultCStringEncoding]] retain];
 	[qtMovie writeToFile:tempPath withAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithLong:MovieFileType], QTMovieExportType, [NSNumber numberWithLong:kAppleManufacturer], QTMovieExportManufacturer, [NSNumber numberWithBool:YES], QTMovieExport, [NSData dataWithBytes:*gExportSettings length:GetHandleSize(gExportSettings)], QTMovieExportSettings, nil]];
 	//[target performSelector:selector withObject:tempPath];
+  NSError *error=nil;
 	if ([[NSFileManager defaultManager] fileExistsAtPath:path])
-		[[NSFileManager defaultManager] removeFileAtPath:path handler:nil];
-	[[NSFileManager defaultManager] movePath:tempPath toPath:path handler:nil];
+  {
+		if(![[NSFileManager defaultManager] removeItemAtPath:path error:&error])
+    {
+      [[NSDocumentController sharedDocumentController] presentError:error];
+      DisposeHandle(gExportSettings);
+      return;
+    }
+  }
+	if(![[NSFileManager defaultManager] moveItemAtPath:tempPath toPath:path error:&error])
+  {
+    [[NSDocumentController sharedDocumentController] presentError:error];
+    DisposeHandle(gExportSettings);
+    return;
+  }
 	DisposeHandle(gExportSettings);
+  return;
 }
 
 - (BOOL)movie:(QTMovie *)movie shouldContinueOperation:(NSString *)op withPhase:(QTMovieOperationPhase)phase atPercent:(NSNumber *)percent withAttributes:(NSDictionary *)attributes

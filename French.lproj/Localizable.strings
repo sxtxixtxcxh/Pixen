@@ -1,7 +1,3 @@
-"FEEDBACK_EMAIL" = "opensword@opensword.org";
-"FEEDBACK_SUBJECT_PREFIX" = "[Pixen Feedback] ";
-"FEEDBACK_URL" = "mailto:opensword@opensword.org?subject=[Pixen%20Feedback]%20";
-
 /* Background Label */
 "BACKGROUND_LABEL" = "Fond";
 /* Background Tooltip */
@@ -56,11 +52,6 @@
 "RESIZE_LABEL" = "Taille du doc.";
 /* Resize Tooltip */
 "RESIZE_TOOLTIP" = "Redimensionner le document";
-
-/* Feedback Label */
-"FEEDBACK_LABEL" = "Commentaires";
-/* Feedback Tooltip */
-"FEEDBACK_TOOLTIP" = "Envoyez vos demandes de fonctionnalités, rapports de bogues, et autres commentaires";
 
 /* Zoom Label */
 "ZOOM_LABEL" = "Zoom";

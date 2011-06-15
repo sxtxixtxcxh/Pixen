@@ -104,26 +104,21 @@ BOOL isPowerOfTwo(int num)
 	return (logResult == (int)logResult);
 }
 
-- (void)saveToFile:(NSString *)fileName saveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo
-{
-	if(fileName == nil) 
-	{
-		return;
-	}
-    // this kind of stuff should probably be factored out to some kind of archiving object
-	if ([[self fileTypeFromLastRunSavePanel] isEqualToString:JPEGFileType])
+- (void)saveToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo {
+  if(absoluteURL == nil)
+  {
+    return;
+  }
+  if ([typeName isEqualToString:JPEGFileType])
 	{
 		saveFactor = 100;
-		[super saveToFile:fileName
-        saveOperation:saveOperation
-             delegate:delegate
-		  didSaveSelector:didSaveSelector
-          contextInfo:contextInfo];
-	}
-	else
-	{
-		[super saveToFile:fileName saveOperation:saveOperation delegate:delegate didSaveSelector:didSaveSelector contextInfo:contextInfo];
-	}
+  }
+  [super saveToURL:absoluteURL 
+            ofType:typeName 
+  forSaveOperation:saveOperation 
+          delegate:delegate 
+   didSaveSelector:didSaveSelector 
+       contextInfo:contextInfo];
 }
 
 + (NSData *)dataRepresentationOfType:(NSString *)aType withCanvas:(PXCanvas *)canvas
@@ -178,13 +173,15 @@ BOOL isPowerOfTwo(int num)
 	return nil;
 }
 
-- (NSData *)dataRepresentationOfType:(NSString *)type
+- (NSData *)dataOfType:(NSString *)type error:(NSError **)err
 {
 	if ([type isEqualToString:JPEGFileType])
 	{
+    NSNumber *sf = [NSNumber numberWithFloat:saveFactor];
+    NSDictionary *props = [NSDictionary dictionaryWithObject:sf
+                                                      forKey:NSImageCompressionFactor];
 		return [canvas imageDataWithType:NSJPEGFileType 
-                          properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:saveFactor]
-                                                                 forKey:NSImageCompressionFactor]];
+                          properties:props];
 	}
 	return [[self class] dataRepresentationOfType:type withCanvas:canvas];
 }
@@ -193,7 +190,8 @@ BOOL isPowerOfTwo(int num)
 {	
 	if ([[board types] containsObject:PXLayerPboardType])
 	{
-		PXLayer *layer = [NSKeyedUnarchiver unarchiveObjectWithData:[board dataForType:PXLayerPboardType]];
+    NSData *data = [board dataForType:PXLayerPboardType];
+		PXLayer *layer = [NSKeyedUnarchiver unarchiveObjectWithData:data];
 		[canvas setSize:[layer size]];
 		[canvas pasteFromPasteboard:board type:PXLayerPboardType];
 	}
@@ -204,7 +202,8 @@ BOOL isPowerOfTwo(int num)
 			if ([[board types] containsObject:type])
 			{
 				id image = [[[NSImage alloc] initWithPasteboard:board] autorelease];
-				[canvas setSize:NSMakeSize(ceilf([image size].width), ceilf([image size].height))];
+				[canvas setSize:NSMakeSize(ceilf([image size].width), 
+                                   ceilf([image size].height))];
 				[canvas pasteFromPasteboard:board type:PXNSImagePboardType];
 				break;
 			}
@@ -217,7 +216,9 @@ BOOL isPowerOfTwo(int num)
 		[self makeWindowControllers];
 		// remove the auto-created main layer
 		if ([[canvas layers] count] > 1)
+    {
 			[canvas removeLayerAtIndex:0];
+    }
 	}
 	
 	[[self undoManager] removeAllActions];
@@ -229,7 +230,7 @@ BOOL isPowerOfTwo(int num)
 	[windowController delete:sender];
 }
 
-- (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)aType
+- (BOOL)readFromData:(NSData *)data ofType:(NSString *)aType error:(NSError **)error
 {
 	if([aType isEqualToString:PixenImageFileType])
   {
@@ -275,7 +276,8 @@ BOOL isPowerOfTwo(int num)
   NSPrintOperation *op;
 	op = [NSPrintOperation printOperationWithView:printableView 
                                       printInfo:[self printInfo]];
-  [op setShowPanels:showPanels];
+  [op setShowsPrintPanel:showPanels];
+  [op setShowsProgressPanel:showPanels];
 	
 #ifdef __COCOA__
 	[self runModalPrintOperation:op 

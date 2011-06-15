@@ -69,7 +69,6 @@ typedef BOOL * PXSelectionMask;
 - (void)setUndoManager:(NSUndoManager *)manager;
 - (NSUndoManager *)undoManager;
 
-- (id)duplicateWithinAnimation;
 - (void)recacheSize;
 
 - (NSSize)size;

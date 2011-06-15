@@ -288,8 +288,6 @@
 		EA31FCC60CE7D7C200EC481B /* SubviewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC430CE7D7C200EC481B /* SubviewTableViewController.m */; };
 		EA31FCC70CE7D7C200EC481B /* ThreadWorker.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC450CE7D7C200EC481B /* ThreadWorker.h */; };
 		EA31FCC80CE7D7C200EC481B /* ThreadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC460CE7D7C200EC481B /* ThreadWorker.m */; };
-		EA31FCC90CE7D7C200EC481B /* UKFeedbackProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC480CE7D7C200EC481B /* UKFeedbackProvider.h */; };
-		EA31FCCA0CE7D7C200EC481B /* UKFeedbackProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC490CE7D7C200EC481B /* UKFeedbackProvider.m */; };
 		EA31FCCB0CE7D7C200EC481B /* UKPrefsPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC4A0CE7D7C200EC481B /* UKPrefsPanel.h */; };
 		EA31FCCC0CE7D7C200EC481B /* UKPrefsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC4B0CE7D7C200EC481B /* UKPrefsPanel.m */; };
 		EA31FCCD0CE7D7C200EC481B /* TabletAEDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC4D0CE7D7C200EC481B /* TabletAEDictionary.h */; };
@@ -489,7 +487,6 @@
 		EAF6949006A9AE0B0019D8D7 /* PXCanvasResizePrompt.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6151D0140677C8E3009E3BE4 /* PXCanvasResizePrompt.nib */; };
 		EAF6949106A9AE0B0019D8D7 /* PXPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 615E87EE06A31AE0002445B8 /* PXPreferences.nib */; };
 		EAF6949D06A9AE0B0019D8D7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 61BD25D3067A1E1D0054A2BB /* Localizable.strings */; };
-		EAF694A006A9AE0B0019D8D7 /* UKFeedbackProvider.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61EBB565067A2C5900FF5C2E /* UKFeedbackProvider.nib */; };
 		EAF694A706A9AE0B0019D8D7 /* PXDiscoverPixen.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61163708067D286900AE87D7 /* PXDiscoverPixen.nib */; };
 		EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61F598B9067949D500B8C8CA /* PXScalePrompt.nib */; };
 		EAF694BC06A9AE0B0019D8D7 /* PXCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5482DD0513E2DB000101DE /* PXCanvasView.m */; };
@@ -571,7 +568,6 @@
 		61E6F12F0608E9FB001B46E8 /* PXGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGrid.h; sourceTree = "<group>"; };
 		61E6F1300608E9FB001B46E8 /* PXGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGrid.m; sourceTree = "<group>"; };
 		61EBB557067A2A3000FF5C2E /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
-		61EBB566067A2C5900FF5C2E /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/UKFeedbackProvider.nib; sourceTree = "<group>"; };
 		61ED25AC06BD63DA00264DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXAbout.nib; sourceTree = "<group>"; };
 		61F598BA067949D500B8C8CA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXScalePrompt.nib; sourceTree = "<group>"; };
 		61F9CB17060D6A6D00562B78 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXToolPalette.nib; sourceTree = "<group>"; };
@@ -834,8 +830,6 @@
 		EA31FC430CE7D7C200EC481B /* SubviewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubviewTableViewController.m; sourceTree = "<group>"; };
 		EA31FC450CE7D7C200EC481B /* ThreadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadWorker.h; sourceTree = "<group>"; };
 		EA31FC460CE7D7C200EC481B /* ThreadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadWorker.m; sourceTree = "<group>"; };
-		EA31FC480CE7D7C200EC481B /* UKFeedbackProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKFeedbackProvider.h; sourceTree = "<group>"; };
-		EA31FC490CE7D7C200EC481B /* UKFeedbackProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFeedbackProvider.m; sourceTree = "<group>"; };
 		EA31FC4A0CE7D7C200EC481B /* UKPrefsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPrefsPanel.h; sourceTree = "<group>"; };
 		EA31FC4B0CE7D7C200EC481B /* UKPrefsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPrefsPanel.m; sourceTree = "<group>"; };
 		EA31FC4D0CE7D7C200EC481B /* TabletAEDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletAEDictionary.h; sourceTree = "<group>"; };
@@ -936,7 +930,6 @@
 		EA90F6EA06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXScalePrompt.nib; sourceTree = "<group>"; };
 		EA90F6EB06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXToolPalette.nib; sourceTree = "<group>"; };
 		EA90F6EC06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXToolProperties.nib; sourceTree = "<group>"; };
-		EA90F6ED06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/UKFeedbackProvider.nib; sourceTree = "<group>"; };
 		EA9E180C0557104F00119DF5 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXNamePrompt.nib; sourceTree = "<group>"; };
 		EAA0184A054DCC7000EF18C2 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXDuotoneBackgroundConfigurator.nib; sourceTree = "<group>"; };
 		EAA0184F054DCC7B00EF18C2 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXMonotoneBackgroundConfigurator.nib; sourceTree = "<group>"; };
@@ -1742,8 +1735,6 @@
 		EA31FC470CE7D7C200EC481B /* UKNiftyFeatures */ = {
 			isa = PBXGroup;
 			children = (
-				EA31FC480CE7D7C200EC481B /* UKFeedbackProvider.h */,
-				EA31FC490CE7D7C200EC481B /* UKFeedbackProvider.m */,
 				EA31FC4A0CE7D7C200EC481B /* UKPrefsPanel.h */,
 				EA31FC4B0CE7D7C200EC481B /* UKPrefsPanel.m */,
 			);
@@ -1934,7 +1925,6 @@
 				61FED6C208BCC646005E51EA /* PXSequenceExportPrompter.nib */,
 				61F9CB16060D6A6D00562B78 /* PXToolPalette.nib */,
 				615E87FA06A31AF8002445B8 /* PXToolProperties.nib */,
-				61EBB565067A2C5900FF5C2E /* UKFeedbackProvider.nib */,
 				BFB1440408AD1D1800CE29EF /* PXSpriteSheetExporter.nib */,
 			);
 			name = NIBs;
@@ -2278,7 +2268,6 @@
 				EA31FCC30CE7D7C200EC481B /* SubviewTableViewCell.h in Headers */,
 				EA31FCC50CE7D7C200EC481B /* SubviewTableViewController.h in Headers */,
 				EA31FCC70CE7D7C200EC481B /* ThreadWorker.h in Headers */,
-				EA31FCC90CE7D7C200EC481B /* UKFeedbackProvider.h in Headers */,
 				EA31FCCB0CE7D7C200EC481B /* UKPrefsPanel.h in Headers */,
 				EA31FCCD0CE7D7C200EC481B /* TabletAEDictionary.h in Headers */,
 				EA31FCCE0CE7D7C200EC481B /* TabletEvents.h in Headers */,
@@ -2385,7 +2374,6 @@
 				EAF6949006A9AE0B0019D8D7 /* PXCanvasResizePrompt.nib in Resources */,
 				EAF6949106A9AE0B0019D8D7 /* PXPreferences.nib in Resources */,
 				EAF6949D06A9AE0B0019D8D7 /* Localizable.strings in Resources */,
-				EAF694A006A9AE0B0019D8D7 /* UKFeedbackProvider.nib in Resources */,
 				EAF694A706A9AE0B0019D8D7 /* PXDiscoverPixen.nib in Resources */,
 				EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.nib in Resources */,
 				610865F706B988F400733B2D /* PXInfoPanel.nib in Resources */,
@@ -2657,7 +2645,6 @@
 				EA31FCC40CE7D7C200EC481B /* SubviewTableViewCell.m in Sources */,
 				EA31FCC60CE7D7C200EC481B /* SubviewTableViewController.m in Sources */,
 				EA31FCC80CE7D7C200EC481B /* ThreadWorker.m in Sources */,
-				EA31FCCA0CE7D7C200EC481B /* UKFeedbackProvider.m in Sources */,
 				EA31FCCC0CE7D7C200EC481B /* UKPrefsPanel.m in Sources */,
 				EA31FCCF0CE7D7C200EC481B /* TabletEvents.m in Sources */,
 				EA31FCD00CE7D7C200EC481B /* TAEHelpers.c in Sources */,
@@ -2893,15 +2880,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		61EBB565067A2C5900FF5C2E /* UKFeedbackProvider.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				61EBB566067A2C5900FF5C2E /* English */,
-				EA90F6ED06D123B7001755A6 /* French */,
-			);
-			name = UKFeedbackProvider.nib;
-			sourceTree = "<group>";
-		};
 		61ED25AB06BD63DA00264DA2 /* PXAbout.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3063,7 +3041,6 @@
 		616BAEA608553EFB004CF172 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
@@ -3074,15 +3051,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Other Sources/Pixen_Prefix.h";
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = Pixen;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -3096,8 +3071,6 @@
 		616BAEA708553EFB004CF172 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				COPY_PHASE_STRIP = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3113,17 +3086,16 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Other Sources/Pixen_Prefix.h";
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = /Applications;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				LIBRARY_STYLE = STATIC;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "-funroll-loops";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Pixen;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -3148,10 +3120,10 @@
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = 4.2;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = ".//**";
 				WARNING_CFLAGS = (
@@ -3170,9 +3142,9 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_VERSION = 4.2;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				SKIP_INSTALL = NO;
 				UNSTRIPPED_PRODUCT = YES;
 				WARNING_CFLAGS = "-Wall";

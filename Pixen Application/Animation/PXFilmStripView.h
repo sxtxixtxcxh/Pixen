@@ -45,12 +45,12 @@
 
 - (void)setNeedsDelayedDisplayInRect:(NSRect)rect;
 
-- (unsigned int)selectedIndex;
+- (int)selectedIndex;
 - selectedCel;
 - (NSIndexSet *)selectedIndices;
 - (NSArray *)selectedCels;
-- (void)selectCelAtIndex:(unsigned)index byExtendingSelection:(BOOL)extend;
-- (NSRect)rectOfCelIndex:(unsigned int)index;
+- (void)selectCelAtIndex:(int)index byExtendingSelection:(BOOL)extend;
+- (NSRect)rectOfCelIndex:(int)index;
 
 @end
 

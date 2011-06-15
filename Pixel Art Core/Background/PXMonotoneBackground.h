@@ -38,7 +38,6 @@
   IBOutlet NSColorWell *colorWell;
 }
 
-- (void)windowWillClose:(NSNotification *)notification;
 - (IBAction)configuratorColorChanged:(id) sender;
 - (void)setColor:(NSColor *) aColor;
 @end

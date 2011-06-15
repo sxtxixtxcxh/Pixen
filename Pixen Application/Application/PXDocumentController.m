@@ -84,17 +84,21 @@
 	BOOL isDir;
 	NSString *path = [root stringByAppendingPathComponent:sub];
 	
-	if  ( ! [fileManager fileExistsAtPath:path isDirectory:&isDir] )
+	if(![fileManager fileExistsAtPath:path isDirectory:&isDir])
 	{
-		if ( ! [fileManager createDirectoryAtPath:path attributes:nil] ) 
+    NSError *err=nil;
+		if (![fileManager createDirectoryAtPath:path 
+                withIntermediateDirectories:YES 
+                                 attributes:nil 
+                                      error:&err] ) 
 		{
-			[NSException raise:@"Directory Error" format:@"Couldn't create Pixen support directory."];
+      [self presentError:err];
 			return;
 		}
 	}
 	else
 	{
-		if ( ! isDir ) 
+		if(!isDir) 
 		{
 			[NSException raise:@"Directory Error" format:@"Couldn't create Pixen support directory."];
 			return;
@@ -266,8 +270,15 @@ NSString *palettesSubdirName = @"Palettes";
 		int result = [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Install Background Template \"%@\"?", @"Install Background Template \"%@\"?"), bgName] defaultButton:NSLocalizedString(@"Install", @"Install") alternateButton:NSLocalizedString(@"Cancel", @"CANCEL") otherButton:nil informativeTextWithFormat:NSLocalizedString(@"%@ will be copied to %@.", @"%@ will be copied to %@."), [filename stringByAbbreviatingWithTildeInPath], [dest stringByAbbreviatingWithTildeInPath]] runModal];
 		if(result == NSAlertDefaultReturn)
 		{
-			[[NSFileManager defaultManager] copyPath:filename toPath:dest handler:nil];
-			[[NSNotificationCenter defaultCenter] postNotificationName:PXBackgroundTemplateInstalledNotificationName object:self];
+      NSError *err=nil;
+			if(![[NSFileManager defaultManager] copyItemAtPath:filename toPath:dest error:&err]) 
+      {
+        [self presentError:err];
+      }
+      else
+      {
+        [[NSNotificationCenter defaultCenter] postNotificationName:PXBackgroundTemplateInstalledNotificationName object:self];
+      }
 		}
 	}
 	if([[filename pathExtension] isEqual:PXPatternSuffix])
@@ -294,8 +305,13 @@ NSString *palettesSubdirName = @"Palettes";
 			[[NSNotificationCenter defaultCenter] postNotificationName:PXUserPalettesChangedNotificationName object:self];
 		}
 	}
-	[self openDocumentWithContentsOfFile:filename display:YES];
-	return YES;
+  NSError *err = nil;
+	NSDocument *doc = [self openDocumentWithContentsOfURL:[NSURL fileURLWithPath:filename] display:YES error:&err];
+  if(err) {
+    [self presentError:err];
+  }
+  
+	return doc != nil;
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
@@ -310,7 +326,9 @@ NSString *palettesSubdirName = @"Palettes";
 
 - (IBAction)newFromClipboard:sender
 {
-	PXCanvasDocument *doc = [self makeUntitledDocumentOfType:PixenImageFileType];
+  NSError *err=nil;
+	PXCanvasDocument *doc = [self makeUntitledDocumentOfType:PixenImageFileType error:&err];
+  [self presentError:err];
 	[self addDocument:doc];
 	[doc loadFromPasteboard:[NSPasteboard generalPasteboard]];
 }
@@ -425,7 +443,12 @@ NSString *palettesSubdirName = @"Palettes";
 		if (potentiallyAnimatedDocument)
 			return potentiallyAnimatedDocument;
 	}
-	return [super makeDocumentWithContentsOfURL:aURL ofType:docType];
+  NSError *err = nil;
+	NSDocument *doc = [super makeDocumentWithContentsOfURL:aURL ofType:docType error:&err];
+  if(err) {
+    [self presentError:err];
+  }
+  return doc;
 }
 
 - (id)makeDocumentWithContentsOfFile:(NSString *)fileName ofType:(NSString *)docType
@@ -436,7 +459,12 @@ NSString *palettesSubdirName = @"Palettes";
 		if (potentiallyAnimatedDocument)
 			return potentiallyAnimatedDocument;
 	}
-	return [super makeDocumentWithContentsOfFile:fileName ofType:docType];	
+  NSError *err = nil;
+	NSDocument *doc = [super makeDocumentWithContentsOfURL:[NSURL fileURLWithPath:fileName] ofType:docType error:&err];
+  if(err) {
+    [self presentError:err];
+  }
+  return doc;
 }
 
 - (id)makeDocumentForURL:(NSURL *)absoluteDocumentURL withContentsOfURL:(NSURL *)absoluteDocumentContentsURL ofType:(NSString *)typeName error:(NSError **)outError
@@ -452,7 +480,16 @@ NSString *palettesSubdirName = @"Palettes";
 
 - (IBAction)newAnimationDocument:sender
 {
-	[self openUntitledDocumentOfType:PixenAnimationFileType display:YES];
+  NSError *err = nil;
+  NSDocument *doc = [self makeUntitledDocumentOfType:PixenAnimationFileType error:&err];
+  if(err) 
+  {
+    [self presentError:err];
+    return;
+  }
+  [self addDocument:doc];
+  [doc makeWindowControllers];
+  [doc showWindows];
 }
 
 - (NSArray *)animationDocuments

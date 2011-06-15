@@ -275,9 +275,16 @@ int kPXColorPickerMode = 23421337;
 {
 	if (returnCode == NSAlertFirstButtonReturn)
 	{
-		[[NSFileManager defaultManager] removeFileAtPath:[[GetPixenPaletteDirectory() stringByAppendingPathComponent:[paletteView palette]->name] stringByAppendingPathExtension:PXPaletteSuffix] handler:nil];
+    NSString *path = [[GetPixenPaletteDirectory() stringByAppendingPathComponent:[paletteView palette]->name] stringByAppendingPathExtension:PXPaletteSuffix];
+    NSError *err = nil;
+		if(![[NSFileManager defaultManager] removeItemAtPath:path error:&err]) 
+    {
+      [pickerView presentError:err];
+      return;
+    }
 		[self reloadData];
-		[[NSNotificationCenter defaultCenter] postNotificationName:PXUserPalettesChangedNotificationName object:self];
+		[[NSNotificationCenter defaultCenter] postNotificationName:PXUserPalettesChangedNotificationName 
+                                                        object:self];
 	}
 }
 

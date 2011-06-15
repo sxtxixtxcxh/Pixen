@@ -14,7 +14,7 @@
 
 - (id) initWithViewColumn:(NSTableColumn *) vCol
 {
-    if (! (self = [super init]) )
+  if(!(self = [super init]))
 		return nil;
 	
 	// Weak references
@@ -30,9 +30,8 @@
 	
 	// Setup column properties
 	[subviewTableColumn setEditable: NO];
-    
-    
-    return self;
+  
+  return self;
 }
 
 - (void) dealloc

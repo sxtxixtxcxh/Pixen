@@ -153,6 +153,11 @@
     [aTransform concat];
 }
 
+- (void)windowWillClose:(NSNotification *)notification 
+{
+	[self doesNotRecognizeSelector:@selector(windowWillClose:)];
+}
+
 - (void)drawRect:(NSRect)rect withinRect:(NSRect)wholeRect
 {
 	[self doesNotRecognizeSelector:@selector(drawRect:withinRect:)];

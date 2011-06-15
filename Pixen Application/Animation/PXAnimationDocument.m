@@ -65,7 +65,7 @@
 	[(PXAnimationWindowController *)windowController setAnimation:animation];
 }
 
-- (NSFileWrapper *)fileWrapperRepresentationOfType:(NSString *)aType
+- (NSFileWrapper *)fileWrapperOfType:(NSString *)aType error:(NSError **)outError
 {
 	if ([aType isEqualToString:PixenAnimationFileType])
 	{
@@ -92,12 +92,22 @@
 	}
 	else if ([aType isEqualToString:GIFFileType])
 	{
-		return [[[NSFileWrapper alloc] initRegularFileWithContents:[self dataRepresentationOfType:GIFFileType]] autorelease];
+    NSError *err = nil;
+    NSData *data = [self dataOfType:GIFFileType error:&err];
+    if(err) 
+    {
+      [self presentError:err];
+      return nil;
+    }
+    else
+    {
+      return [[[NSFileWrapper alloc] initRegularFileWithContents:data] autorelease];
+    }
 	}
 	return nil;
 }
 
-- (NSData *)dataRepresentationOfType:(NSString *)aType
+- (NSData *)dataOfType:(NSString *)aType error:(NSError **)err
 {
 	if ([aType isEqualToString:GIFFileType])
 	{
@@ -127,7 +137,7 @@
 	return nil;
 }
 
-- (BOOL)loadFileWrapperRepresentation:(NSFileWrapper *)wrapper ofType:(NSString *)docType
+- (BOOL)readFromFileWrapper:(NSFileWrapper *)wrapper ofType:(NSString *)docType error:(NSError **)outError
 {
 	if ([docType isEqualToString:PixenAnimationFileType])
 	{
@@ -164,7 +174,7 @@
 	}
 	else if ([docType isEqualToString:GIFFileType])
 	{
-		return [self loadDataRepresentation:[wrapper regularFileContents] ofType:docType];
+		return [self readFromData:[wrapper regularFileContents] ofType:docType error:outError];
 	}
 	else
 	{
@@ -172,7 +182,7 @@
 	}
 }
 
-- (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)docType
+- (BOOL)readFromData:(NSData *)data ofType:(NSString *)docType error:(NSError **)err
 {
 	if ([docType isEqualToString:GIFFileType])
 	{

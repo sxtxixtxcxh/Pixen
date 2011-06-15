@@ -67,4 +67,6 @@
       withinRect:(NSRect)wholeRect
    withTransform:(NSAffineTransform *)aTransform
 		onCanvas:(PXCanvas *)aCanvas;
+
+- (void)windowWillClose:(NSNotification *)note;
 @end

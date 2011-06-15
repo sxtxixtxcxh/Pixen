@@ -199,7 +199,13 @@
 {
 	if (returnCode == NSAlertFirstButtonReturn)
 	{
-		[[NSFileManager defaultManager] removeFileAtPath:[[GetPixenPaletteDirectory() stringByAppendingPathComponent:[paletteView palette]->name] stringByAppendingPathExtension:PXPaletteSuffix] handler:nil];
+    NSString *path = [[GetPixenPaletteDirectory() stringByAppendingPathComponent:[paletteView palette]->name] stringByAppendingPathExtension:PXPaletteSuffix];
+    NSError *err = nil;
+		if(![[NSFileManager defaultManager] removeItemAtPath:path error:&err]) 
+    {
+      [self presentError:err];
+      return;
+    }
 		[[NSNotificationCenter defaultCenter] postNotificationName:PXUserPalettesChangedNotificationName object:self];
 		[self reloadData];
 	}

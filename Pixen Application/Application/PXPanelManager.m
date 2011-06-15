@@ -30,7 +30,6 @@
 //
 
 #import "PXPanelManager.h"
-#import "UKFeedbackProvider.h"
 #import "PXWelcomeController.h"
 #import "PXAboutController.h"
 #import "PXToolPaletteController.h"
@@ -62,13 +61,11 @@ static PXPanelManager *sharedManager = nil;
 		return nil;
 	
 	sharedManager = self;
-	provider = [[UKFeedbackProvider alloc] init];
 	return self;
 }
 
 - (void)dealloc
 {
-	[provider release];
 	[super dealloc];
 }
 - (void)restorePanelStates
@@ -256,11 +253,6 @@ static PXPanelManager *sharedManager = nil;
 - (NSPanel *)previewPanel
 {
 	return (NSPanel *)[[PXPreviewController sharedPreviewController] window];
-}
-
-- (IBAction)showFeedback: (id)sender
-{
-	[provider orderFrontFeedbackWindow:self];
 }
 
 - (IBAction)showLeftToolProperties: (id)sender

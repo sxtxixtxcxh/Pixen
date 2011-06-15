@@ -41,7 +41,6 @@ NSString *PXZoomFit = @"PXZoomFit";
 NSString *PXZoom100 = @"PXZoom100";
 NSString *PXScale = @"PXScale";
 NSString *PXResize = @"PXResize";
-NSString *PXFeedback = @"PXFeedback";
 NSString *PXZoom = @"PXZoom";
   //NSString *PXDocumentPalette = @"PXDocumentPalette";
 
@@ -123,21 +122,6 @@ NSString *PXZoom = @"PXZoom";
 		[item setAction:@selector(resizeCanvas:)];
 		[item setImage:[NSImage imageNamed:@"resize"]];
 	}
-//	else if ([itemIdentifier isEqualToString:PXDocumentPalette])
-//	{
-//		[item setLabel:NSLocalizedString(@"DOCUMENT_PALETTE_LABEL", @"Document Palette Label")];
-//		[item setToolTip:NSLocalizedString(@"DOCUMENT_PALETTE_TOOLTIP", @"Document Palette Tooltip")];
-//		[item setAction:@selector(popDocumentPalette:)];
-//		[item setImage:[NSImage imageNamed:@"colorpalette"]];
-//	}
-	else if ([itemIdentifier isEqualToString:PXFeedback])
-	{
-		[item setLabel:NSLocalizedString(@"FEEDBACK_LABEL", @"Feedback Label")];
-		[item setToolTip:NSLocalizedString(@"FEEDBACK_TOOLTIP", @"Feedback Tooltip")];
-		[item setTarget:[PXPanelManager sharedManager]];
-		[item setAction:@selector(showFeedback:)];
-		[item setImage:[NSImage imageNamed:@"feedback"]];
-	}
 	else if ([itemIdentifier isEqualToString:PXZoom])
 	{
 		[item setLabel:NSLocalizedString(@"ZOOM_LABEL", @"Zoom Label")];
@@ -160,7 +144,7 @@ NSString *PXZoom = @"PXZoom";
 		PXPreview, PXZoom, 
 		PXZoomFit, PXZoom100,
 		PXResize, PXScale,
-		PXFeedback, PXGridConfigurator,
+		PXGridConfigurator,
           //		PXDocumentPalette,
 		NSToolbarCustomizeToolbarItemIdentifier, 
 		NSToolbarSpaceItemIdentifier,
@@ -173,7 +157,7 @@ NSString *PXZoom = @"PXZoom";
 {
 	return [NSArray arrayWithObjects:PXBackgroundConfigurator, PXGridConfigurator, 
 		NSToolbarSeparatorItemIdentifier, PXLayerDrawer, PXPreview, /*PXDocumentPalette,*/
-		NSToolbarFlexibleSpaceItemIdentifier, PXFeedback,
+		NSToolbarFlexibleSpaceItemIdentifier,
 		PXZoom,
 		nil];
 }

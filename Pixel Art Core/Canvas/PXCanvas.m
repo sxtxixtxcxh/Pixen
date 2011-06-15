@@ -102,23 +102,6 @@
 	canvasRect = NSMakeRect(0, 0, [self size].width, [self size].height);
 }
 
-- (id)duplicateWithinAnimation
-{
-	PXCanvas *canvas = [[[self class] alloc] _rawInit];
-	[canvas setLayers:[[self layers] deepMutableCopy]];
-	[canvas recacheSize];
-	[canvas setMainBackground:[self mainBackground]];
-	[canvas setAlternateBackground:[self alternateBackground]];
-	[canvas setMainPreviewBackground:[self mainPreviewBackground]];
-	[canvas setAlternatePreviewBackground:[self alternatePreviewBackground]];
-	[canvas setGrid:grid];
-	[canvas setPreviewSize:[self previewSize]];
-	[canvas setWraps:[self wraps]];
-	[canvas reallocateSelection];
-	[canvas setUndoManager:[self undoManager]];
-	return canvas;
-}
-
 - (id)init
 {
 	if (![super init]) return nil;

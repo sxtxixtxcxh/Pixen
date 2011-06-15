@@ -137,6 +137,9 @@ static PXToolPaletteController *singleInstance = nil;
 
 - (void)mouseDown:(NSEvent *)event
 {
+  //notably, holding command prevents the tool palette from gaining focus.
+  //how can I force this to happen even without the command key held?
+  //can I say "windowCanBecomeKey" = NO?
 	if (!([event modifierFlags] & NSCommandKeyMask))
 		[[self window] makeKeyWindow];
 }

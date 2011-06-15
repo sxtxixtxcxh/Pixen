@@ -28,25 +28,26 @@
 
 #import <AppKit/AppKit.h>
 #import "PXLayer.h"
+@class PXNSImageView, PXLayerTextField, PXLayerController, PXLayer;
 @interface PXLayerDetailsView : NSView 
 {
-	IBOutlet id name;
-	IBOutlet id thumbnail;
-	IBOutlet id opacity;
-	IBOutlet id opacityText;
-	IBOutlet id view;
-	IBOutlet id visibility;
+	IBOutlet PXLayerTextField *name;
+	IBOutlet PXNSImageView *thumbnail;
+	IBOutlet NSSlider *opacity;
+	IBOutlet NSTextField *opacityText;
+	IBOutlet NSView *view;
+	IBOutlet NSButton *visibility;
 
-	id layerController;
+	PXLayerController *layerController;
 	
-	id layer;
+	PXLayer *layer;
 	BOOL isHidden; //for backwards compatibility with 10.2
 	NSRect changedRect;	
 }
 - (void)setLayerController:cont;
-- layer;
+- (PXLayer *)layer;
 - (void)focusOnName;
-- opacityText;
+- (PXLayerTextField *)opacityText;
 - (NSTextField *)name;
 - (id) initWithLayer:(PXLayer *) aLayer;
 

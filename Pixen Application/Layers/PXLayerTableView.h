@@ -8,13 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class PXLayerDetailsView, PXLayerTableView;
+
+@protocol PXLayerTableViewDelegate
+- (void)deleteKeyPressedInTableView:(PXLayerTableView *)tableView;
+- (PXLayerDetailsView *)tableView:(PXLayerTableView *)tv viewForRow:(int)row;
+@end
 
 @interface PXLayerTableView : NSTableView {
 
 }
 
-@end
-
-@interface NSObject(PXLayerTableViewDelegate)
-- (void)deleteKeyPressedInTableView:tableView;
 @end

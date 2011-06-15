@@ -33,12 +33,11 @@
 
 #import <AppKit/NSNibDeclarations.h>
 
-@class UKFeedbackProvider;
 @class NSPanel;
 
 @interface PXPanelManager : NSObject 
 {
-	UKFeedbackProvider *provider;
+
 }
 
 //Singleton
@@ -58,7 +57,6 @@
 - (NSPanel *)spriteSheetExporterPanel;
 
    //IBActions
-- (IBAction)showFeedback: (id)sender;
 - (IBAction)showPreferences: (id)sender;
 - (IBAction)showInfo: (id)sender;
 - (IBAction)showWelcome: (id)sender;

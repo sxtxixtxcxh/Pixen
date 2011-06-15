@@ -46,7 +46,7 @@
 
 - copyWithZone:(NSZone *)zone
 {
-	PXCel *cel = [[PXCel alloc] initWithCanvas:[canvas copyWithZone:zone] duration:duration];
+	PXCel *cel = [[PXCel alloc] initWithCanvas:[[canvas copyWithZone:zone] autorelease] duration:duration];
 	[[cel canvas] setGrid:[canvas grid]];
 	return cel;
 }

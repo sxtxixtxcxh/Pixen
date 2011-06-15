@@ -531,6 +531,7 @@ void PXImage_drawInRectFromRectWithOperationFraction(PXImage *self, NSRect dst, 
 		PXTileDraw(self->tiles[i], source, CGRectMake(drawPoint.x, drawPoint.y, drawSize.width, drawSize.height));
 	}
 	CGContextTranslateCTM(target, fullDest.origin.x, fullDest.origin.y);
+  [transform release];
 }
 
 NSColor * PXImage_blendColors(PXImage * self, NSColor * bottomColor, NSColor * topColor)
