@@ -54,6 +54,7 @@
 						<string key="NSFrame">{{25, 2}, {41, 41}}</string>
 						<reference key="NSSuperview" ref="359467106"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="484925282"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSImageCell" key="NSCell" id="908279383">
 							<int key="NSCellFlags">130560</int>
@@ -71,6 +72,7 @@
 						<string key="NSFrame">{{4, 13}, {15, 18}}</string>
 						<reference key="NSSuperview" ref="359467106"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="322840496"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="76625499">
 							<int key="NSCellFlags">67239424</int>
@@ -103,6 +105,7 @@
 						<string key="NSFrame">{{68, 18}, {141, 22}}</string>
 						<reference key="NSSuperview" ref="359467106"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="126151380"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="264052663">
 							<int key="NSCellFlags">-2079195584</int>
@@ -136,6 +139,7 @@
 						<string key="NSFrame">{{68, 8}, {44, 11}}</string>
 						<reference key="NSSuperview" ref="359467106"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="74097682"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="823710547">
 							<int key="NSCellFlags">67239424</int>
@@ -173,6 +177,7 @@
 						<string key="NSFrame">{{112, 5}, {94, 15}}</string>
 						<reference key="NSSuperview" ref="359467106"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSSliderCell" key="NSCell" id="263978427">
 							<int key="NSCellFlags">67501824</int>
@@ -197,9 +202,10 @@
 						</object>
 					</object>
 				</array>
-				<string key="NSFrameSize">{215, 59}</string>
+				<string key="NSFrameSize">{215, 49}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="299429013"/>
 				<string key="NSClassName">NSView</string>
 				<string key="NSExtension">NSResponder</string>
 			</object>
@@ -405,6 +411,11 @@
 				<boolean value="YES" key="31.ImportedFromIB2"/>
 				<string key="35.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="35.ImportedFromIB2"/>
+				<string key="41.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="42.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="43.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="44.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="45.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="5.ImportedFromIB2"/>
 				<string key="7.CustomClassName">PXLayerTextField</string>
@@ -444,37 +455,37 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="name">id</string>
-						<string key="opacity">id</string>
-						<string key="opacityText">id</string>
-						<string key="thumbnail">id</string>
-						<string key="view">id</string>
-						<string key="visibility">id</string>
+						<string key="name">PXLayerTextField</string>
+						<string key="opacity">NSSlider</string>
+						<string key="opacityText">NSTextField</string>
+						<string key="thumbnail">PXNSImageView</string>
+						<string key="view">NSView</string>
+						<string key="visibility">NSButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="name">
 							<string key="name">name</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">PXLayerTextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="opacity">
 							<string key="name">opacity</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSSlider</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="opacityText">
 							<string key="name">opacityText</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSTextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="thumbnail">
 							<string key="name">thumbnail</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">PXNSImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="view">
 							<string key="name">view</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="visibility">
 							<string key="name">visibility</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

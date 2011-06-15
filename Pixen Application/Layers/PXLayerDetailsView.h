@@ -26,8 +26,8 @@
 //  Copyright (c) 2004 Open Sword Group. All rights reserved.
 //
 
-#import <AppKit/AppKit.h>
-#import "PXLayer.h"
+#import <Cocoa/Cocoa.h>
+
 @class PXNSImageView, PXLayerTextField, PXLayerController, PXLayer;
 @interface PXLayerDetailsView : NSView 
 {
@@ -43,7 +43,9 @@
 	PXLayer *layer;
 	BOOL isHidden; //for backwards compatibility with 10.2
 	NSRect changedRect;	
+	BOOL selected;
 }
+@property (nonatomic, readwrite, assign) BOOL selected;
 - (void)setLayerController:cont;
 - (PXLayer *)layer;
 - (void)focusOnName;

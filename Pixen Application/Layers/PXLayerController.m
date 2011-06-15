@@ -32,21 +32,22 @@
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_Modifying.h"
 #import "PXLayer.h"
-#import "SubviewTableViewController.h"
 #import "PXNotifications.h"
 #import "PXCanvasDocument.h"
 #import "PXAnimationDocument.h"
 #import "RBSplitSubview.h"
+
+@interface PXLayerController()
+- (void)propagateSelectedLayer:(int)row;
+@end
 
 @implementation PXLayerController
 
 - init
 {
 	[super init];
+	views = [[NSMutableArray alloc] init];
 	[NSBundle loadNibNamed:@"PXLayerController" owner:self];
-	views = [[NSMutableArray alloc] initWithCapacity:8];
-	[self selectRow:-1];
-	[tableView registerForDraggedTypes:[NSArray arrayWithObject:PXLayerRowPboardType]];
 	return self;
 }
 
@@ -68,14 +69,14 @@
 	canvas = aCanvas;
 	
 	[nc addObserver:self
-		   selector:@selector(reloadData:)
-			   name:PXCanvasLayersChangedNotificationName 
-			 object:canvas];
+				 selector:@selector(reloadData:)
+						 name:PXCanvasLayersChangedNotificationName 
+					 object:canvas];
 	
 	[nc addObserver:self
-		   selector:@selector(canvasLayerChanged:) 
-			   name:PXCanvasLayerSelectionDidChangeName 
-			 object:canvas];
+				 selector:@selector(canvasLayerChanged:) 
+						 name:PXCanvasLayerSelectionDidChangeName 
+					 object:canvas];
 	
 	[self reloadData:nil];
 }
@@ -83,27 +84,23 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[views release];
+	[layersView removeObserver:self forKeyPath:@"selectionIndexes"];
 	[canvas release];
-	[tableViewController release];
+	[views release];
 	[super dealloc];
 }
 
 - (void)awakeFromNib
 {
-	[tableView setIntercellSpacing:NSMakeSize(0,1)];
-	tableViewController = [[SubviewTableViewController controllerWithViewColumn:[tableView tableColumnWithIdentifier:@"details"]] retain];
-	[tableViewController setDelegate:self];
-}
-
-- (void)resetViewHiddenStatus
-{
-	BOOL shouldBeHidden = [subview isCollapsed];
-	
-	for (NSView *current in views)
-	{
-		[current setHidden:shouldBeHidden];
-	}
+	[layersView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
+	[layersView setDraggingSourceOperationMask:NSDragOperationNone forLocal:NO];
+	[layersView setMinItemSize:NSMakeSize(200, 49)];
+	[layersView setMaxItemSize:NSMakeSize(0, 49)];
+	[layersView registerForDraggedTypes:[NSArray arrayWithObject:PXLayerRowPboardType]];
+	[layersView addObserver:self 
+							 forKeyPath:@"selectionIndexes" 
+									options:NSKeyValueObservingOptionNew
+									context:nil];
 }
 
 - (NSView *)view;
@@ -121,31 +118,24 @@
 	document = doc;
 }
 
-- (NSView *) tableView:(NSTableView *)tableView viewForRow:(int)row
-{
-	return [views objectAtIndex:[self invertLayerIndex:row]];	
-}
-
 - (void)canvasLayerChanged:(NSNotification *) notification
 {
-	[self selectRow:[self invertLayerIndex:[[canvas layers] indexOfObject:[canvas activeLayer]]]];
-}
-
-- (int)numberOfRowsInTableView:(NSTableView *)view
-{
-	return [[canvas layers] count];
+	[self selectRow:[[canvas layers] indexOfObject:[canvas activeLayer]]];
 }
 
 - (void)reloadData:(NSNotification *) aNotification
 {
 	int i, selectedRow;
 	
-	if ([tableView selectedRow] == -1)
+	int idx = [[layersView selectionIndexes] indexGreaterThanOrEqualToIndex:0];
+	if (idx == NSNotFound || idx >= [[canvas layers] count])
 	{
-		[self selectRow:0]; 
+		selectedRow = 0; 
 	}
-	
-	selectedRow = [self invertLayerIndex:[tableView selectedRow]];
+	else
+	{
+		selectedRow = [self invertLayerIndex:idx];
+	}
 	for (i = 0; i < [[canvas layers] count]; i++)
 	{
 		PXLayer *layer = [[canvas layers] objectAtIndex:i];
@@ -162,26 +152,19 @@
 			[newView updatePreview:nil];
 		}
 	}
-	for (i = [[canvas layers] count]; i < [views count]; i++)
-	{
-		[[views objectAtIndex:i] setLayer:nil];
-	}
-	[views removeObjectsInRange:NSMakeRange(i, [views count] - i)];
-	[self selectRow:[self invertLayerIndex:selectedRow]];
-//	[self resetViewHiddenStatus];
+	[views removeObjectsInRange:NSMakeRange([[canvas layers] count], [views count] - [[canvas layers] count])];
+	[self selectRow:selectedRow];
 	
 	if ([[[aNotification userInfo] objectForKey:PXCanvasOldLayersCountKey] intValue] == 1 
-		&& [[canvas layers] count] == 2
-		&& [subview isCollapsed])
+			&& [[canvas layers] count] == 2
+			&& [subview isCollapsed])
 	{
 		[self toggle:self];
 	}
-	[tableViewController reloadTableView];
-	[tableView setNeedsDisplay:YES];
+	[layersView setContent:[[views reverseObjectEnumerator] allObjects]];
 	id newLayer = [[aNotification userInfo] objectForKey:PXCanvasNewLayerKey];
 	if(newLayer)
 	{
-		[tableView display];
 		for (id current in views)
 		{
 			if([current layer] == newLayer)
@@ -194,62 +177,28 @@
 	//	[self canvasLayerChanged:nil];
 }
 
-- (IBAction)nextLayer:(id) sender
+- (IBAction)nextLayer:(id)sender
 {
-	[self selectRow:[tableView selectedRow]+1];
-	[self selectLayer:[[canvas layers] objectAtIndex:[self invertLayerIndex:[tableView selectedRow]]]];
+	[self selectRow:[self invertLayerIndex:[[layersView selectionIndexes] firstIndex]+1]];
+	[self selectLayer:[[canvas layers] objectAtIndex:[self invertLayerIndex:[[layersView selectionIndexes] firstIndex]]]];
 }
 
-- (IBAction)previousLayer:(id) sender
+- (IBAction)previousLayer:(id)sender
 {
-	[self selectRow:[tableView selectedRow]-1];
-	[self selectLayer:[[canvas layers] objectAtIndex:[self invertLayerIndex:[tableView selectedRow]]]];
+	[self selectRow:[self invertLayerIndex:[[layersView selectionIndexes] firstIndex]-1]];
+	[self selectLayer:[[canvas layers] objectAtIndex:[self invertLayerIndex:[[layersView selectionIndexes] firstIndex]]]];
 }
 
 - (void)selectRow:(int)index
 {
-	if ([tableView respondsToSelector:@selector(selectRowIndexes:byExtendingSelection:)])
-	{
-		
-		[tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
-	}
-	else
-	{
-		[tableView selectRow:index byExtendingSelection:NO];
-	}
+	if(index < 0 || !canvas || [[canvas layers] count] == 0) { return; }
+	[layersView setSelectionIndexes:[NSIndexSet indexSetWithIndex:[self invertLayerIndex:index]]];
 	[self updateRemoveButtonStatus];
 }
 
 - (IBAction)displayHelp:sender
 {
 	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"workingwithlayers" inBook:@"Pixen Help"];	
-}
-
-- (id)tableView:(NSTableView *)aTableView 
-objectValueForTableColumn:(NSTableColumn *)aTableColumn 
-			row:(int)rowIndex
-{
-	if([[aTableColumn identifier] isEqualToString:@"visible"])
-	{
-		return [NSNumber numberWithBool:[[[canvas layers] objectAtIndex:[self invertLayerIndex:rowIndex]] visible]];
-	}
-	return nil;
-}
-
-/*
- * TableView dataSource
- */
-
-- (void)tableView:(NSTableView *)aTableView
-   setObjectValue:(id)anObject
-   forTableColumn:(NSTableColumn *)aTableColumn 
-			  row:(int)rowIndex
-{
-	if([[aTableColumn identifier] isEqualToString:@"visible"])
-	{
-		[[[canvas layers] objectAtIndex:[self invertLayerIndex:rowIndex]] setVisible:[anObject boolValue]];
-		[canvas changedInRect:NSMakeRect(0,0,[canvas size].width, [canvas size].height)];
-	}
 }
 
 - (void)setSubview:(RBSplitSubview *)sv;
@@ -267,7 +216,6 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 	{
 		[subview collapse];
 	}
-//	[self resetViewHiddenStatus];
 	[[subview window] display];
 }
 
@@ -279,7 +227,7 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 	//[[[self document] undoManager] beginUndoGrouping];
 	[canvas addLayer:layer];
 	//[[[self document] undoManager] endUndoGrouping];
-	[self selectRow:0];
+	[self selectRow:[self invertLayerIndex:0]];
 	[self selectLayer:nil];
 }
 
@@ -290,7 +238,7 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 
 - (IBAction)duplicateLayer:(id)sender
 {
-	[canvas duplicateLayerAtIndex:[self invertLayerIndex:[tableView selectedRow]]];
+	[canvas duplicateLayerAtIndex:[self invertLayerIndex:[[layersView selectionIndexes] firstIndex]]];
 }
 
 - (void)duplicateLayerObject:(PXLayer *)layer
@@ -303,7 +251,7 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 	if([[canvas layers] count] <= 1) { return; }
 	[canvas removeLayerAtIndex:index];
 	int newIndex = MAX(index - 1, 0);
-	[self selectRow:[self invertLayerIndex:newIndex]];
+	[self selectRow:newIndex];
 	[self selectLayer:nil];
 }
 
@@ -314,35 +262,48 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 
 - (IBAction)removeLayer:(id) sender
 {
-	if ([tableView selectedRow] == -1) 
+	NSUInteger idx = [[layersView selectionIndexes] indexGreaterThanOrEqualToIndex:0];
+	if (idx == NSNotFound || idx >= [[canvas layers] count]) 
 		return; 
 	
-	[self removeLayerAtCanvasLayersIndex:[self invertLayerIndex:[tableView selectedRow]]];
+	[self removeLayerAtCanvasLayersIndex:[self invertLayerIndex:[[layersView selectionIndexes] firstIndex]]];
 }
 
-- (void)tableViewSelectionDidChange:(NSNotification *)aNotification
-{
-	[self selectLayer:self];
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+	if(!canvas) { return; }
+	NSIndexSet *newSel = [change objectForKey:NSKeyValueChangeNewKey];
+	NSUInteger idx = [newSel indexGreaterThanOrEqualToIndex:0];
+	if (idx == NSNotFound || idx >= [[canvas layers] count]) {
+		[self selectRow:0];
+	} else {
+		int row = [self invertLayerIndex:idx];
+		[self propagateSelectedLayer:row];
+	}
+}
+
+- (void)propagateSelectedLayer:(int)row {
+	if(!canvas || row < 0) { return; }
+	PXLayer *layer = [[canvas layers] objectAtIndex:row];
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc postNotificationName:PXLayerSelectionDidChangeName
+										object:self
+									userInfo:[NSDictionary dictionaryWithObject:layer
+																											 forKey:PXLayerKey]];
 }
 
 - (IBAction)selectLayer:(id)sender
 {
-	if ([tableView selectedRow] == -1)
-	{
-		[self selectRow:[self invertLayerIndex:[[canvas layers] indexOfObject:[canvas activeLayer]]]]; 
+	NSUInteger idx = [[layersView selectionIndexes] indexGreaterThanOrEqualToIndex:0];
+	if (idx == NSNotFound || idx >= [[canvas layers] count]) {
+		[self selectRow:[[canvas layers] indexOfObject:[canvas activeLayer]]]; 
 		return;
 	}
-	
-	int row = [self invertLayerIndex:[tableView selectedRow]];
-	
-	[self selectRow:[self invertLayerIndex:row]];
-	
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-	
-	[nc postNotificationName:PXLayerSelectionDidChangeName
-					  object:self
-					userInfo:[NSDictionary dictionaryWithObject:[[canvas layers] objectAtIndex:row]
-														 forKey:PXLayerKey]];
+	int row = [self invertLayerIndex:[[layersView selectionIndexes] firstIndex]];
+	[self selectRow:row];	
+	[self propagateSelectedLayer:row];
 }
 
 - (void)updateRemoveButtonStatus
@@ -370,12 +331,12 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 	[canvas mergeDownLayer:[[canvas layers] objectAtIndex:index]];
 	if(wasActive)
 	{
-		[self selectRow:[self invertLayerIndex:index-1]];
+		[self selectRow:index-1];
 		[self selectLayer:[[canvas layers] objectAtIndex:index-1]];
 	}
 	else
 	{
-		[self selectRow:[self invertLayerIndex:[canvas indexOfLayer:[canvas activeLayer]]]];
+		[self selectRow:[canvas indexOfLayer:[canvas activeLayer]]];
 		[self selectLayer:[canvas activeLayer]];
 	}
 }
@@ -387,57 +348,85 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 
 - (void)mergeDown
 {
-	[self mergeDownLayerAtCanvasLayersIndex:[self invertLayerIndex:[tableView selectedRow]]];
+	[self mergeDownLayerAtCanvasLayersIndex:[self invertLayerIndex:[[layersView selectionIndexes] firstIndex]]];
 }
 
-- (BOOL)tableView:(NSTableView *)aTableView
-		writeRows:(NSArray *)rows
-	 toPasteboard:(NSPasteboard *)pboard
+- (BOOL)collectionView:(NSCollectionView *)cv 
+	 writeItemsAtIndexes:(NSIndexSet *)rows 
+					toPasteboard:(NSPasteboard *)pboard
 {
 	[pboard declareTypes:[NSArray arrayWithObject:PXLayerRowPboardType] owner:self];
 	
-	[pboard setString:[NSString stringWithFormat:@"%d", [self invertLayerIndex:[[rows objectAtIndex:0] intValue]]] forType:PXLayerRowPboardType];
+	[pboard setString:[NSString stringWithFormat:@"%d", [self invertLayerIndex:[rows firstIndex]]] forType:PXLayerRowPboardType];
 	return YES;
 }
 
-- (NSDragOperation)tableView:(NSTableView *)aTableView 
-				validateDrop:(id <NSDraggingInfo>)info
-				 proposedRow:(int)row
-	   proposedDropOperation:(NSTableViewDropOperation)operation
-{
+- (NSDragOperation)collectionView:(NSCollectionView *)collectionView 
+                     validateDrop:(id < NSDraggingInfo >)info 
+                    proposedIndex:(NSInteger *)idxP 
+                    dropOperation:(NSCollectionViewDropOperation *)operationP {
 	if (![[[info draggingPasteboard] types] containsObject:PXLayerRowPboardType])
 	{
 		return NSDragOperationNone; 
 	}
+  
+  int idx = *idxP;
+  NSCollectionViewDropOperation operation = *operationP;
+  
 	
-	int sourceRow = [self invertLayerIndex:[[[info draggingPasteboard] stringForType:PXLayerRowPboardType] intValue]];
-	if ( row == sourceRow + 1 || row == sourceRow)
+	int sourceIdx = [self invertLayerIndex:[[[info draggingPasteboard] stringForType:PXLayerRowPboardType] intValue]];
+	if ( idx == sourceIdx + 1 || idx == sourceIdx)
 	{
 		return NSDragOperationNone;
 	}
-		
-	if (operation == NSTableViewDropOn) 
+	
+	if (operation == NSCollectionViewDropOn) 
 	{ 
-		if (row == sourceRow - 1)
+		if (idx == sourceIdx - 1)
 			return NSDragOperationNone;
-		[aTableView setDropRow:row dropOperation:NSTableViewDropAbove]; 
+    *operationP = NSCollectionViewDropBefore;
 	}
 	
 	return NSDragOperationMove;
 }
 
-- (BOOL)tableView:(NSTableView *)aTableView
-	   acceptDrop:(id <NSDraggingInfo>)info
-			  row:(int)row
-	dropOperation:(NSTableViewDropOperation)operation
-{
+- (BOOL)collectionView:(NSCollectionView *)collectionView 
+            acceptDrop:(id < NSDraggingInfo >)info 
+                 index:(NSInteger)idx 
+         dropOperation:(NSCollectionViewDropOperation)dropOperation {
 	id layer = [[canvas layers] objectAtIndex:[[[info draggingPasteboard] stringForType:PXLayerRowPboardType] intValue]];
-	[canvas moveLayer:layer toIndex:[self invertLayerIndex:row]];
-	[self selectRow:[self invertLayerIndex:[[canvas layers] indexOfObject:layer]]];
+	[canvas moveLayer:layer toIndex:[self invertLayerIndex:idx]];
+	[self selectRow:[[canvas layers] indexOfObject:layer]];
 	return YES;
 }
 
-- (void)deleteKeyPressedInTableView:tv
+- (NSImage *)collectionView:(NSCollectionView *)collectionView 
+draggingImageForItemsAtIndexes:(NSIndexSet *)dragIndexes 
+                  withEvent:(NSEvent *)dragEvent 
+                     offset:(NSPointPointer)dragImageOffset {
+	PXLayerDetailsView *v = (PXLayerDetailsView *)[[collectionView itemAtIndex:[dragIndexes firstIndex]] view];
+	
+	NSData *viewData = [v dataWithPDFInsideRect:[v bounds]];
+	NSImage *viewImage = [[[NSImage alloc] initWithData:viewData] autorelease];
+	NSImage *bgImage = [[[NSImage alloc] initWithSize:[v bounds].size] autorelease];
+	[bgImage lockFocus];
+	[[[NSColor whiteColor] colorWithAlphaComponent:0.66] set];
+	NSRectFill([v bounds]);
+	[[[NSColor lightGrayColor] colorWithAlphaComponent:0.66] set];
+	[[NSBezierPath bezierPathWithRect:[v bounds]] stroke];
+	[viewImage compositeToPoint:NSZeroPoint fromRect:[v bounds] operation:NSCompositeSourceOver fraction:0.66];
+	[bgImage unlockFocus];
+	
+	NSPoint locationInView = [v convertPoint:[dragEvent locationInWindow] fromView:nil];
+	locationInView.x -= NSWidth([v frame]) / 2;
+	locationInView.x *= -1;
+	locationInView.y -= NSHeight([v frame]) / 2;
+	locationInView.y *= -1;
+	*dragImageOffset = locationInView;
+	return bgImage;
+}
+
+- (void)deleteKeyPressedInCollectionView:(NSCollectionView *)cv
 {
 	[self removeLayer:self];
 }

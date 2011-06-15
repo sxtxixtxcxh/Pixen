@@ -82,7 +82,7 @@
 	isEditing = NO;
 	[self setDrawsBackground:NO];
 	[self setBezeled:NO];
-	[self setTextColor:[NSColor whiteColor]];
+//	[self setTextColor:[NSColor whiteColor]];
 	[super textDidEndEditing:notification];
 	[self abortEditing];
 	[self setFocusRingType:NSFocusRingTypeNone];

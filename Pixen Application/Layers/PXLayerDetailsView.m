@@ -43,18 +43,25 @@
 
 @implementation PXLayerDetailsView
 
+@synthesize selected;
+
 -(id) initWithLayer:(PXLayer *)aLayer
 {
 	if ( ! (self = [super init] ) ) 
 		return nil;
 	
 	[NSBundle loadNibNamed:@"PXLayerDetailsView" owner:self];
-    [self setAutoresizesSubviews:NO];
+	self.selected = NO;
+  [self setAutoresizesSubviews:YES];
 	[self addSubview:view];
 	[self setLayer:aLayer];
 	[thumbnail setEditable:NO];
 	isHidden = YES;
 	return self;
+}
+
+- (BOOL)acceptsFirstResponder {
+	return NO;
 }
 
 - (void)setFrame:(NSRect)newFrame
@@ -220,7 +227,6 @@
 
 - (BOOL)validateMenuItem:(NSMenuItem *)anItem
 {
-	// I'm so sorry. This is so bad.
 	if ([anItem action] == @selector(mergeDown:)) {
 		id layers = [[layerController canvas] layers];
 		return [layers count] > 1 && [layers objectAtIndex:0] != layer;
@@ -347,6 +353,14 @@
 - (IBAction)flipLayerVertically:(id) sender
 {
 	[[layer canvas] flipLayerVertically:layer];
+}
+
+
+- (void)drawRect:(NSRect)r {
+	if(selected) {
+		[[NSColor alternateSelectedControlColor] set];
+		NSRectFill(r);
+	}
 }
 
 @end

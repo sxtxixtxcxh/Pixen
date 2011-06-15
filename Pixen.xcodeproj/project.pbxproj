@@ -37,6 +37,10 @@
 		BF489DDD08775845007DF4CF /* PXPatternEditor.nib in Resources */ = {isa = PBXBuildFile; fileRef = BF489DDB08775845007DF4CF /* PXPatternEditor.nib */; };
 		BFB1440608AD1D1800CE29EF /* PXSpriteSheetExporter.nib in Resources */ = {isa = PBXBuildFile; fileRef = BFB1440408AD1D1800CE29EF /* PXSpriteSheetExporter.nib */; };
 		BFFC21B906DED6F8008EC4CC /* PXGradientBuilder.nib in Resources */ = {isa = PBXBuildFile; fileRef = BFFC21B706DED6F8008EC4CC /* PXGradientBuilder.nib */; };
+		D866555113A932CC00030D76 /* PXLayerDetailsView.nib in Resources */ = {isa = PBXBuildFile; fileRef = D866554F13A932CC00030D76 /* PXLayerDetailsView.nib */; };
+		D866555313A932D900030D76 /* PXMonotoneBackgroundConfigurator.nib in Resources */ = {isa = PBXBuildFile; fileRef = EAA0184E054DCC7B00EF18C2 /* PXMonotoneBackgroundConfigurator.nib */; };
+		D88A735113A93CCD00B56402 /* PXLayerCollectionViewItem.h in Headers */ = {isa = PBXBuildFile; fileRef = D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */; };
+		D88A735213A93CCD00B56402 /* PXLayerCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D88A735013A93CCD00B56402 /* PXLayerCollectionViewItem.m */; };
 		EA041A190CE8F72F0095DAA9 /* PXBackgroundConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = EA041A170CE8F72F0095DAA9 /* PXBackgroundConfig.h */; };
 		EA041A1A0CE8F72F0095DAA9 /* PXBackgroundConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EA041A180CE8F72F0095DAA9 /* PXBackgroundConfig.m */; };
 		EA2EA41B10DB37E50065090C /* NSString+Comparison.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2EA41910DB37E50065090C /* NSString+Comparison.h */; };
@@ -105,8 +109,8 @@
 		EA31F9770CE7CD9300EC481B /* PXLayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F96C0CE7CD9300EC481B /* PXLayerController.m */; };
 		EA31F9780CE7CD9300EC481B /* PXLayerDetailsView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F96D0CE7CD9300EC481B /* PXLayerDetailsView.h */; };
 		EA31F9790CE7CD9300EC481B /* PXLayerDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F96E0CE7CD9300EC481B /* PXLayerDetailsView.m */; };
-		EA31F97A0CE7CD9300EC481B /* PXLayerTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F96F0CE7CD9300EC481B /* PXLayerTableView.h */; };
-		EA31F97B0CE7CD9300EC481B /* PXLayerTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9700CE7CD9300EC481B /* PXLayerTableView.m */; };
+		EA31F97A0CE7CD9300EC481B /* PXLayerCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F96F0CE7CD9300EC481B /* PXLayerCollectionView.h */; };
+		EA31F97B0CE7CD9300EC481B /* PXLayerCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9700CE7CD9300EC481B /* PXLayerCollectionView.m */; };
 		EA31F97C0CE7CD9300EC481B /* PXLayerTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */; };
 		EA31F97D0CE7CD9300EC481B /* PXLayerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */; };
 		EA31F97E0CE7CD9300EC481B /* PXInfoPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */; };
@@ -476,7 +480,6 @@
 		EAF6947D06A9AE0B0019D8D7 /* PXNamePrompt.nib in Resources */ = {isa = PBXBuildFile; fileRef = EA9E180B0557104F00119DF5 /* PXNamePrompt.nib */; };
 		EAF6947E06A9AE0B0019D8D7 /* PXPreview.nib in Resources */ = {isa = PBXBuildFile; fileRef = 615E88DD06A31B72002445B8 /* PXPreview.nib */; };
 		EAF6947F06A9AE0B0019D8D7 /* PXLayerController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 615E87F206A31AF8002445B8 /* PXLayerController.nib */; };
-		EAF6948206A9AE0B0019D8D7 /* PXLayerDetailsView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 615E87F606A31AF8002445B8 /* PXLayerDetailsView.nib */; };
 		EAF6948406A9AE0B0019D8D7 /* PXToolProperties.nib in Resources */ = {isa = PBXBuildFile; fileRef = 615E87FA06A31AF8002445B8 /* PXToolProperties.nib */; };
 		EAF6948506A9AE0B0019D8D7 /* PXRectangleToolPropertiesView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 615E87FE06A31AF8002445B8 /* PXRectangleToolPropertiesView.nib */; };
 		EAF6948606A9AE0B0019D8D7 /* PXBlankPropertiesView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 615E880A06A31AF8002445B8 /* PXBlankPropertiesView.nib */; };
@@ -579,6 +582,10 @@
 		BFB1440508AD1D1800CE29EF /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXSpriteSheetExporter.nib; sourceTree = "<group>"; };
 		BFFC21B806DED6F8008EC4CC /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXGradientBuilder.nib; sourceTree = "<group>"; };
 		BFFC221A06DEDE63008EC4CC /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXGradientBuilder.nib; sourceTree = "<group>"; };
+		D866555013A932CC00030D76 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXLayerDetailsView.nib; sourceTree = "<group>"; };
+		D866555213A932D900030D76 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXLayerDetailsView.nib; sourceTree = "<group>"; };
+		D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerCollectionViewItem.h; sourceTree = "<group>"; };
+		D88A735013A93CCD00B56402 /* PXLayerCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerCollectionViewItem.m; sourceTree = "<group>"; };
 		EA041A170CE8F72F0095DAA9 /* PXBackgroundConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXBackgroundConfig.h; sourceTree = "<group>"; };
 		EA041A180CE8F72F0095DAA9 /* PXBackgroundConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXBackgroundConfig.m; sourceTree = "<group>"; };
 		EA2EA41910DB37E50065090C /* NSString+Comparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Comparison.h"; sourceTree = "<group>"; };
@@ -647,8 +654,8 @@
 		EA31F96C0CE7CD9300EC481B /* PXLayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerController.m; sourceTree = "<group>"; };
 		EA31F96D0CE7CD9300EC481B /* PXLayerDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerDetailsView.h; sourceTree = "<group>"; };
 		EA31F96E0CE7CD9300EC481B /* PXLayerDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerDetailsView.m; sourceTree = "<group>"; };
-		EA31F96F0CE7CD9300EC481B /* PXLayerTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerTableView.h; sourceTree = "<group>"; };
-		EA31F9700CE7CD9300EC481B /* PXLayerTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerTableView.m; sourceTree = "<group>"; };
+		EA31F96F0CE7CD9300EC481B /* PXLayerCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerCollectionView.h; sourceTree = "<group>"; };
+		EA31F9700CE7CD9300EC481B /* PXLayerCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerCollectionView.m; sourceTree = "<group>"; };
 		EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerTextField.h; sourceTree = "<group>"; };
 		EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerTextField.m; sourceTree = "<group>"; };
 		EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXInfoPanelController.h; sourceTree = "<group>"; };
@@ -920,7 +927,6 @@
 		EA90F6DE06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXImageSizePrompt.nib; sourceTree = "<group>"; };
 		EA90F6DF06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXInfoPanel.nib; sourceTree = "<group>"; };
 		EA90F6E006D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXLayerController.nib; sourceTree = "<group>"; };
-		EA90F6E106D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXLayerDetailsView.nib; sourceTree = "<group>"; };
 		EA90F6E206D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXMonotoneBackgroundConfigurator.nib; sourceTree = "<group>"; };
 		EA90F6E306D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXNamePrompt.nib; sourceTree = "<group>"; };
 		EA90F6E606D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXPencilToolPropertiesView.nib; sourceTree = "<group>"; };
@@ -939,7 +945,6 @@
 		EAB6506D0D108D0F00274070 /* PXPaletteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteController.h; sourceTree = "<group>"; };
 		EAB6506E0D108D0F00274070 /* PXPaletteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteController.m; sourceTree = "<group>"; };
 		EAB650850D108D9000274070 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPaletteController.xib; sourceTree = "<group>"; };
-		EABC7DCF05D2FE4700CDB5BB /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXLayerDetailsView.nib; sourceTree = "<group>"; };
 		EABD60B70CE986E3008A1B1E /* PXCanvasPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvasPreviewView.h; sourceTree = "<group>"; };
 		EABD60B80CE986E3008A1B1E /* PXCanvasPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasPreviewView.m; sourceTree = "<group>"; };
 		EAC916E10CE7DC7300E519E1 /* actiongear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actiongear.png; sourceTree = "<group>"; };
@@ -1325,10 +1330,12 @@
 				EA31F96C0CE7CD9300EC481B /* PXLayerController.m */,
 				EA31F96D0CE7CD9300EC481B /* PXLayerDetailsView.h */,
 				EA31F96E0CE7CD9300EC481B /* PXLayerDetailsView.m */,
+				D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */,
+				D88A735013A93CCD00B56402 /* PXLayerCollectionViewItem.m */,
 				615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */,
 				615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */,
-				EA31F96F0CE7CD9300EC481B /* PXLayerTableView.h */,
-				EA31F9700CE7CD9300EC481B /* PXLayerTableView.m */,
+				EA31F96F0CE7CD9300EC481B /* PXLayerCollectionView.h */,
+				EA31F9700CE7CD9300EC481B /* PXLayerCollectionView.m */,
 				EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */,
 				EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */,
 			);
@@ -1912,7 +1919,7 @@
 				610865F506B988F400733B2D /* PXInfoPanel.nib */,
 				616AA52408611A8800FD2CB9 /* PXJPEGSizePrompt.nib */,
 				615E87F206A31AF8002445B8 /* PXLayerController.nib */,
-				615E87F606A31AF8002445B8 /* PXLayerDetailsView.nib */,
+				D866554F13A932CC00030D76 /* PXLayerDetailsView.nib */,
 				EAA0184E054DCC7B00EF18C2 /* PXMonotoneBackgroundConfigurator.nib */,
 				EA9E180B0557104F00119DF5 /* PXNamePrompt.nib */,
 				BF489DDB08775845007DF4CF /* PXPatternEditor.nib */,
@@ -2179,7 +2186,7 @@
 				EA31F9680CE7BF0900EC481B /* PXCanvasResizeView.h in Headers */,
 				EA31F9760CE7CD9300EC481B /* PXLayerController.h in Headers */,
 				EA31F9780CE7CD9300EC481B /* PXLayerDetailsView.h in Headers */,
-				EA31F97A0CE7CD9300EC481B /* PXLayerTableView.h in Headers */,
+				EA31F97A0CE7CD9300EC481B /* PXLayerCollectionView.h in Headers */,
 				EA31F97C0CE7CD9300EC481B /* PXLayerTextField.h in Headers */,
 				EA31F97E0CE7CD9300EC481B /* PXInfoPanelController.h in Headers */,
 				EA31F9A90CE7CE4800EC481B /* PXGradientBuilderController.h in Headers */,
@@ -2299,6 +2306,7 @@
 				31E907B5105757C700ADB171 /* CTGradient.h in Headers */,
 				31E907B7105757C700ADB171 /* CTGradientView.h in Headers */,
 				EA2EA41B10DB37E50065090C /* NSString+Comparison.h in Headers */,
+				D88A735113A93CCD00B56402 /* PXLayerCollectionViewItem.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2337,6 +2345,8 @@
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				en,
+				English,
+				French,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Pixen */;
 			projectDirPath = "";
@@ -2363,7 +2373,6 @@
 				EAF6947D06A9AE0B0019D8D7 /* PXNamePrompt.nib in Resources */,
 				EAF6947E06A9AE0B0019D8D7 /* PXPreview.nib in Resources */,
 				EAF6947F06A9AE0B0019D8D7 /* PXLayerController.nib in Resources */,
-				EAF6948206A9AE0B0019D8D7 /* PXLayerDetailsView.nib in Resources */,
 				EAF6948406A9AE0B0019D8D7 /* PXToolProperties.nib in Resources */,
 				EAF6948506A9AE0B0019D8D7 /* PXRectangleToolPropertiesView.nib in Resources */,
 				EAF6948606A9AE0B0019D8D7 /* PXBlankPropertiesView.nib in Resources */,
@@ -2492,6 +2501,8 @@
 				EAB650860D108D9000274070 /* PXPaletteController.xib in Resources */,
 				61A22A070D20715100430CCD /* History.tiff in Resources */,
 				61A22A240D2073E500430CCD /* Frequency.tiff in Resources */,
+				D866555113A932CC00030D76 /* PXLayerDetailsView.nib in Resources */,
+				D866555313A932D900030D76 /* PXMonotoneBackgroundConfigurator.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2552,7 +2563,7 @@
 				EA31F9690CE7BF0900EC481B /* PXCanvasResizeView.m in Sources */,
 				EA31F9770CE7CD9300EC481B /* PXLayerController.m in Sources */,
 				EA31F9790CE7CD9300EC481B /* PXLayerDetailsView.m in Sources */,
-				EA31F97B0CE7CD9300EC481B /* PXLayerTableView.m in Sources */,
+				EA31F97B0CE7CD9300EC481B /* PXLayerCollectionView.m in Sources */,
 				EA31F97D0CE7CD9300EC481B /* PXLayerTextField.m in Sources */,
 				EA31F97F0CE7CD9300EC481B /* PXInfoPanelController.m in Sources */,
 				EA31F9AA0CE7CE4800EC481B /* PXGradientBuilderController.m in Sources */,
@@ -2673,6 +2684,7 @@
 				31E907B6105757C700ADB171 /* CTGradient.m in Sources */,
 				31E907B8105757C700ADB171 /* CTGradientView.m in Sources */,
 				EA2EA41C10DB37E50065090C /* NSString+Comparison.m in Sources */,
+				D88A735213A93CCD00B56402 /* PXLayerCollectionViewItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2757,15 +2769,6 @@
 				EA90F6E006D123B7001755A6 /* French */,
 			);
 			name = PXLayerController.nib;
-			sourceTree = "<group>";
-		};
-		615E87F606A31AF8002445B8 /* PXLayerDetailsView.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EABC7DCF05D2FE4700CDB5BB /* English */,
-				EA90F6E106D123B7001755A6 /* French */,
-			);
-			name = PXLayerDetailsView.nib;
 			sourceTree = "<group>";
 		};
 		615E87FA06A31AF8002445B8 /* PXToolProperties.nib */ = {
@@ -2937,6 +2940,15 @@
 				BFFC221A06DEDE63008EC4CC /* French */,
 			);
 			name = PXGradientBuilder.nib;
+			sourceTree = "<group>";
+		};
+		D866554F13A932CC00030D76 /* PXLayerDetailsView.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D866555013A932CC00030D76 /* English */,
+				D866555213A932D900030D76 /* French */,
+			);
+			name = PXLayerDetailsView.nib;
 			sourceTree = "<group>";
 		};
 		EA4A6C3D08A98133007BAC7F /* PXAnimationDocument.nib */ = {
@@ -3111,7 +3123,6 @@
 		616BAEAA08553EFB004CF172 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DEBUGGING_SYMBOLS = full;
@@ -3122,7 +3133,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = ".//**";
@@ -3137,8 +3148,6 @@
 		616BAEAB08553EFB004CF172 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = s;

@@ -26,22 +26,22 @@
 //  Copyright (c) 2004 Open Sword Group. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "SubviewTableViewController.h"
+#import <AppKit/AppKit.h>
 #import "PXCanvas.h"
 
-@class PXLayer, RBSplitSubview;
-@interface PXLayerController : NSResponder <SubviewTableViewControllerDataSourceProtocol> 
+@class PXLayer, PXCanvas, PXDocument, RBSplitSubview;
+@interface PXLayerController : NSResponder <NSCollectionViewDelegate>
 {
-	IBOutlet id view;
-	IBOutlet id tableView;
-	id canvas;
-	IBOutlet RBSplitSubview *subview;
-	id views;
-	id tableViewController;
-	IBOutlet id removeButton;
-	id document;
+	IBOutlet NSView *view;
+	IBOutlet NSCollectionView *layersView;
+	PXCanvas *canvas;
+	NSMutableArray *views;
+	RBSplitSubview *subview;
+	IBOutlet NSButton *removeButton;
+	PXDocument *document;
 	int layersCreated;
+
+  NSIndexSet *selection;
 }
 -(id) initWithCanvas:(PXCanvas *)aCanvas;
 - (void)toggle:(id)sender;
@@ -70,24 +70,6 @@
 
 - (int)invertLayerIndex:(int)anIndex;
 
-	/*
-	 * Table View dateSource
-	 */
-- (id)tableView:(NSTableView *)aTableView 
-objectValueForTableColumn:(NSTableColumn *)aTableColumn
-			row:(int)rowIndex;
-
-- (void)tableView:(NSTableView *)aTableView 
-   setObjectValue:(id)anObject 
-   forTableColumn:(NSTableColumn *)aTableColumn
-			  row:(int)rowIndex;
-
-	/*
-	 * TableView drag & drop 
-	 */
-- (NSDragOperation)tableView:(NSTableView *)aTableView
-				validateDrop:(id <NSDraggingInfo>)info
-				 proposedRow:(int)row
-       proposedDropOperation:(NSTableViewDropOperation)operation;
+- (void)deleteKeyPressedInCollectionView:(NSCollectionView *)cv;
 
 @end
