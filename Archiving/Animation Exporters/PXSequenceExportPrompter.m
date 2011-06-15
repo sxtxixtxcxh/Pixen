@@ -13,11 +13,11 @@
 
 - initWithDocument:(NSDocument *)aDocument
 {
-	[super init];
+	self = [super init];
 	fileTemplate = [[NSString stringWithFormat:@"%@ %%f", [[aDocument displayName] stringByDeletingPathExtension]] retain];
 	[NSBundle loadNibNamed:@"PXSequenceExportPrompter" owner:self];
 	[self setFileType:PixenImageFileType];
-	savePanel = [[NSOpenPanel savePanel] retain];
+	savePanel = [[NSSavePanel savePanel] retain];
 	[savePanel setCanChooseDirectories:YES];
 	[savePanel setTitle:@"Choose Target Folder"];
 	[savePanel setPrompt:@"Export"];

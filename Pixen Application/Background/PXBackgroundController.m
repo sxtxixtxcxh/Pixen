@@ -350,7 +350,7 @@ typedef enum _PXStackType
 	[pboard setString:[self newBackgroundNameForTemplateView:(PXBackgroundTemplateView *)view] forType:PXBackgroundNewTemplatePboardType];
 	
 	// set the data for file-based drags
-	id path = [self pathForBackground:bg];
+	NSString *path = [self pathForBackground:bg];
 	[pboard setString:path forType:PXBackgroundNamePboardType];
 	if([[NSFileManager defaultManager] fileExistsAtPath:[self pathForBackground:bg]])
 	{

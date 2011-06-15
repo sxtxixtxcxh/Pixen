@@ -24,9 +24,9 @@ static NSLock *popupLock = nil;
 	return nil;
 }
 
-- _init
+- (id)_init
 {
-	[super init];
+	self = [super init];
 	[NSBundle loadNibNamed:@"OSProgressPopup" owner:self];
 	[progressIndicator setUsesThreadedAnimation:YES];
 	[self setCanCancel:NO];	

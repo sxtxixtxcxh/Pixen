@@ -100,7 +100,7 @@
                    argument:(id)argument
                    didEndSelector:(SEL)didEndSelector
 {    
-    if( ![super init] )
+    if( ! (self = [super init]) )
         return nil;
 
     // Set instance variables

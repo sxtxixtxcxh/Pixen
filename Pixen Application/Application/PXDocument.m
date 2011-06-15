@@ -13,12 +13,6 @@
 
 @implementation PXDocument
 
-- init
-{
-	[super init];
-	return self;
-}
-
 - (void)dealloc
 {
 	[[self windowControllers] makeObjectsPerformSelector:@selector(close)];

@@ -36,9 +36,9 @@
 	[shadow setShadowColor:[NSColor colorWithDeviceWhite:0.2 alpha:1]];	
 }
 
-- initWithFrame:(NSRect)rect
+- (id)initWithFrame:(NSRect)rect
 {
-	[super initWithFrame:rect];
+	self = [super initWithFrame:rect];
 	[self initialize];
 	return self;
 }
