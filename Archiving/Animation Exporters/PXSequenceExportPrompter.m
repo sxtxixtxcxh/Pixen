@@ -18,12 +18,9 @@
 	[NSBundle loadNibNamed:@"PXSequenceExportPrompter" owner:self];
 	[self setFileType:PixenImageFileType];
 	savePanel = [[NSSavePanel savePanel] retain];
-	[savePanel setCanChooseDirectories:YES];
 	[savePanel setTitle:@"Choose Target Folder"];
 	[savePanel setPrompt:@"Export"];
-	[savePanel setCanChooseFiles:NO];
 	[savePanel setCanCreateDirectories:YES];
-	[savePanel setAllowsMultipleSelection:NO];
 	[savePanel setAccessoryView:view];
 	return self;
 }
@@ -59,7 +56,7 @@
 {
 	_delegate = delegate;
 	_didEndSelector = didEndSelector;
-	[savePanel beginSheetForDirectory:nil file:nil types:nil modalForWindow:parentWindow modalDelegate:self didEndSelector:@selector(panelDidFinish:returnCode:contextInfo:) contextInfo:NULL];
+    [savePanel beginSheetForDirectory:nil file:nil modalForWindow:parentWindow modalDelegate:self didEndSelector:@selector(panelDidFinish:returnCode:contextInfo:) contextInfo:NULL];
 }
 
 - savePanel

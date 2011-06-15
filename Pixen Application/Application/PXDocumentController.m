@@ -164,8 +164,9 @@ NSString *palettesSubdirName = @"Palettes";
 
 - (IBAction)globalInstallPalette:sender
 {
-	id importer = [[PXPaletteImporter alloc] init];
+	PXPaletteImporter *importer = [[PXPaletteImporter alloc] init];
 	[importer runInWindow:nil];
+    [importer release];
 }
 
 //

@@ -142,6 +142,7 @@ typedef enum _PXStackType
 		[views addObject:newView];
 		[stack stackSubview:newView];
 	}
+    [header release];
 }
 
 - (void)populateViews

@@ -227,6 +227,7 @@
 			[celImage unlockFocus];
 			[celImage removeRepresentation:[[celImage representations] objectAtIndex:0]];
 			[celImage addRepresentation:bitmap];
+            [bitmap release];
 
 		} else {
 			celImage = image;
@@ -438,6 +439,7 @@
 		[sharedExporter addImage:[[animation objectInCelsAtIndex:i] displayImage] forLength:[[animation objectInCelsAtIndex:i] duration]];
 	}
 	[sharedExporter exportToPath:[panel filename] parentWindow:[self window]];
+    [sharedExporter release];
 }
 
 - (IBAction)exportToQuicktime:sender
