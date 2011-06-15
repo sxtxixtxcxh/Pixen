@@ -22,21 +22,24 @@ int kPXColorPickerMode = 23421337;
 
 @implementation PXColorPicker
 
-- initWithPickerMask:(NSUInteger)mask colorPanel:(NSColorPanel *)owningColorPanel
+- (id)initWithPickerMask:(NSUInteger)mask colorPanel:(NSColorPanel *)owningColorPanel
 {
 	if (!(mask & NSColorPanelRGBModeMask))
-	{
-		// We only support RGB mode.
-		return nil;
-	}
-	[super initWithPickerMask:mask colorPanel:owningColorPanel];
+		return nil; // We only support RGB mode.
+	
+	self = [super initWithPickerMask:mask colorPanel:owningColorPanel];
+	
 	[NSBundle loadNibNamed:@"PXColorPicker" owner:self];
+	
 	[gearMenu setImage:[NSImage imageNamed:@"actiongear"]];
 	[gearMenu setEnabled:YES];
+	
 	icon = [[NSImage imageNamed:@"colorpalette"] retain];
 	[paletteView setDelegate:self];
+	
 	namePrompter = [[PXNamePrompter alloc] init];
 	[namePrompter setDelegate:self];
+	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentAdded:) name:PXDocumentOpenedNotificationName object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentClosed:) name:PXDocumentWillCloseNotificationName object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paletteChanged:) name:PXPaletteChangedNotificationName object:nil];

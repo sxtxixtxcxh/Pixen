@@ -40,9 +40,9 @@
 
 @implementation PXLayerController
 
-- init
+- (id)init
 {
-	[super init];
+	self = [super init];
 	[NSBundle loadNibNamed:@"PXLayerController" owner:self];
 	views = [[NSMutableArray alloc] initWithCapacity:8];
 	[self selectRow:-1];

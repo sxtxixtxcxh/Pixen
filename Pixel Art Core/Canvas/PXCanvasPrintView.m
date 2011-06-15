@@ -39,7 +39,7 @@
 
 - (id)initWithCanvas:(PXCanvas *)aCanvas
 {
-	[super initWithFrame:NSMakeRect(0, 0, [aCanvas size].width, [aCanvas size].height)];
+	self = [super initWithFrame:NSMakeRect(0, 0, [aCanvas size].width, [aCanvas size].height)];
 	canvas = [aCanvas retain];
 	return self;
 }

@@ -34,14 +34,14 @@
 
 @implementation PXGradientBuilderController
 //FIXME: unused, but kept because we'll probably use it with the new palette ui
--(id)  init
+- (id)init
 {
 	return [super initWithWindowNibName:@"PXGradientBuilder"];
 }
 
-- (id) initWithDelegate:(id)aDelegate
+- (id)initWithDelegate:(id)aDelegate
 {
-	[self init];
+	self = [self init];
 	delegate = aDelegate;
 	return self;
 }

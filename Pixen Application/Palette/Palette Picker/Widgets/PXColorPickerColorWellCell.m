@@ -39,9 +39,9 @@
 
 @implementation PXColorPickerColorWellCell
 
-- init
+- (id)init
 {
-	[super init];
+	self = [super init];
 	smallNewColorImage = [[NSImage imageNamed:@"newcolorsmall"] retain];
 	bigNewColorImage = [[NSImage imageNamed:@"newcolorbig"] retain];
 	return self;

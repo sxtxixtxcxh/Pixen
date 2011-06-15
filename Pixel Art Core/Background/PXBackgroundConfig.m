@@ -11,27 +11,30 @@
 
 @implementation PXBackgroundConfig
 
-- init
+- (id)init
 {
-	[super init];
+	self = [super init];
 	[self setDefaultBackgrounds];
 	[self setDefaultPreviewBackgrounds];
 	return self;
 }
 
-- initWithMainBG:(PXBackground *)mbg altBG:(PXBackground *)abg prevMainBG:(PXBackground *)pmbg altBG:(PXBackground *)pabg
+- (id)initWithMainBG:(PXBackground *)mbg altBG:(PXBackground *)abg prevMainBG:(PXBackground *)pmbg altBG:(PXBackground *)pabg
 {
-	[self init];
-	if(mbg)
+	self = [self init];
+	
+	if (mbg)
 	{
 		[self setMainBackground:mbg];
 		[self setAlternateBackground:abg];
 	}
-	if(pmbg)
+	
+	if (pmbg)
 	{
 		[self setMainPreviewBackground:pmbg];
 		[self setAlternatePreviewBackground:pabg];
 	}
+	
 	return self;
 }
 

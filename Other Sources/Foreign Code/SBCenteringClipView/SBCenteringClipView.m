@@ -11,7 +11,7 @@
 
 -(void)centerDocument
 {
-    NSRect docRect = [[self documentView] frame];
+    NSRect docRect = [ (NSView *) [self documentView] frame];
     NSRect clipRect = [self bounds];
 
     // We can leave these values as integers (don't need the "2.0")
@@ -30,7 +30,7 @@
 
 -(NSPoint)constrainScrollPoint:(NSPoint)proposedNewOrigin
 {
-    NSRect docRect = [[self documentView] frame];
+    NSRect docRect = [ (NSView *) [self documentView] frame];
     NSRect clipRect = [self bounds];
     NSPoint newScrollPoint = proposedNewOrigin;
     float maxX = docRect.size.width - clipRect.size.width;
