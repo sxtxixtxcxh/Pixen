@@ -328,7 +328,9 @@ NSString *palettesSubdirName = @"Palettes";
 {
   NSError *err=nil;
 	PXCanvasDocument *doc = [self makeUntitledDocumentOfType:PixenImageFileType error:&err];
-  [self presentError:err];
+  if(err) {
+    [self presentError:err];
+  }
 	[self addDocument:doc];
 	[doc loadFromPasteboard:[NSPasteboard generalPasteboard]];
 }
@@ -451,18 +453,18 @@ NSString *palettesSubdirName = @"Palettes";
   return doc;
 }
 
-- (id)makeDocumentWithContentsOfFile:(NSString *)fileName ofType:(NSString *)docType
+- (id)makeDocumentWithContentsOfURL:(NSURL *)url ofType:(NSString *)docType error:(NSError **)err
 {
 	if ([docType isEqualToString:GIFFileType])
 	{
-		id potentiallyAnimatedDocument = [self handleAnimatedGifAtURL:[NSURL fileURLWithPath:fileName]];
+		id potentiallyAnimatedDocument = [self handleAnimatedGifAtURL:url];
 		if (potentiallyAnimatedDocument)
 			return potentiallyAnimatedDocument;
 	}
-  NSError *err = nil;
-	NSDocument *doc = [super makeDocumentWithContentsOfURL:[NSURL fileURLWithPath:fileName] ofType:docType error:&err];
-  if(err) {
-    [self presentError:err];
+	NSDocument *doc = [super makeDocumentWithContentsOfURL:url ofType:docType error:err];
+  if(err && *err) {
+    [self presentError:*err];
+    return nil;
   }
   return doc;
 }

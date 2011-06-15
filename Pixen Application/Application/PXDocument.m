@@ -77,9 +77,9 @@
 														object:self];
 }
 
-- (void)setFileName:(NSString *)fileName
+- (void)setFileURL:(NSURL *)url
 {
-	[super setFileURL:[NSURL fileURLWithPath:fileName]];
+	[super setFileURL:url];
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentChangedDisplayNameNotificationName object:self];
 }
 
