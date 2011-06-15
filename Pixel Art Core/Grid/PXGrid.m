@@ -30,9 +30,9 @@
 
 @implementation PXGrid
 
--(id) init
+- (id)init
 {
-	[super init];
+	self = [super init];
 	[self setDefaultParameters];
 	return self;
 }
