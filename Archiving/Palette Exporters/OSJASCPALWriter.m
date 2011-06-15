@@ -23,11 +23,15 @@
 	return self;
 }
 
-+ sharedJASCPALWriter
++ (id)sharedJASCPALWriter
 {
 	static OSJASCPALWriter *sharedJASCPALWriter = nil;
-	if (sharedJASCPALWriter) { return sharedJASCPALWriter; }
-	sharedJASCPALWriter = [[OSJASCPALWriter alloc] _init];
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		sharedJASCPALWriter = [[OSJASCPALWriter alloc] _init];
+	});
+	
 	return sharedJASCPALWriter;
 }
 
