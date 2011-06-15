@@ -104,13 +104,7 @@ static PXToolPaletteController *singleInstance = nil;
 
 -(id) init
 {
-	if ( singleInstance ) 
-    {
-		[self dealloc];
-		return singleInstance;
-    }
-	
-	if ( ! (self = [super initWithWindowNibName:@"PXToolPalette"] ) ) 
+  if ( ! (self = [super initWithWindowNibName:@"PXToolPalette"] ) ) 
 		return nil;
 
 	
@@ -125,7 +119,7 @@ static PXToolPaletteController *singleInstance = nil;
 											   object:nil];
 	
 	[[self window] setMovableByWindowBackground:YES];
-	
+	[(NSPanel *)[self window] setBecomesKeyOnlyIfNeeded:YES];
 	singleInstance = self;
 	return singleInstance;
 }
@@ -133,15 +127,6 @@ static PXToolPaletteController *singleInstance = nil;
 - (BOOL)acceptsFirstResponder
 {
 	return YES;
-}
-
-- (void)mouseDown:(NSEvent *)event
-{
-  //notably, holding command prevents the tool palette from gaining focus.
-  //how can I force this to happen even without the command key held?
-  //can I say "windowCanBecomeKey" = NO?
-	if (!([event modifierFlags] & NSCommandKeyMask))
-		[[self window] makeKeyWindow];
 }
 
 - (void)lock:(NSNotification *)aNotification

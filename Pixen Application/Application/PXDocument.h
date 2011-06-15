@@ -17,7 +17,6 @@
 - (NSArray *)canvases;
 - (BOOL)containsCanvas:(PXCanvas *)c;
 - (void)close;
-- (void)setFileName:(NSString *)fileName;
 - (void)initWindowController;
 - (void)setWindowControllerData;
 - frameAutosaveName;
