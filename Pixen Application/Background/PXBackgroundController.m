@@ -287,7 +287,7 @@ typedef enum _PXStackType
 	}
 }
 
-- (NSString *)newBackgroundNameForTemplateView:(PXBackgroundTemplateView *)templateView
+- (NSString *)nameOfNewBackgroundForTemplateView:(PXBackgroundTemplateView *)templateView
 {
 	if ([templateView isKindOfClass:[PXBuiltinBackgroundTemplateView class]])
 	{
@@ -348,7 +348,7 @@ typedef enum _PXStackType
 	}
 	
 	[pboard setData:[NSKeyedArchiver archivedDataWithRootObject:bg] forType:PXBackgroundTemplatePboardType];
-	[pboard setString:[self newBackgroundNameForTemplateView:(PXBackgroundTemplateView *)view] forType:PXBackgroundNewTemplatePboardType];
+	[pboard setString:[self nameOfNewBackgroundForTemplateView:(PXBackgroundTemplateView *)view] forType:PXBackgroundNewTemplatePboardType];
 	
 	// set the data for file-based drags
 	NSString *path = [self pathForBackground:bg];
@@ -405,7 +405,7 @@ typedef enum _PXStackType
 			}
 		}
 	}*/
-}	
+}
 
 - (NSDragOperation)stackedView:(OSStackedView *)aStackedView
 					updateDrag:(id <NSDraggingInfo>)info
