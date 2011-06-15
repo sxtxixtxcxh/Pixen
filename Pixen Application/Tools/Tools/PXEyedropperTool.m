@@ -88,7 +88,7 @@
 {
 	if(![[controller canvas] containsPoint:aPoint]) { return; }
 	id usedSwitcher;
-	if ([(PXEyedropperToolPropertiesView *)propertiesView targetToolButton] == PXLeftButtonTool)
+	if ([[self propertiesView] targetToolButton] == PXLeftButtonTool)
 		usedSwitcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
 	else
 		usedSwitcher = [[PXToolPaletteController sharedToolPaletteController] rightSwitcher];
