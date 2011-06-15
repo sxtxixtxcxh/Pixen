@@ -156,6 +156,11 @@ static int GAOptionExists(int argc, char **argv);
 static char *MyMalloc(unsigned size);
 #endif /* MYMALLOC */
 
+int
+GAGetArgs(int argc,
+					char **argv,
+					char *CtrlStr, ...);
+
 /***************************************************************************
  * Routine to access the    command    line argument and interpret them:       
  * Return ARG_OK (0) is case of succesfull parsing, error code else...       

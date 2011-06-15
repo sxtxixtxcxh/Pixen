@@ -55,7 +55,7 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex);
 BOOL PXPalette_isDocumentPalette(PXPalette *self);
 
-PXPalette *PXPalette_alloc();
+PXPalette *PXPalette_alloc(void);
 
 PXPalette *PXPalette_init(PXPalette *self);
 PXPalette *PXPalette_initWithoutBackgroundColor(PXPalette *self);

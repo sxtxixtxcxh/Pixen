@@ -33,6 +33,18 @@ int PXTileBitsPerComponent = 8;
 int PXTileComponentsPerPixel = 4;
 int PXTileDimension = 256;
 
+PXTile* PXTileCreate(CGPoint loc, CGSize size, CGColorSpaceRef colorspace, unsigned char *data);
+void PXTileRelease(PXTile* t);
+void PXTileDraw(PXTile* t, CGRect source, CGRect dest);
+CGColorRef PXTileColorAtXY(PXTile *t, int xv, int yv);
+void PXTileSetAtXY(PXTile *t, int xv, int yv, CGColorRef color);
+unsigned int PXTileGetData(PXTile *t, unsigned char **data);
+PXImage *PXImage_alloc(void);
+PXTile *PXImage_tileAtXY(PXImage *self, int xv, int yv);
+void PXImage_swapTiles(PXImage *self, PXImage *other);
+void PXImage_drawRect(PXImage *self, NSRect rect, double opacity);
+
+
 PXTile* PXTileCreate(CGPoint loc, CGSize size, CGColorSpaceRef colorspace, unsigned char *data)
 {
 	PXTile *t = calloc(1, sizeof(PXTile));

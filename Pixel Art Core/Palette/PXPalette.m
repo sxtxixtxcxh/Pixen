@@ -29,6 +29,18 @@
 #import "NSColor+PXPaletteAdditions.h"
 #import "NSString+Comparison.h"
 
+PXColorBucket *PXColorBucket_alloc(void);
+PXColorBucket *PXColorBucket_init(PXColorBucket *self, NSColor *color, unsigned int index);
+void PXColorBucket_dealloc(PXColorBucket *self);
+void PXPalette_insertColorBucket(PXPalette *self, PXColorBucket *bucket);
+void PXPalette_removeBucketForColor(PXPalette *self, NSColor *color);
+NSColor *_PXPalette_correctColor(NSColor *color);
+void PXPalette_saveChanges(PXPalette *self);
+unsigned int PXPalette_indexOfColorClosestToAddingIfTooFar(PXPalette *self, NSColor *color, float threshold, BOOL *added);
+unsigned int _PXPalette_indexOfCorrectedColor(PXPalette *self, NSColor *colorToCheck);
+NSArray *CreateGrayList(void);
+
+
 PXColorBucket *PXColorBucket_alloc()
 {
 	return (PXColorBucket *)calloc(1, sizeof(PXColorBucket));
