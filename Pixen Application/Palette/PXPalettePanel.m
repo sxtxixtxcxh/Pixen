@@ -38,9 +38,15 @@
 	return panel;
 }
 
+- (BOOL)canBecomeKeyWindow {
+	return NO;
+}
+
 - initWithPalette:(PXPalette *)pal
 {
 	[super initWithContentRect:NSMakeRect(0, 0, 270, 283) styleMask:NSUtilityWindowMask | NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
+	[self setBecomesKeyOnlyIfNeeded:YES];
+	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentAdded:) name:PXDocumentOpenedNotificationName object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentClosed:) name:PXDocumentWillCloseNotificationName object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paletteChanged:) name:PXPaletteChangedNotificationName object:nil];
