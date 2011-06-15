@@ -43,6 +43,8 @@
 
 #define make_128(x) (x + 16 - (x % 16))
 
+Handle myCreateHandleDataRef(Handle dataHandle, Str255 fileName, OSType fileType, StringPtr mimeTypeString, Ptr initDataPtr, Size initDataByteCount);
+
 @interface NSBitmapImageRep (OSColorSpaceConversion)
 - calibratedBitmapImageRep;
 @end

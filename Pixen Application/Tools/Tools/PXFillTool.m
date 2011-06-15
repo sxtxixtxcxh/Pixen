@@ -37,6 +37,8 @@
 #import "PXFillToolPropertiesView.h"
 #import "NSColor+PXPaletteAdditions.h"
 
+int CombineAxis(int Xaxis, int Yaxis, int width, int height);
+
 int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 {
 	return ((height - Yaxis) * width) + Xaxis;

@@ -52,6 +52,7 @@
 #import <AppKit/NSAlert.h>
 #import "PXCanvasWindowController_IBActions.h"
 
+BOOL isPowerOfTwo(int num);
 
 @implementation PXCanvasDocument
 
@@ -97,6 +98,7 @@
 {
   [windowController setCanvas:canvas];
 }
+
 
 BOOL isPowerOfTwo(int num)
 {

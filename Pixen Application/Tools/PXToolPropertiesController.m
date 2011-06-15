@@ -166,14 +166,19 @@ static PXToolPropertiesController *rightInstance = nil;
 {
 	NSRect newPropertiesFrame = [propertiesView frame];
 	NSRect contentRect = [panel frame];
+	float oldHeight = contentRect.size.height;
 	contentRect.size = newPropertiesFrame.size;
 	NSRect newPanelFrame = [NSPanel frameRectForContentRect:contentRect
-												  styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask];
+																								styleMask:
+													NSTitledWindowMask | 
+													NSClosableWindowMask | 
+													NSMiniaturizableWindowMask];
 	
 	//FIXME: (I know this isn't actually going to leak, because there is a finite, very small number of these things, but seriously!  HACK ALERT)
 	[[propertiesView view] retain];
 	[panel setContentView: [propertiesView view]];	
-	[panel setFrame:newPanelFrame display:YES animate:YES];
+	float yDelta = -(newPanelFrame.size.height-oldHeight);
+	[panel setFrame:NSOffsetRect(newPanelFrame, 0, yDelta) display:YES animate:YES];
 }
 
 @end
