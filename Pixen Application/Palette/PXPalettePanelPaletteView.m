@@ -11,12 +11,6 @@
 
 @implementation PXPalettePanelPaletteView
 
-- initWithFrame:(NSRect)frame
-{
-	[super initWithFrame:frame];
-	return self;
-}
-
 - (void)mouseDown:(NSEvent *)event
 {
 	if ([event modifierFlags] & NSControlKeyMask)

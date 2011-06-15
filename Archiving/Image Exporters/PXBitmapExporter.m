@@ -352,7 +352,7 @@ typedef struct tagBITMAPINFOHEADER
 		if ([pngData length] == 0)
 		{
 			[[NSAlert alertWithMessageText:NSLocalizedString(@"Export to BMP failed", @"Export to BMP failed") defaultButton:NSLocalizedString(@"OK", @"OK") alternateButton:nil otherButton:nil informativeTextWithFormat:NSLocalizedString(@"This really shouldn't happen. You might try saving the document as a Pixen Image, closing it, reopening it, then trying again.", @"This really shouldn't happen. You might try saving the document as a Pixen Image, closing it, reopening it, then trying again.")] runModal];
-			[rep release];
+			
 			return nil;
 		}
 		

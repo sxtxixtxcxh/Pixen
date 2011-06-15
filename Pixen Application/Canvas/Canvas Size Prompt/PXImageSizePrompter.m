@@ -40,9 +40,9 @@
 
 @implementation PXImageSizePrompter
 
--(id) init
+- (id)init
 {
-	[super initWithWindowNibName:@"PXImageSizePrompt"];
+	self = [super initWithWindowNibName:@"PXImageSizePrompt"];
 	[self setBackgroundColor:[NSColor clearColor]];
 	return self;
 }

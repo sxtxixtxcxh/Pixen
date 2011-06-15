@@ -16,9 +16,9 @@
 
 @implementation PXAnimatedGifExporter
 
-- initWithSize:(NSSize)aSize iterations:(int)someIterations
+- (id)initWithSize:(NSSize)aSize iterations:(int)someIterations
 {
-	[super init];
+	self = [super init];
 	iterations = someIterations;
 	EGifSetGifVersion("89a");
 	tempFilePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"pxa_gif_export.gif"] retain];

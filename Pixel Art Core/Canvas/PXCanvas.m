@@ -46,38 +46,46 @@
 - (void)increment;
 @end
 @implementation PXFrequencyEntry
-+ withColor:c
+
++ (id)withColor:(NSColor *)c
 {
 	return [[[self alloc] initWithColor:c] autorelease];
 }
-- initWithColor:c
+
+- (id)initWithColor:(NSColor *)c
 {
-	[super init];
+	self = [super init];
 	count = 1;
 	color = [c retain];
 	return self;
 }
+
 - (void)dealloc
 {
 	[color release];
 	[super dealloc];
 }
+
 - (int)count
 {
 	return count;
 }
+
 - (NSColor *)color
 {
 	return color;
 }
+
 - (void)increment
 {
 	count++;
 }
-- (NSComparisonResult)compare:other
+
+- (NSComparisonResult)compare:(id)other
 {
 	return count < [other count];
 }
+
 @end
 
 

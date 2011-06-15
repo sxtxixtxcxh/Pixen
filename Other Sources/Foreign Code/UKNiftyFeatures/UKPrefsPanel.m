@@ -81,7 +81,6 @@
 
 -(void)	awakeFromNib
 {
-	NSString*		key;
 	NSString*		wndTitle = nil;
 	
 	// Generate a string containing the window's title so we can display the original window title plus the selected pane:
@@ -96,7 +95,6 @@
 	[self setAutosaveName: [[tabView window] frameAutosaveName]];
 	
 	// Select the preferences page the user last had selected when this window was opened:
-	key = [NSString stringWithFormat: @"%@.prefspanel.recentpage", autosaveName];
 	[tabView selectTabViewItemAtIndex: 0];
 	
 	// Actually hook up our toolbar and the tabs:
@@ -336,16 +334,15 @@
 		etc.) in addition to our custom items.
    -------------------------------------------------------------------------- */
 
--(NSArray*) toolbarAllowedItemIdentifiers: (NSToolbar *) toolbar
+- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar
 {
-    NSMutableArray*		allowedItems = [[itemsList allKeys] mutableCopy];
+	NSMutableArray *allowedItems = [[itemsList allKeys] mutableCopy];
 	
 	[allowedItems addObjectsFromArray: [NSArray arrayWithObjects: NSToolbarSeparatorItemIdentifier,
-				NSToolbarSpaceItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier,
-				NSToolbarCustomizeToolbarItemIdentifier, nil] ];
+										NSToolbarSpaceItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier,
+										NSToolbarCustomizeToolbarItemIdentifier, nil]];
 	
-	return allowedItems;
+	return [allowedItems autorelease];
 }
-
 
 @end

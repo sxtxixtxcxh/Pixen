@@ -82,28 +82,25 @@ NSMutableArray * toolNames;
 	[toolsMatrix setDoubleAction:@selector(toolDoubleClicked:)];
 }
 
--(id) init
+- (id)init
 {
-	if ( ! ( self = [super init] ) ) 
+	if ( ! ( self = [super init] ))
 		return nil;
 	
 	tools = [[NSMutableArray alloc] initWithCapacity:[[[self class] toolClasses] count]];
 	
-	NSEnumerator *enumerator = [[[self class] toolClasses] objectEnumerator];
-	id current;
-	
-	while (( current = [enumerator nextObject] ) )
-  {
-		[tools addObject:[[current alloc] init]];
-  }
+	for (Class current in [[self class] toolClasses])
+	{
+		[tools addObject:[[[current alloc] init] autorelease]];
+	}
 	
 	[tools makeObjectsPerformSelector:@selector(setSwitcher:) withObject:self];
 	[self setColor:[[NSColor blackColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
 	[self useToolTagged:PXPencilToolTag];
-  
+	
 	_locked = NO;
 	[self checkUserDefaults];
-  
+	
 	return self;
 }
 

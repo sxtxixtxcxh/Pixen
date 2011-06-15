@@ -54,9 +54,9 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 	return NSLocalizedString(@"FILL_ACTION", @"Fill");
 }
 
-- init
+- (id)init
 {
-	[super init];
+	self = [super init];
 	propertiesView = [[PXFillToolPropertiesView alloc] init];
 	return self;
 }
@@ -241,6 +241,7 @@ fromCanvasController:(PXCanvasController*)controller
 	NSRect bounds = NSMakeRect(leftBound, lowerBound, rightBound - leftBound + 1, upperBound - lowerBound + 1);
 	[self fillPixelsInBOOLArray:pointsToFill withColor:fillColor withBoundsRect:bounds ofCanvas:canvas];
 	[consideredPoints release];
+	[pointsToFill release];
 	[canvas registerForUndo];
 	return;
 }

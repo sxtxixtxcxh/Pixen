@@ -46,23 +46,30 @@
 }
 
 
-- initWithWidth:(float)width patternFile:(NSString *)file
+- (id)initWithWidth:(float)width patternFile:(NSString *)file
 {
 	self = [super initWithFrame:NSMakeRect(0, 0, width, 1)];
 	if (self) {
 		patterns = [[NSMutableArray alloc] init];
-		id prototype = [[PXPatternCell alloc] init];
+		
+		PXPatternCell *prototype = [[PXPatternCell alloc] init];
 		[self setPrototype:prototype];
+		[self setCellSize:[prototype properSize]];
+		[prototype release];
+		
 		[self setSelectionByRect:NO];
 		[self setDrawsBackground:YES];
 		[self setDrawsCellBackground:YES];
-		[self setCellSize:[prototype properSize]];
 		[self setAutosizesCells:NO];
 		[self setIntercellSpacing:NSZeroSize];
 		[self setBackgroundColor:[NSColor whiteColor]];
 		[self setMode:NSRadioModeMatrix];
 		[self setPatternFile:file];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(patternsChanged:) name:PXPatternsChangedNotificationName object:nil];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(patternsChanged:)
+													 name:PXPatternsChangedNotificationName
+												   object:nil];
 	}
 	return self;
 }

@@ -220,6 +220,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 		[shadow set];
 		[[NSColor blackColor] set];
 		[invertedHole fill];
+		[shadow release];
 		[[NSGraphicsContext currentContext] restoreGraphicsState];
 		
 		[spokeHoleCache unlockFocus];
@@ -339,6 +340,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 		[[NSGraphicsContext currentContext] saveGraphicsState];
 		[shadow set];
 		[roundedPath fill];
+		[shadow release];
 		[[NSGraphicsContext currentContext] restoreGraphicsState];
 		
 		[currentCel drawInRect:celRects[i] fromRect:NSMakeRect(0,0,celSize.width,celSize.height) operation:NSCompositeSourceOver fraction:1];

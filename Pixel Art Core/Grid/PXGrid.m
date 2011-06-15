@@ -37,16 +37,16 @@
 	return self;
 }
 
--(id) initWithUnitSize:(NSSize)newUnitSize
-				 color:(NSColor*)newColor
-			shouldDraw:(BOOL)newShouldDraw;
+- (id)initWithUnitSize:(NSSize)newUnitSize
+				 color:(NSColor *)newColor
+			shouldDraw:(BOOL)newShouldDraw
 {
-	[self init];
-	if(newColor)
+	self = [self init];
+	if (newColor)
 	{
 		[self setUnitSize:newUnitSize];
 		[self setColor:newColor];
-		[self setShouldDraw:newShouldDraw];		
+		[self setShouldDraw:newShouldDraw];
 	}
 	return self;
 }

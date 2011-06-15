@@ -43,9 +43,12 @@
 
 @implementation PXLayerController
 
-- init
+- (id)init
 {
-	[super init];
+	if(!(self = [super init])) {
+		[self release];
+		return nil;
+	}
 	views = [[NSMutableArray alloc] init];
 	[NSBundle loadNibNamed:@"PXLayerController" owner:self];
 	return self;
