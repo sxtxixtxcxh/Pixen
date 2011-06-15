@@ -7,6 +7,8 @@
 
 @implementation PXBackgroundInfoView
 
+@synthesize nameField;
+
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
@@ -74,7 +76,6 @@
 	}
 	return cachedBackgroundPath;
 }
-
 
 - (void)drawRect:(NSRect)rect
 {
@@ -256,11 +257,6 @@
 		[imageView setImage:nil];
 	}
 	[self display];
-}
-
-- (NSTextField *)nameField
-{
-	return nameField;
 }
 
 @end

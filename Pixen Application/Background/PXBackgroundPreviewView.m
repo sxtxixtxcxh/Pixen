@@ -31,17 +31,7 @@
 
 @implementation PXBackgroundPreviewView
 
-- (id)initWithFrame:(NSRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-    }
-    return self;
-}
-
-- (NSImage *)image
-{
-	return image;
-}
+@synthesize image;
 
 - (void)setImage:(NSImage *)im
 {

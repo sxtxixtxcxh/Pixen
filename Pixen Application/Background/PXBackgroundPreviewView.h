@@ -33,6 +33,7 @@
 	NSImage *image;
 	NSRect functionalRect;
 }
-- (NSImage *)image;
-- (void)setImage:(NSImage *)im;
+
+@property (nonatomic, retain) NSImage *image;
+
 @end

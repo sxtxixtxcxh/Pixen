@@ -28,19 +28,17 @@
 
 #import "NSArray_DeepMutableCopy.h"
 
-
 @implementation NSArray(DeepMutableCopy)
 
--(NSArray *) deepMutableCopy
+- (NSArray *)deepMutableCopy
 {
 	NSMutableArray *new = [[NSMutableArray alloc] initWithCapacity:[self count]];
-	NSEnumerator *enumerator = [self objectEnumerator];
-	id current;
 	
-	while ( ( current = [enumerator nextObject] ) )
-    {
+	for (id current in self)
+	{
 		[new addObject:[[current copy] autorelease]];
-    }
+	}
+	
 	return new;
 }
 

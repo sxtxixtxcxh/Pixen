@@ -163,17 +163,18 @@ static PXToolPropertiesController *rightInstance = nil;
 	return panel;
 }
 
-- (void)setPropertiesView:(id)propertiesView
+- (void)setPropertiesView:(PXToolPropertiesView *)propertiesView
 {
-	NSRect newPropertiesFrame = [propertiesView frame] ;
+	NSRect newPropertiesFrame = [propertiesView frame];
 	NSRect contentRect = [panel frame];
 	contentRect.size = newPropertiesFrame.size;
-	NSRect newPanelFrame = [NSPanel frameRectForContentRect:contentRect styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask];								 
-//FIXME: (I know this isn't actually going to leak, because there is a finite, very small number of these things, but seriously!  HACK ALERT)
+	NSRect newPanelFrame = [NSPanel frameRectForContentRect:contentRect
+												  styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask];
+	
+	//FIXME: (I know this isn't actually going to leak, because there is a finite, very small number of these things, but seriously!  HACK ALERT)
 	[[propertiesView view] retain];
 	[panel setContentView: [propertiesView view]];	
 	[panel setFrame:newPanelFrame display:YES animate:YES];
 }
-
 
 @end

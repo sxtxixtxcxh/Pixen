@@ -44,7 +44,7 @@ PXPreferencesController * preferences = nil;
 	return preferences;
 }
 
--(id) init
+- (id)init
 {
 	return [super initWithWindowNibName:@"PXPreferences"];
 }
@@ -55,23 +55,22 @@ PXPreferencesController * preferences = nil;
 	
 	if ([defaults boolForKey:PXCrosshairEnabledKey]) {
 		[crosshairColor setEnabled:YES];
-	} else {
+	}
+	else {
 		[crosshairColor setEnabled:NO];
 	}
 	
 	if ([defaults boolForKey:PXAutosaveEnabledKey]) {
 		[autoupdateFrequency setEnabled:YES];
-	} else {
+	}
+	else {
 		[autoupdateFrequency setEnabled:NO];
 	}
 	
-	NSEnumerator *enumerator = [[form cells] objectEnumerator];
-	id current;
-	
-	while ((current = [enumerator nextObject]))
-    {
-		[current setFormatter:[[[PXHotkeyFormatter alloc] init] autorelease]];
-    }
+	for (NSCell *currentCell in [form cells])
+	{
+		[currentCell setFormatter:[[[PXHotkeyFormatter alloc] init] autorelease]];
+	}
 }
 
 - (IBAction)switchCrosshair:(id)sender

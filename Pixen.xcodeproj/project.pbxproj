@@ -2344,7 +2344,11 @@
 			isa = PBXProject;
 			buildConfigurationList = 616BAEA908553EFB004CF172 /* Build configuration list for PBXProject "Pixen" */;
 			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Pixen */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -3070,7 +3074,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Other Sources/Pixen_Prefix.h";
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_VERSION = 4.2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
@@ -3078,6 +3082,7 @@
 				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = Pixen;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -3108,7 +3113,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Other Sources/Pixen_Prefix.h";
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_VERSION = 4.2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = /Applications;
@@ -3118,6 +3123,7 @@
 				OTHER_CFLAGS = "-funroll-loops";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Pixen;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",

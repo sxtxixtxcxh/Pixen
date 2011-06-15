@@ -34,10 +34,11 @@
 {
   NSPoint cursorPosition;
 }
+
+@property (nonatomic, assign) NSPoint cursorPosition;
+
 - (void)drawRect:(NSRect)drawingRect withTool:tool tileOffset:(NSPoint)offset;
 - (NSColor *) color;
 - (BOOL)shouldDraw;
-- (NSPoint)cursorPosition;
-- (void)setCursorPosition:(NSPoint)position;
 
 @end

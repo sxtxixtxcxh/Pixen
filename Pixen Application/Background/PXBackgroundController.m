@@ -18,6 +18,8 @@ typedef enum _PXStackType
 
 @implementation PXBackgroundController
 
+@synthesize delegate;
+
 - builtinTemplates
 {
     static id backgrounds = nil;
@@ -175,11 +177,6 @@ typedef enum _PXStackType
 
 	[mainBackgroundView setBackground:mainBG];
 	[alternateBackgroundView setBackground:alternateBG];
-}
-
-- (void)setDelegate:del
-{
-	delegate = del;
 }
 
 - (IBAction)displayHelp:sender

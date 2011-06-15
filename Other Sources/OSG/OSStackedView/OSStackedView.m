@@ -344,7 +344,7 @@
 - (float)height
 {
 	float totalHeight = 0;
-	for (id current in views)
+	for (NSView *current in views)
 	{
 		totalHeight += NSHeight([current frame]);
 	}

@@ -36,6 +36,8 @@
 
 @implementation PXCrosshair
 
+@synthesize cursorPosition;
+
 - (void)drawRect:(NSRect)drawingRect withTool:tool tileOffset:(NSPoint)offset
 {
 	if (![self shouldDraw]) 
@@ -89,16 +91,6 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	return [defaults boolForKey:PXCrosshairEnabledKey];
-}
-
-- (NSPoint)cursorPosition
-{
-	return cursorPosition;
-}
-
-- (void)setCursorPosition:(NSPoint)position
-{
-	cursorPosition = position;
 }
 
 @end

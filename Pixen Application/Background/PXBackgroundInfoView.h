@@ -20,7 +20,9 @@
 - (IBAction)nameChanged:(id)sender;
 - (void)setPreviewImage:(NSImage *)img;
 - (void)setBackground:(PXBackground *)bg;
-- (NSTextField *)nameField;
+
+@property (nonatomic, readonly) NSTextField *nameField;
+
 @end
 
 @interface NSObject(PXBackgroundInfoViewDelegate)

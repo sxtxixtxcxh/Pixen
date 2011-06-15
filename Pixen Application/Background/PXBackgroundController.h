@@ -11,7 +11,9 @@
 	id delegate;
 	NSMutableArray *mainViews, *defaultsViews;
 }
-- (void)setDelegate:del;
+
+@property (nonatomic, assign) id delegate;
+
 - (void)reloadData;
 - (void)setPreviewImage:(NSImage *)img;
 - (NSString *)pathForBackground:(PXBackground *)background;
