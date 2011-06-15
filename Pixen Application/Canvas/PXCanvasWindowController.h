@@ -14,7 +14,7 @@
 
 	IBOutlet id zoomPercentageBox;
 	IBOutlet id zoomStepper;
-	IBOutlet id zoomView;
+	IBOutlet NSView *zoomView;
 	id previewController;
 	id resizePrompter;
 	id scaleController;
