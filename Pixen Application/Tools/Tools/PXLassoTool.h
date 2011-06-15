@@ -35,7 +35,7 @@
 	NSPoint origin;
 	int leftMost, rightMost, topMost, bottomMost;
 	
-	id linePath;
+	NSBezierPath *linePath;
 	NSRect selectedRect, lastSelectedRect;
 }
 

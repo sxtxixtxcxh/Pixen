@@ -34,6 +34,8 @@
 
 @implementation PXLayer
 
+@synthesize opacity;
+
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image origin:(NSPoint)origin size:(NSSize)sz
 {
 	id layer = [[PXLayer alloc] initWithName:name size:sz];
@@ -121,16 +123,6 @@
 - (PXImage *)image
 {
 	return image;
-}
-
-- (double)opacity
-{
-	return opacity;
-}
-
-- (void)setOpacity:(double)newOpacity
-{
-	opacity = newOpacity;
 }
 
 - (BOOL)visible

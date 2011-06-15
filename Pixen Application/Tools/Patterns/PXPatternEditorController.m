@@ -44,7 +44,7 @@
 - (NSSize)properContentSize
 {
 	NSSize viewSize = [view resizeToFitPattern:pattern];
-	NSSize contentViewSize = [[[self window] contentView] frame].size;
+	NSSize contentViewSize = [ (NSView *) [[self window] contentView] frame].size;
 	NSSize newSize;
 	newSize.width = viewSize.width;
 	newSize.height = contentViewSize.height + (viewSize.width - contentViewSize.width);

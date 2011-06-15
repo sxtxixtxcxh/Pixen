@@ -32,7 +32,7 @@
 @interface PXLayer : NSObject <NSCoding, NSCopying> {
 	id name;
 	PXImage *image;
-	double opacity;
+	CGFloat opacity;
 	BOOL visible;
 	NSPoint origin;
 	
@@ -45,6 +45,9 @@
 	
 	PXCanvas *canvas;
 }
+
+@property (nonatomic, assign) CGFloat opacity;
+
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image origin:(NSPoint)origin size:(NSSize)sz;
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image size:(NSSize)sz;
 
@@ -63,9 +66,6 @@ backgroundColor:(NSColor *)color;
 
 - (NSPoint)origin;
 - (void)setOrigin:(NSPoint)pt;
-
-- (double)opacity;
-- (void)setOpacity:(double)opacity;
 
 - (void)setCanvas:(PXCanvas *)canvas;
 - (PXCanvas *)canvas;
