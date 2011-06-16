@@ -6,9 +6,8 @@
 //  Copyright 2007 Open Sword Group. All rights reserved.
 //
 
-@class CTGradient;
 @interface PXLayerPaneBackgroundView : NSView {
-	CTGradient *gradient;
+	NSGradient *gradient;
 }
 
 @end
