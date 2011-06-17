@@ -573,9 +573,7 @@
 		BF489DDC08775845007DF4CF /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPatternEditor.nib; sourceTree = "<group>"; };
 		BFB1440508AD1D1800CE29EF /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXSpriteSheetExporter.nib; sourceTree = "<group>"; };
 		BFFC21B806DED6F8008EC4CC /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXGradientBuilder.nib; sourceTree = "<group>"; };
-		BFFC221A06DEDE63008EC4CC /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXGradientBuilder.nib; sourceTree = "<group>"; };
 		D866555013A932CC00030D76 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXLayerDetailsView.nib; sourceTree = "<group>"; };
-		D866555213A932D900030D76 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXLayerDetailsView.nib; sourceTree = "<group>"; };
 		D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerCollectionViewItem.h; sourceTree = "<group>"; };
 		D88A735013A93CCD00B56402 /* PXLayerCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerCollectionViewItem.m; sourceTree = "<group>"; };
 		EA041A170CE8F72F0095DAA9 /* PXBackgroundConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXBackgroundConfig.h; sourceTree = "<group>"; };
@@ -874,7 +872,6 @@
 		EA4A6C0308A97E26007BAC7F /* PXAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAnimation.h; sourceTree = "<group>"; };
 		EA4A6C0408A97E26007BAC7F /* PXAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAnimation.m; sourceTree = "<group>"; };
 		EA4A6C3E08A98133007BAC7F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXAnimationDocument.nib; sourceTree = "<group>"; };
-		EA4A6C4208A9813B007BAC7F /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXAnimationDocument.nib; sourceTree = "<group>"; };
 		EA4A6C4D08A98259007BAC7F /* PXCel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCel.h; sourceTree = "<group>"; };
 		EA4A6C4E08A98259007BAC7F /* PXCel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCel.m; sourceTree = "<group>"; };
 		EA5482DC0513E2DB000101DE /* PXCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvasView.h; sourceTree = "<group>"; };
@@ -895,7 +892,6 @@
 		EA5618D9089DB93100C12231 /* PXCanvas_Layers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvas_Layers.m; sourceTree = "<group>"; };
 		EA5618EC089DB96D00C12231 /* PXCanvas_Archiving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvas_Archiving.h; sourceTree = "<group>"; };
 		EA5618ED089DB96D00C12231 /* PXCanvas_Archiving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvas_Archiving.m; sourceTree = "<group>"; };
-		EA5D218408A90697006D4AE9 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXCanvasDocument.nib; sourceTree = "<group>"; };
 		EA5D218808A906AF006D4AE9 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXCanvasDocument.nib; sourceTree = "<group>"; };
 		EA5D223108A90FEE006D4AE9 /* PXCanvasController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvasController.h; sourceTree = "<group>"; };
 		EA5D223208A90FEE006D4AE9 /* PXCanvasController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasController.m; sourceTree = "<group>"; };
@@ -904,30 +900,6 @@
 		EA68641E054C583900EE395F /* Release Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Release Notes.rtf"; sourceTree = "<group>"; };
 		EA6864B4054C5EDE00EE395F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXBackgroundController.nib; sourceTree = "<group>"; };
 		EA88F45C05D1C172003DEBD3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXLayerController.nib; sourceTree = "<group>"; };
-		EA90F6CF06D123AA001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = French; path = French.lproj/Credits.html; sourceTree = "<group>"; };
-		EA90F6D006D123AA001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EA90F6D106D123AA001755A6 /* French */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
-		EA90F6D306D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		EA90F6D506D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXBackgroundController.nib; sourceTree = "<group>"; };
-		EA90F6D606D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXBlankPropertiesView.nib; sourceTree = "<group>"; };
-		EA90F6D706D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXCanvasResizePrompt.nib; sourceTree = "<group>"; };
-		EA90F6D906D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXDiscoverPixen.nib; sourceTree = "<group>"; };
-		EA90F6DA06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXDuotoneBackgroundConfigurator.nib; sourceTree = "<group>"; };
-		EA90F6DB06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXEllipseToolPropertiesView.nib; sourceTree = "<group>"; };
-		EA90F6DC06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXGridSettingsPrompter.nib; sourceTree = "<group>"; };
-		EA90F6DD06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXImageBackgroundConfigurator.nib; sourceTree = "<group>"; };
-		EA90F6DE06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXImageSizePrompt.nib; sourceTree = "<group>"; };
-		EA90F6DF06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXInfoPanel.nib; sourceTree = "<group>"; };
-		EA90F6E006D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXLayerController.nib; sourceTree = "<group>"; };
-		EA90F6E206D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXMonotoneBackgroundConfigurator.nib; sourceTree = "<group>"; };
-		EA90F6E306D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXNamePrompt.nib; sourceTree = "<group>"; };
-		EA90F6E606D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXPencilToolPropertiesView.nib; sourceTree = "<group>"; };
-		EA90F6E706D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXPreferences.nib; sourceTree = "<group>"; };
-		EA90F6E806D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXPreview.nib; sourceTree = "<group>"; };
-		EA90F6E906D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXRectangleToolPropertiesView.nib; sourceTree = "<group>"; };
-		EA90F6EA06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXScalePrompt.nib; sourceTree = "<group>"; };
-		EA90F6EB06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXToolPalette.nib; sourceTree = "<group>"; };
-		EA90F6EC06D123B7001755A6 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXToolProperties.nib; sourceTree = "<group>"; };
 		EA9E180C0557104F00119DF5 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXNamePrompt.nib; sourceTree = "<group>"; };
 		EAA0184A054DCC7000EF18C2 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXDuotoneBackgroundConfigurator.nib; sourceTree = "<group>"; };
 		EAA0184F054DCC7B00EF18C2 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXMonotoneBackgroundConfigurator.nib; sourceTree = "<group>"; };
@@ -2674,7 +2646,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				089C1660FE840EACC02AAC07 /* English */,
-				EA90F6D006D123AA001755A6 /* French */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2683,7 +2654,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				2A37F4B7FDCFA73011CA2CEA /* English */,
-				EA90F6D306D123B7001755A6 /* French */,
 			);
 			name = MainMenu.nib;
 			sourceTree = "<group>";
@@ -2692,7 +2662,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				2A37F4BAFDCFA73011CA2CEA /* English */,
-				EA90F6CF06D123AA001755A6 /* French */,
 			);
 			name = Credits.html;
 			sourceTree = "<group>";
@@ -2701,7 +2670,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				610865F606B988F400733B2D /* English */,
-				EA90F6DF06D123B7001755A6 /* French */,
 			);
 			name = PXInfoPanel.nib;
 			sourceTree = "<group>";
@@ -2718,7 +2686,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				61163709067D286900AE87D7 /* English */,
-				EA90F6D906D123B7001755A6 /* French */,
 			);
 			name = PXDiscoverPixen.nib;
 			sourceTree = "<group>";
@@ -2727,7 +2694,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				6151D0150677C8E3009E3BE4 /* English */,
-				EA90F6D706D123B7001755A6 /* French */,
 			);
 			name = PXCanvasResizePrompt.nib;
 			sourceTree = "<group>";
@@ -2736,7 +2702,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				61ADDE0E0678044E008A1184 /* English */,
-				EA90F6E706D123B7001755A6 /* French */,
 			);
 			name = PXPreferences.nib;
 			sourceTree = "<group>";
@@ -2745,7 +2710,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				EA88F45C05D1C172003DEBD3 /* English */,
-				EA90F6E006D123B7001755A6 /* French */,
 			);
 			name = PXLayerController.nib;
 			sourceTree = "<group>";
@@ -2754,7 +2718,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				61DE1D2F060282060008F6AD /* English */,
-				EA90F6EC06D123B7001755A6 /* French */,
 			);
 			name = PXToolProperties.nib;
 			sourceTree = "<group>";
@@ -2763,7 +2726,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				61E1B9D006037B2200A7C4EF /* English */,
-				EA90F6E906D123B7001755A6 /* French */,
 			);
 			name = PXRectangleToolPropertiesView.nib;
 			sourceTree = "<group>";
@@ -2772,7 +2734,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				619E871906051901007D2A05 /* English */,
-				EA90F6DB06D123B7001755A6 /* French */,
 			);
 			name = PXEllipseToolPropertiesView.nib;
 			sourceTree = "<group>";
@@ -2781,7 +2742,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				615DEC2C060950260011F3F8 /* English */,
-				EA90F6E606D123B7001755A6 /* French */,
 			);
 			name = PXPencilToolPropertiesView.nib;
 			sourceTree = "<group>";
@@ -2790,7 +2750,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				61E1BA370603B12400A7C4EF /* English */,
-				EA90F6D606D123B7001755A6 /* French */,
 			);
 			name = PXBlankPropertiesView.nib;
 			sourceTree = "<group>";
@@ -2799,7 +2758,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				6103626B060A07B700D5450C /* English */,
-				EA90F6DC06D123B7001755A6 /* French */,
 			);
 			name = PXGridSettingsPrompter.nib;
 			sourceTree = "<group>";
@@ -2808,7 +2766,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				EA676A9D058658BC00F400BF /* English */,
-				EA90F6E806D123B7001755A6 /* French */,
 			);
 			name = PXPreview.nib;
 			sourceTree = "<group>";
@@ -2857,7 +2814,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				61BD25C9067A1DD80054A2BB /* English */,
-				EA90F6D106D123AA001755A6 /* French */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2874,7 +2830,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				61F598BA067949D500B8C8CA /* English */,
-				EA90F6EA06D123B7001755A6 /* French */,
 			);
 			name = PXScalePrompt.nib;
 			sourceTree = "<group>";
@@ -2883,7 +2838,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				61F9CB17060D6A6D00562B78 /* English */,
-				EA90F6EB06D123B7001755A6 /* French */,
 			);
 			name = PXToolPalette.nib;
 			sourceTree = "<group>";
@@ -2916,7 +2870,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				BFFC21B806DED6F8008EC4CC /* English */,
-				BFFC221A06DEDE63008EC4CC /* French */,
 			);
 			name = PXGradientBuilder.nib;
 			sourceTree = "<group>";
@@ -2925,7 +2878,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				D866555013A932CC00030D76 /* English */,
-				D866555213A932D900030D76 /* French */,
 			);
 			name = PXLayerDetailsView.nib;
 			sourceTree = "<group>";
@@ -2934,7 +2886,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				EA4A6C3E08A98133007BAC7F /* English */,
-				EA4A6C4208A9813B007BAC7F /* French */,
 			);
 			name = PXAnimationDocument.nib;
 			sourceTree = "<group>";
@@ -2942,7 +2893,6 @@
 		EA5482E40513E419000101DE /* PXImageSizePrompt.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				EA90F6DE06D123B7001755A6 /* French */,
 				EAA79F2906D173CF000513FD /* English */,
 			);
 			name = PXImageSizePrompt.nib;
@@ -2952,7 +2902,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				EA5D218808A906AF006D4AE9 /* English */,
-				EA5D218408A90697006D4AE9 /* French */,
 			);
 			name = PXCanvasDocument.nib;
 			sourceTree = "<group>";
@@ -2961,7 +2910,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				EA6864B4054C5EDE00EE395F /* English */,
-				EA90F6D506D123B7001755A6 /* French */,
 			);
 			name = PXBackgroundController.nib;
 			sourceTree = "<group>";
@@ -2970,7 +2918,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				EA9E180C0557104F00119DF5 /* English */,
-				EA90F6E306D123B7001755A6 /* French */,
 			);
 			name = PXNamePrompt.nib;
 			sourceTree = "<group>";
@@ -2979,7 +2926,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				EAA0184A054DCC7000EF18C2 /* English */,
-				EA90F6DA06D123B7001755A6 /* French */,
 			);
 			name = PXDuotoneBackgroundConfigurator.nib;
 			sourceTree = "<group>";
@@ -2988,7 +2934,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				EAA0184F054DCC7B00EF18C2 /* English */,
-				EA90F6E206D123B7001755A6 /* French */,
 			);
 			name = PXMonotoneBackgroundConfigurator.nib;
 			sourceTree = "<group>";
@@ -3013,7 +2958,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				EAE126D0054F41A9001208D9 /* English */,
-				EA90F6DD06D123B7001755A6 /* French */,
 			);
 			name = PXImageBackgroundConfigurator.nib;
 			sourceTree = "<group>";
