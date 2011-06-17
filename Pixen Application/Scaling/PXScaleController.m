@@ -101,20 +101,18 @@ static NSArray *algorithms = nil;
 
 - (void)awakeFromNib
 {
-	NSEnumerator *algorithmEnumerator = [algorithms objectEnumerator];
-	PXScaleAlgorithm *algorithm;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
 	[algorithmButton removeAllItems];
 	
-	while ( (algorithm = [algorithmEnumerator nextObject]) ) 
-    {
+	for (PXScaleAlgorithm *algorithm in algorithms)
+	{
 		[algorithmButton addItemWithTitle:[algorithm name]];
-    }
-	if ([defaults objectForKey:PXSelectedScaleAlgorithmKey] )
-    {
+	}
+	
+	if ([defaults objectForKey:PXSelectedScaleAlgorithmKey])
+	{
 		[algorithmButton selectItemWithTitle:[defaults objectForKey:PXSelectedScaleAlgorithmKey]];
-    }
+	}
 	
 	[self setAlgorithm:algorithmButton];
 	newSize = [[canvasController canvas] size];

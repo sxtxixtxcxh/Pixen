@@ -134,10 +134,10 @@
 	
 	if ([(PXPencilToolPropertiesView *)propertiesView drawingPoints] != nil) {
 		NSArray *points = [(PXPencilToolPropertiesView *)propertiesView drawingPoints];
-		unsigned int i;
 		
-		for (i=0; i<[points count]; i++) {
-			NSPoint point = NSPointFromString([points objectAtIndex:i]);
+		for (NSString *string in points)
+		{
+			NSPoint point = NSPointFromString(string);
 			point.x += ceilf(aPoint.x - ([(PXPencilToolPropertiesView *)propertiesView patternSize].width / 2));
 			point.y += ceilf(aPoint.y - ([(PXPencilToolPropertiesView *)propertiesView patternSize].height / 2));
 			

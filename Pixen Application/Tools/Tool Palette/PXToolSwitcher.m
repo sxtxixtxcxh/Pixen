@@ -216,23 +216,22 @@ NSMutableArray * toolNames;
 
 - (void)setColor:(NSColor *)col
 {
-    //FIXME: coupled
+	//FIXME: coupled
 	NSColor *aColor = [col colorUsingColorSpaceName:NSDeviceRGBColorSpace];
-  [aColor retain];
-  [_color release];
-  _color = aColor;
+	[aColor retain];
+	[_color release];
+	_color = aColor;
 	
-  id enumerator = [tools objectEnumerator];
-  id current;
-  while ( (current = [enumerator nextObject] )  )
+	for (id current in tools)
 	{
-		if([current respondsToSelector:@selector(setColor:)]) 
-		{
+		if ([current respondsToSelector:@selector(setColor:)]) 
 			[current setColor:_color]; 
-		}
 	}
-  [colorWell setColor:_color];
-	[[NSNotificationCenter defaultCenter] postNotificationName:PXToolColorDidChangeNotificationName object:self];
+	
+	[colorWell setColor:_color];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXToolColorDidChangeNotificationName
+														object:self];
 }
 
 - (IBAction)colorChanged:(id)sender
@@ -253,17 +252,17 @@ NSMutableArray * toolNames;
 
 - (void)keyDown:(NSEvent *)event fromCanvasController:(PXCanvasController *)cc
 {
-	NSString * chars = [[event charactersIgnoringModifiers] lowercaseString];
-	id enumerator = [[PXToolSwitcher toolNames] objectEnumerator], current;
-	while  ( ( current = [enumerator nextObject] ) )
-  {
-		if ([chars characterAtIndex:0] == [[[NSUserDefaults standardUserDefaults] objectForKey:current] characterAtIndex:0])
-		{
-			[self useToolTagged:[[PXToolSwitcher toolNames] indexOfObject:current]];
-			break;
-		}
-  }
-	[[self toolWithTag:PXMoveToolTag] keyDown:event fromCanvasController:cc];
+NSString * chars = [[event charactersIgnoringModifiers] lowercaseString];
+
+for (NSString *current in [PXToolSwitcher toolNames])
+{
+if ([chars characterAtIndex:0] == [[[NSUserDefaults standardUserDefaults] objectForKey:current] characterAtIndex:0])
+{
+[self useToolTagged:[[PXToolSwitcher toolNames] indexOfObject:current]];
+break;
+}
+}
+[[self toolWithTag:PXMoveToolTag] keyDown:event fromCanvasController:cc];
 }
 
 - (void)optionKeyDown
