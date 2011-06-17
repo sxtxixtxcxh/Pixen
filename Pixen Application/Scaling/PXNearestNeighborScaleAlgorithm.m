@@ -56,25 +56,26 @@
 
 - (void)scaleCanvas:canvas toSize:(NSSize)size
 {
-	if (! canvas ) {
+	if (!canvas)
 		return;
-	}
-	NSEnumerator *layerEnumerator = [[canvas layers] objectEnumerator];
-	PXLayer *layer, *layerCopy;
+	
+	PXLayer *layerCopy;
+	NSPoint currentPoint;
 	int x, y;
 	float xScale = size.width / [canvas size].width;
 	float yScale = size.height / [canvas size].height;
 	
-	NSPoint currentPoint;
-	while ( (layer = [layerEnumerator nextObject]) ) {
+	for (PXLayer *layer in [canvas layers])
+	{
 		layerCopy = [[layer copy] autorelease];
 		[layer setSize:size];
+		
 		for (x=0; x<size.width; x++) {
 			for (y=0; y<size.height; y++) {
 				currentPoint = NSMakePoint((int)(x/xScale),(int)(y/yScale));
 				[canvas setColor:[layerCopy colorAtPoint:currentPoint]
-                 atPoint:NSMakePoint(x, y) 
-                 onLayer:layer];
+						 atPoint:NSMakePoint(x, y)
+						 onLayer:layer];
 			}
 		}
 	}
