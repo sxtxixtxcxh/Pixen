@@ -1,6 +1,7 @@
 //
 //  PXPreferencesController.m
 //  Pixen-XCode
+
 // Copyright (c) 2003,2004,2005 Open Sword Group
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,85 +23,91 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM,  OUT OF OR IN CONNECTION WITH
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-//  Created by Andy Matuschak on Wed Jun 09 2004.
-//  Copyright (c) 2004 Open Sword Group. All rights reserved.
+//  Created by Matt Rajca on Fri Jun 17 2011.
+//  Copyright (c) 2011 Open Sword Group. All rights reserved.
 //
 
 #import "PXPreferencesController.h"
-#import "PXHotkeyFormatter.h"
-#import "PXDocumentController.h"
+
+#import "PXGeneralPreferencesController.h"
+#import "PXHotkeysPreferencesController.h"
 
 @implementation PXPreferencesController
 
-PXPreferencesController * preferences = nil;
-
-+(id) sharedPreferencesController
++ (id)sharedPreferencesController
 {
-	if( ! preferences )
-    {
-		preferences = [[self alloc] init]; 
-    }
+	static PXPreferencesController *sharedPreferences = nil;
+	static dispatch_once_t onceToken;
 	
-	return preferences;
+	dispatch_once(&onceToken, ^{
+		sharedPreferences = [[self alloc] init];
+	});
+	
+	return sharedPreferences;
 }
 
 - (id)init
 {
-	return [super initWithWindowNibName:@"PXPreferences"];
+	self = [super initWithWindowNibName:@"PXPreferences"];
+	_selectedTab = -1;
+	return self;
+}
+
+- (void)dealloc
+{
+	[_generalVC release];
+	[_hotkeysVC release];
+	[super dealloc];
 }
 
 - (void)awakeFromNib
 {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[[[self window] toolbar] setSelectedItemIdentifier:@"General"];
+	[self selectGeneralTab:nil];
+}
+
+- (void)selectViewController:(NSViewController *)vc
+{
+	for (NSView *subview in [[[self window] contentView] subviews]) {
+		[subview removeFromSuperview];
+	}
 	
-	if ([defaults boolForKey:PXCrosshairEnabledKey]) {
-		[crosshairColor setEnabled:YES];
+	NSView *childView = vc.view;
+	
+	NSRect frame = [self window].frame;
+	CGFloat deltaY = [ (NSView *) [[self window] contentView] bounds].size.height - childView.bounds.size.height;
+	
+	frame.origin.y += deltaY;
+	frame.size.height -= deltaY;
+	
+	if (_selectedTab != -1) {
+		[[[self window] animator] setFrame:frame display:YES];
 	}
 	else {
-		[crosshairColor setEnabled:NO];
+		[[self window] setFrame:frame display:YES];
 	}
 	
-	if ([defaults boolForKey:PXAutosaveEnabledKey]) {
-		[autoupdateFrequency setEnabled:YES];
-	}
-	else {
-		[autoupdateFrequency setEnabled:NO];
+	[[[self window] contentView] addSubview:childView];
+}
+
+- (IBAction)selectGeneralTab:(id)sender
+{
+	if (!_generalVC) {
+		_generalVC = [[PXGeneralPreferencesController alloc] init];
 	}
 	
-	for (NSCell *currentCell in [form cells])
-	{
-		[currentCell setFormatter:[[[PXHotkeyFormatter alloc] init] autorelease]];
+	[self selectViewController:_generalVC];
+	_selectedTab = PXPreferencesTabGeneral;
+}
+
+- (IBAction)selectHotkeysTab:(id)sender
+{
+	if (!_hotkeysVC) {
+		_hotkeysVC = [[PXHotkeysPreferencesController alloc] init];
 	}
+	
+	[self selectViewController:_hotkeysVC];
+	_selectedTab = PXPreferencesTabHotkeys;
 }
-
-- (IBAction)switchCrosshair:(id)sender
-{
-	if ([sender state] == NSOnState) {
-		[crosshairColor setEnabled:YES];
-	} else {
-		[crosshairColor setEnabled:NO];
-	}
-}
-
-- (IBAction)switchAutoupdate:(id) sender
-{
-	[self updateAutoupdate:sender];
-	if ([sender state] == NSOnState) {
-		[autoupdateFrequency setEnabled:YES];
-	} else {
-		[autoupdateFrequency setEnabled:NO];
-	}
-}
-
-- (IBAction)updateAutoupdate:(id) sender
-{
-	[(PXDocumentController *)[NSDocumentController sharedDocumentController] rescheduleAutosave];
-}
-
-- (void)controlTextDidChange:(NSNotification *) aNotification
-{
-	[(PXDocumentController *)[NSDocumentController sharedDocumentController] rescheduleAutosave];
-}
-
 
 @end
