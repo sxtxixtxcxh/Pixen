@@ -223,7 +223,7 @@ DrawBoxedText(SavedImage * Image,
               const int bg,
               const int fg) {
 
-    int i, j = 0, LineCount = 0, TextWidth = 0;
+    int j = 0, LineCount = 0, TextWidth = 0;
     const char *cp;
 
     /* compute size of text to box */
@@ -245,7 +245,8 @@ DrawBoxedText(SavedImage * Image,
                   border + LineCount * GIF_FONT_HEIGHT + border - 1, bg);
 
     /* draw the text */
-    i = 0;
+#if 0
+    int i = 0;
     cp = strtok((char *)legend, "\r\n");
     do {
         int leadspace = 0;
@@ -257,6 +258,7 @@ DrawBoxedText(SavedImage * Image,
                  y + border + (GIF_FONT_HEIGHT * i++), cp, fg);
         cp = strtok((char *)NULL, "\r\n");*/
     } while (cp);
+#endif
 
     /* outline the box */
     DrawBox(Image, x, y, border + TextWidth * GIF_FONT_WIDTH + border,
