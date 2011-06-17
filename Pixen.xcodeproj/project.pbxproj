@@ -33,6 +33,13 @@
 		BF489DDD08775845007DF4CF /* PXPatternEditor.nib in Resources */ = {isa = PBXBuildFile; fileRef = BF489DDB08775845007DF4CF /* PXPatternEditor.nib */; };
 		BFB1440608AD1D1800CE29EF /* PXSpriteSheetExporter.nib in Resources */ = {isa = PBXBuildFile; fileRef = BFB1440408AD1D1800CE29EF /* PXSpriteSheetExporter.nib */; };
 		BFFC21B906DED6F8008EC4CC /* PXGradientBuilder.nib in Resources */ = {isa = PBXBuildFile; fileRef = BFFC21B706DED6F8008EC4CC /* PXGradientBuilder.nib */; };
+		C93DB17F13ABC6BE006D42FE /* PXPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93DB17D13ABC6BE006D42FE /* PXPreferences.xib */; };
+		C93DB18213ABC8BE006D42FE /* PXGeneralPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93DB18013ABC8BE006D42FE /* PXGeneralPreferences.xib */; };
+		C93DB18613ABC963006D42FE /* PXGeneralPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C93DB18313ABC963006D42FE /* PXGeneralPreferencesController.h */; };
+		C93DB18713ABC963006D42FE /* PXGeneralPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93DB18413ABC963006D42FE /* PXGeneralPreferencesController.m */; };
+		C96BABB513ABD3AB00015C92 /* PXHotkeysPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */; };
+		C96BABBB13ABD44A00015C92 /* PXHotkeysPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */; };
+		C96BABBC13ABD44A00015C92 /* PXHotkeysPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */; };
 		D866555113A932CC00030D76 /* PXLayerDetailsView.nib in Resources */ = {isa = PBXBuildFile; fileRef = D866554F13A932CC00030D76 /* PXLayerDetailsView.nib */; };
 		D866555313A932D900030D76 /* PXMonotoneBackgroundConfigurator.nib in Resources */ = {isa = PBXBuildFile; fileRef = EAA0184E054DCC7B00EF18C2 /* PXMonotoneBackgroundConfigurator.nib */; };
 		D88A735113A93CCD00B56402 /* PXLayerCollectionViewItem.h in Headers */ = {isa = PBXBuildFile; fileRef = D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */; };
@@ -288,8 +295,6 @@
 		EA31FCC60CE7D7C200EC481B /* SubviewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC430CE7D7C200EC481B /* SubviewTableViewController.m */; };
 		EA31FCC70CE7D7C200EC481B /* ThreadWorker.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC450CE7D7C200EC481B /* ThreadWorker.h */; };
 		EA31FCC80CE7D7C200EC481B /* ThreadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC460CE7D7C200EC481B /* ThreadWorker.m */; };
-		EA31FCCB0CE7D7C200EC481B /* UKPrefsPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC4A0CE7D7C200EC481B /* UKPrefsPanel.h */; };
-		EA31FCCC0CE7D7C200EC481B /* UKPrefsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC4B0CE7D7C200EC481B /* UKPrefsPanel.m */; };
 		EA31FCCD0CE7D7C200EC481B /* TabletAEDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC4D0CE7D7C200EC481B /* TabletAEDictionary.h */; };
 		EA31FCCE0CE7D7C200EC481B /* TabletEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC4E0CE7D7C200EC481B /* TabletEvents.h */; };
 		EA31FCCF0CE7D7C200EC481B /* TabletEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC4F0CE7D7C200EC481B /* TabletEvents.m */; };
@@ -366,7 +371,6 @@
 		EAC9174D0CE7DC7300E519E1 /* Pixen.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916E60CE7DC7300E519E1 /* Pixen.png */; };
 		EAC9174E0CE7DC7300E519E1 /* pixenbig.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916E70CE7DC7300E519E1 /* pixenbig.png */; };
 		EAC9174F0CE7DC7300E519E1 /* PixenDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = EAC916E80CE7DC7300E519E1 /* PixenDoc.icns */; };
-		EAC917500CE7DC7300E519E1 /* GeneralPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC916EA0CE7DC7300E519E1 /* GeneralPreferences.tiff */; };
 		EAC917510CE7DC7300E519E1 /* HotkeysPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC916EB0CE7DC7300E519E1 /* HotkeysPreferences.tiff */; };
 		EAC917520CE7DC7300E519E1 /* airbrush.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916ED0CE7DC7300E519E1 /* airbrush.png */; };
 		EAC917530CE7DC7300E519E1 /* apencil.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916EE0CE7DC7300E519E1 /* apencil.png */; };
@@ -484,7 +488,6 @@
 		EAF6948906A9AE0B0019D8D7 /* PXGridSettingsPrompter.nib in Resources */ = {isa = PBXBuildFile; fileRef = 615E88D906A31B72002445B8 /* PXGridSettingsPrompter.nib */; };
 		EAF6948A06A9AE0B0019D8D7 /* PXToolPalette.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61F9CB16060D6A6D00562B78 /* PXToolPalette.nib */; };
 		EAF6949006A9AE0B0019D8D7 /* PXCanvasResizePrompt.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6151D0140677C8E3009E3BE4 /* PXCanvasResizePrompt.nib */; };
-		EAF6949106A9AE0B0019D8D7 /* PXPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 615E87EE06A31AE0002445B8 /* PXPreferences.nib */; };
 		EAF6949D06A9AE0B0019D8D7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 61BD25D3067A1E1D0054A2BB /* Localizable.strings */; };
 		EAF694A706A9AE0B0019D8D7 /* PXDiscoverPixen.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61163708067D286900AE87D7 /* PXDiscoverPixen.nib */; };
 		EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61F598B9067949D500B8C8CA /* PXScalePrompt.nib */; };
@@ -554,7 +557,6 @@
 		61A6F50C060E8151008FA11F /* PXCanvas_ApplescriptAdditions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PXCanvas_ApplescriptAdditions.h; sourceTree = "<group>"; };
 		61A6F50D060E8151008FA11F /* PXCanvas_ApplescriptAdditions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PXCanvas_ApplescriptAdditions.m; sourceTree = "<group>"; };
 		61A956BB08AD76CF009BB89F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/OSProgressPopup.nib; sourceTree = "<group>"; };
-		61ADDE0E0678044E008A1184 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPreferences.nib; sourceTree = "<group>"; };
 		61BB8ED608FB58F9009C75A6 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		61BD25C9067A1DD80054A2BB /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		61DE1D2F060282060008F6AD /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXToolProperties.nib; sourceTree = "<group>"; };
@@ -573,6 +575,13 @@
 		BF489DDC08775845007DF4CF /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPatternEditor.nib; sourceTree = "<group>"; };
 		BFB1440508AD1D1800CE29EF /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXSpriteSheetExporter.nib; sourceTree = "<group>"; };
 		BFFC21B806DED6F8008EC4CC /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXGradientBuilder.nib; sourceTree = "<group>"; };
+		C93DB17E13ABC6BE006D42FE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreferences.xib; sourceTree = "<group>"; };
+		C93DB18113ABC8BE006D42FE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXGeneralPreferences.xib; sourceTree = "<group>"; };
+		C93DB18313ABC963006D42FE /* PXGeneralPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGeneralPreferencesController.h; sourceTree = "<group>"; };
+		C93DB18413ABC963006D42FE /* PXGeneralPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGeneralPreferencesController.m; sourceTree = "<group>"; };
+		C96BABB413ABD3AB00015C92 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXHotkeysPreferences.xib; sourceTree = "<group>"; };
+		C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXHotkeysPreferencesController.h; sourceTree = "<group>"; };
+		C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXHotkeysPreferencesController.m; sourceTree = "<group>"; };
 		D866555013A932CC00030D76 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXLayerDetailsView.nib; sourceTree = "<group>"; };
 		D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerCollectionViewItem.h; sourceTree = "<group>"; };
 		D88A735013A93CCD00B56402 /* PXLayerCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerCollectionViewItem.m; sourceTree = "<group>"; };
@@ -827,8 +836,6 @@
 		EA31FC430CE7D7C200EC481B /* SubviewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubviewTableViewController.m; sourceTree = "<group>"; };
 		EA31FC450CE7D7C200EC481B /* ThreadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadWorker.h; sourceTree = "<group>"; };
 		EA31FC460CE7D7C200EC481B /* ThreadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadWorker.m; sourceTree = "<group>"; };
-		EA31FC4A0CE7D7C200EC481B /* UKPrefsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPrefsPanel.h; sourceTree = "<group>"; };
-		EA31FC4B0CE7D7C200EC481B /* UKPrefsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPrefsPanel.m; sourceTree = "<group>"; };
 		EA31FC4D0CE7D7C200EC481B /* TabletAEDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletAEDictionary.h; sourceTree = "<group>"; };
 		EA31FC4E0CE7D7C200EC481B /* TabletEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletEvents.h; sourceTree = "<group>"; };
 		EA31FC4F0CE7D7C200EC481B /* TabletEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabletEvents.m; sourceTree = "<group>"; };
@@ -919,7 +926,6 @@
 		EAC916E60CE7DC7300E519E1 /* Pixen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pixen.png; sourceTree = "<group>"; };
 		EAC916E70CE7DC7300E519E1 /* pixenbig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pixenbig.png; sourceTree = "<group>"; };
 		EAC916E80CE7DC7300E519E1 /* PixenDoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PixenDoc.icns; sourceTree = "<group>"; };
-		EAC916EA0CE7DC7300E519E1 /* GeneralPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GeneralPreferences.tiff; sourceTree = "<group>"; };
 		EAC916EB0CE7DC7300E519E1 /* HotkeysPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = HotkeysPreferences.tiff; sourceTree = "<group>"; };
 		EAC916ED0CE7DC7300E519E1 /* airbrush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airbrush.png; sourceTree = "<group>"; };
 		EAC916EE0CE7DC7300E519E1 /* apencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apencil.png; sourceTree = "<group>"; };
@@ -1160,8 +1166,12 @@
 		EA31F8680CE7BD8B00EC481B /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				C93DB18313ABC963006D42FE /* PXGeneralPreferencesController.h */,
+				C93DB18413ABC963006D42FE /* PXGeneralPreferencesController.m */,
 				EA31F8690CE7BD8B00EC481B /* PXHotkeyFormatter.h */,
 				EA31F86A0CE7BD8B00EC481B /* PXHotkeyFormatter.m */,
+				C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */,
+				C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */,
 				EA31F86B0CE7BD8B00EC481B /* PXPreferencesController.h */,
 				EA31F86C0CE7BD8B00EC481B /* PXPreferencesController.m */,
 			);
@@ -1624,7 +1634,6 @@
 				EA31FC3C0CE7D7C200EC481B /* SBCenteringClipView */,
 				EA31FC3F0CE7D7C200EC481B /* SubviewTableView */,
 				EA31FC440CE7D7C200EC481B /* ThreadWorker */,
-				EA31FC470CE7D7C200EC481B /* UKNiftyFeatures */,
 				EA31FC4C0CE7D7C200EC481B /* Wacom */,
 			);
 			path = "Foreign Code";
@@ -1689,15 +1698,6 @@
 				EA31FC460CE7D7C200EC481B /* ThreadWorker.m */,
 			);
 			path = ThreadWorker;
-			sourceTree = "<group>";
-		};
-		EA31FC470CE7D7C200EC481B /* UKNiftyFeatures */ = {
-			isa = PBXGroup;
-			children = (
-				EA31FC4A0CE7D7C200EC481B /* UKPrefsPanel.h */,
-				EA31FC4B0CE7D7C200EC481B /* UKPrefsPanel.m */,
-			);
-			path = UKNiftyFeatures;
 			sourceTree = "<group>";
 		};
 		EA31FC4C0CE7D7C200EC481B /* Wacom */ = {
@@ -1847,7 +1847,10 @@
 		EA90F6CB06D12380001755A6 /* NIBs */ = {
 			isa = PBXGroup;
 			children = (
+				C93DB18013ABC8BE006D42FE /* PXGeneralPreferences.xib */,
+				C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */,
 				EAB650840D108D9000274070 /* PXPaletteController.xib */,
+				C93DB17D13ABC6BE006D42FE /* PXPreferences.xib */,
 				618AE58F087E6FEA00A9FA9B /* PXColorPicker.nib */,
 				EAF21E2908AD0CFD0037A23B /* PXPalettePanel.nib */,
 				B9EBC23808BB813F00C4892E /* PXFillToolPropertiesView.nib */,
@@ -1876,7 +1879,6 @@
 				EA9E180B0557104F00119DF5 /* PXNamePrompt.nib */,
 				BF489DDB08775845007DF4CF /* PXPatternEditor.nib */,
 				615E880606A31AF8002445B8 /* PXPencilToolPropertiesView.nib */,
-				615E87EE06A31AE0002445B8 /* PXPreferences.nib */,
 				615E88DD06A31B72002445B8 /* PXPreview.nib */,
 				619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.nib */,
 				615E87FE06A31AF8002445B8 /* PXRectangleToolPropertiesView.nib */,
@@ -1947,7 +1949,6 @@
 		EAC916E90CE7DC7300E519E1 /* Preferences Icons */ = {
 			isa = PBXGroup;
 			children = (
-				EAC916EA0CE7DC7300E519E1 /* GeneralPreferences.tiff */,
 				EAC916EB0CE7DC7300E519E1 /* HotkeysPreferences.tiff */,
 			);
 			path = "Preferences Icons";
@@ -2227,7 +2228,6 @@
 				EA31FCC30CE7D7C200EC481B /* SubviewTableViewCell.h in Headers */,
 				EA31FCC50CE7D7C200EC481B /* SubviewTableViewController.h in Headers */,
 				EA31FCC70CE7D7C200EC481B /* ThreadWorker.h in Headers */,
-				EA31FCCB0CE7D7C200EC481B /* UKPrefsPanel.h in Headers */,
 				EA31FCCD0CE7D7C200EC481B /* TabletAEDictionary.h in Headers */,
 				EA31FCCE0CE7D7C200EC481B /* TabletEvents.h in Headers */,
 				EA31FCD10CE7D7C200EC481B /* TAEHelpers.h in Headers */,
@@ -2257,6 +2257,8 @@
 				61A22B920D2323B500430CCD /* OSPlasticButtonCell.h in Headers */,
 				EA2EA41B10DB37E50065090C /* NSString+Comparison.h in Headers */,
 				D88A735113A93CCD00B56402 /* PXLayerCollectionViewItem.h in Headers */,
+				C93DB18613ABC963006D42FE /* PXGeneralPreferencesController.h in Headers */,
+				C96BABBB13ABD44A00015C92 /* PXHotkeysPreferencesController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2334,7 +2336,6 @@
 				EAF6948906A9AE0B0019D8D7 /* PXGridSettingsPrompter.nib in Resources */,
 				EAF6948A06A9AE0B0019D8D7 /* PXToolPalette.nib in Resources */,
 				EAF6949006A9AE0B0019D8D7 /* PXCanvasResizePrompt.nib in Resources */,
-				EAF6949106A9AE0B0019D8D7 /* PXPreferences.nib in Resources */,
 				EAF6949D06A9AE0B0019D8D7 /* Localizable.strings in Resources */,
 				EAF694A706A9AE0B0019D8D7 /* PXDiscoverPixen.nib in Resources */,
 				EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.nib in Resources */,
@@ -2364,7 +2365,6 @@
 				EAC9174D0CE7DC7300E519E1 /* Pixen.png in Resources */,
 				EAC9174E0CE7DC7300E519E1 /* pixenbig.png in Resources */,
 				EAC9174F0CE7DC7300E519E1 /* PixenDoc.icns in Resources */,
-				EAC917500CE7DC7300E519E1 /* GeneralPreferences.tiff in Resources */,
 				EAC917510CE7DC7300E519E1 /* HotkeysPreferences.tiff in Resources */,
 				EAC917520CE7DC7300E519E1 /* airbrush.png in Resources */,
 				EAC917530CE7DC7300E519E1 /* apencil.png in Resources */,
@@ -2456,6 +2456,9 @@
 				61A22A240D2073E500430CCD /* Frequency.tiff in Resources */,
 				D866555113A932CC00030D76 /* PXLayerDetailsView.nib in Resources */,
 				D866555313A932D900030D76 /* PXMonotoneBackgroundConfigurator.nib in Resources */,
+				C93DB17F13ABC6BE006D42FE /* PXPreferences.xib in Resources */,
+				C93DB18213ABC8BE006D42FE /* PXGeneralPreferences.xib in Resources */,
+				C96BABB513ABD3AB00015C92 /* PXHotkeysPreferences.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2609,7 +2612,6 @@
 				EA31FCC40CE7D7C200EC481B /* SubviewTableViewCell.m in Sources */,
 				EA31FCC60CE7D7C200EC481B /* SubviewTableViewController.m in Sources */,
 				EA31FCC80CE7D7C200EC481B /* ThreadWorker.m in Sources */,
-				EA31FCCC0CE7D7C200EC481B /* UKPrefsPanel.m in Sources */,
 				EA31FCCF0CE7D7C200EC481B /* TabletEvents.m in Sources */,
 				EA31FCD00CE7D7C200EC481B /* TAEHelpers.c in Sources */,
 				EA31FCD30CE7D7C200EC481B /* main.m in Sources */,
@@ -2636,6 +2638,8 @@
 				61A22B930D2323B500430CCD /* OSPlasticButtonCell.m in Sources */,
 				EA2EA41C10DB37E50065090C /* NSString+Comparison.m in Sources */,
 				D88A735213A93CCD00B56402 /* PXLayerCollectionViewItem.m in Sources */,
+				C93DB18713ABC963006D42FE /* PXGeneralPreferencesController.m in Sources */,
+				C96BABBC13ABD44A00015C92 /* PXHotkeysPreferencesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2696,14 +2700,6 @@
 				6151D0150677C8E3009E3BE4 /* English */,
 			);
 			name = PXCanvasResizePrompt.nib;
-			sourceTree = "<group>";
-		};
-		615E87EE06A31AE0002445B8 /* PXPreferences.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				61ADDE0E0678044E008A1184 /* English */,
-			);
-			name = PXPreferences.nib;
 			sourceTree = "<group>";
 		};
 		615E87F206A31AF8002445B8 /* PXLayerController.nib */ = {
@@ -2872,6 +2868,30 @@
 				BFFC21B806DED6F8008EC4CC /* English */,
 			);
 			name = PXGradientBuilder.nib;
+			sourceTree = "<group>";
+		};
+		C93DB17D13ABC6BE006D42FE /* PXPreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C93DB17E13ABC6BE006D42FE /* English */,
+			);
+			name = PXPreferences.xib;
+			sourceTree = "<group>";
+		};
+		C93DB18013ABC8BE006D42FE /* PXGeneralPreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C93DB18113ABC8BE006D42FE /* English */,
+			);
+			name = PXGeneralPreferences.xib;
+			sourceTree = "<group>";
+		};
+		C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C96BABB413ABD3AB00015C92 /* English */,
+			);
+			name = PXHotkeysPreferences.xib;
 			sourceTree = "<group>";
 		};
 		D866554F13A932CC00030D76 /* PXLayerDetailsView.nib */ = {
