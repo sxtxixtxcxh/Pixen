@@ -252,17 +252,18 @@ NSMutableArray * toolNames;
 
 - (void)keyDown:(NSEvent *)event fromCanvasController:(PXCanvasController *)cc
 {
-NSString * chars = [[event charactersIgnoringModifiers] lowercaseString];
-
-for (NSString *current in [PXToolSwitcher toolNames])
-{
-if ([chars characterAtIndex:0] == [[[NSUserDefaults standardUserDefaults] objectForKey:current] characterAtIndex:0])
-{
-[self useToolTagged:[[PXToolSwitcher toolNames] indexOfObject:current]];
-break;
-}
-}
-[[self toolWithTag:PXMoveToolTag] keyDown:event fromCanvasController:cc];
+	NSString *chars = [[event charactersIgnoringModifiers] lowercaseString];
+	
+	for (NSString *current in [PXToolSwitcher toolNames])
+	{
+		if ([chars characterAtIndex:0] == [[[NSUserDefaults standardUserDefaults] objectForKey:current] characterAtIndex:0])
+		{
+			[self useToolTagged:[[PXToolSwitcher toolNames] indexOfObject:current]];
+			break;
+		}
+	}
+	
+	[[self toolWithTag:PXMoveToolTag] keyDown:event fromCanvasController:cc];
 }
 
 - (void)optionKeyDown
