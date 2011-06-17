@@ -80,7 +80,7 @@
 	
     if (gExportSettings == NULL) {
         // set up some initial default settings; use Standard Compression just to help build atom container
-        err = OpenADefaultComponent( StandardCompressionType, StandardCompressionSubType, &sc );
+        OpenADefaultComponent( StandardCompressionType, StandardCompressionSubType, &sc );
 		
         ss.codecType = kMPEG4VisualCodecType;
         ss.codec = NULL;
@@ -117,29 +117,29 @@
             
             // YES: video
             aChar = true;
-            err = QTInsertChild( gExportSettings, kParentAtomIsContainer, kQTSettingsMovieExportEnableVideo, 1, 0, sizeof(aChar), &aChar, nil );
+            QTInsertChild( gExportSettings, kParentAtomIsContainer, kQTSettingsMovieExportEnableVideo, 1, 0, sizeof(aChar), &aChar, nil );
             
             // NO: audio
 			aChar = false;
-			err = QTInsertChild( gExportSettings, kParentAtomIsContainer, kQTSettingsMovieExportEnableSound, 1, 0, sizeof(aChar), &aChar, nil );
+			QTInsertChild( gExportSettings, kParentAtomIsContainer, kQTSettingsMovieExportEnableSound, 1, 0, sizeof(aChar), &aChar, nil );
             
             // NO: save as Fast Start
-            err = QTInsertChild( gExportSettings, kParentAtomIsContainer, kQTSettingsMovieExportSaveOptions, 1, 0, 0, nil, &saveAtom );
+            QTInsertChild( gExportSettings, kParentAtomIsContainer, kQTSettingsMovieExportSaveOptions, 1, 0, 0, nil, &saveAtom );
             aChar = false;
-            err = QTInsertChild( gExportSettings, saveAtom, kQTSettingsMovieExportSaveForInternet, 1, 0, sizeof(aChar), &aChar, nil );
+            QTInsertChild( gExportSettings, saveAtom, kQTSettingsMovieExportSaveForInternet, 1, 0, sizeof(aChar), &aChar, nil );
             
             // video options
             videAtom = QTFindChildByID( gExportSettings, kParentAtomIsContainer, kQTSettingsVideo, 1, nil );
             if (videAtom == 0)
-                err = QTInsertChild( gExportSettings, kParentAtomIsContainer, kQTSettingsVideo, 1, 0, 0, nil, &videAtom );
+                QTInsertChild( gExportSettings, kParentAtomIsContainer, kQTSettingsVideo, 1, 0, 0, nil, &videAtom );
             
             aLong = FixRatio(320,1);
-            aLong = EndianU32_NtoB(aLong);
-           // err = QTInsertChild( gExportSettings, videAtom, movieExportWidth, 1, 0, sizeof(aLong), &aLong, nil );
+            (void)EndianU32_NtoB(aLong);
+           // QTInsertChild( gExportSettings, videAtom, movieExportWidth, 1, 0, sizeof(aLong), &aLong, nil );
 			
             aLong = FixRatio(240,1);
-            aLong = EndianU32_NtoB(aLong);
-           // err = QTInsertChild( gExportSettings, videAtom, movieExportHeight, 1, 0, sizeof(aLong), &aLong, nil );
+            (void)EndianU32_NtoB(aLong);
+           // QTInsertChild( gExportSettings, videAtom, movieExportHeight, 1, 0, sizeof(aLong), &aLong, nil );
         }
     }
     
@@ -147,10 +147,10 @@
         return;
 	
     // wrap 'em up, I'll take 'em....
-    err = MovieExportSetSettingsFromAtomContainer(exporter, gExportSettings);
+    MovieExportSetSettingsFromAtomContainer(exporter, gExportSettings);
     
     // get the export settings from the user
-    err = MovieExportDoUserDialog(exporter, movie, NULL, 0, 0, &canceled);
+    MovieExportDoUserDialog(exporter, movie, NULL, 0, 0, &canceled);
     
 	if (canceled) { return; }
 	
@@ -158,7 +158,7 @@
     gExportSettings = NULL;
 	
     // get the selected export settings as an atom container (so we can pass them to the thread)
-    err = MovieExportGetSettingsAsAtomContainer(exporter, &gExportSettings);
+    MovieExportGetSettingsAsAtomContainer(exporter, &gExportSettings);
 	
 	parentWindow = newParentWindow;
 	[qtMovie setDelegate:self];
