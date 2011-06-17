@@ -288,8 +288,6 @@
 		EA31FCC60CE7D7C200EC481B /* SubviewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC430CE7D7C200EC481B /* SubviewTableViewController.m */; };
 		EA31FCC70CE7D7C200EC481B /* ThreadWorker.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC450CE7D7C200EC481B /* ThreadWorker.h */; };
 		EA31FCC80CE7D7C200EC481B /* ThreadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC460CE7D7C200EC481B /* ThreadWorker.m */; };
-		EA31FCCB0CE7D7C200EC481B /* UKPrefsPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC4A0CE7D7C200EC481B /* UKPrefsPanel.h */; };
-		EA31FCCC0CE7D7C200EC481B /* UKPrefsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC4B0CE7D7C200EC481B /* UKPrefsPanel.m */; };
 		EA31FCCD0CE7D7C200EC481B /* TabletAEDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC4D0CE7D7C200EC481B /* TabletAEDictionary.h */; };
 		EA31FCCE0CE7D7C200EC481B /* TabletEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC4E0CE7D7C200EC481B /* TabletEvents.h */; };
 		EA31FCCF0CE7D7C200EC481B /* TabletEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC4F0CE7D7C200EC481B /* TabletEvents.m */; };
@@ -827,8 +825,6 @@
 		EA31FC430CE7D7C200EC481B /* SubviewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubviewTableViewController.m; sourceTree = "<group>"; };
 		EA31FC450CE7D7C200EC481B /* ThreadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadWorker.h; sourceTree = "<group>"; };
 		EA31FC460CE7D7C200EC481B /* ThreadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadWorker.m; sourceTree = "<group>"; };
-		EA31FC4A0CE7D7C200EC481B /* UKPrefsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPrefsPanel.h; sourceTree = "<group>"; };
-		EA31FC4B0CE7D7C200EC481B /* UKPrefsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPrefsPanel.m; sourceTree = "<group>"; };
 		EA31FC4D0CE7D7C200EC481B /* TabletAEDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletAEDictionary.h; sourceTree = "<group>"; };
 		EA31FC4E0CE7D7C200EC481B /* TabletEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletEvents.h; sourceTree = "<group>"; };
 		EA31FC4F0CE7D7C200EC481B /* TabletEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabletEvents.m; sourceTree = "<group>"; };
@@ -1624,7 +1620,6 @@
 				EA31FC3C0CE7D7C200EC481B /* SBCenteringClipView */,
 				EA31FC3F0CE7D7C200EC481B /* SubviewTableView */,
 				EA31FC440CE7D7C200EC481B /* ThreadWorker */,
-				EA31FC470CE7D7C200EC481B /* UKNiftyFeatures */,
 				EA31FC4C0CE7D7C200EC481B /* Wacom */,
 			);
 			path = "Foreign Code";
@@ -1689,15 +1684,6 @@
 				EA31FC460CE7D7C200EC481B /* ThreadWorker.m */,
 			);
 			path = ThreadWorker;
-			sourceTree = "<group>";
-		};
-		EA31FC470CE7D7C200EC481B /* UKNiftyFeatures */ = {
-			isa = PBXGroup;
-			children = (
-				EA31FC4A0CE7D7C200EC481B /* UKPrefsPanel.h */,
-				EA31FC4B0CE7D7C200EC481B /* UKPrefsPanel.m */,
-			);
-			path = UKNiftyFeatures;
 			sourceTree = "<group>";
 		};
 		EA31FC4C0CE7D7C200EC481B /* Wacom */ = {
@@ -2227,7 +2213,6 @@
 				EA31FCC30CE7D7C200EC481B /* SubviewTableViewCell.h in Headers */,
 				EA31FCC50CE7D7C200EC481B /* SubviewTableViewController.h in Headers */,
 				EA31FCC70CE7D7C200EC481B /* ThreadWorker.h in Headers */,
-				EA31FCCB0CE7D7C200EC481B /* UKPrefsPanel.h in Headers */,
 				EA31FCCD0CE7D7C200EC481B /* TabletAEDictionary.h in Headers */,
 				EA31FCCE0CE7D7C200EC481B /* TabletEvents.h in Headers */,
 				EA31FCD10CE7D7C200EC481B /* TAEHelpers.h in Headers */,
@@ -2609,7 +2594,6 @@
 				EA31FCC40CE7D7C200EC481B /* SubviewTableViewCell.m in Sources */,
 				EA31FCC60CE7D7C200EC481B /* SubviewTableViewController.m in Sources */,
 				EA31FCC80CE7D7C200EC481B /* ThreadWorker.m in Sources */,
-				EA31FCCC0CE7D7C200EC481B /* UKPrefsPanel.m in Sources */,
 				EA31FCCF0CE7D7C200EC481B /* TabletEvents.m in Sources */,
 				EA31FCD00CE7D7C200EC481B /* TAEHelpers.c in Sources */,
 				EA31FCD30CE7D7C200EC481B /* main.m in Sources */,
