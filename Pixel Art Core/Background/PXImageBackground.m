@@ -196,9 +196,9 @@
 	[super encodeWithCoder:coder];
 }
 
--(id) initWithCoder:(NSCoder*)coder
+- (id)initWithCoder:(NSCoder*)coder
 {
-	[super initWithCoder:coder];
+	self = [super initWithCoder:coder];
 	[self setImage:[coder decodeObjectForKey:@"image"]];
 	return self;
 }

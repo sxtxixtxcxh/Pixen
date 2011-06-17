@@ -51,12 +51,11 @@
 
 - (void)scaleCanvas:(PXCanvas *)canvas toSize:(NSSize)size
 {
-	if (! canvas ) 
+	if (!canvas) 
 		return;
 	
-	NSEnumerator *layerEnumerator = [[canvas layers] objectEnumerator];
-	PXLayer *layer;	
-	while ( ( layer = [layerEnumerator nextObject] ) ) {
+	for (PXLayer *layer in [canvas layers])
+	{
 		NSImage *newLayerImage = [[[NSImage alloc] initWithSize:size] autorelease];
 		int oldOpacity = [layer opacity];
 		[layer setOpacity:100];
@@ -64,10 +63,10 @@
 		[layer drawInRect:(NSRect){NSZeroPoint, size} fromRect:(NSRect){NSZeroPoint, [layer size]} operation:NSCompositeCopy fraction:1];
 		[newLayerImage unlockFocus];
 		[layer setOpacity:oldOpacity];
-			
 		[layer setSize:size];
 		[canvas applyImage:newLayerImage toLayer:layer];
 	}
+	
 	[canvas layersChanged];
 	[canvas changed];
 }

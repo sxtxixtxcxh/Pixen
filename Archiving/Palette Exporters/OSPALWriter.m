@@ -26,9 +26,9 @@ typedef struct
 	return nil;
 }
 
-- _init
+- (id)_init
 {
-	[super init];
+	self = [super init];
 	return self;
 }
 

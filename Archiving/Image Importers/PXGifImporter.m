@@ -17,9 +17,9 @@
 	return (frameCount > 1);
 }
 
-- initWithData:data
+- (id)initWithData:data
 {
-	[super init];
+	self = [super init];
 	[data writeToFile:@"/tmp/PAdummy.gif" atomically:NO];
 	frames = [[NSMutableArray alloc] init];
 	gifFile = DGifOpenFileName("/tmp/PAdummy.gif");
