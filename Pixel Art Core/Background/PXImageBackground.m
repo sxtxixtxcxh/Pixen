@@ -85,17 +85,19 @@
 	NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
 	NSArray *documentTypes = [infoDictionary objectForKey:CFBundleDocumentTypesKey];
 	NSMutableArray *fileExtensions = [NSMutableArray array];
-	id enumerator = [documentTypes objectEnumerator], current;
 	
-	while  ( ( current = [enumerator nextObject] ) ) {
+	for (NSDictionary *current in documentTypes)
+	{
 		[fileExtensions addObjectsFromArray:[current objectForKey:CFBundleTypeExtensionsKey]];
 	}
 	
-	if([panel runModalForDirectory:GetBackgroundImagesDirectory() file:nil types:fileExtensions] == NSOKButton)
-    {
+	if ([panel runModalForDirectory:GetBackgroundImagesDirectory()
+							   file:nil
+							  types:fileExtensions] == NSOKButton)
+	{
 		[self setImage:[[PXCanvas canvasWithContentsOfFile:[[panel filenames] objectAtIndex:0]] displayImage]];
 		[imageNameField setStringValue:[[[panel filenames] objectAtIndex:0] lastPathComponent]];
-    }
+	}
 }
 
 - (void)setColor:(NSColor *)aColor
@@ -194,9 +196,9 @@
 	[super encodeWithCoder:coder];
 }
 
--(id) initWithCoder:(NSCoder*)coder
+- (id)initWithCoder:(NSCoder*)coder
 {
-	[super initWithCoder:coder];
+	self = [super initWithCoder:coder];
 	[self setImage:[coder decodeObjectForKey:@"image"]];
 	return self;
 }
