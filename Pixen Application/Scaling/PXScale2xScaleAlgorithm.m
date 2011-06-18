@@ -63,7 +63,7 @@
 		return;
 	}
 	NSEnumerator *layerEnumerator;
-	PXLayer *layer, *layerCopy;
+	PXLayer *layerCopy;
 	int x, y;
 	NSColor *A, *B, *C, *D, *E, *F, *G, *H, *I, *E0, *E1, *E2, *E3;
 	int xScale = size.width / [canvas size].width;
@@ -76,8 +76,9 @@
 	while (xScale > 1 && yScale > 1) {
 		layerWidth = layerWidth << 1;
 		layerHeight = layerHeight << 1;
-		layerEnumerator = [[canvas layers] objectEnumerator];
-		while  ( (layer = [layerEnumerator nextObject]) ) {
+		
+		for (PXLayer *layer in [canvas layers])
+		{
 			pool = [[NSAutoreleasePool alloc] init];
 			layerCopy = [[layer copy] autorelease];
 			[layer setSize:NSMakeSize(layerWidth, layerHeight)];

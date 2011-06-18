@@ -149,14 +149,15 @@
 
 - (void)drawRect:(NSRect)rect
 {
-	NSEnumerator *pointEnumerator = [points objectEnumerator];
-	NSString *string;
 	NSPoint point;
 	NSRect pixel;
 	pixel.size = NSMakeSize(1,1);
-	while ((string = [pointEnumerator nextObject]) != nil) {
+	
+	for (NSString *string in points)
+	{
 		point = NSPointFromString(string);
 		pixel.origin = point;
+		
 		if (NSIntersectsRect(rect, pixel)) {
 			NSRectFill(pixel);
 		}
