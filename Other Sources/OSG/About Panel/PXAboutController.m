@@ -84,7 +84,13 @@ static PXAboutController *singleInstance = nil;
 {
 	id linkString = [NSString stringWithFormat:@"<a href=\"http://www.opensword.org/license.php\">MIT License</a>"];
 	
-	id plainString = [[[NSMutableString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Credits" ofType:@"html"]] autorelease];
+	NSString *creditsPath = [[NSBundle mainBundle] pathForResource:@"Credits" ofType:@"html"];
+	NSError *error=nil;
+	NSMutableString *plainString = [NSMutableString stringWithContentsOfFile:creditsPath encoding:NSUTF8StringEncoding error:&error];
+	if(error) {
+		[self presentError:error];
+		return;
+	}
 	
 	[plainString replaceOccurrencesOfString:@"<PXLICENSE>"
 								 withString:linkString
@@ -92,7 +98,7 @@ static PXAboutController *singleInstance = nil;
 									  range:NSMakeRange(0,[(NSString *)plainString length])];
 	
 	
-	NSData *htmlData = [NSData dataWithBytes:[plainString cString] length:[(NSString *)plainString length]];
+	NSData *htmlData = [NSData dataWithBytes:[plainString UTF8String] length:[(NSString *)plainString length]];
 	NSDictionary *attributedOptions = [NSDictionary dictionaryWithObject:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]] forKey:@"BaseURL"];
 	NSAttributedString *attributedString = [[[NSMutableAttributedString alloc] initWithHTML:htmlData options:attributedOptions documentAttributes:nil] autorelease];
 	[[credits textStorage] setAttributedString:attributedString];

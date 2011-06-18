@@ -14,13 +14,18 @@
 	NSString *fileType;
 	IBOutlet NSView *view;
 	
-	id _delegate;
-	SEL _didEndSelector;
+	id delegate;
+	SEL didEndSelector;
 }
+@property (readonly, copy) NSString *fileTemplate, *fileType;
+@property (readonly, retain) NSSavePanel *savePanel;
+@property (readwrite, retain) NSView *view;
 
-- initWithDocument:(NSDocument *)document;
-- (void)beginSheetModalForWindow:(NSWindow *)parentWindow modalDelegate:delegate didEndSelector:(SEL)didEndSelector;
-- savePanel;
+- (id)initWithDocument:(NSDocument *)document;
+- (void)beginSheetModalForWindow:(NSWindow *)parentWindow 
+									 modalDelegate:(id)delegate 
+									didEndSelector:(SEL)didEndSelector;
+- (NSSavePanel *)savePanel;
 - (NSString *)fileTemplate;
 - (void)setFileType:(NSString *)type;
 

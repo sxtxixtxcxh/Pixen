@@ -275,6 +275,7 @@ NSString *palettesSubdirName = @"Palettes";
 			if(![[NSFileManager defaultManager] copyItemAtPath:filename toPath:dest error:&err]) 
       {
         [self presentError:err];
+				return NO;
       }
       else
       {
@@ -331,6 +332,7 @@ NSString *palettesSubdirName = @"Palettes";
 	PXCanvasDocument *doc = [self makeUntitledDocumentOfType:PixenImageFileType error:&err];
   if(err) {
     [self presentError:err];
+		return;
   }
 	[self addDocument:doc];
 	[doc loadFromPasteboard:[NSPasteboard generalPasteboard]];

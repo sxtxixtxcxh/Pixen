@@ -395,7 +395,7 @@
 	return [super validateMenuItem:menuItem];
 }
 
-- (void)exportSequencePrompterDidEnd:prompter
+- (void)exportSequencePrompterDidEnd:(PXSequenceExportPrompter *)prompter
 {
 	NSString *fileTemplate = [prompter fileTemplate];
 	NSRange range = [fileTemplate rangeOfString:@"%f"];
@@ -404,7 +404,17 @@
 	finalString = [finalString stringByAppendingString:[fileTemplate substringFromIndex:range.location + 2]];
 	int i;
 	int numberOfCels = [animation countOfCels];
-	NSString *directoryPath = [[[prompter savePanel] filenames] objectAtIndex:0];
+	NSString *directoryPath = [[[prompter savePanel] URL] path];
+	NSError *error=nil;
+	if(![[NSFileManager defaultManager] createDirectoryAtPath:directoryPath 
+																withIntermediateDirectories:YES 
+																								 attributes:nil 
+																											error:&error]) {
+		if(error) {
+			[self presentError:error];
+		}
+		return;
+	}
 	for (i = 0; i < numberOfCels; i++)
 	{
 		NSString *filePath = [[directoryPath copy] autorelease];

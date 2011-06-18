@@ -9,15 +9,25 @@
 #import "PXSequenceExportPrompter.h"
 #import "PXCanvasDocument.h"
 
+@interface PXSequenceExportPrompter()
+@property (readwrite, copy) NSString *fileTemplate, *fileType;
+@property (readwrite, retain) NSSavePanel *savePanel;
+@property (readwrite, assign) id delegate;
+@property (readwrite, assign) SEL didEndSelector;
+@end
+
 @implementation PXSequenceExportPrompter
+
+@synthesize fileTemplate, savePanel, delegate, didEndSelector, view;
+@dynamic fileType;
 
 - initWithDocument:(NSDocument *)aDocument
 {
 	self = [super init];
-	fileTemplate = [[NSString stringWithFormat:@"%@ %%f", [[aDocument displayName] stringByDeletingPathExtension]] retain];
+	self.fileTemplate = [NSString stringWithFormat:@"%@ %%f", [[aDocument displayName] stringByDeletingPathExtension]];
 	[NSBundle loadNibNamed:@"PXSequenceExportPrompter" owner:self];
-	[self setFileType:PixenImageFileType];
-	savePanel = [[NSSavePanel savePanel] retain];
+	self.fileType = PixenImageFileType;
+	self.savePanel = [NSSavePanel savePanel];
 	[savePanel setTitle:@"Choose Target Folder"];
 	[savePanel setPrompt:@"Export"];
 	[savePanel setCanCreateDirectories:YES];
@@ -29,39 +39,47 @@
 {
 	[savePanel release];
 	[fileType release];
+	[fileTemplate release];
 	[super dealloc];
+}
+
+- (NSString *)fileType {
+	return fileType;
 }
 
 - (void)setFileType:(NSString *)newFT
 {
 	[fileType release];
 	fileType = [newFT retain];
-	[self setValue:[[[self fileTemplate] stringByDeletingPathExtension] stringByAppendingString:[NSString stringWithFormat:@".%@", [[[NSDocumentController sharedDocumentController] fileExtensionsFromType:newFT] objectAtIndex:0]]] forKey:@"fileTemplate"];
+	NSString *newExtension = [[[NSDocumentController sharedDocumentController] fileExtensionsFromType:newFT] objectAtIndex:0];
+	NSString *newTemplate = [[self.fileTemplate stringByDeletingPathExtension] stringByAppendingPathExtension:newExtension];
+	self.fileTemplate = newTemplate;
 }
 
-- (NSString *)fileTemplate
-{
-	return fileTemplate;
-}
-
-- (void)panelDidFinish:panel returnCode:(int)code contextInfo:(void *)info
+- (void)panelDidFinish:(NSPanel *)panel 
+						returnCode:(int)code 
+					 contextInfo:(void *)info
 {
 	if (code == NSCancelButton) { return; }
-	if (NSEqualRanges([fileTemplate rangeOfString:@"%f"], NSMakeRange(NSNotFound, 0)))
-		fileTemplate = [fileTemplate stringByAppendingString:@" %f"];
-	[_delegate performSelector:_didEndSelector withObject:self];
+	if (NSEqualRanges([self.fileTemplate rangeOfString:@"%f"], NSMakeRange(NSNotFound, 0)))
+		self.fileTemplate = [self.fileTemplate stringByAppendingString:@" %f"];
+	[self.delegate performSelector:self.didEndSelector withObject:self];
 }
 
-- (void)beginSheetModalForWindow:(NSWindow *)parentWindow modalDelegate:delegate didEndSelector:(SEL)didEndSelector
+- (void)beginSheetModalForWindow:(NSWindow *)parentWindow 
+									 modalDelegate:(id)del 
+									didEndSelector:(SEL)didEnd
 {
-	_delegate = delegate;
-	_didEndSelector = didEndSelector;
-    [savePanel beginSheetForDirectory:nil file:nil modalForWindow:parentWindow modalDelegate:self didEndSelector:@selector(panelDidFinish:returnCode:contextInfo:) contextInfo:NULL];
-}
-
-- savePanel
-{
-	return savePanel;
+	self.delegate = del;
+	self.didEndSelector = didEnd;
+	[savePanel beginSheetForDirectory:nil 
+															 file:nil 
+										 modalForWindow:parentWindow 
+											modalDelegate:self 
+										 didEndSelector:@selector(panelDidFinish:
+																							returnCode:
+																							contextInfo:) 
+												contextInfo:NULL];
 }
 
 - (NSArray *)fileTypes
