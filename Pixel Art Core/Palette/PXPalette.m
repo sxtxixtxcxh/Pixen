@@ -244,11 +244,12 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 			PXPalette *palette = PXPalette_alloc();
 			PXPalette_initWithoutBackgroundColor(palette);
 			PXPalette_setName(palette, [current name]);
-			keyEnumerator = [[current allKeys] objectEnumerator];
-			while((currentKey = [keyEnumerator nextObject]))
+			
+			for (NSString *currentKey in [current allKeys])
 			{
 				PXPalette_addColor(palette,[current colorWithKey:currentKey]);
 			}
+			
 			palette->isSystemPalette = YES;
 			palette->canSave = NO;
 			systemPalettes[i] = palette;

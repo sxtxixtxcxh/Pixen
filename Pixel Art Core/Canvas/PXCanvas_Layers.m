@@ -89,27 +89,25 @@
 
 - (void)setLayers:(NSArray *) newLayers
 {
-	if(layers == newLayers)
-	{
+	if (layers == newLayers)
 		return;
-	}
+	
 	[newLayers retain];
 	int oldActiveIndex = [layers indexOfObject:activeLayer];
-	int i;
 	
-	if ( [newLayers count] <= oldActiveIndex ) 
-		oldActiveIndex = [newLayers count]-1; 
+	if ( [newLayers count] <= oldActiveIndex )
+		oldActiveIndex = [newLayers count]-1;
 	
-	
-	for (i=0; i<[newLayers count]; i++) 
+	for (PXLayer *layer in newLayers)
 	{
-		[[newLayers objectAtIndex:i] setCanvas:self];
+		[layer setCanvas:self];
 	}
-	[layers autorelease];	
-	layers = newLayers;
-	[self activateLayer:[newLayers objectAtIndex:oldActiveIndex]];
 	
-  [self refreshWholePalette];
+	[layers autorelease];
+	layers = newLayers;
+	
+	[self activateLayer:[newLayers objectAtIndex:oldActiveIndex]];
+	[self refreshWholePalette];
 	[self layersChanged];
 }
 
