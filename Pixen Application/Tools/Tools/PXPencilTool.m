@@ -32,10 +32,12 @@
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_Drawing.h"
 #import "PXCanvasController.h"
-#import "PXPencilToolPropertiesView.h"
+#import "PXPencilToolPropertiesController.h"
 #import "InterpolatePoint.h"
 
 @implementation PXPencilTool
+
+#define PENCIL_PC ((PXPencilToolPropertiesController *) self.propertiesController)
 
 - (NSString *)name
 {
@@ -60,17 +62,11 @@
 	if (! ( self = [super init] ) ) 
 		return nil;
 	
-	propertiesView = [[PXPencilToolPropertiesView alloc] init];
-	[(PXPencilToolPropertiesView *)propertiesView setToolName:[self name]];
+	self.propertiesController = [[PXPencilToolPropertiesController new] autorelease];
+	[PENCIL_PC setToolName:[self name]];
 	shiftDown = NO;
 	changedRect = NSZeroRect;
 	return self;
-}
-
-- (void)dealloc
-{
-	[propertiesView release];
-	[super dealloc];
 }
 
 -(NSString *)  actionName
@@ -123,7 +119,7 @@
 
 - (void)drawPixelAtPoint:(NSPoint)aPoint inCanvas:(PXCanvas *)aCanvas
 {
-	if (![propertiesView respondsToSelector:@selector(lineThickness)]) {
+	if (![self.propertiesController respondsToSelector:@selector(lineThickness)]) {
 		[self drawWithOldColor:[aCanvas colorAtPoint:aPoint] 
 					  newColor:[self colorForCanvas:aCanvas] 
 					   atPoint:aPoint 
@@ -132,14 +128,14 @@
 		return;
 	}
 	
-	if ([(PXPencilToolPropertiesView *)propertiesView drawingPoints] != nil) {
-		NSArray *points = [(PXPencilToolPropertiesView *)propertiesView drawingPoints];
+	if ([PENCIL_PC drawingPoints] != nil) {
+		NSArray *points = [PENCIL_PC drawingPoints];
 		
 		for (NSString *string in points)
 		{
 			NSPoint point = NSPointFromString(string);
-			point.x += ceilf(aPoint.x - ([(PXPencilToolPropertiesView *)propertiesView patternSize].width / 2));
-			point.y += ceilf(aPoint.y - ([(PXPencilToolPropertiesView *)propertiesView patternSize].height / 2));
+			point.x += ceilf(aPoint.x - ([PENCIL_PC patternSize].width / 2));
+			point.y += ceilf(aPoint.y - ([PENCIL_PC patternSize].height / 2));
 			
 			[self drawWithOldColor:[aCanvas colorAtPoint:point] 
 						  newColor:[self colorForCanvas:aCanvas] 
@@ -151,7 +147,7 @@
 		return;
 	}
 	
-	int diameter = [(PXPencilToolPropertiesView *)propertiesView lineThickness];
+	int diameter = [PENCIL_PC lineThickness];
 	int radius = diameter/2;
 	NSRect rect = NSMakeRect(aPoint.x-radius, aPoint.y-radius, diameter, diameter);
 	int x,y;
@@ -291,7 +287,7 @@ fromCanvasController:(PXCanvasController *) controller
 - (void)setPattern:(PXPattern *)pattern
 {
 	if (![self supportsPatterns]) { return; }
-	[(PXPencilToolPropertiesView *)propertiesView setPattern:pattern];
+	[PENCIL_PC setPattern:pattern];
 }
 
 @end
