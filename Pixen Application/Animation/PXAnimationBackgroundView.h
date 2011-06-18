@@ -8,10 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class CTGradient;
 @interface PXAnimationBackgroundView : NSView {
-	CTGradient *horizontalGradient;
-	id filmStrip;
+	NSGradient *horizontalGradient;
+	NSScrollView *filmStrip;
 }
 
 @end

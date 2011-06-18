@@ -39,8 +39,8 @@
 	iterations = 0;
 	char iterationString[3];
 	iterationString[0] = 0x01;
-	iterationString[1] = iterations % 256;
-	iterationString[2] = iterations / 256;
+	iterationString[1] = 0 % 256;
+	iterationString[2] = 0 / 256;
 	iterationString[3] = 0;
 	
 	int result = EGifPutScreenDesc(gifFile, size.width, size.height, numberOfColors, transColor, colorMap);

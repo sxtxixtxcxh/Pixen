@@ -38,9 +38,10 @@
 @implementation PXLinearTool
 -(id) init
 {
-	if (! ( self = [super init] ) ) 
-		locked = NO;
-	
+	if (! ( self = [super init] ) )
+        return nil;
+
+    locked = NO;
 	centeredOnOrigin = NO;
 	return self;
 }

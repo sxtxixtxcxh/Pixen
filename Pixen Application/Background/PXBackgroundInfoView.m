@@ -1,4 +1,5 @@
 #import "PXBackgroundInfoView.h"
+#import "PXBackgroundPreviewView.h"
 #import "PXBackgrounds.h"
 #import "NSBezierPath+PXRoundedRectangleAdditions.h"
 

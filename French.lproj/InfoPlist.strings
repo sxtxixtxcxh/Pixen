@@ -1,5 +1,0 @@
-/* Localized versions of Info.plist keys */
-
-CFBundleName = "Pixen";
-CFBundleGetInfoString = "Pixen 3.0, Copyright 2003-2006 The Open Sword Group.";
-NSHumanReadableCopyright = "Copyright 2003-2006 The Open Sword Group.";

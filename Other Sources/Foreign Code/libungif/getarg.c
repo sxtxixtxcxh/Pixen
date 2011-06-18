@@ -373,6 +373,7 @@ GAGetParmeters(int *Parameters[],
           case 'f':    /* Get float number. */
               ScanRes = sscanf(*((*argv)++), "%f",
                                (float *)Parameters[(*ParamCount)++]);
+                break;
           case 'F':    /* Get double float number. */
               ScanRes = sscanf(*((*argv)++), "%lf",
                                (double *)Parameters[(*ParamCount)++]);

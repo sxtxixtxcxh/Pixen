@@ -18,5 +18,5 @@
 @end
 
 @interface NSObject (PXNewCelButtonDelegate)
-- newCel:(PXNewCelButton *)button;
+- (void)newCel:(PXNewCelButton *)button;
 @end

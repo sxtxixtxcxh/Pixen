@@ -18,16 +18,20 @@
 
 @implementation PXPaletteController
 
-- init
+- (id)init
 {
-	[super init];
+	self = [super init];
+	
 	[NSBundle loadNibNamed:@"PXPaletteController" owner:self];
-  frequencyPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
-  recentLimit = 32;
-  recentPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
-  mode = PXPaletteModeFrequency;
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPalette:) name:@"PXCanvasFrequencyPaletteRefresh" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePalette:) name:@"PXCanvasPaletteUpdate" object:nil];
+	
+	frequencyPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
+	recentLimit = 32;
+	recentPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
+	mode = PXPaletteModeFrequency;
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPalette:) name:@"PXCanvasFrequencyPaletteRefresh" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePalette:) name:@"PXCanvasPaletteUpdate" object:nil];
+	
 	return self;
 }
 

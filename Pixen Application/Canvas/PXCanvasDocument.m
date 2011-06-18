@@ -262,33 +262,29 @@ BOOL isPowerOfTwo(int num)
 	return NO;
 }
 
-- (void)printShowingPrintPanel:(BOOL)showPanels 
-{
-	if(! printableView ) {
+- (void)printDocumentWithSettings:(NSDictionary *)printSettings
+				   showPrintPanel:(BOOL)showPanels delegate:(id)delegate
+				 didPrintSelector:(SEL)didPrintSelector contextInfo:(void *)contextInfo {
+	
+	if (!printableView) {
 		printableView = [PXCanvasPrintView viewForCanvas:[self canvas]];
-		[printableView retain]; 
-	}  
+		[printableView retain];
+	}
 	
 	float scale = [[[[self printInfo] dictionary] objectForKey:NSPrintScalingFactor] floatValue];
+	
 	NSAffineTransform *transform = [NSAffineTransform transform];
 	[transform scaleXBy:scale yBy:scale];
+	
 	[printableView setBoundsOrigin:[transform transformPoint:[printableView frame].origin]];
 	[printableView setBoundsSize:[transform transformSize:[printableView frame].size]];
 	
-  NSPrintOperation *op;
-	op = [NSPrintOperation printOperationWithView:printableView 
-                                      printInfo:[self printInfo]];
-  [op setShowsPrintPanel:showPanels];
-  [op setShowsProgressPanel:showPanels];
+	NSPrintOperation *op = [NSPrintOperation printOperationWithView:printableView
+														  printInfo:[self printInfo]];
+	[op setShowsPrintPanel:showPanels];
+	[op setShowsProgressPanel:showPanels];
 	
-#ifdef __COCOA__
-	[self runModalPrintOperation:op 
-                      delegate:nil 
-                didRunSelector:NULL 
-                   contextInfo:NULL];
-#else
-    //FIXME: GNUstep TODO
-#endif
+	[self runModalPrintOperation:op delegate:nil didRunSelector:NULL contextInfo:NULL];
 }
 
 -(PXCanvas *)canvas

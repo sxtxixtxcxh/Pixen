@@ -98,6 +98,7 @@
 	[textCell setTextColor:(highlighted) ? [NSColor whiteColor] : [NSColor disabledControlTextColor]];
 	[textCell setStringValue:NSLocalizedString(@"Default Alternate Background", @"ALTERNATE_BACKGROUND_INFO")];
 	[textCell drawWithFrame:drawFrame inView:self];
+    [textCell release];
 }
 
 - (void)drawRect:(NSRect)rect

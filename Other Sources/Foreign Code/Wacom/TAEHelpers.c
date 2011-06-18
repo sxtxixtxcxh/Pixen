@@ -146,48 +146,48 @@ OSErr	CreateWacomContextForTablet(UInt32 tabletIdx, UInt32	*contextID)
       return err;
    }
 
-   err = AECreateAppleEvent(kAECoreSuite,
-                            kAECreateElement,
-                            &driverTarget,
-                            kAutoGenerateReturnID,
-                            kAnyTransactionID,
-                            &aeSend);
+   AECreateAppleEvent(kAECoreSuite,
+                      kAECreateElement,
+                      &driverTarget,
+                      kAutoGenerateReturnID,
+                      kAnyTransactionID,
+                      &aeSend);
 
    // Now tell the AE what to create
-   err = AEPutParamPtr( &aeSend,
-                        keyAEObjectClass,
-                        typeType,
-                        &objectToMake,
-                        sizeof(DescType));
+   AEPutParamPtr( &aeSend,
+                  keyAEObjectClass,
+                  typeType,
+                  &objectToMake,
+                  sizeof(DescType));
 
    // Now tell the AE where to create a context
    //Create  NULL AEDesc, this will signify the end of the AEDesc Chain
    AEInitializeDesc(&nullDesc);
-   err = AECreateDesc( typeNull, NULL, 0, &nullDesc );
+   AECreateDesc( typeNull, NULL, 0, &nullDesc );
 
    AEInitializeDesc(&keyData);
-   err = AECreateDesc( typeUInt32,
-                       &tabletIdx,	// This is the tablet number we want the context for
-                       sizeof(tabletIdx),
-                       &keyData );
+   AECreateDesc( typeUInt32,
+                 &tabletIdx,	// This is the tablet number we want the context for
+                 sizeof(tabletIdx),
+                 &keyData );
 
-   err = CreateObjSpecifier(cWTDTablet,			// We want info from a tablet
-                            &nullDesc,				// This is the last item in the chain
-                            formAbsolutePosition,	// use indexing to determine which tablet to get data from
-                            &keyData,				// This is the Tablet Number descriptor created above
-                            TRUE,					// delete the nullDesc, and KeyData descriptor for us
-                            &tObjSpecifier);		// The created descriptor which says that we want data from tablet number X
+   CreateObjSpecifier(cWTDTablet,			// We want info from a tablet
+                      &nullDesc,			// This is the last item in the chain
+                      formAbsolutePosition,	// use indexing to determine which tablet to get data from
+                      &keyData,				// This is the Tablet Number descriptor created above
+                      TRUE,					// delete the nullDesc, and KeyData descriptor for us
+                      &tObjSpecifier);		// The created descriptor which says that we want data from tablet number X
 
-   err = AEPutParamDesc( &aeSend, keyAEInsertHere,  &tObjSpecifier);
+   AEPutParamDesc( &aeSend, keyAEInsertHere,  &tObjSpecifier);
 
    // Finally send the event
-   err = AESend(&aeSend,	// The complete AE we created above
-                &aeReply,	// The reply event that contains the Context ID.
-                kAEWaitReply,
-                kAEHighPriority,
-                kDefaultTimeOut,
-                NULL,
-                NULL);
+   AESend(&aeSend,	// The complete AE we created above
+          &aeReply,	// The reply event that contains the Context ID.
+          kAEWaitReply,
+          kAEHighPriority,
+          kDefaultTimeOut,
+          NULL,
+          NULL);
    AEDisposeDesc(&tObjSpecifier);
    AEDisposeDesc(&aeSend);
 
@@ -238,32 +238,32 @@ OSErr	DestoryWacomContext(UInt32	contextID)
       return err;
    }
 
-   err = AECreateAppleEvent(kAECoreSuite,
-                            kAEDelete,
-                            &driverTarget,
-                            kAutoGenerateReturnID,
-                            kAnyTransactionID,
-                            &aeSend);
+   AECreateAppleEvent(kAECoreSuite,
+                      kAEDelete,
+                      &driverTarget,
+                      kAutoGenerateReturnID,
+                      kAnyTransactionID,
+                      &aeSend);
 
    // Now tell the AE what to destroy
    //Create  NULL AEDesc, this will signify the end of the AEDesc Chain
    AEInitializeDesc(&nullDesc);
-   err = AECreateDesc( typeNull, NULL, 0, &nullDesc );
+   AECreateDesc( typeNull, NULL, 0, &nullDesc );
 
    AEInitializeDesc(&keyData);
-   err = AECreateDesc( typeUInt32,
-                       &contextID,	// This is the context ID we want to destroy
-                       sizeof(contextID),
-                       &keyData );
+   AECreateDesc( typeUInt32,
+                 &contextID,	// This is the context ID we want to destroy
+                 sizeof(contextID),
+                 &keyData );
 
-   err = CreateObjSpecifier(cContext,				// We want to destroy a context
-                            &nullDesc,				// This is the last item in the chain
-                            formUniqueID,			// use id to determine which context to destroy
-                            &keyData,				// This is the Context ID descriptor created above
-                            TRUE,					// delete the nullDesc, and KeyData descriptor for us
-                            &tObjSpecifier);		// The created descriptor which says that we want to delete Context X
+   CreateObjSpecifier(cContext,				// We want to destroy a context
+                      &nullDesc,			// This is the last item in the chain
+                      formUniqueID,			// use id to determine which context to destroy
+                      &keyData,				// This is the Context ID descriptor created above
+                      TRUE,					// delete the nullDesc, and KeyData descriptor for us
+                      &tObjSpecifier);		// The created descriptor which says that we want to delete Context X
 
-   err = AEPutParamDesc( &aeSend, keyDirectObject,  &tObjSpecifier);
+   AEPutParamDesc( &aeSend, keyDirectObject,  &tObjSpecifier);
 
    // Finally send the event
    err = AESend(&aeSend,	// The complete AE we created above
@@ -319,12 +319,12 @@ OSErr	SetData_ofSize_ofType_ofContext_ForAttribute(const void *inDataPtr,
       return err;
    }
 
-   err = AECreateAppleEvent(kAECoreSuite,
-                            kAESetData,
-                            &driverTarget,
-                            kAutoGenerateReturnID,
-                            kAnyTransactionID,
-                            &aeSend);
+   AECreateAppleEvent(kAECoreSuite,
+                      kAESetData,
+                      &driverTarget,
+                      kAutoGenerateReturnID,
+                      kAnyTransactionID,
+                      &aeSend);
 
    // Now tell the AE what to set
    
@@ -334,41 +334,40 @@ OSErr	SetData_ofSize_ofType_ofContext_ForAttribute(const void *inDataPtr,
    
    //Create  NULL AEDesc, this will signify the end of the AEDesc Chain
    AEInitializeDesc(&nullDesc);
-   err = AECreateDesc( typeNull, NULL, 0, &nullDesc );
+   AECreateDesc( typeNull, NULL, 0, &nullDesc );
 
    AEInitializeDesc(&keyData);
-   err = AECreateDesc( typeUInt32,
-                       &contextID,	// This is the context ID that we want to modify
-                       sizeof(contextID),
-                       &keyData );
+   AECreateDesc( typeUInt32,
+                 &contextID,	// This is the context ID that we want to modify
+                 sizeof(contextID),
+                 &keyData );
 
-   err = CreateObjSpecifier(cContext,				// We want to modifiy the property of this context
-                            &nullDesc,				// This is the last item in the chain
-                            formUniqueID,			// use unique id to determine which context to modify
-                            &keyData,				// This is the Context ID descriptor created above
-                            TRUE,					// delete the nullDesc, and KeyData descriptor for us
-                            &tObjSpecifier);		// The created descriptor which says that we want to modify Context X
+   CreateObjSpecifier(cContext,				// We want to modifiy the property of this context
+                      &nullDesc,			// This is the last item in the chain
+                      formUniqueID,			// use unique id to determine which context to modify
+                      &keyData,				// This is the Context ID descriptor created above
+                      TRUE,					// delete the nullDesc, and KeyData descriptor for us
+                      &tObjSpecifier);		// The created descriptor which says that we want to modify Context X
 	AEDuplicateDesc(&tObjSpecifier, &lastDesc);
    AEDisposeDesc(&tObjSpecifier);
 	
    AEInitializeDesc(&keyData);
-   err = AECreateDesc( typeType,
-                       &attribute,	// This is the Property we want to set
-                       sizeof(DescType),
-                       &keyData );
+   AECreateDesc( typeType,
+                 &attribute,	// This is the Property we want to set
+                 sizeof(DescType),
+                 &keyData );
 
-   err = CreateObjSpecifier(cProperty,				// The context's property we want to modify
-                            &lastDesc,				// This is the last item in the chain (the Context)
-                            formPropertyID,		// use PropertyID to determine which type of Property to set
-                            &keyData,				// This is the Property descriptor created above
-                            TRUE,					// delete the lastDesc, and KeyData descriptor for us
-                            &tObjSpecifier);		// The created descriptor which says that we want to set Property X
+   CreateObjSpecifier(cProperty,			// The context's property we want to modify
+                      &lastDesc,			// This is the last item in the chain (the Context)
+                      formPropertyID,		// use PropertyID to determine which type of Property to set
+                      &keyData,				// This is the Property descriptor created above
+                      TRUE,					// delete the lastDesc, and KeyData descriptor for us
+                      &tObjSpecifier);		// The created descriptor which says that we want to set Property X
    
 	// Add the data to set to the AE here.
-   err = AEPutParamPtr ( &aeSend, keyAEData, dataType,
-								 inDataPtr, inDataSize);
+    AEPutParamPtr ( &aeSend, keyAEData, dataType, inDataPtr, inDataSize);
 	// The Object chain (Attribute -> Context -> null)
-	err = AEPutParamDesc( &aeSend, keyDirectObject,  &tObjSpecifier);	
+	AEPutParamDesc( &aeSend, keyDirectObject,  &tObjSpecifier);	
 
    // Finally send the event
    err = AESend(&aeSend,	// The complete AE we created above
@@ -427,12 +426,12 @@ OSErr	GetData_ofSize_ofType_ofContext_ForAttribute(void 		*inDataPtr,
       return err;
    }
 
-   err = AECreateAppleEvent(kAECoreSuite,
-                            kAEGetData,
-                            &driverTarget,
-                            kAutoGenerateReturnID,
-                            kAnyTransactionID,
-                            &aeSend);
+   AECreateAppleEvent(kAECoreSuite,
+                      kAEGetData,
+                      &driverTarget,
+                      kAutoGenerateReturnID,
+                      kAnyTransactionID,
+                      &aeSend);
 
    // Now tell the AE what to get
 
@@ -442,41 +441,40 @@ OSErr	GetData_ofSize_ofType_ofContext_ForAttribute(void 		*inDataPtr,
 
    //Create  NULL AEDesc, this will signify the end of the AEDesc Chain
    AEInitializeDesc(&nullDesc);
-   err = AECreateDesc( typeNull, NULL, 0, &nullDesc );
+   AECreateDesc( typeNull, NULL, 0, &nullDesc );
 
    AEInitializeDesc(&keyData);
-   err = AECreateDesc( typeUInt32,
-                       &contextID,	// This is the context ID that we want to modify
-                       sizeof(contextID),
-                       &keyData );
+   AECreateDesc( typeUInt32,
+                 &contextID,	// This is the context ID that we want to modify
+                 sizeof(contextID),
+                 &keyData );
 
-   err = CreateObjSpecifier(cContext,				// We want to modifiy a context attribute
-                            &nullDesc,				// This is the last item in the chain
-                            formUniqueID,			// use id to determine which context to modify
-                            &keyData,				// This is the Context ID descriptor created above
-                            TRUE,					// delete the nullDesc, and KeyData descriptor for us
-                            &tObjSpecifier);		// The created descriptor which says that we want to modify Context X
+   CreateObjSpecifier(cContext,				// We want to modifiy a context attribute
+                      &nullDesc,			// This is the last item in the chain
+                      formUniqueID,			// use id to determine which context to modify
+                      &keyData,				// This is the Context ID descriptor created above
+                      TRUE,					// delete the nullDesc, and KeyData descriptor for us
+                      &tObjSpecifier);		// The created descriptor which says that we want to modify Context X
 	AEDuplicateDesc(&tObjSpecifier, &lastDesc);
    AEDisposeDesc(&tObjSpecifier);
 	
    AEInitializeDesc(&keyData);
-   err = AECreateDesc( typeType,
-                       &attribute,	// This is the Attribute we want to set
-                       sizeof(DescType),
-                       &keyData );
+   AECreateDesc( typeType,
+                 &attribute,	// This is the Attribute we want to set
+                 sizeof(DescType),
+                 &keyData );
 
-   err = CreateObjSpecifier(cProperty,				// We want to destroy a context
-                            &lastDesc,				// This is the last item in the chain (the Context)
-                            formPropertyID,		// use id to determine which context to destroy
-                            &keyData,				// This is the Context ID descriptor created above
-                            TRUE,					// delete the nullDesc, and KeyData descriptor for us
-                            &tObjSpecifier);		// The created descriptor which says that we want to delete Context X
+   CreateObjSpecifier(cProperty,			// We want to destroy a context
+                      &lastDesc,			// This is the last item in the chain (the Context)
+                      formPropertyID,		// use id to determine which context to destroy
+                      &keyData,				// This is the Context ID descriptor created above
+                      TRUE,					// delete the nullDesc, and KeyData descriptor for us
+                      &tObjSpecifier);		// The created descriptor which says that we want to delete Context X
 	
 	// Add the data to set to the AE here.
-   err = AEPutParamPtr ( &aeSend, keyAERequestedType,
-								 typeType, &dataType, sizeof(DescType));
+   AEPutParamPtr ( &aeSend, keyAERequestedType, typeType, &dataType, sizeof(DescType));
 	// The Object chain (Attribute -> Context -> null)
-	err = AEPutParamDesc( &aeSend, keyDirectObject,  &tObjSpecifier);
+	AEPutParamDesc( &aeSend, keyDirectObject,  &tObjSpecifier);
 
    // Finally send the event
    err = AESend(&aeSend,	// The complete AE we created above
@@ -557,12 +555,12 @@ OSErr	GetData_ofSize_ofType_ofTabletObject_ForAttribute(void 		*inDataPtr,
       return err;
    }
 
-   err = AECreateAppleEvent(kAECoreSuite,
-                            kAEGetData,
-                            &driverTarget,
-                            kAutoGenerateReturnID,
-                            kAnyTransactionID,
-                            &aeSend);
+   AECreateAppleEvent(kAECoreSuite,
+                      kAEGetData,
+                      &driverTarget,
+                      kAutoGenerateReturnID,
+                      kAnyTransactionID,
+                      &aeSend);
 
    // Now tell the AE what to get
 
@@ -572,22 +570,22 @@ OSErr	GetData_ofSize_ofType_ofTabletObject_ForAttribute(void 		*inDataPtr,
 
    //Create  NULL AEDesc, this will signify the end of the AEDesc Chain
    AEInitializeDesc(&nullDesc);
-   err = AECreateDesc( typeNull, NULL, 0, &nullDesc );
+   AECreateDesc( typeNull, NULL, 0, &nullDesc );
 
    // set up the driver desc
    AEInitializeDesc(&keyData);
    tmpIndex = 1;
-   err = AECreateDesc( typeUInt32,
-                       &tmpIndex,	// This is the Tablet Driver Index. Always 1
-                       sizeof(tmpIndex),
-                       &keyData );
+   AECreateDesc( typeUInt32,
+                 &tmpIndex,	// This is the Tablet Driver Index. Always 1
+                 sizeof(tmpIndex),
+                 &keyData );
 
-   err = CreateObjSpecifier(cWTDDriver,
-                            &nullDesc,	
-                            formAbsolutePosition,
-                            &keyData,	
-                            TRUE,
-                            &tObjSpecifier);
+   CreateObjSpecifier(cWTDDriver,
+                      &nullDesc,	
+                      formAbsolutePosition,
+                      &keyData,	
+                      TRUE,
+                      &tObjSpecifier);
 	AEDuplicateDesc(&tObjSpecifier,&lastDesc);
    AEDisposeDesc(&tObjSpecifier);
    
@@ -595,17 +593,17 @@ OSErr	GetData_ofSize_ofType_ofTabletObject_ForAttribute(void 		*inDataPtr,
    {
       // set up the tablet desc
       AEInitializeDesc(&keyData);
-      err = AECreateDesc( typeUInt32,
-                          &pTabletObject->tabletIndex,
-                          sizeof(UInt32),
-                          &keyData );
+      AECreateDesc( typeUInt32,
+                    &pTabletObject->tabletIndex,
+                    sizeof(UInt32),
+                    &keyData );
 
-      err = CreateObjSpecifier(cWTDTablet,
-                               &lastDesc,
-                               formAbsolutePosition,
-                               &keyData,
-                               TRUE,
-                               &tObjSpecifier);
+      CreateObjSpecifier(cWTDTablet,
+                         &lastDesc,
+                         formAbsolutePosition,
+                         &keyData,
+                         TRUE,
+                         &tObjSpecifier);
       AEDuplicateDesc(&tObjSpecifier,&lastDesc);
 		AEDisposeDesc(&tObjSpecifier);
 
@@ -613,17 +611,17 @@ OSErr	GetData_ofSize_ofType_ofTabletObject_ForAttribute(void 		*inDataPtr,
       {
          // set up the cutom app desc
          AEInitializeDesc(&keyData);
-         err = AECreateDesc( typeUInt32,
-                             &pTabletObject->applicationIndex,
-                             sizeof(UInt32),
-                             &keyData );
+         AECreateDesc( typeUInt32,
+                       &pTabletObject->applicationIndex,
+                       sizeof(UInt32),
+                       &keyData );
 
-         err = CreateObjSpecifier(cWTDCustomizedApp,
-                                  &lastDesc,
-                                  formAbsolutePosition,
-                                  &keyData,
-                                  TRUE,
-                                  &tObjSpecifier);
+         CreateObjSpecifier(cWTDCustomizedApp,
+                            &lastDesc,
+                            formAbsolutePosition,
+                            &keyData,
+                            TRUE,
+                            &tObjSpecifier);
          AEDuplicateDesc(&tObjSpecifier,&lastDesc);
 			AEDisposeDesc(&tObjSpecifier);
 
@@ -633,17 +631,17 @@ OSErr	GetData_ofSize_ofType_ofTabletObject_ForAttribute(void 		*inDataPtr,
             {
                // set up the transducer desc
                AEInitializeDesc(&keyData);
-               err = AECreateDesc( typeUInt32,
-                                 &pTabletObject->transducerIndex,
-                                 sizeof(UInt32),
-                                 &keyData );
+               AECreateDesc( typeUInt32,
+                             &pTabletObject->transducerIndex,
+                             sizeof(UInt32),
+                             &keyData );
    
-               err = CreateObjSpecifier(cWTDTransducer,
-                                       &lastDesc,
-                                       formAbsolutePosition,
-                                       &keyData,
-                                       TRUE,
-                                       &tObjSpecifier);
+               CreateObjSpecifier(cWTDTransducer,
+                                  &lastDesc,
+                                  formAbsolutePosition,
+                                  &keyData,
+                                  TRUE,
+                                  &tObjSpecifier);
                AEDuplicateDesc(&tObjSpecifier,&lastDesc);
 					AEDisposeDesc(&tObjSpecifier);
             }
@@ -652,17 +650,17 @@ OSErr	GetData_ofSize_ofType_ofTabletObject_ForAttribute(void 		*inDataPtr,
             {
                // set up the transducer desc
                AEInitializeDesc(&keyData);
-               err = AECreateDesc( typeUInt32,
-                                 &pTabletObject->transducerIndex,
-                                 sizeof(UInt32),
-                                 &keyData );
+               AECreateDesc( typeUInt32,
+                             &pTabletObject->transducerIndex,
+                             sizeof(UInt32),
+                             &keyData );
    
-               err = CreateObjSpecifier(cWTDTransducer,
-                                       &lastDesc,
-                                       formAbsolutePosition,
-                                       &keyData,
-                                       TRUE,
-                                       &tObjSpecifier);
+               CreateObjSpecifier(cWTDTransducer,
+                                  &lastDesc,
+                                  formAbsolutePosition,
+                                  &keyData,
+                                  TRUE,
+                                  &tObjSpecifier);
                AEDuplicateDesc(&tObjSpecifier,&lastDesc);
 					AEDisposeDesc(&tObjSpecifier);
             }
@@ -670,17 +668,17 @@ OSErr	GetData_ofSize_ofType_ofTabletObject_ForAttribute(void 		*inDataPtr,
             {
                // set up the transducer desc
                AEInitializeDesc(&keyData);
-               err = AECreateDesc( typeUInt32,
-                                 &pTabletObject->auxIndex,
-                                 sizeof(UInt32),
-                                 &keyData );
+               AECreateDesc( typeUInt32,
+                              &pTabletObject->auxIndex,
+                              sizeof(UInt32),
+                              &keyData );
    
-               err = CreateObjSpecifier(pTabletObject->objectType,
-                                       &lastDesc,
-                                       formAbsolutePosition,
-                                       &keyData,
-                                       TRUE,
-                                       &tObjSpecifier);
+               CreateObjSpecifier(pTabletObject->objectType,
+                                  &lastDesc,
+                                  formAbsolutePosition,
+                                  &keyData,
+                                  TRUE,
+                                  &tObjSpecifier);
                AEDuplicateDesc(&tObjSpecifier,&lastDesc);
 					AEDisposeDesc(&tObjSpecifier);
             }
@@ -689,22 +687,21 @@ OSErr	GetData_ofSize_ofType_ofTabletObject_ForAttribute(void 		*inDataPtr,
    }
 
    AEInitializeDesc(&keyData);
-   err = AECreateDesc( typeType,
-                       &attribute,	// This is the Attribute we want to get
-                       sizeof(DescType),
-                       &keyData );
+   AECreateDesc( typeType,
+                  &attribute,	// This is the Attribute we want to get
+                  sizeof(DescType),
+                  &keyData );
 
-   err = CreateObjSpecifier(cProperty,	
-                            &lastDesc,
-                            formPropertyID,
-                            &keyData,	
-                            TRUE,
-                            &tObjSpecifier);	
+   CreateObjSpecifier(cProperty,	
+                      &lastDesc,
+                      formPropertyID,
+                      &keyData,	
+                      TRUE,
+                      &tObjSpecifier);	
 
 	// Add the data to set to the AE here.
-   err = AEPutParamPtr ( &aeSend, keyAERequestedType,
-								 typeType, &dataType, sizeof(DescType)); 
-   err = AEPutParamDesc( &aeSend, keyDirectObject,  &tObjSpecifier);	// The Object chain 
+   AEPutParamPtr ( &aeSend, keyAERequestedType, typeType, &dataType, sizeof(DescType)); 
+   AEPutParamDesc( &aeSend, keyDirectObject,  &tObjSpecifier);	// The Object chain 
    
    // Finally send the event
    err = AESend(&aeSend,	// The complete AE we created above
@@ -776,12 +773,12 @@ OSErr	CountTabletObjects(TAEObject *pTabletObject, UInt32 *outCount)
       return err;
    }
 
-   err = AECreateAppleEvent(kAECoreSuite,
-                            kAECountElements,
-                            &driverTarget,
-                            kAutoGenerateReturnID,
-                            kAnyTransactionID,
-                            &aeSend);
+   AECreateAppleEvent(kAECoreSuite,
+                      kAECountElements,
+                      &driverTarget,
+                      kAutoGenerateReturnID,
+                      kAnyTransactionID,
+                      &aeSend);
 
    // Now tell the AE what to Count
 
@@ -791,24 +788,24 @@ OSErr	CountTabletObjects(TAEObject *pTabletObject, UInt32 *outCount)
 
    //Create  NULL AEDesc, this will signify the end of the AEDesc Chain
    AEInitializeDesc(&lastDesc);
-   err = AECreateDesc( typeNull, NULL, 0, &lastDesc );
+   AECreateDesc( typeNull, NULL, 0, &lastDesc );
 
    if (pTabletObject->objectType != cWTDDriver)
    {
       // set up the driver desc
       AEInitializeDesc(&keyData);
       tmpIndex = 1;
-      err = AECreateDesc( typeUInt32,
-                        &tmpIndex,	// This is the Tablet Driver Index. Always 1
-                        sizeof(tmpIndex),
-                        &keyData );
+      AECreateDesc( typeUInt32,
+                    &tmpIndex,	// This is the Tablet Driver Index. Always 1
+                    sizeof(tmpIndex),
+                    &keyData );
    
-      err = CreateObjSpecifier(cWTDDriver,
-                              &lastDesc,
-                              formAbsolutePosition,
-                              &keyData,
-                              TRUE,
-                              &tObjSpecifier);
+      CreateObjSpecifier(cWTDDriver,
+                         &lastDesc,
+                         formAbsolutePosition,
+                         &keyData,
+                         TRUE,
+                         &tObjSpecifier);
       AEDuplicateDesc(&tObjSpecifier,&lastDesc);
 		AEDisposeDesc(&tObjSpecifier);
 
@@ -816,17 +813,17 @@ OSErr	CountTabletObjects(TAEObject *pTabletObject, UInt32 *outCount)
       {
          // set up the tablet desc
          AEInitializeDesc(&keyData);
-         err = AECreateDesc( typeUInt32,
-                           &pTabletObject->tabletIndex,
-                           sizeof(UInt32),
-                           &keyData );
+         AECreateDesc( typeUInt32,
+                       &pTabletObject->tabletIndex,
+                       sizeof(UInt32),
+                       &keyData );
    
-         err = CreateObjSpecifier(cWTDTablet,
-                                 &lastDesc,
-                                 formAbsolutePosition,
-                                 &keyData,
-                                 TRUE,
-                                 &tObjSpecifier);
+         CreateObjSpecifier(cWTDTablet,
+                            &lastDesc,
+                            formAbsolutePosition,
+                            &keyData,
+                            TRUE,
+                            &tObjSpecifier);
          AEDuplicateDesc(&tObjSpecifier,&lastDesc);
 			AEDisposeDesc(&tObjSpecifier);
    
@@ -834,17 +831,17 @@ OSErr	CountTabletObjects(TAEObject *pTabletObject, UInt32 *outCount)
          {
             // set up the cutom app desc
             AEInitializeDesc(&keyData);
-            err = AECreateDesc( typeUInt32,
-                              &pTabletObject->applicationIndex,
-                              sizeof(UInt32),
-                              &keyData );
+            AECreateDesc( typeUInt32,
+                          &pTabletObject->applicationIndex,
+                          sizeof(UInt32),
+                          &keyData );
    
-            err = CreateObjSpecifier(cWTDCustomizedApp,
-                                    &lastDesc,
-                                    formAbsolutePosition,
-                                    &keyData,
-                                    TRUE,
-                                    &tObjSpecifier);
+            CreateObjSpecifier(cWTDCustomizedApp,
+                               &lastDesc,
+                               formAbsolutePosition,
+                               &keyData,
+                               TRUE,
+                               &tObjSpecifier);
             AEDuplicateDesc(&tObjSpecifier,&lastDesc);
 				AEDisposeDesc(&tObjSpecifier);
 
@@ -852,19 +849,19 @@ OSErr	CountTabletObjects(TAEObject *pTabletObject, UInt32 *outCount)
             {
                // set up the transducer desc
                AEInitializeDesc(&keyData);
-               err = AECreateDesc( typeUInt32,
-                                   &pTabletObject->transducerIndex,
-                                   sizeof(UInt32),
-                                   &keyData );
+               AECreateDesc( typeUInt32,
+                              &pTabletObject->transducerIndex,
+                              sizeof(UInt32),
+                              &keyData );
 
-               err = CreateObjSpecifier(cWTDTransducer,
-                                        &lastDesc,
-                                        formAbsolutePosition,
-                                        &keyData,
-                                        TRUE,
-                                        &tObjSpecifier);
+               CreateObjSpecifier(cWTDTransducer,
+                                  &lastDesc,
+                                  formAbsolutePosition,
+                                  &keyData,
+                                  TRUE,
+                                  &tObjSpecifier);
                AEDuplicateDesc(&tObjSpecifier,&lastDesc);
-					AEDisposeDesc(&tObjSpecifier);
+               AEDisposeDesc(&tObjSpecifier);
             }
          }
       }
@@ -872,12 +869,12 @@ OSErr	CountTabletObjects(TAEObject *pTabletObject, UInt32 *outCount)
 
 
    // Now we actually tell it to count the number of the tablet objects
-   err = AEPutParamPtr( &aeSend,
-                        keyAEObjectClass,
-                        typeType,
-                        &pTabletObject->objectType,	// This is the class of objects to count
-                        sizeof(DescType) );
-   err = AEPutParamDesc( &aeSend, keyDirectObject, &lastDesc);	// The Object chain
+   AEPutParamPtr( &aeSend,
+                  keyAEObjectClass,
+                  typeType,
+                  &pTabletObject->objectType,	// This is the class of objects to count
+                  sizeof(DescType) );
+   AEPutParamDesc( &aeSend, keyDirectObject, &lastDesc);	// The Object chain
 
    // Finally send the event
    err = AESend(&aeSend,	// The complete AE we created above

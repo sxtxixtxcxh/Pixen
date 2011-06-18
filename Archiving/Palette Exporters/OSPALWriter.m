@@ -26,17 +26,21 @@ typedef struct
 	return nil;
 }
 
-- _init
+- (id)_init
 {
-	[super init];
+	self = [super init];
 	return self;
 }
 
-+ sharedPALWriter
++ (id)sharedPALWriter
 {
 	static OSPALWriter *sharedPALWriter = nil;
-	if (sharedPALWriter) { return sharedPALWriter; }
-	sharedPALWriter = [[OSPALWriter alloc] _init];
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		sharedPALWriter = [[OSPALWriter alloc] _init];
+	});
+	
 	return sharedPALWriter;
 }
 

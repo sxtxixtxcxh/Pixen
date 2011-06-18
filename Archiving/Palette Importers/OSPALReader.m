@@ -23,11 +23,15 @@
 	return self;
 }
 
-+ sharedPALReader
++ (id)sharedPALReader
 {
 	static OSPALReader *sharedPALReader = nil;
-	if (sharedPALReader) { return sharedPALReader; }
-	sharedPALReader = [[OSPALReader alloc] _init];
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		sharedPALReader = [[OSPALReader alloc] _init];
+	});
+	
 	return sharedPALReader;
 }
 

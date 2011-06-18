@@ -23,11 +23,15 @@
 	return self;
 }
 
-+ sharedJASCPALReader
++ (id)sharedJASCPALReader
 {
 	static OSJASCPALReader *sharedJASCPALReader = nil;
-	if (sharedJASCPALReader) { return sharedJASCPALReader; }
-	sharedJASCPALReader = [[OSJASCPALReader alloc] _init];
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		sharedJASCPALReader = [[OSJASCPALReader alloc] _init];
+	});
+	
 	return sharedJASCPALReader;
 }
 

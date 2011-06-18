@@ -29,10 +29,8 @@
 
 #import <Foundation/NSArray.h>
 
-
-@interface NSArray(DeepMutableCopy)
+@interface NSArray (DeepMutableCopy)
      
--(NSArray *) deepMutableCopy;
-
+- (NSArray *)deepMutableCopy;
 
 @end

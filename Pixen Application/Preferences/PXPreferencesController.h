@@ -23,23 +23,30 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM,  OUT OF OR IN CONNECTION WITH
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-//  Created by Andy Matuschak on Wed Jun 09 2004.
-//  Copyright (c) 2004 Open Sword Group. All rights reserved.
+//  Created by Matt Rajca on Fri Jun 17 2011.
+//  Copyright (c) 2011 Open Sword Group. All rights reserved.
 //
 
 #import <AppKit/AppKit.h>
 
+@class PXGeneralPreferencesController, PXHotkeysPreferencesController;
+
+typedef enum {
+	PXPreferencesTabGeneral = 0,
+	PXPreferencesTabHotkeys
+} PXPreferencesTab;
 
 @interface PXPreferencesController : NSWindowController
 {
-  IBOutlet id crosshairColor;
-  IBOutlet id autoupdateFrequency;
-  IBOutlet id form;
+  @private
+	PXGeneralPreferencesController *_generalVC;
+	PXHotkeysPreferencesController *_hotkeysVC;
+	PXPreferencesTab _selectedTab;
 }
 
-+(id) sharedPreferencesController;
-- (IBAction)switchCrosshair:(id) sender;
-- (IBAction)switchAutoupdate:(id) sender;
-- (IBAction)updateAutoupdate:(id) sender;
++ (id)sharedPreferencesController;
+
+- (IBAction)selectGeneralTab:(id)sender;
+- (IBAction)selectHotkeysTab:(id)sender;
 
 @end

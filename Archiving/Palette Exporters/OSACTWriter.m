@@ -17,17 +17,21 @@
 	return nil;
 }
 
-- _init
+- (id)_init
 {
-	[super init];
+	self = [super init];
 	return self;
 }
 
-+ sharedACTWriter
++ (id)sharedACTWriter
 {
 	static OSACTWriter *sharedACTWriter = nil;
-	if (sharedACTWriter) { return sharedACTWriter; }
-	sharedACTWriter = [[OSACTWriter alloc] _init];
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		sharedACTWriter = [[OSACTWriter alloc] _init];
+	});
+	
 	return sharedACTWriter;
 }
 

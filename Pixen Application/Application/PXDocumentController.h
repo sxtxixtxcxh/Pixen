@@ -35,7 +35,6 @@
 	NSTimer *mouseTrackingTimer;
 }
 
-- (IBAction)donate:(id) sender;
 - (IBAction)newFromClipboard:sender;
 
 - (BOOL)showsToolPreview;

@@ -336,12 +336,6 @@ NSString *palettesSubdirName = @"Palettes";
 	[doc loadFromPasteboard:[NSPasteboard generalPasteboard]];
 }
 
-- (IBAction)donate:(id) sender
-{
-	NSString *urlString = @"http://www.opensword.org/donate.php";
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:urlString]];
-}
-
 // It occurs to me (after having renamed this object to be a document controller, of course)
 // that this sort of method really should be in, like, an app delegate. But I'm not going
 // to deal with that right now.
