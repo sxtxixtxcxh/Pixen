@@ -30,12 +30,12 @@
 #import "PXRectangleTool.h"
 #import "PXCanvasController.h"
 #import "PXPalette.h"
-#import "PXRectangleToolPropertiesController.h"
+#import "PXShapeToolPropertiesController.h"
 #import "PXCanvas_Modifying.h"
 
 @implementation PXRectangleTool
 
-#define RECT_PC ((PXRectangleToolPropertiesController *) self.propertiesController)
+#define SHAPE_PC ((PXShapeToolPropertiesController *) self.propertiesController)
 
 - (NSString *)name
 {
@@ -52,7 +52,7 @@
 	if (! (self = [super init]) )
 		return nil;
 	
-	self.propertiesController = [[PXRectangleToolPropertiesController new] autorelease];
+	self.propertiesController = [[PXShapeToolPropertiesController new] autorelease];
 	
 	return self;
 }
@@ -81,7 +81,7 @@ fromCanvasController:(PXCanvasController *) controller
 			 inCanvas:(PXCanvas *)canvas
 		   shouldFill:(BOOL)shouldFill
 {
-	int borderWidth = [RECT_PC borderWidth];
+	int borderWidth = [SHAPE_PC borderWidth];
 	float leftMost = (origin.x < aPoint.x) ? origin.x : aPoint.x;
 	float rightMost = (origin.x < aPoint.x) ? aPoint.x: origin.x;
 	float topMost = (origin.y < aPoint.y) ? aPoint.y: origin.y;
@@ -98,9 +98,9 @@ fromCanvasController:(PXCanvasController *) controller
     {
 		// careful about backwards-drawn rectangles...
 		NSColor * oldColor = [self colorForCanvas:canvas];
-		if (![RECT_PC shouldUseMainColorForFill]) 
+		if (![SHAPE_PC shouldUseMainColorForFill])
 		{ 
-			color = [RECT_PC fillColor];
+			color = [SHAPE_PC fillColor];
 		}
 		[self drawRect:NSMakeRect(leftMost + borderWidth,
 								  bottomMost + borderWidth,
@@ -119,7 +119,7 @@ fromCanvasController:(PXCanvasController *) controller
 				   toPoint:(NSPoint)aPoint
 				  inCanvas:(PXCanvas *)canvas
 {
-	[self drawFromPoint:origin toPoint:aPoint inCanvas:canvas shouldFill:[RECT_PC shouldFill]];
+	[self drawFromPoint:origin toPoint:aPoint inCanvas:canvas shouldFill:[SHAPE_PC shouldFill]];
 }
 
 - (void)drawFromPoint:(NSPoint)origin 
