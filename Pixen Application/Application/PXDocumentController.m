@@ -428,12 +428,17 @@ NSString *palettesSubdirName = @"Palettes";
 	}
 }
 
-- handleAnimatedGifAtURL:(NSURL *)aURL
+- (PXAnimationDocument *)handleAnimatedGifAtURL:(NSURL *)aURL
 {
 	BOOL isAnimated = [PXGifImporter fileAtURLIsAnimated:aURL];
 	if (isAnimated)
 	{
-		return [[[PXAnimationDocument alloc] initWithContentsOfFile:[aURL path] ofType:GIFFileType] autorelease];
+		NSError *error=nil;
+		PXAnimationDocument *doc = [[[PXAnimationDocument alloc] initWithContentsOfURL:aURL ofType:GIFFileType error:&error] autorelease];
+		if(error) {
+			[self presentError:error];
+		}
+		return doc;
 	}
 	return nil;
 }
