@@ -30,10 +30,12 @@
 #import "PXRectangleTool.h"
 #import "PXCanvasController.h"
 #import "PXPalette.h"
-#import "PXRectangleToolPropertiesView.h"
+#import "PXRectangleToolPropertiesController.h"
 #import "PXCanvas_Modifying.h"
 
 @implementation PXRectangleTool
+
+#define RECT_PC ((PXRectangleToolPropertiesController *) self.propertiesController)
 
 - (NSString *)name
 {
@@ -50,10 +52,10 @@
 	if (! (self = [super init]) )
 		return nil;
 	
-	propertiesView = [[PXRectangleToolPropertiesView alloc] init];
+	self.propertiesController = [[PXRectangleToolPropertiesController new] autorelease];
+	
 	return self;
 }
-
 
 - (void)mouseDownAt:(NSPoint)aPoint
 fromCanvasController:(PXCanvasController *) controller
@@ -79,7 +81,7 @@ fromCanvasController:(PXCanvasController *) controller
 			 inCanvas:(PXCanvas *)canvas
 		   shouldFill:(BOOL)shouldFill
 {
-	int borderWidth = [(PXRectangleToolPropertiesView *)propertiesView borderWidth];
+	int borderWidth = [RECT_PC borderWidth];
 	float leftMost = (origin.x < aPoint.x) ? origin.x : aPoint.x;
 	float rightMost = (origin.x < aPoint.x) ? aPoint.x: origin.x;
 	float topMost = (origin.y < aPoint.y) ? aPoint.y: origin.y;
@@ -96,9 +98,9 @@ fromCanvasController:(PXCanvasController *) controller
     {
 		// careful about backwards-drawn rectangles...
 		NSColor * oldColor = [self colorForCanvas:canvas];
-		if (![(PXRectangleToolPropertiesView *)propertiesView shouldUseMainColorForFill]) 
+		if (![RECT_PC shouldUseMainColorForFill]) 
 		{ 
-			color = [(PXRectangleToolPropertiesView *)propertiesView fillColor];
+			color = [RECT_PC fillColor];
 		}
 		[self drawRect:NSMakeRect(leftMost + borderWidth,
 								  bottomMost + borderWidth,
@@ -117,7 +119,7 @@ fromCanvasController:(PXCanvasController *) controller
 				   toPoint:(NSPoint)aPoint
 				  inCanvas:(PXCanvas *)canvas
 {
-	[self drawFromPoint:origin toPoint:aPoint inCanvas:canvas shouldFill:[(PXRectangleToolPropertiesView *)propertiesView shouldFill]];
+	[self drawFromPoint:origin toPoint:aPoint inCanvas:canvas shouldFill:[RECT_PC shouldFill]];
 }
 
 - (void)drawFromPoint:(NSPoint)origin 
