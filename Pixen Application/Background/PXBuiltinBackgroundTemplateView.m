@@ -14,8 +14,8 @@
 - (void)setBackground:(PXBackground *)bg
 {
 	[super setBackground:bg];
-	[templateName setStringValue:[bg defaultName]];
-	[templateClassName setStringValue:NSLocalizedString(@"Built-in Template", @"Built-in Template")];
+	[self.templateNameField setStringValue:[bg defaultName]];
+	[self.templateClassNameField setStringValue:NSLocalizedString(@"Built-in Template", @"Built-in Template")];
 }
 
 @end

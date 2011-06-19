@@ -31,6 +31,7 @@
 
 @interface PXDocumentController: NSDocumentController
 {
+  @private
 	BOOL cachedShowsToolPreview, cachedShowsPreviousCelOverlay;
 	NSTimer *mouseTrackingTimer;
 }

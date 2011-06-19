@@ -43,6 +43,7 @@
 @class PXNSImageView;
 @interface PXImageSizePrompter : NSWindowController 
 {
+  @private
 	IBOutlet NSTextField *widthField;
 	IBOutlet NSTextField *heightField;
 	IBOutlet PXNSImageView *preview;

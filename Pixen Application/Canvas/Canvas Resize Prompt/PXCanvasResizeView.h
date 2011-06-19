@@ -31,6 +31,7 @@
 
 @interface PXCanvasResizeView : NSView 
 {
+  @private
 	NSSize oldSize;
 	NSSize newSize;
 	NSPoint position;

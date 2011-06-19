@@ -22,6 +22,7 @@ COPYRIGHT
 #import <AppKit/NSApplication.h>
 
 @interface PXApplication : NSApplication {
+  @private
 	BOOL	_needToWatchMouseEvents;
 }
 - (void) handleMouseEvent:(NSEvent *)theEvent;

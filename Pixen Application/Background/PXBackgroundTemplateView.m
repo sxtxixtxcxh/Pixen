@@ -33,6 +33,8 @@
 
 @implementation PXBackgroundTemplateView
 
+@synthesize background, templateNameField, templateClassNameField, imageView;
+
 - (id)initWithFrame:(NSRect)frame
 {
 	if(!(self = [super initWithFrame:frame])) { return nil; }
@@ -65,11 +67,6 @@
 	[view setFrameSize:[self frame].size];
 }
 
-- (PXBackground *)background
-{
-	return background;
-}
-
 - (void)setBackground:(PXBackground *)bg
 {
 	[background autorelease];
@@ -77,31 +74,21 @@
 	if(!bg) { return; }
 	[imageView setImage:[background previewImageOfSize:[imageView bounds].size]];
 	[imageView display];
-	[templateClassName setStringValue:[bg defaultName]];
-	[templateName setStringValue:[bg name]];
-}
-
-- templateName
-{
-	return templateName;
-}
-
-- templateClassName
-{
-	return templateClassName;
+	[templateClassNameField setStringValue:[bg defaultName]];
+	[templateNameField setStringValue:[bg name]];
 }
 
 - (void)setHighlighted:(BOOL)highlighted
 {
 	if(highlighted)
 	{
-		[templateClassName setTextColor:[NSColor whiteColor]];
-		[templateName setTextColor:[NSColor whiteColor]];
+		[templateClassNameField setTextColor:[NSColor whiteColor]];
+		[templateNameField setTextColor:[NSColor whiteColor]];
 	}
 	else
 	{
-		[templateClassName setTextColor:[NSColor disabledControlTextColor]];
-		[templateName setTextColor:[NSColor blackColor]];
+		[templateClassNameField setTextColor:[NSColor disabledControlTextColor]];
+		[templateNameField setTextColor:[NSColor blackColor]];
 	}
 }
 

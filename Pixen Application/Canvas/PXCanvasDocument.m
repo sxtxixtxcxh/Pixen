@@ -78,27 +78,26 @@ BOOL isPowerOfTwo(int num);
 
 - (void)dealloc
 {
-	[windowController releaseCanvas];
+	[self.windowController releaseCanvas];
 	[canvas release];
-    //	[[NSNotificationCenter defaultCenter] removeObserver:self];
-  [super dealloc];
+	//	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[super dealloc];
 }
 
 - (PXCanvasController *)canvasController
 {
-	return [windowController canvasController];
+	return [self.windowController canvasController];
 }
 
 - (void)initWindowController
 {
-  windowController = [[PXCanvasWindowController alloc] initWithWindowNibName:@"PXCanvasDocument"];
+	self.windowController = [[[PXCanvasWindowController alloc] initWithWindowNibName:@"PXCanvasDocument"] autorelease];
 }
 
 - (void)setWindowControllerData
 {
-  [windowController setCanvas:canvas];
+	[self.windowController setCanvas:canvas];
 }
-
 
 BOOL isPowerOfTwo(int num)
 {
@@ -227,18 +226,18 @@ BOOL isPowerOfTwo(int num)
 	[self updateChangeCount:NSChangeCleared];
 }
 
-- (void)delete:sender
+- (void)delete:(id)sender
 {
-	[windowController delete:sender];
+	[self.windowController delete:sender];
 }
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)aType error:(NSError **)error
 {
 	if([aType isEqualToString:PixenImageFileType])
-  {
+	{
 		[canvas release];
 		canvas = [[NSKeyedUnarchiver unarchiveObjectWithData:data] retain];
-  }
+	}
 	else if ([aType isEqualTo:BMPFileType])
 	{
 		[canvas release];
@@ -246,19 +245,19 @@ BOOL isPowerOfTwo(int num)
 		[canvas replaceActiveLayerWithImage:[[[NSImage alloc] initWithData:data] autorelease]];
 	}
 	else
-  {
+	{
 		NSImage *image = [[[NSImage alloc] initWithData:data] autorelease];
 		[canvas release];
 		canvas = [[PXCanvas alloc] initWithImage:image type:aType];
-  }
+	}
 	if(canvas)
-  {
+	{
 		[canvas setUndoManager:[self undoManager]];
-		[windowController setCanvas:canvas];
+		[self.windowController setCanvas:canvas];
 		[[self undoManager] removeAllActions];
 		[self updateChangeCount:NSChangeCleared]; 
 		return YES;
-  }
+	}
 	return NO;
 }
 

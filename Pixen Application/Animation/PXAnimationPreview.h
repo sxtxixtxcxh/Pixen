@@ -10,6 +10,7 @@
 
 
 @interface PXAnimationPreview : NSView {
+  @private
 	NSTimer *animationTimer;
 	id currentCel;
 	int currentIndex;

@@ -10,6 +10,7 @@
 
 
 @interface PXLayerTextField : NSTextField {
+  @private
 	BOOL isEditing;
 	BOOL isFirstEnd;
 	BOOL reachedByClicking;

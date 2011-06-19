@@ -39,6 +39,7 @@
 
 @interface PXGridSettingsPrompter : NSWindowController
 {
+  @private
 	IBOutlet NSForm * sizeForm;
 	IBOutlet id colorWell;
 	IBOutlet id shouldDrawCheckBox;

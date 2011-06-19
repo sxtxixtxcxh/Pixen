@@ -30,6 +30,7 @@
 
 
 @interface PXBackgroundPreviewView : NSView {
+  @private
 	NSImage *image;
 	NSRect functionalRect;
 }

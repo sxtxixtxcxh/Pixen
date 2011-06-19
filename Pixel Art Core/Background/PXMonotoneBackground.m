@@ -105,11 +105,11 @@
     [super encodeWithCoder:coder];
 }
 
--(id) initWithCoder:(NSCoder *) coder
+- (id)initWithCoder:(NSCoder *)coder
 {
-    [super initWithCoder:coder];
-    [self setColor:[coder decodeObjectForKey:@"color"]];
-    return self;
+	self = [super initWithCoder:coder];
+	[self setColor:[coder decodeObjectForKey:@"color"]];
+	return self;
 }
 
 -(id) copyWithZone:(NSZone *)zone

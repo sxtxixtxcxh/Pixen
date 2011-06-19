@@ -38,6 +38,7 @@
 
 @interface PXCanvasDocument : PXDocument
 {
+  @private
 	PXCanvas *canvas;
 	PXCanvasPrintView *printableView;
 	

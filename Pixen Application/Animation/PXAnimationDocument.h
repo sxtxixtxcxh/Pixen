@@ -10,6 +10,7 @@
 #import "PXDocument.h"
 @class PXAnimationWindowController, PXAnimation;
 @interface PXAnimationDocument : PXDocument {
+  @private
 	PXAnimation *animation;
 }
 
