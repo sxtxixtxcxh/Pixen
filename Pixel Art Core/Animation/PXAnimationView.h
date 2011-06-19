@@ -10,6 +10,7 @@
 #import "PXCanvasView.h"
 
 @interface PXAnimationView : PXCanvasView {
+  @private
 	NSImage *previousCel;
 }
 

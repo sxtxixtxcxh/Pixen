@@ -18,9 +18,10 @@ typedef enum {
 
 @interface PXPaletteController : NSObject
 {
-  PXPaletteMode mode;
+  @private
+	PXPaletteMode mode;
 	PXDocument *document;
-  int recentLimit;
+	int recentLimit;
 	PXPalette *frequencyPalette, *recentPalette, *listPalette;
 	IBOutlet PXPalettePanelPaletteView *paletteView;
 	IBOutlet NSView *view;

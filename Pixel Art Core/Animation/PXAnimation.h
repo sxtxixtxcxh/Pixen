@@ -10,9 +10,11 @@
 
 @class PXCel;
 @interface PXAnimation : NSObject <NSCopying> {
+  @private
 	NSMutableArray *cels;
 	NSUndoManager *undoManager;
 }
+
 - init;
 - (NSArray *)canvases;
 - (PXCel *)objectInCelsAtIndex:(unsigned int)index;

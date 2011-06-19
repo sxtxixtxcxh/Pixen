@@ -31,11 +31,13 @@
 
 @interface PXDuotoneBackground : PXMonotoneBackground 
 {
-	NSColor * backColor;
+  @private
+	NSColor *backColor;
 	IBOutlet NSColorWell *backWell;
 }
 
+@property (nonatomic, retain) NSColor *backColor;
+
 - (IBAction)configuratorBackColorChanged:(id)sender;
-- (void)setBackColor:(NSColor *)aColor;
 
 @end

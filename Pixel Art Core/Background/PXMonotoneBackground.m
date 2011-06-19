@@ -32,6 +32,8 @@
 
 @implementation PXMonotoneBackground
 
+@synthesize color;
+
 -(NSString *) defaultName
 {
 	return NSLocalizedString(@"FLAT_BACKGROUND", @"Flat Background");
@@ -51,8 +53,8 @@
 {
     [self setColor:[sender color]];
     [self changed];
-	[cachedImage release];
-	cachedImage = nil;
+	
+	self.cachedImage = nil;
 }
 
 - (void)windowWillClose:(NSNotification *)notification

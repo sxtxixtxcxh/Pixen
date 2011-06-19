@@ -43,7 +43,7 @@
     [[NSGraphicsContext currentContext] setShouldAntialias:NO];
     [NSBezierPath setDefaultLineWidth:10];
 	
-    [color set];
+    [self.color set];
     int higherOrigin = (int)((rect.size.width >= rect.size.height) ? rect.origin.x : rect.origin.y);
     int higherDimension = 2*(int)((rect.size.width >= rect.size.height) ? rect.size.width : rect.size.height);
     int i = (int)(higherOrigin-higherDimension);
@@ -66,7 +66,7 @@
 
 - (void)drawRect:(NSRect)rect withinRect:(NSRect)wholeRect
 {
-    [backColor set];
+    [self.backColor set];
     
     NSRectFill(wholeRect);
     [self drawBackgroundLinesInRect:wholeRect];

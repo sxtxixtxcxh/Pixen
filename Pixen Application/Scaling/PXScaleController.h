@@ -33,6 +33,7 @@
 
 @interface PXScaleController : NSWindowController 
 {
+  @private
 	IBOutlet NSPopUpButton *algorithmButton;
 	IBOutlet NSBox *scaleParameterView;
 	

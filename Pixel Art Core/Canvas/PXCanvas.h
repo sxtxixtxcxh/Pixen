@@ -34,6 +34,7 @@ typedef BOOL * PXSelectionMask;
 
 @interface PXCanvas : NSObject <NSCopying>
 {
+  @private
 	id layers;
 	
 //I want to move these to the document somehow, eventually.

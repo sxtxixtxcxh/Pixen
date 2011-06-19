@@ -5,10 +5,7 @@
 
 const int viewMargin = 1;
 
-- (void)setDelegate:del
-{
-	delegate = del;
-}
+@synthesize enabled, delegate;
 
 - (id)initWithFrame:(NSRect)frameRect
 {
@@ -32,11 +29,6 @@ const int viewMargin = 1;
 - (BOOL)isFlipped
 {
 	return YES;
-}
-
-- (void)setEnabled:(BOOL)en
-{
-	enabled = en;
 }
 
 - (void)resizeWithOldSuperviewSize:(NSSize)size

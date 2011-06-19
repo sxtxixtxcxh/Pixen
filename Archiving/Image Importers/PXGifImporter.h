@@ -10,6 +10,7 @@
 #import "gif_lib.h"
 
 @interface PXGifImporter : NSObject {
+  @private
 	GifFileType *gifFile;
 	int iterations;
 	

@@ -10,9 +10,11 @@
 #import "PXPalette.h"
 @class PXCanvas, PXAnimation;
 @interface PXCel : NSObject <NSCoding, NSCopying> {
+  @private
 	PXCanvas *canvas;
 	NSTimeInterval duration;
 }
+
 - initWithImage:(NSImage *)image animation:(PXAnimation *)animation atIndex:(int)index;
 - initWithImage:(NSImage *)image animation:(PXAnimation *)animation;
 - initWithCanvas:(PXCanvas *)initCanvas duration:(NSTimeInterval)initDuration;

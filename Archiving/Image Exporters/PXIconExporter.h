@@ -11,6 +11,7 @@
 @class PXCanvas;
 @interface PXIconExporter : NSObject
 {
+  @private
 	PXCanvas *canvas;
 	NSMutableData *iconData;
 }

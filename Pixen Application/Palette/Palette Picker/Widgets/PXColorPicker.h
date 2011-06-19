@@ -11,6 +11,7 @@ extern int kPXColorPickerMode;
 @class PXPaletteView, PXPaletteSelector;
 @interface PXColorPicker : NSColorPicker <NSColorPickingDefault, NSColorPickingCustom>
 {
+  @private
 	NSImage *icon;
 	IBOutlet NSView *pickerView;
 	IBOutlet PXPaletteView *paletteView;

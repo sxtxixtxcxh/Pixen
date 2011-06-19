@@ -11,6 +11,7 @@
 
 @class PXCanvas, PXCanvasView, PXBackground;
 @interface PXCanvasController : NSObject {
+  @private
 	PXCanvas *canvas;
 	IBOutlet PXCanvasView *view;
 	IBOutlet NSScrollView *scrollView;
@@ -36,6 +37,7 @@
 	id delegate;
 	BOOL wraps; // used in setCanvas
 }
+
 - (PXCanvasView *)view;
 - (NSScrollView *)scrollView;
 - layerController;

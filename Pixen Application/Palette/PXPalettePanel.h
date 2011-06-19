@@ -10,6 +10,7 @@
 #import "PXPalette.h"
 @class PXPaletteSelector, PXPalettePanelPaletteView;
 @interface PXPalettePanel : NSPanel {
+  @private
 	PXPalette *palette;
 	IBOutlet PXPaletteSelector *paletteSelector;
 	IBOutlet PXPalettePanelPaletteView *paletteView;

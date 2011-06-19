@@ -9,6 +9,7 @@
 #import <AppKit/NSView.h>
 
 @interface PXPreviewBezelView : NSView {
+  @private
 	NSImage * actionGear;
 	NSMenu * menu;
 	id delegate;

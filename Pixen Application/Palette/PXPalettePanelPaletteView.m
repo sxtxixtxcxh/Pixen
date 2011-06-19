@@ -37,11 +37,11 @@
 
 - (void)rightMouseDown:(NSEvent *)event
 {
-	if(!enabled) { return; }
+	if(!self.enabled) { return; }
 	int paletteIndex = [self indexOfCelAtPoint:[self convertPoint:[event locationInWindow] fromView:nil]];
 	if (paletteIndex == -1) { return; }
 
-	[delegate useColorAtIndex:paletteIndex event:event];
+	[self.delegate useColorAtIndex:paletteIndex event:event];
 }
 
 // Intentionally no-op:

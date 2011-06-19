@@ -39,7 +39,7 @@
 {
 	id result = [[[NSImage alloc] initWithSize:size] autorelease];
 	[result lockFocus];
-	[color set];
+	[self.color set];
 	NSRectFill(NSMakeRect(0, 0, size.width, size.height));
 	[image drawInRect:NSMakeRect(0, 0, size.width, size.height) fromRect:NSMakeRect(0, 0, [image size].width, [image size].height) operation:NSCompositeSourceOver fraction:1];
 	[result unlockFocus];
@@ -103,7 +103,7 @@
 - (void)setColor:(NSColor *)aColor
 {
 	[super setColor:aColor];
-	[image setBackgroundColor:color];
+	[image setBackgroundColor:self.color];
 }
 
 - (void)setImage:(NSImage *)anImage
@@ -111,7 +111,7 @@
 	[anImage retain];
 	[image release];
 	image = anImage;
-	[image setBackgroundColor:color];
+	[image setBackgroundColor:self.color];
 	if(![[self name] isEqualToString:[self defaultName]]) 
     { 
 		[imageNameField setStringValue:[self name]]; 
@@ -147,7 +147,7 @@
 	
 	[newTransform invert];
 	[newTransform concat];
-	[color set];
+	[self.color set];
 	NSRectFill(NSMakeRect(origin.x, origin.y, size.width, size.height));
 	if(![aCanvas wraps])
 	{
@@ -178,7 +178,7 @@
 
 - (void)drawRect:(NSRect)rect withinRect:(NSRect)wholeRect
 {
-	[color set];
+	[self.color set];
 	NSRectFill(rect);
 	[image drawInRect:rect fromRect:rect operation:NSCompositeSourceOver fraction:1];
 }

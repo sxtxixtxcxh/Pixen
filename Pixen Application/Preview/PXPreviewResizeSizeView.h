@@ -33,6 +33,7 @@
 
 @interface PXPreviewResizeSizeView : NSView 
 {
+  @private
 	NSAttributedString *scaleString;
 	NSShadow *shadow;
 }

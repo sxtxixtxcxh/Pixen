@@ -10,6 +10,7 @@
 
 @class PXPaletteViewSizeSelector;
 @interface PXPaletteViewScrollView : NSScrollView {
+  @private
 	PXPaletteViewSizeSelector *sizeSelector;
 }
 - (void)setControlSize:(NSControlSize)size;
