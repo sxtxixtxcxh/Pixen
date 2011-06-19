@@ -10,6 +10,7 @@
 
 @interface PXFilmStripView : NSView
 {
+  @private
 	id dataSource;
 	id delegate;
 	

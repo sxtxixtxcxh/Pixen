@@ -11,6 +11,7 @@
 #import "PXCanvasWindowController.h"
 @class PXAnimation, PXCel, PXFilmStripView, PXAnimationPreview, RBSplitSubview;
 @interface PXAnimationWindowController : PXCanvasWindowController {
+  @private
 	PXAnimation *animation;
 	IBOutlet PXFilmStripView *filmStrip;
 	IBOutlet PXAnimationPreview *animationPreview;

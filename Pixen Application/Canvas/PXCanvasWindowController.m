@@ -49,6 +49,8 @@
 
 @implementation PXCanvasWindowController
 
+@synthesize scaleController, canvasController, canvas;
+
 - (PXCanvasView *)view
 {
 	return [canvasController view];
@@ -111,11 +113,6 @@
 	[toolbar release];
 	
 	[super dealloc];
-}
-
-- (PXCanvas *) canvas
-{
-	return canvas;
 }
 
 - (void)windowWillClose:note
@@ -183,11 +180,6 @@
 - (void)updateCanvasSize
 {
 	[canvasController updateCanvasSize];
-}
-
-- canvasController
-{
-	return canvasController;
 }
 
 - (void)canvasController:(PXCanvasController *)controller setSize:(NSSize)size backgroundColor:(NSColor *)bg

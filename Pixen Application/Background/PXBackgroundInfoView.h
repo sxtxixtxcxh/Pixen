@@ -4,6 +4,7 @@
 @class PXBackground, PXBackgroundPreviewView;
 @interface PXBackgroundInfoView : NSView
 {
+  @private
     IBOutlet NSView *configuratorContainer;
     IBOutlet id delegate;
     IBOutlet PXBackgroundPreviewView *imageView;

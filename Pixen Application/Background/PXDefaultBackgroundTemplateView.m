@@ -43,7 +43,7 @@
 {
 	[backgroundTypeText autorelease];
 	backgroundTypeText = [typeText retain];
-	[templateClassName setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Default %@", @"Default %@"), backgroundTypeText]];
+	[self.templateClassNameField setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Default %@", @"Default %@"), backgroundTypeText]];
 }
 
 - (void)setActiveDragTarget:(BOOL)adt
@@ -57,15 +57,15 @@
 	[super setBackground:bg];
 	if (bg == nil)
 	{
-		[templateName setHidden:YES];
-		[templateClassName setHidden:YES];
-		[imageView setHidden:YES];
+		[self.templateNameField setHidden:YES];
+		[self.templateClassNameField setHidden:YES];
+		[self.imageView setHidden:YES];
 	}
 	else
 	{
-		[templateName setHidden:NO];
-		[templateClassName setHidden:NO];
-		[imageView setHidden:NO];
+		[self.templateNameField setHidden:NO];
+		[self.templateClassNameField setHidden:NO];
+		[self.imageView setHidden:NO];
 	}
 	
 	if (backgroundTypeText)
@@ -108,7 +108,7 @@
 		NSFrameRectWithWidth([self bounds], 3);
 	}
 	
-	if (background == nil)
+	if (self.background == nil)
 	{
 		[self drawDottedOutline];
 		[self drawNoDefaultText];

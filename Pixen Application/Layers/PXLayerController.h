@@ -32,6 +32,7 @@
 @class PXLayer, PXCanvas, PXDocument, RBSplitSubview;
 @interface PXLayerController : NSResponder <NSCollectionViewDelegate>
 {
+  @private
 	IBOutlet NSView *view;
 	IBOutlet NSCollectionView *layersView;
 	PXCanvas *canvas;

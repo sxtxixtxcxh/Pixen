@@ -176,7 +176,7 @@
 
 - (id)initWithCoder:(NSCoder *)coder
 {
-	[super init];
+	self = [super init];
 	[self setName:[coder decodeObjectForKey:@"name"]];
 	[self configurator];
 	return self;

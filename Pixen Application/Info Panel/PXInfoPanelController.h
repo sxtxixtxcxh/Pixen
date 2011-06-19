@@ -38,6 +38,7 @@
 
 @interface PXInfoPanelController : NSObject
 {
+  @private
 	NSPoint draggingOrigin;
 		
 	IBOutlet NSPanel *panel;

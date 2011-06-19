@@ -95,9 +95,9 @@
 	[super encodeWithCoder:coder];
 }
 
--(id) initWithCoder:(NSCoder *)coder
+- (id)initWithCoder:(NSCoder *)coder
 {
-	[super initWithCoder:coder];
+	self = [super initWithCoder:coder];
 	[self setBackColor:[coder decodeObjectForKey:@"backColor"]];
 	return self;
 }

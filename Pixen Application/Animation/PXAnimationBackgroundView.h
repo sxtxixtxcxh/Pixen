@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface PXAnimationBackgroundView : NSView {
+  @private
 	NSGradient *horizontalGradient;
 	NSScrollView *filmStrip;
 }
