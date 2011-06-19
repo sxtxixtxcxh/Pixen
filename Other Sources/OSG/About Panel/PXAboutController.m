@@ -109,7 +109,7 @@ static PXAboutController *singleInstance = nil;
 {
 	id content;
 	aboutPanel = [[PXAboutPanel alloc]
-		 initWithContentRect:[[panelInNib contentView] frame]
+		 initWithContentRect:[ (NSView *) [panelInNib contentView] frame]
 				   styleMask:NSBorderlessWindowMask
 					 backing:[panelInNib backingType]
 					   defer:NO];

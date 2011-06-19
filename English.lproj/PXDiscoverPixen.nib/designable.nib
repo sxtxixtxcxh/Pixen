@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">10J869</string>
+		<string key="IBDocument.SystemVersion">11A494a</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1864</string>
-		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<string key="IBDocument.AppKitVersion">1128</string>
+		<string key="IBDocument.HIToolboxVersion">564.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">1864</string>
@@ -51,6 +51,7 @@
 				<object class="NSMutableString" key="NSViewClass">
 					<characters key="NS.bytes">View</characters>
 				</object>
+				<nil key="NSUserInterfaceItemIdentifier"/>
 				<string key="NSWindowContentMinSize">{213, 107}</string>
 				<object class="NSView" key="NSWindowView" id="995228849">
 					<reference key="NSNextResponder"/>
@@ -62,7 +63,6 @@
 							<string key="NSFrame">{{-7, 40}, {586, 468}}</string>
 							<reference key="NSSuperview" ref="995228849"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="274549581"/>
 							<array class="NSMutableArray" key="NSTabViewItems">
 								<object class="NSTabViewItem" id="4159739">
 									<object class="NSView" key="NSView" id="147879382">
@@ -1100,7 +1100,6 @@ ZXZlcnkgY291cGxlIGRheXMuIFdvdWxkIHlvdSBsaWtlIHRoYXQ/A</string>
 												<string key="NSFrame">{{29, 168}, {522, 107}}</string>
 												<reference key="NSSuperview" ref="274549581"/>
 												<reference key="NSWindow"/>
-												<reference key="NSNextKeyView"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="668138072">
 													<int key="NSCellFlags">67239424</int>
@@ -1272,9 +1271,10 @@ dGlvbi4KCg</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMinSize">{213, 129}</string>
-				<string key="NSMaxSize">{1e+13, 1e+13}</string>
+				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
+				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
 			<object class="NSUserDefaultsController" id="688809186">
 				<array class="NSMutableArray" key="NSDeclaredKeys">

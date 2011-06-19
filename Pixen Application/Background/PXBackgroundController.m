@@ -547,7 +547,11 @@ typedef enum _PXStackType
 
 - (NSDragOperation)draggingExited:(id <NSDraggingInfo>)info
 {		
-	if (NSPointInRect([[self documentView] convertPoint:[info draggingLocation] fromView:nil], [[self documentView] bounds])) { return NSDragOperationNone; }
+	if (NSPointInRect([ (NSView *) [self documentView] convertPoint:[info draggingLocation] fromView:nil],
+					  [ (NSView *) [self documentView] bounds])) {
+		
+		return NSDragOperationNone;
+	}
 	
 	if ([[self documentView] tag] == PXDefaultsStackViewType)
 	{

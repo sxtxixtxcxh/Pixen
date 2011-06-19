@@ -27,6 +27,8 @@
 //
 
 #import "PXBackgroundTemplateView.h"
+
+#import "PXBackgroundPreviewView.h"
 #import "PXBackgrounds.h"
 
 @implementation PXBackgroundTemplateView
