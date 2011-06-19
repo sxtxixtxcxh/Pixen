@@ -240,12 +240,20 @@
 
 - (IBAction)duplicateLayer:(id)sender
 {
-	[canvas duplicateLayerAtIndex:[self invertLayerIndex:[[layersView selectionIndexes] firstIndex]]];
+	NSInteger index = [self invertLayerIndex:[[layersView selectionIndexes] firstIndex]];
+	[canvas duplicateLayerAtIndex:index];
+	
+	[self selectRow:index+1];
+	[self selectLayer:nil];
 }
 
 - (void)duplicateLayerObject:(PXLayer *)layer
 {
-	[canvas duplicateLayerAtIndex:[[canvas layers] indexOfObject:layer]];
+	NSInteger index = [[canvas layers] indexOfObject:layer];
+	[canvas duplicateLayerAtIndex:index];
+	
+	[self selectRow:index+1];
+	[self selectLayer:nil];
 }
 
 - (void)removeLayerAtCanvasLayersIndex:(unsigned)index
