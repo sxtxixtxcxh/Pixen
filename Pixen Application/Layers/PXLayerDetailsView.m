@@ -230,9 +230,13 @@
 	if ([anItem action] == @selector(mergeDown:)) {
 		id layers = [[layerController canvas] layers];
 		return [layers count] > 1 && [layers objectAtIndex:0] != layer;
-	} else {
-		return YES;
 	}
+	else if ([anItem action] == @selector(cutLayer:) || [anItem action] == @selector(delete:)) {
+		id layers = [[layerController canvas] layers];
+		return [layers count] > 1;
+	}
+	
+	return YES;
 }
 
 - (void)updatePreview:(NSNotification* )notification
