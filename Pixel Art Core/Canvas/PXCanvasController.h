@@ -36,8 +36,8 @@
 	id delegate;
 	BOOL wraps; // used in setCanvas
 }
-- view;
-- scrollView;
+- (PXCanvasView *)view;
+- (NSScrollView *)scrollView;
 - layerController;
 - window;
 - (void)dealloc;

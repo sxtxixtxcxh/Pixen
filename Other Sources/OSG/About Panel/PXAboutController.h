@@ -15,7 +15,7 @@
 @interface PXAboutController : NSResponder 
 {
 	id aboutPanel;
-	id panelInNib;
+	NSPanel *panelInNib;
 	IBOutlet NSTextView *credits;
 	IBOutlet NSTextField *version;
 	

@@ -33,6 +33,7 @@
 #import "PXCanvasWindowController_IBActions.h"
 #import "PXCanvasController.h"
 #import "PXCanvas_Layers.h"
+#import "PXCanvasView.h"
 #import "PXLayerController.h"
 #import "PXCanvasResizePrompter.h"
 #import "PXScaleController.h"

@@ -62,7 +62,6 @@
 	if (! canvas ) {
 		return;
 	}
-	NSEnumerator *layerEnumerator;
 	PXLayer *layerCopy;
 	int x, y;
 	NSColor *A, *B, *C, *D, *E, *F, *G, *H, *I, *E0, *E1, *E2, *E3;

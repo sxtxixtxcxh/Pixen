@@ -238,9 +238,8 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 		systemPalettes = calloc(newCount, sizeof(PXPalette *));
 		for (i = 0; i < [lists count]; i++)
 		{
-			NSEnumerator *keyEnumerator;
 			NSColorList *current = [lists objectAtIndex:i];
-			NSString *currentKey;
+			
 			PXPalette *palette = PXPalette_alloc();
 			PXPalette_initWithoutBackgroundColor(palette);
 			PXPalette_setName(palette, [current name]);

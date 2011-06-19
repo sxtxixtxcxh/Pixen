@@ -31,7 +31,7 @@
 
 @implementation PXCanvasController
 
-- view
+- (PXCanvasView *)view
 {
 	return view;
 }
@@ -303,7 +303,7 @@
 	wraps = newWraps;
 }
 
-- scrollView
+- (NSScrollView *)scrollView
 {
 	return scrollView;
 }

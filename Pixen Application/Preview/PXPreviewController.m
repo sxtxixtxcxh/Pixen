@@ -30,6 +30,7 @@
 #import "PXCanvas.h"
 #import "PXCanvas_Backgrounds.h"
 #import "PXCanvas_ImportingExporting.h"
+#import "PXCanvasPreviewView.h"
 #import "PXBackgrounds.h"
 #import "PXBackgroundController.h"
 #import "PXDefaults.h"
@@ -51,7 +52,7 @@ static PXPreviewController *instance = nil;
 @implementation NSWindow(TitleBarHeight)
 - (float)titleBarHeight
 {
-	return NSHeight([self frame]) - NSHeight([[self contentView] frame]);
+	return NSHeight([self frame]) - NSHeight([ (NSView *) [self contentView] frame]);
 }
 @end
 
@@ -89,7 +90,7 @@ static PXPreviewController *instance = nil;
 		autorelease]];
 	[resizeSizeWindow setLevel:NSPopUpMenuWindowLevel];
 	
-	NSRect contentFrame = [[[self window] contentView] frame];
+	NSRect contentFrame = [ (NSView *) [[self window] contentView] frame];
 	bezelView = [[PXPreviewBezelView alloc] initWithFrame:NSMakeRect(NSWidth(contentFrame) - 18, NSHeight(contentFrame) - 18, 18, 18)];
 	[[[self window] contentView] addSubview:bezelView];
 	[bezelView setAlphaValue:0.33];
@@ -193,7 +194,7 @@ static PXPreviewController *instance = nil;
 - (void)updateTrackingRectAssumingInside:(BOOL)inside
 {
 	[self mouseExited:nil];
-	NSRect trackingFrame = [[[self window] contentView] frame];
+	NSRect trackingFrame = [ (NSView *) [[self window] contentView] frame];
 	if (trackingTag != -1) { [view removeTrackingRect:trackingTag]; }
 	trackingTag = [[[self window] contentView] addTrackingRect:trackingFrame owner:self userData:nil assumeInside:inside];
 }
@@ -222,7 +223,7 @@ static PXPreviewController *instance = nil;
 
 - (NSSize)properWindowSizeForCanvasSize:(NSSize)size
 {
-	NSSize newSize = [[[self window] contentView] frame].size;
+	NSSize newSize = [ (NSView *) [[self window] contentView] frame].size;
 	if (size.width > 64)
     {
 		newSize.width = size.width;
@@ -254,11 +255,11 @@ static PXPreviewController *instance = nil;
 		newSize = [self properWindowSizeForCanvasSize:[canvas previewSize]];
 	NSRect newFrame = [[self window] frame];
 	newFrame.size = newSize;
-	if(!NSEqualSizes(newFrame.size, [[[self window] contentView] frame].size))
+	if(!NSEqualSizes(newFrame.size, [ (NSView *) [[self window] contentView] frame].size))
 	{
 		liveResizing = YES;
 		NSRect windowFrame = [[self window] frame];
-		NSRect contentFrame = [[[self window] contentView] frame];
+		NSRect contentFrame = [ (NSView *) [[self window] contentView] frame];
 		newFrame.size.height += NSHeight(windowFrame) - NSHeight(contentFrame);
 		[[self window] setFrame:newFrame display:YES animate:YES];
 	}
@@ -476,7 +477,7 @@ static PXPreviewController *instance = nil;
 
 - (void)centerContent
 {
-	NSSize windowSize = [[[self window] contentView] frame].size;
+	NSSize windowSize = [ (NSView *) [[self window] contentView] frame].size;
 	NSSize contentSize = [view frame].size;
 	NSPoint newOrigin;
 	newOrigin.x = (windowSize.width - contentSize.width) / 2;
@@ -489,7 +490,7 @@ static PXPreviewController *instance = nil;
 {
 	if([self hasUsableCanvas]) {
 		if(liveResizing) {
-			NSSize windowSize = [[[self window] contentView] frame].size;
+			NSSize windowSize = [ (NSView *) [[self window] contentView] frame].size;
 			NSSize finalCanvasSize = [canvas previewSize];
 			NSSize finalWindowSize = [self properWindowSizeForCanvasSize:finalCanvasSize];
 			NSPoint canvasToWindowRatio = NSMakePoint(1,1);
@@ -522,7 +523,7 @@ static PXPreviewController *instance = nil;
 				newSize.height = MAX(newSize.height * sizingFactor.height, MAX(floorf(MIN([canvas size].height / 2, 64)), 1));
 			}
 			else
-				newSize = [[[self window] contentView] frame].size;
+				newSize = [ (NSView *) [[self window] contentView] frame].size;
 			[canvas setPreviewSize:newSize];
 			[self sizeToCanvas];
 		}
