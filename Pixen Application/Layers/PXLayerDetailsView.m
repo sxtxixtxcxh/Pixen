@@ -355,9 +355,33 @@
 	[[layer canvas] flipLayerVertically:layer];
 }
 
+- (void)setSelected:(BOOL)state
+{
+	if (selected != state)
+	{
+		selected = state;
+		
+		if (selected) {
+			if (name.isEditing) {
+				[[name cell] setTextColor:[NSColor blackColor]];
+			}
+			else {
+				[[name cell] setTextColor:[NSColor whiteColor]];
+			}
+			
+			[[opacityText cell] setTextColor:[NSColor whiteColor]];
+		}
+		else {
+			[[name cell] setTextColor:[NSColor blackColor]];
+			[[opacityText cell] setTextColor:[NSColor grayColor]];
+		}
+		
+		[self setNeedsDisplay:YES];
+	}
+}
 
 - (void)drawRect:(NSRect)r {
-	if(selected) {
+	if (selected) {
 		[[NSColor alternateSelectedControlColor] set];
 		NSRectFill(r);
 	}
