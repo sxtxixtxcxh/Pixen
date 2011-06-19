@@ -40,6 +40,12 @@
 
 @implementation PXMoveTool
 
+- (id)init {
+	self = [super init];
+	self.propertiesController = nil;
+	return self;
+}
+
 - (NSString *)name
 {
 	return NSLocalizedString(@"MOVE_NAME", @"Move Tool");
