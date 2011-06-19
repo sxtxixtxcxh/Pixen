@@ -11,6 +11,8 @@
 
 @implementation PXLayerTextField
 
+@synthesize editing = isEditing;
+
 - (void)resetCursorRects
 {
 	// no-op on purpose; we don't want the text cursor showing up over this
@@ -87,6 +89,8 @@
 	[self abortEditing];
 	[self setFocusRingType:NSFocusRingTypeNone];
 	[self setSelectable:NO];
+	[[self cell] setTextColor:[NSColor whiteColor]];
+	
 	NSRect frame = [self frame];
 	frame.origin.y -= 3;
 	frame.origin.x += 2;

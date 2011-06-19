@@ -15,4 +15,7 @@
 	BOOL reachedByClicking;
 }
 - (void)useEditAppearance;
+
+@property (nonatomic, readonly, getter=isEditing) BOOL editing;
+
 @end

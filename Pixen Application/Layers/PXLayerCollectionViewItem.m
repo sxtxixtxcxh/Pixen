@@ -11,26 +11,10 @@
 
 @implementation PXLayerCollectionViewItem
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
-}
-
-- (void)dealloc
-{
-    [super dealloc];
-}
-
 - (void)setSelected:(BOOL)flag
 {
 	[super setSelected:flag];
-	[(PXLayerDetailsView *)[self view] setSelected:flag];
-	[[self view] setNeedsDisplay:YES];
+	[ (PXLayerDetailsView *) [self view] setSelected:flag];
 }
 
 @end
