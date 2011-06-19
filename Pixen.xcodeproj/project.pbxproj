@@ -3001,6 +3001,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = Pixen;
+				VALID_ARCHS = i386;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -3039,6 +3040,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Pixen;
 				SECTORDER_FLAGS = "";
+				VALID_ARCHS = i386;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
