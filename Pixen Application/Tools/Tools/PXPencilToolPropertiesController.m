@@ -117,7 +117,6 @@
 - (void)awakeFromNib
 {
 	[self clearPattern:nil];
-	self.lineThickness = 1;
 }
 
 - (id)init
@@ -126,6 +125,8 @@
 	if (self) {
 		patternEditor = [[PXPatternEditorController alloc] init];
 		[patternEditor setDelegate:self];
+		
+		self.lineThickness = 1;
 	}
 	return self;
 }
