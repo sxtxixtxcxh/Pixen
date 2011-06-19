@@ -44,6 +44,8 @@
 #import <AppKit/NSTextStorage.h>
 #import <AppKit/NSTextView.h>
 
+#import <QuartzCore/QuartzCore.h>
+
 static PXAboutController *singleInstance = nil;
 
 @implementation PXAboutController
@@ -121,6 +123,10 @@ static PXAboutController *singleInstance = nil;
 	[aboutPanel setDelegate: self];
 	[aboutPanel setLevel:NSModalPanelWindowLevel];
 	
+	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"alphaValue"];
+	animation.delegate = self;
+	
+	[aboutPanel setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
 	
 	content = [[panelInNib contentView] retain];
 	[content removeFromSuperview];
@@ -175,82 +181,24 @@ static PXAboutController *singleInstance = nil;
 
 - (void)showPanel:(id) sender
 {
-	NSDictionary *dictUserInfo;
-	if (!aboutPanel) 
-    { 
-		[self setupPanel]; 
-    }
+	if (!aboutPanel)
+		[self setupPanel];
+	
 	[aboutPanel setAlphaValue:0.0];
 	[aboutPanel makeKeyAndOrderFront:nil];
-	[fadeTimer invalidate];
-	[fadeTimer release];
 	
-	dictUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-		[NSNumber numberWithFloat:0.0], PXFadeOpacityKey,
-		[NSNumber numberWithFloat:.1], PXFadeDirectionKey,
-		nil];
-	
-	fadeTimer = [[NSTimer scheduledTimerWithTimeInterval:.05 
-												  target:self 
-												selector:@selector(fade:) 
-												userInfo:dictUserInfo			  
-												 repeats:NO] retain];
+	[[aboutPanel animator] setAlphaValue:1.0f];
 }
 
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+	if ([aboutPanel alphaValue] == 0)
+		[aboutPanel orderOut:nil];
+}
 
 - (void)hidePanel
 {
-	NSDictionary *dictUserInfo;
-	
-	[fadeTimer invalidate];
-	[fadeTimer release];
-	
-	dictUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-		[NSNumber numberWithFloat:1.0], PXFadeOpacityKey, 
-		[NSNumber numberWithFloat:-.1], PXFadeDirectionKey, 
-		nil];
-	
-	fadeTimer = [[NSTimer scheduledTimerWithTimeInterval:.05 
-												  target:self 
-												selector:@selector(fade:) 
-												userInfo:dictUserInfo
-												 repeats:NO] retain];
-}
-
-- (void)fade:(NSTimer *)timer
-{
-	NSDictionary *userInfo = [timer userInfo];
-
-	float alphaValue = [[userInfo objectForKey:PXFadeOpacityKey] floatValue];
-	float fadeDirection = [[userInfo objectForKey:PXFadeDirectionKey] floatValue];
-	
-	[aboutPanel setAlphaValue:alphaValue];
-	[fadeTimer invalidate];
-	[fadeTimer release];
-	
-	if ( ( (alphaValue > 0 ) &&  ( fadeDirection < 0 ) )
-		 || ( (alphaValue < 1)  && (fadeDirection > 0 ) ) )
-    {
-		NSNumber *opacityNum = [NSNumber numberWithFloat:alphaValue+fadeDirection];
-		NSNumber *dirNum = [NSNumber numberWithFloat:fadeDirection];
-		
-		NSDictionary *dictUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-			opacityNum, PXFadeOpacityKey, 
-			dirNum, PXFadeDirectionKey,nil];
-		
-		fadeTimer = [[NSTimer scheduledTimerWithTimeInterval:.02 
-													  target:self 
-													selector:@selector(fade:) 
-													userInfo: dictUserInfo
-													 repeats:NO] retain];
-    }
-	else
-    {
-		fadeTimer = nil;
-		if (alphaValue <= 0) {
-			[aboutPanel orderOut:nil];
-		}
-    }
+	[[aboutPanel animator] setAlphaValue:0.0f];
 }
 
 - (void)mouseDown:(NSEvent *) event
