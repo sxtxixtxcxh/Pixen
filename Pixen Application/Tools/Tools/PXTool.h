@@ -30,16 +30,18 @@
 #import <AppKit/AppKit.h>
 
 #import "PXCanvasController.h"
-@class PXToolSwitcher, PXToolPropertiesView, PXPattern, PXCanvas;
+@class PXToolSwitcher, PXToolPropertiesController, PXPattern, PXCanvas;
 @interface PXTool : NSObject 
 {
 	BOOL isClicking;
 	NSBezierPath *path;
 	NSBezierPath *wrappedPath;
 	PXToolSwitcher *switcher;
-	PXToolPropertiesView *propertiesView;
+	PXToolPropertiesController *propertiesController;
 	NSColor *color;
 }
+
+@property (nonatomic, retain) PXToolPropertiesController *propertiesController;
 
 - (NSString *)name;
 
@@ -61,8 +63,6 @@ fromCanvasController:(PXCanvasController *)controller;
 - (void)keyDown:(NSEvent *)event fromCanvasController:(PXCanvasController *)cc;
 
 - (NSRect)crosshairRectCenteredAtPoint:(NSPoint)aPoint;
-
-- propertiesView;
 
 - (NSBezierPath *)path;
 - (NSBezierPath *)wrappedPath;

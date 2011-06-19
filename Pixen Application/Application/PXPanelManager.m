@@ -33,7 +33,7 @@
 #import "PXWelcomeController.h"
 #import "PXAboutController.h"
 #import "PXToolPaletteController.h"
-#import "PXToolPropertiesController.h"
+#import "PXToolPropertiesManager.h"
 #import "PXPreferencesController.h"
 #import "PXInfoPanelController.h"
 #import "PXPreviewController.h"
@@ -217,12 +217,12 @@ static PXPanelManager *sharedManager = nil;
 
 - (NSPanel *)leftToolPropertiesPanel
 {
-	return [[PXToolPropertiesController leftToolPropertiesController] propertiesPanel];
+	return (NSPanel *) [PXToolPropertiesManager leftToolPropertiesManager].window;
 }
 
 - (NSPanel *)rightToolPropertiesPanel
 {
-	return [[PXToolPropertiesController rightToolPropertiesController] propertiesPanel];
+	return (NSPanel *) [PXToolPropertiesManager rightToolPropertiesManager].window;
 }
 
 - (NSPanel *)preferencesPanel

@@ -1,5 +1,5 @@
 //
-//  PXPencilToolPropertiesView.h
+//  PXShapeToolPropertiesController.h
 //  Pixen-XCode
 
 // Copyright (c) 2003,2004,2005 Open Sword Group
@@ -24,34 +24,25 @@
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-//  Created by Ian Henderson on Wed Mar 17 2004.
+//  Created by Andy Matuschak on Sat Mar 13 2004.
 //  Copyright (c) 2004 Open Sword Group. All rights reserved.
 //
 
-#import "PXToolPropertiesView.h"
+#import <AppKit/AppKit.h>
+#import "PXToolPropertiesController.h"
 
-@class PXPattern, PXPatternEditorController;
-
-@interface PXPencilToolPropertiesView : PXToolPropertiesView 
+@interface PXShapeToolPropertiesController : PXToolPropertiesController
 {
-	IBOutlet NSTextField *lineThicknessField;
-	IBOutlet NSButton *modifyButton;
-	IBOutlet NSButton *clearButton;
-	
-	PXPattern *drawingPattern;
-	PXPatternEditorController *patternEditor;
-	int lineThickness;
+  @private
+	NSColor *fillColor;
+	BOOL shouldFill;
+	BOOL shouldUseMainColorForFill;
+	int borderWidth;
 }
 
-- (NSSize)patternSize;
-- (int)lineThickness;
-- (NSArray *)drawingPoints;
-
-- (IBAction)modifyPattern:(id)sender;
-- (IBAction)clearPattern:(id)sender;
-- (void)setPattern:(PXPattern *)pattern;
-- (IBAction)lineThicknessChanged:(id)sender;
-
-- (void)setToolName:name;
+@property (nonatomic, retain) NSColor *fillColor;
+@property (nonatomic, assign) BOOL shouldFill;
+@property (nonatomic, assign) BOOL shouldUseMainColorForFill;
+@property (nonatomic, assign) int borderWidth;
 
 @end

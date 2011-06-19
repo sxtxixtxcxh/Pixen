@@ -1,5 +1,5 @@
 //
-//  PXPencilToolPropertiesView.m
+//  PXPencilToolPropertiesController.m
 //  Pixen-XCode
 
 // Copyright (c) 2003,2004,2005 Open Sword Group
@@ -28,47 +28,43 @@
 //  Copyright (c) 2004 Open Sword Group. All rights reserved.
 //
 
-#import "PXPencilToolPropertiesView.h"
+#import "PXPencilToolPropertiesController.h"
 #import "PXCanvasDocument.h"
 #import "PXPattern.h"
 #import "PXCanvasController.h"
 #import "PXNotifications.h"
 #import "PXPatternEditorController.h"
 
-@implementation PXPencilToolPropertiesView
+@implementation PXPencilToolPropertiesController
 
--(NSString *)  nibName
+@synthesize lineThickness, pattern = drawingPattern;
+
+- (NSString *)nibName
 {
     return @"PXPencilToolPropertiesView";
 }
 
-- (int)lineThickness
-{
-	return lineThickness;
-}
-
-- (IBAction)lineThicknessChanged:(id)sender
-{
-	lineThickness = [lineThicknessField intValue];
-}
-
 - (void)setPattern:(PXPattern *)pattern
 {
-	[drawingPattern release];
-	drawingPattern = [pattern retain];
-	[lineThicknessField setEnabled:NO];
-	[clearButton setEnabled:YES];
-	[modifyButton setTitle:NSLocalizedString(@"MODIFY_PATTERN", @"Modify Pattern…")];
-	if([pattern size].width < 2 && [pattern size].height < 2) {
-		[self clearPattern:self];
+	if (drawingPattern != pattern) {
+		[drawingPattern release];
+		drawingPattern = [pattern retain];
+		
+		[lineThicknessField setEnabled:NO];
+		[clearButton setEnabled:YES];
+		[modifyButton setTitle:NSLocalizedString(@"MODIFY_PATTERN", @"Modify Pattern...")];
+		
+		if ([pattern size].width < 2 && [pattern size].height < 2) {
+			[self clearPattern:self];
+		}
 	}
 }
 
-- (void)patternEditor:editor finishedWithPattern:(PXPattern *)pattern
+- (void)patternEditor:(id)editor finishedWithPattern:(PXPattern *)pattern
 {
-	if (pattern == nil) {
+	if (pattern == nil)
 		return;
-	}
+	
 	[self setPattern:pattern];
 }
 
@@ -77,6 +73,7 @@
 	if (drawingPattern != nil) {
 		return [drawingPattern size];
 	}
+	
 	return NSZeroSize;
 }
 
@@ -85,20 +82,25 @@
 	return [drawingPattern pointsInPattern];
 }
 
-- (IBAction)clearPattern:(id) sender
+- (IBAction)clearPattern:(id)sender
 {
+	if (!drawingPattern)
+		return;
+	
 	[drawingPattern release];
 	drawingPattern = nil;
+	
 	[lineThicknessField setEnabled:YES];
 	[clearButton setEnabled:NO];
-	[modifyButton setTitle:NSLocalizedString(@"SET_PATTERN", @"Set Pattern…")];
+	[modifyButton setTitle:NSLocalizedString(@"SET_PATTERN", @"Set Pattern...")];
 }
 
-- (IBAction)modifyPattern:(id) sender
+- (IBAction)modifyPattern:(id)sender
 {
 	if (drawingPattern == nil) {
 		drawingPattern = [[PXPattern alloc] init];
 		[drawingPattern setSize:NSMakeSize([self lineThickness], [self lineThickness])];
+		
 		int x, y;
 		for (x=0; x<[self lineThickness]; x++) {
 			for (y=0; y<[self lineThickness]; y++) {
@@ -115,10 +117,10 @@
 - (void)awakeFromNib
 {
 	[self clearPattern:nil];
-	lineThickness = 1;
+	self.lineThickness = 1;
 }
 
-- init
+- (id)init
 {
 	self = [super init];
 	if (self) {
@@ -128,7 +130,7 @@
 	return self;
 }
 
-- (void)setToolName:name
+- (void)setToolName:(id)name
 {
 	[patternEditor setToolName:name];
 }

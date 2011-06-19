@@ -34,6 +34,8 @@
 
 @implementation PXTool
 
+@synthesize propertiesController;
+
 - (NSString *)name
 {
 	return @"";
@@ -60,6 +62,7 @@
 	[wrappedPath release];
 	[path release];
 	[color release];
+	[propertiesController release];
 	[super dealloc];
 }
 
@@ -137,11 +140,6 @@ fromCanvasController:(PXCanvasController *)controller
 	if ([[[controller canvas] undoManager] groupingLevel] > 0) {
 		[[controller canvas] endUndoGrouping:[self actionName]];
 	}
-}
-
-- (PXToolPropertiesView *)propertiesView 
-{ 
-	return propertiesView; 
 }
 
 - (BOOL)shiftKeyDown 

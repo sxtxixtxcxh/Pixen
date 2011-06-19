@@ -1,28 +1,30 @@
 //
-//  PXEyedropperToolPropertiesView.m
+//  PXEyedropperToolPropertiesController.m
 //  Pixen
 //
 //  Created by Andy Matuschak on 7/8/05.
 //  Copyright 2005 Open Sword Group. All rights reserved.
 //
 
-#import "PXEyedropperToolPropertiesView.h"
+#import "PXEyedropperToolPropertiesController.h"
 
+@implementation PXEyedropperToolPropertiesController
 
-@implementation PXEyedropperToolPropertiesView
+@synthesize buttonType;
 
-- init
+- (id)init
 {
-	[super init];
+	self = [super init];
 	colorSource = PXMergedLayersColorSource;
 	return self;
 }
 
-- (void)setButtonType:(PXToolButtonType)tbt
+- (void)setButtonType:(PXToolButtonType)type
 {
-	buttonType = tbt;
+	buttonType = type;
+	
 	if (targetMatrix)
-		[targetMatrix selectCellAtRow:tbt column:0];
+		[targetMatrix selectCellAtRow:type column:0];
 }
 
 - (void)awakeFromNib
@@ -30,7 +32,7 @@
 	[targetMatrix selectCellAtRow:buttonType column:0];
 }
 
-- (NSString *)  nibName
+- (NSString *)nibName
 {
     return @"PXEyedropperToolPropertiesView";
 }
@@ -40,19 +42,14 @@
 	return colorSource;
 }
 
-- (PXToolButtonType)targetToolButton
-{
-	return buttonType;
-}
-
-- (IBAction)colorSourceChanged:sender
+- (IBAction)colorSourceChanged:(id)sender
 {
 	colorSource = ([[sender selectedCell] tag]) ? PXActiveLayerColorSource : PXMergedLayersColorSource;
 }
 
-- (IBAction)targetChanged:sender
+- (IBAction)targetChanged:(id)sender
 {
-	buttonType = ([[sender selectedCell] tag]) ? PXRightButtonTool : PXLeftButtonTool;
+	self.buttonType = ([[sender selectedCell] tag]) ? PXRightButtonTool : PXLeftButtonTool;
 }
 
 @end

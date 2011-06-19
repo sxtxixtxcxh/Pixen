@@ -13,6 +13,7 @@
 
 @interface PXFillTool : PXTool 
 {
+  @private
 	BOOL commandDown;
 }
 

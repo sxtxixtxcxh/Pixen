@@ -1,6 +1,7 @@
 //
-//  PXToolPropertiesView.m
+//  PXPencilToolPropertiesController.h
 //  Pixen-XCode
+
 // Copyright (c) 2003,2004,2005 Open Sword Group
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,41 +22,37 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM,  OUT OF OR IN CONNECTION WITH
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
 
-//  Created by Andy Matuschak on Sat Mar 13 2004.
+//  Created by Ian Henderson on Wed Mar 17 2004.
 //  Copyright (c) 2004 Open Sword Group. All rights reserved.
 //
 
-#import "PXToolPropertiesView.h"
+#import "PXToolPropertiesController.h"
 
+@class PXPattern, PXPatternEditorController;
 
-@implementation PXToolPropertiesView
-
--(id) init
+@interface PXPencilToolPropertiesController : PXToolPropertiesController
 {
-	if ( ! ( self = [super init] ) ) 
-		return nil;
+  @private
+	IBOutlet NSTextField *lineThicknessField;
+	IBOutlet NSButton *modifyButton;
+	IBOutlet NSButton *clearButton;
 	
-	[NSBundle loadNibNamed:[self nibName] owner:self];
-	[self setFrame:[view frame]];
-	[self addSubview:view];
-	
-	return self;
+	PXPattern *drawingPattern;
+	PXPatternEditorController *patternEditor;
+	int lineThickness;
 }
 
--(NSString *) nibName
-{
-	return @"PXBlankPropertiesView";
-}
+@property (nonatomic, assign) int lineThickness;
+@property (nonatomic, retain) PXPattern *pattern;
 
-- (void)drawRect:(NSRect)rect 
-{
-	// Drawing code here.
-}
+- (NSSize)patternSize;
+- (NSArray *)drawingPoints;
 
-- (NSView *)view
-{
-	return view;
-}
+- (IBAction)modifyPattern:(id)sender;
+- (IBAction)clearPattern:(id)sender;
+
+- (void)setToolName:(id)name;
 
 @end

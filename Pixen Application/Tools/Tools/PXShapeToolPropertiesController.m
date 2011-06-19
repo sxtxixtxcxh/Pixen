@@ -1,6 +1,7 @@
 //
-//  PXRectangleToolPropertiesView.h
+//  PXShapeToolPropertiesController.m
 //  Pixen-XCode
+
 // Copyright (c) 2003,2004,2005 Open Sword Group
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,21 +28,30 @@
 //  Copyright (c) 2004 Open Sword Group. All rights reserved.
 //
 
-#import <AppKit/AppKit.h>
-#import "PXToolPropertiesView.h"
+#import "PXShapeToolPropertiesController.h"
 
+@implementation PXShapeToolPropertiesController
 
-@interface PXRectangleToolPropertiesView : PXToolPropertiesView
+@synthesize fillColor, shouldFill, shouldUseMainColorForFill, borderWidth;
+
+- (id)init
 {
-	NSColor *fillColor;
-	BOOL shouldFill;
-	BOOL shouldUseMainColorForFill;
-	int borderWidth;
+	self = [super init];
+	self.shouldUseMainColorForFill = YES;
+	self.borderWidth = 1;
+	self.fillColor = [[NSColor blackColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+	return self;
 }
 
-- (NSColor *) fillColor;
-- (BOOL)shouldFill;
-- (BOOL)shouldUseMainColorForFill;
-- (int)borderWidth;
+- (void)dealloc
+{
+	[fillColor release];
+	[super dealloc];
+}
+
+- (NSString *)nibName
+{
+	return @"PXShapeToolPropertiesView";
+}
 
 @end

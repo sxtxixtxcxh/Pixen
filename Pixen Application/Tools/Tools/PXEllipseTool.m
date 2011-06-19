@@ -29,10 +29,11 @@
 #import "PXCanvasController.h"
 #import "PXCanvas.h"
 #import "PXEllipseTool.h"
-#import "PXEllipseToolPropertiesView.h"
-
+#import "PXShapeToolPropertiesController.h"
 
 @implementation PXEllipseTool
+
+#define SHAPE_PC ((PXShapeToolPropertiesController *) self.propertiesController)
 
 - (NSString *)name
 {
@@ -49,7 +50,8 @@
 	if ( ! ( self = [super init] ) ) 
 		return nil;
 	
-	propertiesView = [[PXEllipseToolPropertiesView alloc] init];
+	self.propertiesController = [[PXShapeToolPropertiesController new] autorelease];
+	
 	return self;
 }
 
@@ -174,7 +176,7 @@
 	NSPoint startPoint, endPoint;
 	NSColor * oldColor = color;
 	
-	if (![(PXEllipseToolPropertiesView *)propertiesView shouldUseMainColorForFill]) 
+	if (![SHAPE_PC shouldUseMainColorForFill]) 
     { 
 		color = fillColor;
     }
@@ -242,16 +244,16 @@
 	NSRect ellipseBound = [self getEllipseBoundFromdrawFromPoint:(NSPoint)origin 
 														 toPoint:aPoint];
 	
-	if ([(PXEllipseToolPropertiesView *)propertiesView shouldFill]) {
+	if ([SHAPE_PC shouldFill]) {
 		[self plotFilledEllipseInscribedInRect:ellipseBound
-								 withLineWidth:[(PXEllipseToolPropertiesView *)propertiesView borderWidth]
-								 withFillColor:([(PXEllipseToolPropertiesView *)propertiesView shouldUseMainColorForFill]) ? [self colorForCanvas:canvas] : [(PXEllipseToolPropertiesView *)propertiesView fillColor] 
+								 withLineWidth:[SHAPE_PC borderWidth]
+								 withFillColor:([SHAPE_PC shouldUseMainColorForFill]) ? [self colorForCanvas:canvas] : [SHAPE_PC fillColor]
 									  inCanvas:canvas];
 		
 	} else {
 		
 		[self plotUnfilledEllipseInscribedInRect:ellipseBound
-								   withLineWidth:[(PXEllipseToolPropertiesView *)propertiesView borderWidth] 
+								   withLineWidth:[SHAPE_PC borderWidth]
 										inCanvas:canvas];
 	}
 }
@@ -264,7 +266,7 @@
 	NSRect ellipseBound = [self getEllipseBoundFromdrawFromPoint:(NSPoint)origin
 														 toPoint:finalPoint];
     [self plotUnfilledEllipseInscribedInRect:ellipseBound
-							   withLineWidth:[(PXEllipseToolPropertiesView *)propertiesView borderWidth]
+							   withLineWidth:[SHAPE_PC borderWidth]
 									inCanvas:canvas];
 }
 

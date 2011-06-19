@@ -30,10 +30,12 @@
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvasController.h"
-#import "PXEyedropperToolPropertiesView.h"
+#import "PXEyedropperToolPropertiesController.h"
 #import "PXToolPaletteController.h"
 
 @implementation PXEyedropperTool
+
+#define EYE_PC ((PXEyedropperToolPropertiesController *) self.propertiesController)
 
 - (NSString *)name
 {
@@ -43,25 +45,24 @@
 - (id)init
 {
 	self = [super init];
-	propertiesView = [[PXEyedropperToolPropertiesView alloc] init];
+	self.propertiesController = [[PXEyedropperToolPropertiesController new] autorelease];
 	return self;
 }
 
-- (void)dealloc
-{
-	[propertiesView release];
-	[super dealloc];
-}
+/*
 
 - propertiesView
 {
-    // immense HACK ohgodimsorry
+    //FIXME immense HACK ohgodimsorry
 	if ([[PXToolPaletteController sharedToolPaletteController] leftTool] == self)
-		[(PXEyedropperToolPropertiesView *) propertiesView setButtonType:PXLeftButtonTool];
+		[(PXEyedropperToolPropertiesController *) self.propertiesController setButtonType:PXLeftButtonTool];
 	else
-		[(PXEyedropperToolPropertiesView *)propertiesView setButtonType:PXRightButtonTool];
+		[(PXEyedropperToolPropertiesController *) self.propertiesController setButtonType:PXRightButtonTool];
+	
 	return propertiesView;	
 }
+
+ */
 
 -(NSColor *) compositeColorAtPoint:(NSPoint)aPoint
                         fromCanvas:(PXCanvas *)canvas
@@ -72,7 +73,7 @@
   }
 	else 
   {
-		if ([(PXEyedropperToolPropertiesView *)propertiesView colorSource] == PXActiveLayerColorSource)
+		if ([EYE_PC colorSource] == PXActiveLayerColorSource)
 		{
 			return [[canvas activeLayer] colorAtPoint:aPoint];
 		}
@@ -88,7 +89,8 @@
 {
 	if(![[controller canvas] containsPoint:aPoint]) { return; }
 	id usedSwitcher;
-	if ([[self propertiesView] targetToolButton] == PXLeftButtonTool)
+	
+	if ([EYE_PC buttonType] == PXLeftButtonTool)
 		usedSwitcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
 	else
 		usedSwitcher = [[PXToolPaletteController sharedToolPaletteController] rightSwitcher];
