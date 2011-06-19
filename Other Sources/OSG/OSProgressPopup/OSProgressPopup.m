@@ -7,7 +7,6 @@
 //
 
 #import "OSProgressPopup.h"
-#import "ThreadWorker.h"
 
 static NSLock *popupLock = nil;
 
@@ -31,6 +30,11 @@ static NSLock *popupLock = nil;
 	[progressIndicator setUsesThreadedAnimation:YES];
 	[self setCanCancel:NO];	
 	return self;
+}
+
+- (void)dealloc {
+	[_workQueue release];
+	[super dealloc];
 }
 
 + (OSProgressPopup *)sharedProgressPopup
@@ -76,7 +80,7 @@ static NSLock *popupLock = nil;
 	[popupLock unlock];
 }
 
-- (void)forwardStartSelector:userInfo
+- (void)forwardStartSelector:(id)userInfo
 {
 	[_target performSelector:_selector withObject:userInfo];
 }
@@ -113,10 +117,11 @@ static NSLock *popupLock = nil;
 	}
 }
 
-- (void)forwardEndSelector:userInfo
+- (void)forwardEndSelector:(id)userInfo
 {
 	if (_didEndSelector)
 		[_target performSelector:_didEndSelector withObject:userInfo];
+	
 	[self endOperation];
 }
 
@@ -149,7 +154,19 @@ static NSLock *popupLock = nil;
 	[popupLock unlock];
 	
 	[self beginOperationWithStatusText:statusText parentWindow:parentWindow];
-	[ThreadWorker workOn:self withSelector:@selector(forwardStartSelector:) withObject:object didEndSelector:@selector(forwardEndSelector:)];
+	
+	if (!_workQueue) {
+		_workQueue = [[NSOperationQueue alloc] init];
+		[_workQueue setMaxConcurrentOperationCount:1];
+	}
+	
+	[_workQueue addOperationWithBlock:^{
+		[self forwardStartSelector:object];
+		
+		[[NSOperationQueue mainQueue] addOperationWithBlock:^{
+			[self performSelector:@selector(forwardEndSelector:)];
+		}];
+	}];
 }
 
 @end
