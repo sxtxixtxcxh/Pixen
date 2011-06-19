@@ -104,48 +104,45 @@ NSMutableArray * toolNames;
 	return self;
 }
 
-  //FIXME: private ? 
-  //Not sure what this was warning about -- though we do in general mix private and 'public' methods a bit much, we should make use of categories.
+//FIXME: private ?
+//Not sure what this was warning about -- though we do in general mix private and 'public' methods a bit much, we should make use of categories.
 - (void)checkUserDefaults
 {
-    //should find a way to factor this into the tools' classes.
-    //Leaks ? ?
+	//should find a way to factor this into the tools' classes.
+	//Leaks ??
 	NSArray *arrayObjects = [NSArray arrayWithObjects:@"p", @"e", @"d", @"z", 
-                           @"f", @"l", @"s", @"m", @"r", @"o", @"w", 
-                           @"a", nil];
+							 @"f", @"l", @"s", @"m", @"r", @"o", @"w", 
+							 @"a", nil];
 	
 	NSArray *arrayKeys = [NSArray arrayWithObjects:
-                        [NSNumber numberWithInt:PXPencilToolTag],
-                        [NSNumber numberWithInt:PXEraserToolTag],
-                        [NSNumber numberWithInt:PXEyedropperToolTag],
-                        [NSNumber numberWithInt:PXZoomToolTag],
-                        [NSNumber numberWithInt:PXFillToolTag],
-                        [NSNumber numberWithInt:PXLineToolTag],
-                        [NSNumber numberWithInt:PXRectangularSelectionToolTag],
-                        [NSNumber numberWithInt:PXMoveToolTag],
-                        [NSNumber numberWithInt:PXRectangleToolTag],
-                        [NSNumber numberWithInt:PXEllipseToolTag],
-                        [NSNumber numberWithInt:PXMagicWandToolTag],
-                        [NSNumber numberWithInt:PXLassoToolTag],
-                        nil];
+						  [NSNumber numberWithInt:PXPencilToolTag],
+						  [NSNumber numberWithInt:PXEraserToolTag],
+						  [NSNumber numberWithInt:PXEyedropperToolTag],
+						  [NSNumber numberWithInt:PXZoomToolTag],
+						  [NSNumber numberWithInt:PXFillToolTag],
+						  [NSNumber numberWithInt:PXLineToolTag],
+						  [NSNumber numberWithInt:PXRectangularSelectionToolTag],
+						  [NSNumber numberWithInt:PXMoveToolTag],
+						  [NSNumber numberWithInt:PXRectangleToolTag],
+						  [NSNumber numberWithInt:PXEllipseToolTag],
+						  [NSNumber numberWithInt:PXMagicWandToolTag],
+						  [NSNumber numberWithInt:PXLassoToolTag],
+						  nil];
 	
 	NSDictionary *defaultShortcuts = [NSDictionary dictionaryWithObjects:arrayObjects
-                                                               forKeys:arrayKeys];
-	NSEnumerator *enumerator = [defaultShortcuts keyEnumerator];
-	NSString *current;
-	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-	NSString *tmp; 
+																 forKeys:arrayKeys];
 	
-	while ( ( current = [enumerator nextObject] ) )
-  {
-		tmp =  [[[self class] toolNames] objectAtIndex:[current intValue]];
-		if ( ! [userDefaults objectForKey:tmp ] )
-		{
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	NSString *tmp;
+	
+	for (NSString *current in [defaultShortcuts keyEnumerator])
+	{
+		tmp = [[[self class] toolNames] objectAtIndex:[current intValue]];
+		
+		if ( ! [userDefaults objectForKey:tmp])
 			[userDefaults setObject:[defaultShortcuts objectForKey:current] forKey:tmp];
-		}
-  }
+	}
 }
-
 
 - (void)dealloc
 {

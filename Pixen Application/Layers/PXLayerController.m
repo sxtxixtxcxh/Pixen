@@ -138,6 +138,7 @@
 	{
 		selectedRow = [self invertLayerIndex:idx];
 	}
+	
 	for (i = 0; i < [[canvas layers] count]; i++)
 	{
 		PXLayer *layer = [[canvas layers] objectAtIndex:i];
