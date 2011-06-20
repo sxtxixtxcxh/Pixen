@@ -92,21 +92,21 @@
 	if (layers == newLayers)
 		return;
 	
-	[newLayers retain];
+	NSMutableArray *mutableNewLayers = [newLayers mutableCopy];
 	int oldActiveIndex = [layers indexOfObject:activeLayer];
 	
-	if ( [newLayers count] <= oldActiveIndex )
-		oldActiveIndex = [newLayers count]-1;
+	if ( [mutableNewLayers count] <= oldActiveIndex )
+		oldActiveIndex = [mutableNewLayers count]-1;
 	
-	for (PXLayer *layer in newLayers)
+	for (PXLayer *layer in mutableNewLayers)
 	{
 		[layer setCanvas:self];
 	}
 	
 	[layers autorelease];
-	layers = newLayers;
+	layers = mutableNewLayers;
 	
-	[self activateLayer:[newLayers objectAtIndex:oldActiveIndex]];
+	[self activateLayer:[mutableNewLayers objectAtIndex:oldActiveIndex]];
 	[self refreshWholePalette];
 	[self layersChanged];
 }
@@ -133,8 +133,8 @@
 
 - (void)replaceLayer:(PXLayer *)old withLayer:(PXLayer *)new actionName:(NSString *)act
 {
-	unsigned index = [layers indexOfObject:old];
-	unsigned activeIndex = [layers indexOfObject:activeLayer];
+	NSInteger index = [layers indexOfObject:old];
+	NSInteger activeIndex = [layers indexOfObject:activeLayer];
 	if(index == NSNotFound) { return; }
 	[self beginUndoGrouping]; {
 		[[undoManager prepareWithInvocationTarget:self] replaceLayer:new withLayer:old actionName:act];

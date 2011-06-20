@@ -11,6 +11,14 @@
 
 @implementation PXBackgroundTableHeader
 
+- (id)initWithFrame:(NSRect)frameRect {
+	if((self = [super initWithFrame:frameRect])) {
+		self.buttonType = NSMomentaryChangeButton;
+		self.bezelStyle = NSThickSquareBezelStyle;
+	}
+	return self;
+}
+
 - (void)mouseDown:(NSEvent *)event
 {
 	// don't make the button highlight

@@ -9,19 +9,20 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PXCanvasWindowController.h"
-@class PXAnimation, PXCel, PXFilmStripView, PXAnimationPreview, RBSplitSubview;
+@class PXAnimation, PXCel, PXFilmStripView, PXAnimationPreview;
 @interface PXAnimationWindowController : PXCanvasWindowController {
 	PXAnimation *animation;
+	IBOutlet NSSplitView *outerSplitView;
 	IBOutlet PXFilmStripView *filmStrip;
 	IBOutlet PXAnimationPreview *animationPreview;
 	
-	IBOutlet RBSplitSubview *topSubview;
+	IBOutlet NSView *topSubview;
 	unsigned oldMin, oldMax;
 	
 	IBOutlet NSButton *playPauseButton;
 	
 	PXCel *activeCel;
-	int activeIndex;
+	NSInteger activeIndex;
 }
 - (void)setAnimation:anim;
 - (void)activateCel:(PXCel *)cel;

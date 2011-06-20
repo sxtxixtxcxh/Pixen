@@ -13,7 +13,7 @@
 	NSTimer *animationTimer;
 	id currentCel;
 	int currentIndex;
-	id dataSource;
+	IBOutlet id dataSource;
 }
 
 - (BOOL)isPlaying;

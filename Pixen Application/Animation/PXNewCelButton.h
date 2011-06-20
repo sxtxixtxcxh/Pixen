@@ -12,7 +12,7 @@
 @interface PXNewCelButton : NSView {
 	int state;
 	NSBezierPath *buttonPath, *plusPath;
-	id delegate;
+	IBOutlet id delegate;
 }
 
 @end

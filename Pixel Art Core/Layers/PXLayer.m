@@ -254,7 +254,7 @@
 	[self moveToPoint:NSMakePoint(origin.x + amountX, origin.y + amountY)];
 }
 
-- (void)transformedDrawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(float)frac
+- (void)transformedDrawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(CGFloat)frac
 {
 	if(NSWidth(src) == 0 || NSHeight(src) == 0) {
 		return;
@@ -284,7 +284,7 @@
 			[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
 			[[NSGraphicsContext currentContext] setShouldAntialias:NO];
 			[[NSColor blackColor] set];
-			id translate = [NSAffineTransform transform];
+			NSAffineTransform *translate = [NSAffineTransform transform];
 			[translate translateXBy:-src.origin.x*widthScale yBy:-src.origin.y*heightScale];
 			[translate concat];
 			[[transform transformBezierPath:meldedBezier] fill];
@@ -319,7 +319,7 @@
 	[self drawInRect:dst fromRect:src operation:NSCompositeSourceOver fraction:1];
 }
 
-- (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(float)frac
+- (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(CGFloat)frac
 {
 	if (!visible || opacity == 0) { return; }
 //FIXME: this shouldn't be here

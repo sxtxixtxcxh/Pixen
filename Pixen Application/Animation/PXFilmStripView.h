@@ -10,32 +10,32 @@
 
 @interface PXFilmStripView : NSView
 {
-	id dataSource;
-	id delegate;
+	IBOutlet id dataSource;
+	IBOutlet id delegate;
 	
 	NSImage *spokeHoleCache;
 	
 	NSRect *celRects;
-	int celRectsCount;
+	NSInteger celRectsCount;
 	NSBezierPath *spokeHolePath;
 	
 	NSRect updateRect;
 	NSTimer *updateTimer;
 	
 	NSPoint dragOrigin;
-	int targetDraggingIndex;
+	NSInteger targetDraggingIndex;
 	
 	NSPoint mouseLocation;
 	
 	NSTrackingRectTag *celTrackingTags;
 	NSTrackingRectTag *closeButtonTrackingTags;
 	
-	int gonnaBeDeleted;
+	NSInteger gonnaBeDeleted;
 	
 	NSMutableIndexSet *selectedIndices;
 	BOOL allowsMultipleSelection;
 	NSTextFieldCell *fieldCell;
-	int activeCelForField;
+	NSInteger activeCelForField;
 }
 
 - (void)setDataSource:dataSource;
@@ -45,24 +45,24 @@
 
 - (void)setNeedsDelayedDisplayInRect:(NSRect)rect;
 
-- (int)selectedIndex;
+- (NSInteger)selectedIndex;
 - selectedCel;
 - (NSIndexSet *)selectedIndices;
 - (NSArray *)selectedCels;
-- (void)selectCelAtIndex:(int)index byExtendingSelection:(BOOL)extend;
-- (NSRect)rectOfCelIndex:(int)index;
+- (void)selectCelAtIndex:(NSInteger)index byExtendingSelection:(BOOL)extend;
+- (NSRect)rectOfCelIndex:(NSInteger)index;
 
 @end
 
 @interface NSObject (PXFilmStripDataSource)
-- (int)numberOfCels;
-- celAtIndex:(int)index;
+- (NSInteger)numberOfCels;
+- celAtIndex:(NSInteger)index;
 - (NSArray *)draggedTypesForFilmStripView:view;
 - (void)deleteCelsAtIndices:(NSIndexSet *)indices;
 - (void)writeCelsAtIndices:(NSIndexSet *)indices toPasteboard:(NSPasteboard *)pboard;
-- (BOOL)insertCelIntoFilmStripView:view fromPasteboard:(NSPasteboard *)pboard atIndex:(int)targetDraggingIndex;
-- (BOOL)moveCelInFilmStripView:view fromIndex:(int)index1 toIndex:(int)index2;
-- (BOOL)copyCelInFilmStripView:view atIndex:(int)currentIndex toIndex:(int)anotherIndex;
+- (BOOL)insertCelIntoFilmStripView:view fromPasteboard:(NSPasteboard *)pboard atIndex:(NSInteger)targetDraggingIndex;
+- (BOOL)moveCelInFilmStripView:view fromIndex:(NSInteger)index1 toIndex:(NSInteger)index2;
+- (BOOL)copyCelInFilmStripView:view atIndex:(NSInteger)currentIndex toIndex:(NSInteger)anotherIndex;
 @end
 
 @interface NSObject (PXFilmStripDelegate)

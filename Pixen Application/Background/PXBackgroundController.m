@@ -126,7 +126,7 @@ typedef enum _PXStackType
 {
 //FIXME: minor leak?  not autoreleasing this fixes the open/close-background-config-repeatedly crasher.
 	PXBackgroundTableHeader *header = [[PXBackgroundTableHeader alloc] initWithFrame:NSMakeRect(0, 0, NSWidth([stack frame]), 18)];
-	[header setStringValue:headerName];
+	[header setTitle:headerName];
 	[views addObject:header];
 	[stack stackSubview:header];
 	[header setFrame:NSMakeRect(-1, -1, NSWidth([header frame]) + 2, NSHeight([header frame]) + 2)];
@@ -215,7 +215,7 @@ typedef enum _PXStackType
 {
 	if (returnCode == NSAlertFirstButtonReturn)
 	{
-		int tag;
+		NSInteger tag=0;
 		[[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation
                                                  source:GetBackgroundPresetsDirectory()
                                             destination:nil 
@@ -361,10 +361,12 @@ typedef enum _PXStackType
 }
 
 - (NSDragOperation)stackedView:(OSStackedView *)aStackedView 
-				  validateDrop:(id <NSDraggingInfo>)info
+									validateDrop:(id <NSDraggingInfo>)info
 {
-	if(([[info draggingSource] tag] == PXTemplatesStackViewType && [aStackedView tag] == PXTemplatesStackViewType) ||
-	   ([[info draggingSource] tag] == PXDefaultsStackViewType && [aStackedView tag] == PXDefaultsStackViewType))
+	if(([(NSView *)[info draggingSource] tag] == PXTemplatesStackViewType && 
+			[aStackedView tag] == PXTemplatesStackViewType) ||
+	   ([(NSView *)[info draggingSource] tag] == PXDefaultsStackViewType && 
+			[aStackedView tag] == PXDefaultsStackViewType))
 	{
 		[[NSCursor arrowCursor] set];
 		return NSDragOperationNone;
@@ -536,8 +538,10 @@ typedef enum _PXStackType
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)info
 {
-	if(([[info draggingSource] tag] == PXTemplatesStackViewType && [[self documentView] tag] == PXTemplatesStackViewType) ||
-	   ([[info draggingSource] tag] == PXDefaultsStackViewType && [[self documentView] tag] == PXDefaultsStackViewType))
+	if(([(NSView *)[info draggingSource] tag] == PXTemplatesStackViewType && 
+			[(NSView *)[self documentView] tag] == PXTemplatesStackViewType) ||
+	   ([(NSView *)[info draggingSource] tag] == PXDefaultsStackViewType && 
+			[(NSView *)[self documentView] tag] == PXDefaultsStackViewType))
 	{
 		[[NSCursor arrowCursor] set];
 		return NSDragOperationNone;
@@ -553,7 +557,7 @@ typedef enum _PXStackType
 		return NSDragOperationNone;
 	}
 	
-	if ([[self documentView] tag] == PXDefaultsStackViewType)
+	if ([(NSView *)[self documentView] tag] == PXDefaultsStackViewType)
 	{
 		PXDefaultBackgroundTemplateView *mainBackgroundTemplate = (PXDefaultBackgroundTemplateView *)[[[[self documentView] valueForKey:@"views"] objectAtIndex:1] view];
 		PXDefaultBackgroundTemplateView *alternateBackgroundTemplate = (PXDefaultBackgroundTemplateView *)[[[[self documentView] valueForKey:@"views"] objectAtIndex:2] view];

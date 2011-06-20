@@ -66,7 +66,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	[super dealloc];
 }
 
-- (NSRect)closeButtonRectForCelIndex:(int)index
+- (NSRect)closeButtonRectForCelIndex:(NSInteger)index
 {
 	if (index >= celRectsCount || index < 0) { return NSZeroRect; }
 	NSRect celRect = celRects[index];
@@ -84,7 +84,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	return closeButtonRect;
 }
 
-- (NSRect)fieldCellRectForCelIndex:(int)index editing:(BOOL)editing
+- (NSRect)fieldCellRectForCelIndex:(NSInteger)index editing:(BOOL)editing
 {
 	NSAttributedString *string = [[[NSMutableAttributedString alloc] initWithString:[fieldCell stringValue] attributes:[NSDictionary dictionaryWithObject:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSMiniControlSize]] forKey:NSFontAttributeName]] autorelease];
 	if (index >= celRectsCount) { return NSZeroRect; }
@@ -128,7 +128,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 
 - (void)reloadData
 {
-	int numberOfCels = [dataSource numberOfCels];
+	NSInteger numberOfCels = [dataSource numberOfCels];
 	if (numberOfCels == 0)
 	{
 		[self setFrame:(NSRect){ NSZeroPoint, [[self enclosingScrollView] contentSize] }];
@@ -170,7 +170,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	celTrackingTags = malloc(sizeof(NSTrackingRectTag) * numberOfCels);
 	closeButtonTrackingTags = malloc(sizeof(NSTrackingRectTag) * numberOfCels);
 	
-	int i;
+	NSInteger i;
 	for (i = 0; i < celRectsCount; i++)
 	{
 		[self removeTrackingRect:celTrackingTags[i]];
@@ -188,7 +188,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 
 - (void)resetCursorRects
 {
-	int i;
+	NSInteger i;
 	for (i = 0; i < celRectsCount; i++)
 	{
 		[self removeTrackingRect:celTrackingTags[i]];
@@ -236,9 +236,9 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 - (void)drawSpokeHolesForRect:(NSRect)rect
 {
 	rect.origin.x -= PXFilmStripSpokeHoleSpacing;
-	int firstSpokeIndex = floorf(NSMinX(rect) / (PXFilmStripSpokeHoleSize.width + PXFilmStripSpokeHoleSpacing));
-	int lastSpokeIndex = ceilf(NSMaxX(rect) / (PXFilmStripSpokeHoleSize.width + PXFilmStripSpokeHoleSpacing));
-	int i;
+	NSInteger firstSpokeIndex = floorf(NSMinX(rect) / (PXFilmStripSpokeHoleSize.width + PXFilmStripSpokeHoleSpacing));
+	NSInteger lastSpokeIndex = ceilf(NSMaxX(rect) / (PXFilmStripSpokeHoleSize.width + PXFilmStripSpokeHoleSpacing));
+	NSInteger i;
 	float lowerHoleY = (PXFilmStripVerticalPadding - PXFilmStripSpokeHoleSize.height) / 2;
 	float upperHoleY = NSHeight([self bounds]) - lowerHoleY - PXFilmStripSpokeHoleSize.height;
 	for (i = firstSpokeIndex; i < lastSpokeIndex; i++)
@@ -248,7 +248,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	}
 }
 
-- (void)drawCloseButtonAtIndex:(int)index highlighted:(BOOL)highlighted pressed:(BOOL)pressed
+- (void)drawCloseButtonAtIndex:(NSInteger)index highlighted:(BOOL)highlighted pressed:(BOOL)pressed
 {
 	NSRect bounds = [self closeButtonRectForCelIndex:index];
 	NSColor *circleColor = [NSColor colorWithDeviceWhite:.86 alpha:1];
@@ -269,9 +269,9 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMinX(xBounds), NSMaxY(xBounds)) toPoint:NSMakePoint(NSMaxX(xBounds), NSMinY(xBounds))];
 }
 
-- (void)badgeCelAtIndex:(int)index
+- (void)badgeCelAtIndex:(NSInteger)index
 {
-	int fontSize = [NSFont systemFontSizeForControlSize:NSMiniControlSize];
+	CGFloat fontSize = [NSFont systemFontSizeForControlSize:NSMiniControlSize];
 	if (index > 9999)
 		fontSize = floorf(fontSize * .85);
 	
@@ -318,8 +318,8 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 
 - (void)drawRect:(NSRect)rect
 {
-	int i;
-	int numberOfCels = [dataSource numberOfCels];
+	NSInteger i;
+	NSInteger numberOfCels = [dataSource numberOfCels];
 
 	for (i = 0; i < numberOfCels; i++)
 	{
@@ -428,9 +428,9 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 {
 	if ([[event characters] characterAtIndex:0] == NSLeftArrowFunctionKey)
 	{
-		int numberOfCels = [dataSource numberOfCels];
+		NSInteger numberOfCels = [dataSource numberOfCels];
 		if (numberOfCels <= 1) { NSBeep(); return; }
-		int newIndex = [self selectedIndex];
+		NSInteger newIndex = [self selectedIndex];
 		if (newIndex == NSNotFound) { NSBeep(); return; }
 		newIndex--;
 		if (newIndex < 0)
@@ -439,9 +439,9 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	}
 	else if ([[event characters] characterAtIndex:0] == NSRightArrowFunctionKey)
 	{
-		int numberOfCels = [dataSource numberOfCels];
+		NSInteger numberOfCels = [dataSource numberOfCels];
 		if (numberOfCels <= 1) { NSBeep(); return; }
-		int newIndex = [self selectedIndex];
+		NSInteger newIndex = [self selectedIndex];
 		if (newIndex == NSNotFound) { NSBeep(); return; }
 		newIndex++;
 		if (newIndex >= numberOfCels)
@@ -463,7 +463,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	if (gonnaBeDeleted != -1 && NSPointInRect([self convertPoint:[event locationInWindow] fromView:nil], [self closeButtonRectForCelIndex:gonnaBeDeleted])) {
 		[dataSource deleteCelsAtIndices:[NSIndexSet indexSetWithIndex:gonnaBeDeleted]];
 	}
-	int index = gonnaBeDeleted;
+	NSInteger index = gonnaBeDeleted;
 	gonnaBeDeleted = -1;
 	[self setNeedsDisplayInRect:[self closeButtonRectForCelIndex:index]];
 }
@@ -471,10 +471,10 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 - (void)mouseDown:(NSEvent *)event
 {
 	// This could be faster if it needs to be by actually finding out candidates for the hit using some fancy math.
-	int numberOfCels = [dataSource numberOfCels];
+	NSInteger numberOfCels = [dataSource numberOfCels];
 	NSPoint location = [self convertPoint:[event locationInWindow] fromView:nil];
 	NSIndexSet *oldSet = [[selectedIndices copy] autorelease];
-	int i;
+	NSInteger i;
 	for (i = 0; i < numberOfCels; i++)
 	{
 		// For the duration editor thing
@@ -496,7 +496,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 			break;
 		}
 		NSRect redrawRect = NSInsetRect(celRects[i], -5, -5);
-		unsigned int modifierFlags = [event modifierFlags];
+		NSUInteger modifierFlags = [event modifierFlags];
 		if (modifierFlags & NSCommandKeyMask && allowsMultipleSelection)
 		{
 			if ([selectedIndices containsIndex:i])
@@ -521,7 +521,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 		{
 			if ([selectedIndices count])
 			{
-				int currentIndex = [selectedIndices firstIndex];
+				NSInteger currentIndex = [selectedIndices firstIndex];
 				do
 				{
 					redrawRect = NSUnionRect(redrawRect, NSInsetRect(celRects[currentIndex], -5, -5));
@@ -543,9 +543,9 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 - (NSMenu *)menuForEvent:(NSEvent *)event
 {
 	// This could be faster if it needs to be by actually finding out candidates for the hit using some fancy math.
-	int numberOfCels = [dataSource numberOfCels];
+	NSInteger numberOfCels = [dataSource numberOfCels];
 	NSPoint location = [self convertPoint:[event locationInWindow] fromView:nil];	
-	int i;
+	NSInteger i;
 	for (i = 0; i < numberOfCels; i++)
 	{
 		if (!NSPointInRect(location, celRects[i])) { continue; }
@@ -564,7 +564,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 - (void)mouseEntered:(NSEvent *)event
 {
 	mouseLocation = [self convertPoint:[event locationInWindow] fromView:nil];
-	int i;
+	NSInteger i;
 	NSTrackingRectTag trackingNumber = [event trackingNumber];
 	for (i=0; i<celRectsCount; i++) {
 		if (trackingNumber == celTrackingTags[i] || trackingNumber == closeButtonTrackingTags[i]) {
@@ -597,7 +597,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	if ([selectedIndices count] < 1) {
 		return; // something should be selected
 	}
-	int index = [selectedIndices firstIndex];
+	NSInteger index = [selectedIndices firstIndex];
 	id cel = [dataSource celAtIndex:index];
 	NSSize realCelSize = [cel size];
 	NSRect celRect = celRects[index];
@@ -671,7 +671,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	if (success && shouldReload) {
 		[self reloadData];
 		if (targetDraggingIndex < [selectedIndices firstIndex]) {
-			int newIndex = [selectedIndices firstIndex] + 1;
+			NSInteger newIndex = [selectedIndices firstIndex] + 1;
 			[selectedIndices removeAllIndexes];
 			[selectedIndices addIndex:newIndex];
 		}
@@ -687,9 +687,9 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 - (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender
 {
 	NSPoint location = [self convertPoint:[sender draggingLocation] fromView:nil];
-	int lastTargetDraggingIndex = targetDraggingIndex;
+	NSInteger lastTargetDraggingIndex = targetDraggingIndex;
 	targetDraggingIndex = 0;
-	int i;
+	NSInteger i;
 	for (i=0; i<celRectsCount; i++) {
 		if (location.x > NSMidX(celRects[i])) {
 			targetDraggingIndex = i+1;
@@ -720,7 +720,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	return [self draggingUpdated:sender];
 }
 
-- (unsigned int)draggingSourceOperationMaskForLocal:(BOOL)isLocal
+- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal
 {
 	if (isLocal) {
 		return (NSDragOperationMove | NSDragOperationCopy);
@@ -729,14 +729,14 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	}
 }
 
-- (int)selectedIndex
+- (NSInteger)selectedIndex
 {
 	return [selectedIndices firstIndex];
 }
 
 - selectedCel
 {
-	int index = [self selectedIndex];
+	NSInteger index = [self selectedIndex];
 	return (index == NSNotFound) ? nil : [dataSource celAtIndex:index];
 }
 
@@ -749,7 +749,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 {
 	if (![selectedIndices count]) { return nil; }
 	NSMutableArray *tempCels = [[[NSMutableArray alloc] init] autorelease];
-	int currentIndex = [selectedIndices firstIndex];
+	NSInteger currentIndex = [selectedIndices firstIndex];
 	do
 	{
 		[tempCels addObject:[dataSource celAtIndex:currentIndex]];
@@ -757,7 +757,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	return [NSArray arrayWithArray:tempCels];
 }
 
-- (void)selectCelAtIndex:(int)index byExtendingSelection:(BOOL)extend
+- (void)selectCelAtIndex:(NSInteger)index byExtendingSelection:(BOOL)extend
 {
 	BOOL same = [selectedIndices containsIndex:index] && ([selectedIndices count] == 1);
 	if (index < celRectsCount)
@@ -767,7 +767,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 		{
 			if ([selectedIndices count])
 			{
-				int currentIndex = [selectedIndices firstIndex];
+				NSInteger currentIndex = [selectedIndices firstIndex];
 				do
 				{
 					redrawRect = NSUnionRect(redrawRect, NSInsetRect(celRects[currentIndex], -5, -5));
@@ -791,7 +791,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 {
 	if (!newAllows)
 	{
-		int firstIndex = [selectedIndices firstIndex];
+		NSInteger firstIndex = [selectedIndices firstIndex];
 		[selectedIndices removeAllIndexes];
 		if (firstIndex != NSNotFound)
 			[selectedIndices addIndex:firstIndex];
@@ -800,7 +800,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	allowsMultipleSelection = newAllows;
 }
 
-- (NSRect)rectOfCelIndex:(int)index
+- (NSRect)rectOfCelIndex:(NSInteger)index
 {
 	if (index >= [dataSource numberOfCels] || index >= celRectsCount) { return NSZeroRect; }
 	return celRects[index];

@@ -536,6 +536,7 @@ void PXPalette_resize(PXPalette *self, unsigned int newSize)
 }
 
 NSColor *PXPalette_colorAtIndex(PXPalette *self, unsigned index) {
+	if(index > self->colorCount) { return nil; }
 	return self->colors[index].color;
 }
 

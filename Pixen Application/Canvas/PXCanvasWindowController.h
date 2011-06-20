@@ -6,7 +6,7 @@
 //
 #import <AppKit/AppKit.h>
 
-@class PXCanvasController, PXCanvas, PXCanvasView, PXBackground, RBSplitView, RBSplitSubview;
+@class PXCanvasController, PXCanvas, PXCanvasView, PXBackground;
 
 @interface PXCanvasWindowController : NSWindowController
 {
@@ -24,15 +24,16 @@
 	
 	id toolbar;
 	IBOutlet PXCanvasController *canvasController;
-	IBOutlet RBSplitView *splitView;
-	IBOutlet RBSplitSubview *layerSplit, *canvasSplit, *paletteSplit;
+	
+	IBOutlet NSSplitView *splitView;
+	IBOutlet NSView *layerSplit, *canvasSplit, *paletteSplit;
 }
 - canvasController;
 - (PXCanvasView *)view;
 - (id) initWithWindowNibName:name;
 - (void)awakeFromNib;
-- (RBSplitSubview*)layerSplit;
-- (RBSplitSubview*)canvasSplit;
+- (NSView *)layerSplit;
+- (NSView *)canvasSplit;
 - (void)dealloc;
 - (PXCanvas *) canvas;
 - (void)windowWillClose:note;

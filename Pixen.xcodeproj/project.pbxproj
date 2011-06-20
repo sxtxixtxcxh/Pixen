@@ -237,8 +237,6 @@
 		EA31FBA30CE7D59700EC481B /* PXSequenceExportPrompter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB700CE7D59700EC481B /* PXSequenceExportPrompter.m */; };
 		EA31FBA40CE7D59700EC481B /* PXSpriteSheetExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB710CE7D59700EC481B /* PXSpriteSheetExporter.h */; };
 		EA31FBA50CE7D59700EC481B /* PXSpriteSheetExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB720CE7D59700EC481B /* PXSpriteSheetExporter.m */; };
-		EA31FBA60CE7D59700EC481B /* PXBitmapExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB740CE7D59700EC481B /* PXBitmapExporter.h */; };
-		EA31FBA70CE7D59700EC481B /* PXBitmapExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB750CE7D59700EC481B /* PXBitmapExporter.m */; };
 		EA31FBA80CE7D59700EC481B /* PXGifExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB760CE7D59700EC481B /* PXGifExporter.h */; };
 		EA31FBA90CE7D59700EC481B /* PXGifExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB770CE7D59700EC481B /* PXGifExporter.m */; };
 		EA31FBAA0CE7D59700EC481B /* PXIconExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB780CE7D59700EC481B /* PXIconExporter.h */; };
@@ -247,8 +245,6 @@
 		EA31FBAF0CE7D59700EC481B /* PXBitmapImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB7E0CE7D59700EC481B /* PXBitmapImporter.m */; };
 		EA31FBB00CE7D59700EC481B /* PXGifImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB7F0CE7D59700EC481B /* PXGifImporter.h */; };
 		EA31FBB10CE7D59700EC481B /* PXGifImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB800CE7D59700EC481B /* PXGifImporter.m */; };
-		EA31FBB20CE7D59700EC481B /* PXPSDHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB810CE7D59700EC481B /* PXPSDHandler.h */; };
-		EA31FBB30CE7D59700EC481B /* PXPSDHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB820CE7D59700EC481B /* PXPSDHandler.m */; };
 		EA31FBBC0CE7D59700EC481B /* OSACTWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB8D0CE7D59700EC481B /* OSACTWriter.h */; };
 		EA31FBBD0CE7D59700EC481B /* OSACTWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB8E0CE7D59700EC481B /* OSACTWriter.m */; };
 		EA31FBBE0CE7D59700EC481B /* OSJASCPALWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB8F0CE7D59700EC481B /* OSJASCPALWriter.h */; };
@@ -284,11 +280,6 @@
 		EA31FCAB0CE7D7C200EC481B /* gifalloc.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC1C0CE7D7C200EC481B /* gifalloc.c */; };
 		EA31FCAC0CE7D7C200EC481B /* qprintf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC1D0CE7D7C200EC481B /* qprintf.c */; };
 		EA31FCAD0CE7D7C200EC481B /* quantize.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC1E0CE7D7C200EC481B /* quantize.c */; };
-		EA31FCAE0CE7D7C200EC481B /* RBSplitSubview.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC200CE7D7C200EC481B /* RBSplitSubview.h */; };
-		EA31FCAF0CE7D7C200EC481B /* RBSplitSubview.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC210CE7D7C200EC481B /* RBSplitSubview.m */; };
-		EA31FCB00CE7D7C200EC481B /* RBSplitView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC220CE7D7C200EC481B /* RBSplitView.h */; };
-		EA31FCB10CE7D7C200EC481B /* RBSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC230CE7D7C200EC481B /* RBSplitView.m */; };
-		EA31FCC00CE7D7C200EC481B /* RBSplitViewPrivateDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC3B0CE7D7C200EC481B /* RBSplitViewPrivateDefines.h */; };
 		EA31FCC10CE7D7C200EC481B /* SBCenteringClipView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC3D0CE7D7C200EC481B /* SBCenteringClipView.h */; };
 		EA31FCC20CE7D7C200EC481B /* SBCenteringClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC3E0CE7D7C200EC481B /* SBCenteringClipView.m */; };
 		EA31FCC30CE7D7C200EC481B /* SubviewTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC400CE7D7C200EC481B /* SubviewTableViewCell.h */; };
@@ -459,10 +450,6 @@
 		EAC917A50CE7DC7300E519E1 /* prevcelpressed.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917450CE7DC7300E519E1 /* prevcelpressed.png */; };
 		EAC917A60CE7DC7300E519E1 /* Remove.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC917460CE7DC7300E519E1 /* Remove.tiff */; };
 		EAC917A70CE7DC7300E519E1 /* titlebargradient.tif in Resources */ = {isa = PBXBuildFile; fileRef = EAC917470CE7DC7300E519E1 /* titlebargradient.tif */; };
-		EAC917BC0CE7DD8400E519E1 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC917BA0CE7DD8400E519E1 /* Sparkle.framework */; };
-		EAC917BD0CE7DD8400E519E1 /* FlatButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC917BB0CE7DD8400E519E1 /* FlatButton.framework */; };
-		EAC917D50CE7DD9200E519E1 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = EAC917BA0CE7DD8400E519E1 /* Sparkle.framework */; };
-		EAC917D60CE7DD9200E519E1 /* FlatButton.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = EAC917BB0CE7DD8400E519E1 /* FlatButton.framework */; };
 		EAC917DC0CE7DDDF00E519E1 /* colorpalette.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EAC917090CE7DC7300E519E1 /* colorpalette.png */; };
 		EAC918150CE7DF8100E519E1 /* PXCanvasView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5482DC0513E2DB000101DE /* PXCanvasView.h */; };
 		EACDBD810878B37100564512 /* PXBackgroundTemplateView.nib in Resources */ = {isa = PBXBuildFile; fileRef = EACDBD7F0878B37100564512 /* PXBackgroundTemplateView.nib */; };
@@ -494,8 +481,6 @@
 		EAF694F506A9AE0B0019D8D7 /* PXCanvas_ApplescriptAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A6F50D060E8151008FA11F /* PXCanvas_ApplescriptAdditions.m */; };
 		EAF6950C06A9AE0B0019D8D7 /* PXCanvasPrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA35564406A4AD7B004DE6AE /* PXCanvasPrintView.m */; };
 		EAF6951106A9AE0B0019D8D7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
-		EAF6951206A9AE0B0019D8D7 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611B104F067789560047ECE7 /* QuickTime.framework */; };
-		EAF6951306A9AE0B0019D8D7 /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBB557067A2A3000FF5C2E /* Message.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -515,8 +500,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				EAC917D50CE7DD9200E519E1 /* Sparkle.framework in CopyFiles */,
-				EAC917D60CE7DD9200E519E1 /* FlatButton.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,7 +518,6 @@
 		61163709067D286900AE87D7 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXDiscoverPixen.nib; sourceTree = "<group>"; };
 		6117815F08ABA7F30098DCC4 /* PXAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PXAnimationView.h; sourceTree = "<group>"; };
 		6117816008ABA7F30098DCC4 /* PXAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PXAnimationView.m; sourceTree = "<group>"; };
-		611B104F067789560047ECE7 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
 		6151D0150677C8E3009E3BE4 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXCanvasResizePrompt.nib; sourceTree = "<group>"; };
 		615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerPaneBackgroundView.h; sourceTree = "<group>"; };
 		615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerPaneBackgroundView.m; sourceTree = "<group>"; };
@@ -555,7 +537,6 @@
 		61BD25C9067A1DD80054A2BB /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		61E6F12F0608E9FB001B46E8 /* PXGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGrid.h; sourceTree = "<group>"; };
 		61E6F1300608E9FB001B46E8 /* PXGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGrid.m; sourceTree = "<group>"; };
-		61EBB557067A2A3000FF5C2E /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
 		61ED25AC06BD63DA00264DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXAbout.nib; sourceTree = "<group>"; };
 		61F598BA067949D500B8C8CA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXScalePrompt.nib; sourceTree = "<group>"; };
 		61F9CB17060D6A6D00562B78 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXToolPalette.nib; sourceTree = "<group>"; };
@@ -770,8 +751,6 @@
 		EA31FB700CE7D59700EC481B /* PXSequenceExportPrompter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSequenceExportPrompter.m; sourceTree = "<group>"; };
 		EA31FB710CE7D59700EC481B /* PXSpriteSheetExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSpriteSheetExporter.h; sourceTree = "<group>"; };
 		EA31FB720CE7D59700EC481B /* PXSpriteSheetExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSpriteSheetExporter.m; sourceTree = "<group>"; };
-		EA31FB740CE7D59700EC481B /* PXBitmapExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXBitmapExporter.h; sourceTree = "<group>"; };
-		EA31FB750CE7D59700EC481B /* PXBitmapExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXBitmapExporter.m; sourceTree = "<group>"; };
 		EA31FB760CE7D59700EC481B /* PXGifExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGifExporter.h; sourceTree = "<group>"; };
 		EA31FB770CE7D59700EC481B /* PXGifExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGifExporter.m; sourceTree = "<group>"; };
 		EA31FB780CE7D59700EC481B /* PXIconExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXIconExporter.h; sourceTree = "<group>"; };
@@ -780,8 +759,6 @@
 		EA31FB7E0CE7D59700EC481B /* PXBitmapImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXBitmapImporter.m; sourceTree = "<group>"; };
 		EA31FB7F0CE7D59700EC481B /* PXGifImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGifImporter.h; sourceTree = "<group>"; };
 		EA31FB800CE7D59700EC481B /* PXGifImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGifImporter.m; sourceTree = "<group>"; };
-		EA31FB810CE7D59700EC481B /* PXPSDHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPSDHandler.h; sourceTree = "<group>"; };
-		EA31FB820CE7D59700EC481B /* PXPSDHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPSDHandler.m; sourceTree = "<group>"; };
 		EA31FB8D0CE7D59700EC481B /* OSACTWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSACTWriter.h; sourceTree = "<group>"; };
 		EA31FB8E0CE7D59700EC481B /* OSACTWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSACTWriter.m; sourceTree = "<group>"; };
 		EA31FB8F0CE7D59700EC481B /* OSJASCPALWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSJASCPALWriter.h; sourceTree = "<group>"; };
@@ -817,11 +794,6 @@
 		EA31FC1C0CE7D7C200EC481B /* gifalloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gifalloc.c; sourceTree = "<group>"; };
 		EA31FC1D0CE7D7C200EC481B /* qprintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qprintf.c; sourceTree = "<group>"; };
 		EA31FC1E0CE7D7C200EC481B /* quantize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = quantize.c; sourceTree = "<group>"; };
-		EA31FC200CE7D7C200EC481B /* RBSplitSubview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBSplitSubview.h; sourceTree = "<group>"; };
-		EA31FC210CE7D7C200EC481B /* RBSplitSubview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBSplitSubview.m; sourceTree = "<group>"; };
-		EA31FC220CE7D7C200EC481B /* RBSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBSplitView.h; sourceTree = "<group>"; };
-		EA31FC230CE7D7C200EC481B /* RBSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBSplitView.m; sourceTree = "<group>"; };
-		EA31FC3B0CE7D7C200EC481B /* RBSplitViewPrivateDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBSplitViewPrivateDefines.h; sourceTree = "<group>"; };
 		EA31FC3D0CE7D7C200EC481B /* SBCenteringClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCenteringClipView.h; sourceTree = "<group>"; };
 		EA31FC3E0CE7D7C200EC481B /* SBCenteringClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCenteringClipView.m; sourceTree = "<group>"; };
 		EA31FC400CE7D7C200EC481B /* SubviewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubviewTableViewCell.h; sourceTree = "<group>"; };
@@ -1006,8 +978,6 @@
 		EAC917450CE7DC7300E519E1 /* prevcelpressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prevcelpressed.png; sourceTree = "<group>"; };
 		EAC917460CE7DC7300E519E1 /* Remove.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Remove.tiff; sourceTree = "<group>"; };
 		EAC917470CE7DC7300E519E1 /* titlebargradient.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = titlebargradient.tif; sourceTree = "<group>"; };
-		EAC917BA0CE7DD8400E519E1 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Frameworks and Palettes/Sparkle.framework"; sourceTree = "<group>"; };
-		EAC917BB0CE7DD8400E519E1 /* FlatButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FlatButton.framework; path = "Frameworks and Palettes/FlatButton.framework"; sourceTree = "<group>"; };
 		EACDBD800878B37100564512 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXBackgroundTemplateView.nib; sourceTree = "<group>"; };
 		EAE126D0054F41A9001208D9 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXImageBackgroundConfigurator.nib; sourceTree = "<group>"; };
 		EAF21E2A08AD0CFD0037A23B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPalettePanel.nib; sourceTree = "<group>"; };
@@ -1021,12 +991,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAF6951106A9AE0B0019D8D7 /* Cocoa.framework in Frameworks */,
-				EAF6951206A9AE0B0019D8D7 /* QuickTime.framework in Frameworks */,
-				EAF6951306A9AE0B0019D8D7 /* Message.framework in Frameworks */,
 				EA5E9EE80877237800FCE6FE /* Carbon.framework in Frameworks */,
 				BF269FE6091307BF00B7A218 /* QTKit.framework in Frameworks */,
-				EAC917BC0CE7DD8400E519E1 /* Sparkle.framework in Frameworks */,
-				EAC917BD0CE7DD8400E519E1 /* FlatButton.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1036,12 +1002,8 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EAC917BA0CE7DD8400E519E1 /* Sparkle.framework */,
-				EAC917BB0CE7DD8400E519E1 /* FlatButton.framework */,
 				61BB8ED608FB58F9009C75A6 /* QTKit.framework */,
 				EA5E9EE70877237800FCE6FE /* Carbon.framework */,
-				61EBB557067A2A3000FF5C2E /* Message.framework */,
-				611B104F067789560047ECE7 /* QuickTime.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -1540,8 +1502,6 @@
 		EA31FB730CE7D59700EC481B /* Image Exporters */ = {
 			isa = PBXGroup;
 			children = (
-				EA31FB740CE7D59700EC481B /* PXBitmapExporter.h */,
-				EA31FB750CE7D59700EC481B /* PXBitmapExporter.m */,
 				EA31FB760CE7D59700EC481B /* PXGifExporter.h */,
 				EA31FB770CE7D59700EC481B /* PXGifExporter.m */,
 				EA31FB780CE7D59700EC481B /* PXIconExporter.h */,
@@ -1557,8 +1517,6 @@
 				EA31FB7E0CE7D59700EC481B /* PXBitmapImporter.m */,
 				EA31FB7F0CE7D59700EC481B /* PXGifImporter.h */,
 				EA31FB800CE7D59700EC481B /* PXGifImporter.m */,
-				EA31FB810CE7D59700EC481B /* PXPSDHandler.h */,
-				EA31FB820CE7D59700EC481B /* PXPSDHandler.m */,
 			);
 			path = "Image Importers";
 			sourceTree = "<group>";
@@ -1622,7 +1580,6 @@
 			isa = PBXGroup;
 			children = (
 				EA31FC110CE7D7C200EC481B /* libungif */,
-				EA31FC1F0CE7D7C200EC481B /* RBSplitView */,
 				EA31FC3C0CE7D7C200EC481B /* SBCenteringClipView */,
 				EA31FC3F0CE7D7C200EC481B /* SubviewTableView */,
 				EA31FC440CE7D7C200EC481B /* ThreadWorker */,
@@ -1649,18 +1606,6 @@
 				EA31FC1E0CE7D7C200EC481B /* quantize.c */,
 			);
 			path = libungif;
-			sourceTree = "<group>";
-		};
-		EA31FC1F0CE7D7C200EC481B /* RBSplitView */ = {
-			isa = PBXGroup;
-			children = (
-				EA31FC200CE7D7C200EC481B /* RBSplitSubview.h */,
-				EA31FC210CE7D7C200EC481B /* RBSplitSubview.m */,
-				EA31FC220CE7D7C200EC481B /* RBSplitView.h */,
-				EA31FC230CE7D7C200EC481B /* RBSplitView.m */,
-				EA31FC3B0CE7D7C200EC481B /* RBSplitViewPrivateDefines.h */,
-			);
-			path = RBSplitView;
 			sourceTree = "<group>";
 		};
 		EA31FC3C0CE7D7C200EC481B /* SBCenteringClipView */ = {
@@ -2191,12 +2136,10 @@
 				EA31FBA00CE7D59700EC481B /* PXAnimatedGifExporter.h in Headers */,
 				EA31FBA20CE7D59700EC481B /* PXSequenceExportPrompter.h in Headers */,
 				EA31FBA40CE7D59700EC481B /* PXSpriteSheetExporter.h in Headers */,
-				EA31FBA60CE7D59700EC481B /* PXBitmapExporter.h in Headers */,
 				EA31FBA80CE7D59700EC481B /* PXGifExporter.h in Headers */,
 				EA31FBAA0CE7D59700EC481B /* PXIconExporter.h in Headers */,
 				EA31FBAE0CE7D59700EC481B /* PXBitmapImporter.h in Headers */,
 				EA31FBB00CE7D59700EC481B /* PXGifImporter.h in Headers */,
-				EA31FBB20CE7D59700EC481B /* PXPSDHandler.h in Headers */,
 				EA31FBBC0CE7D59700EC481B /* OSACTWriter.h in Headers */,
 				EA31FBBE0CE7D59700EC481B /* OSJASCPALWriter.h in Headers */,
 				EA31FBC00CE7D59700EC481B /* OSPALWriter.h in Headers */,
@@ -2211,9 +2154,6 @@
 				EA31FCA60CE7D7C200EC481B /* getarg.h in Headers */,
 				EA31FCA90CE7D7C200EC481B /* gif_lib.h in Headers */,
 				EA31FCAA0CE7D7C200EC481B /* gif_lib_private.h in Headers */,
-				EA31FCAE0CE7D7C200EC481B /* RBSplitSubview.h in Headers */,
-				EA31FCB00CE7D7C200EC481B /* RBSplitView.h in Headers */,
-				EA31FCC00CE7D7C200EC481B /* RBSplitViewPrivateDefines.h in Headers */,
 				EA31FCC10CE7D7C200EC481B /* SBCenteringClipView.h in Headers */,
 				EA31FCC30CE7D7C200EC481B /* SubviewTableViewCell.h in Headers */,
 				EA31FCC50CE7D7C200EC481B /* SubviewTableViewController.h in Headers */,
@@ -2568,12 +2508,10 @@
 				EA31FBA10CE7D59700EC481B /* PXAnimatedGifExporter.m in Sources */,
 				EA31FBA30CE7D59700EC481B /* PXSequenceExportPrompter.m in Sources */,
 				EA31FBA50CE7D59700EC481B /* PXSpriteSheetExporter.m in Sources */,
-				EA31FBA70CE7D59700EC481B /* PXBitmapExporter.m in Sources */,
 				EA31FBA90CE7D59700EC481B /* PXGifExporter.m in Sources */,
 				EA31FBAB0CE7D59700EC481B /* PXIconExporter.m in Sources */,
 				EA31FBAF0CE7D59700EC481B /* PXBitmapImporter.m in Sources */,
 				EA31FBB10CE7D59700EC481B /* PXGifImporter.m in Sources */,
-				EA31FBB30CE7D59700EC481B /* PXPSDHandler.m in Sources */,
 				EA31FBBD0CE7D59700EC481B /* OSACTWriter.m in Sources */,
 				EA31FBBF0CE7D59700EC481B /* OSJASCPALWriter.m in Sources */,
 				EA31FBC10CE7D59700EC481B /* OSPALWriter.m in Sources */,
@@ -2594,8 +2532,6 @@
 				EA31FCAB0CE7D7C200EC481B /* gifalloc.c in Sources */,
 				EA31FCAC0CE7D7C200EC481B /* qprintf.c in Sources */,
 				EA31FCAD0CE7D7C200EC481B /* quantize.c in Sources */,
-				EA31FCAF0CE7D7C200EC481B /* RBSplitSubview.m in Sources */,
-				EA31FCB10CE7D7C200EC481B /* RBSplitView.m in Sources */,
 				EA31FCC20CE7D7C200EC481B /* SBCenteringClipView.m in Sources */,
 				EA31FCC40CE7D7C200EC481B /* SubviewTableViewCell.m in Sources */,
 				EA31FCC60CE7D7C200EC481B /* SubviewTableViewController.m in Sources */,
@@ -3001,7 +2937,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = Pixen;
-				VALID_ARCHS = i386;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -3040,7 +2975,6 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Pixen;
 				SECTORDER_FLAGS = "";
-				VALID_ARCHS = i386;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -3055,7 +2989,7 @@
 		616BAEAA08553EFB004CF172 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -3078,7 +3012,7 @@
 		616BAEAB08553EFB004CF172 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;

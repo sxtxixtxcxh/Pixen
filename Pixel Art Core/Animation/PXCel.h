@@ -27,4 +27,5 @@
 - (NSDictionary *)info;
 - (void)setInfo:(NSDictionary *)info;
 - (NSImage *)displayImage;
+- (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(CGFloat)frac;
 @end

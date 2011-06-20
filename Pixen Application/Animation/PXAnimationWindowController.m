@@ -9,7 +9,6 @@
 #import "PXAnimationWindowController.h"
 #import "PXCanvas_ImportingExporting.h"
 #import "PXCanvas_Selection.h"
-#import "RBSplitSubview.h"
 #import "PXAnimation.h"
 #import "PXCel.h"
 #import "PXFilmStripView.h"
@@ -20,8 +19,6 @@
 #import "OSQTExporter.h"
 #import "PXCanvasWindowController_IBActions.h"
 #import "PXScaleController.h"
-#import "RBSplitView.h"
-#import "RBSplitSubview.h"
 #import "Constants.h"
 
 @implementation PXAnimationWindowController
@@ -49,7 +46,7 @@
 	changedRect.size.height *= scaledRatio;
 	[filmStrip setNeedsDelayedDisplayInRect:changedRect];
 	if([notification object] == [activeCel canvas]) { return; }
-	int i;
+	NSInteger i;
 	for (i = 0; i < [self numberOfCels]; i++)
 	{
 		PXCel *current = [self celAtIndex:i];
@@ -70,13 +67,13 @@
 
 - (void)activateCel:(PXCel *)cel
 {
-	int newCelIndex = [animation indexOfObjectInCels:cel];
+	NSInteger newCelIndex = [animation indexOfObjectInCels:cel];
 		
 	if(cel == activeCel && activeIndex == newCelIndex) { return; }
 	activeIndex = newCelIndex;
 	activeCel = cel;
 	[self setCanvas:[cel canvas]];
-	int prevIndex = newCelIndex - 1;
+	NSInteger prevIndex = newCelIndex - 1;
 	if (prevIndex < 0)
 		prevIndex = [self numberOfCels] ? [self numberOfCels] - 1 : 0;
 	if (newCelIndex != prevIndex)
@@ -120,14 +117,16 @@
 		if(!NSEqualSizes([anim size], NSZeroSize))
 		{
 			[filmStrip reloadData];
-			[topSubview setMinDimension:[filmStrip minimumHeight] andMaxDimension:0];
 			[animationPreview reloadData];
 			[animationPreview play:self];
 		}
 	}
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)observeValueForKeyPath:(NSString *)keyPath 
+											ofObject:(id)object 
+												change:(NSDictionary *)change 
+											 context:(void *)context
 {
 	if (object == animationPreview) {
 		BOOL isPlaying = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
@@ -149,7 +148,7 @@
 		// It's gone down, so select the next one down.
 		else if([[change objectForKey:NSKeyValueChangeOldKey] intValue] > [animation countOfCels])
 		{
-			[self activateCel:[self celAtIndex:MAX((int)([filmStrip selectedIndex])-1, 0)]];
+			[self activateCel:[self celAtIndex:MAX((NSInteger)([filmStrip selectedIndex])-1, 0)]];
 		}
 		else
 		{
@@ -162,7 +161,7 @@
 	}
 }
 
-- (int)numberOfCels
+- (NSInteger)numberOfCels
 {
 	return NSEqualSizes([animation size], NSZeroSize) ? 0 : [animation countOfCels];
 }
@@ -176,7 +175,7 @@
 	if ([indices count] < 1) {
 		return;
 	}
-	int index = [indices firstIndex];
+	NSInteger index = [indices firstIndex];
 	
 	PXCel *cel = [self celAtIndex:index];
 	
@@ -194,7 +193,7 @@
 	return [[[NSArray arrayWithObject:PXCelPboardType] arrayByAddingObjectsFromArray:[NSImage imagePasteboardTypes]] arrayByAddingObject:NSFilenamesPboardType];
 }
 
-- (BOOL)insertCelIntoFilmStripView:view fromPasteboard:(NSPasteboard *)pboard atIndex:(int)targetDraggingIndex
+- (BOOL)insertCelIntoFilmStripView:view fromPasteboard:(NSPasteboard *)pboard atIndex:(NSInteger)targetDraggingIndex
 {
 	NSString *type = [pboard availableTypeFromArray:[self draggedTypesForFilmStripView:view]];
 	if ([[NSImage imagePasteboardTypes] containsObject:type]) {
@@ -258,7 +257,7 @@
 	return NO;
 }
 
-- (BOOL)copyCelInFilmStripView:view atIndex:(int)currentIndex toIndex:(int)anotherIndex
+- (BOOL)copyCelInFilmStripView:view atIndex:(NSInteger)currentIndex toIndex:(NSInteger)anotherIndex
 {
 	[animation copyCelFromIndex:currentIndex toIndex:anotherIndex];
 	[filmStrip setNeedsDisplay:YES];
@@ -267,42 +266,42 @@
 
 - (IBAction)duplicateCel:sender
 {
-	int selectedIndex = [filmStrip selectedIndex];
+	NSInteger selectedIndex = [filmStrip selectedIndex];
 	[animation copyCelFromIndex:selectedIndex toIndex:selectedIndex+1];
 }
 
-- (BOOL)moveCelInFilmStripView:view fromIndex:(int)index1 toIndex:(int)index2
+- (BOOL)moveCelInFilmStripView:view fromIndex:(NSInteger)index1 toIndex:(NSInteger)index2
 {
 	if((index1 == index2) || (index2 == (index1+1))) { return NO; }
 	[animation moveCelFromIndex:index1 toIndex:index2];
 	return YES;
 }
 
-- (id)celAtIndex:(int)currentIndex
+- (id)celAtIndex:(NSInteger)currentIndex
 {
 	return [animation objectInCelsAtIndex:currentIndex];
 }
-- (NSTimeInterval)durationOfCelAtIndex:(int)currentIndex
+- (NSTimeInterval)durationOfCelAtIndex:(NSInteger)currentIndex
 {
 	return [[self celAtIndex:currentIndex] duration];	
 }
 
 - (void)windowDidResize:(NSNotification *)aNotification
 {
-	[topSubview setMinDimension:oldMin andMaxDimension:oldMax];
+	//	[topSubview setMinDimension:oldMin andMaxDimension:oldMax];
 }
 
 - (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)proposedFrameSize
 {
-	oldMin = [topSubview minDimension];
-	oldMax = [topSubview maxDimension];
-	[topSubview setMinDimension:[topSubview dimension] andMaxDimension:[topSubview dimension]];
+	//oldMin = [topSubview minDimension];
+	//oldMax = [topSubview maxDimension];
+	//[topSubview setMinDimension:[topSubview dimension] andMaxDimension:[topSubview dimension]];
 	return proposedFrameSize;
 }
 
 - (IBAction)newCel:sender
 {
-	unsigned int newIndex = [filmStrip selectedIndex] + 1;
+	NSInteger newIndex = [filmStrip selectedIndex] + 1;
 	if (newIndex == NSNotFound) {newIndex = [animation countOfCels];}
 	[animation insertNewCelAtIndex:newIndex];
 	[[animation objectInCelsAtIndex:newIndex] setDuration:[[animation objectInCelsAtIndex:newIndex - 1] duration]];
@@ -321,7 +320,7 @@
 - (void)deleteCelsAtIndices:(NSIndexSet *)indices
 {
 	if([animation countOfCels] <= 1) { return; }
-	int currentIndex = [indices firstIndex];
+	NSInteger currentIndex = [indices firstIndex];
 	do
 	{
 		[animation removeCel:[self celAtIndex:currentIndex]];
@@ -335,7 +334,7 @@
 
 - (IBAction)selectPreviousCel:sender
 {
-	int newIndex = [filmStrip selectedIndex];
+	NSInteger newIndex = [filmStrip selectedIndex];
 	if (newIndex == NSNotFound)
 	{
 		NSBeep();
@@ -349,7 +348,7 @@
 
 - (IBAction)selectNextCel:sender
 {
-	unsigned int newIndex = [filmStrip selectedIndex];
+	NSInteger newIndex = [filmStrip selectedIndex];
 	if (newIndex == NSNotFound)
 	{
 		NSBeep();
@@ -402,8 +401,8 @@
 	NSString *finalString = [fileTemplate substringToIndex:range.location];
 	finalString = [finalString stringByAppendingString:@"%d"];
 	finalString = [finalString stringByAppendingString:[fileTemplate substringFromIndex:range.location + 2]];
-	int i;
-	int numberOfCels = [animation countOfCels];
+	NSInteger i;
+	NSInteger numberOfCels = [animation countOfCels];
 	NSString *directoryPath = [[[prompter savePanel] URL] path];
 	NSError *error=nil;
 	if(![[NSFileManager defaultManager] createDirectoryAtPath:directoryPath 
@@ -434,22 +433,28 @@
 - (IBAction)exportToImageSequence:sender
 {
 	PXSequenceExportPrompter *prompter = [[PXSequenceExportPrompter alloc] initWithDocument:[self document]];
-	[prompter beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(exportSequencePrompterDidEnd:)];
+	[prompter beginSheetModalForWindow:[self window] 
+											 modalDelegate:self 
+											didEndSelector:@selector(exportSequencePrompterDidEnd:)];
 }
 
-- (void)exportToQuicktimePrompterDidEnd:(NSSavePanel *)panel returnCode:(int)code contextInfo:(void *)info
+- (void)exportToQuicktimePrompterDidEnd:(NSSavePanel *)panel 
+														 returnCode:(int)code 
+														contextInfo:(void *)info
 {
 	if (code == NSCancelButton) { return; }
 	[panel orderOut:self];
-	id sharedExporter = [[OSQTExporter alloc] init];
-	int celCount = [animation countOfCels];
-	int i;
+	id exporter = [[OSQTExporter alloc] init];
+	NSInteger celCount = [animation countOfCels];
+	NSInteger i;
 	for (i = 0; i < celCount; i++)
 	{
-		[sharedExporter addImage:[[animation objectInCelsAtIndex:i] displayImage] forLength:[[animation objectInCelsAtIndex:i] duration]];
+		[exporter addImage:[[animation objectInCelsAtIndex:i] displayImage] 
+									 forLength:[[animation objectInCelsAtIndex:i] duration]];
 	}
-	[sharedExporter exportToPath:[panel filename] parentWindow:[self window]];
-    [sharedExporter release];
+	[exporter exportToPath:[panel filename] 
+						parentWindow:[self window]];
+	[exporter release];
 }
 
 - (IBAction)exportToQuicktime:sender
@@ -457,8 +462,19 @@
 	NSSavePanel *savePanel = [NSSavePanel savePanel];
 	[savePanel setCanCreateDirectories:YES];
 	[savePanel setNameFieldLabel:@"Export to:"];
+	[savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"mov"]];
 	[savePanel setPrompt:@"Export"];
-	[savePanel beginSheetForDirectory:nil file:[[self document] displayName] modalForWindow:[self window] modalDelegate:self didEndSelector:@selector(exportToQuicktimePrompterDidEnd:returnCode:contextInfo:) contextInfo:nil];
+	
+	NSString *displayName = [[self document] displayName];
+	NSString *defaultFilename = [displayName stringByAppendingPathExtension:@"mov"];
+	[savePanel beginSheetForDirectory:nil 
+															 file:defaultFilename
+										 modalForWindow:[self window] 
+											modalDelegate:self 
+										 didEndSelector:@selector(exportToQuicktimePrompterDidEnd:
+																							returnCode:
+																							contextInfo:) 
+												contextInfo:nil];
 }
 
 - (void)scalePrompterFinished:prompter shouldScale:shouldScale
@@ -466,8 +482,8 @@
 	if ([shouldScale boolValue])
 	{
 		id currentCanvas = [activeCel canvas];
-		int celCount = [animation countOfCels];
-		int i;
+		NSInteger celCount = [animation countOfCels];
+		NSInteger i;
 		for (i = 0; i < celCount; i++)
 		{
 			if ([[animation objectInCelsAtIndex:i] canvas] == currentCanvas) { continue; }
@@ -514,7 +530,7 @@ didFinishWithSize:(NSSize)aSize
 
 - (IBAction)pasteCel:sender
 {
-	int newIndex = [filmStrip selectedIndex];
+	NSInteger newIndex = [filmStrip selectedIndex];
 	if (newIndex == NSNotFound)
 		newIndex = [self numberOfCels];
 	else
@@ -524,7 +540,32 @@ didFinishWithSize:(NSSize)aSize
 
 - (IBAction)toggleAutomaticPalette:sender
 {
-	// intentionall noop
+	//noop
 }
+
+- (BOOL)splitView:(NSSplitView *)sender canCollapseSubview:(NSView *)subview {
+	return (subview != canvasSplit) && (subview != topSubview);
+}
+
+- (CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin
+				 ofSubviewAt:(NSInteger)offset { 
+	if(sender == splitView) {
+		return 210;
+	} else if(sender != outerSplitView) {
+		return 110;
+	}
+	return [filmStrip minimumHeight];
+}
+
+- (CGFloat)splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMax 
+				 ofSubviewAt:(NSInteger)offset {
+	if(sender == splitView) {
+		return 400;
+	} else if(sender != outerSplitView) {
+		return sender.frame.size.height-110;
+	}
+	return proposedMax;
+}
+
 
 @end

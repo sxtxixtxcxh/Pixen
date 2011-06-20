@@ -40,7 +40,6 @@
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Layers.h"
 #import "PXPalette.h"
-#import "PXPSDHandler.h"
 #import "PXCanvasView.h"
 #import "PXCanvasPrintView.h"
 #import "PXLayerController.h"
@@ -48,7 +47,6 @@
 #import "gif_lib.h"
 #import "PXAnimatedGifExporter.h"
 #import "PXLayer.h"
-#import "PXBitmapImporter.h"
 #import <AppKit/NSAlert.h>
 #import "PXCanvasWindowController_IBActions.h"
 
@@ -169,7 +167,19 @@ BOOL isPowerOfTwo(int num)
   }
 	if([aType isEqualToString:PICTFileType])
   {
-		return [canvas PICTData];
+		NSMutableData *pictData = [NSMutableData data];
+		CGImageDestinationRef pictOutput = 
+		CGImageDestinationCreateWithData((CFMutableDataRef)pictData, 
+																		 kUTTypePICT, 
+																		 1, 
+																		 NULL);
+		CGImageDestinationAddImage(pictOutput,
+															 [[canvas displayImage] CGImageForProposedRect:NULL 
+																																		 context:nil 
+																																			 hints:nil],
+															 NULL);
+		CGImageDestinationFinalize(pictOutput);
+		return pictData;
   }
 	
 	return nil;

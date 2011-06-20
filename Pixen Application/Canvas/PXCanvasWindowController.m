@@ -40,7 +40,6 @@
 #import "PXCanvasDocument.h"
 #import "PXPreviewController.h"
 #import "PXInfoPanelController.h"
-#import "RBSplitView.h"
 #import "PXPaletteController.h"
 
 //Taken from a man calling himself "BROCK BRANDENBERG" 
@@ -68,12 +67,12 @@
 	return self;
 }
 
-- (RBSplitSubview*)layerSplit;
+- (NSView*)layerSplit;
 {
 	return layerSplit;
 }
 
-- (RBSplitSubview*)canvasSplit;
+- (NSView*)canvasSplit;
 {
 	return canvasSplit;
 }
@@ -278,10 +277,30 @@
 	return v;
 }
 
+- (BOOL)splitView:(NSSplitView *)sender canCollapseSubview:(NSView *)subview {
+	return (subview != canvasSplit);
+}
+
+- (CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin
+				 ofSubviewAt:(NSInteger)offset { 
+	if(sender == splitView) {
+		return 210;
+	}
+	return 110;
+}
+
+- (CGFloat)splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMax 
+				 ofSubviewAt:(NSInteger)offset {
+	if(sender == splitView) {
+		return 400;
+	}
+	return sender.frame.size.height-110;
+}
+
 
 //this is to fix a bug in animation documents where expanding the
 //split subview trashes the dimensions of the layer control view
-- (void)splitView:(RBSplitView*)sender didExpand:(RBSplitSubview*)subview;
+- (void)splitViewDidResizeSubviews:(NSNotification *)aNotification
 {
 	[self updateFrameSizes];
 }

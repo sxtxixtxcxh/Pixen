@@ -9,6 +9,7 @@
 #import "PXAnimationBackgroundView.h"
 		
 @implementation PXAnimationBackgroundView
+@synthesize filmStrip;
 
 - (void)awakeFromNib
 {
@@ -24,6 +25,7 @@
 - (void)dealloc
 {
 	[horizontalGradient release];
+	[filmStrip release];
 	[super dealloc];
 }
 

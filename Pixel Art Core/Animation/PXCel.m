@@ -119,7 +119,7 @@
 {
 	return [canvas size];
 }
-- (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(float)frac
+- (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(CGFloat)frac
 {
 	[canvas drawInRect:dst fromRect:src operation:op fraction:frac];
 }

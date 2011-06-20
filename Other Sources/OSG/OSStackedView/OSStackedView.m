@@ -228,7 +228,7 @@
 	return bgImage;
 }
 
-- (unsigned int)draggingSourceOperationMaskForLocal:(BOOL)local
+- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)local
 {
 	return NSDragOperationEvery;
 }

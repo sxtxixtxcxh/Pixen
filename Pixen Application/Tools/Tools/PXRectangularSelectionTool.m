@@ -134,10 +134,10 @@ fromCanvasController:(PXCanvasController *) controller
 {
 	// selection drawing (while still dragging) is now O(1). hooray.
 	if (!isClicking || isMoving) { return; }
-	id bezierPath = [NSBezierPath bezierPathWithRect:selectedRect];
+	NSBezierPath *bezierPath = [NSBezierPath bezierPathWithRect:selectedRect];
 	[bezierPath setLineWidth:1.0f/([[view transform] transformSize:NSMakeSize(1,1)].width)];
-	float patternLength = 17.5f/([[view transform] transformSize:NSMakeSize(5,1)].width);
-	const float pattern[] = { patternLength, patternLength };
+	CGFloat patternLength = 17.5f/([[view transform] transformSize:NSMakeSize(5,1)].width);
+	const CGFloat pattern[] = { patternLength, patternLength };
 	[[NSColor whiteColor] set];
 	[bezierPath setLineDash:pattern count:1 phase:0];
 	[bezierPath stroke];

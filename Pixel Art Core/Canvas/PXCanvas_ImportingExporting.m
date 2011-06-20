@@ -9,8 +9,6 @@
 #import "PXCanvas_ImportingExporting.h"
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Layers.h"
-#import "PXBitmapExporter.h"
-#import "PXPSDHandler.h"
 #import "PXLayer.h"
 
 @implementation PXCanvas(ImportingExporting)
@@ -37,7 +35,7 @@
 
 
 - imageDataWithType:(NSBitmapImageFileType)storageType
-		 properties:(NSDictionary *)properties
+				 properties:(NSDictionary *)properties
 {
 	NSBitmapImageRep *rep;
 	NSRect frame = NSMakeRect(0, 0, [self size].width, [self size].height);
@@ -51,30 +49,8 @@
 	// And now, we interrupt our regularly scheduled codegram for a hack: remove color profile info from the rep because we don't handle it on loading.
 	[rep setProperty:NSImageColorSyncProfileData withValue:nil];
 	
-	if (storageType == NSBMPFileType)
-	{
-		PXPalette *pal = [self createFrequencyPalette];
-		if (PXPalette_colorCount(pal) <= 256)
-		{
-			return [PXBitmapExporter indexedBitmapDataForCanvas:self];
-		}
-		else
-		{
-			return [PXBitmapExporter BMPDataForImage:outputImage];
-		}
-		PXPalette_release(pal);
-	}
-	else
-	{
-		return [rep representationUsingType:storageType properties:properties];
-	}	
-}
-
-- PICTData
-{
-	id outputImage = [self exportImage];
-	return [PXBitmapExporter PICTDataForImage:outputImage];
-}
+	return [rep representationUsingType:storageType properties:properties];
+}	
 
 - (void)replaceActiveLayerWithImage:(NSImage *)anImage
 {
@@ -108,21 +84,6 @@
 - initWithImage:(NSImage *)anImage
 {
 	return [self initWithImage:anImage type:PNGFileType];
-}
-
-- initWithPSDData:(NSData *)data
-{
-	[self init];
-	id images = [PXPSDHandler imagesForPSDData:data];
-	[self setSize:[[images objectAtIndex:0] size]];
-	for (id current in images)
-	{
-		id layer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Imported Layer", @"Imported Layer") size:[current size]] autorelease];
-		[self addLayer:layer];
-		[self applyImage:current toLayer:layer];
-	}
-	[[self undoManager] removeAllActions];
-	return self;
 }
 
 - (NSImage *)displayImage

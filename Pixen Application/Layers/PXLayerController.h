@@ -29,24 +29,28 @@
 #import <AppKit/AppKit.h>
 #import "PXCanvas.h"
 
-@class PXLayer, PXCanvas, PXDocument, RBSplitSubview;
+@class PXLayer, PXCanvas, PXDocument;
 @interface PXLayerController : NSResponder <NSCollectionViewDelegate>
 {
 	IBOutlet NSView *view;
 	IBOutlet NSCollectionView *layersView;
 	PXCanvas *canvas;
 	NSMutableArray *views;
-	RBSplitSubview *subview;
+
+	NSView *subview;
 	IBOutlet NSButton *removeButton;
 	PXDocument *document;
 	int layersCreated;
 
   NSIndexSet *selection;
+	
+	//for programmatic expand/collapse
+	CGFloat lastSubviewHeight;
 }
 -(id) initWithCanvas:(PXCanvas *)aCanvas;
 - (void)toggle:(id)sender;
 - (NSView *)view;
-- (void)setSubview:(RBSplitSubview *)sv;
+- (void)setSubview:(NSView *)sv;
 - (void)reloadData:(NSNotification *) aNotification;
 - (void)setCanvas:(PXCanvas *) aCanvas;
 - (PXCanvas *)canvas;

@@ -33,7 +33,6 @@
 
 //identifiers
 NSString *PXBackgroundConfigurator = @"PXBackgroundConfigurator";
-NSString *PXLayerDrawer = @"PXLayerDrawer";
 NSString *PXPreview = @"PXPreview";
 NSString *PXToolProperties = @"PXToolProperties";
 NSString *PXGridConfigurator = @"PXGridConfigurator";
@@ -64,13 +63,6 @@ NSString *PXZoom = @"PXZoom";
 		[item setToolTip:NSLocalizedString(@"BACKGROUND_TOOLTIP", @"Background Tooltip")];
 		[item setAction:@selector(showBackgroundInfo:)];
 		[item setImage:[NSImage imageNamed:@"bgconf"]];
-	}
-	else if ([itemIdentifier isEqualToString:PXLayerDrawer])
-	{
-		[item setLabel:NSLocalizedString(@"LAYERS_LABEL", @"Layers Label")];
-		[item setToolTip:NSLocalizedString(@"LAYERS_TOOLTIP", @"Layers Tooltip")];
-		[item setAction:@selector(toggleLayersDrawer:)];
-		[item setImage:[NSImage imageNamed:@"layerdrawer"]];
 	}
 	else if ([itemIdentifier isEqualToString:PXPreview])
 	{
@@ -140,7 +132,7 @@ NSString *PXZoom = @"PXZoom";
 
 - (NSArray *) toolbarAllowedItemIdentifiers:(NSToolbar *) toolbar
 {
-	return [NSArray arrayWithObjects:PXBackgroundConfigurator, PXLayerDrawer,
+	return [NSArray arrayWithObjects:PXBackgroundConfigurator,
 		PXPreview, PXZoom, 
 		PXZoomFit, PXZoom100,
 		PXResize, PXScale,
@@ -156,7 +148,7 @@ NSString *PXZoom = @"PXZoom";
 - (NSArray *) toolbarDefaultItemIdentifiers:(NSToolbar *) toolbar
 {
 	return [NSArray arrayWithObjects:PXBackgroundConfigurator, PXGridConfigurator, 
-		NSToolbarSeparatorItemIdentifier, PXLayerDrawer, PXPreview, /*PXDocumentPalette,*/
+		NSToolbarSeparatorItemIdentifier, PXPreview, /*PXDocumentPalette,*/
 		NSToolbarFlexibleSpaceItemIdentifier,
 		PXZoom,
 		nil];

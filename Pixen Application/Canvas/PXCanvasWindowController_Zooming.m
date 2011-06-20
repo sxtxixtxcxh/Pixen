@@ -88,10 +88,10 @@
 		return;
 	}
 	NSRect contentFrame = [[[canvasController scrollView] contentView] frame];
-    float xRatio = NSWidth(contentFrame)/[canvas size].width;
-    float yRatio = NSHeight(contentFrame)/[canvas size].height;
+	float xRatio = NSWidth(contentFrame)/[canvas size].width;
+	float yRatio = NSHeight(contentFrame)/[canvas size].height;
 	float pct = (NSWidth(contentFrame) > [canvas size].width || NSHeight(contentFrame) > [canvas size].height) ? (floorf(xRatio < yRatio ? xRatio : yRatio))*100 : 100.0;
-    [self zoomToPercentage:[NSNumber numberWithFloat:MIN(pct, 10000)]];
+	[self zoomToPercentage:[NSNumber numberWithFloat:MIN(pct, 10000)]];
 }
 
 - (void)canvasController:(PXCanvasController *)controller zoomInOnCanvasPoint:(NSPoint)point

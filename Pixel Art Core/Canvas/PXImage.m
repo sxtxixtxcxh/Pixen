@@ -107,7 +107,7 @@ CGColorRef PXTileColorAtXY(PXTile *t, int xv, int yv)
 	{
 		a = b = c = 0;
 	}
-	const float components[4] = {a, b, c, d};
+	const CGFloat components[4] = {a, b, c, d};
 	return CGColorCreate(CGBitmapContextGetColorSpace(t->painting), components);
 }
 void PXTileSetAtXY(PXTile *t, int xv, int yv, CGColorRef color)
@@ -125,8 +125,8 @@ void PXTileSetAtXY(PXTile *t, int xv, int yv, CGColorRef color)
 	unsigned char *data = CGBitmapContextGetData(t->painting);
 	int bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
 	unsigned startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y)*bytesPerRow+x*PXTileComponentsPerPixel;
-	const float *components = CGColorGetComponents(color);
-	float a = components[3];
+	const CGFloat *components = CGColorGetComponents(color);
+	CGFloat a = components[3];
 	data[startIndex+0] = a*components[0]*255;
 	data[startIndex+1] = a*components[1]*255;
 	data[startIndex+2] = a*components[2]*255;
@@ -330,7 +330,7 @@ void PXImage_setColorAtIndex(PXImage *self, NSColor *c, unsigned loc)
 void PXImage_setColorAtXY(PXImage *self, NSColor *color, int xv, int yv)
 {
 	PXTile *t = PXImage_tileAtXY(self, xv, yv);
-	float components[4];
+	CGFloat components[4];
 	[[color colorUsingColorSpaceName:NSDeviceRGBColorSpace] getComponents:components];
 	CGColorRef c = CGColorCreate(self->colorspace, components);
 	PXTileSetAtXY(t, xv, yv, c);
@@ -598,7 +598,7 @@ NSImage *PXImage_bitmapImage(PXImage *self)
 	id rep = [[nsimage representations] objectAtIndex:0];
 	if (![rep isKindOfClass:[NSBitmapImageRep class]])
 	{
-		NSLog(@"Converting cached to bitmap...");
+//		NSLog(@"Converting cached to bitmap...");
 		NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:[nsimage TIFFRepresentation]];
 		
 		[nsimage removeRepresentation:rep];

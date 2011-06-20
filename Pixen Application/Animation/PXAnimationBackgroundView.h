@@ -12,5 +12,5 @@
 	NSGradient *horizontalGradient;
 	NSScrollView *filmStrip;
 }
-
+@property (readwrite, retain) IBOutlet NSScrollView *filmStrip;
 @end

@@ -146,7 +146,7 @@ int kPXColorPickerMode = 23421337;
 	[buttonCell setImage:newButtonImage];
 }
 
-- (void)setMode:(int)mode { }
+- (void)setMode:(NSColorPanelMode)mode { }
 
 - (NSView *)provideNewView:(BOOL)initialRequest
 {
@@ -169,12 +169,12 @@ int kPXColorPickerMode = 23421337;
 	[pickerView setFrameOrigin:NSZeroPoint];
 }
 
-- (int)currentMode
+- (NSColorPanelMode)currentMode
 {
 	return kPXColorPickerMode;
 }
 
-- (BOOL)supportsMode:(int)mode
+- (BOOL)supportsMode:(NSColorPanelMode)mode
 {
 	return kPXColorPickerMode == mode;
 }

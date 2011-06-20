@@ -22,7 +22,7 @@
 	[self drawInRect:dst fromRect:src operation:NSCompositeSourceOver];
 }
 
-- (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(float)frac
+- (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(CGFloat)frac
 {
 	for (PXLayer *layer in layers)
 	{

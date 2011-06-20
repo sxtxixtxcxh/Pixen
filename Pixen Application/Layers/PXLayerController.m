@@ -35,7 +35,6 @@
 #import "PXNotifications.h"
 #import "PXCanvasDocument.h"
 #import "PXAnimationDocument.h"
-#import "RBSplitSubview.h"
 
 @interface PXLayerController()
 - (void)propagateSelectedLayer:(int)row;
@@ -125,11 +124,15 @@
 	[self selectRow:[[canvas layers] indexOfObject:[canvas activeLayer]]];
 }
 
+- (BOOL) isSubviewCollapsed {
+	return [(NSSplitView *)[subview superview] isSubviewCollapsed:subview];
+}
+
 - (void)reloadData:(NSNotification *) aNotification
 {
-	int i, selectedRow;
+	NSInteger i, selectedRow;
 	
-	int idx = [[layersView selectionIndexes] indexGreaterThanOrEqualToIndex:0];
+	NSUInteger idx = [[layersView selectionIndexes] indexGreaterThanOrEqualToIndex:0];
 	if (idx == NSNotFound || idx >= [[canvas layers] count])
 	{
 		selectedRow = 0; 
@@ -159,7 +162,7 @@
 	
 	if ([[[aNotification userInfo] objectForKey:PXCanvasOldLayersCountKey] intValue] == 1 
 			&& [[canvas layers] count] == 2
-			&& [subview isCollapsed])
+			&& [self isSubviewCollapsed])
 	{
 		[self toggle:self];
 	}
@@ -203,20 +206,53 @@
 	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"workingwithlayers" inBook:@"Pixen Help"];	
 }
 
-- (void)setSubview:(RBSplitSubview *)sv;
+- (void)setSubview:(NSView *)sv;
 {
 	subview = sv;
+	lastSubviewHeight = [subview frame].size.height;
+	[[NSNotificationCenter defaultCenter] addObserver:self
+																					 selector:@selector(splitViewWillResizeSubviews:)
+																							 name:NSSplitViewWillResizeSubviewsNotification
+																						 object:[subview superview]];
 }
+
+
+// this is the handler the above snippet refers to
+- (void) splitViewWillResizeSubviews:(id)object
+{
+	lastSubviewHeight = [subview frame].size.height;
+}
+
+// wire this to the UI control you wish to use to toggle the
+// expanded/collapsed state of splitViewSubViewLeft
+- (void)expandSubview
+{
+	NSSplitView *splitView = (NSSplitView *)[subview superview];
+	[splitView adjustSubviews];
+	if ([splitView isSubviewCollapsed:subview])
+		[splitView setPosition:lastSubviewHeight
+					ofDividerAtIndex:0];
+}
+
+- (void)collapseSubview {
+	NSSplitView *splitView = (NSSplitView *)[subview superview];
+	[splitView adjustSubviews];
+	if ([splitView isSubviewCollapsed:subview])
+		[splitView setPosition:[splitView minPossiblePositionOfDividerAtIndex:0]
+					ofDividerAtIndex:0];
+}
+
+
 
 - (void)toggle:(id)sender
 {
-	if([subview isCollapsed])
+	if([self isSubviewCollapsed])
 	{
-		[subview expand];
+		[self expandSubview];
 	}
 	else
 	{
-		[subview collapse];
+		[self collapseSubview];
 	}
 	[[subview window] display];
 }

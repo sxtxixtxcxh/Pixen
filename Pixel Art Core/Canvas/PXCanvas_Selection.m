@@ -10,7 +10,6 @@
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_CopyPaste.h"
 #import "PXCanvas_Modifying.h"
-#import "PXBitmapExporter.h"
 #import "PXCanvas_ImportingExporting.h"
 #import "PXLayer.h"
 
@@ -416,16 +415,21 @@
 }
 
 - selectionDataWithType:(NSBitmapImageFileType)storageType 
-			 properties:(NSDictionary *)properties
+						 properties:(NSDictionary *)properties
 {
 	if (![self hasSelection])
 		return [self imageDataWithType:storageType properties:properties];
 	NSRect selectionRect = [self selectedRect];
-	NSImage *tempImage = [[NSImage alloc] initWithSize:selectionRect.size];
+	
+	NSImage *tempImage = [[[NSImage alloc] initWithSize:selectionRect.size] autorelease];
 	BOOL mergeLayers = [[properties objectForKey:PXMergeLayersKey] boolValue];
 	
 	[tempImage lockFocus];
 	int i, j;
+	
+	//We need to draw a selection mask so we can do a SourceIn composite
+	//Would this be better with a bezier path or something?
+	
 	[[NSColor blackColor] set];
 	for (i = NSMinX(selectionRect); i < NSMaxX(selectionRect); i++)
 	{
@@ -438,21 +442,15 @@
 		}
 	}
 	NSImage *cocoaImage = mergeLayers ? [self exportImage] : [activeLayer exportImage];
-	[cocoaImage compositeToPoint:NSZeroPoint fromRect:selectionRect operation:NSCompositeSourceIn];
+	[cocoaImage compositeToPoint:NSZeroPoint 
+											fromRect:selectionRect 
+										 operation:NSCompositeSourceIn];
 	
-	if (storageType == NSBMPFileType)
-	{
-		[tempImage unlockFocus];
-		return [PXBitmapExporter BMPDataForImage:tempImage];
-	}
-	else
-	{
-		NSRect rect = selectionRect;
-		rect.origin = NSZeroPoint;
-		NSBitmapImageRep *rep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:rect] autorelease];		
-		[tempImage unlockFocus];
-		return [rep representationUsingType:storageType properties:properties];		
-	}
+	NSRect rect = selectionRect;
+	rect.origin = NSZeroPoint;
+	NSBitmapImageRep *rep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:rect] autorelease];		
+	[tempImage unlockFocus];
+	return [rep representationUsingType:storageType properties:properties];		
 }
 
 - (PXSelectionMask)selectionMask

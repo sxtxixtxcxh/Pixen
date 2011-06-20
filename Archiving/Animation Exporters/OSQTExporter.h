@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <QuickTime/QuickTime.h>
 
 @class QTMovie;
 @interface OSQTExporter : NSObject {
@@ -15,7 +14,6 @@
 	
 	QTMovie *qtMovie;
 	NSWindow *parentWindow;
-	QTAtomContainer	gExportSettings;
 }
 
 - (void)addImage:(NSImage *)image forLength:(NSTimeInterval)seconds;

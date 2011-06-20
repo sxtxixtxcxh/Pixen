@@ -122,19 +122,19 @@
 - (void)drawRect:(NSRect)rect 
       withinRect:(NSRect)wholeRect 
    withTransform:(NSAffineTransform *) aTransform 
-		onCanvas:(PXCanvas *)aCanvas
+				onCanvas:(PXCanvas *)aCanvas
 {
 	[aTransform invert];
 	
 	NSPoint origin = [aTransform transformPoint:rect.origin];
 	NSSize size = [aTransform transformSize:rect.size];
 
-	id newTransform = [NSAffineTransform transform];
+	NSAffineTransform *newTransform = [NSAffineTransform transform];
 	NSAffineTransformStruct s = [aTransform transformStruct];
-	float dx = s.tX, dy = s.tY;
+	CGFloat dx = s.tX, dy = s.tY;
 	while(dx < 0) { dx += [aCanvas size].width; }
 	while(dy < 0) { dy += [aCanvas size].height; }
-	[newTransform translateXBy:dx yBy:dy];
+	[(NSAffineTransform *)newTransform translateXBy:dx yBy:dy];
 	[newTransform invert];
 	origin = [newTransform transformPoint:origin];
 	origin.x = floorf(origin.x);

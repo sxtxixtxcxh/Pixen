@@ -81,7 +81,7 @@
 	count++;
 }
 
-- (NSComparisonResult)compare:(id)other
+- (NSComparisonResult)compare:(PXFrequencyEntry *)other
 {
 	return count < [other count];
 }

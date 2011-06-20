@@ -7,9 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <FlatButton/FlatButton.h>
 
-@interface PXBackgroundTableHeader : FlatButtonControl {
+@interface PXBackgroundTableHeader : NSButton {
 
 }
 
