@@ -11,11 +11,13 @@
 @class PXBackground;
 
 @interface PXBackgroundConfig : NSObject < NSCoding > {
+  @private
 	PXBackground *mainBackground;
 	PXBackground *alternateBackground;
 	PXBackground *mainPreviewBackground;
 	PXBackground *alternatePreviewBackground;	
 }
+
 - (PXBackground *)mainBackground;
 - (void)setMainBackground:(PXBackground *)value;
 

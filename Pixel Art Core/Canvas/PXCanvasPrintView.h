@@ -31,8 +31,11 @@
 
 @interface PXCanvasPrintView : NSView 
 {
+  @private
 	id canvas;
 }
-+ (id) viewForCanvas:(PXCanvas *) aCanvas;
+
++ (id) viewForCanvas:(PXCanvas *)aCanvas;
 - (id) initWithCanvas:(PXCanvas *)aCanvas;
+
 @end

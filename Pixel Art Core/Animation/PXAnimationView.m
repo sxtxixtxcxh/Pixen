@@ -30,18 +30,18 @@
 	if (!previousCel) { return; }
 	NSSize previousCelSize = [previousCel size];
 	NSRect canvasRect = [self convertFromViewToCanvasRect:[self bounds]];
-	if ([canvas wraps])
+	if ([self.canvas wraps])
 	{
 		int xTiles = 0;
 		int yTiles = 0;
-		if([canvas wraps])
+		if([self.canvas wraps])
 		{
 			while(((xTiles * previousCelSize.width)) < NSWidth(canvasRect)) { xTiles++; }
 			if(xTiles % 2 == 0) { xTiles += 1; }
 			while(((yTiles * previousCelSize.height)) < NSHeight(canvasRect)) { yTiles++; }
 			if(yTiles % 2 == 0) { yTiles += 1; }
 		}
-		float factor = (zoomPercentage / 100.0);
+		float factor = (self.zoomPercentage / 100.0);
 		NSRect destination = NSMakeRect(0, 0, previousCelSize.width * factor, previousCelSize.height * factor);
 		NSRect source = NSMakeRect(0, 0, previousCelSize.width, previousCelSize.height);
 		float i, j;

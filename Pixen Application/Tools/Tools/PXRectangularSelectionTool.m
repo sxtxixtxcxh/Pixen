@@ -48,40 +48,40 @@
 
 - (BOOL)shiftKeyDown
 {
-	if (!isClicking)
+	if (!self.isClicking)
 	{
 		isAdding = YES;
-		[switcher setIcon:[NSImage imageNamed:@"squareselectadd"] forTool:self];
+		[self.switcher setIcon:[NSImage imageNamed:@"squareselectadd"] forTool:self];
 	}
 	return YES;
 }
 
 - (BOOL)shiftKeyUp
 {
-	if (!isClicking)
+	if (!self.isClicking)
 	{
 		isAdding = NO;
-		[switcher setIcon:[NSImage imageNamed:@"squareselect"] forTool:self];
+		[self.switcher setIcon:[NSImage imageNamed:@"squareselect"] forTool:self];
 	}
 	return YES;
 }
 
 - (BOOL)optionKeyDown
 {
-	if (!isClicking)
+	if (!self.isClicking)
 	{
 		isSubtracting = YES;
-		[switcher setIcon:[NSImage imageNamed:@"squareselectsubtract"] forTool:self];
+		[self.switcher setIcon:[NSImage imageNamed:@"squareselectsubtract"] forTool:self];
 	}
 	return YES;
 }
 
 - (BOOL)optionKeyUp
 {
-	if (!isClicking)
+	if (!self.isClicking)
 	{
 		isSubtracting = NO;
-		[switcher setIcon:[NSImage imageNamed:@"squareselect"] forTool:self];
+		[self.switcher setIcon:[NSImage imageNamed:@"squareselect"] forTool:self];
 	}
 	return YES;
 }
@@ -90,7 +90,7 @@
 fromCanvasController:(PXCanvasController *) controller
 {
 	origin = aPoint;
-	isClicking = YES;
+	self.isClicking = YES;
 	
 	//have to have an undo grouping here because we're doing multiple selects on the canvas.
 	[[controller canvas] beginUndoGrouping];
@@ -133,7 +133,7 @@ fromCanvasController:(PXCanvasController *) controller
 - (void)drawRectOnTop:(NSRect)rect inView:(PXCanvasView *)view
 {
 	// selection drawing (while still dragging) is now O(1). hooray.
-	if (!isClicking || isMoving) { return; }
+	if (!self.isClicking || isMoving) { return; }
 	NSBezierPath *bezierPath = [NSBezierPath bezierPathWithRect:selectedRect];
 	[bezierPath setLineWidth:1.0f/([[view transform] transformSize:NSMakeSize(1,1)].width)];
 	CGFloat patternLength = 17.5f/([[view transform] transformSize:NSMakeSize(5,1)].width);
@@ -197,7 +197,7 @@ fromCanvasController:(PXCanvasController *)controller
 		}
 	}
 	[[controller canvas] endUndoGrouping:NSLocalizedString(@"Selection", @"Selection")];
-	isClicking = NO;
+	self.isClicking = NO;
 	[[controller canvas] changedInRect:[[controller canvas] selectedRect]];
 	selectedRect = NSZeroRect;
 }

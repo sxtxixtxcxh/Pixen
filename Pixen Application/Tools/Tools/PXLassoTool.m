@@ -46,7 +46,7 @@
 	if (! ( self = [super init] ) ) 
 		return nil;
 	
-	isClicking = NO;
+	self.isClicking = NO;
 	
 	return self;
 }
@@ -63,20 +63,20 @@
 
 - (BOOL)shiftKeyDown
 {
-	if (!isClicking)
+	if (!self.isClicking)
 	{
 		isAdding = YES;
-		[switcher setIcon:[NSImage imageNamed:@"lassoadd"] forTool:self];
+		[self.switcher setIcon:[NSImage imageNamed:@"lassoadd"] forTool:self];
 	}
 	return YES;
 }
 
 - (BOOL)shiftKeyUp
 {
-	if (!isClicking)
+	if (!self.isClicking)
 	{
 		isAdding = NO;
-		[switcher setIcon:[NSImage imageNamed:@"lasso"] forTool:self];
+		[self.switcher setIcon:[NSImage imageNamed:@"lasso"] forTool:self];
 	}
 	return YES;
 }
@@ -87,31 +87,31 @@
 	rightMost = MAX(point.x, rightMost);
 	bottomMost = MIN(point.y, bottomMost);
 	topMost = MAX(point.y, topMost);
-	[path appendBezierPathWithRect:NSMakeRect(point.x, point.y, 1, 1)];
+	[self.path appendBezierPathWithRect:NSMakeRect(point.x, point.y, 1, 1)];
 	[linePath lineToPoint:point];
 }
 
 - (void)drawRectOnTop:(NSRect)rect inView:view
 {
-	if (!isClicking || isMoving) 
+	if (!self.isClicking || isMoving) 
 	{
 		return; 
 	}
 	
 	[[[NSColor blackColor] colorWithAlphaComponent:0.7f] set];
 	
-	[path fill];
+	[self.path fill];
 	[((isSubtracting) ? [NSColor redColor] : [NSColor whiteColor]) set];
-	[path setLineWidth:0.1];
-	[path stroke];
+	[self.path setLineWidth:0.1];
+	[self.path stroke];
 }
 
 - (BOOL)optionKeyDown
 {
-	if (!isClicking)
+	if (!self.isClicking)
 	{
 		isSubtracting = YES;
-		[switcher setIcon:[NSImage imageNamed:@"lassosubtract"] forTool:self];
+		[self.switcher setIcon:[NSImage imageNamed:@"lassosubtract"] forTool:self];
 	}
 	
 	return YES;
@@ -119,10 +119,10 @@
 
 - (BOOL)optionKeyUp
 {
-	if (!isClicking)
+	if (!self.isClicking)
 	{
 		isSubtracting = NO;
-		[switcher setIcon:[NSImage imageNamed:@"lasso"] forTool:self];
+		[self.switcher setIcon:[NSImage imageNamed:@"lasso"] forTool:self];
 	}
 	
 	return YES;
@@ -130,7 +130,7 @@
 
 - (void)mouseDownAt:(NSPoint)aPoint fromCanvasController:(PXCanvasController*)controller
 {
-	isClicking = YES;	
+	self.isClicking = YES;	
 	origin = aPoint;
 	leftMost = origin.x;
 	rightMost = origin.x;
@@ -150,9 +150,9 @@
 		{
 			[[controller canvas] deselect];
 		}
-		[path release];
-		path = [[NSBezierPath bezierPath] retain];
-		[path appendBezierPathWithRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
+		
+		self.path = [NSBezierPath bezierPath];
+		[self.path appendBezierPathWithRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
 		[linePath release];
 		linePath = [[NSBezierPath bezierPath] retain];
 		[linePath moveToPoint:origin];
@@ -216,14 +216,14 @@
 			}
 		}
 		
-		[[controller canvas] changedInRect:[path bounds]];
+		[[controller canvas] changedInRect:[self.path bounds]];
 	}
 }
 
 - (void)mouseUpAt:(NSPoint)aPoint fromCanvasController:(PXCanvasController *)controller
 {
 	PXCanvas *canvas = [controller canvas];
-	isClicking = NO;
+	self.isClicking = NO;
 	if (!isMoving)
 	{
 		NSMutableArray *indices = [NSMutableArray arrayWithCapacity:1000];

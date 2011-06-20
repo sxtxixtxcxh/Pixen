@@ -35,16 +35,20 @@
 	[panel setFrame:[window frame] display:NO];
 	previousPoint = [panel cascadeTopLeftFromPoint:topLeft];
 	[panel makeKeyAndOrderFront:self];
-	return panel;
+	return [panel autorelease];
 }
 
 - (BOOL)canBecomeKeyWindow {
 	return NO;
 }
 
-- initWithPalette:(PXPalette *)pal
+- (id)initWithPalette:(PXPalette *)pal
 {
-	[super initWithContentRect:NSMakeRect(0, 0, 270, 283) styleMask:NSUtilityWindowMask | NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
+	self = [super initWithContentRect:NSMakeRect(0, 0, 270, 283)
+							styleMask:NSUtilityWindowMask | NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask
+							  backing:NSBackingStoreBuffered
+								defer:NO];
+	
 	[self setBecomesKeyOnlyIfNeeded:YES];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentAdded:) name:PXDocumentOpenedNotificationName object:nil];
@@ -52,6 +56,7 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paletteChanged:) name:PXPaletteChangedNotificationName object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidBecomeMain:) name:NSWindowDidBecomeMainNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paletteChanged:) name:PXUserPalettesChangedNotificationName object:nil];
+	
 	[NSBundle loadNibNamed:@"PXPalettePanel" owner:self];
 	[gearMenu setImage:[NSImage imageNamed:@"actiongear"]];
 	[self setContentView:contents];
@@ -59,6 +64,7 @@
 	[namePrompter setDelegate:self];
 	[paletteView setDelegate:self];
 	[self reloadDataAndShow:pal];
+	
 	return self;
 }
 

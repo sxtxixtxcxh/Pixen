@@ -34,6 +34,7 @@
 
 @interface PXWelcomeController : NSWindowController
 {
+  @private
 	IBOutlet NSTabView*		tabView;			// The tabless tab-view that we're a switcher for.
 	IBOutlet id image;
 	IBOutlet id next, prev, close;

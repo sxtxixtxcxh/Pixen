@@ -31,6 +31,6 @@
 
 @interface NSArray (DeepMutableCopy)
      
-- (NSArray *)deepMutableCopy;
+- (NSArray *)deepMutableCopy NS_RETURNS_RETAINED;
 
 @end

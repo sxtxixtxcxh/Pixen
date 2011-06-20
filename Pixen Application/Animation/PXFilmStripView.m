@@ -542,21 +542,24 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 
 - (NSMenu *)menuForEvent:(NSEvent *)event
 {
-	// This could be faster if it needs to be by actually finding out candidates for the hit using some fancy math.
+	// This could be faster if it needs to be by actually finding out candidates for the hit using some math.
 	NSInteger numberOfCels = [dataSource numberOfCels];
 	NSPoint location = [self convertPoint:[event locationInWindow] fromView:nil];	
 	NSInteger i;
 	for (i = 0; i < numberOfCels; i++)
 	{
-		if (!NSPointInRect(location, celRects[i])) { continue; }
+		if (!NSPointInRect(location, celRects[i]))
+			continue;
+		
 		[self selectCelAtIndex:i byExtendingSelection:NO];
+		
 		NSMenu *menu = [[NSMenu alloc] init];
 		[menu addItemWithTitle:NSLocalizedString(@"COPY_CEL", @"Copy") action:@selector(copyCel:) keyEquivalent:@""];
 		[menu addItemWithTitle:NSLocalizedString(@"CUT_CEL", @"Cut") action:@selector(cutCel:) keyEquivalent:@""];
 		[menu addItemWithTitle:NSLocalizedString(@"DELETE_CEL", @"Delete") action:@selector(deleteCel:) keyEquivalent:@""];
 		[menu addItem:[NSMenuItem separatorItem]];
 		[menu addItemWithTitle:NSLocalizedString(@"DUPLICATE_CEL", @"Duplicate") action:@selector(duplicateCel:) keyEquivalent:@""];
-		return menu;
+		return [menu autorelease];
 	}
 	return nil;
 }

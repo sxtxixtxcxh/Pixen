@@ -43,8 +43,6 @@
 
 #import "PXNotifications.h"
 
-static PXToolPaletteController *singleInstance = nil;
-
 @interface PXToolPaletteController (Private)
 - (void)_openRightToolSwitcher;
 - (void)_closeRightToolSwitcher;
@@ -120,8 +118,8 @@ static PXToolPaletteController *singleInstance = nil;
 	
 	[[self window] setMovableByWindowBackground:YES];
 	[(NSPanel *)[self window] setBecomesKeyOnlyIfNeeded:YES];
-	singleInstance = self;
-	return singleInstance;
+	
+	return self;
 }
 
 - (BOOL)acceptsFirstResponder
@@ -153,10 +151,14 @@ static PXToolPaletteController *singleInstance = nil;
 	[super dealloc];
 }
 
-+(id) sharedToolPaletteController
++ (id)sharedToolPaletteController
 {
-	if(! singleInstance ) 
+	static PXToolPaletteController *singleInstance = nil;
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
 		singleInstance = [[self alloc] init];
+	});
 	
 	return singleInstance;
 }

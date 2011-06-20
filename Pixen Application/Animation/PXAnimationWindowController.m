@@ -157,7 +157,7 @@
 		
 		[self updateDeleteButtonState];
 	} else if ([keyPath isEqualToString:@"size"]) {
-		[canvasController updateCanvasSize];
+		[self.canvasController updateCanvasSize];
 	}
 }
 
@@ -487,7 +487,7 @@
 		for (i = 0; i < celCount; i++)
 		{
 			if ([[animation objectInCelsAtIndex:i] canvas] == currentCanvas) { continue; }
-			[scaleController scaleCanvas:[[animation objectInCelsAtIndex:i] canvas]];
+			[self.scaleController scaleCanvas:[[animation objectInCelsAtIndex:i] canvas]];
 		}
 	}
 	[[[self document] undoManager] endUndoGrouping];
@@ -495,7 +495,7 @@
 
 - (IBAction)scaleCanvas:(id) sender
 {
-	[scaleController setDelegate:self withCallback:@selector(scalePrompterFinished:shouldScale:)];
+	[self.scaleController setDelegate:self withCallback:@selector(scalePrompterFinished:shouldScale:)];
 	[[[self document] undoManager] beginUndoGrouping];
 	[super scaleCanvas:self];
 }
@@ -510,10 +510,10 @@ didFinishWithSize:(NSSize)aSize
 
 - (IBAction)crop:sender
 {
-	NSRect selectedRect = [canvas selectedRect];
+	NSRect selectedRect = [self.canvas selectedRect];
 	[[[self document] undoManager] beginUndoGrouping];
 	[animation setSize:selectedRect.size withOrigin:NSMakePoint(NSMinX(selectedRect) * -1, NSMinY(selectedRect) * -1) backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
-	[canvas deselect];
+	[self.canvas deselect];
 	[[[self document] undoManager] endUndoGrouping];
 }
 
@@ -544,12 +544,12 @@ didFinishWithSize:(NSSize)aSize
 }
 
 - (BOOL)splitView:(NSSplitView *)sender canCollapseSubview:(NSView *)subview {
-	return (subview != canvasSplit) && (subview != topSubview);
+	return (subview != self.canvasSplit) && (subview != topSubview);
 }
 
 - (CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin
 				 ofSubviewAt:(NSInteger)offset { 
-	if(sender == splitView) {
+	if(sender == self.splitView) {
 		return 210;
 	} else if(sender != outerSplitView) {
 		return 110;
@@ -559,7 +559,7 @@ didFinishWithSize:(NSSize)aSize
 
 - (CGFloat)splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMax 
 				 ofSubviewAt:(NSInteger)offset {
-	if(sender == splitView) {
+	if(sender == self.splitView) {
 		return 400;
 	} else if(sender != outerSplitView) {
 		return sender.frame.size.height-110;

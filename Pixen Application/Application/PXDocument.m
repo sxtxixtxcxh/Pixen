@@ -13,6 +13,8 @@
 
 @implementation PXDocument
 
+@synthesize windowController;
+
 - (void)dealloc
 {
 	[[self windowControllers] makeObjectsPerformSelector:@selector(close)];
@@ -83,8 +85,4 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentChangedDisplayNameNotificationName object:self];
 }
 
-- (PXCanvasWindowController *)windowController;
-{
-	return windowController;
-}
 @end

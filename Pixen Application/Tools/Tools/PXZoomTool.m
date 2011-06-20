@@ -61,14 +61,14 @@ fromCanvasController:(PXCanvasController *) controller
 - (BOOL)optionKeyUp
 {
 	zoomType = PXZoomIn;
-	[switcher setIcon:[NSImage imageNamed:@"zoomIn"] forTool:self];
+	[self.switcher setIcon:[NSImage imageNamed:@"zoomIn"] forTool:self];
 	return YES;
 }
 
 - (BOOL)optionKeyDown
 {
 	zoomType = PXZoomOut;
-	[switcher setIcon:[NSImage imageNamed:@"zoomOut"] forTool:self];
+	[self.switcher setIcon:[NSImage imageNamed:@"zoomOut"] forTool:self];
 	return YES;
 }
 

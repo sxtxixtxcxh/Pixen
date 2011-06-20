@@ -33,6 +33,7 @@
 @class PXToolSwitcher, PXToolPropertiesController, PXPattern, PXCanvas;
 @interface PXTool : NSObject 
 {
+  @private
 	BOOL isClicking;
 	NSBezierPath *path;
 	NSBezierPath *wrappedPath;
@@ -41,11 +42,15 @@
 	NSColor *color;
 }
 
+@property (nonatomic, assign) BOOL isClicking;
+@property (nonatomic, retain) NSBezierPath *path;
+@property (nonatomic, retain) NSBezierPath *wrappedPath;
+@property (nonatomic, assign) PXToolSwitcher *switcher;
+@property (nonatomic, retain) NSColor *color;
+
 @property (nonatomic, retain) PXToolPropertiesController *propertiesController;
 
 - (NSString *)name;
-
-- (void)setSwitcher:(PXToolSwitcher *)aSwitcher;
 
 - (void)mouseDownAt:(NSPoint)aPoint 
 fromCanvasController:(PXCanvasController *) controller;
@@ -64,10 +69,7 @@ fromCanvasController:(PXCanvasController *)controller;
 
 - (NSRect)crosshairRectCenteredAtPoint:(NSPoint)aPoint;
 
-- (NSBezierPath *)path;
-- (NSBezierPath *)wrappedPath;
 - (NSColor *)colorForCanvas:(PXCanvas *)canvas;
-- (void)setColor:(NSColor *)aColor;
 
 - (BOOL)shiftKeyDown;
 - (BOOL)shiftKeyUp;

@@ -35,12 +35,15 @@
 // a generalized line tool
 @interface PXLinearTool : PXPencilTool 
 {
+  @private
 	NSPoint _origin;
 	NSPoint _lastPoint;
 	NSRect lastBounds;
 	BOOL locked;
 	BOOL centeredOnOrigin;
 }
+
+@property (nonatomic, assign) NSPoint origin;
 
 - (NSPoint)transformOrigin:(NSPoint)origin withDrawingPoint:(NSPoint)aPoint;
 - (void)drawFromPoint:(NSPoint)origin

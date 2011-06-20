@@ -24,7 +24,7 @@
 #import "PXTool.h"
 #import "PXCanvasDocument.h"
 #import "PXPattern.h"
-#import "PXGridSettingsPrompter.h"
+#import "PXGridSettingsController.h"
 #import "PXGrid.h"
 #import "PXToolSwitcher.h"
 #import "TabletEvents.h"
@@ -106,18 +106,6 @@
 	[scrollView setDocumentView:view];
 	[view setCanvas:canvas];
 	[layerController setCanvas:canvas];
-}
-
-- (void)gridSettingsPrompter:aPrompter 
-			 updatedWithSize:(NSSize)aSize
-					   color:color
-				  shouldDraw:(BOOL)shouldDraw
-{
-	PXGrid *grid = [canvas grid];
-	[grid setUnitSize:aSize];
-	[grid setColor:color];
-	[grid setShouldDraw:shouldDraw];
-	[canvas changed];
 }
 
 - (void)toolSwitched:(NSNotification *)notification
@@ -365,18 +353,35 @@
 	[backgroundController showWindow:self];	
 }
 
+- (void)gridSettingsController:(id)aController
+			   updatedWithSize:(NSSize)aSize
+						 color:(NSColor *)color
+					shouldDraw:(BOOL)shouldDraw {
+	
+	PXGrid *grid = [canvas grid];
+	[grid setUnitSize:aSize];
+	[grid setColor:color];
+	[grid setShouldDraw:shouldDraw];
+	[canvas changed];
+}
+
 - (void)showGridSettings
 {
-	if (gridSettingsPrompter) 
-		[gridSettingsPrompter release];
+	if (!_gridSettingsController) {
+		_gridSettingsController = [[PXGridSettingsController alloc] init];
+		_gridSettingsController.delegate = self;
+	}
 	
-	gridSettingsPrompter = [[PXGridSettingsPrompter alloc] initWithSize:[[view grid] unitSize] 
-																  color:[[view grid] color] 
-															 shouldDraw:[[view grid] shouldDraw] ? YES : NO];
-	[[gridSettingsPrompter window] setTitle:[NSString stringWithFormat:@"%@ - %@", NSLocalizedString(@"Grid", @"Grid"), [[self document] displayName]]];
+	_gridSettingsController.width = (int) [[view grid] unitSize].width;
+	_gridSettingsController.height = (int) [[view grid] unitSize].height;
+	_gridSettingsController.color = [[view grid] color];
+	_gridSettingsController.shouldDraw = [[view grid] shouldDraw] ? YES : NO;
 	
-	[gridSettingsPrompter setDelegate:self];
-	[(PXGridSettingsPrompter *)gridSettingsPrompter prompt];	
+	NSString *title = [NSString stringWithFormat:@"%@ - %@", NSLocalizedString(@"Grid", @"Grid"),
+					   [[self document] displayName]];
+	
+	[[_gridSettingsController window] setTitle:title];
+	[_gridSettingsController showWindow:self];
 }
 
 - (void)updateCanvasSizeZoomingToFit:(BOOL)zooming

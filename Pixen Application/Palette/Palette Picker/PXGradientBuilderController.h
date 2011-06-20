@@ -30,12 +30,13 @@
 
 @interface PXGradientBuilderController : NSWindowController 
 {
-  IBOutlet NSTextField *nameField;
-  IBOutlet NSColorWell *startColorWell;
-  IBOutlet NSColorWell *endColorWell;
-  IBOutlet NSTextField *colorsField;
-
-  id delegate;
+  @private
+	IBOutlet NSTextField *nameField;
+	IBOutlet NSColorWell *startColorWell;
+	IBOutlet NSColorWell *endColorWell;
+	IBOutlet NSTextField *colorsField;
+	
+	id delegate;
 }
 
 - (void)beginSheetInWindow:(NSWindow *)window;

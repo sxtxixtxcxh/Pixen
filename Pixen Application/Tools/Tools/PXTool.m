@@ -34,16 +34,11 @@
 
 @implementation PXTool
 
-@synthesize propertiesController;
+@synthesize isClicking, path, wrappedPath, switcher, color, propertiesController;
 
 - (NSString *)name
 {
 	return @"";
-}
-
-- (void)setSwitcher:(PXToolSwitcher *)aSwitcher 
-{
-	switcher = aSwitcher; 
 }
 
 - init
@@ -84,31 +79,14 @@ fromCanvasController:(PXCanvasController*)controller
 	return NO;
 }
 
-- (NSBezierPath *)wrappedPath
-{
-	return wrappedPath;
-}
-
-- (NSBezierPath *)path
-{
-	return path;
-}
-
-- (NSColor *)colorForCanvas:(PXCanvas *)aCanvas
-{
-	return color;
-}
-
-- (void)setColor:(NSColor *) aColor
-{
-	[aColor retain];
-	[color release];
-	color = aColor;
-}
-
 - (NSRect)crosshairRectCenteredAtPoint:(NSPoint)aPoint
 {
 	return NSMakeRect(aPoint.x, aPoint.y, 1, 1);
+}
+
+- (NSColor *)colorForCanvas:(PXCanvas *)canvas
+{
+	return color;
 }
 
 - (void)recacheColorIfNecessaryFromController:(PXCanvasController*)controller

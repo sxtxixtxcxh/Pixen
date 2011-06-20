@@ -26,11 +26,15 @@ const int PXBMPColorCountPosition = 46;
 	return self;
 }
 
-+ sharedBitmapImporter
++ (id)sharedBitmapImporter
 {
 	static PXBitmapImporter *sharedBitmapImporter = nil;
-	if (!sharedBitmapImporter)
-		sharedBitmapImporter = [[PXBitmapImporter alloc] _init];
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		sharedBitmapImporter = [[self alloc] _init];
+	});
+	
 	return sharedBitmapImporter;
 }
 

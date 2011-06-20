@@ -32,6 +32,7 @@
 
 @interface PXPreviewController : NSWindowController
 {
+  @private
 	IBOutlet PXCanvasPreviewView *view;
 	PXCanvas *canvas;
 	NSRect updateRect;

@@ -134,16 +134,16 @@
 {
 	if (pointsInBounds == nil) {
 		pointsInBounds = [[NSMutableArray alloc] init];
-		NSEnumerator *pointEnumerator = [points objectEnumerator];
-		NSString *string;
-		NSPoint point;
-		while ((string = [pointEnumerator nextObject]) != nil) {
-			point = NSPointFromString(string);
+		
+		for (NSString *string in points)
+		{
+			NSPoint point = NSPointFromString(string);
 			if (point.x >= 0 && point.y >= 0 && point.x < [self size].width && point.y < [self size].height) {
 				[pointsInBounds addObject:string];
 			}
 		}
 	}
+	
 	return pointsInBounds;
 }
 

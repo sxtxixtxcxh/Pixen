@@ -33,17 +33,19 @@ typedef enum _PXStackType
     return backgrounds;
 }
 
-- presetTemplates
+- (NSArray *)presetTemplates
 {
 	NSMutableArray *results = [NSMutableArray array];
-	id enumerator = [[NSFileManager defaultManager] enumeratorAtPath:GetBackgroundPresetsDirectory()], current;
-    while((current = [enumerator nextObject]))
-    {
-        if([[current pathExtension] isEqualToString:PXBackgroundSuffix])
-        {
-            [results addObject:[NSKeyedUnarchiver unarchiveObjectWithFile:[GetBackgroundPresetsDirectory() stringByAppendingPathComponent:current]]];
-        }
-    }
+	id enumerator = [[NSFileManager defaultManager] enumeratorAtPath:GetBackgroundPresetsDirectory()];
+	
+	for (NSString *current in enumerator)
+	{
+		if ([[current pathExtension] isEqualToString:PXBackgroundSuffix])
+		{
+			[results addObject:[NSKeyedUnarchiver unarchiveObjectWithFile:[GetBackgroundPresetsDirectory() stringByAppendingPathComponent:current]]];
+		}
+	}
+	
 	return results;
 }
 
@@ -130,18 +132,20 @@ typedef enum _PXStackType
 	[views addObject:header];
 	[stack stackSubview:header];
 	[header setFrame:NSMakeRect(-1, -1, NSWidth([header frame]) + 2, NSHeight([header frame]) + 2)];
-	int i;
-	for (i = 0; i < [templates count]; i++)
+	
+	for (id template in templates)
 	{
-		id template = [templates objectAtIndex:i];
 		id newView = [[[class alloc] init] autorelease];
+		
 		if (template == [NSNull null])
 			[newView setBackground:nil];
 		else
 			[newView setBackground:template];
+		
 		[views addObject:newView];
 		[stack stackSubview:newView];
 	}
+	
     [header release];
 }
 

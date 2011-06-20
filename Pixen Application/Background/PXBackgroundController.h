@@ -5,6 +5,7 @@
 @class PXBackgroundInfoView, PXBackgroundsTableView, PXBackground, OSStackedView, PXDefaultBackgroundTemplateView;
 @interface PXBackgroundController : NSWindowController
 {
+  @private
     IBOutlet PXBackgroundInfoView *alternateBackgroundView;
     IBOutlet PXBackgroundInfoView *mainBackgroundView;
     IBOutlet OSStackedView *mainStack, *defaultsStack;

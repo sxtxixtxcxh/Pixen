@@ -37,6 +37,7 @@
 
 @interface PXToolPaletteController: NSWindowController
 {
+  @private
 	IBOutlet PXToolSwitcher *leftSwitcher;
 	IBOutlet PXToolSwitcher *rightSwitcher;
 	IBOutlet id minimalView;

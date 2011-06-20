@@ -61,7 +61,7 @@
 fromCanvasController:(PXCanvasController *) controller
 {
 	[super mouseDownAt:aPoint fromCanvasController:controller];
-	lastRect = NSMakeRect(_origin.x, _origin.y, 0, 0);
+	lastRect = NSMakeRect(self.origin.x, self.origin.y, 0, 0);
 }
 
 - (void)drawRect:(NSRect)aRect inCanvas:(PXCanvas *) aCanvas
@@ -100,14 +100,14 @@ fromCanvasController:(PXCanvasController *) controller
 		NSColor * oldColor = [self colorForCanvas:canvas];
 		if (![SHAPE_PC shouldUseMainColorForFill])
 		{ 
-			color = [SHAPE_PC fillColor];
+			self.color = [SHAPE_PC fillColor];
 		}
 		[self drawRect:NSMakeRect(leftMost + borderWidth,
 								  bottomMost + borderWidth,
 								  rightMost - leftMost - 2*borderWidth,
 								  topMost - bottomMost - 2*borderWidth)
 			  inCanvas:canvas];
-		color = oldColor;
+		self.color = oldColor;
     }
 	[self drawRect:NSMakeRect(leftMost, bottomMost, rightMost - leftMost, borderWidth) inCanvas:canvas];
 	[self drawRect:NSMakeRect(leftMost, topMost-borderWidth, rightMost - leftMost, borderWidth) inCanvas:canvas];
@@ -134,11 +134,11 @@ fromCanvasController:(PXCanvasController *) controller
 					  to:(NSPoint)finalPoint
     fromCanvasController:(PXCanvasController *)controller
 {
-    NSPoint backupOrigin = _origin;
+    NSPoint backupOrigin = self.origin;
     [super mouseDraggedFrom:initialPoint 
 						 to:finalPoint
 	   fromCanvasController:controller];
-    _origin = backupOrigin;
+    self.origin = backupOrigin;
 }
 
 - (BOOL)supportsPatterns

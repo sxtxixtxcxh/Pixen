@@ -30,10 +30,11 @@
 
 @interface PXCanvasView : NSView 
 {
-	PXCanvas * canvas;
-
-	PXCrosshair * crosshair;
-	NSAffineTransform * transform;
+  @private
+	PXCanvas *canvas;
+	
+	PXCrosshair *crosshair;
+	NSAffineTransform *transform;
 	
 	NSBezierPath *cachedMarqueePath;
 	NSColor *antsPattern;
@@ -58,6 +59,10 @@
 	
 	id delegate;
 }
+
+@property (nonatomic, assign) PXCanvas *canvas;
+@property (nonatomic, assign) float zoomPercentage;
+
 - (void)setDelegate:(id) aDelegate;
 - (void)setCrosshair:aCrosshair;
 - (PXCrosshair *)crosshair;
@@ -66,7 +71,6 @@
 - (float)zoomPercentage;
 
 - (void)setZoomPercentage:(float)percent;
-- (void)setCanvas:(PXCanvas *)aCanvas;
 
 - (NSPoint)convertFromCanvasToViewPoint:(NSPoint)point;
 - (NSRect)convertFromCanvasToViewRect:(NSRect)rect;

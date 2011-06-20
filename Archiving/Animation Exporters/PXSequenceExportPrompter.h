@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface PXSequenceExportPrompter : NSObject {
+  @private
 	NSSavePanel *savePanel;
 	NSString *fileTemplate;
 	NSString *fileType;

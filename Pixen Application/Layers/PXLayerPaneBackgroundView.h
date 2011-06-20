@@ -7,6 +7,7 @@
 //
 
 @interface PXLayerPaneBackgroundView : NSView {
+  @private
 	NSGradient *gradient;
 }
 

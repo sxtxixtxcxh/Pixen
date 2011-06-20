@@ -41,12 +41,15 @@
 
 @interface PXBackground : NSObject <NSCoding, NSCopying> 
 {
+  @private
 	IBOutlet NSView * configurator;
 	id name;
 	
 	NSSize cachedImageSize;
 	NSImage *cachedImage;
 }
+
+@property (nonatomic, retain) NSImage *cachedImage;
 
 - (NSImage *)previewImageOfSize:(NSSize)size;
 

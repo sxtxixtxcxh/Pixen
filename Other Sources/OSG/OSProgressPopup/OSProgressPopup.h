@@ -21,6 +21,7 @@
 	SEL _didEndSelector;
 	id _target;
 	
+	NSOperationQueue *_workQueue;
 	BOOL indeterminate;
 }
 

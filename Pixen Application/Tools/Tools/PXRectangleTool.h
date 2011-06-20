@@ -11,6 +11,7 @@
 
 @interface PXRectangleTool : PXLinearTool 
 {
+  @private
 	NSRect lastRect;
 }
 

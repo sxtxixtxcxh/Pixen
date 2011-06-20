@@ -6,6 +6,7 @@
 @class PXColorPickerColorWellCell, PXCanvasDocument;
 @interface PXPaletteView : NSView
 {
+  @private
 	PXPalette *palette;
 	PXColorPickerColorWellCell *colorCell;
 
@@ -18,8 +19,10 @@
 	NSControlSize controlSize;
 	IBOutlet id delegate;
 }
-- (void)setEnabled:(BOOL)enabled;
-- (void)setDelegate:del;
+
+@property (nonatomic, assign) BOOL enabled;
+@property (nonatomic, assign) id delegate;
+
 - (id)initWithFrame:(NSRect)frameRect;
 - (void)resizeWithOldSuperviewSize:(NSSize)size;
 - (BOOL)isFlipped;

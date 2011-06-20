@@ -8,21 +8,19 @@
 
 #import <AppKit/NSResponder.h>
 #import <AppKit/NSNibDeclarations.h>
-@class NSTimer;
-@class NSTextField;
-@class NSTextView;
+
+@class NSTimer, NSTextField, NSTextView;
 
 @interface PXAboutController : NSResponder 
 {
+  @private
 	id aboutPanel;
 	NSPanel *panelInNib;
 	IBOutlet NSTextView *credits;
 	IBOutlet NSTextField *version;
-	
-	NSTimer *fadeTimer;
 }
 
-+(id) sharedAboutController;
++ (id)sharedAboutController;
 - (void)showPanel:(id)sender;
 
 @end

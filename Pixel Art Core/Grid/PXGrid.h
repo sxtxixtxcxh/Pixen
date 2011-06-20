@@ -34,6 +34,7 @@
 
 @interface PXGrid : NSObject <NSCopying, NSCoding>
 {
+  @private
 	NSSize unitSize;
 	id color;
 	BOOL shouldDraw;

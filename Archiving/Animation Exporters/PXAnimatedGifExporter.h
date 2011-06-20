@@ -13,6 +13,7 @@
 @class PXCanvas;
 @interface PXAnimatedGifExporter : NSObject
 {
+  @private
 	GifFileType * gifFile;
 	id finalData;
 	int iterations;

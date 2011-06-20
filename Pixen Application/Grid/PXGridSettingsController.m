@@ -1,5 +1,5 @@
 //
-//  PXGridSettingsPrompter.m
+//  PXGridSettingsController.m
 //  Pixen-XCode
 //
 // Copyright (c) 2003,2004,2005 Open Sword Group
@@ -27,84 +27,62 @@
 //  Copyright (c) 2004 Open Sword Group. All rights reserved.
 //
 
-#import "PXGridSettingsPrompter.h"
+#import "PXGridSettingsController.h"
 #import "PXDefaults.h"
 
-@implementation PXGridSettingsPrompter
+@implementation PXGridSettingsController
 
-- (id) initWithSize:(NSSize)aSize 
-			  color:(NSColor *)aColor
-		 shouldDraw:(BOOL)newShouldDraw
+@synthesize width, height, color, shouldDraw, delegate;
+
+- (id)init
 {
-	if ( ! ( self = [super initWithWindowNibName:@"PXGridSettingsPrompter"] )) 
+	if ( ! ( self = [super initWithWindowNibName:@"PXGridSettings"] ))
 		return nil;
 	
-	unitSize = aSize;
-	color = aColor;
-	shouldDraw = newShouldDraw;
 	return self;
 }
 
-- (void)setDelegate:(id) newDelegate
+- (void)showWindow:(id)sender
 {
-	delegate = newDelegate;
-}
-
-- (void)prompt
-{
-	[self showWindow:self];
-	[[sizeForm cellAtIndex:0] setIntValue:unitSize.width];
-	[[sizeForm cellAtIndex:1] setIntValue:unitSize.height];
-	[colorWell setColor:color];
-	[shouldDrawCheckBox setState:(shouldDraw) ? NSOnState : NSOffState];
-	[self update:self];
+	[super showWindow:sender];
+	[self update:nil];
 }
 
 - (IBAction)update:(id)sender
 {
 	if ([shouldDrawCheckBox state] == NSOnState) {
-		[sizeForm setEnabled:YES];
-		[colorWell setEnabled:YES];
 		[sizeLabel setTextColor:[NSColor blackColor]];
 		[colorLabel setTextColor:[NSColor blackColor]];
 	} else {
-		[sizeForm setEnabled:NO];
 		if ([colorWell isActive])
-		{
-			[[NSColorPanel sharedColorPanel] close];			
-		}
-		[colorWell setEnabled:NO];
+			[[NSColorPanel sharedColorPanel] close];
+		
 		[sizeLabel setTextColor:[NSColor disabledControlTextColor]];
 		[colorLabel setTextColor:[NSColor disabledControlTextColor]];
 	}
-	[delegate gridSettingsPrompter:self
-				   updatedWithSize:NSMakeSize([[sizeForm cellAtIndex:0] intValue], [[sizeForm cellAtIndex:1] intValue]) 
-							 color:[colorWell color] 
-						shouldDraw:([shouldDrawCheckBox state] == NSOnState) ? YES : NO];
+	
+	[delegate gridSettingsController:self
+					 updatedWithSize:NSMakeSize(self.width, self.height)
+							   color:self.color
+						  shouldDraw:self.shouldDraw];
 }
 
 - (IBAction)useAsDefaults:(id)sender
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-	[defaults setBool:([shouldDrawCheckBox state] == NSOnState) 
-			   forKey:PXGridShouldDrawKey];
 	
-	[defaults setFloat:[[sizeForm cellAtIndex:0] intValue] 
-				forKey:PXGridUnitWidthKey];
-	
-	[defaults setFloat:[[sizeForm cellAtIndex:1] intValue]
-				forKey:PXGridUnitHeightKey];
-	
-	[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:[colorWell color]] 
+	[defaults setBool:self.shouldDraw forKey:PXGridShouldDrawKey];
+	[defaults setFloat:self.width forKey:PXGridUnitWidthKey];
+	[defaults setFloat:self.height forKey:PXGridUnitHeightKey];
+	[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.color]
 				 forKey:PXGridColorDataKey];
 	
 	[self update:self];
 }
 
-- (IBAction)displayHelp:sender
+- (IBAction)displayHelp:(id)sender
 {
-	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"grid" inBook:@"Pixen Help"];	
+	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"grid" inBook:@"Pixen Help"];
 }
 
 - (void)windowWillClose:(NSNotification *)notification

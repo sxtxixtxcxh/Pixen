@@ -37,6 +37,8 @@
 
 @implementation PXBackground
 
+@synthesize cachedImage;
+
 + (void)initialize
 {
 	static BOOL ready = NO;
@@ -128,8 +130,8 @@
 {
 	if (cachedImage == nil || !NSEqualSizes(size, cachedImageSize)) {
 		cachedImageSize = size;
-		[cachedImage release];
-		cachedImage = [[NSImage alloc] initWithSize:size];
+		
+		self.cachedImage = [[[NSImage alloc] initWithSize:size] autorelease];
 		[cachedImage lockFocus];
 		
 		NSRect rect = NSMakeRect(0, 0, size.width, size.height);
@@ -176,7 +178,7 @@
 
 - (id)initWithCoder:(NSCoder *)coder
 {
-	[super init];
+	self = [super init];
 	[self setName:[coder decodeObjectForKey:@"name"]];
 	[self configurator];
 	return self;

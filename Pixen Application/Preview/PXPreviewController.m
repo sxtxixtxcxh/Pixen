@@ -43,8 +43,6 @@
 #import "PXPreviewResizePrompter.h"
 #import "PXNotifications.h"
 
-static PXPreviewController *instance = nil;
-
 @interface NSWindow(TitleBarHeight)
 - (float)titleBarHeight;
 @end
@@ -65,10 +63,6 @@ static PXPreviewController *instance = nil;
 
 - (id) init
 {
-	if(instance) {
-		[self autorelease];
-		return self = instance;
-	}
 	if ( ! ( self = [super initWithWindowNibName:@"PXPreview"] ) ) 
 		return nil;
 	
@@ -110,10 +104,14 @@ static PXPreviewController *instance = nil;
 	return self;
 }
 
-+(id) sharedPreviewController
-{	
-	if(! instance )
-		instance = [[self alloc] init]; 
++ (id)sharedPreviewController
+{
+	static PXPreviewController *instance = nil;
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		instance = [[self alloc] init];
+	});
 	
 	return instance;
 }

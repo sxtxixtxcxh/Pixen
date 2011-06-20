@@ -31,6 +31,7 @@
 #import <Foundation/Foundation.h>
 
 @interface PXPattern : NSObject <NSCopying, NSCoding> {
+  @private
 	NSMutableSet *points;
 	NSMutableArray *pointsInBounds;
 	NSSize size;

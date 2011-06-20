@@ -32,6 +32,8 @@
 
 @implementation PXDuotoneBackground
 
+@synthesize backColor;
+
 - (NSString *)nibName
 {
     return @"PXDuotoneBackgroundConfigurator";
@@ -47,8 +49,7 @@
 {
     [self setBackColor:[sender color]];
     [self changed];
-	[cachedImage release];
-	cachedImage = nil;
+	self.cachedImage = nil;
 }
 
 - (void)setBackColor:(NSColor *)aColor
@@ -95,9 +96,9 @@
 	[super encodeWithCoder:coder];
 }
 
--(id) initWithCoder:(NSCoder *)coder
+- (id)initWithCoder:(NSCoder *)coder
 {
-	[super initWithCoder:coder];
+	self = [super initWithCoder:coder];
 	[self setBackColor:[coder decodeObjectForKey:@"backColor"]];
 	return self;
 }

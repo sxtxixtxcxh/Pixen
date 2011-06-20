@@ -141,6 +141,7 @@
 	{
 		selectedRow = [self invertLayerIndex:idx];
 	}
+	
 	for (i = 0; i < [[canvas layers] count]; i++)
 	{
 		PXLayer *layer = [[canvas layers] objectAtIndex:i];
@@ -264,6 +265,8 @@
 	
 	//[[[self document] undoManager] beginUndoGrouping];
 	[canvas addLayer:layer];
+	[layer release];
+	
 	//[[[self document] undoManager] endUndoGrouping];
 	[self selectRow:[self invertLayerIndex:0]];
 	[self selectLayer:nil];
@@ -276,12 +279,20 @@
 
 - (IBAction)duplicateLayer:(id)sender
 {
-	[canvas duplicateLayerAtIndex:[self invertLayerIndex:[[layersView selectionIndexes] firstIndex]]];
+	NSInteger index = [self invertLayerIndex:[[layersView selectionIndexes] firstIndex]];
+	[canvas duplicateLayerAtIndex:index];
+	
+	[self selectRow:index+1];
+	[self selectLayer:nil];
 }
 
 - (void)duplicateLayerObject:(PXLayer *)layer
 {
-	[canvas duplicateLayerAtIndex:[[canvas layers] indexOfObject:layer]];
+	NSInteger index = [[canvas layers] indexOfObject:layer];
+	[canvas duplicateLayerAtIndex:index];
+	
+	[self selectRow:index+1];
+	[self selectLayer:nil];
 }
 
 - (void)removeLayerAtCanvasLayersIndex:(unsigned)index

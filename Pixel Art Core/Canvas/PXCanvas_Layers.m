@@ -291,7 +291,7 @@
 	BOOL wasActive = aLayer == activeLayer;
 	int index = [layers indexOfObject:aLayer];
 	[self beginUndoGrouping]; {
-		[self setLayers:[layers deepMutableCopy] fromLayers:layers];
+		[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];
 		[[layers objectAtIndex:index-1] compositeUnder:[layers objectAtIndex:index] flattenOpacity:YES];
 		[self removeLayerAtIndex:index];
 		if(wasActive)

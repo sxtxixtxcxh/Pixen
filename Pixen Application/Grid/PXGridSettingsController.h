@@ -1,5 +1,5 @@
 //
-//  PXGridSettingsPrompter.h
+//  PXGridSettingsController.h
 //  Pixen-XCode
 //
 // Copyright (c) 2003,2004,2005 Open Sword Group
@@ -30,33 +30,35 @@
 
 @interface NSObject(PXGridSettingsPrompterDelegate)
 
-- (void)gridSettingsPrompter:aPrompter
-			 updatedWithSize:(NSSize)aSize
-					   color:color
-				  shouldDraw:(BOOL)shouldDraw;
+- (void)gridSettingsController:(id)aController
+			   updatedWithSize:(NSSize)aSize
+						 color:(NSColor *)color
+					shouldDraw:(BOOL)shouldDraw;
 
 @end
 
-@interface PXGridSettingsPrompter : NSWindowController
+@interface PXGridSettingsController : NSWindowController
 {
-	IBOutlet NSForm * sizeForm;
-	IBOutlet id colorWell;
-	IBOutlet id shouldDrawCheckBox;
-	IBOutlet id colorLabel, sizeLabel;
+  @private
+	IBOutlet NSColorWell *colorWell;
+	IBOutlet NSButton *shouldDrawCheckBox;
+	IBOutlet NSTextField *colorLabel, *sizeLabel;
 	
-	NSSize unitSize;
+	int width, height;
 	NSColor *color;
 	id delegate;
 	BOOL shouldDraw;
 }
 
-- (id)initWithSize:(NSSize)aSize
-			 color:(NSColor *) aColor
-		shouldDraw:(BOOL)shouldDraw;
+@property (nonatomic, assign) int width;
+@property (nonatomic, assign) int height;
+@property (nonatomic, retain) NSColor *color;
+@property (nonatomic, assign) BOOL shouldDraw;
 
-- (void)setDelegate:(id)newDelegate;
-- (void)prompt;
+@property (nonatomic, assign) id delegate;
+
 - (IBAction)update:(id)sender;
 - (IBAction)useAsDefaults:(id)sender;
+- (IBAction)displayHelp:(id)sender;
 
 @end

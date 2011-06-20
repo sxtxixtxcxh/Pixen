@@ -30,6 +30,7 @@
 #import "PXPalette.h"
 @class PXLayerController, PXCanvas;
 @interface PXLayer : NSObject <NSCoding, NSCopying> {
+  @private
 	id name;
 	PXImage *image;
 	CGFloat opacity;

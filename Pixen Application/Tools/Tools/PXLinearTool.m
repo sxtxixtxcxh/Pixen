@@ -36,6 +36,9 @@
 #import "PXCanvasDocument.h"
 
 @implementation PXLinearTool
+
+@synthesize origin = _origin;
+
 -(id) init
 {
 	if (! ( self = [super init] ) )
@@ -59,7 +62,7 @@
 - (void)fakeMouseDraggedIfNecessary;
 {
 	// kind of a HACK
-	if (isClicking)
+	if (self.isClicking)
 	{
 //FIXME: coupled
 		[self mouseDraggedFrom:_origin to:_lastPoint fromCanvasController:[[[NSDocumentController sharedDocumentController] currentDocument] canvasController]];
@@ -103,8 +106,8 @@
 fromCanvasController:(PXCanvasController *)controller
 {
 	[super mouseDownAt:aPoint fromCanvasController:controller];
-	path = [[NSBezierPath bezierPath] retain];
-	wrappedPath = [[NSBezierPath bezierPath] retain];
+	self.path = [NSBezierPath bezierPath];
+	self.wrappedPath = [NSBezierPath bezierPath];
 	_origin = aPoint;
 }
 
@@ -173,11 +176,10 @@ fromCanvasController:(PXCanvasController *)controller
 - (void)mouseUpAt:(NSPoint)aPoint 
 fromCanvasController:(PXCanvasController *)controller
 {
-	isClicking = NO;
-	[path release];
-	path = nil;
-	[wrappedPath release];
-	wrappedPath = nil;
+	self.isClicking = NO;
+	self.path = nil;
+	self.wrappedPath = nil;
+	
 	NSPoint origin = [self transformOrigin:_origin withDrawingPoint:[self lockedPointFromUnlockedPoint:aPoint withOrigin:_origin]];
 	
 	[self finalDrawFromPoint:origin
@@ -189,7 +191,7 @@ fromCanvasController:(PXCanvasController *)controller
 
 - (BOOL)shouldUseBezierDrawing
 {
-	return isClicking;
+	return self.isClicking;
 }
 
 - (void)mouseDraggedFrom:(NSPoint)initialPoint 
@@ -200,16 +202,16 @@ fromCanvasController:(PXCanvasController *)controller
 	NSPoint origin = [self transformOrigin:_origin withDrawingPoint:[self lockedPointFromUnlockedPoint:finalPoint withOrigin:_origin]];
 	if (!NSEqualPoints(initialPoint, finalPoint)) 
     {
-		[path removeAllPoints];
-		[wrappedPath removeAllPoints];
+		[self.path removeAllPoints];
+		[self.wrappedPath removeAllPoints];
 		[self drawFromPoint:origin 
 					toPoint:[self lockedPointFromUnlockedPoint:finalPoint withOrigin:origin]
 				   inCanvas:[controller canvas]];
 	}
 	NSRect updateRect = lastBounds;
-	if (path != nil && ![path isEmpty]) {
-		updateRect = NSUnionRect(updateRect, [path bounds]);
-		lastBounds = [path bounds];
+	if (self.path != nil && ![self.path isEmpty]) {
+		updateRect = NSUnionRect(updateRect, [self.path bounds]);
+		lastBounds = [self.path bounds];
 	} else {
 		lastBounds = NSZeroRect;
 	}

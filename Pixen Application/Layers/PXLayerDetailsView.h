@@ -31,6 +31,7 @@
 @class PXNSImageView, PXLayerTextField, PXLayerController, PXLayer;
 @interface PXLayerDetailsView : NSView 
 {
+  @private
 	IBOutlet PXLayerTextField *name;
 	IBOutlet PXNSImageView *thumbnail;
 	IBOutlet NSSlider *opacity;

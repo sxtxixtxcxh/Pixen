@@ -10,6 +10,7 @@
 
 
 @interface PXSpriteSheetExporter : NSWindowController {
+  @private
 	IBOutlet NSTableView *animationsTable;
 	IBOutlet NSImageView *sheetImageView;
 	NSArray *documentRepresentations;

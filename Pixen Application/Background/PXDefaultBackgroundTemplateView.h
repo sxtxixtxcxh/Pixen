@@ -30,6 +30,7 @@
 #import "PXBackgroundTemplateView.h"
 
 @interface PXDefaultBackgroundTemplateView : PXBackgroundTemplateView {
+  @private
 	NSString *backgroundTypeText;
 	BOOL highlighted;
 	BOOL activeDragTarget;

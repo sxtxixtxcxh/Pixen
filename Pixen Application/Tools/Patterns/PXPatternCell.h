@@ -31,6 +31,7 @@
 @class PXPattern;
 
 @interface PXPatternCell : NSButtonCell {
+  @private
 	PXPattern *pattern;
 	id delegate;
 	

@@ -28,16 +28,16 @@
 
 - (void)dealloc
 {
-	[(PXAnimationWindowController *)windowController setAnimation:nil];
+	[ (PXAnimationWindowController *) self.windowController setAnimation:nil];
 	[animation release];
 	[super dealloc];
 }
 
 //FIXME: consider removing these three once coupling decreases
 
-- canvasController
+- (id)canvasController
 {
-	return [windowController canvasController];
+	return [self.windowController canvasController];
 }
 
 - canvas
@@ -50,19 +50,19 @@
   return [animation canvases];
 }
 
-- (void)delete:sender
+- (void)delete:(id)sender
 {
-  [windowController delete:sender];
+	[self.windowController delete:sender];
 }
 
 - (void)initWindowController
 {
-    windowController = [[PXAnimationWindowController alloc] initWithWindowNibName:@"PXAnimationDocument"];
+	self.windowController = [[[PXAnimationWindowController alloc] initWithWindowNibName:@"PXAnimationDocument"] autorelease];
 }
 
 - (void)setWindowControllerData
 {
-	[(PXAnimationWindowController *)windowController setAnimation:animation];
+	[ (PXAnimationWindowController *) self.windowController setAnimation:animation];
 }
 
 - (NSFileWrapper *)fileWrapperOfType:(NSString *)aType error:(NSError **)outError
@@ -116,7 +116,10 @@
 		int i;
 		int numberOfCels = [animation countOfCels];
 		[popup setMaxProgress:numberOfCels];
-		[popup beginOperationWithStatusText:[NSString stringWithFormat:@"Exporting GIF... (1 of %d)", numberOfCels] parentWindow:[windowController window]];
+		
+		[popup beginOperationWithStatusText:[NSString stringWithFormat:@"Exporting GIF... (1 of %d)", numberOfCels]
+							   parentWindow:[self.windowController window]];
+		
 		[popup setProgress:0];
 		id exportAnimation = [[animation copy] autorelease];
 		[exportAnimation reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];

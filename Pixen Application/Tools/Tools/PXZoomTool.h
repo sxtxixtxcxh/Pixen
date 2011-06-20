@@ -35,6 +35,7 @@ typedef enum {
 
 @interface PXZoomTool : PXTool 
 {
+  @private
 	PXZoomType zoomType;
 }
 //should implement 'drag to create rect and zoom to fit that rect'

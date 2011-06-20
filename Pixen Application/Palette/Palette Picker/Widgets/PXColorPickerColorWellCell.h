@@ -11,6 +11,7 @@
 // warning private interface
 @interface NSColorPanelColorWell : NSColorWell
 {
+  @private
     BOOL _disabledAsColorDestination;
     BOOL _actsLikeButton;
 }

@@ -64,7 +64,7 @@
 	}
 	PXLayer *layerCopy;
 	int x, y;
-	NSColor *A, *B, *C, *D, *E, *F, *G, *H, *I, *E0, *E1, *E2, *E3;
+	NSColor /* *A,*/ *B, /* *C,*/ *D, *E, *F, /* *G,*/ *H, /* *I,*/ *E0, *E1, *E2, *E3;
 	int xScale = size.width / [canvas size].width;
 	int yScale = size.height / [canvas size].height;
 	int layerWidth, layerHeight;
@@ -87,15 +87,15 @@
 					// D E F
 					// G H I
 					
-					A = [layerCopy colorAtPoint:NSMakePoint(x - 1, y - 1)];
+					// A = [layerCopy colorAtPoint:NSMakePoint(x - 1, y - 1)];
 					B = [layerCopy colorAtPoint:NSMakePoint(x    , y - 1)];
-					C = [layerCopy colorAtPoint:NSMakePoint(x + 1, y - 1)];
+					// C = [layerCopy colorAtPoint:NSMakePoint(x + 1, y - 1)];
 					D = [layerCopy colorAtPoint:NSMakePoint(x - 1, y)];
 					E = [layerCopy colorAtPoint:NSMakePoint(x    , y)];
 					F = [layerCopy colorAtPoint:NSMakePoint(x + 1, y)];
-					G = [layerCopy colorAtPoint:NSMakePoint(x - 1, y + 1)];
+					// G = [layerCopy colorAtPoint:NSMakePoint(x - 1, y + 1)];
 					H = [layerCopy colorAtPoint:NSMakePoint(x    , y + 1)];
-					I = [layerCopy colorAtPoint:NSMakePoint(x + 1, y + 1)];
+					// I = [layerCopy colorAtPoint:NSMakePoint(x + 1, y + 1)];
 					
 					if (![B isEqual:H] && ![D isEqual:F]) {
 						E0 = [D isEqual:B] ? D : E;

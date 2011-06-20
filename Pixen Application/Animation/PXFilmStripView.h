@@ -10,6 +10,7 @@
 
 @interface PXFilmStripView : NSView
 {
+  @private
 	IBOutlet id dataSource;
 	IBOutlet id delegate;
 	

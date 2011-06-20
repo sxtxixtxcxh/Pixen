@@ -236,10 +236,10 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 		}
 		free(systemPalettes);
 		systemPalettes = calloc(newCount, sizeof(PXPalette *));
-		for (i = 0; i < [lists count]; i++)
+		
+		i = 0;
+		for (NSColorList *current in lists)
 		{
-			NSColorList *current = [lists objectAtIndex:i];
-			
 			PXPalette *palette = PXPalette_alloc();
 			PXPalette_initWithoutBackgroundColor(palette);
 			PXPalette_setName(palette, [current name]);
@@ -251,7 +251,7 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 			
 			palette->isSystemPalette = YES;
 			palette->canSave = NO;
-			systemPalettes[i] = palette;
+			systemPalettes[i++] = palette;
 		}
 		NSMutableArray *grays = [NSMutableArray arrayWithArray:CreateGrayList()];
 		PXPalette *palette = PXPalette_alloc();
@@ -278,15 +278,17 @@ unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex)
 {
 //FIXME: this code will leak or worse(probably just leak) if palettes are removed at runtime.
 	NSMutableArray *paths = [NSMutableArray array];
-	id enumerator = [[NSFileManager defaultManager] enumeratorAtPath:GetPixenPaletteDirectory()], current;
-	while((current = [enumerator nextObject]))
+	id enumerator = [[NSFileManager defaultManager] enumeratorAtPath:GetPixenPaletteDirectory()];
+	
+	for (NSString *current in enumerator)
 	{
-		if([[current pathExtension] isEqual:PXPaletteSuffix])
+		if ([[current pathExtension] isEqual:PXPaletteSuffix])
 		{
 			//removing path extension so it will sort correctly.
 			[paths addObject:[current stringByDeletingPathExtension]];
 		}
 	}
+	
 	[paths sortUsingSelector:@selector(compareNumeric:)];
 	int newCount = [paths count];
 	if(pals == NULL) { return newCount; }

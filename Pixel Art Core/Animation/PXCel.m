@@ -13,21 +13,22 @@
 #import "PXAnimation.h"
 
 @implementation PXCel
-- init
+
+- (id)init
 {
-	if (![super init]) {
+	if ( ! (self = [super init]))
 		return nil;
-	}
+	
 	canvas = [[PXCanvas alloc] init];
 	duration = 1;
 	return self;
 }
 
-- initWithCanvas:(PXCanvas *)initCanvas duration:(NSTimeInterval)initDuration
+- (id)initWithCanvas:(PXCanvas *)initCanvas duration:(NSTimeInterval)initDuration
 {
-	if (![super init]) {
+	if ( ! (self = [super init]))
 		return nil;
-	}
+	
 	canvas = [initCanvas retain];
 	duration = initDuration;
 	return self;
@@ -51,11 +52,11 @@
 	return cel;
 }
 
-- initWithImage:(NSImage *)image animation:(PXAnimation *)animation atIndex:(int)index
+- (id)initWithImage:(NSImage *)image animation:(PXAnimation *)animation atIndex:(int)index
 {
-	if (![super init]) {
+	if ( ! (self = [super init]))
 		return nil;
-	}
+	
 	canvas = [[PXCanvas alloc] init];
 	[canvas setUndoManager:[animation undoManager]];
 	[canvas replaceActiveLayerWithImage:image];

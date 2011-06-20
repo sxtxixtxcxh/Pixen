@@ -10,6 +10,7 @@
 
 @class QTMovie;
 @interface OSQTExporter : NSObject {
+  @private
 	NSString *tempPath;
 	
 	QTMovie *qtMovie;

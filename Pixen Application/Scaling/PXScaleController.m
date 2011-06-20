@@ -267,7 +267,7 @@ static NSArray *algorithms = nil;
 	PXSelectionMask oldMask = malloc([canvas selectionMaskSize]);
 	memcpy(oldMask, [canvas selectionMask], [canvas selectionMaskSize]);
 	PXSelectionMask newMask = (PXSelectionMask)calloc(newSize.width * newSize.height, sizeof(BOOL));
-	[canvas setLayers:[[canvas layers] deepMutableCopy] 
+	[canvas setLayers:[[[canvas layers] deepMutableCopy] autorelease]
 		   fromLayers:[canvas layers]
 	  withDescription:NSLocalizedString(@"Set Layers", @"Set Layers")];
 	//this seems wrong.  you'd think we'd want to use the actual old canvas size, but whatever...

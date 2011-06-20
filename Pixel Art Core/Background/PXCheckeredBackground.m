@@ -38,9 +38,9 @@
 
 - (void)drawRect:(NSRect)rect withinRect:(NSRect)wholeRect
 {
-    [backColor set];
+    [self.backColor set];
     NSRectFill(wholeRect);
-    [color set];
+    [self.color set];
     int i, j;
     BOOL drawForeground = NO;
     

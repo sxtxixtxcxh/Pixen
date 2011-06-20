@@ -37,6 +37,7 @@
 @class PXLayer;
 @interface PXMoveTool : PXLinearTool
 {
+  @private
 	PXLayer *realLayer, *copyLayer, *moveLayer;
 	BOOL isCopying;
 	BOOL isMovingSelection;

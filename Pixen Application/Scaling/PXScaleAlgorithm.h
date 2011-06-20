@@ -34,7 +34,8 @@
 
 @interface PXScaleAlgorithm : NSObject 
 {
-  IBOutlet NSView *parameterView;
+  @private
+	IBOutlet NSView *parameterView;
 }
 
 +(id) algorithm;

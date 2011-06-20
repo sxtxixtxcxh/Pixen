@@ -11,6 +11,7 @@
 
 @class PXCanvasDocument;
 @interface PXPaletteSelector : NSObject {
+  @private
 	IBOutlet NSPopUpButton *selectionPopup;
 	IBOutlet id delegate;
 	

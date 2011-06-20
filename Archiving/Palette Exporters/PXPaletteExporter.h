@@ -10,6 +10,7 @@
 #import "PXPalette.h"
 
 @interface PXPaletteExporter : NSObject {
+  @private
 	NSSavePanel *savePanel;
 	PXPalette *palette;
 }

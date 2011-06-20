@@ -42,6 +42,7 @@ didFinishWithSize:(NSSize)size
 
 @interface PXCanvasResizePrompter : NSWindowController 
 {
+  @private
 	IBOutlet NSTextField *heightField, *widthField;
 	IBOutlet PXCanvasResizeView *resizeView;
 	IBOutlet NSColorWell *bgColorWell;

@@ -13,12 +13,12 @@
 
 - (PXBackground *)mainBackground
 {
-	return [canvas mainPreviewBackground];
+	return [self.canvas mainPreviewBackground];
 }
 
 - (PXBackground *)alternateBackground
 {
-	return [canvas alternatePreviewBackground];
+	return [self.canvas alternatePreviewBackground];
 }
 
 @end

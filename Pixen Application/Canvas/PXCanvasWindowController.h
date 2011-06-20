@@ -6,10 +6,11 @@
 //
 #import <AppKit/AppKit.h>
 
-@class PXCanvasController, PXCanvas, PXCanvasView, PXBackground;
+@class PXCanvasController, PXScaleController, PXCanvas, PXCanvasView, PXBackground;
 
 @interface PXCanvasWindowController : NSWindowController
 {
+  @private
 	PXCanvas *canvas;
 
 	IBOutlet id zoomPercentageBox;
@@ -17,7 +18,7 @@
 	IBOutlet NSView *zoomView;
 	id previewController;
 	id resizePrompter;
-	id scaleController;
+	PXScaleController *scaleController;
 	id layerController;
 	
 	id paletteController;
@@ -28,16 +29,22 @@
 	IBOutlet NSSplitView *splitView;
 	IBOutlet NSView *layerSplit, *canvasSplit, *paletteSplit;
 }
-- canvasController;
+
+@property (nonatomic, readonly) IBOutlet PXCanvasController *canvasController;
+@property (nonatomic, readonly) PXScaleController *scaleController;
+
+@property (nonatomic, assign) PXCanvas *canvas;
+
+@property (nonatomic, readonly) IBOutlet NSSplitView *splitView;
+@property (nonatomic, readonly) IBOutlet NSView *layerSplit, *canvasSplite, *paletteSplit;
+
 - (PXCanvasView *)view;
 - (id) initWithWindowNibName:name;
 - (void)awakeFromNib;
 - (NSView *)layerSplit;
 - (NSView *)canvasSplit;
 - (void)dealloc;
-- (PXCanvas *) canvas;
 - (void)windowWillClose:note;
-- (void)setCanvas:(PXCanvas *) aCanvas;
 - (void)releaseCanvas;
 - (void)setDocument:(NSDocument *)doc;
 - (void)windowDidResignMain:note;

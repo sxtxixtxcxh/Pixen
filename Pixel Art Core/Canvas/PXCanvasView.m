@@ -63,6 +63,8 @@ void PXDebugRect(NSRect r, float alpha)
 
 @implementation PXCanvasView
 
+@synthesize canvas, zoomPercentage;
+
 - (BOOL)acceptsFirstMouse:(NSEvent *)event
 {
 	return acceptsFirstMouse;
@@ -274,11 +276,6 @@ void PXDebugRect(NSRect r, float alpha)
 	[self centerOn:[self convertFromCanvasToViewPoint:centeredPoint]];
 	[[self window] invalidateCursorRectsForView:self];
 	[self setNeedsDisplay:YES];
-}
-
-- (float)zoomPercentage
-{
-	return zoomPercentage;
 }
 
 - (void)setZoomPercentage:(float)percent
