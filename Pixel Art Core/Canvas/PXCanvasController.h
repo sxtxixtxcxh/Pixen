@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@class PXCanvas, PXCanvasView, PXBackground;
+@class PXCanvas, PXCanvasView, PXBackground, PXGridSettingsController;
 @interface PXCanvasController : NSObject {
   @private
 	PXCanvas *canvas;
@@ -17,7 +17,7 @@
 	IBOutlet NSScrollView *scrollView;
 	NSDocument *document;
 	IBOutlet NSWindow *window;
-	id gridSettingsPrompter;
+	PXGridSettingsController *_gridSettingsController;
 
 	id prompter;
 	id previewController;
@@ -46,10 +46,6 @@
 - (void)layerSelectionDidChange:(NSNotification *) aNotification;
 - (void)setLayerController:contro;
 - (void)prepare;
-- (void)gridSettingsPrompter:aPrompter 
-			 updatedWithSize:(NSSize)aSize
-					   color:color
-				  shouldDraw:(BOOL)shouldDraw;
 - (void)toolSwitched:(NSNotification *)notification;
 - (void)canvasSizeDidChange:(NSNotification *) aNotification;
 - (PXCanvas *) canvas;
