@@ -161,12 +161,6 @@
 	[views removeObjectsInRange:NSMakeRange([[canvas layers] count], [views count] - [[canvas layers] count])];
 	[self selectRow:selectedRow];
 	
-	if ([[[aNotification userInfo] objectForKey:PXCanvasOldLayersCountKey] intValue] == 1 
-			&& [[canvas layers] count] == 2
-			&& [self isSubviewCollapsed])
-	{
-		[self toggle:self];
-	}
 	[layersView setContent:[[views reverseObjectEnumerator] allObjects]];
 	id newLayer = [[aNotification userInfo] objectForKey:PXCanvasNewLayerKey];
 	if(newLayer)
@@ -241,21 +235,6 @@
 	if ([splitView isSubviewCollapsed:subview])
 		[splitView setPosition:[splitView minPossiblePositionOfDividerAtIndex:0]
 					ofDividerAtIndex:0];
-}
-
-
-
-- (void)toggle:(id)sender
-{
-	if([self isSubviewCollapsed])
-	{
-		[self expandSubview];
-	}
-	else
-	{
-		[self collapseSubview];
-	}
-	[[subview window] display];
 }
 
 - (IBAction)addLayer:(id)sender

@@ -40,7 +40,6 @@
 - (IBAction)togglePreviewWindow: (id) sender;
 - (IBAction)showBackgroundInfo:(id) sender;
 - (IBAction)showGridSettingsPrompter:(id) sender;
-- (IBAction)toggleLayersDrawer:(id) sender;
 - (IBAction)redrawCanvas: (id) sender;
 - (void)prompter:aPrompter 
 didFinishWithSize:(NSSize)aSize

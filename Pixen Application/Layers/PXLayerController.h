@@ -49,7 +49,6 @@
 	CGFloat lastSubviewHeight;
 }
 -(id) initWithCanvas:(PXCanvas *)aCanvas;
-- (void)toggle:(id)sender;
 - (NSView *)view;
 - (void)setSubview:(NSView *)sv;
 - (void)reloadData:(NSNotification *) aNotification;

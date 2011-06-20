@@ -275,11 +275,6 @@
 	[canvasController showGridSettings];
 }
 
-- (IBAction)toggleLayersDrawer:(id) sender
-{
-	[[canvasController layerController] toggle:sender];
-}
-
 - (IBAction)redrawCanvas: (id) sender
 {
 	[canvas changed];
