@@ -11,24 +11,17 @@
 #import "PXAnimationDocument.h"
 #import "PXAnimation.h"
 
-PXSpriteSheetExporter *sharedSpriteSheetExporter = nil; 
-
 @implementation PXSpriteSheetExporter
 
 - init
 {
-	if (sharedSpriteSheetExporter) {
-		[self dealloc];
-		return sharedSpriteSheetExporter;
-	}
-	if ([super initWithWindowNibName:@"PXSpriteSheetExporter"] == nil) {
+	if ( ! (self = [super initWithWindowNibName:@"PXSpriteSheetExporter"]))
 		return nil;
-	}
+	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentsChanged:) name:PXDocumentDidCloseNotificationName object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentsChanged:) name:PXDocumentOpenedNotificationName object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentsChanged:) name:PXDocumentChangedDisplayNameNotificationName object:nil];
 	
-	sharedSpriteSheetExporter = self;
 	return self;
 }
 
@@ -62,9 +55,16 @@ PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
 	}
 }
 
-+ sharedSpriteSheetExporter
++ (id)sharedSpriteSheetExporter
 {
-	return [[self alloc] init];
+	static PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		sharedSpriteSheetExporter = [[self alloc] init];
+	});
+	
+	return sharedSpriteSheetExporter;
 }
 
 - (NSArray *)documentRepresentations

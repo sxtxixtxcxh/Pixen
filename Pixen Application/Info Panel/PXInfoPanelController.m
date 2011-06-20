@@ -37,31 +37,21 @@
 #import <AppKit/NSTextField.h>
 
 
-static PXInfoPanelController *singleInstance = nil;
-
 @implementation PXInfoPanelController
 
 
--(id) init
+- (id)init
 {
-	if ( singleInstance )
-    {
-		[self dealloc];
-		return singleInstance;
-    }
-	
-	if ( ! (self = [super init] ) ) 
+	if ( ! (self = [super init] ))
 		return nil;
 	
-	if ( ! [NSBundle loadNibNamed:@"PXInfoPanel" owner:self] )
-    {
-		[self dealloc];
+	if ( ! [NSBundle loadNibNamed:@"PXInfoPanel" owner:self])
+	{
+		[self release];
 		return nil;
-    }
+	}
 	
-	singleInstance = self;
-	
-	return singleInstance;
+	return self;
 }
 
 -(void) awakeFromNib
@@ -71,10 +61,15 @@ static PXInfoPanelController *singleInstance = nil;
 }
 
 
-+(id) sharedInfoPanelController
++ (id)sharedInfoPanelController
 {
-	if ( ! singleInstance ) 
-		singleInstance = [[self alloc] init]; 
+	static PXInfoPanelController *singleInstance = nil;
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		singleInstance = [[self alloc] init];
+	});
+	
 	return singleInstance;
 }
 

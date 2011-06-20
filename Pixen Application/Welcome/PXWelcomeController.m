@@ -29,14 +29,16 @@
 
 #import "PXWelcomeController.h"
 
-static PXWelcomeController *sharedWelcomeController = nil;
-
 @implementation PXWelcomeController
 
-+(id) sharedWelcomeController
++ (id)sharedWelcomeController
 {
-	if (! sharedWelcomeController ) 
+	static PXWelcomeController *sharedWelcomeController = nil;
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
 		sharedWelcomeController = [[self alloc] init];
+	});
 	
 	return sharedWelcomeController;
 }

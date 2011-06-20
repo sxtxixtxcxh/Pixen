@@ -46,41 +46,33 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-static PXAboutController *singleInstance = nil;
-
 @implementation PXAboutController
 
--(id) init
+- (id)init
 {
-	if ( singleInstance ) 
-    {
-		[self dealloc];
-		return singleInstance;
-    }
-	
-	
-	if ( ! ( self = [super init] ) ) 
+	if ( ! ( self = [super init] ))
 		return nil;
 	
-	if ( ! [NSBundle loadNibNamed :@"PXAbout" owner:self] ) {
+	if ( ! [NSBundle loadNibNamed :@"PXAbout" owner:self]) {
 		NSLog(@"!!! Could not load PXAbout NIB !!!");
-		[self dealloc];
+		[self release];
 		return nil;
 	}
 	
-	singleInstance = self;
-	
-	return singleInstance;
+	return self;
 }
 
-+(id) sharedAboutController
++ (id)sharedAboutController
 {
-	if ( ! singleInstance  ) 
-		singleInstance = [[self alloc] init]; 
+	static PXAboutController *singleInstance = nil;
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		singleInstance = [[self alloc] init];
+	});
 	
 	return singleInstance;
 }
-
 
 - (void)loadCreditsText
 {

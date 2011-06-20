@@ -41,7 +41,7 @@
 	
 	if (! [NSBundle loadNibNamed:@"PXNamePrompt" owner: self] ) {
 		NSLog(@"!!! Could not load PXNamePrompt NIB !!!");
-		[self dealloc];
+		[self release];
 		return nil;
 	}
 	
