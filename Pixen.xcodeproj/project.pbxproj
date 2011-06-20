@@ -30,7 +30,6 @@
 		BF269FE6091307BF00B7A218 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BB8ED608FB58F9009C75A6 /* QTKit.framework */; };
 		BF489DDD08775845007DF4CF /* PXPatternEditor.nib in Resources */ = {isa = PBXBuildFile; fileRef = BF489DDB08775845007DF4CF /* PXPatternEditor.nib */; };
 		BFB1440608AD1D1800CE29EF /* PXSpriteSheetExporter.nib in Resources */ = {isa = PBXBuildFile; fileRef = BFB1440408AD1D1800CE29EF /* PXSpriteSheetExporter.nib */; };
-		BFFC21B906DED6F8008EC4CC /* PXGradientBuilder.nib in Resources */ = {isa = PBXBuildFile; fileRef = BFFC21B706DED6F8008EC4CC /* PXGradientBuilder.nib */; };
 		C93DB17F13ABC6BE006D42FE /* PXPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93DB17D13ABC6BE006D42FE /* PXPreferences.xib */; };
 		C93DB18213ABC8BE006D42FE /* PXGeneralPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93DB18013ABC8BE006D42FE /* PXGeneralPreferences.xib */; };
 		C93DB18613ABC963006D42FE /* PXGeneralPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C93DB18313ABC963006D42FE /* PXGeneralPreferencesController.h */; };
@@ -125,8 +124,6 @@
 		EA31F97D0CE7CD9300EC481B /* PXLayerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */; };
 		EA31F97E0CE7CD9300EC481B /* PXInfoPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */; };
 		EA31F97F0CE7CD9300EC481B /* PXInfoPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9750CE7CD9300EC481B /* PXInfoPanelController.m */; };
-		EA31F9A90CE7CE4800EC481B /* PXGradientBuilderController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9870CE7CE4800EC481B /* PXGradientBuilderController.h */; };
-		EA31F9AA0CE7CE4800EC481B /* PXGradientBuilderController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9880CE7CE4800EC481B /* PXGradientBuilderController.m */; };
 		EA31F9AB0CE7CE4800EC481B /* PXPaletteSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9890CE7CE4800EC481B /* PXPaletteSelector.h */; };
 		EA31F9AC0CE7CE4800EC481B /* PXPaletteSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F98A0CE7CE4800EC481B /* PXPaletteSelector.m */; };
 		EA31F9AD0CE7CE4800EC481B /* PXPaletteView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F98B0CE7CE4800EC481B /* PXPaletteView.h */; };
@@ -543,7 +540,6 @@
 		BF1A538607ECD9200017A44E /* PXImage.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PXImage.m; sourceTree = "<group>"; };
 		BF489DDC08775845007DF4CF /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPatternEditor.nib; sourceTree = "<group>"; };
 		BFB1440508AD1D1800CE29EF /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXSpriteSheetExporter.nib; sourceTree = "<group>"; };
-		BFFC21B806DED6F8008EC4CC /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXGradientBuilder.nib; sourceTree = "<group>"; };
 		C93DB17E13ABC6BE006D42FE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreferences.xib; sourceTree = "<group>"; };
 		C93DB18113ABC8BE006D42FE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXGeneralPreferences.xib; sourceTree = "<group>"; };
 		C93DB18313ABC963006D42FE /* PXGeneralPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGeneralPreferencesController.h; sourceTree = "<group>"; };
@@ -637,8 +633,6 @@
 		EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerTextField.m; sourceTree = "<group>"; };
 		EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXInfoPanelController.h; sourceTree = "<group>"; };
 		EA31F9750CE7CD9300EC481B /* PXInfoPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXInfoPanelController.m; sourceTree = "<group>"; };
-		EA31F9870CE7CE4800EC481B /* PXGradientBuilderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGradientBuilderController.h; sourceTree = "<group>"; };
-		EA31F9880CE7CE4800EC481B /* PXGradientBuilderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGradientBuilderController.m; sourceTree = "<group>"; };
 		EA31F9890CE7CE4800EC481B /* PXPaletteSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteSelector.h; sourceTree = "<group>"; };
 		EA31F98A0CE7CE4800EC481B /* PXPaletteSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteSelector.m; sourceTree = "<group>"; };
 		EA31F98B0CE7CE4800EC481B /* PXPaletteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteView.h; sourceTree = "<group>"; };
@@ -1287,8 +1281,6 @@
 		EA31F9810CE7CE4800EC481B /* Palette Picker */ = {
 			isa = PBXGroup;
 			children = (
-				EA31F9870CE7CE4800EC481B /* PXGradientBuilderController.h */,
-				EA31F9880CE7CE4800EC481B /* PXGradientBuilderController.m */,
 				EA31F9890CE7CE4800EC481B /* PXPaletteSelector.h */,
 				EA31F98A0CE7CE4800EC481B /* PXPaletteSelector.m */,
 				EA31F98B0CE7CE4800EC481B /* PXPaletteView.h */,
@@ -1799,7 +1791,6 @@
 				6151D0140677C8E3009E3BE4 /* PXCanvasResizePrompt.nib */,
 				61163708067D286900AE87D7 /* PXDiscoverPixen.nib */,
 				EAA01849054DCC7000EF18C2 /* PXDuotoneBackgroundConfigurator.nib */,
-				BFFC21B706DED6F8008EC4CC /* PXGradientBuilder.nib */,
 				EAE126CF054F41A9001208D9 /* PXImageBackgroundConfigurator.nib */,
 				EA5482E40513E419000101DE /* PXImageSizePrompt.nib */,
 				610865F506B988F400733B2D /* PXInfoPanel.nib */,
@@ -2068,7 +2059,6 @@
 				EA31F97A0CE7CD9300EC481B /* PXLayerCollectionView.h in Headers */,
 				EA31F97C0CE7CD9300EC481B /* PXLayerTextField.h in Headers */,
 				EA31F97E0CE7CD9300EC481B /* PXInfoPanelController.h in Headers */,
-				EA31F9A90CE7CE4800EC481B /* PXGradientBuilderController.h in Headers */,
 				EA31F9AB0CE7CE4800EC481B /* PXPaletteSelector.h in Headers */,
 				EA31F9AD0CE7CE4800EC481B /* PXPaletteView.h in Headers */,
 				EA31F9B10CE7CE4800EC481B /* PXColorPicker.h in Headers */,
@@ -2253,7 +2243,6 @@
 				EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.nib in Resources */,
 				610865F706B988F400733B2D /* PXInfoPanel.nib in Resources */,
 				61ED25AD06BD63DA00264DA2 /* PXAbout.nib in Resources */,
-				BFFC21B906DED6F8008EC4CC /* PXGradientBuilder.nib in Resources */,
 				619DC353085BCD37007EF7F7 /* PXPreviewResizePrompt.nib in Resources */,
 				616AA52608611A8800FD2CB9 /* PXJPEGSizePrompt.nib in Resources */,
 				BF489DDD08775845007DF4CF /* PXPatternEditor.nib in Resources */,
@@ -2440,7 +2429,6 @@
 				EA31F97B0CE7CD9300EC481B /* PXLayerCollectionView.m in Sources */,
 				EA31F97D0CE7CD9300EC481B /* PXLayerTextField.m in Sources */,
 				EA31F97F0CE7CD9300EC481B /* PXInfoPanelController.m in Sources */,
-				EA31F9AA0CE7CE4800EC481B /* PXGradientBuilderController.m in Sources */,
 				EA31F9AC0CE7CE4800EC481B /* PXPaletteSelector.m in Sources */,
 				EA31F9AE0CE7CE4800EC481B /* PXPaletteView.m in Sources */,
 				EA31F9B20CE7CE4800EC481B /* PXColorPicker.m in Sources */,
@@ -2708,14 +2696,6 @@
 				BFB1440508AD1D1800CE29EF /* English */,
 			);
 			name = PXSpriteSheetExporter.nib;
-			sourceTree = "<group>";
-		};
-		BFFC21B706DED6F8008EC4CC /* PXGradientBuilder.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BFFC21B806DED6F8008EC4CC /* English */,
-			);
-			name = PXGradientBuilder.nib;
 			sourceTree = "<group>";
 		};
 		C93DB17D13ABC6BE006D42FE /* PXPreferences.xib */ = {

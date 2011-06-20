@@ -83,8 +83,6 @@
 "PALETTE_SET_DEFAULT" = "Set this palette as default";
 /* Palette Delete */
 "PALETTE_DELETE" = "Delete current palette";
-/* Palette Make Gradient */
-"PALETTE_MAKE_GRADIENT" = "Make gradient palette…";
 /* Generated Palette */
 "GENERATED_PALETTE" = "Generated Palette";
 /* Crayons */
