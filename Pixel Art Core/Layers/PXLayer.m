@@ -47,7 +47,7 @@
 		[image drawAtPoint:origin fromRect:NSMakeRect(0, 0, [image size].width, [image size].height) operation:NSCompositeCopy fraction:1];			
 	} [layerImage unlockFocus];
 	[layer applyImage:layerImage];
-	return layer;
+	return [layer autorelease];
 }
 
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image size:(NSSize)sz
@@ -58,7 +58,7 @@
 - (id) initWithName:(NSString *) aName 
 			  image:(PXImage *)anImage
 {
-	[super init];
+	self = [super init];
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self
 		   selector:@selector(paletteChanged:)
@@ -85,7 +85,7 @@
 
 - initWithName:(NSString *)aName size:(NSSize)size fillWithColor:(NSColor *)c
 {
-	[self initWithName:aName image:nil];
+	self = [self initWithName:aName image:nil];
 	image = PXImage_initWithSize(PXImage_alloc(), size);
 	if (image)
 	{
@@ -387,30 +387,15 @@
 	PXImage_flipVertically(image);
 }
 
--(id) initWithCoder:(NSCoder *)coder
+- (id)initWithCoder:(NSCoder *)coder
 {
-	[super init];
+	self = [super init];
 	
 	image = PXImage_initWithCoder(PXImage_alloc(), coder);
 	name = [[coder decodeObjectForKey:@"name"] retain];
 	
-	if([coder containsValueForKey:@"visible"])
-	{
-		visible = [coder decodeBoolForKey:@"visible"];
-	}
-	else
-	{
-		visible = YES;
-	}
-	
-	if([coder decodeObjectForKey:@"opacity"] != nil)
-	{	
-		opacity = [[coder decodeObjectForKey:@"opacity"] doubleValue];
-	}
-	else
-	{
-		opacity = 100;
-	}
+	visible = [coder containsValueForKey:@"visible"] ? [coder decodeBoolForKey:@"visible"] : YES;
+	opacity = [coder decodeObjectForKey:@"opacity"] ? [[coder decodeObjectForKey:@"opacity"] doubleValue] : 100;
 	
 	return self;
 }

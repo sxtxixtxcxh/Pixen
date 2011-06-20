@@ -151,17 +151,21 @@ BOOL isPowerOfTwo(int num)
 		return [canvas imageDataWithType:NSTIFFFileType properties:nil];
   }
 	
-	if([aType isEqualToString:GIFFileType])
-  {	
-		id exportCanvas = canvas;
-		exportCanvas = [canvas copy];
+	
+	if ([aType isEqualToString:GIFFileType])
+	{
+		id exportCanvas = [canvas copy];
 		[exportCanvas reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
+		
 		id exporter = [[PXAnimatedGifExporter alloc] initWithSize:[canvas size] iterations:1];
 		[exporter writeCanvas:exportCanvas withDuration:0 transparentColor:nil];
 		[exporter finalizeExport];
+		[exportCanvas release];
+		
 		return [exporter data];
-      //return [PXGifExporter gifDataForImage:[canvas exportImage]];
-  }
+		//return [PXGifExporter gifDataForImage:[canvas exportImage]];
+	}
+	
 	if([aType isEqualToString:BMPFileType])
   {
 		return [canvas imageDataWithType:NSBMPFileType properties:nil];

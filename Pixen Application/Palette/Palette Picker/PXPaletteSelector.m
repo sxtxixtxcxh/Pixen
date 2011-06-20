@@ -12,9 +12,9 @@
 
 @implementation PXPaletteSelector
 
-- init
+- (id)init
 {
-	[super init];
+	self = [super init];
 	palettes = (PXPalette **)malloc(sizeof(PXPalette *) * 20);
 	memset((void *)palettes, 0, 20);
 	return self;

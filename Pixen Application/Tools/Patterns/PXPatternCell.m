@@ -219,6 +219,8 @@
 	NSImage *translucentImage = [[NSImage alloc] initWithSize:lastFrame.size];
 	[translucentImage lockFocus];
 	[image compositeToPoint:NSZeroPoint operation:NSCompositeCopy fraction:.66];
+	[image release];
+	
 	[translucentImage unlockFocus];
 	
 	NSPasteboard *pasteboard = [NSPasteboard pasteboardWithName:NSDragPboard];
@@ -234,6 +236,8 @@
 	NSPoint origin = lastFrame.origin;
 	origin.y += NSHeight(lastFrame);
 	[controlView dragImage:translucentImage at:origin offset:NSMakeSize(xOffset, yOffset) event:dragEvent pasteboard:pasteboard source:delegate slideBack:NO];
+	[translucentImage release];
+	
 	dragOrigin = NSZeroPoint;
 	[self setState:NSOnState];
 	return YES;

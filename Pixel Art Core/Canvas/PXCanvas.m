@@ -112,10 +112,12 @@
 
 - (id)init
 {
-	if (![super init]) return nil;
-  plusColors = [[NSCountedSet alloc] init];
-  minusColors = [[NSCountedSet alloc] init];
-  frequencyPaletteDirty = NO;
+	if ( ! (self = [super init]))
+		return nil;
+	
+	plusColors = [[NSCountedSet alloc] init];
+	minusColors = [[NSCountedSet alloc] init];
+	frequencyPaletteDirty = NO;
 	layers = [[NSMutableArray alloc] initWithCapacity:23];
 	grid = [[PXGrid alloc] init];
 	bgConfig = [[PXBackgroundConfig alloc] init];

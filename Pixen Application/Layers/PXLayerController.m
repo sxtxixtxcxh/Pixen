@@ -229,6 +229,8 @@
 	
 	//[[[self document] undoManager] beginUndoGrouping];
 	[canvas addLayer:layer];
+	[layer release];
+	
 	//[[[self document] undoManager] endUndoGrouping];
 	[self selectRow:[self invertLayerIndex:0]];
 	[self selectLayer:nil];
