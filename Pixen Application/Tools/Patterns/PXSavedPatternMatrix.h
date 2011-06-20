@@ -31,6 +31,7 @@
 @class PXPattern;
 
 @interface PXSavedPatternMatrix : NSMatrix {
+  @private
 	NSMutableArray *patterns;
 	NSString *patternFileName;
 	NSWindow *window;

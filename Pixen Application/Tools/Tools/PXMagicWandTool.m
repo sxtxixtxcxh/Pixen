@@ -52,28 +52,28 @@
 - (BOOL)shiftKeyDown
 {
 	isAdding = YES;
-	[switcher setIcon:[NSImage imageNamed:@"magicadd"] forTool:self];
+	[self.switcher setIcon:[NSImage imageNamed:@"magicadd"] forTool:self];
 	return YES;
 }
 
 - (BOOL)shiftKeyUp
 {
 	isAdding = NO;
-	[switcher setIcon:[NSImage imageNamed:@"magic"] forTool:self];
+	[self.switcher setIcon:[NSImage imageNamed:@"magic"] forTool:self];
 	return YES;
 }
 
 - (BOOL)optionKeyDown
 {
 	isSubtracting = YES;
-	[switcher setIcon:[NSImage imageNamed:@"magicsubtract"] forTool:self];
+	[self.switcher setIcon:[NSImage imageNamed:@"magicsubtract"] forTool:self];
 	return YES;
 }
 
 - (BOOL)optionKeyUp
 {
 	isSubtracting = NO;
-	[switcher setIcon:[NSImage imageNamed:@"magic"] forTool:self];
+	[self.switcher setIcon:[NSImage imageNamed:@"magic"] forTool:self];
 	return YES;
 }
 

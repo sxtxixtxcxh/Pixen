@@ -12,6 +12,7 @@
 
 @interface PXMagicWandTool : PXFillTool
 {
+  @private
 	BOOL isMoving, isAdding, isSubtracting;
 	NSPoint origin;
 	NSRect selectedRect, lastSelectedRect;

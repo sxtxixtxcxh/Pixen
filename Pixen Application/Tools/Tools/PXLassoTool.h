@@ -31,6 +31,7 @@
 
 @interface PXLassoTool : PXTool 
 {
+  @private
 	BOOL isMoving, isAdding, isSubtracting;
 	NSPoint origin;
 	int leftMost, rightMost, topMost, bottomMost;

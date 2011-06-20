@@ -32,6 +32,7 @@
 
 @interface PXRectangularSelectionTool : PXTool 
 {
+  @private
 	NSPoint origin;
 	NSRect selectedRect, lastSelectedRect;
 	BOOL isMoving;

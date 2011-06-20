@@ -174,11 +174,11 @@
 	NSEnumerator *pointEnumerator = [points objectEnumerator];
 	id start, end;
 	NSPoint startPoint, endPoint;
-	NSColor * oldColor = color;
+	NSColor * oldColor = self.color;
 	
 	if (![SHAPE_PC shouldUseMainColorForFill]) 
     { 
-		color = fillColor;
+		self.color = fillColor;
     }
 	
 	while ((start = [pointEnumerator nextObject]) 
@@ -197,7 +197,8 @@
 			[self drawLineFrom:startPoint to:endPoint inCanvas:canvas];
 		}
     }
-	color = oldColor;
+	
+	self.color = oldColor;
 }
 
 - (void)plotUnfilledEllipseInscribedInRect:(NSRect)bound 

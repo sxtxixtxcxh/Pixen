@@ -30,6 +30,7 @@
 @class PXPattern, PXPatternEditorView, PXSavedPatternMatrix;
 
 @interface PXPatternEditorController : NSWindowController {
+  @private
 	PXPattern *pattern;
 	PXPattern *oldPattern;
 	id toolName;

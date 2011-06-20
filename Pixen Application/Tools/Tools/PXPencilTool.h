@@ -33,12 +33,16 @@
 
 @interface PXPencilTool : PXTool 
 {
+  @private
 	BOOL isDragging;
 	BOOL shiftDown;
 	NSRect changedRect, lastBezierBounds;
 	NSPoint movingOrigin;
 	BOOL shouldUseBezierDrawing;
 }
+
+@property (nonatomic, assign) BOOL shouldUseBezierDrawing;
+
 - (void)mouseDownAt:(NSPoint)aPoint
 fromCanvasController:(PXCanvasController *) controller;
 

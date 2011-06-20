@@ -64,7 +64,7 @@
 
 - (BOOL)shouldUseBezierDrawing
 {
-	return shouldUseBezierDrawing || isClicking;
+	return self.shouldUseBezierDrawing || self.isClicking;
 }
 
 - (void)drawFromPoint:(NSPoint)origin
@@ -80,7 +80,7 @@
 				   toPoint:(NSPoint)finalPoint
 				  inCanvas:(PXCanvas *) canvas
 {
-	shouldUseBezierDrawing = NO;
+	self.shouldUseBezierDrawing = NO;
 	[self drawPixelAtPoint:origin inCanvas:canvas];
 	[self drawLineFrom:origin to:finalPoint inCanvas:canvas];
 }

@@ -30,6 +30,7 @@
 @class PXPattern, PXGrid;
 
 @interface PXPatternEditorView : NSView {
+  @private
 	PXPattern *pattern;
 	NSAffineTransform *transform;
 	

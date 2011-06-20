@@ -39,6 +39,8 @@
 
 #define PENCIL_PC ((PXPencilToolPropertiesController *) self.propertiesController)
 
+@synthesize shouldUseBezierDrawing;
+
 - (NSString *)name
 {
 	return NSLocalizedString(@"PENCIL_NAME", @"Pencil Tool");
@@ -86,7 +88,7 @@
     }
 	if ([self shouldUseBezierDrawing])
 	{
-		[path appendBezierPathWithRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
+		[self.path appendBezierPathWithRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
 		if ([aCanvas wraps]) {
 			NSSize canvasSize = [aCanvas size];
 			while (aPoint.x >= canvasSize.width) {
@@ -101,7 +103,7 @@
 			while (aPoint.y < 0) {
 				aPoint.y += canvasSize.height;
 			}
-			[wrappedPath appendBezierPathWithRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
+			[self.wrappedPath appendBezierPathWithRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
 		}
 	}
 	else// if (![oldColor isEqualTo:newColor])
@@ -214,21 +216,20 @@ fromCanvasController:(PXCanvasController *)controller
 	if([controller canvas] == nil) { return; }
 	shouldUseBezierDrawing = YES;
 	if ([self shouldUseBezierDrawing] && !NSEqualPoints(movingOrigin, aPoint))
-	{
-		[path release];
-		path = [[NSBezierPath bezierPath] retain];
-		[wrappedPath release];
-		wrappedPath = [[NSBezierPath bezierPath] retain];
+	{	
+		self.path = [NSBezierPath bezierPath];
+		self.wrappedPath = [NSBezierPath bezierPath];
+		
 		movingOrigin = aPoint;
 		[self drawPixelAtPoint:aPoint inCanvas:[controller canvas]];
 		[[controller canvas] changedInRect:lastBezierBounds];
-		if (![path isEmpty]) {
-			NSRect bezierBounds = [path bounds];
+		if (![self.path isEmpty]) {
+			NSRect bezierBounds = [self.path bounds];
 			[[controller canvas] changedInRect:bezierBounds];
 			lastBezierBounds = bezierBounds;
 		}
 	}
-	if (isClicking) {
+	if (self.isClicking) {
 		shouldUseBezierDrawing = NO;
 	}
 }
@@ -237,15 +238,15 @@ fromCanvasController:(PXCanvasController *)controller
 {
 	lastBezierBounds = NSZeroRect;
 	movingOrigin = NSMakePoint(-1,-1);
-	[path removeAllPoints];
+	[self.path removeAllPoints];
 }
 
 - (NSRect)crosshairRectCenteredAtPoint:(NSPoint)aPoint
 {
-	if (path == nil || [path isEmpty] || ![[NSUserDefaults standardUserDefaults] boolForKey:PXToolPreviewEnabledKey]) {
+	if (self.path == nil || [self.path isEmpty] || ![[NSUserDefaults standardUserDefaults] boolForKey:PXToolPreviewEnabledKey]) {
 		return [super crosshairRectCenteredAtPoint:aPoint];
 	}
-	return [path bounds];
+	return [self.path bounds];
 }
 
 
