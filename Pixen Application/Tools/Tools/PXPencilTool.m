@@ -39,8 +39,6 @@
 
 #define PENCIL_PC ((PXPencilToolPropertiesController *) self.propertiesController)
 
-@synthesize shouldUseBezierDrawing;
-
 - (NSString *)name
 {
 	return NSLocalizedString(@"PENCIL_NAME", @"Pencil Tool");
@@ -182,6 +180,11 @@
     }
 }
 
+- (BOOL)shouldUseBezierDrawing
+{
+	return shouldUseBezierDrawing;
+}
+
 - (BOOL)drawsInitialPixel
 {
 	return YES;
@@ -203,11 +206,6 @@ fromCanvasController:(PXCanvasController*) controller
 		[self drawLineFrom:[controller lastDrawnPoint] to:aPoint inCanvas:[controller canvas]];
 	}
 	[controller setLastDrawnPoint:aPoint];
-}
-
-- (BOOL)shouldUseBezierDrawing
-{
-	return shouldUseBezierDrawing;
 }
 
 - (void)mouseMovedTo:(NSPoint)aPoint

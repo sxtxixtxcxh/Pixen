@@ -38,10 +38,11 @@
 	BOOL shiftDown;
 	NSRect changedRect, lastBezierBounds;
 	NSPoint movingOrigin;
+  @public
 	BOOL shouldUseBezierDrawing;
 }
 
-@property (nonatomic, assign) BOOL shouldUseBezierDrawing;
+- (BOOL)shouldUseBezierDrawing;
 
 - (void)mouseDownAt:(NSPoint)aPoint
 fromCanvasController:(PXCanvasController *) controller;
