@@ -275,6 +275,14 @@
 	return (subview != canvasSplit);
 }
 
+- (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)view
+{
+	if (view == sidebarSplit)
+		return NO;
+	
+	return YES;
+}
+
 - (CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin
 				 ofSubviewAt:(NSInteger)offset { 
 	if(sender == splitView) {

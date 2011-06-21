@@ -27,7 +27,7 @@
 	IBOutlet PXCanvasController *canvasController;
 	
 	IBOutlet NSSplitView *splitView;
-	IBOutlet NSView *layerSplit, *canvasSplit, *paletteSplit;
+	IBOutlet NSView *sidebarSplit, *layerSplit, *canvasSplit, *paletteSplit;
 }
 
 @property (nonatomic, readonly) IBOutlet PXCanvasController *canvasController;
