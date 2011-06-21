@@ -4574,6 +4574,7 @@
 							<string>canvasSplite</string>
 							<string>layerSplit</string>
 							<string>paletteSplit</string>
+							<string>sidebarSplit</string>
 							<string>splitView</string>
 							<string>zoomPercentageBox</string>
 							<string>zoomStepper</string>
@@ -4582,6 +4583,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>PXCanvasController</string>
+							<string>NSView</string>
 							<string>NSView</string>
 							<string>NSView</string>
 							<string>NSView</string>
@@ -4601,6 +4603,7 @@
 							<string>canvasSplite</string>
 							<string>layerSplit</string>
 							<string>paletteSplit</string>
+							<string>sidebarSplit</string>
 							<string>splitView</string>
 							<string>zoomPercentageBox</string>
 							<string>zoomStepper</string>
@@ -4626,6 +4629,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">paletteSplit</string>
+								<string key="candidateClassName">NSView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">sidebarSplit</string>
 								<string key="candidateClassName">NSView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -4951,7 +4958,7 @@
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>
-			<integer value="3000" key="NS.object.0"/>
+			<real value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
