@@ -34,6 +34,7 @@
 		C93DB18213ABC8BE006D42FE /* PXGeneralPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93DB18013ABC8BE006D42FE /* PXGeneralPreferences.xib */; };
 		C93DB18613ABC963006D42FE /* PXGeneralPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C93DB18313ABC963006D42FE /* PXGeneralPreferencesController.h */; };
 		C93DB18713ABC963006D42FE /* PXGeneralPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93DB18413ABC963006D42FE /* PXGeneralPreferencesController.m */; };
+		C94A9EDA13B114DE0034AFE3 /* PXCanvasDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = C94A9ED813B114DE0034AFE3 /* PXCanvasDocument.xib */; };
 		C96BABB513ABD3AB00015C92 /* PXHotkeysPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */; };
 		C96BABBB13ABD44A00015C92 /* PXHotkeysPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */; };
 		C96BABBC13ABD44A00015C92 /* PXHotkeysPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */; };
@@ -343,7 +344,6 @@
 		EA5618DB089DB93100C12231 /* PXCanvas_Layers.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5618D9089DB93100C12231 /* PXCanvas_Layers.m */; };
 		EA5618EE089DB96D00C12231 /* PXCanvas_Archiving.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5618EC089DB96D00C12231 /* PXCanvas_Archiving.h */; };
 		EA5618EF089DB96D00C12231 /* PXCanvas_Archiving.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5618ED089DB96D00C12231 /* PXCanvas_Archiving.m */; };
-		EA5D218508A90697006D4AE9 /* PXCanvasDocument.nib in Resources */ = {isa = PBXBuildFile; fileRef = EA5D218308A90697006D4AE9 /* PXCanvasDocument.nib */; };
 		EA5D223308A90FEE006D4AE9 /* PXCanvasController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5D223108A90FEE006D4AE9 /* PXCanvasController.h */; };
 		EA5D223408A90FEE006D4AE9 /* PXCanvasController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D223208A90FEE006D4AE9 /* PXCanvasController.m */; };
 		EA5E9EE80877237800FCE6FE /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5E9EE70877237800FCE6FE /* Carbon.framework */; };
@@ -544,6 +544,7 @@
 		C93DB18113ABC8BE006D42FE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXGeneralPreferences.xib; sourceTree = "<group>"; };
 		C93DB18313ABC963006D42FE /* PXGeneralPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGeneralPreferencesController.h; sourceTree = "<group>"; };
 		C93DB18413ABC963006D42FE /* PXGeneralPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGeneralPreferencesController.m; sourceTree = "<group>"; };
+		C94A9ED913B114DE0034AFE3 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXCanvasDocument.xib; sourceTree = "<group>"; };
 		C96BABB413ABD3AB00015C92 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXHotkeysPreferences.xib; sourceTree = "<group>"; };
 		C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXHotkeysPreferencesController.h; sourceTree = "<group>"; };
 		C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXHotkeysPreferencesController.m; sourceTree = "<group>"; };
@@ -858,7 +859,6 @@
 		EA5618D9089DB93100C12231 /* PXCanvas_Layers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvas_Layers.m; sourceTree = "<group>"; };
 		EA5618EC089DB96D00C12231 /* PXCanvas_Archiving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvas_Archiving.h; sourceTree = "<group>"; };
 		EA5618ED089DB96D00C12231 /* PXCanvas_Archiving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvas_Archiving.m; sourceTree = "<group>"; };
-		EA5D218808A906AF006D4AE9 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXCanvasDocument.nib; sourceTree = "<group>"; };
 		EA5D223108A90FEE006D4AE9 /* PXCanvasController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvasController.h; sourceTree = "<group>"; };
 		EA5D223208A90FEE006D4AE9 /* PXCanvasController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasController.m; sourceTree = "<group>"; };
 		EA5E9EE70877237800FCE6FE /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
@@ -1767,6 +1767,7 @@
 			isa = PBXGroup;
 			children = (
 				C9A6BE1813AD008C0028B141 /* PXBlankPropertiesView.xib */,
+				C94A9ED813B114DE0034AFE3 /* PXCanvasDocument.xib */,
 				C9799FB913AD745500E261EE /* PXEyedropperToolPropertiesView.xib */,
 				C9A6BE1B13AD07B10028B141 /* PXFillToolPropertiesView.xib */,
 				C93DB18013ABC8BE006D42FE /* PXGeneralPreferences.xib */,
@@ -1787,7 +1788,6 @@
 				EA4A6C3D08A98133007BAC7F /* PXAnimationDocument.nib */,
 				EA6864B3054C5EDE00EE395F /* PXBackgroundController.nib */,
 				EACDBD7F0878B37100564512 /* PXBackgroundTemplateView.nib */,
-				EA5D218308A90697006D4AE9 /* PXCanvasDocument.nib */,
 				6151D0140677C8E3009E3BE4 /* PXCanvasResizePrompt.nib */,
 				61163708067D286900AE87D7 /* PXDiscoverPixen.nib */,
 				EAA01849054DCC7000EF18C2 /* PXDuotoneBackgroundConfigurator.nib */,
@@ -2249,7 +2249,6 @@
 				EACDBD810878B37100564512 /* PXBackgroundTemplateView.nib in Resources */,
 				618AE591087E6FEA00A9FA9B /* PXColorPicker.nib in Resources */,
 				610F37DE0899A5DE00567E90 /* PixenHelp in Resources */,
-				EA5D218508A90697006D4AE9 /* PXCanvasDocument.nib in Resources */,
 				EA4A6C3F08A98133007BAC7F /* PXAnimationDocument.nib in Resources */,
 				EAF21E2B08AD0CFD0037A23B /* PXPalettePanel.nib in Resources */,
 				BFB1440608AD1D1800CE29EF /* PXSpriteSheetExporter.nib in Resources */,
@@ -2366,6 +2365,7 @@
 				C9F4E5FE13AD8F6500345D5D /* PXLayerDetailsView.xib in Resources */,
 				C9FEE51B13AF81AF004FFC3C /* PXGridSettings.xib in Resources */,
 				C984251213AFC142000072C5 /* PXPreview.xib in Resources */,
+				C94A9EDA13B114DE0034AFE3 /* PXCanvasDocument.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2714,6 +2714,14 @@
 			name = PXGeneralPreferences.xib;
 			sourceTree = "<group>";
 		};
+		C94A9ED813B114DE0034AFE3 /* PXCanvasDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C94A9ED913B114DE0034AFE3 /* English */,
+			);
+			name = PXCanvasDocument.xib;
+			sourceTree = "<group>";
+		};
 		C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2808,14 +2816,6 @@
 				EAA79F2906D173CF000513FD /* English */,
 			);
 			name = PXImageSizePrompt.nib;
-			sourceTree = "<group>";
-		};
-		EA5D218308A90697006D4AE9 /* PXCanvasDocument.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EA5D218808A906AF006D4AE9 /* English */,
-			);
-			name = PXCanvasDocument.nib;
 			sourceTree = "<group>";
 		};
 		EA6864B3054C5EDE00EE395F /* PXBackgroundController.nib */ = {

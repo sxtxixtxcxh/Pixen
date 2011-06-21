@@ -201,7 +201,7 @@
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
 			<object class="NSCustomView" id="344111175">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">256</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSBox" id="12890499">
@@ -217,6 +217,8 @@
 										<int key="NSvFlags">261</int>
 										<string key="NSFrame">{{117, 3}, {15, 22}}</string>
 										<reference key="NSSuperview" ref="35785786"/>
+										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSStepperCell" key="NSCell" id="714381963">
 											<int key="NSCellFlags">917024</int>
@@ -233,6 +235,7 @@
 										<int key="NSvFlags">261</int>
 										<string key="NSFrame">{{14, 2}, {100, 22}}</string>
 										<reference key="NSSuperview" ref="35785786"/>
+										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="133572339"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSComboBoxCell" key="NSCell" id="644351094">
@@ -401,11 +404,13 @@
 								</array>
 								<string key="NSFrameSize">{167, 28}</string>
 								<reference key="NSSuperview" ref="12890499"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="846471551"/>
 							</object>
 						</array>
 						<string key="NSFrame">{{-10, 0}, {167, 28}}</string>
 						<reference key="NSSuperview" ref="344111175"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="35785786"/>
 						<string key="NSOffsets">{0, 0}</string>
 						<object class="NSTextFieldCell" key="NSTitleCell">
@@ -431,6 +436,8 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{124, 28}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="12890499"/>
 				<string key="NSClassName">NSView</string>
 				<string key="NSExtension">NSResponder</string>
