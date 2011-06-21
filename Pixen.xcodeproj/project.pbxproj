@@ -35,6 +35,8 @@
 		C93DB18613ABC963006D42FE /* PXGeneralPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C93DB18313ABC963006D42FE /* PXGeneralPreferencesController.h */; };
 		C93DB18713ABC963006D42FE /* PXGeneralPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93DB18413ABC963006D42FE /* PXGeneralPreferencesController.m */; };
 		C94A9EDA13B114DE0034AFE3 /* PXCanvasDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = C94A9ED813B114DE0034AFE3 /* PXCanvasDocument.xib */; };
+		C94A9EDD13B11BEA0034AFE3 /* PXSplitView.h in Headers */ = {isa = PBXBuildFile; fileRef = C94A9EDB13B11BEA0034AFE3 /* PXSplitView.h */; };
+		C94A9EDE13B11BEA0034AFE3 /* PXSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = C94A9EDC13B11BEA0034AFE3 /* PXSplitView.m */; };
 		C96BABB513ABD3AB00015C92 /* PXHotkeysPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */; };
 		C96BABBB13ABD44A00015C92 /* PXHotkeysPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */; };
 		C96BABBC13ABD44A00015C92 /* PXHotkeysPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */; };
@@ -545,6 +547,8 @@
 		C93DB18313ABC963006D42FE /* PXGeneralPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGeneralPreferencesController.h; sourceTree = "<group>"; };
 		C93DB18413ABC963006D42FE /* PXGeneralPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGeneralPreferencesController.m; sourceTree = "<group>"; };
 		C94A9ED913B114DE0034AFE3 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXCanvasDocument.xib; sourceTree = "<group>"; };
+		C94A9EDB13B11BEA0034AFE3 /* PXSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSplitView.h; sourceTree = "<group>"; };
+		C94A9EDC13B11BEA0034AFE3 /* PXSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSplitView.m; sourceTree = "<group>"; };
 		C96BABB413ABD3AB00015C92 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXHotkeysPreferences.xib; sourceTree = "<group>"; };
 		C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXHotkeysPreferencesController.h; sourceTree = "<group>"; };
 		C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXHotkeysPreferencesController.m; sourceTree = "<group>"; };
@@ -1109,6 +1113,8 @@
 				EA31F8670CE7BD8B00EC481B /* PXPanelManager.m */,
 				EAAB76740CEF54F300F2EF66 /* PXDocument.h */,
 				EAAB76750CEF54F300F2EF66 /* PXDocument.m */,
+				C94A9EDB13B11BEA0034AFE3 /* PXSplitView.h */,
+				C94A9EDC13B11BEA0034AFE3 /* PXSplitView.m */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -2168,6 +2174,7 @@
 				D88A735113A93CCD00B56402 /* PXLayerCollectionViewItem.h in Headers */,
 				C93DB18613ABC963006D42FE /* PXGeneralPreferencesController.h in Headers */,
 				C96BABBB13ABD44A00015C92 /* PXHotkeysPreferencesController.h in Headers */,
+				C94A9EDD13B11BEA0034AFE3 /* PXSplitView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2540,6 +2547,7 @@
 				D88A735213A93CCD00B56402 /* PXLayerCollectionViewItem.m in Sources */,
 				C93DB18713ABC963006D42FE /* PXGeneralPreferencesController.m in Sources */,
 				C96BABBC13ABD44A00015C92 /* PXHotkeysPreferencesController.m in Sources */,
+				C94A9EDE13B11BEA0034AFE3 /* PXSplitView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
