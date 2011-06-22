@@ -193,6 +193,16 @@
 	[[aboutPanel animator] setAlphaValue:0.0f];
 }
 
+- (BOOL)handlesKeyDown:(NSEvent *)event inWindow:(NSWindow *)window
+{
+	if ([[event characters] isEqualToString:@"\033"]) {
+		[self hidePanel];
+		return YES;
+	}
+	
+	return NO;
+}
+
 - (void)mouseDown:(NSEvent *) event
 {
 	[self hidePanel];
