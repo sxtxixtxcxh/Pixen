@@ -35,7 +35,7 @@
 
 - (BOOL)canBecomeMainWindow
 {
-	return NO;
+	return YES;
 }
 
 - (BOOL)canBecomeKeyWindow
