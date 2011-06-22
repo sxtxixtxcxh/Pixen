@@ -50,8 +50,9 @@
 - (void)setAction:(SEL)act;
 - (void)setDoubleAction:(SEL)act;
 
-- (void)setTag:(int)newTag;
-- (int)tag;
+- (void)setTag:(NSInteger)someTag;
+- (NSInteger)tag;
+
 @end
 
 @interface NSObject(OSStackedViewDelegate)

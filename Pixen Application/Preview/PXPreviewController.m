@@ -87,7 +87,7 @@
 	NSRect contentFrame = [ (NSView *) [[self window] contentView] frame];
 	bezelView = [[PXPreviewBezelView alloc] initWithFrame:NSMakeRect(NSWidth(contentFrame) - 18, NSHeight(contentFrame) - 18, 18, 18)];
 	[[[self window] contentView] addSubview:bezelView];
-	[bezelView setAlphaValue:0.33];
+	[bezelView setOpacity:0.33];
 	[bezelView setHidden:YES];
 	[bezelView setAutoresizingMask:NSViewMinXMargin | NSViewMinYMargin];
 	
@@ -150,7 +150,7 @@
 													   target:self
 													 selector:@selector(fadeBezel:) 
 													 userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-														 [NSNumber numberWithFloat:[bezelView alphaValue]-.04], PXFadeOpacityKey,
+														 [NSNumber numberWithFloat:[bezelView opacity]-.04], PXFadeOpacityKey,
 														 [NSNumber numberWithBool:NO], PXFadeDirectionKey, nil]
 													  repeats:NO] retain];
 	
@@ -411,7 +411,7 @@
 {
 	NSDictionary *dict = [timer userInfo];
 	float alphaValue = [[dict objectForKey:PXFadeOpacityKey] floatValue];
-	[bezelView setAlphaValue:MAX(alphaValue, 0.33)];
+	[bezelView setOpacity:MAX(alphaValue, 0.33)];
 	BOOL fadingIn = [[dict objectForKey:PXFadeDirectionKey] boolValue];
 	[bezelFadeTimer invalidate];
 	[bezelFadeTimer release];

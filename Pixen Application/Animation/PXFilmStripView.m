@@ -616,6 +616,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	[[NSGraphicsContext currentContext] saveGraphicsState];
 	[shadow set];
 	NSEraseRect(imageRect);
+	[shadow release];
 	[[NSGraphicsContext currentContext] restoreGraphicsState];
 
 	[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];

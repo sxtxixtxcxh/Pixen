@@ -160,7 +160,10 @@ BOOL isPowerOfTwo(int num)
 		[exporter finalizeExport];
 		[exportCanvas release];
 		
-		return [exporter data];
+		NSData *data = [[exporter data] retain];
+		[exporter release];
+		
+		return [data autorelease];
 		//return [PXGifExporter gifDataForImage:[canvas exportImage]];
 	}
 	
@@ -169,21 +172,22 @@ BOOL isPowerOfTwo(int num)
 		return [canvas imageDataWithType:NSBMPFileType properties:nil];
   }
 	if([aType isEqualToString:PICTFileType])
-  {
+	{
 		NSMutableData *pictData = [NSMutableData data];
 		CGImageDestinationRef pictOutput = 
 		CGImageDestinationCreateWithData((CFMutableDataRef)pictData, 
-																		 kUTTypePICT, 
-																		 1, 
-																		 NULL);
+										 kUTTypePICT, 
+										 1, 
+										 NULL);
 		CGImageDestinationAddImage(pictOutput,
-															 [[canvas displayImage] CGImageForProposedRect:NULL 
-																																		 context:nil 
-																																			 hints:nil],
-															 NULL);
+								   [[canvas displayImage] CGImageForProposedRect:NULL 
+																		 context:nil 
+																		   hints:nil],
+								   NULL);
 		CGImageDestinationFinalize(pictOutput);
+		CFRelease(pictOutput);
 		return pictData;
-  }
+	}
 	
 	return nil;
 }

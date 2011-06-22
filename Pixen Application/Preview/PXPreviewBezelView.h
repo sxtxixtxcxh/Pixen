@@ -13,11 +13,11 @@
 	NSImage * actionGear;
 	NSMenu * menu;
 	id delegate;
-	float alpha;
+	CGFloat alpha;
 }
 
 - (void)setDelegate:delegate;
-- (void)setAlphaValue:(float)alpha;
-- (float)alphaValue;
+
+@property (nonatomic, assign) CGFloat opacity;
 
 @end

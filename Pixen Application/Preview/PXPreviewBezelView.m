@@ -13,6 +13,8 @@
 
 @implementation PXPreviewBezelView
 
+@synthesize opacity = alpha;
+
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
 {
 	return YES;
@@ -22,16 +24,6 @@
 {
 	[delegate release];
 	delegate = [newDelegate retain];
-}
-
-- (void)setAlphaValue:(float)newAlpha
-{
-	alpha = newAlpha;
-}
-
-- (float)alphaValue
-{
-	return alpha;
 }
 
 - (void)dealloc

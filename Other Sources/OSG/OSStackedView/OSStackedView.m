@@ -331,14 +331,14 @@
 	return YES;
 }
 
-- (int)tag
+- (NSInteger)tag
 {
 	return tag;
 }
 
-- (void)setTag:(int)newTag
+- (void)setTag:(NSInteger)someTag
 {
-	tag = newTag;
+	tag = someTag;
 }
 
 - (float)height
