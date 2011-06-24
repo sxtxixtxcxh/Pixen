@@ -206,9 +206,9 @@ NSMutableArray * toolNames;
 	[colorWell activate:YES];
 }
 
-- (void)clearBeziers;
+- (void)clearBeziers
 {
-	[tools makeObjectsPerformSelector:@selector(clearBeziers)];
+	[tools makeObjectsPerformSelector:@selector(clearBezier)];
 }
 
 - (void)setColor:(NSColor *)col
