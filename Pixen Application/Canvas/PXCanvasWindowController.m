@@ -49,7 +49,7 @@
 @implementation PXCanvasWindowController
 
 @synthesize scaleController, canvasController, canvas;
-@synthesize splitView, layerSplit, canvasSplite, paletteSplit;
+@synthesize splitView, layerSplit, canvasSplit, paletteSplit;
 
 
 - (PXCanvasView *)view

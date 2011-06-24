@@ -36,7 +36,7 @@
 @property (nonatomic, assign) PXCanvas *canvas;
 
 @property (nonatomic, readonly) IBOutlet NSSplitView *splitView;
-@property (nonatomic, readonly) IBOutlet NSView *layerSplit, *canvasSplite, *paletteSplit;
+@property (nonatomic, readonly) IBOutlet NSView *layerSplit, *canvasSplit, *paletteSplit;
 
 - (PXCanvasView *)view;
 - (id) initWithWindowNibName:name;
