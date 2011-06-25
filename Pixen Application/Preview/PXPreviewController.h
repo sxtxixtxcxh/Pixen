@@ -38,7 +38,6 @@
 	NSRect updateRect;
 	NSWindow *resizeSizeWindow;
 	PXPreviewBezelView *bezelView;
-	NSTimer *fadeOutTimer;
 	NSTrackingRectTag trackingTag;
 	
 	BOOL liveResizing;
@@ -65,7 +64,6 @@
 - (void)setCanvasSize:(NSSize)size;
 - (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)proposedFrameSize;
 - (void)updateResizeSizeViewScale;
-- (void)fadeOutSize:(NSTimer *)timer;
 - (void)centerContent;
 - (void)windowDidResize:(NSNotification *)aNotification;
 - (void)initializeWindow;

@@ -143,9 +143,6 @@
 
 - (void)dealloc
 {
-	[fadeOutTimer invalidate];
-	[fadeOutTimer dealloc];
-	
 	[resizeSizeWindow release];
 	[bezelView release];
 	[[NSUserDefaults standardUserDefaults] setBool:[[self window] isVisible] forKey:PXPreviewWindowIsOpenKey];
@@ -380,34 +377,12 @@
 	[resizeSizeWindow setAlphaValue:initialAlpha];
 	[resizeSizeWindow orderFront:self];
 	
-	[fadeOutTimer invalidate];
-	[fadeOutTimer release];
-	fadeOutTimer = [[NSTimer scheduledTimerWithTimeInterval:1
-													 target:self 
-												   selector:@selector(fadeOutSize:)
-												   userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:initialAlpha] forKey:PXFadeOpacityKey] repeats:NO] retain];
-	
+	[self performSelector:@selector(fadeSize) withObject:nil afterDelay:1.0f];
 }
 
-- (void)fadeOutSize:(NSTimer *)timer
-{
-	NSDictionary *dict = [timer userInfo];
-	float alphaValue = [[dict objectForKey:PXFadeOpacityKey] floatValue];
-	[resizeSizeWindow setAlphaValue:alphaValue];
-	[fadeOutTimer invalidate];
-	[fadeOutTimer release];
-	if (alphaValue > 0) 
-    {
-		fadeOutTimer = [[NSTimer scheduledTimerWithTimeInterval:.01
-														 target:self
-													   selector:@selector(fadeOutSize:) 
-													   userInfo:[NSDictionary dictionaryWithObject:
-												  [NSNumber numberWithFloat:alphaValue-.01] forKey:PXFadeOpacityKey] repeats:NO] retain];
-	} 
-	else 
-    {
-		fadeOutTimer = nil;
-    }
+- (void)fadeSize {
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeSize) object:nil];
+	[[resizeSizeWindow animator] setAlphaValue:0.0f];
 }
 
 - (void)centerContent
