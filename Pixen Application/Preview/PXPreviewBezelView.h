@@ -8,7 +8,7 @@
 
 #import <AppKit/NSView.h>
 
-@interface PXPreviewBezelView : NSView {
+@interface PXPreviewBezelView : NSView < NSAnimatablePropertyContainer > {
   @private
 	NSImage * actionGear;
 	NSMenu * menu;

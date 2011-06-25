@@ -86,10 +86,11 @@
 	
 	NSRect contentFrame = [ (NSView *) [[self window] contentView] frame];
 	bezelView = [[PXPreviewBezelView alloc] initWithFrame:NSMakeRect(NSWidth(contentFrame) - 18, NSHeight(contentFrame) - 18, 18, 18)];
-	[[[self window] contentView] addSubview:bezelView];
+	[bezelView setWantsLayer:YES];
 	[bezelView setOpacity:0.33];
 	[bezelView setHidden:YES];
 	[bezelView setAutoresizingMask:NSViewMinXMargin | NSViewMinYMargin];
+	[[[self window] contentView] addSubview:bezelView];
 	
 	[[NSNotificationCenter defaultCenter]  addObserver:self 
 											  selector:@selector(documentClosed:) 
@@ -131,28 +132,12 @@
 
 - (void)mouseEntered:(NSEvent *)event
 {
-	[bezelFadeTimer invalidate];
-	[bezelFadeTimer release];
-	bezelFadeTimer = [[NSTimer scheduledTimerWithTimeInterval:.01
-													   target:self
-													 selector:@selector(fadeBezel:) 
-													 userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-														 [NSNumber numberWithFloat:.41], PXFadeOpacityKey,
-														 [NSNumber numberWithBool:YES], PXFadeDirectionKey, nil]
-													  repeats:NO] retain];
+	[ (PXPreviewBezelView *) [bezelView animator] setOpacity:0.75f];
 }
 
 - (void)mouseExited:(NSEvent *)event
 {
-	[bezelFadeTimer invalidate];
-	[bezelFadeTimer release];
-	bezelFadeTimer = [[NSTimer scheduledTimerWithTimeInterval:.01
-													   target:self
-													 selector:@selector(fadeBezel:) 
-													 userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-														 [NSNumber numberWithFloat:[bezelView opacity]-.04], PXFadeOpacityKey,
-														 [NSNumber numberWithBool:NO], PXFadeDirectionKey, nil]
-													  repeats:NO] retain];
+	[ (PXPreviewBezelView *) [bezelView animator] setOpacity:0.33f];
 	
 }
 
@@ -160,9 +145,6 @@
 {
 	[fadeOutTimer invalidate];
 	[fadeOutTimer dealloc];
-	
-	[bezelFadeTimer invalidate];
-	[bezelFadeTimer dealloc];
 	
 	[resizeSizeWindow release];
 	[bezelView release];
@@ -405,51 +387,6 @@
 												   selector:@selector(fadeOutSize:)
 												   userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:initialAlpha] forKey:PXFadeOpacityKey] repeats:NO] retain];
 	
-}
-
-- (void)fadeBezel:(NSTimer *)timer
-{
-	NSDictionary *dict = [timer userInfo];
-	float alphaValue = [[dict objectForKey:PXFadeOpacityKey] floatValue];
-	[bezelView setOpacity:MAX(alphaValue, 0.33)];
-	BOOL fadingIn = [[dict objectForKey:PXFadeDirectionKey] boolValue];
-	[bezelFadeTimer invalidate];
-	[bezelFadeTimer release];
-	if (fadingIn)
-	{
-		if (alphaValue < 0.75)
-		{
-			bezelFadeTimer = [[NSTimer scheduledTimerWithTimeInterval:.01
-															   target:self
-															 selector:@selector(fadeBezel:) 
-															 userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-																 [NSNumber numberWithFloat:alphaValue+.08], PXFadeOpacityKey,
-																 [NSNumber numberWithBool:YES], PXFadeDirectionKey, nil]
-															  repeats:NO] retain];
-		}
-		else
-		{
-			bezelFadeTimer = nil;
-		}
-	}
-	else
-	{
-		if (alphaValue > 0.33)
-		{
-			bezelFadeTimer = [[NSTimer scheduledTimerWithTimeInterval:.01
-															   target:self
-															 selector:@selector(fadeBezel:) 
-															 userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-																 [NSNumber numberWithFloat:alphaValue-.04], PXFadeOpacityKey,
-																 [NSNumber numberWithBool:NO], PXFadeDirectionKey, nil]
-															  repeats:NO] retain];			
-		}
-		else
-		{
-			bezelFadeTimer = nil;
-		}
-	}
-	[bezelView setNeedsDisplay:YES];
 }
 
 - (void)fadeOutSize:(NSTimer *)timer

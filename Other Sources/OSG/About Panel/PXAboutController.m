@@ -36,7 +36,6 @@
 #import <Foundation/NSData.h>
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSNotification.h>
-#import <Foundation/NSTimer.h>
 #import <Foundation/NSValue.h>
 
 #import <AppKit/NSApplication.h>

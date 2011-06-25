@@ -9,7 +9,7 @@
 #import <AppKit/NSResponder.h>
 #import <AppKit/NSNibDeclarations.h>
 
-@class NSTimer, NSTextField, NSTextView;
+@class NSTextField, NSTextView;
 
 @interface PXAboutController : NSResponder 
 {

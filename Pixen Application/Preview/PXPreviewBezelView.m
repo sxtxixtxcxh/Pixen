@@ -9,11 +9,24 @@
 #import "PXPreviewBezelView.h"
 
 #import <AppKit/NSBezierPath.h>
+#import <QuartzCore/QuartzCore.h>
 #import "NSBezierPath+PXRoundedRectangleAdditions.h"
 
 @implementation PXPreviewBezelView
 
 @synthesize opacity = alpha;
+
++ (id)defaultAnimationForKey:(NSString *)key
+{
+	if ([key isEqualToString:@"opacity"]) {
+		CABasicAnimation *anim = [CABasicAnimation animation];
+		anim.duration = 0.25f;
+		
+		return anim;
+	}
+	
+	return [super defaultAnimationForKey:key];
+}
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
 {
@@ -24,6 +37,13 @@
 {
 	[delegate release];
 	delegate = [newDelegate retain];
+}
+
+- (void)setOpacity:(CGFloat)opacity {
+	if (alpha != opacity) {
+		alpha = opacity;
+		[self setNeedsDisplay:YES];
+	}
 }
 
 - (void)dealloc
