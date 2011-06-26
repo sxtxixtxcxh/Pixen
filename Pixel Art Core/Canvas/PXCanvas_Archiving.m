@@ -58,6 +58,8 @@
 	selectionMask = malloc([self selectionMaskSize]);
 	memset(selectionMask, 0, [self selectionMaskSize]);	
 	
+	[self refreshWholePalette];
+	
 	return self;
 }
 
