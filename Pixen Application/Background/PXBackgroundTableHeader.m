@@ -13,7 +13,7 @@
 
 - (id)initWithFrame:(NSRect)frameRect {
 	if((self = [super initWithFrame:frameRect])) {
-		self.buttonType = NSMomentaryChangeButton;
+		[self setButtonType:NSMomentaryChangeButton];
 		self.bezelStyle = NSThickSquareBezelStyle;
 	}
 	return self;
