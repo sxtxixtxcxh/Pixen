@@ -872,7 +872,7 @@
 		EA88F45C05D1C172003DEBD3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXLayerController.nib; sourceTree = "<group>"; };
 		EA9E180C0557104F00119DF5 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXNamePrompt.nib; sourceTree = "<group>"; };
 		EAA0184A054DCC7000EF18C2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXDuotoneBackgroundConfigurator.xib; sourceTree = "<group>"; };
-		EAA0184F054DCC7B00EF18C2 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXMonotoneBackgroundConfigurator.nib; sourceTree = "<group>"; };
+		EAA0184F054DCC7B00EF18C2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXMonotoneBackgroundConfigurator.xib; sourceTree = "<group>"; };
 		EAA79F2906D173CF000513FD /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXImageSizePrompt.nib; sourceTree = "<group>"; };
 		EAAB76740CEF54F300F2EF66 /* PXDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXDocument.h; sourceTree = "<group>"; };
 		EAAB76750CEF54F300F2EF66 /* PXDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXDocument.m; sourceTree = "<group>"; };
@@ -1783,6 +1783,7 @@
 				C9FEE51913AF81AF004FFC3C /* PXGridSettings.xib */,
 				C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */,
 				C9F4E5FC13AD8F6500345D5D /* PXLayerDetailsView.xib */,
+				EAA0184E054DCC7B00EF18C2 /* PXMonotoneBackgroundConfigurator.nib */,
 				EAB650840D108D9000274070 /* PXPaletteController.xib */,
 				C9799FB613AD6ED900E261EE /* PXPencilToolPropertiesView.xib */,
 				C93DB17D13ABC6BE006D42FE /* PXPreferences.xib */,
@@ -1803,7 +1804,6 @@
 				610865F506B988F400733B2D /* PXInfoPanel.nib */,
 				616AA52408611A8800FD2CB9 /* PXJPEGSizePrompt.nib */,
 				615E87F206A31AF8002445B8 /* PXLayerController.nib */,
-				EAA0184E054DCC7B00EF18C2 /* PXMonotoneBackgroundConfigurator.nib */,
 				EA9E180B0557104F00119DF5 /* PXNamePrompt.nib */,
 				BF489DDB08775845007DF4CF /* PXPatternEditor.nib */,
 				619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.nib */,

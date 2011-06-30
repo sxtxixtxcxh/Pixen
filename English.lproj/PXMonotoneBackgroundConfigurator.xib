@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1070</int>
+		<int key="IBDocument.SystemTarget">1060</int>
 		<string key="IBDocument.SystemVersion">11A494a</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1881</string>
 		<string key="IBDocument.AppKitVersion">1128</string>
@@ -46,9 +46,10 @@
 								<characters key="NS.bytes">NSColor pasteboard type</characters>
 							</object>
 						</set>
-						<string key="NSFrame">{{126, 7}, {59, 30}}</string>
+						<string key="NSFrame">{{126, 0}, {54, 26}}</string>
 						<reference key="NSSuperview" ref="205169857"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<bool key="NSIsBordered">YES</bool>
 						<object class="NSColor" key="NSColor">
@@ -59,9 +60,10 @@
 					<object class="NSTextField" id="396593338">
 						<reference key="NSNextResponder" ref="205169857"/>
 						<int key="NSvFlags">256</int>
-						<string key="NSFrame">{{0, 14}, {121, 17}}</string>
+						<string key="NSFrame">{{0, 5}, {121, 17}}</string>
 						<reference key="NSSuperview" ref="205169857"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="686240590"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="503640177">
 							<int key="NSCellFlags">67239424</int>
@@ -94,9 +96,10 @@
 						</object>
 					</object>
 				</array>
-				<string key="NSFrameSize">{185, 45}</string>
+				<string key="NSFrameSize">{180, 26}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="396593338"/>
 				<object class="NSMutableString" key="NSClassName">
 					<characters key="NS.bytes">NSView</characters>
 				</object>
@@ -154,8 +157,8 @@
 						<int key="objectID">5</int>
 						<reference key="object" ref="205169857"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="686240590"/>
 							<reference ref="396593338"/>
+							<reference ref="686240590"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">View</string>
@@ -247,7 +250,11 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
-			<integer value="1070" key="NS.object.0"/>
+			<real value="1060" key="NS.object.0"/>
+		</object>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>
+			<real value="3200" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
