@@ -34,25 +34,25 @@
 
 @synthesize color;
 
--(NSString *) defaultName
+- (NSString *)defaultName
 {
 	return NSLocalizedString(@"FLAT_BACKGROUND", @"Flat Background");
 }
 
 - (NSString *)nibName
 {
-    return @"PXMonotoneBackgroundConfigurator";
+	return @"PXMonotoneBackgroundConfigurator";
 }
 
 - (void)setConfiguratorEnabled:(BOOL)enabled
 {
-    [colorWell setEnabled:enabled];
+	[colorWell setEnabled:enabled];
 }
 
-- (IBAction)configuratorColorChanged:(id) sender
+- (IBAction)configuratorColorChanged:(id)sender
 {
-    [self setColor:[sender color]];
-    [self changed];
+	[self setColor:[sender color]];
+	[self changed];
 	
 	self.cachedImage = nil;
 }
@@ -61,12 +61,13 @@
 {
 	if ([colorWell isActive])
 		[[NSColorPanel sharedColorPanel] close];
+	
 	[colorWell deactivate];
 }
 
-- (id) init
+- (id)init
 {
-	if ( ! ( self = [super init] ) ) 
+	if ( ! ( self = [super init] ))
 		return nil;
 	
 	color = [[NSColor whiteColor] retain];
@@ -75,23 +76,19 @@
 
 - (void)dealloc
 {
-    [self setColor:nil];
-    [super dealloc];
+	[self setColor:nil];
+	[super dealloc];
 }
 
-- (NSColor *) color
+- (void)setColor:(NSColor *)aColor
 {
-    return color;
-}
-
-- (void)setColor:(NSColor *) aColor
-{
-    [aColor retain];
-    [color release];
-    color = aColor;
-    if( aColor) 
-	{ 
-		[colorWell setColor:aColor]; 
+	[aColor retain];
+	[color release];
+	color = aColor;
+	
+	if (aColor)
+	{
+		[colorWell setColor:aColor];
 	}
 }
 
@@ -101,7 +98,7 @@
 	NSRectFill(rect);
 }
 
-- (void)encodeWithCoder:(NSCoder *) coder
+- (void)encodeWithCoder:(NSCoder *)coder
 {
     [coder encodeObject:color forKey:@"color"];
     [super encodeWithCoder:coder];
@@ -114,11 +111,11 @@
 	return self;
 }
 
--(id) copyWithZone:(NSZone *)zone
+- (id)copyWithZone:(NSZone *)zone
 {
-    id copy = [super copyWithZone:zone];
-    [copy setColor:color];
-    return copy;
+	id copy = [super copyWithZone:zone];
+	[copy setColor:color];
+	return copy;
 }
 
 @end

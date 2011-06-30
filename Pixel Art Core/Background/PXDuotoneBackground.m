@@ -36,7 +36,7 @@
 
 - (NSString *)nibName
 {
-    return @"PXDuotoneBackgroundConfigurator";
+	return @"PXDuotoneBackgroundConfigurator";
 }
 
 - (void)setConfiguratorEnabled:(BOOL)enabled
@@ -47,8 +47,9 @@
 
 - (IBAction)configuratorBackColorChanged:(id)sender
 {
-    [self setBackColor:[sender color]];
-    [self changed];
+	[self setBackColor:[sender color]];
+	[self changed];
+	
 	self.cachedImage = nil;
 }
 
@@ -57,23 +58,26 @@
 	[aColor retain];
 	[backColor release];
 	backColor = aColor;
-	if(aColor) 
-	{ 
-		[backWell setColor:aColor]; 
+	
+	if (aColor)
+	{
+		[backWell setColor:aColor];
 	}
 }
 
 - (void)windowWillClose:(NSNotification *)notification
 {
 	[super windowWillClose:notification];
+	
 	if ([backWell isActive])
 		[[NSColorPanel sharedColorPanel] close];
+	
 	[backWell deactivate];
 }
 
--(id) init
+- (id)init
 {
-	if ( ! ( self = [super init] )) 
+	if ( ! ( self = [super init] ))
 		return nil;
 	
 	[self setColor:[NSColor lightGrayColor]];
@@ -82,7 +86,7 @@
 	return self;
 }
 
--(id) copyWithZone:(NSZone *)zone
+- (id)copyWithZone:(NSZone *)zone
 {
 	id copy = [super copyWithZone:zone];
 	[copy setBackColor:backColor];

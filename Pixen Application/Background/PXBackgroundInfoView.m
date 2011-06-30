@@ -233,15 +233,15 @@
 - (void)centerConfigurator
 {
 	NSRect newFrame;
-	newFrame.origin = NSMakePoint(floorf(NSWidth([configuratorContainer bounds]) / 2 - NSWidth([[background configurator] bounds]) / 2),
-								  floorf(NSHeight([configuratorContainer bounds]) / 2 - NSHeight([[background configurator] bounds]) / 2));
-	newFrame.size = [[background configurator] bounds].size;
-	[[background configurator] setFrameOrigin:newFrame.origin];
+	newFrame.origin = NSMakePoint(floorf(NSWidth([configuratorContainer bounds]) / 2 - NSWidth([[background view] bounds]) / 2),
+								  floorf(NSHeight([configuratorContainer bounds]) / 2 - NSHeight([[background view] bounds]) / 2));
+	newFrame.size = [[background view] bounds].size;
+	[[background view] setFrameOrigin:newFrame.origin];
 }
 
 - (void)setBackground:(PXBackground *)bg
 {
-	[[background configurator] removeFromSuperview];
+	[[background view] removeFromSuperview];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	background = bg;
 	if(bg)
@@ -249,7 +249,7 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backgroundChanged:) name:PXBackgroundChangedNotificationName object:background];
 		[nameField setStringValue:[bg name]];
 		[nameField setHidden:NO];
-		[configuratorContainer addSubview:[bg configurator]];
+		[configuratorContainer addSubview:[bg view]];
 		[self centerConfigurator];
 		[self fixThumbnailImage];
 	}

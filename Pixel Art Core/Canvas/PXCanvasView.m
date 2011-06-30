@@ -695,7 +695,7 @@ void PXDebugRect(NSRect r, float alpha)
 			[[canvas grid] drawRect:gridRect];
 		}
 		[gridTransform invert];
-		[gridTransform concat];			
+		[gridTransform concat];
 	}
 	if ([[self window] isMainWindow])
 	{	

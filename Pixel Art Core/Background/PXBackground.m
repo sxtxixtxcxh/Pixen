@@ -37,12 +37,12 @@
 
 @implementation PXBackground
 
-@synthesize cachedImage;
+@synthesize cachedImage, name;
 
 + (void)initialize
 {
 	static BOOL ready = NO;
-	if(!ready)
+	if (!ready)
 	{
 		ready = YES;
 		PXMainBackgroundType = NSLocalizedString(@"Main Background", @"Main Background");
@@ -56,74 +56,41 @@
 	NSImage *previewImage = [[[NSImage alloc] initWithSize:imageRect.size] autorelease];
 	[previewImage lockFocus];
 	[self drawRect:NSInsetRect(imageRect, -5, -5) withinRect:NSInsetRect(imageRect, -5, -5)];
-	[previewImage unlockFocus];	
+	[previewImage unlockFocus];
 	return previewImage;
 }
 
 - (void)dealloc
 {
 	[self setName:nil];
+	[self setCachedImage:nil];
 	[super dealloc];
 }
 
--(id) init
+- (id)init
 {
-	if (! ( self = [super init] ) ) 
+	if ( ! ( self = [super init] ))
 		return nil;
 	
 	[self setName:[self defaultName]];
-	[self configurator];
+	[self loadView];
 	
 	return self;
 }
 
--(NSString *) defaultName
+- (NSString *)defaultName
 {
 	return [self className];
 }
 
-- (NSString *)name
-{
-	return name;   
-}
-
-- (void)setName:(NSString *) aName
-{
-	id old = name;
-	name = [aName copy];
-	[old release];
-}
-
-- (NSView *)configurator
-{
-	if([self isMemberOfClass:[PXBackground class]]) 
-	{
-		return nil; 
-	}
-	
-	if( ! configurator ) 
-	{
-		[NSBundle loadNibNamed:[self nibName] owner:self]; 
-		[configurator retain];
-	}
-	
-	NSAssert1(configurator != nil, @"No configurator for %@!", self);
-	return configurator;
-}
-
-- (NSString *)nibName
-{
-    return @"";
-}
-
 - (void)setConfiguratorEnabled:(BOOL)enabled
 {
-    
 }
 
 - (void)changed
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:PXBackgroundChangedNotificationName object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXBackgroundChangedNotificationName
+														object:self];
 }
 
 - (NSImage *)cachedImageOfSize:(NSSize)size
@@ -142,20 +109,23 @@
 	return cachedImage;
 }
 
-- (void)drawRect:(NSRect)rect 
-      withinRect:(NSRect)wholeRect 
-   withTransform:(NSAffineTransform *) aTransform 
-		onCanvas:(PXCanvas *) aCanvas
+- (void)drawRect:(NSRect)rect
+      withinRect:(NSRect)wholeRect
+   withTransform:(NSAffineTransform *)aTransform
+		onCanvas:(PXCanvas *)aCanvas
 {
-    //default behavior is to draw outside of the current transform.
-    [aTransform invert];
-    [aTransform concat];
-	[[self cachedImageOfSize:wholeRect.size] drawInRect:rect fromRect:NSOffsetRect(rect, -1*wholeRect.origin.x, -1*wholeRect.origin.y) operation:NSCompositeCopy fraction:1];
-    [aTransform invert];
-    [aTransform concat];
+	//default behavior is to draw outside of the current transform.
+	[aTransform invert];
+	[aTransform concat];
+	[[self cachedImageOfSize:wholeRect.size] drawInRect:rect
+											   fromRect:NSOffsetRect(rect, -1*wholeRect.origin.x, -1*wholeRect.origin.y)
+											  operation:NSCompositeCopy
+											   fraction:1];
+	[aTransform invert];
+	[aTransform concat];
 }
 
-- (void)windowWillClose:(NSNotification *)notification 
+- (void)windowWillClose:(NSNotification *)notification
 {
 	[self doesNotRecognizeSelector:@selector(windowWillClose:)];
 }
@@ -165,7 +135,7 @@
 	[self doesNotRecognizeSelector:@selector(drawRect:withinRect:)];
 }
 
--(id) copyWithZone:(NSZone *)zone
+- (id)copyWithZone:(NSZone *)zone
 {
     id copy = [[[self class] allocWithZone:zone] init];
     return copy;
@@ -173,14 +143,14 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-    [coder encodeObject:name forKey:@"name"];
+	[coder encodeObject:name forKey:@"name"];
 }
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [super init];
 	[self setName:[coder decodeObjectForKey:@"name"]];
-	[self configurator];
+	[self loadView];
 	return self;
 }
 

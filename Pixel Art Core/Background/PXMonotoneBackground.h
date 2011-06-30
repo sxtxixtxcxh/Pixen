@@ -29,10 +29,10 @@
 //
 
 #import "PXBackground.h"
-@class NSColor;
-@class NSColorWell;
 
-@interface PXMonotoneBackground : PXBackground 
+@class NSColor, NSColorWell;
+
+@interface PXMonotoneBackground : PXBackground
 {
   @private
 	NSColor *color;
@@ -41,6 +41,6 @@
 
 @property (nonatomic, retain) NSColor *color;
 
-- (IBAction)configuratorColorChanged:(id) sender;
+- (IBAction)configuratorColorChanged:(id)sender;
 
 @end

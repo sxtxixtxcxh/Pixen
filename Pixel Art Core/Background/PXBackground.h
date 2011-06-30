@@ -34,42 +34,32 @@
 #import <AppKit/NSNibDeclarations.h>
 
 @class PXCanvas;
-@class NSString;
-@class NSAffineTransform;
-@class NSView;
-@class NSImage;
+@class NSString, NSAffineTransform, NSView, NSImage;
 
-@interface PXBackground : NSObject <NSCoding, NSCopying> 
+@interface PXBackground : NSViewController <NSCoding, NSCopying>
 {
   @private
-	IBOutlet NSView * configurator;
-	id name;
-	
+	NSString *name;
 	NSSize cachedImageSize;
 	NSImage *cachedImage;
 }
 
 @property (nonatomic, retain) NSImage *cachedImage;
+@property (nonatomic, copy) NSString *name;
 
 - (NSImage *)previewImageOfSize:(NSSize)size;
-
-- (NSString *) defaultName;
-- (NSString *)name;
-- (void)setName:(NSString *) aName;
+- (NSString *)defaultName;
 
 - (void)setConfiguratorEnabled:(BOOL)enabled;
-- (NSView *)configurator;
-
-- (NSString *)nibName;
-
 - (void)changed;
 
 - (void)drawRect:(NSRect)rect withinRect:(NSRect)wholeRect;
 
-- (void)drawRect:(NSRect)rect 
+- (void)drawRect:(NSRect)rect
       withinRect:(NSRect)wholeRect
    withTransform:(NSAffineTransform *)aTransform
 		onCanvas:(PXCanvas *)aCanvas;
 
 - (void)windowWillClose:(NSNotification *)note;
+
 @end
