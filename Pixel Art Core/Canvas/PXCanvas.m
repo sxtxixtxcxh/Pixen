@@ -91,6 +91,8 @@
 
 @implementation PXCanvas
 
+@synthesize grid;
+
 -(id)copyWithZone:(NSZone*) zone
 {
 	return [[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:self]] retain];
@@ -142,20 +144,9 @@
 	[bgConfig release];
   [minusColors release];
   [plusColors release];
+	[grid release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
-}
-
-- (PXGrid *)grid 
-{
-	return grid;
-}
-
-- (void)setGrid:(PXGrid *)g
-{
-	PXGrid *oldGrid = grid;
-	grid = [g retain];
-	[oldGrid autorelease];
 }
 
 - (void)setUndoManager:(NSUndoManager *)manager

@@ -64,6 +64,8 @@ typedef BOOL * PXSelectionMask;
   NSCountedSet *plusColors;
 }
 
+@property (nonatomic, retain) PXGrid *grid;
+
 - (void)refreshWholePalette;
 - (void)refreshPaletteDecreaseColorCount:(NSColor *)down increaseColorCount:(NSColor *)up;
 
@@ -77,9 +79,6 @@ typedef BOOL * PXSelectionMask;
  	withOrigin:(NSPoint)origin
 backgroundColor:(NSColor *)color;
 - (void)setSize:(NSSize)aSize;
-
-- (PXGrid *)grid;
-- (void)setGrid:(PXGrid *)g;
 
 - (NSSize)previewSize;
 - (void)setPreviewSize:(NSSize)size;
