@@ -871,7 +871,7 @@
 		EA6864B4054C5EDE00EE395F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXBackgroundController.nib; sourceTree = "<group>"; };
 		EA88F45C05D1C172003DEBD3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXLayerController.nib; sourceTree = "<group>"; };
 		EA9E180C0557104F00119DF5 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXNamePrompt.nib; sourceTree = "<group>"; };
-		EAA0184A054DCC7000EF18C2 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXDuotoneBackgroundConfigurator.nib; sourceTree = "<group>"; };
+		EAA0184A054DCC7000EF18C2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXDuotoneBackgroundConfigurator.xib; sourceTree = "<group>"; };
 		EAA0184F054DCC7B00EF18C2 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXMonotoneBackgroundConfigurator.nib; sourceTree = "<group>"; };
 		EAA79F2906D173CF000513FD /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXImageSizePrompt.nib; sourceTree = "<group>"; };
 		EAAB76740CEF54F300F2EF66 /* PXDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXDocument.h; sourceTree = "<group>"; };
@@ -1776,6 +1776,7 @@
 				C92A1E9013B12CAB0007235A /* MainMenu.xib */,
 				C9A6BE1813AD008C0028B141 /* PXBlankPropertiesView.xib */,
 				C94A9ED813B114DE0034AFE3 /* PXCanvasDocument.xib */,
+				EAA01849054DCC7000EF18C2 /* PXDuotoneBackgroundConfigurator.nib */,
 				C9799FB913AD745500E261EE /* PXEyedropperToolPropertiesView.xib */,
 				C9A6BE1B13AD07B10028B141 /* PXFillToolPropertiesView.xib */,
 				C93DB18013ABC8BE006D42FE /* PXGeneralPreferences.xib */,
@@ -1797,7 +1798,6 @@
 				EACDBD7F0878B37100564512 /* PXBackgroundTemplateView.nib */,
 				6151D0140677C8E3009E3BE4 /* PXCanvasResizePrompt.nib */,
 				61163708067D286900AE87D7 /* PXDiscoverPixen.nib */,
-				EAA01849054DCC7000EF18C2 /* PXDuotoneBackgroundConfigurator.nib */,
 				EAE126CF054F41A9001208D9 /* PXImageBackgroundConfigurator.nib */,
 				EA5482E40513E419000101DE /* PXImageSizePrompt.nib */,
 				610865F506B988F400733B2D /* PXInfoPanel.nib */,
