@@ -27,64 +27,48 @@
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
 #import <Foundation/NSObject.h>
 #import <AppKit/NSNibDeclarations.h>
 
+@class NSTextField, NSPanel, NSWindow;
 
-@class NSTextField;
-@class NSPanel;
-@class NSWindow;
-
-@interface PXNamePrompter : NSObject
+@interface PXNamePrompter : NSWindowController
 {
+  @private
 	IBOutlet NSTextField *nameField;
 	IBOutlet NSTextField *promptString;
-	IBOutlet NSPanel *panel;
-	@private 
-		id _context;
+	id _context;
 	id _delegate;
 	BOOL _runningModal;
 	NSString *_modalString;
 }
 
-- (id) init;
+@property (nonatomic, assign) id delegate;
 
-- (void)setDelegate:(id) newDelegate;
+- (id)init;
 
-- (void)promptInWindow:(NSWindow *) window
-			   context:(id) contextInfo;
+- (void)promptInWindow:(NSWindow *)window context:(id)contextInfo;
 
-- (void)promptInWindow:(NSWindow *)window 
-			   context:(id)contextInfo 
-		  promptString:(NSString *)string 
-		  defaultEntry:(NSString *)entry;
+- (void)promptInWindow:(NSWindow *)window context:(id)contextInfo
+		  promptString:(NSString *)string defaultEntry:(NSString *)entry;
 
 + (NSString *)promptModalWithPromptString:(NSString *)string;
 - (NSString *)promptModalWithPromptString:(NSString *)string;
 
-	//IBactions 
 - (IBAction)useEnteredName:(id)sender;
 - (IBAction)cancel:(id)sender;
 
-	//Accessors
--(NSPanel *) namePrompterPanel;
 @end
-
 
 //
 // Methods Implemented by the Delegate 
 //
 @interface NSObject(PXNamePrompterDelegate)
 
-//The delegate receive this message when the user hit the button
-// "Use this name" Usually the delegate save the new background
-// using the name ( contains in nameField ) 
-- (void)prompter:aPrompter didFinishWithName:aName context:context;
+// The delegate receives this message when the user hits the button "Use this Name"
+- (void)prompter:(id)aPrompter didFinishWithName:(NSString *)aName context:(id)context;
 
-	//The delegate receive this message when the user hit the button Cancel 
-- (void)prompter:aPrompter didCancelWithContext:contextObject;
+// The delegate receives this message when the user hits the cancel button
+- (void)prompter:(id)aPrompter didCancelWithContext:(id)contextObject;
 
 @end
-

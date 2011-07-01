@@ -30,50 +30,41 @@
 
 #import "PXNamePrompter.h"
 #import "PXCanvasView.h"
-//FIXME: obsolete, should be removed - I think this is false, since it's still used in PXPalettePanel and PXColorPicker
 
 @implementation PXNamePrompter
 
-- (id) init
+@synthesize delegate = _delegate;
+
+- (id)init
 {
-	if ( ! ( self = [super init] ) ) 
+	if ( ! (self = [super initWithWindowNibName:@"PXNamePrompt"]))
 		return nil;
-	
-	if (! [NSBundle loadNibNamed:@"PXNamePrompt" owner: self] ) {
-		NSLog(@"!!! Could not load PXNamePrompt NIB !!!");
-		[self release];
-		return nil;
-	}
 	
 	return self;
 }
 
-- (void)setDelegate: (id)newDelegate
-{
-	_delegate = newDelegate;
-}
-
-- (void)promptInWindow:(NSWindow *) window context:(id)contextInfo
+- (void)promptInWindow:(NSWindow *)window context:(id)contextInfo
 {
 	[self promptInWindow:window
-				 context:contextInfo 
-			promptString:NSLocalizedString(@"Please name the new configuration.", @"Please name the new configuration.")
+				 context:contextInfo
+			promptString:NSLocalizedString(@"Please name the new configuration.",
+										   @"Please name the new configuration.")
 			defaultEntry:@""];
 }
 
-- (void)promptInWindow:(NSWindow *) window
-			   context:(id) contextInfo 
-		  promptString:(NSString* )string
+- (void)promptInWindow:(NSWindow *)window
+			   context:(id)contextInfo
+		  promptString:(NSString *)string
 		  defaultEntry:(NSString *)entry
 {
 	_context = contextInfo;
 	
 	[promptString setStringValue:string];
 	
-	[NSApp beginSheet:panel
+	[NSApp beginSheet:self.window
 	   modalForWindow:window
-		modalDelegate:nil 
-	   didEndSelector:NULL 
+		modalDelegate:nil
+	   didEndSelector:NULL
 		  contextInfo:NULL];
 	
 	[nameField setStringValue:entry];
@@ -89,9 +80,9 @@
 	_runningModal = YES;
 	_modalString = nil;
 	[promptString setStringValue:string];
-	int result = [NSApp runModalForWindow:panel];
+	NSInteger result = [NSApp runModalForWindow:self.window];
 	_runningModal = NO;
-	[panel close];
+	[self.window close];
 	if (result == NSRunAbortedResponse) {
 		return nil;
 	} else {
@@ -104,7 +95,7 @@
 // Maybye do external check or use formater for nameField
 - (IBAction)useEnteredName:(id)sender
 {
-	if([[nameField stringValue] isEqualToString:@""]) 
+	if ([[nameField stringValue] isEqualToString:@""])
 		return;
 	
 	if (_runningModal) {
@@ -112,11 +103,11 @@
 		return;
 	}
 	
-	if( [_delegate respondsToSelector:@selector(prompter:didFinishWithName:context:)] )
-		[_delegate prompter:self didFinishWithName:[nameField stringValue] context:_context]; 
+	if ([_delegate respondsToSelector:@selector(prompter:didFinishWithName:context:)])
+		[_delegate prompter:self didFinishWithName:[nameField stringValue] context:_context];
 	
-	[NSApp endSheet:panel];
-	[panel close];
+	[NSApp endSheet:self.window];
+	[self.window close];
 }
 
 //Action from 'use this entered name" button
@@ -128,20 +119,12 @@
 		[NSApp abortModal];
 		return;
 	}
-	[NSApp endSheet:panel];
 	
-	[panel close];
+	[NSApp endSheet:self.window];
+	[self.window close];
 	
-	if( [_delegate respondsToSelector:@selector(prompter:didCancelWithContext:)] ) 
-		[_delegate prompter:self didCancelWithContext:_context]; 
-}
-
-//
-// Accessor method
-//
--(NSPanel *) namePrompterPanel
-{
-	return panel;
+	if ([_delegate respondsToSelector:@selector(prompter:didCancelWithContext:)])
+		[_delegate prompter:self didCancelWithContext:_context];
 }
 
 @end
