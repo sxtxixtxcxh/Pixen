@@ -14,7 +14,7 @@
 		615C3B610D15038F00ACFA33 /* PXLayerPaneBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */; };
 		615C3B620D15038F00ACFA33 /* PXLayerPaneBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */; };
 		618AE591087E6FEA00A9FA9B /* PXColorPicker.nib in Resources */ = {isa = PBXBuildFile; fileRef = 618AE58F087E6FEA00A9FA9B /* PXColorPicker.nib */; };
-		619DC353085BCD37007EF7F7 /* PXPreviewResizePrompt.nib in Resources */ = {isa = PBXBuildFile; fileRef = 619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.nib */; };
+		619DC353085BCD37007EF7F7 /* PXPreviewResizePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.xib */; };
 		61A22A070D20715100430CCD /* History.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A22A060D20715000430CCD /* History.tiff */; };
 		61A22A240D2073E500430CCD /* Frequency.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A22A230D2073E500430CCD /* Frequency.tiff */; };
 		61A22A860D2303EE00430CCD /* OSRectAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A22A840D2303EE00430CCD /* OSRectAdditions.h */; };
@@ -518,7 +518,7 @@
 		615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerPaneBackgroundView.h; sourceTree = "<group>"; };
 		615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerPaneBackgroundView.m; sourceTree = "<group>"; };
 		618AE590087E6FEA00A9FA9B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXColorPicker.nib; sourceTree = "<group>"; };
-		619DC352085BCD37007EF7F7 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPreviewResizePrompt.nib; sourceTree = "<group>"; };
+		619DC352085BCD37007EF7F7 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreviewResizePrompt.xib; sourceTree = "<group>"; };
 		61A22A060D20715000430CCD /* History.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = History.tiff; sourceTree = "<group>"; };
 		61A22A230D2073E500430CCD /* Frequency.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Frequency.tiff; sourceTree = "<group>"; };
 		61A22A840D2303EE00430CCD /* OSRectAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSRectAdditions.h; sourceTree = "<group>"; };
@@ -1788,6 +1788,7 @@
 				C9799FB613AD6ED900E261EE /* PXPencilToolPropertiesView.xib */,
 				C93DB17D13ABC6BE006D42FE /* PXPreferences.xib */,
 				C984251013AFC142000072C5 /* PXPreview.xib */,
+				619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.xib */,
 				61FED6C208BCC646005E51EA /* PXSequenceExportPrompter.xib */,
 				C9799FAE13AD69C000E261EE /* PXShapeToolPropertiesView.xib */,
 				C9A6BE1513ACFBC50028B141 /* PXToolProperties.xib */,
@@ -1804,7 +1805,6 @@
 				610865F506B988F400733B2D /* PXInfoPanel.nib */,
 				615E87F206A31AF8002445B8 /* PXLayerController.nib */,
 				BF489DDB08775845007DF4CF /* PXPatternEditor.nib */,
-				619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.nib */,
 				61F598B9067949D500B8C8CA /* PXScalePrompt.nib */,
 				61F9CB16060D6A6D00562B78 /* PXToolPalette.nib */,
 				BFB1440408AD1D1800CE29EF /* PXSpriteSheetExporter.nib */,
@@ -2247,7 +2247,7 @@
 				EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.nib in Resources */,
 				610865F706B988F400733B2D /* PXInfoPanel.nib in Resources */,
 				61ED25AD06BD63DA00264DA2 /* PXAbout.nib in Resources */,
-				619DC353085BCD37007EF7F7 /* PXPreviewResizePrompt.nib in Resources */,
+				619DC353085BCD37007EF7F7 /* PXPreviewResizePrompt.xib in Resources */,
 				BF489DDD08775845007DF4CF /* PXPatternEditor.nib in Resources */,
 				EACDBD810878B37100564512 /* PXBackgroundTemplateView.xib in Resources */,
 				618AE591087E6FEA00A9FA9B /* PXColorPicker.nib in Resources */,
@@ -2616,12 +2616,12 @@
 			name = PXColorPicker.nib;
 			sourceTree = "<group>";
 		};
-		619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.nib */ = {
+		619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				619DC352085BCD37007EF7F7 /* English */,
 			);
-			name = PXPreviewResizePrompt.nib;
+			name = PXPreviewResizePrompt.xib;
 			sourceTree = "<group>";
 		};
 		61A956BA08AD76CF009BB89F /* OSProgressPopup.nib */ = {
