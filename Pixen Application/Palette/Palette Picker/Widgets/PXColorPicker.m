@@ -252,7 +252,11 @@ int kPXColorPickerMode = 23421337;
 - (IBAction)renamePalette:sender
 {
 	PXPalette *palette = [paletteView palette];
-	[namePrompter promptInWindow:[self colorPanel] context:NULL promptString:[NSString stringWithFormat:NSLocalizedString(@"Rename Palette %@", @"Rename Palette%@"), palette->name] defaultEntry:palette->name];
+	
+	[namePrompter promptInWindow:[self colorPanel]
+						 context:NULL
+					promptString:[NSString stringWithFormat:NSLocalizedString(@"Rename the palette '%@'", @"Rename the palette '%@'"), palette->name]
+					defaultEntry:palette->name];
 }
 
 - (IBAction)newPalette:sender
@@ -298,7 +302,7 @@ int kPXColorPickerMode = 23421337;
 	[[alert addButtonWithTitle:NSLocalizedString(@"Delete", @"DELETE")] setKeyEquivalent:@""];
 	NSButton *button = [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"CANCEL")];
 	[button setKeyEquivalent:@"\r"];
-	[alert setMessageText:[NSString stringWithFormat:NSLocalizedString(@"Really delete palette %@?", @"PALETTE_DELETE_PROMPT"), name]];
+	[alert setMessageText:[NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete the palette '%@'?", @"PALETTE_DELETE_PROMPT"), name]];
 	[alert setInformativeText:NSLocalizedString(@"This operation cannot be undone.", @"BACKGROUND_DELETE_INFORMATIVE_TEXT")];
 	[alert beginSheetModalForWindow:[self colorPanel] modalDelegate:self didEndSelector:@selector(deleteSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
 }
