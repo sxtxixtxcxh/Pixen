@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">11A494a</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1864</string>
-		<string key="IBDocument.AppKitVersion">1128</string>
-		<string key="IBDocument.HIToolboxVersion">564.00</string>
+		<string key="IBDocument.SystemVersion">11A511</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1615</string>
+		<string key="IBDocument.AppKitVersion">1138</string>
+		<string key="IBDocument.HIToolboxVersion">566.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1864</string>
+			<string key="NS.object.0">1615</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSCollectionView</string>
@@ -23,10 +23,7 @@
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</array>
-		<object class="NSMutableDictionary" key="IBDocument.Metadata">
-			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
-			<integer value="1" key="NS.object.0"/>
-		</object>
+		<dictionary class="NSMutableDictionary" key="IBDocument.Metadata"/>
 		<array class="NSMutableArray" key="IBDocument.RootObjects" id="271609693">
 			<object class="NSCustomObject" id="731948192">
 				<string key="NSClassName">PXLayerController</string>
@@ -44,9 +41,10 @@
 					<object class="NSBox" id="593505030">
 						<reference key="NSNextResponder" ref="273469827"/>
 						<int key="NSvFlags">34</int>
-						<string key="NSFrame">{{0, 23}, {213, 5}}</string>
+						<string key="NSFrame">{{0, 23}, {214, 5}}</string>
 						<reference key="NSSuperview" ref="273469827"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="777095640"/>
 						<string key="NSOffsets">{0, 0}</string>
 						<object class="NSTextFieldCell" key="NSTitleCell">
 							<int key="NSCellFlags">67239424</int>
@@ -87,7 +85,7 @@
 									<object class="NSCollectionView" id="849373330">
 										<reference key="NSNextResponder" ref="1067190618"/>
 										<int key="NSvFlags">274</int>
-										<string key="NSFrameSize">{213, 280}</string>
+										<string key="NSFrameSize">{214, 280}</string>
 										<reference key="NSSuperview" ref="1067190618"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="327235981"/>
@@ -111,7 +109,7 @@
 										<int key="NSDraggingSourceMaskForNonLocal">0</int>
 									</object>
 								</array>
-								<string key="NSFrameSize">{213, 280}</string>
+								<string key="NSFrameSize">{214, 280}</string>
 								<reference key="NSSuperview" ref="1068694535"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="849373330"/>
@@ -142,14 +140,14 @@
 								<string key="NSFrame">{{1, 144}, {233, 15}}</string>
 								<reference key="NSSuperview" ref="1068694535"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="777095640"/>
+								<reference key="NSNextKeyView" ref="593505030"/>
 								<int key="NSsFlags">1</int>
 								<reference key="NSTarget" ref="1068694535"/>
 								<string key="NSAction">_doScroller:</string>
 								<double key="NSPercent">0.63157892227172852</double>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 26}, {213, 280}}</string>
+						<string key="NSFrame">{{0, 26}, {214, 280}}</string>
 						<reference key="NSSuperview" ref="273469827"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1067190618"/>
@@ -194,6 +192,7 @@
 						<string key="NSFrame">{{30, 0}, {32, 24}}</string>
 						<reference key="NSSuperview" ref="273469827"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="115292767">
 							<int key="NSCellFlags">604110336</int>
@@ -214,7 +213,7 @@
 						</object>
 					</object>
 				</array>
-				<string key="NSFrameSize">{213, 306}</string>
+				<string key="NSFrameSize">{214, 306}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="1068694535"/>
