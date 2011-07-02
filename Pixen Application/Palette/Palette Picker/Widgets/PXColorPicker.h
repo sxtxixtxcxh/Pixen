@@ -7,20 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
+
 extern int kPXColorPickerMode;
-@class PXPaletteView, PXPaletteSelector;
+
+@class PXPaletteViewController;
+
 @interface PXColorPicker : NSColorPicker <NSColorPickingDefault, NSColorPickingCustom>
 {
   @private
-	NSImage *icon;
-	IBOutlet NSView *pickerView;
-	IBOutlet PXPaletteView *paletteView;
-	IBOutlet PXPaletteSelector *paletteSelector;
-	IBOutlet NSPopUpButton *gearMenu;
-	
-	id namePrompter;
+	PXPaletteViewController *_vc;
+	NSImage *_icon;
 }
-
-- (IBAction)popOut:sender;
 
 @end

@@ -13,7 +13,7 @@
 		6117816208ABA7F30098DCC4 /* PXAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6117816008ABA7F30098DCC4 /* PXAnimationView.m */; };
 		615C3B610D15038F00ACFA33 /* PXLayerPaneBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */; };
 		615C3B620D15038F00ACFA33 /* PXLayerPaneBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */; };
-		618AE591087E6FEA00A9FA9B /* PXColorPicker.nib in Resources */ = {isa = PBXBuildFile; fileRef = 618AE58F087E6FEA00A9FA9B /* PXColorPicker.nib */; };
+		618AE591087E6FEA00A9FA9B /* PXPalette.nib in Resources */ = {isa = PBXBuildFile; fileRef = 618AE58F087E6FEA00A9FA9B /* PXPalette.nib */; };
 		619DC353085BCD37007EF7F7 /* PXPreviewResizePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.xib */; };
 		61A22A070D20715100430CCD /* History.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A22A060D20715000430CCD /* History.tiff */; };
 		61A22A240D2073E500430CCD /* Frequency.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A22A230D2073E500430CCD /* Frequency.tiff */; };
@@ -48,6 +48,8 @@
 		C9A6BE1713ACFBC50028B141 /* PXToolProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1513ACFBC50028B141 /* PXToolProperties.xib */; };
 		C9A6BE1A13AD008C0028B141 /* PXBlankPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1813AD008C0028B141 /* PXBlankPropertiesView.xib */; };
 		C9A6BE1D13AD07B10028B141 /* PXFillToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1B13AD07B10028B141 /* PXFillToolPropertiesView.xib */; };
+		C9DE2B2C13BF5899007EC48A /* PXPaletteViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C9DE2B2A13BF5899007EC48A /* PXPaletteViewController.h */; };
+		C9DE2B2D13BF5899007EC48A /* PXPaletteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DE2B2B13BF5899007EC48A /* PXPaletteViewController.m */; };
 		C9F4E5FE13AD8F6500345D5D /* PXLayerDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F4E5FC13AD8F6500345D5D /* PXLayerDetailsView.xib */; };
 		C9FEE51B13AF81AF004FFC3C /* PXGridSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FEE51913AF81AF004FFC3C /* PXGridSettings.xib */; };
 		D866555313A932D900030D76 /* PXMonotoneBackgroundConfigurator.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAA0184E054DCC7B00EF18C2 /* PXMonotoneBackgroundConfigurator.xib */; };
@@ -454,7 +456,6 @@
 		EAC917DC0CE7DDDF00E519E1 /* colorpalette.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EAC917090CE7DC7300E519E1 /* colorpalette.png */; };
 		EAC918150CE7DF8100E519E1 /* PXCanvasView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5482DC0513E2DB000101DE /* PXCanvasView.h */; };
 		EACDBD810878B37100564512 /* PXBackgroundTemplateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACDBD7F0878B37100564512 /* PXBackgroundTemplateView.xib */; };
-		EAF21E2B08AD0CFD0037A23B /* PXPalettePanel.nib in Resources */ = {isa = PBXBuildFile; fileRef = EAF21E2908AD0CFD0037A23B /* PXPalettePanel.nib */; };
 		EAF6941A06A9AE0B0019D8D7 /* PXCanvas.h in Headers */ = {isa = PBXBuildFile; fileRef = EA495593054C6943009A8EE7 /* PXCanvas.h */; };
 		EAF6944306A9AE0B0019D8D7 /* PXGrid.h in Headers */ = {isa = PBXBuildFile; fileRef = 61E6F12F0608E9FB001B46E8 /* PXGrid.h */; };
 		EAF6944706A9AE0B0019D8D7 /* PXCanvas_ApplescriptAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A6F50C060E8151008FA11F /* PXCanvas_ApplescriptAdditions.h */; };
@@ -517,7 +518,7 @@
 		6151D0150677C8E3009E3BE4 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXCanvasResizePrompt.nib; sourceTree = "<group>"; };
 		615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerPaneBackgroundView.h; sourceTree = "<group>"; };
 		615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerPaneBackgroundView.m; sourceTree = "<group>"; };
-		618AE590087E6FEA00A9FA9B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXColorPicker.nib; sourceTree = "<group>"; };
+		618AE590087E6FEA00A9FA9B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPalette.nib; sourceTree = "<group>"; };
 		619DC352085BCD37007EF7F7 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreviewResizePrompt.xib; sourceTree = "<group>"; };
 		61A22A060D20715000430CCD /* History.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = History.tiff; sourceTree = "<group>"; };
 		61A22A230D2073E500430CCD /* Frequency.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Frequency.tiff; sourceTree = "<group>"; };
@@ -558,6 +559,8 @@
 		C9A6BE1613ACFBC50028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXToolProperties.xib; sourceTree = "<group>"; };
 		C9A6BE1913AD008C0028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXBlankPropertiesView.xib; sourceTree = "<group>"; };
 		C9A6BE1C13AD07B10028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXFillToolPropertiesView.xib; sourceTree = "<group>"; };
+		C9DE2B2A13BF5899007EC48A /* PXPaletteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteViewController.h; sourceTree = "<group>"; };
+		C9DE2B2B13BF5899007EC48A /* PXPaletteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteViewController.m; sourceTree = "<group>"; };
 		C9F4E5FD13AD8F6500345D5D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXLayerDetailsView.xib; sourceTree = "<group>"; };
 		C9FEE51A13AF81AF004FFC3C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXGridSettings.xib; sourceTree = "<group>"; };
 		D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerCollectionViewItem.h; sourceTree = "<group>"; };
@@ -975,7 +978,6 @@
 		EAC917470CE7DC7300E519E1 /* titlebargradient.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = titlebargradient.tif; sourceTree = "<group>"; };
 		EACDBD800878B37100564512 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXBackgroundTemplateView.xib; sourceTree = "<group>"; };
 		EAE126D0054F41A9001208D9 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXImageBackgroundConfigurator.nib; sourceTree = "<group>"; };
-		EAF21E2A08AD0CFD0037A23B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPalettePanel.nib; sourceTree = "<group>"; };
 		EAF6951606A9AE0B0019D8D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 		EAF6951706A9AE0B0019D8D7 /* Pixen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pixen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1279,6 +1281,8 @@
 				EA31F9A40CE7CE4800EC481B /* PXPalettePanelPaletteView.m */,
 				EAB6506D0D108D0F00274070 /* PXPaletteController.h */,
 				EAB6506E0D108D0F00274070 /* PXPaletteController.m */,
+				C9DE2B2A13BF5899007EC48A /* PXPaletteViewController.h */,
+				C9DE2B2B13BF5899007EC48A /* PXPaletteViewController.m */,
 			);
 			path = Palette;
 			sourceTree = "<group>";
@@ -1793,8 +1797,7 @@
 				61FED6C208BCC646005E51EA /* PXSequenceExportPrompter.xib */,
 				C9799FAE13AD69C000E261EE /* PXShapeToolPropertiesView.xib */,
 				C9A6BE1513ACFBC50028B141 /* PXToolProperties.xib */,
-				618AE58F087E6FEA00A9FA9B /* PXColorPicker.nib */,
-				EAF21E2908AD0CFD0037A23B /* PXPalettePanel.nib */,
+				618AE58F087E6FEA00A9FA9B /* PXPalette.nib */,
 				61A956BA08AD76CF009BB89F /* OSProgressPopup.nib */,
 				61ED25AB06BD63DA00264DA2 /* PXAbout.nib */,
 				EA4A6C3D08A98133007BAC7F /* PXAnimationDocument.nib */,
@@ -2173,6 +2176,7 @@
 				C93DB18613ABC963006D42FE /* PXGeneralPreferencesController.h in Headers */,
 				C96BABBB13ABD44A00015C92 /* PXHotkeysPreferencesController.h in Headers */,
 				C94A9EDD13B11BEA0034AFE3 /* PXSplitView.h in Headers */,
+				C9DE2B2C13BF5899007EC48A /* PXPaletteViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2250,10 +2254,9 @@
 				619DC353085BCD37007EF7F7 /* PXPreviewResizePrompt.xib in Resources */,
 				BF489DDD08775845007DF4CF /* PXPatternEditor.nib in Resources */,
 				EACDBD810878B37100564512 /* PXBackgroundTemplateView.xib in Resources */,
-				618AE591087E6FEA00A9FA9B /* PXColorPicker.nib in Resources */,
+				618AE591087E6FEA00A9FA9B /* PXPalette.nib in Resources */,
 				610F37DE0899A5DE00567E90 /* PixenHelp in Resources */,
 				EA4A6C3F08A98133007BAC7F /* PXAnimationDocument.nib in Resources */,
-				EAF21E2B08AD0CFD0037A23B /* PXPalettePanel.nib in Resources */,
 				BFB1440608AD1D1800CE29EF /* PXSpriteSheetExporter.nib in Resources */,
 				61A956BC08AD76CF009BB89F /* OSProgressPopup.nib in Resources */,
 				61FED6C408BCC646005E51EA /* PXSequenceExportPrompter.xib in Resources */,
@@ -2546,6 +2549,7 @@
 				C93DB18713ABC963006D42FE /* PXGeneralPreferencesController.m in Sources */,
 				C96BABBC13ABD44A00015C92 /* PXHotkeysPreferencesController.m in Sources */,
 				C94A9EDE13B11BEA0034AFE3 /* PXSplitView.m in Sources */,
+				C9DE2B2D13BF5899007EC48A /* PXPaletteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2608,12 +2612,12 @@
 			name = PXLayerController.xib;
 			sourceTree = "<group>";
 		};
-		618AE58F087E6FEA00A9FA9B /* PXColorPicker.nib */ = {
+		618AE58F087E6FEA00A9FA9B /* PXPalette.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				618AE590087E6FEA00A9FA9B /* English */,
 			);
-			name = PXColorPicker.nib;
+			name = PXPalette.nib;
 			sourceTree = "<group>";
 		};
 		619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.xib */ = {
@@ -2870,14 +2874,6 @@
 				EAE126D0054F41A9001208D9 /* English */,
 			);
 			name = PXImageBackgroundConfigurator.nib;
-			sourceTree = "<group>";
-		};
-		EAF21E2908AD0CFD0037A23B /* PXPalettePanel.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EAF21E2A08AD0CFD0037A23B /* English */,
-			);
-			name = PXPalettePanel.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
