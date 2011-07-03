@@ -473,7 +473,7 @@
 		EAF6949006A9AE0B0019D8D7 /* PXCanvasResizePrompt.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6151D0140677C8E3009E3BE4 /* PXCanvasResizePrompt.nib */; };
 		EAF6949D06A9AE0B0019D8D7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 61BD25D3067A1E1D0054A2BB /* Localizable.strings */; };
 		EAF694A706A9AE0B0019D8D7 /* PXDiscoverPixen.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61163708067D286900AE87D7 /* PXDiscoverPixen.nib */; };
-		EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61F598B9067949D500B8C8CA /* PXScalePrompt.nib */; };
+		EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61F598B9067949D500B8C8CA /* PXScalePrompt.xib */; };
 		EAF694BC06A9AE0B0019D8D7 /* PXCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5482DD0513E2DB000101DE /* PXCanvasView.m */; };
 		EAF694C806A9AE0B0019D8D7 /* PXCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = EA495594054C6943009A8EE7 /* PXCanvas.m */; };
 		EAF694F106A9AE0B0019D8D7 /* PXGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E6F1300608E9FB001B46E8 /* PXGrid.m */; };
@@ -534,7 +534,7 @@
 		61E6F12F0608E9FB001B46E8 /* PXGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGrid.h; sourceTree = "<group>"; };
 		61E6F1300608E9FB001B46E8 /* PXGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGrid.m; sourceTree = "<group>"; };
 		61ED25AC06BD63DA00264DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXAbout.nib; sourceTree = "<group>"; };
-		61F598BA067949D500B8C8CA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXScalePrompt.nib; sourceTree = "<group>"; };
+		61F598BA067949D500B8C8CA /* English */ = {isa = PBXFileReference; name = English; path = English.lproj/PXScalePrompt.xib; sourceTree = "<group>"; };
 		61F9CB17060D6A6D00562B78 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXToolPalette.nib; sourceTree = "<group>"; };
 		61FED6C308BCC646005E51EA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXSequenceExportPrompter.xib; sourceTree = "<group>"; };
 		BF1A538507ECD9200017A44E /* PXImage.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PXImage.h; sourceTree = "<group>"; };
@@ -1794,6 +1794,7 @@
 				C93DB17D13ABC6BE006D42FE /* PXPreferences.xib */,
 				C984251013AFC142000072C5 /* PXPreview.xib */,
 				619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.xib */,
+				61F598B9067949D500B8C8CA /* PXScalePrompt.xib */,
 				61FED6C208BCC646005E51EA /* PXSequenceExportPrompter.xib */,
 				C9799FAE13AD69C000E261EE /* PXShapeToolPropertiesView.xib */,
 				C9A6BE1513ACFBC50028B141 /* PXToolProperties.xib */,
@@ -1808,7 +1809,6 @@
 				EA5482E40513E419000101DE /* PXImageSizePrompt.nib */,
 				610865F506B988F400733B2D /* PXInfoPanel.nib */,
 				BF489DDB08775845007DF4CF /* PXPatternEditor.nib */,
-				61F598B9067949D500B8C8CA /* PXScalePrompt.nib */,
 				61F9CB16060D6A6D00562B78 /* PXToolPalette.nib */,
 				BFB1440408AD1D1800CE29EF /* PXSpriteSheetExporter.nib */,
 			);
@@ -2248,7 +2248,7 @@
 				EAF6949006A9AE0B0019D8D7 /* PXCanvasResizePrompt.nib in Resources */,
 				EAF6949D06A9AE0B0019D8D7 /* Localizable.strings in Resources */,
 				EAF694A706A9AE0B0019D8D7 /* PXDiscoverPixen.nib in Resources */,
-				EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.nib in Resources */,
+				EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.xib in Resources */,
 				610865F706B988F400733B2D /* PXInfoPanel.nib in Resources */,
 				61ED25AD06BD63DA00264DA2 /* PXAbout.nib in Resources */,
 				619DC353085BCD37007EF7F7 /* PXPreviewResizePrompt.xib in Resources */,
@@ -2652,12 +2652,12 @@
 			name = PXAbout.nib;
 			sourceTree = "<group>";
 		};
-		61F598B9067949D500B8C8CA /* PXScalePrompt.nib */ = {
+		61F598B9067949D500B8C8CA /* PXScalePrompt.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				61F598BA067949D500B8C8CA /* English */,
 			);
-			name = PXScalePrompt.nib;
+			name = PXScalePrompt.xib;
 			sourceTree = "<group>";
 		};
 		61F9CB16060D6A6D00562B78 /* PXToolPalette.nib */ = {

@@ -35,7 +35,7 @@
 {
   @private
 	IBOutlet NSPopUpButton *algorithmButton;
-	IBOutlet NSBox *scaleParameterView;
+	// currently unused: IBOutlet NSBox *scaleParameterView;
 	
 	IBOutlet NSButton *scaleProportionallyCheckbox;
 	IBOutlet NSTextField *pixelsWideField, *pixelsHighField, *percentageWideField, *percentageHighField;

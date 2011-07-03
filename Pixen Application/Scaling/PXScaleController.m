@@ -128,6 +128,7 @@ static NSArray *algorithms = nil;
 {
 	static BOOL lastAlgorithmHadParameterView = YES;
 	
+	/*
 	NSSize newBoxSize = [scaleParameterView frame].size;
 	
 	if ([[self currentAlgorithm] hasParameterView]) 
@@ -151,6 +152,8 @@ static NSArray *algorithms = nil;
 		[scaleParameterView setContentView:[[self currentAlgorithm] parameterView]]; // Don't move this to the top of the method or it breaks.  No, I don't know why.
 	}
 	[scaleParameterView setFrameSize:newBoxSize];
+	 */
+	
 	[algorithmInfoView setString:[[self currentAlgorithm] algorithmInfo]];
 	
 	lastAlgorithmHadParameterView = [[self currentAlgorithm] hasParameterView];
