@@ -34,10 +34,20 @@
 	int version = [coder decodeIntForKey:@"version"];
 	if(version < 4)
 	{
+		if (layers) {
+			[layers release];
+			layers = nil;
+		}
+		
 		layers = [[coder decodeObjectForKey:@"layers"] retain];
 		for (id current in layers)
 		{
 			[current setCanvas:self];
+		}
+		
+		if (bgConfig) {
+			[bgConfig release];
+			bgConfig = nil;
 		}
 	
 		bgConfig = [[coder decodeObjectForKey:@"bgConfig"] retain];
@@ -45,6 +55,12 @@
 		{
 			bgConfig = [[PXBackgroundConfig alloc] initWithCoder:coder];
 		}
+		
+		if (grid) {
+			[grid release];
+			grid = nil;
+		}
+		
 		grid = [[coder decodeObjectForKey:@"grid"] retain];
 		if(!grid)
 		{

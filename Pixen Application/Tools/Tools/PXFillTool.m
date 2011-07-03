@@ -238,6 +238,7 @@ fromCanvasController:(PXCanvasController*)controller
 	[self fillPixelsInBOOLArray:pointsToFill withColor:fillColor withBoundsRect:bounds ofCanvas:canvas];
 	[consideredPoints release];
 	[pointsToFill release];
+	free(points);
 	[canvas registerForUndo];
 	return;
 }
