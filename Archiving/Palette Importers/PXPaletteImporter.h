@@ -10,7 +10,8 @@
 
 
 @interface PXPaletteImporter : NSObject {
-
+  @private
+	NSOpenPanel *openPanel;
 }
 
 - (void)importPaletteAtPath:(NSString *)path;

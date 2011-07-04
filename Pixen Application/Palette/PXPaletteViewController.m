@@ -80,8 +80,9 @@
 
 - (IBAction)installPalette:sender
 {
-	id importer = [[PXPaletteImporter alloc] init];
+	PXPaletteImporter *importer = [[PXPaletteImporter alloc] init];
 	[importer runInWindow:[[self view] window]];
+	[importer release];
 }
 
 - (IBAction)exportPalette:sender
