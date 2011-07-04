@@ -6,7 +6,7 @@
 //
 #import <AppKit/AppKit.h>
 
-@class PXCanvasController, PXScaleController, PXCanvas, PXCanvasView, PXBackground;
+@class PXCanvasController, PXLayerController, PXScaleController, PXCanvas, PXCanvasView, PXBackground;
 
 @interface PXCanvasWindowController : NSWindowController
 {
@@ -19,7 +19,7 @@
 	id previewController;
 	id resizePrompter;
 	PXScaleController *scaleController;
-	id layerController;
+	PXLayerController *layerController;
 	
 	id paletteController;
 	

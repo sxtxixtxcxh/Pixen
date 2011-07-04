@@ -21,6 +21,7 @@
 #import "PXTool.h"
 #import "PXPaletteExporter.h"
 #import "PXPalettePanel.h"
+#import "PXLayerController.h"
 
 #import "PXAnimationDocument.h"
 #import "PXAnimation.h"
@@ -122,7 +123,7 @@
 
 - (IBAction)mergeDown:(id) sender
 {
-	[canvas mergeDownLayer:[canvas activeLayer]];
+	[layerController mergeDown];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)anItem

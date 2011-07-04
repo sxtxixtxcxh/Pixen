@@ -54,6 +54,7 @@
 - (void)reloadData:(NSNotification *) aNotification;
 - (void)setCanvas:(PXCanvas *) aCanvas;
 - (PXCanvas *)canvas;
+- (void)setDocument:(id)doc;
 
 - (IBAction)addLayer: (id)sender;
 - (IBAction)duplicateLayer: (id)sender;
