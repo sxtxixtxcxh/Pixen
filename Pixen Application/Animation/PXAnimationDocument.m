@@ -203,8 +203,9 @@
 		for (i = 0; i < frameCount; i++)
 		{
 			[bitmapRep setProperty:NSImageCurrentFrame withValue:[NSNumber numberWithInt:i]];
-			PXCel *newCel = [[[PXCel alloc] initWithImage:[tempImage copy] animation:animation] autorelease];
-			[newCel retain];
+			PXCel *newCel = [[[PXCel alloc] initWithImage:[[tempImage copy] autorelease] animation:animation] autorelease];
+			// PXCel is retained by the animation in the initializer used above
+			// [newCel retain];
 			[newCel setDuration:[[bitmapRep valueForProperty:NSImageCurrentFrameDuration] floatValue]];
 		}
 		[[self undoManager] removeAllActions];
