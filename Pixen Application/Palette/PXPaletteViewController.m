@@ -86,8 +86,9 @@
 
 - (IBAction)exportPalette:sender
 {
-	id exporter = [[PXPaletteExporter alloc] init];
+	PXPaletteExporter *exporter = [[PXPaletteExporter alloc] init];
 	[exporter runWithPalette:[paletteView palette] inWindow:[[self view] window]];
+	[exporter release];
 }
 
 - (IBAction)popOut:sender

@@ -37,21 +37,20 @@
 
 - (NSData *)palDataForPalette:(PXPalette *)palette
 {
-	NSMutableData *data = [NSMutableData data];
-	[data appendBytes:"JASC-PAL\n0100\n" length:14]; // Header and version
+	NSMutableString *string = [NSMutableString string];
+	[string appendString:@"JASC-PAL\n0100\n"];
+	
 	int colorCount = PXPalette_colorCount(palette);
-	char countString[5];
-	sprintf(countString, "%d\n", colorCount);
-	[data appendBytes:countString length:strlen(countString)];
+	[string appendFormat:@"%d\n", colorCount];
+	
 	int i;
 	for (i = 0; i < colorCount; i++)
 	{
 		NSColor *color = [palette->colors[i].color colorUsingColorSpaceName:NSDeviceRGBColorSpace];
-		char colorString[12];
-		sprintf(colorString, "%d %d %d\n", (int)([color redComponent] * 255), (int)([color greenComponent] * 255), (int)([color blueComponent] * 255));
-		[data appendBytes:colorString length:strlen(colorString)];
+		[string appendFormat:@"%d %d %d\n", (int)([color redComponent] * 255), (int)([color greenComponent] * 255), (int)([color blueComponent] * 255)];
 	}
-	return data;
+	
+	return [string dataUsingEncoding:NSASCIIStringEncoding];
 }
 
 @end

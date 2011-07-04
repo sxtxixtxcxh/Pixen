@@ -271,16 +271,16 @@ NSString *palettesSubdirName = @"Palettes";
 		int result = [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Install Background Template \"%@\"?", @"Install Background Template \"%@\"?"), bgName] defaultButton:NSLocalizedString(@"Install", @"Install") alternateButton:NSLocalizedString(@"Cancel", @"CANCEL") otherButton:nil informativeTextWithFormat:NSLocalizedString(@"%@ will be copied to %@.", @"%@ will be copied to %@."), [filename stringByAbbreviatingWithTildeInPath], [dest stringByAbbreviatingWithTildeInPath]] runModal];
 		if(result == NSAlertDefaultReturn)
 		{
-      NSError *err=nil;
+			NSError *err=nil;
 			if(![[NSFileManager defaultManager] copyItemAtPath:filename toPath:dest error:&err]) 
-      {
-        [self presentError:err];
+			{
+				[self presentError:err];
 				return NO;
-      }
-      else
-      {
-        [[NSNotificationCenter defaultCenter] postNotificationName:PXBackgroundTemplateInstalledNotificationName object:self];
-      }
+			}
+			else
+			{
+				[[NSNotificationCenter defaultCenter] postNotificationName:PXBackgroundTemplateInstalledNotificationName object:self];
+			}
 		}
 	}
 	if([[filename pathExtension] isEqual:PXPatternSuffix])
@@ -302,17 +302,21 @@ NSString *palettesSubdirName = @"Palettes";
 		int result = [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Install Palette \"%@\"?", @"Instal Palette \"%@\"?"), paletteName] defaultButton:NSLocalizedString(@"Install", @"Install") alternateButton:NSLocalizedString(@"Cancel", @"CANCEL") otherButton:nil informativeTextWithFormat:NSLocalizedString(@"%@ will be copied to %@.", @"%@ will be copied to %@."), [filename stringByAbbreviatingWithTildeInPath], [dest stringByAbbreviatingWithTildeInPath]] runModal];
 		if(result == NSAlertDefaultReturn)
 		{
-			id importer = [[[PXPaletteImporter alloc] init] autorelease];
+			PXPaletteImporter *importer = [[PXPaletteImporter alloc] init];
 			[importer importPaletteAtPath:filename];
+			[importer release];
+			
 			[[NSNotificationCenter defaultCenter] postNotificationName:PXUserPalettesChangedNotificationName object:self];
+			
+			return YES;
 		}
 	}
-  NSError *err = nil;
+	NSError *err = nil;
 	NSDocument *doc = [self openDocumentWithContentsOfURL:[NSURL fileURLWithPath:filename] display:YES error:&err];
-  if(err) {
-    [self presentError:err];
-  }
-  
+	if(err) {
+		[self presentError:err];
+	}
+	
 	return doc != nil;
 }
 

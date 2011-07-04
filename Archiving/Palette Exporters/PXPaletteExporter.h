@@ -9,9 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import "PXPalette.h"
 
-@interface PXPaletteExporter : NSObject {
+@interface PXPaletteExporter : NSObject < NSOpenSavePanelDelegate > {
   @private
 	NSSavePanel *savePanel;
+	NSPopUpButton *typeSelector;
 	PXPalette *palette;
 }
 

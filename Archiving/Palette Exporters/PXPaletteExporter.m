@@ -13,7 +13,7 @@
 
 @implementation PXPaletteExporter
 
-+ types
++ (NSArray *)types
 {
 	return [NSArray arrayWithObjects:PixenPaletteType, MicrosoftPaletteType, JascPaletteType, AdobePaletteType, nil];
 }
@@ -21,65 +21,98 @@
 - (void)dealloc
 {
 	[savePanel release];
+	[typeSelector release];
 	[super dealloc];
 }
 
-- (void)panelDidEnd:(NSSavePanel *)panel returnCode:(int)code contextInfo:(void *)info
+- (void)panelDidEndWithReturnCode:(NSInteger)code
 {
-	if (code == NSCancelButton) 
-	{
-		PXPalette_release(palette);
-		return; 
+	if (code == NSCancelButton) {
+		[NSApp stopModal];
+		return;
 	}
-	NSString *type = [[(NSPopUpButton *)[panel accessoryView] selectedItem] title];
-	if ([type isEqualToString:PixenPaletteType])
-	{
-		[NSKeyedArchiver archiveRootObject:PXPalette_dictForArchiving(palette) toFile:[panel filename]];
+	
+	NSString *type = [[typeSelector selectedItem] title];
+	
+	if ([type isEqualToString:PixenPaletteType]) {
+		[NSKeyedArchiver archiveRootObject:PXPalette_dictForArchiving(palette)
+									toFile:[[savePanel URL] path]];
 	}
-	else
-	{
+	else {
 		id writer = nil;
-		if ([type isEqualToString:MicrosoftPaletteType]) { writer = [OSPALWriter sharedPALWriter]; }
-		else if ([type isEqualToString:JascPaletteType]) { writer = [OSJASCPALWriter sharedJASCPALWriter]; }
-		else if ([type isEqualToString:AdobePaletteType]) { writer = [OSACTWriter sharedACTWriter]; }
-		if (writer == nil) { return; }
-		id data = [writer palDataForPalette:palette];
-		if (data == nil) { return; }
-		[data writeToFile:[panel filename] atomically:YES];
+		
+		if ([type isEqualToString:MicrosoftPaletteType]) {
+			writer = [OSPALWriter sharedPALWriter];
+		}
+		else if ([type isEqualToString:JascPaletteType]) {
+			writer = [OSJASCPALWriter sharedJASCPALWriter];
+		}
+		else if ([type isEqualToString:AdobePaletteType]) {
+			writer = [OSACTWriter sharedACTWriter];
+		}
+		
+		if (writer == nil) {
+			[NSApp stopModal];
+			return;
+		}
+		
+		NSData *data = [writer palDataForPalette:palette];
+		
+		if (data == nil) {
+			[NSApp stopModal];
+			return;
+		}
+		
+		[data writeToURL:[savePanel URL] atomically:YES];
 	}
-	PXPalette_release(palette);
+	
+	[NSApp stopModal];
 }
 
-- (void)typeChanged:sender
+- (NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag
 {
-	NSString *type = [[(NSPopUpButton *)[savePanel accessoryView] selectedItem] title];
-	id newString = [[[[savePanel filename] lastPathComponent] stringByDeletingPathExtension] stringByAppendingString:@"."];
+	NSString *type = [[typeSelector selectedItem] title];
+	
+	NSString *basename = [[filename lastPathComponent] stringByDeletingPathExtension];
+	NSString *path = nil;
+	
 	if ([type isEqualToString:PixenPaletteType])
-		newString = [newString stringByAppendingString:PXPaletteSuffix];
+		path = [basename stringByAppendingPathExtension:PXPaletteSuffix];
 	else if ([type isEqualToString:MicrosoftPaletteType])
-		newString = [newString stringByAppendingString:MicrosoftPaletteSuffix];
+		path = [basename stringByAppendingPathExtension:MicrosoftPaletteSuffix];
 	else if ([type isEqualToString:JascPaletteType])
-		newString = [newString stringByAppendingString:MicrosoftPaletteSuffix];
+		path = [basename stringByAppendingPathExtension:MicrosoftPaletteSuffix];
 	else
-		newString = [newString stringByAppendingString:AdobePaletteSuffix];
-	[[savePanel valueForKey:@"_nameField"] setStringValue:newString]; // warning: private key!
+		path = [basename stringByAppendingPathExtension:AdobePaletteSuffix];
+	
+	return path;
 }
 
 - (void)runWithPalette:(PXPalette *)aPalette inWindow:(NSWindow *)window
 {
-	if (aPalette == NULL) { return; }
+	if (aPalette == NULL)
+		return;
+	
 	palette = PXPalette_retain(aPalette);
-	savePanel = [NSSavePanel savePanel];
+	
+	savePanel = [[NSSavePanel savePanel] retain];
 	[savePanel setAllowedFileTypes:[NSArray arrayWithObjects:PXPaletteSuffix, MicrosoftPaletteSuffix, AdobePaletteSuffix, nil]];
 	[savePanel setPrompt:@"Export"];
-	NSPopUpButton *typePopup = [[[NSPopUpButton alloc] initWithFrame:NSMakeRect(0, 0, 250, 40) pullsDown:NO] autorelease];
-	[typePopup setTarget:self];
-	[typePopup setAction:@selector(typeChanged:)];
-	[typePopup addItemsWithTitles:[[self class] types]];
-	[savePanel setAccessoryView:typePopup];
-	[savePanel setCanSelectHiddenExtension:NO];
-	[savePanel beginSheetForDirectory:nil file:palette->name modalForWindow:window modalDelegate:self didEndSelector:@selector(panelDidEnd:returnCode:contextInfo:) contextInfo:nil];
-	[self typeChanged:self];
+	[savePanel setExtensionHidden:YES];
+	[savePanel setNameFieldStringValue:palette->name];
+	[savePanel setDelegate:self];
+	
+	typeSelector = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(0, 0, 250, 40) pullsDown:NO];
+	[typeSelector addItemsWithTitles:[[self class] types]];
+	[savePanel setAccessoryView:typeSelector];
+	
+	[savePanel beginSheetModalForWindow:window completionHandler:^(NSInteger result) {
+		[self panelDidEndWithReturnCode:result];
+	}];
+	
+	[NSApp runModalForWindow:savePanel];
+	
+	PXPalette_release(palette);
 }
 
 @end

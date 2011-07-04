@@ -13,9 +13,9 @@
 
 typedef struct
 {
-	unsigned long signature;
-	unsigned long fileLength;
-	unsigned long riffType;
+	uint32_t signature;
+	uint32_t fileLength;
+	uint32_t riffType;
 } OSPALHeader;
 
 @implementation OSPALWriter
