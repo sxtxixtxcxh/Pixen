@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PXPalette.h"
 
-@class PXPaletteViewController;
+@class PXPaletteView, PXPaletteViewController;
 
 @interface PXPalettePanel : NSPanel {
   @private
@@ -18,5 +18,7 @@
 
 + (id)popWithPalette:(PXPalette *)palette fromWindow:(NSWindow *)window;
 - (id)initWithPalette:(PXPalette *)palette;
+
+- (PXPaletteView *)paletteView;
 
 @end

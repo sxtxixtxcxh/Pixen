@@ -67,6 +67,11 @@
     [super dealloc];
 }
 
+- (PXPaletteView *)paletteView
+{
+	return _vc.paletteView;
+}
+
 - (void)paletteViewControllerDidShowPalette:(PXPalette *)palette
 {
 	[self setTitle:palette->name];
