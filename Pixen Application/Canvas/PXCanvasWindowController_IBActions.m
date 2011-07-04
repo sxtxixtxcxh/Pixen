@@ -194,7 +194,7 @@
 
 - (IBAction)deleteLayer:sender
 {
-	[canvas removeLayer:[canvas activeLayer]];
+	[layerController removeLayer:nil];
 }
 
 - (IBAction)crop:sender
