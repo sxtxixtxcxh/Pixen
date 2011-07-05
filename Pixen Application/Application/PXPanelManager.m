@@ -134,6 +134,11 @@ static PXPanelManager *sharedManager = nil;
 		[panel makeKeyAndOrderFront:self];
 	}
 	
+	free(systemPalettes);
+	
+	if (userPalettes)
+		free(userPalettes);
+	
 	// make sure this gets document open/close notification
 	[PXSpriteSheetExporter sharedSpriteSheetExporter];
 }
