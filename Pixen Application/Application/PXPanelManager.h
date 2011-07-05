@@ -37,7 +37,8 @@
 
 @interface PXPanelManager : NSObject 
 {
-
+  @private
+	NSMutableArray *_palettePanels;
 }
 
 //Singleton
@@ -45,6 +46,9 @@
 
 - (void)archivePanelStates;
 - (void)restorePanelStates;
+
+- (void)addPalettePanel:(NSPanel *)panel;
+- (void)removePalettePanel:(NSPanel *)panel;
 
 	//Accessors
 - (NSPanel *)leftToolPropertiesPanel;

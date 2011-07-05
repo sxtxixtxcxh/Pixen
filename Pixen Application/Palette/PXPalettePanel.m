@@ -11,6 +11,7 @@
 #import "PXPaletteViewController.h"
 #import "PXToolSwitcher.h"
 #import "PXToolPaletteController.h"
+#import "PXPanelManager.h"
 
 @implementation PXPalettePanel
 
@@ -36,9 +37,8 @@
 	
 	[panel setFrame:[window frame] display:NO];
 	previousPoint = [panel cascadeTopLeftFromPoint:topLeft];
-	[panel makeKeyAndOrderFront:self];
 	
-	return panel; // [panel autorelease];
+	return [panel autorelease];
 }
 
 - (id)initWithPalette:(PXPalette *)palette
@@ -49,6 +49,7 @@
 								defer:NO];
 	
 	[self setBecomesKeyOnlyIfNeeded:YES];
+	[self setDelegate:self];
 	
 	_vc = [[PXPaletteViewController alloc] init];
 	[_vc setDelegate:self];
@@ -59,6 +60,12 @@
 	[_vc reloadDataAndShow:palette];
 	
 	return self;
+}
+
+- (void)windowWillClose:(NSNotification *)notification {
+	[[PXPanelManager sharedManager] performSelector:@selector(removePalettePanel:)
+										 withObject:self
+										 afterDelay:0.0f];
 }
 
 - (void)dealloc

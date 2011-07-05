@@ -61,11 +61,14 @@ static PXPanelManager *sharedManager = nil;
 		return nil;
 	
 	sharedManager = self;
+	_palettePanels = [[NSMutableArray alloc] init];
+	
 	return self;
 }
 
 - (void)dealloc
 {
+	[_palettePanels release];
 	[super dealloc];
 }
 - (void)restorePanelStates
@@ -94,26 +97,40 @@ static PXPanelManager *sharedManager = nil;
 	int systemPalettesCount = PXPalette_getSystemPalettes(NULL, 0);
 	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPalettesCount);
 	PXPalette_getSystemPalettes(systemPalettes, 0);
+	
 	int userPalettesCount = PXPalette_getUserPalettes(NULL, 0);
 	PXPalette **userPalettes = malloc(sizeof(PXPalette *) * userPalettesCount);
 	PXPalette_getUserPalettes(userPalettes, 0);
+	
 	NSArray *palettePanels = [defaults objectForKey:PXPalettePanelsKey];
-	for (id current in palettePanels)
+	
+	for (NSDictionary *current in palettePanels)
 	{
 		BOOL isSystemPalette = [[current objectForKey:PXPalettePanelIsSystemPaletteKey] boolValue];
 		int index = [[current objectForKey:PXPalettePanelPaletteIndexKey] intValue];
+		int viewSize = [[current objectForKey:PXPalettePanelPaletteViewSizeKey] intValue];
+		
 		PXPalette *palette = NULL;
+		
 		if ((isSystemPalette && index >= systemPalettesCount) || (!isSystemPalette && index >= userPalettesCount))
 		{
 			palette = systemPalettes[0];
 		}
 		else
 		{
-			palette = (isSystemPalette ? systemPalettes : userPalettes)[[[current objectForKey:PXPalettePanelPaletteIndexKey] intValue]];
+			palette = (isSystemPalette ? systemPalettes : userPalettes)[index];
 		}
+		
 		PXPalettePanel *panel = [[PXPalettePanel alloc] initWithPalette:palette];
-		[panel setFrame:NSRectFromString([current objectForKey:PXPalettePanelFrameKey]) display:NO];
-		[(PXPaletteViewScrollView *)[[panel paletteView] enclosingScrollView] setControlSize:[[current objectForKey:PXPalettePanelPaletteViewSizeKey] intValue]];
+		
+		[self addPalettePanel:panel];
+		[panel release];
+		
+		[panel setFrame:NSRectFromString([current objectForKey:PXPalettePanelFrameKey])
+				display:NO];
+		
+		[(PXPaletteViewScrollView *)[[panel paletteView] enclosingScrollView] setControlSize:viewSize];
+		
 		[panel makeKeyAndOrderFront:self];
 	}
 	
@@ -139,25 +156,28 @@ static PXPanelManager *sharedManager = nil;
 	[defaults setBool:boolTmp forKey:PXInfoPanelIsOpenKey];
 	
 	// Popout color panels
-	NSMutableArray *palettePanels = [NSMutableArray array];
+	NSMutableArray *archivedPalettePanels = [NSMutableArray array];
 	
 	int systemPalettesCount = PXPalette_getSystemPalettes(NULL, 0);
 	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPalettesCount);
 	PXPalette_getSystemPalettes(systemPalettes, 0);
+	
 	int userPalettesCount = PXPalette_getUserPalettes(NULL, 0);
 	PXPalette **userPalettes = malloc(sizeof(PXPalette *) * userPalettesCount);
 	PXPalette_getUserPalettes(userPalettes, 0);
 	
-	for (NSWindow *current in [NSApp windows])
+	for (PXPalettePanel *panel in _palettePanels)
 	{
-		if (![current isKindOfClass:[PXPalettePanel class]]) { continue; }
-		if (![current isVisible]) { continue; }
+		if (![panel isVisible])
+			continue;
+		
 		NSMutableDictionary *panelInfo = [NSMutableDictionary dictionary];
-		[panelInfo setObject:NSStringFromRect([current frame]) forKey:PXPalettePanelFrameKey];
-		[panelInfo setObject:[NSNumber numberWithInt:[[(PXPalettePanel *)current paletteView] controlSize]] forKey:PXPalettePanelPaletteViewSizeKey];
+		[panelInfo setObject:NSStringFromRect([panel frame]) forKey:PXPalettePanelFrameKey];
+		[panelInfo setObject:[NSNumber numberWithInt:[[panel paletteView] controlSize]] forKey:PXPalettePanelPaletteViewSizeKey];
 		
 		// Now we've got to identify the palette and see how we're going to classify it.
-		PXPalette *palette = [[(PXPalettePanel *)current paletteView] palette];
+		PXPalette *palette = [[panel paletteView] palette];
+		
 		int i;
 		BOOL found = NO;
 		for (i = 0; i < systemPalettesCount; i++)
@@ -170,6 +190,7 @@ static PXPanelManager *sharedManager = nil;
 				break;
 			}
 		}
+		
 		if (!found) // Check the user palettes.
 		{
 			for (i = 0; i < userPalettesCount; i++)
@@ -181,19 +202,34 @@ static PXPanelManager *sharedManager = nil;
 					[panelInfo setObject:[NSNumber numberWithInt:i] forKey:PXPalettePanelPaletteIndexKey];
 				}
 			}
+			
 			if (!found) // Okay, if it's -still- not found, we skip it.
-			{
 				continue;
-			}
 		}
-		[palettePanels addObject:panelInfo];
+		
+		[archivedPalettePanels addObject:panelInfo];
 	}
-	[defaults setObject:palettePanels forKey:PXPalettePanelsKey];
+	
+	[defaults setObject:archivedPalettePanels forKey:PXPalettePanelsKey];
+	
 	free(systemPalettes);
+	
 	if (userPalettes)
 		free(userPalettes);
 	
 	[defaults synchronize];
+}
+
+- (void)addPalettePanel:(NSPanel *)panel
+{
+	[_palettePanels addObject:panel];
+}
+
+- (void)removePalettePanel:(NSPanel *)panel
+{
+	if ([_palettePanels containsObject:panel]) {
+		[_palettePanels removeObject:panel];
+	}
 }
 
 - (void)show:panel

@@ -16,6 +16,7 @@
 #import "PXPalettePanel.h"
 #import "PXPaletteSelector.h"
 #import "PXPaletteView.h"
+#import "PXPanelManager.h"
 
 @interface PXPaletteViewController ()
 
@@ -94,7 +95,12 @@
 
 - (IBAction)popOut:sender
 {
-	[PXPalettePanel popWithPalette:[paletteView palette] fromWindow:[[self view] window]];
+	PXPalettePanel *panel = [PXPalettePanel popWithPalette:[paletteView palette]
+												fromWindow:[[self view] window]];
+	
+	[[PXPanelManager sharedManager] addPalettePanel:panel];
+	
+	[panel makeKeyAndOrderFront:self];
 }
 
 - (void)paletteChanged:(NSNotification *)notification
