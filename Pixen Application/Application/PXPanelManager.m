@@ -245,7 +245,7 @@ static PXPanelManager *sharedManager = nil;
 	
 	[self performSelector:@selector(removePalettePanel:)
 			   withObject:panel
-			   afterDelay:1.0f];
+			   afterDelay:0.0f];
 }
 
 - (void)removePalettePanel:(NSPanel *)panel

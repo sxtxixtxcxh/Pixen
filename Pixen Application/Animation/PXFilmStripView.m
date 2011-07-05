@@ -46,6 +46,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[self setDelegate:nil];
 	[self setDataSource:nil];
 	[spokeHoleCache release];

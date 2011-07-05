@@ -49,6 +49,7 @@
 								defer:NO];
 	
 	[self setBecomesKeyOnlyIfNeeded:YES];
+	[self setReleasedWhenClosed:NO];
 	
 	_vc = [[PXPaletteViewController alloc] init];
 	[_vc setDelegate:self];

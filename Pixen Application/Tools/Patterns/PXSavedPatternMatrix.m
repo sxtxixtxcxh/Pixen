@@ -186,6 +186,7 @@
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[patternFileName release];
 	[patterns release];
 	[super dealloc];

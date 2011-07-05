@@ -25,6 +25,7 @@
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[animationPreview removeObserver:self forKeyPath:@"isPlaying"];
 	[animationPreview setDataSource:nil];
 	[filmStrip setDataSource:nil];
@@ -89,7 +90,8 @@
 
 - (void)awakeFromNib
 {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(canvasDidChange:) name:PXCanvasChangedNotificationName object:nil];	[(NSClipView *)[filmStrip superview] setCopiesOnScroll:NO]; // prevent weird visual bugs
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(canvasDidChange:) name:PXCanvasChangedNotificationName object:nil];
+	[(NSClipView *)[filmStrip superview] setCopiesOnScroll:NO]; // prevent weird visual bugs
 	[animationPreview addObserver:self forKeyPath:@"isPlaying" options:NSKeyValueObservingOptionNew context:NULL];
 	[super awakeFromNib];
 }

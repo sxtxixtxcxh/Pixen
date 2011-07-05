@@ -20,6 +20,7 @@
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[cachedEmptyPath release];
 	[super dealloc];
 }

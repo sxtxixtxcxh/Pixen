@@ -37,8 +37,7 @@
 
 - (void)dealloc
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PXCanvasFrequencyPaletteRefresh" object:nil];
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PXCanvasPaletteUpdate" object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	PXPalette_release(frequencyPalette);
 	PXPalette_release(recentPalette);
 	[super dealloc];

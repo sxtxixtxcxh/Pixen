@@ -47,6 +47,7 @@
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
     [namePrompter release];
     [super dealloc];
 }
