@@ -60,7 +60,7 @@
 	  fromCanvasController:(PXCanvasController *)controller
 {
 	isMovingSelection = YES;
-	id canvas = [controller canvas];
+	PXCanvas *canvas = [controller canvas];
 	selectedRect = [canvas selectedRect]; // O(N)
 	lastSelectedRect = selectedRect;
 	selectionOrigin = selectedRect.origin;

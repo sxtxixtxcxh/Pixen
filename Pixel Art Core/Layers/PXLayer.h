@@ -31,7 +31,7 @@
 @class PXLayerController, PXCanvas;
 @interface PXLayer : NSObject <NSCoding, NSCopying> {
   @private
-	id name;
+	NSString *name;
 	PXImage *image;
 	CGFloat opacity;
 	BOOL visible;
@@ -47,6 +47,7 @@
 	PXCanvas *canvas;
 }
 
+@property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) CGFloat opacity;
 
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image origin:(NSPoint)origin size:(NSSize)sz;
@@ -55,8 +56,7 @@
 - (id) initWithName:(NSString *)aName image:(PXImage *)anImage;
 - (id)initWithName:(NSString *)aName size:(NSSize)size;
 - initWithName:(NSString *)aName size:(NSSize)size fillWithColor:(NSColor *)c;
-- (NSString *)name;
-- (void)setName:(NSString *) aName;
+
 - (PXImage *)image;
 //- (void)setUndoManager:(NSUndoManager *)man;
 - (NSSize)size;

@@ -41,7 +41,7 @@
 
 - layerNamed:aName
 {
-	for (id current in layers)
+	for (PXLayer *current in layers)
 	{
 		if ([[current name] isEqualToString:aName])
 		{

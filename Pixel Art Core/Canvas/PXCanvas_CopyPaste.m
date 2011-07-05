@@ -75,7 +75,7 @@
 		[layer setSize:[self size]];
 	}
 	else if([type isEqualToString:PXNSImagePboardType]) {
-		id image = [[[NSImage alloc] initWithPasteboard:board] autorelease];
+		NSImage *image = [[[NSImage alloc] initWithPasteboard:board] autorelease];
 		if(![self canContinuePasteOf:NSLocalizedString(@"image", @"image") size:[image size]]) { return nil; }
 		NSPoint origin;
 		if (![board stringForType:PXSelectionOriginPboardType])

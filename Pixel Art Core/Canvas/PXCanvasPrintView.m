@@ -27,7 +27,9 @@
 //
 
 #import "PXCanvasPrintView.h"
+
 #import "PXCanvas.h"
+#import "PXCanvas_Drawing.h"
 
 @implementation PXCanvasPrintView
 

@@ -220,7 +220,7 @@ BOOL isPowerOfTwo(int num)
 		{
 			if ([[board types] containsObject:type])
 			{
-				id image = [[[NSImage alloc] initWithPasteboard:board] autorelease];
+				NSImage *image = [[[NSImage alloc] initWithPasteboard:board] autorelease];
 				[canvas setSize:NSMakeSize(ceilf([image size].width), 
                                    ceilf([image size].height))];
 				[canvas pasteFromPasteboard:board type:PXNSImagePboardType];

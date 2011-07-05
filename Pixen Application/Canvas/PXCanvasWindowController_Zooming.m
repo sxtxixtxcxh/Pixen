@@ -69,7 +69,7 @@
 	
 	if( ! [[zoomPercentageBox objectValues] containsObject:percentage])
 	{
-		id values = [NSMutableArray arrayWithArray:[zoomPercentageBox objectValues]];
+		NSMutableArray *values = [NSMutableArray arrayWithArray:[zoomPercentageBox objectValues]];
 		[values addObject:percentage];
 		[values sortUsingSelector:@selector(compare:)];
 		[zoomPercentageBox removeAllItems];

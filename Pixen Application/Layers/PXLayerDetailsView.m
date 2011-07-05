@@ -228,11 +228,11 @@
 - (BOOL)validateMenuItem:(NSMenuItem *)anItem
 {
 	if ([anItem action] == @selector(mergeDown:)) {
-		id layers = [[layerController canvas] layers];
+		NSArray *layers = [[layerController canvas] layers];
 		return [layers count] > 1 && [layers objectAtIndex:0] != layer;
 	}
 	else if ([anItem action] == @selector(cutLayer:) || [anItem action] == @selector(delete:)) {
-		id layers = [[layerController canvas] layers];
+		NSArray *layers = [[layerController canvas] layers];
 		return [layers count] > 1;
 	}
 	

@@ -37,7 +37,7 @@
 
 - (NSImage *)previewImageOfSize:(NSSize)size
 {
-	id result = [[[NSImage alloc] initWithSize:size] autorelease];
+	NSImage *result = [[[NSImage alloc] initWithSize:size] autorelease];
 	[result lockFocus];
 	[self.color set];
 	NSRectFill(NSMakeRect(0, 0, size.width, size.height));
@@ -80,7 +80,7 @@
 
 - (IBAction)configuratorBrowseForImageButtonClicked:(id)sender
 {
-	id panel = [NSOpenPanel openPanel];
+	NSOpenPanel *panel = [NSOpenPanel openPanel];
 	// fixed!  I'm reading the document types directly from the Info.plist, though...
 	NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
 	NSArray *documentTypes = [infoDictionary objectForKey:CFBundleDocumentTypesKey];

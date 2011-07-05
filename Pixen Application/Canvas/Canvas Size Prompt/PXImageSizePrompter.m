@@ -95,7 +95,7 @@
 {
 //	[self willChangeValueForKey:@"backgroundColor"];
 	[c retain];
-	id oldColor = backgroundColor;
+	NSColor *oldColor = backgroundColor;
 	backgroundColor = c;
 	[oldColor autorelease];
 	[image release]; image = nil;

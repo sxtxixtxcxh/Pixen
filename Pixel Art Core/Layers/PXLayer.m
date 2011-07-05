@@ -34,7 +34,7 @@
 
 @implementation PXLayer
 
-@synthesize opacity;
+@synthesize name, opacity;
 
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image origin:(NSPoint)origin size:(NSSize)sz
 {
@@ -107,17 +107,6 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	PXImage_release(image);
 	[super dealloc];
-}
-
--(NSString *) name
-{
-	return name;
-}
-
-- (void)setName:(NSString *)aName
-{
-	[name release];
-	name = [aName copy];
 }
 
 - (PXImage *)image

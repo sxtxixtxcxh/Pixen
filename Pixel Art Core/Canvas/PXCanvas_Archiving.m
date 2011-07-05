@@ -40,7 +40,7 @@
 		}
 		
 		layers = [[coder decodeObjectForKey:@"layers"] retain];
-		for (id current in layers)
+		for (PXLayer *current in layers)
 		{
 			[current setCanvas:self];
 		}

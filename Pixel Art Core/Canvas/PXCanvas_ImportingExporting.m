@@ -56,7 +56,7 @@
 {
 	NSImageRep *firstRep = [[anImage representations] objectAtIndex:0];
 	NSSize newSize = NSMakeSize((int)[firstRep pixelsWide], (int)[firstRep pixelsHigh]);
-	for (id current in layers)
+	for (PXLayer *current in layers)
 	{
 		[current setSize:newSize withOrigin:NSZeroPoint backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
 	}
