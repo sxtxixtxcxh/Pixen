@@ -441,13 +441,13 @@ NSString *PXPalette_name(PXPalette *self)
 
 void PXPalette_setName(PXPalette *self, NSString *name)
 {
-	if([name isEqual:self->name])
+	if ([name isEqual:self->name])
 	{
 		PXPalette_saveChanges(self);
 		return;
 	}
 	id oldName = [self->name autorelease];
-	if(self->canSave && [[NSFileManager defaultManager] fileExistsAtPath:[[GetPixenPaletteDirectory() stringByAppendingPathComponent:name] stringByAppendingPathExtension:PXPaletteSuffix]])
+	if (self->canSave && [[NSFileManager defaultManager] fileExistsAtPath:[[GetPixenPaletteDirectory() stringByAppendingPathComponent:name] stringByAppendingPathExtension:PXPaletteSuffix]])
 	{
 		NSString *name = self->name;
 		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
@@ -463,14 +463,14 @@ void PXPalette_setName(PXPalette *self, NSString *name)
 	}
 	self->name = [name retain];
 	PXPalette_saveChanges(self);
-	if(self->canSave)
+	if (self->canSave && [oldName length] > 0)
 	{
-    NSString *path=[[GetPixenPaletteDirectory() stringByAppendingPathComponent:oldName] stringByAppendingPathExtension:PXPaletteSuffix];
-    NSError *err=nil;
+		NSString *path=[[GetPixenPaletteDirectory() stringByAppendingPathComponent:oldName] stringByAppendingPathExtension:PXPaletteSuffix];
+		NSError *err=nil;
 		if(![[NSFileManager defaultManager] removeItemAtPath:path error:&err])
-    {
-      [[NSDocumentController sharedDocumentController] presentError:err];
-    }
+		{
+			[[NSDocumentController sharedDocumentController] presentError:err];
+		}
 	}
 }
 
