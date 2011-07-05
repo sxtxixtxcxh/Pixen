@@ -186,7 +186,7 @@
 		centeredRect.size.width /= aspectRatio;
 		centeredRect.origin.x += ((NSWidth([imageView bounds]) - 10) - NSWidth(centeredRect)) / 2.0;
 	}
-	id backgroundImage = [[[background previewImageOfSize:[imageView bounds].size] copy] autorelease];
+	NSImage *backgroundImage = [[[background previewImageOfSize:[imageView bounds].size] copy] autorelease];
 	[backgroundImage lockFocus];
 	[previewImage drawInRect:centeredRect fromRect:NSMakeRect(0, 0, [previewImage size].width, [previewImage size].height) operation:NSCompositeSourceOver fraction:1];
 	[backgroundImage unlockFocus];

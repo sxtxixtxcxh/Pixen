@@ -140,7 +140,7 @@
 
 - (void)performCopyMergingLayers:(BOOL)merge
 {
-	id board = [NSPasteboard generalPasteboard];
+	NSPasteboard *board = [NSPasteboard generalPasteboard];
 	[board declareTypes:[NSArray arrayWithObjects:NSTIFFPboardType, PXSelectionOriginPboardType, nil] owner:self];	
 	if(! [[board types] containsObject:NSTIFFPboardType]) 
   { 

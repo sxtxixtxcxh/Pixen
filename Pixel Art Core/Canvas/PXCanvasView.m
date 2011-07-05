@@ -189,13 +189,13 @@ void PXDebugRect(NSRect r, float alpha)
 
 - (NSPoint)convertFromCanvasToViewPoint:(NSPoint)point
 {
-	id transformation = [self setupTransform];
+	NSAffineTransform *transformation = [self setupTransform];
 	return [transformation transformPoint:point];
 }
 
 - (NSRect)convertFromCanvasToViewRect:(NSRect)rect
 {
-	id transformation = [self setupTransform];
+	NSAffineTransform *transformation = [self setupTransform];
 	NSPoint origin = [transformation transformPoint:rect.origin];
 	NSSize size = [transformation transformSize:rect.size];
 	return NSMakeRect(origin.x, origin.y, size.width, size.height);
@@ -203,7 +203,7 @@ void PXDebugRect(NSRect r, float alpha)
 
 - (NSPoint)convertFromViewToPartialCanvasPoint:(NSPoint)point
 {
-	id transformation = [self setupTransform];
+	NSAffineTransform *transformation = [self setupTransform];
 	[transformation invert];
 	return [transformation transformPoint:point];
 }
@@ -234,7 +234,7 @@ void PXDebugRect(NSRect r, float alpha)
 
 - (NSRect)convertFromViewToCanvasRect:(NSRect)viewRect
 {
-	id transformation = [self setupTransform];
+	NSAffineTransform *transformation = [self setupTransform];
 	[transformation invert];
 	NSRect rect;
 	rect.origin = [self convertFromViewToPartialCanvasPoint:viewRect.origin];
@@ -738,7 +738,7 @@ void PXDebugRect(NSRect r, float alpha)
 
 - (NSAffineTransform *)setupScaleTransform
 {
-	id transformation = [NSAffineTransform transform];
+	NSAffineTransform *transformation = [NSAffineTransform transform];
 	
 	[transformation scaleBy:zoomPercentage/100.0f];
 	return transformation;	

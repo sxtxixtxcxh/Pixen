@@ -152,10 +152,10 @@ BOOL isPowerOfTwo(int num)
 	
 	if ([aType isEqualToString:GIFFileType])
 	{
-		id exportCanvas = [canvas copy];
+		PXCanvas *exportCanvas = [canvas copy];
 		[exportCanvas reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
 		
-		id exporter = [[PXAnimatedGifExporter alloc] initWithSize:[canvas size] iterations:1];
+		PXAnimatedGifExporter *exporter = [[PXAnimatedGifExporter alloc] initWithSize:[canvas size] iterations:1];
 		[exporter writeCanvas:exportCanvas withDuration:0 transparentColor:nil];
 		[exporter finalizeExport];
 		[exportCanvas release];

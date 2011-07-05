@@ -267,11 +267,11 @@ backgroundColor:(NSColor *)color
 	if([layers count] > 0)
 	{
 		[self beginUndoGrouping]; {
-			id newData = [NSData dataWithBytes:newMask length:newMaskLength];
-			id oldData = [NSData dataWithBytes:selectionMask length:[self selectionMaskSize]];
+			NSData *newData = [NSData dataWithBytes:newMask length:newMaskLength];
+			NSData *oldData = [NSData dataWithBytes:selectionMask length:[self selectionMaskSize]];
 			
 			[self setLayersNoResize:[[layers deepMutableCopy] autorelease] fromLayers:layers];
-			for (id current in layers)
+			for (PXLayer *current in layers)
 			{
 				[current setSize:aSize withOrigin:origin backgroundColor:color];
 			}
@@ -346,10 +346,10 @@ backgroundColor:(NSColor *)color
 - (PXPalette *)createFrequencyPalette
 {
 	PXPalette *freqPal = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
-  NSSize sz = [self size];
-  float w = sz.width;
-  float h = sz.height;
-  NSCountedSet *colors = [NSCountedSet set];
+	NSSize sz = [self size];
+	float w = sz.width;
+	float h = sz.height;
+	NSCountedSet *colors = [NSCountedSet set];
 	for (PXLayer * current in layers)
 	{
 		int i;
@@ -358,16 +358,16 @@ backgroundColor:(NSColor *)color
 			int j;
 			for (j = 0; j < h; j++)
 			{
-				id color = [current colorAtPoint:NSMakePoint(i, j)];
-        [colors addObject:color];
+				NSColor *color = [current colorAtPoint:NSMakePoint(i, j)];
+				[colors addObject:color];
 			}
 		}
 	}
-  for(NSColor *c in colors)
-  {
-    PXPalette_incrementColorCount(freqPal, c, [colors countForObject:c]);
-  }
-  return freqPal;
+	for(NSColor *c in colors)
+	{
+		PXPalette_incrementColorCount(freqPal, c, [colors countForObject:c]);
+	}
+	return freqPal;
 }
 
 @end

@@ -70,7 +70,7 @@
 - (void)drawCapsuleInRect:(NSRect)rect withFillColor:(NSColor *)fillColor outlineColor:(NSColor *)outlineColor
 {
 	NSRect frame = rect;
-	id path = [NSBezierPath bezierPath];
+	NSBezierPath *path = [NSBezierPath bezierPath];
 	// is this correct?
 	[path appendBezierPathWithOvalInRect:NSInsetRect(NSMakeRect(NSMinX(frame), NSMinY(frame), NSHeight(frame), NSHeight(frame)), 1, 1)];
 	[path appendBezierPathWithOvalInRect:NSInsetRect(NSMakeRect(NSMaxX(frame) - NSHeight(frame), NSMinY(frame), NSHeight(frame), NSHeight(frame)), 1, 1)];
@@ -88,7 +88,7 @@
 }
 
 - (void)drawRect:(NSRect)rect {
-	id path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(1, 1, 100, 100) cornerRadius:7];
+	NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(1, 1, 100, 100) cornerRadius:7];
 	[[[NSColor lightGrayColor] colorWithAlphaComponent:alpha*.75] set];
 	[path fill];
 	[[[NSColor darkGrayColor] colorWithAlphaComponent:alpha] set];

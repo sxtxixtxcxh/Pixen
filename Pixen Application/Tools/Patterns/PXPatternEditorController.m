@@ -35,6 +35,7 @@
 
 @implementation PXPatternEditorController
 
+@synthesize toolName;
 
 - (void)setDelegate:del
 {
@@ -78,13 +79,6 @@
 	newSize.width = viewSize.width;
 	newSize.height = NSHeight([sender frame]) + (viewSize.width - NSWidth([sender frame]));
 	return newSize;
-}
-
-
-- (void)setToolName:name
-{
-	[toolName autorelease];
-	toolName = [name copy];
 }
 
 - (void)windowDidLoad

@@ -88,7 +88,7 @@
   fromCanvasController:(PXCanvasController *)controller
 {
 	if(![[controller canvas] containsPoint:aPoint]) { return; }
-	id usedSwitcher;
+	PXToolSwitcher *usedSwitcher;
 	
 	if ([EYE_PC buttonType] == PXLeftButtonTool)
 		usedSwitcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];

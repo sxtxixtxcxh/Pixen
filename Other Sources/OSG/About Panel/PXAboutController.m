@@ -75,7 +75,7 @@
 
 - (void)loadCreditsText
 {
-	id linkString = [NSString stringWithFormat:@"<a href=\"http://www.opensword.org/license.php\">MIT License</a>"];
+	NSString *linkString = [NSString stringWithFormat:@"<a href=\"http://www.opensword.org/license.php\">MIT License</a>"];
 	
 	NSString *creditsPath = [[NSBundle mainBundle] pathForResource:@"Credits" ofType:@"html"];
 	NSError *error=nil;
@@ -100,7 +100,7 @@
 
 - (void)createPanel
 {
-	id content;
+	NSView *content;
 	aboutPanel = [[PXAboutPanel alloc]
 		 initWithContentRect:[ (NSView *) [panelInNib contentView] frame]
 				   styleMask:NSBorderlessWindowMask

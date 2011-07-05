@@ -59,7 +59,7 @@
 	float scale = [[[printInfo dictionary] objectForKey:NSPrintScalingFactor] 
 		floatValue];
 	
-	id transform = [NSAffineTransform transform];
+	NSAffineTransform *transform = [NSAffineTransform transform];
 	[transform scaleXBy:scale yBy:scale];
 	[transform concat];
 	[canvas drawRect:rect];

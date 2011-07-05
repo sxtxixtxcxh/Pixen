@@ -444,7 +444,7 @@
 {
 	if (code == NSCancelButton) { return; }
 	[panel orderOut:self];
-	id exporter = [[OSQTExporter alloc] init];
+	OSQTExporter *exporter = [[OSQTExporter alloc] init];
 	NSInteger celCount = [animation countOfCels];
 	NSInteger i;
 	for (i = 0; i < celCount; i++)
@@ -481,7 +481,7 @@
 {
 	if ([shouldScale boolValue])
 	{
-		id currentCanvas = [activeCel canvas];
+		PXCanvas *currentCanvas = [activeCel canvas];
 		NSInteger celCount = [animation countOfCels];
 		NSInteger i;
 		for (i = 0; i < celCount; i++)

@@ -36,7 +36,7 @@
 {
   @private
 	NSSize unitSize;
-	id color;
+	NSColor *color;
 	BOOL shouldDraw;
 }
 

@@ -56,7 +56,7 @@ const int PXBMPColorCountPosition = 46;
 	colorCount += (bitmapData[PXBMPColorCountPosition + 3] * 256 * 256 * 256);
 	if (colorCount == 0) { colorCount = 256; }
 	
-	id colorArray = [NSMutableArray array];
+	NSMutableArray *colorArray = [NSMutableArray array];
 	int i;
 	for (i = 0; i < colorCount; i++)
 	{

@@ -15,7 +15,7 @@
 {
   @private
 	GifFileType * gifFile;
-	id finalData;
+	NSData *finalData;
 	int iterations;
 	
 	BOOL firstImage;

@@ -9,12 +9,12 @@
 #import <AppKit/NSResponder.h>
 #import <AppKit/NSNibDeclarations.h>
 
-@class NSTextField, NSTextView;
+@class NSTextField, NSTextView, PXAboutPanel;
 
-@interface PXAboutController : NSResponder 
+@interface PXAboutController : NSResponder < NSWindowDelegate >
 {
   @private
-	id aboutPanel;
+	PXAboutPanel *aboutPanel;
 	NSPanel *panelInNib;
 	IBOutlet NSTextView *credits;
 	IBOutlet NSTextField *version;

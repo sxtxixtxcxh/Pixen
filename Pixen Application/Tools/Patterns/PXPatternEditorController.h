@@ -33,7 +33,7 @@
   @private
 	PXPattern *pattern;
 	PXPattern *oldPattern;
-	id toolName;
+	NSString *toolName;
 	IBOutlet PXPatternEditorView *view;
 	IBOutlet NSDrawer *drawer;
 	IBOutlet NSScrollView *scrollView;
@@ -41,7 +41,7 @@
 	id delegate;
 }
 
-- (void)setToolName:name;
+@property (nonatomic, copy) NSString *toolName;
 
 - (void)setDelegate:del;
 - (void)setPattern:(PXPattern *)pattern;

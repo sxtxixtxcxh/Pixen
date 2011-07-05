@@ -83,7 +83,7 @@
 
 - (void)awakeFromNib
 {
-	id paletteView = [paletteController view];
+	NSView *paletteView = [paletteController view];
 	[paletteSplit addSubview:paletteView];
 	[canvasController setLayerController:layerController];
 	[layerController setSubview:layerSplit];
