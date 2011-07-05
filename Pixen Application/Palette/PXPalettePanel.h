@@ -11,7 +11,7 @@
 
 @class PXPaletteView, PXPaletteViewController;
 
-@interface PXPalettePanel : NSPanel < NSWindowDelegate > {
+@interface PXPalettePanel : NSPanel {
   @private
 	PXPaletteViewController *_vc;
 }

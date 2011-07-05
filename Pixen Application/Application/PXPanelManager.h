@@ -35,7 +35,7 @@
 
 @class NSPanel;
 
-@interface PXPanelManager : NSObject 
+@interface PXPanelManager : NSObject < NSWindowDelegate >
 {
   @private
 	NSMutableArray *_palettePanels;

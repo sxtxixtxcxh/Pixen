@@ -49,7 +49,6 @@
 								defer:NO];
 	
 	[self setBecomesKeyOnlyIfNeeded:YES];
-	[self setDelegate:self];
 	
 	_vc = [[PXPaletteViewController alloc] init];
 	[_vc setDelegate:self];
@@ -60,12 +59,6 @@
 	[_vc reloadDataAndShow:palette];
 	
 	return self;
-}
-
-- (void)windowWillClose:(NSNotification *)notification {
-	[[PXPanelManager sharedManager] performSelector:@selector(removePalettePanel:)
-										 withObject:self
-										 afterDelay:0.0f];
 }
 
 - (void)dealloc

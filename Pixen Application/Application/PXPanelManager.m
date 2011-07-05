@@ -228,6 +228,24 @@ static PXPanelManager *sharedManager = nil;
 - (void)addPalettePanel:(NSPanel *)panel
 {
 	[_palettePanels addObject:panel];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(windowWillClose:)
+												 name:NSWindowWillCloseNotification
+											   object:panel];
+}
+
+- (void)windowWillClose:(NSNotification *)notification
+{
+	PXPalettePanel *panel = [notification object];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:NSWindowWillCloseNotification
+												  object:panel];
+	
+	[self performSelector:@selector(removePalettePanel:)
+			   withObject:panel
+			   afterDelay:1.0f];
 }
 
 - (void)removePalettePanel:(NSPanel *)panel
@@ -318,7 +336,7 @@ static PXPanelManager *sharedManager = nil;
 
 - (IBAction)showPreferences: (id)sender
 {
-	[self show:[self preferencesPanel]];
+	[[PXPreferencesController sharedPreferencesController] showWindow:nil];
 }
 
 - (IBAction)showInfo: (id)sender
