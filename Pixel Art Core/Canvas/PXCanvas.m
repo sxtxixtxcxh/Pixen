@@ -297,7 +297,7 @@ backgroundColor:(NSColor *)color
 
 - (void)setSize:(NSSize)aSize
 {
-	NSColor *color = [NSColor colorWithDeviceRed:0 green:0 blue:0 alpha:0];
+	NSColor *color = [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0];
 	
 	[self setSize:aSize
 	   withOrigin:NSZeroPoint 
@@ -340,7 +340,7 @@ backgroundColor:(NSColor *)color
 	{
 		return PXImage_backgroundColor([(PXLayer *)[layers objectAtIndex:0] image]);
 	}
-	return [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+	return [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 }
 
 - (PXPalette *)createFrequencyPalette

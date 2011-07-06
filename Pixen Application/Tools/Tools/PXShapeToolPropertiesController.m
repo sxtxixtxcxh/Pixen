@@ -39,7 +39,7 @@
 	self = [super init];
 	self.shouldUseMainColorForFill = YES;
 	self.borderWidth = 1;
-	self.fillColor = [[NSColor blackColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+	self.fillColor = [[NSColor blackColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 	return self;
 }
 

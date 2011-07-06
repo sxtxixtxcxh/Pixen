@@ -514,7 +514,7 @@ didFinishWithSize:(NSSize)aSize
 {
 	NSRect selectedRect = [self.canvas selectedRect];
 	[[[self document] undoManager] beginUndoGrouping];
-	[animation setSize:selectedRect.size withOrigin:NSMakePoint(NSMinX(selectedRect) * -1, NSMinY(selectedRect) * -1) backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
+	[animation setSize:selectedRect.size withOrigin:NSMakePoint(NSMinX(selectedRect) * -1, NSMinY(selectedRect) * -1) backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
 	[self.canvas deselect];
 	[[[self document] undoManager] endUndoGrouping];
 }

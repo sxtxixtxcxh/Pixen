@@ -47,7 +47,7 @@
 	if (self != nil) {
 		path = [[NSBezierPath bezierPath] retain];
 		wrappedPath = [[NSBezierPath bezierPath] retain];
-		color = [[[NSColor blackColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace] retain];
+		color = [[[NSColor blackColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace] retain];
 	}
 	return self;
 }

@@ -58,7 +58,7 @@
 	NSSize newSize = NSMakeSize((int)[firstRep pixelsWide], (int)[firstRep pixelsHigh]);
 	for (PXLayer *current in layers)
 	{
-		[current setSize:newSize withOrigin:NSZeroPoint backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
+		[current setSize:newSize withOrigin:NSZeroPoint backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
 	}
 	free(selectionMask);
 	selectionMask = calloc(newSize.width * newSize.height, sizeof(BOOL));
@@ -133,7 +133,7 @@
 	
 	[imageCopy unlockFocus];
 	//this probably won't do any good... but there aren't any reps before the above execute.  Replace with ImageIO!
-	[[[imageCopy representations] objectAtIndex:0] setColorSpaceName:NSDeviceRGBColorSpace];
+	// [[[imageCopy representations] objectAtIndex:0] setColorSpaceName:NSDeviceRGBColorSpace];
 	return [imageCopy autorelease];	
 }
 

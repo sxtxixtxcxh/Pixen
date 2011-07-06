@@ -95,7 +95,7 @@ NSMutableArray * toolNames;
 	}
 	
 	[tools makeObjectsPerformSelector:@selector(setSwitcher:) withObject:self];
-	[self setColor:[[NSColor blackColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
+	[self setColor:[[NSColor blackColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
 	[self useToolTagged:PXPencilToolTag];
 	
 	_locked = NO;
@@ -214,10 +214,9 @@ NSMutableArray * toolNames;
 - (void)setColor:(NSColor *)col
 {
 	//FIXME: coupled
-	NSColor *aColor = [col colorUsingColorSpaceName:NSDeviceRGBColorSpace];
-	[aColor retain];
+	[col retain];
 	[_color release];
-	_color = aColor;
+	_color = col;
 	
 	for (id current in tools)
 	{

@@ -240,7 +240,9 @@
 - (IBAction)addLayer:(id)sender
 {
 	layersCreated++;
-	PXLayer *layer =[[PXLayer alloc] initWithName:[NSString stringWithFormat:NSLocalizedString(@"New Layer %d", @"New Layer %d"), layersCreated] size:[canvas size] fillWithColor:[[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
+	PXLayer *layer =[[PXLayer alloc] initWithName:[NSString stringWithFormat:NSLocalizedString(@"New Layer %d", @"New Layer %d"), layersCreated]
+											 size:[canvas size]
+									fillWithColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
 	
 	//[[[self document] undoManager] beginUndoGrouping];
 	[canvas addLayer:layer];

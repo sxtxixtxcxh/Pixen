@@ -177,7 +177,7 @@
 {
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
-	[[NSColorPanel sharedColorPanel] setColor:[[NSColor blackColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
+	[[NSColorPanel sharedColorPanel] setColor:[[NSColor blackColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
 	//[(NSPanel *)[self window] setBecomesKeyOnlyIfNeeded:YES];
 	
 	[leftSwitcher useToolTagged:PXPencilToolTag];

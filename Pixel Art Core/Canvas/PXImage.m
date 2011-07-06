@@ -33,11 +33,11 @@ int PXTileBitsPerComponent = 8;
 int PXTileComponentsPerPixel = 4;
 int PXTileDimension = 256;
 
-PXTile* PXTileCreate(CGPoint loc, CGSize size, CGColorSpaceRef colorspace, unsigned char *data);
+PXTile* PXTileCreate(CGPoint loc, CGSize size, unsigned char *data);
 void PXTileRelease(PXTile* t);
 void PXTileDraw(PXTile* t, CGRect source, CGRect dest);
-CGColorRef PXTileColorAtXY(PXTile *t, int xv, int yv);
-void PXTileSetAtXY(PXTile *t, int xv, int yv, CGColorRef color);
+NSColor *PXTileColorAtXY(PXTile *t, int xv, int yv);
+void PXTileSetAtXY(PXTile *t, int xv, int yv, NSColor *color);
 unsigned int PXTileGetData(PXTile *t, unsigned char **data);
 PXImage *PXImage_alloc(void);
 PXTile *PXImage_tileAtXY(PXImage *self, int xv, int yv);
@@ -45,8 +45,14 @@ void PXImage_swapTiles(PXImage *self, PXImage *other);
 void PXImage_drawRect(PXImage *self, NSRect rect, double opacity);
 
 
-PXTile* PXTileCreate(CGPoint loc, CGSize size, CGColorSpaceRef colorspace, unsigned char *data)
+PXTile* PXTileCreate(CGPoint loc, CGSize size, unsigned char *data)
 {
+	static CGColorSpaceRef colorspace = NULL;
+	
+	if (!colorspace) {
+		colorspace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+	}
+	
 	PXTile *t = calloc(1, sizeof(PXTile));
 	int bytesPerRow = PXTileComponentsPerPixel * size.width;
 	if(data == NULL)
@@ -85,7 +91,7 @@ void PXTileDraw(PXTile* t, CGRect source, CGRect dest)
     CGContextRef target = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
 	CGContextDrawImage(target, dest, t->image);
 }
-CGColorRef PXTileColorAtXY(PXTile *t, int xv, int yv)
+NSColor *PXTileColorAtXY(PXTile *t, int xv, int yv)
 {
 	if(xv < t->location.x || xv >= t->location.x + CGBitmapContextGetWidth(t->painting)) { return NULL; }
 	if(yv < t->location.y || yv >= t->location.y + CGBitmapContextGetHeight(t->painting)) { return NULL; }
@@ -108,9 +114,9 @@ CGColorRef PXTileColorAtXY(PXTile *t, int xv, int yv)
 		a = b = c = 0;
 	}
 	const CGFloat components[4] = {a, b, c, d};
-	return CGColorCreate(CGBitmapContextGetColorSpace(t->painting), components);
+	return [NSColor colorWithColorSpace:[NSColorSpace genericRGBColorSpace] components:components count:4];
 }
-void PXTileSetAtXY(PXTile *t, int xv, int yv, CGColorRef color)
+void PXTileSetAtXY(PXTile *t, int xv, int yv, NSColor *color)
 {
 	if(xv < t->location.x || xv >= t->location.x + CGBitmapContextGetWidth(t->painting)) { return; }
 	if(yv < t->location.y || yv >= t->location.y + CGBitmapContextGetHeight(t->painting)) { return; }
@@ -125,7 +131,8 @@ void PXTileSetAtXY(PXTile *t, int xv, int yv, CGColorRef color)
 	unsigned char *data = CGBitmapContextGetData(t->painting);
 	int bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
 	unsigned startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y)*bytesPerRow+x*PXTileComponentsPerPixel;
-	const CGFloat *components = CGColorGetComponents(color);
+	CGFloat components[4];
+	[color getComponents:components];
 	CGFloat a = components[3];
 	data[startIndex+0] = a*components[0]*255;
 	data[startIndex+1] = a*components[1]*255;
@@ -154,7 +161,6 @@ PXImage *PXImage_init(PXImage *self)
 	self->height = 0;
 	self->tileCount = 0;
 	self->tiles = calloc(1, sizeof(PXTile *));
-	self->colorspace = CGColorSpaceCreateDeviceRGB();
 	return self;
 }
 
@@ -194,7 +200,7 @@ PXImage *PXImage_initWithCoder(PXImage *self, NSCoder *coder)
 		int bytesPerRow = PXTileComponentsPerPixel * PXTileDimension;
 		unsigned char *data = calloc(bytesPerRow*PXTileDimension, 1);
 		memcpy(data, [[current objectForKey:@"data"] bytes], sizeof(unsigned char) * bytesPerRow * PXTileDimension);
-		self->tiles[self->tileCount] = PXTileCreate((*(CGPoint *)&(pt)), CGSizeMake(PXTileDimension, PXTileDimension), self->colorspace, data);
+		self->tiles[self->tileCount] = PXTileCreate((*(CGPoint *)&(pt)), CGSizeMake(PXTileDimension, PXTileDimension), data);
 		self->tileCount++;
 	}
 	return self;
@@ -210,7 +216,6 @@ PXImage *PXImage_initWithSize(PXImage *self, NSSize size)
 
 void PXImage_dealloc(PXImage *self)
 {
-	CGColorSpaceRelease(self->colorspace);
 	if(self->tiles)
 	{
 		unsigned i;
@@ -243,9 +248,7 @@ PXImage *PXImage_copy(PXImage *self)
 		unsigned char *copyBytes = calloc(length, sizeof(unsigned char));
 		memcpy(copyBytes, bytes, length);
 		image->tiles[i] = PXTileCreate(t->location, 
-									   CGSizeMake(PXTileDimension, PXTileDimension), 
-									   self->colorspace, 
-									   copyBytes);
+									   CGSizeMake(PXTileDimension, PXTileDimension), copyBytes);
 	}	
 	return image;
 }
@@ -290,7 +293,7 @@ PXTile *PXImage_tileAtXY(PXImage *self, int xv, int yv)
 	{
 		self->tileCount++;
 		self->tiles = realloc(self->tiles, self->tileCount * sizeof(PXTile*));
-		self->tiles[self->tileCount-1] = PXTileCreate(tileLocation, CGSizeMake(PXTileDimension, PXTileDimension), self->colorspace, NULL);
+		self->tiles[self->tileCount-1] = PXTileCreate(tileLocation, CGSizeMake(PXTileDimension, PXTileDimension), NULL);
 		t = self->tiles[self->tileCount-1];
 	}
 	return t;
@@ -305,19 +308,17 @@ NSColor *PXImage_colorAtIndex(PXImage *self, int loc)
 
 NSColor *PXImage_backgroundColor(PXImage *self)
 {
-	return [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+	return [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 }
 
 NSColor *PXImage_colorAtXY(PXImage *self, int x, int y)
 {
-	CGColorRef c = PXTileColorAtXY(PXImage_tileAtXY(self, x, y), x, y);
-	if(c == NULL)
-	{
+	NSColor *c = PXTileColorAtXY(PXImage_tileAtXY(self, x, y), x, y);
+	
+	if (c == nil)
 		return PXImage_backgroundColor(self);
-	}
-	NSColor *color = [NSColor colorWithColorSpace:[NSColorSpace deviceRGBColorSpace] components:CGColorGetComponents(c) count:CGColorGetNumberOfComponents(c)];
-	CGColorRelease(c);
-	return color;
+	
+	return c;
 }
 
 void PXImage_setColorAtIndex(PXImage *self, NSColor *c, unsigned loc)
@@ -330,11 +331,9 @@ void PXImage_setColorAtIndex(PXImage *self, NSColor *c, unsigned loc)
 void PXImage_setColorAtXY(PXImage *self, NSColor *color, int xv, int yv)
 {
 	PXTile *t = PXImage_tileAtXY(self, xv, yv);
-	CGFloat components[4];
-	[[color colorUsingColorSpaceName:NSDeviceRGBColorSpace] getComponents:components];
-	CGColorRef c = CGColorCreate(self->colorspace, components);
+	
+	NSColor *c = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 	PXTileSetAtXY(t, xv, yv, c);
-	CGColorRelease(c);
 }
 
 void PXImage_flipHorizontally(PXImage *self)
@@ -548,8 +547,8 @@ void PXImage_drawInRectFromRectWithOperationFraction(PXImage *self, NSRect dst, 
 
 NSColor * PXImage_blendColors(PXImage * self, NSColor * bottomColor, NSColor * topColor)
 {
-	bottomColor = [bottomColor colorUsingColorSpaceName:NSDeviceRGBColorSpace];
-	topColor = [topColor colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+	bottomColor = [bottomColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	topColor = [topColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 	float compositeRedComponent;
 	float compositeGreenComponent;
 	float compositeBlueComponent;
@@ -565,14 +564,14 @@ NSColor * PXImage_blendColors(PXImage * self, NSColor * bottomColor, NSColor * t
 	compositeAlphaComponent = topAlphaComponent + bottomAlphaComponent - (topAlphaComponent * bottomAlphaComponent);
 	if(compositeAlphaComponent == 0)
 	{
-		return [NSColor colorWithDeviceRed:0 green:0 blue:0 alpha:0];
+		return [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0];
 	}
 	else
 	{	
 		compositeRedComponent = bottomRedComponent + ((topRedComponent - bottomRedComponent) * (topAlphaComponent / compositeAlphaComponent));
 		compositeBlueComponent = bottomBlueComponent + ((topBlueComponent - bottomBlueComponent) * (topAlphaComponent / compositeAlphaComponent));
 		compositeGreenComponent = bottomGreenComponent + ((topGreenComponent - bottomGreenComponent) * (topAlphaComponent / compositeAlphaComponent));
-		return [NSColor colorWithDeviceRed:compositeRedComponent green:compositeGreenComponent blue:compositeBlueComponent alpha:compositeAlphaComponent];
+		return [NSColor colorWithCalibratedRed:compositeRedComponent green:compositeGreenComponent blue:compositeBlueComponent alpha:compositeAlphaComponent];
 	}	
 }
 
@@ -633,7 +632,7 @@ NSImage *PXImage_bitmapImage(PXImage *self)
 														  samplesPerPixel:4 
 																 hasAlpha:YES 
 																 isPlanar:NO 
-														   colorSpaceName:NSDeviceRGBColorSpace 
+														   colorSpaceName:NSCalibratedRGBColorSpace 
 															  bytesPerRow:self->width * 4 
 															 bitsPerPixel:32] autorelease];
 		[nsimage removeRepresentation:rep];
