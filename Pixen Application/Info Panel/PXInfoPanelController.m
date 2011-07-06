@@ -83,19 +83,19 @@
 {
 	if (color)
 	{
-		if ([color colorSpaceName] != NSDeviceRGBColorSpace)
-			color = [color colorUsingColorSpaceName:NSDeviceRGBColorSpace]; 
+		//if ([color colorSpaceName] != NSCalibratedRGBColorSpace)
+		color = [color colorUsingColorSpaceName:NSDeviceRGBColorSpace]; 
 				
 		[red setStringValue:
-			[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"RED", @"Red"), (int)([color redComponent] * 255)]];
+			[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"RED", @"Red"), (int) roundf([color redComponent] * 255)]];
 		[green setStringValue:
-			[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"GREEN", @"Green"), (int)([color greenComponent] * 255)]];
+			[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"GREEN", @"Green"), (int) roundf([color greenComponent] * 255)]];
 		[blue setStringValue:
-			[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"BLUE", @"Blue"), (int)([color blueComponent] * 255)]];
+			[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"BLUE", @"Blue"), (int) roundf([color blueComponent] * 255)]];
 		[alpha setStringValue:
-			[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"ALPHA", @"Alpha"), (int)([color alphaComponent] * 255)]];
+			[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"ALPHA", @"Alpha"), (int) roundf([color alphaComponent] * 255)]];
 		[hex setStringValue:
-			[NSString stringWithFormat:@"%@: #%02X%02X%02X", NSLocalizedString(@"Hex", @"Hex"), (int)([color redComponent] * 255), (int)([color greenComponent] * 255), (int)([color blueComponent] * 255)]];
+			[NSString stringWithFormat:@"%@: #%02X%02X%02X", NSLocalizedString(@"Hex", @"Hex"), (int) roundf([color redComponent] * 255), (int) roundf([color greenComponent] * 255), (int) roundf([color blueComponent] * 255)]];
 	}
 	else
 	{

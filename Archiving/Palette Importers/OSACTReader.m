@@ -54,7 +54,7 @@
 		green = bytes[i * 3 + 1];
 		blue = bytes[i * 3 + 2];
 		// There's a bunch of black at the end of the file to pad it to 768 bytes; if we already have a black color in our palette and we find another black, it means that the file is over.
-		if ((red == 0) && (green == 0) && (blue == 0) && PXPalette_bucketForColor(palette, [[NSColor blackColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]))
+		if ((red == 0) && (green == 0) && (blue == 0) && PXPalette_bucketForColor(palette, [[NSColor blackColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]))
 		{
 			// If the rest of the file is black, break.
 			int j = 0;
@@ -70,7 +70,7 @@
 			if (shouldBreak)
 				break;
 		}
-		PXPalette_addColor(palette, [NSColor colorWithDeviceRed:red / 255.0 green:green / 255.0 blue:blue / 255.0 alpha:1]);
+		PXPalette_addColor(palette, [NSColor colorWithCalibratedRed:red / 255.0 green:green / 255.0 blue:blue / 255.0 alpha:1]);
 	}
 	return palette;
 }

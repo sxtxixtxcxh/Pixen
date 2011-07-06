@@ -113,7 +113,7 @@ const int viewMargin = 1;
 				if (index >= (PXPalette_colorCount(palette))) { break; }
 				int paletteIndex = index;
 				[colorCell setIndex:paletteIndex];
-				NSColor *color = [NSColor colorWithDeviceRed:0 green:0 blue:0 alpha:0];
+				NSColor *color = [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0];
 				if(paletteIndex != -1)
 				{
 					color = colors[paletteIndex].color;

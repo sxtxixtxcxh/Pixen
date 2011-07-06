@@ -53,7 +53,7 @@
 		float red = bytes[24 + (i * 4) + 0] / 255.0;
 		float green = bytes[24 + (i * 4) + 1] / 255.0;
 		float blue = bytes[24 + (i * 4) + 2] / 255.0;
-		PXPalette_addColor(palette, [NSColor colorWithDeviceRed:red green:green blue:blue alpha:1]);
+		PXPalette_addColor(palette, [NSColor colorWithCalibratedRed:red green:green blue:blue alpha:1]);
 	}
 	return palette;
 }

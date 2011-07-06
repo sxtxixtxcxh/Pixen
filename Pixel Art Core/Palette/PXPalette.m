@@ -113,9 +113,9 @@ void PXPalette_removeBucketForColor(PXPalette *self, NSColor *color)
 
 NSColor *_PXPalette_correctColor(NSColor *color)
 {
-	NSColor *colorToCheck = [color colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+	NSColor *colorToCheck = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 	if ([colorToCheck alphaComponent] == 0) {
-		colorToCheck = [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]; // so we don't get lots of clear colors
+		colorToCheck = [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]; // so we don't get lots of clear colors
 	}
 	return colorToCheck;
 }
@@ -194,25 +194,25 @@ NSArray *CreateGrayList()
 	//Maybe we can factor these into a series of function calls?
 	for (i=0; i<64; i++) {
 		rgb = (float)i / 64.0;
-		color = [NSColor colorWithDeviceRed:rgb green:rgb blue:rgb alpha:alpha];
+		color = [NSColor colorWithCalibratedRed:rgb green:rgb blue:rgb alpha:alpha];
 		[grays addObject:color];
 	}
 	rgb = 0;
 	for (i=0; i<64; i++) {
 		alpha = log2(64 - i) * 0.1667;
-		color = [NSColor colorWithDeviceRed:rgb green:rgb blue:rgb alpha:alpha];
+		color = [NSColor colorWithCalibratedRed:rgb green:rgb blue:rgb alpha:alpha];
 		[grays addObject:color];
 	}
 	rgb = .5;
 	for (i=0; i<64; i++) {
 		alpha = log2(64 - i) * 0.1667;
-		color = [NSColor colorWithDeviceRed:rgb green:rgb blue:rgb alpha:alpha];
+		color = [NSColor colorWithCalibratedRed:rgb green:rgb blue:rgb alpha:alpha];
 		[grays addObject:color];
 	}
 	rgb = 1;
 	for (i=0; i<64; i++) {
 		alpha = log2(64 - i) * 0.1667;
-		color = [NSColor colorWithDeviceRed:rgb green:rgb blue:rgb alpha:alpha];
+		color = [NSColor colorWithCalibratedRed:rgb green:rgb blue:rgb alpha:alpha];
 		[grays addObject:color];
 	}
 	return grays;
@@ -572,7 +572,7 @@ void PXPalette_swapColors(PXPalette* self, NSColor *color1, NSColor *color2)
 
 void PXPalette_addBackgroundColor(PXPalette *self)
 {
-	PXPalette_addColorWithoutDuplicating(self, [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]);
+	PXPalette_addColorWithoutDuplicating(self, [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]);
 }
 
 void PXPalette_addColorWithoutDuplicating(PXPalette *self, NSColor *color)

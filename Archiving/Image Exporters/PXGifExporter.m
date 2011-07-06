@@ -18,7 +18,7 @@
 	[image lockFocus];
 	
 	// first we find a valid transparent color
-	id transparentColor = [NSColor colorWithDeviceRed:0 green:0 blue:0 alpha:1];
+	id transparentColor = [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:1];
 	BOOL found = YES;
 	while (found) // I know this is ugly. It works.
 	{
@@ -28,20 +28,20 @@
 		{
 			for (j = 0; j < size.height; j++)
 			{
-				id converted = [NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSDeviceRGBColorSpace];
-				if ((unsigned char)([converted redComponent] * 255) == (unsigned char)([transparentColor redComponent] * 255) && (unsigned char)([converted greenComponent] * 255) == (unsigned char)([transparentColor greenComponent] * 255) && (unsigned char)([converted blueComponent] * 255) == (unsigned char)([transparentColor blueComponent] * 255))
+				id converted = [NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+				if ((unsigned char)roundf([converted redComponent] * 255) == (unsigned char)roundf([transparentColor redComponent] * 255) && (unsigned char)roundf([converted greenComponent] * 255) == (unsigned char)roundf([transparentColor greenComponent] * 255) && (unsigned char)roundf([converted blueComponent] * 255) == (unsigned char)roundf([transparentColor blueComponent] * 255))
 				{
 					if ([transparentColor redComponent] < 1)
 					{
-						transparentColor = [NSColor colorWithDeviceRed:[transparentColor redComponent]+0.1 green:[transparentColor greenComponent] blue:[transparentColor blueComponent] alpha:1];
+						transparentColor = [NSColor colorWithCalibratedRed:[transparentColor redComponent]+0.1 green:[transparentColor greenComponent] blue:[transparentColor blueComponent] alpha:1];
 					}
 					else if ([transparentColor greenComponent] < 1)
 					{
-						transparentColor = [NSColor colorWithDeviceRed:[transparentColor redComponent] green:[transparentColor greenComponent]+0.1 blue:[transparentColor blueComponent] alpha:1];
+						transparentColor = [NSColor colorWithCalibratedRed:[transparentColor redComponent] green:[transparentColor greenComponent]+0.1 blue:[transparentColor blueComponent] alpha:1];
 					}
 					else if ([transparentColor blueComponent] < 1)
 					{
-						transparentColor = [NSColor colorWithDeviceRed:[transparentColor redComponent] green:[transparentColor greenComponent] blue:[transparentColor blueComponent]+0.1 alpha:1];
+						transparentColor = [NSColor colorWithCalibratedRed:[transparentColor redComponent] green:[transparentColor greenComponent] blue:[transparentColor blueComponent]+0.1 alpha:1];
 					}
 					found = YES;
 				}
@@ -60,12 +60,12 @@
 	{
 		for (i = 0; i < size.width; i++, count++)
 		{
-			NSColor * color = [NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+			NSColor * color = [NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 			if ([color alphaComponent] < 0.5) { color = transparentColor; }
 			
-			redBuffer[count] = (GifByteType)([color redComponent] * 255);
-			greenBuffer[count] = (GifByteType)([color greenComponent] * 255);
-			blueBuffer[count] = (GifByteType)([color blueComponent] * 255);
+			redBuffer[count] = (GifByteType)roundf([color redComponent] * 255);
+			greenBuffer[count] = (GifByteType)roundf([color greenComponent] * 255);
+			blueBuffer[count] = (GifByteType)roundf([color blueComponent] * 255);
 		}
 	}
 	
@@ -81,9 +81,9 @@
 	unsigned transparentIndex = 0, bestDelta = 1000;
 	for (i = 0; i < colorMapSize; i++)
 	{
-		unsigned char transRed = (unsigned char)([transparentColor redComponent] * 255);
-		unsigned char transGreen = (unsigned char)([transparentColor greenComponent] * 255);
-		unsigned char transBlue = (unsigned char)([transparentColor blueComponent] * 255);			
+		unsigned char transRed = (unsigned char)roundf([transparentColor redComponent] * 255);
+		unsigned char transGreen = (unsigned char)roundf([transparentColor greenComponent] * 255);
+		unsigned char transBlue = (unsigned char)roundf([transparentColor blueComponent] * 255);			
 		GifColorType color = colorMap->Colors[i];
 		if (color.Red == transRed && color.Green == transGreen && color.Blue == transBlue)
 		{

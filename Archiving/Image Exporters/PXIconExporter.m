@@ -148,11 +148,11 @@ typedef struct
 		int bytesWritten = 0;
 		for (i = 0; i < canvasSize.width; i++)
 		{
-			NSColor *color = [NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+			NSColor *color = [NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 			byte colors[3];
-			colors[2] = [color redComponent] * 255;
-			colors[1] = [color greenComponent] * 255;
-			colors[0] = [color blueComponent] * 255;
+			colors[2] = (int) roundf([color redComponent] * 255);
+			colors[1] = (int) roundf([color greenComponent] * 255);
+			colors[0] = (int) roundf([color blueComponent] * 255);
 			[iconData appendBytes:colors length:3 * sizeof(byte)];
 			bytesWritten += 3;
 		}
@@ -181,7 +181,7 @@ typedef struct
 		for (i = 0; i < canvasSize.width; i++)
 		{
 			// make anything with alpha of less than 0.5 be invisible
-			if ([[NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSDeviceRGBColorSpace] alphaComponent] < 0.5)
+			if ([[NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSCalibratedRGBColorSpace] alphaComponent] < 0.5)
 			{
 				workingMask[i >> 3] |= (0x80 >> (i & 0x07));
 			}

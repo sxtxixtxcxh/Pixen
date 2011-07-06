@@ -46,8 +46,8 @@
 	int i;
 	for (i = 0; i < colorCount; i++)
 	{
-		NSColor *color = [palette->colors[i].color colorUsingColorSpaceName:NSDeviceRGBColorSpace];
-		[string appendFormat:@"%d %d %d\n", (int)([color redComponent] * 255), (int)([color greenComponent] * 255), (int)([color blueComponent] * 255)];
+		NSColor *color = [palette->colors[i].color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+		[string appendFormat:@"%d %d %d\n", (int) roundf([color redComponent] * 255), (int) roundf([color greenComponent] * 255), (int) roundf([color blueComponent] * 255)];
 	}
 	
 	return [string dataUsingEncoding:NSASCIIStringEncoding];

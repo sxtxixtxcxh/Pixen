@@ -74,7 +74,7 @@
 
 - (void)setSize:(NSSize)aSize
 {
-	[self setSize:aSize withOrigin:NSZeroPoint backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
+	[self setSize:aSize withOrigin:NSZeroPoint backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
 }
 
 - (void)_willChangeSize:(BOOL)undo
