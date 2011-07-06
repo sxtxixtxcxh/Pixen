@@ -434,7 +434,8 @@
 	}
 	else
 	{
-		imageRep = [(NSBitmapImageRep *) ir bitmapImageRepByConvertingToColorSpace:[NSColorSpace genericRGBColorSpace] renderingIntent:0];
+		imageRep = (NSBitmapImageRep *) ir;
+		imageRep = [imageRep bitmapImageRepByRetaggingWithColorSpace:[NSColorSpace deviceRGBColorSpace]];
 	}
 	int width = floorf([imageRep pixelsWide]);
 	int height = floorf([imageRep pixelsHigh]);
