@@ -8,29 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-// warning private interface
-@interface NSColorPanelColorWell : NSColorWell
-{
-  @private
-    BOOL _disabledAsColorDestination;
-    BOOL _actsLikeButton;
-}
-
-- (void)registerForDraggedTypes:(id)fp8;
-- (void)setAcceptsColorDrops:(BOOL)fp8;
-- (void)setActsLikeButton:(BOOL)fp8;
-- (void)mouseDown:(id)fp8;
-- (BOOL)acceptsFirstResponder;
-- (void)performClick:(id)fp8;
-- (void)moveRight:(id)fp8;
-- (void)moveLeft:(id)fp8;
-- (struct _NSRect)_colorRect;
-- (void)drawWellInside:(struct _NSRect)fp8;
-- (void)_drawBorderInRect:(struct _NSRect)fp8;
-- (void)setColor:(id)fp8;
-
-@end
-
 @interface PXColorPickerColorWellCell : NSCell {
 	int index;
 	NSColor *color;
