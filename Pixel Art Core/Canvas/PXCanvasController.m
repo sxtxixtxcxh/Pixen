@@ -8,7 +8,6 @@
 
 #import "PXCanvasController.h"
 #import "PXDocumentController.h"
-#import "PXImageSizePrompter.h"
 #import "PXBackgroundController.h"
 #import "PXPreviewController.h"
 #import "PXToolPaletteController.h"
@@ -39,7 +38,7 @@
 - (void)awakeFromNib
 {
 	[self setLastDrawnPoint:NSMakePoint(-1, -1)];
-	prompter = [[PXImageSizePrompter alloc] init];
+	
 	backgroundController = [[PXBackgroundController alloc] init];
 	[backgroundController setDelegate:self];
 	previewController = [PXPreviewController sharedPreviewController];
@@ -62,12 +61,7 @@
 	[canvas deselect];
 	[backgroundController close];
 	[backgroundController release];
-
-	if([[prompter window] isVisible]) 
-	{
-		[prompter close]; 
-	}
-	[prompter release];
+	
 	[super dealloc];
 }
 
@@ -133,23 +127,6 @@
 	[[PXToolPaletteController sharedToolPaletteController] setColor:aColor];
 }
 
-- (void)promptForImageSize
-{
-	[prompter setDelegate:self];
-	[prompter promptInWindow:[self window]];
-}
-
-- (void)prompterDidCancel:aPrompter
-{
-	[[[[[self document] windowControllers] lastObject] window] performClose:self];
-}
-
-- (void)prompter:aPrompter didFinishWithSize:(NSSize)aSize backgroundColor:(NSColor *)bg
-{
-	[delegate canvasController:self setSize:aSize backgroundColor:bg];
-	[self updateCanvasSize];
-}
-
 - (void)setCanvas:(PXCanvas *)canv
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self
@@ -159,10 +136,6 @@
 	canvas = canv;
 	if(canvas)
 	{
-		if(NSEqualSizes([canvas size], NSZeroSize))
-		{
-			[self promptForImageSize];
-		}
 		[canvas setWraps:wraps];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self

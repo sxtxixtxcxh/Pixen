@@ -18,8 +18,7 @@
 	NSDocument *document;
 	IBOutlet NSWindow *window;
 	PXGridSettingsController *_gridSettingsController;
-
-	id prompter;
+	
 	id previewController;
 	id layerController;
 	id backgroundController;
@@ -50,8 +49,6 @@
 - (void)canvasSizeDidChange:(NSNotification *) aNotification;
 - (PXCanvas *) canvas;
 - (void)setColor:(NSColor *) aColor;
-- (void)promptForImageSize;
-- (void)prompter:aPrompter didFinishWithSize:(NSSize)aSize backgroundColor:(NSColor *)bg;
 - (void)setCanvas:(PXCanvas *)canv;
 - (void)canvasDidChange:(NSNotification *) aNotification;
 - (void)activate;

@@ -38,7 +38,16 @@
 #import "PXNSImageView.h"
 #import "PXBackgrounds.h"
 
+@interface PXImageSizePrompter ()
+
+- (NSImage *)imageWithWidth:(CGFloat)width height:(CGFloat)height;
+
+@end
+
+
 @implementation PXImageSizePrompter
+
+@synthesize size, backgroundColor;
 
 - (id)init
 {
@@ -49,20 +58,46 @@
 
 - (void)dealloc
 {
+	[self removeObserver:self forKeyPath:@"backgroundColor"];
 	[self setBackgroundColor:nil];
 	[image release];
 	[super dealloc];
 }
 
-- (void)setDelegate:(id)newDelegate
+- (void)windowDidLoad
 {
-	delegate = newDelegate;
+	[super windowDidLoad];
+	
+	[[self window] setDelegate:self];
+	
+	[self addObserver:self 
+		   forKeyPath:@"backgroundColor"
+			  options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew)
+			  context:NULL];
 }
 
-- imageWithWidth:(float)width height:(float)height
+- (void)windowWillClose:(NSNotification *)notification
 {
-	if (image) { return image; }
+	[self cancel:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if ([keyPath isEqualToString:@"backgroundColor"]) {
+		[image release];
+		image = nil;
+		
+		[preview setImage:[self imageWithWidth:size.width height:size.height]];
+	}
+}
+
+- (NSImage *)imageWithWidth:(CGFloat)width height:(CGFloat)height
+{
+	if (image)
+		return image;
+	
 	NSSize imageSize;
+	
 	if (width > height)
 	{
 		imageSize.width = MIN(85, width);
@@ -73,49 +108,44 @@
 		imageSize.height = MIN(85, height);
 		imageSize.width = MAX(MIN(85, height) * (width / height), 1);
 	}
-		
-	if (imageSize.width == 0 || imageSize.height == 0) { return nil; }
+	
+	if (imageSize.width == 0 || imageSize.height == 0)
+		return nil;
+	
 	image = [[NSImage alloc] initWithSize:imageSize];
 	[image lockFocus];
+	
 	NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:PXCanvasDefaultMainBackgroundKey];
+	
 	PXBackground *background = (data) ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : [[[PXSlashyBackground alloc] init] autorelease];
 	NSSize ceiledSize = NSMakeSize(ceilf(imageSize.width), ceilf(imageSize.height));
 	[background drawRect:(NSRect){NSZeroPoint, ceiledSize} withinRect:(NSRect){NSZeroPoint, ceiledSize}];
+	
 	[backgroundColor set];
 	NSRectFillUsingOperation(NSMakeRect(0, 0, imageSize.width, imageSize.height), NSCompositeSourceOver);
+	
 	[image unlockFocus];
+	
 	return image;
-}
-
-- backgroundColor
-{
-	return backgroundColor;
-}
-- (void)setBackgroundColor:(NSColor *)c
-{
-//	[self willChangeValueForKey:@"backgroundColor"];
-	[c retain];
-	NSColor *oldColor = backgroundColor;
-	backgroundColor = c;
-	[oldColor autorelease];
-	[image release]; image = nil;
-	[preview setImage:[self imageWithWidth:initialSize.width height:initialSize.height]];
-//	[self didChangeValueForKey:@"backgroundColor"];
 }
 
 - (void)updateFieldsFromDefaults
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
 	if (![defaults objectForKey:PXDefaultNewDocumentWidth])
 		[defaults setInteger:64 forKey:PXDefaultNewDocumentWidth];
+	
 	if (![defaults objectForKey:PXDefaultNewDocumentHeight])
 		[defaults setInteger:64 forKey:PXDefaultNewDocumentHeight];
+	
 	if (![defaults objectForKey:PXDefaultNewDocumentBackgroundColor])
 		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:[NSColor clearColor]] forKey:PXDefaultNewDocumentBackgroundColor];
 	
 	[self setBackgroundColor:[NSKeyedUnarchiver unarchiveObjectWithData:[defaults objectForKey:PXDefaultNewDocumentBackgroundColor]]];
-	[widthField setIntValue:[defaults integerForKey:PXDefaultNewDocumentWidth]];
-	[heightField setIntValue:[defaults integerForKey:PXDefaultNewDocumentHeight]];
+	
+	[widthField setIntegerValue:[defaults integerForKey:PXDefaultNewDocumentWidth]];
+	[heightField setIntegerValue:[defaults integerForKey:PXDefaultNewDocumentHeight]];
 }
 
 - (void)updateSizeIndicators
@@ -123,53 +153,73 @@
 	NSSize imageSize = [image size];
 	NSRect functionalRect = [preview functionalRect];
 	
-	if (NSIsEmptyRect(initialWidthIndicatorFrame)) { initialWidthIndicatorFrame = [widthIndicator frame]; }
-	[widthIndicator setFrame:NSMakeRect(NSMinX(functionalRect) + NSMinX([preview frame]), NSMinY([widthIndicator frame]), imageSize.width, NSHeight([widthIndicator frame]))];
+	if (NSIsEmptyRect(initialWidthIndicatorFrame)) {
+		initialWidthIndicatorFrame = [widthIndicator frame];
+	}
 	
-	if (NSIsEmptyRect(initialHeightIndicatorFrame)) { initialHeightIndicatorFrame = [heightIndicator frame]; }
-	[heightIndicator setFrame:NSMakeRect(NSMinX([heightIndicator frame]), NSMinY(functionalRect) + NSMinY([preview frame]), NSWidth([heightIndicator frame]), imageSize.height)];
-	[[[self window] contentView] setNeedsDisplay:YES];	
+	[widthIndicator setFrame:NSMakeRect(NSMinX(functionalRect) + NSMinX([preview frame]),
+										NSMinY([widthIndicator frame]),
+										imageSize.width, NSHeight([widthIndicator frame]))];
+	
+	if (NSIsEmptyRect(initialHeightIndicatorFrame)) {
+		initialHeightIndicatorFrame = [heightIndicator frame];
+	}
+	
+	[heightIndicator setFrame:NSMakeRect(NSMinX([heightIndicator frame]),
+										 NSMinY(functionalRect) + NSMinY([preview frame]),
+										 NSWidth([heightIndicator frame]), imageSize.height)];
+	
+	[[[self window] contentView] setNeedsDisplay:YES];
 }
 
-- (void)promptInWindow:(NSWindow *) window
+- (BOOL)runModal
 {
-	if([[[NSProcessInfo processInfo] arguments] containsObject:@"-SenTest"]) 
-		return;
-	
 	[self window];
 	[self updateFieldsFromDefaults];
-	float width = [widthField intValue], height = [heightField intValue];
+	
+	CGFloat width = [widthField integerValue], height = [heightField integerValue];
+	
 	[image release];
 	image = nil;
+	
 	[preview setImage:[self imageWithWidth:width height:height]];
 	[self updateSizeIndicators];
+	
 	initialSize = NSMakeSize(width, height);
 	targetSize = initialSize;
 	
-	animationTimer = [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(updatePreviewImageFrame:) userInfo:nil repeats:YES] retain];
+	animationTimer = [[NSTimer scheduledTimerWithTimeInterval:0.05f
+													   target:self
+													 selector:@selector(updatePreviewImageFrame:)
+													 userInfo:nil
+													  repeats:YES] retain];
 	
-	[NSApp beginSheet:[self window] 
-	   modalForWindow:window
-		modalDelegate:nil
-	   didEndSelector:NULL
-		  contextInfo:NULL];
+	[[NSRunLoop currentRunLoop] addTimer:animationTimer forMode:NSRunLoopCommonModes];
+	
+	[NSApp runModalForWindow:[self window]];
+	
+	return accepted;
 }
 
 - (void)updatePreviewImageFrame:event
 {
 	NSSize previewSize = initialSize;
-	float projectedFraction = (sin(animationFraction) + 1.0)/2.0 - 0.01; // the 0.01 is so it goes below 0
-	if (projectedFraction < 0) {
+	
+	CGFloat projectedFraction = (sin(animationFraction) + 1.0)/2.0 - 0.01; // the 0.01 is so it goes below 0
+	
+	if (projectedFraction < 0)
 		return;
-	}
+	
 	previewSize.width = targetSize.width * (1.0 - projectedFraction) + initialSize.width * projectedFraction;
 	previewSize.height = targetSize.height * (1.0 - projectedFraction) + initialSize.height * projectedFraction;
 	
-	[image release]; image = nil;
+	[image release];
+	image = nil;
+	
 	[preview setImage:[self imageWithWidth:previewSize.width height:previewSize.height]];
 	[self updateSizeIndicators];
 	
-	//[preview setFunctionalRect:previewRect];
+	// [preview setFunctionalRect:previewRect];
 	[preview setNeedsDisplay];
 	
 	animationFraction -= 0.25;
@@ -180,12 +230,14 @@
 	[[NSUserDefaults standardUserDefaults] setInteger:[widthField intValue] forKey:PXDefaultNewDocumentWidth];
 	[[NSUserDefaults standardUserDefaults] setInteger:[heightField intValue] forKey:PXDefaultNewDocumentHeight];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:backgroundColor] forKey:PXDefaultNewDocumentBackgroundColor];
+	
 	[image release];
 	image = nil;
 	
-	float width = [widthField intValue];
-	float height = [heightField intValue];
+	CGFloat width = [widthField integerValue];
+	CGFloat height = [heightField integerValue];
 	
+	size = NSMakeSize(width, height);
 	initialSize = [preview functionalRect].size;
 	targetSize = [preview scaledSizeForImage:[self imageWithWidth:width height:height]];
 	
@@ -194,39 +246,48 @@
 
 - (void)controlTextDidChange:note
 {
-	if ([widthField intValue] == 0)
+	if ([widthField integerValue] == 0)
 	{
 		NSBeep();
-		[widthField setIntValue:1];
+		[widthField setIntegerValue:1];
 	}
-	if ([heightField intValue] == 0)
+	
+	if ([heightField integerValue] == 0)
 	{
 		NSBeep();
-		[heightField setIntValue:1];
+		[heightField setIntegerValue:1];
 	}
+	
 	[self sizeChanged:self];
 }
 
 - (IBAction)useEnteredSize:(id)sender
 {
 	[[self window] makeFirstResponder:nil];
-	int width = MAX([widthField intValue], 1);
-	int height = MAX([heightField intValue], 1);
-	[delegate prompter:self 
-	 didFinishWithSize:NSMakeSize(width, height)
-	   backgroundColor:backgroundColor];
+	
+	NSInteger width = MAX([widthField integerValue], 1);
+	NSInteger height = MAX([heightField integerValue], 1);
+	
+	size = NSMakeSize(width, height);
 	
 	if (animationTimer)
 		[animationTimer invalidate];
+	
 	[animationTimer release];
-	[NSApp endSheet:[self window]];
-	[self close];
+	animationTimer = nil;
+	
+	accepted = YES;
+	
+	[[self window] orderOut:nil];
+	[NSApp stopModal];
 }
+
 - (IBAction)cancel:(id)sender
 {	
-    [NSApp endSheet:[self window]];
-    [self close];
-	[delegate prompterDidCancel:self];
+	accepted = NO;
+	
+	[[self window] orderOut:nil];
+	[NSApp stopModal];
 }
 
 @end

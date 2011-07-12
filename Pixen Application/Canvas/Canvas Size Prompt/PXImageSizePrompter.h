@@ -33,36 +33,32 @@
 
 #import <AppKit/AppKit.h>
 
-@interface NSObject(PXImageSizePrompterDelegate)
-
-- (void)prompter:aPrompter didFinishWithSize:(NSSize)aSize backgroundColor:(NSColor *)bg;
-- (void)prompterDidCancel:aPrompter;
-
-@end
-
 @class PXNSImageView;
-@interface PXImageSizePrompter : NSWindowController 
-{
+
+@interface PXImageSizePrompter : NSWindowController < NSWindowDelegate > {
   @private
 	IBOutlet NSTextField *widthField;
 	IBOutlet NSTextField *heightField;
 	IBOutlet PXNSImageView *preview;
 	IBOutlet NSView *widthIndicator, *heightIndicator;
 	NSColor *backgroundColor;
+	NSSize size;
 	NSImage *image;
 	NSTimer *animationTimer;
 	NSSize initialSize;
 	NSSize targetSize;
 	float animationFraction;
-	id delegate;
 	NSRect initialHeightIndicatorFrame;
 	NSRect initialWidthIndicatorFrame;
+	BOOL accepted;
 }
-- (id) init;
-- (void)setDelegate:(id) newDelegate;
-- (void)promptInWindow:(NSWindow *) window;
-- (IBAction)useEnteredSize:(id) sender;
+
+@property (nonatomic, readonly) NSSize size;
+@property (nonatomic, retain) NSColor *backgroundColor;
+
+- (BOOL)runModal;
+
+- (IBAction)useEnteredSize:(id)sender;
 - (IBAction)cancel:(id)sender;
-- backgroundColor;
-- (void)setBackgroundColor:(NSColor *)c;
+
 @end

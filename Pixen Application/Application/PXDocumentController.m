@@ -45,6 +45,7 @@
 #import "PXCanvasController.h"
 #import "PXCanvasDocument.h"
 #import "PXAnimationDocument.h"
+#import "PXImageSizePrompter.h"
 #import "PXLayer.h"
 #import "PXCanvas.h"
 #import "PXPalette.h"
@@ -441,6 +442,58 @@ NSString *palettesSubdirName = @"Palettes";
 		return doc;
 	}
 	return nil;
+}
+
+- (BOOL)presentError:(NSError *)error
+{
+	if ([[error domain] isEqualToString:NSCocoaErrorDomain] && [error code] == 260) {
+		return NO; // suppress 'Document could not be created errors' which are the result of returning nil in 'makeUntitledDocumentOfType:error:'
+	}
+	
+	return YES;
+}
+
+- (id)makeUntitledDocumentOfType:(NSString *)typeName error:(NSError **)outError
+{
+	PXImageSizePrompter *prompter = [[PXImageSizePrompter alloc] init];
+	
+	if (![prompter runModal]) {
+		[prompter release];
+		
+		if (outError)
+			*outError = nil;
+		
+		return nil;
+	}
+	
+	Class documentClass = [self documentClassForType:typeName];
+	
+	id document = [[documentClass alloc] initWithType:typeName error:outError];
+	
+	if (!document) {
+		[prompter release];
+		return nil;
+	}
+	
+	if (![document isKindOfClass:[PXDocument class]]) {
+		[prompter release];
+		[document release];
+		
+		if (outError)
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:-1 userInfo:nil];
+		
+		return nil;
+	}
+	
+	[[document canvas] setSize:[prompter size]
+					withOrigin:NSZeroPoint
+			   backgroundColor:[prompter backgroundColor]];
+	
+	[[document canvasController] updateCanvasSize];
+	
+	[prompter release];
+	
+	return [document autorelease];
 }
 
 - (id)makeDocumentWithContentsOfURL:(NSURL *)aURL ofType:(NSString *)docType
