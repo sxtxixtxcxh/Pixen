@@ -7,7 +7,6 @@
 //
 
 #import "PXPalettePanelPaletteView.h"
-#import "PXColorPickerColorWellCell.h"
 
 @implementation PXPalettePanelPaletteView
 
@@ -37,11 +36,16 @@
 
 - (void)rightMouseDown:(NSEvent *)event
 {
-	if(!self.enabled) { return; }
+	if (!self.enabled)
+		return;
+	
 	int paletteIndex = [self indexOfCelAtPoint:[self convertPoint:[event locationInWindow] fromView:nil]];
-	if (paletteIndex == -1) { return; }
-
-	[self.delegate useColorAtIndex:paletteIndex event:event];
+	
+	if (paletteIndex == -1)
+		return;
+	
+	if ([self.delegate respondsToSelector:@selector(useColorAtIndex:event:)])
+		[self.delegate useColorAtIndex:paletteIndex event:event];
 }
 
 // Intentionally no-op:

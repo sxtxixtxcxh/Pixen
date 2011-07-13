@@ -1,18 +1,22 @@
-/* PXPaletteView */
+//
+//  PXPaletteView.h
+//  Pixen
+//
+//  Copyright 2011 Open Sword Group. All rights reserved.
+//
 
 #import <Cocoa/Cocoa.h>
 #import "PXPalette.h"
 
-@class PXColorPickerColorWellCell, PXCanvasDocument;
+@class PXDocument;
+
 @interface PXPaletteView : NSView
 {
   @private
+	PXDocument *document;
 	PXPalette *palette;
-	PXColorPickerColorWellCell *colorCell;
-
-	PXCanvasDocument *document;
 	NSMutableArray *paletteIndices;
-
+	
 	int rows, columns;
 	float width, height;
 	BOOL enabled;
@@ -21,27 +25,25 @@
 }
 
 @property (nonatomic, assign) BOOL enabled;
+@property (nonatomic, assign) NSControlSize controlSize;
+
+@property (nonatomic, assign) PXDocument *document;
+@property (nonatomic, assign) PXPalette *palette;
+
 @property (nonatomic, assign) id delegate;
 
-- (id)initWithFrame:(NSRect)frameRect;
-- (void)resizeWithOldSuperviewSize:(NSSize)size;
-- (BOOL)isFlipped;
-- (void)retile;
-- (void)setDocument:doc;
-- (PXPalette *)palette;
-- (void)setPalette:(PXPalette *)pal;
-- (void)drawRect:(NSRect)rect;
-- (void)mouseDown:event;
-- (void)mouseDragged:event;
-- (void)mouseUp:event;
+- (void)setupLayer;
+- (void)setNeedsRetile;
+
 - (int)indexOfCelAtPoint:(NSPoint)point;
-- (void)setControlSize:(NSControlSize)size;
-- (NSControlSize)controlSize;
 
 @end
 
-@interface NSObject(PXPaletteViewDelegate)
-- (void)useColorAtIndex:(unsigned)index event:(NSEvent *)e;
-//- (void)modifyColorAtIndex:(unsigned)index;
+
+@interface NSObject (PXPaletteViewDelegate)
+
+- (void)useColorAtIndex:(unsigned)index event:(NSEvent *)event;
+- (void)modifyColorAtIndex:(unsigned)index;
 - (void)paletteViewSizeChangedTo:(NSControlSize)size;
+
 @end

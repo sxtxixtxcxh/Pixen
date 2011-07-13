@@ -55,7 +55,9 @@ int kPXColorPickerMode = 23421337;
 
 - (NSView *)provideNewView:(BOOL)initialRequest
 {
+	[_vc.paletteView performSelector:@selector(setupLayer) withObject:nil afterDelay:0.0f];
 	[_vc reloadData];
+	
 	return _vc.view;
 }
 
