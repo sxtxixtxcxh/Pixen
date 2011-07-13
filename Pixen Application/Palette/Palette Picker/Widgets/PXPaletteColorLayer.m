@@ -101,7 +101,7 @@
 	[NSGraphicsContext saveGraphicsState];
 	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithGraphicsPort:ctx flipped:YES]];
 	
-	CGRect frame = [self bounds];
+	NSRect frame = NSRectFromCGRect([self bounds]);
 	[color set];
 	
 	[self drawColorSwatchWithFrame:frame];

@@ -19,7 +19,6 @@ const CGFloat viewMargin = 1.0f;
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
-		[self setWantsLayer:YES];
 		[self setEnabled:YES];
 		
 		palette = NULL;
