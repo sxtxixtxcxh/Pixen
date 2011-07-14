@@ -14,14 +14,18 @@
 @interface PXPaletteViewController : NSViewController {
   @private
 	IBOutlet PXPaletteView *paletteView;
+	NSButton *addColorButton;
 	IBOutlet PXPaletteSelector *paletteSelector;
 	IBOutlet NSPopUpButton *gearMenu;
 	id namePrompter, delegate;
 }
 
 @property (nonatomic, readonly) IBOutlet PXPaletteView *paletteView;
+@property (nonatomic, assign) IBOutlet NSButton *addColorButton;
 
 @property (nonatomic, assign) id delegate;
+
+- (IBAction)addColor:(id)sender;
 
 - (IBAction)installPalette:sender;
 - (IBAction)exportPalette:sender;

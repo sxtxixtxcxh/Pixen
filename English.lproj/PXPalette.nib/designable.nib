@@ -40,6 +40,36 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
+					<object class="NSButton" id="151034213">
+						<reference key="NSNextResponder" ref="314497084"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{7, 6}, {24, 23}}</string>
+						<reference key="NSSuperview" ref="314497084"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
+						<bool key="NSEnabled">YES</bool>
+						<object class="NSButtonCell" key="NSCell" id="28553035">
+							<int key="NSCellFlags">-2080244224</int>
+							<int key="NSCellFlags2">134348800</int>
+							<string key="NSContents"/>
+							<object class="NSFont" key="NSSupport" id="26">
+								<string key="NSName">LucidaGrande</string>
+								<double key="NSSize">11</double>
+								<int key="NSfFlags">3100</int>
+							</object>
+							<reference key="NSControlView" ref="151034213"/>
+							<int key="NSButtonFlags">-2033434369</int>
+							<int key="NSButtonFlags2">162</int>
+							<object class="NSCustomResource" key="NSNormalImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">NSAddTemplate</string>
+							</object>
+							<string key="NSAlternateContents"/>
+							<string key="NSKeyEquivalent"/>
+							<int key="NSPeriodicDelay">400</int>
+							<int key="NSPeriodicInterval">75</int>
+						</object>
+					</object>
 					<object class="NSScrollView" id="836002209">
 						<reference key="NSNextResponder" ref="314497084"/>
 						<int key="NSvFlags">274</int>
@@ -54,7 +84,7 @@
 										<string key="NSFrameSize">{253, 244}</string>
 										<reference key="NSSuperview" ref="624940323"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="116870875"/>
+										<reference key="NSNextKeyView" ref="206058105"/>
 										<bool key="NSViewIsLayerTreeHost">YES</bool>
 										<int key="NSViewLayerContentsRedrawPolicy">2</int>
 										<string key="NSClassName">PXPaletteView</string>
@@ -83,6 +113,7 @@
 								<string key="NSFrame">{{250, 1}, {15, 238}}</string>
 								<reference key="NSSuperview" ref="836002209"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="151034213"/>
 								<bool key="NSEnabled">YES</bool>
 								<reference key="NSTarget" ref="836002209"/>
 								<string key="NSAction">_doScroller:</string>
@@ -101,10 +132,10 @@
 								<string key="NSAction">_doScroller:</string>
 							</object>
 						</array>
-						<string key="NSFrame">{{7, 5}, {266, 240}}</string>
+						<string key="NSFrame">{{7, 34}, {266, 240}}</string>
 						<reference key="NSSuperview" ref="314497084"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="624940323"/>
+						<reference key="NSNextKeyView" ref="116870875"/>
 						<int key="NSsFlags">133202</int>
 						<reference key="NSVScroller" ref="206058105"/>
 						<reference key="NSHScroller" ref="116870875"/>
@@ -113,7 +144,7 @@
 					<object class="NSPopUpButton" id="714837294">
 						<reference key="NSNextResponder" ref="314497084"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{4, 249}, {178, 22}}</string>
+						<string key="NSFrame">{{4, 278}, {178, 22}}</string>
 						<reference key="NSSuperview" ref="314497084"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="984532406"/>
@@ -121,11 +152,7 @@
 						<object class="NSPopUpButtonCell" key="NSCell" id="368028498">
 							<int key="NSCellFlags">-2076049856</int>
 							<int key="NSCellFlags2">133120</int>
-							<object class="NSFont" key="NSSupport" id="26">
-								<string key="NSName">LucidaGrande</string>
-								<double key="NSSize">11</double>
-								<int key="NSfFlags">3100</int>
-							</object>
+							<reference key="NSSupport" ref="26"/>
 							<reference key="NSControlView" ref="714837294"/>
 							<int key="NSButtonFlags">-2038284033</int>
 							<int key="NSButtonFlags2">1</int>
@@ -196,7 +223,7 @@
 					<object class="NSButton" id="984532406">
 						<reference key="NSNextResponder" ref="314497084"/>
 						<int key="NSvFlags">265</int>
-						<string key="NSFrame">{{184, 250}, {18, 20}}</string>
+						<string key="NSFrame">{{184, 279}, {18, 20}}</string>
 						<reference key="NSSuperview" ref="314497084"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="479196117"/>
@@ -222,7 +249,7 @@
 					<object class="NSPopUpButton" id="479196117">
 						<reference key="NSNextResponder" ref="314497084"/>
 						<int key="NSvFlags">265</int>
-						<string key="NSFrame">{{209, 249}, {42, 22}}</string>
+						<string key="NSFrame">{{209, 278}, {42, 22}}</string>
 						<reference key="NSSuperview" ref="314497084"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="96434023"/>
@@ -349,7 +376,7 @@
 					<object class="NSButton" id="96434023">
 						<reference key="NSNextResponder" ref="314497084"/>
 						<int key="NSvFlags">265</int>
-						<string key="NSFrame">{{254, 249}, {22, 22}}</string>
+						<string key="NSFrame">{{254, 278}, {22, 22}}</string>
 						<reference key="NSSuperview" ref="314497084"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="836002209"/>
@@ -372,7 +399,7 @@
 						</object>
 					</object>
 				</array>
-				<string key="NSFrameSize">{280, 275}</string>
+				<string key="NSFrameSize">{280, 304}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="714837294"/>
@@ -505,6 +532,22 @@
 					</object>
 					<int key="connectionID">53</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">addColor:</string>
+						<reference key="source" ref="865131046"/>
+						<reference key="destination" ref="151034213"/>
+					</object>
+					<int key="connectionID">56</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">addColorButton</string>
+						<reference key="source" ref="865131046"/>
+						<reference key="destination" ref="151034213"/>
+					</object>
+					<int key="connectionID">57</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -541,6 +584,7 @@
 							<reference ref="984532406"/>
 							<reference ref="479196117"/>
 							<reference ref="96434023"/>
+							<reference ref="151034213"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">View</string>
@@ -714,6 +758,19 @@
 						<reference key="object" ref="116870875"/>
 						<reference key="parent" ref="836002209"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">54</int>
+						<reference key="object" ref="151034213"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="28553035"/>
+						</array>
+						<reference key="parent" ref="314497084"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">55</int>
+						<reference key="object" ref="28553035"/>
+						<reference key="parent" ref="151034213"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -748,6 +805,8 @@
 				<boolean value="YES" key="51.IBShouldRemoveOnLegacySave"/>
 				<string key="52.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="52.IBShouldRemoveOnLegacySave"/>
+				<string key="54.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="55.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="9.CustomClassName">PXPaletteViewScrollView</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -756,7 +815,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">53</int>
+			<int key="maxID">57</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -868,11 +927,16 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="addColorButton">NSButton</string>
 						<string key="gearMenu">NSPopUpButton</string>
 						<string key="paletteSelector">PXPaletteSelector</string>
 						<string key="paletteView">PXPaletteView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="addColorButton">
+							<string key="name">addColorButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="gearMenu">
 							<string key="name">gearMenu</string>
 							<string key="candidateClassName">NSPopUpButton</string>
@@ -914,6 +978,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NSAddTemplate">{8, 8}</string>
 			<string key="NSMenuCheckmark">{9, 8}</string>
 			<string key="NSMenuMixedState">{7, 2}</string>
 			<string key="popout">{21, 21}</string>

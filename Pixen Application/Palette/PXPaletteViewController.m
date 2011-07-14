@@ -30,7 +30,7 @@
 
 @implementation PXPaletteViewController
 
-@synthesize paletteView, delegate;
+@synthesize addColorButton, paletteView, delegate;
 
 - (id)init
 {
@@ -78,6 +78,18 @@
 	}
 	
 	return YES;
+}
+
+- (IBAction)addColor:(id)sender
+{
+	PXPalette *palette = [paletteView palette];
+	
+	if (!palette->canSave)
+		return;
+	
+	PXPalette_addColorWithoutDuplicating(palette, [[NSColorPanel sharedColorPanel] color]);
+	
+	[self.paletteView setNeedsRetile];
 }
 
 - (IBAction)installPalette:sender
@@ -255,6 +267,8 @@
 - (void)showPalette:(PXPalette *)palette
 {
 	PXPalette *currentPalette = palette;
+	
+	[addColorButton setEnabled:palette->canSave];
 	
 	if ([paletteView palette] != palette) {
 		[paletteView setPalette:palette];
