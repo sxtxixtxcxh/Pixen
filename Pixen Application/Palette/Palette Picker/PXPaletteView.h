@@ -20,12 +20,13 @@
 	int rows, columns;
 	int selectionIndex;
 	float width, height;
-	BOOL enabled;
+	BOOL enabled, highlightEnabled;
 	NSControlSize controlSize;
 	IBOutlet id delegate;
 }
 
 @property (nonatomic, assign) BOOL enabled;
+@property (nonatomic, assign) BOOL highlightEnabled;
 @property (nonatomic, assign) NSControlSize controlSize;
 
 @property (nonatomic, assign) PXDocument *document;

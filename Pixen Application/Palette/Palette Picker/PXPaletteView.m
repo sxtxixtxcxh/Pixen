@@ -14,7 +14,7 @@
 
 const CGFloat viewMargin = 1.0f;
 
-@synthesize enabled, controlSize, document, palette, delegate;
+@synthesize enabled, highlightEnabled, controlSize, document, palette, delegate;
 
 - (id)initWithFrame:(NSRect)frameRect
 {
@@ -24,6 +24,7 @@ const CGFloat viewMargin = 1.0f;
 		selectionIndex = -1;
 		palette = NULL;
 		controlSize = NSRegularControlSize;
+		highlightEnabled = YES;
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(paletteChanged:)
@@ -264,6 +265,9 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)toggleHighlightOnLayerAtIndex:(int)index
 {
+	if (!highlightEnabled)
+		return;
+	
 	for (CALayer *layer in [[self layer] sublayers])
 	{
 		if (![layer isKindOfClass:[PXPaletteColorLayer class]])
@@ -288,6 +292,9 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)keyDown:(NSEvent *)theEvent
 {
+	if (!highlightEnabled)
+		return; // disable moveRight:, moveLeft:, and deleteBackward:
+	
 	[self interpretKeyEvents:[NSArray arrayWithObject:theEvent]];
 }
 

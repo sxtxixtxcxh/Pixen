@@ -43,6 +43,11 @@
 	[super dealloc];
 }
 
+- (void)awakeFromNib
+{
+	paletteView.highlightEnabled = NO;
+}
+
 - view
 {
 	return view;
