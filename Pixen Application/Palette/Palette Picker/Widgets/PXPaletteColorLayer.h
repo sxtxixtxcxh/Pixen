@@ -13,10 +13,12 @@
 	int index;
 	NSColor *color;
 	NSControlSize controlSize;
+	BOOL highlighted;
 }
 
 @property (nonatomic, assign) int index;
 @property (nonatomic, retain) NSColor *color;
 @property (nonatomic, assign) NSControlSize controlSize;
+@property (nonatomic, assign) BOOL highlighted;
 
 @end

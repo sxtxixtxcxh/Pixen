@@ -47,7 +47,7 @@
 
 @implementation PXPaletteColorLayer
 
-@synthesize color, index, controlSize;
+@synthesize color, index, controlSize, highlighted;
 
 - (void)dealloc
 {
@@ -118,10 +118,12 @@
 	badgeSize.width += 6.5f;
 	badgeSize.height += 0;
 	
-	[[[NSColor grayColor] colorWithAlphaComponent:0.5f] set];
-	
 	NSRect badgeRect = NSMakeRect(NSMaxX(frame) - badgeSize.width - 1.5f, NSMaxY(frame) - badgeSize.height - 2, badgeSize.width, badgeSize.height);
-	NSFrameRectWithWidthUsingOperation(NSInsetRect(frame, 0, 0), 2, NSCompositeSourceOver);
+	
+	if (!highlighted) {
+		[[[NSColor grayColor] colorWithAlphaComponent:0.5f] set];
+		NSFrameRectWithWidthUsingOperation(frame, 2.0f, NSCompositeSourceOver);
+	}
 	
 	// Exceuse me for my mdrfkr hardcoded numbers and ternary operators.
 	int verticalTextOffset = (index > 9999) ? 1 : 2;
@@ -140,6 +142,11 @@
 	
 	[badgeString drawAtPoint:NSMakePoint(NSMaxX(frame) - badgeSize.width + 3, NSMaxY(frame) - badgeSize.height - verticalTextOffset)];
 	
+	if (highlighted) {
+		NSSetFocusRingStyle(NSFocusRingAbove);
+		NSFrameRectWithWidthUsingOperation(NSInsetRect(frame, -1, -1), 2.0f, NSCompositeSourceOver);
+	}
+	
 	[NSGraphicsContext restoreGraphicsState];
 }
 
@@ -156,6 +163,15 @@
 	if (color != newColor) {
 		[color release];
 		color = [newColor retain];
+		
+		[self setNeedsDisplay];
+	}
+}
+
+- (void)setHighlighted:(BOOL)state
+{
+	if (highlighted != state) {
+		highlighted = state;
 		
 		[self setNeedsDisplay];
 	}
