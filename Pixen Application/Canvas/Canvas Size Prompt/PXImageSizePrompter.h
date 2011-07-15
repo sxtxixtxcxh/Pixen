@@ -33,16 +33,18 @@
 
 #import <AppKit/AppKit.h>
 
-@class PXNSImageView;
+@class PXNamePrompter, PXNSImageView;
 
 @interface PXImageSizePrompter : NSWindowController < NSWindowDelegate > {
   @private
-	IBOutlet NSTextField *widthField;
-	IBOutlet NSTextField *heightField;
 	IBOutlet PXNSImageView *preview;
 	IBOutlet NSView *widthIndicator, *heightIndicator;
+	IBOutlet NSPopUpButton *presetsButton;
+	PXNamePrompter *prompter;
+	
+	NSInteger _width, _height;
 	NSColor *backgroundColor;
-	NSSize size;
+	
 	NSImage *image;
 	NSTimer *animationTimer;
 	NSSize initialSize;
@@ -54,9 +56,17 @@
 }
 
 @property (nonatomic, readonly) NSSize size;
+
+@property (nonatomic, assign) NSInteger width;
+@property (nonatomic, assign) NSInteger height;
 @property (nonatomic, retain) NSColor *backgroundColor;
 
 - (BOOL)runModal;
+
+- (IBAction)selectedPreset:(id)sender;
+
+- (IBAction)sizeChanged:(id)sender;
+- (IBAction)changedColor:(id)sender;
 
 - (IBAction)useEnteredSize:(id)sender;
 - (IBAction)cancel:(id)sender;

@@ -35,10 +35,16 @@
 
 #import "PXImageSizePrompter.h"
 #import "PXCanvasView.h"
+#import "PXNamePrompter.h"
 #import "PXNSImageView.h"
 #import "PXBackgrounds.h"
+#import "PXPresetsManager.h"
+#import "PXPreset.h"
 
 @interface PXImageSizePrompter ()
+
+- (void)populatePresetsButton;
+- (void)updateSizeIndicators;
 
 - (NSImage *)imageWithWidth:(CGFloat)width height:(CGFloat)height;
 
@@ -47,7 +53,8 @@
 
 @implementation PXImageSizePrompter
 
-@synthesize size, backgroundColor;
+@synthesize width = _width, height = _height, backgroundColor;
+@dynamic size;
 
 - (id)init
 {
@@ -58,8 +65,7 @@
 
 - (void)dealloc
 {
-	[self removeObserver:self forKeyPath:@"backgroundColor"];
-	[self setBackgroundColor:nil];
+	[backgroundColor release];
 	[image release];
 	[super dealloc];
 }
@@ -69,11 +75,7 @@
 	[super windowDidLoad];
 	
 	[[self window] setDelegate:self];
-	
-	[self addObserver:self 
-		   forKeyPath:@"backgroundColor"
-			  options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew)
-			  context:NULL];
+	[self populatePresetsButton];
 }
 
 - (void)windowWillClose:(NSNotification *)notification
@@ -81,14 +83,70 @@
 	[self cancel:nil];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)populatePresetsButton
 {
-	if ([keyPath isEqualToString:@"backgroundColor"]) {
-		[image release];
-		image = nil;
-		
-		[preview setImage:[self imageWithWidth:size.width height:size.height]];
+	PXPresetsManager *manager = [PXPresetsManager sharedPresetsManager];
+	
+	for (NSInteger n = 1; n < [presetsButton numberOfItems]; n++) {
+		[presetsButton removeItemAtIndex:n];
 	}
+	
+	for (NSString *name in [manager presetNames]) {
+		[presetsButton addItemWithTitle:name];
+	}
+	
+	if ([presetsButton numberOfItems] > 1) {
+		[[presetsButton menu] addItem:[NSMenuItem separatorItem]];
+	}
+	
+	[presetsButton addItemWithTitle:@"Save Preset As..."];
+}
+
+- (IBAction)selectedPreset:(id)sender
+{
+	BOOL last = ([presetsButton indexOfSelectedItem] == [presetsButton numberOfItems]-1);
+	
+	if (last) {
+		if (!prompter) {
+			prompter = [[PXNamePrompter alloc] init];
+			prompter.delegate = self;
+		}
+		
+		[prompter promptInWindow:[self window]
+						 context:NULL
+					promptString:@"Enter a name for this preset:"
+					defaultEntry:@""];
+	}
+	else {
+		NSString *name = [presetsButton titleOfSelectedItem];
+		PXPreset *preset = [[PXPresetsManager sharedPresetsManager] presetWithName:name];
+		
+		self.width = preset.size.width;
+		self.height = preset.size.height;
+		self.backgroundColor = preset.color;
+		
+		[self sizeChanged:nil];
+	}
+}
+
+- (void)prompter:(id)aPrompter didFinishWithName:(NSString *)aName context:(id)context
+{
+	[[PXPresetsManager sharedPresetsManager] addPresetWithName:aName
+														  size:self.size
+														 color:backgroundColor];
+	
+	[self populatePresetsButton];
+}
+
+- (IBAction)changedColor:(id)sender
+{
+	[image release];
+	image = nil;
+	
+	[preview setImage:[self imageWithWidth:self.width height:self.height]];
+	
+	[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.backgroundColor]
+											  forKey:PXDefaultNewDocumentBackgroundColor];
 }
 
 - (NSImage *)imageWithWidth:(CGFloat)width height:(CGFloat)height
@@ -144,8 +202,8 @@
 	
 	[self setBackgroundColor:[NSKeyedUnarchiver unarchiveObjectWithData:[defaults objectForKey:PXDefaultNewDocumentBackgroundColor]]];
 	
-	[widthField setIntegerValue:[defaults integerForKey:PXDefaultNewDocumentWidth]];
-	[heightField setIntegerValue:[defaults integerForKey:PXDefaultNewDocumentHeight]];
+	self.width = [defaults integerForKey:PXDefaultNewDocumentWidth];
+	self.height = [defaults integerForKey:PXDefaultNewDocumentHeight];
 }
 
 - (void)updateSizeIndicators
@@ -177,16 +235,13 @@
 	[self window];
 	[self updateFieldsFromDefaults];
 	
-	CGFloat width = [widthField integerValue], height = [heightField integerValue];
-	
 	[image release];
 	image = nil;
 	
-	[preview setImage:[self imageWithWidth:width height:height]];
+	[preview setImage:[self imageWithWidth:self.width height:self.height]];
 	[self updateSizeIndicators];
 	
-	initialSize = NSMakeSize(width, height);
-	targetSize = initialSize;
+	initialSize = targetSize = [self size];
 	
 	animationTimer = [[NSTimer scheduledTimerWithTimeInterval:0.05f
 													   target:self
@@ -225,37 +280,38 @@
 	animationFraction -= 0.25;
 }
 
-- (IBAction)sizeChanged:sender
+- (NSSize)size
 {
-	[[NSUserDefaults standardUserDefaults] setInteger:[widthField intValue] forKey:PXDefaultNewDocumentWidth];
-	[[NSUserDefaults standardUserDefaults] setInteger:[heightField intValue] forKey:PXDefaultNewDocumentHeight];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:backgroundColor] forKey:PXDefaultNewDocumentBackgroundColor];
+	return NSMakeSize(_width, _height);
+}
+
+- (IBAction)sizeChanged:(id)sender
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:self.width forKey:PXDefaultNewDocumentWidth];
+	[[NSUserDefaults standardUserDefaults] setInteger:self.height forKey:PXDefaultNewDocumentHeight];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.backgroundColor] forKey:PXDefaultNewDocumentBackgroundColor];
 	
 	[image release];
 	image = nil;
 	
-	CGFloat width = [widthField integerValue];
-	CGFloat height = [heightField integerValue];
-	
-	size = NSMakeSize(width, height);
 	initialSize = [preview functionalRect].size;
-	targetSize = [preview scaledSizeForImage:[self imageWithWidth:width height:height]];
+	targetSize = [preview scaledSizeForImage:[self imageWithWidth:self.width height:self.height]];
 	
 	animationFraction = 1;
 }
 
-- (void)controlTextDidChange:note
+- (void)controlTextDidChange:(NSNotification *)notification
 {
-	if ([widthField integerValue] == 0)
+	if (self.width == 0)
 	{
 		NSBeep();
-		[widthField setIntegerValue:1];
+		self.width = 1;
 	}
 	
-	if ([heightField integerValue] == 0)
+	if (self.height == 0)
 	{
 		NSBeep();
-		[heightField setIntegerValue:1];
+		self.height = 1;
 	}
 	
 	[self sizeChanged:self];
@@ -264,11 +320,6 @@
 - (IBAction)useEnteredSize:(id)sender
 {
 	[[self window] makeFirstResponder:nil];
-	
-	NSInteger width = MAX([widthField integerValue], 1);
-	NSInteger height = MAX([heightField integerValue], 1);
-	
-	size = NSMakeSize(width, height);
 	
 	if (animationTimer)
 		[animationTimer invalidate];
