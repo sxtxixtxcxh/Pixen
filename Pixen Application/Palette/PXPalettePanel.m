@@ -15,11 +15,6 @@
 
 @implementation PXPalettePanel
 
-- (BOOL)canBecomeKeyWindow
-{
-	return NO;
-}
-
 + (id)popWithPalette:(PXPalette *)palette fromWindow:(NSWindow *)window
 {
 	id panel = [[self alloc] initWithPalette:palette];
