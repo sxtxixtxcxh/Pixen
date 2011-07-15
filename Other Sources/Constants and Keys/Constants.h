@@ -35,6 +35,8 @@ extern NSString *PXPoofLocationKey;
 extern NSString *PXInfinityDescription;
 extern NSString *PXNanDescription;
 
+extern NSString *PXLastSavedFileType;
+
 extern NSString *PixenImageFileType;
 extern NSString *JPEGFileType;
 extern NSString *ICOFileType;

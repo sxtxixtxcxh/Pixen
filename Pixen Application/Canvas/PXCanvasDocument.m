@@ -120,6 +120,36 @@ BOOL isPowerOfTwo(int num)
        contextInfo:contextInfo];
 }
 
+- (BOOL)prepareSavePanel:(NSSavePanel *)savePanel
+{
+	NSString *lastType = [[NSUserDefaults standardUserDefaults] stringForKey:PXLastSavedFileType];
+	
+	if (!lastType)
+		return YES;
+	
+	NSView *accessoryView = [savePanel accessoryView];
+	NSPopUpButton *popUpButton = nil;
+	
+	if ([[accessoryView subviews] count]) {
+		NSView *box = [[accessoryView subviews] objectAtIndex:0];
+		
+		if ([[box subviews] count]) {
+			for (NSView *view in [box subviews]) {
+				if ([view isKindOfClass:[NSPopUpButton class]]) {
+					popUpButton = (NSPopUpButton *) view;
+					break;
+				}
+			}
+		}
+	}
+	
+	if (popUpButton) {
+		[popUpButton selectItemWithTitle:lastType];
+	}
+	
+	return YES;
+}
+
 + (NSData *)dataRepresentationOfType:(NSString *)aType withCanvas:(PXCanvas *)canvas
 {
 	if([aType isEqualToString:PixenImageFileType])
@@ -194,6 +224,8 @@ BOOL isPowerOfTwo(int num)
 
 - (NSData *)dataOfType:(NSString *)type error:(NSError **)err
 {
+	[[NSUserDefaults standardUserDefaults] setObject:type forKey:PXLastSavedFileType];
+	
 	if ([type isEqualToString:JPEGFileType])
 	{
     NSNumber *sf = [NSNumber numberWithFloat:saveFactor];

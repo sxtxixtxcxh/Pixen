@@ -36,6 +36,8 @@ NSString *PXPoofLocationKey = @"PXPoofLocation";
 NSString *PXInfinityDescription = @"inf";
 NSString *PXNanDescription = @"nan";
 
+NSString *PXLastSavedFileType = @"PXLastSavedFileType";
+
 NSString *PixenImageFileType = @"Pixen Image";
 NSString *JPEGFileType = @"JPEG Graphic";
 NSString *ICOFileType = @"Windows Icon (ICO)";
