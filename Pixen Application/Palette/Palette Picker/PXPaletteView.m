@@ -222,8 +222,13 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)deleteBackward:(id)sender
 {
-	if (!selectionIndex)
+	if (!selectionIndex || !palette)
 		return;
+	
+	if (!palette->canSave) {
+		NSBeep();
+		return;
+	}
 	
 	PXPalette_removeColorAtIndex(palette, selectionIndex);
 	[self retile];
