@@ -222,10 +222,10 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)deleteBackward:(id)sender
 {
-	if (!selectionIndex || !palette)
+	if (!palette)
 		return;
 	
-	if (!palette->canSave) {
+	if (selectionIndex < 0 || !palette->canSave) {
 		NSBeep();
 		return;
 	}
@@ -305,7 +305,7 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)activateIndexWithEvent:(NSEvent *)event
 {
-	if (selectionIndex) {
+	if (selectionIndex >= 0) {
 		[self toggleHighlightOnLayerAtIndex:selectionIndex];
 	}
 	
