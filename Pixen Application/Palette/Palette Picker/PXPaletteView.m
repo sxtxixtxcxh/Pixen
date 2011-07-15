@@ -21,6 +21,7 @@ const CGFloat viewMargin = 1.0f;
 	if ((self = [super initWithFrame:frameRect]) != nil) {
 		[self setEnabled:YES];
 		
+		selectionIndex = -1;
 		palette = NULL;
 		controlSize = NSRegularControlSize;
 		
@@ -44,6 +45,11 @@ const CGFloat viewMargin = 1.0f;
 	rootLayer.layoutManager = self;
 	
 	[self setNeedsRetile];
+}
+
+- (BOOL)acceptsFirstResponder
+{
+	return YES;
 }
 
 - (void)dealloc
@@ -88,6 +94,8 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)retile
 {
+	selectionIndex = -1;
+	
 	[self size];
 	[self setFrameSize:NSMakeSize(NSWidth([[self superview] bounds]), MAX(rows * height + viewMargin*2, NSHeight([[self superview] bounds])))];
 	
@@ -120,7 +128,8 @@ const CGFloat viewMargin = 1.0f;
 	 */
 }
 
-- (void)setNeedsRetile {
+- (void)setNeedsRetile
+{
 	[[self class] cancelPreviousPerformRequestsWithTarget:self];
 	[self performSelector:@selector(retile) withObject:nil afterDelay:0.0f];
 }
@@ -210,25 +219,98 @@ const CGFloat viewMargin = 1.0f;
 	}
 }
 
+- (void)deleteBackward:(id)sender
+{
+	if (!selectionIndex)
+		return;
+	
+	PXPalette_removeColorAtIndex(palette, selectionIndex);
+	[self retile];
+}
+
+- (void)moveLeft:(id)sender
+{
+	if (selectionIndex > 0) {
+		int index = selectionIndex;
+		
+		[self toggleHighlightOnLayerAtIndex:selectionIndex];
+		index--;
+		[self toggleHighlightOnLayerAtIndex:index];
+		
+		if ([delegate respondsToSelector:@selector(useColorAtIndex:)])
+			[delegate useColorAtIndex:index];
+	}
+	else {
+		NSBeep();
+	}
+}
+
+- (void)moveRight:(id)sender
+{
+	if (selectionIndex < (PXPalette_colorCount(palette)-1)) {
+		int index = selectionIndex;
+		
+		[self toggleHighlightOnLayerAtIndex:selectionIndex];
+		index++;
+		[self toggleHighlightOnLayerAtIndex:index];
+		
+		if ([delegate respondsToSelector:@selector(useColorAtIndex:)])
+			[delegate useColorAtIndex:index];
+	}
+	else {
+		NSBeep();
+	}
+}
+
+- (void)toggleHighlightOnLayerAtIndex:(int)index
+{
+	for (CALayer *layer in [[self layer] sublayers])
+	{
+		if (![layer isKindOfClass:[PXPaletteColorLayer class]])
+			continue;
+		
+		PXPaletteColorLayer *colorLayer = (PXPaletteColorLayer *) layer;
+		
+		if (index == colorLayer.index) {
+			if (colorLayer.highlighted) {
+				colorLayer.highlighted = NO;
+				selectionIndex = -1;
+			}
+			else {
+				colorLayer.highlighted = YES;
+				selectionIndex = index;
+			}
+			
+			break;
+		}
+	}
+}
+
+- (void)keyDown:(NSEvent *)theEvent
+{
+	[self interpretKeyEvents:[NSArray arrayWithObject:theEvent]];
+}
+
 - (void)activateIndexWithEvent:(NSEvent *)event
 {
-	NSPoint p = [self convertPoint:[event locationInWindow] fromView:nil];
+	if (selectionIndex) {
+		[self toggleHighlightOnLayerAtIndex:selectionIndex];
+	}
 	
 	if (!palette || !enabled)
 		return;
 	
-	int index = [self indexOfCelAtPoint:p];
+	NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
+	
+	int index = [self indexOfCelAtPoint:point];
 	
 	if (index == -1)
 		return;
 	
-	int paletteIndex = index;
+	[self toggleHighlightOnLayerAtIndex:index];
 	
-	if (paletteIndex == -1)
-		return;
-	
-	if ([delegate respondsToSelector:@selector(useColorAtIndex:event:)])
-		[delegate useColorAtIndex:paletteIndex event:event];
+	if ([delegate respondsToSelector:@selector(useColorAtIndex:)])
+		[delegate useColorAtIndex:index];
 }
 
 - (void)mouseDown:(NSEvent *)event
@@ -244,7 +326,7 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)mouseUp:(NSEvent *)event
 {
-	[self activateIndexWithEvent:event];
+	// [self activateIndexWithEvent:event];
 }
 
 @end

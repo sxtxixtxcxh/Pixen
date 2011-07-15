@@ -96,11 +96,16 @@ int kPXColorPickerMode = 23421337;
 	[[NSUserDefaults standardUserDefaults] setInteger:size forKey:PXColorPickerPaletteViewSizeKey];
 }
 
-- (void)useColorAtIndex:(unsigned)index event:(NSEvent *)event
+- (void)useColorAtIndex:(unsigned)index
 {
 	PXPalette *palette = [_vc.paletteView palette];
 	[[self colorPanel] setShowsAlpha:YES];
 	[[self colorPanel] setColor:PXPalette_colorAtIndex(palette, index)];
+}
+
+- (void)modifyColorAtIndex:(unsigned)index
+{
+	
 }
 
 @end

@@ -78,11 +78,11 @@
 	[self setTitle:palette->name];
 }
 
-- (void)useColorAtIndex:(unsigned)index event:(NSEvent *)event
+- (void)useColorAtIndex:(unsigned)index
 {
 	PXToolSwitcher *switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
 	
-	if ([event buttonNumber] == 1 || ([event modifierFlags] & NSControlKeyMask)) {
+	if ([NSEvent pressedMouseButtons] == 2 || ([NSEvent modifierFlags] & NSControlKeyMask)) {
 		switcher = [[PXToolPaletteController sharedToolPaletteController] rightSwitcher];
 	}
 	
