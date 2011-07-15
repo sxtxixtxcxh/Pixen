@@ -144,8 +144,6 @@
 		EA31F9B80CE7CE4800EC481B /* PXPaletteViewSizeSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F99D0CE7CE4800EC481B /* PXPaletteViewSizeSelector.m */; };
 		EA31F9BB0CE7CE4800EC481B /* PXPalettePanel.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9A10CE7CE4800EC481B /* PXPalettePanel.h */; };
 		EA31F9BC0CE7CE4800EC481B /* PXPalettePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9A20CE7CE4800EC481B /* PXPalettePanel.m */; };
-		EA31F9BD0CE7CE4800EC481B /* PXPalettePanelPaletteView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9A30CE7CE4800EC481B /* PXPalettePanelPaletteView.h */; };
-		EA31F9BE0CE7CE4800EC481B /* PXPalettePanelPaletteView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9A40CE7CE4800EC481B /* PXPalettePanelPaletteView.m */; };
 		EA31FA130CE7D02C00EC481B /* PXPreviewBezelView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9FE0CE7D02C00EC481B /* PXPreviewBezelView.h */; };
 		EA31FA140CE7D02C00EC481B /* PXPreviewBezelView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9FF0CE7D02C00EC481B /* PXPreviewBezelView.m */; };
 		EA31FA150CE7D02C00EC481B /* PXPreviewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA000CE7D02C00EC481B /* PXPreviewController.h */; };
@@ -654,8 +652,6 @@
 		EA31F99D0CE7CE4800EC481B /* PXPaletteViewSizeSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteViewSizeSelector.m; sourceTree = "<group>"; };
 		EA31F9A10CE7CE4800EC481B /* PXPalettePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPalettePanel.h; sourceTree = "<group>"; };
 		EA31F9A20CE7CE4800EC481B /* PXPalettePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPalettePanel.m; sourceTree = "<group>"; };
-		EA31F9A30CE7CE4800EC481B /* PXPalettePanelPaletteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPalettePanelPaletteView.h; sourceTree = "<group>"; };
-		EA31F9A40CE7CE4800EC481B /* PXPalettePanelPaletteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPalettePanelPaletteView.m; sourceTree = "<group>"; };
 		EA31F9FE0CE7D02C00EC481B /* PXPreviewBezelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPreviewBezelView.h; sourceTree = "<group>"; };
 		EA31F9FF0CE7D02C00EC481B /* PXPreviewBezelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPreviewBezelView.m; sourceTree = "<group>"; };
 		EA31FA000CE7D02C00EC481B /* PXPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPreviewController.h; sourceTree = "<group>"; };
@@ -1277,8 +1273,6 @@
 				EA31F9810CE7CE4800EC481B /* Palette Picker */,
 				EA31F9A10CE7CE4800EC481B /* PXPalettePanel.h */,
 				EA31F9A20CE7CE4800EC481B /* PXPalettePanel.m */,
-				EA31F9A30CE7CE4800EC481B /* PXPalettePanelPaletteView.h */,
-				EA31F9A40CE7CE4800EC481B /* PXPalettePanelPaletteView.m */,
 				EAB6506D0D108D0F00274070 /* PXPaletteController.h */,
 				EAB6506E0D108D0F00274070 /* PXPaletteController.m */,
 				C9DE2B2A13BF5899007EC48A /* PXPaletteViewController.h */,
@@ -2073,7 +2067,6 @@
 				EA31F9B50CE7CE4800EC481B /* PXPaletteViewScrollView.h in Headers */,
 				EA31F9B70CE7CE4800EC481B /* PXPaletteViewSizeSelector.h in Headers */,
 				EA31F9BB0CE7CE4800EC481B /* PXPalettePanel.h in Headers */,
-				EA31F9BD0CE7CE4800EC481B /* PXPalettePanelPaletteView.h in Headers */,
 				EA31FA130CE7D02C00EC481B /* PXPreviewBezelView.h in Headers */,
 				EA31FA150CE7D02C00EC481B /* PXPreviewController.h in Headers */,
 				EA31FA170CE7D02C00EC481B /* PXPreviewResizePrompter.h in Headers */,
@@ -2444,7 +2437,6 @@
 				EA31F9B60CE7CE4800EC481B /* PXPaletteViewScrollView.m in Sources */,
 				EA31F9B80CE7CE4800EC481B /* PXPaletteViewSizeSelector.m in Sources */,
 				EA31F9BC0CE7CE4800EC481B /* PXPalettePanel.m in Sources */,
-				EA31F9BE0CE7CE4800EC481B /* PXPalettePanelPaletteView.m in Sources */,
 				EA31FA140CE7D02C00EC481B /* PXPreviewBezelView.m in Sources */,
 				EA31FA160CE7D02C00EC481B /* PXPreviewController.m in Sources */,
 				EA31FA180CE7D02C00EC481B /* PXPreviewResizePrompter.m in Sources */,

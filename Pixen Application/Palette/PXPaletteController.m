@@ -8,13 +8,13 @@
 
 #import "PXPaletteController.h"
 
-#import "PXPalettePanelPaletteView.h"
 #import "PXToolSwitcher.h"
 #import "PXToolPaletteController.h"
 #import "PXCanvas.h"
 #import "PXCanvas_Layers.h"
 #import "PXPalette.h"
 #import "PXDocument.h"
+#import "PXPaletteView.h"
 
 @implementation PXPaletteController
 
@@ -117,17 +117,19 @@
 	[paletteView setNeedsRetile];
 }
 
-- (void)useColorAtIndex:(unsigned)index event:(NSEvent *)e;
+- (void)useColorAtIndex:(unsigned)index
 {
 	PXToolSwitcher *switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
-	if([e buttonNumber] == 1 || ([e modifierFlags] & NSControlKeyMask))
+	
+	if ([NSEvent pressedMouseButtons] == 2 || ([NSEvent modifierFlags] & NSControlKeyMask))
 	{
 		switcher = [[PXToolPaletteController sharedToolPaletteController] rightSwitcher];
 	}
+	
 	[switcher setColor:PXPalette_colorAtIndex(frequencyPalette, index)];	
 }
 
-- (void)modifyColorAtIndex:(unsigned)index;
+- (void)modifyColorAtIndex:(unsigned)index
 {
 	//FIXME: put palette adds here
 }
@@ -149,7 +151,7 @@
 {
 	NSString *chars = [event characters];
 	unsigned index = [chars intValue];
-	[self useColorAtIndex:index event:event];
+	[self useColorAtIndex:index];
 }
 
 - (IBAction)useMostRecentColors:sender;
