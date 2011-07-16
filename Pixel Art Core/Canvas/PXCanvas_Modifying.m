@@ -170,6 +170,9 @@
 			return NO; 
 		}
 	}
+	if (!NSPointInRect(point, canvasRect))
+		return NO;
+	
 	return YES;
 }
 

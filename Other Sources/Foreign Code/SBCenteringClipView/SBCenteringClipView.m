@@ -72,6 +72,24 @@
 // work and then swoop in behind to change the bounds origin ourselves. This appears to work
 // just fine without us having to reinvent the methods from scratch.
 
+- (void)mouseDown:(NSEvent *)theEvent
+{
+	NSView *view = [self documentView];
+	[view mouseDown:theEvent];
+}
+
+- (void)mouseDragged:(NSEvent *)theEvent
+{
+	NSView *view = [self documentView];
+	[view mouseDragged:theEvent];
+}
+
+- (void)mouseUp:(NSEvent *)theEvent
+{
+	NSView *view = [self documentView];
+	[view mouseUp:theEvent];
+}
+
 - (void)setFrame:(NSRect)frameRect
 {
     [super setFrame:frameRect];
