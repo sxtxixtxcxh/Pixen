@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PXPalette.h"
 
-@class PXPaletteView, PXPaletteSelector;
+@class PXPaletteView, PXPaletteSelector, PXNamePrompter;
 
 @interface PXPaletteViewController : NSViewController {
   @private
@@ -17,7 +17,8 @@
 	NSButton *addColorButton;
 	IBOutlet PXPaletteSelector *paletteSelector;
 	IBOutlet NSPopUpButton *gearMenu;
-	id namePrompter, delegate;
+	PXNamePrompter *namePrompter;
+	id delegate;
 }
 
 @property (nonatomic, readonly) IBOutlet PXPaletteView *paletteView;

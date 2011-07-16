@@ -56,7 +56,7 @@ typedef enum {
 @interface PXToolSwitcher : NSObject
 {
   @private
-	id tools;
+	NSMutableArray *tools;
 	IBOutlet NSMatrix *toolsMatrix;
 	IBOutlet NSColorWell *colorWell;
 @private 

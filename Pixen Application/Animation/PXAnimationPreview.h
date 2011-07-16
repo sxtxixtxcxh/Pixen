@@ -8,11 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class PXCel;
 
 @interface PXAnimationPreview : NSView {
   @private
 	NSTimer *animationTimer;
-	id currentCel;
+	PXCel *currentCel;
 	int currentIndex;
 	IBOutlet id dataSource;
 }

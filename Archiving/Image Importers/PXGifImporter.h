@@ -14,7 +14,7 @@
 	GifFileType *gifFile;
 	int iterations;
 	
-	id frames;
+	NSMutableArray *frames;
 }
 
 + (BOOL)fileAtURLIsAnimated:(NSURL *)url;
