@@ -63,7 +63,8 @@
 @property (nonatomic, assign) PXCanvas *canvas;
 @property (nonatomic, assign) float zoomPercentage;
 
-- (void)setDelegate:(id) aDelegate;
+@property (nonatomic, assign) id delegate;
+
 - (void)setCrosshair:aCrosshair;
 - (PXCrosshair *)crosshair;
 - (id) initWithFrame:(NSRect)rect;

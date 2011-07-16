@@ -32,17 +32,14 @@
 
 @implementation PXCanvasResizePrompter
 
+@synthesize delegate;
+
 - (id) init
 {
 	if (! ( self = [super initWithWindowNibName:@"PXCanvasResizePrompt"] ) )
 		return nil;
 	
 	return self;
-}
-
-- (void)setDelegate:(id) newDelegate
-{
-	delegate = newDelegate;
 }
 
 - (void)promptInWindow:(NSWindow *)window

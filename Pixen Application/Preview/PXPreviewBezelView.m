@@ -14,7 +14,7 @@
 
 @implementation PXPreviewBezelView
 
-@synthesize opacity = alpha;
+@synthesize opacity = alpha, delegate;
 
 + (id)defaultAnimationForKey:(NSString *)key
 {
@@ -33,12 +33,6 @@
 	return YES;
 }
 
-- (void)setDelegate:newDelegate
-{
-	[delegate release];
-	delegate = [newDelegate retain];
-}
-
 - (void)setOpacity:(CGFloat)opacity {
 	if (alpha != opacity) {
 		alpha = opacity;
@@ -48,7 +42,6 @@
 
 - (void)dealloc
 {
-	[delegate release];
 	[actionGear release];
 	[menu release];
 	[super dealloc];

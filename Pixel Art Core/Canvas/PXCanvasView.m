@@ -63,7 +63,7 @@ void PXDebugRect(NSRect r, float alpha)
 
 @implementation PXCanvasView
 
-@synthesize canvas, zoomPercentage;
+@synthesize canvas, zoomPercentage, delegate;
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)event
 {
@@ -78,11 +78,6 @@ void PXDebugRect(NSRect r, float alpha)
 - (void)rightMouseDown:(NSEvent*) event
 {
 	[delegate rightMouseDown:event];
-}
-
-- (void)setDelegate:(id) aDelegate
-{
-	delegate = aDelegate;
 }
 
 - (void)setShouldDrawToolBeziers:(BOOL)newShouldDraw

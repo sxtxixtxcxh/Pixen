@@ -37,11 +37,12 @@
 	BOOL wraps; // used in setCanvas
 }
 
+@property (nonatomic, assign) id delegate;
+
 - (PXCanvasView *)view;
 - (NSScrollView *)scrollView;
 - layerController;
 - window;
-- (void)dealloc;
 - (void)layerSelectionDidChange:(NSNotification *) aNotification;
 - (void)setLayerController:contro;
 - (void)prepare;
@@ -72,8 +73,6 @@
 - (void)setDocument:doc;
 - window;
 - (void)setWindow:win;
-- delegate;
-- (void)setDelegate:del;
 - (void)zoomInOnCanvasPoint:(NSPoint)point;
 - (void)zoomOutOnCanvasPoint:(NSPoint)point;
 

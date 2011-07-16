@@ -11,6 +11,8 @@
 
 @implementation PXPreviewResizePrompter
 
+@synthesize delegate;
+
 - (id) init
 {
 	if (! ( self = [super initWithWindowNibName:@"PXPreviewResizePrompt"] ) )
@@ -77,11 +79,6 @@
 - (void)setCanvasSize:(NSSize)newSize
 {
 	canvasSize = newSize;
-}
-
-- (void)setDelegate:newDelegate
-{
-	delegate = newDelegate;
 }
 
 @end

@@ -50,8 +50,9 @@ didFinishWithSize:(NSSize)size
 	id delegate;
 }
 
+@property (nonatomic, assign) id delegate;
+
 -(id) init;
-- (void)setDelegate:(id)newDelegate;
 - (void)promptInWindow:(NSWindow *)window;
 
 - (IBAction)cancel:(id) sender;

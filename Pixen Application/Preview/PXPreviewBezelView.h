@@ -16,7 +16,7 @@
 	CGFloat alpha;
 }
 
-- (void)setDelegate:delegate;
+@property (nonatomic, assign) id delegate;
 
 @property (nonatomic, assign) CGFloat opacity;
 

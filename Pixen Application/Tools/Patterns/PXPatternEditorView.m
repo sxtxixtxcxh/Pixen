@@ -34,6 +34,8 @@
 
 @implementation PXPatternEditorView
 
+@synthesize delegate;
+
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -205,11 +207,6 @@
 	pattern = newPattern;
 	[self setNeedsDisplay:YES];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redrawPattern:) name:PXPatternChangedNotificationName object:pattern];
-}
-
-- (void)setDelegate:del
-{
-	delegate = del;
 }
 
 @end

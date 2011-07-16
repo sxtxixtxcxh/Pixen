@@ -39,8 +39,9 @@
 	NSInteger activeCelForField;
 }
 
+@property (nonatomic, assign) id delegate;
+
 - (void)setDataSource:dataSource;
-- (void)setDelegate:delegate;
 - (void)reloadData;
 - (float)minimumHeight;
 

@@ -33,6 +33,8 @@
 
 @implementation PXPatternCell
 
+@synthesize delegate;
+
 - (id)init
 {
 	self = [super init];
@@ -257,11 +259,6 @@
 	dragEvent = theEvent;
 	[super trackMouse:theEvent inRect:cellFrame ofView:controlView untilMouseUp:untilMouseUp];	
 	return YES;
-}
-
-- (void)setDelegate:d
-{
-	delegate = d;
 }
 
 @end

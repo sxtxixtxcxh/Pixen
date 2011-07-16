@@ -43,7 +43,8 @@
 	BOOL erasing;
 }
 
-- (void)setDelegate:del;
+@property (nonatomic, assign) id delegate;
+
 - (void)setPattern:(PXPattern *)newPattern;
 
 - (NSSize)resizeToFitWidth:(float)frameSize;

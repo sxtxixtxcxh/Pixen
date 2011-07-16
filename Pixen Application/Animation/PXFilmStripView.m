@@ -25,6 +25,8 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 
 @implementation PXFilmStripView
 
+@synthesize delegate;
+
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) 

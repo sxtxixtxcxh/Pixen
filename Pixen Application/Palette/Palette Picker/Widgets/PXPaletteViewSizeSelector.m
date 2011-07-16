@@ -11,6 +11,8 @@
 
 @implementation PXPaletteViewSizeSelector
 
+@synthesize delegate;
+
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -99,11 +101,6 @@
 - (void)mouseUp:(NSEvent *)event
 {
 	[delegate sizeSelector:self selectedSize:size];
-}
-
-- (void)setDelegate:aDelegate
-{
-	delegate = aDelegate;
 }
 
 - (void)setControlSize:(NSControlSize)aSize

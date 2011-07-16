@@ -16,13 +16,14 @@
 	id delegate;
 }
 
+@property (nonatomic, assign) id delegate;
+
 - (IBAction)resize:sender;
 - (IBAction)cancel:sender;
 - (IBAction)updateForm:sender;
 
 - (void)setZoomFactor:(float)zoomFactor;
 - (void)setCanvasSize:(NSSize)size;
-- (void)setDelegate:delegate;
 
 - (void)promptInWindow:(NSWindow *)window;
 

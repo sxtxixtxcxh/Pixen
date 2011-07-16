@@ -15,7 +15,9 @@
 	NSControlSize size;
 	id delegate;
 }
-- (void)setDelegate:delegate;
+
+@property (nonatomic, assign) id delegate;
+
 - (void)setControlSize:(NSControlSize)size;
 @end
 

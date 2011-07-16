@@ -30,6 +30,8 @@
 
 @implementation PXCanvasController
 
+@synthesize delegate;
+
 - (PXCanvasView *)view
 {
 	return view;
@@ -409,16 +411,6 @@
 {
 	[delegate canvasController:self zoomOutOnCanvasPoint:point];
 	[view centerOn:[view convertFromCanvasToViewPoint:point]];
-}
-
-- delegate
-{
-	return delegate;
-}
-
-- (void)setDelegate:del
-{
-	delegate = del;
 }
 
 - (void)mouseDown:event forTool:aTool
