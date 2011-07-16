@@ -35,7 +35,6 @@
 	PXPattern *oldPattern;
 	NSString *toolName;
 	IBOutlet PXPatternEditorView *view;
-	IBOutlet NSDrawer *drawer;
 	IBOutlet NSScrollView *scrollView;
 	PXSavedPatternMatrix *matrix;
 	id delegate;
@@ -43,7 +42,8 @@
 
 @property (nonatomic, copy) NSString *toolName;
 
-- (void)setDelegate:del;
+@property (nonatomic, assign) id delegate;
+
 - (void)setPattern:(PXPattern *)pattern;
 
 - (IBAction)save:sender;

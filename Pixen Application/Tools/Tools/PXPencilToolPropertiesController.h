@@ -42,17 +42,18 @@
 	PXPattern *drawingPattern;
 	PXPatternEditorController *patternEditor;
 	int lineThickness;
+	NSString *toolName;
 }
 
 @property (nonatomic, assign) int lineThickness;
 @property (nonatomic, retain) PXPattern *pattern;
+
+@property (nonatomic, copy) NSString *toolName;
 
 - (NSSize)patternSize;
 - (NSArray *)drawingPoints;
 
 - (IBAction)modifyPattern:(id)sender;
 - (IBAction)clearPattern:(id)sender;
-
-- (void)setToolName:(id)name;
 
 @end

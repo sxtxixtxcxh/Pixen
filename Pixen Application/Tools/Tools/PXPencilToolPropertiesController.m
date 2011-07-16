@@ -37,7 +37,7 @@
 
 @implementation PXPencilToolPropertiesController
 
-@synthesize lineThickness, pattern = drawingPattern;
+@synthesize lineThickness, pattern = drawingPattern, toolName;
 
 - (NSString *)nibName
 {
@@ -109,7 +109,12 @@
 		}
 	}
 	
-	[patternEditor window];
+	if (!patternEditor) {
+		patternEditor = [[PXPatternEditorController alloc] init];
+		patternEditor.delegate = self;
+		patternEditor.toolName = toolName;
+	}
+	
 	[patternEditor setPattern:drawingPattern];
 	[patternEditor showWindow:self];
 }
@@ -123,23 +128,16 @@
 {
 	self = [super init];
 	if (self) {
-		patternEditor = [[PXPatternEditorController alloc] init];
-		[patternEditor setDelegate:self];
-		
 		self.lineThickness = 1;
 	}
 	return self;
-}
-
-- (void)setToolName:(id)name
-{
-	[patternEditor setToolName:name];
 }
 
 - (void)dealloc
 {
 	[patternEditor release];
 	[drawingPattern release];
+	[toolName release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
 }

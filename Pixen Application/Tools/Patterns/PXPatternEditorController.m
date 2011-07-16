@@ -35,12 +35,7 @@
 
 @implementation PXPatternEditorController
 
-@synthesize toolName;
-
-- (void)setDelegate:del
-{
-	delegate = del;
-}
+@synthesize toolName, delegate;
 
 - (NSSize)properContentSize
 {
@@ -52,8 +47,24 @@
 	return newSize;
 }
 
+- (void)awakeFromNib
+{
+	[view setDelegate:self];
+	
+	[[self window] setContentAspectRatio:[[self window] contentAspectRatio]];
+	[[self window] setContentSize:[self properContentSize]];
+	[[self window] setTitle:[NSLocalizedString(@"Pattern Editor: ", @"Pattern Editor:") stringByAppendingString:toolName]];
+	
+	matrix = [[PXSavedPatternMatrix alloc] initWithWidth:[scrollView contentSize].width patternFile:GetPixenPatternFile()];
+	[matrix setDoubleAction:@selector(load:)];
+	[matrix setTarget:self];
+	[scrollView setDocumentView:matrix];
+}
+
 - (void)setPattern:(PXPattern *)pat
 {
+	[self loadWindow];
+	
 	[pattern release];
 	pattern = [pat copy];
 	NSSize patternSize = [pattern size];
@@ -81,19 +92,6 @@
 	return newSize;
 }
 
-- (void)windowDidLoad
-{
-	[view setDelegate:self];
-	[[self window] setContentAspectRatio:[[self window] contentAspectRatio]];
-	[[self window] setContentSize:[self properContentSize]];
-	[[self window] setTitle:[NSLocalizedString(@"Pattern Editor: ", @"Pattern Editor:") stringByAppendingString:toolName]];
-	
-	matrix = [[PXSavedPatternMatrix alloc] initWithWidth:[scrollView contentSize].width patternFile:GetPixenPatternFile()];
-	[matrix setDoubleAction:@selector(load:)];
-	[matrix setTarget:self];
-	[scrollView setDocumentView:matrix];
-} 
-
 - (IBAction)displayHelp:sender
 {
 	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"patterns" inBook:@"Pixen Help"];	
@@ -111,7 +109,6 @@
 - (IBAction)save:sender
 {
 	[matrix addPattern:pattern];
-	[drawer open:self];
 }
 
 - (IBAction)load:sender
@@ -143,21 +140,7 @@
 						contextInfo:nil];
 }
 
-- (void)awakeFromNib
-{
-	NSSize drawerContentSize = [drawer contentSize];
-	NSSize drawerMinSize = [drawer minContentSize];
-	NSSize drawerMaxSize = [drawer maxContentSize];
-	if (drawerContentSize.width < drawerMinSize.width) {
-		drawerContentSize.width = drawerMinSize.width;
-	}
-	if (drawerContentSize.width > drawerMaxSize.width) {
-		drawerContentSize.width = drawerMaxSize.width;
-	}
-	[drawer setContentSize:drawerContentSize];
-}
-
-- init
+- (id)init
 {
 	return [super initWithWindowNibName:@"PXPatternEditor"];
 }
