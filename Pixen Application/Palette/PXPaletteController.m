@@ -134,11 +134,6 @@
 	[switcher setColor:PXPalette_colorAtIndex(frequencyPalette, index)];	
 }
 
-- (void)modifyColorAtIndex:(NSUInteger)index
-{
-	//FIXME: put palette adds here
-}
-
 - (void)paletteViewSizeChangedTo:(NSControlSize)size
 {
 	[[NSUserDefaults standardUserDefaults] setInteger:size forKey:PXColorPickerPaletteViewSizeKey];

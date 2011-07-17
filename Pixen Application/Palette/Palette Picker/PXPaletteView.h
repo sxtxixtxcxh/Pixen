@@ -46,7 +46,6 @@
 @interface NSObject (PXPaletteViewDelegate)
 
 - (void)useColorAtIndex:(NSUInteger)index;
-- (void)modifyColorAtIndex:(NSUInteger)index;
 - (void)paletteViewSizeChangedTo:(NSControlSize)size;
 
 @end

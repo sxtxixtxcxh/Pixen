@@ -10,6 +10,8 @@
 #import "PXDocument.h"
 #import "PXPaletteColorLayer.h"
 
+#import <Carbon/Carbon.h>
+
 @implementation PXPaletteView
 
 const CGFloat viewMargin = 1.0f;
@@ -327,6 +329,37 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)mouseDown:(NSEvent *)event
 {
+	if ([event clickCount] == 2 && highlightEnabled) {
+		NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
+		NSUInteger index = [self indexOfCelAtPoint:point];
+		
+		if (index == NSNotFound)
+			return;
+		
+		NSColor *color = PXPalette_colorAtIndex(palette, index);
+		
+		int r = [color redComponent] * 65335;
+		int g = [color greenComponent] * 65335;
+		int b = [color blueComponent] * 65335;
+		
+		RGBColor inColor = { r, g, b };
+		RGBColor outColor = { 0, 0, 0 };
+		Point zero = { 0, 0 };
+		
+		if (GetColor(zero, (ConstStr255Param) "" , &inColor, &outColor)) {
+			NSColor *newColor = [NSColor colorWithCalibratedRed:outColor.red / 65335.0f
+														  green:outColor.green / 65335.0f
+														   blue:outColor.blue / 65335.0f
+														  alpha:1.0f];
+			
+			PXPalette_setColorAtIndex(palette, newColor, index);
+			
+			[self retile];
+		}
+		
+		return;
+	}
+	
 	[self activateIndexWithEvent:event];
 }
 
