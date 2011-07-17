@@ -38,7 +38,7 @@ NSString *PXNanDescription = @"nan";
 
 NSString *PXLastSavedFileType = @"PXLastSavedFileType";
 
-NSString *PixenImageFileType = @"Pixen Image";
+NSString *PixenImageFileType = @"com.opensword.pxim";
 NSString *JPEGFileType = @"JPEG Graphic";
 NSString *ICOFileType = @"Windows Icon (ICO)";
 NSString *PNGFileType = @"Portable Network Graphic (PNG)";

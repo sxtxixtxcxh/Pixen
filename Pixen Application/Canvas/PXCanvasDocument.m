@@ -122,6 +122,7 @@ BOOL isPowerOfTwo(int num)
 
 - (BOOL)prepareSavePanel:(NSSavePanel *)savePanel
 {
+	/*
 	NSString *lastType = [[NSUserDefaults standardUserDefaults] stringForKey:PXLastSavedFileType];
 	
 	if (!lastType)
@@ -146,6 +147,7 @@ BOOL isPowerOfTwo(int num)
 	if (popUpButton) {
 		[popUpButton selectItemWithTitle:lastType];
 	}
+	*/
 	
 	return YES;
 }
