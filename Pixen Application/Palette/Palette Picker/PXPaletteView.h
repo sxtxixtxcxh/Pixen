@@ -18,7 +18,7 @@
 	NSMutableArray *paletteIndices;
 	
 	int rows, columns;
-	int selectionIndex;
+	NSUInteger selectionIndex;
 	float width, height;
 	BOOL enabled, highlightEnabled;
 	NSControlSize controlSize;
@@ -37,16 +37,16 @@
 - (void)setupLayer;
 - (void)setNeedsRetile;
 
-- (int)indexOfCelAtPoint:(NSPoint)point;
-- (void)toggleHighlightOnLayerAtIndex:(int)index;
+- (NSUInteger)indexOfCelAtPoint:(NSPoint)point;
+- (void)toggleHighlightOnLayerAtIndex:(NSUInteger)index;
 
 @end
 
 
 @interface NSObject (PXPaletteViewDelegate)
 
-- (void)useColorAtIndex:(unsigned)index;
-- (void)modifyColorAtIndex:(unsigned)index;
+- (void)useColorAtIndex:(NSUInteger)index;
+- (void)modifyColorAtIndex:(NSUInteger)index;
 - (void)paletteViewSizeChangedTo:(NSControlSize)size;
 
 @end

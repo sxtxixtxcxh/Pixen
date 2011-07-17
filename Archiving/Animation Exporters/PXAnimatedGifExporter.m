@@ -56,7 +56,7 @@
 - (NSColor *)writeCanvas:(PXCanvas *)canvas withDuration:(NSTimeInterval)duration origin:(NSPoint)origin transparentColor:aColor
 {	
 	PXPalette *palette = [canvas createFrequencyPalette];
-	int colorCount = PXPalette_colorCount(palette);
+	NSUInteger colorCount = PXPalette_colorCount(palette);
 	// The animated gif writer only supports <= 256 color palettes. If you have a palette bigger than that, quantize it first then come back.
 	if (colorCount > 256)
 	{

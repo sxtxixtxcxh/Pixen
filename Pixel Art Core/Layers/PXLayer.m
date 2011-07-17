@@ -462,7 +462,7 @@
 		transparency = NO;
 	for (i = 0; i < [self size].width * [self size].height; i++)
 	{
-		int base = i * [rep samplesPerPixel];
+		NSInteger base = i * [rep samplesPerPixel];
 		NSColor *color;
 		if (transparency && bitmapData[base + 3] == 0)
 		{

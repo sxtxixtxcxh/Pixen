@@ -94,11 +94,11 @@ static PXPanelManager *sharedManager = nil;
 	[self showToolPalette:self];
 	
 	// Palette panels!
-	int systemPalettesCount = PXPalette_getSystemPalettes(NULL, 0);
+	NSUInteger systemPalettesCount = PXPalette_getSystemPalettes(NULL, 0);
 	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPalettesCount);
 	PXPalette_getSystemPalettes(systemPalettes, 0);
 	
-	int userPalettesCount = PXPalette_getUserPalettes(NULL, 0);
+	NSUInteger userPalettesCount = PXPalette_getUserPalettes(NULL, 0);
 	PXPalette **userPalettes = malloc(sizeof(PXPalette *) * userPalettesCount);
 	PXPalette_getUserPalettes(userPalettes, 0);
 	
@@ -107,7 +107,7 @@ static PXPanelManager *sharedManager = nil;
 	for (NSDictionary *current in palettePanels)
 	{
 		BOOL isSystemPalette = [[current objectForKey:PXPalettePanelIsSystemPaletteKey] boolValue];
-		int index = [[current objectForKey:PXPalettePanelPaletteIndexKey] intValue];
+		NSUInteger index = [[current objectForKey:PXPalettePanelPaletteIndexKey] unsignedIntegerValue];
 		int viewSize = [[current objectForKey:PXPalettePanelPaletteViewSizeKey] intValue];
 		
 		PXPalette *palette = NULL;
@@ -163,11 +163,11 @@ static PXPanelManager *sharedManager = nil;
 	// Popout color panels
 	NSMutableArray *archivedPalettePanels = [NSMutableArray array];
 	
-	int systemPalettesCount = PXPalette_getSystemPalettes(NULL, 0);
+	NSUInteger systemPalettesCount = PXPalette_getSystemPalettes(NULL, 0);
 	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPalettesCount);
 	PXPalette_getSystemPalettes(systemPalettes, 0);
 	
-	int userPalettesCount = PXPalette_getUserPalettes(NULL, 0);
+	NSUInteger userPalettesCount = PXPalette_getUserPalettes(NULL, 0);
 	PXPalette **userPalettes = malloc(sizeof(PXPalette *) * userPalettesCount);
 	PXPalette_getUserPalettes(userPalettes, 0);
 	
@@ -178,12 +178,12 @@ static PXPanelManager *sharedManager = nil;
 		
 		NSMutableDictionary *panelInfo = [NSMutableDictionary dictionary];
 		[panelInfo setObject:NSStringFromRect([panel frame]) forKey:PXPalettePanelFrameKey];
-		[panelInfo setObject:[NSNumber numberWithInt:[[panel paletteView] controlSize]] forKey:PXPalettePanelPaletteViewSizeKey];
+		[panelInfo setObject:[NSNumber numberWithLong:[[panel paletteView] controlSize]] forKey:PXPalettePanelPaletteViewSizeKey];
 		
 		// Now we've got to identify the palette and see how we're going to classify it.
 		PXPalette *palette = [[panel paletteView] palette];
 		
-		int i;
+		NSUInteger i;
 		BOOL found = NO;
 		for (i = 0; i < systemPalettesCount; i++)
 		{
@@ -191,7 +191,7 @@ static PXPanelManager *sharedManager = nil;
 			{
 				found = YES;
 				[panelInfo setObject:[NSNumber numberWithBool:YES] forKey:PXPalettePanelIsSystemPaletteKey];
-				[panelInfo setObject:[NSNumber numberWithInt:i] forKey:PXPalettePanelPaletteIndexKey];
+				[panelInfo setObject:[NSNumber numberWithUnsignedInteger:i] forKey:PXPalettePanelPaletteIndexKey];
 				break;
 			}
 		}
@@ -204,7 +204,7 @@ static PXPanelManager *sharedManager = nil;
 				{
 					found = YES;
 					[panelInfo setObject:[NSNumber numberWithBool:NO] forKey:PXPalettePanelIsSystemPaletteKey];
-					[panelInfo setObject:[NSNumber numberWithInt:i] forKey:PXPalettePanelPaletteIndexKey];
+					[panelInfo setObject:[NSNumber numberWithUnsignedInteger:i] forKey:PXPalettePanelPaletteIndexKey];
 				}
 			}
 			

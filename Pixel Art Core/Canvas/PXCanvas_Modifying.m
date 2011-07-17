@@ -331,7 +331,7 @@
 		pt = [[pts objectAtIndex:0] pointValue];
 		changedRect = NSMakeRect(pt.x, pt.y, 1, 1);
 	}
-	int i;
+	NSInteger i;
 	for (i = [pts count]-1; i >= 0; i--) 
 	{
 		pt = [[pts objectAtIndex:i] pointValue];

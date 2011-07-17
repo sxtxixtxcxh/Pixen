@@ -47,23 +47,23 @@ typedef struct
 - (NSData *)palDataForPalette:(PXPalette *)palette
 {
 	NSMutableData *data = [NSMutableData data];
-	unsigned long length = 24 + (4 * PXPalette_colorCount(palette));
+	NSUInteger length = 24 + (4 * PXPalette_colorCount(palette));
 	
 	// Construct the header
 	OSPALHeader header;
 	header.signature = CFSwapInt32HostToLittle('FFIR'); // Magic number for PAL
-	header.fileLength = CFSwapInt32HostToLittle(length - 8); // Size of the file minus this long and the previous one.
+	header.fileLength = CFSwapInt32HostToLittle( (int) length - 8); // Size of the file minus this long and the previous one.
 	header.riffType = CFSwapInt32HostToLittle(' LAP'); // Always the same for palettes
 	[data appendBytes:&header length:sizeof(OSPALHeader)];
 	
 	// Construct the RIFF chunk
 	unsigned long riffSignature = CFSwapInt32HostToLittle('atad');
 	[data appendBytes:&riffSignature length:4];
-	unsigned long chunkSize = CFSwapInt32HostToLittle(length - 20);
+	unsigned long chunkSize = CFSwapInt32HostToLittle( (int) length - 20);
 	[data appendBytes:&chunkSize length:4];
 	
 	// The first data long is in two shorts: a palette version and the number of colors in the palette.
-	int colorCount = PXPalette_colorCount(palette);
+	NSUInteger colorCount = PXPalette_colorCount(palette);
 	char riffHeader[4];
 	riffHeader[0] = 0;
 	riffHeader[1] = 3;
@@ -72,7 +72,7 @@ typedef struct
 	[data appendBytes:riffHeader length:4];
 	
 	// Write the color data.
-	int i;
+	NSUInteger i;
 	for (i = 0; i < colorCount; i++)
 	{
 		NSColor *color = [palette->colors[i].color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];

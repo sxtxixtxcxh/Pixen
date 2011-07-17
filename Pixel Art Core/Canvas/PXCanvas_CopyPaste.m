@@ -99,7 +99,7 @@
 - (void)pasteFromPasteboard:(NSPasteboard *) board type:type intoLayer:(PXLayer *)layer
 {
   PXLayer *newLayer = [self layerForPastingFromPasteboard:board type:type];
-  int idx = [layers indexOfObject:layer];
+  NSUInteger idx = [layers indexOfObject:layer];
   [self beginUndoGrouping]; {
       //FIXME wasteful copy
 		[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];

@@ -73,7 +73,7 @@
 	[self setTitle:palette->name];
 }
 
-- (void)useColorAtIndex:(unsigned)index
+- (void)useColorAtIndex:(NSUInteger)index
 {
 	PXToolSwitcher *switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
 	

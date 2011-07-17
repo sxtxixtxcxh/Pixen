@@ -44,18 +44,18 @@
 	
 	NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
 	NSString *base = [NSString stringWithString:name];
-	int i = 2, j;
+	int i = 2;
 	
 	// First make the name not conflict with system palettes
-	int systemPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
+	NSUInteger systemPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
 	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPaletteCount);
 	PXPalette_getSystemPalettes(systemPalettes, 0);
 	
 	NSMutableArray *names = [NSMutableArray array];
 	
-	for (j = 0; j < systemPaletteCount; j++)
+	for (NSUInteger n = 0; n < systemPaletteCount; n++)
 	{
-		[names addObject:PXPalette_name(systemPalettes[j])];
+		[names addObject:PXPalette_name(systemPalettes[n])];
 	}
 	
 	free(systemPalettes);

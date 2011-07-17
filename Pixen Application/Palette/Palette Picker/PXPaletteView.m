@@ -21,7 +21,7 @@ const CGFloat viewMargin = 1.0f;
 	if ((self = [super initWithFrame:frameRect]) != nil) {
 		[self setEnabled:YES];
 		
-		selectionIndex = -1;
+		selectionIndex = NSNotFound;
 		palette = NULL;
 		controlSize = NSRegularControlSize;
 		highlightEnabled = YES;
@@ -84,10 +84,10 @@ const CGFloat viewMargin = 1.0f;
 		if (![layer isKindOfClass:[PXPaletteColorLayer class]])
 			continue;
 		
-		int n = [ (PXPaletteColorLayer *) layer index];
+		NSUInteger n = [ (PXPaletteColorLayer *) layer index];
 		
-		int i = n % columns;
-		int j = n / columns;
+		NSUInteger i = n % columns;
+		NSUInteger j = n / columns;
 		
 		layer.frame = CGRectMake(viewMargin*2 + i*width, viewMargin*2 + j*height, width - viewMargin*2, height - viewMargin*2);
 	}
@@ -95,7 +95,7 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)retile
 {
-	selectionIndex = -1;
+	selectionIndex = NSNotFound;
 	
 	[self size];
 	[self setFrameSize:NSMakeSize(NSWidth([[self superview] bounds]), MAX(rows * height + viewMargin*2, NSHeight([[self superview] bounds])))];
@@ -105,10 +105,10 @@ const CGFloat viewMargin = 1.0f;
 	if (!palette)
 		return;
 	
-	int count = PXPalette_colorCount(palette);
+	NSUInteger count = PXPalette_colorCount(palette);
 	PXPaletteColorPair *colors = palette->colors;
 	
-	for (int n = 0; n < count; n++) {
+	for (NSUInteger n = 0; n < count; n++) {
 		PXPaletteColorLayer *colorLayer = [PXPaletteColorLayer layer];
 		colorLayer.index = n;
 		colorLayer.color = colors[n].color;
@@ -179,7 +179,7 @@ const CGFloat viewMargin = 1.0f;
 	[self mouseUp:event];
 }
 
-- (int)indexOfCelAtPoint:(NSPoint)point
+- (NSUInteger)indexOfCelAtPoint:(NSPoint)point
 {
 	int firstRow = MAX(floorf(NSMinY([self visibleRect]) / height), 0);
 	int lastRow = MIN(ceilf(NSMaxY([self visibleRect]) / height), rows-1);
@@ -189,7 +189,7 @@ const CGFloat viewMargin = 1.0f;
 	{
 		for (i = 0; i < columns; i++)
 		{
-			int index = j * columns + i;
+			NSUInteger index = j * columns + i;
 			
 			if (index >= (PXPalette_colorCount(palette)))
 				break;
@@ -201,7 +201,7 @@ const CGFloat viewMargin = 1.0f;
 		}
 	}
 	
-	return -1;
+	return NSNotFound;
 }
 
 - (void)setControlSize:(NSControlSize)aSize
@@ -225,7 +225,7 @@ const CGFloat viewMargin = 1.0f;
 	if (!palette)
 		return;
 	
-	if (selectionIndex < 0 || !palette->canSave) {
+	if (selectionIndex == NSNotFound || !palette->canSave) {
 		NSBeep();
 		return;
 	}
@@ -237,7 +237,7 @@ const CGFloat viewMargin = 1.0f;
 - (void)moveLeft:(id)sender
 {
 	if (selectionIndex > 0) {
-		int index = selectionIndex;
+		NSUInteger index = selectionIndex;
 		
 		[self toggleHighlightOnLayerAtIndex:selectionIndex];
 		index--;
@@ -254,7 +254,7 @@ const CGFloat viewMargin = 1.0f;
 - (void)moveRight:(id)sender
 {
 	if (selectionIndex < (PXPalette_colorCount(palette)-1)) {
-		int index = selectionIndex;
+		NSUInteger index = selectionIndex;
 		
 		[self toggleHighlightOnLayerAtIndex:selectionIndex];
 		index++;
@@ -268,7 +268,7 @@ const CGFloat viewMargin = 1.0f;
 	}
 }
 
-- (void)toggleHighlightOnLayerAtIndex:(int)index
+- (void)toggleHighlightOnLayerAtIndex:(NSUInteger)index
 {
 	if (!highlightEnabled)
 		return;
@@ -283,7 +283,7 @@ const CGFloat viewMargin = 1.0f;
 		if (index == colorLayer.index) {
 			if (colorLayer.highlighted) {
 				colorLayer.highlighted = NO;
-				selectionIndex = -1;
+				selectionIndex = NSNotFound;
 			}
 			else {
 				colorLayer.highlighted = YES;
@@ -305,7 +305,7 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)activateIndexWithEvent:(NSEvent *)event
 {
-	if (selectionIndex >= 0) {
+	if (selectionIndex != NSNotFound) {
 		[self toggleHighlightOnLayerAtIndex:selectionIndex];
 	}
 	
@@ -314,9 +314,9 @@ const CGFloat viewMargin = 1.0f;
 	
 	NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
 	
-	int index = [self indexOfCelAtPoint:point];
+	NSUInteger index = [self indexOfCelAtPoint:point];
 	
-	if (index == -1)
+	if (index == NSNotFound)
 		return;
 	
 	[self toggleHighlightOnLayerAtIndex:index];

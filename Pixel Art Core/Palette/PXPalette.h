@@ -28,7 +28,7 @@
 
 typedef struct _PXColorBucket {
 	NSColor *color;
-	unsigned int index;
+	NSUInteger index;
 	struct _PXColorBucket *next;
 } PXColorBucket;
 
@@ -38,12 +38,12 @@ typedef struct _PXPaletteColorPair {
 } PXPaletteColorPair;
 
 typedef struct {
-	unsigned int retainCount;
+	NSUInteger retainCount;
 	
-  PXPaletteColorPair *colors;
+	PXPaletteColorPair *colors;
   
-	unsigned int colorCount;
-	unsigned int size;
+	NSUInteger colorCount;
+	NSUInteger size;
 	PXColorBucket **reverseHashTable;
 	NSString *name;
 	
@@ -51,8 +51,8 @@ typedef struct {
 	BOOL canSave;
 } PXPalette;
 
-unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex);
-unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex);
+NSUInteger PXPalette_getSystemPalettes(PXPalette **pals, NSUInteger initialIndex);
+NSUInteger PXPalette_getUserPalettes(PXPalette **pals, NSUInteger initialIndex);
 BOOL PXPalette_isDocumentPalette(PXPalette *self);
 
 PXPalette *PXPalette_alloc(void);
@@ -69,25 +69,25 @@ PXPalette *PXPalette_release(PXPalette *self);
 NSString *PXPalette_name(PXPalette *self);
 void PXPalette_setName(PXPalette *self, NSString *name);
 
-void PXPalette_resize(PXPalette *self, unsigned int newSize);
+void PXPalette_resize(PXPalette *self, NSUInteger newSize);
 void PXPalette_addColorPair(PXPalette *self, PXPaletteColorPair pair);
 void PXPalette_addColor(PXPalette *self, NSColor *color);
 void PXPalette_addBackgroundColor(PXPalette *self);
 void PXPalette_addColorWithoutDuplicating(PXPalette *self, NSColor *color);
-void PXPalette_removeColorAtIndex(PXPalette *self, unsigned int index);
-void PXPalette_insertColorAtIndex(PXPalette *self, NSColor *color, unsigned index);
+void PXPalette_removeColorAtIndex(PXPalette *self, NSUInteger index);
+void PXPalette_insertColorAtIndex(PXPalette *self, NSColor *color, NSUInteger index);
 PXColorBucket *PXPalette_bucketForColor(PXPalette *self, NSColor *color);
 
-void PXPalette_swapColorsAtIndex(PXPalette* self, unsigned int colorIndex1, unsigned int colorIndex2);
+void PXPalette_swapColorsAtIndex(PXPalette* self, NSUInteger colorIndex1, NSUInteger colorIndex2);
 void PXPalette_swapColors(PXPalette* self, NSColor *color1, NSColor *color2);
 void PXPalette_cycleColors(PXPalette *self);
-void PXPalette_setColorAtIndex(PXPalette *self, NSColor *color, unsigned int index);
-void PXPalette_moveColorAtIndexToIndex(PXPalette *self, unsigned int index1, unsigned int index2);
+void PXPalette_setColorAtIndex(PXPalette *self, NSColor *color, NSUInteger index);
+void PXPalette_moveColorAtIndexToIndex(PXPalette *self, NSUInteger index1, NSUInteger index2);
 
-unsigned int PXPalette_indexOfColor(PXPalette *self, NSColor *color);
-NSColor *PXPalette_colorAtIndex(PXPalette *self, unsigned index);
-unsigned int PXPalette_indexOfColorAddingIfNotPresent(PXPalette *self, NSColor *color);
-unsigned int PXPalette_indexOfColorClosestTo(PXPalette *self, NSColor *color);
+NSUInteger PXPalette_indexOfColor(PXPalette *self, NSColor *color);
+NSColor *PXPalette_colorAtIndex(PXPalette *self, NSUInteger index);
+NSUInteger PXPalette_indexOfColorAddingIfNotPresent(PXPalette *self, NSColor *color);
+NSUInteger PXPalette_indexOfColorClosestTo(PXPalette *self, NSColor *color);
 NSColor *PXPalette_colorClosestTo(PXPalette *self, NSColor *color);
 NSColor *PXPalette_restrictColor(PXPalette *self, NSColor *color);
 void PXPalette_removeAlphaComponents(PXPalette *self);
@@ -98,8 +98,8 @@ NSDictionary *PXPalette_dictForArchiving(PXPalette *self);
 
 double PXPalette_hashEfficiency(PXPalette *self);
 
-int PXPalette_colorCount(PXPalette *self);
+NSUInteger PXPalette_colorCount(PXPalette *self);
 NSArray *PXPalette_colors(PXPalette *self);
 
-void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, int amt);
-void PXPalette_incrementColorCount(PXPalette *self, NSColor *color, int amt);
+void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, NSInteger amt);
+void PXPalette_incrementColorCount(PXPalette *self, NSColor *color, NSInteger amt);

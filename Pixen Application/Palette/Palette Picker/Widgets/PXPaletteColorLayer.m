@@ -150,7 +150,7 @@
 	[NSGraphicsContext restoreGraphicsState];
 }
 
-- (void)setIndex:(int)newIndex
+- (void)setIndex:(NSUInteger)newIndex
 {
 	if (index != newIndex) {
 		index = newIndex;

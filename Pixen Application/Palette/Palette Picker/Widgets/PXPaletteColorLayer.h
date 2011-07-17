@@ -10,13 +10,13 @@
 
 @interface PXPaletteColorLayer : CALayer {
   @private
-	int index;
+	NSUInteger index;
 	NSColor *color;
 	NSControlSize controlSize;
 	BOOL highlighted;
 }
 
-@property (nonatomic, assign) int index;
+@property (nonatomic, assign) NSUInteger index;
 @property (nonatomic, retain) NSColor *color;
 @property (nonatomic, assign) NSControlSize controlSize;
 @property (nonatomic, assign) BOOL highlighted;

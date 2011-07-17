@@ -331,12 +331,11 @@
 
 - (void)prompter:(id)aPrompter didFinishWithName:(NSString *)aName context:(id)context
 {
-	int systemPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
-	
+	NSUInteger systemPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
 	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPaletteCount);
 	PXPalette_getSystemPalettes(systemPalettes, 0);
 	
-	int j;
+	NSUInteger j;
 	for (j = 0; j < systemPaletteCount; j++)
 	{
 		if ([aName isEqualToString:PXPalette_name(systemPalettes[j])])

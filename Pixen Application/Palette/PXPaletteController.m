@@ -78,8 +78,8 @@
 
 - (void)addRecentColor:(NSColor *)c
 {
-	int idx = PXPalette_indexOfColor(recentPalette, c);
-	if(idx != -1)
+	NSUInteger idx = PXPalette_indexOfColor(recentPalette, c);
+	if(idx != NSNotFound)
 	{
 		if(idx != 0)
 		{
@@ -122,7 +122,7 @@
 	[paletteView setNeedsRetile];
 }
 
-- (void)useColorAtIndex:(unsigned)index
+- (void)useColorAtIndex:(NSUInteger)index
 {
 	PXToolSwitcher *switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
 	
@@ -134,7 +134,7 @@
 	[switcher setColor:PXPalette_colorAtIndex(frequencyPalette, index)];	
 }
 
-- (void)modifyColorAtIndex:(unsigned)index
+- (void)modifyColorAtIndex:(NSUInteger)index
 {
 	//FIXME: put palette adds here
 }

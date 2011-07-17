@@ -30,14 +30,14 @@
 #import "NSString+Comparison.h"
 
 PXColorBucket *PXColorBucket_alloc(void);
-PXColorBucket *PXColorBucket_init(PXColorBucket *self, NSColor *color, unsigned int index);
+PXColorBucket *PXColorBucket_init(PXColorBucket *self, NSColor *color, NSUInteger index);
 void PXColorBucket_dealloc(PXColorBucket *self);
 void PXPalette_insertColorBucket(PXPalette *self, PXColorBucket *bucket);
 void PXPalette_removeBucketForColor(PXPalette *self, NSColor *color);
 NSColor *_PXPalette_correctColor(NSColor *color);
 void PXPalette_saveChanges(PXPalette *self);
-unsigned int PXPalette_indexOfColorClosestToAddingIfTooFar(PXPalette *self, NSColor *color, float threshold, BOOL *added);
-unsigned int _PXPalette_indexOfCorrectedColor(PXPalette *self, NSColor *colorToCheck);
+NSUInteger PXPalette_indexOfColorClosestToAddingIfTooFar(PXPalette *self, NSColor *color, float threshold, BOOL *added);
+NSUInteger _PXPalette_indexOfCorrectedColor(PXPalette *self, NSColor *colorToCheck);
 NSArray *CreateGrayList(void);
 
 
@@ -46,7 +46,7 @@ PXColorBucket *PXColorBucket_alloc()
 	return (PXColorBucket *)calloc(1, sizeof(PXColorBucket));
 }
 
-PXColorBucket *PXColorBucket_init(PXColorBucket *self, NSColor *color, unsigned int index)
+PXColorBucket *PXColorBucket_init(PXColorBucket *self, NSColor *color, NSUInteger index)
 {
 	self->next = NULL;
 	self->color = [color retain];
@@ -121,17 +121,17 @@ NSColor *_PXPalette_correctColor(NSColor *color)
 }
 
 static PXPalette **systemPalettes = NULL;
-static unsigned int systemPalettesCount = 0;
+static NSUInteger systemPalettesCount = 0;
 
 static PXPalette **userPalettes = NULL;
-static unsigned int userPalettesCount = 0;
+static NSUInteger userPalettesCount = 0;
 
 NSDictionary *PXPalette_dictForArchiving(PXPalette *self)
 {
 	NSMutableDictionary *paletteDict = [NSMutableDictionary dictionaryWithCapacity:4];
-	[paletteDict setObject:[NSNumber numberWithInt:self->size] forKey:@"size"];
+	[paletteDict setObject:[NSNumber numberWithUnsignedInteger:self->size] forKey:@"size"];
 	// can't just copy bytes of the array of colors because they're pointers.
-	int i;
+	NSUInteger i;
 	NSMutableArray *tempArray= [[[NSMutableArray alloc] init] autorelease];
 	for (i = 0; i < self->colorCount; i++)
 	{
@@ -168,10 +168,10 @@ BOOL PXPalette_isDocumentPalette(PXPalette *self)
 {
 	if (self->canSave) { return NO; } // Must be a user palette.
 	// Let's see if it's a system palette.
-	int systemCount = PXPalette_getSystemPalettes(NULL,0);
+	NSUInteger systemCount = PXPalette_getSystemPalettes(NULL,0);
 	PXPalette **systemPalettes = calloc(systemCount, sizeof(PXPalette *));
 	PXPalette_getSystemPalettes(systemPalettes, 0);
-	int i;
+	NSUInteger i;
 	for (i = 0; i < systemCount; i++)
 	{
 		if (self == systemPalettes[i])
@@ -218,10 +218,10 @@ NSArray *CreateGrayList()
 	return grays;
 }
 
-unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex)
+NSUInteger PXPalette_getSystemPalettes(PXPalette **pals, NSUInteger initialIndex)
 {
 	NSArray *lists = [NSColorList availableColorLists];
-	int newCount = [lists count] + 1;
+	NSUInteger newCount = [lists count] + 1;
 	if(pals == NULL) { return newCount; }
 	if(systemPalettes == NULL)
 	{
@@ -229,7 +229,7 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 	}
 	if(newCount != systemPalettesCount)
 	{
-		int i;
+		NSUInteger i;
 		for (i = 0; i < systemPalettesCount; i++)
 		{
 			PXPalette_release(systemPalettes[i]);
@@ -266,7 +266,7 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 		systemPalettes[[lists count]] = palette;
 		systemPalettesCount = newCount;
 	}
-	int i;
+	NSUInteger i;
 	for (i = initialIndex; i < (initialIndex + systemPalettesCount); i++)
 	{
 		pals[i] = systemPalettes[i - initialIndex];
@@ -274,7 +274,7 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 	return systemPalettesCount;
 }
 
-unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex)
+NSUInteger PXPalette_getUserPalettes(PXPalette **pals, NSUInteger initialIndex)
 {
 //FIXME: this code will leak or worse(probably just leak) if palettes are removed at runtime.
 	NSMutableArray *paths = [NSMutableArray array];
@@ -290,7 +290,7 @@ unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex)
 	}
 	
 	[paths sortUsingSelector:@selector(compareNumeric:)];
-	int newCount = [paths count];
+	NSUInteger newCount = [paths count];
 	if(pals == NULL) { return newCount; }
 	if(userPalettes == NULL)
 	{
@@ -298,7 +298,7 @@ unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex)
 	}
 	if(newCount != userPalettesCount)
 	{
-		int i;
+		NSUInteger i;
 		for (i = 0; i < [paths count]; i++)
 		{
 			NSString *path = [[GetPixenPaletteDirectory() stringByAppendingPathComponent:[paths objectAtIndex:i]] stringByAppendingPathExtension:PXPaletteSuffix];
@@ -311,7 +311,7 @@ unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex)
 		}
 		userPalettesCount = newCount;
 	}
-	int i;
+	NSUInteger i;
 	for (i = initialIndex; i < (initialIndex + userPalettesCount); i++)
 	{
 		pals[i] = userPalettes[i - initialIndex];
@@ -378,7 +378,7 @@ PXPalette *PXPalette_copy(PXPalette *self)
 {
 	PXPalette *newPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
 	newPalette->name = [self->name copy];
-	int i;
+	NSUInteger i;
 	for (i = 0; i < self->colorCount; i++) {
 		PXPalette_addColorPair(newPalette, self->colors[i]);
 	}
@@ -417,7 +417,7 @@ PXPalette *PXPalette_release(PXPalette *self)
 	return self;
 }
 
-void PXPalette_insertColorAtIndex(PXPalette *self, NSColor *color, unsigned index)
+void PXPalette_insertColorAtIndex(PXPalette *self, NSColor *color, NSUInteger index)
 {
 	PXPalette_addColorPair(self, (PXPaletteColorPair){color, 1});
 	PXPalette_moveColorAtIndexToIndex(self,self->colorCount-1,index);
@@ -425,7 +425,7 @@ void PXPalette_insertColorAtIndex(PXPalette *self, NSColor *color, unsigned inde
 
 void PXPalette_removeAlphaComponents(PXPalette *self)
 {
-	int i;
+	NSUInteger i;
 	for (i = 0; i < self->colorCount; i++)
 	{
 		NSColor *color = [[PXPalette_colorAtIndex(self, i) retain] autorelease];
@@ -500,9 +500,9 @@ void PXPalette_addColor(PXPalette *self, NSColor *color)
   PXPalette_addColorPair(self, (PXPaletteColorPair){color, 1});
 }
 
-void PXPalette_resize(PXPalette *self, unsigned int newSize)
+void PXPalette_resize(PXPalette *self, NSUInteger newSize)
 {
-	unsigned int i;
+	NSUInteger i;
 	
 	if (self->size == newSize) {
 		return;
@@ -537,13 +537,13 @@ void PXPalette_resize(PXPalette *self, unsigned int newSize)
 	}
 }
 
-NSColor *PXPalette_colorAtIndex(PXPalette *self, unsigned index) {
+NSColor *PXPalette_colorAtIndex(PXPalette *self, NSUInteger index) {
 	if(index > self->colorCount) { return nil; }
 	return self->colors[index].color;
 }
 
 
-void PXPalette_swapColorsAtIndex(PXPalette* self, unsigned int colorIndex1, unsigned int colorIndex2)
+void PXPalette_swapColorsAtIndex(PXPalette* self, NSUInteger colorIndex1, NSUInteger colorIndex2)
 {
 	if (colorIndex1 >= self->colorCount || colorIndex2 >= self->colorCount) {
 		return;
@@ -580,11 +580,11 @@ void PXPalette_addColorWithoutDuplicating(PXPalette *self, NSColor *color)
 	PXPalette_indexOfColorAddingIfNotPresent(self, color);
 }
 
-unsigned int PXPalette_indexOfColorClosestToAddingIfTooFar(PXPalette *self, NSColor *color, float threshold, BOOL *added)
+NSUInteger PXPalette_indexOfColorClosestToAddingIfTooFar(PXPalette *self, NSColor *color, float threshold, BOOL *added)
 {
-	unsigned int i;
+	NSUInteger i;
 	float distance, minDistance=INFINITY;
-	unsigned int closestIndex=0;
+	NSUInteger closestIndex=0;
 	for (i=0; i<self->colorCount; i++) {
 		distance = [self->colors[i].color distanceTo:color];
 		if (distance < minDistance) {
@@ -602,11 +602,11 @@ unsigned int PXPalette_indexOfColorClosestToAddingIfTooFar(PXPalette *self, NSCo
   return self->colorCount-1;
 }
 
-unsigned int PXPalette_indexOfColorClosestTo(PXPalette *self, NSColor *color)
+NSUInteger PXPalette_indexOfColorClosestTo(PXPalette *self, NSColor *color)
 {
-	unsigned int i;
+	NSUInteger i;
 	float distance, minDistance=INFINITY;
-	unsigned int closestIndex=0;
+	NSUInteger closestIndex=0;
 	for (i=0; i<self->colorCount; i++) {
 		distance = [self->colors[i].color distanceTo:color];
 		if (distance < minDistance) {
@@ -619,32 +619,32 @@ unsigned int PXPalette_indexOfColorClosestTo(PXPalette *self, NSColor *color)
 
 NSColor *PXPalette_colorClosestTo(PXPalette *self, NSColor *color)
 {
-	unsigned int index = PXPalette_indexOfColorClosestTo(self, color);
+	NSUInteger index = PXPalette_indexOfColorClosestTo(self, color);
 	return self->colors[index].color;
 }
 
-unsigned int _PXPalette_indexOfCorrectedColor(PXPalette *self, NSColor *colorToCheck)
+NSUInteger _PXPalette_indexOfCorrectedColor(PXPalette *self, NSColor *colorToCheck)
 {
-	if (self == NULL) { return -1; }
+	if (self == NULL) { return NSNotFound; }
 	PXColorBucket *bucket = PXPalette_bucketForColor(self, colorToCheck);
 	if (bucket != NULL) {
 		return bucket->index;
 	}
 	else
-		return -1;
+		return NSNotFound;
 }
 
-unsigned int PXPalette_indexOfColor(PXPalette *self, NSColor *color)
+NSUInteger PXPalette_indexOfColor(PXPalette *self, NSColor *color)
 {
-	if (self == NULL) { return -1; }
+	if (self == NULL) { return NSNotFound; }
 	return _PXPalette_indexOfCorrectedColor(self, _PXPalette_correctColor(color));
 }
 
-unsigned int PXPalette_indexOfColorAddingIfNotPresent(PXPalette *self, NSColor *color)
+NSUInteger PXPalette_indexOfColorAddingIfNotPresent(PXPalette *self, NSColor *color)
 {
 	NSColor *correctedColor = _PXPalette_correctColor(color);
-	unsigned int index = _PXPalette_indexOfCorrectedColor(self, correctedColor);
-	if (index != -1) {
+	NSUInteger index = _PXPalette_indexOfCorrectedColor(self, correctedColor);
+	if (index != NSNotFound) {
 		return index;
 	}
 	PXPalette_addColor(self, correctedColor);
@@ -652,16 +652,16 @@ unsigned int PXPalette_indexOfColorAddingIfNotPresent(PXPalette *self, NSColor *
 }
 
   //this one keeps the colors sorted, as long as it's the only way used to take colors out.
-void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, int amt)
+void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, NSInteger amt)
 {
 	NSColor *correctedColor = _PXPalette_correctColor(color);
   BOOL added = NO;
-	unsigned int idx = PXPalette_indexOfColorClosestToAddingIfTooFar(self, correctedColor, 0.05f, &added);
+	NSUInteger idx = PXPalette_indexOfColorClosestToAddingIfTooFar(self, correctedColor, 0.05f, &added);
   if(added)
   {
     self->colors[idx].frequency = 0;
   }
-  if(idx != -1)
+  if(idx != NSNotFound)
   {
     NSInteger freq = self->colors[idx].frequency;
     freq-=amt;
@@ -673,7 +673,7 @@ void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, int amt)
     self->colors[idx].frequency=freq;
     if(idx < self->colorCount-1)
     {
-      unsigned int newIdx = idx+1;
+      NSUInteger newIdx = idx+1;
       while((freq < self->colors[newIdx].frequency) && (newIdx < self->colorCount-1))
       {
         newIdx++;
@@ -686,24 +686,24 @@ void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, int amt)
   }
 }
   //this one keeps the colors sorted, as long as it's the only way used to put colors in.
-void PXPalette_incrementColorCount(PXPalette *self, NSColor *color, int amt)
+void PXPalette_incrementColorCount(PXPalette *self, NSColor *color, NSInteger amt)
 {
     //this could be hilariously accelerated if we were coalescing color updates.
 	NSColor *correctedColor = _PXPalette_correctColor(color);
   BOOL added = NO;
-	unsigned int idx = PXPalette_indexOfColorClosestToAddingIfTooFar(self, correctedColor, 0.05f, &added);
+	NSUInteger idx = PXPalette_indexOfColorClosestToAddingIfTooFar(self, correctedColor, 0.05f, &added);
   if(added)
   {
     self->colors[idx].frequency = 0;
   }
-  if(idx != -1)
+  if(idx != NSNotFound)
   {
     NSInteger freq = self->colors[idx].frequency;
     freq+=amt;
     self->colors[idx].frequency=freq;
     if(idx > 0)
     {
-      unsigned int newIdx = idx-1;
+      NSUInteger newIdx = idx-1;
       while((freq > self->colors[newIdx].frequency) && (newIdx > 0))
       {
         newIdx--;
@@ -738,7 +738,7 @@ double PXPalette_hashEfficiency(PXPalette *self)
 	return (double)bucketsFilled / (double)(self->colorCount);
 }
 
-int PXPalette_colorCount(PXPalette *self)
+NSUInteger PXPalette_colorCount(PXPalette *self)
 {
 	return self->colorCount;
 }
@@ -746,19 +746,19 @@ int PXPalette_colorCount(PXPalette *self)
 NSArray *PXPalette_colors(PXPalette *self)
 {
   NSMutableArray *result = [NSMutableArray arrayWithCapacity:self->colorCount];
-  for(int i = 0; i < self->colorCount; i++)
+  for(NSUInteger i = 0; i < self->colorCount; i++)
   {
     [result addObject:self->colors[i].color];
   }
   return result;
 }
 
-void PXPalette_removeColorAtIndex(PXPalette *self, unsigned int index)
+void PXPalette_removeColorAtIndex(PXPalette *self, NSUInteger index)
 {
 	NSColor *color = self->colors[index].color;
 	PXPalette_removeBucketForColor(self, color);
 	[color release];
-	int i;
+	NSUInteger i;
 	for (i = index + 1; i < self->colorCount; i++)
 	{
 		self->colors[i - 1] = self->colors[i];
@@ -770,7 +770,7 @@ void PXPalette_removeColorAtIndex(PXPalette *self, unsigned int index)
 	PXPalette_saveChanges(self);
 }
 
-void PXPalette_setColorAtIndex(PXPalette *self, NSColor *color, unsigned int index)
+void PXPalette_setColorAtIndex(PXPalette *self, NSColor *color, NSUInteger index)
 {
 	if (index > self->colorCount) {
 		return;
@@ -801,12 +801,12 @@ void PXPalette_setColorAtIndex(PXPalette *self, NSColor *color, unsigned int ind
   // $ ^
   // 
 
-void PXPalette_moveColorAtIndexToIndex(PXPalette *self, unsigned int index1, unsigned int index2)
+void PXPalette_moveColorAtIndexToIndex(PXPalette *self, NSUInteger index1, NSUInteger index2)
 {
-	int i;
+	NSUInteger i;
   PXPaletteColorPair src = self->colors[index1];
   PXColorBucket *targBucket = PXPalette_bucketForColor(self, src.color);
-  int sign = (index2 > index1) ? 1 : -1;
+  NSInteger sign = (index2 > index1) ? 1 : -1;
   for(i = index1; i != index2; i+=sign)
   {
       //i = i+sign
