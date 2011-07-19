@@ -76,7 +76,7 @@
 
 - initWithImage:(NSImage *)anImage type:(NSString *)type
 {
-	[self init];
+	self = [self init];
 	[self replaceActiveLayerWithImage:anImage];
 	return self;
 }
