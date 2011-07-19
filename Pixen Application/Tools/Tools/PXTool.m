@@ -48,11 +48,23 @@
 		path = [[NSBezierPath bezierPath] retain];
 		wrappedPath = [[NSBezierPath bezierPath] retain];
 		color = [[[NSColor blackColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace] retain];
+		initialLoad = YES;
 	}
 	return self;
 }
 
-- (PXToolPropertiesController *)createPropertiesController {
+- (PXToolPropertiesController *)propertiesController
+{
+	if (initialLoad) {
+		propertiesController = [[self createPropertiesController] retain];
+		initialLoad = NO;
+	}
+	
+	return propertiesController;
+}
+
+- (PXToolPropertiesController *)createPropertiesController
+{
 	return nil;
 }
 

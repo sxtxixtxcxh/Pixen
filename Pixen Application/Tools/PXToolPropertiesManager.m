@@ -44,10 +44,6 @@
 	PXToolPropertiesController *controller = [tool propertiesController];
 	
 	if (!controller) {
-		controller = [tool createPropertiesController];
-	}
-	
-	if (!controller) {
 		self.propertiesController = [[PXToolPropertiesController new] autorelease];
 	}
 	else {

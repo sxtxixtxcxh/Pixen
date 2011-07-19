@@ -40,6 +40,7 @@
 	PXToolSwitcher *switcher;
 	PXToolPropertiesController *propertiesController;
 	NSColor *color;
+	BOOL initialLoad;
 }
 
 @property (nonatomic, assign) BOOL isClicking;
