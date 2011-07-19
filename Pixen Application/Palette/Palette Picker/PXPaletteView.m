@@ -10,8 +10,6 @@
 #import "PXDocument.h"
 #import "PXPaletteColorLayer.h"
 
-#import <Carbon/Carbon.h>
-
 @implementation PXPaletteView
 
 const CGFloat viewMargin = 1.0f;
@@ -32,6 +30,8 @@ const CGFloat viewMargin = 1.0f;
 												 selector:@selector(paletteChanged:)
 													 name:PXPaletteChangedNotificationName
 												   object:nil];
+		
+		[self registerForDraggedTypes:[NSArray arrayWithObject:NSPasteboardTypeColor]];
 	}
 	return self;
 }
@@ -315,7 +315,6 @@ const CGFloat viewMargin = 1.0f;
 		return;
 	
 	NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
-	
 	NSUInteger index = [self indexOfCelAtPoint:point];
 	
 	if (index == NSNotFound)
@@ -327,6 +326,53 @@ const CGFloat viewMargin = 1.0f;
 		[delegate useColorAtIndex:index];
 }
 
+- (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
+{
+	if (!palette || !palette->canSave)
+		return NSDragOperationNone;
+	
+	NSPoint point = [self convertPoint:[sender draggingLocation] fromView:nil];
+	NSUInteger index = [self indexOfCelAtPoint:point];
+	
+	if (index == NSNotFound)
+		return NSDragOperationNone;
+	
+	return NSDragOperationGeneric;
+}
+
+- (NSDragOperation)draggingUpdated:(id<NSDraggingInfo>)sender
+{
+	return [self draggingEntered:sender];
+}
+
+- (BOOL)prepareForDragOperation:(id<NSDraggingInfo>)sender
+{
+	return YES;
+}
+
+- (BOOL)performDragOperation:(id<NSDraggingInfo>)sender
+{
+	NSArray *colors = [[sender draggingPasteboard] readObjectsForClasses:[NSArray arrayWithObject:[NSColor class]]
+																 options:nil];
+	
+	if (![colors count])
+		return NO;
+	
+	NSColor *color = [colors objectAtIndex:0];
+	
+	NSPoint point = [self convertPoint:[sender draggingLocation] fromView:nil];
+	NSUInteger index = [self indexOfCelAtPoint:point];
+	
+	PXPalette_setColorAtIndex(palette, color, index);
+	
+	return YES;
+}
+
+- (void)concludeDragOperation:(id<NSDraggingInfo>)sender
+{
+	[self retile];
+}
+
 - (void)mouseDown:(NSEvent *)event
 {
 	if ([event clickCount] == 2 && highlightEnabled) {
@@ -336,26 +382,8 @@ const CGFloat viewMargin = 1.0f;
 		if (index == NSNotFound)
 			return;
 		
-		NSColor *color = PXPalette_colorAtIndex(palette, index);
-		
-		int r = [color redComponent] * 65335;
-		int g = [color greenComponent] * 65335;
-		int b = [color blueComponent] * 65335;
-		
-		RGBColor inColor = { r, g, b };
-		RGBColor outColor = { 0, 0, 0 };
-		Point zero = { 0, 0 };
-		
-		if (GetColor(zero, (ConstStr255Param) "" , &inColor, &outColor)) {
-			NSColor *newColor = [NSColor colorWithCalibratedRed:outColor.red / 65335.0f
-														  green:outColor.green / 65335.0f
-														   blue:outColor.blue / 65335.0f
-														  alpha:1.0f];
-			
-			PXPalette_setColorAtIndex(palette, newColor, index);
-			
-			[self retile];
-		}
+		if ([delegate respondsToSelector:@selector(paletteView:modifyColorAtIndex:)])
+			[delegate paletteView:self modifyColorAtIndex:index];
 		
 		return;
 	}

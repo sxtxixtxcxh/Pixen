@@ -84,4 +84,9 @@
 	[switcher setColor:PXPalette_colorAtIndex([_vc.paletteView palette], index)];
 }
 
+- (void)paletteView:(PXPaletteView *)pv modifyColorAtIndex:(NSUInteger)index
+{
+	[_vc showColorModificationInfo];
+}
+
 @end

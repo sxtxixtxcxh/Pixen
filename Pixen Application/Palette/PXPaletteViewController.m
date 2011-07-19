@@ -30,7 +30,7 @@
 
 @implementation PXPaletteViewController
 
-@synthesize addColorButton, paletteView, delegate;
+@synthesize addColorButton, infoField, paletteView, delegate;
 
 - (id)init
 {
@@ -56,6 +56,8 @@
 {
 	[gearMenu setImage:[NSImage imageNamed:@"actiongear"]];
 	[gearMenu setEnabled:YES];
+	
+	[infoField setAlphaValue:0.0f];
 	
 	namePrompter = [[PXNamePrompter alloc] init];
 	[namePrompter setDelegate:self];
@@ -359,6 +361,18 @@
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXUserPalettesChangedNotificationName
 														object:self];
+}
+
+- (void)showColorModificationInfo
+{
+	[[infoField animator] setAlphaValue:1.0f];
+	
+	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 4.0f * NSEC_PER_SEC);
+	dispatch_after(popTime, dispatch_get_main_queue(), ^{
+		
+		[[infoField animator] setAlphaValue:0.0f];
+		
+	});
 }
 
 @end

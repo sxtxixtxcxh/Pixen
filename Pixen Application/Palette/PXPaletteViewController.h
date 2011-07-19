@@ -15,6 +15,7 @@
   @private
 	IBOutlet PXPaletteView *paletteView;
 	NSButton *addColorButton;
+	NSTextField *infoField;
 	IBOutlet PXPaletteSelector *paletteSelector;
 	IBOutlet NSPopUpButton *gearMenu;
 	PXNamePrompter *namePrompter;
@@ -23,6 +24,7 @@
 
 @property (nonatomic, readonly) IBOutlet PXPaletteView *paletteView;
 @property (nonatomic, assign) IBOutlet NSButton *addColorButton;
+@property (nonatomic, assign) IBOutlet NSTextField *infoField;
 
 @property (nonatomic, assign) id delegate;
 
@@ -38,6 +40,8 @@
 
 - (void)reloadData;
 - (void)reloadDataAndShow:(PXPalette *)palette;
+
+- (void)showColorModificationInfo;
 
 @end
 

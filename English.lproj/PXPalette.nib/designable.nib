@@ -3,29 +3,34 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
 		<string key="IBDocument.SystemVersion">11A511</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1891</string>
 		<string key="IBDocument.AppKitVersion">1138</string>
 		<string key="IBDocument.HIToolboxVersion">566.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1617</string>
+			<string key="NS.object.0">1891</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
-			<string>NSMenu</string>
-			<string>NSMenuItem</string>
-			<string>NSScrollView</string>
 			<string>NSPopUpButton</string>
-			<string>NSCustomView</string>
-			<string>NSPopUpButtonCell</string>
+			<string>NSScroller</string>
+			<string>NSMenuItem</string>
+			<string>NSMenu</string>
+			<string>NSScrollView</string>
 			<string>NSButtonCell</string>
 			<string>NSButton</string>
-			<string>NSScroller</string>
+			<string>NSTextFieldCell</string>
+			<string>NSCustomView</string>
 			<string>NSCustomObject</string>
+			<string>NSPopUpButtonCell</string>
+			<string>NSTextField</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</array>
-		<dictionary class="NSMutableDictionary" key="IBDocument.Metadata"/>
+		<object class="NSMutableDictionary" key="IBDocument.Metadata">
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
+		</object>
 		<array class="NSMutableArray" key="IBDocument.RootObjects" id="898284991">
 			<object class="NSCustomObject" id="865131046">
 				<string key="NSClassName">PXPaletteViewController</string>
@@ -40,6 +45,43 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
+					<object class="NSTextField" id="551051318">
+						<reference key="NSNextResponder" ref="314497084"/>
+						<int key="NSvFlags">290</int>
+						<string key="NSFrame">{{36, 6}, {241, 23}}</string>
+						<reference key="NSSuperview" ref="314497084"/>
+						<reference key="NSWindow"/>
+						<bool key="NSEnabled">YES</bool>
+						<object class="NSTextFieldCell" key="NSCell" id="296557315">
+							<int key="NSCellFlags">67239424</int>
+							<int key="NSCellFlags2">272891904</int>
+							<string key="NSContents">To modify a color, drag a replacement one on top of it</string>
+							<object class="NSFont" key="NSSupport">
+								<string key="NSName">LucidaGrande</string>
+								<double key="NSSize">9</double>
+								<int key="NSfFlags">3614</int>
+							</object>
+							<reference key="NSControlView" ref="551051318"/>
+							<object class="NSColor" key="NSBackgroundColor" id="532486607">
+								<int key="NSColorSpace">6</int>
+								<string key="NSCatalogName">System</string>
+								<string key="NSColorName">controlColor</string>
+								<object class="NSColor" key="NSColor">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
+								</object>
+							</object>
+							<object class="NSColor" key="NSTextColor">
+								<int key="NSColorSpace">6</int>
+								<string key="NSCatalogName">System</string>
+								<string key="NSColorName">controlTextColor</string>
+								<object class="NSColor" key="NSColor">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MAA</bytes>
+								</object>
+							</object>
+						</object>
+					</object>
 					<object class="NSButton" id="151034213">
 						<reference key="NSNextResponder" ref="314497084"/>
 						<int key="NSvFlags">292</int>
@@ -96,15 +138,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="529274411"/>
 								<reference key="NSDocView" ref="529274411"/>
-								<object class="NSColor" key="NSBGColor">
-									<int key="NSColorSpace">6</int>
-									<string key="NSCatalogName">System</string>
-									<string key="NSColorName">controlColor</string>
-									<object class="NSColor" key="NSColor">
-										<int key="NSColorSpace">3</int>
-										<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
-									</object>
-								</object>
+								<reference key="NSBGColor" ref="532486607"/>
 								<int key="NScvFlags">4</int>
 							</object>
 							<object class="NSScroller" id="206058105">
@@ -548,6 +582,14 @@
 					</object>
 					<int key="connectionID">57</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">infoField</string>
+						<reference key="source" ref="865131046"/>
+						<reference key="destination" ref="551051318"/>
+					</object>
+					<int key="connectionID">63</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -585,6 +627,7 @@
 							<reference ref="479196117"/>
 							<reference ref="96434023"/>
 							<reference ref="151034213"/>
+							<reference ref="551051318"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">View</string>
@@ -771,6 +814,19 @@
 						<reference key="object" ref="28553035"/>
 						<reference key="parent" ref="151034213"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">61</int>
+						<reference key="object" ref="551051318"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="296557315"/>
+						</array>
+						<reference key="parent" ref="314497084"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">62</int>
+						<reference key="object" ref="296557315"/>
+						<reference key="parent" ref="551051318"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -807,6 +863,8 @@
 				<boolean value="YES" key="52.IBShouldRemoveOnLegacySave"/>
 				<string key="54.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="55.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="61.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="62.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="9.CustomClassName">PXPaletteViewScrollView</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -815,7 +873,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">57</int>
+			<int key="maxID">63</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -929,6 +987,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="addColorButton">NSButton</string>
 						<string key="gearMenu">NSPopUpButton</string>
+						<string key="infoField">NSTextField</string>
 						<string key="paletteSelector">PXPaletteSelector</string>
 						<string key="paletteView">PXPaletteView</string>
 					</dictionary>
@@ -940,6 +999,10 @@
 						<object class="IBToOneOutletInfo" key="gearMenu">
 							<string key="name">gearMenu</string>
 							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="infoField">
+							<string key="name">infoField</string>
+							<string key="candidateClassName">NSTextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="paletteSelector">
 							<string key="name">paletteSelector</string>
@@ -968,6 +1031,10 @@
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
+			<real value="1060" key="NS.object.0"/>
+		</object>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<real value="1060" key="NS.object.0"/>
 		</object>
