@@ -89,7 +89,7 @@
 
 - (IBAction)scaleCanvas:(id) sender
 {
-	[scaleController scaleCanvasFromController:self modalForWindow:[self window]];
+	[self.scaleController scaleCanvasFromController:self modalForWindow:[self window]];
 }
 
 - (IBAction)increaseOpacity:(id)sender

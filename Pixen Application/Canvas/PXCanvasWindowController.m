@@ -66,9 +66,17 @@
 	paletteController = [[PXPaletteController alloc] init];
 	resizePrompter = [[PXCanvasResizePrompter alloc] init];
 	previewController = [PXPreviewController sharedPreviewController];
-	scaleController = [[PXScaleController alloc] init];
 
 	return self;
+}
+
+- (PXScaleController *)scaleController
+{
+	if (!scaleController) {
+		scaleController = [[PXScaleController alloc] init];
+	}
+	
+	return scaleController;
 }
 
 - (NSView*)layerSplit;
