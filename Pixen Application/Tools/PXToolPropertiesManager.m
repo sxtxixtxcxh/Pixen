@@ -40,7 +40,12 @@
 	
 	[self.window setTitle:title];
 	
-	PXToolPropertiesController *controller = [[[aNotification userInfo] objectForKey:PXNewToolKey] propertiesController];
+	PXTool *tool = [[aNotification userInfo] objectForKey:PXNewToolKey];
+	PXToolPropertiesController *controller = [tool propertiesController];
+	
+	if (!controller) {
+		controller = [tool createPropertiesController];
+	}
 	
 	if (!controller) {
 		self.propertiesController = [[PXToolPropertiesController new] autorelease];

@@ -47,14 +47,9 @@
 	return NSLocalizedString(@"RECTANGLE_ACTION", @"Drawing Rectangle");
 }
 
--(id) init
+- (PXToolPropertiesController *)createPropertiesController
 {
-	if (! (self = [super init]) )
-		return nil;
-	
-	self.propertiesController = [[PXShapeToolPropertiesController new] autorelease];
-	
-	return self;
+	return [[PXShapeToolPropertiesController new] autorelease];
 }
 
 - (NSCursor *)cursor

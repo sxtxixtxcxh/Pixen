@@ -52,6 +52,10 @@
 	return self;
 }
 
+- (PXToolPropertiesController *)createPropertiesController {
+	return nil;
+}
+
 - (void)dealloc
 {
 	[wrappedPath release];

@@ -40,10 +40,9 @@
 
 @implementation PXMoveTool
 
-- (id)init {
-	self = [super init];
-	self.propertiesController = nil;
-	return self;
+- (PXToolPropertiesController *)createPropertiesController
+{
+	return nil;
 }
 
 - (NSString *)name

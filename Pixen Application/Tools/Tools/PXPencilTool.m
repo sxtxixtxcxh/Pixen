@@ -62,11 +62,15 @@
 	if (! ( self = [super init] ) ) 
 		return nil;
 	
-	self.propertiesController = [[PXPencilToolPropertiesController new] autorelease];
 	[PENCIL_PC setToolName:[self name]];
 	shiftDown = NO;
 	changedRect = NSZeroRect;
 	return self;
+}
+
+- (PXToolPropertiesController *)createPropertiesController
+{
+	return [[PXPencilToolPropertiesController new] autorelease];
 }
 
 -(NSString *)  actionName

@@ -45,14 +45,9 @@
 	return NSLocalizedString(@"ELLIPSE_ACTION", @"Drawing Ellipse");
 }
 
--(id) init
+- (PXToolPropertiesController *)createPropertiesController
 {
-	if ( ! ( self = [super init] ) ) 
-		return nil;
-	
-	self.propertiesController = [[PXShapeToolPropertiesController new] autorelease];
-	
-	return self;
+	return [[PXShapeToolPropertiesController new] autorelease];
 }
 
 - (NSCursor *)cursor

@@ -58,11 +58,9 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 	return NSLocalizedString(@"FILL_ACTION", @"Fill");
 }
 
-- (id)init
+- (PXToolPropertiesController *)createPropertiesController
 {
-	self = [super init];
-	self.propertiesController = [[PXFillToolPropertiesController new] autorelease];
-	return self;
+	return [[PXFillToolPropertiesController new] autorelease];
 }
 
 - (NSCursor *)cursor

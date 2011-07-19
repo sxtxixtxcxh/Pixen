@@ -42,11 +42,9 @@
 	return NSLocalizedString(@"EYEDROPPER_NAME", @"Eyedropper Tool");
 }
 
-- (id)init
+- (PXToolPropertiesController *)createPropertiesController
 {
-	self = [super init];
-	self.propertiesController = [[PXEyedropperToolPropertiesController new] autorelease];
-	return self;
+	return [[PXEyedropperToolPropertiesController new] autorelease];
 }
 
 -  (NSCursor *)cursor

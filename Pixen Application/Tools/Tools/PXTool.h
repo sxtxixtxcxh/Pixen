@@ -48,9 +48,11 @@
 @property (nonatomic, assign) PXToolSwitcher *switcher;
 @property (nonatomic, retain) NSColor *color;
 
-@property (nonatomic, retain) PXToolPropertiesController *propertiesController;
+@property (nonatomic, readonly) PXToolPropertiesController *propertiesController;
 
 - (NSString *)name;
+
+- (PXToolPropertiesController *)createPropertiesController;
 
 - (void)mouseDownAt:(NSPoint)aPoint 
 fromCanvasController:(PXCanvasController *) controller;
