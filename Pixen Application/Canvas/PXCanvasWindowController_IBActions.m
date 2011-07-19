@@ -76,15 +76,17 @@
 
 - (IBAction)resizeCanvas:(id) sender
 {
-	[resizePrompter loadWindow];
-	[resizePrompter setDelegate:self];
+	PXCanvasResizePrompter *prompter = self.resizePrompter;
+	
+	[prompter loadWindow];
+	[prompter setDelegate:self];
 //FIXME: this stuff should use the canvas's mainbackground to draw the resize area stuffies.  otherwise the matte color won't show up very well
-	[resizePrompter setBackgroundColor:
+	[prompter setBackgroundColor:
 	 [NSKeyedUnarchiver unarchiveObjectWithData:
 	  [[NSUserDefaults standardUserDefaults] objectForKey:PXDefaultNewDocumentBackgroundColor]]];
-	[resizePrompter setCurrentSize:[canvas size]];
-	[resizePrompter setCachedImage:[canvas displayImage]];
-	[resizePrompter promptInWindow:[self window]];
+	[prompter setCurrentSize:[canvas size]];
+	[prompter setCachedImage:[canvas displayImage]];
+	[prompter promptInWindow:[self window]];
 }
 
 - (IBAction)scaleCanvas:(id) sender

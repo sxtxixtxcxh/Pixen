@@ -6,7 +6,8 @@
 //
 #import <AppKit/AppKit.h>
 
-@class PXCanvasController, PXLayerController, PXScaleController, PXCanvas, PXCanvasView, PXBackground;
+@class PXCanvasController, PXLayerController, PXScaleController, PXCanvasResizePrompter;
+@class PXCanvas, PXCanvasView, PXBackground;
 
 @interface PXCanvasWindowController : NSWindowController
 {
@@ -17,7 +18,7 @@
 	IBOutlet id zoomStepper;
 	IBOutlet NSView *zoomView;
 	id previewController;
-	id resizePrompter;
+	PXCanvasResizePrompter *resizePrompter;
 	PXScaleController *scaleController;
 	PXLayerController *layerController;
 	
@@ -31,7 +32,9 @@
 }
 
 @property (nonatomic, readonly) IBOutlet PXCanvasController *canvasController;
+
 @property (nonatomic, readonly) PXScaleController *scaleController;
+@property (nonatomic, readonly) PXCanvasResizePrompter *resizePrompter;
 
 @property (nonatomic, assign) PXCanvas *canvas;
 

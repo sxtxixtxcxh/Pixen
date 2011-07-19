@@ -48,7 +48,7 @@
 
 @implementation PXCanvasWindowController
 
-@synthesize scaleController, canvasController, canvas;
+@synthesize scaleController, canvasController, resizePrompter, canvas;
 @synthesize splitView, layerSplit, canvasSplit, paletteSplit;
 
 
@@ -64,7 +64,6 @@
 	layerController = [[PXLayerController alloc] init];
 	[layerController setNextResponder:self];
 	paletteController = [[PXPaletteController alloc] init];
-	resizePrompter = [[PXCanvasResizePrompter alloc] init];
 	previewController = [PXPreviewController sharedPreviewController];
 
 	return self;
@@ -77,6 +76,15 @@
 	}
 	
 	return scaleController;
+}
+
+- (PXCanvasResizePrompter *)resizePrompter
+{
+	if (!resizePrompter) {
+		resizePrompter = [[PXCanvasResizePrompter alloc] init];
+	}
+	
+	return resizePrompter;
 }
 
 - (NSView*)layerSplit;
