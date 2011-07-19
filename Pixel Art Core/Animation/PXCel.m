@@ -52,7 +52,7 @@
 	return cel;
 }
 
-- (id)initWithImage:(NSImage *)image animation:(PXAnimation *)animation atIndex:(int)index
+- (id)initWithImage:(NSImage *)image animation:(PXAnimation *)animation atIndex:(NSUInteger)index
 {
 	if ( ! (self = [super init]))
 		return nil;

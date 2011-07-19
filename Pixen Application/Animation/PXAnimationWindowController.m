@@ -47,7 +47,7 @@
 	changedRect.size.height *= scaledRatio;
 	[filmStrip setNeedsDelayedDisplayInRect:changedRect];
 	if([notification object] == [activeCel canvas]) { return; }
-	NSInteger i;
+	NSUInteger i;
 	for (i = 0; i < [self numberOfCels]; i++)
 	{
 		PXCel *current = [self celAtIndex:i];
@@ -279,11 +279,11 @@
 	return YES;
 }
 
-- (id)celAtIndex:(NSInteger)currentIndex
+- (id)celAtIndex:(NSUInteger)currentIndex
 {
 	return [animation objectInCelsAtIndex:currentIndex];
 }
-- (NSTimeInterval)durationOfCelAtIndex:(NSInteger)currentIndex
+- (NSTimeInterval)durationOfCelAtIndex:(NSUInteger)currentIndex
 {
 	return [[self celAtIndex:currentIndex] duration];	
 }

@@ -287,7 +287,7 @@
     return [self keyWasDown:mask] && ((newMask & mask) == 0x0000);
 }
 
-- (BOOL)isMask:(unsigned int)newMask downEventForModifierMask:(unsigned int)mask
+- (BOOL)isMask:(NSUInteger)newMask downEventForModifierMask:(unsigned int)mask
 {
     return ![self keyWasDown:mask] && ((newMask & mask) == mask);
 }

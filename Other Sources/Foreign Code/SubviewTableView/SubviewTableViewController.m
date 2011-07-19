@@ -252,7 +252,7 @@ shouldSelectTableColumn:(NSTableColumn *) tableColumn
 
 - (NSInteger) numberOfRowsInTableView:(NSTableView *) tableView
 {
-	int count = 0;
+	NSInteger count = 0;
 	
 	if ([self isValidDelegateForSelector: _cmd])
 	{

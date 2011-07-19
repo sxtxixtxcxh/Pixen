@@ -99,8 +99,8 @@ NSColor *PXTileColorAtXY(PXTile *t, int xv, int yv)
 	unsigned y = yv - t->location.y;
 	
 	unsigned char *data = CGBitmapContextGetData(t->painting);
-	int bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
-	unsigned startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y)*bytesPerRow+x*PXTileComponentsPerPixel;
+	size_t bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
+	size_t startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y)*bytesPerRow+x*PXTileComponentsPerPixel;
 	float a,b,c,d;
 	d = data[startIndex+3] / 255.0;
 	if(d > 0)

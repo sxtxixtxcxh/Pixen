@@ -582,7 +582,7 @@ NSString *palettesSubdirName = @"Palettes";
 	[openPanel setAllowsOtherFileTypes:NO];
 	[openPanel setCanChooseDirectories:NO];
 
-	int returnCode = [openPanel runModalForTypes:types];
+	NSInteger returnCode = [openPanel runModalForTypes:types];
 	if (returnCode == NSFileHandlingPanelCancelButton) { return; }
 
 	PXAnimationDocument *animationDocument = (PXAnimationDocument *)[self makeUntitledDocumentOfType:PixenAnimationFileType error:NULL];

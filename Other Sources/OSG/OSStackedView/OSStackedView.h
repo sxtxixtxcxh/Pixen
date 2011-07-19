@@ -32,7 +32,7 @@
 @interface OSStackedView : NSView {
 	id delegate;
 	id views;
-	int tag;
+	NSInteger tag;
 	id selectedElement;
 	id target;
 	SEL singleAction, doubleAction;

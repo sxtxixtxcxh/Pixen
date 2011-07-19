@@ -43,7 +43,7 @@
 	PXDocument *document;
 	int layersCreated;
 
-  NSIndexSet *selection;
+	NSIndexSet *selection;
 	
 	//for programmatic expand/collapse
 	CGFloat lastSubviewHeight;
@@ -62,7 +62,7 @@
 - (IBAction)removeLayer: (id)sender;
 - (void)removeLayerObject: (PXLayer *)layer;
 - (IBAction)selectLayer: (id)sender;
-- (void)selectRow:(int)index;
+- (void)selectRow:(NSUInteger)index;
 
 - (IBAction)nextLayer: (id)sender;
 - (IBAction)previousLayer: (id)sender;
@@ -73,7 +73,7 @@
 
 - (void)mergeDownLayerObject:(PXLayer *)layer;
 
-- (int)invertLayerIndex:(int)anIndex;
+- (NSUInteger)invertLayerIndex:(NSUInteger)anIndex;
 
 - (void)deleteKeyPressedInCollectionView:(NSCollectionView *)cv;
 

@@ -133,10 +133,10 @@
 		return;
 	}
 	
-	int paletteCount = [paletteSelector paletteCount];
+	NSUInteger paletteCount = [paletteSelector paletteCount];
 	PXPalette **palettes = [paletteSelector palettes];
 	
-	int i;
+	NSUInteger i;
 	for (i = 0; i < paletteCount; i++)
 	{
 		if (palette == palettes[i] || [palette->name isEqualToString:palettes[i]->name])

@@ -189,9 +189,9 @@
 	[self selectLayer:[[canvas layers] objectAtIndex:[self invertLayerIndex:[[layersView selectionIndexes] firstIndex]]]];
 }
 
-- (void)selectRow:(int)index
+- (void)selectRow:(NSUInteger)index
 {
-	if(index < 0 || !canvas || [[canvas layers] count] == 0) { return; }
+	if(index == NSNotFound || !canvas || [[canvas layers] count] == 0) { return; }
 	[layersView setSelectionIndexes:[NSIndexSet indexSetWithIndex:[self invertLayerIndex:index]]];
 	[self updateRemoveButtonStatus];
 }
@@ -276,7 +276,7 @@
 	[self selectLayer:nil];
 }
 
-- (void)removeLayerAtCanvasLayersIndex:(unsigned)index
+- (void)removeLayerAtCanvasLayersIndex:(NSUInteger)index
 {
 	if([[canvas layers] count] <= 1) { return; }
 	[canvas removeLayerAtIndex:index];
@@ -344,12 +344,12 @@
 		[removeButton setEnabled:YES];
 }
 
-- (int)invertLayerIndex:(int)anIndex
+- (NSUInteger)invertLayerIndex:(NSUInteger)anIndex
 {
 	return [[canvas layers] count] - anIndex - 1;
 }
 
-- (void)mergeDownLayerAtCanvasLayersIndex:(unsigned)ind
+- (void)mergeDownLayerAtCanvasLayersIndex:(NSUInteger)ind
 {
 	int index = ind;
 	if (index >= [[canvas layers] count]) {
