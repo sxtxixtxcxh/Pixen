@@ -106,9 +106,15 @@
 
 - (void)toolSwitched:(NSNotification *)notification
 {
-	if (![[NSDocumentController sharedDocumentController] showsToolPreview]) { return; }
+	[window discardCursorRects];
+	[window resetCursorRects];
+	
+	if (![[NSDocumentController sharedDocumentController] showsToolPreview])
+		return;
+	
+	PXTool *tool = [[notification userInfo] objectForKey:PXNewToolKey];
 	NSPoint currentPoint = [view convertFromViewToCanvasPoint:[view convertPoint:[[self window] mouseLocationOutsideOfEventStream] fromView:nil]];
-	[[[notification userInfo] objectForKey:PXNewToolKey] mouseMovedTo:currentPoint fromCanvasController:self];
+	[tool mouseMovedTo:currentPoint fromCanvasController:self];
 	[view setNeedsDisplayInRect:[view visibleRect]];
 }
 

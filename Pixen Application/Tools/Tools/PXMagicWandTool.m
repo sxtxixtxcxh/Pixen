@@ -49,6 +49,12 @@
 	return NSLocalizedString(@"MAGICWAND_NAME", @"Magic Wand Tool");
 }
 
+- (NSCursor *)cursor
+{
+	return [[[NSCursor alloc] initWithImage:[NSImage imageNamed:@"magic_bw"]
+									hotSpot:NSMakePoint(4.0f, 4.0f)] autorelease];
+}
+
 - (BOOL)shiftKeyDown
 {
 	isAdding = YES;

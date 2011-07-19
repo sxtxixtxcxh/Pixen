@@ -65,6 +65,12 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 	return self;
 }
 
+- (NSCursor *)cursor
+{
+	return [[[NSCursor alloc] initWithImage:[NSImage imageNamed:@"paintbucket_bw.png"]
+									hotSpot:NSMakePoint(11.0f, 15.0f)] autorelease];
+}
+
 - (BOOL)commandKeyDown 
 {
 	FILL_PC.contiguous = !FILL_PC.contiguous;

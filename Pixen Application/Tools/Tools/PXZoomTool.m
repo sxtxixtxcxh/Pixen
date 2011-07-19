@@ -45,6 +45,12 @@
 	return self;
 }
 
+- (NSCursor *)cursor
+{
+	return [[[NSCursor alloc] initWithImage:[NSImage imageNamed:@"zoomIn_bw.png"]
+									hotSpot:NSMakePoint(5.0f, 5.0f)] autorelease];
+}
+
 - (void)mouseDownAt:(NSPoint)aPoint
 fromCanvasController:(PXCanvasController *) controller
 {

@@ -79,6 +79,11 @@ fromCanvasController:(PXCanvasController*)controller
 	return NO;
 }
 
+- (NSCursor *)cursor
+{
+	return nil;
+}
+
 - (NSRect)crosshairRectCenteredAtPoint:(NSPoint)aPoint
 {
 	return NSMakeRect(aPoint.x, aPoint.y, 1, 1);

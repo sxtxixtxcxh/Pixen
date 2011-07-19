@@ -44,6 +44,11 @@
 	return NSLocalizedString(@"LINE_ACTION", @"Drawing Line");
 }
 
+- (NSCursor *)cursor
+{
+	return [NSCursor crosshairCursor];
+}
+
 // Line tool doesn't need center locking, just gets in the way...
 
 - (BOOL)optionKeyDown

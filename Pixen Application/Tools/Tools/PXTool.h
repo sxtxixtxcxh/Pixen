@@ -71,6 +71,8 @@ fromCanvasController:(PXCanvasController *)controller;
 
 - (NSColor *)colorForCanvas:(PXCanvas *)canvas;
 
+- (NSCursor *)cursor;
+
 - (BOOL)shiftKeyDown;
 - (BOOL)shiftKeyUp;
 - (BOOL)optionKeyDown;

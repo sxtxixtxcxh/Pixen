@@ -56,6 +56,11 @@
 	return NSLocalizedString(@"MOVE_ACTION", @"Moving");
 }
 
+- (NSCursor *)cursor
+{
+	return [NSCursor openHandCursor];
+}
+
 - (void)startMovingSelectionFromPoint:(NSPoint)aPoint
 	  fromCanvasController:(PXCanvasController *)controller
 {

@@ -57,6 +57,11 @@
 	return self;
 }
 
+- (NSCursor *)cursor
+{
+	return [NSCursor crosshairCursor];
+}
+
 - (void)mouseDownAt:(NSPoint)aPoint
 fromCanvasController:(PXCanvasController *) controller
 {

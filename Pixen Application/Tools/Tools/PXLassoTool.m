@@ -61,6 +61,11 @@
 	return NSLocalizedString(@"SELECTION_MOVE_ACTION", @"Moving");
 }
 
+- (NSCursor *)cursor
+{
+	return [NSCursor crosshairCursor];
+}
+
 - (BOOL)shiftKeyDown
 {
 	if (!self.isClicking)

@@ -49,6 +49,12 @@
 	return self;
 }
 
+-  (NSCursor *)cursor
+{
+	return [[[NSCursor alloc] initWithImage:[NSImage imageNamed:@"eyedropper_bw.png"]
+									hotSpot:NSMakePoint(14.0f, 14.0f)] autorelease];
+}
+
 /*
 
 - propertiesView

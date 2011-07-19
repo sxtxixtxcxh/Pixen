@@ -791,7 +791,16 @@ void PXDebugRect(NSRect r, float alpha)
 
 - (void)resetCursorRects
 {
-	if(trackingRect != -1) { [self removeTrackingRect:trackingRect]; }
+	NSCursor *toolCursor = [[[PXToolPaletteController sharedToolPaletteController] currentTool] cursor];
+	
+	if (toolCursor) {
+		[self addCursorRect:[self visibleRect] cursor:toolCursor];
+	}
+	
+	if (trackingRect != -1) {
+		[self removeTrackingRect:trackingRect];
+	}
+	
 	BOOL inside = NSPointInRect([[self window] mouseLocationOutsideOfEventStream], [self convertRect:[self bounds] toView:nil]);
 	trackingRect = [self addTrackingRect:[self visibleRect] owner:self userData:NULL assumeInside:inside];
 	[self setShouldDrawMainBackground:inside];

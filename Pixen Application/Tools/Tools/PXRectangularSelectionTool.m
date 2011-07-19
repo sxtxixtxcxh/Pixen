@@ -46,6 +46,11 @@
 	return NSLocalizedString(@"RECTANGULARSELECTION_ACTION", @"Selection");
 }
 
+- (NSCursor *)cursor
+{
+	return [NSCursor crosshairCursor];
+}
+
 - (BOOL)shiftKeyDown
 {
 	if (!self.isClicking)

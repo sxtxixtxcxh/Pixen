@@ -55,6 +55,11 @@
 	return self;
 }
 
+- (NSCursor *)cursor
+{
+	return [NSCursor crosshairCursor];
+}
+
 - (void)drawPointsAddingToArray:(NSMutableArray *)points 
 					 ifTracking:(BOOL)tracking 
 						  withX:(int)x 
