@@ -16,7 +16,7 @@ typedef enum {
   PXPaletteModeColorList
 } PXPaletteMode;
 
-@interface PXPaletteController : NSObject
+@interface PXPaletteController : NSViewController
 {
   @private
 	PXPaletteMode mode;
@@ -24,10 +24,8 @@ typedef enum {
 	int recentLimit;
 	PXPalette *frequencyPalette, *recentPalette, *listPalette;
 	IBOutlet PXPaletteView *paletteView;
-	IBOutlet NSView *view;
 }
 
-- view;
 - (BOOL)isPaletteIndexKey:(NSEvent *)event;
 - (void)keyDown:(NSEvent *)event;
 

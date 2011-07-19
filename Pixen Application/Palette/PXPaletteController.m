@@ -20,9 +20,7 @@
 
 - (id)init
 {
-	self = [super init];
-	
-	[NSBundle loadNibNamed:@"PXPaletteController" owner:self];
+	self = [super initWithNibName:@"PXPaletteController" bundle:nil];
 	
 	frequencyPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
 	recentLimit = 32;
@@ -46,11 +44,6 @@
 - (void)awakeFromNib
 {
 	paletteView.highlightEnabled = NO;
-}
-
-- view
-{
-	return view;
 }
 
 - (void)setDocument:(PXDocument *)doc
