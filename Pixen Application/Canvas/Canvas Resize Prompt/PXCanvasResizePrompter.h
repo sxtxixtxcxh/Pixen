@@ -28,19 +28,9 @@
 
 #import <AppKit/AppKit.h>
 
-
 @class PXCanvasResizeView;
 
-@interface NSObject(PXCanvasResizePrompterDelegate)
-
-- (void)prompter:aPrompter 
-didFinishWithSize:(NSSize)size
-		position:(NSPoint)position
- backgroundColor:(NSColor *)color;
-
-@end
-
-@interface PXCanvasResizePrompter : NSWindowController 
+@interface PXCanvasResizePrompter : NSWindowController
 {
   @private
 	IBOutlet NSTextField *heightField, *widthField;
@@ -52,19 +42,29 @@ didFinishWithSize:(NSSize)size
 
 @property (nonatomic, assign) id delegate;
 
--(id) init;
 - (void)promptInWindow:(NSWindow *)window;
 
-- (IBAction)cancel:(id) sender;
-- (IBAction)updateBgColor:(id) sender;
-- (IBAction)updateSize:(id) sender;
-- (IBAction)useEnteredFrame:(id) sender;
+- (IBAction)cancel:(id)sender;
+- (IBAction)updateBgColor:(id)sender;
+- (IBAction)updateSize:(id)sender;
+- (IBAction)useEnteredFrame:(id)sender;
+
 - (void)setCurrentSize:(NSSize)size;
 - (void)setCachedImage:(NSImage *)image;
-- widthField;
-- heightField;
-- resizeView;
-- backgroundColor;
+
+- (NSTextField *)widthField;
+- (NSTextField *)heightField;
+- (PXCanvasResizeView *)resizeView;
+
+- (NSColor *)backgroundColor;
 - (void)setBackgroundColor:(NSColor *)c;
+
+@end
+
+
+@interface NSObject(PXCanvasResizePrompterDelegate)
+
+- (void)prompter:(PXCanvasResizePrompter *)aPrompter didFinishWithSize:(NSSize)size
+		position:(NSPoint)position backgroundColor:(NSColor *)color;
 
 @end

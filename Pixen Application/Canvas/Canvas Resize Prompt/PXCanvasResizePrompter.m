@@ -27,16 +27,16 @@
 //
 
 #import "PXCanvasResizePrompter.h"
-#import "PXCanvasResizeView.h"
 
+#import "PXCanvasResizeView.h"
 
 @implementation PXCanvasResizePrompter
 
 @synthesize delegate;
 
-- (id) init
+- (id)init
 {
-	if (! ( self = [super initWithWindowNibName:@"PXCanvasResizePrompt"] ) )
+	if ( ! (self = [super initWithWindowNibName:@"PXCanvasResizePrompt"] ))
 		return nil;
 	
 	return self;
@@ -44,19 +44,20 @@
 
 - (void)promptInWindow:(NSWindow *)window
 {
-	if([[[NSProcessInfo processInfo] arguments] containsObject:@"-SenTest"]) 
-		return; 
-
+	if ([[[NSProcessInfo processInfo] arguments] containsObject:@"-SenTest"])
+		return;
+	
 	[resizeView setTopOffset:0];
 	[resizeView setLeftOffset:0];
 	
-	[NSApp beginSheet:[self window] 
+	[NSApp beginSheet:[self window]
 	   modalForWindow:window
 		modalDelegate:nil
 	   didEndSelector:NULL
 		  contextInfo:NULL];
 }
-- backgroundColor
+
+- (NSColor *)backgroundColor
 {
 	return [resizeView backgroundColor];
 }
@@ -74,39 +75,41 @@
 
 - (IBAction)useEnteredFrame:(id)sender
 {
-	[delegate prompter:self didFinishWithSize:[resizeView newSize] position:[resizeView resultPosition] backgroundColor:[bgColorWell color]];
+	[delegate prompter:self didFinishWithSize:[resizeView newSize]
+			  position:[resizeView resultPosition]
+	   backgroundColor:[bgColorWell color]];
+	
 	[NSApp endSheet:[self window]];
 	[self close];
 }
 
-- (IBAction)cancel:sender
+- (IBAction)cancel:(id)sender
 {
 	[NSApp endSheet:[self window]];
 	[self close];
 }
 
-- resizeView
+- (PXCanvasResizeView *)resizeView
 {
 	return resizeView;
 }
-- widthField
+
+- (NSTextField *)widthField
 {
 	return widthField;
 }
 
-- heightField
+- (NSTextField *)heightField
 {
 	return heightField;
 }
 
-- (IBAction)updateSize:sender
+- (IBAction)updateSize:(id)sender
 {
-//FIXME: Why not float ? 
-//Because a canvas that is 32.5 px by 38.2 px doesn't really make sense.
 	int width = [[self widthField] intValue];
 	int height = [[self heightField] intValue];
 	
-	[resizeView setNewImageSize:NSMakeSize(width,height)];
+	[resizeView setNewImageSize:NSMakeSize(width, height)];
 }
 
 - (void)setCurrentSize:(NSSize)size
@@ -118,15 +121,14 @@
 	[resizeView setOldImageSize:size];
 }
 
-- (IBAction)displayHelp:sender
+- (IBAction)displayHelp:(id)sender
 {
-	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"resize" inBook:@"Pixen Help"];	
+	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"resize" inBook:@"Pixen Help"];
 }
 
 - (void)setCachedImage:(NSImage *)image
 {
 	[resizeView setCachedImage:image];
 }
-
 
 @end
