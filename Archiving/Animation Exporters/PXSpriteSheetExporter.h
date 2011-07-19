@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface PXSpriteSheetExporter : NSWindowController {
   @private
 	IBOutlet NSTableView *animationsTable;
@@ -17,12 +16,12 @@
 	BOOL closeOnEndSheet;
 }
 
-+ sharedSpriteSheetExporter;
++ (id)sharedSpriteSheetExporter;
 
-- (IBAction)export:sender;
+- (IBAction)export:(id)sender;
 
 - (NSArray *)documentRepresentations;
-- (IBAction)updatePreview:sender;
+- (IBAction)updatePreview:(id)sender;
 
 - (void)recacheDocumentRepresentations;
 

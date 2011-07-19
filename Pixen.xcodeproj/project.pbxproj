@@ -27,7 +27,7 @@
 		BF1A538707ECD9200017A44E /* PXImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF1A538507ECD9200017A44E /* PXImage.h */; };
 		BF1A538807ECD9200017A44E /* PXImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1A538607ECD9200017A44E /* PXImage.m */; };
 		BF269FE6091307BF00B7A218 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BB8ED608FB58F9009C75A6 /* QTKit.framework */; };
-		BFB1440608AD1D1800CE29EF /* PXSpriteSheetExporter.nib in Resources */ = {isa = PBXBuildFile; fileRef = BFB1440408AD1D1800CE29EF /* PXSpriteSheetExporter.nib */; };
+		C912F26D13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib in Resources */ = {isa = PBXBuildFile; fileRef = C912F26B13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib */; };
 		C9287A0D13D1D9AB0065A400 /* PXPatternEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9287A0B13D1D9AB0065A400 /* PXPatternEditor.xib */; };
 		C92A1E8F13B12C9B0007235A /* PXPaletteController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAB650840D108D9000274070 /* PXPaletteController.xib */; };
 		C92A1E9213B12CAB0007235A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C92A1E9013B12CAB0007235A /* MainMenu.xib */; };
@@ -564,7 +564,7 @@
 		61FED6C308BCC646005E51EA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXSequenceExportPrompter.xib; sourceTree = "<group>"; };
 		BF1A538507ECD9200017A44E /* PXImage.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PXImage.h; sourceTree = "<group>"; };
 		BF1A538607ECD9200017A44E /* PXImage.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PXImage.m; sourceTree = "<group>"; };
-		BFB1440508AD1D1800CE29EF /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXSpriteSheetExporter.nib; sourceTree = "<group>"; };
+		C912F26C13D5CDC100C0CF29 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXSpriteSheetExporter.xib; sourceTree = "<group>"; };
 		C9287A0C13D1D9AB0065A400 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPatternEditor.xib; sourceTree = "<group>"; };
 		C92A1E9113B12CAB0007235A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		C93DB17E13ABC6BE006D42FE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreferences.xib; sourceTree = "<group>"; };
@@ -1842,6 +1842,7 @@
 				61F598B9067949D500B8C8CA /* PXScalePrompt.xib */,
 				61FED6C208BCC646005E51EA /* PXSequenceExportPrompter.xib */,
 				C9799FAE13AD69C000E261EE /* PXShapeToolPropertiesView.xib */,
+				C912F26B13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib */,
 				C9A6BE1513ACFBC50028B141 /* PXToolProperties.xib */,
 				618AE58F087E6FEA00A9FA9B /* PXPalette.nib */,
 				61A956BA08AD76CF009BB89F /* OSProgressPopup.nib */,
@@ -1853,7 +1854,6 @@
 				EAE126CF054F41A9001208D9 /* PXImageBackgroundConfigurator.nib */,
 				610865F506B988F400733B2D /* PXInfoPanel.nib */,
 				61F9CB16060D6A6D00562B78 /* PXToolPalette.nib */,
-				BFB1440408AD1D1800CE29EF /* PXSpriteSheetExporter.nib */,
 			);
 			name = NIBs;
 			sourceTree = "<group>";
@@ -2320,7 +2320,6 @@
 				618AE591087E6FEA00A9FA9B /* PXPalette.nib in Resources */,
 				610F37DE0899A5DE00567E90 /* PixenHelp in Resources */,
 				EA4A6C3F08A98133007BAC7F /* PXAnimationDocument.nib in Resources */,
-				BFB1440608AD1D1800CE29EF /* PXSpriteSheetExporter.nib in Resources */,
 				61A956BC08AD76CF009BB89F /* OSProgressPopup.nib in Resources */,
 				61FED6C408BCC646005E51EA /* PXSequenceExportPrompter.xib in Resources */,
 				EA31FCA10CE7D7C200EC481B /* COPYING in Resources */,
@@ -2443,6 +2442,7 @@
 				C9E088A413D5BDCE002A0AD4 /* magic_bw.png in Resources */,
 				C9E088A613D5BF17002A0AD4 /* zoomIn_bw.png in Resources */,
 				C9E088A813D5C03D002A0AD4 /* eyedropper_bw.png in Resources */,
+				C912F26D13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2754,12 +2754,12 @@
 			name = PXSequenceExportPrompter.xib;
 			sourceTree = "<group>";
 		};
-		BFB1440408AD1D1800CE29EF /* PXSpriteSheetExporter.nib */ = {
+		C912F26B13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				BFB1440508AD1D1800CE29EF /* English */,
+				C912F26C13D5CDC100C0CF29 /* English */,
 			);
-			name = PXSpriteSheetExporter.nib;
+			name = PXSpriteSheetExporter.xib;
 			sourceTree = "<group>";
 		};
 		C9287A0B13D1D9AB0065A400 /* PXPatternEditor.xib */ = {
@@ -3031,6 +3031,7 @@
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_ENABLE_TRIGRAPHS = NO;
@@ -3054,6 +3055,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
