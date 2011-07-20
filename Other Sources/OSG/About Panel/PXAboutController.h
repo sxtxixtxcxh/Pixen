@@ -6,21 +6,20 @@
 //  Copyright (c) 2004 Open Sword Group. All rights reserved.
 //
 
-#import <AppKit/NSResponder.h>
-#import <AppKit/NSNibDeclarations.h>
+#import <AppKit/AppKit.h>
 
 @class NSTextField, NSTextView, PXAboutPanel;
 
-@interface PXAboutController : NSResponder < NSWindowDelegate >
+@interface PXAboutController : NSWindowController < NSWindowDelegate >
 {
   @private
 	PXAboutPanel *aboutPanel;
-	NSPanel *panelInNib;
-	IBOutlet NSTextView *credits;
-	IBOutlet NSTextField *version;
+	IBOutlet NSTextView *creditsView;
+	IBOutlet NSTextField *versionField;
 }
 
 + (id)sharedAboutController;
+
 - (void)showPanel:(id)sender;
 
 @end

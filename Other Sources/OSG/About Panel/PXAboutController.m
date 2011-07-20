@@ -28,20 +28,9 @@
 //
 
 #import "PXAboutController.h"
-#import "PXAboutPanel.h"
+
 #import "Constants.h"
-
-#import <Foundation/NSArray.h>
-#import <Foundation/NSBundle.h>
-#import <Foundation/NSData.h>
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSNotification.h>
-#import <Foundation/NSValue.h>
-
-#import <AppKit/NSApplication.h>
-#import <AppKit/NSNibLoading.h>
-#import <AppKit/NSTextStorage.h>
-#import <AppKit/NSTextView.h>
+#import "PXAboutPanel.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -49,16 +38,7 @@
 
 - (id)init
 {
-	if ( ! ( self = [super init] ))
-		return nil;
-	
-	if ( ! [NSBundle loadNibNamed :@"PXAbout" owner:self]) {
-		NSLog(@"!!! Could not load PXAbout NIB !!!");
-		[self release];
-		return nil;
-	}
-	
-	return self;
+	return [super initWithWindowNibName:@"PXAbout"];
 }
 
 + (id)sharedAboutController
@@ -75,43 +55,41 @@
 
 - (void)loadCreditsText
 {
-	NSString *linkString = [NSString stringWithFormat:@"<a href=\"http://www.opensword.org/license.php\">MIT License</a>"];
-	
 	NSString *creditsPath = [[NSBundle mainBundle] pathForResource:@"Credits" ofType:@"html"];
-	NSError *error=nil;
-	NSMutableString *plainString = [NSMutableString stringWithContentsOfFile:creditsPath encoding:NSUTF8StringEncoding error:&error];
-	if(error) {
-		[self presentError:error];
+	NSData *htmlData = [NSData dataWithContentsOfFile:creditsPath];
+	
+	if (!htmlData) {
 		return;
 	}
 	
-	[plainString replaceOccurrencesOfString:@"<PXLICENSE>"
-								 withString:linkString
-									options:NSLiteralSearch
-									  range:NSMakeRange(0,[(NSString *)plainString length])];
+	NSDictionary *attributedOptions = [NSDictionary dictionaryWithObject:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]
+																  forKey:NSBaseURLDocumentOption];
 	
+	NSAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithHTML:htmlData
+																				   options:attributedOptions
+																		documentAttributes:nil];
 	
-	NSData *htmlData = [NSData dataWithBytes:[plainString UTF8String] length:[(NSString *)plainString length]];
-	NSDictionary *attributedOptions = [NSDictionary dictionaryWithObject:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]] forKey:@"BaseURL"];
-	NSAttributedString *attributedString = [[[NSMutableAttributedString alloc] initWithHTML:htmlData options:attributedOptions documentAttributes:nil] autorelease];
-	[[credits textStorage] setAttributedString:attributedString];
+	[[creditsView textStorage] setAttributedString:attributedString];
+	[attributedString release];
+	
+	NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleVersionKey];
+	version = [@"Version " stringByAppendingString:version];
+	
+	[versionField setStringValue:version];
 }
-
 
 - (void)createPanel
 {
-	NSView *content;
-	aboutPanel = [[PXAboutPanel alloc]
-		 initWithContentRect:[ (NSView *) [panelInNib contentView] frame]
-				   styleMask:NSBorderlessWindowMask
-					 backing:[panelInNib backingType]
-					   defer:NO];
+	aboutPanel = [[PXAboutPanel alloc] initWithContentRect:[ (NSView *) [self.window contentView] frame]
+												 styleMask:NSBorderlessWindowMask
+												   backing:[self.window backingType]
+													 defer:NO];
 	
-	[aboutPanel setBackgroundColor: [NSColor whiteColor]];
-	[aboutPanel setHasShadow: YES];
-	[aboutPanel setNextResponder: self];
-	[aboutPanel setBecomesKeyOnlyIfNeeded: NO];
-	[aboutPanel setDelegate: self];
+	[aboutPanel setBackgroundColor:[NSColor whiteColor]];
+	[aboutPanel setHasShadow:YES];
+	[aboutPanel setNextResponder:self];
+	[aboutPanel setBecomesKeyOnlyIfNeeded:NO];
+	[aboutPanel setDelegate:self];
 	[aboutPanel setLevel:NSModalPanelWindowLevel];
 	
 	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"alphaValue"];
@@ -119,39 +97,39 @@
 	
 	[aboutPanel setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
 	
-	content = [[panelInNib contentView] retain];
+	NSView *content = [[self.window contentView] retain];
 	[content removeFromSuperview];
-	[(PXAboutPanel *)aboutPanel setContentView:content];
 	
+	[aboutPanel setContentView:content];
 	[content release];
 }
 
 //Watch for notifications that the application is no longer active, or that
 //another window has replaced the About panel as the main window, and hide
 //on either of these notifications.
-- (void) watchForNotificationsWhichShouldHidePanel
+- (void)watchForNotificationsWhichShouldHidePanel
 {
 	//This works better than just making the panel hide when the app
 	//deactivates (setHidesOnDeactivate:YES), because if we use that
 	//then the panel will return when the app reactivates.
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	
-	[nc addObserver: self
-		   selector: @selector(hidePanel)
-			   name: NSApplicationDidResignActiveNotification
-			 object: nil];
+	[nc addObserver:self
+		   selector:@selector(hidePanel)
+			   name:NSApplicationDidResignActiveNotification
+			 object:nil];
 	
 	//If the panel is no longer main, hide it.
 	//(We could also use the delegate notification for this.)
-	[nc addObserver: self
-		   selector: @selector(hidePanel)
-			   name: NSWindowDidResignMainNotification
-			 object: aboutPanel];
+	[nc addObserver:self
+		   selector:@selector(hidePanel)
+			   name:NSWindowDidResignMainNotification
+			 object:aboutPanel];
 	
-	[nc addObserver: self
-		   selector: @selector(hidePanel)
-			   name: NSWindowDidResignKeyNotification
-			 object: aboutPanel];
+	[nc addObserver:self
+		   selector:@selector(hidePanel)
+			   name:NSWindowDidResignKeyNotification
+			 object:aboutPanel];
 	
 }
 
@@ -170,7 +148,7 @@
 	[self watchForNotificationsWhichShouldHidePanel];
 }
 
-- (void)showPanel:(id) sender
+- (void)showPanel:(id)sender
 {
 	if (!aboutPanel)
 		[self setupPanel];
@@ -181,7 +159,7 @@
 	[[aboutPanel animator] setAlphaValue:1.0f];
 }
 
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag
 {
 	if ([aboutPanel alphaValue] == 0)
 		[aboutPanel orderOut:nil];
@@ -202,7 +180,7 @@
 	return NO;
 }
 
-- (void)mouseDown:(NSEvent *) event
+- (void)mouseDown:(NSEvent *)event
 {
 	[self hidePanel];
 }

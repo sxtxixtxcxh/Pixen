@@ -422,7 +422,6 @@
 		EAC9177C0CE7DC7300E519E1 /* crosshairscreenshot2.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917190CE7DC7300E519E1 /* crosshairscreenshot2.png */; };
 		EAC9177D0CE7DC7300E519E1 /* discoverpixen.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9171A0CE7DC7300E519E1 /* discoverpixen.png */; };
 		EAC9177E0CE7DC7300E519E1 /* layersscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9171B0CE7DC7300E519E1 /* layersscreen.png */; };
-		EAC9177F0CE7DC7300E519E1 /* osglogo.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9171C0CE7DC7300E519E1 /* osglogo.png */; };
 		EAC917800CE7DC7300E519E1 /* patternscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9171D0CE7DC7300E519E1 /* patternscreen.png */; };
 		EAC917810CE7DC7300E519E1 /* righttoolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9171E0CE7DC7300E519E1 /* righttoolbar.png */; };
 		EAC917820CE7DC7300E519E1 /* tilingscreenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9171F0CE7DC7300E519E1 /* tilingscreenshot.png */; };
@@ -557,7 +556,7 @@
 		61BD25C9067A1DD80054A2BB /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		61E6F12F0608E9FB001B46E8 /* PXGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGrid.h; sourceTree = "<group>"; };
 		61E6F1300608E9FB001B46E8 /* PXGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGrid.m; sourceTree = "<group>"; };
-		61ED25AC06BD63DA00264DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXAbout.nib; sourceTree = "<group>"; };
+		61ED25AC06BD63DA00264DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXAbout.xib; sourceTree = "<group>"; };
 		61F598BA067949D500B8C8CA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXScalePrompt.xib; sourceTree = "<group>"; };
 		61F9CB17060D6A6D00562B78 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXToolPalette.nib; sourceTree = "<group>"; };
 		61FED6C308BCC646005E51EA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXSequenceExportPrompter.xib; sourceTree = "<group>"; };
@@ -968,7 +967,6 @@
 		EAC917190CE7DC7300E519E1 /* crosshairscreenshot2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crosshairscreenshot2.png; sourceTree = "<group>"; };
 		EAC9171A0CE7DC7300E519E1 /* discoverpixen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discoverpixen.png; sourceTree = "<group>"; };
 		EAC9171B0CE7DC7300E519E1 /* layersscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = layersscreen.png; sourceTree = "<group>"; };
-		EAC9171C0CE7DC7300E519E1 /* osglogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = osglogo.png; sourceTree = "<group>"; };
 		EAC9171D0CE7DC7300E519E1 /* patternscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = patternscreen.png; sourceTree = "<group>"; };
 		EAC9171E0CE7DC7300E519E1 /* righttoolbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = righttoolbar.png; sourceTree = "<group>"; };
 		EAC9171F0CE7DC7300E519E1 /* tilingscreenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tilingscreenshot.png; sourceTree = "<group>"; };
@@ -1986,7 +1984,6 @@
 				EAC917190CE7DC7300E519E1 /* crosshairscreenshot2.png */,
 				EAC9171A0CE7DC7300E519E1 /* discoverpixen.png */,
 				EAC9171B0CE7DC7300E519E1 /* layersscreen.png */,
-				EAC9171C0CE7DC7300E519E1 /* osglogo.png */,
 				EAC9171D0CE7DC7300E519E1 /* patternscreen.png */,
 				EAC9171E0CE7DC7300E519E1 /* righttoolbar.png */,
 				EAC9171F0CE7DC7300E519E1 /* tilingscreenshot.png */,
@@ -2376,7 +2373,6 @@
 				EAC9177C0CE7DC7300E519E1 /* crosshairscreenshot2.png in Resources */,
 				EAC9177D0CE7DC7300E519E1 /* discoverpixen.png in Resources */,
 				EAC9177E0CE7DC7300E519E1 /* layersscreen.png in Resources */,
-				EAC9177F0CE7DC7300E519E1 /* osglogo.png in Resources */,
 				EAC917800CE7DC7300E519E1 /* patternscreen.png in Resources */,
 				EAC917810CE7DC7300E519E1 /* righttoolbar.png in Resources */,
 				EAC917820CE7DC7300E519E1 /* tilingscreenshot.png in Resources */,
