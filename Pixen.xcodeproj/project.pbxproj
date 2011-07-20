@@ -51,6 +51,9 @@
 		C9A6BE1713ACFBC50028B141 /* PXToolProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1513ACFBC50028B141 /* PXToolProperties.xib */; };
 		C9A6BE1A13AD008C0028B141 /* PXBlankPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1813AD008C0028B141 /* PXBlankPropertiesView.xib */; };
 		C9A6BE1D13AD07B10028B141 /* PXFillToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1B13AD07B10028B141 /* PXFillToolPropertiesView.xib */; };
+		C9B1FA5A13D7328D00BB7CF7 /* PXManagePresetsController.h in Headers */ = {isa = PBXBuildFile; fileRef = C9B1FA5813D7328D00BB7CF7 /* PXManagePresetsController.h */; };
+		C9B1FA5B13D7328D00BB7CF7 /* PXManagePresetsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FA5913D7328D00BB7CF7 /* PXManagePresetsController.m */; };
+		C9B1FA5E13D732FC00BB7CF7 /* PXManagePresetsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9B1FA5C13D732FC00BB7CF7 /* PXManagePresetsWindow.xib */; };
 		C9DC4D9B13D0E6D70065C1A6 /* PXImageSizePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9DC4D9913D0E6D70065C1A6 /* PXImageSizePrompt.xib */; };
 		C9DC4D9E13D0E91B0065C1A6 /* PXPresetsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C9DC4D9C13D0E91B0065C1A6 /* PXPresetsManager.h */; };
 		C9DC4D9F13D0E91B0065C1A6 /* PXPresetsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DC4D9D13D0E91B0065C1A6 /* PXPresetsManager.m */; };
@@ -585,6 +588,9 @@
 		C9A6BE1613ACFBC50028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXToolProperties.xib; sourceTree = "<group>"; };
 		C9A6BE1913AD008C0028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXBlankPropertiesView.xib; sourceTree = "<group>"; };
 		C9A6BE1C13AD07B10028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXFillToolPropertiesView.xib; sourceTree = "<group>"; };
+		C9B1FA5813D7328D00BB7CF7 /* PXManagePresetsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXManagePresetsController.h; sourceTree = "<group>"; };
+		C9B1FA5913D7328D00BB7CF7 /* PXManagePresetsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXManagePresetsController.m; sourceTree = "<group>"; };
+		C9B1FA5D13D732FC00BB7CF7 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXManagePresetsWindow.xib; sourceTree = "<group>"; };
 		C9DC4D9A13D0E6D70065C1A6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXImageSizePrompt.xib; sourceTree = "<group>"; };
 		C9DC4D9C13D0E91B0065C1A6 /* PXPresetsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPresetsManager.h; sourceTree = "<group>"; };
 		C9DC4D9D13D0E91B0065C1A6 /* PXPresetsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPresetsManager.m; sourceTree = "<group>"; };
@@ -1267,6 +1273,8 @@
 			children = (
 				EA31F95D0CE7BF0900EC481B /* PXImageSizePrompter.h */,
 				EA31F95E0CE7BF0900EC481B /* PXImageSizePrompter.m */,
+				C9B1FA5813D7328D00BB7CF7 /* PXManagePresetsController.h */,
+				C9B1FA5913D7328D00BB7CF7 /* PXManagePresetsController.m */,
 				C9DDEE3913D0EB4D000464F2 /* PXPreset.h */,
 				C9DDEE3A13D0EB4D000464F2 /* PXPreset.m */,
 				C9DC4D9C13D0E91B0065C1A6 /* PXPresetsManager.h */,
@@ -1830,6 +1838,7 @@
 				C9DC4D9913D0E6D70065C1A6 /* PXImageSizePrompt.xib */,
 				615E87F206A31AF8002445B8 /* PXLayerController.xib */,
 				C9F4E5FC13AD8F6500345D5D /* PXLayerDetailsView.xib */,
+				C9B1FA5C13D732FC00BB7CF7 /* PXManagePresetsWindow.xib */,
 				EAA0184E054DCC7B00EF18C2 /* PXMonotoneBackgroundConfigurator.xib */,
 				EA9E180B0557104F00119DF5 /* PXNamePrompt.xib */,
 				EAB650840D108D9000274070 /* PXPaletteController.xib */,
@@ -2222,6 +2231,7 @@
 				C9DE2B2C13BF5899007EC48A /* PXPaletteViewController.h in Headers */,
 				C9DC4D9E13D0E91B0065C1A6 /* PXPresetsManager.h in Headers */,
 				C9DDEE3B13D0EB4D000464F2 /* PXPreset.h in Headers */,
+				C9B1FA5A13D7328D00BB7CF7 /* PXManagePresetsController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2439,6 +2449,7 @@
 				C9E088A813D5C03D002A0AD4 /* eyedropper_bw.png in Resources */,
 				C912F26D13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib in Resources */,
 				C90E7E3013D5F81C00751F5B /* PXCanvasResizePrompt.xib in Resources */,
+				C9B1FA5E13D732FC00BB7CF7 /* PXManagePresetsWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2616,6 +2627,7 @@
 				C9DE2B2D13BF5899007EC48A /* PXPaletteViewController.m in Sources */,
 				C9DC4D9F13D0E91B0065C1A6 /* PXPresetsManager.m in Sources */,
 				C9DDEE3C13D0EB4D000464F2 /* PXPreset.m in Sources */,
+				C9B1FA5B13D7328D00BB7CF7 /* PXManagePresetsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2860,6 +2872,14 @@
 				C9A6BE1C13AD07B10028B141 /* English */,
 			);
 			name = PXFillToolPropertiesView.xib;
+			sourceTree = "<group>";
+		};
+		C9B1FA5C13D732FC00BB7CF7 /* PXManagePresetsWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9B1FA5D13D732FC00BB7CF7 /* English */,
+			);
+			name = PXManagePresetsWindow.xib;
 			sourceTree = "<group>";
 		};
 		C9DC4D9913D0E6D70065C1A6 /* PXImageSizePrompt.xib */ = {

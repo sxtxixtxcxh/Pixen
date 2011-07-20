@@ -65,3 +65,5 @@ NSString *PXPaletteUnlockedNotificationName = @"PXPaletteUnlocked";
 
 NSString *PXUnlockToolSwitcherNotificationName = @"PXUnlockToolSwitcher";
 NSString *PXLockToolSwitcherNotificationName = @"PXLockToolSwitcher";
+
+NSString *PXPresetsChangedNotificationName = @"PXPresetsChanged";

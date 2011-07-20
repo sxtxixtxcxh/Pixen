@@ -40,6 +40,7 @@
 #import "PXBackgrounds.h"
 #import "PXPresetsManager.h"
 #import "PXPreset.h"
+#import "PXManagePresetsController.h"
 
 @interface PXImageSizePrompter ()
 
@@ -65,8 +66,10 @@
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[backgroundColor release];
 	[image release];
+	[manageWC release];
 	[super dealloc];
 }
 
@@ -75,6 +78,16 @@
 	[super windowDidLoad];
 	
 	[[self window] setDelegate:self];
+	[self populatePresetsButton];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(presetsChanged:)
+												 name:PXPresetsChangedNotificationName
+											   object:nil];
+}
+
+- (void)presetsChanged:(NSNotification *)notification
+{
 	[self populatePresetsButton];
 }
 
@@ -86,56 +99,72 @@
 - (void)populatePresetsButton
 {
 	PXPresetsManager *manager = [PXPresetsManager sharedPresetsManager];
+	NSMenu *menu = [presetsButton menu];
 	
-	for (NSInteger n = 1; n < [presetsButton numberOfItems]; n++) {
-		[presetsButton removeItemAtIndex:n];
-	}
+	[menu removeAllItems];
+	[menu addItemWithTitle:@"Preset" action:NULL keyEquivalent:@""];
 	
 	for (NSString *name in [manager presetNames]) {
-		[presetsButton addItemWithTitle:name];
+		[menu addItemWithTitle:name
+						action:@selector(selectedPreset:)
+				 keyEquivalent:@""];
 	}
 	
-	if ([presetsButton numberOfItems] > 1) {
-		[[presetsButton menu] addItem:[NSMenuItem separatorItem]];
+	if ([menu numberOfItems] > 1) {
+		[menu addItem:[NSMenuItem separatorItem]];
 	}
 	
-	[presetsButton addItemWithTitle:@"Save Preset As..."];
+	[menu addItemWithTitle:@"Save Preset As..."
+					action:@selector(savePresetAs:)
+			 keyEquivalent:@""];
+	
+	[menu addItemWithTitle:@"Manage Presets..."
+					action:@selector(managePresets:)
+			 keyEquivalent:@""];
 }
 
-- (IBAction)selectedPreset:(id)sender
+- (void)selectedPreset:(id)sender
 {
-	BOOL last = ([presetsButton indexOfSelectedItem] == [presetsButton numberOfItems]-1);
+	NSString *name = [presetsButton titleOfSelectedItem];
+	PXPreset *preset = [[PXPresetsManager sharedPresetsManager] presetWithName:name];
 	
-	if (last) {
-		if (!prompter) {
-			prompter = [[PXNamePrompter alloc] init];
-			prompter.delegate = self;
-		}
-		
-		[prompter promptInWindow:[self window]
-						 context:NULL
-					promptString:@"Enter a name for this preset:"
-					defaultEntry:@""];
+	self.width = preset.size.width;
+	self.height = preset.size.height;
+	self.backgroundColor = preset.color;
+	
+	[self sizeChanged:nil];
+}
+
+- (void)savePresetAs:(id)sender
+{
+	if (!prompter) {
+		prompter = [[PXNamePrompter alloc] init];
+		prompter.delegate = self;
 	}
-	else {
-		NSString *name = [presetsButton titleOfSelectedItem];
-		PXPreset *preset = [[PXPresetsManager sharedPresetsManager] presetWithName:name];
-		
-		self.width = preset.size.width;
-		self.height = preset.size.height;
-		self.backgroundColor = preset.color;
-		
-		[self sizeChanged:nil];
+	
+	[prompter promptInWindow:[self window]
+					 context:NULL
+				promptString:@"Enter a name for this preset:"
+				defaultEntry:@""];
+}
+
+- (void)managePresets:(id)sender
+{
+	if (!manageWC) {
+		manageWC = [[PXManagePresetsController alloc] init];
 	}
+	
+	[NSApp beginSheet:[manageWC window]
+	   modalForWindow:[self window]
+		modalDelegate:nil didEndSelector:NULL
+		  contextInfo:NULL];
 }
 
 - (void)prompter:(id)aPrompter didFinishWithName:(NSString *)aName context:(id)context
 {
-	[[PXPresetsManager sharedPresetsManager] addPresetWithName:aName
-														  size:self.size
-														 color:backgroundColor];
-	
-	[self populatePresetsButton];
+	[[PXPresetsManager sharedPresetsManager] savePresetWithName:aName
+														   size:self.size
+														  color:backgroundColor];
 }
 
 - (IBAction)changedColor:(id)sender

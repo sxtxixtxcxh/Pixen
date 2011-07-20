@@ -33,7 +33,7 @@
 
 #import <AppKit/AppKit.h>
 
-@class PXNamePrompter, PXNSImageView;
+@class PXManagePresetsController, PXNamePrompter, PXNSImageView;
 
 @interface PXImageSizePrompter : NSWindowController < NSWindowDelegate > {
   @private
@@ -41,6 +41,7 @@
 	IBOutlet NSView *widthIndicator, *heightIndicator;
 	IBOutlet NSPopUpButton *presetsButton;
 	PXNamePrompter *prompter;
+	PXManagePresetsController *manageWC;
 	
 	NSInteger _width, _height;
 	NSColor *backgroundColor;
@@ -62,8 +63,6 @@
 @property (nonatomic, retain) NSColor *backgroundColor;
 
 - (BOOL)runModal;
-
-- (IBAction)selectedPreset:(id)sender;
 
 - (IBAction)sizeChanged:(id)sender;
 - (IBAction)changedColor:(id)sender;

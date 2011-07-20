@@ -64,3 +64,5 @@ extern NSString *PXPaletteUnlockedNotificationName;
 
 extern NSString *PXUnlockToolSwitcherNotificationName;
 extern NSString *PXLockToolSwitcherNotificationName;
+
+extern NSString *PXPresetsChangedNotificationName;

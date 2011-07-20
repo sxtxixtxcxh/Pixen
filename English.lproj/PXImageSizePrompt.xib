@@ -107,7 +107,6 @@
 							<string key="NSFrame">{{134, 12}, {120, 32}}</string>
 							<reference key="NSSuperview" ref="558903617"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="442222547">
 								<int key="NSCellFlags">67239424</int>
@@ -761,14 +760,6 @@
 					<int key="connectionID">131</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">selectedPreset:</string>
-						<reference key="source" ref="21489076"/>
-						<reference key="destination" ref="272803399"/>
-					</object>
-					<int key="connectionID">133</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: height</string>
 						<reference key="source" ref="270185955"/>
@@ -1142,7 +1133,6 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="cancel:">id</string>
 						<string key="changedColor:">id</string>
-						<string key="selectedPreset:">id</string>
 						<string key="sizeChanged:">id</string>
 						<string key="useEnteredSize:">id</string>
 					</dictionary>
@@ -1153,10 +1143,6 @@
 						</object>
 						<object class="IBActionInfo" key="changedColor:">
 							<string key="name">changedColor:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectedPreset:">
-							<string key="name">selectedPreset:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="sizeChanged:">

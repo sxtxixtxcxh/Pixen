@@ -61,6 +61,11 @@
 	[super dealloc];
 }
 
+- (NSArray *)presets
+{
+	return _presets;
+}
+
 - (NSArray *)presetNames
 {
 	return [_presets valueForKey:@"name"];
@@ -80,17 +85,28 @@
 - (void)persistPresets
 {
 	[NSKeyedArchiver archiveRootObject:_presets toFile:[self presetsPath]];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXPresetsChangedNotificationName
+														object:self];
 }
 
-- (void)addPresetWithName:(NSString *)name size:(NSSize)size color:(NSColor *)color
+- (void)savePresetWithName:(NSString *)name size:(NSSize)size color:(NSColor *)color
 {
-	PXPreset *preset = [[PXPreset alloc] init];
-	preset.name = name;
-	preset.size = size;
-	preset.color = color;
+	PXPreset *existingPreset = [self presetWithName:name];
 	
-	[_presets addObject:preset];
-	[preset release];
+	if (existingPreset) {
+		existingPreset.size = size;
+		existingPreset.color = color;
+	}
+	else {
+		PXPreset *preset = [[PXPreset alloc] init];
+		preset.name = name;
+		preset.size = size;
+		preset.color = color;
+		
+		[_presets addObject:preset];
+		[preset release];
+	}
 	
 	[self persistPresets];
 }

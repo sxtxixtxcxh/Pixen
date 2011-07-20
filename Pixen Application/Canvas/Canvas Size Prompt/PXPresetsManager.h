@@ -18,10 +18,14 @@
 
 + (id)sharedPresetsManager;
 
+- (NSArray *)presets;
 - (NSArray *)presetNames;
+
 - (PXPreset *)presetWithName:(NSString *)name;
 
-- (void)addPresetWithName:(NSString *)name size:(NSSize)size color:(NSColor *)color;
+- (void)persistPresets;
+
+- (void)savePresetWithName:(NSString *)name size:(NSSize)size color:(NSColor *)color;
 - (void)removePresetWithName:(NSString *)name;
 
 @end
