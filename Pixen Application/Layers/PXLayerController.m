@@ -44,11 +44,10 @@
 
 - (id)init
 {
-	if(!(self = [super init])) {
+	if(!(self = [super initWithNibName:@"PXLayerController" bundle:nil])) {
 		return nil;
 	}
 	views = [[NSMutableArray alloc] init];
-	[NSBundle loadNibNamed:@"PXLayerController" owner:self];
 	return self;
 }
 
@@ -102,11 +101,6 @@
 							 forKeyPath:@"selectionIndexes" 
 									options:NSKeyValueObservingOptionNew
 									context:nil];
-}
-
-- (NSView *)view;
-{
-	return view;
 }
 
 - (id)document
@@ -400,11 +394,11 @@
 		return NSDragOperationNone; 
 	}
   
-  int idx = *idxP;
+  NSInteger idx = *idxP;
   NSCollectionViewDropOperation operation = *operationP;
   
 	
-	int sourceIdx = [self invertLayerIndex:[[[info draggingPasteboard] stringForType:PXLayerRowPboardType] intValue]];
+	NSUInteger sourceIdx = [self invertLayerIndex:[[[info draggingPasteboard] stringForType:PXLayerRowPboardType] intValue]];
 	if ( idx == sourceIdx + 1 || idx == sourceIdx)
 	{
 		return NSDragOperationNone;

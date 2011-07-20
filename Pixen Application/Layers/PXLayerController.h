@@ -30,10 +30,9 @@
 #import "PXCanvas.h"
 
 @class PXLayer, PXCanvas, PXDocument;
-@interface PXLayerController : NSResponder <NSCollectionViewDelegate>
+@interface PXLayerController : NSViewController <NSCollectionViewDelegate>
 {
   @private
-	IBOutlet NSView *view;
 	IBOutlet NSCollectionView *layersView;
 	PXCanvas *canvas;
 	NSMutableArray *views;
