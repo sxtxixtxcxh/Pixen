@@ -21,7 +21,7 @@ OSStatus GenerateThumbnailForURL (void *thisInterface, QLThumbnailRequestRef thu
 	
 	PXCanvas *canvas = [NSKeyedUnarchiver unarchiveObjectWithFile:[ (NSURL *) url path]];
 	
-	CGContextRef ctx = QLThumbnailRequestCreateContext(thumbnail, [canvas size], 1, NULL);
+	CGContextRef ctx = QLThumbnailRequestCreateContext(thumbnail, NSSizeToCGSize([canvas size]), 1, NULL);
 	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithGraphicsPort:ctx flipped:NO]];
 	
 	[canvas draw];

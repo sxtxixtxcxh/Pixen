@@ -25,7 +25,7 @@ OSStatus GeneratePreviewForURL (void *thisInterface, QLPreviewRequestRef preview
 						  [NSNumber numberWithInt:[canvas size].width], kQLPreviewPropertyWidthKey,
 						  [NSNumber numberWithInt:[canvas size].height], kQLPreviewPropertyHeightKey, nil];
 	
-	CGContextRef ctx = QLPreviewRequestCreateContext(preview, [canvas size], 1, (CFDictionaryRef) dict);
+	CGContextRef ctx = QLPreviewRequestCreateContext(preview, NSSizeToCGSize([canvas size]), 1, (CFDictionaryRef) dict);
 	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithGraphicsPort:ctx flipped:NO]];
 	
 	[canvas draw];
