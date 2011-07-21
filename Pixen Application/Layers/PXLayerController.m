@@ -274,7 +274,7 @@
 {
 	if([[canvas layers] count] <= 1) { return; }
 	[canvas removeLayerAtIndex:index];
-	int newIndex = MAX(index - 1, 0);
+	NSUInteger newIndex = MAX(index - 1, 0);
 	[self selectRow:newIndex];
 	[self selectLayer:nil];
 }
@@ -340,7 +340,12 @@
 
 - (NSUInteger)invertLayerIndex:(NSUInteger)anIndex
 {
-	return [[canvas layers] count] - anIndex - 1;
+	NSInteger idx = [[canvas layers] count] - anIndex - 1;
+	
+	if (idx == -1)
+		return NSNotFound;
+	
+	return idx;
 }
 
 - (void)mergeDownLayerAtCanvasLayersIndex:(NSUInteger)ind
