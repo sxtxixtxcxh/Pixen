@@ -41,6 +41,8 @@
 - (BOOL)showsToolPreview;
 - (BOOL)showsPreviousCelOverlay;
 
+- (id)makeUntitledDocumentOfType:(NSString *)typeName showSizePrompt:(BOOL)showPrompt error:(NSError **)outError;
+
 - (IBAction)newAnimationDocument:sender;
 
 - (NSArray *)animationDocuments;

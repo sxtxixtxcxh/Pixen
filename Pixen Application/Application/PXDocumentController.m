@@ -87,13 +87,13 @@
 	
 	if(![fileManager fileExistsAtPath:path isDirectory:&isDir])
 	{
-    NSError *err=nil;
+		NSError *err=nil;
 		if (![fileManager createDirectoryAtPath:path 
-                withIntermediateDirectories:YES 
-                                 attributes:nil 
-                                      error:&err] ) 
+					withIntermediateDirectories:YES 
+									 attributes:nil 
+										  error:&err] ) 
 		{
-      [self presentError:err];
+			[self presentError:err];
 			return;
 		}
 	}
@@ -249,7 +249,7 @@ NSString *palettesSubdirName = @"Palettes";
 	PXCanvasDocument *doc = [self currentDocument];
 	if(doc)
 	{
-//FIXME: coupled to canvas controller
+		//FIXME: coupled to canvas controller
 		PXCanvasController *canvasController = [doc canvasController];
 		NSWindow *window = [canvasController window];
 		if (![window isKeyWindow]) {
@@ -333,12 +333,12 @@ NSString *palettesSubdirName = @"Palettes";
 
 - (IBAction)newFromClipboard:sender
 {
-  NSError *err=nil;
-	PXCanvasDocument *doc = [self makeUntitledDocumentOfType:PixenImageFileType error:&err];
-  if(err) {
-    [self presentError:err];
+	NSError *err=nil;
+	PXCanvasDocument *doc = [self makeUntitledDocumentOfType:PixenImageFileType showSizePrompt:NO error:&err];
+	if(err) {
+		[self presentError:err];
 		return;
-  }
+	}
 	[self addDocument:doc];
 	[doc loadFromPasteboard:[NSPasteboard generalPasteboard]];
 }
@@ -351,7 +351,7 @@ NSString *palettesSubdirName = @"Palettes";
 	BOOL showCrosshairs = [[NSUserDefaults standardUserDefaults] boolForKey:PXCrosshairEnabledKey];
 	showCrosshairs = !showCrosshairs;
 	[[NSUserDefaults standardUserDefaults] setBool:showCrosshairs forKey:PXCrosshairEnabledKey];
-//FIXME: coupled to canvas window controller
+	//FIXME: coupled to canvas window controller
 	[[[[self currentDocument] windowControllers] objectAtIndex:0] redrawCanvas:self];
 }
 
@@ -369,7 +369,7 @@ NSString *palettesSubdirName = @"Palettes";
 		[[PXToolPaletteController sharedToolPaletteController] clearBeziers];
 	}
 	[[NSUserDefaults standardUserDefaults] setBool:cachedShowsToolPreview forKey:PXToolPreviewEnabledKey];
-//FIXME: coupled to canvas window controller 
+	//FIXME: coupled to canvas window controller 
 	[[[[self currentDocument] windowControllers] objectAtIndex:0] redrawCanvas:self];
 }
 
@@ -383,7 +383,7 @@ NSString *palettesSubdirName = @"Palettes";
 	BOOL showPreviousCelOverlay = [[NSUserDefaults standardUserDefaults] boolForKey:PXPreviousCelOverlayEnabledKey];
 	cachedShowsPreviousCelOverlay = !showPreviousCelOverlay;
 	[[NSUserDefaults standardUserDefaults] setBool:cachedShowsPreviousCelOverlay forKey:PXPreviousCelOverlayEnabledKey];
-//FIXME: coupled to canvas window controller
+	//FIXME: coupled to canvas window controller
 	[[[self currentDocument] windowControllers] makeObjectsPerformSelector:@selector(redrawCanvas:) withObject:self];
 }
 
@@ -453,8 +453,12 @@ NSString *palettesSubdirName = @"Palettes";
 	return YES;
 }
 
-- (id)makeUntitledDocumentOfType:(NSString *)typeName error:(NSError **)outError
+- (id)makeUntitledDocumentOfType:(NSString *)typeName showSizePrompt:(BOOL)showPrompt error:(NSError **)outError
 {
+	if (!showPrompt) {
+		return [super makeUntitledDocumentOfType:typeName error:outError];
+	}
+	
 	PXImageSizePrompter *prompter = [[PXImageSizePrompter alloc] init];
 	
 	if (![prompter runModal]) {
@@ -466,24 +470,10 @@ NSString *palettesSubdirName = @"Palettes";
 		return nil;
 	}
 	
-	Class documentClass = [self documentClassForType:typeName];
+	id document = [super makeUntitledDocumentOfType:typeName error:outError];
 	
-	id document = [[documentClass alloc] initWithType:typeName error:outError];
-	
-	if (!document) {
-		[prompter release];
+	if (!document)
 		return nil;
-	}
-	
-	if (![document isKindOfClass:[PXDocument class]]) {
-		[prompter release];
-		[document release];
-		
-		if (outError)
-			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:-1 userInfo:nil];
-		
-		return nil;
-	}
 	
 	[[document canvas] setSize:[prompter size]
 					withOrigin:NSZeroPoint
@@ -493,7 +483,12 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	[prompter release];
 	
-	return [document autorelease];
+	return document;
+}
+
+- (id)makeUntitledDocumentOfType:(NSString *)typeName error:(NSError **)outError
+{
+	return [self makeUntitledDocumentOfType:typeName showSizePrompt:YES error:outError];
 }
 
 - (id)makeDocumentWithContentsOfURL:(NSURL *)aURL ofType:(NSString *)docType
@@ -504,12 +499,12 @@ NSString *palettesSubdirName = @"Palettes";
 		if (potentiallyAnimatedDocument)
 			return potentiallyAnimatedDocument;
 	}
-  NSError *err = nil;
+	NSError *err = nil;
 	NSDocument *doc = [super makeDocumentWithContentsOfURL:aURL ofType:docType error:&err];
-  if(err) {
-    [self presentError:err];
-  }
-  return doc;
+	if(err) {
+		[self presentError:err];
+	}
+	return doc;
 }
 
 - (id)makeDocumentWithContentsOfURL:(NSURL *)url ofType:(NSString *)docType error:(NSError **)err
@@ -521,11 +516,11 @@ NSString *palettesSubdirName = @"Palettes";
 			return potentiallyAnimatedDocument;
 	}
 	NSDocument *doc = [super makeDocumentWithContentsOfURL:url ofType:docType error:err];
-  if(err && *err) {
-    [self presentError:*err];
-    return nil;
-  }
-  return doc;
+	if(err && *err) {
+		[self presentError:*err];
+		return nil;
+	}
+	return doc;
 }
 
 - (id)makeDocumentForURL:(NSURL *)absoluteDocumentURL withContentsOfURL:(NSURL *)absoluteDocumentContentsURL ofType:(NSString *)typeName error:(NSError **)outError
@@ -541,16 +536,16 @@ NSString *palettesSubdirName = @"Palettes";
 
 - (IBAction)newAnimationDocument:sender
 {
-  NSError *err = nil;
-  NSDocument *doc = [self makeUntitledDocumentOfType:PixenAnimationFileType error:&err];
-  if(err) 
-  {
-    [self presentError:err];
-    return;
-  }
-  [self addDocument:doc];
-  [doc makeWindowControllers];
-  [doc showWindows];
+	NSError *err = nil;
+	NSDocument *doc = [self makeUntitledDocumentOfType:PixenAnimationFileType error:&err];
+	if(err) 
+	{
+		[self presentError:err];
+		return;
+	}
+	[self addDocument:doc];
+	[doc makeWindowControllers];
+	[doc showWindows];
 }
 
 - (NSArray *)animationDocuments
@@ -581,29 +576,29 @@ NSString *palettesSubdirName = @"Palettes";
 	}
 	[openPanel setAllowsOtherFileTypes:NO];
 	[openPanel setCanChooseDirectories:NO];
-
+	
 	NSInteger returnCode = [openPanel runModalForTypes:types];
 	if (returnCode == NSFileHandlingPanelCancelButton) { return; }
-
+	
 	PXAnimationDocument *animationDocument = (PXAnimationDocument *)[self makeUntitledDocumentOfType:PixenAnimationFileType error:NULL];
-  
+	
 	[[animationDocument animation] removeCel:[[animationDocument animation] objectInCelsAtIndex:0]];
 	
 	NSMutableArray *images = [[[NSMutableArray alloc] initWithCapacity:[[openPanel filenames] count]] autorelease];
     for (NSString *currentFile in [openPanel filenames])
 	{
-    [images addObject:[PXCanvas canvasWithContentsOfFile:currentFile]];
+		[images addObject:[PXCanvas canvasWithContentsOfFile:currentFile]];
 	}
 	
-  float defaultDuration = 1.0f;
+	float defaultDuration = 1.0f;
 	for(PXCanvas *current in images)
-  {
-    [[animationDocument animation] addCel:[[[PXCel alloc] initWithCanvas:current duration:defaultDuration] autorelease]];
-  }	
-  [self addDocument:animationDocument];
+	{
+		[[animationDocument animation] addCel:[[[PXCel alloc] initWithCanvas:current duration:defaultDuration] autorelease]];
+	}	
+	[self addDocument:animationDocument];
 	[animationDocument makeWindowControllers];
 	[animationDocument showWindows];
-  [animationDocument updateChangeCount:NSChangeReadOtherContents];
+	[animationDocument updateChangeCount:NSChangeReadOtherContents];
 }
 
 @end
