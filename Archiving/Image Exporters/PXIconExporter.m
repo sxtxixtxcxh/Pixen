@@ -98,22 +98,10 @@ typedef struct
 	return iconData;
 }
 
-- (int)alignBitsToDWord:(int)num
-{
-	// round to the nearest four bytes
-	return (((num + 31) >> 5) << 2);
-}
-
 - (int)imageSize
 {
-	// determine size of icon image data
 	NSSize canvasSize = [canvas size];
-	int xorPitch = canvasSize.width * 3;
-	while (xorPitch % 4 != 0)
-		xorPitch++;
-	int xorSize = xorPitch * canvasSize.height;
-	int andSize = [self alignBitsToDWord:canvasSize.width] * canvasSize.height;
-	return xorSize + andSize;
+	return canvasSize.width * canvasSize.height * 4;
 }
 
 - (void)writeIconFileHeader
@@ -130,7 +118,7 @@ typedef struct
 	dirEntry.bColorCount = 0; // not dealing with color tables
 	dirEntry.bReserved = 0; // this is always 0
 	dirEntry.wPlanes = CFSwapInt16HostToLittle(1); // I think this is supposed to always be 1 for icons
-	dirEntry.wBitCount = CFSwapInt16HostToLittle(24);	
+	dirEntry.wBitCount = CFSwapInt16HostToLittle(32);
 	dirEntry.dwBytesInRes = CFSwapInt32HostToLittle(sizeof(BITMAPINFOHEADER) + [self imageSize]);
 	dirEntry.dwImageOffset = CFSwapInt32HostToLittle(sizeof(ICONHEADER));
 	iconHeader.idEntry = dirEntry;
@@ -149,47 +137,15 @@ typedef struct
 		for (i = 0; i < canvasSize.width; i++)
 		{
 			NSColor *color = [NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-			byte colors[3];
+			byte colors[4];
+			colors[3] = (int) roundf([color alphaComponent] * 255);
 			colors[2] = (int) roundf([color redComponent] * 255);
 			colors[1] = (int) roundf([color greenComponent] * 255);
 			colors[0] = (int) roundf([color blueComponent] * 255);
-			[iconData appendBytes:colors length:3 * sizeof(byte)];
-			bytesWritten += 3;
-		}
-		// fill in zeroes to make scanline end on dword boundary
-		while (bytesWritten % 4 != 0)
-		{
-			char blank = 0;
-			[iconData appendBytes:&blank length:1];
-			bytesWritten++;
+			[iconData appendBytes:colors length:4 * sizeof(byte)];
+			bytesWritten += 4;
 		}
 	}	
-}
-
-- (void)writeMask
-{
-	// write mask data
-	NSSize canvasSize = [canvas size];
-	int maskWidthBytes = [self alignBitsToDWord:canvasSize.width];
-	int maskSize = maskWidthBytes * canvasSize.height;
-	unsigned char *mask = malloc(maskSize);
-	memset(mask, 0, maskSize);
-	unsigned char *workingMask = mask;
-	int i, j;
-	for (j = 0; j < canvasSize.height; j++)
-	{
-		for (i = 0; i < canvasSize.width; i++)
-		{
-			// make anything with alpha of less than 0.5 be invisible
-			if ([[NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSCalibratedRGBColorSpace] alphaComponent] < 0.5)
-			{
-				workingMask[i >> 3] |= (0x80 >> (i & 0x07));
-			}
-		}
-		workingMask += maskWidthBytes;
-	}
-	[iconData appendBytes:mask length:maskSize];
-	free(mask);	
 }
 
 - (void)writeImage
@@ -203,7 +159,7 @@ typedef struct
 	bitmapHeader.biWidth = CFSwapInt32HostToLittle((uint32_t)canvasSize.width);
 	bitmapHeader.biHeight = CFSwapInt32HostToLittle((uint32_t)canvasSize.height*2); // height is doubled because it covers the mask, too
 	bitmapHeader.biPlanes = CFSwapInt16HostToLittle(1); // I think this is always supposed to be 1 for icons
-	bitmapHeader.biBitCount = CFSwapInt16HostToLittle(24); // We're only gonna write 24-bit images for now.
+	bitmapHeader.biBitCount = CFSwapInt16HostToLittle(32); // alpha channel is included
 	bitmapHeader.biSizeImage = CFSwapInt32HostToLittle([self imageSize]);
 	[iconData appendBytes:&bitmapHeader length:sizeof(BITMAPINFOHEADER)];
 	
@@ -212,7 +168,6 @@ typedef struct
 	[mergedImage lockFocus];
 	
 	[self writeImageData];
-	[self writeMask];
 	
 	[mergedImage unlockFocus];
 }
