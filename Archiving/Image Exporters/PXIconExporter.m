@@ -10,9 +10,9 @@
 #import "PXCanvas.h"
 #import "PXCanvas_ImportingExporting.h"
 
-typedef unsigned char byte;
-typedef unsigned short word;
-typedef unsigned long dword;
+typedef uint8_t byte;
+typedef uint16_t word;
+typedef uint32_t dword;
 
 #pragma pack(1)
 
@@ -24,15 +24,15 @@ typedef struct
     byte        bReserved;       // Reserved ( must be 0)
     word        wPlanes;         // Color Planes
     word        wBitCount;       // Bits per pixel
-    long       dwBytesInRes;    // How many bytes in this resource?
-    long       dwImageOffset;   // Where in the file is this image?
+    dword       dwBytesInRes;    // How many bytes in this resource?
+    dword       dwImageOffset;   // Where in the file is this image?
 } ICONDIRENTRY, *LPICONDIRENTRY;
 
 typedef struct ICONDIR
 {
-    word          idReserved;
-    word          idType;
-    word          idCount;
+    word          idReserved;   // Reserved (must be 0)
+    word          idType;       // Resource Type (1 for icons)
+    word          idCount;      // How many images?
 	
     // we're only using one resolution, so there's only one entry.
 	ICONDIRENTRY idEntry;
@@ -40,17 +40,17 @@ typedef struct ICONDIR
 
 typedef struct tagBITMAPINFOHEADER
 {
-	long   biSize;
-	long    biWidth;
-	long    biHeight;
+	dword   biSize;
+	dword    biWidth;
+	dword    biHeight;
 	word    biPlanes;
 	word    biBitCount;
-	long   biCompression;
-	long   biSizeImage;
-	long    biXPelsPerMeter;
-	long    biYPelsPerMeter;
-	long   biClrUsed;
-	long   biClrImportant;
+	dword   biCompression;
+	dword   biSizeImage;
+	dword    biXPelsPerMeter;
+	dword    biYPelsPerMeter;
+	dword   biClrUsed;
+	dword   biClrImportant;
 } BITMAPINFOHEADER;
 
 typedef struct tagRGBQUAD
@@ -82,13 +82,13 @@ typedef struct
 
 - iconDataForCanvas:(PXCanvas *)aCanvas
 {
-	if ([aCanvas size].width > 128 || [aCanvas size].height > 128)
+	if ([aCanvas size].width > 256 || [aCanvas size].height > 256)
 	{
 		[[NSAlert alertWithMessageText:NSLocalizedString(@"Can't save image", @"Can't save image")
 						 defaultButton:NSLocalizedString(@"OK", @"OK")
 					   alternateButton:nil
 						   otherButton:nil
-			 informativeTextWithFormat:NSLocalizedString(@"The Windows icon format doesn't support images with width or height above 128.", @"The Windows icon format doesn't support images with width or height above 128.")] runModal];
+			 informativeTextWithFormat:NSLocalizedString(@"The Windows icon format doesn't support images with width or height above 256", @"The Windows icon format doesn't support images with width or height above 256")] runModal];
 		return nil;
 	}
 	canvas = aCanvas;
@@ -200,8 +200,8 @@ typedef struct
 	NSSize canvasSize = [canvas size];
 	// note all the endian swaps; these are important
 	bitmapHeader.biSize = CFSwapInt32HostToLittle(sizeof(BITMAPINFOHEADER));
-	bitmapHeader.biWidth = CFSwapInt32HostToLittle((long)canvasSize.width);
-	bitmapHeader.biHeight = CFSwapInt32HostToLittle((long)canvasSize.height*2); // height is doubled because it covers the mask, too
+	bitmapHeader.biWidth = CFSwapInt32HostToLittle((uint32_t)canvasSize.width);
+	bitmapHeader.biHeight = CFSwapInt32HostToLittle((uint32_t)canvasSize.height*2); // height is doubled because it covers the mask, too
 	bitmapHeader.biPlanes = CFSwapInt16HostToLittle(1); // I think this is always supposed to be 1 for icons
 	bitmapHeader.biBitCount = CFSwapInt16HostToLittle(24); // We're only gonna write 24-bit images for now.
 	bitmapHeader.biSizeImage = CFSwapInt32HostToLittle([self imageSize]);
@@ -213,7 +213,7 @@ typedef struct
 	
 	[self writeImageData];
 	[self writeMask];
-
+	
 	[mergedImage unlockFocus];
 }
 
