@@ -22,7 +22,6 @@
 - (void)writeImage;
 
 - (void)writeImageData;
-- (void)writeMask;
 
 
 @end

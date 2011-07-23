@@ -225,7 +225,7 @@
 {
 	[self beginUndoGrouping]; {
 		[[[self undoManager] prepareWithInvocationTarget:self] moveLayer:aLayer toIndex:[layers indexOfObject:aLayer]];
-		id newLayers = [layers mutableCopy];
+		NSMutableArray *newLayers = [layers mutableCopy];
 		NSUInteger sourceIndex = [layers indexOfObject:aLayer];
 		if (targetIndex != NSNotFound)
 		{
