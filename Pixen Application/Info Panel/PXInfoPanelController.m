@@ -84,7 +84,7 @@
 	if (color)
 	{
 		//if ([color colorSpaceName] != NSCalibratedRGBColorSpace)
-		color = [color colorUsingColorSpaceName:NSDeviceRGBColorSpace]; 
+		color = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace]; 
 				
 		[red setStringValue:
 			[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"RED", @"Red"), (int) roundf([color redComponent] * 255)]];
