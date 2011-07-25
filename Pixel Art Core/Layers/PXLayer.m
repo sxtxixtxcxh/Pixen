@@ -31,6 +31,7 @@
 #import "PXCanvas.h"
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Layers.h"
+#import "NSObject+AssociatedObjects.h"
 
 @implementation PXLayer
 
@@ -380,7 +381,7 @@
 {
 	self = [super init];
 	
-	image = PXImage_initWithCoder(PXImage_alloc(), coder);
+	image = PXImage_initWithCoder(PXImage_alloc(), coder, (PXPalette *)[[coder associatedValueForKey:@"palette"] pointerValue]);
 	name = [[coder decodeObjectForKey:@"name"] retain];
 	
 	visible = [coder containsValueForKey:@"visible"] ? [coder decodeBoolForKey:@"visible"] : YES;

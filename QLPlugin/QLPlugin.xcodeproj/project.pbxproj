@@ -23,6 +23,12 @@
 		C969A16E13D200B300F1C1FE /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C969A16D13D200B300F1C1FE /* ApplicationServices.framework */; };
 		C969A17013D200B300F1C1FE /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C969A16F13D200B300F1C1FE /* CoreServices.framework */; };
 		C969A17213D200B300F1C1FE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C969A17113D200B300F1C1FE /* CoreFoundation.framework */; };
+		D88FA9AB13DD274A00175A2F /* NSObject+AssociatedObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FA9A913DD274A00175A2F /* NSObject+AssociatedObjects.h */; };
+		D88FA9AC13DD274A00175A2F /* NSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = D88FA9AA13DD274A00175A2F /* NSObject+AssociatedObjects.m */; };
+		D88FA9AF13DD280500175A2F /* PXPalette.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FA9AD13DD280400175A2F /* PXPalette.h */; };
+		D88FA9B013DD280500175A2F /* PXPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = D88FA9AE13DD280400175A2F /* PXPalette.m */; };
+		D88FA9B313DD282500175A2F /* NSColor+PXPaletteAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FA9B113DD282400175A2F /* NSColor+PXPaletteAdditions.h */; };
+		D88FA9B413DD282500175A2F /* NSColor+PXPaletteAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D88FA9B213DD282400175A2F /* NSColor+PXPaletteAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +50,12 @@
 		C969A16D13D200B300F1C1FE /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		C969A16F13D200B300F1C1FE /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		C969A17113D200B300F1C1FE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		D88FA9A913DD274A00175A2F /* NSObject+AssociatedObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AssociatedObjects.h"; sourceTree = "<group>"; };
+		D88FA9AA13DD274A00175A2F /* NSObject+AssociatedObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AssociatedObjects.m"; sourceTree = "<group>"; };
+		D88FA9AD13DD280400175A2F /* PXPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPalette.h; sourceTree = "<group>"; };
+		D88FA9AE13DD280400175A2F /* PXPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPalette.m; sourceTree = "<group>"; };
+		D88FA9B113DD282400175A2F /* NSColor+PXPaletteAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSColor+PXPaletteAdditions.h"; path = "../../Other Sources/OSG/Utility/NSColor+PXPaletteAdditions.h"; sourceTree = "<group>"; };
+		D88FA9B213DD282400175A2F /* NSColor+PXPaletteAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSColor+PXPaletteAdditions.m"; path = "../../Other Sources/OSG/Utility/NSColor+PXPaletteAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +80,10 @@
 				C916B65B13D25B7100F30F54 /* GeneratePreviewForURL.m */,
 				C916B65C13D25B7100F30F54 /* GenerateThumbnailForURL.m */,
 				C916B65D13D25B7100F30F54 /* main.c */,
+				D88FA9B113DD282400175A2F /* NSColor+PXPaletteAdditions.h */,
+				D88FA9B213DD282400175A2F /* NSColor+PXPaletteAdditions.m */,
+				D88FA9AD13DD280400175A2F /* PXPalette.h */,
+				D88FA9AE13DD280400175A2F /* PXPalette.m */,
 				C916B65E13D25B7100F30F54 /* PXCanvas.h */,
 				C916B65F13D25B7100F30F54 /* PXCanvas.m */,
 				C9246E4613D216B200835F09 /* PXImage.h */,
@@ -91,6 +107,7 @@
 		C969A15B13D200B300F1C1FE = {
 			isa = PBXGroup;
 			children = (
+				D88FA9A813DD274A00175A2F /* AMAssociatedObject */,
 				C916B65A13D25B7100F30F54 /* Source */,
 				C916B66B13D25B9700F30F54 /* Resources */,
 				C969A16A13D200B300F1C1FE /* Frameworks */,
@@ -118,6 +135,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D88FA9A813DD274A00175A2F /* AMAssociatedObject */ = {
+			isa = PBXGroup;
+			children = (
+				D88FA9A913DD274A00175A2F /* NSObject+AssociatedObjects.h */,
+				D88FA9AA13DD274A00175A2F /* NSObject+AssociatedObjects.m */,
+			);
+			name = AMAssociatedObject;
+			path = "../Other Sources/Foreign Code/AMAssociatedObject";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -129,6 +156,9 @@
 				C916B66613D25B7100F30F54 /* PXCanvas.h in Headers */,
 				C916B66813D25B7100F30F54 /* PXLayer.h in Headers */,
 				C916B66A13D25B7100F30F54 /* QLPlugin-Prefix.pch in Headers */,
+				D88FA9AB13DD274A00175A2F /* NSObject+AssociatedObjects.h in Headers */,
+				D88FA9AF13DD280500175A2F /* PXPalette.h in Headers */,
+				D88FA9B313DD282500175A2F /* NSColor+PXPaletteAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +231,9 @@
 				C916B66513D25B7100F30F54 /* main.c in Sources */,
 				C916B66713D25B7100F30F54 /* PXCanvas.m in Sources */,
 				C916B66913D25B7100F30F54 /* PXLayer.m in Sources */,
+				D88FA9AC13DD274A00175A2F /* NSObject+AssociatedObjects.m in Sources */,
+				D88FA9B013DD280500175A2F /* PXPalette.m in Sources */,
+				D88FA9B413DD282500175A2F /* NSColor+PXPaletteAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

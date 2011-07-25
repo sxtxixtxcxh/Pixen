@@ -11,6 +11,8 @@
 #import "PXCanvas_Selection.h"
 #import "PXLayer.h"
 #import "PXBackgroundConfig.h"
+#import "PXPalette.h"
+#import "NSObject+AssociatedObjects.h"
 
 @implementation PXCanvas(Archiving)
 
@@ -32,8 +34,19 @@
 		return nil;
 	}
 	int version = [coder decodeIntForKey:@"version"];
-	if(version < 4)
+	if(version <= 4)
 	{
+		BOOL isIndexedImage = [coder containsValueForKey:@"palette"];
+		PXPalette *palette = NULL;
+		if(isIndexedImage) {
+			palette = PXPalette_alloc();
+			if(!PXPalette_initWithCoder(palette, coder))
+			{
+				PXPalette_release(palette);
+			}
+			[coder associateValue:[NSValue valueWithPointer:palette] withKey:@"palette"];
+		}	
+
 		if (layers) {
 			[layers release];
 			layers = nil;
@@ -45,6 +58,13 @@
 			[current setCanvas:self];
 		}
 		
+		if(isIndexedImage) {
+			[coder associateValue:nil withKey:@"palette"];
+			if(palette) {
+				PXPalette_release(palette);
+			}
+		}
+
 		if (bgConfig) {
 			[bgConfig release];
 			bgConfig = nil;

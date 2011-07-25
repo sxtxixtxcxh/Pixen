@@ -28,6 +28,7 @@
 
 
 #import <AppKit/AppKit.h>
+#import "PXPalette.h"
 
 typedef struct {
 	CGContextRef painting; //we draw into its bytes and make an image out of it when it changes
@@ -77,7 +78,8 @@ NSColor * PXImage_blendColors(PXImage * self, NSColor * bottomColor, NSColor * t
 NSData *PXImage_encodedData(PXImage *self);
 PXImage *PXImage_initWithData(PXImage *self, NSData *data);
 
-PXImage *PXImage_initWithCoder(PXImage *self, NSCoder *coder);
+//`legacyPalette` is passed for 3.2 compatibility. It may be NULL.
+PXImage *PXImage_initWithCoder(PXImage *self, NSCoder *coder, PXPalette *legacyPalette);
 void PXImage_encodeWithCoder(PXImage *self, NSCoder *coder);
 
 NSImage *PXImage_NSImage(PXImage *self);

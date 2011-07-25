@@ -7,21 +7,38 @@
 //
 
 #import "PXCanvas.h"
-
+#import "PXPalette.h"
 #import "PXLayer.h"
+#import "NSObject+AssociatedObjects.h"
 
 @implementation PXCanvas
 
 - (id)initWithCoder:(NSCoder *)coder
 {
-    self = [super init];
-    if (self) {
+	self = [super init];
+	if (self) {
 		int version = [coder decodeIntForKey:@"version"];
-		
-		if (version < 4)
+		if (version <= 4) {
+			BOOL isIndexedImage = [coder containsValueForKey:@"palette"];
+			PXPalette *palette = NULL;
+			if(isIndexedImage) {
+				palette = PXPalette_alloc();
+				if(!PXPalette_initWithCoder(palette, coder))
+				{
+					PXPalette_release(palette);
+				}
+				[coder associateValue:[NSValue valueWithPointer:palette] withKey:@"palette"];
+			}	
 			layers = [[coder decodeObjectForKey:@"layers"] retain];
+			if(isIndexedImage) {
+				[coder associateValue:nil withKey:@"palette"];
+				if(palette) {
+					PXPalette_release(palette);
+				}
+			}
     }
-    return self;
+	}
+	return self;
 }
 
 - (void)dealloc

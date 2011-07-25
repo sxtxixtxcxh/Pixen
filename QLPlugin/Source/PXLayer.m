@@ -7,19 +7,21 @@
 //
 
 #import "PXLayer.h"
+#import "PXPalette.h"
+#import "NSObject+AssociatedObjects.h"
 
 @implementation PXLayer
 
 - (id)initWithCoder:(NSCoder *)coder
 {
-    self = [super init];
-    if (self) {
-		image = PXImage_initWithCoder(PXImage_alloc(), coder);
+	self = [super init];
+	if (self) {
+		image = PXImage_initWithCoder(PXImage_alloc(), coder, (PXPalette *)[[coder associatedValueForKey:@"palette"] pointerValue]);
 		
 		visible = [coder containsValueForKey:@"visible"] ? [coder decodeBoolForKey:@"visible"] : YES;
 		opacity = [coder decodeObjectForKey:@"opacity"] ? [[coder decodeObjectForKey:@"opacity"] doubleValue] : 100;
-    }
-    return self;
+	}
+	return self;
 }
 
 - (void)dealloc

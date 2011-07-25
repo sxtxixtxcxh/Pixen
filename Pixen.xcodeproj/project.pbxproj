@@ -69,6 +69,8 @@
 		D866555313A932D900030D76 /* PXMonotoneBackgroundConfigurator.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAA0184E054DCC7B00EF18C2 /* PXMonotoneBackgroundConfigurator.xib */; };
 		D88A735113A93CCD00B56402 /* PXLayerCollectionViewItem.h in Headers */ = {isa = PBXBuildFile; fileRef = D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */; };
 		D88A735213A93CCD00B56402 /* PXLayerCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D88A735013A93CCD00B56402 /* PXLayerCollectionViewItem.m */; };
+		D88FA9A113DD265000175A2F /* NSObject+AssociatedObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FA99F13DD265000175A2F /* NSObject+AssociatedObjects.h */; };
+		D88FA9A213DD265000175A2F /* NSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = D88FA9A013DD265000175A2F /* NSObject+AssociatedObjects.m */; };
 		D8B300DC13AFC443004E83F3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B300DB13AFC443004E83F3 /* QuartzCore.framework */; };
 		EA041A190CE8F72F0095DAA9 /* PXBackgroundConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = EA041A170CE8F72F0095DAA9 /* PXBackgroundConfig.h */; };
 		EA041A1A0CE8F72F0095DAA9 /* PXBackgroundConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EA041A180CE8F72F0095DAA9 /* PXBackgroundConfig.m */; };
@@ -605,6 +607,8 @@
 		C9FEE51A13AF81AF004FFC3C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXGridSettings.xib; sourceTree = "<group>"; };
 		D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerCollectionViewItem.h; sourceTree = "<group>"; };
 		D88A735013A93CCD00B56402 /* PXLayerCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerCollectionViewItem.m; sourceTree = "<group>"; };
+		D88FA99F13DD265000175A2F /* NSObject+AssociatedObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AssociatedObjects.h"; sourceTree = "<group>"; };
+		D88FA9A013DD265000175A2F /* NSObject+AssociatedObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AssociatedObjects.m"; sourceTree = "<group>"; };
 		D8B300DB13AFC443004E83F3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		EA041A170CE8F72F0095DAA9 /* PXBackgroundConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXBackgroundConfig.h; sourceTree = "<group>"; };
 		EA041A180CE8F72F0095DAA9 /* PXBackgroundConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXBackgroundConfig.m; sourceTree = "<group>"; };
@@ -1126,6 +1130,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D88FA99E13DD265000175A2F /* AMAssociatedObject */ = {
+			isa = PBXGroup;
+			children = (
+				D88FA99F13DD265000175A2F /* NSObject+AssociatedObjects.h */,
+				D88FA9A013DD265000175A2F /* NSObject+AssociatedObjects.m */,
+			);
+			path = AMAssociatedObject;
+			sourceTree = "<group>";
+		};
 		EA31F6640CE7A69D00EC481B /* Grid */ = {
 			isa = PBXGroup;
 			children = (
@@ -1629,6 +1642,7 @@
 		EA31FBF30CE7D7C200EC481B /* Foreign Code */ = {
 			isa = PBXGroup;
 			children = (
+				D88FA99E13DD265000175A2F /* AMAssociatedObject */,
 				EA31FC110CE7D7C200EC481B /* libungif */,
 				EA31FC3C0CE7D7C200EC481B /* SBCenteringClipView */,
 				EA31FC3F0CE7D7C200EC481B /* SubviewTableView */,
@@ -2232,6 +2246,7 @@
 				C9DC4D9E13D0E91B0065C1A6 /* PXPresetsManager.h in Headers */,
 				C9DDEE3B13D0EB4D000464F2 /* PXPreset.h in Headers */,
 				C9B1FA5A13D7328D00BB7CF7 /* PXManagePresetsController.h in Headers */,
+				D88FA9A113DD265000175A2F /* NSObject+AssociatedObjects.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2628,6 +2643,7 @@
 				C9DC4D9F13D0E91B0065C1A6 /* PXPresetsManager.m in Sources */,
 				C9DDEE3C13D0EB4D000464F2 /* PXPreset.m in Sources */,
 				C9B1FA5B13D7328D00BB7CF7 /* PXManagePresetsController.m in Sources */,
+				D88FA9A213DD265000175A2F /* NSObject+AssociatedObjects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

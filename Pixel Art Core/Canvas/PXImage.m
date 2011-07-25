@@ -28,6 +28,7 @@
 
 #import "PXImage.h"
 #import <Foundation/NSGeometry.h>
+#import "PXPalette.h"
 
 int PXTileBitsPerComponent = 8;
 int PXTileComponentsPerPixel = 4;
@@ -185,23 +186,37 @@ void PXImage_encodeWithCoder(PXImage *self, NSCoder *coder)
 	[coder encodeObject:dict forKey:@"image"];
 }
 
-PXImage *PXImage_initWithCoder(PXImage *self, NSCoder *coder)
+//we pass `palette` along for legacy (3.2) reasons
+PXImage *PXImage_initWithCoder(PXImage *self, NSCoder *coder, PXPalette *palette)
 {
 	PXImage_init(self);
 	NSDictionary *dict = [coder decodeObjectForKey:@"image"];
 	self->width = [[dict objectForKey:@"width"] intValue];
 	self->height = [[dict objectForKey:@"height"] intValue];
 	self->tileCount = 0;
-	NSArray *tileArray = [dict objectForKey:@"tiles"];
-	self->tiles = calloc([tileArray count], sizeof(PXTile *));
-	for (id current in tileArray)
-	{
-		NSPoint pt = NSPointFromString([current objectForKey:@"location"]);
-		int bytesPerRow = PXTileComponentsPerPixel * PXTileDimension;
-		unsigned char *data = calloc(bytesPerRow*PXTileDimension, 1);
-		memcpy(data, [[current objectForKey:@"data"] bytes], sizeof(unsigned char) * bytesPerRow * PXTileDimension);
-		self->tiles[self->tileCount] = PXTileCreate((*(CGPoint *)&(pt)), CGSizeMake(PXTileDimension, PXTileDimension), data);
-		self->tileCount++;
+	self->tiles = NULL;
+	if([dict objectForKey:@"colorIndices"]) {
+		NSUInteger imageSize = self->width * self->height;
+		unsigned int *colorIndices = (unsigned int *)malloc(sizeof(unsigned int) * imageSize);
+		memcpy(colorIndices, [[dict objectForKey:@"colorIndices"] bytes], sizeof(unsigned int) * imageSize);
+		for(int i = 0; i < imageSize; i++) {
+			NSColor *col = PXPalette_colorAtIndex(palette, colorIndices[i]);
+			PXImage_setColorAtXY(self, col, i%self->width, (int)(i/self->width));
+		}
+	} else {
+		NSArray *tileArray = [dict objectForKey:@"tiles"];
+		if(tileArray.count > 0) {
+			self->tiles = calloc([tileArray count], sizeof(PXTile *));
+			for (id current in tileArray)
+			{
+				NSPoint pt = NSPointFromString([current objectForKey:@"location"]);
+				int bytesPerRow = PXTileComponentsPerPixel * PXTileDimension;
+				unsigned char *data = calloc(bytesPerRow*PXTileDimension, 1);
+				memcpy(data, [[current objectForKey:@"data"] bytes], sizeof(unsigned char) * bytesPerRow * PXTileDimension);
+				self->tiles[self->tileCount] = PXTileCreate((*(CGPoint *)&(pt)), CGSizeMake(PXTileDimension, PXTileDimension), data);
+				self->tileCount++;
+			}
+		}
 	}
 	return self;
 }
