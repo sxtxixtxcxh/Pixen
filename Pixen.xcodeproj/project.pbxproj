@@ -48,6 +48,10 @@
 		C9799FB813AD6ED900E261EE /* PXPencilToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9799FB613AD6ED900E261EE /* PXPencilToolPropertiesView.xib */; };
 		C9799FBB13AD745500E261EE /* PXEyedropperToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9799FB913AD745500E261EE /* PXEyedropperToolPropertiesView.xib */; };
 		C984251213AFC142000072C5 /* PXPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = C984251013AFC142000072C5 /* PXPreview.xib */; };
+		C9A0858E13DE3EB600C27061 /* PXDiscoverPixen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A0858A13DE3EB600C27061 /* PXDiscoverPixen.xib */; };
+		C9A0858F13DE3EB600C27061 /* PXDiscoverPixenold.nib in Resources */ = {isa = PBXBuildFile; fileRef = C9A0858C13DE3EB600C27061 /* PXDiscoverPixenold.nib */; };
+		C9A0859113DE3ECD00C27061 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A0859013DE3ECD00C27061 /* WebKit.framework */; };
+		C9A0859313DE3F0100C27061 /* PixenIntro in Resources */ = {isa = PBXBuildFile; fileRef = C9A0859213DE3F0100C27061 /* PixenIntro */; };
 		C9A6BE1713ACFBC50028B141 /* PXToolProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1513ACFBC50028B141 /* PXToolProperties.xib */; };
 		C9A6BE1A13AD008C0028B141 /* PXBlankPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1813AD008C0028B141 /* PXBlankPropertiesView.xib */; };
 		C9A6BE1D13AD07B10028B141 /* PXFillToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1B13AD07B10028B141 /* PXFillToolPropertiesView.xib */; };
@@ -420,17 +424,11 @@
 		EAC917750CE7DC7300E519E1 /* zoom100.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917110CE7DC7300E519E1 /* zoom100.png */; };
 		EAC917760CE7DC7300E519E1 /* zoomfit.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917120CE7DC7300E519E1 /* zoomfit.png */; };
 		EAC917770CE7DC7300E519E1 /* UnlockedIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EAC917130CE7DC7300E519E1 /* UnlockedIcon.icns */; };
-		EAC917780CE7DC7300E519E1 /* animationscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917150CE7DC7300E519E1 /* animationscreen.png */; };
-		EAC917790CE7DC7300E519E1 /* backgroundscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917160CE7DC7300E519E1 /* backgroundscreen.png */; };
-		EAC9177A0CE7DC7300E519E1 /* colorpalettescreenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917170CE7DC7300E519E1 /* colorpalettescreenshot.png */; };
 		EAC9177B0CE7DC7300E519E1 /* crosshairscreenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917180CE7DC7300E519E1 /* crosshairscreenshot.png */; };
 		EAC9177C0CE7DC7300E519E1 /* crosshairscreenshot2.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917190CE7DC7300E519E1 /* crosshairscreenshot2.png */; };
 		EAC9177D0CE7DC7300E519E1 /* discoverpixen.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9171A0CE7DC7300E519E1 /* discoverpixen.png */; };
-		EAC9177E0CE7DC7300E519E1 /* layersscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9171B0CE7DC7300E519E1 /* layersscreen.png */; };
-		EAC917800CE7DC7300E519E1 /* patternscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9171D0CE7DC7300E519E1 /* patternscreen.png */; };
 		EAC917810CE7DC7300E519E1 /* righttoolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9171E0CE7DC7300E519E1 /* righttoolbar.png */; };
 		EAC917820CE7DC7300E519E1 /* tilingscreenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9171F0CE7DC7300E519E1 /* tilingscreenshot.png */; };
-		EAC917830CE7DC7300E519E1 /* toolpropertiesscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917200CE7DC7300E519E1 /* toolpropertiesscreen.png */; };
 		EAC917850CE7DC7300E519E1 /* Pixen.scriptSuite in Resources */ = {isa = PBXBuildFile; fileRef = EAC917230CE7DC7300E519E1 /* Pixen.scriptSuite */; };
 		EAC917860CE7DC7300E519E1 /* Pixen.scriptTerminology in Resources */ = {isa = PBXBuildFile; fileRef = EAC917240CE7DC7300E519E1 /* Pixen.scriptTerminology */; };
 		EAC917870CE7DC7300E519E1 /* Pixen.suiteModel in Resources */ = {isa = PBXBuildFile; fileRef = EAC917250CE7DC7300E519E1 /* Pixen.suiteModel */; };
@@ -483,7 +481,6 @@
 		EAF6947F06A9AE0B0019D8D7 /* PXLayerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 615E87F206A31AF8002445B8 /* PXLayerController.xib */; };
 		EAF6948A06A9AE0B0019D8D7 /* PXToolPalette.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61F9CB16060D6A6D00562B78 /* PXToolPalette.nib */; };
 		EAF6949D06A9AE0B0019D8D7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 61BD25D3067A1E1D0054A2BB /* Localizable.strings */; };
-		EAF694A706A9AE0B0019D8D7 /* PXDiscoverPixen.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61163708067D286900AE87D7 /* PXDiscoverPixen.nib */; };
 		EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61F598B9067949D500B8C8CA /* PXScalePrompt.xib */; };
 		EAF694BC06A9AE0B0019D8D7 /* PXCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5482DD0513E2DB000101DE /* PXCanvasView.m */; };
 		EAF694C806A9AE0B0019D8D7 /* PXCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = EA495594054C6943009A8EE7 /* PXCanvas.m */; };
@@ -541,7 +538,6 @@
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		610865F606B988F400733B2D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXInfoPanel.nib; sourceTree = "<group>"; };
 		610F37D40899A5DD00567E90 /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = English.lproj/PixenHelp; sourceTree = "<group>"; };
-		61163709067D286900AE87D7 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXDiscoverPixen.nib; sourceTree = "<group>"; };
 		6117815F08ABA7F30098DCC4 /* PXAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PXAnimationView.h; sourceTree = "<group>"; };
 		6117816008ABA7F30098DCC4 /* PXAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PXAnimationView.m; sourceTree = "<group>"; };
 		615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerPaneBackgroundView.h; sourceTree = "<group>"; };
@@ -587,6 +583,10 @@
 		C9799FB713AD6ED900E261EE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPencilToolPropertiesView.xib; sourceTree = "<group>"; };
 		C9799FBA13AD745500E261EE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXEyedropperToolPropertiesView.xib; sourceTree = "<group>"; };
 		C984251113AFC142000072C5 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreview.xib; sourceTree = "<group>"; };
+		C9A0858B13DE3EB600C27061 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXDiscoverPixen.xib; sourceTree = "<group>"; };
+		C9A0858D13DE3EB600C27061 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXDiscoverPixenold.nib; sourceTree = "<group>"; };
+		C9A0859013DE3ECD00C27061 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		C9A0859213DE3F0100C27061 /* PixenIntro */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PixenIntro; path = Resources/PixenIntro; sourceTree = "<group>"; };
 		C9A6BE1613ACFBC50028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXToolProperties.xib; sourceTree = "<group>"; };
 		C9A6BE1913AD008C0028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXBlankPropertiesView.xib; sourceTree = "<group>"; };
 		C9A6BE1C13AD07B10028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXFillToolPropertiesView.xib; sourceTree = "<group>"; };
@@ -970,17 +970,11 @@
 		EAC917110CE7DC7300E519E1 /* zoom100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoom100.png; sourceTree = "<group>"; };
 		EAC917120CE7DC7300E519E1 /* zoomfit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomfit.png; sourceTree = "<group>"; };
 		EAC917130CE7DC7300E519E1 /* UnlockedIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = UnlockedIcon.icns; sourceTree = "<group>"; };
-		EAC917150CE7DC7300E519E1 /* animationscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animationscreen.png; sourceTree = "<group>"; };
-		EAC917160CE7DC7300E519E1 /* backgroundscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundscreen.png; sourceTree = "<group>"; };
-		EAC917170CE7DC7300E519E1 /* colorpalettescreenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = colorpalettescreenshot.png; sourceTree = "<group>"; };
 		EAC917180CE7DC7300E519E1 /* crosshairscreenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crosshairscreenshot.png; sourceTree = "<group>"; };
 		EAC917190CE7DC7300E519E1 /* crosshairscreenshot2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crosshairscreenshot2.png; sourceTree = "<group>"; };
 		EAC9171A0CE7DC7300E519E1 /* discoverpixen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discoverpixen.png; sourceTree = "<group>"; };
-		EAC9171B0CE7DC7300E519E1 /* layersscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = layersscreen.png; sourceTree = "<group>"; };
-		EAC9171D0CE7DC7300E519E1 /* patternscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = patternscreen.png; sourceTree = "<group>"; };
 		EAC9171E0CE7DC7300E519E1 /* righttoolbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = righttoolbar.png; sourceTree = "<group>"; };
 		EAC9171F0CE7DC7300E519E1 /* tilingscreenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tilingscreenshot.png; sourceTree = "<group>"; };
-		EAC917200CE7DC7300E519E1 /* toolpropertiesscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolpropertiesscreen.png; sourceTree = "<group>"; };
 		EAC917230CE7DC7300E519E1 /* Pixen.scriptSuite */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pixen.scriptSuite; sourceTree = "<group>"; };
 		EAC917240CE7DC7300E519E1 /* Pixen.scriptTerminology */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pixen.scriptTerminology; sourceTree = "<group>"; };
 		EAC917250CE7DC7300E519E1 /* Pixen.suiteModel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Pixen.suiteModel; sourceTree = "<group>"; };
@@ -1031,6 +1025,7 @@
 				EA5E9EE80877237800FCE6FE /* Carbon.framework in Frameworks */,
 				BF269FE6091307BF00B7A218 /* QTKit.framework in Frameworks */,
 				D8B300DC13AFC443004E83F3 /* QuartzCore.framework in Frameworks */,
+				C9A0859113DE3ECD00C27061 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1044,6 +1039,7 @@
 				61BB8ED608FB58F9009C75A6 /* QTKit.framework */,
 				EA5E9EE70877237800FCE6FE /* Carbon.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
+				C9A0859013DE3ECD00C27061 /* WebKit.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -1838,6 +1834,8 @@
 		EA90F6CB06D12380001755A6 /* NIBs */ = {
 			isa = PBXGroup;
 			children = (
+				C9A0858A13DE3EB600C27061 /* PXDiscoverPixen.xib */,
+				C9A0858C13DE3EB600C27061 /* PXDiscoverPixenold.nib */,
 				C92A1E9013B12CAB0007235A /* MainMenu.xib */,
 				EACDBD7F0878B37100564512 /* PXBackgroundTemplateView.xib */,
 				C9A6BE1813AD008C0028B141 /* PXBlankPropertiesView.xib */,
@@ -1871,7 +1869,6 @@
 				61ED25AB06BD63DA00264DA2 /* PXAbout.nib */,
 				EA4A6C3D08A98133007BAC7F /* PXAnimationDocument.nib */,
 				EA6864B3054C5EDE00EE395F /* PXBackgroundController.nib */,
-				61163708067D286900AE87D7 /* PXDiscoverPixen.nib */,
 				EAE126CF054F41A9001208D9 /* PXImageBackgroundConfigurator.nib */,
 				610865F506B988F400733B2D /* PXInfoPanel.nib */,
 				61F9CB16060D6A6D00562B78 /* PXToolPalette.nib */,
@@ -1883,6 +1880,7 @@
 			isa = PBXGroup;
 			children = (
 				610F37D30899A5DD00567E90 /* PixenHelp */,
+				C9A0859213DE3F0100C27061 /* PixenIntro */,
 				61BD25D3067A1E1D0054A2BB /* Localizable.strings */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.html */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
@@ -2000,17 +1998,11 @@
 		EAC917140CE7DC7300E519E1 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
-				EAC917150CE7DC7300E519E1 /* animationscreen.png */,
-				EAC917160CE7DC7300E519E1 /* backgroundscreen.png */,
-				EAC917170CE7DC7300E519E1 /* colorpalettescreenshot.png */,
 				EAC917180CE7DC7300E519E1 /* crosshairscreenshot.png */,
 				EAC917190CE7DC7300E519E1 /* crosshairscreenshot2.png */,
 				EAC9171A0CE7DC7300E519E1 /* discoverpixen.png */,
-				EAC9171B0CE7DC7300E519E1 /* layersscreen.png */,
-				EAC9171D0CE7DC7300E519E1 /* patternscreen.png */,
 				EAC9171E0CE7DC7300E519E1 /* righttoolbar.png */,
 				EAC9171F0CE7DC7300E519E1 /* tilingscreenshot.png */,
-				EAC917200CE7DC7300E519E1 /* toolpropertiesscreen.png */,
 			);
 			path = Intro;
 			sourceTree = "<group>";
@@ -2332,7 +2324,6 @@
 				EAF6947F06A9AE0B0019D8D7 /* PXLayerController.xib in Resources */,
 				EAF6948A06A9AE0B0019D8D7 /* PXToolPalette.nib in Resources */,
 				EAF6949D06A9AE0B0019D8D7 /* Localizable.strings in Resources */,
-				EAF694A706A9AE0B0019D8D7 /* PXDiscoverPixen.nib in Resources */,
 				EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.xib in Resources */,
 				610865F706B988F400733B2D /* PXInfoPanel.nib in Resources */,
 				61ED25AD06BD63DA00264DA2 /* PXAbout.nib in Resources */,
@@ -2391,17 +2382,11 @@
 				EAC917750CE7DC7300E519E1 /* zoom100.png in Resources */,
 				EAC917760CE7DC7300E519E1 /* zoomfit.png in Resources */,
 				EAC917770CE7DC7300E519E1 /* UnlockedIcon.icns in Resources */,
-				EAC917780CE7DC7300E519E1 /* animationscreen.png in Resources */,
-				EAC917790CE7DC7300E519E1 /* backgroundscreen.png in Resources */,
-				EAC9177A0CE7DC7300E519E1 /* colorpalettescreenshot.png in Resources */,
 				EAC9177B0CE7DC7300E519E1 /* crosshairscreenshot.png in Resources */,
 				EAC9177C0CE7DC7300E519E1 /* crosshairscreenshot2.png in Resources */,
 				EAC9177D0CE7DC7300E519E1 /* discoverpixen.png in Resources */,
-				EAC9177E0CE7DC7300E519E1 /* layersscreen.png in Resources */,
-				EAC917800CE7DC7300E519E1 /* patternscreen.png in Resources */,
 				EAC917810CE7DC7300E519E1 /* righttoolbar.png in Resources */,
 				EAC917820CE7DC7300E519E1 /* tilingscreenshot.png in Resources */,
-				EAC917830CE7DC7300E519E1 /* toolpropertiesscreen.png in Resources */,
 				EAC917850CE7DC7300E519E1 /* Pixen.scriptSuite in Resources */,
 				EAC917860CE7DC7300E519E1 /* Pixen.scriptTerminology in Resources */,
 				EAC917870CE7DC7300E519E1 /* Pixen.suiteModel in Resources */,
@@ -2465,6 +2450,9 @@
 				C912F26D13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib in Resources */,
 				C90E7E3013D5F81C00751F5B /* PXCanvasResizePrompt.xib in Resources */,
 				C9B1FA5E13D732FC00BB7CF7 /* PXManagePresetsWindow.xib in Resources */,
+				C9A0858E13DE3EB600C27061 /* PXDiscoverPixen.xib in Resources */,
+				C9A0858F13DE3EB600C27061 /* PXDiscoverPixenold.nib in Resources */,
+				C9A0859313DE3F0100C27061 /* PixenIntro in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2690,14 +2678,6 @@
 			name = PixenHelp;
 			sourceTree = "<group>";
 		};
-		61163708067D286900AE87D7 /* PXDiscoverPixen.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				61163709067D286900AE87D7 /* English */,
-			);
-			name = PXDiscoverPixen.nib;
-			sourceTree = "<group>";
-		};
 		615E87F206A31AF8002445B8 /* PXLayerController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2864,6 +2844,22 @@
 				C984251113AFC142000072C5 /* English */,
 			);
 			name = PXPreview.xib;
+			sourceTree = "<group>";
+		};
+		C9A0858A13DE3EB600C27061 /* PXDiscoverPixen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9A0858B13DE3EB600C27061 /* English */,
+			);
+			name = PXDiscoverPixen.xib;
+			sourceTree = "<group>";
+		};
+		C9A0858C13DE3EB600C27061 /* PXDiscoverPixenold.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9A0858D13DE3EB600C27061 /* English */,
+			);
+			name = PXDiscoverPixenold.nib;
 			sourceTree = "<group>";
 		};
 		C9A6BE1513ACFBC50028B141 /* PXToolProperties.xib */ = {
