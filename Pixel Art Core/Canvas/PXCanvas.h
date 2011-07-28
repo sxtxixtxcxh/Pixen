@@ -43,6 +43,7 @@ typedef BOOL * PXSelectionMask;
 //at this point.  is it worth it?  yeah, probably.  but do I have time
 //for it now?  well...  --joe
 	PXLayer *activeLayer;
+	NSMutableArray *tempLayers;
 	
 	PXSelectionMask selectionMask;
 	BOOL hasSelection;
@@ -65,6 +66,8 @@ typedef BOOL * PXSelectionMask;
 }
 
 @property (nonatomic, retain) PXGrid *grid;
+
+@property (nonatomic, readonly) NSArray *tempLayers;
 
 - (void)refreshWholePalette;
 - (void)refreshPaletteDecreaseColorCount:(NSColor *)down increaseColorCount:(NSColor *)up;

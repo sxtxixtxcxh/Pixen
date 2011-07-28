@@ -29,6 +29,10 @@
 - (void)removeLayerAtIndex:(NSUInteger)index;
 - (void)removeLayerAtIndex:(NSUInteger)index suppressingNotification:(BOOL)suppress;
 
+- (void)addTempLayer:(PXLayer *)layer;
+- (void)insertTempLayer:(PXLayer *)layer atIndex:(NSUInteger)index;
+- (void)removeTempLayer:(PXLayer *)layer;
+
 - (void)moveLayer:(PXLayer *)aLayer toIndex:(NSUInteger)anIndex;
 - (void)layersChanged;
 

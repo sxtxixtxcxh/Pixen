@@ -91,7 +91,7 @@
 
 @implementation PXCanvas
 
-@synthesize grid;
+@synthesize tempLayers, grid;
 
 -(id)copyWithZone:(NSZone*) zone
 {
@@ -137,6 +137,7 @@
 		free(selectionMask);
 	}
 	
+	[tempLayers release];
 	[drawnPoints release];
 	[oldColors release];
 	[newColors release];

@@ -28,6 +28,11 @@
 	{
 		[layer drawInRect:dst fromRect:src operation:op fraction:frac];
 	}
+	
+	for (PXLayer *layer in tempLayers)
+	{
+		[layer drawInRect:dst fromRect:src operation:op fraction:frac]; 
+	}
 }
 
 - (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op

@@ -221,6 +221,28 @@
 	[self removeLayerAtIndex:index suppressingNotification:NO];
 }
 
+- (void)addTempLayer:(PXLayer *)layer
+{
+	[self insertTempLayer:layer atIndex:[tempLayers count]];
+}
+
+- (void)insertTempLayer:(PXLayer *)layer atIndex:(NSUInteger)index
+{
+	if (!tempLayers)
+		tempLayers = [[NSMutableArray alloc] init];
+	
+	[tempLayers insertObject:layer atIndex:index];
+	
+	[self changed];
+}
+
+- (void)removeTempLayer:(PXLayer *)layer
+{
+	[tempLayers removeObject:layer];
+	
+	[self changed];
+}
+
 - (void)moveLayer:(PXLayer*) aLayer toIndex:(NSUInteger)targetIndex
 {
 	[self beginUndoGrouping]; {

@@ -91,7 +91,7 @@
 		}
 	}
 	[moveLayer moveToPoint:selectedRect.origin]; // move to initial point
-	[canvas insertLayer:moveLayer atIndex:[[canvas layers] indexOfObject:realLayer]+1];
+	[canvas addTempLayer:moveLayer];
 }
 
 - (void)mouseDownAt:(NSPoint)aPoint
@@ -127,18 +127,17 @@ fromCanvasController:(PXCanvasController *) controller
 				copyLayer = [moveLayer copy];
 				[copyLayer moveToPoint:selectionOrigin];
 			}
-			if(![[canvas layers] containsObject:copyLayer])
+			if(![canvas.tempLayers containsObject:copyLayer])
 			{
-				[canvas insertLayer:copyLayer atIndex:[canvas indexOfLayer:moveLayer]];
-				[canvas activateLayer:moveLayer];
+				[canvas insertTempLayer:copyLayer atIndex:0];
 			}
 		}		
 	}
 	else
 	{
-		if(copyLayer != nil && moveLayer != nil && [[canvas layers] containsObject:copyLayer])
+		if(copyLayer != nil && moveLayer != nil && [canvas.tempLayers containsObject:copyLayer])
 		{
-			[canvas removeLayer:copyLayer];
+			[canvas removeTempLayer:copyLayer];
 		}	
 	}	
 }
@@ -159,7 +158,13 @@ fromCanvasController:(PXCanvasController *) controller
 	}
 	else
 	{
-		[[canvas activeLayer] moveToPoint:NSMakePoint(dx, dy)];
+		if (!isCopying) {
+			[[canvas activeLayer] moveToPoint:NSMakePoint(dx, dy)];
+		}
+		else {
+			[copyLayer moveToPoint:NSMakePoint(dx, dy)];
+		}
+		
 		[canvas changedInRect:NSMakeRect(0,0,[canvas size].width,[canvas size].height)];
 	}
 }
@@ -184,14 +189,15 @@ fromCanvasController:(PXCanvasController *) controller
 			[copyLayer finalizeMotion];
 		}
 		selectedRect = lastSelectedRect;
-		NSUInteger index = [[canvas layers] indexOfObject:moveLayer];
-		[canvas mergeDownLayer:moveLayer];
+		// NSUInteger index = [[canvas layers] indexOfObject:moveLayer];
+		[[canvas activeLayer] compositeUnder:moveLayer flattenOpacity:YES];
+		[canvas removeTempLayer:moveLayer];
 		[moveLayer release];
 		if(isCopying && copyLayer != nil)
 		{
 			[copyLayer release];
-			copyLayer = [[canvas layers] objectAtIndex:index-1];
-			[canvas mergeDownLayer:copyLayer];
+			[[canvas activeLayer] compositeUnder:copyLayer flattenOpacity:YES];
+			[canvas removeTempLayer:copyLayer];
 		}
 		[canvas finalizeSelectionMotion];
 		[canvas changed];
@@ -205,7 +211,11 @@ fromCanvasController:(PXCanvasController *) controller
 		[moveLayer moveToPoint:NSZeroPoint];
 		if(isCopying && copyLayer != nil)
 		{
-			[canvas mergeDownLayer:moveLayer];
+			[copyLayer setSize:[canvas size]];
+			[copyLayer finalizeMotion];
+			
+			[[canvas activeLayer] compositeUnder:copyLayer flattenOpacity:YES];
+			[canvas removeTempLayer:copyLayer];
 			[copyLayer release];
 		}
 	}
