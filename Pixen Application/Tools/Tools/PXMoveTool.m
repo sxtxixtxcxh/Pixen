@@ -24,7 +24,6 @@
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 //  Created by Andy Matuschak on Fri Feb 27 2004.
 //  Copyright (c) 2004 Open Sword Group. All rights reserved.
 //
@@ -32,6 +31,7 @@
 #import "PXMoveTool.h"
 #import "PXCanvasController.h"
 #import "PXCanvas.h"
+#import "PXCanvasDocument.h"
 #import "PXCanvas_Selection.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_Modifying.h"
@@ -50,7 +50,7 @@
 	return NSLocalizedString(@"MOVE_NAME", @"Move Tool");
 }
 
--(NSString *) actionName
+-(NSString *)actionName
 {
 	return NSLocalizedString(@"MOVE_ACTION", @"Moving");
 }
@@ -60,17 +60,18 @@
 	return [NSCursor openHandCursor];
 }
 
-- (void)startMovingSelectionFromPoint:(NSPoint)aPoint
-	  fromCanvasController:(PXCanvasController *)controller
+- (void)startMovingSelectionFromPoint:(NSPoint)aPoint fromCanvasController:(PXCanvasController *)controller
 {
-	isMovingSelection = YES;
 	PXCanvas *canvas = [controller canvas];
-	selectedRect = [canvas selectedRect]; // O(N)
-	lastSelectedRect = selectedRect;
+	
+	lastSelectedRect = selectedRect = [canvas selectedRect]; // O(N)
 	selectionOrigin = selectedRect.origin;
-	moveLayer = [[PXLayer alloc] initWithName:NSLocalizedString(@"Temp Layer", @"Temp Layer") size:selectedRect.size];
+	
+	moveLayer = [[PXLayer alloc] initWithName:NSLocalizedString(@"Temp Layer", @"Temp Layer")
+										 size:selectedRect.size];
 	[moveLayer setCanvas:canvas];
 	[moveLayer setOpacity:[[canvas activeLayer] opacity]];
+	
 	// we clear the selected area in the active layer and copy the selected pixels
 	// into a pximage of our own to be drawn each frame. whoo.
 	// this is O(N), incidentally. but just over selected pixels, not the whole canvas.
@@ -81,91 +82,115 @@
 		for (j = NSMinY(selectedRect); j < NSMaxY(selectedRect); j++)
 		{
 			NSPoint point = NSMakePoint(i, j);
+			
 			if (![canvas pointIsSelected:point])
 				continue;
 			
-			[canvas setColor:[canvas colorAtPoint:point] 
-               atPoint:NSMakePoint(i - selectedRect.origin.x, j - selectedRect.origin.y)
-               onLayer:moveLayer];
+			[canvas setColor:[canvas colorAtPoint:point]
+					 atPoint:NSMakePoint(i - selectedRect.origin.x, j - selectedRect.origin.y)
+					 onLayer:moveLayer];
+			
 			[canvas setColor:clear atPoint:point];
 		}
 	}
+	
 	[moveLayer moveToPoint:selectedRect.origin]; // move to initial point
 	[canvas addTempLayer:moveLayer];
 }
 
-- (void)mouseDownAt:(NSPoint)aPoint
-fromCanvasController:(PXCanvasController *) controller
+- (void)mouseDownAt:(NSPoint)aPoint fromCanvasController:(PXCanvasController *)controller
 {
 	[super mouseDownAt:aPoint fromCanvasController:controller];
-	origin = aPoint;
+	
+	if ([NSEvent modifierFlags] & NSAlternateKeyMask) {
+		type = PXMoveTypeCopying;
+	}
+	else {
+		type = PXMoveTypeMoving;
+	}
+	
 	PXCanvas *canvas = [controller canvas];
 	[canvas beginUndoGrouping];
+	
 	if ([canvas hasSelection])
 	{
-		[canvas replaceLayer:[canvas activeLayer] withLayer:[[[canvas activeLayer] copy] autorelease] actionName:[self actionName]];
-		realLayer = [canvas activeLayer];
+		entireImage = NO;
 		[self startMovingSelectionFromPoint:aPoint fromCanvasController:controller];
 	}
-	else
-	{
-		selectionOrigin = NSZeroPoint;
+	else {
+		entireImage = YES;
 		moveLayer = [canvas activeLayer];
-		realLayer = moveLayer;
+		selectionOrigin = NSZeroPoint;
+	}
+	
+	if (type == PXMoveTypeCopying) {
 		[self updateCopyLayerForCanvas:canvas];
 	}
 }
 
 - (void)updateCopyLayerForCanvas:(PXCanvas *)canvas
 {
-	if(isCopying)
-	{
-		if(moveLayer != nil)
-		{
-			if(copyLayer == nil)
-			{
-				copyLayer = [moveLayer copy];
-				[copyLayer moveToPoint:selectionOrigin];
-			}
-			if(![canvas.tempLayers containsObject:copyLayer])
-			{
-				[canvas insertTempLayer:copyLayer atIndex:0];
-			}
-		}		
-	}
-	else
-	{
-		if(copyLayer != nil && moveLayer != nil && [canvas.tempLayers containsObject:copyLayer])
-		{
+	if (!entireImage) {
+		if (type == PXMoveTypeCopying) {
+			copyLayer = [moveLayer copy];
+			[copyLayer moveToPoint:selectionOrigin];
+			
+			[canvas insertTempLayer:copyLayer atIndex:0];
+		}
+		else if (type == PXMoveTypeMoving) {
 			[canvas removeTempLayer:copyLayer];
-		}	
-	}	
+			[copyLayer release];
+			copyLayer = nil;
+		}
+	}
+	else {
+		if (type == PXMoveTypeMoving) {
+			NSPoint origin = [copyLayer origin];
+			
+			[canvas removeTempLayer:copyLayer];
+			[copyLayer release];
+			copyLayer = nil;
+			
+			[moveLayer moveToPoint:origin];
+		}
+		else if (type == PXMoveTypeCopying) {
+			NSPoint origin = [moveLayer origin];
+			[moveLayer moveToPoint:NSZeroPoint];
+			
+			copyLayer = [moveLayer copy];
+			[copyLayer moveToPoint:origin];
+			
+			[canvas insertTempLayer:copyLayer atIndex:0];
+		}
+	}
 }
 
 - (void)drawFromPoint:(NSPoint)initialPoint
 			  toPoint:(NSPoint)finalPoint
-			 inCanvas:(PXCanvas *) canvas
+			 inCanvas:(PXCanvas *)canvas
 {
 	float dx = (finalPoint.x - initialPoint.x), dy = (finalPoint.y - initialPoint.y);
-	[self updateCopyLayerForCanvas:canvas];
-	if (isMovingSelection)
+	
+	if (!entireImage)
 	{
 		selectedRect.origin = NSMakePoint(selectionOrigin.x + dx, selectionOrigin.y + dy);
 		[moveLayer moveToPoint:selectedRect.origin];
+		
 		[canvas setSelectionOrigin:NSMakePoint(dx, dy)];
 		[canvas changedInRect:NSInsetRect(NSUnionRect(selectedRect, lastSelectedRect), -1, -1)];
+		
 		lastSelectedRect = selectedRect;
 	}
 	else
 	{
-		if (!isCopying) {
+		if (type == PXMoveTypeMoving) {
 			[[canvas activeLayer] moveToPoint:NSMakePoint(dx, dy)];
 		}
-		else {
+		else if (type == PXMoveTypeCopying) {
 			[copyLayer moveToPoint:NSMakePoint(dx, dy)];
 		}
 		
-		[canvas changedInRect:NSMakeRect(0,0,[canvas size].width,[canvas size].height)];
+		[canvas changedInRect:NSMakeRect(0.0f, 0.0f, [canvas size].width, [canvas size].height)];
 	}
 }
 
@@ -176,52 +201,61 @@ fromCanvasController:(PXCanvasController *) controller
 
 - (void)finalDrawFromPoint:(NSPoint)initialPoint
 				   toPoint:(NSPoint)finalPoint
-				  inCanvas:(PXCanvas *) canvas
+				  inCanvas:(PXCanvas *)canvas
 {
-	if (isMovingSelection)
+	if (!entireImage)
 	{
-		isMovingSelection = NO;
-		[moveLayer setSize:[canvas size]];
-		[moveLayer finalizeMotion];
-		if(isCopying && copyLayer != nil)
+		selectedRect = lastSelectedRect;
+		
+		if (type == PXMoveTypeCopying)
 		{
 			[copyLayer setSize:[canvas size]];
 			[copyLayer finalizeMotion];
+			
+			[[canvas activeLayer] compositeUnder:copyLayer flattenOpacity:YES];
+			
+			[canvas removeTempLayer:copyLayer];
+			[copyLayer release];
+			copyLayer = nil;
 		}
-		selectedRect = lastSelectedRect;
-		// NSUInteger index = [[canvas layers] indexOfObject:moveLayer];
+		
+		[moveLayer setSize:[canvas size]];
+		[moveLayer finalizeMotion];
+		
 		[[canvas activeLayer] compositeUnder:moveLayer flattenOpacity:YES];
+		
 		[canvas removeTempLayer:moveLayer];
 		[moveLayer release];
-		if(isCopying && copyLayer != nil)
-		{
-			[copyLayer release];
-			[[canvas activeLayer] compositeUnder:copyLayer flattenOpacity:YES];
-			[canvas removeTempLayer:copyLayer];
-		}
+		moveLayer = nil;
+		
 		[canvas finalizeSelectionMotion];
 		[canvas changed];
+		
 		[[NSNotificationCenter defaultCenter] postNotificationName:PXSelectionMaskChangedNotificationName
 															object:canvas];
 	}
 	else
 	{
 		[canvas moveLayer:moveLayer byX:[moveLayer origin].x y:[moveLayer origin].y];
-		moveLayer = [canvas activeLayer];
 		[moveLayer moveToPoint:NSZeroPoint];
-		if(isCopying && copyLayer != nil)
+		
+		if (type == PXMoveTypeCopying)
 		{
 			[copyLayer setSize:[canvas size]];
 			[copyLayer finalizeMotion];
 			
 			[[canvas activeLayer] compositeUnder:copyLayer flattenOpacity:YES];
+			
 			[canvas removeTempLayer:copyLayer];
 			[copyLayer release];
+			copyLayer = nil;
 		}
+		
+		entireImage = NO;
+		moveLayer = nil;
 	}
-	moveLayer = nil;
-	copyLayer = nil;
-	realLayer = nil;
+	
+	type = PXMoveTypeNone;
 	[canvas endUndoGrouping:[self actionName]];
 }
 
@@ -229,54 +263,54 @@ fromCanvasController:(PXCanvasController *) controller
 {
 	NSPoint nudgeDest = NSZeroPoint;
 	int nudgeAmount = 1;
-	if(([event modifierFlags] & NSShiftKeyMask) == NSShiftKeyMask)
-	{
+	
+	if (([event modifierFlags] & NSShiftKeyMask) == NSShiftKeyMask) {
 		nudgeAmount = 10;
 	}
-	if([[event characters] characterAtIndex:0] == NSUpArrowFunctionKey)
-	{
+	
+	if ([[event characters] characterAtIndex:0] == NSUpArrowFunctionKey) {
 		nudgeDest.y = nudgeAmount;
 	}
-	else if([[event characters] characterAtIndex:0] == NSRightArrowFunctionKey)
-	{
+	else if ([[event characters] characterAtIndex:0] == NSRightArrowFunctionKey) {
 		nudgeDest.x = nudgeAmount;
 	}
-	else if([[event characters] characterAtIndex:0] == NSDownArrowFunctionKey)
-	{
+	else if ([[event characters] characterAtIndex:0] == NSDownArrowFunctionKey) {
 		nudgeDest.y = -nudgeAmount;
 	}
-	else if([[event characters] characterAtIndex:0] == NSLeftArrowFunctionKey)
-	{
+	else if ([[event characters] characterAtIndex:0] == NSLeftArrowFunctionKey) {
 		nudgeDest.x = -nudgeAmount;
 	}
-	if(!NSEqualPoints(nudgeDest, NSZeroPoint))
-	{
+	
+	if (!NSEqualPoints(nudgeDest, NSZeroPoint)) {
 		[self mouseDownAt:NSZeroPoint fromCanvasController:cc];
 		[self mouseDraggedFrom:NSZeroPoint to:nudgeDest fromCanvasController:cc];
 		[self mouseUpAt:nudgeDest fromCanvasController:cc];
 	}
 }
 
-
 - (BOOL)optionKeyDown
 {
-	isCopying = YES;
-	if(moveLayer == nil || realLayer == nil)
-	{
+	if (type == PXMoveTypeNone)
 		return YES;
-	}
-	[self fakeMouseDraggedIfNecessary];
+	
+	type = PXMoveTypeCopying;
+	
+	PXCanvasDocument *doc = (PXCanvasDocument *) [[NSDocumentController sharedDocumentController] currentDocument];
+	[self updateCopyLayerForCanvas:[[doc canvasController] canvas]];
+	
 	return YES;
 }
 
 - (BOOL)optionKeyUp
 {
-	isCopying = NO;
-	if(moveLayer == nil || realLayer == nil)
-	{
+	if (type == PXMoveTypeNone)
 		return YES;
-	}
-	[self fakeMouseDraggedIfNecessary];
+	
+	type = PXMoveTypeMoving;
+	
+	PXCanvasDocument *doc = (PXCanvasDocument *) [[NSDocumentController sharedDocumentController] currentDocument];
+	[self updateCopyLayerForCanvas:[[doc canvasController] canvas]];
+	
 	return YES;
 }
 

@@ -24,27 +24,32 @@
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 //  Created by Andy Matuschak on Fri Feb 27 2004.
 //  Copyright (c) 2004 Open Sword Group. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "PXLinearTool.h"
-#import "PXCanvasController.h"
-#import "PXCanvas.h"
 
-@class PXLayer;
+#import "PXLinearTool.h"
+
+@class PXCanvas, PXLayer;
+
+typedef enum {
+	PXMoveTypeNone = 0,
+	PXMoveTypeMoving,
+	PXMoveTypeCopying
+} PXMoveType;
+
 @interface PXMoveTool : PXLinearTool
 {
   @private
-	PXLayer *realLayer, *copyLayer, *moveLayer;
-	BOOL isCopying;
-	BOOL isMovingSelection;
-	NSPoint origin, selectionOrigin;
+	PXLayer *copyLayer, *moveLayer;
+	PXMoveType type;
+	BOOL entireImage;
+	NSPoint selectionOrigin;
 	NSRect selectedRect, lastSelectedRect;
-	PXSelectionMask oldMask;
 }
+
 - (void)updateCopyLayerForCanvas:(PXCanvas *)canvas;
 
 @end
