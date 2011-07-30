@@ -2,7 +2,7 @@
 //  Pixen
 //
 //  Created by Joe Osborn on Sat Sep 13 2003.
-//  Copyright (c) 2003 Open Sword Group. All rights reserved.
+//  Copyright (c) 2003 Pixen. All rights reserved.
 //
 #import <AppKit/AppKit.h>
 

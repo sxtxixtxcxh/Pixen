@@ -22,7 +22,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM,  OUT OF OR IN CONNECTION WITH
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //  Created by Joe Osborn on Tue Nov 18 2003.
-//  Copyright (c) 2003 Open Sword Group. All rights reserved.
+//  Copyright (c) 2003 Pixen. All rights reserved.
 //
 
 // This code is based on some from Will Leshner. Thanks, man!

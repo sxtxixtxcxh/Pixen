@@ -22,7 +22,7 @@
   // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
   //  Created by Joe Osborn on Mon Oct 13 2003.
-  //  Copyright (c) 2003 Open Sword Group. All rights reserved.
+  //  Copyright (c) 2003 Pixen. All rights reserved.
   //
 
 #import "PXEyedropperTool.h"

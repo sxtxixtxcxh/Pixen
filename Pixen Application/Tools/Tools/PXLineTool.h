@@ -3,7 +3,7 @@
 //  Pixen-XCode
 //
 //  Created by Ian Henderson on Wed Dec 10 2003.
-//  Copyright (c) 2003 Open Sword Group. All rights reserved.
+//  Copyright (c) 2003 Pixen. All rights reserved.
 //
 
 #import "PXLinearTool.h"

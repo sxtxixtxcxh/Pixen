@@ -22,7 +22,7 @@
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 //  Created by Joe Osborn on Tue Oct 07 2003.
-//  Copyright (c) 2003 Open Sword Group. All rights reserved.
+//  Copyright (c) 2003 Pixen. All rights reserved.
 //
 
 #import "PXPencilTool.h"

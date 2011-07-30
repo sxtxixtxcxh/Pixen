@@ -24,7 +24,7 @@
 //
 
 //  Created by Joe Osborn on Tue Sep 30 2003.
-//  Copyright (c) 2003 Open Sword Group. All rights reserved.
+//  Copyright (c) 2003 Pixen. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
