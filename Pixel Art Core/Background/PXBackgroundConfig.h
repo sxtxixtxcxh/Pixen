@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Joe Osborn on 2007.11.12.
-//  Copyright 2007 Open Sword Group. All rights reserved.
+//  Copyright 2007 Pixen. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

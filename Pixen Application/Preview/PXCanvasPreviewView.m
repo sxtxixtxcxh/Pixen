@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Joe Osborn on 2007.11.13.
-//  Copyright 2007 Open Sword Group. All rights reserved.
+//  Copyright 2007 Pixen. All rights reserved.
 //
 
 #import "PXCanvasPreviewView.h"
