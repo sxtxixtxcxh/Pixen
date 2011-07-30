@@ -23,7 +23,7 @@
 //
 //
 //  Created by Joe Osborn on Sat Jan 24 2004.
-//  Copyright (c) 2004 Open Sword Group. All rights reserved.
+//  Copyright (c) 2004 Pixen. All rights reserved.
 //
 
 #import "NSArray_DeepMutableCopy.h"

@@ -26,7 +26,7 @@
 
 
 //  Created by Ian Henderson on Mon Mar 15 2004.
-//  Copyright (c) 2004 Open Sword Group. All rights reserved.
+//  Copyright (c) 2004 Pixen. All rights reserved.
 //
 
 #import "PXPencilTool.h"

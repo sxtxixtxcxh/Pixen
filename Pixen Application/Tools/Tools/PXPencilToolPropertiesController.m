@@ -25,7 +25,7 @@
 //
 
 //  Created by Ian Henderson on Wed Mar 17 2004.
-//  Copyright (c) 2004 Open Sword Group. All rights reserved.
+//  Copyright (c) 2004 Pixen. All rights reserved.
 //
 
 #import "PXPencilToolPropertiesController.h"

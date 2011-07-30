@@ -16,7 +16,7 @@
 //  all copies or substantial portions of the Software.
 
 //  Created by Joe Osborn on Sun Jan 04 2004.
-//  Copyright (c) 2004 Open Sword Group. All rights reserved.
+//  Copyright (c) 2004 Pixen. All rights reserved.
 //
 
 #import "PXRectangularSelectionTool.h"

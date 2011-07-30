@@ -3,7 +3,7 @@
 //  Pixen-XCode
 //
 //  Created by Andy Matuschak on Fri Jul 16 2004.
-//  Copyright (c) 2004 Open Sword Group. All rights reserved.
+//  Copyright (c) 2004 Pixen. All rights reserved.
 //
 
 #import "PXAnimatedGifExporter.h"

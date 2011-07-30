@@ -25,7 +25,7 @@
 //
 
 //  Created by Andy Matuschak on Fri Feb 27 2004.
-//  Copyright (c) 2004 Open Sword Group. All rights reserved.
+//  Copyright (c) 2004 Pixen. All rights reserved.
 //
 
 #import "PXMoveTool.h"
