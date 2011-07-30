@@ -8,7 +8,7 @@
 	<array>
 		<dict>
 			<key>UTTypeIdentifier</key>
-			<string>com.opensword.pxim</string>
+			<string>com.Pixen.pxim</string>
 			<key>UTTypeReferenceURL</key>
 			<string>http://github.com/philippec/Pixen</string>
 			<key>UTTypeDescription</key>
@@ -41,11 +41,11 @@
 			<string>Editor</string>
 			<key>NSExportableTypes</key>
 			<array>
-				<string>com.opensword.pxim</string>
+				<string>com.Pixen.pxim</string>
 			</array>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.opensword.pxim</string>
+				<string>com.Pixen.pxim</string>
 			</array>
 		</dict>
 		<dict>
@@ -272,7 +272,7 @@
 	<key>CFBundleIconFile</key>
 	<string>Pixen</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.opensword.pixen</string>
+	<string>com.Pixen.Pixen</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -299,10 +299,6 @@
 	<string>PXApplication</string>
 	<key>NSServices</key>
 	<array/>
-	<key>SUCheckAtStartup</key>
-	<true/>
-	<key>SUFeedURL</key>
-	<string>http://opensword.org/pixen/PixenChangelog.xml</string>
 	<key>UTImportedTypeDeclarations</key>
 	<array/>
 </dict>
