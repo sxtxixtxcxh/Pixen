@@ -2,7 +2,6 @@
 //  PXNamePrompter.m
 //  Pixel Editor
 //
-//  Created by Open Sword Group on Thu May 01 2003.
 
 // Copyright (c) 2003,2004,2005 Pixen
 

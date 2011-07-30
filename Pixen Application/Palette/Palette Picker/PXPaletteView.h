@@ -2,7 +2,7 @@
 //  PXPaletteView.h
 //  Pixen
 //
-//  Copyright 2011 Open Sword Group. All rights reserved.
+//  Copyright 2011 Pixen. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
