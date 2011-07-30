@@ -4,7 +4,7 @@
 //
 //  Created by Joe Osborn on 2005.07.04.
 
-// Copyright (c) 2003,2004,2005 Open Sword Group
+// Copyright (c) 2003,2004,2005 Pixen
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 
