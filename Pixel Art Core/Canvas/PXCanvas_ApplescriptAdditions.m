@@ -34,7 +34,12 @@
 
 - handleAddLayerScriptCommand:command
 {
-	[self addLayer:[[PXLayer alloc] initWithName:[[command evaluatedArguments] objectForKey:@"layerName"] size:[self size]]];
+	PXLayer *layer = [[PXLayer alloc] initWithName:[[command evaluatedArguments] objectForKey:@"layerName"]
+											  size:[self size]];
+	
+	[self addLayer:layer];
+	[layer release];
+	
 	return nil;
 }
 

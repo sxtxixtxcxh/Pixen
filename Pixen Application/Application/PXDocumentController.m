@@ -472,8 +472,10 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	id document = [super makeUntitledDocumentOfType:typeName error:outError];
 	
-	if (!document)
+	if (!document) {
+		[prompter release];
 		return nil;
+	}
 	
 	[[document canvas] setSize:[prompter size]
 					withOrigin:NSZeroPoint
