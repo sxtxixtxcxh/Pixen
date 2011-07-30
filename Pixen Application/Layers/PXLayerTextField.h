@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Andy Matuschak on 6/28/05.
-//  Copyright 2005 Open Sword Group. All rights reserved.
+//  Copyright 2005 Pixen. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 Open Sword Group. All rights reserved.
+//  Copyright 2005 Pixen. All rights reserved.
 //
 
 #import "PXAnimationWindowController.h"

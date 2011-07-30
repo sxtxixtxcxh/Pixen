@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Andy Matuschak on 8/21/05.
-//  Copyright 2005 Open Sword Group. All rights reserved.
+//  Copyright 2005 Pixen. All rights reserved.
 //
 
 #import "PXPaletteViewSizeSelector.h"

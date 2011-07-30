@@ -3,7 +3,7 @@
 //  Pixen-XCode
 //
 //  Created by Andy Matuschak on 5/7/05.
-//  Copyright 2005 Open Sword Group. All rights reserved.
+//  Copyright 2005 Pixen. All rights reserved.
 //
 
 #import <AppKit/NSView.h>
