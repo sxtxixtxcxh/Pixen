@@ -48,8 +48,8 @@ NSString *GIFFileType = @"Compuserve Graphic (GIF)";
 NSString *BMPFileType = @"Windows Bitmap (BMP)";
 NSString *PICTFileType = @"Apple PICT Graphic";
 NSString *EPSFileType = @"Encapsulated PostScript (EPS)";
-NSString *PixenAnimationFileType = @"com.Pixen.pxa";
-NSString *PixenAnimationFileTypeOld = @"com.opensword.pxa";
+NSString *PixenAnimationFileType = @"com.Pixen.pxan";
+NSString *PixenAnimationFileTypeOld = @"com.opensword.pxan";
 
 NSString *PixenPaletteType = @"Pixen Palette Format (.pxpalette)";
 NSString *MicrosoftPaletteType = @"Microsoft RAW Palette Format (.pal)";
