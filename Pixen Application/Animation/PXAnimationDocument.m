@@ -67,7 +67,8 @@
 
 - (NSFileWrapper *)fileWrapperOfType:(NSString *)aType error:(NSError **)outError
 {
-	if ([aType isEqualToString:PixenAnimationFileType])
+	if ([aType isEqualToString:PixenAnimationFileType] ||
+			[aType isEqualToString:PixenAnimationFileTypeOld])
 	{
 		NSMutableDictionary *files = [NSMutableDictionary dictionaryWithCapacity:[animation countOfCels]];
 		NSMutableArray *celData = [NSMutableArray arrayWithCapacity:[animation countOfCels]];

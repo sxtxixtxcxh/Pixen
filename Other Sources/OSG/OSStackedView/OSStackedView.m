@@ -353,8 +353,9 @@
 
 - (void)restackViews
 {
+	if([views count] == 0) { return; }
 	float totalHeight = [self height];
-	NSUInteger i;
+	NSInteger i;
 	for (i = [views count] - 1; i >= 0; i--)
 	{
 		OSStackedViewElement *current = [views objectAtIndex:i];

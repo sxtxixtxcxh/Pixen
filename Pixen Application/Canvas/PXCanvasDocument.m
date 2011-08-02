@@ -257,7 +257,8 @@ BOOL isPowerOfTwo(int num)
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)aType error:(NSError **)error
 {
-	if([aType isEqualToString:PixenImageFileType])
+	if([aType isEqualToString:PixenImageFileType] ||
+		 [aType isEqualToString:PixenImageFileTypeOld])
 	{
 		[canvas release];
 		canvas = [[NSKeyedUnarchiver unarchiveObjectWithData:data] retain];

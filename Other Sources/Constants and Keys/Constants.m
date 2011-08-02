@@ -39,6 +39,7 @@ NSString *PXNanDescription = @"nan";
 NSString *PXLastSavedFileType = @"PXLastSavedFileType";
 
 NSString *PixenImageFileType = @"com.Pixen.pxim";
+NSString *PixenImageFileTypeOld = @"com.opensword.pxim";
 NSString *JPEGFileType = @"JPEG Graphic";
 NSString *ICOFileType = @"Windows Icon (ICO)";
 NSString *PNGFileType = @"Portable Network Graphic (PNG)";
@@ -47,7 +48,8 @@ NSString *GIFFileType = @"Compuserve Graphic (GIF)";
 NSString *BMPFileType = @"Windows Bitmap (BMP)";
 NSString *PICTFileType = @"Apple PICT Graphic";
 NSString *EPSFileType = @"Encapsulated PostScript (EPS)";
-NSString *PixenAnimationFileType = @"Pixen Animation";
+NSString *PixenAnimationFileType = @"com.Pixen.pxa";
+NSString *PixenAnimationFileTypeOld = @"com.opensword.pxa";
 
 NSString *PixenPaletteType = @"Pixen Palette Format (.pxpalette)";
 NSString *MicrosoftPaletteType = @"Microsoft RAW Palette Format (.pal)";

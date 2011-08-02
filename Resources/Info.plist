@@ -4,46 +4,30 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
-	<key>UTExportedTypeDeclarations</key>
-	<array>
-		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>com.Pixen.pxim</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://github.com/philippec/Pixen</string>
-			<key>UTTypeDescription</key>
-			<string>Pixen Image</string>
-			<key>UTTypeIconFile</key>
-			<string>PixenDoc.icns</string>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>pxi</string>
-				</array>
-			</dict>
-		</dict>
-	</array>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>pxi</string>
+			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>PixenDoc</string>
-			<key>NSDocumentClass</key>
-			<string>PXCanvasDocument</string>
 			<key>CFBundleTypeName</key>
 			<string>Pixen Image</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>PXIm</string>
+			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>NSExportableTypes</key>
+			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.Pixen.pxim</string>
 			</array>
-			<key>LSItemContentTypes</key>
+			<key>NSDocumentClass</key>
+			<string>PXCanvasDocument</string>
+			<key>NSExportableTypes</key>
 			<array>
 				<string>com.Pixen.pxim</string>
 			</array>
@@ -61,6 +45,10 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.Pixen.pxan</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<true/>
 			<key>NSDocumentClass</key>
@@ -260,6 +248,56 @@
 			<key>LSTypeIsPackage</key>
 			<false/>
 		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>pxi</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>PixenDoc</string>
+			<key>CFBundleTypeName</key>
+			<string>Pixen Image</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>PXIm</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.opensword.pxim</string>
+			</array>
+			<key>NSDocumentClass</key>
+			<string>PXCanvasDocument</string>
+			<key>NSExportableTypes</key>
+			<array>
+				<string>com.Pixen.pxim</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>pxa</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Pixen Animation</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>PXAn</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.opensword.pxan</string>
+			</array>
+			<key>NSDocumentClass</key>
+			<string>PXAnimationDocument</string>
+			<key>NSExportableTypes</key>
+			<array>
+				<string>com.Pixen.pxan</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>Pixen</string>
@@ -283,8 +321,6 @@
 	<string>3.5</string>
 	<key>CFBundleSignature</key>
 	<string>PiXn</string>
-	<key>CFBundleURLTypes</key>
-	<array/>
 	<key>CFBundleVersion</key>
 	<string>3.5</string>
 	<key>LSApplicationCategoryType</key>
@@ -297,9 +333,107 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>PXApplication</string>
-	<key>NSServices</key>
-	<array/>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Pixen Image</string>
+			<key>UTTypeIconFile</key>
+			<string>PixenDoc.icns</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.Pixen.pxim</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://github.com/philippec/Pixen</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>PXIm</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>pxi</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Pixen Animation</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.Pixen.pxan</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://github.com/philippec/Pixen</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>PXAn</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>pxa</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 	<key>UTImportedTypeDeclarations</key>
-	<array/>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Pixen Image (Old UTI)</string>
+			<key>UTTypeIconFile</key>
+			<string>PixenDoc.icns</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.opensword.pxim</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://github.com/philippec/Pixen</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>PXIm</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>pxi</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Pixen Animation (Old UTI)</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.opensword.pxan</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://github.com/philippec/Pixen</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>PXAn</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>pxa</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>
