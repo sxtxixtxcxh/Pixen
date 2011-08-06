@@ -142,7 +142,8 @@
 
 - (BOOL)readFromFileWrapper:(NSFileWrapper *)wrapper ofType:(NSString *)docType error:(NSError **)outError
 {
-	if ([docType isEqualToString:PixenAnimationFileType])
+	if ([docType isEqualToString:PixenAnimationFileType] ||
+			[docType isEqualToString:PixenAnimationFileTypeOld])
 	{
 		[animation removeCel:[animation objectInCelsAtIndex:0]];
 		NSDictionary *files = [wrapper fileWrappers];

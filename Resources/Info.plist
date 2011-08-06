@@ -338,7 +338,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
+				<string>public.image</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>Pixen Image</string>
@@ -363,7 +363,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
+				<string>public.image</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>Pixen Animation</string>
@@ -389,7 +389,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
+				<string>public.image</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>Pixen Image (Old UTI)</string>
@@ -414,7 +414,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
+				<string>public.image</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>Pixen Animation (Old UTI)</string>

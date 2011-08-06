@@ -12,6 +12,7 @@
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.Pixen.pxim</string>
+				<string>com.opensword.pxim</string>
 			</array>
 		</dict>
 	</array>
@@ -49,12 +50,12 @@
 	<string></string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2011 Pixen. All rights reserved.</string>
+	<key>QLNeedsToBeRunInMainThread</key>
+	<false/>
 	<key>QLPreviewHeight</key>
 	<real>800</real>
 	<key>QLPreviewWidth</key>
 	<real>600</real>
-	<key>QLNeedsToBeRunInMainThread</key>
-	<false/>
 	<key>QLSupportsConcurrentRequests</key>
 	<false/>
 	<key>QLThumbnailMinimumSize</key>

@@ -126,7 +126,8 @@ BOOL isPowerOfTwo(int num)
 
 + (NSData *)dataRepresentationOfType:(NSString *)aType withCanvas:(PXCanvas *)canvas
 {
-	if([aType isEqualToString:PixenImageFileType])
+	if([aType isEqualToString:PixenImageFileType] ||
+		 [aType isEqualToString:PixenImageFileTypeOld])
   {
 		return [NSKeyedArchiver archivedDataWithRootObject:canvas];
   }
