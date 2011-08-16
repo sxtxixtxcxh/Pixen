@@ -23,6 +23,7 @@
 #import "PXPalettePanel.h"
 #import "PXLayerController.h"
 
+#import "PXDocumentController.h"
 #import "PXAnimationDocument.h"
 #import "PXAnimation.h"
 #import "PXCel.h"
@@ -31,17 +32,35 @@
 
 - (IBAction)createAnimationFromImage:sender
 {
-	PXAnimationDocument *animationDocument = [[PXAnimationDocument alloc] init];
+	PXDocumentController *docController = [PXDocumentController sharedDocumentController];
+	
+	NSError *error = nil;
+	PXAnimationDocument *doc = [docController makeUntitledDocumentOfType:PixenAnimationFileType
+														  showSizePrompt:NO
+																   error:&error];
+	
+	if (!doc) {
+		[NSApp presentError:error];
+		return;
+	}
+	
+	[docController addDocument:doc];
+	
 	NSImage *cocoaImage = [[[self canvas] exportImage] retain];
 	[cocoaImage lockFocus];
+	
 	NSBitmapImageRep *bitmapRep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:(NSRect){NSZeroPoint,[cocoaImage size]}] autorelease];
 	[cocoaImage unlockFocus];
+	
 	[cocoaImage removeRepresentation:[[cocoaImage representations] objectAtIndex:0]];
 	[cocoaImage addRepresentation:bitmapRep];
-	[[[[animationDocument animation] objectInCelsAtIndex:0] canvas] replaceActiveLayerWithImage:cocoaImage];
-	[animationDocument makeWindowControllers];
-	[animationDocument showWindows];
-  [animationDocument updateChangeCount:NSChangeReadOtherContents];
+	
+	[[[[doc animation] objectInCelsAtIndex:0] canvas] replaceActiveLayerWithImage:cocoaImage];
+	[cocoaImage release];
+	
+	[doc makeWindowControllers];
+	[doc showWindows];
+	[doc updateChangeCount:NSChangeReadOtherContents];
 }
 
 - (void)rotateLayerCounterclockwise:sender

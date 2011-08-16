@@ -68,6 +68,8 @@
 		[self willChangeValueForKey:@"documentRepresentations"];
 		[self recacheDocumentRepresentations];
 		[self didChangeValueForKey:@"documentRepresentations"];
+		
+		[self updatePreview:nil];
 	}
 }
 
