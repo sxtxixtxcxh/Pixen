@@ -183,7 +183,7 @@
 							<array class="NSMutableArray" key="NSMenuItems">
 								<object class="NSMenuItem" id="540629169">
 									<reference key="NSMenu" ref="654037141"/>
-									<string key="NSTitle">New Image</string>
+									<string key="NSTitle">New Image...</string>
 									<string key="NSKeyEquiv">n</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -210,7 +210,7 @@
 								</object>
 								<object class="NSMenuItem" id="616013946">
 									<reference key="NSMenu" ref="654037141"/>
-									<string key="NSTitle">New Animation</string>
+									<string key="NSTitle">New Animation...</string>
 									<string key="NSKeyEquiv">N</string>
 									<int key="NSKeyEquivModMask">1310720</int>
 									<int key="NSMnemonicLoc">2147483647</int>
