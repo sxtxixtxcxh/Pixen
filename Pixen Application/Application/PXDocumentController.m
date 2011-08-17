@@ -411,7 +411,7 @@ NSString *palettesSubdirName = @"Palettes";
 	if (isAnimated)
 	{
 		NSError *error=nil;
-		PXAnimationDocument *doc = [[[PXAnimationDocument alloc] initWithContentsOfURL:aURL ofType:GIFFileType error:&error] autorelease];
+		PXAnimationDocument *doc = [[[PXAnimationDocument alloc] initWithContentsOfURL:aURL ofType:(NSString *)kUTTypeGIF error:&error] autorelease];
 		if(error) {
 			[self presentError:error];
 		}
@@ -469,25 +469,9 @@ NSString *palettesSubdirName = @"Palettes";
 	return [self makeUntitledDocumentOfType:typeName showSizePrompt:YES error:outError];
 }
 
-- (id)makeDocumentWithContentsOfURL:(NSURL *)aURL ofType:(NSString *)docType
-{
-	if ([docType isEqualToString:GIFFileType])
-	{
-		id potentiallyAnimatedDocument = [self handleAnimatedGifAtURL:aURL];
-		if (potentiallyAnimatedDocument)
-			return potentiallyAnimatedDocument;
-	}
-	NSError *err = nil;
-	NSDocument *doc = [super makeDocumentWithContentsOfURL:aURL ofType:docType error:&err];
-	if(err) {
-		[self presentError:err];
-	}
-	return doc;
-}
-
 - (id)makeDocumentWithContentsOfURL:(NSURL *)url ofType:(NSString *)docType error:(NSError **)err
 {
-	if ([docType isEqualToString:GIFFileType])
+	if (UTTypeEqual(kUTTypeGIF, (CFStringRef) docType))
 	{
 		id potentiallyAnimatedDocument = [self handleAnimatedGifAtURL:url];
 		if (potentiallyAnimatedDocument)
@@ -503,7 +487,7 @@ NSString *palettesSubdirName = @"Palettes";
 
 - (id)makeDocumentForURL:(NSURL *)absoluteDocumentURL withContentsOfURL:(NSURL *)absoluteDocumentContentsURL ofType:(NSString *)typeName error:(NSError **)outError
 {
-	if ([typeName isEqualToString:GIFFileType])
+	if (UTTypeEqual(kUTTypeGIF, (CFStringRef)typeName))
 	{
 		id potentiallyAnimatedDocument = [self handleAnimatedGifAtURL:absoluteDocumentURL];
 		if (potentiallyAnimatedDocument)

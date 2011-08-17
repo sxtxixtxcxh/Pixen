@@ -16,7 +16,6 @@
 - imageDataWithType:(NSBitmapImageFileType)storageType
 		 properties:(NSDictionary *)properties;
 - (void)replaceActiveLayerWithImage:(NSImage *)anImage;
-- initWithImage:(NSImage *)anImage type:(NSString *)type;
 - initWithImage:(NSImage *)anImage;
 - (NSImage *)exportImageWithBackgroundColor:(NSColor *)color;
 - (NSImage *)exportImage; // suitable for writing to file

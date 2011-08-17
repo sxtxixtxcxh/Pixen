@@ -68,7 +68,7 @@
 - (NSFileWrapper *)fileWrapperOfType:(NSString *)aType error:(NSError **)outError
 {
 	if ([aType isEqualToString:PixenAnimationFileType] ||
-			[aType isEqualToString:PixenAnimationFileTypeOld])
+		[aType isEqualToString:PixenAnimationFileTypeOld])
 	{
 		NSMutableDictionary *files = [NSMutableDictionary dictionaryWithCapacity:[animation countOfCels]];
 		NSMutableArray *celData = [NSMutableArray arrayWithCapacity:[animation countOfCels]];
@@ -91,26 +91,26 @@
 		[files setObject:[[[NSFileWrapper alloc] initRegularFileWithContents:xmlData] autorelease] forKey:@"CelData.plist"];
 		return [[[NSFileWrapper alloc] initDirectoryWithFileWrappers:files] autorelease];
 	}
-	else if ([aType isEqualToString:GIFFileType])
+	else if (UTTypeEqual(kUTTypeGIF, (CFStringRef)aType))
 	{
-    NSError *err = nil;
-    NSData *data = [self dataOfType:GIFFileType error:&err];
-    if(err) 
-    {
-      [self presentError:err];
-      return nil;
-    }
-    else
-    {
-      return [[[NSFileWrapper alloc] initRegularFileWithContents:data] autorelease];
-    }
+		NSError *err = nil;
+		NSData *data = [self dataOfType:(NSString *)kUTTypeGIF error:&err];
+		if(err) 
+		{
+			[self presentError:err];
+			return nil;
+		}
+		else
+		{
+			return [[[NSFileWrapper alloc] initRegularFileWithContents:data] autorelease];
+		}
 	}
 	return nil;
 }
 
 - (NSData *)dataOfType:(NSString *)aType error:(NSError **)err
 {
-	if ([aType isEqualToString:GIFFileType])
+	if (UTTypeEqual(kUTTypeGIF, (CFStringRef) aType))
 	{
 		OSProgressPopup *popup = [OSProgressPopup sharedProgressPopup];
 		PXAnimatedGifExporter *exporter = [[[PXAnimatedGifExporter alloc] initWithSize:[animation size] iterations:1] autorelease];
@@ -183,7 +183,7 @@
 		
 		return (animation != nil) && ([animation countOfCels] > 0);
 	}
-	else if ([docType isEqualToString:GIFFileType])
+	else if (UTTypeEqual(kUTTypeGIF, (CFStringRef) docType))
 	{
 		return [self readFromData:[wrapper regularFileContents] ofType:docType error:outError];
 	}
@@ -195,7 +195,7 @@
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)docType error:(NSError **)err
 {
-	if ([docType isEqualToString:GIFFileType])
+	if (UTTypeEqual(kUTTypeGIF, (CFStringRef) docType))
 	{
 		[animation removeCel:[animation objectInCelsAtIndex:0]];
 		NSImage *tempImage = [[[NSImage alloc] initWithData:data] autorelease];
@@ -221,13 +221,13 @@
 
 + (BOOL)isNativeType:(NSString *)type
 {
-	if ([type isEqualToString:GIFFileType]) { return YES; }
+	if (UTTypeEqual(kUTTypeGIF, (CFStringRef) type)) { return YES; }
 	return [super isNativeType:type];
 }
 
 + writableTypes
 {
-	return [[super writableTypes] arrayByAddingObject:GIFFileType];
+	return [[super writableTypes] arrayByAddingObject:(NSString *)kUTTypeGIF];
 }
 
 @end

@@ -59,26 +59,14 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>pict</string>
-			</array>
-			<key>CFBundleTypeName</key>
-			<string>Apple PICT Graphic</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSTypeIsPackage</key>
-			<false/>
-			<key>NSDocumentClass</key>
-			<string>PXCanvasDocument</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
 				<string>gif</string>
 			</array>
-			<key>CFBundleTypeName</key>
-			<string>Compuserve Graphic (GIF)</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.compuserve.gif</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSDocumentClass</key>
@@ -90,10 +78,12 @@
 				<string>jpg</string>
 				<string>jpeg</string>
 			</array>
-			<key>CFBundleTypeName</key>
-			<string>JPEG Graphic</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.jpeg</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSDocumentClass</key>
@@ -108,10 +98,12 @@
 			<array>
 				<string>image/png</string>
 			</array>
-			<key>CFBundleTypeName</key>
-			<string>Portable Network Graphic (PNG)</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.png</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSDocumentClass</key>
@@ -123,10 +115,28 @@
 				<string>tiff</string>
 				<string>tif</string>
 			</array>
-			<key>CFBundleTypeName</key>
-			<string>Tagged Image File Format (TIFF)</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.tiff</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSDocumentClass</key>
+			<string>PXCanvasDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>pict</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.apple.pict</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSDocumentClass</key>
@@ -137,10 +147,12 @@
 			<array>
 				<string>bmp</string>
 			</array>
-			<key>CFBundleTypeName</key>
-			<string>Windows Bitmap (BMP)</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.microsoft.bmp</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSDocumentClass</key>
@@ -151,10 +163,12 @@
 			<array>
 				<string>ico</string>
 			</array>
-			<key>CFBundleTypeName</key>
-			<string>Windows Icon (ICO)</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.microsoft.ico</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSDocumentClass</key>

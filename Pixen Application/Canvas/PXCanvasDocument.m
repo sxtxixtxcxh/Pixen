@@ -80,7 +80,7 @@ BOOL isPowerOfTwo(int num)
   {
     return;
   }
-  if ([typeName isEqualToString:JPEGFileType])
+  if (UTTypeEqual(kUTTypeJPEG, (CFStringRef) typeName))
 	{
 		saveFactor = 100;
   }
@@ -132,30 +132,30 @@ BOOL isPowerOfTwo(int num)
 		return [NSKeyedArchiver archivedDataWithRootObject:canvas];
   }
 	
-	if ([aType isEqualToString:JPEGFileType])
+	if (UTTypeEqual(kUTTypeJPEG, (CFStringRef) aType))
 	{
 		return [canvas imageDataWithType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0]
                                                                                            forKey:NSImageCompressionFactor]];
 	}
   
-	if ([aType isEqualToString:ICOFileType])
+	if (UTTypeEqual(kUTTypeICO, (CFStringRef) aType))
 	{
 		PXIconExporter *iconExporter = [[[PXIconExporter alloc] init] autorelease];
 		return [iconExporter iconDataForCanvas:canvas];
 	}
 	
-	if([aType isEqualToString:PNGFileType])
+	if(UTTypeEqual(kUTTypePNG, (CFStringRef) aType))
   {
 		return [canvas imageDataWithType:NSPNGFileType properties:nil];
   }
 	
-	if([aType isEqualToString:TIFFFileType])
+	if(UTTypeEqual(kUTTypeTIFF, (CFStringRef) aType))
   {
 		return [canvas imageDataWithType:NSTIFFFileType properties:nil];
   }
 	
 	
-	if ([aType isEqualToString:GIFFileType])
+	if (UTTypeEqual(kUTTypeGIF, (CFStringRef) aType))
 	{
 		PXCanvas *exportCanvas = [canvas copy];
 		[exportCanvas reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
@@ -172,11 +172,11 @@ BOOL isPowerOfTwo(int num)
 		//return [PXGifExporter gifDataForImage:[canvas exportImage]];
 	}
 	
-	if([aType isEqualToString:BMPFileType])
+	if(UTTypeEqual(kUTTypeBMP, (CFStringRef) aType))
   {
 		return [canvas imageDataWithType:NSBMPFileType properties:nil];
   }
-	if([aType isEqualToString:PICTFileType])
+	if(UTTypeEqual(kUTTypePICT, (CFStringRef) aType))
 	{
 		NSMutableData *pictData = [NSMutableData data];
 		CGImageDestinationRef pictOutput = 
@@ -201,7 +201,7 @@ BOOL isPowerOfTwo(int num)
 {
 	[[NSUserDefaults standardUserDefaults] setObject:type forKey:PXLastSavedFileType];
 	
-	if ([type isEqualToString:JPEGFileType])
+	if (UTTypeEqual(kUTTypeJPEG, (CFStringRef) type))
 	{
     NSNumber *sf = [NSNumber numberWithFloat:saveFactor];
     NSDictionary *props = [NSDictionary dictionaryWithObject:sf
@@ -264,7 +264,7 @@ BOOL isPowerOfTwo(int num)
 		[canvas release];
 		canvas = [[NSKeyedUnarchiver unarchiveObjectWithData:data] retain];
 	}
-	else if ([aType isEqualTo:BMPFileType])
+	else if (UTTypeEqual(kUTTypeBMP, (CFStringRef) aType))
 	{
 		[canvas release];
 		canvas = [[PXCanvas alloc] init];
@@ -274,7 +274,7 @@ BOOL isPowerOfTwo(int num)
 	{
 		NSImage *image = [[[NSImage alloc] initWithData:data] autorelease];
 		[canvas release];
-		canvas = [[PXCanvas alloc] initWithImage:image type:aType];
+		canvas = [[PXCanvas alloc] initWithImage:image];
 	}
 	if(canvas)
 	{

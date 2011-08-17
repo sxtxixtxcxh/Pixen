@@ -74,16 +74,11 @@
 	[self layersChanged];
 }
 
-- initWithImage:(NSImage *)anImage type:(NSString *)type
+- initWithImage:(NSImage *)anImage
 {
 	self = [self init];
 	[self replaceActiveLayerWithImage:anImage];
 	return self;
-}
-
-- initWithImage:(NSImage *)anImage
-{
-	return [self initWithImage:anImage type:PNGFileType];
 }
 
 - (NSImage *)displayImage

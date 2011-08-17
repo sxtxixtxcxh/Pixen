@@ -40,14 +40,6 @@ NSString *PXLastSavedFileType = @"PXLastSavedFileType";
 
 NSString *PixenImageFileType = @"com.Pixen.pxim";
 NSString *PixenImageFileTypeOld = @"com.opensword.pxim";
-NSString *JPEGFileType = @"JPEG Graphic";
-NSString *ICOFileType = @"Windows Icon (ICO)";
-NSString *PNGFileType = @"Portable Network Graphic (PNG)";
-NSString *TIFFFileType = @"Tagged Image File Format (TIFF)";
-NSString *GIFFileType = @"Compuserve Graphic (GIF)";
-NSString *BMPFileType = @"Windows Bitmap (BMP)";
-NSString *PICTFileType = @"Apple PICT Graphic";
-NSString *EPSFileType = @"Encapsulated PostScript (EPS)";
 NSString *PixenAnimationFileType = @"com.Pixen.pxan";
 NSString *PixenAnimationFileTypeOld = @"com.opensword.pxan";
 

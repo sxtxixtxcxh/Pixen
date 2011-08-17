@@ -39,14 +39,6 @@ extern NSString *PXLastSavedFileType;
 
 extern NSString *PixenImageFileType;
 extern NSString *PixenImageFileTypeOld;
-extern NSString *JPEGFileType;
-extern NSString *ICOFileType;
-extern NSString *PNGFileType;
-extern NSString *TIFFFileType;
-extern NSString *GIFFileType;
-extern NSString *BMPFileType;
-extern NSString *PICTFileType;
-extern NSString *EPSFileType;
 extern NSString *PixenAnimationFileType;
 extern NSString *PixenAnimationFileTypeOld;
 
