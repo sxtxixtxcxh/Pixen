@@ -8,26 +8,21 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class PXSequenceExportViewController;
+
 @interface PXSequenceExportPrompter : NSObject {
   @private
+	PXSequenceExportViewController *vc;
 	NSSavePanel *savePanel;
-	NSString *fileTemplate;
-	NSString *fileType;
-	IBOutlet NSView *view;
-	
-	id delegate;
-	SEL didEndSelector;
 }
-@property (readonly, copy) NSString *fileTemplate, *fileType;
-@property (readonly, retain) NSSavePanel *savePanel;
-@property (readwrite, retain) NSView *view;
+
+@property (nonatomic, readonly) NSSavePanel *savePanel;
+@property (nonatomic, readonly) NSString *fileTemplate, *selectedUTI;
 
 - (id)initWithDocument:(NSDocument *)document;
+
 - (void)beginSheetModalForWindow:(NSWindow *)parentWindow 
-									 modalDelegate:(id)delegate 
-									didEndSelector:(SEL)didEndSelector;
-- (NSSavePanel *)savePanel;
-- (NSString *)fileTemplate;
-- (void)setFileType:(NSString *)type;
+				   modalDelegate:(id)delegate 
+				  didEndSelector:(SEL)didEndSelector;
 
 @end

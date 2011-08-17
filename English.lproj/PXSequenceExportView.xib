@@ -2,19 +2,20 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">11A494a</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1881</string>
-		<string key="IBDocument.AppKitVersion">1128</string>
-		<string key="IBDocument.HIToolboxVersion">564.00</string>
+		<string key="IBDocument.SystemVersion">11C37</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
+		<string key="IBDocument.AppKitVersion">1138.15</string>
+		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1881</string>
+			<string key="NS.object.0">1617</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSTextField</string>
 			<string>NSCustomObject</string>
 			<string>NSMenu</string>
 			<string>NSMenuItem</string>
+			<string>NSArrayController</string>
 			<string>NSPopUpButton</string>
 			<string>NSCustomView</string>
 			<string>NSPopUpButtonCell</string>
@@ -23,13 +24,10 @@
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</array>
-		<object class="NSMutableDictionary" key="IBDocument.Metadata">
-			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
-			<integer value="1" key="NS.object.0"/>
-		</object>
+		<dictionary class="NSMutableDictionary" key="IBDocument.Metadata"/>
 		<array class="NSMutableArray" key="IBDocument.RootObjects" id="770165051">
 			<object class="NSCustomObject" id="882259942">
-				<string key="NSClassName">PXSequenceExportPrompter</string>
+				<string key="NSClassName">PXSequenceExportViewController</string>
 			</object>
 			<object class="NSCustomObject" id="370791210">
 				<string key="NSClassName">FirstResponder</string>
@@ -154,7 +152,6 @@
 									</object>
 								</array>
 							</object>
-							<int key="NSSelectedIndex">-1</int>
 							<int key="NSPreferredEdge">3</int>
 							<bool key="NSUsesItemFromMenu">YES</bool>
 							<bool key="NSAltersState">YES</bool>
@@ -243,25 +240,22 @@
 				</object>
 				<string key="NSExtension">NSResponder</string>
 			</object>
+			<object class="NSArrayController" id="312641620">
+				<array class="NSMutableArray" key="NSDeclaredKeys">
+					<string>name</string>
+					<string>uti</string>
+				</array>
+				<bool key="NSEditable">YES</bool>
+				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
+				<bool key="NSAvoidsEmptySelection">YES</bool>
+				<bool key="NSPreservesSelection">YES</bool>
+				<bool key="NSSelectsInsertedObjects">YES</bool>
+				<bool key="NSFilterRestrictsInsertion">YES</bool>
+				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
+			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">contentValues: fileTypes</string>
-						<reference key="source" ref="313874046"/>
-						<reference key="destination" ref="882259942"/>
-						<object class="NSNibBindingConnector" key="connector" id="620089283">
-							<reference key="NSSource" ref="313874046"/>
-							<reference key="NSDestination" ref="882259942"/>
-							<string key="NSLabel">contentValues: fileTypes</string>
-							<string key="NSBinding">contentValues</string>
-							<string key="NSKeyPath">fileTypes</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">16</int>
-				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">view</string>
@@ -269,23 +263,6 @@
 						<reference key="destination" ref="80089611"/>
 					</object>
 					<int key="connectionID">21</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">selectedObject: fileType</string>
-						<reference key="source" ref="313874046"/>
-						<reference key="destination" ref="882259942"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="313874046"/>
-							<reference key="NSDestination" ref="882259942"/>
-							<string key="NSLabel">selectedObject: fileType</string>
-							<string key="NSBinding">selectedObject</string>
-							<string key="NSKeyPath">fileType</string>
-							<reference key="NSPreviousConnector" ref="620089283"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">22</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -306,6 +283,54 @@
 						</object>
 					</object>
 					<int key="connectionID">29</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">contentArray: fileTypes</string>
+						<reference key="source" ref="312641620"/>
+						<reference key="destination" ref="882259942"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="312641620"/>
+							<reference key="NSDestination" ref="882259942"/>
+							<string key="NSLabel">contentArray: fileTypes</string>
+							<string key="NSBinding">contentArray</string>
+							<string key="NSKeyPath">fileTypes</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">32</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">contentValues: arrangedObjects.name</string>
+						<reference key="source" ref="313874046"/>
+						<reference key="destination" ref="312641620"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="313874046"/>
+							<reference key="NSDestination" ref="312641620"/>
+							<string key="NSLabel">contentValues: arrangedObjects.name</string>
+							<string key="NSBinding">contentValues</string>
+							<string key="NSKeyPath">arrangedObjects.name</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">37</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">typesController</string>
+						<reference key="source" ref="882259942"/>
+						<reference key="destination" ref="312641620"/>
+					</object>
+					<int key="connectionID">38</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">changedSelection:</string>
+						<reference key="source" ref="882259942"/>
+						<reference key="destination" ref="313874046"/>
+					</object>
+					<int key="connectionID">39</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -335,8 +360,8 @@
 							<reference ref="295248547"/>
 							<reference ref="1033255164"/>
 							<reference ref="325796565"/>
-							<reference ref="313874046"/>
 							<reference ref="523079104"/>
+							<reference ref="313874046"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">View</string>
@@ -440,6 +465,11 @@
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Application</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">30</int>
+						<reference key="object" ref="312641620"/>
+						<reference key="parent" ref="0"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -457,6 +487,7 @@
 				<string key="26.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="27.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="28.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="30.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -466,27 +497,38 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">29</int>
+			<int key="maxID">43</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">PXSequenceExportPrompter</string>
-					<string key="superclassName">NSObject</string>
+					<string key="className">PXSequenceExportViewController</string>
+					<string key="superclassName">NSViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">changedSelection:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">changedSelection:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">changedSelection:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">view</string>
-						<string key="NS.object.0">NSView</string>
+						<string key="NS.key.0">typesController</string>
+						<string key="NS.object.0">NSArrayController</string>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">view</string>
+						<string key="NS.key.0">typesController</string>
 						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">view</string>
-							<string key="candidateClassName">NSView</string>
+							<string key="name">typesController</string>
+							<string key="candidateClassName">NSArrayController</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PXSequenceExportPrompter.h</string>
+						<string key="minorKey">./Classes/PXSequenceExportViewController.h</string>
 					</object>
 				</object>
 			</array>
@@ -494,6 +536,10 @@
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
+			<real value="1060" key="NS.object.0"/>
+		</object>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<real value="1060" key="NS.object.0"/>
 		</object>

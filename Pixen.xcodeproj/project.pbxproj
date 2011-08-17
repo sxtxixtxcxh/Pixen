@@ -23,7 +23,7 @@
 		61A22B930D2323B500430CCD /* OSPlasticButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A22B910D2323B500430CCD /* OSPlasticButtonCell.m */; };
 		61A956BC08AD76CF009BB89F /* OSProgressPopup.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61A956BA08AD76CF009BB89F /* OSProgressPopup.nib */; };
 		61ED25AD06BD63DA00264DA2 /* PXAbout.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61ED25AB06BD63DA00264DA2 /* PXAbout.nib */; };
-		61FED6C408BCC646005E51EA /* PXSequenceExportPrompter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61FED6C208BCC646005E51EA /* PXSequenceExportPrompter.xib */; };
+		61FED6C408BCC646005E51EA /* PXSequenceExportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61FED6C208BCC646005E51EA /* PXSequenceExportView.xib */; };
 		BF1A538707ECD9200017A44E /* PXImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF1A538507ECD9200017A44E /* PXImage.h */; };
 		BF1A538807ECD9200017A44E /* PXImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1A538607ECD9200017A44E /* PXImage.m */; };
 		BF269FE6091307BF00B7A218 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BB8ED608FB58F9009C75A6 /* QTKit.framework */; };
@@ -40,6 +40,8 @@
 		C94A9EDA13B114DE0034AFE3 /* PXCanvasDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = C94A9ED813B114DE0034AFE3 /* PXCanvasDocument.xib */; };
 		C94A9EDD13B11BEA0034AFE3 /* PXSplitView.h in Headers */ = {isa = PBXBuildFile; fileRef = C94A9EDB13B11BEA0034AFE3 /* PXSplitView.h */; };
 		C94A9EDE13B11BEA0034AFE3 /* PXSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = C94A9EDC13B11BEA0034AFE3 /* PXSplitView.m */; };
+		C953831813FC477100440AB5 /* PXSequenceExportViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C953831613FC477100440AB5 /* PXSequenceExportViewController.h */; };
+		C953831913FC477100440AB5 /* PXSequenceExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C953831713FC477100440AB5 /* PXSequenceExportViewController.m */; };
 		C969A18E13D2012A00F1C1FE /* QLPlugin.qlgenerator in CopyFiles */ = {isa = PBXBuildFile; fileRef = C969A18A13D200B400F1C1FE /* QLPlugin.qlgenerator */; };
 		C96BABB513ABD3AB00015C92 /* PXHotkeysPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */; };
 		C96BABBB13ABD44A00015C92 /* PXHotkeysPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */; };
@@ -554,7 +556,7 @@
 		61ED25AC06BD63DA00264DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXAbout.xib; sourceTree = "<group>"; };
 		61F598BA067949D500B8C8CA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXScalePrompt.xib; sourceTree = "<group>"; };
 		61F9CB17060D6A6D00562B78 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXToolPalette.nib; sourceTree = "<group>"; };
-		61FED6C308BCC646005E51EA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXSequenceExportPrompter.xib; sourceTree = "<group>"; };
+		61FED6C308BCC646005E51EA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXSequenceExportView.xib; sourceTree = "<group>"; };
 		BF1A538507ECD9200017A44E /* PXImage.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PXImage.h; sourceTree = "<group>"; };
 		BF1A538607ECD9200017A44E /* PXImage.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PXImage.m; sourceTree = "<group>"; };
 		C90E7E2F13D5F81C00751F5B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXCanvasResizePrompt.xib; sourceTree = "<group>"; };
@@ -569,6 +571,8 @@
 		C94A9ED913B114DE0034AFE3 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXCanvasDocument.xib; sourceTree = "<group>"; };
 		C94A9EDB13B11BEA0034AFE3 /* PXSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSplitView.h; sourceTree = "<group>"; };
 		C94A9EDC13B11BEA0034AFE3 /* PXSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSplitView.m; sourceTree = "<group>"; };
+		C953831613FC477100440AB5 /* PXSequenceExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSequenceExportViewController.h; sourceTree = "<group>"; };
+		C953831713FC477100440AB5 /* PXSequenceExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSequenceExportViewController.m; sourceTree = "<group>"; };
 		C969A18513D200B300F1C1FE /* QLPlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QLPlugin.xcodeproj; path = QLPlugin/QLPlugin.xcodeproj; sourceTree = "<group>"; };
 		C96BABB413ABD3AB00015C92 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXHotkeysPreferences.xib; sourceTree = "<group>"; };
 		C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXHotkeysPreferencesController.h; sourceTree = "<group>"; };
@@ -1540,6 +1544,8 @@
 				EA31FB6E0CE7D59700EC481B /* PXAnimatedGifExporter.m */,
 				EA31FB6F0CE7D59700EC481B /* PXSequenceExportPrompter.h */,
 				EA31FB700CE7D59700EC481B /* PXSequenceExportPrompter.m */,
+				C953831613FC477100440AB5 /* PXSequenceExportViewController.h */,
+				C953831713FC477100440AB5 /* PXSequenceExportViewController.m */,
 				EA31FB710CE7D59700EC481B /* PXSpriteSheetExporter.h */,
 				EA31FB720CE7D59700EC481B /* PXSpriteSheetExporter.m */,
 			);
@@ -1847,7 +1853,7 @@
 				C984251013AFC142000072C5 /* PXPreview.xib */,
 				619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.xib */,
 				61F598B9067949D500B8C8CA /* PXScalePrompt.xib */,
-				61FED6C208BCC646005E51EA /* PXSequenceExportPrompter.xib */,
+				61FED6C208BCC646005E51EA /* PXSequenceExportView.xib */,
 				C9799FAE13AD69C000E261EE /* PXShapeToolPropertiesView.xib */,
 				C912F26B13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib */,
 				C9A6BE1513ACFBC50028B141 /* PXToolProperties.xib */,
@@ -2213,6 +2219,7 @@
 				C9DDEE3B13D0EB4D000464F2 /* PXPreset.h in Headers */,
 				C9B1FA5A13D7328D00BB7CF7 /* PXManagePresetsController.h in Headers */,
 				D88FA9A113DD265000175A2F /* NSObject+AssociatedObjects.h in Headers */,
+				C953831813FC477100440AB5 /* PXSequenceExportViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2307,7 +2314,7 @@
 				610F37DE0899A5DE00567E90 /* PixenHelp in Resources */,
 				EA4A6C3F08A98133007BAC7F /* PXAnimationDocument.nib in Resources */,
 				61A956BC08AD76CF009BB89F /* OSProgressPopup.nib in Resources */,
-				61FED6C408BCC646005E51EA /* PXSequenceExportPrompter.xib in Resources */,
+				61FED6C408BCC646005E51EA /* PXSequenceExportView.xib in Resources */,
 				EA31FCA10CE7D7C200EC481B /* COPYING in Resources */,
 				EAC917480CE7DC7300E519E1 /* actiongear.png in Resources */,
 				EAC917490CE7DC7300E519E1 /* arrow.tiff in Resources */,
@@ -2600,6 +2607,7 @@
 				C9DDEE3C13D0EB4D000464F2 /* PXPreset.m in Sources */,
 				C9B1FA5B13D7328D00BB7CF7 /* PXManagePresetsController.m in Sources */,
 				D88FA9A213DD265000175A2F /* NSObject+AssociatedObjects.m in Sources */,
+				C953831913FC477100440AB5 /* PXSequenceExportViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2710,12 +2718,12 @@
 			name = PXToolPalette.nib;
 			sourceTree = "<group>";
 		};
-		61FED6C208BCC646005E51EA /* PXSequenceExportPrompter.xib */ = {
+		61FED6C208BCC646005E51EA /* PXSequenceExportView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				61FED6C308BCC646005E51EA /* English */,
 			);
-			name = PXSequenceExportPrompter.xib;
+			name = PXSequenceExportView.xib;
 			sourceTree = "<group>";
 		};
 		C90E7E2E13D5F81C00751F5B /* PXCanvasResizePrompt.xib */ = {

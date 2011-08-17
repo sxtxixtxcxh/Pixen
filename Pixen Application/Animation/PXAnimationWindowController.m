@@ -399,35 +399,36 @@
 - (void)exportSequencePrompterDidEnd:(PXSequenceExportPrompter *)prompter
 {
 	NSString *fileTemplate = [prompter fileTemplate];
-	NSRange range = [fileTemplate rangeOfString:@"%f"];
-	NSString *finalString = [fileTemplate substringToIndex:range.location];
-	finalString = [finalString stringByAppendingString:@"%d"];
-	finalString = [finalString stringByAppendingString:[fileTemplate substringFromIndex:range.location + 2]];
 	NSInteger i;
 	NSInteger numberOfCels = [animation countOfCels];
 	NSString *directoryPath = [[[prompter savePanel] URL] path];
-	NSError *error=nil;
-	if(![[NSFileManager defaultManager] createDirectoryAtPath:directoryPath 
-																withIntermediateDirectories:YES 
-																								 attributes:nil 
-																											error:&error]) {
-		if(error) {
+	NSError *error = nil;
+	
+	if (![[NSFileManager defaultManager] createDirectoryAtPath:directoryPath
+								   withIntermediateDirectories:YES
+													attributes:nil
+														 error:&error]) {
+		if (error)
 			[self presentError:error];
-		}
+		
 		return;
 	}
-	for (i = 0; i < numberOfCels; i++)
+	
+	for (i = 1; i <= numberOfCels; i++)
 	{
 		NSString *filePath = [[directoryPath copy] autorelease];
-		if ([filePath characterAtIndex:[filePath length] - 1] != '/')
-    {
+		
+		if (![filePath hasSuffix:@"/"])
 			filePath = [filePath stringByAppendingString:@"/"];
-    }
-		filePath = [filePath stringByAppendingString:[NSString stringWithFormat:finalString, i + 1]];
-    NSString *type = [prompter valueForKey:@"fileType"];
-    PXCanvas *cnv = [[animation objectInCelsAtIndex:i] canvas];
-    NSData *data = [PXCanvasDocument dataRepresentationOfType:type 
-                                                   withCanvas:cnv];
+		
+		NSString *finalTemplate = [fileTemplate stringByReplacingOccurrencesOfString:@"%f"
+																		  withString:[NSString stringWithFormat:@"%d", i]];
+		filePath = [filePath stringByAppendingString:finalTemplate];
+		
+		NSString *type = [prompter selectedUTI];
+		PXCanvas *cnv = [[animation objectInCelsAtIndex:i-1] canvas];
+		
+		NSData *data = [PXCanvasDocument dataRepresentationOfType:type withCanvas:cnv];
 		[data writeToFile:filePath atomically:YES];
 	}
 }
