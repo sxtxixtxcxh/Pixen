@@ -531,18 +531,13 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	// Determine the appropriate extensions for the open panel.
 	NSArray *longTypes = [PXCanvasDocument readableTypes];
-	NSMutableArray *types = [[[NSMutableArray alloc] initWithCapacity:[longTypes count]] autorelease];
-	for (NSString *currentType in longTypes)
-	{
-		[types addObjectsFromArray:[[NSDocumentController sharedDocumentController] fileExtensionsFromType:currentType]];
-	}
 	[openPanel setAllowsOtherFileTypes:NO];
 	[openPanel setCanChooseDirectories:NO];
 	
-	NSInteger returnCode = [openPanel runModalForTypes:types];
+	NSInteger returnCode = [openPanel runModalForTypes:longTypes];
 	if (returnCode == NSFileHandlingPanelCancelButton) { return; }
 	
-	PXAnimationDocument *animationDocument = (PXAnimationDocument *)[self makeUntitledDocumentOfType:PixenAnimationFileType error:NULL];
+	PXAnimationDocument *animationDocument = (PXAnimationDocument *)[self makeUntitledDocumentOfType:PixenAnimationFileType showSizePrompt:NO error:nil];
 	
 	[[animationDocument animation] removeCel:[[animationDocument animation] objectInCelsAtIndex:0]];
 	

@@ -94,11 +94,10 @@ BOOL isPowerOfTwo(int num)
 
 - (BOOL)prepareSavePanel:(NSSavePanel *)savePanel
 {
-	/*
 	NSString *lastType = [[NSUserDefaults standardUserDefaults] stringForKey:PXLastSavedFileType];
 	
 	if (!lastType)
-		return YES;
+		lastType = PixenImageFileType;
 	
 	NSView *accessoryView = [savePanel accessoryView];
 	NSPopUpButton *popUpButton = nil;
@@ -117,9 +116,10 @@ BOOL isPowerOfTwo(int num)
 	}
 	
 	if (popUpButton) {
-		[popUpButton selectItemWithTitle:lastType];
+		NSString *name = (NSString *) UTTypeCopyDescription((CFStringRef)lastType);
+		[popUpButton selectItemWithTitle:name];
+		[name release];
 	}
-	*/
 	
 	return YES;
 }
