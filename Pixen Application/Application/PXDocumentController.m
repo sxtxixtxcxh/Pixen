@@ -500,9 +500,11 @@ NSString *palettesSubdirName = @"Palettes";
 {
 	NSError *err = nil;
 	NSDocument *doc = [self makeUntitledDocumentOfType:PixenAnimationFileType error:&err];
-	if(err) 
+	if(!doc) 
 	{
-		[self presentError:err];
+		if (err)
+			[self presentError:err];
+		
 		return;
 	}
 	[self addDocument:doc];
