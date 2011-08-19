@@ -7,14 +7,14 @@
 
 #import "PXPattern.h"
 #import "PXPatternEditorView.h"
-#import "PXSavedPatternMatrix.h"
 #import "PathUtilities.h"
-#import "PXPatternCell.h"
+#import "SBCenteringClipView.h"
 
 @implementation PXPatternEditorController
 
-@synthesize toolName, delegate;
+@synthesize toolName, patternFileName, delegate;
 
+/*
 - (NSSize)properContentSize
 {
 	NSSize viewSize = [view resizeToFitPattern:pattern];
@@ -23,67 +23,58 @@
 	newSize.width = viewSize.width;
 	newSize.height = contentViewSize.height + (viewSize.width - contentViewSize.width);
 	return newSize;
-}
+}*/
 
 - (void)awakeFromNib
 {
-	[view setDelegate:self];
+	[editorView setDelegate:self];
 	
-	[[self window] setContentAspectRatio:[[self window] contentAspectRatio]];
-	[[self window] setContentSize:[self properContentSize]];
-	[[self window] setTitle:[NSLocalizedString(@"Pattern Editor: ", @"Pattern Editor:") stringByAppendingString:toolName]];
+	id clip = [[[SBCenteringClipView alloc] initWithFrame:[[scrollView contentView] frame]] autorelease];
+	[clip setBackgroundColor:[NSColor lightGrayColor]];
+	[clip setCopiesOnScroll:NO];
 	
-	matrix = [[PXSavedPatternMatrix alloc] initWithWidth:[scrollView contentSize].width patternFile:GetPixenPatternFile()];
-	[matrix setDoubleAction:@selector(load:)];
-	[matrix setTarget:self];
-	[scrollView setDocumentView:matrix];
+	[(NSScrollView *)scrollView setContentView:clip];
+	[scrollView setDocumentView:editorView];
+	
+	//[[self window] setTitle:[NSLocalizedString(@"Pattern Editor: ", @"Pattern Editor:") stringByAppendingString:toolName]];
 }
 
 - (void)setPattern:(PXPattern *)pat
 {
 	[self loadWindow];
 	
-	[pattern release];
-	pattern = [pat copy];
-	NSSize patternSize = [pattern size];
+	[_pattern release];
+	_pattern = [pat copy];
+	
+	NSSize patternSize = [_pattern size];
 	if(patternSize.width < 2) {
 		patternSize.width = 2;
 	}
 	if (patternSize.height < 2) {
 		patternSize.height = 2;
 	}
-	if (!NSEqualSizes([pattern size], patternSize)) {
-		[pattern setSize:patternSize];
+	if (!NSEqualSizes([_pattern size], patternSize)) {
+		[_pattern setSize:patternSize];
 	}
-	if (view) {
-		[view setPattern:pattern];
+	if (editorView) {
+		[editorView setFrame:NSMakeRect(0, 0, patternSize.width * 32, patternSize.height * 32)];
+		[editorView setPattern:_pattern];
 	}
-	[[self window] setContentSize:[self properContentSize]];
 }
 
-- (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)proposedFrameSize
+- (IBAction)displayHelp:(id)sender
 {
-	NSSize viewSize = [view resizeToFitWidth:proposedFrameSize.width];
-	NSSize newSize;
-	newSize.width = viewSize.width;
-	newSize.height = NSHeight([sender frame]) + (viewSize.width - NSWidth([sender frame]));
-	return newSize;
+	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"patterns" inBook:@"Pixen Help"];
 }
 
-- (IBAction)displayHelp:sender
+- (IBAction)newPattern:(id)sender
 {
-	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"patterns" inBook:@"Pixen Help"];	
+	[self addPattern:[[_pattern copy] autorelease]];
+	
+	// [delegate patternEditor:self finishedWithPattern:newPattern];
 }
 
-- (IBAction)newPattern:sender
-{
-	PXPattern *newPattern = [[[PXPattern alloc] init] autorelease];
-	[newPattern setSize:NSMakeSize(2, 2)];
-	[newPattern togglePoint:NSMakePoint(0, 0)];
-	[self setPattern:newPattern];
-	[delegate patternEditor:self finishedWithPattern:pattern];
-}
-
+/*
 - (IBAction)save:sender
 {
 	[matrix addPattern:pattern];
@@ -103,6 +94,7 @@
 		[matrix removeSelectedPattern];
 	}
 }
+ */
 
 - (IBAction)deleteSelected:sender
 {
@@ -120,20 +112,139 @@
 
 - (id)init
 {
-	return [super initWithWindowNibName:@"PXPatternEditor"];
+	self = [super initWithWindowNibName:@"PXPatternEditor"];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(patternsChanged:)
+												 name:PXPatternsChangedNotificationName
+											   object:nil];
+	[self setPatternFileName:GetPixenPatternFile()];
+	return self;
+}
+
+- (void)windowDidLoad
+{
+	[self reloadPatterns];
 }
 
 - (void)patternView:(PXPatternEditorView *)pv changedPattern:(PXPattern *)pat
 {
-	if (pat != pattern) {
+	if (pat != _pattern) {
 		[self setPattern:pat];
 	}
 	[delegate patternEditor:self finishedWithPattern:pat];
 }
 
-- (PXPattern *)selectedPattern
+- (void)reloadPatterns
 {
-	return [matrix selectedPattern];
+	BOOL isDirectory;
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	
+	if (![fileManager fileExistsAtPath:patternFileName isDirectory:&isDirectory] || isDirectory) {
+		return;
+	}
+	
+	[patternsController removeObjects:[patternsController arrangedObjects]];
+	
+	NSArray *p = [NSKeyedUnarchiver unarchiveObjectWithFile:patternFileName];
+	
+	if (p)
+		[patternsController addObjects:p];
 }
+
+/*
+ - (void)keyDown:(NSEvent *)event
+ {
+ if ([[event characters] isEqualToString: @"\177"] || ([[event characters] characterAtIndex:0] == NSDeleteFunctionKey))
+ {
+ [self removePattern:[self selectedPattern]];
+ }
+ }
+ */
+
+- (void)patternsChanged:(NSNotification *)notification
+{
+	
+}
+
+- (void)addPattern:(PXPattern *)pattern
+{
+	[patternsController addObject:pattern];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXPatternsChangedNotificationName
+														object:self
+													  userInfo:nil];
+	
+	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects] toFile:patternFileName];
+}
+
+- (void)removePattern:(PXPattern *)pattern
+{
+	[patternsController removeObject:pattern];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXPatternsChangedNotificationName
+														object:self
+													  userInfo:nil];
+	
+	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects] toFile:patternFileName];
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[patternFileName release];
+	[super dealloc];
+}
+
+//- (unsigned int)draggingSourceOperationMaskForLocal:(BOOL)isLocal
+//{
+//	return NSDragOperationCopy;
+//}
+
+/*
+ 
+ - (BOOL)continueTracking:(NSPoint)lastPoint at:(NSPoint)currentPoint inView:(NSView *)controlView
+ {
+ if (NSEqualPoints(dragOrigin, NSZeroPoint))
+ dragOrigin = currentPoint;
+ 
+ float xOffset = currentPoint.x - dragOrigin.x, yOffset = currentPoint.y - dragOrigin.y;
+ float distance = sqrt(xOffset*xOffset + yOffset*yOffset);
+ 
+ if (distance <= 5)
+ return YES;
+ 
+ NSImage *image = [[NSImage alloc] initWithSize:lastFrame.size];
+ [image lockFocus];
+ NSRect bounds = lastFrame;
+ bounds.origin = NSZeroPoint;
+ [self drawWithCellBounds:bounds flipText:NO];
+ [image unlockFocus];
+ NSImage *translucentImage = [[NSImage alloc] initWithSize:lastFrame.size];
+ [translucentImage lockFocus];
+ [image compositeToPoint:NSZeroPoint operation:NSCompositeCopy fraction:.66];
+ [image release];
+ 
+ [translucentImage unlockFocus];
+ 
+ NSPasteboard *pasteboard = [NSPasteboard pasteboardWithName:NSDragPboard];
+ [pasteboard declareTypes:[NSArray arrayWithObjects:PXPatternPboardType,
+ NSFilenamesPboardType,
+ nil] owner:nil];
+ [pasteboard setData:[NSKeyedArchiver archivedDataWithRootObject:pattern] forType:PXPatternPboardType];
+ 
+ NSString *tempFile = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"Pattern"] stringByAppendingPathExtension:PXPatternSuffix];
+ [NSKeyedArchiver archiveRootObject:pattern toFile:tempFile];
+ [pasteboard setPropertyList:[NSArray arrayWithObject:tempFile] forType:NSFilenamesPboardType];
+ 
+ NSPoint origin = lastFrame.origin;
+ origin.y += NSHeight(lastFrame);
+ [controlView dragImage:translucentImage at:origin offset:NSMakeSize(xOffset, yOffset) event:dragEvent pasteboard:pasteboard source:delegate slideBack:NO];
+ [translucentImage release];
+ 
+ dragOrigin = NSZeroPoint;
+ [self setState:NSOnState];
+ return YES;
+ }
+ */
 
 @end

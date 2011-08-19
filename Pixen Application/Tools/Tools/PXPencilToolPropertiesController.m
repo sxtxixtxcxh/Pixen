@@ -52,7 +52,6 @@
 		
 		[lineThicknessField setEnabled:NO];
 		[clearButton setEnabled:YES];
-		[modifyButton setTitle:NSLocalizedString(@"MODIFY_PATTERN", @"Modify Pattern...")];
 		
 		if ([pattern size].width < 2 && [pattern size].height < 2) {
 			[self clearPattern:self];
@@ -84,18 +83,14 @@
 
 - (IBAction)clearPattern:(id)sender
 {
-	if (!drawingPattern)
-		return;
-	
 	[drawingPattern release];
 	drawingPattern = nil;
 	
 	[lineThicknessField setEnabled:YES];
 	[clearButton setEnabled:NO];
-	[modifyButton setTitle:NSLocalizedString(@"SET_PATTERN", @"Set Pattern...")];
 }
 
-- (IBAction)modifyPattern:(id)sender
+- (IBAction)showPatterns:(id)sender
 {
 	if (drawingPattern == nil) {
 		drawingPattern = [[PXPattern alloc] init];

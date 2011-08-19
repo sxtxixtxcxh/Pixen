@@ -75,19 +75,25 @@
 - (void)mouseDown:(NSEvent *)theEvent
 {
 	NSView *view = [self documentView];
-	[view mouseDown:theEvent];
+	
+	if ([view isKindOfClass:NSClassFromString(@"PXCanvasView")])
+		[view mouseDown:theEvent];
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
 	NSView *view = [self documentView];
-	[view mouseDragged:theEvent];
+	
+	if ([view isKindOfClass:NSClassFromString(@"PXCanvasView")])
+		[view mouseDragged:theEvent];
 }
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
 	NSView *view = [self documentView];
-	[view mouseUp:theEvent];
+	
+	if ([view isKindOfClass:NSClassFromString(@"PXCanvasView")])
+		[view mouseUp:theEvent];
 }
 
 - (void)setFrame:(NSRect)frameRect

@@ -36,7 +36,7 @@
 {
   @private
 	IBOutlet NSTextField *lineThicknessField;
-	IBOutlet NSButton *modifyButton;
+	IBOutlet NSButton *patternButton;
 	IBOutlet NSButton *clearButton;
 	
 	PXPattern *drawingPattern;
@@ -53,7 +53,7 @@
 - (NSSize)patternSize;
 - (NSArray *)drawingPoints;
 
-- (IBAction)modifyPattern:(id)sender;
+- (IBAction)showPatterns:(id)sender;
 - (IBAction)clearPattern:(id)sender;
 
 @end

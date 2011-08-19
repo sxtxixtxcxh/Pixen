@@ -5,20 +5,22 @@
 
 #import <AppKit/AppKit.h>
 
-@class PXPattern, PXPatternEditorView, PXSavedPatternMatrix;
+@class PXPattern, PXPatternEditorView;
 
 @interface PXPatternEditorController : NSWindowController {
   @private
-	PXPattern *pattern;
+	PXPattern *_pattern;
 	PXPattern *oldPattern;
 	NSString *toolName;
-	IBOutlet PXPatternEditorView *view;
+	NSString *patternFileName;
+	IBOutlet NSArrayController *patternsController;
 	IBOutlet NSScrollView *scrollView;
-	PXSavedPatternMatrix *matrix;
+	IBOutlet PXPatternEditorView *editorView;
 	id delegate;
 }
 
 @property (nonatomic, copy) NSString *toolName;
+@property (nonatomic, copy) NSString *patternFileName;
 
 @property (nonatomic, assign) id delegate;
 

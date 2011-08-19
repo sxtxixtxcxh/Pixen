@@ -7,15 +7,17 @@
 
 @interface PXPattern : NSObject <NSCopying, NSCoding> {
   @private
-	NSMutableSet *points;
-	NSMutableArray *pointsInBounds;
-	NSSize size;
+	NSMutableSet *_points;
+	NSMutableArray *_pointsInBounds;
+	NSSize _size;
 }
 
-- (NSSize)size;
-- (NSArray *)pointsInPattern;
+@property (nonatomic, assign) NSSize size;
 
-- (void)setSize:(NSSize)newSize;
+- (NSString *)sizeString;
+- (NSImage *)image;
+
+- (NSArray *)pointsInPattern;
 - (void)setPoints:(NSMutableSet *)newPoints;
 
 - (BOOL)hasPixelAtPoint:(NSPoint)point;

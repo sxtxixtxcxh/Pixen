@@ -10,8 +10,6 @@
 @interface PXPatternEditorView : NSView {
   @private
 	PXPattern *pattern;
-	NSAffineTransform *transform;
-	
 	PXGrid *grid;
 	
 	NSPoint initialPoint;
