@@ -12,8 +12,6 @@
 	PXPattern *pattern;
 	PXGrid *grid;
 	
-	NSPoint initialPoint;
-	
 	id delegate;
 	
 	BOOL erasing;
@@ -23,12 +21,11 @@
 
 - (void)setPattern:(PXPattern *)newPattern;
 
-- (NSSize)resizeToFitWidth:(float)frameSize;
-- (NSSize)resizeToFitPattern:(PXPattern *)fitPattern;
-
 @end
 
 
 @interface NSObject(PXPatternEditorViewDelegate)
-- (void)patternView:(PXPatternEditorView *)pv changedPattern:(PXPattern *)pat;
+
+- (void)patternView:(PXPatternEditorView *)pv changedPattern:(PXPattern *)pattern;
+
 @end
