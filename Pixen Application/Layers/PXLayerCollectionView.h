@@ -6,9 +6,9 @@
 //  Copyright 2005 Pixen. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "PXDeleteCollectionView.h"
 
-@interface PXLayerCollectionView : NSCollectionView {
+@interface PXLayerCollectionView : PXDeleteCollectionView {
 }
 
 @end

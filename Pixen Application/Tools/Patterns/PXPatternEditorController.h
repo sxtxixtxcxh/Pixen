@@ -7,12 +7,10 @@
 
 @class PXPattern, PXPatternEditorView;
 
-@interface PXPatternEditorController : NSWindowController {
+@interface PXPatternEditorController : NSWindowController < NSCollectionViewDelegate > {
   @private
 	PXPattern *_pattern;
-	PXPattern *oldPattern;
-	NSString *toolName;
-	NSString *patternFileName;
+	NSString *toolName, *patternFileName;
 	IBOutlet NSArrayController *patternsController;
 	IBOutlet NSScrollView *scrollView;
 	IBOutlet PXPatternEditorView *editorView;
@@ -26,13 +24,18 @@
 
 - (void)setPattern:(PXPattern *)pattern;
 
-- (IBAction)save:sender;
-- (IBAction)load:sender;
-- (IBAction)deleteSelected:sender;
-- (IBAction)newPattern:sender;
+- (IBAction)newPattern:(id)sender;
+
+- (void)reloadPatterns;
+
+- (void)addPattern:(PXPattern *)pattern;
+- (void)removePattern:(PXPattern *)pattern;
 
 @end
 
+
 @interface NSObject(PXPatternEditorControllerDelegate)
-- (void)patternEditor:(PXPatternEditorController *)ed finishedWithPattern:(PXPattern *)pat;
+
+- (void)patternEditor:(PXPatternEditorController *)ed finishedWithPattern:(PXPattern *)pattern;
+
 @end

@@ -5,133 +5,105 @@
 
 #import "PXPatternEditorController.h"
 
+#import "PathUtilities.h"
+#import "PXDeleteCollectionView.h"
 #import "PXPattern.h"
 #import "PXPatternEditorView.h"
-#import "PathUtilities.h"
 #import "SBCenteringClipView.h"
 
 @implementation PXPatternEditorController
 
 @synthesize toolName, patternFileName, delegate;
 
-/*
-- (NSSize)properContentSize
-{
-	NSSize viewSize = [view resizeToFitPattern:pattern];
-	NSSize contentViewSize = [ (NSView *) [[self window] contentView] frame].size;
-	NSSize newSize;
-	newSize.width = viewSize.width;
-	newSize.height = contentViewSize.height + (viewSize.width - contentViewSize.width);
-	return newSize;
-}*/
-
 - (void)awakeFromNib
 {
 	[editorView setDelegate:self];
 	
-	id clip = [[[SBCenteringClipView alloc] initWithFrame:[[scrollView contentView] frame]] autorelease];
+	SBCenteringClipView *clip = [[SBCenteringClipView alloc] initWithFrame:[[scrollView contentView] frame]];
 	[clip setBackgroundColor:[NSColor lightGrayColor]];
 	[clip setCopiesOnScroll:NO];
 	
 	[(NSScrollView *)scrollView setContentView:clip];
+	[clip release];
+	
 	[scrollView setDocumentView:editorView];
 	
-	//[[self window] setTitle:[NSLocalizedString(@"Pattern Editor: ", @"Pattern Editor:") stringByAppendingString:toolName]];
+	[[self window] setTitle:[NSLocalizedString(@"Pattern Editor: ", @"Pattern Editor:") stringByAppendingString:toolName]];
+	
+	[self reloadPatterns];
 }
 
-- (void)setPattern:(PXPattern *)pat
+- (void)setPattern:(PXPattern *)pattern
 {
 	[self loadWindow];
 	
 	[_pattern release];
-	_pattern = [pat copy];
+	_pattern = [pattern copy];
 	
 	NSSize patternSize = [_pattern size];
-	if(patternSize.width < 2) {
+	
+	if (patternSize.width < 2)
 		patternSize.width = 2;
-	}
-	if (patternSize.height < 2) {
+	
+	if (patternSize.height < 2)
 		patternSize.height = 2;
-	}
-	if (!NSEqualSizes([_pattern size], patternSize)) {
+	
+	if (!NSEqualSizes([_pattern size], patternSize))
 		[_pattern setSize:patternSize];
-	}
+	
 	if (editorView) {
-		[editorView setFrame:NSMakeRect(0, 0, patternSize.width * 32, patternSize.height * 32)];
+		[editorView setFrame:NSMakeRect(0.0f, 0.0f, patternSize.width * 32.0f, patternSize.height * 32.0f)];
 		[editorView setPattern:_pattern];
 	}
 }
 
-- (IBAction)displayHelp:(id)sender
-{
-	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"patterns" inBook:@"Pixen Help"];
-}
-
 - (IBAction)newPattern:(id)sender
 {
-	[self addPattern:[[_pattern copy] autorelease]];
+	PXPattern *pattern = [[_pattern copy] autorelease];
+	[self addPattern:pattern];
 	
-	// [delegate patternEditor:self finishedWithPattern:newPattern];
+	if ([delegate respondsToSelector:@selector(patternEditor:finishedWithPattern:)])
+		[delegate patternEditor:self finishedWithPattern:pattern];
 }
 
 /*
-- (IBAction)save:sender
-{
-	[matrix addPattern:pattern];
-}
-
 - (IBAction)load:sender
 {
 	[self setPattern:[matrix selectedPattern]];
 	[delegate patternEditor:self finishedWithPattern:pattern];
 }
-
+ */
 
 - (void)deleteSheetDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:contextInfo
 {
 	if (returnCode == NSAlertFirstButtonReturn)
 	{
-		[matrix removeSelectedPattern];
+		PXPattern *selectedPattern = [[patternsController selectedObjects] objectAtIndex:0];
+		[self removePattern:selectedPattern];
 	}
-}
- */
-
-- (IBAction)deleteSelected:sender
-{
-	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-	[[alert addButtonWithTitle:NSLocalizedString(@"Delete", @"DELETE")] setKeyEquivalent:@""];
-	NSButton *button = [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"CANCEL")];
-	[button setKeyEquivalent:@"\r"];
-	[alert setMessageText:NSLocalizedString(@"Really delete pattern?", @"PATTERN_DELETE_PROMPT")];
-	[alert setInformativeText:NSLocalizedString(@"This operation cannot be undone.", @"PATTERN_DELETE_INFORMATIVE_TEXT")];
-	[alert beginSheetModalForWindow:[self window]
-					  modalDelegate:self
-					 didEndSelector:@selector(deleteSheetDidEnd:returnCode:contextInfo:)
-						contextInfo:nil];
 }
 
 - (id)init
 {
 	self = [super initWithWindowNibName:@"PXPatternEditor"];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(patternsChanged:)
-												 name:PXPatternsChangedNotificationName
-											   object:nil];
-	[self setPatternFileName:GetPixenPatternFile()];
+	if (self) {
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(patternsChanged:)
+													 name:PXPatternsChangedNotificationName
+												   object:nil];
+		
+		[self setPatternFileName:GetPixenPatternFile()];
+	}
 	return self;
 }
 
-- (void)windowDidLoad
+- (void)patternView:(PXPatternEditorView *)pv changedPattern:(PXPattern *)pattern
 {
-	[self reloadPatterns];
-}
-
-- (void)patternView:(PXPatternEditorView *)pv changedPattern:(PXPattern *)pat
-{
-	if (pat != _pattern) {
-		[self setPattern:pat];
-	}
-	[delegate patternEditor:self finishedWithPattern:pat];
+	if (pattern != _pattern)
+		[self setPattern:pattern];
+	
+	if ([delegate respondsToSelector:@selector(patternEditor:finishedWithPattern:)])
+		[delegate patternEditor:self finishedWithPattern:pattern];
 }
 
 - (void)reloadPatterns
@@ -139,9 +111,8 @@
 	BOOL isDirectory;
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	
-	if (![fileManager fileExistsAtPath:patternFileName isDirectory:&isDirectory] || isDirectory) {
+	if (![fileManager fileExistsAtPath:patternFileName isDirectory:&isDirectory] || isDirectory)
 		return;
-	}
 	
 	[patternsController removeObjects:[patternsController arrangedObjects]];
 	
@@ -151,15 +122,25 @@
 		[patternsController addObjects:p];
 }
 
-/*
- - (void)keyDown:(NSEvent *)event
- {
- if ([[event characters] isEqualToString: @"\177"] || ([[event characters] characterAtIndex:0] == NSDeleteFunctionKey))
- {
- [self removePattern:[self selectedPattern]];
- }
- }
- */
+- (void)deleteKeyPressedInCollectionView:(NSCollectionView *)view
+{
+	if ([patternsController selectionIndex] == NSNotFound)
+		return;
+	
+	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	[alert addButtonWithTitle:NSLocalizedString(@"Delete", @"DELETE")];
+	
+	NSButton *button = [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"CANCEL")];
+	[button setKeyEquivalent:@"\r"];
+	
+	[alert setMessageText:NSLocalizedString(@"Really delete the selected pattern?", @"PATTERN_DELETE_PROMPT")];
+	[alert setInformativeText:NSLocalizedString(@"This operation cannot be undone.", @"PATTERN_DELETE_INFORMATIVE_TEXT")];
+	
+	[alert beginSheetModalForWindow:[self window]
+					  modalDelegate:self
+					 didEndSelector:@selector(deleteSheetDidEnd:returnCode:contextInfo:)
+						contextInfo:nil];
+}
 
 - (void)patternsChanged:(NSNotification *)notification
 {
@@ -174,7 +155,8 @@
 														object:self
 													  userInfo:nil];
 	
-	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects] toFile:patternFileName];
+	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects]
+								toFile:patternFileName];
 }
 
 - (void)removePattern:(PXPattern *)pattern
@@ -185,7 +167,8 @@
 														object:self
 													  userInfo:nil];
 	
-	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects] toFile:patternFileName];
+	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects]
+								toFile:patternFileName];
 }
 
 - (void)dealloc
@@ -195,56 +178,15 @@
 	[super dealloc];
 }
 
-//- (unsigned int)draggingSourceOperationMaskForLocal:(BOOL)isLocal
-//{
-//	return NSDragOperationCopy;
-//}
-
-/*
- 
- - (BOOL)continueTracking:(NSPoint)lastPoint at:(NSPoint)currentPoint inView:(NSView *)controlView
- {
- if (NSEqualPoints(dragOrigin, NSZeroPoint))
- dragOrigin = currentPoint;
- 
- float xOffset = currentPoint.x - dragOrigin.x, yOffset = currentPoint.y - dragOrigin.y;
- float distance = sqrt(xOffset*xOffset + yOffset*yOffset);
- 
- if (distance <= 5)
- return YES;
- 
- NSImage *image = [[NSImage alloc] initWithSize:lastFrame.size];
- [image lockFocus];
- NSRect bounds = lastFrame;
- bounds.origin = NSZeroPoint;
- [self drawWithCellBounds:bounds flipText:NO];
- [image unlockFocus];
- NSImage *translucentImage = [[NSImage alloc] initWithSize:lastFrame.size];
- [translucentImage lockFocus];
- [image compositeToPoint:NSZeroPoint operation:NSCompositeCopy fraction:.66];
- [image release];
- 
- [translucentImage unlockFocus];
- 
- NSPasteboard *pasteboard = [NSPasteboard pasteboardWithName:NSDragPboard];
- [pasteboard declareTypes:[NSArray arrayWithObjects:PXPatternPboardType,
- NSFilenamesPboardType,
- nil] owner:nil];
- [pasteboard setData:[NSKeyedArchiver archivedDataWithRootObject:pattern] forType:PXPatternPboardType];
- 
- NSString *tempFile = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"Pattern"] stringByAppendingPathExtension:PXPatternSuffix];
- [NSKeyedArchiver archiveRootObject:pattern toFile:tempFile];
- [pasteboard setPropertyList:[NSArray arrayWithObject:tempFile] forType:NSFilenamesPboardType];
- 
- NSPoint origin = lastFrame.origin;
- origin.y += NSHeight(lastFrame);
- [controlView dragImage:translucentImage at:origin offset:NSMakeSize(xOffset, yOffset) event:dragEvent pasteboard:pasteboard source:delegate slideBack:NO];
- [translucentImage release];
- 
- dragOrigin = NSZeroPoint;
- [self setState:NSOnState];
- return YES;
- }
- */
+- (BOOL)collectionView:(NSCollectionView *)collectionView writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pasteboard
+{
+	NSUInteger index = [indexes firstIndex];
+	PXPattern *pattern = [[patternsController arrangedObjects] objectAtIndex:index];
+	
+	[pasteboard declareTypes:[NSArray arrayWithObject:PXPatternPboardType] owner:self];
+	[pasteboard setData:[NSKeyedArchiver archivedDataWithRootObject:pattern] forType:PXPatternPboardType];
+	
+	return YES;
+}
 
 @end

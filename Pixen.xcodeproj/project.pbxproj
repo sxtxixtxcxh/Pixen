@@ -41,6 +41,8 @@
 		C94A9EDE13B11BEA0034AFE3 /* PXSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = C94A9EDC13B11BEA0034AFE3 /* PXSplitView.m */; };
 		C953831813FC477100440AB5 /* PXSequenceExportViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C953831613FC477100440AB5 /* PXSequenceExportViewController.h */; };
 		C953831913FC477100440AB5 /* PXSequenceExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C953831713FC477100440AB5 /* PXSequenceExportViewController.m */; };
+		C96541EB13FF44A600F1F83C /* PXDeleteCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = C96541E913FF44A600F1F83C /* PXDeleteCollectionView.h */; };
+		C96541EC13FF44A600F1F83C /* PXDeleteCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C96541EA13FF44A600F1F83C /* PXDeleteCollectionView.m */; };
 		C969A18E13D2012A00F1C1FE /* QLPlugin.qlgenerator in CopyFiles */ = {isa = PBXBuildFile; fileRef = C969A18A13D200B400F1C1FE /* QLPlugin.qlgenerator */; };
 		C96BABB513ABD3AB00015C92 /* PXHotkeysPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */; };
 		C96BABBB13ABD44A00015C92 /* PXHotkeysPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */; };
@@ -568,6 +570,8 @@
 		C94A9EDC13B11BEA0034AFE3 /* PXSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSplitView.m; sourceTree = "<group>"; };
 		C953831613FC477100440AB5 /* PXSequenceExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSequenceExportViewController.h; sourceTree = "<group>"; };
 		C953831713FC477100440AB5 /* PXSequenceExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSequenceExportViewController.m; sourceTree = "<group>"; };
+		C96541E913FF44A600F1F83C /* PXDeleteCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXDeleteCollectionView.h; sourceTree = "<group>"; };
+		C96541EA13FF44A600F1F83C /* PXDeleteCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXDeleteCollectionView.m; sourceTree = "<group>"; };
 		C969A18513D200B300F1C1FE /* QLPlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QLPlugin.xcodeproj; path = QLPlugin/QLPlugin.xcodeproj; sourceTree = "<group>"; };
 		C96BABB413ABD3AB00015C92 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXHotkeysPreferences.xib; sourceTree = "<group>"; };
 		C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXHotkeysPreferencesController.h; sourceTree = "<group>"; };
@@ -1407,6 +1411,8 @@
 		EA31FA380CE7D1A700EC481B /* Patterns */ = {
 			isa = PBXGroup;
 			children = (
+				C96541E913FF44A600F1F83C /* PXDeleteCollectionView.h */,
+				C96541EA13FF44A600F1F83C /* PXDeleteCollectionView.m */,
 				EA31FA390CE7D1A700EC481B /* PXPattern.h */,
 				EA31FA3A0CE7D1A700EC481B /* PXPattern.m */,
 				EA31FA3D0CE7D1A700EC481B /* PXPatternEditorController.h */,
@@ -2206,6 +2212,7 @@
 				C9B1FA5A13D7328D00BB7CF7 /* PXManagePresetsController.h in Headers */,
 				D88FA9A113DD265000175A2F /* NSObject+AssociatedObjects.h in Headers */,
 				C953831813FC477100440AB5 /* PXSequenceExportViewController.h in Headers */,
+				C96541EB13FF44A600F1F83C /* PXDeleteCollectionView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2592,6 +2599,7 @@
 				C9B1FA5B13D7328D00BB7CF7 /* PXManagePresetsController.m in Sources */,
 				D88FA9A213DD265000175A2F /* NSObject+AssociatedObjects.m in Sources */,
 				C953831913FC477100440AB5 /* PXSequenceExportViewController.m in Sources */,
+				C96541EC13FF44A600F1F83C /* PXDeleteCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

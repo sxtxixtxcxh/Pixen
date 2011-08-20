@@ -13,13 +13,6 @@
 
 @implementation PXLayerCollectionView
 
-- (void)keyDown:(NSEvent*)theEvent { 
-	if ([[theEvent characters] isEqualToString: @"\177"]) {
-		[(PXLayerController *)[self delegate] deleteKeyPressedInCollectionView:self];
-	}
-	[super keyDown:theEvent];
-}
-
 - (BOOL)acceptsFirstResponder
 {
 	return NO;
