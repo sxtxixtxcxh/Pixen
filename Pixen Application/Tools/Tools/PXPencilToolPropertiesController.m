@@ -52,10 +52,6 @@
 		
 		[lineThicknessField setEnabled:NO];
 		[clearButton setEnabled:YES];
-		
-		if ([pattern size].width < 2 && [pattern size].height < 2) {
-			[self clearPattern:self];
-		}
 	}
 }
 
@@ -93,15 +89,18 @@
 - (IBAction)showPatterns:(id)sender
 {
 	if (drawingPattern == nil) {
-		drawingPattern = [[PXPattern alloc] init];
-		[drawingPattern setSize:NSMakeSize([self lineThickness], [self lineThickness])];
+		PXPattern *pattern = [[PXPattern alloc] init];
+		[pattern setSize:NSMakeSize([self lineThickness], [self lineThickness])];
 		
 		int x, y;
 		for (x=0; x<[self lineThickness]; x++) {
 			for (y=0; y<[self lineThickness]; y++) {
-				[drawingPattern addPoint:NSMakePoint(x, y)];
+				[pattern addPoint:NSMakePoint(x, y)];
 			}
 		}
+		
+		[self setPattern:pattern];
+		[pattern release];
 	}
 	
 	if (!patternEditor) {
