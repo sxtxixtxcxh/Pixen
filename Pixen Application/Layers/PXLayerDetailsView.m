@@ -215,20 +215,16 @@
 	return YES;
 }
 
+- (void)updatePreviewReal
+{
+	[thumbnail setImage:[layer displayImage]];
+	[thumbnail setNeedsDisplay:YES];
+}
+
 - (void)updatePreview:(NSNotification* )notification
 {
-	NSRect rect= [[[notification userInfo] objectForKey:PXChangedRectKey] rectValue];
-	[thumbnail setImage:[layer displayImage]];
-	if(![[notification userInfo] objectForKey:PXChangedRectKey])
-	{
-		[thumbnail setNeedsDisplay:YES];
-	}
-	else
-	{
-		NSRect functionalRect = [thumbnail functionalRect];
-		float scalingFactor = NSWidth(functionalRect) / [layer size].width;
-		[thumbnail setNeedsDisplayInRect:NSMakeRect(NSMinX(rect) * scalingFactor + NSMinX(functionalRect), NSMinY(rect) * scalingFactor + NSMinY(functionalRect), NSWidth(rect) * scalingFactor, NSHeight(rect) * scalingFactor)];
-	}	
+	[[self class] cancelPreviousPerformRequestsWithTarget:self];
+	[self performSelector:@selector(updatePreviewReal) withObject:nil afterDelay:0.05f];
 }
 
 - (IBAction)visibilityDidChange:(id) sender
