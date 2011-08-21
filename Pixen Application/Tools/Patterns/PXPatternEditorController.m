@@ -9,6 +9,7 @@
 #import "PXDeleteCollectionView.h"
 #import "PXPattern.h"
 #import "PXPatternEditorView.h"
+#import "PXPatternItem.h"
 #import "SBCenteringClipView.h"
 
 @implementation PXPatternEditorController
@@ -18,6 +19,7 @@
 - (void)awakeFromNib
 {
 	[editorView setDelegate:self];
+	[[promptField cell] setBackgroundStyle:NSBackgroundStyleRaised];
 	
 	SBCenteringClipView *clip = [[SBCenteringClipView alloc] initWithFrame:[[scrollView contentView] frame]];
 	[clip setBackgroundColor:[NSColor lightGrayColor]];
@@ -35,6 +37,9 @@
 
 - (void)setPattern:(PXPattern *)pattern
 {
+	if (pattern == _pattern)
+		return;
+	
 	[self loadWindow];
 	
 	[_pattern release];
@@ -66,14 +71,6 @@
 		[delegate patternEditor:self finishedWithPattern:pattern];
 }
 
-/*
-- (IBAction)load:sender
-{
-	[self setPattern:[matrix selectedPattern]];
-	[delegate patternEditor:self finishedWithPattern:pattern];
-}
- */
-
 - (void)deleteSheetDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:contextInfo
 {
 	if (returnCode == NSAlertFirstButtonReturn)
@@ -99,8 +96,7 @@
 
 - (void)patternView:(PXPatternEditorView *)pv changedPattern:(PXPattern *)pattern
 {
-	if (pattern != _pattern)
-		[self setPattern:pattern];
+	[self setPattern:pattern];
 	
 	if ([delegate respondsToSelector:@selector(patternEditor:finishedWithPattern:)])
 		[delegate patternEditor:self finishedWithPattern:pattern];
@@ -145,6 +141,15 @@
 - (void)patternsChanged:(NSNotification *)notification
 {
 	
+}
+
+- (void)patternItemWasDoubleClicked:(PXPatternItem *)item
+{
+	PXPattern *pattern = [item representedObject];
+	[self setPattern:pattern];
+	
+	if ([delegate respondsToSelector:@selector(patternEditor:finishedWithPattern:)])
+		[delegate patternEditor:self finishedWithPattern:pattern];
 }
 
 - (void)addPattern:(PXPattern *)pattern

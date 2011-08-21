@@ -14,6 +14,7 @@
 	IBOutlet NSArrayController *patternsController;
 	IBOutlet NSScrollView *scrollView;
 	IBOutlet PXPatternEditorView *editorView;
+	IBOutlet NSTextField *promptField;
 	id delegate;
 }
 

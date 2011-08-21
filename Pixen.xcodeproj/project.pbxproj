@@ -57,6 +57,11 @@
 		C9A6BE1713ACFBC50028B141 /* PXToolProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1513ACFBC50028B141 /* PXToolProperties.xib */; };
 		C9A6BE1A13AD008C0028B141 /* PXBlankPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1813AD008C0028B141 /* PXBlankPropertiesView.xib */; };
 		C9A6BE1D13AD07B10028B141 /* PXFillToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1B13AD07B10028B141 /* PXFillToolPropertiesView.xib */; };
+		C9ADD4A214007FE500257E38 /* PXClickableView.h in Headers */ = {isa = PBXBuildFile; fileRef = C9ADD4A014007FE500257E38 /* PXClickableView.h */; };
+		C9ADD4A314007FE500257E38 /* PXClickableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9ADD4A114007FE500257E38 /* PXClickableView.m */; };
+		C9ADD4A61400821300257E38 /* PXPatternItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C9ADD4A41400821300257E38 /* PXPatternItem.h */; };
+		C9ADD4A71400821300257E38 /* PXPatternItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C9ADD4A51400821300257E38 /* PXPatternItem.m */; };
+		C9ADD4AA1400844B00257E38 /* PXPatternItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9ADD4A81400844B00257E38 /* PXPatternItem.xib */; };
 		C9B1FA5A13D7328D00BB7CF7 /* PXManagePresetsController.h in Headers */ = {isa = PBXBuildFile; fileRef = C9B1FA5813D7328D00BB7CF7 /* PXManagePresetsController.h */; };
 		C9B1FA5B13D7328D00BB7CF7 /* PXManagePresetsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FA5913D7328D00BB7CF7 /* PXManagePresetsController.m */; };
 		C9B1FA5E13D732FC00BB7CF7 /* PXManagePresetsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9B1FA5C13D732FC00BB7CF7 /* PXManagePresetsWindow.xib */; };
@@ -586,6 +591,11 @@
 		C9A6BE1613ACFBC50028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXToolProperties.xib; sourceTree = "<group>"; };
 		C9A6BE1913AD008C0028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXBlankPropertiesView.xib; sourceTree = "<group>"; };
 		C9A6BE1C13AD07B10028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXFillToolPropertiesView.xib; sourceTree = "<group>"; };
+		C9ADD4A014007FE500257E38 /* PXClickableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXClickableView.h; sourceTree = "<group>"; };
+		C9ADD4A114007FE500257E38 /* PXClickableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXClickableView.m; sourceTree = "<group>"; };
+		C9ADD4A41400821300257E38 /* PXPatternItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPatternItem.h; sourceTree = "<group>"; };
+		C9ADD4A51400821300257E38 /* PXPatternItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPatternItem.m; sourceTree = "<group>"; };
+		C9ADD4A91400844B00257E38 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPatternItem.xib; sourceTree = "<group>"; };
 		C9B1FA5813D7328D00BB7CF7 /* PXManagePresetsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXManagePresetsController.h; sourceTree = "<group>"; };
 		C9B1FA5913D7328D00BB7CF7 /* PXManagePresetsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXManagePresetsController.m; sourceTree = "<group>"; };
 		C9B1FA5D13D732FC00BB7CF7 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXManagePresetsWindow.xib; sourceTree = "<group>"; };
@@ -1411,6 +1421,8 @@
 		EA31FA380CE7D1A700EC481B /* Patterns */ = {
 			isa = PBXGroup;
 			children = (
+				C9ADD4A014007FE500257E38 /* PXClickableView.h */,
+				C9ADD4A114007FE500257E38 /* PXClickableView.m */,
 				C96541E913FF44A600F1F83C /* PXDeleteCollectionView.h */,
 				C96541EA13FF44A600F1F83C /* PXDeleteCollectionView.m */,
 				EA31FA390CE7D1A700EC481B /* PXPattern.h */,
@@ -1419,6 +1431,8 @@
 				EA31FA3E0CE7D1A700EC481B /* PXPatternEditorController.m */,
 				EA31FA3F0CE7D1A700EC481B /* PXPatternEditorView.h */,
 				EA31FA400CE7D1A700EC481B /* PXPatternEditorView.m */,
+				C9ADD4A41400821300257E38 /* PXPatternItem.h */,
+				C9ADD4A51400821300257E38 /* PXPatternItem.m */,
 			);
 			path = Patterns;
 			sourceTree = "<group>";
@@ -1842,6 +1856,7 @@
 				EA9E180B0557104F00119DF5 /* PXNamePrompt.xib */,
 				EAB650840D108D9000274070 /* PXPaletteController.xib */,
 				C9FD44DF13FD70FC00CEE4FC /* PXPatternEditor.xib */,
+				C9ADD4A81400844B00257E38 /* PXPatternItem.xib */,
 				C9799FB613AD6ED900E261EE /* PXPencilToolPropertiesView.xib */,
 				C93DB17D13ABC6BE006D42FE /* PXPreferences.xib */,
 				C984251013AFC142000072C5 /* PXPreview.xib */,
@@ -2213,6 +2228,8 @@
 				D88FA9A113DD265000175A2F /* NSObject+AssociatedObjects.h in Headers */,
 				C953831813FC477100440AB5 /* PXSequenceExportViewController.h in Headers */,
 				C96541EB13FF44A600F1F83C /* PXDeleteCollectionView.h in Headers */,
+				C9ADD4A214007FE500257E38 /* PXClickableView.h in Headers */,
+				C9ADD4A61400821300257E38 /* PXPatternItem.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2421,6 +2438,7 @@
 				C9A0858E13DE3EB600C27061 /* PXDiscoverPixen.xib in Resources */,
 				C9A0859313DE3F0100C27061 /* PixenIntro in Resources */,
 				C9FD44E113FD70FC00CEE4FC /* PXPatternEditor.xib in Resources */,
+				C9ADD4AA1400844B00257E38 /* PXPatternItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2600,6 +2618,8 @@
 				D88FA9A213DD265000175A2F /* NSObject+AssociatedObjects.m in Sources */,
 				C953831913FC477100440AB5 /* PXSequenceExportViewController.m in Sources */,
 				C96541EC13FF44A600F1F83C /* PXDeleteCollectionView.m in Sources */,
+				C9ADD4A314007FE500257E38 /* PXClickableView.m in Sources */,
+				C9ADD4A71400821300257E38 /* PXPatternItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2836,6 +2856,14 @@
 				C9A6BE1C13AD07B10028B141 /* English */,
 			);
 			name = PXFillToolPropertiesView.xib;
+			sourceTree = "<group>";
+		};
+		C9ADD4A81400844B00257E38 /* PXPatternItem.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9ADD4A91400844B00257E38 /* English */,
+			);
+			name = PXPatternItem.xib;
 			sourceTree = "<group>";
 		};
 		C9B1FA5C13D732FC00BB7CF7 /* PXManagePresetsWindow.xib */ = {
