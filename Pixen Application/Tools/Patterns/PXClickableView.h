@@ -10,8 +10,11 @@
 
 @interface PXClickableView : NSView {
   @private
+	BOOL _selected;
 	IBOutlet id delegate;
 }
+
+- (void)setSelected:(BOOL)selected;
 
 @end
 

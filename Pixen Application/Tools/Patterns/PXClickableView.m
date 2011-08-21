@@ -16,6 +16,27 @@
 		if ([delegate respondsToSelector:@selector(viewDidReceiveDoubleClick:)])
 			[delegate viewDidReceiveDoubleClick:self];
 	}
+	else {
+		[super mouseDown:theEvent];
+	}
+}
+
+- (void)setSelected:(BOOL)selected
+{
+	if (_selected != selected) {
+		_selected = selected;
+		[self setNeedsDisplay:YES];
+	}
+}
+
+- (void)drawRect:(NSRect)dirtyRect
+{
+	if (_selected) {
+		[[NSColor selectedControlColor] set];
+		[[NSBezierPath bezierPathWithRoundedRect:[self bounds]
+										 xRadius:4.0f
+										 yRadius:4.0f] fill];
+	}
 }
 
 @end
