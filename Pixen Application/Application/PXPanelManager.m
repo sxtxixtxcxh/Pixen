@@ -67,14 +67,8 @@ static PXPanelManager *sharedManager = nil;
 	//Always display toolPanel
 	[self showToolPalette:self];
 	
-	// Palette panels!
-	NSUInteger systemPalettesCount = PXPalette_getSystemPalettes(NULL, 0);
-	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPalettesCount);
-	PXPalette_getSystemPalettes(systemPalettes, 0);
-	
-	NSUInteger userPalettesCount = PXPalette_getUserPalettes(NULL, 0);
-	PXPalette **userPalettes = malloc(sizeof(PXPalette *) * userPalettesCount);
-	PXPalette_getUserPalettes(userPalettes, 0);
+	NSArray *systemPalettes = [PXPalette systemPalettes];
+	NSArray *userPalettes = [PXPalette userPalettes];
 	
 	NSArray *palettePanels = [defaults objectForKey:PXPalettePanelsKey];
 	
@@ -84,15 +78,16 @@ static PXPanelManager *sharedManager = nil;
 		NSUInteger index = [[current objectForKey:PXPalettePanelPaletteIndexKey] unsignedIntegerValue];
 		int viewSize = [[current objectForKey:PXPalettePanelPaletteViewSizeKey] intValue];
 		
-		PXPalette *palette = NULL;
+		PXPalette *palette = nil;
 		
-		if ((isSystemPalette && index >= systemPalettesCount) || (!isSystemPalette && index >= userPalettesCount))
+		if ((isSystemPalette && index >= [systemPalettes count]) ||
+			(!isSystemPalette && index >= [userPalettes count]))
 		{
-			palette = systemPalettes[0];
+			palette = [systemPalettes objectAtIndex:0];
 		}
 		else
 		{
-			palette = (isSystemPalette ? systemPalettes : userPalettes)[index];
+			palette = isSystemPalette ? [systemPalettes objectAtIndex:index] : [userPalettes objectAtIndex:index];
 		}
 		
 		PXPalettePanel *panel = [[PXPalettePanel alloc] initWithPalette:palette];
@@ -107,11 +102,6 @@ static PXPanelManager *sharedManager = nil;
 		
 		[panel makeKeyAndOrderFront:self];
 	}
-	
-	free(systemPalettes);
-	
-	if (userPalettes)
-		free(userPalettes);
 	
 	// make sure this gets document open/close notification
 	[PXSpriteSheetExporter sharedSpriteSheetExporter];
@@ -137,13 +127,8 @@ static PXPanelManager *sharedManager = nil;
 	// Popout color panels
 	NSMutableArray *archivedPalettePanels = [NSMutableArray array];
 	
-	NSUInteger systemPalettesCount = PXPalette_getSystemPalettes(NULL, 0);
-	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPalettesCount);
-	PXPalette_getSystemPalettes(systemPalettes, 0);
-	
-	NSUInteger userPalettesCount = PXPalette_getUserPalettes(NULL, 0);
-	PXPalette **userPalettes = malloc(sizeof(PXPalette *) * userPalettesCount);
-	PXPalette_getUserPalettes(userPalettes, 0);
+	NSArray *systemPalettes = [PXPalette systemPalettes];
+	NSArray *userPalettes = [PXPalette userPalettes];
 	
 	for (PXPalettePanel *panel in _palettePanels)
 	{
@@ -159,9 +144,10 @@ static PXPanelManager *sharedManager = nil;
 		
 		NSUInteger i;
 		BOOL found = NO;
-		for (i = 0; i < systemPalettesCount; i++)
+		
+		for (i = 0; i < [systemPalettes count]; i++)
 		{
-			if (systemPalettes[i] == palette)
+			if ([[systemPalettes objectAtIndex:i] isEqual:palette])
 			{
 				found = YES;
 				[panelInfo setObject:[NSNumber numberWithBool:YES] forKey:PXPalettePanelIsSystemPaletteKey];
@@ -172,9 +158,9 @@ static PXPanelManager *sharedManager = nil;
 		
 		if (!found) // Check the user palettes.
 		{
-			for (i = 0; i < userPalettesCount; i++)
+			for (i = 0; i < [userPalettes count]; i++)
 			{
-				if (userPalettes[i] == palette)
+				if ([[userPalettes objectAtIndex:i] isEqual:palette])
 				{
 					found = YES;
 					[panelInfo setObject:[NSNumber numberWithBool:NO] forKey:PXPalettePanelIsSystemPaletteKey];
@@ -190,12 +176,6 @@ static PXPanelManager *sharedManager = nil;
 	}
 	
 	[defaults setObject:archivedPalettePanels forKey:PXPalettePanelsKey];
-	
-	free(systemPalettes);
-	
-	if (userPalettes)
-		free(userPalettes);
-	
 	[defaults synchronize];
 }
 

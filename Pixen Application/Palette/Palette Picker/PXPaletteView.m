@@ -71,7 +71,7 @@ const CGFloat viewMargin = 1.0f;
 	width = (controlSize == NSRegularControlSize ? 32 : 16) + viewMargin;
 	height = width;
 	columns = NSWidth([self bounds]) / width;
-	rows = palette ? ceilf((float)((PXPalette_colorCount(palette))) / columns) : 0;
+	rows = palette ? ceilf((float)(([palette colorCount])) / columns) : 0;
 }
 
 - (void)viewDidEndLiveResize
@@ -107,13 +107,10 @@ const CGFloat viewMargin = 1.0f;
 	if (!palette)
 		return;
 	
-	NSUInteger count = PXPalette_colorCount(palette);
-	PXPaletteColorPair *colors = palette->colors;
-	
-	for (NSUInteger n = 0; n < count; n++) {
+	for (NSUInteger n = 0; n < [palette colorCount]; n++) {
 		PXPaletteColorLayer *colorLayer = [PXPaletteColorLayer layer];
 		colorLayer.index = n;
-		colorLayer.color = colors[n].color;
+		colorLayer.color = [palette colorAtIndex:n];
 		colorLayer.controlSize = controlSize;
 		
 		[self.layer addSublayer:colorLayer];
@@ -149,19 +146,8 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)setPalette:(PXPalette *)pal
 {
-	if (!pal)
-	{
-		if (palette)
-		{
-			PXPalette_release(palette);
-			palette = nil;
-		}
-		return;
-	}
-	
-	PXPalette_retain(pal);
-	PXPalette_release(palette);
-	palette = pal;
+	[palette release];
+	palette = [pal retain];
 	
 	[self setNeedsRetile];
 }
@@ -193,7 +179,7 @@ const CGFloat viewMargin = 1.0f;
 		{
 			NSUInteger index = j * columns + i;
 			
-			if (index >= (PXPalette_colorCount(palette)))
+			if (index >= ([palette colorCount]))
 				break;
 			
 			NSRect frame = NSMakeRect(viewMargin*2 + i*width, viewMargin*2 + j*height, width - viewMargin*2, height - viewMargin*2);
@@ -227,12 +213,14 @@ const CGFloat viewMargin = 1.0f;
 	if (!palette)
 		return;
 	
-	if (selectionIndex == NSNotFound || !palette->canSave) {
+	if (selectionIndex == NSNotFound || !palette.canSave) {
 		NSBeep();
 		return;
 	}
 	
-	PXPalette_removeColorAtIndex(palette, selectionIndex);
+	[palette removeColorAtIndex:selectionIndex];
+	[palette save];
+	
 	[self retile];
 }
 
@@ -255,7 +243,7 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)moveRight:(id)sender
 {
-	if (selectionIndex < (PXPalette_colorCount(palette)-1)) {
+	if (selectionIndex < ([palette colorCount]-1)) {
 		NSUInteger index = selectionIndex;
 		
 		[self toggleHighlightOnLayerAtIndex:selectionIndex];
@@ -328,7 +316,7 @@ const CGFloat viewMargin = 1.0f;
 
 - (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
 {
-	if (!palette || !palette->canSave)
+	if (!palette || !palette.canSave)
 		return NSDragOperationNone;
 	
 	NSPoint point = [self convertPoint:[sender draggingLocation] fromView:nil];
@@ -363,7 +351,8 @@ const CGFloat viewMargin = 1.0f;
 	NSPoint point = [self convertPoint:[sender draggingLocation] fromView:nil];
 	NSUInteger index = [self indexOfCelAtPoint:point];
 	
-	PXPalette_setColorAtIndex(palette, color, index);
+	[palette setColor:color atIndex:index];
+	[palette save];
 	
 	return YES;
 }

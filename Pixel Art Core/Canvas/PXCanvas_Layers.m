@@ -103,7 +103,7 @@
 		[layer setCanvas:self];
 	}
 	
-	[layers autorelease];
+	[layers release];
 	layers = mutableNewLayers;
 	
 	[self activateLayer:[mutableNewLayers objectAtIndex:oldActiveIndex]];
@@ -139,9 +139,7 @@
 	[self beginUndoGrouping]; {
 		[[undoManager prepareWithInvocationTarget:self] replaceLayer:new withLayer:old actionName:act];
 		[new setCanvas:self];
-		[[old retain] autorelease];
-		[layers removeObjectAtIndex:index];
-		[layers insertObject:new atIndex:index];
+		[layers replaceObjectAtIndex:index withObject:new];
 		if(activeIndex != NSNotFound)
 		{
 			[self activateLayer:[layers objectAtIndex:activeIndex]];
@@ -152,7 +150,7 @@
 		}
 		[self layersChanged];
 		[self changed];
-    [self refreshWholePalette];
+		[self refreshWholePalette];
 	} [self endUndoGrouping:act];
 }
 

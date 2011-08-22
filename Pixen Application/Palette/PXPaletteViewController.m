@@ -73,10 +73,10 @@
 - (BOOL)validateMenuItem:(id)item
 {
 	if ([item action] == @selector(renamePalette:)) {
-		return ([paletteView palette]->canSave);
+		return ([paletteView palette].canSave);
 	}
 	else if ([item action] == @selector(deletePalette:)) {
-		return ([paletteView palette]->canSave);
+		return ([paletteView palette].canSave);
 	}
 	
 	return YES;
@@ -86,10 +86,11 @@
 {
 	PXPalette *palette = [paletteView palette];
 	
-	if (!palette->canSave)
+	if (!palette.canSave)
 		return;
 	
-	PXPalette_addColorWithoutDuplicating(palette, [[NSColorPanel sharedColorPanel] color]);
+	[palette addColorWithoutDuplicating:[[NSColorPanel sharedColorPanel] color]];
+	[palette save];
 	
 	[self.paletteView setNeedsRetile];
 }
@@ -133,13 +134,10 @@
 		return;
 	}
 	
-	NSUInteger paletteCount = [paletteSelector paletteCount];
-	PXPalette **palettes = [paletteSelector palettes];
+	NSArray *palettes = [paletteSelector palettes];
 	
-	NSUInteger i;
-	for (i = 0; i < paletteCount; i++)
-	{
-		if (palette == palettes[i] || [palette->name isEqualToString:palettes[i]->name])
+	for (PXPalette *currentPalette in palettes) {
+		if ([palette isEqual:currentPalette])
 		{
 			[self showPalette:palette];
 			return;
@@ -162,14 +160,14 @@
 
 - (IBAction)duplicatePalette:sender
 {
-	PXPalette *newPal = PXPalette_copy([paletteView palette]);
-	newPal->isSystemPalette = NO;
-	newPal->canSave = NO;
+	PXPalette *newPal = [[paletteView palette] copy];
+	newPal.isSystemPalette = NO;
+	newPal.canSave = YES;
 	
-	NSString *base = [NSString stringWithFormat:@"%@ Copy", newPal->name];
+	NSString *base = [NSString stringWithFormat:@"%@ Copy", newPal.name];
 	//FIXME: might not work for other languages
-	if ([newPal->name rangeOfString:@" Copy"].location != NSNotFound) {
-		base = [newPal->name substringToIndex:NSMaxRange([newPal->name rangeOfString:@" Copy"])];
+	if ([newPal.name rangeOfString:@" Copy"].location != NSNotFound) {
+		base = [newPal.name substringToIndex:NSMaxRange([newPal.name rangeOfString:@" Copy"])];
 	}
 	
 	NSString *name = base;
@@ -181,9 +179,9 @@
 		i++;
 	}
 	
-	PXPalette_setName(newPal, name);
-	newPal->canSave = YES;
-	PXPalette_setName(newPal, name);
+	newPal.name = name;
+	
+	[newPal save];
 	
 	[self reloadData];
 	
@@ -191,12 +189,12 @@
 														object:self];
 	
 	[self showPalette:newPal];
-	PXPalette_release(newPal);
+	[newPal release];
 }
 
 - (IBAction)deletePalette:sender
 {
-	NSString *name = [paletteView palette]->name;
+	NSString *name = [paletteView palette].name;
 	
 	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
 	[[alert addButtonWithTitle:NSLocalizedString(@"Delete", @"DELETE")] setKeyEquivalent:@""];
@@ -217,13 +215,7 @@
 {
 	if (returnCode == NSAlertFirstButtonReturn)
 	{
-		NSString *path = [[GetPixenPaletteDirectory() stringByAppendingPathComponent:[paletteView palette]->name] stringByAppendingPathExtension:PXPaletteSuffix];
-		NSError *error = nil;
-		
-		if (![[NSFileManager defaultManager] removeItemAtPath:path error:&error]) {
-			[self presentError:error];
-			return;
-		}
+		[[paletteView palette] removeFile];
 		
 		[self reloadData];
 		
@@ -270,7 +262,7 @@
 {
 	PXPalette *currentPalette = palette;
 	
-	[addColorButton setEnabled:palette->canSave];
+	[addColorButton setEnabled:palette.canSave];
 	
 	if ([paletteView palette] != palette) {
 		[paletteView setPalette:palette];
@@ -294,9 +286,9 @@
 
 - (IBAction)newPalette:sender
 {
-	PXPalette *newPal = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
-	newPal->isSystemPalette = NO;
-	newPal->canSave = YES;
+	PXPalette *newPal = [[PXPalette alloc] initWithoutBackgroundColor];
+	newPal.isSystemPalette = NO;
+	newPal.canSave = YES;
 	
 	NSString *base = NSLocalizedString(@"Untitled Palette", @"Untitled Palette");
 	NSString *name = base;
@@ -308,9 +300,12 @@
 		i++;
 	}
 	
-	PXPalette_setName(newPal, name);
+	newPal.name = name;
+	
+	[newPal save];
+	
 	[self reloadDataAndShow:newPal];
-	PXPalette_release(newPal);
+	[newPal release];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXUserPalettesChangedNotificationName
 														object:self];
@@ -327,20 +322,17 @@
 	
 	[namePrompter promptInWindow:[[self view] window]
 						 context:NULL
-					promptString:[NSString stringWithFormat:NSLocalizedString(@"Rename the palette '%@'", @"Rename the palette '%@'"), palette->name]
-					defaultEntry:palette->name];
+					promptString:[NSString stringWithFormat:NSLocalizedString(@"Rename the palette '%@'", @"Rename the palette '%@'"), palette.name]
+					defaultEntry:palette.name];
 }
 
 - (void)prompter:(id)aPrompter didFinishWithName:(NSString *)aName context:(id)context
 {
-	NSUInteger systemPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
-	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPaletteCount);
-	PXPalette_getSystemPalettes(systemPalettes, 0);
+	NSArray *systemPalettes = [PXPalette systemPalettes];
 	
-	NSUInteger j;
-	for (j = 0; j < systemPaletteCount; j++)
+	for (PXPalette *palette in systemPalettes)
 	{
-		if ([aName isEqualToString:PXPalette_name(systemPalettes[j])])
+		if ([aName isEqualToString:palette.name])
 		{
 			[[NSAlert alertWithMessageText:NSLocalizedString(@"ALREADY_SYSTEM_PALETTE", @"There is already a system palette by that name.")
 							 defaultButton:nil
@@ -348,16 +340,16 @@
 							   otherButton:nil
 				 informativeTextWithFormat:@""] runModal];
 			
-			free(systemPalettes);
-			
 			return;
 		}
 	}
 	
-	free(systemPalettes);
+	PXPalette *palette = [paletteView palette];
+	[palette removeFile];
+	[palette setName:aName];
+	[palette save];
 	
-	PXPalette_setName([paletteView palette], aName);
-	[self reloadDataAndShow:[paletteView palette]];
+	[self reloadDataAndShow:palette];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXUserPalettesChangedNotificationName
 														object:self];

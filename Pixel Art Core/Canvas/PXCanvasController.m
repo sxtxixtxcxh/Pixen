@@ -12,6 +12,7 @@
 #import "PXPreviewController.h"
 #import "PXToolPaletteController.h"
 #import "PXInfoPanelController.h"
+#import "PXLayerController.h"
 #import "PXCanvas.h"
 #import "PXCanvas_Selection.h"
 #import "PXCanvas_Drawing.h"
