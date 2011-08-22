@@ -12,7 +12,7 @@
 
 - (void)keyDown:(NSEvent*)theEvent { 
 	if ([[theEvent characters] isEqualToString: @"\177"]) {
-		[[self delegate] deleteKeyPressedInCollectionView:self];
+		[ (id) [self delegate] deleteKeyPressedInCollectionView:self];
 		return;
 	}
 	

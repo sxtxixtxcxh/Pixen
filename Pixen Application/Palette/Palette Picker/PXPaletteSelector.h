@@ -15,12 +15,10 @@
 	IBOutlet NSPopUpButton *selectionPopup;
 	IBOutlet id delegate;
 	
-	PXPalette **palettes;
-	NSUInteger paletteCount;
+	NSMutableArray *_palettes;
 }
 
-- (NSUInteger)paletteCount;
-- (PXPalette **)palettes;
+- (NSArray *)palettes;
 
 - (void)showPalette:(PXPalette *)pal;
 - (PXPalette *)reloadDataExcluding:(PXCanvasDocument *)aDoc withCurrentPalette:(PXPalette *)currentPalette;

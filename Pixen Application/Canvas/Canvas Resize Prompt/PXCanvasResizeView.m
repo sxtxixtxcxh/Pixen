@@ -135,7 +135,7 @@
 - (void)setBackgroundColor:(NSColor *)color
 {
 	[color retain];
-	[backgroundColor autorelease];
+	[backgroundColor release];
 	backgroundColor = color;
 	[self setNeedsDisplay:YES];
 }

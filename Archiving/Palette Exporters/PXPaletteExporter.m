@@ -35,8 +35,7 @@
 	NSString *type = [[typeSelector selectedItem] title];
 	
 	if ([type isEqualToString:PixenPaletteType]) {
-		[NSKeyedArchiver archiveRootObject:PXPalette_dictForArchiving(palette)
-									toFile:[[savePanel URL] path]];
+		[NSKeyedArchiver archiveRootObject:[palette dictForArchiving] toFile:[[savePanel URL] path]];
 	}
 	else {
 		id writer = nil;
@@ -93,13 +92,13 @@
 	if (aPalette == NULL)
 		return;
 	
-	palette = PXPalette_retain(aPalette);
+	palette = [aPalette retain];
 	
 	savePanel = [[NSSavePanel savePanel] retain];
 	[savePanel setAllowedFileTypes:[NSArray arrayWithObjects:PXPaletteSuffix, MicrosoftPaletteSuffix, AdobePaletteSuffix, nil]];
 	[savePanel setPrompt:@"Export"];
 	[savePanel setExtensionHidden:YES];
-	[savePanel setNameFieldStringValue:palette->name];
+	[savePanel setNameFieldStringValue:palette.name];
 	[savePanel setDelegate:self];
 	
 	typeSelector = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(0, 0, 250, 40) pullsDown:NO];
@@ -112,7 +111,7 @@
 	
 	[NSApp runModalForWindow:savePanel];
 	
-	PXPalette_release(palette);
+	[palette release];
 }
 
 @end

@@ -18,7 +18,7 @@
 
 - (void)setBackgroundTypeText:(NSString *)typeText;
 {
-	[backgroundTypeText autorelease];
+	[backgroundTypeText release];
 	backgroundTypeText = [typeText retain];
 	[self.templateClassNameField setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Default %@", @"Default %@"), backgroundTypeText]];
 }

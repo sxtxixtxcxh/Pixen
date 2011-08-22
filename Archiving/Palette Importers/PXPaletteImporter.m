@@ -46,20 +46,15 @@
 	NSString *base = [NSString stringWithString:name];
 	int i = 2;
 	
-	// First make the name not conflict with system palettes
-	NSUInteger systemPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
-	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPaletteCount);
-	PXPalette_getSystemPalettes(systemPalettes, 0);
-	
+	NSArray *systemPalettes = [PXPalette systemPalettes];
 	NSMutableArray *names = [NSMutableArray array];
 	
-	for (NSUInteger n = 0; n < systemPaletteCount; n++)
+	for (PXPalette *palette in systemPalettes)
 	{
-		[names addObject:PXPalette_name(systemPalettes[n])];
+		[names addObject:palette.name];
 	}
 	
-	free(systemPalettes);
-	
+	// First make the name not conflict with system palettes
 	while ([names containsObject:name])
 	{
 		name = [base stringByAppendingFormat:@" %d", i];
@@ -74,23 +69,23 @@
 	}
 	
 	NSString *finalPath = [[GetPixenPaletteDirectory() stringByAppendingPathComponent:name] stringByAppendingPathExtension:PXPaletteSuffix];
-	PXPalette *newPal = NULL;
+	PXPalette *newPal = nil;
 	
 	if (reader) // If we've got a reader, we've got to import the format first.
 	{
-		newPal = [reader paletteWithData:[NSData dataWithContentsOfFile:path]];
+		newPal = [[reader paletteWithData:[NSData dataWithContentsOfFile:path]] retain];
 	}
 	else // It must be a pxpalette.
 	{
-		newPal = PXPalette_initWithDictionary(PXPalette_alloc(), [NSKeyedUnarchiver unarchiveObjectWithFile:path]);
+		newPal = [[PXPalette alloc] initWithDictionary:[NSKeyedUnarchiver unarchiveObjectWithFile:path]];
 	}
 	
-	PXPalette_setName(newPal, name);
-	newPal->isSystemPalette = NO;
-	newPal->canSave = YES;
+	newPal.name = name;
+	newPal.isSystemPalette = NO;
+	newPal.canSave = YES;
 	
-	[NSKeyedArchiver archiveRootObject:PXPalette_dictForArchiving(newPal) toFile:finalPath];
-	PXPalette_release(newPal);
+	[NSKeyedArchiver archiveRootObject:[newPal dictForArchiving] toFile:finalPath];
+	[newPal release];
 }
 
 - (void)panelDidEndWithReturnCode:(NSInteger)code modalSheet:(BOOL)modalSheet

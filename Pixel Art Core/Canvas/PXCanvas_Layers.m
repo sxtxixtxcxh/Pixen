@@ -197,7 +197,6 @@
 	[self beginUndoGrouping]; {
 		NSUInteger newIndex = [layers indexOfObject:layer];
 		[[[self undoManager] prepareWithInvocationTarget:self] insertLayer:layer atIndex:index];
-		[[layer retain] autorelease];
 		[layers removeObject:layer];
 		if(newIndex >= [layers count])
 		{
@@ -212,7 +211,7 @@
 			[self activateLayer:[layers objectAtIndex:newIndex]];
 		}
 		[self changed];
-    [self refreshWholePalette];
+		[self refreshWholePalette];
 	} [self endUndoGrouping:NSLocalizedString(@"Remove Layer", @"Remove Layer")];	
 }
 

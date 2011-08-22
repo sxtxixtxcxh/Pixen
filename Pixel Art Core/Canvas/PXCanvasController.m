@@ -436,7 +436,7 @@
 	
 	if(! [aTool respondsToSelector:@selector(mouseDownAt:fromCanvasController:)]) 
 		return; 
-	[oldColor autorelease];
+	[oldColor release];
 	oldColor = [[aTool colorForCanvas:canvas] retain];
 	if([event isTabletPointerEvent] && [self caresAboutPressure])
 	{

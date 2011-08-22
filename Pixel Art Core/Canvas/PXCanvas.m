@@ -322,9 +322,9 @@ backgroundColor:(NSColor *)color
 	return [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 }
 
-- (PXPalette *)createFrequencyPalette
+- (PXPalette *)newFrequencyPalette
 {
-	PXPalette *freqPal = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
+	PXPalette *freqPal = [[PXPalette alloc] initWithoutBackgroundColor];
 	NSSize sz = [self size];
 	float w = sz.width;
 	float h = sz.height;
@@ -344,7 +344,7 @@ backgroundColor:(NSColor *)color
 	}
 	for(NSColor *c in colors)
 	{
-		PXPalette_incrementColorCount(freqPal, c, [colors countForObject:c]);
+		// PXPalette_incrementColorCount(freqPal, c, [colors countForObject:c]);
 	}
 	return freqPal;
 }

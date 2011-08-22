@@ -137,9 +137,9 @@
 - (IBAction)exportDocumentPalette:sender
 {
 	id exporter = [[PXPaletteExporter alloc] init];
-	PXPalette *p = [canvas createFrequencyPalette];
+	PXPalette *p = [canvas newFrequencyPalette];
 	[exporter runWithPalette:p inWindow:[self window]];
-	PXPalette_release(p);
+	[p release];
 }
 
 - (IBAction)mergeDown:(id) sender

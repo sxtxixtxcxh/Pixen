@@ -47,7 +47,8 @@ typedef struct
 - (NSData *)palDataForPalette:(PXPalette *)palette
 {
 	NSMutableData *data = [NSMutableData data];
-	NSUInteger length = 24 + (4 * PXPalette_colorCount(palette));
+	NSUInteger colorCount = [palette colorCount];
+	NSUInteger length = 24 + (4 * colorCount);
 	
 	// Construct the header
 	OSPALHeader header;
@@ -63,7 +64,6 @@ typedef struct
 	[data appendBytes:&chunkSize length:4];
 	
 	// The first data long is in two shorts: a palette version and the number of colors in the palette.
-	NSUInteger colorCount = PXPalette_colorCount(palette);
 	char riffHeader[4];
 	riffHeader[0] = 0;
 	riffHeader[1] = 3;
@@ -72,10 +72,8 @@ typedef struct
 	[data appendBytes:riffHeader length:4];
 	
 	// Write the color data.
-	NSUInteger i;
-	for (i = 0; i < colorCount; i++)
+	for (NSColor *color in palette)
 	{
-		NSColor *color = [palette->colors[i].color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 		char colorData[4];
 		colorData[0] = (int) roundf([color redComponent] * 255);
 		colorData[1] = (int) roundf([color greenComponent] * 255);

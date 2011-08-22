@@ -70,7 +70,7 @@
 
 - (void)paletteViewControllerDidShowPalette:(PXPalette *)palette
 {
-	[self setTitle:palette->name];
+	[self setTitle:palette.name];
 }
 
 - (void)useColorAtIndex:(NSUInteger)index
@@ -81,7 +81,7 @@
 		switcher = [[PXToolPaletteController sharedToolPaletteController] rightSwitcher];
 	}
 	
-	[switcher setColor:PXPalette_colorAtIndex([_vc.paletteView palette], index)];
+	[switcher setColor:[[_vc.paletteView palette] colorAtIndex:index]];
 }
 
 - (void)paletteView:(PXPaletteView *)pv modifyColorAtIndex:(NSUInteger)index

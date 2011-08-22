@@ -45,17 +45,16 @@
 	}
 	int colorCount = bytes[22] + (bytes[23] * 256);
 	int i;
-	PXPalette *palette = PXPalette_alloc();
-	PXPalette_initWithoutBackgroundColor(palette);
-	PXPalette_setName(palette, @"Imported palette");
+	PXPalette *palette = [[PXPalette alloc] initWithoutBackgroundColor];
+	palette.name = @"Imported palette";
 	for (i = 0; i < colorCount; i++)
 	{
 		float red = bytes[24 + (i * 4) + 0] / 255.0;
 		float green = bytes[24 + (i * 4) + 1] / 255.0;
 		float blue = bytes[24 + (i * 4) + 2] / 255.0;
-		PXPalette_addColor(palette, [NSColor colorWithCalibratedRed:red green:green blue:blue alpha:1]);
+		[palette addColor:[NSColor colorWithCalibratedRed:red green:green blue:blue alpha:1]];
 	}
-	return palette;
+	return [palette autorelease];
 }
 
 @end

@@ -38,7 +38,7 @@
 - (NSData *)palDataForPalette:(PXPalette *)palette
 {
 	NSMutableData *data = [NSMutableData data];
-	NSUInteger colorCount = PXPalette_colorCount(palette);
+	NSUInteger colorCount = [palette colorCount];
 	if (colorCount > 256)
 	{
 		NSLog(@"This palette has more than 256 colors, and the ACT format only supports that many; %ld will be truncated.", colorCount-256);
@@ -47,7 +47,7 @@
 	int i;
 	for (i = 0; i < colorCount; i++)
 	{
-		NSColor *color = [palette->colors[i].color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+		NSColor *color = [[palette colorAtIndex:i] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 		char colorData[3];
 		colorData[0] = (int) roundf([color redComponent] * 255);
 		colorData[1] = (int) roundf([color greenComponent] * 255);

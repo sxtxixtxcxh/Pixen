@@ -17,18 +17,18 @@
 	BOOL shouldDraw;
 }
 
+@property (nonatomic, retain) NSColor *color;
+
 -(id) initWithUnitSize:(NSSize)unitSize
 				 color:(NSColor *) color
 			shouldDraw:(BOOL)shouldDraw;
 
 - (NSSize)unitSize;
-- (NSColor *)color;
 - (BOOL)shouldDraw;
 
 - (void)drawRect:(NSRect)rect;
 
 - (void)setShouldDraw:(BOOL)shouldDraw;
-- (void)setColor:(NSColor *)color;
 - (void)setUnitSize:(NSSize)unitSize;
 
 - (void)setDefaultParameters;

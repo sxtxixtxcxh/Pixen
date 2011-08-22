@@ -72,6 +72,6 @@ backgroundColor:(NSColor *)color;
 - (void)updatePreviewSize;
 - (NSColor *)eraseColor;
 
-- (PXPalette *)createFrequencyPalette;
+- (PXPalette *)newFrequencyPalette;
 
 @end

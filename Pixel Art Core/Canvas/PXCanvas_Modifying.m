@@ -268,14 +268,15 @@
 	if (quantizedPixels)
 		QuantizeBuffer(quantizedPixels, &size, red, green, blue, output, map);
 	//NSLog(@"Quantized to %d colors", size);
-
-	PXPalette *palette = PXPalette_init(PXPalette_alloc());
+	
+	PXPalette *palette = [[PXPalette alloc] init];
 	for (i = 0; i < size; i++)
 	{
-		PXPalette_addColor(palette, [NSColor colorWithCalibratedRed:map[i].Red / 255.0f green:map[i].Green / 255.0f blue:map[i].Blue / 255.0f alpha:1]);
+		[palette addColor:[NSColor colorWithCalibratedRed:map[i].Red / 255.0f green:map[i].Green / 255.0f blue:map[i].Blue / 255.0f alpha:1]];
 	}
+	
 	if (transparency)
-		PXPalette_addColorWithoutDuplicating(palette, [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]);
+		[palette addColorWithoutDuplicating:[NSColor clearColor]];
 	
 	for (id current in canvases)
 	{
@@ -283,10 +284,12 @@
 		{
 			[currentLayer adaptToPalette:palette withTransparency:transparency matteColor:matteColor];
 		}
-    [current refreshWholePalette];
+		[current refreshWholePalette];
 		[current changed];
 	}
+	
 	free(red); free(green); free(blue); free(output); free(map);
+	[palette release];
 }
 
 - (void)clearUndoBuffers

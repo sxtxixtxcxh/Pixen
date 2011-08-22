@@ -100,7 +100,7 @@ int kPXColorPickerMode = 23421337;
 {
 	PXPalette *palette = [_vc.paletteView palette];
 	[[self colorPanel] setShowsAlpha:YES];
-	[[self colorPanel] setColor:PXPalette_colorAtIndex(palette, index)];
+	[[self colorPanel] setColor:[palette colorAtIndex:index]];
 }
 
 - (void)paletteView:(PXPaletteView *)pv modifyColorAtIndex:(NSUInteger)index

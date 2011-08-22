@@ -40,13 +40,11 @@
 	NSMutableString *string = [NSMutableString string];
 	[string appendString:@"JASC-PAL\n0100\n"];
 	
-	NSUInteger colorCount = PXPalette_colorCount(palette);
+	NSUInteger colorCount = [palette colorCount];
 	[string appendFormat:@"%d\n", colorCount];
 	
-	NSUInteger i;
-	for (i = 0; i < colorCount; i++)
+	for (NSColor *color in palette)
 	{
-		NSColor *color = [palette->colors[i].color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 		[string appendFormat:@"%d %d %d\n", (int) roundf([color redComponent] * 255), (int) roundf([color greenComponent] * 255), (int) roundf([color blueComponent] * 255)];
 	}
 	

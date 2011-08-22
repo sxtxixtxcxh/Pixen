@@ -7,6 +7,8 @@
 
 @implementation PXGrid
 
+@synthesize color;
+
 - (id)init
 {
 	self = [super init];
@@ -74,11 +76,6 @@
 	return unitSize;
 }
 
-- (NSColor *)color
-{
-	return color;
-}
-
 - (BOOL)shouldDraw
 {
 	return shouldDraw;
@@ -87,12 +84,6 @@
 - (void)setShouldDraw:(BOOL)newShouldDraw
 {
 	shouldDraw = newShouldDraw;
-}
-
-- (void)setColor:(NSColor *)newColor
-{
-	[color autorelease];
-	color = [newColor retain];
 }
 
 - (void)setUnitSize:(NSSize)newUnitSize
