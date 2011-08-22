@@ -13,14 +13,19 @@
 
 - (void)moveObjectAtIndex:(NSUInteger)initialIndex toIndex:(NSUInteger)targetIndex
 {
-	if(targetIndex == initialIndex) { return; }
-	id object = [[[self objectAtIndex:initialIndex] retain] autorelease];
-	[self removeObjectAtIndex:initialIndex];
-	NSUInteger finalIndex = targetIndex;
-	if (finalIndex > initialIndex) {
-		finalIndex--;
+	if (targetIndex != initialIndex) {
+		id obj = [[self objectAtIndex:initialIndex] retain];
+		[self removeObjectAtIndex:initialIndex];
+		
+		if (targetIndex >= [self count]) {
+			[self addObject:obj];
+		}
+		else {
+			[self insertObject:obj atIndex:targetIndex];
+		}
+		
+		[obj release];
 	}
-	[self insertObject:object atIndex:finalIndex];
 }
 
 @end
