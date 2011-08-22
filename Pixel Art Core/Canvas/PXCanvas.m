@@ -176,50 +176,50 @@
 
 - (void)clearIncrementalPaletteRefresh
 {
-  [minusColors removeAllObjects];
-  [plusColors removeAllObjects];
+	[minusColors removeAllObjects];
+	[plusColors removeAllObjects];
 }
 
 //could be coalesced by timer or update/undo group; would rather do it with undo.
 - (void)reallyRefreshWholePalette:ignored
 {
-  [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(reallyRefreshWholePalette:) object:nil];
-  [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(reallyRefreshIncrementalPalette:) object:nil];
-  
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasFrequencyPaletteRefresh" object:self userInfo:nil];
-  frequencyPaletteDirty = NO;
-  [self clearIncrementalPaletteRefresh];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasFrequencyPaletteRefresh" object:self userInfo:nil];
+	frequencyPaletteDirty = NO;
+	[self clearIncrementalPaletteRefresh];
 }
 
 - (void)reallyRefreshIncrementalPalette:ignored
 {
-    //NSLog(@"incremental update");
-  [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(reallyRefreshIncrementalPalette:) object:nil];
-
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasPaletteUpdate" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:minusColors, @"PXCanvasPaletteUpdateRemoved", plusColors, @"PXCanvasPaletteUpdateAdded", nil]];
-  [self clearIncrementalPaletteRefresh];
+	// NSLog(@"incremental update");
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasPaletteUpdate"
+														object:self
+													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:minusColors, @"PXCanvasPaletteUpdateRemoved", plusColors, @"PXCanvasPaletteUpdateAdded", nil]];
+	[self clearIncrementalPaletteRefresh];
 }
 
 - (void)refreshWholePalette
 {
-  if(!frequencyPaletteDirty)
-  {
-    frequencyPaletteDirty = YES;
-      //time isn't the best way to do this.  should be undo group-based.
-    [self performSelector:@selector(reallyRefreshWholePalette:) withObject:nil afterDelay:0.5f];
-  }
+	if (!frequencyPaletteDirty)
+	{
+		frequencyPaletteDirty = YES;
+		
+		[[self class] cancelPreviousPerformRequestsWithTarget:self];
+		[self performSelector:@selector(reallyRefreshWholePalette:) withObject:nil afterDelay:0.5f];
+	}
 }
+
 - (void)refreshPaletteDecreaseColorCount:(NSColor *)down increaseColorCount:(NSColor *)up
 {
-  if([down isEqual:up]) 
-  {
-    return;
-  }
-    //NSLog(@"change color %@ to %@", down, up);
-    //time isn't the best way to do this.  should be undo group-based.
-  [self performSelector:@selector(reallyRefreshIncrementalPalette:) withObject:nil afterDelay:0.5f];
-  [minusColors addObject:down];
-  [plusColors addObject:up];
+	if ([down isEqual:up])
+		return;
+	
+	[[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(reallyRefreshIncrementalPalette:) object:nil];
+	
+	[minusColors addObject:down];
+	[plusColors addObject:up];
+	
+	[self performSelector:@selector(reallyRefreshIncrementalPalette:) withObject:nil afterDelay:0.5f];
 }
 
 - (void)setSize:(NSSize)aSize 
