@@ -1,84 +1,54 @@
 //
-//  PXPalette.m
+//  PXPalette.h
 //  Pixen
 //
+//  Created by Matt Rajca on 8/21/11.
+//  Copyright (c) 2011 Matt Rajca. All rights reserved.
+//
 
-#import <AppKit/AppKit.h>
+#import <Foundation/Foundation.h>
 
-typedef struct _PXColorBucket {
-	NSColor *color;
-	NSUInteger index;
-	struct _PXColorBucket *next;
-} PXColorBucket;
-
-typedef struct _PXPaletteColorPair {
-  NSColor *color;
-  NSInteger frequency;
-} PXPaletteColorPair;
-
-typedef struct {
-	NSUInteger retainCount;
+@interface PXPalette : NSObject < NSCoding, NSCopying, NSFastEnumeration > {
+  @private
+	NSMutableArray *_colors;
+	NSMapTable *_frequencies;
+	NSString *_name;
 	
-	PXPaletteColorPair *colors;
-  
-	NSUInteger colorCount;
-	NSUInteger size;
-	PXColorBucket **reverseHashTable;
-	NSString *name;
-	
-	BOOL isSystemPalette;
-	BOOL canSave;
-} PXPalette;
+	BOOL canSave, isSystemPalette;
+}
 
-NSUInteger PXPalette_getSystemPalettes(PXPalette **pals, NSUInteger initialIndex);
-NSUInteger PXPalette_getUserPalettes(PXPalette **pals, NSUInteger initialIndex);
-BOOL PXPalette_isDocumentPalette(PXPalette *self);
+@property (nonatomic, copy) NSString *name;
 
-PXPalette *PXPalette_alloc(void);
+@property (nonatomic, assign) BOOL canSave;
+@property (nonatomic, assign) BOOL isSystemPalette;
 
-PXPalette *PXPalette_init(PXPalette *self);
-PXPalette *PXPalette_initWithoutBackgroundColor(PXPalette *self);
-PXPalette *PXPalette_initWithContentsOfFile(PXPalette *self, NSString *file);
-PXPalette *PXPalette_initWithDictionary(PXPalette *self, NSDictionary *dict);
-PXPalette *PXPalette_copy(PXPalette *self);
-void PXPalette_dealloc(PXPalette *self);
-PXPalette *PXPalette_retain(PXPalette *self);
-PXPalette *PXPalette_release(PXPalette *self);
++ (NSArray *)systemPalettes;
++ (NSArray *)userPalettes;
 
-NSString *PXPalette_name(PXPalette *self);
-void PXPalette_setName(PXPalette *self, NSString *name);
+- (id)initWithoutBackgroundColor;
+- (id)initWithDictionary:(NSDictionary *)dict;
 
-void PXPalette_resize(PXPalette *self, NSUInteger newSize);
-void PXPalette_addColorPair(PXPalette *self, PXPaletteColorPair pair);
-void PXPalette_addColor(PXPalette *self, NSColor *color);
-void PXPalette_addBackgroundColor(PXPalette *self);
-void PXPalette_addColorWithoutDuplicating(PXPalette *self, NSColor *color);
-void PXPalette_removeColorAtIndex(PXPalette *self, NSUInteger index);
-void PXPalette_insertColorAtIndex(PXPalette *self, NSColor *color, NSUInteger index);
-PXColorBucket *PXPalette_bucketForColor(PXPalette *self, NSColor *color);
+- (void)addBackgroundColor;
 
-void PXPalette_swapColorsAtIndex(PXPalette* self, NSUInteger colorIndex1, NSUInteger colorIndex2);
-void PXPalette_swapColors(PXPalette* self, NSColor *color1, NSColor *color2);
-void PXPalette_cycleColors(PXPalette *self);
-void PXPalette_setColorAtIndex(PXPalette *self, NSColor *color, NSUInteger index);
-void PXPalette_moveColorAtIndexToIndex(PXPalette *self, NSUInteger index1, NSUInteger index2);
+- (NSUInteger)colorCount;
+- (NSColor *)colorAtIndex:(NSUInteger)index;
+- (NSUInteger)indexOfColor:(NSColor *)color;
 
-NSUInteger PXPalette_indexOfColor(PXPalette *self, NSColor *color);
-NSColor *PXPalette_colorAtIndex(PXPalette *self, NSUInteger index);
-NSUInteger PXPalette_indexOfColorAddingIfNotPresent(PXPalette *self, NSColor *color);
-NSUInteger PXPalette_indexOfColorClosestTo(PXPalette *self, NSColor *color);
-NSColor *PXPalette_colorClosestTo(PXPalette *self, NSColor *color);
-NSColor *PXPalette_restrictColor(PXPalette *self, NSColor *color);
-void PXPalette_removeAlphaComponents(PXPalette *self);
+- (void)addColor:(NSColor *)color;
+- (void)addColorWithoutDuplicating:(NSColor *)color;
+- (void)insertColor:(NSColor *)color atIndex:(NSUInteger)index;
 
-PXPalette *PXPalette_initWithCoder(PXPalette *self, NSCoder *coder);
-void PXPalette_encodeWithCoder(PXPalette *self, NSCoder *coder);
-NSDictionary *PXPalette_dictForArchiving(PXPalette *self);
+- (void)removeColorAtIndex:(NSUInteger)index;
+- (void)removeLastColor;
 
-double PXPalette_hashEfficiency(PXPalette *self);
+- (void)replaceColorAtIndex:(NSUInteger)index withColor:(NSColor *)color;
 
-NSUInteger PXPalette_colorCount(PXPalette *self);
-NSArray *PXPalette_colors(PXPalette *self);
+- (void)incrementCountForColor:(NSColor *)color byAmount:(NSInteger)amount;
+- (void)decrementCountForColor:(NSColor *)color byAmount:(NSInteger)amount;
 
-void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, NSInteger amt);
-void PXPalette_incrementColorCount(PXPalette *self, NSColor *color, NSInteger amt);
+- (void)removeFile;
+- (void)save;
+
+- (NSDictionary *)dictForArchiving;
+
+@end
