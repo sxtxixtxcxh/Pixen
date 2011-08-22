@@ -11,6 +11,6 @@
 
 @interface NSMutableArray(ReorderingAdditions)
 
-- (void)moveObjectAtIndex:(int)initialIndex toIndex:(int)targetIndex;
+- (void)moveObjectAtIndex:(NSUInteger)initialIndex toIndex:(NSUInteger)targetIndex;
 
 @end

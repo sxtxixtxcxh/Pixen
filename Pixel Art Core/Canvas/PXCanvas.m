@@ -344,7 +344,7 @@ backgroundColor:(NSColor *)color
 	}
 	for(NSColor *c in colors)
 	{
-		// PXPalette_incrementColorCount(freqPal, c, [colors countForObject:c]);
+		[freqPal incrementCountForColor:c byAmount:[colors countForObject:c]];
 	}
 	return freqPal;
 }

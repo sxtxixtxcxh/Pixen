@@ -11,12 +11,12 @@
 
 @implementation NSMutableArray(ReorderingAdditions)
 
-- (void)moveObjectAtIndex:(int)initialIndex toIndex:(int)targetIndex
+- (void)moveObjectAtIndex:(NSUInteger)initialIndex toIndex:(NSUInteger)targetIndex
 {
 	if(targetIndex == initialIndex) { return; }
 	id object = [[[self objectAtIndex:initialIndex] retain] autorelease];
 	[self removeObjectAtIndex:initialIndex];
-	int finalIndex = targetIndex;
+	NSUInteger finalIndex = targetIndex;
 	if (finalIndex > initialIndex) {
 		finalIndex--;
 	}

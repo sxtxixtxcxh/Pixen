@@ -351,7 +351,7 @@ const CGFloat viewMargin = 1.0f;
 	NSPoint point = [self convertPoint:[sender draggingLocation] fromView:nil];
 	NSUInteger index = [self indexOfCelAtPoint:point];
 	
-	[palette setColor:color atIndex:index];
+	[palette replaceColorAtIndex:index withColor:color];
 	[palette save];
 	
 	return YES;

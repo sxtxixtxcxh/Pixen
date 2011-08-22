@@ -22,9 +22,9 @@
 {
 	self = [super initWithNibName:@"PXPaletteController" bundle:nil];
 	
-	frequencyPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
+	frequencyPalette = [[PXPalette alloc] initWithoutBackgroundColor];
 	recentLimit = 32;
-	recentPalette = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
+	recentPalette = [[PXPalette alloc] initWithoutBackgroundColor];
 	mode = PXPaletteModeFrequency;
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPalette:) name:@"PXCanvasFrequencyPaletteRefresh" object:nil];
@@ -36,8 +36,8 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	PXPalette_release(frequencyPalette);
-	PXPalette_release(recentPalette);
+	[frequencyPalette release];
+	[recentPalette release];
 	[super dealloc];
 }
 
@@ -61,8 +61,8 @@
 	}
 	
 	PXPalette *oldPal = frequencyPalette;
-	frequencyPalette = [[note object] createFrequencyPalette];
-	PXPalette_release(oldPal);
+	frequencyPalette = [[note object] newFrequencyPalette];
+	[oldPal release];
 	if(mode == PXPaletteModeFrequency)
 	{
 		[paletteView setPalette:frequencyPalette];
@@ -71,21 +71,22 @@
 
 - (void)addRecentColor:(NSColor *)c
 {
-	NSUInteger idx = PXPalette_indexOfColor(recentPalette, c);
-	if(idx != NSNotFound)
+	NSUInteger idx = [recentPalette indexOfColor:c];
+	
+	if (idx != NSNotFound)
 	{
-		if(idx != 0)
-		{
-			PXPalette_removeColorAtIndex(recentPalette, idx);
-			PXPalette_insertColorAtIndex(recentPalette, c, 0);
+		if (idx != 0) {
+			[recentPalette removeColorAtIndex:idx];
+			[recentPalette insertColor:c atIndex:0];
 		}
 	}
 	else
 	{
-		PXPalette_insertColorAtIndex(recentPalette, c, 0);
-		while(PXPalette_colorCount(recentPalette) > recentLimit)
+		[recentPalette insertColor:c atIndex:0];
+		
+		while ([recentPalette colorCount] > recentLimit)
 		{
-			PXPalette_removeColorAtIndex(recentPalette, PXPalette_colorCount(recentPalette)-1);
+			[recentPalette removeLastColor];
 		}
 	}
 }
@@ -103,13 +104,13 @@
 	for(NSColor *old in oldC)
 	{
 		// NSLog(@"Color %@ was removed %d times", old, [oldC countForObject:old]);
-		PXPalette_decrementColorCount(frequencyPalette, old, [oldC countForObject:old]);
+		[frequencyPalette decrementCountForColor:old byAmount:[oldC countForObject:old]];
 	}
 	//can do 'recent palette' stuff here too. most draws will consist of one new and many old, so just consider the last 100 new?
 	for(NSColor *new in newC)
 	{
 		//NSLog(@"Color %@ was added %d times", new, [newC countForObject:new]);
-		PXPalette_incrementColorCount(frequencyPalette, new, [newC countForObject:new]);
+		[frequencyPalette incrementCountForColor:new byAmount:[newC countForObject:new]];
 		[self addRecentColor:new];
 	}
 	[paletteView setNeedsRetile];
@@ -124,7 +125,7 @@
 		switcher = [[PXToolPaletteController sharedToolPaletteController] rightSwitcher];
 	}
 	
-	[switcher setColor:PXPalette_colorAtIndex(frequencyPalette, index)];	
+	[switcher setColor:[frequencyPalette colorAtIndex:index]];
 }
 
 - (void)paletteViewSizeChangedTo:(NSControlSize)size
