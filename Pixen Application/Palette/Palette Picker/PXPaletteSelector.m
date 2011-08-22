@@ -15,14 +15,13 @@
 - (id)init
 {
 	self = [super init];
-	palettes = (PXPalette **)malloc(sizeof(PXPalette *) * 20);
-	memset((void *)palettes, 0, 20);
+	_palettes = [[NSMutableArray alloc] init];
 	return self;
 }
 
 - (void)dealloc
 {
-	free(palettes);
+	[_palettes release];
 	[super dealloc];
 }
 
@@ -35,15 +34,7 @@
 {
 	for (id current in [[selectionPopup menu] itemArray])
 	{
-		if([[current representedObject] pointerValue] == pal)
-		{
-			[selectionPopup selectItem:current];
-			return;
-		}
-	}
-	for (id current in [[selectionPopup menu] itemArray])
-	{
-		if([[current title] isEqual:pal->name])
+		if ([[current representedObject] isEqual:pal])
 		{
 			[selectionPopup selectItem:current];
 			return;
@@ -54,133 +45,81 @@
 - (PXPalette *)reloadDataExcluding:(PXCanvasDocument *)aDoc withCurrentPalette:(PXPalette *)currentPalette
 {
 	[selectionPopup removeAllItems];
-	NSUInteger index = 0;
-	int i;
-	for (i = 0; i < paletteCount; i++)
-	{
-		if(palettes[i] == currentPalette)
-		{
-			index = i;
-		}
-	}
-	free(palettes);
 	
-	/*
-	id docs = [NSMutableArray arrayWithArray:[[NSDocumentController sharedDocumentController] documents]];
+	NSUInteger index = [_palettes indexOfObject:currentPalette];
 	
-	if(aDoc) {
-		[docs removeObject:aDoc];
-	}
+	if (index == NSNotFound)
+		index = 0;
 	
-	int docPaletteCount = [docs count];
-	int docPaletteCount = 0;
-	 */
+	[_palettes removeAllObjects];
 	
-	NSUInteger userPaletteCount = PXPalette_getUserPalettes(NULL, 0);
-	NSUInteger sysPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
+	NSArray *userPalettes = [PXPalette userPalettes];
+	NSArray *systemPalettes = [PXPalette systemPalettes];
+	
+	[_palettes addObjectsFromArray:userPalettes];
+	[_palettes addObjectsFromArray:systemPalettes];
+	
 	[selectionPopup setEnabled:YES];
-	if (userPaletteCount == 0 && sysPaletteCount == 0)
+	
+	if (![_palettes count])
 	{
 		[selectionPopup addItemWithTitle:NSLocalizedString(@"No Palettes", @"No Palettes")];
 		[selectionPopup setEnabled:NO];
-		paletteCount = 0;
 	}
-	paletteCount =  userPaletteCount + sysPaletteCount;
-	palettes = (PXPalette **)calloc(paletteCount, sizeof(PXPalette *));
 	
-	/*
-	for (i = 0; i < docPaletteCount; i++)
+	if (index >= [_palettes count])
+		index = [_palettes count] - 1;
+	
+	for (PXPalette *palette in userPalettes)
 	{
-		//FIXME: no palette
-		assert(0);
-		PXCanvasDocument *doc = [docs objectAtIndex:i];
-		PXPalette *pal = PXPalette_init(PXPalette_alloc());
-		if([PXPalette_name(pal) isEqual:@""])
-		{
-			PXPalette_setName(pal, [doc displayName]);
-		}
-		NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:PXPalette_name(pal)
+		NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:palette.name
 													   action:@selector(selectionChanged:)
 												keyEquivalent:@""] autorelease];
-		[item setRepresentedObject:[NSValue valueWithPointer:pal]];
-		[[selectionPopup menu] addItem:item];
-		[item setTarget:self];
-		palettes[i] = pal;
-	}
-	 
-	if((docPaletteCount > 0) && ((userPaletteCount > 0) || (sysPaletteCount > 0)))
-	{
-		[[selectionPopup menu] addItem:[NSMenuItem separatorItem]];
-	}
-	 */
-	
-	if(index >= paletteCount)
-	{
-		index = paletteCount - 1;
-	}
-	
-	PXPalette_getUserPalettes(palettes, 0);
-	for (i = 0; i < userPaletteCount; i++)
-	{
-		NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:PXPalette_name(palettes[i])
-													   action:@selector(selectionChanged:)
-												keyEquivalent:@""] autorelease];
-		[item setRepresentedObject:[NSValue valueWithPointer:palettes[i]]];
+		[item setRepresentedObject:palette];
 		[[selectionPopup menu] addItem:item];
 		[item setTarget:self];
 	}
-	if((userPaletteCount > 0) && (sysPaletteCount > 0))
+	
+	if (([userPalettes count] > 0) && ([systemPalettes count] > 0))
 	{
 		[[selectionPopup menu] addItem:[NSMenuItem separatorItem]];
 	}
-	if(index >= paletteCount)
-	{
-		index = paletteCount - 1;
-	}
 	
-	PXPalette_getSystemPalettes(palettes, userPaletteCount);
-	for (i = 0; i < sysPaletteCount; i++)
+	for (PXPalette *palette in systemPalettes)
 	{
-		NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:PXPalette_name(palettes[i + userPaletteCount])
+		NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:palette.name
 													   action:@selector(selectionChanged:)
 												keyEquivalent:@""] autorelease];
-		[item setRepresentedObject:[NSValue valueWithPointer:palettes[i + userPaletteCount]]];
+		[item setRepresentedObject:palette];
 		[[selectionPopup menu] addItem:item];
 		[item setTarget:self];
 	}
 	//FIXME: this should do something about showing the document's palette
-	if ((sysPaletteCount) == 0)
+	if (([systemPalettes count]) == 0)
 	{
 		return NULL;
 	}
 	else
 	{
-		return palettes[index];	
+		return [_palettes objectAtIndex:index];
 	}
 }
 
 - (IBAction)selectionChanged:sender
 {
-	int i;
-	for (i = 0; i < paletteCount; i++)
-	{
-		if([[sender representedObject] pointerValue] == palettes[i])
-		{
+	for (PXPalette *palette in _palettes) {
+		if ([palette isEqual:[sender representedObject]]) {
 			if ([delegate respondsToSelector:@selector(paletteSelector:selectionDidChangeTo:)])
-				[delegate paletteSelector:self selectionDidChangeTo:palettes[i]];
+				[delegate paletteSelector:self selectionDidChangeTo:palette];
+			
 			return;
 		}
 	}
 }
 
-- (NSUInteger)paletteCount
+- (NSArray *)palettes
 {
-	return paletteCount;
-}
-
-- (PXPalette **)palettes
-{
-	return palettes;
+	return _palettes;
 }
 
 @end
