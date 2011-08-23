@@ -10,6 +10,7 @@
 
 #import "SubviewTableViewController.h"
 #import "PXLayerDetailsView.h"
+#import "PXLayerTextField.h"
 
 @implementation SubviewTableViewCell
 

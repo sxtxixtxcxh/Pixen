@@ -245,7 +245,7 @@
 			   (fullSize.width > [cachedSourceOutImage size].width) || 
 			   (fullSize.height > [cachedSourceOutImage size].height))
 			{
-				[cachedSourceOutImage autorelease];
+				[cachedSourceOutImage release];
 				cachedSourceOutImage = [[NSImage alloc] initWithSize:fullSize];
 			}
 			[cachedSourceOutImage lockFocus];

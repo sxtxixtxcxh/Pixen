@@ -177,7 +177,7 @@ NSArray *CreateGrayList()
 	return self;
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id *)stackbuf count:(NSUInteger)len
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained *)stackbuf count:(NSUInteger)len
 {
 	return [_colors countByEnumeratingWithState:state objects:stackbuf count:len];
 }
@@ -265,16 +265,16 @@ NSArray *CreateGrayList()
 		currIndex = [_colors count]-1;
 	}
 	
-	int value = (int) NSMapGet(_frequencies, color);
+	int value = (int) NSMapGet(_frequencies, (__bridge const void *) color);
 	value += amount;
 	
-	NSMapInsert(_frequencies, color, (void *) value);
+	NSMapInsert(_frequencies, (__bridge const void *) color, (void *) value);
 	
 	NSUInteger finalIndex = NSNotFound;
 	
 	for (NSInteger n = (currIndex-1); n >= 0; n--) {
 		NSColor *nextColor = [_colors objectAtIndex:n];
-		int nextValue = (int) NSMapGet(_frequencies, nextColor);
+		int nextValue = (int) NSMapGet(_frequencies, (__bridge const void *) nextColor);
 		
 		if (nextValue <= value) {
 			finalIndex = n;
@@ -296,23 +296,23 @@ NSArray *CreateGrayList()
 	if (currIndex == NSNotFound)
 		return;
 	
-	int value = (int) NSMapGet(_frequencies, color);
+	int value = (int) NSMapGet(_frequencies, (__bridge const void *) color);
 	value -= amount;
 	
 	if (value == 0) {
-		NSMapRemove(_frequencies, color);
+		NSMapRemove(_frequencies, (__bridge const void *) color);
 		[_colors removeObject:color];
 		
 		return;
 	}
 	
-	NSMapInsert(_frequencies, color, (void *) value);
+	NSMapInsert(_frequencies, (__bridge const void *) color, (void *) value);
 	
 	NSUInteger finalIndex = NSNotFound;
 	
 	for (NSInteger n = currIndex+1; n < [_colors count]; n++) {
 		NSColor *nextColor = [_colors objectAtIndex:n];
-		int nextValue = (int) NSMapGet(_frequencies, nextColor);
+		int nextValue = (int) NSMapGet(_frequencies, (__bridge const void *) nextColor);
 		
 		if (value <= nextValue) {
 			finalIndex = n;
