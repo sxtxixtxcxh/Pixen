@@ -360,7 +360,7 @@
 {
 	self = [super init];
 	
-	image = PXImage_initWithCoder(PXImage_alloc(), coder, (PXPalette *)[[coder associatedValueForKey:@"palette"] pointerValue]);
+	image = PXImage_initWithCoder(PXImage_alloc(), coder, (PXPalette *)[coder associatedValueForKey:@"palette"]);
 	name = [[coder decodeObjectForKey:@"name"] retain];
 	
 	visible = [coder containsValueForKey:@"visible"] ? [coder decodeBoolForKey:@"visible"] : YES;
@@ -457,7 +457,9 @@
 		{
 			color = [NSColor colorWithCalibratedRed:bitmapData[base + 0] / 255.0f green:bitmapData[base + 1] / 255.0f blue:bitmapData[base + 2] / 255.0f alpha:1];
 		}
-		[self setColor:PXPalette_colorClosestTo(p, color) atIndex:i];
+		
+#warning TODO: use PXPalette's Objective-C interface
+		//	[self setColor:PXPalette_colorClosestTo(p, color) atIndex:i];
 	}
 }
 
