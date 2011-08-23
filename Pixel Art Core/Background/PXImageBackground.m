@@ -68,12 +68,13 @@
 		[fileExtensions addObjectsFromArray:[current objectForKey:CFBundleTypeExtensionsKey]];
 	}
 	
-	if ([panel runModalForDirectory:GetBackgroundImagesDirectory()
-							   file:nil
-							  types:fileExtensions] == NSOKButton)
+	[panel setDirectoryURL:[NSURL fileURLWithPath:GetBackgroundImagesDirectory()]];
+	[panel setAllowedFileTypes:fileExtensions];
+	
+	if ([panel runModal] == NSFileHandlingPanelOKButton)
 	{
-		[self setImage:[[PXCanvas canvasWithContentsOfFile:[[panel filenames] objectAtIndex:0]] displayImage]];
-		[imageNameField setStringValue:[[[panel filenames] objectAtIndex:0] lastPathComponent]];
+		[self setImage:[[PXCanvas canvasWithContentsOfFile:[[panel URL] path]] displayImage]];
+		[imageNameField setStringValue:[[[panel URL] path] lastPathComponent]];
 	}
 }
 

@@ -444,10 +444,12 @@
 }
 
 - (void)exportToQuicktimePrompterDidEnd:(NSSavePanel *)panel 
-														 returnCode:(int)code 
-														contextInfo:(void *)info
+							 returnCode:(NSInteger)code 
+							contextInfo:(void *)info
 {
-	if (code == NSCancelButton) { return; }
+	if (code == NSFileHandlingPanelCancelButton)
+		return;
+	
 	[panel orderOut:self];
 	OSQTExporter *exporter = [[OSQTExporter alloc] init];
 	NSInteger celCount = [animation countOfCels];
@@ -455,10 +457,10 @@
 	for (i = 0; i < celCount; i++)
 	{
 		[exporter addImage:[[animation objectInCelsAtIndex:i] displayImage] 
-									 forLength:[[animation objectInCelsAtIndex:i] duration]];
+				 forLength:[[animation objectInCelsAtIndex:i] duration]];
 	}
-	[exporter exportToPath:[panel filename] 
-						parentWindow:[self window]];
+	
+	[exporter exportToPath:[[panel URL] path] parentWindow:[self window]];
 	[exporter release];
 }
 
@@ -472,14 +474,15 @@
 	
 	NSString *displayName = [[self document] displayName];
 	NSString *defaultFilename = [displayName stringByAppendingPathExtension:@"mov"];
-	[savePanel beginSheetForDirectory:nil 
-															 file:defaultFilename
-										 modalForWindow:[self window] 
-											modalDelegate:self 
-										 didEndSelector:@selector(exportToQuicktimePrompterDidEnd:
-																							returnCode:
-																							contextInfo:) 
-												contextInfo:nil];
+	
+	[savePanel beginSheetModalForWindow:[self window]
+					  completionHandler:^(NSInteger result) {
+						  
+						  [self exportToQuicktimePrompterDidEnd:savePanel
+													 returnCode:result
+													contextInfo:NULL];
+						  
+					  }
 }
 
 - (void)scalePrompterFinished:prompter shouldScale:shouldScale

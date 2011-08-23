@@ -27,7 +27,7 @@
 
 - (void)panelDidEndWithReturnCode:(NSInteger)code
 {
-	if (code == NSCancelButton) {
+	if (code == NSFileHandlingPanelCancelButton) {
 		[NSApp stopModal];
 		return;
 	}

@@ -201,7 +201,7 @@
 	[savePanel setExtensionHidden:NO];
 	[savePanel setCanSelectHiddenExtension:NO];
 	[savePanel setTitle:@"Save Sprite Sheet"];
-	[savePanel setRequiredFileType: (NSString *) kUTTypePNG];
+	[savePanel setAllowedFileTypes: [NSArray arrayWithObject: (NSString *) kUTTypePNG]];
 	
 	[savePanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
 		
