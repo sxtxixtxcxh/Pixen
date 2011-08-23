@@ -6,6 +6,10 @@
 #define __bridge
 #endif
 
+#ifndef __unsafe_unretained
+#define __unsafe_unretained
+#endif
+
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
     #import "NSArray_DeepMutableCopy.h"
