@@ -7,8 +7,10 @@
 //
 
 #import "PXAnimationWindowController.h"
+
 #import "PXCanvas_ImportingExporting.h"
 #import "PXCanvas_Selection.h"
+#import "PXCanvasController.h"
 #import "PXAnimation.h"
 #import "PXCel.h"
 #import "PXFilmStripView.h"

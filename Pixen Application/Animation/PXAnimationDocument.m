@@ -91,7 +91,7 @@
 		[files setObject:[[[NSFileWrapper alloc] initRegularFileWithContents:xmlData] autorelease] forKey:@"CelData.plist"];
 		return [[[NSFileWrapper alloc] initDirectoryWithFileWrappers:files] autorelease];
 	}
-	else if (UTTypeEqual(kUTTypeGIF, (CFStringRef)aType))
+	else if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef)aType))
 	{
 		NSError *err = nil;
 		NSData *data = [self dataOfType:(NSString *)kUTTypeGIF error:&err];
@@ -110,7 +110,7 @@
 
 - (NSData *)dataOfType:(NSString *)aType error:(NSError **)err
 {
-	if (UTTypeEqual(kUTTypeGIF, (CFStringRef) aType))
+	if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) aType))
 	{
 		OSProgressPopup *popup = [OSProgressPopup sharedProgressPopup];
 		PXAnimatedGifExporter *exporter = [[[PXAnimatedGifExporter alloc] initWithSize:[animation size] iterations:1] autorelease];
@@ -183,7 +183,7 @@
 		
 		return (animation != nil) && ([animation countOfCels] > 0);
 	}
-	else if (UTTypeEqual(kUTTypeGIF, (CFStringRef) docType))
+	else if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) docType))
 	{
 		return [self readFromData:[wrapper regularFileContents] ofType:docType error:outError];
 	}
@@ -195,7 +195,7 @@
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)docType error:(NSError **)err
 {
-	if (UTTypeEqual(kUTTypeGIF, (CFStringRef) docType))
+	if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) docType))
 	{
 		[animation removeCel:[animation objectInCelsAtIndex:0]];
 		NSImage *tempImage = [[[NSImage alloc] initWithData:data] autorelease];
@@ -221,7 +221,7 @@
 
 + (BOOL)isNativeType:(NSString *)type
 {
-	if (UTTypeEqual(kUTTypeGIF, (CFStringRef) type)) { return YES; }
+	if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) type)) { return YES; }
 	return [super isNativeType:type];
 }
 

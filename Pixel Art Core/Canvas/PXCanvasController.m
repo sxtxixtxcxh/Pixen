@@ -19,6 +19,7 @@
 #import "PXCanvas_ImportingExporting.h"
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Layers.h"
+#import "PXCrosshair.h"
 #import "SBCenteringClipView.h"
 #import "PXCanvasView.h"
 #import "PXTool.h"
@@ -73,7 +74,7 @@
 	[canvas activateLayer:[[aNotification userInfo] objectForKey:PXLayerKey]];
 }
 
-- (void)setLayerController:contro
+- (void)setLayerController:(PXLayerController *)contro
 {
 	layerController = contro;
 	[layerController setCanvas:canvas];
@@ -84,8 +85,6 @@
 			   name:PXLayerSelectionDidChangeName 
 			 object:layerController];
 	
-	if ([[canvas layers] count] > 1)
-		[layerController toggle:self];
 	[nc postNotificationName:PXCanvasLayersChangedNotificationName
 					  object:canvas];
 }

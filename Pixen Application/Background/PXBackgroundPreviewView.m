@@ -12,7 +12,7 @@
 
 - (void)setImage:(NSImage *)im
 {
-	[image autorelease];
+	[image release];
 	image = [im retain];
 	NSSize imageSize = [image size];
 	NSSize viewSize = [self bounds].size;

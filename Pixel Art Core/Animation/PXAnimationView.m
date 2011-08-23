@@ -7,6 +7,8 @@
 //
 
 #import "PXAnimationView.h"
+
+#import "PXCanvas_Modifying.h"
 #import "PXDocumentController.h"
 
 @implementation PXAnimationView

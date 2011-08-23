@@ -4,7 +4,9 @@
 //
 
 #import "PXDefaultBackgroundTemplateView.h"
+
 #import "NSBezierPath+PXRoundedRectangleAdditions.h"
+#import "PXBackgroundPreviewView.h"
 
 @implementation PXDefaultBackgroundTemplateView
 

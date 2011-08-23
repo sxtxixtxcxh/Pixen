@@ -7,6 +7,8 @@
 //
 
 #import "PXCanvasWindowController_Zooming.h"
+
+#import "PXCanvas.h"
 #import "PXCanvasView.h"
 #import "PXCanvasController.h"
 

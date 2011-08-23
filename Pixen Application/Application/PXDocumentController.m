@@ -471,7 +471,7 @@ NSString *palettesSubdirName = @"Palettes";
 
 - (id)makeDocumentWithContentsOfURL:(NSURL *)url ofType:(NSString *)docType error:(NSError **)err
 {
-	if (UTTypeEqual(kUTTypeGIF, (CFStringRef) docType))
+	if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) docType))
 	{
 		id potentiallyAnimatedDocument = [self handleAnimatedGifAtURL:url];
 		if (potentiallyAnimatedDocument)
@@ -487,7 +487,7 @@ NSString *palettesSubdirName = @"Palettes";
 
 - (id)makeDocumentForURL:(NSURL *)absoluteDocumentURL withContentsOfURL:(NSURL *)absoluteDocumentContentsURL ofType:(NSString *)typeName error:(NSError **)outError
 {
-	if (UTTypeEqual(kUTTypeGIF, (CFStringRef)typeName))
+	if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef)typeName))
 	{
 		id potentiallyAnimatedDocument = [self handleAnimatedGifAtURL:absoluteDocumentURL];
 		if (potentiallyAnimatedDocument)

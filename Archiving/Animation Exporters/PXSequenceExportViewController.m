@@ -39,7 +39,7 @@
 			if ([type isEqualToString:PixenImageFileTypeOld] || [type isEqualToString:PixenAnimationFileType] || [type isEqualToString:PixenAnimationFileTypeOld])
 				continue;
 			
-			NSString *displayName = (NSString *) UTTypeCopyDescription((CFStringRef)type);
+			NSString *displayName = (NSString *) UTTypeCopyDescription((__bridge CFStringRef)type);
 			
 			if (displayName) {
 				[_fileTypes addObject:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -59,7 +59,7 @@
 {
 	[_typesController setSelectionIndex:[sender indexOfSelectedItem]];
 	
-	NSDictionary *dictionary = (NSDictionary *) UTTypeCopyDeclaration((CFStringRef)[self selectedUTI]);
+	NSDictionary *dictionary = (NSDictionary *) UTTypeCopyDeclaration((__bridge CFStringRef)[self selectedUTI]);
 	id ext = [[dictionary valueForKey:(NSString *)kUTTypeTagSpecificationKey] valueForKey:(NSString *)kUTTagClassFilenameExtension];
 	
 	if ([ext isKindOfClass:[NSArray class]])

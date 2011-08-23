@@ -26,12 +26,14 @@
   //
 
 #import "PXEyedropperTool.h"
+
 #import "PXCanvas.h"
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvasController.h"
 #import "PXEyedropperToolPropertiesController.h"
 #import "PXToolPaletteController.h"
+#import "PXToolSwitcher.h"
 
 @implementation PXEyedropperTool
 

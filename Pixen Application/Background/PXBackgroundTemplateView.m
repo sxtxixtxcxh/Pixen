@@ -46,7 +46,7 @@
 
 - (void)setBackground:(PXBackground *)bg
 {
-	[background autorelease];
+	[background release];
 	background = [bg retain];
 	if(!bg) { return; }
 	[imageView setImage:[background previewImageOfSize:[imageView bounds].size]];

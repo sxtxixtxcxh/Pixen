@@ -27,9 +27,11 @@
 //
 
 #import "PXTool.h"
+
 #import "PXPalette.h"
 #import "PXCanvas.h"
 #import "PXCanvasController.h"
+#import "PXToolPropertiesController.h"
 #import "PXToolSwitcher.h"
 
 @implementation PXTool

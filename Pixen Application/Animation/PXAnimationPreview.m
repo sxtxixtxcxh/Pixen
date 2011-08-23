@@ -8,6 +8,7 @@
 
 #import "PXAnimationPreview.h"
 
+#import "PXCel.h"
 
 @implementation PXAnimationPreview
 
