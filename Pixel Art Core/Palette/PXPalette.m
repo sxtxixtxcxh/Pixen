@@ -8,6 +8,7 @@
 
 #import "PXPalette.h"
 
+#import "Constants.h"
 #import "NSColor+PXPaletteAdditions.h"
 #import "NSMutableArray+ReorderingAdditions.h"
 #import "PathUtilities.h"
@@ -176,6 +177,17 @@ NSArray *CreateGrayList()
 		[_colors addObjectsFromArray:[dict objectForKey:@"colors"]];
 	}
 	return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+	return [self initWithDictionary:[aDecoder decodeObjectForKey:@"palette"]];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+	[aCoder encodeObject:[self dictForArchiving] forKey:@"palette"];
+	[aCoder encodeObject:[NSNumber numberWithInt:3] forKey:@"paletteVersion"];
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained *)stackbuf count:(NSUInteger)len

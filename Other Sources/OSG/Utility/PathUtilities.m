@@ -28,6 +28,8 @@
 
 #import "PathUtilities.h"
 
+#import "Constants.h"
+
 NSString *GetApplicationSupportDirectory()
 {
 	//Check the Library user path

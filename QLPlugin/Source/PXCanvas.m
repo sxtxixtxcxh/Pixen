@@ -22,18 +22,18 @@
 			BOOL isIndexedImage = [coder containsValueForKey:@"palette"];
 			PXPalette *palette = NULL;
 			if(isIndexedImage) {
-				palette = PXPalette_alloc();
-				if(!PXPalette_initWithCoder(palette, coder))
-				{
-					PXPalette_release(palette);
-				}
-				[coder associateValue:[NSValue valueWithPointer:palette] withKey:@"palette"];
+				palette = [[PXPalette alloc] initWithCoder:coder];
+				
+				if (!palette)
+					[palette release];
+				
+				[coder associateValue:palette withKey:@"palette"];
 			}	
 			layers = [[coder decodeObjectForKey:@"layers"] retain];
 			if(isIndexedImage) {
 				[coder associateValue:nil withKey:@"palette"];
 				if(palette) {
-					PXPalette_release(palette);
+					[palette release];
 				}
 			}
     }

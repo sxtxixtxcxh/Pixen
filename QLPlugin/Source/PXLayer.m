@@ -16,7 +16,7 @@
 {
 	self = [super init];
 	if (self) {
-		image = PXImage_initWithCoder(PXImage_alloc(), coder, (PXPalette *)[[coder associatedValueForKey:@"palette"] pointerValue]);
+		image = PXImage_initWithCoder(PXImage_alloc(), coder, (PXPalette *)[coder associatedValueForKey:@"palette"]);
 		
 		visible = [coder containsValueForKey:@"visible"] ? [coder decodeBoolForKey:@"visible"] : YES;
 		opacity = [coder decodeObjectForKey:@"opacity"] ? [[coder decodeObjectForKey:@"opacity"] doubleValue] : 100;

@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 Matt Rajca. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 @interface PXPalette : NSObject < NSCoding, NSCopying, NSFastEnumeration > {
   @private
