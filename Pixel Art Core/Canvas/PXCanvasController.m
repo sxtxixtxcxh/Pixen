@@ -28,7 +28,6 @@
 #import "PXGridSettingsController.h"
 #import "PXGrid.h"
 #import "PXToolSwitcher.h"
-#import "TabletEvents.h"
 
 @implementation PXCanvasController
 
@@ -419,7 +418,7 @@
 	[view centerOn:[view convertFromCanvasToViewPoint:point]];
 }
 
-- (void)mouseDown:event forTool:aTool
+- (void)mouseDown:(NSEvent *)event forTool:aTool
 {
 	if(downEventOccurred) 
 		return; 
@@ -438,10 +437,10 @@
 		return; 
 	[oldColor release];
 	oldColor = [[aTool colorForCanvas:canvas] retain];
-	if([event isTabletPointerEvent] && [self caresAboutPressure])
+	if([event type] == NSTabletPoint && [self caresAboutPressure])
 	{
 		id color = [oldColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-		float pressure = [event scaledTabletPressure];
+		float pressure = [event pressure];
 		[aTool setColor:[NSColor colorWithCalibratedRed:[color redComponent] green:[color greenComponent] blue:[color blueComponent] alpha:pressure * [color alphaComponent]]];
 	}
 	initialPoint = [event locationInWindow];
@@ -455,10 +454,10 @@
 	
 	if(![aTool respondsToSelector:@selector(mouseDraggedFrom:to:fromCanvasController:)]) 
 		return; 
-	if([event isTabletPointerEvent] && [self caresAboutPressure])
+	if([event type] == NSTabletPoint && [self caresAboutPressure])
 	{
 		id color = [oldColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-		float pressure = [event scaledTabletPressure];
+		float pressure = [event pressure];
 		[aTool setColor:[NSColor colorWithCalibratedRed:[color redComponent] green:[color greenComponent] blue:[color blueComponent] alpha:pressure * [color alphaComponent]]];
 	}	
 	NSPoint endPoint = [event locationInWindow];

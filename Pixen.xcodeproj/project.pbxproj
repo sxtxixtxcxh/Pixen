@@ -88,8 +88,6 @@
 		EA041A1A0CE8F72F0095DAA9 /* PXBackgroundConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EA041A180CE8F72F0095DAA9 /* PXBackgroundConfig.m */; };
 		EA2EA41B10DB37E50065090C /* NSString+Comparison.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2EA41910DB37E50065090C /* NSString+Comparison.h */; };
 		EA2EA41C10DB37E50065090C /* NSString+Comparison.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2EA41A10DB37E50065090C /* NSString+Comparison.m */; };
-		EA31F8700CE7BD8B00EC481B /* PXApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8620CE7BD8B00EC481B /* PXApplication.h */; };
-		EA31F8710CE7BD8B00EC481B /* PXApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F8630CE7BD8B00EC481B /* PXApplication.m */; };
 		EA31F8720CE7BD8B00EC481B /* PXDocumentController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8640CE7BD8B00EC481B /* PXDocumentController.h */; };
 		EA31F8730CE7BD8B00EC481B /* PXDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F8650CE7BD8B00EC481B /* PXDocumentController.m */; };
 		EA31F8740CE7BD8B00EC481B /* PXPanelManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8660CE7BD8B00EC481B /* PXPanelManager.h */; };
@@ -314,12 +312,6 @@
 		EA31FCC40CE7D7C200EC481B /* SubviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC410CE7D7C200EC481B /* SubviewTableViewCell.m */; };
 		EA31FCC50CE7D7C200EC481B /* SubviewTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC420CE7D7C200EC481B /* SubviewTableViewController.h */; };
 		EA31FCC60CE7D7C200EC481B /* SubviewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC430CE7D7C200EC481B /* SubviewTableViewController.m */; };
-		EA31FCCD0CE7D7C200EC481B /* TabletAEDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC4D0CE7D7C200EC481B /* TabletAEDictionary.h */; };
-		EA31FCCE0CE7D7C200EC481B /* TabletEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC4E0CE7D7C200EC481B /* TabletEvents.h */; };
-		EA31FCCF0CE7D7C200EC481B /* TabletEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC4F0CE7D7C200EC481B /* TabletEvents.m */; };
-		EA31FCD00CE7D7C200EC481B /* TAEHelpers.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC500CE7D7C200EC481B /* TAEHelpers.c */; };
-		EA31FCD10CE7D7C200EC481B /* TAEHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC510CE7D7C200EC481B /* TAEHelpers.h */; };
-		EA31FCD20CE7D7C200EC481B /* Wacom.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC520CE7D7C200EC481B /* Wacom.h */; };
 		EA31FCD30CE7D7C200EC481B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC530CE7D7C200EC481B /* main.m */; };
 		EA31FCD40CE7D7C200EC481B /* PXAboutController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC560CE7D7C200EC481B /* PXAboutController.h */; };
 		EA31FCD50CE7D7C200EC481B /* PXAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC570CE7D7C200EC481B /* PXAboutController.m */; };
@@ -621,8 +613,6 @@
 		EA041A180CE8F72F0095DAA9 /* PXBackgroundConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXBackgroundConfig.m; sourceTree = "<group>"; };
 		EA2EA41910DB37E50065090C /* NSString+Comparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Comparison.h"; sourceTree = "<group>"; };
 		EA2EA41A10DB37E50065090C /* NSString+Comparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Comparison.m"; sourceTree = "<group>"; };
-		EA31F8620CE7BD8B00EC481B /* PXApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXApplication.h; sourceTree = "<group>"; };
-		EA31F8630CE7BD8B00EC481B /* PXApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXApplication.m; sourceTree = "<group>"; };
 		EA31F8640CE7BD8B00EC481B /* PXDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXDocumentController.h; sourceTree = "<group>"; };
 		EA31F8650CE7BD8B00EC481B /* PXDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PXDocumentController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		EA31F8660CE7BD8B00EC481B /* PXPanelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPanelManager.h; sourceTree = "<group>"; };
@@ -847,12 +837,6 @@
 		EA31FC410CE7D7C200EC481B /* SubviewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubviewTableViewCell.m; sourceTree = "<group>"; };
 		EA31FC420CE7D7C200EC481B /* SubviewTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubviewTableViewController.h; sourceTree = "<group>"; };
 		EA31FC430CE7D7C200EC481B /* SubviewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubviewTableViewController.m; sourceTree = "<group>"; };
-		EA31FC4D0CE7D7C200EC481B /* TabletAEDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletAEDictionary.h; sourceTree = "<group>"; };
-		EA31FC4E0CE7D7C200EC481B /* TabletEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletEvents.h; sourceTree = "<group>"; };
-		EA31FC4F0CE7D7C200EC481B /* TabletEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabletEvents.m; sourceTree = "<group>"; };
-		EA31FC500CE7D7C200EC481B /* TAEHelpers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TAEHelpers.c; sourceTree = "<group>"; };
-		EA31FC510CE7D7C200EC481B /* TAEHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAEHelpers.h; sourceTree = "<group>"; };
-		EA31FC520CE7D7C200EC481B /* Wacom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wacom.h; sourceTree = "<group>"; };
 		EA31FC530CE7D7C200EC481B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EA31FC560CE7D7C200EC481B /* PXAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAboutController.h; sourceTree = "<group>"; };
 		EA31FC570CE7D7C200EC481B /* PXAboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAboutController.m; sourceTree = "<group>"; };
@@ -1158,8 +1142,6 @@
 		EA31F8610CE7BD8B00EC481B /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				EA31F8620CE7BD8B00EC481B /* PXApplication.h */,
-				EA31F8630CE7BD8B00EC481B /* PXApplication.m */,
 				EA31F8640CE7BD8B00EC481B /* PXDocumentController.h */,
 				EA31F8650CE7BD8B00EC481B /* PXDocumentController.m */,
 				EA31F8660CE7BD8B00EC481B /* PXPanelManager.h */,
@@ -1644,7 +1626,6 @@
 				EA31FC110CE7D7C200EC481B /* libungif */,
 				EA31FC3C0CE7D7C200EC481B /* SBCenteringClipView */,
 				EA31FC3F0CE7D7C200EC481B /* SubviewTableView */,
-				EA31FC4C0CE7D7C200EC481B /* Wacom */,
 			);
 			path = "Foreign Code";
 			sourceTree = "<group>";
@@ -1687,19 +1668,6 @@
 				EA31FC430CE7D7C200EC481B /* SubviewTableViewController.m */,
 			);
 			path = SubviewTableView;
-			sourceTree = "<group>";
-		};
-		EA31FC4C0CE7D7C200EC481B /* Wacom */ = {
-			isa = PBXGroup;
-			children = (
-				EA31FC4D0CE7D7C200EC481B /* TabletAEDictionary.h */,
-				EA31FC4E0CE7D7C200EC481B /* TabletEvents.h */,
-				EA31FC4F0CE7D7C200EC481B /* TabletEvents.m */,
-				EA31FC500CE7D7C200EC481B /* TAEHelpers.c */,
-				EA31FC510CE7D7C200EC481B /* TAEHelpers.h */,
-				EA31FC520CE7D7C200EC481B /* Wacom.h */,
-			);
-			path = Wacom;
 			sourceTree = "<group>";
 		};
 		EA31FC540CE7D7C200EC481B /* OSG */ = {
@@ -2079,7 +2047,6 @@
 				EA4A6C0508A97E26007BAC7F /* PXAnimation.h in Headers */,
 				EA4A6C4F08A98259007BAC7F /* PXCel.h in Headers */,
 				6117816108ABA7F30098DCC4 /* PXAnimationView.h in Headers */,
-				EA31F8700CE7BD8B00EC481B /* PXApplication.h in Headers */,
 				EA31F8720CE7BD8B00EC481B /* PXDocumentController.h in Headers */,
 				EA31F8740CE7BD8B00EC481B /* PXPanelManager.h in Headers */,
 				EA31F8760CE7BD8B00EC481B /* PXHotkeyFormatter.h in Headers */,
@@ -2189,10 +2156,6 @@
 				EA31FCC10CE7D7C200EC481B /* SBCenteringClipView.h in Headers */,
 				EA31FCC30CE7D7C200EC481B /* SubviewTableViewCell.h in Headers */,
 				EA31FCC50CE7D7C200EC481B /* SubviewTableViewController.h in Headers */,
-				EA31FCCD0CE7D7C200EC481B /* TabletAEDictionary.h in Headers */,
-				EA31FCCE0CE7D7C200EC481B /* TabletEvents.h in Headers */,
-				EA31FCD10CE7D7C200EC481B /* TAEHelpers.h in Headers */,
-				EA31FCD20CE7D7C200EC481B /* Wacom.h in Headers */,
 				EA31FCD40CE7D7C200EC481B /* PXAboutController.h in Headers */,
 				EA31FCD60CE7D7C200EC481B /* PXAboutPanel.h in Headers */,
 				EA31FCDE0CE7D7C200EC481B /* OSProgressPopup.h in Headers */,
@@ -2467,7 +2430,6 @@
 				EA4A6C0608A97E26007BAC7F /* PXAnimation.m in Sources */,
 				EA4A6C5008A98259007BAC7F /* PXCel.m in Sources */,
 				6117816208ABA7F30098DCC4 /* PXAnimationView.m in Sources */,
-				EA31F8710CE7BD8B00EC481B /* PXApplication.m in Sources */,
 				EA31F8730CE7BD8B00EC481B /* PXDocumentController.m in Sources */,
 				EA31F8750CE7BD8B00EC481B /* PXPanelManager.m in Sources */,
 				EA31F8770CE7BD8B00EC481B /* PXHotkeyFormatter.m in Sources */,
@@ -2582,8 +2544,6 @@
 				EA31FCC20CE7D7C200EC481B /* SBCenteringClipView.m in Sources */,
 				EA31FCC40CE7D7C200EC481B /* SubviewTableViewCell.m in Sources */,
 				EA31FCC60CE7D7C200EC481B /* SubviewTableViewController.m in Sources */,
-				EA31FCCF0CE7D7C200EC481B /* TabletEvents.m in Sources */,
-				EA31FCD00CE7D7C200EC481B /* TAEHelpers.c in Sources */,
 				EA31FCD30CE7D7C200EC481B /* main.m in Sources */,
 				EA31FCD50CE7D7C200EC481B /* PXAboutController.m in Sources */,
 				EA31FCD70CE7D7C200EC481B /* PXAboutPanel.m in Sources */,

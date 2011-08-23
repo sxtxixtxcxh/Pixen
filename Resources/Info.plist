@@ -346,7 +346,7 @@
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
-	<string>PXApplication</string>
+	<string>NSApplication</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>

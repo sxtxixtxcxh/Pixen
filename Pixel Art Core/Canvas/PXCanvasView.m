@@ -25,11 +25,6 @@
 
 #import "SBCenteringClipView.h"
 
-#import "PXApplication.h"
-#import "TabletEvents.h"
-#import "Wacom.h"
-#import "TAEHelpers.h"
-
 #import "PXCanvasController.h"
 
 @interface PXTool(DrawRectOnTopInViewWarningSilencer)
@@ -89,11 +84,6 @@ void PXDebugRect(NSRect r, float alpha)
 											 selector:@selector(selectionStatusChanged:)
 												 name:PXCanvasSelectionStatusChangedNotificationName
 											   object:canvas];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(handleProximity:)
-												 name:kProximityNotification
-											   object:nil];
 	
 	marqueePatternOffset = NSZeroPoint;
 	return self;
@@ -826,21 +816,12 @@ void PXDebugRect(NSRect r, float alpha)
 	[delegate scrollWheel:event];
 }
 
-- (void) handleProximity:(NSNotification *)proxNotice
+- (void)tabletProximity:(NSEvent *)theEvent
 {
-	NSDictionary *proxDict = [proxNotice userInfo];
-	UInt8 enterProximity;
-	UInt8 pointerType;
-	UInt16 pointerID;
-	
-	[[proxDict objectForKey:kEnterProximity] getValue:&enterProximity];
-	[[proxDict objectForKey:kPointerID] getValue:&pointerID];
 	erasing = NO;
-	// Only interested in Enter Proximity for 1st concurrent device
-	if(enterProximity != 0)
-	{
-		[[proxDict objectForKey:kPointerType] getValue:&pointerType];
-		erasing = (pointerType == EEraser);
+	
+	if ([theEvent isEnteringProximity]) {
+		erasing = ([theEvent pointingDeviceType] == NSEraserPointingDevice);
 	}
 }
 
