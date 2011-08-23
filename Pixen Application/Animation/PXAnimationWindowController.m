@@ -482,7 +482,7 @@
 													 returnCode:result
 													contextInfo:NULL];
 						  
-					  }
+					  }];
 }
 
 - (void)scalePrompterFinished:prompter shouldScale:shouldScale
