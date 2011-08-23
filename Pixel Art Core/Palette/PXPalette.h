@@ -43,6 +43,8 @@
 
 - (void)replaceColorAtIndex:(NSUInteger)index withColor:(NSColor *)color;
 
+- (NSColor *)colorClosestToColor:(NSColor *)color;
+
 - (void)incrementCountForColor:(NSColor *)color byAmount:(NSInteger)amount;
 - (void)decrementCountForColor:(NSColor *)color byAmount:(NSInteger)amount;
 

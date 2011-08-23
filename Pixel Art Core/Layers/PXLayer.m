@@ -458,8 +458,7 @@
 			color = [NSColor colorWithCalibratedRed:bitmapData[base + 0] / 255.0f green:bitmapData[base + 1] / 255.0f blue:bitmapData[base + 2] / 255.0f alpha:1];
 		}
 		
-#warning TODO: use PXPalette's Objective-C interface
-		//	[self setColor:PXPalette_colorClosestTo(p, color) atIndex:i];
+		[self setColor:[p colorClosestToColor:color] atIndex:i];
 	}
 }
 

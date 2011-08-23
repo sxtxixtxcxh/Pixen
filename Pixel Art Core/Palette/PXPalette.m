@@ -8,6 +8,7 @@
 
 #import "PXPalette.h"
 
+#import "NSColor+PXPaletteAdditions.h"
 #import "NSMutableArray+ReorderingAdditions.h"
 #import "PathUtilities.h"
 
@@ -254,6 +255,24 @@ NSArray *CreateGrayList()
 	}
 	
 	return newPalette;
+}
+
+- (NSColor *)colorClosestToColor:(NSColor *)color
+{
+	CGFloat minDistance = INFINITY;
+	NSColor *closestColor = nil;
+	
+	for (NSColor *color in _colors)
+	{
+		CGFloat distance = [color distanceTo:color];
+		
+		if (distance < minDistance) {
+			minDistance = distance;
+			closestColor = color;
+		}
+	}
+	
+	return closestColor;
 }
 
 - (void)incrementCountForColor:(NSColor *)color byAmount:(NSInteger)amount
