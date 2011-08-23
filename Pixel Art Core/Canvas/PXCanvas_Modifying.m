@@ -276,7 +276,7 @@
 	}
 	
 	if (transparency)
-		[palette addColorWithoutDuplicating:[NSColor clearColor]];
+		[palette addColorWithoutDuplicating:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
 	
 	for (id current in canvases)
 	{

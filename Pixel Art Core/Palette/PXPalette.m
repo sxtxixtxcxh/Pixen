@@ -194,7 +194,7 @@ NSArray *CreateGrayList()
 
 - (void)addBackgroundColor
 {
-	[self addColorWithoutDuplicating:[NSColor clearColor]];
+	[self addColorWithoutDuplicating:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
 }
 
 - (NSUInteger)colorCount
