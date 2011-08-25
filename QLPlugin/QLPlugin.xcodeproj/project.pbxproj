@@ -332,7 +332,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "\"$(SYSTEM_LIBRARY_DIR)/Frameworks\"";
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Source/QLPlugin-Prefix.pch";
 				INFOPLIST_FILE = "Resources/QLPlugin-Info.plist";
 				INSTALL_PATH = /Library/QuickLook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -344,7 +345,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "\"$(SYSTEM_LIBRARY_DIR)/Frameworks\"";
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Source/QLPlugin-Prefix.pch";
 				INFOPLIST_FILE = "Resources/QLPlugin-Info.plist";
 				INSTALL_PATH = /Library/QuickLook;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -2,3 +2,11 @@
 // Prefix header for all source files of the 'QLPlugin' target in the 'QLPlugin' project
 //
 
+#ifndef __has_feature
+#define __has_feature(x) 0
+#endif
+
+#if !__has_feature(objc_arc)
+#define __unsafe_unretained
+#define __bridge
+#endif
