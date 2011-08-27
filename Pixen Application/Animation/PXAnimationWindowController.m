@@ -472,9 +472,6 @@
 	[savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"mov"]];
 	[savePanel setPrompt:@"Export"];
 	
-	NSString *displayName = [[self document] displayName];
-	NSString *defaultFilename = [displayName stringByAppendingPathExtension:@"mov"];
-	
 	[savePanel beginSheetModalForWindow:[self window]
 					  completionHandler:^(NSInteger result) {
 						  
