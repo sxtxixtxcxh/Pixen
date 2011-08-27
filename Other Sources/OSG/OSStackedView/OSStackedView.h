@@ -40,7 +40,7 @@
 	NSPoint dragOffset;
 }
 - (NSView *)selectedView;
-- (int)selectedRow;
+- (NSUInteger)selectedRow;
 - (void)stackSubview:(NSView *)sub;
 - (void)unstackSubview:(NSView *)sub;
 - (void)clearStack;

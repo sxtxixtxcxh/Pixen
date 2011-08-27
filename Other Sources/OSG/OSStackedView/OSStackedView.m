@@ -205,7 +205,7 @@
 	return [selectedElement view];
 }
 
-- (int)selectedRow
+- (NSUInteger)selectedRow
 {
 	return [views indexOfObject:selectedElement];
 }
@@ -238,7 +238,7 @@
 	if(![delegate respondsToSelector:@selector(stackedView:writeRows:toPasteboard:)]) { return; }
 	NSPasteboard *pasteboard = [NSPasteboard pasteboardWithName:NSDragPboard];
 	dragOffset = [element convertPoint:[event locationInWindow] fromView:nil];
-	if([delegate stackedView:self writeRows:[NSArray arrayWithObject:[NSNumber numberWithInt:[views indexOfObject:element]]] toPasteboard:pasteboard])
+	if([delegate stackedView:self writeRows:[NSArray arrayWithObject:[NSNumber numberWithInt:(int)[views indexOfObject:element]]] toPasteboard:pasteboard])
 	{
 		NSImage *image = [self dragImageForElement:element];
 		[element dragImage:image at:NSZeroPoint offset:NSMakeSize(dragOffset.x, dragOffset.y) event:event pasteboard:pasteboard source:self slideBack:NO];

@@ -115,7 +115,7 @@
 		OSProgressPopup *popup = [OSProgressPopup sharedProgressPopup];
 		PXAnimatedGifExporter *exporter = [[[PXAnimatedGifExporter alloc] initWithSize:[animation size] iterations:1] autorelease];
 		int i;
-		int numberOfCels = [animation countOfCels];
+		NSUInteger numberOfCels = [animation countOfCels];
 		[popup setMaxProgress:numberOfCels];
 		
 		[popup beginOperationWithStatusText:[NSString stringWithFormat:@"Exporting GIF... (1 of %d)", numberOfCels]

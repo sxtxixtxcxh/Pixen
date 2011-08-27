@@ -136,7 +136,7 @@
 	if([zoomStepper intValue] >= [zoomPercentageBox numberOfItems]) 
 	{ 
 		NSBeep();
-		[zoomStepper setIntValue:[zoomPercentageBox numberOfItems]-1]; 
+		[zoomStepper setIntValue: (int)[zoomPercentageBox numberOfItems]-1]; 
 		return; 
 	}
 	[self zoomToIndex:[zoomStepper intValue]];

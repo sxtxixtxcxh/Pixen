@@ -13,7 +13,7 @@
 
 @implementation PXCanvas(CopyPaste)
 
-- (int)runPasteTooBigAlert:(NSString *)pastedThing size:(NSSize)aSize
+- (NSInteger)runPasteTooBigAlert:(NSString *)pastedThing size:(NSSize)aSize
 {
 	return [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"The pasted %@ is too big!", @"The pasted %@ is too big!"), pastedThing]
                           defaultButton:NSLocalizedString(@"Resize Canvas to Fit", @"Resize Canvas to Fit")

@@ -14,7 +14,7 @@
 #import "PXAnimationDocument.h"
 
 @interface PXLayerController()
-- (void)propagateSelectedLayer:(int)row;
+- (void)propagateSelectedLayer:(NSInteger)row;
 @end
 
 @implementation PXLayerController
@@ -280,12 +280,12 @@
 	if (idx == NSNotFound || idx >= [[canvas layers] count]) {
 		[self selectRow:0];
 	} else {
-		int row = [self invertLayerIndex:idx];
+		NSUInteger row = [self invertLayerIndex:idx];
 		[self propagateSelectedLayer:row];
 	}
 }
 
-- (void)propagateSelectedLayer:(int)row {
+- (void)propagateSelectedLayer:(NSInteger)row {
 	if(!canvas || row < 0) { return; }
 	PXLayer *layer = [[canvas layers] objectAtIndex:row];
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -302,7 +302,7 @@
 		[self selectRow:[[canvas layers] indexOfObject:[canvas activeLayer]]]; 
 		return;
 	}
-	int row = [self invertLayerIndex:[[layersView selectionIndexes] firstIndex]];
+	NSUInteger row = [self invertLayerIndex:[[layersView selectionIndexes] firstIndex]];
 	[self selectRow:row];	
 	[self propagateSelectedLayer:row];
 }
@@ -327,7 +327,7 @@
 
 - (void)mergeDownLayerAtCanvasLayersIndex:(NSUInteger)ind
 {
-	int index = ind;
+	NSUInteger index = ind;
 	if (index >= [[canvas layers] count]) {
 		index = 0;
 	}

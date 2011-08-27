@@ -107,8 +107,8 @@ void PXTileSetAtXY(PXTile *t, int xv, int yv, NSColor *color)
 		t->image = NULL;
 	}
 	unsigned char *data = CGBitmapContextGetData(t->painting);
-	int bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
-	unsigned startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y)*bytesPerRow+x*PXTileComponentsPerPixel;
+	NSUInteger bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
+	NSUInteger startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y)*bytesPerRow+x*PXTileComponentsPerPixel;
 	CGFloat components[4];
 	[color getComponents:components];
 	CGFloat a = components[3];
@@ -123,7 +123,7 @@ unsigned int PXTileGetData(PXTile *t, unsigned char **data)
 	{
 		*data = CGBitmapContextGetData(t->painting);
 	}
-	return CGBitmapContextGetBytesPerRow(t->painting) * CGBitmapContextGetHeight(t->painting);
+	return (unsigned int)(CGBitmapContextGetBytesPerRow(t->painting) * CGBitmapContextGetHeight(t->painting));
 }
 
 PXImage *PXImage_alloc()
@@ -603,14 +603,14 @@ NSImage *PXImage_bitmapImage(PXImage *self)
 		unsigned char * oldData = [tempRep bitmapData];
 		int i, j;
 		NSSize imageSize = NSMakeSize([tempRep pixelsWide], [tempRep pixelsHigh]);
-		int bytesPerRow = [tempRep bytesPerRow];
-		int samplesPerPixel = [tempRep samplesPerPixel];
+		NSInteger bytesPerRow = [tempRep bytesPerRow];
+		NSInteger samplesPerPixel = [tempRep samplesPerPixel];
 		for (j = 0; j < imageSize.height; j++)
 		{
 			for (i = 0; i < imageSize.width; i++)
 			{
-				int oldBase = j * bytesPerRow + i * samplesPerPixel;
-				int newBase = j * 4 * self->width + i * 4;
+				NSInteger oldBase = j * bytesPerRow + i * samplesPerPixel;
+				NSInteger newBase = j * 4 * self->width + i * 4;
 				newData[newBase + 0] = oldData[oldBase + 0];
 				newData[newBase + 1] = oldData[oldBase + 1];
 				newData[newBase + 2] = oldData[oldBase + 2];
@@ -640,7 +640,7 @@ NSImage *PXImage_bitmapImage(PXImage *self)
 		{
 			for (i = 0; i < self->width; i++)
 			{
-				int baseIndex = j * [rep bytesPerRow] + i*4;
+				NSInteger baseIndex = j * [rep bytesPerRow] + i*4;
 				unsigned char temp;
 				temp = bitmapData[baseIndex];
 				bitmapData[baseIndex] = bitmapData[baseIndex+1];
