@@ -273,10 +273,17 @@ BOOL isPowerOfTwo(int num)
 	else
 	{
 		NSImage *image = [[[NSImage alloc] initWithData:data] autorelease];
+		
+		if (!image) {
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:-1 userInfo:nil];
+			return NO;
+		}
+		
 		[canvas release];
 		canvas = [[PXCanvas alloc] initWithImage:image];
 	}
-	if(canvas)
+	
+	if (canvas)
 	{
 		[canvas setUndoManager:[self undoManager]];
 		[self.windowController setCanvas:canvas];
@@ -284,6 +291,7 @@ BOOL isPowerOfTwo(int num)
 		[self updateChangeCount:NSChangeCleared]; 
 		return YES;
 	}
+	
 	return NO;
 }
 
