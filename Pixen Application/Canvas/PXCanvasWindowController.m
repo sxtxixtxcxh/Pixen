@@ -164,12 +164,14 @@
 - (void)prepare
 {
 	[self prepareZoom];
+	
 	[canvasController setDocument:[self document]];
 	[canvasController setWindow:[self window]];
 	[canvasController prepare];
+	
 	[self zoomToFit:self];
+	
 	[[self window] useOptimizedDrawing:YES];
-	[[self window] makeKeyAndOrderFront:self];
 }
 
 - (void)updateCanvasSize

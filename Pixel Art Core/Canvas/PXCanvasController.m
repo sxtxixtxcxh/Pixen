@@ -93,7 +93,7 @@
 	[view setDelegate:self];
 	
 	// Programmatically create our scrollview and canvas view
-	id clip = [[[SBCenteringClipView alloc] initWithFrame:[[scrollView contentView] frame]] autorelease];
+	SBCenteringClipView *clip = [[[SBCenteringClipView alloc] initWithFrame:[[scrollView contentView] frame]] autorelease];
 	[clip setBackgroundColor:[NSColor lightGrayColor]];
 	[clip setCopiesOnScroll:NO];
 	

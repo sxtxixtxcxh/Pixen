@@ -17,23 +17,15 @@
 
 - (void)dealloc
 {
-	[[self windowControllers] makeObjectsPerformSelector:@selector(close)];
-	[self removeWindowController:windowController];
-	
+	[windowController release];	
 	[super dealloc];
 }
 
-- (void)initWindowController
-{
-    windowController = nil;
-}
+- (void)initWindowController { }
 
-- (void)setWindowControllerData
-{
-	return;
-}
+- (void)setWindowControllerData { }
 
-- frameAutosaveName
+- (NSString *)frameAutosaveName
 {
 	return [[self className] stringByAppendingString:[self displayName]];
 }
@@ -41,11 +33,13 @@
 - (void)makeWindowControllers
 {
 	[self initWindowController];
+	
 	[[windowController window] setFrameAutosaveName:[self frameAutosaveName]];
 	[[windowController window] setFrameUsingName:[self frameAutosaveName]];
+	
     [self addWindowController:windowController];
-    [windowController showWindow:self];
 	[self setWindowControllerData];
+	
 	[windowController prepare];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentOpenedNotificationName
@@ -59,12 +53,12 @@
 
 - (NSArray *)canvases
 {
-  return [NSArray arrayWithObject:[self canvas]];
+	return [NSArray arrayWithObject:[self canvas]];
 }
 
 - (BOOL)containsCanvas:(PXCanvas *)c
 {
-  return [[self canvases] containsObject:c];
+	return [[self canvases] containsObject:c];
 }
 
 - (void)close
@@ -74,7 +68,9 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentWillCloseNotificationName
 															object:self];
 	}
+	
 	[super close];
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentDidCloseNotificationName
 														object:self];
 }
