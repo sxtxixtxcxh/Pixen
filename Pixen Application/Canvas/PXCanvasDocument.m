@@ -75,23 +75,6 @@ BOOL isPowerOfTwo(int num)
 	return (logResult == (int)logResult);
 }
 
-- (void)saveToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo {
-  if(absoluteURL == nil)
-  {
-    return;
-  }
-  if (UTTypeEqual(kUTTypeJPEG, (__bridge CFStringRef) typeName))
-	{
-		saveFactor = 100;
-  }
-  [super saveToURL:absoluteURL 
-            ofType:typeName 
-  forSaveOperation:saveOperation 
-          delegate:delegate 
-   didSaveSelector:didSaveSelector 
-       contextInfo:contextInfo];
-}
-
 - (BOOL)prepareSavePanel:(NSSavePanel *)savePanel
 {
 	NSString *lastType = [[NSUserDefaults standardUserDefaults] stringForKey:PXLastSavedFileType];
@@ -203,12 +186,12 @@ BOOL isPowerOfTwo(int num)
 	
 	if (UTTypeEqual(kUTTypeJPEG, (__bridge CFStringRef) type))
 	{
-    NSNumber *sf = [NSNumber numberWithFloat:saveFactor];
-    NSDictionary *props = [NSDictionary dictionaryWithObject:sf
-                                                      forKey:NSImageCompressionFactor];
-		return [canvas imageDataWithType:NSJPEGFileType 
-                          properties:props];
+		NSDictionary *props = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0f]
+														  forKey:NSImageCompressionFactor];
+		
+		return [canvas imageDataWithType:NSJPEGFileType properties:props];
 	}
+	
 	return [[self class] dataRepresentationOfType:type withCanvas:canvas];
 }
 

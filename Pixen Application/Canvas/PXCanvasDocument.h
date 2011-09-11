@@ -13,8 +13,6 @@
   @private
 	PXCanvas *canvas;
 	PXCanvasPrintView *printableView;
-	
-	float saveFactor;
 }
 
 + (NSData *)dataRepresentationOfType:(NSString *)aType withCanvas:(PXCanvas *)canvas;
