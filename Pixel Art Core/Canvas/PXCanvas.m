@@ -153,24 +153,6 @@
 - (void)updatePreviewSize
 {
 	canvasRect = NSMakeRect(0, 0, [self size].width, [self size].height);  //Cached because [self size] and NSMakeRect slow things down when containsPoint is called a bunch
-	NSSize aSize = [self size];
-	if (aSize.width > 256 || aSize.height > 256)
-	{
-		if (aSize.width > aSize.height)
-		{
-			previewSize.width = 256;
-			previewSize.height = aSize.height * (256 / aSize.width);
-		}
-		else
-		{
-			previewSize.height = 256;
-			previewSize.width = aSize.width * (256 / aSize.height);
-		}
-	}
-	else
-	{	
-		previewSize = [self size];
-	}
 	[self layersChanged];
 }
 
