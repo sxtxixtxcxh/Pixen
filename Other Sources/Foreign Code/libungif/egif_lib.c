@@ -474,7 +474,7 @@ EGifPutComment(GifFileType * GifFile,
 int
 EGifPutExtensionFirst(GifFileType * GifFile,
                       int ExtCode,
-                      int ExtLen,
+                      size_t ExtLen,
                       const VoidPtr Extension) {
 
     GifByteType Buf[3];
@@ -505,7 +505,7 @@ EGifPutExtensionFirst(GifFileType * GifFile,
 int
 EGifPutExtensionNext(GifFileType * GifFile,
                      int ExtCode,
-                     int ExtLen,
+                     size_t ExtLen,
                      const VoidPtr Extension) {
 
     GifByteType Buf;
@@ -530,7 +530,7 @@ EGifPutExtensionNext(GifFileType * GifFile,
 int
 EGifPutExtensionLast(GifFileType * GifFile,
                      int ExtCode,
-                     int ExtLen,
+                     size_t ExtLen,
                      const VoidPtr Extension) {
 
     GifByteType Buf;
@@ -558,7 +558,7 @@ EGifPutExtensionLast(GifFileType * GifFile,
 int
 EGifPutExtension(GifFileType * GifFile,
                  int ExtCode,
-                 int ExtLen,
+                 size_t ExtLen,
                  const VoidPtr Extension) {
 
     GifByteType Buf[3];

@@ -41,7 +41,7 @@
 
 #define SVGA_SPECIAL 999    /* 800 by 600 Super VGA mode. */
 
-static int GraphDriver = -1,    /* Device parameters - reasonable values. */
+static long GraphDriver = -1,    /* Device parameters - reasonable values. */
    GraphMode = -1, ScreenColorBits = 1;
 static long ScreenXMax = 100, ScreenYMax = 100;
 

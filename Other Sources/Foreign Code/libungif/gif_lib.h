@@ -145,12 +145,12 @@ int EGifPutLine(GifFileType * GifFile, GifPixelType * GifLine,
 int EGifPutPixel(GifFileType * GifFile, GifPixelType GifPixel);
 int EGifPutComment(GifFileType * GifFile, const char *GifComment);
 int EGifPutExtensionFirst(GifFileType * GifFile, int GifExtCode,
-                          int GifExtLen, const VoidPtr GifExtension);
+                          size_t GifExtLen, const VoidPtr GifExtension);
 int EGifPutExtensionNext(GifFileType * GifFile, int GifExtCode,
-                         int GifExtLen, const VoidPtr GifExtension);
+                         size_t GifExtLen, const VoidPtr GifExtension);
 int EGifPutExtensionLast(GifFileType * GifFile, int GifExtCode,
-                         int GifExtLen, const VoidPtr GifExtension);
-int EGifPutExtension(GifFileType * GifFile, int GifExtCode, int GifExtLen,
+                         size_t GifExtLen, const VoidPtr GifExtension);
+int EGifPutExtension(GifFileType * GifFile, int GifExtCode, size_t GifExtLen,
                      const VoidPtr GifExtension);
 int EGifPutCode(GifFileType * GifFile, int GifCodeSize,
                 const GifByteType * GifCodeBlock);

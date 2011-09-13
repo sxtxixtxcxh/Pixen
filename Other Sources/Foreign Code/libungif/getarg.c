@@ -149,7 +149,7 @@ static int GAGetParmeters(int *Parameters[], int *ParamCount,
                           char ***argv);
 static int GAGetMultiParmeters(int *Parameters[], int *ParamCount,
                                char *CtrlStrCopy, int *argc, char ***argv);
-static void GASetParamCount(char *CtrlStr, int Max, int *ParamCount);
+static void GASetParamCount(char *CtrlStr, size_t Max, int *ParamCount);
 static void GAByteCopy(char *Dst, char *Src, unsigned n);
 static int GAOptionExists(int argc, char **argv);
 #ifdef MYMALLOC
@@ -240,7 +240,7 @@ GATestAllSatis(char *CtrlStrCopy,
                int *Parameters[MAX_PARAM],
                int *ParamCount) {
 
-    int i;
+    size_t i;
     static char *LocalToken = NULL;
 
     /* If LocalToken is not initialized - do it now. Note that this string
@@ -535,7 +535,7 @@ GAGetMultiParmeters(int *Parameters[],
  **************************************************************************/
 static void
 GASetParamCount(char *CtrlStr,
-                int Max,
+                size_t Max,
                 int *ParamCount) {
     int i;
 
