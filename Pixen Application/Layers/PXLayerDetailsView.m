@@ -80,6 +80,7 @@
 
 - (void)dealloc
 {
+	[[self class] cancelPreviousPerformRequestsWithTarget:self];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
 }

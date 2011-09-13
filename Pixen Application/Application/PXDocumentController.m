@@ -426,7 +426,7 @@ NSString *palettesSubdirName = @"Palettes";
 		return NO; // suppress 'Document could not be created errors' which are the result of returning nil in 'makeUntitledDocumentOfType:error:'
 	}
 	
-	return YES;
+	return [super presentError:error];
 }
 
 - (id)makeUntitledDocumentOfType:(NSString *)typeName showSizePrompt:(BOOL)showPrompt error:(NSError **)outError
@@ -478,7 +478,7 @@ NSString *palettesSubdirName = @"Palettes";
 			return potentiallyAnimatedDocument;
 	}
 	NSDocument *doc = [super makeDocumentWithContentsOfURL:url ofType:docType error:err];
-	if(err && *err) {
+	if (err && *err) {
 		[self presentError:*err];
 		return nil;
 	}

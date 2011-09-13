@@ -123,10 +123,12 @@
 		}
 		else
 		{
-			id newView = [[[PXLayerDetailsView alloc] initWithLayer:layer] autorelease];
+			PXLayerDetailsView *newView = [[PXLayerDetailsView alloc] initWithLayer:layer];
 			[newView setLayerController:self];
-			[views addObject:newView];
 			[newView updatePreview:nil];
+			
+			[views addObject:newView];
+			[newView release];
 		}
 	}
 	[views removeObjectsInRange:NSMakeRange([[canvas layers] count], [views count] - [[canvas layers] count])];

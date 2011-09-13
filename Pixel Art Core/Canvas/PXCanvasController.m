@@ -93,7 +93,7 @@
 	[view setDelegate:self];
 	
 	// Programmatically create our scrollview and canvas view
-	id clip = [[[SBCenteringClipView alloc] initWithFrame:[[scrollView contentView] frame]] autorelease];
+	SBCenteringClipView *clip = [[[SBCenteringClipView alloc] initWithFrame:[[scrollView contentView] frame]] autorelease];
 	[clip setBackgroundColor:[NSColor lightGrayColor]];
 	[clip setCopiesOnScroll:NO];
 	
@@ -437,9 +437,10 @@
 		return; 
 	[oldColor release];
 	oldColor = [[aTool colorForCanvas:canvas] retain];
-	if([event type] == NSTabletPoint && [self caresAboutPressure])
+	BOOL isTabletEvent = ([event type] == NSTabletPoint) || ([event subtype] == NSTabletPointEventSubtype);
+	if(isTabletEvent && [self caresAboutPressure])
 	{
-		id color = [oldColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+		NSColor *color = [oldColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 		float pressure = [event pressure];
 		[aTool setColor:[NSColor colorWithCalibratedRed:[color redComponent] green:[color greenComponent] blue:[color blueComponent] alpha:pressure * [color alphaComponent]]];
 	}
@@ -453,10 +454,12 @@
 		return; 
 	
 	if(![aTool respondsToSelector:@selector(mouseDraggedFrom:to:fromCanvasController:)]) 
-		return; 
-	if([event type] == NSTabletPoint && [self caresAboutPressure])
+		return;
+	
+	BOOL isTabletEvent = ([event type] == NSTabletPoint) || ([event subtype] == NSTabletPointEventSubtype);
+	if(isTabletEvent && [self caresAboutPressure])
 	{
-		id color = [oldColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+		NSColor *color = [oldColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 		float pressure = [event pressure];
 		[aTool setColor:[NSColor colorWithCalibratedRed:[color redComponent] green:[color greenComponent] blue:[color blueComponent] alpha:pressure * [color alphaComponent]]];
 	}	

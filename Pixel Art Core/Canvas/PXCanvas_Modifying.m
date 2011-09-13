@@ -296,7 +296,11 @@
 {
 	[drawnPoints release];
 	drawnPoints = [[NSMutableArray alloc] initWithCapacity:200];
+	
+	[oldColors release];
 	oldColors = [[NSMutableArray alloc] initWithCapacity:200];
+	
+	[newColors release];
 	newColors = [[NSMutableArray alloc] initWithCapacity:200];
 }
 

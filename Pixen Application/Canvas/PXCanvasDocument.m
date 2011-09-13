@@ -75,23 +75,6 @@ BOOL isPowerOfTwo(int num)
 	return (logResult == (int)logResult);
 }
 
-- (void)saveToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo {
-  if(absoluteURL == nil)
-  {
-    return;
-  }
-  if (UTTypeEqual(kUTTypeJPEG, (__bridge CFStringRef) typeName))
-	{
-		saveFactor = 100;
-  }
-  [super saveToURL:absoluteURL 
-            ofType:typeName 
-  forSaveOperation:saveOperation 
-          delegate:delegate 
-   didSaveSelector:didSaveSelector 
-       contextInfo:contextInfo];
-}
-
 - (BOOL)prepareSavePanel:(NSSavePanel *)savePanel
 {
 	NSString *lastType = [[NSUserDefaults standardUserDefaults] stringForKey:PXLastSavedFileType];
@@ -203,12 +186,12 @@ BOOL isPowerOfTwo(int num)
 	
 	if (UTTypeEqual(kUTTypeJPEG, (__bridge CFStringRef) type))
 	{
-    NSNumber *sf = [NSNumber numberWithFloat:saveFactor];
-    NSDictionary *props = [NSDictionary dictionaryWithObject:sf
-                                                      forKey:NSImageCompressionFactor];
-		return [canvas imageDataWithType:NSJPEGFileType 
-                          properties:props];
+		NSDictionary *props = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0f]
+														  forKey:NSImageCompressionFactor];
+		
+		return [canvas imageDataWithType:NSJPEGFileType properties:props];
 	}
+	
 	return [[self class] dataRepresentationOfType:type withCanvas:canvas];
 }
 
@@ -258,8 +241,8 @@ BOOL isPowerOfTwo(int num)
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)aType error:(NSError **)error
 {
-	if([aType isEqualToString:PixenImageFileType] ||
-		 [aType isEqualToString:PixenImageFileTypeOld])
+	if (UTTypeEqual( (__bridge CFStringRef) aType, (__bridge CFStringRef) PixenImageFileType) ||
+		UTTypeEqual( (__bridge CFStringRef) aType, (__bridge CFStringRef) PixenImageFileTypeOld))
 	{
 		[canvas release];
 		canvas = [[NSKeyedUnarchiver unarchiveObjectWithData:data] retain];
@@ -273,10 +256,17 @@ BOOL isPowerOfTwo(int num)
 	else
 	{
 		NSImage *image = [[[NSImage alloc] initWithData:data] autorelease];
+		
+		if (!image) {
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:-1 userInfo:nil];
+			return NO;
+		}
+		
 		[canvas release];
 		canvas = [[PXCanvas alloc] initWithImage:image];
 	}
-	if(canvas)
+	
+	if (canvas)
 	{
 		[canvas setUndoManager:[self undoManager]];
 		[self.windowController setCanvas:canvas];
@@ -284,6 +274,7 @@ BOOL isPowerOfTwo(int num)
 		[self updateChangeCount:NSChangeCleared]; 
 		return YES;
 	}
+	
 	return NO;
 }
 

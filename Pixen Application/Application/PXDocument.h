@@ -11,10 +11,10 @@
 @class PXCanvas, PXCanvasWindowController;
 @interface PXDocument : NSDocument {
   @private
-	IBOutlet PXCanvasWindowController *windowController;
+	PXCanvasWindowController *windowController;
 }
 
-@property (nonatomic, retain) IBOutlet PXCanvasWindowController *windowController;
+@property (nonatomic, retain) PXCanvasWindowController *windowController;
 
 - (PXCanvas *)canvas;
 - (NSArray *)canvases;

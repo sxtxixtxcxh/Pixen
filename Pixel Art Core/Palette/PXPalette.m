@@ -184,6 +184,15 @@ NSArray *CreateGrayList()
 	return [self initWithDictionary:[aDecoder decodeObjectForKey:@"palette"]];
 }
 
+- (void)dealloc
+{
+	[_colors release];
+	[_frequencies release];
+	[_name release];
+	
+	[super dealloc];
+}
+
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
 	[aCoder encodeObject:[self dictForArchiving] forKey:@"palette"];
