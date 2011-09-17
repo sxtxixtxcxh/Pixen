@@ -124,9 +124,12 @@
 
 - (void)setCanvas:(PXCanvas *) aCanvas
 {
-	canvas = aCanvas;
-	[canvasController setCanvas:canvas];
-	[self updatePreview];
+	if (canvas != aCanvas) {
+		canvas = aCanvas;
+		[canvasController setCanvas:canvas];
+		
+		[self updatePreview];
+	}
 }
 
 - (void)updatePreview

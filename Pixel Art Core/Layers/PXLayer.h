@@ -25,6 +25,7 @@
 	PXCanvas *canvas;
 }
 
+@property (nonatomic, assign) BOOL visible;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) CGFloat opacity;
 
@@ -48,9 +49,6 @@ backgroundColor:(NSColor *)color;
 
 - (void)setCanvas:(PXCanvas *)canvas;
 - (PXCanvas *)canvas;
-
-- (BOOL)visible;
-- (void)setVisible:(BOOL)visible;
 
 - (NSColor *)colorAtIndex:(unsigned int)index;
 - (NSColor *)colorAtPoint:(NSPoint)aPoint;

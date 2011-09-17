@@ -14,7 +14,7 @@
 
 @implementation PXLayer
 
-@synthesize name, opacity;
+@synthesize visible, name, opacity;
 
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image origin:(NSPoint)origin size:(NSSize)sz
 {
@@ -94,14 +94,12 @@
 	return image;
 }
 
-- (BOOL)visible
+- (void)setVisible:(BOOL)state
 {
-	return visible;
-}
-
-- (void)setVisible:(BOOL)isVisible
-{
-	visible = isVisible;
+	if (visible != state) {
+		visible = state;
+		[[self canvas] changed];
+	}
 }
 
 - (NSColor *)colorAtIndex:(unsigned int)index
@@ -130,6 +128,14 @@
 - (void)setColor:(NSColor *)c atIndex:(unsigned int)loc
 {
 	PXImage_setColorAtIndex(image, c, loc);
+}
+
+- (void)setOpacity:(CGFloat)state
+{
+	if (opacity != state) {
+		opacity = state;
+		[[self canvas] changed];
+	}
 }
 
 - (void)setColor:(NSColor *)color atPoint:(NSPoint)pt

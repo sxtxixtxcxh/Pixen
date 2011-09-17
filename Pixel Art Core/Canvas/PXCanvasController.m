@@ -136,28 +136,31 @@
 
 - (void)setCanvas:(PXCanvas *)canv
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self
-				  name:PXCanvasChangedNotificationName 
-				object:canvas];
-	
-	canvas = canv;
-	if(canvas)
-	{
-		[canvas setWraps:wraps];
+	if (canvas != canv) {
+		[[NSNotificationCenter defaultCenter] removeObserver:self
+														name:PXCanvasChangedNotificationName 
+													  object:canvas];
 		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-			   selector:@selector(canvasDidChange:)
-				   name:PXCanvasChangedNotificationName 
-				 object:canvas];
-	}
-	[view setCanvas:canvas];
-	[layerController setCanvas:canvas];
-	if(canvas)
-	{
-		[[PXInfoPanelController sharedInfoPanelController] setCanvasSize:[canvas size]];
-		[canvas changed];	
-		[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasLayersChangedNotificationName 
-															object:canvas];
+		canvas = canv;
+		
+		if (canvas)
+		{
+			[canvas setWraps:wraps];
+			
+			[[NSNotificationCenter defaultCenter] addObserver:self
+													 selector:@selector(canvasDidChange:)
+														 name:PXCanvasChangedNotificationName
+													   object:canvas];
+		}
+		
+		[view setCanvas:canvas];
+		[layerController setCanvas:canvas];
+		
+		if (canvas)
+		{
+			[[PXInfoPanelController sharedInfoPanelController] setCanvasSize:[canvas size]];
+			[canvas changed];
+		}
 	}
 }
 

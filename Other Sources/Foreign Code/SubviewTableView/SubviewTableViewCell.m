@@ -33,21 +33,6 @@
 
 - (void) drawWithFrame:(NSRect) cellFrame inView:(NSView *) controlView
 {
-	//ugly hack
-	if ([[self view] isKindOfClass:[PXLayerDetailsView class]])
-	{
-		id v = (PXLayerDetailsView *)[self view];
-		if ([self isHighlighted])
-		{
-			[[v opacityText] setTextColor:[NSColor whiteColor]];
-			[(NSTextField *)[v name] setTextColor:[NSColor whiteColor]];
-		}
-		else
-		{
-			[[v opacityText] setTextColor:[NSColor disabledControlTextColor]];
-			[(NSTextField *)[v name] setTextColor:[NSColor blackColor]];
-		}
-	}
     [super drawWithFrame: cellFrame inView: controlView];
     [[self view] setFrame: cellFrame];
     if([[self view] superview] != controlView)

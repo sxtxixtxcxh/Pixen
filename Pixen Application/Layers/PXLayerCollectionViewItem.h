@@ -8,10 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+@class PXLayerDetailsView, PXNSImageView, PXLayerTextField, PXLayerController, PXLayer;
 
 @interface PXLayerCollectionViewItem : NSCollectionViewItem {
-@private
-    
+  @private
+	IBOutlet PXLayerDetailsView *backgroundView;
+	IBOutlet PXLayerTextField *nameField;
+	IBOutlet PXNSImageView *thumbnailView;
+	IBOutlet NSTextField *opacityField;
+	
+	PXLayer *layer;
+	PXLayerController *layerController;
 }
+
+@property (nonatomic, assign) PXLayerController *layerController;
+
+- (void)focusOnName;
+- (void)unload;
 
 @end
