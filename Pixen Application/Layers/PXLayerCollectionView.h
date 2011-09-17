@@ -8,7 +8,13 @@
 
 #import "PXDeleteCollectionView.h"
 
+@class PXLayerController;
+
 @interface PXLayerCollectionView : PXDeleteCollectionView {
+  @private
+	PXLayerController *layerController;
 }
+
+@property (nonatomic, assign) PXLayerController *layerController;
 
 @end

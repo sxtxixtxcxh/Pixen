@@ -39,6 +39,11 @@
 	return self;
 }
 
+- (id)init
+{
+	return [self initWithNibName:@"PXLayerDetailsView" bundle:nil];
+}
+
 - (void)awakeFromNib
 {
 	[thumbnailView setEditable:NO];
@@ -256,7 +261,7 @@
 {
 	[super setSelected:state];
 	
-	if ([self isSelected]) {
+	if (state) {
 		if (nameField.isEditing) {
 			[[nameField cell] setTextColor:[NSColor blackColor]];
 		}

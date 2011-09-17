@@ -13,15 +13,19 @@
 
 @implementation PXLayerCollectionView
 
+@synthesize layerController;
+
 - (BOOL)acceptsFirstResponder
 {
 	return NO;
 }
 
-- (NSCollectionViewItem *)newItemForRepresentedObject:(id)object {
+- (NSCollectionViewItem *)newItemForRepresentedObject:(id)object
+{
 	PXLayerCollectionViewItem *item = [[PXLayerCollectionViewItem alloc] init];
 	item.representedObject = object;
-	item.view = object;
+	item.layerController = layerController;
+	
 	return item;
 }
 
