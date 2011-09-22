@@ -34,7 +34,7 @@
 	if ( ! (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
 		return nil;
 	
-	self.selected = NO;
+	[self setSelected:NO];
 	
 	return self;
 }
