@@ -76,6 +76,8 @@
 		C9E088A613D5BF17002A0AD4 /* zoomIn_bw.png in Resources */ = {isa = PBXBuildFile; fileRef = C9E088A513D5BF17002A0AD4 /* zoomIn_bw.png */; };
 		C9E088A813D5C03D002A0AD4 /* eyedropper_bw.png in Resources */ = {isa = PBXBuildFile; fileRef = C9E088A713D5C03D002A0AD4 /* eyedropper_bw.png */; };
 		C9F4E5FE13AD8F6500345D5D /* PXLayerDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F4E5FC13AD8F6500345D5D /* PXLayerDetailsView.xib */; };
+		C9F7F16C142BE3D500AB8E37 /* UTType+NSString.h in Headers */ = {isa = PBXBuildFile; fileRef = C9F7F16A142BE3D500AB8E37 /* UTType+NSString.h */; };
+		C9F7F16D142BE3D500AB8E37 /* UTType+NSString.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F7F16B142BE3D500AB8E37 /* UTType+NSString.m */; };
 		C9FD44E113FD70FC00CEE4FC /* PXPatternEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FD44DF13FD70FC00CEE4FC /* PXPatternEditor.xib */; };
 		C9FEE51B13AF81AF004FFC3C /* PXGridSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FEE51913AF81AF004FFC3C /* PXGridSettings.xib */; };
 		D866555313A932D900030D76 /* PXMonotoneBackgroundConfigurator.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAA0184E054DCC7B00EF18C2 /* PXMonotoneBackgroundConfigurator.xib */; };
@@ -602,6 +604,8 @@
 		C9E088A513D5BF17002A0AD4 /* zoomIn_bw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomIn_bw.png; sourceTree = "<group>"; };
 		C9E088A713D5C03D002A0AD4 /* eyedropper_bw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyedropper_bw.png; sourceTree = "<group>"; };
 		C9F4E5FD13AD8F6500345D5D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXLayerDetailsView.xib; sourceTree = "<group>"; };
+		C9F7F16A142BE3D500AB8E37 /* UTType+NSString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UTType+NSString.h"; sourceTree = "<group>"; };
+		C9F7F16B142BE3D500AB8E37 /* UTType+NSString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UTType+NSString.m"; sourceTree = "<group>"; };
 		C9FD44E013FD70FC00CEE4FC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPatternEditor.xib; sourceTree = "<group>"; };
 		C9FEE51A13AF81AF004FFC3C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXGridSettings.xib; sourceTree = "<group>"; };
 		D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerCollectionViewItem.h; sourceTree = "<group>"; };
@@ -1150,6 +1154,8 @@
 				EAAB76750CEF54F300F2EF66 /* PXDocument.m */,
 				C94A9EDB13B11BEA0034AFE3 /* PXSplitView.h */,
 				C94A9EDC13B11BEA0034AFE3 /* PXSplitView.m */,
+				C9F7F16A142BE3D500AB8E37 /* UTType+NSString.h */,
+				C9F7F16B142BE3D500AB8E37 /* UTType+NSString.m */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -2193,6 +2199,7 @@
 				C96541EB13FF44A600F1F83C /* PXDeleteCollectionView.h in Headers */,
 				C9ADD4A214007FE500257E38 /* PXClickableView.h in Headers */,
 				C9ADD4A61400821300257E38 /* PXPatternItem.h in Headers */,
+				C9F7F16C142BE3D500AB8E37 /* UTType+NSString.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2580,6 +2587,7 @@
 				C96541EC13FF44A600F1F83C /* PXDeleteCollectionView.m in Sources */,
 				C9ADD4A314007FE500257E38 /* PXClickableView.m in Sources */,
 				C9ADD4A71400821300257E38 /* PXPatternItem.m in Sources */,
+				C9F7F16D142BE3D500AB8E37 /* UTType+NSString.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

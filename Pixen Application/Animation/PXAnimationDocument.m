@@ -14,6 +14,7 @@
 #import "PXCanvas_ImportingExporting.h"
 #import "OSProgressPopup.h"
 #import "PXCanvasWindowController_IBActions.h"
+#import "UTType+NSString.h"
 
 @implementation PXAnimationDocument
 
@@ -67,8 +68,8 @@
 
 - (NSFileWrapper *)fileWrapperOfType:(NSString *)aType error:(NSError **)outError
 {
-	if ([aType isEqualToString:PixenAnimationFileType] ||
-		[aType isEqualToString:PixenAnimationFileTypeOld])
+	if (UTTypeEqualNSString(aType, PixenAnimationFileType) ||
+		UTTypeEqualNSString(aType, PixenAnimationFileTypeOld))
 	{
 		NSMutableDictionary *files = [NSMutableDictionary dictionaryWithCapacity:[animation countOfCels]];
 		NSMutableArray *celData = [NSMutableArray arrayWithCapacity:[animation countOfCels]];
@@ -142,8 +143,8 @@
 
 - (BOOL)readFromFileWrapper:(NSFileWrapper *)wrapper ofType:(NSString *)docType error:(NSError **)outError
 {
-	if ([docType isEqualToString:PixenAnimationFileType] ||
-			[docType isEqualToString:PixenAnimationFileTypeOld])
+	if (UTTypeEqualNSString(docType, PixenAnimationFileType) ||
+		UTTypeEqualNSString(docType, PixenAnimationFileTypeOld))
 	{
 		[animation removeCel:[animation objectInCelsAtIndex:0]];
 		NSDictionary *files = [wrapper fileWrappers];

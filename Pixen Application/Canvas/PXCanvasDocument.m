@@ -19,8 +19,8 @@
 #import "gif_lib.h"
 #import "PXAnimatedGifExporter.h"
 #import "PXLayer.h"
-#import <AppKit/NSAlert.h>
 #import "PXCanvasWindowController_IBActions.h"
+#import "UTType+NSString.h"
 
 BOOL isPowerOfTwo(int num);
 
@@ -109,73 +109,66 @@ BOOL isPowerOfTwo(int num)
 
 + (NSData *)dataRepresentationOfType:(NSString *)aType withCanvas:(PXCanvas *)canvas
 {
-	if([aType isEqualToString:PixenImageFileType] ||
-		 [aType isEqualToString:PixenImageFileTypeOld])
-  {
-		return [NSKeyedArchiver archivedDataWithRootObject:canvas];
-  }
-	
-	if (UTTypeEqual(kUTTypeJPEG, (__bridge CFStringRef) aType))
-	{
-		return [canvas imageDataWithType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0]
-                                                                                           forKey:NSImageCompressionFactor]];
-	}
-  
-	if (UTTypeEqual(kUTTypeICO, (__bridge CFStringRef) aType))
-	{
-		PXIconExporter *iconExporter = [[[PXIconExporter alloc] init] autorelease];
-		return [iconExporter iconDataForCanvas:canvas];
-	}
-	
-	if(UTTypeEqual(kUTTypePNG, (__bridge CFStringRef) aType))
-  {
-		return [canvas imageDataWithType:NSPNGFileType properties:nil];
-  }
-	
-	if(UTTypeEqual(kUTTypeTIFF, (__bridge CFStringRef) aType))
-  {
-		return [canvas imageDataWithType:NSTIFFFileType properties:nil];
-  }
-	
-	
-	if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) aType))
-	{
-		PXCanvas *exportCanvas = [canvas copy];
-		[exportCanvas reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
-		
-		PXAnimatedGifExporter *exporter = [[PXAnimatedGifExporter alloc] initWithSize:[canvas size] iterations:1];
-		[exporter writeCanvas:exportCanvas withDuration:0 transparentColor:nil];
-		[exporter finalizeExport];
-		[exportCanvas release];
-		
-		NSData *data = [[exporter data] retain];
-		[exporter release];
-		
-		return [data autorelease];
-		//return [PXGifExporter gifDataForImage:[canvas exportImage]];
-	}
-	
-	if(UTTypeEqual(kUTTypeBMP, (__bridge CFStringRef) aType))
-  {
-		return [canvas imageDataWithType:NSBMPFileType properties:nil];
-  }
-	if(UTTypeEqual(kUTTypePICT, (__bridge CFStringRef) aType))
-	{
-		NSMutableData *pictData = [NSMutableData data];
-		CGImageDestinationRef pictOutput = 
-		CGImageDestinationCreateWithData((__bridge CFMutableDataRef)pictData, 
-										 kUTTypePICT, 
-										 1, 
-										 NULL);
-		CGImageDestinationAddImage(pictOutput,
-								   [[canvas displayImage] CGImageForProposedRect:NULL 
-																		 context:nil 
-																		   hints:nil],
-								   NULL);
-		CGImageDestinationFinalize(pictOutput);
-		CFRelease(pictOutput);
-		return pictData;
-	}
+	if (UTTypeEqualNSString(aType, PixenImageFileType) ||
+		UTTypeEqualNSString(aType, PixenImageFileTypeOld)) {
+        
+        return [NSKeyedArchiver archivedDataWithRootObject:canvas];
+    }
+    else if (UTTypeEqual(kUTTypeJPEG, (__bridge CFStringRef) aType))
+    {
+        return [canvas imageDataWithType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0]
+                                                                                               forKey:NSImageCompressionFactor]];
+    }
+    else if (UTTypeEqual(kUTTypeICO, (__bridge CFStringRef) aType))
+    {
+        PXIconExporter *iconExporter = [[[PXIconExporter alloc] init] autorelease];
+        return [iconExporter iconDataForCanvas:canvas];
+    }
+    else if (UTTypeEqual(kUTTypePNG, (__bridge CFStringRef) aType))
+    {
+        return [canvas imageDataWithType:NSPNGFileType properties:nil];
+    }
+    else if (UTTypeEqual(kUTTypeTIFF, (__bridge CFStringRef) aType))
+    {
+        return [canvas imageDataWithType:NSTIFFFileType properties:nil];
+    }
+    else if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) aType))
+    {
+        PXCanvas *exportCanvas = [canvas copy];
+        [exportCanvas reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
+        
+        PXAnimatedGifExporter *exporter = [[PXAnimatedGifExporter alloc] initWithSize:[canvas size] iterations:1];
+        [exporter writeCanvas:exportCanvas withDuration:0 transparentColor:nil];
+        [exporter finalizeExport];
+        [exportCanvas release];
+        
+        NSData *data = [[exporter data] retain];
+        [exporter release];
+        
+        return [data autorelease];
+        //return [PXGifExporter gifDataForImage:[canvas exportImage]];
+    }
+    else if (UTTypeEqual(kUTTypeBMP, (__bridge CFStringRef) aType))
+    {
+        return [canvas imageDataWithType:NSBMPFileType properties:nil];
+    }
+    else if (UTTypeEqual(kUTTypePICT, (__bridge CFStringRef) aType))
+    {
+        NSMutableData *pictData = [NSMutableData data];
+        CGImageDestinationRef pictOutput = 
+        CGImageDestinationCreateWithData((__bridge CFMutableDataRef)pictData, 
+                                         kUTTypePICT, 
+                                         1, 
+                                         NULL);
+        CGImageDestinationAddImage(pictOutput,
+                                   [[canvas displayImage] CGImageForProposedRect:NULL 
+                                                                         context:nil 
+                                                                           hints:nil],
+                                   NULL);
+        CGImageDestinationFinalize(pictOutput);
+        CFRelease(pictOutput);
+        return pictData;
+    }
 	
 	return nil;
 }

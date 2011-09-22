@@ -9,6 +9,7 @@
 #import "PXSequenceExportViewController.h"
 
 #import "PXCanvasDocument.h"
+#import "UTType+NSString.h"
 
 @implementation PXSequenceExportViewController
 
@@ -36,8 +37,12 @@
 		_fileTypes = [[NSMutableArray alloc] init];
 		
 		for (NSString *type in [PXCanvasDocument writableTypes]) {
-			if ([type isEqualToString:PixenImageFileTypeOld] || [type isEqualToString:PixenAnimationFileType] || [type isEqualToString:PixenAnimationFileTypeOld])
+			if (UTTypeEqualNSString(type, PixenImageFileTypeOld) ||
+				UTTypeEqualNSString(type, PixenAnimationFileType) ||
+				UTTypeEqualNSString(type, PixenAnimationFileTypeOld)) {
+				
 				continue;
+			}
 			
 			NSString *displayName = (NSString *) UTTypeCopyDescription((__bridge CFStringRef)type);
 			
