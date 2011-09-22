@@ -41,7 +41,7 @@
 
 - (PXCanvasView *)view;
 - (NSScrollView *)scrollView;
-- layerController;
+- (PXLayerController *)layerController;
 - window;
 - (void)layerSelectionDidChange:(NSNotification *) aNotification;
 - (void)setLayerController:contro;

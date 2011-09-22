@@ -144,7 +144,7 @@
 
 - (IBAction)mergeDown:(id) sender
 {
-	[layerController mergeDown];
+	[layerController mergeDownSelectedLayer];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)anItem
@@ -247,17 +247,17 @@
 
 - (IBAction)duplicateLayer:(id) sender
 {
-	[[canvasController layerController] duplicateLayer:sender];
+	[[canvasController layerController] duplicateSelectedLayer];
 }
 
 - (IBAction)nextLayer:(id) sender
 {
-	[[canvasController layerController] nextLayer:sender];
+	[[canvasController layerController] selectNextLayer];
 }
 
 - (IBAction)previousLayer:(id) sender
 {
-	[[canvasController layerController] previousLayer:sender];
+	[[canvasController layerController] selectPreviousLayer];
 }
 
 - (IBAction) shouldTileToggled: (id) sender

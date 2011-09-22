@@ -69,7 +69,7 @@
 		[[layers lastObject] setCanvas:self];
 		[self activateLayer:[layers lastObject]];
 	}
-  [self applyImage:anImage toLayer:activeLayer];
+	[self applyImage:anImage toLayer:activeLayer];
 	[self updatePreviewSize];
 	[self layersChanged];
 }

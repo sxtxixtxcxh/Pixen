@@ -20,14 +20,10 @@
 - (void)setLayers:(NSArray *) newLayers fromLayers:(NSArray *)oldLayers withDescription:(NSString *)desc;
 - (void)setLayersNoResize:(NSArray *) newLayers fromLayers:(NSArray *)oldLayers;
 
-- (void)addLayer:(PXLayer *) aLayer suppressingNotification:(BOOL)suppress;
 - (void)addLayer:(PXLayer *)aLayer;
-- (void)insertLayer:(PXLayer *) aLayer atIndex:(NSUInteger)index suppressingNotification:(BOOL)suppress;
 - (void)insertLayer:(PXLayer *) aLayer atIndex:(NSUInteger)index;
 - (void)removeLayer: (PXLayer*) aLayer;
-- (void)removeLayer: (PXLayer*) aLayer suppressingNotification:(BOOL)suppress;
 - (void)removeLayerAtIndex:(NSUInteger)index;
-- (void)removeLayerAtIndex:(NSUInteger)index suppressingNotification:(BOOL)suppress;
 
 - (void)addTempLayer:(PXLayer *)layer;
 - (void)insertTempLayer:(PXLayer *)layer atIndex:(NSUInteger)index;
@@ -38,7 +34,7 @@
 
 - (void)rotateLayer:(PXLayer *)layer byDegrees:(int)degrees;
 
-- (void)duplicateLayerAtIndex:(NSUInteger)index;
+- (PXLayer *)duplicateLayerAtIndex:(NSUInteger)index;
 - (void)flipLayerHorizontally:aLayer;
 - (void)flipLayerVertically:aLayer;
 

@@ -6,50 +6,45 @@
 #import <AppKit/AppKit.h>
 #import "PXCanvas.h"
 
-@class PXLayer, PXCanvas, PXDocument;
-@interface PXLayerController : NSViewController <NSCollectionViewDelegate>
+@class PXLayer, PXLayerCollectionView, PXCanvas, PXDocument;
+
+@interface PXLayerController : NSViewController < NSCollectionViewDelegate >
 {
   @private
-	IBOutlet NSCollectionView *layersView;
-	PXCanvas *canvas;
-	NSMutableArray *views;
-
-	NSView *subview;
+	IBOutlet PXLayerCollectionView *layersView;
 	IBOutlet NSButton *removeButton;
-	PXDocument *document;
-	int layersCreated;
-
-	NSIndexSet *selection;
+	IBOutlet NSArrayController *layersArray;
+	NSView *subview;
 	
-	//for programmatic expand/collapse
+	PXCanvas *canvas;
+	PXDocument *document;
+	NSUInteger layersCreated;
+	
+	// for programmatic expand/collapse
 	CGFloat lastSubviewHeight;
 }
--(id) initWithCanvas:(PXCanvas *)aCanvas;
-- (void)setSubview:(NSView *)sv;
-- (void)reloadData:(NSNotification *) aNotification;
-- (void)setCanvas:(PXCanvas *) aCanvas;
-- (PXCanvas *)canvas;
-- (void)setDocument:(id)doc;
 
-- (IBAction)addLayer: (id)sender;
-- (IBAction)duplicateLayer: (id)sender;
-- (void)duplicateLayerObject: (PXLayer *)layer;
-- (IBAction)removeLayer: (id)sender;
-- (void)removeLayerObject: (PXLayer *)layer;
-- (IBAction)selectLayer: (id)sender;
+@property (nonatomic, assign) PXDocument *document;
+@property (nonatomic, retain) PXCanvas *canvas;
+
+- (id)initWithCanvas:(PXCanvas *)aCanvas;
+
+- (void)setSubview:(NSView *)sv;
+
+- (void)selectNextLayer;
+- (void)selectPreviousLayer;
+
+- (IBAction)addLayer:(id)sender;
+
+- (IBAction)removeLayer:(id)sender;
+- (void)removeLayerObject:(PXLayer *)layer;
+
 - (void)selectRow:(NSUInteger)index;
 
-- (IBAction)nextLayer: (id)sender;
-- (IBAction)previousLayer: (id)sender;
+- (void)duplicateSelectedLayer;
+- (void)duplicateLayerObject:(PXLayer *)layer;
 
-- (void)mergeDown;
-
-- (void)updateRemoveButtonStatus;
-
+- (void)mergeDownSelectedLayer;
 - (void)mergeDownLayerObject:(PXLayer *)layer;
-
-- (NSUInteger)invertLayerIndex:(NSUInteger)anIndex;
-
-- (void)deleteKeyPressedInCollectionView:(NSCollectionView *)cv;
 
 @end

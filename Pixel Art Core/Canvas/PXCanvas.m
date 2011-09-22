@@ -153,7 +153,7 @@
 - (void)updatePreviewSize
 {
 	canvasRect = NSMakeRect(0, 0, [self size].width, [self size].height);  //Cached because [self size] and NSMakeRect slow things down when containsPoint is called a bunch
-	[self layersChanged];
+	[self changed];
 }
 
 - (void)clearIncrementalPaletteRefresh

@@ -404,7 +404,7 @@
 	window = win;
 }
 
-- layerController
+- (PXLayerController *)layerController
 {
 	return layerController;
 }

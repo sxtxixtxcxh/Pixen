@@ -65,8 +65,11 @@
 
 - (void)activateLayer:(PXLayer *)aLayer
 {
-	if( (activeLayer == aLayer) || (aLayer == nil) ) return; 
+	if (activeLayer == aLayer || !aLayer)
+		return;
+	
 	//if([[self undoManager] groupingLevel] != 0) { [[[self undoManager] prepareWithInvocationTarget:self] activateLayer:activeLayer]; }
+	
 	activeLayer = aLayer;
 }
 
@@ -111,24 +114,11 @@
 	[self layersChanged];
 }
 
-- (void)addLayer:(PXLayer *) aLayer suppressingNotification:(BOOL)suppress
-{
-	[self beginUndoGrouping]; {
-		[self insertLayer:aLayer atIndex:[layers count] suppressingNotification:suppress];
-		if(!suppress)
-		{
-			[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasLayersChangedNotificationName
-																object:self
-															  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-																  aLayer, PXCanvasNewLayerKey,
-																  [NSNumber numberWithUnsignedInteger:[layers count] - 1], PXCanvasOldLayersCountKey, nil]];
-		}
-	} [self endUndoGrouping:NSLocalizedString(@"Add Layer", @"Add Layer")];
-}
-
 - (void)addLayer:(PXLayer *)aLayer
 {
-	[self addLayer:aLayer suppressingNotification:NO];
+	[self beginUndoGrouping]; {
+		[self insertLayer:aLayer atIndex:[layers count]];
+	} [self endUndoGrouping:NSLocalizedString(@"Add Layer", @"Add Layer")];
 }
 
 - (void)replaceLayer:(PXLayer *)old withLayer:(PXLayer *)new actionName:(NSString *)act
@@ -154,41 +144,24 @@
 	} [self endUndoGrouping:act];
 }
 
-- (void)insertLayer:(PXLayer *) aLayer atIndex:(NSUInteger)index suppressingNotification:(BOOL)suppress
+- (void)insertLayer:(PXLayer *) aLayer atIndex:(NSUInteger)index
 {
 	[self beginUndoGrouping]; {
 		[[[self undoManager] prepareWithInvocationTarget:self] removeLayer:aLayer];
 		[aLayer setCanvas:self];
 		[layers insertObject:aLayer atIndex:index];
 		[self activateLayer:aLayer];
-		if(!suppress)
-		{
-			[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasLayersChangedNotificationName
-																object:self
-															  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-																  [NSNumber numberWithUnsignedInteger:[layers count] - 1], PXCanvasOldLayersCountKey, nil]];
-		}
-    [self refreshWholePalette];
+		[self refreshWholePalette];
 		[self changed];
 	} [self endUndoGrouping:NSLocalizedString(@"Insert Layer", @"Insert Layer")];
 }
 
-- (void)insertLayer:(PXLayer *) aLayer atIndex:(NSUInteger)index
-{
-	[self insertLayer:aLayer atIndex:index suppressingNotification:NO];
-}
-
 - (void)removeLayer: (PXLayer*) aLayer
 {
-	[self removeLayerAtIndex:[layers indexOfObject:aLayer] suppressingNotification:NO];
+	[self removeLayerAtIndex:[layers indexOfObject:aLayer]];
 }
 
-- (void)removeLayer: (PXLayer*) aLayer suppressingNotification:(BOOL)suppress
-{
-	[self removeLayerAtIndex:[layers indexOfObject:aLayer] suppressingNotification:YES];
-}
-
-- (void)removeLayerAtIndex:(NSUInteger)index suppressingNotification:(BOOL)suppress
+- (void)removeLayerAtIndex:(NSUInteger)index
 {
 	BOOL wasActive = ([self indexOfLayer:activeLayer] == index);
 	id layer = [layers objectAtIndex:index];
@@ -200,10 +173,6 @@
 		{
 			newIndex = [layers count] - 1;
 		}
-		if(!suppress)
-		{
-			[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasLayersChangedNotificationName object:self];
-		}
 		if(wasActive)
 		{
 			[self activateLayer:[layers objectAtIndex:newIndex]];
@@ -211,11 +180,6 @@
 		[self changed];
 		[self refreshWholePalette];
 	} [self endUndoGrouping:NSLocalizedString(@"Remove Layer", @"Remove Layer")];	
-}
-
-- (void)removeLayerAtIndex:(NSUInteger)index
-{
-	[self removeLayerAtIndex:index suppressingNotification:NO];
 }
 
 - (void)addTempLayer:(PXLayer *)layer
@@ -280,11 +244,15 @@
 	} [self endUndoGrouping:[NSString stringWithFormat:NSLocalizedString(@"Rotate Layer", @"Rotate Layer"), degrees, [NSString degreeString]]];
 }
 
-- (void)duplicateLayerAtIndex:(NSUInteger)index
+- (PXLayer *)duplicateLayerAtIndex:(NSUInteger)index
 {
+	PXLayer *result = [[[layers objectAtIndex:index] copy] autorelease];
+	
 	[self beginUndoGrouping]; {
-		[self insertLayer:[[[layers objectAtIndex:index] copy] autorelease] atIndex:index];
+		[self insertLayer:result atIndex:index+1];
 	} [self endUndoGrouping:NSLocalizedString(@"Duplicate Layer", @"Duplicate Layer")];
+	
+	return result;
 }
 
 - (void)flipLayerHorizontally:aLayer
@@ -310,7 +278,6 @@
 	BOOL wasActive = aLayer == activeLayer;
 	NSUInteger index = [layers indexOfObject:aLayer];
 	[self beginUndoGrouping]; {
-		[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];
 		[[layers objectAtIndex:index-1] compositeUnder:[layers objectAtIndex:index] flattenOpacity:YES];
 		[self removeLayerAtIndex:index];
 		if(wasActive)
