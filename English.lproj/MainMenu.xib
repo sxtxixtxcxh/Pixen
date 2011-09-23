@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">11C37</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
-		<string key="IBDocument.AppKitVersion">1138.15</string>
+		<string key="IBDocument.SystemVersion">11C62</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1934</string>
+		<string key="IBDocument.AppKitVersion">1138.23</string>
 		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1617</string>
+			<string key="NS.object.0">1934</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSUserDefaultsController</string>
@@ -19,7 +19,10 @@
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</array>
-		<dictionary class="NSMutableDictionary" key="IBDocument.Metadata"/>
+		<object class="NSMutableDictionary" key="IBDocument.Metadata">
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
+		</object>
 		<array class="NSMutableArray" key="IBDocument.RootObjects" id="736530898">
 			<object class="NSCustomObject" id="525467085">
 				<string key="NSClassName">PXApplication</string>
@@ -1006,26 +1009,6 @@
 						<object class="NSMenu" key="NSSubmenu" id="523469101">
 							<string key="NSTitle">Palette</string>
 							<array class="NSMutableArray" key="NSMenuItems">
-								<object class="NSMenuItem" id="478686013">
-									<reference key="NSMenu" ref="523469101"/>
-									<string key="NSTitle">Show Document Palette</string>
-									<string key="NSKeyEquiv"/>
-									<int key="NSKeyEquivModMask">1048576</int>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="130733852"/>
-									<reference key="NSMixedImage" ref="295545801"/>
-								</object>
-								<object class="NSMenuItem" id="926387140">
-									<reference key="NSMenu" ref="523469101"/>
-									<bool key="NSIsDisabled">YES</bool>
-									<bool key="NSIsSeparator">YES</bool>
-									<string key="NSTitle"/>
-									<string key="NSKeyEquiv"/>
-									<int key="NSKeyEquivModMask">1048576</int>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="130733852"/>
-									<reference key="NSMixedImage" ref="295545801"/>
-								</object>
 								<object class="NSMenuItem" id="126920849">
 									<reference key="NSMenu" ref="523469101"/>
 									<string key="NSTitle">Export Document Palette…</string>
@@ -1370,30 +1353,6 @@
 			<array class="NSMutableArray" key="connectionRecords">
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">performMiniaturize:</string>
-						<reference key="source" ref="199577436"/>
-						<reference key="destination" ref="229475888"/>
-					</object>
-					<int key="connectionID">37</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">arrangeInFront:</string>
-						<reference key="source" ref="199577436"/>
-						<reference key="destination" ref="303287891"/>
-					</object>
-					<int key="connectionID">39</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">clearRecentDocuments:</string>
-						<reference key="source" ref="199577436"/>
-						<reference key="destination" ref="714693588"/>
-					</object>
-					<int key="connectionID">127</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">terminate:</string>
 						<reference key="source" ref="525467085"/>
 						<reference key="destination" ref="94917071"/>
@@ -1423,6 +1382,38 @@
 						<reference key="destination" ref="551280303"/>
 					</object>
 					<int key="connectionID">153</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="525467085"/>
+						<reference key="destination" ref="797232323"/>
+					</object>
+					<int key="connectionID">240</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">performMiniaturize:</string>
+						<reference key="source" ref="199577436"/>
+						<reference key="destination" ref="229475888"/>
+					</object>
+					<int key="connectionID">37</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">arrangeInFront:</string>
+						<reference key="source" ref="199577436"/>
+						<reference key="destination" ref="303287891"/>
+					</object>
+					<int key="connectionID">39</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">clearRecentDocuments:</string>
+						<reference key="source" ref="199577436"/>
+						<reference key="destination" ref="714693588"/>
+					</object>
+					<int key="connectionID">127</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1527,14 +1518,6 @@
 						<reference key="destination" ref="509642811"/>
 					</object>
 					<int key="connectionID">201</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="525467085"/>
-						<reference key="destination" ref="797232323"/>
-					</object>
-					<int key="connectionID">240</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1738,54 +1721,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">showRightToolProperties:</string>
-						<reference key="source" ref="1033667961"/>
-						<reference key="destination" ref="1059327666"/>
-					</object>
-					<int key="connectionID">381</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">showLeftToolProperties:</string>
-						<reference key="source" ref="1033667961"/>
-						<reference key="destination" ref="757158459"/>
-					</object>
-					<int key="connectionID">382</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">showWelcome:</string>
-						<reference key="source" ref="1033667961"/>
-						<reference key="destination" ref="46941642"/>
-					</object>
-					<int key="connectionID">384</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">showAbout:</string>
-						<reference key="source" ref="1033667961"/>
-						<reference key="destination" ref="572411375"/>
-					</object>
-					<int key="connectionID">386</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">showPreferences:</string>
-						<reference key="source" ref="1033667961"/>
-						<reference key="destination" ref="577465453"/>
-					</object>
-					<int key="connectionID">387</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">showInfo:</string>
-						<reference key="source" ref="1033667961"/>
-						<reference key="destination" ref="134474568"/>
-					</object>
-					<int key="connectionID">388</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">copyMerged:</string>
 						<reference key="source" ref="199577436"/>
 						<reference key="destination" ref="608961187"/>
@@ -1799,22 +1734,6 @@
 						<reference key="destination" ref="10140717"/>
 					</object>
 					<int key="connectionID">394</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">newFromClipboard:</string>
-						<reference key="source" ref="797232323"/>
-						<reference key="destination" ref="182028804"/>
-					</object>
-					<int key="connectionID">407</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">toggleAlignmentCrosshairs:</string>
-						<reference key="source" ref="797232323"/>
-						<reference key="destination" ref="297930681"/>
-					</object>
-					<int key="connectionID">408</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2034,14 +1953,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">showSpriteSheetExporter:</string>
-						<reference key="source" ref="1033667961"/>
-						<reference key="destination" ref="902731992"/>
-					</object>
-					<int key="connectionID">501</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">importAnimationFromImageSequence:</string>
 						<reference key="source" ref="199577436"/>
 						<reference key="destination" ref="846956891"/>
@@ -2082,22 +1993,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">showPreviewPanel:</string>
-						<reference key="source" ref="1033667961"/>
-						<reference key="destination" ref="417106915"/>
-					</object>
-					<int key="connectionID">513</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">popDocumentPalette:</string>
-						<reference key="source" ref="199577436"/>
-						<reference key="destination" ref="478686013"/>
-					</object>
-					<int key="connectionID">515</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">invertSelection:</string>
 						<reference key="source" ref="199577436"/>
 						<reference key="destination" ref="588029433"/>
@@ -2111,6 +2006,86 @@
 						<reference key="destination" ref="161067250"/>
 					</object>
 					<int key="connectionID">528</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">newFromClipboard:</string>
+						<reference key="source" ref="797232323"/>
+						<reference key="destination" ref="182028804"/>
+					</object>
+					<int key="connectionID">407</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleAlignmentCrosshairs:</string>
+						<reference key="source" ref="797232323"/>
+						<reference key="destination" ref="297930681"/>
+					</object>
+					<int key="connectionID">408</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showRightToolProperties:</string>
+						<reference key="source" ref="1033667961"/>
+						<reference key="destination" ref="1059327666"/>
+					</object>
+					<int key="connectionID">381</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showLeftToolProperties:</string>
+						<reference key="source" ref="1033667961"/>
+						<reference key="destination" ref="757158459"/>
+					</object>
+					<int key="connectionID">382</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showWelcome:</string>
+						<reference key="source" ref="1033667961"/>
+						<reference key="destination" ref="46941642"/>
+					</object>
+					<int key="connectionID">384</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showAbout:</string>
+						<reference key="source" ref="1033667961"/>
+						<reference key="destination" ref="572411375"/>
+					</object>
+					<int key="connectionID">386</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showPreferences:</string>
+						<reference key="source" ref="1033667961"/>
+						<reference key="destination" ref="577465453"/>
+					</object>
+					<int key="connectionID">387</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showInfo:</string>
+						<reference key="source" ref="1033667961"/>
+						<reference key="destination" ref="134474568"/>
+					</object>
+					<int key="connectionID">388</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showSpriteSheetExporter:</string>
+						<reference key="source" ref="1033667961"/>
+						<reference key="destination" ref="902731992"/>
+					</object>
+					<int key="connectionID">501</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showPreviewPanel:</string>
+						<reference key="source" ref="1033667961"/>
+						<reference key="destination" ref="417106915"/>
+					</object>
+					<int key="connectionID">513</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3037,17 +3012,10 @@
 						<int key="objectID">484</int>
 						<reference key="object" ref="523469101"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="926387140"/>
 							<reference ref="126920849"/>
 							<reference ref="489348309"/>
-							<reference ref="478686013"/>
 						</array>
 						<reference key="parent" ref="380451177"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">505</int>
-						<reference key="object" ref="926387140"/>
-						<reference key="parent" ref="523469101"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">506</int>
@@ -3057,11 +3025,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">507</int>
 						<reference key="object" ref="489348309"/>
-						<reference key="parent" ref="523469101"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">514</int>
-						<reference key="object" ref="478686013"/>
 						<reference key="parent" ref="523469101"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -3222,11 +3185,9 @@
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="500.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="502.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="505.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="506.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="507.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="511.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="514.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="519.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="526.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3712,14 +3673,6 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">PXApplication</string>
-					<string key="superclassName">NSApplication</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PXApplication.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">PXCanvasController</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
@@ -4082,62 +4035,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/PXFilmStripView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">PXLayerController</string>
-					<string key="superclassName">NSViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="addLayer:">id</string>
-						<string key="duplicateLayer:">id</string>
-						<string key="nextLayer:">id</string>
-						<string key="previousLayer:">id</string>
-						<string key="removeLayer:">id</string>
-						<string key="selectLayer:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="addLayer:">
-							<string key="name">addLayer:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="duplicateLayer:">
-							<string key="name">duplicateLayer:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="nextLayer:">
-							<string key="name">nextLayer:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="previousLayer:">
-							<string key="name">previousLayer:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="removeLayer:">
-							<string key="name">removeLayer:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectLayer:">
-							<string key="name">selectLayer:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="layersView">NSCollectionView</string>
-						<string key="removeButton">NSButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="layersView">
-							<string key="name">layersView</string>
-							<string key="candidateClassName">NSCollectionView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="removeButton">
-							<string key="name">removeButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PXLayerController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

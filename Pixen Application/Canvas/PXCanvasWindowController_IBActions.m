@@ -383,12 +383,4 @@ didFinishWithSize:(NSSize)aSize
 	[canvas deselect];
 }
 
-- (IBAction)popDocumentPalette:sender
-{
-	//FIXME: no palette, memory concerns, change this architecture some
-	// note: if this is implemented in the future, need to remove code in validateMenuItem: that disables the menu item
-	assert(0);
-//	[PXPalettePanel popWithPalette:[canvas palette] fromWindow:[NSColorPanel sharedColorPanel]];
-}
-
 @end
