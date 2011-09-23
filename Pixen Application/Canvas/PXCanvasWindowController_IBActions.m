@@ -127,11 +127,22 @@
 
 - (IBAction)duplicateDocument:(id)sender
 {
-	PXCanvasDocument *newDocument = [[NSDocumentController sharedDocumentController] makeUntitledDocumentOfType:PixenImageFileType];
-	id newCanvas = [[canvas copy] autorelease];
-	[newDocument setCanvas:newCanvas];
-	[newDocument makeWindowControllers];
+	NSError *error = nil;
+	
+	PXCanvasDocument *newDocument = [[NSDocumentController sharedDocumentController] makeUntitledDocumentOfType:PixenImageFileType
+																								 showSizePrompt:NO
+																										  error:&error];
+	
+	if (!newDocument) {
+		[NSApp presentError:error];
+		return;
+	}
+	
+	[newDocument setCanvas: [[canvas copy] autorelease]];
+	
 	[[NSDocumentController sharedDocumentController] addDocument:newDocument];
+	[newDocument makeWindowControllers];
+	[newDocument showWindows];
 }
 
 - (IBAction)exportDocumentPalette:sender
