@@ -210,8 +210,7 @@
 	}	
 	else if ([anItem action] == @selector(setPatternToSelection:))
 		return [[self canvas] hasSelection] && [[[PXToolPaletteController sharedToolPaletteController] currentTool] supportsPatterns];
-	else if ([anItem action] == @selector(popDocumentPalette:))
-		return NO;  // currently no document palette, so disable the menu item
+	
 	return YES;
 }
 
