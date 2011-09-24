@@ -7,26 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "gif_lib.h"
 
-@interface PXGifImporter : NSObject {
-  @private
-	GifFileType *gifFile;
-	int iterations;
-	
-	NSMutableArray *frames;
-}
+@interface PXGifImporter : NSObject
 
 + (BOOL)fileAtURLIsAnimated:(NSURL *)url;
-- initWithData:data;
-- frames;
-- (int)iterations;
-
-- (unsigned int)durationFromGraphicExtension:(GifByteType *)extensionBuffer;
-- (unsigned int)disposalMethodFromGraphicExtension:(GifByteType *)extensionBuffer;
-- (unsigned int)transparentIndexFromGraphicExtension:(GifByteType *)extensionBuffer;
-- (void)parseIterationExtension:(GifByteType *)extensionBuffer;
-- (BOOL)hasTransparency:(GifByteType *)extensionBuffer;
-
 
 @end
