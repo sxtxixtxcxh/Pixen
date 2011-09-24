@@ -265,8 +265,6 @@
 		EA31FBA30CE7D59700EC481B /* PXSequenceExportPrompter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB700CE7D59700EC481B /* PXSequenceExportPrompter.m */; };
 		EA31FBA40CE7D59700EC481B /* PXSpriteSheetExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB710CE7D59700EC481B /* PXSpriteSheetExporter.h */; };
 		EA31FBA50CE7D59700EC481B /* PXSpriteSheetExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB720CE7D59700EC481B /* PXSpriteSheetExporter.m */; };
-		EA31FBA80CE7D59700EC481B /* PXGifExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB760CE7D59700EC481B /* PXGifExporter.h */; };
-		EA31FBA90CE7D59700EC481B /* PXGifExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB770CE7D59700EC481B /* PXGifExporter.m */; };
 		EA31FBAA0CE7D59700EC481B /* PXIconExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB780CE7D59700EC481B /* PXIconExporter.h */; };
 		EA31FBAB0CE7D59700EC481B /* PXIconExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB790CE7D59700EC481B /* PXIconExporter.m */; };
 		EA31FBAE0CE7D59700EC481B /* PXBitmapImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB7D0CE7D59700EC481B /* PXBitmapImporter.h */; };
@@ -792,8 +790,6 @@
 		EA31FB700CE7D59700EC481B /* PXSequenceExportPrompter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSequenceExportPrompter.m; sourceTree = "<group>"; };
 		EA31FB710CE7D59700EC481B /* PXSpriteSheetExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSpriteSheetExporter.h; sourceTree = "<group>"; };
 		EA31FB720CE7D59700EC481B /* PXSpriteSheetExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSpriteSheetExporter.m; sourceTree = "<group>"; };
-		EA31FB760CE7D59700EC481B /* PXGifExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGifExporter.h; sourceTree = "<group>"; };
-		EA31FB770CE7D59700EC481B /* PXGifExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGifExporter.m; sourceTree = "<group>"; };
 		EA31FB780CE7D59700EC481B /* PXIconExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXIconExporter.h; sourceTree = "<group>"; };
 		EA31FB790CE7D59700EC481B /* PXIconExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXIconExporter.m; sourceTree = "<group>"; };
 		EA31FB7D0CE7D59700EC481B /* PXBitmapImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXBitmapImporter.h; sourceTree = "<group>"; };
@@ -1551,8 +1547,6 @@
 		EA31FB730CE7D59700EC481B /* Image Exporters */ = {
 			isa = PBXGroup;
 			children = (
-				EA31FB760CE7D59700EC481B /* PXGifExporter.h */,
-				EA31FB770CE7D59700EC481B /* PXGifExporter.m */,
 				EA31FB780CE7D59700EC481B /* PXIconExporter.h */,
 				EA31FB790CE7D59700EC481B /* PXIconExporter.m */,
 			);
@@ -2141,7 +2135,6 @@
 				EA31FBA00CE7D59700EC481B /* PXAnimatedGifExporter.h in Headers */,
 				EA31FBA20CE7D59700EC481B /* PXSequenceExportPrompter.h in Headers */,
 				EA31FBA40CE7D59700EC481B /* PXSpriteSheetExporter.h in Headers */,
-				EA31FBA80CE7D59700EC481B /* PXGifExporter.h in Headers */,
 				EA31FBAA0CE7D59700EC481B /* PXIconExporter.h in Headers */,
 				EA31FBAE0CE7D59700EC481B /* PXBitmapImporter.h in Headers */,
 				EA31FBB00CE7D59700EC481B /* PXGifImporter.h in Headers */,
@@ -2524,7 +2517,6 @@
 				EA31FBA10CE7D59700EC481B /* PXAnimatedGifExporter.m in Sources */,
 				EA31FBA30CE7D59700EC481B /* PXSequenceExportPrompter.m in Sources */,
 				EA31FBA50CE7D59700EC481B /* PXSpriteSheetExporter.m in Sources */,
-				EA31FBA90CE7D59700EC481B /* PXGifExporter.m in Sources */,
 				EA31FBAB0CE7D59700EC481B /* PXIconExporter.m in Sources */,
 				EA31FBAF0CE7D59700EC481B /* PXBitmapImporter.m in Sources */,
 				EA31FBB10CE7D59700EC481B /* PXGifImporter.m in Sources */,

@@ -134,19 +134,7 @@ BOOL isPowerOfTwo(int num)
     }
     else if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) aType))
     {
-        PXCanvas *exportCanvas = [canvas copy];
-        [exportCanvas reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
-        
-        PXAnimatedGifExporter *exporter = [[PXAnimatedGifExporter alloc] initWithSize:[canvas size] iterations:1];
-        [exporter writeCanvas:exportCanvas withDuration:0 transparentColor:nil];
-        [exporter finalizeExport];
-        [exportCanvas release];
-        
-        NSData *data = [[exporter data] retain];
-        [exporter release];
-        
-        return [data autorelease];
-        //return [PXGifExporter gifDataForImage:[canvas exportImage]];
+		return [canvas imageDataWithType:NSGIFFileType properties:nil];
     }
     else if (UTTypeEqual(kUTTypeBMP, (__bridge CFStringRef) aType))
     {
