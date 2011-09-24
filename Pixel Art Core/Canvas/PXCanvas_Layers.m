@@ -247,6 +247,7 @@
 - (PXLayer *)duplicateLayerAtIndex:(NSUInteger)index
 {
 	PXLayer *result = [[[layers objectAtIndex:index] copy] autorelease];
+	result.name = [result.name stringByAppendingString:NSLocalizedString(@" Copy", @" Copy")];
 	
 	[self beginUndoGrouping]; {
 		[self insertLayer:result atIndex:index+1];
