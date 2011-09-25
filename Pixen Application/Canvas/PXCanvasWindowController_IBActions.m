@@ -203,11 +203,8 @@
 	else if ([anItem action] == @selector(pasteLayer:))
 	{
 		NSPasteboard *board = [NSPasteboard generalPasteboard];
-		if ([[board types] containsObject:PXLayerPboardType])
-			return YES;
-		else
-			return NO;
-	}	
+		return [[board types] containsObject:PXLayerPboardType];
+	}
 	else if ([anItem action] == @selector(setPatternToSelection:))
 		return [[self canvas] hasSelection] && [[[PXToolPaletteController sharedToolPaletteController] currentTool] supportsPatterns];
 	

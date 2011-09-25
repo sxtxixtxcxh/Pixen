@@ -307,16 +307,25 @@ NSString *palettesSubdirName = @"Palettes";
 
 //IBAction 
 
-- (IBAction)newFromClipboard:sender
+- (IBAction)newFromClipboard:(id)sender
 {
-	NSError *err=nil;
-	PXCanvasDocument *doc = [self makeUntitledDocumentOfType:PixenImageFileType showSizePrompt:NO error:&err];
-	if(err) {
-		[self presentError:err];
+	NSError *error = nil;
+	
+	PXCanvasDocument *doc = [self makeUntitledDocumentOfType:PixenImageFileType
+											  showSizePrompt:NO
+													   error:&error];
+	
+	if (!doc) {
+		[self presentError:error];
 		return;
 	}
-	[self addDocument:doc];
+	
 	[doc loadFromPasteboard:[NSPasteboard generalPasteboard]];
+	
+	[self addDocument:doc];
+	
+	[doc makeWindowControllers];
+	[doc showWindows];
 }
 
 // It occurs to me (after having renamed this object to be a document controller, of course)

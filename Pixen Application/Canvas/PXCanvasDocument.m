@@ -177,24 +177,26 @@ BOOL isPowerOfTwo(int num)
 }
 
 - (void)loadFromPasteboard:(NSPasteboard *)board
-{	
+{
 	if ([[board types] containsObject:PXLayerPboardType])
 	{
-    NSData *data = [board dataForType:PXLayerPboardType];
+		NSData *data = [board dataForType:PXLayerPboardType];
 		PXLayer *layer = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+		
 		[canvas setSize:[layer size]];
 		[canvas pasteFromPasteboard:board type:PXLayerPboardType];
 	}
-	else 
+	else
 	{
 		for (NSString *type in [NSImage imagePasteboardTypes])
 		{
 			if ([[board types] containsObject:type])
 			{
 				NSImage *image = [[[NSImage alloc] initWithPasteboard:board] autorelease];
-				[canvas setSize:NSMakeSize(ceilf([image size].width), 
-                                   ceilf([image size].height))];
+				
+				[canvas setSize:NSMakeSize(ceilf([image size].width), ceilf([image size].height))];
 				[canvas pasteFromPasteboard:board type:PXNSImagePboardType];
+				
 				break;
 			}
 		}
@@ -203,12 +205,12 @@ BOOL isPowerOfTwo(int num)
 	if (canvas)
 	{
 		[canvas setUndoManager:[self undoManager]];
-		[self makeWindowControllers];
+		
 		// remove the auto-created main layer
 		if ([[canvas layers] count] > 1)
-    {
+		{
 			[canvas removeLayerAtIndex:0];
-    }
+		}
 	}
 	
 	[[self undoManager] removeAllActions];

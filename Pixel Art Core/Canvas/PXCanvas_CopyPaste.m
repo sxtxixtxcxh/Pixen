@@ -54,32 +54,38 @@
 	} [self endUndoGrouping];		
 }
 
-- (void)pasteLayerFromPasteboard:(NSPasteboard *)board type:type
+- (void)pasteLayerFromPasteboard:(NSPasteboard *)board type:(NSString *)type
 {
-	if (![type isEqualToString:PXLayerPboardType]) { return; }
-	NSDictionary *layerDict = [NSKeyedUnarchiver unarchiveObjectWithData:[board dataForType:PXLayerPboardType]];
-	NSImage *image = [layerDict objectForKey:PXLayerImageKey];
-	if(![self canContinuePasteOf:NSLocalizedString(@"layer", @"layer") size:[image size]]) { return; }
-	NSString *name = [layerDict objectForKey:PXLayerNameKey];
-	PXLayer *layer = [PXLayer layerWithName:name image:image size:[self size]];
-	[layer setOpacity:[[layerDict objectForKey:PXLayerOpacityKey] floatValue]];
+	if (![type isEqualToString:PXLayerPboardType])
+		return;
+	
+	PXLayer *layer = [NSKeyedUnarchiver unarchiveObjectWithData:[board dataForType:PXLayerPboardType]];
+	
+	if (![self canContinuePasteOf:NSLocalizedString(@"layer", @"layer") size:[layer size]])
+		return;
+	
 	[self pasteLayer:layer];
 	[self layersChanged];
 }
 
-- (PXLayer *)layerForPastingFromPasteboard:(NSPasteboard *)board type:type
+- (PXLayer *)layerForPastingFromPasteboard:(NSPasteboard *)board type:(NSString *)type
 {
 	PXLayer *layer = nil;
-	if([type isEqualToString:PXLayerPboardType]) {
+	
+	if ([type isEqualToString:PXLayerPboardType]) {
 		layer = [NSKeyedUnarchiver unarchiveObjectWithData:[board dataForType:type]];
 		[layer setSize:[self size]];
 	}
-	else if([type isEqualToString:PXNSImagePboardType]) {
+	else if ([type isEqualToString:PXNSImagePboardType]) {
 		NSImage *image = [[[NSImage alloc] initWithPasteboard:board] autorelease];
-		if(![self canContinuePasteOf:NSLocalizedString(@"image", @"image") size:[image size]]) { return nil; }
+		
+		if (![self canContinuePasteOf:NSLocalizedString(@"image", @"image") size:[image size]])
+			return nil;
+		
 		NSPoint origin;
+		
 		if (![board stringForType:PXSelectionOriginPboardType])
-		{	
+		{
 			origin = NSMakePoint(([self size].width - [image size].width) / 2, ([self size].height - [image size].height) / 2);
 		}
 		else
@@ -88,8 +94,13 @@
 			origin.x = MIN([self size].width - [image size].width, pOrigin.x);
 			origin.y = MIN([self size].height - [image size].height, pOrigin.y);
 		}
-		layer = [PXLayer layerWithName:NSLocalizedString(@"Pasted Layer", @"Pasted Layer") image:image origin:origin size:[self size]];
- 	}
+		
+		layer = [PXLayer layerWithName:NSLocalizedString(@"Pasted Layer", @"Pasted Layer")
+								 image:image
+								origin:origin
+								  size:[self size]];
+	}
+	
 	return layer;
 }
 
@@ -106,7 +117,7 @@
 	} [self endUndoGrouping];
 }
 
-- (void)pasteFromPasteboard:(NSPasteboard *) board type:type
+- (void)pasteFromPasteboard:(NSPasteboard *)board type:(NSString *)type
 {
 	PXLayer *layer = [self layerForPastingFromPasteboard:board type:type];
 	[self pasteLayer:layer];
@@ -133,12 +144,7 @@
 	NSBitmapImageRep *bitmapRep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0.0f, 0.0f, [layerImage size].width, [layerImage size].height)] autorelease];
 	[layerImage unlockFocus];
 	
-	NSDictionary *dataDict = [NSDictionary dictionaryWithObjectsAndKeys:
-							  layerImage, PXLayerImageKey,
-							  [NSNumber numberWithFloat:[layer opacity]], PXLayerOpacityKey,
-							  [layer name], PXLayerNameKey, nil];
-	
-	[board setData:[NSKeyedArchiver archivedDataWithRootObject:dataDict]
+	[board setData:[NSKeyedArchiver archivedDataWithRootObject:layer]
 		   forType:PXLayerPboardType];
 	
 	[board setData:[bitmapRep representationUsingType:NSTIFFFileType properties:nil]

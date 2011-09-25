@@ -13,9 +13,9 @@
 - (NSInteger)runPasteTooBigAlert:(NSString *)pastedThing size:(NSSize)aSize;
 - (BOOL)canContinuePasteOf:(NSString *)pastedThing size:(NSSize)aSize;
 - (void)pasteLayer:(PXLayer *)layer;
-- (void)pasteLayerFromPasteboard:(NSPasteboard *)board type:type;
+- (void)pasteLayerFromPasteboard:(NSPasteboard *)board type:(NSString *)type;
 - (void)pasteFromPasteboard:(NSPasteboard *)board type:(NSString *)type intoLayer:(PXLayer *)layer;
-- (void)pasteFromPasteboard:(NSPasteboard *) board type:type;
+- (void)pasteFromPasteboard:(NSPasteboard *) board type:(NSString *)type;
 - (void)copyLayer:(PXLayer *)layer toPasteboard:(NSPasteboard *)board;
 - (void)performCopyMergingLayers:(BOOL)merge;
 - (void)copySelection;
