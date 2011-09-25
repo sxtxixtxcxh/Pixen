@@ -224,7 +224,7 @@
 
 - (void)cutLayer:(id)sender
 {
-	[[layer canvas] cutLayer:layer];
+	[layerController cutLayerObject:layer];
 }
 
 - (void)copyLayer:(id)sender

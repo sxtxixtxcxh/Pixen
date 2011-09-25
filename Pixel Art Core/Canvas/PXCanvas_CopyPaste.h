@@ -23,8 +23,7 @@
 - (void)cutSelection;
 - (void)paste;
 - (void)pasteIntoLayer:(PXLayer *)layer;
-- (void)cutLayer:aLayer;
+- (void)cutLayer:(PXLayer *)aLayer;
 - (void)copyActiveLayer;
-- (void)cutActiveLayer;
 - (void)pasteLayer;
 @end

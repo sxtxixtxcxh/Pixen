@@ -164,7 +164,7 @@
 	[self performCopyMergingLayers:YES];
 }
 
-- (void)cutLayer:aLayer
+- (void)cutLayer:(PXLayer *)aLayer
 {
 	[self beginUndoGrouping]; {
 		[self copyLayer:aLayer toPasteboard:[NSPasteboard generalPasteboard]];
@@ -175,11 +175,6 @@
 - (void)copyActiveLayer
 {
 	[self copyLayer:[self activeLayer] toPasteboard:[NSPasteboard generalPasteboard]];
-}
-
-- (void)cutActiveLayer
-{
-	[self cutLayer:activeLayer];
 }
 
 - (void)pasteLayer

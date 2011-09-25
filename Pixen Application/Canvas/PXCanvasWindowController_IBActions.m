@@ -328,7 +328,7 @@ didFinishWithSize:(NSSize)aSize
 
 - (IBAction)cutLayer:sender
 {
-	[canvas cutActiveLayer];
+	[[canvasController layerController] cutSelectedLayer];
 }
 
 - (IBAction)copyLayer:sender

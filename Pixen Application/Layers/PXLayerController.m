@@ -6,6 +6,7 @@
 #import "PXLayerController.h"
 
 #import "PXAnimationDocument.h"
+#import "PXCanvas_CopyPaste.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas.h"
@@ -214,6 +215,33 @@
 	[layersArray insertObject:layer atArrangedObjectIndex:0];
 	
 	[self selectRow:[[canvas layers] count]];
+}
+
+- (void)cutSelectedLayer
+{
+	NSUInteger idx = [[layersView selectionIndexes] indexGreaterThanOrEqualToIndex:0];
+	
+	if (idx == NSNotFound || idx >= [[canvas layers] count])
+		return;
+	
+	PXLayer *layer = [[canvas layers] objectAtIndex:[self invertLayerIndex:idx]];
+	[self cutLayerObject:layer];
+}
+
+- (void)cutLayerObject:(PXLayer *)layer
+{
+	if ([[canvas layers] count] <= 1)
+		return;
+	
+	NSUInteger index = [[canvas layers] indexOfObject:layer];
+	
+	PXLayerCollectionViewItem *item = (PXLayerCollectionViewItem *) [layersView itemAtIndex:[self invertLayerIndex:index]];
+	[item unload];
+	
+	[layersArray removeObjectAtArrangedObjectIndex:[self invertLayerIndex:index]];
+	[canvas cutLayer:layer];
+	
+	[self selectRow:MAX(index - 1, 0)];
 }
 
 - (void)duplicateSelectedLayer
