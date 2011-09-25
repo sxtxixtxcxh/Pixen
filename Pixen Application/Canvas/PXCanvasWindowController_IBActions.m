@@ -213,7 +213,7 @@
 
 - (IBAction)promoteSelection:(id) sender
 {
-	[canvas promoteSelection];
+	[[canvasController layerController] promoteSelection];
 }
 
 - (IBAction)newLayer:(id) sender

@@ -9,6 +9,7 @@
 #import "PXCanvas_CopyPaste.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_Modifying.h"
+#import "PXCanvas_Selection.h"
 #import "PXCanvas.h"
 #import "PXCanvasDocument.h"
 #import "PXLayer.h"
@@ -212,6 +213,14 @@
 	
 	//[[[self document] undoManager] endUndoGrouping];
 	
+	[layersArray insertObject:layer atArrangedObjectIndex:0];
+	
+	[self selectRow:[[canvas layers] count]];
+}
+
+- (void)promoteSelection
+{
+	PXLayer *layer = [canvas promoteSelection];
 	[layersArray insertObject:layer atArrangedObjectIndex:0];
 	
 	[self selectRow:[[canvas layers] count]];

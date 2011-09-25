@@ -60,18 +60,21 @@
 	return rects;
 }
 
-- (void)promoteSelection
+- (PXLayer *)promoteSelection
 {
+	PXLayer *newLayer = nil;
+	
 	[self beginUndoGrouping]; {
-//FIXME: fix this line once we have canvas-level undo for PXCanvas_Modifying
-		[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];
-		PXLayer *newLayer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Promoted Selection", @"Promoted Selection")
-													  size:[self size]
-											 fillWithColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]] autorelease];
+		newLayer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Promoted Selection", @"Promoted Selection")
+											 size:[self size]
+									fillWithColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]] autorelease];
+		
 		int i, j;
 		NSPoint point;
 		[newLayer setCanvas:self];
+		
 		NSUndoManager *um = [self undoManager];
+		
 		for (i = 0; i < [self size].width; i++)
 		{
 			for (j = 0; j < [self size].height; j++)
@@ -85,11 +88,14 @@
 				}
 			}
 		}
+		
 		[self addLayer:newLayer];
 		[self activateLayer:newLayer];
 		[self layersChanged];
-		[self deselect];		
+		[self deselect];
 	} [self endUndoGrouping:NSLocalizedString(@"Promote Selection to Layer", @"Promote Selection to Layer")];
+	
+	return newLayer;
 }
 
 - (void)setHasSelection:(BOOL)newSelection
