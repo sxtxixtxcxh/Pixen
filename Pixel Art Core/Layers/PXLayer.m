@@ -335,6 +335,8 @@
 	{ 
 		[self setOpacity:MAX(opacity, [aLayer opacity])]; 
 	}
+	
+	[canvas changed];
 }
 
 - (void)compositeNoBlendUnder:(PXLayer *)aLayer inRect:(NSRect)aRect

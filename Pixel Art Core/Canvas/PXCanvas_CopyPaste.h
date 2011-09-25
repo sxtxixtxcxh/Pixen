@@ -14,7 +14,7 @@
 - (BOOL)canContinuePasteOf:(NSString *)pastedThing size:(NSSize)aSize;
 - (void)pasteLayer:(PXLayer *)layer;
 - (void)pasteLayerFromPasteboard:(NSPasteboard *)board type:type;
-- (void)pasteFromPasteboard:(NSPasteboard *) board type:type intoLayer:(PXLayer *)layer;
+- (void)pasteFromPasteboard:(NSPasteboard *)board type:(NSString *)type intoLayer:(PXLayer *)layer;
 - (void)pasteFromPasteboard:(NSPasteboard *) board type:type;
 - (void)copyLayer:(PXLayer *)layer toPasteboard:(NSPasteboard *)board;
 - (void)performCopyMergingLayers:(BOOL)merge;

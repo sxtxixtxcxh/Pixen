@@ -69,7 +69,7 @@
 
 - (PXLayer *)layerForPastingFromPasteboard:(NSPasteboard *)board type:type
 {
-  PXLayer *layer = nil;
+	PXLayer *layer = nil;
 	if([type isEqualToString:PXLayerPboardType]) {
 		layer = [NSKeyedUnarchiver unarchiveObjectWithData:[board dataForType:type]];
 		[layer setSize:[self size]];
@@ -90,22 +90,20 @@
 		}
 		layer = [PXLayer layerWithName:NSLocalizedString(@"Pasted Layer", @"Pasted Layer") image:image origin:origin size:[self size]];
  	}
-  return layer;
+	return layer;
 }
 
   //really, this should keep around an invisible paste-layer until the selection is removed, or something...
   //this way, it will lead to data garbling when people move their selections around.  save it for the rewrite!
 
-- (void)pasteFromPasteboard:(NSPasteboard *) board type:type intoLayer:(PXLayer *)layer
+- (void)pasteFromPasteboard:(NSPasteboard *)board type:(NSString *)type intoLayer:(PXLayer *)layer
 {
-  PXLayer *newLayer = [self layerForPastingFromPasteboard:board type:type];
-  NSUInteger idx = [layers indexOfObject:layer];
-  [self beginUndoGrouping]; {
-      //FIXME wasteful copy
-		[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];
+	PXLayer *newLayer = [self layerForPastingFromPasteboard:board type:type];
+	
+	[self beginUndoGrouping]; {
 		[self deselect];
-    [[layers objectAtIndex:idx] compositeUnder:newLayer flattenOpacity:YES];
-	} [self endUndoGrouping];		
+		[layer compositeUnder:newLayer flattenOpacity:YES];
+	} [self endUndoGrouping];
 }
 
 - (void)pasteFromPasteboard:(NSPasteboard *) board type:type
@@ -118,24 +116,33 @@
 - (void)copyLayer:(PXLayer *)layer toPasteboard:(NSPasteboard *)board
 {
 	[board declareTypes:[NSArray arrayWithObjects:PXLayerPboardType, NSTIFFPboardType, nil] owner:self];
+	
 	if (![[board types] containsObject:PXLayerPboardType])
 	{
 		[board addTypes:[NSArray arrayWithObject:PXLayerPboardType] owner:self];
 	}
-	if(! [[board types] containsObject:NSTIFFPboardType]) 
-  { 
-		[board addTypes:[NSArray arrayWithObject:NSTIFFPboardType] owner:self]; 
-  }	
+	
+	if (![[board types] containsObject:NSTIFFPboardType])
+	{
+		[board addTypes:[NSArray arrayWithObject:NSTIFFPboardType] owner:self];
+	}
 	
 	NSImage *layerImage = [layer exportImage];
 	[layerImage lockFocus];
-	NSBitmapImageRep *bitmapRep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0, 0, [layerImage size].width, [layerImage size].height)] autorelease];
+	
+	NSBitmapImageRep *bitmapRep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0.0f, 0.0f, [layerImage size].width, [layerImage size].height)] autorelease];
 	[layerImage unlockFocus];
-	NSDictionary *dataDict = [NSDictionary dictionaryWithObjectsAndKeys:layerImage, PXLayerImageKey,
-                            [NSNumber numberWithFloat:[layer opacity]], PXLayerOpacityKey,
-                            [layer name], PXLayerNameKey, nil];
-	[board setData:[NSKeyedArchiver archivedDataWithRootObject:dataDict] forType:PXLayerPboardType];
-	[board setData:[bitmapRep representationUsingType:NSTIFFFileType properties:nil] forType:NSTIFFPboardType];	
+	
+	NSDictionary *dataDict = [NSDictionary dictionaryWithObjectsAndKeys:
+							  layerImage, PXLayerImageKey,
+							  [NSNumber numberWithFloat:[layer opacity]], PXLayerOpacityKey,
+							  [layer name], PXLayerNameKey, nil];
+	
+	[board setData:[NSKeyedArchiver archivedDataWithRootObject:dataDict]
+		   forType:PXLayerPboardType];
+	
+	[board setData:[bitmapRep representationUsingType:NSTIFFFileType properties:nil]
+		   forType:NSTIFFPboardType];
 }
 
 - (void)performCopyMergingLayers:(BOOL)merge
