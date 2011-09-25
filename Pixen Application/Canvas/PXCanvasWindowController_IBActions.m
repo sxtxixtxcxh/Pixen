@@ -333,7 +333,7 @@ didFinishWithSize:(NSSize)aSize
 
 - (IBAction)copyLayer:sender
 {
-	[canvas copyActiveLayer];
+	[[canvasController layerController] copySelectedLayer];
 }
 
 - (IBAction)pasteLayer:sender

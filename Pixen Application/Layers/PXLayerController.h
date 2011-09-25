@@ -41,6 +41,9 @@
 
 - (void)selectRow:(NSUInteger)index;
 
+- (void)copySelectedLayer;
+- (void)copyLayerObject:(PXLayer *)layer;
+
 - (void)cutSelectedLayer;
 - (void)cutLayerObject:(PXLayer *)layer;
 

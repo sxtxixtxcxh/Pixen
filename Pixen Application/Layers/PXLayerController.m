@@ -217,6 +217,22 @@
 	[self selectRow:[[canvas layers] count]];
 }
 
+- (void)copySelectedLayer
+{
+	NSUInteger idx = [[layersView selectionIndexes] indexGreaterThanOrEqualToIndex:0];
+	
+	if (idx == NSNotFound || idx >= [[canvas layers] count])
+		return;
+	
+	PXLayer *layer = [[canvas layers] objectAtIndex:[self invertLayerIndex:idx]];
+	[self copyLayerObject:layer];
+}
+
+- (void)copyLayerObject:(PXLayer *)layer
+{
+	[canvas copyLayer:layer toPasteboard:[NSPasteboard generalPasteboard]];
+}
+
 - (void)cutSelectedLayer
 {
 	NSUInteger idx = [[layersView selectionIndexes] indexGreaterThanOrEqualToIndex:0];

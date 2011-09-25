@@ -229,7 +229,7 @@
 
 - (void)copyLayer:(id)sender
 {
-	[[layer canvas] copyLayer:layer toPasteboard:[NSPasteboard generalPasteboard]];
+	[layerController copyLayerObject:layer];
 }
 
 - (void)rotateLayerCounterclockwise:(id)sender
