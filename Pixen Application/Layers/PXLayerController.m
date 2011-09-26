@@ -269,6 +269,14 @@
 	[self selectRow:MAX(index - 1, 0)];
 }
 
+- (void)pasteLayer
+{
+	PXLayer *layer = [canvas pasteLayer];
+	[layersArray insertObject:layer atArrangedObjectIndex:0];
+	
+	[self selectRow:[[canvas layers] count]];
+}
+
 - (void)duplicateSelectedLayer
 {
 	NSInteger index = [self invertLayerIndex:[[layersView selectionIndexes] firstIndex]];

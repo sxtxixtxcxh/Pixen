@@ -49,6 +49,8 @@
 - (void)cutSelectedLayer;
 - (void)cutLayerObject:(PXLayer *)layer;
 
+- (void)pasteLayer;
+
 - (void)duplicateSelectedLayer;
 - (void)duplicateLayerObject:(PXLayer *)layer;
 

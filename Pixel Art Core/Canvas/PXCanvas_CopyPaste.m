@@ -51,21 +51,23 @@
 		[self deselect];
 		[self addLayer:layer];
 		[self activateLayer:layer];
-	} [self endUndoGrouping];		
+	} [self endUndoGrouping];
 }
 
-- (void)pasteLayerFromPasteboard:(NSPasteboard *)board type:(NSString *)type
+- (PXLayer *)pasteLayerFromPasteboard:(NSPasteboard *)board type:(NSString *)type
 {
 	if (![type isEqualToString:PXLayerPboardType])
-		return;
+		return nil;
 	
 	PXLayer *layer = [NSKeyedUnarchiver unarchiveObjectWithData:[board dataForType:PXLayerPboardType]];
 	
 	if (![self canContinuePasteOf:NSLocalizedString(@"layer", @"layer") size:[layer size]])
-		return;
+		return nil;
 	
 	[self pasteLayer:layer];
 	[self layersChanged];
+	
+	return layer;
 }
 
 - (PXLayer *)layerForPastingFromPasteboard:(NSPasteboard *)board type:(NSString *)type
@@ -190,11 +192,15 @@
 	[self copyLayer:[self activeLayer] toPasteboard:[NSPasteboard generalPasteboard]];
 }
 
-- (void)pasteLayer
+- (PXLayer *)pasteLayer
 {
+	PXLayer *layer = nil;
+	
 	[self beginUndoGrouping]; {
-		[self pasteLayerFromPasteboard:[NSPasteboard generalPasteboard] type:PXLayerPboardType];
+		layer = [self pasteLayerFromPasteboard:[NSPasteboard generalPasteboard] type:PXLayerPboardType];
 	} [self endUndoGrouping:NSLocalizedString(@"Paste Layer", @"Paste Layer")];
+	
+	return layer;
 }
 
 - (void)cutSelection

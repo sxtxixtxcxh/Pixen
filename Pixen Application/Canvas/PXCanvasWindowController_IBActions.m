@@ -335,7 +335,7 @@ didFinishWithSize:(NSSize)aSize
 
 - (IBAction)pasteLayer:sender
 {
-	[canvas pasteLayer];
+	[[canvasController layerController] pasteLayer];
 }
 
 - (IBAction)copy:(id) sender
