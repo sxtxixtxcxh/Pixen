@@ -145,12 +145,15 @@
 	[newDocument showWindows];
 }
 
-- (IBAction)exportDocumentPalette:sender
+- (IBAction)exportDocumentPalette:(id)sender
 {
-	id exporter = [[PXPaletteExporter alloc] init];
-	PXPalette *p = [canvas newFrequencyPalette];
-	[exporter runWithPalette:p inWindow:[self window]];
-	[p release];
+	PXPaletteExporter *exporter = [[PXPaletteExporter alloc] init];
+	
+	PXPalette *palette = [canvas newFrequencyPalette];
+	palette.name = NSLocalizedString(@"Document Palette", nil);
+	
+	[exporter runWithPalette:palette inWindow:[self window]];
+	[palette release];
 }
 
 - (IBAction)mergeDown:(id) sender
