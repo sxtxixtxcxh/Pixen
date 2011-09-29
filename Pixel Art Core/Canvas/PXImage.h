@@ -37,6 +37,7 @@ NSColor *PXImage_colorAtIndex(PXImage *self, int loc);
 NSColor *PXImage_colorAtXY(PXImage *self, int x, int y);
 void PXImage_setColorAtXY(PXImage *self, NSColor *color, int x, int y);
 void PXImage_setColorAtIndex(PXImage *self, NSColor *c, unsigned loc);
+void PXImage_clear(PXImage *self, NSColor *c);
 
 void PXImage_flipHorizontally(PXImage *self);
 void PXImage_flipVertically(PXImage *self);

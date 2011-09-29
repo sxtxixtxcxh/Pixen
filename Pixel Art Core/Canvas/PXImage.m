@@ -328,6 +328,30 @@ void PXImage_setColorAtXY(PXImage *self, NSColor *color, int xv, int yv)
 	PXTileSetAtXY(t, xv, yv, c);
 }
 
+void PXImage_clear(PXImage *self, NSColor *c)
+{
+	c = [c colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	
+	CGFloat r = [c redComponent], g = [c greenComponent], b = [c blueComponent], a = [c alphaComponent];
+	
+	for (int y = 0; y < self->height; y += PXTileDimension)
+	{
+		for (int x = 0; x < self->width; x += PXTileDimension)
+		{
+			PXTile *tile = PXImage_tileAtXY(self, x, y);
+			
+			CGContextSetRGBFillColor(tile->painting, r, g, b, a);
+			CGContextFillRect(tile->painting, CGRectMake(0.0f, 0.0f, PXTileDimension, PXTileDimension));
+			
+			if (tile->image)
+			{
+				CGImageRelease(tile->image);
+				tile->image = NULL;
+			}
+		}
+	}
+}
+
 void PXImage_flipHorizontally(PXImage *self)
 {
 	NSColor * leftColor, *rightColor;

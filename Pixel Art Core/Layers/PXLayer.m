@@ -18,7 +18,7 @@
 
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image origin:(NSPoint)origin size:(NSSize)sz
 {
-	id layer = [[PXLayer alloc] initWithName:name size:sz];
+	PXLayer *layer = [[PXLayer alloc] initWithName:name size:sz];
 	// okay, now we have to make sure the image is the same size as the canvas
 	// if it isn't, the weird premade image thing will cause serious problems.
 	// soooo... haxx!
@@ -58,23 +58,19 @@
 	return self;
 }
 
--(id) initWithName:(NSString *) aName size:(NSSize)size
+- (id)initWithName:(NSString *)aName size:(NSSize)size
 {
 	return [self initWithName:aName size:size fillWithColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
 }
 
-- initWithName:(NSString *)aName size:(NSSize)size fillWithColor:(NSColor *)c
+- (id)initWithName:(NSString *)aName size:(NSSize)size fillWithColor:(NSColor *)c
 {
 	self = [self initWithName:aName image:nil];
-	image = PXImage_initWithSize(PXImage_alloc(), size);
-	if (image)
-	{
-//FIXME: this is unconscionable - just RectFill into the CGImages!
-		int i;
-		for (i = 0; i < size.width * size.height; i++)
-		{
-			PXImage_setColorAtIndex(image, c, i);
-		}
+	if (self) {
+		image = PXImage_initWithSize(PXImage_alloc(), size);
+		
+		if (image)
+			PXImage_clear(image, c);
 	}
 	return self;
 }
