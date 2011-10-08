@@ -2,25 +2,25 @@
 //  PXCrosshair.m
 //  Pixen
 //
+//  Copyright 2011 Pixen Project. All rights reserved.
+//
 
 #import "PXCrosshair.h"
 #import "PXToolPaletteController.h"
 #import "PXTool.h"
 #import "PXDefaults.h"
-#import <AppKit/NSGraphicsContext.h>
-#import <AppKit/NSBezierPath.h>
-#import <AppKit/NSColor.h>
 
 @implementation PXCrosshair
 
-@synthesize cursorPosition;
+@synthesize cursorPosition = _cursorPosition;
+@dynamic color, shouldDraw;
 
-- (void)drawRect:(NSRect)drawingRect withTool:tool tileOffset:(NSPoint)offset
+- (void)drawRect:(NSRect)drawingRect withTool:(PXTool *)tool tileOffset:(NSPoint)offset
 {
 	if (![self shouldDraw]) 
 		return; 
 	
-	NSRect rect = [tool crosshairRectCenteredAtPoint:cursorPosition];
+	NSRect rect = [tool crosshairRectCenteredAtPoint:self.cursorPosition];
 	rect.origin.x += offset.x;
 	rect.origin.y += offset.y;
 	

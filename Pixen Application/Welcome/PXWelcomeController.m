@@ -2,14 +2,14 @@
 //  PXWelcomeController.m
 //  Pixen
 //
-//  Copyright Matt Rajca 2011. All rights reserved.
+//  Copyright 2011 Pixen Project. All rights reserved.
 //
 
 #import "PXWelcomeController.h"
 
 @implementation PXWelcomeController
 
-@synthesize webView;
+@synthesize webView = _webView;
 
 + (id)sharedWelcomeController
 {
@@ -29,6 +29,12 @@
 		return nil;
 	
 	return self;
+}
+
+- (void)dealloc
+{
+	self.webView = nil;
+	[super dealloc];
 }
 
 - (void)awakeFromNib {

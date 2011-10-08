@@ -2,6 +2,8 @@
 //  PXLayer.m
 //  Pixen
 //
+//  Copyright 2011 Pixen Project. All rights reserved.
+//
 
 #import "PXLayer.h"
 #import "PXLayerController.h"
@@ -14,7 +16,7 @@
 
 @implementation PXLayer
 
-@synthesize visible, name, opacity;
+@synthesize visible = _visible, name = _name, opacity = _opacity;
 
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image origin:(NSPoint)origin size:(NSSize)sz
 {
@@ -53,8 +55,10 @@
 	meldedColor = nil;
 	meldedBezier = nil;
 	canvas = nil;
-	opacity = 100;
-	visible = YES;
+	
+	self.opacity = 100;
+	self.visible = YES;
+	
 	return self;
 }
 
@@ -77,7 +81,7 @@
 
 - (void)dealloc
 {
-	[name release];
+	[_name release];
 	[meldedBezier release];
 	[meldedColor release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -92,8 +96,8 @@
 
 - (void)setVisible:(BOOL)state
 {
-	if (visible != state) {
-		visible = state;
+	if (_visible != state) {
+		_visible = state;
 		[[self canvas] changed];
 	}
 }
@@ -128,8 +132,8 @@
 
 - (void)setOpacity:(CGFloat)state
 {
-	if (opacity != state) {
-		opacity = state;
+	if (_opacity != state) {
+		_opacity = state;
 		[[self canvas] changed];
 	}
 }
@@ -292,7 +296,9 @@
 
 - (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(CGFloat)frac
 {
-	if (!visible || opacity == 0) { return; }
+	if (!self.visible || self.opacity == 0)
+		return;
+	
 //FIXME: this shouldn't be here
 	float widthScale = NSWidth(dst) / NSWidth(src);
 	float heightScale = NSHeight(dst) / NSHeight(src);
@@ -329,7 +335,7 @@
 	PXImage_compositeUnderInRect(image, [aLayer image], aRect, YES);
 	if (flattenOpacity) 
 	{ 
-		[self setOpacity:MAX(opacity, [aLayer opacity])]; 
+		[self setOpacity:MAX(self.opacity, [aLayer opacity])]; 
 	}
 	
 	[canvas changed];
@@ -365,10 +371,10 @@
 	self = [super init];
 	
 	image = PXImage_initWithCoder(PXImage_alloc(), coder, (PXPalette *)[coder associatedValueForKey:@"palette"]);
-	name = [[coder decodeObjectForKey:@"name"] retain];
 	
-	visible = [coder containsValueForKey:@"visible"] ? [coder decodeBoolForKey:@"visible"] : YES;
-	opacity = [coder decodeObjectForKey:@"opacity"] ? [[coder decodeObjectForKey:@"opacity"] doubleValue] : 100;
+	self.name = [coder decodeObjectForKey:@"name"];
+	self.visible = [coder containsValueForKey:@"visible"] ? [coder decodeBoolForKey:@"visible"] : YES;
+	self.opacity = [coder decodeObjectForKey:@"opacity"] ? [[coder decodeObjectForKey:@"opacity"] doubleValue] : 100;
 	
 	return self;
 }
@@ -376,9 +382,9 @@
 - (void)encodeWithCoder:(NSCoder *)coder
 {
 	PXImage_encodeWithCoder(image, coder);
-	[coder encodeObject:name forKey:@"name"];
-	[coder encodeBool:visible forKey:@"visible"];
-	[coder encodeObject:[NSNumber numberWithDouble:opacity] forKey:@"opacity"];
+	[coder encodeObject:self.name forKey:@"name"];
+	[coder encodeBool:self.visible forKey:@"visible"];
+	[coder encodeObject:[NSNumber numberWithDouble:self.opacity] forKey:@"opacity"];
 }
 
 - (void)_setImage:(PXImage *)newImage
@@ -388,11 +394,11 @@
 
 -(id) copyWithZone:(NSZone *)zone
 {
-	PXLayer * copy = [[[self class] alloc] initWithName:name image:PXImage_copy(image)];
+	PXLayer * copy = [[[self class] alloc] initWithName:self.name image:PXImage_copy(image)];
 	PXImage_release([copy image]);
 	[copy setCanvas:[self canvas]];
-	[copy setOpacity:opacity];
-	[copy setVisible:visible];
+	[copy setOpacity:self.opacity];
+	[copy setVisible:self.visible];
 	return copy;
 }
 

@@ -1,20 +1,11 @@
 //
-//  PXColorPickerColorWellCell.h
-//  PXColorPicker
+//  PXPaletteColorLayer.h
+//  Pixen
 //
-//  Created by Andy Matuschak on 7/7/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-
-@interface PXPaletteColorLayer : CALayer {
-  @private
-	NSUInteger index;
-	NSColor *color;
-	NSControlSize controlSize;
-	BOOL highlighted;
-}
+@interface PXPaletteColorLayer : CALayer
 
 @property (nonatomic, assign) NSUInteger index;
 @property (nonatomic, retain) NSColor *color;

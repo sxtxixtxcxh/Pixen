@@ -1,9 +1,8 @@
 //
 //  PXColorPickerColorWellCell.m
-//  PXColorPicker
+//  Pixen
 //
-//  Created by Andy Matuschak on 7/7/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXPaletteColorLayer.h"
@@ -47,18 +46,18 @@
 
 @implementation PXPaletteColorLayer
 
-@synthesize color, index, controlSize, highlighted;
+@synthesize color = _color, index = _index, controlSize = _controlSize, highlighted = _highlighted;
 
 - (void)dealloc
 {
-	[color release];
+	[_color release];
 	[super dealloc];
 }
 
 - (void)drawColorSwatchWithFrame:(NSRect)rect
 {
 	// Draw that black/white alpha helper and use non-blind compositing. But only if we have to.
-	if ([color alphaComponent] != 1)
+	if ([self.color alphaComponent] != 1)
 	{
 		NSPoint points[3];
 		NSBezierPath *path = [NSBezierPath bezierPath];
@@ -85,13 +84,13 @@
 		[path fill];
 		
 		// Now composite over the actual color.
-		[color set];
+		[self.color set];
 		NSRectFillUsingOperation(rect, NSCompositeSourceOver);
 	}
 	else
 	{
 		// Nothing fancy's required; just paint the color.
-		[color set];
+		[self.color set];
 		NSRectFill(rect);
 	}
 }
@@ -102,13 +101,13 @@
 	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithGraphicsPort:ctx flipped:YES]];
 	
 	NSRect frame = NSRectFromCGRect([self bounds]);
-	[color set];
+	[self.color set];
 	
 	[self drawColorSwatchWithFrame:frame];
 	
 	int fontSize = [NSFont systemFontSizeForControlSize:NSMiniControlSize];
 	
-	if (index > 9999)
+	if (self.index > 9999)
 		fontSize = floorf(fontSize * .85);
 	
 	NSAttributedString *badgeString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", index]
@@ -120,13 +119,13 @@
 	
 	NSRect badgeRect = NSMakeRect(NSMaxX(frame) - badgeSize.width - 1.5f, NSMaxY(frame) - badgeSize.height - 2, badgeSize.width, badgeSize.height);
 	
-	if (!highlighted) {
+	if (!self.highlighted) {
 		[[[NSColor grayColor] colorWithAlphaComponent:0.5f] set];
 		NSFrameRectWithWidthUsingOperation(frame, 2.0f, NSCompositeSourceOver);
 	}
 	
 	// Exceuse me for my mdrfkr hardcoded numbers and ternary operators.
-	int verticalTextOffset = (index > 9999) ? 1 : 2;
+	int verticalTextOffset = (self.index > 9999) ? 1 : 2;
 	
 	NSBezierPath *indexBadge = [NSBezierPath bezierPathWithRoundedRect:badgeRect
 														  cornerRadius:5
@@ -142,7 +141,7 @@
 	
 	[badgeString drawAtPoint:NSMakePoint(NSMaxX(frame) - badgeSize.width + 3, NSMaxY(frame) - badgeSize.height - verticalTextOffset)];
 	
-	if (highlighted) {
+	if (self.highlighted) {
 		NSSetFocusRingStyle(NSFocusRingAbove);
 		NSFrameRectWithWidthUsingOperation(NSInsetRect(frame, -1, -1), 2.0f, NSCompositeSourceOver);
 	}
@@ -152,17 +151,17 @@
 
 - (void)setIndex:(NSUInteger)newIndex
 {
-	if (index != newIndex) {
-		index = newIndex;
+	if (_index != newIndex) {
+		_index = newIndex;
 		[self setNeedsDisplay];
 	}
 }
 
 - (void)setColor:(NSColor *)newColor
 {
-	if (color != newColor) {
-		[color release];
-		color = [newColor retain];
+	if (_color != newColor) {
+		[_color release];
+		_color = [newColor retain];
 		
 		[self setNeedsDisplay];
 	}
@@ -170,9 +169,8 @@
 
 - (void)setHighlighted:(BOOL)state
 {
-	if (highlighted != state) {
-		highlighted = state;
-		
+	if (_highlighted != state) {
+		_highlighted = state;
 		[self setNeedsDisplay];
 	}
 }

@@ -2,7 +2,7 @@
 //  UTType+NSString.m
 //  Pixen
 //
-//  Copyright 2011 Pixen. All rights reserved.
+//  Copyright 2011 Pixen Project. All rights reserved.
 //
 
 #import "UTType+NSString.h"

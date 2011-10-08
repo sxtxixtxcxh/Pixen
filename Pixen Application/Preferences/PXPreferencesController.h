@@ -2,10 +2,8 @@
 //  PXPreferencesController.h
 //  Pixen
 //
-
-#import <AppKit/AppKit.h>
-
-@class PXGeneralPreferencesController, PXHotkeysPreferencesController;
+//  Copyright 2011 Pixen Project. All rights reserved.
+//
 
 typedef enum {
 	PXPreferencesTabGeneral = 0,
@@ -13,12 +11,6 @@ typedef enum {
 } PXPreferencesTab;
 
 @interface PXPreferencesController : NSWindowController
-{
-  @private
-	PXGeneralPreferencesController *_generalVC;
-	PXHotkeysPreferencesController *_hotkeysVC;
-	PXPreferencesTab _selectedTab;
-}
 
 + (id)sharedPreferencesController;
 

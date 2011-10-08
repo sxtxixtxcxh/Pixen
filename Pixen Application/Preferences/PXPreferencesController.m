@@ -2,13 +2,19 @@
 //  PXPreferencesController.m
 //  Pixen
 //
+//  Copyright 2011 Pixen Project. All rights reserved.
+//
 
 #import "PXPreferencesController.h"
 
 #import "PXGeneralPreferencesController.h"
 #import "PXHotkeysPreferencesController.h"
 
-@implementation PXPreferencesController
+@implementation PXPreferencesController {
+	PXGeneralPreferencesController *_generalVC;
+	PXHotkeysPreferencesController *_hotkeysVC;
+	PXPreferencesTab _selectedTab;
+}
 
 + (id)sharedPreferencesController
 {

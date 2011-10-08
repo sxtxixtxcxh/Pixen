@@ -2,21 +2,17 @@
 //  PXCrosshair.h
 //  Pixen
 //
+//  Copyright 2011 Pixen Project. All rights reserved.
+//
 
-#import <Foundation/NSObject.h>
-#import <Foundation/NSGeometry.h>
-@class NSColor;
+@class PXTool;
 
-@interface PXCrosshair : NSObject 
-{
-  @private
-	NSPoint cursorPosition;
-}
+@interface PXCrosshair : NSObject
 
 @property (nonatomic, assign) NSPoint cursorPosition;
+@property (nonatomic, readonly) NSColor *color;
+@property (nonatomic, readonly) BOOL shouldDraw;
 
-- (void)drawRect:(NSRect)drawingRect withTool:tool tileOffset:(NSPoint)offset;
-- (NSColor *) color;
-- (BOOL)shouldDraw;
+- (void)drawRect:(NSRect)drawingRect withTool:(PXTool *)tool tileOffset:(NSPoint)offset;
 
 @end

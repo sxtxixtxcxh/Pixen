@@ -2,15 +2,11 @@
 //  PXHotkeysPreferencesController.h
 //  Pixen
 //
-//  Copyright Matt Rajca 2011. All rights reserved.
+//  Copyright 2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-
 @interface PXHotkeysPreferencesController : NSViewController
-{
-  @private
-	IBOutlet NSForm *form;
-}
+
+@property (nonatomic, retain) IBOutlet NSForm *form;
 
 @end

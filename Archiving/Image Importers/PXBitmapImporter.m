@@ -2,8 +2,7 @@
 //  PXBitmapImporter.m
 //  Pixen
 //
-//  Created by Andy Matuschak on 8/25/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXBitmapImporter.h"
@@ -14,7 +13,7 @@ const int PXBMPColorCountPosition = 46;
 
 @implementation PXBitmapImporter
 
-- init
+- (id)init
 {
 	[NSException raise:@"Invalid initializer" format:@"OSProgressPopup is a singleton; use [PXBitmapImporter sharedBitmapImporter] to access the shared instance."];
 	return nil;
