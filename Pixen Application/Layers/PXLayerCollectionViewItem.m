@@ -16,6 +16,7 @@
 #import "PXLayerController.h"
 #import "PXLayerDetailsView.h"
 #import "PXLayerTextField.h"
+#import "PXNSImageView.h"
 
 @interface PXLayerCollectionViewItem ()
 
