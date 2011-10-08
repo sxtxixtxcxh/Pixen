@@ -2,13 +2,10 @@
 //  PXLayerDetailsView.h
 //  Pixen
 //
+//  Copyright 2011 Pixen Project. All rights reserved.
+//
 
-#import <Cocoa/Cocoa.h>
-
-@interface PXLayerDetailsView : NSView {
-  @private
-	BOOL selected;
-}
+@interface PXLayerDetailsView : NSView
 
 @property (nonatomic, assign) BOOL selected;
 

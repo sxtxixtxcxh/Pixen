@@ -11,10 +11,18 @@
 
 @implementation PXGeneralPreferencesController
 
+@synthesize autoBackupFrequency = _autoBackupFrequency;
+
 - (id)init
 {
 	self = [super initWithNibName:@"PXGeneralPreferences" bundle:nil];
 	return self;
+}
+
+- (void)dealloc
+{
+	self.autoBackupFrequency = nil;
+	[super dealloc];
 }
 
 - (void)awakeFromNib
@@ -22,10 +30,10 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults boolForKey:PXAutosaveEnabledKey]) {
-		[autoBackupFrequency setEnabled:YES];
+		[self.autoBackupFrequency setEnabled:YES];
 	}
 	else {
-		[autoBackupFrequency setEnabled:NO];
+		[self.autoBackupFrequency setEnabled:NO];
 	}
 }
 
@@ -34,10 +42,10 @@
 	[self updateAutoBackup:sender];
 	
 	if ([sender state] == NSOnState) {
-		[autoBackupFrequency setEnabled:YES];
+		[self.autoBackupFrequency setEnabled:YES];
 	}
 	else {
-		[autoBackupFrequency setEnabled:NO];
+		[self.autoBackupFrequency setEnabled:NO];
 	}
 }
 

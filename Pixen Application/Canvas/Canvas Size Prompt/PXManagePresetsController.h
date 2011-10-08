@@ -2,17 +2,12 @@
 //  PXManagePresetsController.h
 //  Pixen
 //
-//  Copyright Matt Rajca 2011. All rights reserved.
+//  Copyright 2011 Pixen Project. All rights reserved.
 //
 
-@interface PXManagePresetsController : NSWindowController < NSTableViewDataSource, NSTableViewDelegate > {
-  @private
-	NSArray *_presets;
-	NSTableView *_tableView;
-	BOOL canDeletePreset;
-}
+@interface PXManagePresetsController : NSWindowController < NSTableViewDataSource, NSTableViewDelegate >
 
-@property (nonatomic, assign) IBOutlet NSTableView *tableView;
+@property (nonatomic, retain) IBOutlet NSTableView *tableView;
 
 @property (nonatomic, assign) BOOL canDeletePreset;
 

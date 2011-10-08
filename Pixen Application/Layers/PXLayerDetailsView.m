@@ -2,12 +2,14 @@
 //  PXLayerDetailsView.m
 //  Pixen
 //
+//  Copyright 2011 Pixen Project. All rights reserved.
+//
 
 #import "PXLayerDetailsView.h"
 
 @implementation PXLayerDetailsView
 
-@synthesize selected;
+@synthesize selected = _selected;
 
 - (BOOL)acceptsFirstResponder
 {
@@ -16,15 +18,15 @@
 
 - (void)setSelected:(BOOL)state
 {
-	if (selected != state) {
-		selected = state;
+	if (_selected != state) {
+		_selected = state;
 		[self setNeedsDisplay:YES];
 	}
 }
 
 - (void)drawRect:(NSRect)rect
 {
-	if (selected) {
+	if (self.selected) {
 		[[NSColor alternateSelectedControlColor] set];
 		NSRectFill(rect);
 	}

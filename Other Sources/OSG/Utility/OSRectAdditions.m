@@ -2,8 +2,7 @@
 //  OSRectAdditions.m
 //  Pixen
 //
-//  Created by Andy Matuschak on 12/26/07.
-//  Copyright 2007 __MyCompanyName__. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "OSRectAdditions.h"

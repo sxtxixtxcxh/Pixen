@@ -2,8 +2,7 @@
 //  PXCanvas_Archiving.m
 //  Pixen
 //
-//  Created by Joe Osborn on 2005.07.31.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXCanvas_Archiving.h"
@@ -20,7 +19,7 @@
 {
 	[coder encodeInt:3 forKey:@"version"];
 	[coder encodeObject:layers forKey:@"layers"];
-
+	
 	[coder encodeObject:bgConfig forKey:@"bgConfig"];
 	[coder encodeBool:wraps forKey:@"wraps"];
 	[coder encodeObject:grid forKey:@"grid"];
@@ -44,7 +43,7 @@
 			if (palette)
 				[coder associateValue:palette withKey:@"palette"];
 		}	
-
+		
 		if (layers) {
 			[layers release];
 			layers = nil;
@@ -62,12 +61,12 @@
 				[palette release];
 			}
 		}
-
+		
 		if (bgConfig) {
 			[bgConfig release];
 			bgConfig = nil;
 		}
-	
+		
 		bgConfig = [[coder decodeObjectForKey:@"bgConfig"] retain];
 		if(!bgConfig)
 		{

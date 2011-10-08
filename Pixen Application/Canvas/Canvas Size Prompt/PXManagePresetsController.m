@@ -2,7 +2,7 @@
 //  PXManagePresetsController.m
 //  Pixen
 //
-//  Copyright Matt Rajca 2011. All rights reserved.
+//  Copyright 2011 Pixen Project. All rights reserved.
 //
 
 #import "PXManagePresetsController.h"
@@ -10,9 +10,11 @@
 #import "PXPreset.h"
 #import "PXPresetsManager.h"
 
-@implementation PXManagePresetsController
+@implementation PXManagePresetsController {
+	NSArray *_presets;
+}
 
-@synthesize tableView = _tableView, canDeletePreset;
+@synthesize tableView = _tableView, canDeletePreset = _canDeletePreset;
 
 - (id)init
 {
@@ -36,12 +38,13 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	self.tableView = nil;
     [super dealloc];
 }
 
 - (void)presetsChanged:(NSNotification *)notification
 {
-	[_tableView reloadData];
+	[self.tableView reloadData];
 	[self tableViewSelectionDidChange:nil];
 }
 
@@ -65,13 +68,13 @@
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
-	self.canDeletePreset = ([_tableView selectedRow] != -1);
+	self.canDeletePreset = ([self.tableView selectedRow] != -1);
 }
 
 - (IBAction)deletePreset:(id)sender
 {
-	if ([_tableView selectedRow] != -1) {
-		PXPreset *preset = [_presets objectAtIndex:[_tableView selectedRow]];
+	if ([self.tableView selectedRow] != -1) {
+		PXPreset *preset = [_presets objectAtIndex:[self.tableView selectedRow]];
 		
 		[[PXPresetsManager sharedPresetsManager] removePresetWithName:[preset name]];
 	}
