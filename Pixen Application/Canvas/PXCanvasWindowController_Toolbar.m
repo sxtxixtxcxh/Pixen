@@ -2,13 +2,15 @@
 //  PXCanvasWindowController_Toolbar.m
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXCanvasWindowController_Toolbar.h"
+
 #import "PXPanelManager.h"
 
 @implementation PXCanvasWindowController(Toolbar)
 
-//identifiers
 NSString *PXBackgroundConfigurator = @"PXBackgroundConfigurator";
 NSString *PXPreview = @"PXPreview";
 NSString *PXToolProperties = @"PXToolProperties";
@@ -18,7 +20,6 @@ NSString *PXZoom100 = @"PXZoom100";
 NSString *PXScale = @"PXScale";
 NSString *PXResize = @"PXResize";
 NSString *PXZoom = @"PXZoom";
-  //NSString *PXDocumentPalette = @"PXDocumentPalette";
 
 - (void)prepareToolbar
 {
@@ -110,24 +111,22 @@ NSString *PXZoom = @"PXZoom";
 - (NSArray *) toolbarAllowedItemIdentifiers:(NSToolbar *) toolbar
 {
 	return [NSArray arrayWithObjects:PXBackgroundConfigurator,
-		PXPreview, PXZoom, 
-		PXZoomFit, PXZoom100,
-		PXResize, PXScale,
-		PXGridConfigurator,
-          //		PXDocumentPalette,
-		NSToolbarCustomizeToolbarItemIdentifier, 
-		NSToolbarSpaceItemIdentifier,
-		NSToolbarSeparatorItemIdentifier,
-		NSToolbarFlexibleSpaceItemIdentifier, 
-		nil];
+			PXPreview, PXZoom, 
+			PXZoomFit, PXZoom100,
+			PXResize, PXScale,
+			PXGridConfigurator,
+			NSToolbarCustomizeToolbarItemIdentifier, 
+			NSToolbarSpaceItemIdentifier,
+			NSToolbarSeparatorItemIdentifier,
+			NSToolbarFlexibleSpaceItemIdentifier, 
+			nil];
 }
 
 - (NSArray *) toolbarDefaultItemIdentifiers:(NSToolbar *) toolbar
 {
-	return [NSArray arrayWithObjects:PXBackgroundConfigurator, PXGridConfigurator, 
-		NSToolbarSeparatorItemIdentifier, PXPreview, /*PXDocumentPalette,*/
-		NSToolbarFlexibleSpaceItemIdentifier,
-		PXZoom,
-		nil];
+	return [NSArray arrayWithObjects:PXBackgroundConfigurator, PXGridConfigurator,
+			NSToolbarSeparatorItemIdentifier, PXPreview,
+			NSToolbarFlexibleSpaceItemIdentifier, PXZoom, nil];
 }
+
 @end

@@ -2,17 +2,15 @@
 //  PXCanvasPrintView.h
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
-#import <AppKit/NSView.h>
 @class PXCanvas;
 
-@interface PXCanvasPrintView : NSView 
-{
-  @private
-	PXCanvas *canvas;
-}
+@interface PXCanvasPrintView : NSView
 
-+ (id) viewForCanvas:(PXCanvas *)aCanvas;
-- (id) initWithCanvas:(PXCanvas *)aCanvas;
++ (id)viewForCanvas:(PXCanvas *)aCanvas;
+
+- (id)initWithCanvas:(PXCanvas *)aCanvas;
 
 @end

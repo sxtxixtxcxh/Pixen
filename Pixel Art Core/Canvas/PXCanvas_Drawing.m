@@ -2,13 +2,13 @@
 //  PXCanvas_Drawing.m
 //  Pixen
 //
-//  Created by Joe Osborn on 2005.07.31.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXCanvas_Drawing.h"
-#import "PXLayer.h"
+
 #import "PXCanvas_Selection.h"
+#import "PXLayer.h"
 
 @implementation PXCanvas(Drawing)
 

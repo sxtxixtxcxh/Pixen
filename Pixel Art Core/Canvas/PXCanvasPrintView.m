@@ -2,16 +2,19 @@
 //  PXCanvasPrintView.m
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXCanvasPrintView.h"
 
 #import "PXCanvas.h"
 #import "PXCanvas_Drawing.h"
 
-@implementation PXCanvasPrintView
+@implementation PXCanvasPrintView {
+	PXCanvas *_canvas;
+}
 
-
-+ (id) viewForCanvas:(PXCanvas *)aCanvas
++ (id)viewForCanvas:(PXCanvas *)aCanvas
 {
 	return [[[self alloc] initWithCanvas:aCanvas] autorelease];	
 }
@@ -19,13 +22,13 @@
 - (id)initWithCanvas:(PXCanvas *)aCanvas
 {
 	self = [super initWithFrame:NSMakeRect(0, 0, [aCanvas size].width, [aCanvas size].height)];
-	canvas = [aCanvas retain];
+	_canvas = [aCanvas retain];
 	return self;
 }
 
 - (void)dealloc
 {
-	[canvas release];
+	[_canvas release];
 	[super dealloc];
 }
 
@@ -39,7 +42,7 @@
 	NSAffineTransform *transform = [NSAffineTransform transform];
 	[transform scaleXBy:scale yBy:scale];
 	[transform concat];
-	[canvas drawRect:rect];
+	[_canvas drawRect:rect];
 	[transform invert];
 	[transform concat];
 }

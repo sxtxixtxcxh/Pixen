@@ -2,18 +2,13 @@
 //  PXAnimationView.h
 //  Pixen
 //
-//  Created by Andy Matuschak on 8/11/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "PXCanvasView.h"
 
-@interface PXAnimationView : PXCanvasView {
-  @private
-	NSImage *previousCel;
-}
+@interface PXAnimationView : PXCanvasView
 
-- (void)setPreviousCelImage:(NSImage *)previousCel;
+@property (nonatomic, retain) NSImage *previousCelImage;
 
 @end

@@ -2,8 +2,11 @@
 //  PXNearestNeighborScaleAlgorithm.m
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXNearestNeighborScaleAlgorithm.h"
+
 #import "PXCanvas.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_Modifying.h"

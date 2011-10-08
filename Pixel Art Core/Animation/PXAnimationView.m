@@ -2,8 +2,7 @@
 //  PXAnimationView.m
 //  Pixen
 //
-//  Created by Andy Matuschak on 8/11/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXAnimationView.h"
@@ -13,24 +12,21 @@
 
 @implementation PXAnimationView
 
+@synthesize previousCelImage = _previousCelImage;
+
 - (void)dealloc
 {
-	[previousCel release];
+	[_previousCelImage release];
 	[super dealloc];
-}
-
-- (void)setPreviousCelImage:(NSImage *)image
-{
-	[previousCel release];
-	previousCel = [image retain];
 }
 
 - (void)drawRect:(NSRect)rect
 {
 	[super drawRect:rect];
 	if (![[NSDocumentController sharedDocumentController] showsPreviousCelOverlay]) { return; }
-	if (!previousCel) { return; }
-	NSSize previousCelSize = [previousCel size];
+	if (!self.previousCelImage)
+		return;
+	NSSize previousCelSize = [self.previousCelImage size];
 	NSRect canvasRect = [self convertFromViewToCanvasRect:[self bounds]];
 	if ([self.canvas wraps])
 	{
@@ -56,7 +52,7 @@
 				NSAffineTransform *tileTransform = [NSAffineTransform transform];
 				[tileTransform translateXBy:xLoc * factor yBy:yLoc * factor];
 				[tileTransform concat];
-				[previousCel drawInRect:destination fromRect:source operation:NSCompositeSourceOver fraction:0.33];
+				[self.previousCelImage drawInRect:destination fromRect:source operation:NSCompositeSourceOver fraction:0.33];
 				[tileTransform invert];
 				[tileTransform concat];
 			}
@@ -64,7 +60,7 @@
 	}
 	else
 	{
-		[previousCel drawInRect:rect fromRect:[self convertFromViewToCanvasRect:rect] operation:NSCompositeSourceOver fraction:0.33];      
+		[self.previousCelImage drawInRect:rect fromRect:[self convertFromViewToCanvasRect:rect] operation:NSCompositeSourceOver fraction:0.33];      
 	}
 }
 

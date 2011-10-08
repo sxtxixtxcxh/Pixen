@@ -2,15 +2,13 @@
 //  PXCanvasWindowController_Toolbar.h
 //  Pixen
 //
-
-#import <Cocoa/Cocoa.h>
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXCanvasWindowController.h"
 
-@interface PXCanvasWindowController(Toolbar)
+@interface PXCanvasWindowController (Toolbar) < NSToolbarDelegate >
+
 - (void)prepareToolbar;
-- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag;
-- (NSArray *) toolbarAllowedItemIdentifiers:(NSToolbar *) toolbar;
-- (NSArray *) toolbarDefaultItemIdentifiers:(NSToolbar *) toolbar;
 
 @end
