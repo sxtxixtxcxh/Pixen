@@ -2,18 +2,20 @@
 //  PXPalettePanel.m
 //  Pixen
 //
-//  Created by Joe Osborn on 2005.08.12.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXPalettePanel.h"
+
 #import "PXPaletteView.h"
 #import "PXPaletteViewController.h"
+#import "PXPanelManager.h"
 #import "PXToolSwitcher.h"
 #import "PXToolPaletteController.h"
-#import "PXPanelManager.h"
 
-@implementation PXPalettePanel
+@implementation PXPalettePanel {
+	PXPaletteViewController *_vc;
+}
 
 + (id)popWithPalette:(PXPalette *)palette fromWindow:(NSWindow *)window
 {

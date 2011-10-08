@@ -2,8 +2,7 @@
 //  PXGifImporter.m
 //  Pixen
 //
-//  Created by Andy Matuschak on Fri Jul 16 2004.
-//  Copyright (c) 2004 Pixen. All rights reserved.
+//  Copyright 2004-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXGifImporter.h"

@@ -2,39 +2,40 @@
 //  PXPaletteViewSizeSelector.m
 //  Pixen
 //
-//  Created by Andy Matuschak on 8/21/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXPaletteViewSizeSelector.h"
 
+@implementation PXPaletteViewSizeSelector {
+	NSImage *_bigImage, *_smallImage;
+}
 
-@implementation PXPaletteViewSizeSelector
-
-@synthesize delegate;
+@synthesize controlSize = _controlSize, delegate = _delegate;
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
 		if ([NSColor currentControlTint] == NSGraphiteControlTint)
 		{
-			smallImage = [[NSImage imageNamed:@"palette_small_graphite"] retain];
-			bigImage = [[NSImage imageNamed:@"palette_big_graphite"] retain];
+			_smallImage = [[NSImage imageNamed:@"palette_small_graphite"] retain];
+			_bigImage = [[NSImage imageNamed:@"palette_big_graphite"] retain];
 		}
 		else
 		{
-			smallImage = [[NSImage imageNamed:@"palette_small_aqua"] retain];
-			bigImage = [[NSImage imageNamed:@"palette_big_aqua"] retain];
+			_smallImage = [[NSImage imageNamed:@"palette_small_aqua"] retain];
+			_bigImage = [[NSImage imageNamed:@"palette_big_aqua"] retain];
 		}
-		size = NSRegularControlSize;
+		
+		self.controlSize = NSRegularControlSize;
     }
     return self;
 }
 
 - (void)dealloc
 {
-	[smallImage release];
-	[bigImage release];
+	[_smallImage release];
+	[_bigImage release];
 	[super dealloc];
 }
 
@@ -65,11 +66,14 @@
 {
 	[super setFrame:frame];
 	[self removeAllToolTips];
+	
 	NSRect upper, lower;
 	NSDivideRect([self bounds], &lower, &upper, NSHeight(frame) / 2, NSMinYEdge);
+	
 	lower.size.height--;
 	upper.origin.y++;
 	upper.size.height--;
+	
 	[self addToolTipRect:upper owner:self userData:nil];
 	[self addToolTipRect:lower owner:self userData:nil];
 }
@@ -77,15 +81,15 @@
 - (void)updateButtonStateWithEvent:(NSEvent *)event
 {
 	NSPoint locationInView = [self convertPoint:[event locationInWindow] fromView:nil];
+	
 	if (locationInView.y >= (NSHeight([self bounds])/2))
 	{
-		size = NSRegularControlSize;
+		self.controlSize = NSRegularControlSize;
 	}
 	else
 	{
-		size = NSSmallControlSize;
+		self.controlSize = NSSmallControlSize;
 	}
-	[self setNeedsDisplay:YES];	
 }
 
 - (void)mouseDown:(NSEvent *)event
@@ -100,17 +104,19 @@
 
 - (void)mouseUp:(NSEvent *)event
 {
-	[delegate sizeSelector:self selectedSize:size];
+	[self.delegate sizeSelector:self selectedSize:self.controlSize];
 }
 
 - (void)setControlSize:(NSControlSize)aSize
 {
-	size = aSize;
-	[self setNeedsDisplay:YES];
+	if (_controlSize != aSize) {
+		_controlSize = aSize;
+		[self setNeedsDisplay:YES];
+	}
 }
 
 - (void)drawRect:(NSRect)rect {
-	NSImage *image = (size == NSRegularControlSize ? bigImage : smallImage);
+	NSImage *image = (self.controlSize == NSRegularControlSize ? _bigImage : _smallImage);
 	[image drawInRect:[self bounds] fromRect:(NSRect){NSZeroPoint, [image size]} operation:NSCompositeCopy fraction:1];
 }
 

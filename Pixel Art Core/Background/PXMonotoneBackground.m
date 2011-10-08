@@ -2,12 +2,14 @@
 //  PXMonotoneBackground.m
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXMonotoneBackground.h"
 
 @implementation PXMonotoneBackground
 
-@synthesize color;
+@synthesize colorWell = _colorWell, color = _color;
 
 - (NSString *)defaultName
 {
@@ -21,7 +23,7 @@
 
 - (void)setConfiguratorEnabled:(BOOL)enabled
 {
-	[colorWell setEnabled:enabled];
+	[self.colorWell setEnabled:enabled];
 }
 
 - (IBAction)configuratorColorChanged:(id)sender
@@ -34,10 +36,10 @@
 
 - (void)windowWillClose:(NSNotification *)notification
 {
-	if ([colorWell isActive])
+	if ([self.colorWell isActive])
 		[[NSColorPanel sharedColorPanel] close];
 	
-	[colorWell deactivate];
+	[self.colorWell deactivate];
 }
 
 - (id)init
@@ -45,37 +47,38 @@
 	if ( ! ( self = [super init] ))
 		return nil;
 	
-	color = [[NSColor whiteColor] retain];
+	self.color = [NSColor whiteColor];
+	
 	return self;
 }
 
 - (void)dealloc
 {
 	[self setColor:nil];
+	[self setColorWell:nil];
 	[super dealloc];
 }
 
 - (void)setColor:(NSColor *)aColor
 {
-	[aColor retain];
-	[color release];
-	color = aColor;
+	[_color release];
+	_color = [aColor retain];
 	
 	if (aColor)
 	{
-		[colorWell setColor:aColor];
+		[self.colorWell setColor:aColor];
 	}
 }
 
 - (void)drawRect:(NSRect)rect withinRect:(NSRect)wholeRect
 {
-	[color set];
+	[self.color set];
 	NSRectFill(rect);
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-    [coder encodeObject:color forKey:@"color"];
+    [coder encodeObject:self.color forKey:@"color"];
     [super encodeWithCoder:coder];
 }
 
@@ -89,7 +92,8 @@
 - (id)copyWithZone:(NSZone *)zone
 {
 	id copy = [super copyWithZone:zone];
-	[copy setColor:color];
+	[copy setColor:self.color];
+	
 	return copy;
 }
 

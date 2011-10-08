@@ -2,17 +2,14 @@
 //  PXMonotoneBackground.h
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXBackground.h"
 
-@class NSColor, NSColorWell;
-
 @interface PXMonotoneBackground : PXBackground
-{
-  @private
-	NSColor *color;
-	IBOutlet NSColorWell *colorWell;
-}
+
+@property (nonatomic, retain) IBOutlet NSColorWell *colorWell;
 
 @property (nonatomic, retain) NSColor *color;
 
