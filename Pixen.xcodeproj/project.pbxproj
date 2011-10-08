@@ -308,10 +308,6 @@
 		EA31FCAD0CE7D7C200EC481B /* quantize.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC1E0CE7D7C200EC481B /* quantize.c */; };
 		EA31FCC10CE7D7C200EC481B /* SBCenteringClipView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC3D0CE7D7C200EC481B /* SBCenteringClipView.h */; };
 		EA31FCC20CE7D7C200EC481B /* SBCenteringClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC3E0CE7D7C200EC481B /* SBCenteringClipView.m */; };
-		EA31FCC30CE7D7C200EC481B /* SubviewTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC400CE7D7C200EC481B /* SubviewTableViewCell.h */; };
-		EA31FCC40CE7D7C200EC481B /* SubviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC410CE7D7C200EC481B /* SubviewTableViewCell.m */; };
-		EA31FCC50CE7D7C200EC481B /* SubviewTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC420CE7D7C200EC481B /* SubviewTableViewController.h */; };
-		EA31FCC60CE7D7C200EC481B /* SubviewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC430CE7D7C200EC481B /* SubviewTableViewController.m */; };
 		EA31FCD30CE7D7C200EC481B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC530CE7D7C200EC481B /* main.m */; };
 		EA31FCD40CE7D7C200EC481B /* PXAboutController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC560CE7D7C200EC481B /* PXAboutController.h */; };
 		EA31FCD50CE7D7C200EC481B /* PXAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC570CE7D7C200EC481B /* PXAboutController.m */; };
@@ -833,10 +829,6 @@
 		EA31FC1E0CE7D7C200EC481B /* quantize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = quantize.c; sourceTree = "<group>"; };
 		EA31FC3D0CE7D7C200EC481B /* SBCenteringClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCenteringClipView.h; sourceTree = "<group>"; };
 		EA31FC3E0CE7D7C200EC481B /* SBCenteringClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCenteringClipView.m; sourceTree = "<group>"; };
-		EA31FC400CE7D7C200EC481B /* SubviewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubviewTableViewCell.h; sourceTree = "<group>"; };
-		EA31FC410CE7D7C200EC481B /* SubviewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubviewTableViewCell.m; sourceTree = "<group>"; };
-		EA31FC420CE7D7C200EC481B /* SubviewTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubviewTableViewController.h; sourceTree = "<group>"; };
-		EA31FC430CE7D7C200EC481B /* SubviewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubviewTableViewController.m; sourceTree = "<group>"; };
 		EA31FC530CE7D7C200EC481B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EA31FC560CE7D7C200EC481B /* PXAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAboutController.h; sourceTree = "<group>"; };
 		EA31FC570CE7D7C200EC481B /* PXAboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAboutController.m; sourceTree = "<group>"; };
@@ -1625,7 +1617,6 @@
 				D88FA99E13DD265000175A2F /* AMAssociatedObject */,
 				EA31FC110CE7D7C200EC481B /* libungif */,
 				EA31FC3C0CE7D7C200EC481B /* SBCenteringClipView */,
-				EA31FC3F0CE7D7C200EC481B /* SubviewTableView */,
 			);
 			path = "Foreign Code";
 			sourceTree = "<group>";
@@ -1657,17 +1648,6 @@
 				EA31FC3E0CE7D7C200EC481B /* SBCenteringClipView.m */,
 			);
 			path = SBCenteringClipView;
-			sourceTree = "<group>";
-		};
-		EA31FC3F0CE7D7C200EC481B /* SubviewTableView */ = {
-			isa = PBXGroup;
-			children = (
-				EA31FC400CE7D7C200EC481B /* SubviewTableViewCell.h */,
-				EA31FC410CE7D7C200EC481B /* SubviewTableViewCell.m */,
-				EA31FC420CE7D7C200EC481B /* SubviewTableViewController.h */,
-				EA31FC430CE7D7C200EC481B /* SubviewTableViewController.m */,
-			);
-			path = SubviewTableView;
 			sourceTree = "<group>";
 		};
 		EA31FC540CE7D7C200EC481B /* OSG */ = {
@@ -2153,8 +2133,6 @@
 				EA31FCA90CE7D7C200EC481B /* gif_lib.h in Headers */,
 				EA31FCAA0CE7D7C200EC481B /* gif_lib_private.h in Headers */,
 				EA31FCC10CE7D7C200EC481B /* SBCenteringClipView.h in Headers */,
-				EA31FCC30CE7D7C200EC481B /* SubviewTableViewCell.h in Headers */,
-				EA31FCC50CE7D7C200EC481B /* SubviewTableViewController.h in Headers */,
 				EA31FCD40CE7D7C200EC481B /* PXAboutController.h in Headers */,
 				EA31FCD60CE7D7C200EC481B /* PXAboutPanel.h in Headers */,
 				EA31FCDE0CE7D7C200EC481B /* OSProgressPopup.h in Headers */,
@@ -2541,8 +2519,6 @@
 				EA31FCAC0CE7D7C200EC481B /* qprintf.c in Sources */,
 				EA31FCAD0CE7D7C200EC481B /* quantize.c in Sources */,
 				EA31FCC20CE7D7C200EC481B /* SBCenteringClipView.m in Sources */,
-				EA31FCC40CE7D7C200EC481B /* SubviewTableViewCell.m in Sources */,
-				EA31FCC60CE7D7C200EC481B /* SubviewTableViewController.m in Sources */,
 				EA31FCD30CE7D7C200EC481B /* main.m in Sources */,
 				EA31FCD50CE7D7C200EC481B /* PXAboutController.m in Sources */,
 				EA31FCD70CE7D7C200EC481B /* PXAboutPanel.m in Sources */,
