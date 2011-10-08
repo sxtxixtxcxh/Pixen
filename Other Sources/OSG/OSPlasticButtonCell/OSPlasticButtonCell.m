@@ -2,37 +2,42 @@
 //  OSPlasticButtonCell.m
 //  Pixen
 // 
-//  Created by Andy Matuschak on 7/18/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "OSPlasticButtonCell.h"
 #import "OSRectAdditions.h"
 
-@implementation OSPlasticButtonCell
+@implementation OSPlasticButtonCell {
+	NSImage *_glass, *_glassHighlighted;
+}
 
 - (void)dealloc
 {
-	[glass release];
-	[glassHighlighted release];
+	[_glass release];
+	[_glassHighlighted release];
 	[super dealloc];
 }
 
 - (void)setupImages
 {
-	if (glass && glassHighlighted) { return; }
+	if (_glass && _glassHighlighted)
+		return;
+	
 	[self setShowsStateBy:0];
-	glass = [[NSImage imageNamed:@"glass"] retain];
+	
+	_glass = [[NSImage imageNamed:@"glass"] retain];
+	
 	if ([NSColor currentControlTint] == NSGraphiteControlTint)
-		glassHighlighted = [[NSImage imageNamed:@"glass-h-graphite"] retain];
+		_glassHighlighted = [[NSImage imageNamed:@"glass-h-graphite"] retain];
 	else
-		glassHighlighted = [[NSImage imageNamed:@"glass-h"] retain];
+		_glassHighlighted = [[NSImage imageNamed:@"glass-h"] retain];
 }
 
 - (void)drawWithFrame:(NSRect)frame inView:(NSView *)view
 {
 	[self setupImages];
-	NSImage *drawingImage = ([self isHighlighted] || [self state] == NSOnState) ? glassHighlighted : glass;
+	NSImage *drawingImage = ([self isHighlighted] || [self state] == NSOnState) ? _glassHighlighted : _glass;
 	[drawingImage setFlipped:[view isFlipped]];
 	[drawingImage drawInRect:(NSRect){frame.origin, NSMakeSize(frame.size.width, frame.size.height-1)}
 					fromRect:NSMakeRect(0, 0, [drawingImage size].width, [drawingImage size].height)

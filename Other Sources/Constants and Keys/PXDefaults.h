@@ -1,9 +1,9 @@
 //
-// PXDefaults.h
-// Pixen
+//  PXDefaults.h
+//  Pixen
 //
-
-#import <Foundation/NSString.h>
+//  Copyright 2011 Pixen Project. All rights reserved.
+//
 
 extern NSString *PXGridShouldDrawKey;
 extern NSString *PXGridUnitWidthKey;

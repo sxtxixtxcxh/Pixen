@@ -1,8 +1,9 @@
 //
-// PXNotifications.m
-// Pixen
+//  PXNotifications.m
+//  Pixen
 //
-
+//  Copyright 2011 Pixen Project. All rights reserved.
+//
 
 #import "PXNotifications.h"
 

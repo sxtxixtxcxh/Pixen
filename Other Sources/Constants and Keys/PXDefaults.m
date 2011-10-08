@@ -1,6 +1,8 @@
 //
-// PXDefaults.m
-// Pixen
+//  PXDefaults.m
+//  Pixen
+//
+//  Copyright 2011 Pixen Project. All rights reserved.
 //
 
 #import "PXDefaults.h"

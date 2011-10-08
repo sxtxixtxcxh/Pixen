@@ -1,9 +1,9 @@
 //
-// PXNotifications.h
-// Pixen
+//  PXNotifications.h
+//  Pixen
 //
-
-#import <Foundation/NSString.h>
+//  Copyright 2011 Pixen Project. All rights reserved.
+//
 
 extern NSString *PXLayerSelectionDidChangeName;
 extern NSString *PXCanvasLayerSelectionDidChangeName;
