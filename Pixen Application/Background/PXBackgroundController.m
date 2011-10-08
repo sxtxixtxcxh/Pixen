@@ -1,6 +1,5 @@
 #import "PXBackgroundController.h"
 #import "PXBackgroundInfoView.h"
-#import "SubviewTableViewController.h"
 #import "PXBackgrounds.h"
 #import "PXBackgroundTemplateView.h"
 #import "PathUtilities.h"

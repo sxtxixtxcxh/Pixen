@@ -1,12 +1,12 @@
 //
 //  OSPALWriter.m
-//  PALExport
+//  Pixen
 //
-//  Created by Andy Matuschak on 8/15/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "OSPALWriter.h"
+
 #import "PXPalette.h"
 
 #pragma pack(1)
@@ -20,7 +20,7 @@ typedef struct
 
 @implementation OSPALWriter
 
-- init
+- (id)init
 {
 	[NSException raise:@"SingletonError" format:@"OSPALWriter is a singleton; use sharedPALWriter to access the shared instance."];
 	return nil;
