@@ -2,7 +2,7 @@
 //  PXToolPropertiesController.m
 //  Pixen
 //
-//  Copyright Matt Rajca 2011. All rights reserved.
+//  Copyright 2011 Pixen Project. All rights reserved.
 //
 
 #import "PXToolPropertiesController.h"

@@ -2,15 +2,16 @@
 //  PXPresetsManager.m
 //  Pixen
 //
-//  Created by Matt Rajca on 7/15/11.
-//  Copyright 2011 Matt Rajca. All rights reserved.
+//  Copyright 2011 Pixen Project. All rights reserved.
 //
 
 #import "PXPresetsManager.h"
 
 #import "PXPreset.h"
 
-@implementation PXPresetsManager
+@implementation PXPresetsManager {
+	NSMutableArray *_presets;
+}
 
 + (id)sharedPresetsManager
 {

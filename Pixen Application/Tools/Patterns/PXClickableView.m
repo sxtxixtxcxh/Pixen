@@ -2,19 +2,20 @@
 //  PXClickableView.m
 //  Pixen
 //
-//  Created by Matt Rajca on 8/20/11.
-//  Copyright (c) 2011 Matt Rajca. All rights reserved.
+//  Copyright 2011 Pixen Project. All rights reserved.
 //
 
 #import "PXClickableView.h"
 
 @implementation PXClickableView
 
+@synthesize selected = _selected, delegate = _delegate;
+
 - (void)mouseDown:(NSEvent *)theEvent
 {
 	if ([theEvent clickCount] > 1) {
-		if ([delegate respondsToSelector:@selector(viewDidReceiveDoubleClick:)])
-			[delegate viewDidReceiveDoubleClick:self];
+		if ([self.delegate respondsToSelector:@selector(viewDidReceiveDoubleClick:)])
+			[self.delegate viewDidReceiveDoubleClick:self];
 	}
 	else {
 		[super mouseDown:theEvent];
@@ -31,7 +32,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-	if (_selected) {
+	if (self.selected) {
 		[[NSColor selectedControlColor] set];
 		[[NSBezierPath bezierPathWithRoundedRect:[self bounds]
 										 xRadius:4.0f

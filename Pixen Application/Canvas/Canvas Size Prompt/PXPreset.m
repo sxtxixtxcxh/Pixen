@@ -2,15 +2,14 @@
 //  PXPreset.m
 //  Pixen
 //
-//  Created by Matt Rajca on 7/15/11.
-//  Copyright 2011 Matt Rajca. All rights reserved.
+//  Copyright 2011 Pixen Project. All rights reserved.
 //
 
 #import "PXPreset.h"
 
 @implementation PXPreset
 
-@synthesize name, size, color;
+@synthesize name = _name, size = _size, color = _color;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -25,15 +24,15 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-	[aCoder encodeObject:name forKey:@"name"];
-	[aCoder encodeSize:size forKey:@"size"];
-	[aCoder encodeObject:color forKey:@"color"];
+	[aCoder encodeObject:self.name forKey:@"name"];
+	[aCoder encodeSize:self.size forKey:@"size"];
+	[aCoder encodeObject:self.color forKey:@"color"];
 }
 
 - (void)dealloc
 {
-    [name release];
-	[color release];
+	[_name release];
+	[_color release];
 	[super dealloc];
 }
 

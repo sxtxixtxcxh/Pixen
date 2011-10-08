@@ -2,17 +2,14 @@
 //  NSString+Comparison.m
 //  Pixen
 //
-//  Created by Joe Osborn on 2009.12.17.
-//  Copyright 2009 God-Bear Productions. All rights reserved.
+//  Copyright 2009-2011 Pixen Project. All rights reserved.
 //
 
 #import "NSString+Comparison.h"
 
-
-
 @implementation NSString(CompareNumeric)
 
-- (NSComparisonResult)compareNumeric:other
+- (NSComparisonResult)compareNumeric:(NSString *)other
 {
 	return [self compare:other options:NSNumericSearch | NSCaseInsensitiveSearch];
 }

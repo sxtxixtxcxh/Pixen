@@ -2,19 +2,14 @@
 //  PXClickableView.h
 //  Pixen
 //
-//  Created by Matt Rajca on 8/20/11.
-//  Copyright (c) 2011 Matt Rajca. All rights reserved.
+//  Copyright 2011 Pixen Project. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@interface PXClickableView : NSView
 
-@interface PXClickableView : NSView {
-  @private
-	BOOL _selected;
-	IBOutlet id delegate;
-}
+@property (nonatomic, assign) BOOL selected;
 
-- (void)setSelected:(BOOL)selected;
+@property (nonatomic, assign) IBOutlet id delegate;
 
 @end
 
