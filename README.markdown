@@ -7,8 +7,9 @@ Compiling the Tip-of-Tree Build
 -------------------------------
 
 Mac OS X 10.6+ and Xcode 3.2+ are required to compile Pixen.
+We recommend Xcode 4, which is available for free on the Mac App Store for OS X 10.7 "Lion" users.
 
-1. Open Terminal and `cd` into a folder in which you'd like to place Pixen's source tree. For example: `cd ~/Desktop`.
+1. Open Terminal (found in the "Utilities" folder inside your "Applications" folder) and `cd` into a folder in which you'd like to place Pixen's source tree. For example: `cd ~/Desktop`.
 2. Issue the following command to pull the latest source code to Pixen: `git clone git://github.com/philippec/Pixen.git`
 3. Once the clone completes, open the Xcode project file found in the root directory of the source tree.
 4. Hit the 'Run' button to compile and run a working build of Pixen.
