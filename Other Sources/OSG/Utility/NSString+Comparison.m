@@ -7,7 +7,7 @@
 
 #import "NSString+Comparison.h"
 
-@implementation NSString(CompareNumeric)
+@implementation NSString (CompareNumeric)
 
 - (NSComparisonResult)compareNumeric:(NSString *)other
 {

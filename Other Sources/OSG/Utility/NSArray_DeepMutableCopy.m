@@ -7,7 +7,7 @@
 
 #import "NSArray_DeepMutableCopy.h"
 
-@implementation NSArray(DeepMutableCopy)
+@implementation NSArray (DeepMutableCopy)
 
 - (NSArray *)deepMutableCopy
 {

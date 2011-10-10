@@ -2,8 +2,7 @@
 //  PXPaletteImporter.m
 //  Pixen
 //
-//  Created by Andy Matuschak on 8/22/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXPaletteImporter.h"
@@ -13,7 +12,9 @@
 #import "PathUtilities.h"
 #import "PXPalette.h"
 
-@implementation PXPaletteImporter
+@implementation PXPaletteImporter {
+	NSOpenPanel *_openPanel;
+}
 
 - (void)importPaletteAtPath:(NSString *)path
 {
@@ -95,7 +96,7 @@
 		return;
 	}
 	
-	for (NSURL *current in [openPanel URLs]) {
+	for (NSURL *current in [_openPanel URLs]) {
 		[self importPaletteAtPath:[current path]];
 	}
 	
@@ -107,29 +108,29 @@
 
 - (void)dealloc
 {
-	[openPanel release];
+	[_openPanel release];
 	[super dealloc];
 }
 
 - (void)runInWindow:(NSWindow *)window
 {
-	openPanel = [[NSOpenPanel openPanel] retain];
-	[openPanel setAllowsMultipleSelection:YES];
-	[openPanel setCanChooseDirectories:NO];
-	[openPanel setPrompt:@"Install"];
-	[openPanel setTitle:@"Install"];
-	[openPanel setAllowedFileTypes:[NSArray arrayWithObjects:PXPaletteSuffix, MicrosoftPaletteSuffix, AdobePaletteSuffix, nil]];
+	_openPanel = [[NSOpenPanel openPanel] retain];
+	[_openPanel setAllowsMultipleSelection:YES];
+	[_openPanel setCanChooseDirectories:NO];
+	[_openPanel setPrompt:@"Install"];
+	[_openPanel setTitle:@"Install"];
+	[_openPanel setAllowedFileTypes:[NSArray arrayWithObjects:PXPaletteSuffix, MicrosoftPaletteSuffix, AdobePaletteSuffix, nil]];
 	
 	if (window) {
-		[openPanel beginSheetModalForWindow:window
-						  completionHandler:^(NSInteger result) {
-							  [self panelDidEndWithReturnCode:result modalSheet:YES];
-						  }];
+		[_openPanel beginSheetModalForWindow:window
+						   completionHandler:^(NSInteger result) {
+							   [self panelDidEndWithReturnCode:result modalSheet:YES];
+						   }];
 		
-		[NSApp runModalForWindow:openPanel];
+		[NSApp runModalForWindow:_openPanel];
 	}
 	else {
-		NSInteger result = [openPanel runModal];
+		NSInteger result = [_openPanel runModal];
 		[self panelDidEndWithReturnCode:result modalSheet:NO];
 	}
 }

@@ -2,11 +2,8 @@
 //  NSBezierPath+PXRoundedRectangleAdditions.h
 //  Pixen
 //
-//  Created by Andy Matuschak on 7/3/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
-
-#import <Cocoa/Cocoa.h>
 
 typedef enum _OSCornerTypes
 {
@@ -16,7 +13,9 @@ typedef enum _OSCornerTypes
 	OSBottomRightCorner = 8
 } OSCornerType;
 
-@interface NSBezierPath(PXRoundedRectangle)
-+ (NSBezierPath *) bezierPathWithRoundedRect: (NSRect)aRect cornerRadius: (float)radius;
-+ (NSBezierPath *) bezierPathWithRoundedRect: (NSRect)aRect cornerRadius: (float)radius inCorners:(OSCornerType)corners;
+@interface NSBezierPath (PXRoundedRectangle)
+
++ (NSBezierPath *)bezierPathWithRoundedRect:(NSRect)aRect cornerRadius:(CGFloat)radius;
++ (NSBezierPath *)bezierPathWithRoundedRect:(NSRect)aRect cornerRadius:(CGFloat)radius inCorners:(OSCornerType)corners;
+
 @end

@@ -2,14 +2,12 @@
 //  NSMutableArray+ReorderingAdditions.m
 //  Pixen
 //
-//  Created by Ian Henderson on 10.08.05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "NSMutableArray+ReorderingAdditions.h"
 
-
-@implementation NSMutableArray(ReorderingAdditions)
+@implementation NSMutableArray (ReorderingAdditions)
 
 - (void)moveObjectAtIndex:(NSUInteger)initialIndex toIndex:(NSUInteger)targetIndex
 {

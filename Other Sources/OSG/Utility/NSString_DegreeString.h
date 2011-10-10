@@ -2,12 +2,11 @@
 //  NSString_DegreeString.h
 //  Pixen
 //
-//  Created by Joe Osborn on 2005.08.01.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+@interface NSString (DegreeString)
 
-@interface NSString(DegreeString)
 + (NSString *)degreeString;
+
 @end
