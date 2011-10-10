@@ -2,15 +2,10 @@
 //  PXPattern.h
 //  Pixen
 //
+//  Copyright 2011 Pixen Project. All rights reserved.
+//
 
-#import <Foundation/Foundation.h>
-
-@interface PXPattern : NSObject <NSCopying, NSCoding> {
-  @private
-	NSMutableSet *_points;
-	NSMutableArray *_pointsInBounds;
-	NSSize _size;
-}
+@interface PXPattern : NSObject < NSCopying, NSCoding >
 
 @property (nonatomic, assign) NSSize size;
 

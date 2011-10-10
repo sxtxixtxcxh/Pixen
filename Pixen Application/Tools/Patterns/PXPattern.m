@@ -2,17 +2,22 @@
 //  PXPattern.m
 //  Pixen
 //
+//  Copyright 2011 Pixen Project. All rights reserved.
+//
 
 #import "PXPattern.h"
 
-@implementation PXPattern
+@implementation PXPattern {
+	NSMutableSet *_points;
+	NSMutableArray *_pointsInBounds;
+}
 
 @synthesize size = _size;
 
 - (id)copyWithZone:(NSZone *)zone
 {
 	PXPattern *newPattern = [[PXPattern alloc] init];
-	[newPattern setSize:_size];
+	[newPattern setSize:self.size];
 	
 	NSMutableSet *pointsCopy = [_points mutableCopy];
 	[newPattern setPoints:pointsCopy];
@@ -24,8 +29,10 @@
 - (id)init
 {
 	self = [super init];
-	_points = [[NSMutableSet alloc] init];
-	_size = NSMakeSize(1.0f, 1.0f);
+	if (self) {
+		_points = [[NSMutableSet alloc] init];
+		self.size = NSMakeSize(1.0f, 1.0f);
+	}
 	return self;
 }
 
@@ -77,7 +84,7 @@
 	self = [super init];
 	if (self) {
 		_points = [[coder decodeObjectForKey:@"points"] mutableCopy];
-		_size = [coder decodeSizeForKey:@"size"];
+		self.size = [coder decodeSizeForKey:@"size"];
 	}
 	return self;
 }
@@ -85,7 +92,7 @@
 - (void)encodeWithCoder:(NSCoder *)coder
 {
 	[coder encodeObject:_points forKey:@"points"];
-	[coder encodeSize:_size forKey:@"size"];
+	[coder encodeSize:self.size forKey:@"size"];
 }
 
 - (void)dealloc

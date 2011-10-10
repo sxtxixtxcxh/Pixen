@@ -2,18 +2,18 @@
 //  PXLayerCollectionView.m
 //  Pixen
 //
-//  Created by Andy Matuschak on 6/19/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXLayerCollectionView.h"
+
+#import "PXLayerCollectionViewItem.h"
 #import "PXLayerController.h"
 #import "PXLayerDetailsView.h"
-#import "PXLayerCollectionViewItem.h"
 
 @implementation PXLayerCollectionView
 
-@synthesize layerController;
+@synthesize layerController = _layerController;
 
 - (BOOL)acceptsFirstResponder
 {
@@ -24,7 +24,7 @@
 {
 	PXLayerCollectionViewItem *item = [[PXLayerCollectionViewItem alloc] init];
 	item.representedObject = object;
-	item.layerController = layerController;
+	item.layerController = self.layerController;
 	
 	return item;
 }

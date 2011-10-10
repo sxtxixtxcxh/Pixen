@@ -2,18 +2,12 @@
 //  PXPreviewResizeSizeView.h
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
-#import <AppKit/AppKit.h>
+@interface PXPreviewResizeSizeView : NSView
 
-
-@interface PXPreviewResizeSizeView : NSView 
-{
-  @private
-	NSAttributedString *scaleString;
-	NSShadow *shadow;
-}
-
-- (BOOL)updateScale:(float)scale;
+- (BOOL)updateScale:(CGFloat)scale;
 - (NSSize)scaleStringSize;
 
 @end

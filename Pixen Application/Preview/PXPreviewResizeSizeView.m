@@ -2,49 +2,50 @@
 //  PXPreviewResizeSizeView.m
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXPreviewResizeSizeView.h"
 
+@implementation PXPreviewResizeSizeView {
+	NSAttributedString *_scaleString;
+}
 
-@implementation PXPreviewResizeSizeView
-
-- (id) initWithFrame:(NSRect)frame
+- (id)initWithFrame:(NSRect)frame
 {
-	if ( ! ( self = [super initWithFrame:frame]) ) 
+	if ( ! ( self = [super initWithFrame:frame]))
 		return nil;
 	
-	shadow = [[NSShadow alloc] init];
-	[shadow setShadowBlurRadius:1];
-	[shadow setShadowOffset:NSMakeSize(0, 0)];
-	[shadow setShadowColor:[NSColor blackColor]];
 	[self updateScale:0];
+	
 	return self;
 }
 
 - (void)dealloc
 {
-	[shadow release];
+	[_scaleString release];
 	[super dealloc];
 }
 
-- (BOOL)updateScale:(float)scale
+- (BOOL)updateScale:(CGFloat)scale
 {
-	if (scale > 100000) {
+	if (scale > 100000)
 		return NO;
-	}
-	[scaleString release];
-	scaleString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d%%", (int)(scale * 100)] attributes:[NSDictionary dictionaryWithObjectsAndKeys:
-		[NSFont fontWithName:@"Verdana" size:20], NSFontAttributeName,
-		[NSColor blackColor], NSForegroundColorAttributeName,
-		//shadow, NSShadowAttributeName,
-		nil]];
+	
+	[_scaleString release];
+	_scaleString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d%%", (int)(scale * 100)]
+												   attributes:[NSDictionary dictionaryWithObjectsAndKeys:
+															   [NSFont fontWithName:@"Verdana" size:20.0f], NSFontAttributeName,
+															   [NSColor blackColor], NSForegroundColorAttributeName,
+															   nil]];
+	
 	[self setNeedsDisplay:YES];
+	
 	return YES;
 }
 
 - (void)drawRect:(NSRect)rect
 {
-//dontreadthisoritwillhurtyourhead, evidently.
 	[[NSColor clearColor] set];
 	NSRectFill([self frame]);
 	NSRect frame = [self frame];
@@ -65,16 +66,16 @@
 		
 		[background appendBezierPathWithRect:topLeftCorner];
 	}
-	stringPoint.x += (width - [scaleString size].width) / 2;
-	stringPoint.y += (height - [scaleString size].height) / 2 + [scaleString size].height / 9;
+	stringPoint.x += (width - [_scaleString size].width) / 2;
+	stringPoint.y += (height - [_scaleString size].height) / 2 + [_scaleString size].height / 9;
 	[[NSColor whiteColor] set];
 	[background fill];
-	[scaleString drawAtPoint:stringPoint];
+	[_scaleString drawAtPoint:stringPoint];
 }
 
 - (NSSize)scaleStringSize
 {
-	NSSize size = [scaleString size];
+	NSSize size = [_scaleString size];
 	return NSMakeSize(size.width * 1.3, size.height);
 }
 

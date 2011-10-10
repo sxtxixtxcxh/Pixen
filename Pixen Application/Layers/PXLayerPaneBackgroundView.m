@@ -2,13 +2,14 @@
 //  PXLayerPaneBackgroundView.m
 //  Pixen
 //
-//  Created by Andy Matuschak on 6/28/05.
-//  Copyright 2007 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXLayerPaneBackgroundView.h"
 
-@implementation PXLayerPaneBackgroundView
+@implementation PXLayerPaneBackgroundView {
+	NSGradient *_gradient;
+}
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -21,23 +22,23 @@
 	NSColor *color3 = [NSColor colorWithDeviceRed:0.95f green:0.95f blue:0.95f alpha:1.0f];
 	NSColor *color4 = [NSColor colorWithDeviceRed:0.92f green:0.92f blue:0.92f alpha:1.0f];
 	
-	gradient = [[NSGradient alloc] initWithColors:[NSArray arrayWithObjects:color1, color2, color3, color4, nil]
-									  atLocations:positions
-									   colorSpace:[NSColorSpace deviceRGBColorSpace]];
+	_gradient = [[NSGradient alloc] initWithColors:[NSArray arrayWithObjects:color1, color2, color3, color4, nil]
+									   atLocations:positions
+										colorSpace:[NSColorSpace deviceRGBColorSpace]];
 	
 	return self;
 }
 
 - (void)dealloc
 {
-	[gradient release];
+	[_gradient release];
 	[super dealloc];
 }
 
 - (void)drawRect:(NSRect)rect
 {
 	NSRect targetRect = NSMakeRect(0.0f, 0.0f, NSWidth([self bounds]), 23.0f);
-	[gradient drawInRect:NSIntersectionRect(rect, targetRect) angle:90.0f];
+	[_gradient drawInRect:NSIntersectionRect(rect, targetRect) angle:90.0f];
 }
 
 @end
