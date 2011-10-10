@@ -2,61 +2,58 @@
 //  PXCanvasWindowController_IBActions.h
 //  Pixen
 //
-//  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "PXCanvasWindowController.h"
 
-@interface PXCanvasWindowController(IBActions)
-- (void)rotateLayerCounterclockwise:sender;
-- (void)rotateLayerClockwise:sender;
-- (void)rotateLayer180:sender;
-- (IBAction)rotateCounterclockwise:sender;
-- (IBAction)rotateClockwise:sender;
-- (IBAction)rotate180:sender;
-- (IBAction)resizeCanvas:(id) sender;
-- (IBAction)scaleCanvas:(id) sender;
+@interface PXCanvasWindowController (IBActions)
+
+- (void)rotateLayerCounterclockwise:(id)sender;
+- (void)rotateLayerClockwise:(id)sender;
+- (void)rotateLayer180:(id)sender;
+
+- (IBAction)rotateCounterclockwise:(id)sender;
+- (IBAction)rotateClockwise:(id)sender;
+- (IBAction)rotate180:(id)sender;
+- (IBAction)resizeCanvas:(id)sender;
+- (IBAction)scaleCanvas:(id)sender;
 - (IBAction)increaseOpacity:(id)sender;
-- (IBAction)decreaseOpacity:(id) sender;
+- (IBAction)decreaseOpacity:(id)sender;
 - (IBAction)duplicateDocument:(id)sender;
-- (IBAction)mergeDown:(id) sender;
-- (BOOL)validateMenuItem:(NSMenuItem *)anItem;
-- (IBAction)promoteSelection:(id) sender;
-- (IBAction)newLayer:(id) sender;
-- (IBAction)deleteLayer:sender;
-- (IBAction)crop:sender;
+- (IBAction)mergeDown:(id)sender;
+- (IBAction)promoteSelection:(id)sender;
+- (IBAction)newLayer:(id)sender;
+- (IBAction)deleteLayer:(id)sender;
+- (IBAction)crop:(id)sender;
 - (IBAction)flipHorizontally:(id)sender;
 - (IBAction)flipVertically:(id)sender;
-- (IBAction)flipLayerHorizontally:(id) sender;
-- (IBAction)flipLayerVertically:(id) sender;
-- (IBAction)duplicateLayer:(id) sender;
-- (IBAction)nextLayer:(id) sender;
-- (IBAction)previousLayer:(id) sender;
-- (IBAction) shouldTileToggled: (id) sender;
-- (IBAction)setPatternToSelection:sender;
-- (IBAction)showPreviewWindow:(NSEvent *) sender;
-- (IBAction)togglePreviewWindow: (id) sender;
-- (IBAction)showBackgroundInfo:(id) sender;
-- (IBAction)showGridSettingsPrompter:(id) sender;
-- (IBAction)redrawCanvas: (id) sender;
-- (void)prompter:aPrompter 
-didFinishWithSize:(NSSize)aSize
-		position:(NSPoint)position
- backgroundColor:(NSColor *)color;
-- (IBAction)selectAll:sender;
-- (IBAction)selectNone:sender;
-- (IBAction)invertSelection: (id) sender;
+- (IBAction)flipLayerHorizontally:(id)sender;
+- (IBAction)flipLayerVertically:(id)sender;
+- (IBAction)duplicateLayer:(id)sender;
+- (IBAction)nextLayer:(id)sender;
+- (IBAction)previousLayer:(id)sender;
+- (IBAction)shouldTileToggled:(id)sender;
+- (IBAction)setPatternToSelection:(id)sender;
+- (IBAction)showPreviewWindow:(NSEvent *)sender;
+- (IBAction)togglePreviewWindow:(id)sender;
+- (IBAction)showBackgroundInfo:(id)sender;
+- (IBAction)showGridSettingsPrompter:(id)sender;
+- (IBAction)redrawCanvas:(id)sender;
 
-- (IBAction)cut:sender;
-- (IBAction)copy:sender;
-- (IBAction)copyMerged:sender;
-- (IBAction)paste:sender;
-- (IBAction)pasteIntoActiveLayer:sender;
-- (IBAction)delete:sender;
+- (IBAction)selectAll:(id)sender;
+- (IBAction)selectNone:(id)sender;
+- (IBAction)invertSelection:(id)sender;
 
-- (IBAction)cutLayer:sender;
-- (IBAction)copyLayer:sender;
-- (IBAction)pasteLayer:sender;
+- (IBAction)cut:(id)sender;
+- (IBAction)copy:(id)sender;
+- (IBAction)copyMerged:(id)sender;
+- (IBAction)paste:(id)sender;
+- (IBAction)pasteIntoActiveLayer:(id)sender;
+- (IBAction)delete:(id)sender;
+
+- (IBAction)cutLayer:(id)sender;
+- (IBAction)copyLayer:(id)sender;
+- (IBAction)pasteLayer:(id)sender;
+
 @end

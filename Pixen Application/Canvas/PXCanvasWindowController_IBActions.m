@@ -2,8 +2,7 @@
 //  PXCanvasWindowController_IBActions.m
 //  Pixen
 //
-//  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXCanvasWindowController_IBActions.h"
@@ -99,7 +98,7 @@
 	
 	[prompter loadWindow];
 	[prompter setDelegate:self];
-//FIXME: this stuff should use the canvas's mainbackground to draw the resize area stuffies.  otherwise the matte color won't show up very well
+	//FIXME: this stuff should use the canvas's mainbackground to draw the resize area stuffies.  otherwise the matte color won't show up very well
 	[prompter setBackgroundColor:
 	 [NSKeyedUnarchiver unarchiveObjectWithData:
 	  [[NSUserDefaults standardUserDefaults] objectForKey:PXDefaultNewDocumentBackgroundColor]]];
@@ -167,7 +166,7 @@
 		return [[self canvas] hasSelection];
 	else if ([anItem action] == @selector(mergeDown:))
 		return [[[self canvas] layers] count] > 1 &&
-			[[[self canvas] layers] objectAtIndex:0] != [[self canvas] activeLayer];
+		[[[self canvas] layers] objectAtIndex:0] != [[self canvas] activeLayer];
 	else if ([anItem action] == @selector(promoteSelection:))
 		return [[self canvas] hasSelection];
 	else if ([anItem action] == @selector(deleteLayer:))
@@ -179,12 +178,12 @@
 	else if ([anItem action] == @selector(shouldTileToggled:))
 	{
 		[anItem setTitle:([canvas wraps]) ? NSLocalizedString(@"HIDE_TILED_VIEW", @"Hide Tiled View") :
-			NSLocalizedString(@"SHOW_TILED_VIEW", @"Show Tiled View")];
+		 NSLocalizedString(@"SHOW_TILED_VIEW", @"Show Tiled View")];
 		return YES;
 	}
 	else if ([anItem action] == @selector(cut:) || [anItem action] == @selector(copy:) ||
-		[anItem action] == @selector(copyMerged:) || [anItem action] == @selector(selectNone:) ||
-		[anItem action] == @selector(delete:)) {
+			 [anItem action] == @selector(copyMerged:) || [anItem action] == @selector(selectNone:) ||
+			 [anItem action] == @selector(delete:)) {
 		return [canvas hasSelection];
 	}
 	else if ([anItem action] == @selector(paste:) || [anItem action] == @selector(pasteIntoActiveLayer:))
@@ -312,12 +311,9 @@
 	[canvas changed];
 }
 
-- (void)prompter:aPrompter
-didFinishWithSize:(NSSize)aSize
-		position:(NSPoint)position
- backgroundColor:(NSColor *)color
+- (void)prompter:(PXCanvasResizePrompter *)aPrompter didFinishWithSize:(NSSize)size position:(NSPoint)position backgroundColor:(NSColor *)color
 {
-	[canvas setSize:aSize withOrigin:position backgroundColor:color];
+	[canvas setSize:size withOrigin:position backgroundColor:color];
 	[canvasController updateCanvasSize];
 }
 
@@ -360,7 +356,6 @@ didFinishWithSize:(NSSize)aSize
 {
 	[canvas pasteIntoLayer:[canvas activeLayer]];
 }
-
 
 - (IBAction)delete:(id) sender
 {

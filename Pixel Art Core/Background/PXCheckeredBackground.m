@@ -2,35 +2,38 @@
 //  PXCheckeredBackground.m
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXCheckeredBackground.h"
-#import <Foundation/NSString.h>
 
 @implementation PXCheckeredBackground
 
-- (NSString *) defaultName
+- (NSString *)defaultName
 {
-  return NSLocalizedString(@"CHECKERED_BACKGROUND", @"Checkered Background");
+	return NSLocalizedString(@"CHECKERED_BACKGROUND", @"Checkered Background");
 }
 
 - (void)drawRect:(NSRect)rect withinRect:(NSRect)wholeRect
 {
-    [self.backColor set];
-    NSRectFill(wholeRect);
-    [self.color set];
-    int i, j;
-    BOOL drawForeground = NO;
-    
-    for(i = 0; i < wholeRect.size.width; i+=10)
+	[self.backColor set];
+	NSRectFill(wholeRect);
+	
+	[self.color set];
+	int i, j;
+	BOOL drawForeground = NO;
+	
+	for (i = 0; i < wholeRect.size.width; i+=10)
 	{
-        drawForeground = i % 20 == 0;
-        for(j = 0; j < wholeRect.size.height; j+=10)
+		drawForeground = i % 20 == 0;
+		for (j = 0; j < wholeRect.size.height; j+=10)
 		{
-            if(drawForeground)
+			if (drawForeground)
 			{
-                NSRectFill(NSMakeRect(wholeRect.origin.x+i, wholeRect.origin.y+j, 10, 10));
-            }
-            drawForeground = !drawForeground;
+				NSRectFill(NSMakeRect(wholeRect.origin.x+i, wholeRect.origin.y+j, 10, 10));
+			}
+			
+			drawForeground = !drawForeground;
 		}
 	}
 }

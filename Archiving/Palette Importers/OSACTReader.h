@@ -1,19 +1,16 @@
 //
 //  OSACTReader.h
-//  PALExport
+//  Pixen
 //
-//  Created by Andy Matuschak on 8/16/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "PXPalette.h"
+@class PXPalette;
 
-@interface OSACTReader : NSObject {
+@interface OSACTReader : NSObject
 
-}
++ (id)sharedACTReader;
 
-+ sharedACTReader;
 - (PXPalette *)paletteWithData:(NSData *)data;
 
 @end

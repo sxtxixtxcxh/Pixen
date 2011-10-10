@@ -2,14 +2,9 @@
 //  PXBackgroundTableHeader.h
 //  Pixen
 //
-//  Created by Andy Matuschak on 7/4/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-
-@interface PXBackgroundTableHeader : NSButton {
-
-}
+@interface PXBackgroundTableHeader : NSButton
 
 @end

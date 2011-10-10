@@ -1,17 +1,17 @@
 //
 //  OSACTReader.m
-//  PALExport
+//  Pixen
 //
-//  Created by Andy Matuschak on 8/16/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "OSACTReader.h"
 
+#import "PXPalette.h"
 
 @implementation OSACTReader
 
-- init
+- (id)init
 {
 	[NSException raise:@"SingletonError" format:@"OSACTReader is a singleton; use sharedACTReader to access the shared instance."];
 	return nil;

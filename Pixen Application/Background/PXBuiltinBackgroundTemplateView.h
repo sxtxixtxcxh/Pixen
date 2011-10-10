@@ -2,15 +2,11 @@
 //  PXBuiltinBackgroundTemplateView.h
 //  Pixen
 //
-//  Created by Andy Matuschak on 7/5/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "PXBackgroundTemplateView.h"
 
-@interface PXBuiltinBackgroundTemplateView : PXBackgroundTemplateView {
-
-}
+@interface PXBuiltinBackgroundTemplateView : PXBackgroundTemplateView
 
 @end

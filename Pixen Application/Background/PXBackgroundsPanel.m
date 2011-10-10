@@ -2,6 +2,8 @@
 //  PXBackgroundsPanel.m
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXBackgroundsPanel.h"
 
