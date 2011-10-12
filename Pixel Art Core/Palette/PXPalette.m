@@ -2,8 +2,7 @@
 //  PXPalette.m
 //  Pixen
 //
-//  Created by Matt Rajca on 8/21/11.
-//  Copyright (c) 2011 Matt Rajca. All rights reserved.
+//  Copyright 2011 Pixen Project. All rights reserved.
 //
 
 #import "PXPalette.h"
@@ -13,9 +12,12 @@
 #import "NSMutableArray+ReorderingAdditions.h"
 #import "PathUtilities.h"
 
-@implementation PXPalette
+@implementation PXPalette {
+	NSMutableArray *_colors;
+	NSMapTable *_frequencies;
+}
 
-@synthesize name = _name, canSave, isSystemPalette;
+@synthesize name = _name, canSave = _canSave, isSystemPalette = _isSystemPalette;
 
 static NSMutableArray *systemPalettes;
 static NSMutableArray *userPalettes;
@@ -211,7 +213,7 @@ NSArray *CreateGrayList()
 	
 	PXPalette *palette = (PXPalette *) object;
 	
-	return (self == palette) || [palette.name isEqualToString:_name];
+	return (self == palette) || [palette.name isEqualToString:self.name];
 }
 
 - (void)addBackgroundColor
@@ -269,7 +271,7 @@ NSArray *CreateGrayList()
 - (id)copyWithZone:(NSZone *)zone
 {
 	PXPalette *newPalette = [[PXPalette alloc] initWithoutBackgroundColor];
-	newPalette.name = _name;
+	newPalette.name = self.name;
 	
 	for (NSColor *color in _colors) {
 		[newPalette addColor:color];
@@ -369,9 +371,9 @@ NSArray *CreateGrayList()
 
 - (void)removeFile
 {
-	if (canSave)
+	if (self.canSave)
 	{
-		NSString *path = [[GetPixenPaletteDirectory() stringByAppendingPathComponent:_name] stringByAppendingPathExtension:PXPaletteSuffix];
+		NSString *path = [[GetPixenPaletteDirectory() stringByAppendingPathComponent:self.name] stringByAppendingPathExtension:PXPaletteSuffix];
 		NSError *error = nil;
 		
 		if (![[NSFileManager defaultManager] removeItemAtPath:path error:&error])
@@ -383,9 +385,9 @@ NSArray *CreateGrayList()
 
 - (void)save
 {
-	if (canSave)
+	if (self.canSave)
 	{
-		NSString *path = [[GetPixenPaletteDirectory() stringByAppendingPathComponent:_name] stringByAppendingPathExtension:PXPaletteSuffix];
+		NSString *path = [[GetPixenPaletteDirectory() stringByAppendingPathComponent:self.name] stringByAppendingPathExtension:PXPaletteSuffix];
 		[NSKeyedArchiver archiveRootObject:[self dictForArchiving] toFile:path];
 	}
 }
@@ -393,7 +395,7 @@ NSArray *CreateGrayList()
 - (NSDictionary *)dictForArchiving
 {
 	NSMutableDictionary *paletteDict = [NSMutableDictionary dictionaryWithCapacity:2];
-	[paletteDict setObject:_name forKey:@"name"];
+	[paletteDict setObject:self.name forKey:@"name"];
 	[paletteDict setObject:_colors forKey:@"colors"];
 	
 	return paletteDict;

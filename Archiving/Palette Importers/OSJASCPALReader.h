@@ -1,19 +1,16 @@
 //
 //  OSJASCPALReader.h
-//  PALExport
+//  Pixen
 //
-//  Created by Andy Matuschak on 8/16/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "PXPalette.h"
 
-@interface OSJASCPALReader : NSObject {
+@interface OSJASCPALReader : NSObject
 
-}
++ (id)sharedJASCPALReader;
 
-+ sharedJASCPALReader;
 - (PXPalette *)paletteWithData:(NSData *)data;
 
 @end

@@ -1,17 +1,15 @@
 //
 //  OSJASCPALReader.m
-//  PALExport
+//  Pixen
 //
-//  Created by Andy Matuschak on 8/16/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "OSJASCPALReader.h"
 
-
 @implementation OSJASCPALReader
 
-- init
+- (id)init
 {
 	[NSException raise:@"SingletonError" format:@"OSJASCPALReader is a singleton; use sharedJASCPALReader to access the shared instance."];
 	return nil;

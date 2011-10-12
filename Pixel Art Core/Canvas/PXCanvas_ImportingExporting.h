@@ -2,24 +2,24 @@
 //  PXCanvas_ImportingExporting.h
 //  Pixen
 //
-//  Created by Joe Osborn on 2005.07.31.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "PXCanvas.h"
 
-@interface PXCanvas(ImportingExporting)
+@interface PXCanvas (ImportingExporting)
 
-+ canvasWithContentsOfFile:(NSString *)aFile;
--(id) initWithContentsOfFile:(NSString* ) aFile;
-- imageDataWithType:(NSBitmapImageFileType)storageType
-		 properties:(NSDictionary *)properties;
++ (id)canvasWithContentsOfFile:(NSString *)aFile;
+
+- (id)initWithContentsOfFile:(NSString *)aFile;
+- (id)initWithImage:(NSImage *)anImage;
+
+- (NSData *)imageDataWithType:(NSBitmapImageFileType)storageType properties:(NSDictionary *)properties;
+
 - (void)replaceActiveLayerWithImage:(NSImage *)anImage;
-- initWithImage:(NSImage *)anImage;
+
 - (NSImage *)exportImageWithBackgroundColor:(NSColor *)color;
 - (NSImage *)exportImage; // suitable for writing to file
 - (NSImage *)displayImage; // suitable for drawing to the screen
-
 
 @end

@@ -2,20 +2,12 @@
 //  PXPalette.h
 //  Pixen
 //
-//  Created by Matt Rajca on 8/21/11.
-//  Copyright (c) 2011 Matt Rajca. All rights reserved.
+//  Copyright 2011 Pixen Project. All rights reserved.
 //
 
 #import <AppKit/AppKit.h>
 
-@interface PXPalette : NSObject < NSCoding, NSCopying, NSFastEnumeration > {
-  @private
-	NSMutableArray *_colors;
-	NSMapTable *_frequencies;
-	NSString *_name;
-	
-	BOOL canSave, isSystemPalette;
-}
+@interface PXPalette : NSObject < NSCoding, NSCopying, NSFastEnumeration >
 
 @property (nonatomic, copy) NSString *name;
 

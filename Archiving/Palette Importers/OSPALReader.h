@@ -1,19 +1,16 @@
 //
 //  OSPALReader.h
-//  PALExport
+//  Pixen
 //
-//  Created by Andy Matuschak on 8/15/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "PXPalette.h"
 
-@interface OSPALReader : NSObject {
+@interface OSPALReader : NSObject
 
-}
++ (id)sharedPALReader;
 
-+ sharedPALReader;
 - (PXPalette *)paletteWithData:(NSData *)data;
 
 @end

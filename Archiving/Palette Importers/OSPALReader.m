@@ -1,17 +1,15 @@
 //
 //  OSPALReader.m
-//  PALExport
+//  Pixen
 //
-//  Created by Andy Matuschak on 8/15/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "OSPALReader.h"
 
-
 @implementation OSPALReader
 
-- init
+- (id)init
 {
 	[NSException raise:@"SingletonError" format:@"OSPALReader is a singleton; use sharedPALReader to access the shared instance."];
 	return nil;

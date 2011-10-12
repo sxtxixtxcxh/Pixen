@@ -2,23 +2,23 @@
 //  PXCanvas_ImportingExporting.m
 //  Pixen
 //
-//  Created by Joe Osborn on 2005.07.31.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXCanvas_ImportingExporting.h"
-#import "PXCanvas_Modifying.h"
+
 #import "PXCanvas_Layers.h"
+#import "PXCanvas_Modifying.h"
 #import "PXLayer.h"
 
 @implementation PXCanvas(ImportingExporting)
 
-+ canvasWithContentsOfFile:(NSString *)aFile
++ (id)canvasWithContentsOfFile:(NSString *)aFile
 {
 	return [[[self alloc] initWithContentsOfFile:aFile] autorelease];
 }
 
--(id) initWithContentsOfFile:(NSString* ) aFile
+- (id)initWithContentsOfFile:(NSString *)aFile
 {
 	if([[aFile pathExtension] isEqualToString:PXISuffix])
 	{
@@ -34,14 +34,14 @@
 }
 
 
-- imageDataWithType:(NSBitmapImageFileType)storageType
-				 properties:(NSDictionary *)properties
+- (NSData *)imageDataWithType:(NSBitmapImageFileType)storageType
+				   properties:(NSDictionary *)properties
 {
 	NSBitmapImageRep *rep;
 	NSRect frame = NSMakeRect(0, 0, [self size].width, [self size].height);
 	// We use a white background color for jpegs because of a bug in 10.3
 	NSImage *outputImage = ((storageType == NSJPEGFileType) ? [self exportImageWithBackgroundColor:[NSColor whiteColor]] : [self displayImage]);
-  
+	
 	[outputImage lockFocus];
 	rep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:frame] autorelease];
 	[outputImage unlockFocus];
@@ -74,7 +74,7 @@
 	[self layersChanged];
 }
 
-- initWithImage:(NSImage *)anImage
+- (id)initWithImage:(NSImage *)anImage
 {
 	self = [self init];
 	[self replaceActiveLayerWithImage:anImage];

@@ -1,19 +1,16 @@
 //
 //  OSJASCPALWriter.h
-//  PALExport
+//  Pixen
 //
-//  Created by Andy Matuschak on 8/16/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "PXPalette.h"
 
-@interface OSJASCPALWriter : NSObject {
+@interface OSJASCPALWriter : NSObject
 
-}
++ (id)sharedJASCPALWriter;
 
-+ sharedJASCPALWriter;
 - (NSData *)palDataForPalette:(PXPalette *)palette;
 
 @end

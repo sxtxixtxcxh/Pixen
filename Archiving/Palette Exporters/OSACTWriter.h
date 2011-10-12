@@ -1,19 +1,16 @@
 //
 //  OSACTWriter.h
-//  PALExport
+//  Pixen
 //
-//  Created by Andy Matuschak on 8/16/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "PXPalette.h"
 
-@interface OSACTWriter : NSObject {
+@interface OSACTWriter : NSObject
 
-}
++ (id)sharedACTWriter;
 
-+ sharedACTWriter;
 - (NSData *)palDataForPalette:(PXPalette *)palette;
 
 @end
