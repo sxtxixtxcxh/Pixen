@@ -1,25 +1,17 @@
 //
 //  PXFillTool.h
-//  Pixen-XCode
+//  Pixen
 //
-//  Created by Joe Osborn on Tue Nov 18 2003.
-//  Copyright (c) 2003 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "PXTool.h"
-#import "PXLayer.h"
 
-
-@interface PXFillTool : PXTool 
-{
-  @private
-	BOOL commandDown;
-}
+@interface PXFillTool : PXTool
 
 - (void)fillPointsFromPoint:(NSPoint)aPoint forCanvasController:(PXCanvasController *)controller;
-- (BOOL)checkSelectionOnCanvas:(PXCanvas *)canvas;
 - (void)fillPixelsInBOOLArray:(NSArray *)fillPoints withColor:(NSColor *)newColor withBoundsRect:(NSRect)bounds ofCanvas:(PXCanvas *)canvas;
 
+- (BOOL)checkSelectionOnCanvas:(PXCanvas *)canvas;
 
 @end

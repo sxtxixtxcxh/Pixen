@@ -2,19 +2,12 @@
 //  PXFillToolPropertiesController.h
 //  Pixen
 //
-//  Created by Andy Matuschak on 7/2/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "PXToolPropertiesController.h"
 
 @interface PXFillToolPropertiesController : PXToolPropertiesController
-{
-  @private
-	int tolerance;
-	BOOL contiguous;
-}
 
 @property (nonatomic, assign) BOOL contiguous;
 @property (nonatomic, assign) int tolerance;

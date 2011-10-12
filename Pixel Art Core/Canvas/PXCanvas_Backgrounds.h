@@ -2,23 +2,18 @@
 //  PXCanvas_Backgrounds.h
 //  Pixen
 //
-//  Created by Joe Osborn on 2005.07.31.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "PXCanvas.h"
 
-@interface PXCanvas(Backgrounds)
+@class PXBackground;
 
-- mainBackground;
-- (void)setMainBackground:bg;
-- alternateBackground;
-- (void)setAlternateBackground:bg;
+@interface PXCanvas (Backgrounds)
 
-- mainPreviewBackground;
-- (void)setMainPreviewBackground:bg;
-- alternatePreviewBackground;
-- (void)setAlternatePreviewBackground:bg;
+@property (nonatomic, retain) PXBackground *mainBackground;
+@property (nonatomic, retain) PXBackground *alternateBackground;
+@property (nonatomic, retain) PXBackground *mainPreviewBackground;
+@property (nonatomic, retain) PXBackground *alternatePreviewBackground;
 
 @end

@@ -1,33 +1,14 @@
 //
 //  PXFillTool.m
-//  Pixen-XCode
+//  Pixen
 //
-// Copyright (c) 2003,2004,2005 Pixen
-
-// Permission is hereby granted, free of charge, to any person obtaining a copy 
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights 
-// to use,copy, modify, merge, publish, distribute, sublicense, and/or sell 
-// copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-
-// The above copyright notice and this permission notice shall be included in
-//  all copies or substantial portions of the Software.
-
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
-// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
-// BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM,  OUT OF OR IN CONNECTION WITH
-// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-//  Created by Joe Osborn on Tue Nov 18 2003.
-//  Copyright (c) 2003 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-// This code is based on some from Will Leshner. Thanks, man!
+//  This code is based on some from Will Leshner. Thanks, man!
 
 #import "PXFillTool.h"
+
 #import "PXCanvas.h"
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Selection.h"
@@ -53,7 +34,7 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 	return NSLocalizedString(@"FILL_NAME", @"Fill Tool");
 }
 
--(NSString *)actionName
+- (NSString *)actionName
 {
 	return NSLocalizedString(@"FILL_ACTION", @"Fill");
 }
@@ -91,8 +72,7 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 	return NO;
 }
 
-- (void)mouseDownAt:(NSPoint)aPoint 
-fromCanvasController:(PXCanvasController*)controller
+- (void)mouseDownAt:(NSPoint)aPoint fromCanvasController:(PXCanvasController*)controller
 {
 	[super mouseDownAt:aPoint fromCanvasController:controller];
 	if([self shouldAbandonFillingAtPoint:aPoint fromCanvasController:controller] || ([self checkSelectionOnCanvas:[controller canvas]] == YES && [[controller canvas] pointIsSelected:aPoint] == NO))
@@ -247,13 +227,6 @@ fromCanvasController:(PXCanvasController*)controller
 	return;
 }
 
-
-
-- (BOOL)checkSelectionOnCanvas:(PXCanvas *)canvas
-{ 
-	return [canvas hasSelection];
-}	
-
 - (void)fillPixelsInBOOLArray:(NSArray *)fillPoints withColor:(NSColor *)newColor withBoundsRect:(NSRect)bounds ofCanvas:(PXCanvas *)canvas
 {
 	int canvasWidth = [canvas size].width;
@@ -269,5 +242,9 @@ fromCanvasController:(PXCanvasController*)controller
 	[canvas changedInRect:bounds];
 }
 
+- (BOOL)checkSelectionOnCanvas:(PXCanvas *)canvas
+{ 
+	return [canvas hasSelection];
+}
 
 @end

@@ -2,15 +2,14 @@
 //  PXFillToolPropertiesController.m
 //  Pixen
 //
-//  Created by Andy Matuschak on 7/2/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXFillToolPropertiesController.h"
 
 @implementation PXFillToolPropertiesController
 
-@synthesize contiguous, tolerance;
+@synthesize contiguous = _contiguous, tolerance = _tolerance;
 
 - (NSString *)nibName
 {
@@ -20,10 +19,10 @@
 - (id)init
 {
 	self = [super init];
-	
-	self.tolerance = 0;
-	self.contiguous = YES;
-	
+	if (self) {
+		self.tolerance = 0;
+		self.contiguous = YES;
+	}
 	return self;
 }
 

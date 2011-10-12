@@ -2,53 +2,54 @@
 //  PXCanvas_Backgrounds.m
 //  Pixen
 //
-//  Created by Joe Osborn on 2005.07.31.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXCanvas_Backgrounds.h"
+
 #import "PXBackgrounds.h"
 #import "PXBackgroundConfig.h"
-#import "PXLayer.h"
 
-@implementation PXCanvas(Backgrounds)
+@implementation PXCanvas (Backgrounds)
 
-- mainBackground
+@dynamic mainBackground, alternateBackground, mainPreviewBackground, alternatePreviewBackground;
+
+- (PXBackground *)mainBackground
 {
 	return [bgConfig mainBackground];   
 }
 
-- (void)setMainBackground:bg
+- (void)setMainBackground:(PXBackground *)bg
 {
 	[bgConfig setMainBackground:bg];
 }
 
-- alternateBackground
+- (PXBackground *)alternateBackground
 {
 	return [bgConfig alternateBackground];
 }
 
-- (void)setAlternateBackground:bg
+- (void)setAlternateBackground:(PXBackground *)bg
 {
 	[bgConfig setAlternateBackground:bg];
 }
 
-- mainPreviewBackground
+- (PXBackground *)mainPreviewBackground
 {
 	return [bgConfig mainPreviewBackground];
 }
 
-- (void)setMainPreviewBackground:bg
+- (void)setMainPreviewBackground:(PXBackground *)bg
 {
 	[bgConfig setMainPreviewBackground:bg];
 }
 
-- alternatePreviewBackground
+- (PXBackground *)alternatePreviewBackground
 {
 	return [bgConfig alternatePreviewBackground];
 }
 
-- (void)setAlternatePreviewBackground:bg
+- (void)setAlternatePreviewBackground:(PXBackground *)bg
 {
 	[bgConfig setAlternatePreviewBackground:bg];
 }
