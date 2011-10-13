@@ -2,30 +2,41 @@
 //  PXCanvasResizeView.m
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXCanvasResizeView.h"
+
 #import <math.h>
 
-@implementation PXCanvasResizeView
+@implementation PXCanvasResizeView {
+	NSPoint _position;
+	NSAffineTransform *_scaleTransform;
+}
+
+@synthesize backgroundColor = _backgroundColor, cachedImage = _cachedImage;
+@synthesize newImageSize = _newSize, oldImageSize = _oldSize;
+
+@dynamic leftOffset, topOffset;
 
 - (void)awakeFromNib
 {
-	cachedImage = [[NSImage imageNamed:@"greybox"] retain];
-	scaleTransform = [[NSAffineTransform alloc] init];
+	self.cachedImage = [NSImage imageNamed:@"greybox"];
+	_scaleTransform = [[NSAffineTransform alloc] init];
+	
 	[self setBackgroundColor:[NSColor colorWithDeviceRed:1 green:1 blue:1 alpha:0]];
 }
 
 - (void)dealloc
 {
-	[backgroundColor release];
-	[scaleTransform release];
-	[cachedImage release];
+	[_backgroundColor release];
+	[_scaleTransform release];
+	[_cachedImage release];
+	
 	[super dealloc];
 }
 
-
-- (NSRect)applyTransformation:(NSAffineTransform *)transform 
-					   toRect:(NSRect)rect
+- (NSRect)applyTransformation:(NSAffineTransform *)transform toRect:(NSRect)rect
 {
 	NSRect newRect;
 	newRect.size = [transform transformSize:rect.size];
@@ -36,11 +47,11 @@
 - (void)drawRect:(NSRect)rect
 {
 	// Find the new size of the canvas
-	NSRect newRect = NSMakeRect(0, 0, newSize.width, newSize.height); 
+	NSRect newRect = NSMakeRect(0, 0, _newSize.width, _newSize.height); 
 	// Find the old size of the canvas
-	NSRect oldRect = NSMakeRect(position.x, newSize.height-(oldSize.height-(position.y*-1)), oldSize.width, oldSize.height); 
+	NSRect oldRect = NSMakeRect(_position.x, _newSize.height-(_oldSize.height-(_position.y*-1)), _oldSize.width, _oldSize.height); 
 	// Find the size we need to display in the view
-	NSSize maxSize = NSMakeSize(MAX(newSize.width, oldSize.width), MAX(newSize.height, oldSize.height)); 
+	NSSize maxSize = NSMakeSize(MAX(_newSize.width, _oldSize.width), MAX(_newSize.height, _oldSize.height)); 
 	NSSize frameSize = [self frame].size;
 	
 	// Find the scaling factor by looking at the rect that contains both the new size
@@ -50,13 +61,13 @@
 	oldRect.origin.x = round(oldRect.origin.x);
 	oldRect.origin.y = round(oldRect.origin.y);
 	
-	[scaleTransform release];
+	[_scaleTransform release];
 	// transform the image-pixel scale to screen-pixel scale
-	scaleTransform = [[NSAffineTransform transform] retain]; 
-	[scaleTransform scaleBy:scale];
+	_scaleTransform = [[NSAffineTransform transform] retain]; 
+	[_scaleTransform scaleBy:scale];
 	
-	newRect = [self applyTransformation:scaleTransform toRect:newRect]; // transform our rects
-	oldRect = [self applyTransformation:scaleTransform toRect:oldRect];
+	newRect = [self applyTransformation:_scaleTransform toRect:newRect]; // transform our rects
+	oldRect = [self applyTransformation:_scaleTransform toRect:oldRect];
 	
 	NSAffineTransform *translateTransform = [NSAffineTransform transform];
 	// center the view on the new frame
@@ -68,14 +79,14 @@
 	[[NSColor whiteColor] set];
 	NSRectFillUsingOperation(newRect, NSCompositeCopy);
 	NSRectFillUsingOperation(oldRect, NSCompositeCopy);
-	[backgroundColor set];
+	[_backgroundColor set];
 	NSRectFillUsingOperation(newRect, NSCompositeSourceOver);
 	[[NSColor whiteColor] set];
 	NSRectFillUsingOperation(NSIntersectionRect(newRect, oldRect), NSCompositeCopy);
-	[cachedImage drawInRect:oldRect 
-				   fromRect:NSMakeRect(0, 0, [cachedImage size].width, [cachedImage size].height)
-				  operation:NSCompositeSourceOver
-				   fraction:1.0f]; // draw the image in the old frame
+	[_cachedImage drawInRect:oldRect 
+					fromRect:NSMakeRect(0, 0, [_cachedImage size].width, [_cachedImage size].height)
+				   operation:NSCompositeSourceOver
+					fraction:1.0f]; // draw the image in the old frame
 	[[NSColor blackColor] set];
 	[NSBezierPath strokeRect:oldRect]; // draw an outline around the image
 	
@@ -88,68 +99,61 @@
 	[canvasOutline stroke]; // dash white and black
 }
 
-- (NSSize)newSize
-{
-	return newSize;
-}
-
 - (NSPoint)resultPosition
 {
-	NSPoint roundedPosition = position;
+	NSPoint roundedPosition = _position;
 	roundedPosition.x = round(roundedPosition.x);
-	roundedPosition.y = round((newSize.height-oldSize.height)-roundedPosition.y);
+	roundedPosition.y = round((_newSize.height-_oldSize.height)-roundedPosition.y);
 	return roundedPosition;
 }
 
 - (void)setNewImageSize:(NSSize)size
 {
-	newSize = size;
-	[self setNeedsDisplay:YES];
+	if (!NSEqualSizes(_newSize, size)) {
+		_newSize = size;
+		[self setNeedsDisplay:YES];
+	}
 }
 
 - (void)setOldImageSize:(NSSize)size
 {
-	oldSize = size;
-	position = NSMakePoint(0,0);
-	[self setNeedsDisplay:YES];
+	if (!NSEqualSizes(_oldSize, size)) {
+		_oldSize = size;
+		_position = NSMakePoint(0,0);
+		
+		[self setNeedsDisplay:YES];
+	}
 }
 
 - (void)setCachedImage:(NSImage *)image
 {
-	[cachedImage release];
-	cachedImage = [[NSImage alloc] initWithSize:[image size]];
-	
-	[cachedImage lockFocus];
-//	[[NSColor colorWithDeviceRed:1 green:1 blue:1 alpha:1] set];
-//	NSRectFill(NSMakeRect(0,0,[image size].width,[image size].height));
-	[image compositeToPoint:NSMakePoint(0, 0) operation:NSCompositeSourceOver];
-	[cachedImage unlockFocus];
-	
-	[self setNeedsDisplay:YES];
+	if (_cachedImage != image) {
+		[_cachedImage release];
+		_cachedImage = [image retain];
+		
+		[self setNeedsDisplay:YES];
+	}
 }
 
-- backgroundColor;
-{
-	return backgroundColor;
-}
 - (void)setBackgroundColor:(NSColor *)color
 {
-	[color retain];
-	[backgroundColor release];
-	backgroundColor = color;
-	[self setNeedsDisplay:YES];
+	if (_backgroundColor != color) {
+		[_backgroundColor release];
+		_backgroundColor = [color retain];
+		
+		[self setNeedsDisplay:YES];
+	}
 }
 
 - (void)mouseUp:(NSEvent *)event
 {
-
 	[self setNeedsDisplay:YES];
 }
 
 - (void)mouseDragged:(NSEvent *)event
 {
 	//FIXME: this is kind of clumsy, doesn't move enough
-	NSAffineTransform *affineTransform = [scaleTransform copy];
+	NSAffineTransform *affineTransform = [_scaleTransform copy];
 	[affineTransform invert];
 	
 	NSPoint deltaVector = [affineTransform transformPoint:NSMakePoint([event deltaX], [event deltaY])];
@@ -193,47 +197,54 @@
 	return YES;
 }
 
-- (int)leftOffset;
+- (CGFloat)leftOffset;
 {
-	return position.x;
+	return _position.x;
 }
-- (void)setLeftOffset:(int)nx;
+
+- (void)setLeftOffset:(CGFloat)nx;
 {
 	[self willChangeValueForKey:@"rightOffset"];
-	position.x = nx;
+	_position.x = nx;
 	[self didChangeValueForKey:@"rightOffset"];
 	[self setNeedsDisplay:YES];
 }
-- (int)topOffset;
+
+- (CGFloat)topOffset;
 {
-	return position.y;
+	return _position.y;
 }
-- (void)setTopOffset:(int)nv
+
+- (void)setTopOffset:(CGFloat)nv
 {
 	[self willChangeValueForKey:@"bottomOffset"];
-	position.y = nv;
+	_position.y = nv;
 	[self didChangeValueForKey:@"bottomOffset"];
 	[self setNeedsDisplay:YES];
 }
-- (int)bottomOffset;
+
+- (CGFloat)bottomOffset;
 {
-	return -1 * position.y;
+	return -1 * _position.y;
 }
-- (void)setBottomOffset:(int)nv
+
+- (void)setBottomOffset:(CGFloat)nv
 {
 	[self willChangeValueForKey:@"topOffset"];
-	position.y = -1 * nv;
+	_position.y = -1 * nv;
 	[self didChangeValueForKey:@"topOffset"];
 	[self setNeedsDisplay:YES];
 }
-- (int)rightOffset;
+
+- (CGFloat)rightOffset;
 {
-	return -1 * position.x;
+	return -1 * _position.x;
 }
-- (void)setRightOffset:(int)nv
+
+- (void)setRightOffset:(CGFloat)nv
 {
 	[self willChangeValueForKey:@"leftOffset"];
-	position.x = -1*nv;
+	_position.x = -1*nv;
 	[self didChangeValueForKey:@"leftOffset"];
 	[self setNeedsDisplay:YES];
 }

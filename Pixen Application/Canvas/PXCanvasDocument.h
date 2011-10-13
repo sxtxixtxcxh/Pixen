@@ -2,25 +2,20 @@
 //  PXCanvasDocument.h
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
-#import <AppKit/NSDocument.h>
 #import "PXDocument.h"
 
-@class PXCanvas, PXCanvasPrintView, PXCanvasWindowController, PXCanvasController, NSString, NSTimer, PXBackground;
+@class PXCanvas, PXCanvasController;
 
 @interface PXCanvasDocument : PXDocument
-{
-  @private
-	PXCanvas *canvas;
-	PXCanvasPrintView *printableView;
-}
+
+@property (nonatomic, retain) PXCanvas *canvas;
 
 + (NSData *)dataRepresentationOfType:(NSString *)aType withCanvas:(PXCanvas *)canvas;
 - (void)loadFromPasteboard:(NSPasteboard *)board;
 
-- (PXCanvas *) canvas;
-- (void)setCanvas:(PXCanvas *)aCanvas;
-
-- (PXCanvasController*)canvasController;
+- (PXCanvasController *)canvasController;
 
 @end

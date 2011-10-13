@@ -2,33 +2,20 @@
 //  PXCanvasResizeView.h
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
-#import <AppKit/AppKit.h>
+@interface PXCanvasResizeView : NSView
 
+@property (nonatomic, retain) NSColor *backgroundColor;
 
-@interface PXCanvasResizeView : NSView 
-{
-  @private
-	NSSize oldSize;
-	NSSize newSize;
-	NSPoint position;
-	NSImage *cachedImage;
-	NSColor *backgroundColor;
-	
-	NSAffineTransform *scaleTransform;
-}
+@property (nonatomic, retain) NSImage *cachedImage;
+@property (nonatomic, assign) NSSize newImageSize;
+@property (nonatomic, assign) NSSize oldImageSize;
 
-- (NSSize)newSize;
+@property (nonatomic, assign) CGFloat leftOffset;
+@property (nonatomic, assign) CGFloat topOffset;
+
 - (NSPoint)resultPosition;
 
-- backgroundColor;
-- (void)setBackgroundColor:(NSColor *)color;
-- (void)setCachedImage:(NSImage *)cachedImage;
-- (void)setNewImageSize:(NSSize)newSize;
-- (void)setOldImageSize:(NSSize)oldSize;
-
-- (int)leftOffset;
-- (void)setLeftOffset:(int)nx;
-- (int)topOffset;
-- (void)setTopOffset:(int)nv;
 @end

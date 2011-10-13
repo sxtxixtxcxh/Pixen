@@ -52,7 +52,7 @@
 
 - (IBAction)useEnteredFrame:(id)sender
 {
-	[delegate prompter:self didFinishWithSize:[resizeView newSize]
+	[delegate prompter:self didFinishWithSize:[resizeView newImageSize]
 			  position:[resizeView resultPosition]
 	   backgroundColor:[bgColorWell color]];
 	

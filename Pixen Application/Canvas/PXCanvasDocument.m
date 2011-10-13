@@ -2,8 +2,11 @@
 //  PXCanvasDocument.m
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXCanvasDocument.h"
+
 #import "PXCanvasWindowController.h"
 #import "PXCanvas.h"
 #import "PXCanvas_ImportingExporting.h"
@@ -16,7 +19,6 @@
 #import "PXCanvasPrintView.h"
 #import "PXLayerController.h"
 #import "PXIconExporter.h"
-#import "gif_lib.h"
 #import "PXAnimatedGifExporter.h"
 #import "PXLayer.h"
 #import "PXCanvasWindowController_IBActions.h"
@@ -24,33 +26,42 @@
 
 BOOL isPowerOfTwo(int num);
 
-@implementation PXCanvasDocument
+@implementation PXCanvasDocument {
+	PXCanvasPrintView *_printableView;
+}
+
+@synthesize canvas = _canvas;
 
 - (id)init
 {
 	if ( ! ( self = [super init] ) ) 
 		return nil;
 	
-	canvas = [[PXCanvas alloc] init];
-	[canvas setUndoManager:[self undoManager]];
+	self.canvas = [[PXCanvas new] autorelease];
+	
 	[[self undoManager] removeAllActions];
-	[self updateChangeCount:NSChangeCleared]; 
-  return self;
+	[self updateChangeCount:NSChangeCleared];
+	
+	return self;
 }
 
 - (void)setCanvas:(PXCanvas *)aCanvas
 {
-	[aCanvas retain];
-	[canvas release];
-	canvas = aCanvas;
-	[canvas setUndoManager:[self undoManager]];
+	if (_canvas != aCanvas) {
+		[_canvas release];
+		_canvas = [aCanvas retain];
+		
+		[_canvas setUndoManager:[self undoManager]];
+	}
 }
 
 - (void)dealloc
 {
 	[self.windowController releaseCanvas];
-	[canvas release];
-	//	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	[_canvas release];
+	[_printableView release];
+	
 	[super dealloc];
 }
 
@@ -66,7 +77,7 @@ BOOL isPowerOfTwo(int num);
 
 - (void)setWindowControllerData
 {
-	[self.windowController setCanvas:canvas];
+	[self.windowController setCanvas:_canvas];
 }
 
 BOOL isPowerOfTwo(int num)
@@ -111,52 +122,55 @@ BOOL isPowerOfTwo(int num)
 {
 	if (UTTypeEqualNSString(aType, PixenImageFileType) ||
 		UTTypeEqualNSString(aType, PixenImageFileTypeOld)) {
-        
-        return [NSKeyedArchiver archivedDataWithRootObject:canvas];
-    }
-    else if (UTTypeEqual(kUTTypeJPEG, (__bridge CFStringRef) aType))
-    {
-        return [canvas imageDataWithType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0]
-                                                                                               forKey:NSImageCompressionFactor]];
-    }
-    else if (UTTypeEqual(kUTTypeICO, (__bridge CFStringRef) aType))
-    {
-        PXIconExporter *iconExporter = [[[PXIconExporter alloc] init] autorelease];
-        return [iconExporter iconDataForCanvas:canvas];
-    }
-    else if (UTTypeEqual(kUTTypePNG, (__bridge CFStringRef) aType))
-    {
-        return [canvas imageDataWithType:NSPNGFileType properties:nil];
-    }
-    else if (UTTypeEqual(kUTTypeTIFF, (__bridge CFStringRef) aType))
-    {
-        return [canvas imageDataWithType:NSTIFFFileType properties:nil];
-    }
-    else if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) aType))
-    {
+		
+		return [NSKeyedArchiver archivedDataWithRootObject:canvas];
+	}
+	else if (UTTypeEqual(kUTTypeJPEG, (__bridge CFStringRef) aType))
+	{
+		return [canvas imageDataWithType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0]
+																							   forKey:NSImageCompressionFactor]];
+	}
+	else if (UTTypeEqual(kUTTypeICO, (__bridge CFStringRef) aType))
+	{
+		PXIconExporter *iconExporter = [[[PXIconExporter alloc] init] autorelease];
+		return [iconExporter iconDataForCanvas:canvas];
+	}
+	else if (UTTypeEqual(kUTTypePNG, (__bridge CFStringRef) aType))
+	{
+		return [canvas imageDataWithType:NSPNGFileType properties:nil];
+	}
+	else if (UTTypeEqual(kUTTypeTIFF, (__bridge CFStringRef) aType))
+	{
+		return [canvas imageDataWithType:NSTIFFFileType properties:nil];
+	}
+	else if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) aType))
+	{
 		return [canvas imageDataWithType:NSGIFFileType properties:nil];
-    }
-    else if (UTTypeEqual(kUTTypeBMP, (__bridge CFStringRef) aType))
-    {
-        return [canvas imageDataWithType:NSBMPFileType properties:nil];
-    }
-    else if (UTTypeEqual(kUTTypePICT, (__bridge CFStringRef) aType))
-    {
-        NSMutableData *pictData = [NSMutableData data];
-        CGImageDestinationRef pictOutput = 
-        CGImageDestinationCreateWithData((__bridge CFMutableDataRef)pictData, 
-                                         kUTTypePICT, 
-                                         1, 
-                                         NULL);
-        CGImageDestinationAddImage(pictOutput,
-                                   [[canvas displayImage] CGImageForProposedRect:NULL 
-                                                                         context:nil 
-                                                                           hints:nil],
-                                   NULL);
-        CGImageDestinationFinalize(pictOutput);
-        CFRelease(pictOutput);
-        return pictData;
-    }
+	}
+	else if (UTTypeEqual(kUTTypeBMP, (__bridge CFStringRef) aType))
+	{
+		return [canvas imageDataWithType:NSBMPFileType properties:nil];
+	}
+	else if (UTTypeEqual(kUTTypePICT, (__bridge CFStringRef) aType))
+	{
+		NSMutableData *pictData = [NSMutableData data];
+		
+		CGImageDestinationRef pictOutput = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)pictData,
+																			kUTTypePICT,
+																			1,
+																			NULL);
+		
+		CGImageDestinationAddImage(pictOutput,
+								   [[canvas displayImage] CGImageForProposedRect:NULL
+																		 context:nil
+																		   hints:nil],
+								   NULL);
+		
+		CGImageDestinationFinalize(pictOutput);
+		CFRelease(pictOutput);
+		
+		return pictData;
+	}
 	
 	return nil;
 }
@@ -170,10 +184,10 @@ BOOL isPowerOfTwo(int num)
 		NSDictionary *props = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0f]
 														  forKey:NSImageCompressionFactor];
 		
-		return [canvas imageDataWithType:NSJPEGFileType properties:props];
+		return [_canvas imageDataWithType:NSJPEGFileType properties:props];
 	}
 	
-	return [[self class] dataRepresentationOfType:type withCanvas:canvas];
+	return [[self class] dataRepresentationOfType:type withCanvas:_canvas];
 }
 
 - (void)loadFromPasteboard:(NSPasteboard *)board
@@ -183,8 +197,8 @@ BOOL isPowerOfTwo(int num)
 		NSData *data = [board dataForType:PXLayerPboardType];
 		PXLayer *layer = [NSKeyedUnarchiver unarchiveObjectWithData:data];
 		
-		[canvas setSize:[layer size]];
-		[canvas pasteFromPasteboard:board type:PXLayerPboardType];
+		[_canvas setSize:[layer size]];
+		[_canvas pasteFromPasteboard:board type:PXLayerPboardType];
 	}
 	else
 	{
@@ -194,22 +208,22 @@ BOOL isPowerOfTwo(int num)
 			{
 				NSImage *image = [[[NSImage alloc] initWithPasteboard:board] autorelease];
 				
-				[canvas setSize:NSMakeSize(ceilf([image size].width), ceilf([image size].height))];
-				[canvas pasteFromPasteboard:board type:PXNSImagePboardType];
+				[_canvas setSize:NSMakeSize(ceilf([image size].width), ceilf([image size].height))];
+				[_canvas pasteFromPasteboard:board type:PXNSImagePboardType];
 				
 				break;
 			}
 		}
 	}
 	
-	if (canvas)
+	if (_canvas)
 	{
-		[canvas setUndoManager:[self undoManager]];
+		[_canvas setUndoManager:[self undoManager]];
 		
 		// remove the auto-created main layer
-		if ([[canvas layers] count] > 1)
+		if ([[_canvas layers] count] > 1)
 		{
-			[canvas removeLayerAtIndex:0];
+			[_canvas removeLayerAtIndex:0];
 		}
 	}
 	
@@ -227,14 +241,13 @@ BOOL isPowerOfTwo(int num)
 	if (UTTypeEqual( (__bridge CFStringRef) aType, (__bridge CFStringRef) PixenImageFileType) ||
 		UTTypeEqual( (__bridge CFStringRef) aType, (__bridge CFStringRef) PixenImageFileTypeOld))
 	{
-		[canvas release];
-		canvas = [[NSKeyedUnarchiver unarchiveObjectWithData:data] retain];
+		self.canvas = [NSKeyedUnarchiver unarchiveObjectWithData:data];
 	}
 	else if (UTTypeEqual(kUTTypeBMP, (__bridge CFStringRef) aType))
 	{
-		[canvas release];
-		canvas = [[PXCanvas alloc] init];
-		[canvas replaceActiveLayerWithImage:[[[NSImage alloc] initWithData:data] autorelease]];
+		self.canvas = [[PXCanvas new] autorelease];
+		
+		[_canvas replaceActiveLayerWithImage:[[[NSImage alloc] initWithData:data] autorelease]];
 	}
 	else
 	{
@@ -245,16 +258,16 @@ BOOL isPowerOfTwo(int num)
 			return NO;
 		}
 		
-		[canvas release];
-		canvas = [[PXCanvas alloc] initWithImage:image];
+		self.canvas = [[[PXCanvas alloc] initWithImage:image] autorelease];
 	}
 	
-	if (canvas)
+	if (_canvas)
 	{
-		[canvas setUndoManager:[self undoManager]];
-		[self.windowController setCanvas:canvas];
+		[self.windowController setCanvas:_canvas];
+		
 		[[self undoManager] removeAllActions];
-		[self updateChangeCount:NSChangeCleared]; 
+		[self updateChangeCount:NSChangeCleared];
+		
 		return YES;
 	}
 	
@@ -265,9 +278,8 @@ BOOL isPowerOfTwo(int num)
 				   showPrintPanel:(BOOL)showPanels delegate:(id)delegate
 				 didPrintSelector:(SEL)didPrintSelector contextInfo:(void *)contextInfo {
 	
-	if (!printableView) {
-		printableView = [PXCanvasPrintView viewForCanvas:[self canvas]];
-		[printableView retain];
+	if (!_printableView) {
+		_printableView = [[PXCanvasPrintView viewForCanvas:[self canvas]] retain];
 	}
 	
 	float scale = [[[[self printInfo] dictionary] objectForKey:NSPrintScalingFactor] floatValue];
@@ -275,20 +287,15 @@ BOOL isPowerOfTwo(int num)
 	NSAffineTransform *transform = [NSAffineTransform transform];
 	[transform scaleXBy:scale yBy:scale];
 	
-	[printableView setBoundsOrigin:[transform transformPoint:[printableView frame].origin]];
-	[printableView setBoundsSize:[transform transformSize:[printableView frame].size]];
+	[_printableView setBoundsOrigin:[transform transformPoint:[_printableView frame].origin]];
+	[_printableView setBoundsSize:[transform transformSize:[_printableView frame].size]];
 	
-	NSPrintOperation *op = [NSPrintOperation printOperationWithView:printableView
+	NSPrintOperation *op = [NSPrintOperation printOperationWithView:_printableView
 														  printInfo:[self printInfo]];
 	[op setShowsPrintPanel:showPanels];
 	[op setShowsProgressPanel:showPanels];
 	
 	[self runModalPrintOperation:op delegate:nil didRunSelector:NULL contextInfo:NULL];
-}
-
--(PXCanvas *)canvas
-{
-	return canvas;
 }
 
 @end
