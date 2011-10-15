@@ -2,16 +2,11 @@
 //  PXAnimationBackgroundView.h
 //  Pixen
 //
-//  Created by Andy Matuschak on 10/16/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+@interface PXAnimationBackgroundView : NSView
 
-@interface PXAnimationBackgroundView : NSView {
-  @private
-	NSGradient *horizontalGradient;
-	NSScrollView *filmStrip;
-}
-@property (readwrite, retain) IBOutlet NSScrollView *filmStrip;
+@property (nonatomic, retain) IBOutlet NSScrollView *filmStrip;
+
 @end

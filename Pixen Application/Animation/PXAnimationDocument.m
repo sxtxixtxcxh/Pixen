@@ -2,11 +2,11 @@
 //  PXAnimationDocument.m
 //  Pixen
 //
-//  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXAnimationDocument.h"
+
 #import "PXAnimation.h"
 #import "PXAnimationWindowController.h"
 #import "PXCel.h"
@@ -18,19 +18,19 @@
 
 @implementation PXAnimationDocument
 
-@synthesize animation;
+@synthesize animation = _animation;
 
-- init
+- (id)init
 {
 	self = [super init];
-	animation = [[PXAnimation alloc] init];
+	_animation = [[PXAnimation alloc] init];
 	return self;
 }
 
 - (void)dealloc
 {
 	[ (PXAnimationWindowController *) self.windowController setAnimation:nil];
-	[animation release];
+	[_animation release];
 	[super dealloc];
 }
 
@@ -41,14 +41,14 @@
 	return [self.windowController canvasController];
 }
 
-- canvas
+- (PXCanvas *)canvas
 {
-	return [[animation objectInCelsAtIndex:0] canvas];
+	return [[_animation objectInCelsAtIndex:0] canvas];
 }
 
 - (NSArray *)canvases
 {
-  return [animation canvases];
+	return [_animation canvases];
 }
 
 - (void)delete:(id)sender
@@ -63,7 +63,7 @@
 
 - (void)setWindowControllerData
 {
-	[ (PXAnimationWindowController *) self.windowController setAnimation:animation];
+	[ (PXAnimationWindowController *) self.windowController setAnimation:_animation];
 }
 
 - (NSFileWrapper *)fileWrapperOfType:(NSString *)aType error:(NSError **)outError
@@ -71,12 +71,12 @@
 	if (UTTypeEqualNSString(aType, PixenAnimationFileType) ||
 		UTTypeEqualNSString(aType, PixenAnimationFileTypeOld))
 	{
-		NSMutableDictionary *files = [NSMutableDictionary dictionaryWithCapacity:[animation countOfCels]];
-		NSMutableArray *celData = [NSMutableArray arrayWithCapacity:[animation countOfCels]];
+		NSMutableDictionary *files = [NSMutableDictionary dictionaryWithCapacity:[_animation countOfCels]];
+		NSMutableArray *celData = [NSMutableArray arrayWithCapacity:[_animation countOfCels]];
 		int i;
-		for (i = 0; i < [animation countOfCels]; i++)
+		for (i = 0; i < [_animation countOfCels]; i++)
 		{
-			PXCel *current = [animation objectInCelsAtIndex:i];
+			PXCel *current = [_animation objectInCelsAtIndex:i];
 			NSFileWrapper *file = [[[NSFileWrapper alloc] initRegularFileWithContents:[NSKeyedArchiver archivedDataWithRootObject:[current canvas]]] autorelease];
 			[files setObject:file forKey:[NSString stringWithFormat:@"%d.%@", i, PXISuffix]];
 			[celData addObject:[current info]];
@@ -114,16 +114,16 @@
 	if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) aType))
 	{
 		OSProgressPopup *popup = [OSProgressPopup sharedProgressPopup];
-		PXAnimatedGifExporter *exporter = [[[PXAnimatedGifExporter alloc] initWithSize:[animation size] iterations:1] autorelease];
+		PXAnimatedGifExporter *exporter = [[[PXAnimatedGifExporter alloc] initWithSize:[_animation size] iterations:1] autorelease];
 		int i;
-		NSUInteger numberOfCels = [animation countOfCels];
+		NSUInteger numberOfCels = [_animation countOfCels];
 		[popup setMaxProgress:numberOfCels];
 		
 		[popup beginOperationWithStatusText:[NSString stringWithFormat:@"Exporting GIF... (1 of %d)", numberOfCels]
 							   parentWindow:[self.windowController window]];
 		
 		[popup setProgress:0];
-		id exportAnimation = [[animation copy] autorelease];
+		PXAnimation *exportAnimation = [[_animation copy] autorelease];
 		[exportAnimation reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
 		NSColor *transparentColor = nil;
 		for (i = 0; i < numberOfCels; i++)
@@ -146,7 +146,7 @@
 	if (UTTypeEqualNSString(docType, PixenAnimationFileType) ||
 		UTTypeEqualNSString(docType, PixenAnimationFileTypeOld))
 	{
-		[animation removeCel:[animation objectInCelsAtIndex:0]];
+		[_animation removeCel:[_animation objectInCelsAtIndex:0]];
 		NSDictionary *files = [wrapper fileWrappers];
 		NSString *error = nil;
 		NSData *plistData = [[files objectForKey:@"CelData.plist"] regularFileContents];
@@ -175,14 +175,14 @@
 				[[cel canvas] setGrid:firstGrid];
 			}
 			
-			[animation addCel:cel];
+			[_animation addCel:cel];
 			[cel release];
 		}
 		
 		[[self undoManager] removeAllActions];
 		[self updateChangeCount:NSChangeCleared];
 		
-		return (animation != nil) && ([animation countOfCels] > 0);
+		return (_animation != nil) && ([_animation countOfCels] > 0);
 	}
 	else if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) docType))
 	{
@@ -198,7 +198,7 @@
 {
 	if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) docType))
 	{
-		[animation removeCel:[animation objectInCelsAtIndex:0]];
+		[_animation removeCel:[_animation objectInCelsAtIndex:0]];
 		NSImage *tempImage = [[[NSImage alloc] initWithData:data] autorelease];
 		NSBitmapImageRep *bitmapRep = [[tempImage representations] objectAtIndex:0];
 		int frameCount = [[bitmapRep valueForProperty:NSImageFrameCount] intValue];
@@ -206,18 +206,18 @@
 		for (i = 0; i < frameCount; i++)
 		{
 			[bitmapRep setProperty:NSImageCurrentFrame withValue:[NSNumber numberWithInt:i]];
-			PXCel *newCel = [[[PXCel alloc] initWithImage:[[tempImage copy] autorelease] animation:animation] autorelease];
+			PXCel *newCel = [[[PXCel alloc] initWithImage:[[tempImage copy] autorelease] animation:_animation] autorelease];
 			// PXCel is retained by the animation in the initializer used above
 			// [newCel retain];
 			[newCel setDuration:[[bitmapRep valueForProperty:NSImageCurrentFrameDuration] floatValue]];
 		}
 		[[self undoManager] removeAllActions];
 		[self updateChangeCount:NSChangeCleared];
-		return (animation != nil) && ([animation countOfCels] > 0);
+		return (_animation != nil) && ([_animation countOfCels] > 0);
 	}
 	[[self undoManager] removeAllActions];
 	[self updateChangeCount:NSChangeCleared];
-	return (animation != nil) && ([animation countOfCels] > 0);
+	return (_animation != nil) && ([_animation countOfCels] > 0);
 }
 
 + (BOOL)isNativeType:(NSString *)type
@@ -226,7 +226,7 @@
 	return [super isNativeType:type];
 }
 
-+ writableTypes
++ (NSArray *)writableTypes
 {
 	return [[super writableTypes] arrayByAddingObject:(NSString *)kUTTypeGIF];
 }

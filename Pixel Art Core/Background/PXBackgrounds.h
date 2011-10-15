@@ -1,11 +1,9 @@
-/*
- *  PXBackgrounds.h
- *  Pixen
- *
- *  Created by Joe Osborn on 2007.11.09.
- *  Copyright 2007 Pixen. All rights reserved.
- *
- */
+//
+//  PXBackgrounds.h
+//  Pixen
+//
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXBackground.h"
 #import "PXMonotoneBackground.h"

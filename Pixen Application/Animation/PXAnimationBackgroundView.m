@@ -2,14 +2,16 @@
 //  PXAnimationBackgroundView.m
 //  Pixen
 //
-//  Created by Andy Matuschak on 10/16/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXAnimationBackgroundView.h"
 		
-@implementation PXAnimationBackgroundView
-@synthesize filmStrip;
+@implementation PXAnimationBackgroundView {
+	NSGradient *_horizontalGradient;
+}
+
+@synthesize filmStrip = _filmStrip;
 
 - (void)awakeFromNib
 {
@@ -18,39 +20,39 @@
 											   blue:51.0/255.0f
 											  alpha:1.0f];
 	
-	horizontalGradient = [[NSGradient alloc] initWithStartingColor:[NSColor blackColor]
-													   endingColor:endColor];
+	_horizontalGradient = [[NSGradient alloc] initWithStartingColor:[NSColor blackColor]
+														endingColor:endColor];
 }
 
 - (void)dealloc
 {
-	[horizontalGradient release];
-	[filmStrip release];
+	[_horizontalGradient release];
+	[_filmStrip release];
+	
 	[super dealloc];
 }
 
 - (void)drawRect:(NSRect)rect {
 	NSRect visibleRect = [self bounds];	
 	NSPoint middle = NSMakePoint(NSMidX(visibleRect), NSMidY(visibleRect));
-	double leftMiddle = floorf(middle.x - NSWidth(visibleRect)*0.2);
-	double rightMiddle = floorf(middle.x + NSWidth(visibleRect)*0.2);
+	CGFloat leftMiddle = floorf(middle.x - NSWidth(visibleRect)*0.2f);
+	CGFloat rightMiddle = floorf(middle.x + NSWidth(visibleRect)*0.2f);
 	
-	[horizontalGradient drawInRect:NSMakeRect(NSMinX(visibleRect), NSMinY(visibleRect), leftMiddle - NSMinX(visibleRect), NSHeight(visibleRect))
-							 angle:0.0f];
+	[_horizontalGradient drawInRect:NSMakeRect(NSMinX(visibleRect), NSMinY(visibleRect), leftMiddle - NSMinX(visibleRect), NSHeight(visibleRect))
+							  angle:0.0f];
 	
-	[horizontalGradient drawInRect:NSMakeRect(rightMiddle, NSMinY(visibleRect), NSWidth(visibleRect) - rightMiddle, NSHeight(visibleRect))
-							 angle:180.0f];
+	[_horizontalGradient drawInRect:NSMakeRect(rightMiddle, NSMinY(visibleRect), NSWidth(visibleRect) - rightMiddle, NSHeight(visibleRect))
+							  angle:180.0f];
 	
-	[[NSColor colorWithDeviceRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1] set];
+	[[NSColor colorWithDeviceRed:51.0/255.0f green:51.0/255.0f blue:51.0/255.0f alpha:1.0f] set];
 	NSRectFill(NSMakeRect(leftMiddle, NSMinY(visibleRect), rightMiddle - leftMiddle, NSHeight(visibleRect)));
 	
-	
 	NSRect lowerRect = visibleRect;
-	lowerRect.size.height /= 2.0;
+	lowerRect.size.height /= 2.0f;
 	
 	[[NSColor whiteColor] set];
-	NSRectFill(NSMakeRect(NSMinX([filmStrip frame])-1, 0, 1.5, NSHeight([self bounds])));	
-	NSRectFill(NSMakeRect(NSMaxX([filmStrip frame]), 0, 1.5, NSHeight([self bounds])));
+	NSRectFill(NSMakeRect(NSMinX([self.filmStrip frame]) - 1.0f, 0.0f, 1.5f, NSHeight([self bounds])));
+	NSRectFill(NSMakeRect(NSMaxX([self.filmStrip frame]), 0.0f, 1.5f, NSHeight([self bounds])));
 }
 
 @end
