@@ -2,25 +2,29 @@
 //  PXCel.m
 //  Pixen
 //
-//  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXCel.h"
+
+#import "PXAnimation.h"
 #import "PXCanvas.h"
 #import "PXCanvas_Drawing.h"
 #import "PXCanvas_ImportingExporting.h"
-#import "PXAnimation.h"
 
 @implementation PXCel
+
+@synthesize canvas = _canvas, duration = _duration;
+@dynamic size, info;
 
 - (id)init
 {
 	if ( ! (self = [super init]))
 		return nil;
 	
-	canvas = [[PXCanvas alloc] init];
-	duration = 1;
+	self.canvas = [[PXCanvas new] autorelease];
+	self.duration = 1.0f;
+	
 	return self;
 }
 
@@ -29,27 +33,36 @@
 	if ( ! (self = [super init]))
 		return nil;
 	
-	canvas = [initCanvas retain];
-	duration = initDuration;
+	self.canvas = initCanvas;
+	self.duration = initDuration;
+	
 	return self;
 }
 
-- initWithCoder:(NSCoder *)coder
+- (id)initWithCoder:(NSCoder *)coder
 {
-	return [self initWithCanvas:[coder decodeObjectForKey:@"canvas"] duration:[coder decodeDoubleForKey:@"duration"]];
+	return [self initWithCanvas:[coder decodeObjectForKey:@"canvas"]
+					   duration:[coder decodeDoubleForKey:@"duration"]];
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-	[coder encodeObject:canvas forKey:@"canvas"];
-	[coder encodeDouble:duration forKey:@"duration"];
+	[coder encodeObject:self.canvas forKey:@"canvas"];
+	[coder encodeDouble:self.duration forKey:@"duration"];
 }
 
-- copyWithZone:(NSZone *)zone
+- (id)copyWithZone:(NSZone *)zone
 {
-	PXCel *cel = [[PXCel alloc] initWithCanvas:[[canvas copyWithZone:zone] autorelease] duration:duration];
-	[[cel canvas] setGrid:[canvas grid]];
+	PXCel *cel = [[PXCel alloc] initWithCanvas:[[self.canvas copyWithZone:zone] autorelease]
+									  duration:self.duration];
+	[[cel canvas] setGrid:[self.canvas grid]];
+	
 	return cel;
+}
+
+- (id)initWithImage:(NSImage *)image animation:(PXAnimation *)animation
+{
+	return [self initWithImage:image animation:animation atIndex:[animation countOfCels]];
 }
 
 - (id)initWithImage:(NSImage *)image animation:(PXAnimation *)animation atIndex:(NSUInteger)index
@@ -57,75 +70,61 @@
 	if ( ! (self = [super init]))
 		return nil;
 	
-	canvas = [[PXCanvas alloc] init];
-	[canvas setUndoManager:[animation undoManager]];
-	[canvas replaceActiveLayerWithImage:image];
-	duration = 1;
+	self.canvas = [[PXCanvas new] autorelease];
+	[self.canvas setUndoManager:[animation undoManager]];
+	[self.canvas replaceActiveLayerWithImage:image];
+	
+	self.duration = 1.0f;
+	
 	[animation insertObject:self inCelsAtIndex:index];
+	
 	return self;
-}
-
-- initWithImage:(NSImage *)image animation:(PXAnimation *)animation
-{
-	return [self initWithImage:image animation:animation atIndex:[animation countOfCels]];
 }
 
 - (void)dealloc
 {
-	[canvas release];
+	[_canvas release];
 	[super dealloc];
 }
 
 - (NSDictionary *)info
 {
-	return [NSDictionary dictionaryWithObject:[NSNumber numberWithDouble:duration] forKey:@"duration"];
+	return [NSDictionary dictionaryWithObject:[NSNumber numberWithDouble:self.duration] forKey:@"duration"];
 }
 
 - (void)setInfo:(NSDictionary *)info
 {
-	duration = [[info objectForKey:@"duration"] doubleValue];
+	self.duration = [[info objectForKey:@"duration"] doubleValue];
 }
 
-- (PXCanvas *)canvas
+- (void)setUndoManager:(NSUndoManager *)manager
 {
-	return canvas;
+	[self.canvas setUndoManager:manager];
 }
-- (void)setCanvas:(PXCanvas *)canv
-{
-	[canv retain];
-	[canvas release];
-	canvas = canv;
-}
-- (void)setUndoManager:man
-{
-	[canvas setUndoManager:man];
-}
-- (void)setSize:(NSSize)size
-{
-	[canvas setSize:size];
-}
-- (void)setSize:(NSSize)aSize withOrigin:(NSPoint)origin backgroundColor:(NSColor *)bgcolor
-{
-	[canvas setSize:aSize withOrigin:origin backgroundColor:bgcolor];
-}
-- (NSTimeInterval) duration
-{
-	return duration;
-}
-- (void)setDuration:(NSTimeInterval)newDuration
-{
-	duration = newDuration;
-}
+
 - (NSSize)size
 {
-	return [canvas size];
+	return [self.canvas size];
 }
+
+- (void)setSize:(NSSize)size
+{
+	[self.canvas setSize:size];
+}
+
+- (void)setSize:(NSSize)size withOrigin:(NSPoint)origin backgroundColor:(NSColor *)bgcolor
+{
+	[self.canvas setSize:size withOrigin:origin backgroundColor:bgcolor];
+}
+
 - (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(CGFloat)frac
 {
-	[canvas drawInRect:dst fromRect:src operation:op fraction:frac];
+	[self.canvas drawInRect:dst fromRect:src operation:op fraction:frac];
 }
+
 - (NSImage *)displayImage
 {
-	return [canvas displayImage];
+	return [self.canvas displayImage];
 }
+
 @end

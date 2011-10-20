@@ -2,32 +2,33 @@
 //  PXCel.h
 //  Pixen
 //
-//  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "PXPalette.h"
-@class PXCanvas, PXAnimation;
-@interface PXCel : NSObject <NSCoding, NSCopying> {
-  @private
-	PXCanvas *canvas;
-	NSTimeInterval duration;
-}
 
-- initWithImage:(NSImage *)image animation:(PXAnimation *)animation atIndex:(NSUInteger)index;
-- initWithImage:(NSImage *)image animation:(PXAnimation *)animation;
-- initWithCanvas:(PXCanvas *)initCanvas duration:(NSTimeInterval)initDuration;
-- (PXCanvas *)canvas;
-- (void)setCanvas:(PXCanvas *)canv;
-- (NSSize)size;
-- (void)setSize:(NSSize)size;
-- (void)setSize:(NSSize)aSize withOrigin:(NSPoint)origin backgroundColor:(NSColor *)bgcolor;
-- (void)setUndoManager:man;
-- (NSTimeInterval) duration;
-- (void)setDuration:(NSTimeInterval)duration;
-- (NSDictionary *)info;
-- (void)setInfo:(NSDictionary *)info;
-- (NSImage *)displayImage;
+@class PXCanvas, PXAnimation;
+
+@interface PXCel : NSObject < NSCoding, NSCopying >
+
+@property (nonatomic, retain) PXCanvas *canvas;
+
+@property (nonatomic, assign) NSSize size;
+@property (nonatomic, assign) NSTimeInterval duration;
+
+@property (nonatomic, retain) NSDictionary *info;
+
+- (id)initWithImage:(NSImage *)image animation:(PXAnimation *)animation;
+- (id)initWithImage:(NSImage *)image animation:(PXAnimation *)animation atIndex:(NSUInteger)index;
+
+- (id)initWithCanvas:(PXCanvas *)initCanvas duration:(NSTimeInterval)initDuration;
+
+- (void)setUndoManager:(NSUndoManager *)manager;
+
+- (void)setSize:(NSSize)size withOrigin:(NSPoint)origin backgroundColor:(NSColor *)bgcolor;
+
 - (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(CGFloat)frac;
+
+- (NSImage *)displayImage;
+
 @end

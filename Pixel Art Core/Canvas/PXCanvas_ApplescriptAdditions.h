@@ -2,20 +2,19 @@
 //  PXCanvas_ApplescriptAdditions.h
 //  Pixen
 //
-//  Created by Ian Henderson on Fri Mar 05 2004.
-//  Copyright (c) 2004 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXCanvas.h"
 
+@interface PXCanvas (ApplescriptAdditions)
 
-@interface PXCanvas(ApplescriptAdditions)
-
-- handleGetColorScriptCommand:command;
-- handleSetColorScriptCommand:command;
+- (id)handleGetColorScriptCommand:(id)command;
+- (id)handleSetColorScriptCommand:(id)command;
 
 - (int)height;
 - (void)setHeight:(int)height;
+
 - (int)width;
 - (void)setWidth:(int)width;
 

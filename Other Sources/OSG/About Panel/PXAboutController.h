@@ -1,22 +1,14 @@
 //
 //  PXAboutController.h
-//  Pixen-XCode
+//  Pixen
 //
-//  Created by Andy Matuschak on Sun Aug 01 2004.
-//  Copyright (c) 2004 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
-
-#import <AppKit/AppKit.h>
-
-@class NSTextField, NSTextView, PXAboutPanel;
 
 @interface PXAboutController : NSWindowController < NSWindowDelegate >
-{
-  @private
-	PXAboutPanel *aboutPanel;
-	IBOutlet NSTextView *creditsView;
-	IBOutlet NSTextField *versionField;
-}
+
+@property (nonatomic, retain) IBOutlet NSTextView *creditsView;
+@property (nonatomic, retain) IBOutlet NSTextField *versionField;
 
 + (id)sharedAboutController;
 
