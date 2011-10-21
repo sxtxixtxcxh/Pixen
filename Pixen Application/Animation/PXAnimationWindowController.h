@@ -27,7 +27,6 @@
 }
 - (void)setAnimation:anim;
 - (void)activateCel:(PXCel *)cel;
-- (IBAction)newCel:sender;
 - (IBAction)deleteCel:sender;
 - (IBAction)duplicateCel:sender;
 - (void)writeCelsAtIndices:(NSIndexSet *)indices toPasteboard:(NSPasteboard *)pboard;

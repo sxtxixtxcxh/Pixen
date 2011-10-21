@@ -2,34 +2,20 @@
 //  PXBackgroundConfig.h
 //  Pixen
 //
-//  Created by Joe Osborn on 2007.11.12.
-//  Copyright 2007 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
-
-#import <Cocoa/Cocoa.h>
 
 @class PXBackground;
 
-@interface PXBackgroundConfig : NSObject < NSCoding > {
-  @private
-	PXBackground *mainBackground;
-	PXBackground *alternateBackground;
-	PXBackground *mainPreviewBackground;
-	PXBackground *alternatePreviewBackground;	
-}
+@interface PXBackgroundConfig : NSObject < NSCoding >
 
-- (PXBackground *)mainBackground;
-- (void)setMainBackground:(PXBackground *)value;
+@property (nonatomic, retain) PXBackground *mainBackground;
+@property (nonatomic, retain) PXBackground *alternateBackground;
 
-- (PXBackground *)alternateBackground;
-- (void)setAlternateBackground:(PXBackground *)value;
-
-- (PXBackground *)mainPreviewBackground;
-- (void)setMainPreviewBackground:(PXBackground *)value;
-
-- (PXBackground *)alternatePreviewBackground;
-- (void)setAlternatePreviewBackground:(PXBackground *)value;
+@property (nonatomic, retain) PXBackground *mainPreviewBackground;
+@property (nonatomic, retain) PXBackground *alternatePreviewBackground;
 
 - (void)setDefaultBackgrounds;
 - (void)setDefaultPreviewBackgrounds;
+
 @end

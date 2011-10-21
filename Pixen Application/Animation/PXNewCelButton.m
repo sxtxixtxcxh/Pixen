@@ -2,60 +2,74 @@
 //  PXNewCelButton.m
 //  Pixen
 //
-//  Created by Andy Matuschak on 10/25/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXNewCelButton.h"
+
 #import "NSBezierPath+PXRoundedRectangleAdditions.h"
 
-@implementation PXNewCelButton
+@implementation PXNewCelButton {
+	NSCellStateValue _state;
+	NSBezierPath *_buttonPath, *_plusPath;
+}
 
-const float PXPlusButtonSize = 12;
-const float PXPlusButtonPadding = 12;
+@synthesize delegate = _delegate;
 
-- (id)initWithFrame:(NSRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        buttonPath = [[NSBezierPath bezierPathWithRoundedRect:NSInsetRect([self bounds], 4, 4) cornerRadius:10] retain];
-		[buttonPath setLineWidth:3];
-		CGFloat pattern[2] = { 9.0, 3.0 };
-		[buttonPath setLineDash:pattern count:2 phase:0.0];
+const CGFloat PXPlusButtonSize = 12.0f;
+const CGFloat PXPlusButtonPadding = 12.0f;
+
+- (id)initWithFrame:(NSRect)frame
+{
+	self = [super initWithFrame:frame];
+	if (self) {
+		_buttonPath = [[NSBezierPath bezierPathWithRoundedRect:NSInsetRect([self bounds], 4.0f, 4.0f) cornerRadius:10.0f] retain];
+		[_buttonPath setLineWidth:3.0f];
 		
-		plusPath = [[NSBezierPath bezierPath] retain];
-		NSPoint tempPoint = NSMakePoint(NSMaxX([self bounds]) - PXPlusButtonSize/2 - PXPlusButtonPadding, NSMaxY([self bounds]) - PXPlusButtonSize - PXPlusButtonPadding);
-		[plusPath moveToPoint:tempPoint];
+		CGFloat pattern[2] = { 9.0f, 3.0f };
+		[_buttonPath setLineDash:pattern count:2 phase:0.0f];
+		
+		_plusPath = [[NSBezierPath bezierPath] retain];
+		[_plusPath setLineWidth:2.5f];
+		
+		NSPoint tempPoint = NSMakePoint(NSMaxX([self bounds]) - PXPlusButtonSize / 2 - PXPlusButtonPadding,
+										NSMaxY([self bounds]) - PXPlusButtonSize - PXPlusButtonPadding);
+		[_plusPath moveToPoint:tempPoint];
+		
 		tempPoint.y += PXPlusButtonSize;
-		[plusPath lineToPoint:tempPoint];
-		tempPoint.x -= PXPlusButtonSize/2;
-		tempPoint.y -= PXPlusButtonSize/2;
-		[plusPath moveToPoint:tempPoint];
+		[_plusPath lineToPoint:tempPoint];
+		
+		tempPoint.x -= PXPlusButtonSize / 2;
+		tempPoint.y -= PXPlusButtonSize / 2;
+		[_plusPath moveToPoint:tempPoint];
+		
 		tempPoint.x += PXPlusButtonSize;
-		[plusPath lineToPoint:tempPoint];
-		[plusPath setLineWidth:2.5];
+		[_plusPath lineToPoint:tempPoint];
 		
 		[self setToolTip:NSLocalizedString(@"ADD_CEL", @"ADD_CEL")];
-    }
-    return self;
+	}
+	return self;
 }
 
 - (void)dealloc
 {
-	[buttonPath release];
-	[plusPath release];
+	[_buttonPath release];
+	[_plusPath release];
 	[super dealloc];
 }
 
 - (void)drawRect:(NSRect)rect
 {
-    [(state == NSOnState) ? [NSColor whiteColor] : [NSColor lightGrayColor] set];
-	[buttonPath stroke];
-	[plusPath stroke];
+	[ (_state == NSOnState) ? [NSColor whiteColor] : [NSColor lightGrayColor] set];
+	
+	[_buttonPath stroke];
+	[_plusPath stroke];
 }
 
 - (void)mouseDown:(NSEvent *)event
 {
-	state = NSOnState;
+	_state = NSOnState;
+	
 	[self setNeedsDisplay:YES];
 }
 
@@ -68,25 +82,35 @@ const float PXPlusButtonPadding = 12;
 {
 	if ([self containsWindowPoint:[event locationInWindow]])
 	{
-		if (state == NSOnState) { return; }
-		state = NSOnState;
-		[self setNeedsDisplay:YES];
+		if (_state == NSOnState)
+			return;
+		
+		_state = NSOnState;
 	}
 	else
 	{
-		if (state == NSOffState) { return; }
-		state = NSOffState;
-		[self setNeedsDisplay:YES];
+		if (_state == NSOffState)
+			return;
+		
+		_state = NSOffState;
 	}
+	
+	[self setNeedsDisplay:YES];
 }
 
 - (void)mouseUp:(NSEvent *)event
 {
-	state = NSOffState;
+	_state = NSOffState;
+	
 	[self setNeedsDisplay:YES];
 	
 	if ([self containsWindowPoint:[event locationInWindow]])
-		[delegate newCel:self];
+	{
+		if ([self.delegate respondsToSelector:@selector(newCelButtonClicked:)])
+		{
+			[self.delegate newCelButtonClicked:self];
+		}
+	}
 }
 
 @end

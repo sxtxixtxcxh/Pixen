@@ -2,22 +2,18 @@
 //  PXNewCelButton.h
 //  Pixen
 //
-//  Created by Andy Matuschak on 10/25/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+@interface PXNewCelButton : NSView
 
-
-@interface PXNewCelButton : NSView {
-  @private
-	int state;
-	NSBezierPath *buttonPath, *plusPath;
-	IBOutlet id delegate;
-}
+@property (nonatomic, assign) IBOutlet id delegate;
 
 @end
 
+
 @interface NSObject (PXNewCelButtonDelegate)
-- (void)newCel:(PXNewCelButton *)button;
+
+- (void)newCelButtonClicked:(PXNewCelButton *)button;
+
 @end

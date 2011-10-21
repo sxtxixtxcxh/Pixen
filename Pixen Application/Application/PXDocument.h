@@ -2,26 +2,23 @@
 //  PXDocument.h
 //  Pixen
 //
-//  Created by Joe Osborn on 2007.11.17.
-//  Copyright 2007 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-
 @class PXCanvas, PXCanvasWindowController;
-@interface PXDocument : NSDocument {
-  @private
-	PXCanvasWindowController *windowController;
-}
+
+@interface PXDocument : NSDocument
 
 @property (nonatomic, retain) PXCanvasWindowController *windowController;
 
 - (PXCanvas *)canvas;
 - (NSArray *)canvases;
-- (BOOL)containsCanvas:(PXCanvas *)c;
-- (void)close;
+- (BOOL)containsCanvas:(PXCanvas *)canvas;
+
 - (void)initWindowController;
 - (void)setWindowControllerData;
-- frameAutosaveName;
 - (void)makeWindowControllers;
+
+- (NSString *)frameAutosaveName;
+
 @end

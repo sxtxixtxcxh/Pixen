@@ -2,124 +2,93 @@
 //  PXBackgroundConfig.m
 //  Pixen
 //
-//  Created by Joe Osborn on 2007.11.12.
-//  Copyright 2007 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXBackgroundConfig.h"
+
 #import "PXBackgrounds.h"
 
 @implementation PXBackgroundConfig
 
+@synthesize mainBackground = _mainBackground, alternateBackground = _alternateBackground;
+@synthesize mainPreviewBackground = _mainPreviewBackground, alternatePreviewBackground = _alternatePreviewBackground;
+
 - (id)init
 {
 	self = [super init];
-	[self setDefaultBackgrounds];
-	[self setDefaultPreviewBackgrounds];
+	if (self) {
+		[self setDefaultBackgrounds];
+		[self setDefaultPreviewBackgrounds];
+	}
 	return self;
 }
 
 - (id)initWithMainBG:(PXBackground *)mbg altBG:(PXBackground *)abg prevMainBG:(PXBackground *)pmbg altBG:(PXBackground *)pabg
 {
 	self = [self init];
-	
-	if (mbg)
-	{
-		[self setMainBackground:mbg];
-		[self setAlternateBackground:abg];
+	if (self) {
+		if (mbg)
+		{
+			[self setMainBackground:mbg];
+			[self setAlternateBackground:abg];
+		}
+		
+		if (pmbg)
+		{
+			[self setMainPreviewBackground:pmbg];
+			[self setAlternatePreviewBackground:pabg];
+		}
 	}
-	
-	if (pmbg)
-	{
-		[self setMainPreviewBackground:pmbg];
-		[self setAlternatePreviewBackground:pabg];
-	}
-	
 	return self;
 }
 
 - (void)dealloc
 {
-	[mainBackground release];
-	[mainPreviewBackground release];
-	[alternateBackground release];
-	[alternatePreviewBackground release];
+	[_mainBackground release];
+	[_mainPreviewBackground release];
+	[_alternateBackground release];
+	[_alternatePreviewBackground release];
+	
 	[super dealloc];
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-	[coder encodeObject:mainBackground forKey:@"mainBackground"];
-	[coder encodeObject:alternateBackground forKey:@"alternateBackground"];
-	[coder encodeObject:mainPreviewBackground forKey:@"mainPreviewBackground"];
-	[coder encodeObject:alternatePreviewBackground forKey:@"alternatePreviewBackground"];
+	[coder encodeObject:self.mainBackground forKey:@"mainBackground"];
+	[coder encodeObject:self.alternateBackground forKey:@"alternateBackground"];
+	[coder encodeObject:self.mainPreviewBackground forKey:@"mainPreviewBackground"];
+	[coder encodeObject:self.alternatePreviewBackground forKey:@"alternatePreviewBackground"];
 }
 
-- initWithCoder:(NSCoder *)coder
+- (id)initWithCoder:(NSCoder *)coder
 {
-	return [self initWithMainBG:[coder decodeObjectForKey:@"mainBackground"] altBG:[coder decodeObjectForKey:@"alternateBackground"]
-					 prevMainBG:[coder decodeObjectForKey:@"mainPreviewBackground"] altBG:[coder decodeObjectForKey:@"alternatePreviewBackground"]];
-}
-
-- (PXBackground *)mainBackground {
-    return [[mainBackground retain] autorelease];
-}
-
-- (void)setMainBackground:(PXBackground *)value {
-    if (mainBackground != value) {
-        [mainBackground release];
-        mainBackground = [value retain];
-    }
-}
-
-- (PXBackground *)alternateBackground {
-    return [[alternateBackground retain] autorelease];
-}
-
-- (void)setAlternateBackground:(PXBackground *)value {
-    if (alternateBackground != value) {
-        [alternateBackground release];
-        alternateBackground = [value retain];
-    }
-}
-
-- (PXBackground *)mainPreviewBackground {
-    return [[mainPreviewBackground retain] autorelease];
-}
-
-- (void)setMainPreviewBackground:(PXBackground *)value {
-    if (mainPreviewBackground != value) {
-        [mainPreviewBackground release];
-        mainPreviewBackground = [value retain];
-    }
-}
-
-- (PXBackground *)alternatePreviewBackground {
-    return [[alternatePreviewBackground retain] autorelease];
-}
-
-- (void)setAlternatePreviewBackground:(PXBackground *)value {
-    if (alternatePreviewBackground != value) {
-        [alternatePreviewBackground release];
-        alternatePreviewBackground = [value retain];
-    }
+	return [self initWithMainBG:[coder decodeObjectForKey:@"mainBackground"]
+						  altBG:[coder decodeObjectForKey:@"alternateBackground"]
+					 prevMainBG:[coder decodeObjectForKey:@"mainPreviewBackground"]
+						  altBG:[coder decodeObjectForKey:@"alternatePreviewBackground"]];
 }
 
 - (void)setDefaultBackgrounds
 {
-	id data = [[NSUserDefaults standardUserDefaults] dataForKey:PXCanvasDefaultMainBackgroundKey];
-	if(data)
+	NSData *data = [[NSUserDefaults standardUserDefaults] dataForKey:PXCanvasDefaultMainBackgroundKey];
+	
+	if (data)
 	{
 		[self setMainBackground:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
 	}
 	else
 	{
-		id background = [[[PXSlashyBackground alloc] init] autorelease];
+		PXSlashyBackground *background = [[[PXSlashyBackground alloc] init] autorelease];
 		[self setMainBackground:background];
-		[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:background] forKey:PXCanvasDefaultMainBackgroundKey];
+		
+		[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:background]
+												  forKey:PXCanvasDefaultMainBackgroundKey];
 	}
+	
 	data = [[NSUserDefaults standardUserDefaults] dataForKey:PXCanvasDefaultAlternateBackgroundKey];
-	if(data)
+	
+	if (data)
 	{
 		[self setAlternateBackground:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
 	}
@@ -127,19 +96,24 @@
 
 - (void)setDefaultPreviewBackgrounds
 {
-	id data = [[NSUserDefaults standardUserDefaults] dataForKey:PXPreviewDefaultMainBackgroundKey];
-	if(data)
+	NSData *data = [[NSUserDefaults standardUserDefaults] dataForKey:PXPreviewDefaultMainBackgroundKey];
+	
+	if (data)
 	{
 		[self setMainPreviewBackground:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
 	}
 	else
 	{
-		id background = [[[PXMonotoneBackground alloc] init] autorelease];
+		PXMonotoneBackground *background = [[[PXMonotoneBackground alloc] init] autorelease];
 		[self setMainPreviewBackground:background];
-		[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:background] forKey:PXPreviewDefaultMainBackgroundKey];		
+		
+		[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:background]
+												  forKey:PXPreviewDefaultMainBackgroundKey];
 	}
+	
 	data = [[NSUserDefaults standardUserDefaults] dataForKey:PXPreviewDefaultAlternateBackgroundKey];
-	if(data)
+	
+	if (data)
 	{
 		[self setAlternatePreviewBackground:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
 	}

@@ -303,7 +303,7 @@
 	return proposedFrameSize;
 }
 
-- (IBAction)newCel:sender
+- (void)newCelButtonClicked:(id)sender
 {
 	NSInteger newIndex = [filmStrip selectedIndex] + 1;
 	if (newIndex == NSNotFound) {newIndex = [animation countOfCels];}

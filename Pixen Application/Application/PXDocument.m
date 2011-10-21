@@ -2,22 +2,22 @@
 //  PXDocument.m
 //  Pixen
 //
-//  Created by Joe Osborn on 2007.11.17.
-//  Copyright 2007 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXDocument.h"
+
 #import "PXCanvas.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvasWindowController.h"
 
 @implementation PXDocument
 
-@synthesize windowController;
+@synthesize windowController = _windowController;
 
 - (void)dealloc
 {
-	[windowController release];	
+	[_windowController release];
 	[super dealloc];
 }
 
@@ -34,13 +34,13 @@
 {
 	[self initWindowController];
 	
-	[[windowController window] setFrameAutosaveName:[self frameAutosaveName]];
-	[[windowController window] setFrameUsingName:[self frameAutosaveName]];
+	[[self.windowController window] setFrameAutosaveName:[self frameAutosaveName]];
+	[[self.windowController window] setFrameUsingName:[self frameAutosaveName]];
 	
-    [self addWindowController:windowController];
+	[self addWindowController:self.windowController];
 	[self setWindowControllerData];
 	
-	[windowController prepare];
+	[self.windowController prepare];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentOpenedNotificationName
 														object:self];
@@ -56,9 +56,9 @@
 	return [NSArray arrayWithObject:[self canvas]];
 }
 
-- (BOOL)containsCanvas:(PXCanvas *)c
+- (BOOL)containsCanvas:(PXCanvas *)canvas
 {
-	return [[self canvases] containsObject:c];
+	return [[self canvases] containsObject:canvas];
 }
 
 - (void)close
@@ -78,7 +78,9 @@
 - (void)setFileURL:(NSURL *)url
 {
 	[super setFileURL:url];
-	[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentChangedDisplayNameNotificationName object:self];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentChangedDisplayNameNotificationName
+														object:self];
 }
 
 @end
