@@ -1,7 +1,7 @@
 Pixen
 =====
 
-Welcome to Pixen, a free, open source pixel editor for Mac OS X! Milestone release of Pixen can be accessed by clicking on the 'Downloads' button above.
+Welcome to Pixen, a free, open source pixel editor for Mac OS X! Milestone releases of Pixen can be accessed by clicking on the 'Downloads' button above.
 
 Compiling the Tip-of-Tree Build
 -------------------------------
