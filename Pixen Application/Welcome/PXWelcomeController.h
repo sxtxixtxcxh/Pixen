@@ -9,7 +9,7 @@
 
 @interface PXWelcomeController : NSWindowController
 
-@property (nonatomic, retain) IBOutlet WebView *webView;
+@property (nonatomic, assign) IBOutlet WebView *webView;
 
 + (id)sharedWelcomeController;
 

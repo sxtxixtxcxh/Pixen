@@ -7,15 +7,15 @@
 
 @interface PXInfoPanelController : NSWindowController
 
-@property (nonatomic, retain) IBOutlet NSTextField *cursorX;
-@property (nonatomic, retain) IBOutlet NSTextField *cursorY;
-@property (nonatomic, retain) IBOutlet NSTextField *width;
-@property (nonatomic, retain) IBOutlet NSTextField *height;
-@property (nonatomic, retain) IBOutlet NSTextField *red;
-@property (nonatomic, retain) IBOutlet NSTextField *green;
-@property (nonatomic, retain) IBOutlet NSTextField *blue;
-@property (nonatomic, retain) IBOutlet NSTextField *alpha;
-@property (nonatomic, retain) IBOutlet NSTextField *hex;
+@property (nonatomic, assign) IBOutlet NSTextField *cursorX;
+@property (nonatomic, assign) IBOutlet NSTextField *cursorY;
+@property (nonatomic, assign) IBOutlet NSTextField *width;
+@property (nonatomic, assign) IBOutlet NSTextField *height;
+@property (nonatomic, assign) IBOutlet NSTextField *red;
+@property (nonatomic, assign) IBOutlet NSTextField *green;
+@property (nonatomic, assign) IBOutlet NSTextField *blue;
+@property (nonatomic, assign) IBOutlet NSTextField *alpha;
+@property (nonatomic, assign) IBOutlet NSTextField *hex;
 
 @property (nonatomic, assign) NSPoint draggingOrigin;
 

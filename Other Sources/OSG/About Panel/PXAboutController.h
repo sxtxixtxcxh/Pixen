@@ -7,8 +7,8 @@
 
 @interface PXAboutController : NSWindowController < NSWindowDelegate >
 
-@property (nonatomic, retain) IBOutlet NSTextView *creditsView;
-@property (nonatomic, retain) IBOutlet NSTextField *versionField;
+@property (nonatomic, assign) IBOutlet NSTextView *creditsView;
+@property (nonatomic, assign) IBOutlet NSTextField *versionField;
 
 + (id)sharedAboutController;
 
