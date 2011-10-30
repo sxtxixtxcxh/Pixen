@@ -71,16 +71,19 @@ typedef struct
 	// byte            icAND[1];      // DIB bits for AND mask
 } ICONIMAGE, *LPICONIMAGE;
 
+@interface PXIconExporter ()
+
+- (void)writeIconFileHeader:(NSMutableData *)data withCanvas:(PXCanvas *)canvas;
+- (void)writeImageData:(NSMutableData *)data withCanvas:(PXCanvas *)canvas;
+- (void)writeImage:(NSMutableData *)data withCanvas:(PXCanvas *)canvas;
+
+@end
+
+#define IMAGE_SIZE (canvasSize.width * canvasSize.height * 4)
+
 @implementation PXIconExporter
 
-- (void)dealloc
-{
-	if (iconData)
-		[iconData release];
-	[super dealloc];
-}
-
-- iconDataForCanvas:(PXCanvas *)aCanvas
+- (NSData *)iconDataForCanvas:(PXCanvas *)aCanvas
 {
 	if ([aCanvas size].width > 256 || [aCanvas size].height > 256)
 	{
@@ -91,20 +94,16 @@ typedef struct
 			 informativeTextWithFormat:NSLocalizedString(@"The Windows icon format doesn't support images with width or height above 256", @"The Windows icon format doesn't support images with width or height above 256")] runModal];
 		return nil;
 	}
-	canvas = aCanvas;
-	iconData = [[NSMutableData alloc] init];
-	[self writeIconFileHeader];
-	[self writeImage];
-	return iconData;
+	
+	NSMutableData *data = [[NSMutableData alloc] init];
+	
+	[self writeIconFileHeader:data withCanvas:aCanvas];
+	[self writeImage:data withCanvas:aCanvas];
+	
+	return data;
 }
 
-- (int)imageSize
-{
-	NSSize canvasSize = [canvas size];
-	return canvasSize.width * canvasSize.height * 4;
-}
-
-- (void)writeIconFileHeader
+- (void)writeIconFileHeader:(NSMutableData *)data withCanvas:(PXCanvas *)canvas
 {
 	ICONHEADER iconHeader;
 	iconHeader.idReserved = CFSwapInt16HostToLittle(0); // reserved is always 0
@@ -119,14 +118,14 @@ typedef struct
 	dirEntry.bReserved = 0; // this is always 0
 	dirEntry.wPlanes = CFSwapInt16HostToLittle(1); // I think this is supposed to always be 1 for icons
 	dirEntry.wBitCount = CFSwapInt16HostToLittle(32);
-	dirEntry.dwBytesInRes = CFSwapInt32HostToLittle(sizeof(BITMAPINFOHEADER) + [self imageSize]);
+	dirEntry.dwBytesInRes = CFSwapInt32HostToLittle(sizeof(BITMAPINFOHEADER) + IMAGE_SIZE);
 	dirEntry.dwImageOffset = CFSwapInt32HostToLittle(sizeof(ICONHEADER));
 	iconHeader.idEntry = dirEntry;
 	
-	[iconData appendBytes:&iconHeader length:sizeof(ICONHEADER)];
+	[data appendBytes:&iconHeader length:sizeof(ICONHEADER)];
 }
 
-- (void)writeImageData
+- (void)writeImageData:(NSMutableData *)data withCanvas:(PXCanvas *)canvas
 {
 	// write color data
 	int i, j;
@@ -142,13 +141,13 @@ typedef struct
 			colors[2] = (int) roundf([color redComponent] * 255);
 			colors[1] = (int) roundf([color greenComponent] * 255);
 			colors[0] = (int) roundf([color blueComponent] * 255);
-			[iconData appendBytes:colors length:4 * sizeof(byte)];
+			[data appendBytes:colors length:4 * sizeof(byte)];
 			bytesWritten += 4;
 		}
 	}	
 }
 
-- (void)writeImage
+- (void)writeImage:(NSMutableData *)data withCanvas:(PXCanvas *)canvas
 {
 	// set up bitmap info header
 	BITMAPINFOHEADER bitmapHeader;
@@ -160,14 +159,14 @@ typedef struct
 	bitmapHeader.biHeight = CFSwapInt32HostToLittle((uint32_t)canvasSize.height*2); // height is doubled because it covers the mask, too
 	bitmapHeader.biPlanes = CFSwapInt16HostToLittle(1); // I think this is always supposed to be 1 for icons
 	bitmapHeader.biBitCount = CFSwapInt16HostToLittle(32); // alpha channel is included
-	bitmapHeader.biSizeImage = CFSwapInt32HostToLittle([self imageSize]);
-	[iconData appendBytes:&bitmapHeader length:sizeof(BITMAPINFOHEADER)];
+	bitmapHeader.biSizeImage = CFSwapInt32HostToLittle(IMAGE_SIZE);
+	[data appendBytes:&bitmapHeader length:sizeof(BITMAPINFOHEADER)];
 	
 	// get merged image
 	NSImage *mergedImage = [canvas exportImage];
 	[mergedImage lockFocus];
 	
-	[self writeImageData];
+	[self writeImageData:data withCanvas:canvas];
 	
 	[mergedImage unlockFocus];
 }

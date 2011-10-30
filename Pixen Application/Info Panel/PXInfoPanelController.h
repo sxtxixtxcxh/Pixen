@@ -2,43 +2,27 @@
 //  PXInfoPanelController.h
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
-#import <Foundation/NSObject.h>
-#import <Foundation/NSGeometry.h>
+@interface PXInfoPanelController : NSWindowController
 
-#import <AppKit/NSNibDeclarations.h>
+@property (nonatomic, retain) IBOutlet NSTextField *cursorX;
+@property (nonatomic, retain) IBOutlet NSTextField *cursorY;
+@property (nonatomic, retain) IBOutlet NSTextField *width;
+@property (nonatomic, retain) IBOutlet NSTextField *height;
+@property (nonatomic, retain) IBOutlet NSTextField *red;
+@property (nonatomic, retain) IBOutlet NSTextField *green;
+@property (nonatomic, retain) IBOutlet NSTextField *blue;
+@property (nonatomic, retain) IBOutlet NSTextField *alpha;
+@property (nonatomic, retain) IBOutlet NSTextField *hex;
 
-@class NSColor;
-@class NSPanel;
-@class NSTextField;
+@property (nonatomic, assign) NSPoint draggingOrigin;
 
-@interface PXInfoPanelController : NSObject
-{
-  @private
-	NSPoint draggingOrigin;
-		
-	IBOutlet NSPanel *panel;
-	
-	IBOutlet NSTextField *cursorX;
-	IBOutlet NSTextField *cursorY;
-	IBOutlet NSTextField *width;
-	IBOutlet NSTextField *height;
-	IBOutlet NSTextField *red;
-	IBOutlet NSTextField *green;
-	IBOutlet NSTextField *blue;
-	IBOutlet NSTextField *alpha;
-	IBOutlet NSTextField *hex;
-}
++ (id)sharedInfoPanelController;
 
-//singleton
-+ (id) sharedInfoPanelController;
-
-- (void)setCursorPosition: (NSPoint)point;
-- (void)setColorInfo:(NSColor *) color;
-- (void)setCanvasSize: (NSSize)size;
-- (void)setDraggingOrigin: (NSPoint)point;
-
-	//Accessor
-- (NSPanel *) infoPanel;
+- (void)setCursorPosition:(NSPoint)point;
+- (void)setColorInfo:(NSColor *)color;
+- (void)setCanvasSize:(NSSize)size;
 
 @end

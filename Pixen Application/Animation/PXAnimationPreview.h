@@ -1,39 +1,34 @@
 //
 //  PXAnimationPreview.h
-//  PXAnimationPreview
+//  Pixen
 //
-//  Created by Ian Henderson on 09.08.05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
-
-#import <Cocoa/Cocoa.h>
 
 @class PXCel;
 
-@interface PXAnimationPreview : NSView {
-  @private
-	NSTimer *animationTimer;
-	PXCel *currentCel;
-	int currentIndex;
-	IBOutlet id dataSource;
-}
+@interface PXAnimationPreview : NSView
+
+@property (nonatomic, assign) IBOutlet id dataSource;
 
 - (BOOL)isPlaying;
 
-- (IBAction)play:sender;
-- (IBAction)pause:sender;
-- (IBAction)playPause:sender; // if it's paused, play.  if it's playing, pause.
-- (IBAction)stepForward:sender;
-- (IBAction)stepBackward:sender;
+- (IBAction)play:(id)sender;
+- (IBAction)pause:(id)sender;
+- (IBAction)playPause:(id)sender; // if it's paused, play. if it's playing, pause.
+- (IBAction)stepForward:(id)sender;
+- (IBAction)stepBackward:(id)sender;
+
 - (void)reloadData;
-- (void)setDataSource:ds;
 
 @end
 
-@interface NSObject(PXAnimationPreviewDataSource)
 
-- (int)numberOfCels;
+@interface NSObject (PXAnimationPreviewDataSource)
+
+- (NSUInteger)numberOfCels;
 - (id)celAtIndex:(NSUInteger)currentIndex;
+
 - (NSTimeInterval)durationOfCelAtIndex:(NSUInteger)currentIndex;
 
 @end

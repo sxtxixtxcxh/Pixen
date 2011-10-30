@@ -245,7 +245,7 @@ static PXPanelManager *sharedManager = nil;
 
 - (NSPanel *)infoPanel
 {
-	return [[PXInfoPanelController sharedInfoPanelController] infoPanel];
+	return (NSPanel *) [[PXInfoPanelController sharedInfoPanelController] window];
 }
 
 - (NSPanel *)welcomePanel

@@ -1,92 +1,105 @@
 //
 //  PXAnimationPreview.m
-//  PXAnimationPreview
+//  Pixen
 //
-//  Created by Ian Henderson on 09.08.05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXAnimationPreview.h"
 
 #import "PXCel.h"
 
-@implementation PXAnimationPreview
+@interface PXAnimationPreview ()
 
-- (id)initWithFrame:(NSRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code here.
-    }
-    return self;
+- (void)stop;
+
+@end
+
+
+@implementation PXAnimationPreview {
+	NSTimer *_animationTimer;
+	PXCel *_currentCel;
+	NSUInteger _currentIndex;
 }
+
+@synthesize dataSource = _dataSource;
 
 - (void)refreshCurrentCel
 {
-	[currentCel release];
-	currentCel = [[dataSource celAtIndex:currentIndex] retain];
+	[_currentCel release];
+	_currentCel = [[_dataSource celAtIndex:_currentIndex] retain];
+	
 	[self setNeedsDisplay:YES];
 }
 
 - (void)incrementFrame
 {
-	currentIndex++;
-	if (currentIndex >= [dataSource numberOfCels]) {
-		currentIndex = 0;
+	_currentIndex++;
+	
+	if (_currentIndex >= [_dataSource numberOfCels]) {
+		_currentIndex = 0;
 	}
+	
 	[self refreshCurrentCel];
 }
 
-- (IBAction)stepForward:sender
+- (BOOL)isPlaying
 {
-	[self pause:nil];
-	[self incrementFrame];
+	return (_animationTimer != nil);
 }
 
-- (IBAction)stepBackward:sender
+- (void)setDataSource:(id)ds
 {
-	[self pause:nil];
-	currentIndex--;
-	if (currentIndex < 0) {
-		currentIndex = [dataSource numberOfCels]-1;
+	if (_dataSource != ds) {
+		[self stop];
+		_dataSource = ds;
 	}
-	[self refreshCurrentCel];
 }
 
 - (void)incrementFromTimer:(NSTimer *)timer
 {
 	[self incrementFrame];
-	[animationTimer invalidate];
-	[animationTimer release];
-	animationTimer = [[NSTimer scheduledTimerWithTimeInterval:[dataSource durationOfCelAtIndex:currentIndex] target:self selector:@selector(incrementFromTimer:) userInfo:nil repeats:NO] retain];
+	
+	[_animationTimer invalidate];
+	[_animationTimer release];
+	
+	_animationTimer = [[NSTimer scheduledTimerWithTimeInterval:[_dataSource durationOfCelAtIndex:_currentIndex]
+														target:self
+													  selector:@selector(incrementFromTimer:)
+													  userInfo:nil
+													   repeats:NO] retain];
 }
 
 - (void)stop
 {
-	[currentCel release];
-	currentCel = nil;
+	[_currentCel release];
+	_currentCel = nil;
+	
 	[self pause:nil];
-	currentIndex = -1;
+	
+	_currentIndex = NSNotFound;
 }
 
 - (void)dealloc
 {
-	[currentCel release];
-	[animationTimer invalidate];
-	[animationTimer release];
+	[_currentCel release];
+	[_animationTimer invalidate];
+	[_animationTimer release];
+	
 	[super dealloc];
 }
 
 - (void)drawRect:(NSRect)rect
 {
-	if (currentCel == nil && dataSource != nil && [dataSource numberOfCels] > 0) {
-		currentIndex = 0;
-		currentCel = [dataSource celAtIndex:0];
+	if (_currentCel == nil && _dataSource != nil && [_dataSource numberOfCels] > 0) {
+		_currentIndex = 0;
+		_currentCel = [[_dataSource celAtIndex:0] retain];
 	}
 	
 	NSSize mySize = [self frame].size;
-	NSSize theirSize = [currentCel size];
-	float myAspectRatio = mySize.height/mySize.width;
-	float theirAspectRatio = theirSize.height/theirSize.width;
+	NSSize theirSize = [_currentCel size];
+	CGFloat myAspectRatio = mySize.height/mySize.width;
+	CGFloat theirAspectRatio = theirSize.height/theirSize.width;
 	NSRect aspectLockedRect;
 	
 	if (myAspectRatio > theirAspectRatio) {
@@ -100,60 +113,72 @@
 		aspectLockedRect.origin.x = (mySize.width - aspectLockedRect.size.width) / 2.0f;
 		aspectLockedRect.origin.y = 0;
 	}
-	aspectLockedRect = NSInsetRect(aspectLockedRect, 1, 1);
+	aspectLockedRect = NSInsetRect(aspectLockedRect, 1.0f, 1.0f);
 	
 	NSEraseRect(NSIntersectionRect(aspectLockedRect, rect));
 	[[NSColor grayColor] set];
-	NSRect frameRect = NSInsetRect(aspectLockedRect, -0.5, -0.5);
-	/*frameRect.origin.x = floorf(NSMinX(frameRect));
-	frameRect.origin.y = floorf(NSMinY(frameRect));
-	frameRect.size.width = ceilf(NSWidth(frameRect));
-	frameRect.size.height = ceilf(NSHeight(frameRect));*/
+	NSRect frameRect = NSInsetRect(aspectLockedRect, -0.5f, -0.5f);
+	
 	NSFrameRect(frameRect);
 	[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
-	[currentCel drawInRect:aspectLockedRect fromRect:NSMakeRect(0, 0, [currentCel size].width, [currentCel size].height) operation:NSCompositeSourceOver fraction:1];
+	
+	[_currentCel drawInRect:aspectLockedRect
+				   fromRect:NSMakeRect(0.0f, 0.0f, [_currentCel size].width, [_currentCel size].height)
+				  operation:NSCompositeSourceOver
+				   fraction:1.0f];
 }
 
-- (void)setDataSource:ds
-{
-	dataSource = ds;
-	[self stop];
-}
-
-- (void)reloadData
-{
-	[self stop];
-	[self setNeedsDisplay:YES];
-}
-
-- (IBAction)play:sender
+- (IBAction)play:(id)sender
 {
 	[self willChangeValueForKey:@"isPlaying"];
 	[self incrementFromTimer:nil];
 	[self didChangeValueForKey:@"isPlaying"];
 }
 
-- (BOOL)isPlaying
-{
-	return (animationTimer != nil);
-}
-
-- (IBAction)pause:sender
+- (IBAction)pause:(id)sender
 {
 	[self willChangeValueForKey:@"isPlaying"];
-	[animationTimer invalidate];
-	[animationTimer release];
-	animationTimer = nil;
+	
+	[_animationTimer invalidate];
+	[_animationTimer release];
+	_animationTimer = nil;
+	
 	[self didChangeValueForKey:@"isPlaying"];
 }
 
-- (IBAction)playPause:sender
+- (IBAction)playPause:(id)sender
 {
 	if ([self isPlaying]) {
 		[self pause:sender];
-	} else {
+	}
+	else {
 		[self play:sender];
 	}
+}
+
+- (IBAction)stepForward:(id)sender
+{
+	[self pause:nil];
+	[self incrementFrame];
+}
+
+- (IBAction)stepBackward:(id)sender
+{
+	[self pause:nil];
+	
+	_currentIndex--;
+	
+	if (_currentIndex == NSNotFound) {
+		_currentIndex = [_dataSource numberOfCels] - 1;
+	}
+	
+	[self refreshCurrentCel];
+}
+
+- (void)reloadData
+{
+	[self stop];
+	[self setNeedsDisplay:YES];
 }
 
 @end

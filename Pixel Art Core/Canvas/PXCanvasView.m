@@ -799,7 +799,7 @@ void PXDebugRect(NSRect r, float alpha)
 
 - (void)updateInfoPanelWithMousePosition:(NSPoint)point dragging:(BOOL)dragging
 {
-	if (![[[PXInfoPanelController sharedInfoPanelController] infoPanel] isVisible]) { return; }
+	if (![[[PXInfoPanelController sharedInfoPanelController] window] isVisible]) { return; }
 	
 	NSPoint cursorPoint = point;
 	cursorPoint.y = [canvas size].height - cursorPoint.y - 1;
