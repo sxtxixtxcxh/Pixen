@@ -100,7 +100,7 @@ typedef struct
 	[self writeIconFileHeader:data withCanvas:aCanvas];
 	[self writeImage:data withCanvas:aCanvas];
 	
-	return data;
+	return [data autorelease];
 }
 
 - (void)writeIconFileHeader:(NSMutableData *)data withCanvas:(PXCanvas *)canvas
