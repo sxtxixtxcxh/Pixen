@@ -1,16 +1,12 @@
 //
 //  PXLineTool.h
-//  Pixen-XCode
+//  Pixen
 //
-//  Created by Ian Henderson on Wed Dec 10 2003.
-//  Copyright (c) 2003 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXLinearTool.h"
 
-
-@interface PXLineTool : PXLinearTool 
-{
-}
+@interface PXLineTool : PXLinearTool
 
 @end

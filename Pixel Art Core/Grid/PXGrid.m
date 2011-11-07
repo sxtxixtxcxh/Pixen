@@ -2,17 +2,21 @@
 //  PXGrid.m
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXGrid.h"
 
 @implementation PXGrid
 
-@synthesize color;
+@synthesize unitSize, color, shouldDraw;
 
 - (id)init
 {
 	self = [super init];
-	[self setDefaultParameters];
+	if (self) {
+		[self setDefaultParameters];
+	}
 	return self;
 }
 
@@ -23,100 +27,82 @@
 	self = [self init];
 	if (newColor)
 	{
-		[self setUnitSize:newUnitSize];
-		[self setColor:newColor];
-		[self setShouldDraw:newShouldDraw];
+		self.unitSize = newUnitSize;
+		self.color = newColor;
+		self.shouldDraw = newShouldDraw;
 	}
 	return self;
 }
 
-- initWithCoder:(NSCoder *)coder
+- (id)initWithCoder:(NSCoder *)coder
 {
-	return [self initWithUnitSize:[coder decodeSizeForKey:@"gridUnitSize"] color:[coder decodeObjectForKey:@"gridColor"] shouldDraw:[coder decodeBoolForKey:@"gridShouldDraw"]];
+	return [self initWithUnitSize:[coder decodeSizeForKey:@"gridUnitSize"]
+							color:[coder decodeObjectForKey:@"gridColor"]
+					   shouldDraw:[coder decodeBoolForKey:@"gridShouldDraw"]];
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
 	[coder encodeBool:[self shouldDraw] forKey:@"gridShouldDraw"];
+	[coder encodeObject:[self color] forKey:@"gridColor"];
 	[coder encodeSize:[self unitSize] forKey:@"gridUnitSize"];
-	[coder encodeObject:[self color] forKey:@"gridColor"];	
 }
 
 - (void)drawRect:(NSRect)drawingRect
 {
-	if (!shouldDraw) 
-		return; 
+	if (!shouldDraw)
+		return;
 	
 	NSSize dimensions = drawingRect.size;
-	int i;
-	float lineWidth = [NSBezierPath defaultLineWidth];;
+	
+	CGFloat lineWidth = [NSBezierPath defaultLineWidth];;
 	BOOL oldShouldAntialias = [[NSGraphicsContext currentContext] shouldAntialias];
+	
 	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
-	[NSBezierPath setDefaultLineWidth:0];
+	[NSBezierPath setDefaultLineWidth:0.0f];
+	
 	[color set];
 	
-	for (i = 0; i < dimensions.width + unitSize.width; i+=unitSize.width)
-    {
-		[NSBezierPath strokeLineFromPoint:NSMakePoint(i, 0) 
+	for (CGFloat i = 0.0f; i < dimensions.width + unitSize.width; i += unitSize.width)
+	{
+		[NSBezierPath strokeLineFromPoint:NSMakePoint(i, 0.0f)
 								  toPoint:NSMakePoint(i, dimensions.height)];
-    }
+	}
 	
-	for (i = 0; i < dimensions.height + unitSize.height; i+=unitSize.height)
-    {
-		[NSBezierPath strokeLineFromPoint:NSMakePoint(0, i) 
+	for (CGFloat i = 0.0f; i < dimensions.height + unitSize.height; i += unitSize.height)
+	{
+		[NSBezierPath strokeLineFromPoint:NSMakePoint(0.0f, i)
 								  toPoint:NSMakePoint(dimensions.width, i)];
-    }
+	}
 	
 	[NSBezierPath setDefaultLineWidth:lineWidth];
-	[[NSGraphicsContext currentContext] setShouldAntialias:oldShouldAntialias];	
-}
-
-- (NSSize)unitSize
-{
-	return unitSize;
-}
-
-- (BOOL)shouldDraw
-{
-	return shouldDraw;
-}
-
-- (void)setShouldDraw:(BOOL)newShouldDraw
-{
-	shouldDraw = newShouldDraw;
-}
-
-- (void)setUnitSize:(NSSize)newUnitSize
-{
-	unitSize = newUnitSize;
+	
+	[[NSGraphicsContext currentContext] setShouldAntialias:oldShouldAntialias];
 }
 
 - (void)setDefaultParameters
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	if(! [defaults objectForKey:PXGridColorDataKey] )
+	
+	if (![defaults objectForKey:PXGridColorDataKey])
 	{
-		[self setShouldDraw:NO];
-		[self setUnitSize:NSMakeSize(1,1)];
-		[self setColor:[NSColor blackColor]];
+		self.shouldDraw = NO;
+		self.unitSize = NSMakeSize(1.0f, 1.0f);
+		self.color = [NSColor blackColor];
 	}
 	else
 	{
-		NSSize uS;
-		uS.width = [defaults floatForKey:PXGridUnitWidthKey];
-		uS.height = [defaults floatForKey:PXGridUnitHeightKey];
-		
-		[self setShouldDraw:[defaults boolForKey:PXGridShouldDrawKey]];
-		[self setUnitSize:uS];
-		
-		[self setColor:[NSKeyedUnarchiver unarchiveObjectWithData:[defaults objectForKey:PXGridColorDataKey]]];	
+		self.shouldDraw = [defaults boolForKey:PXGridShouldDrawKey];
+		self.unitSize = NSMakeSize([defaults floatForKey:PXGridUnitWidthKey], [defaults floatForKey:PXGridUnitHeightKey]);
+		self.color = [NSKeyedUnarchiver unarchiveObjectWithData:[defaults objectForKey:PXGridColorDataKey]];
 	}
 }
 
-- copyWithZone:(NSZone *)zn
+- (id)copyWithZone:(NSZone *)zone
 {
-	id copy = [[PXGrid allocWithZone:zn] initWithUnitSize:unitSize color:color shouldDraw:shouldDraw];
-	return copy;
+	return [[PXGrid allocWithZone:zone] initWithUnitSize:unitSize
+												   color:color
+											  shouldDraw:shouldDraw];
 }
 
 @end

@@ -103,8 +103,6 @@ static NSArray *algorithms = nil;
 
 - (IBAction)setAlgorithm:(id) sender
 {
-	static BOOL lastAlgorithmHadParameterView = YES;
-	
 	/*
 	NSSize newBoxSize = [scaleParameterView frame].size;
 	
@@ -132,8 +130,6 @@ static NSArray *algorithms = nil;
 	 */
 	
 	[algorithmInfoView setString:[[self currentAlgorithm] algorithmInfo]];
-	
-	lastAlgorithmHadParameterView = [[self currentAlgorithm] hasParameterView];
 	
 	[[NSUserDefaults standardUserDefaults] setObject:[[sender selectedItem] title] forKey:PXSelectedScaleAlgorithmKey];
 }
