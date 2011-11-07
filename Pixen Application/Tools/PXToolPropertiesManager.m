@@ -2,27 +2,27 @@
 //  PXToolPropertiesManager.m
 //  Pixen
 //
-//  Copyright Matt Rajca 2011. All rights reserved.
+//  Copyright 2011 Pixen Project. All rights reserved.
 //
 
 #import "PXToolPropertiesManager.h"
 
+#import "PXNotifications.h"
 #import "PXTool.h"
 #import "PXToolPaletteController.h"
 #import "PXToolPropertiesController.h"
 #import "PXToolSwitcher.h"
-#import "PXNotifications.h"
 
 @interface PXToolPropertiesManager (Private)
 
-- (void)_toolDidChange:(NSNotification *)notification;
+- (void)toolDidChange:(NSNotification *)notification;
 
 @end
 
 
 @implementation PXToolPropertiesManager (Private)
 
-- (void)_toolDidChange:(NSNotification *)aNotification
+- (void)toolDidChange:(NSNotification *)aNotification
 {
 	NSMutableString *title = [NSMutableString string];
 	[title appendString:[[[aNotification userInfo] objectForKey:PXNewToolKey] name]];
@@ -90,7 +90,7 @@
 		[[PXToolPaletteController sharedToolPaletteController] rightSwitcher];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(_toolDidChange:)
+												 selector:@selector(toolDidChange:)
 													 name:PXToolDidChangeNotificationName
 												   object:switcher];
 		

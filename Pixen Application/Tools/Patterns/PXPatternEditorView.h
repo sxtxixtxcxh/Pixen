@@ -2,29 +2,21 @@
 //  PXPatternEditorView.h
 //  Pixen
 //
-
-#import <AppKit/AppKit.h>
+//  Copyright 2011 Pixen Project. All rights reserved.
+//
 
 @class PXPattern, PXGrid;
 
-@interface PXPatternEditorView : NSView {
-  @private
-	PXPattern *pattern;
-	PXGrid *grid;
-	
-	id delegate;
-	
-	BOOL erasing;
-}
+@interface PXPatternEditorView : NSView
+
+@property (nonatomic, assign) PXPattern *pattern;
 
 @property (nonatomic, assign) id delegate;
-
-- (void)setPattern:(PXPattern *)newPattern;
 
 @end
 
 
-@interface NSObject(PXPatternEditorViewDelegate)
+@interface NSObject (PXPatternEditorViewDelegate)
 
 - (void)patternView:(PXPatternEditorView *)pv changedPattern:(PXPattern *)pattern;
 

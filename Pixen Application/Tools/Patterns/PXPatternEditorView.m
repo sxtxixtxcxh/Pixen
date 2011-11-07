@@ -2,15 +2,21 @@
 //  PXPatternEditorView.m
 //  Pixen
 //
+//  Copyright 2011 Pixen Project. All rights reserved.
+//
 
 #import "PXPatternEditorView.h"
 
 #import "PXGrid.h"
 #import "PXPattern.h"
 
-@implementation PXPatternEditorView
+@implementation PXPatternEditorView {
+	PXGrid *_grid;
+	BOOL _erasing;
+}
 
-@synthesize delegate;
+@synthesize pattern = _pattern;
+@synthesize delegate = _delegate;
 
 #define SCALE_FACTOR 32.0f
 
@@ -18,9 +24,9 @@
 {
 	self = [super initWithCoder:aDecoder];
 	if (self) {
-		grid = [[PXGrid alloc] initWithUnitSize:NSMakeSize(1.0f, 1.0f)
-										  color:[NSColor grayColor]
-									 shouldDraw:YES];
+		_grid = [[PXGrid alloc] initWithUnitSize:NSMakeSize(1.0f, 1.0f)
+										   color:[NSColor grayColor]
+									  shouldDraw:YES];
 	}
 	return self;
 }
@@ -40,15 +46,15 @@
 	NSPasteboard *pboard = [sender draggingPasteboard];
 	[self setPattern:[NSKeyedUnarchiver unarchiveObjectWithData:[pboard dataForType:PXPatternPboardType]]];
 	
-	if ([delegate respondsToSelector:@selector(patternView:changedPattern:)])
-		[delegate patternView:self changedPattern:pattern];
+	if ([_delegate respondsToSelector:@selector(patternView:changedPattern:)])
+		[_delegate patternView:self changedPattern:_pattern];
 	
 	return YES;
 }
 
 - (void)drawRect:(NSRect)rect
 {
-	if (pattern == nil)
+	if (_pattern == nil)
 		return;
 	
 	[[NSColor whiteColor] set];
@@ -57,8 +63,10 @@
 	NSAffineTransform *transform = [NSAffineTransform transform];
 	[transform scaleBy:SCALE_FACTOR];
 	[transform concat];
-	[pattern drawRect:NSMakeRect(0.0f, 0.0f, [pattern size].width, [pattern size].height)];
-	[grid drawRect:rect];
+	
+	[_pattern drawRect:NSMakeRect(0.0f, 0.0f, [_pattern size].width, [_pattern size].height)];
+	[_grid drawRect:rect];
+	
 	[transform invert];
 	[transform concat];
 }
@@ -70,8 +78,8 @@
 
 - (void)mouseUp:(NSEvent *)event
 {
-	if ([delegate respondsToSelector:@selector(patternView:changedPattern:)])
-		[delegate patternView:self changedPattern:pattern];
+	if ([_delegate respondsToSelector:@selector(patternView:changedPattern:)])
+		[_delegate patternView:self changedPattern:_pattern];
 }
 
 - (void)mouseDown:(NSEvent *)event
@@ -80,8 +88,8 @@
 	point.x = floor(point.x / SCALE_FACTOR);
 	point.y = floor(point.y / SCALE_FACTOR);
 	
-	[pattern togglePoint:point];
-	erasing = ![pattern hasPixelAtPoint:point];
+	[_pattern togglePoint:point];
+	_erasing = ![_pattern hasPixelAtPoint:point];
 	
 	[self setNeedsDisplay:YES];
 }
@@ -92,11 +100,11 @@
 	point.x = floor(point.x / SCALE_FACTOR);
 	point.y = floor(point.y / SCALE_FACTOR);
 	
-	if (erasing) {
-		[pattern removePoint:point];
+	if (_erasing) {
+		[_pattern removePoint:point];
 	}
 	else {
-		[pattern addPoint:point];
+		[_pattern addPoint:point];
 	}
 	
 	[self setNeedsDisplay:YES];
@@ -105,24 +113,24 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[grid release];
+	[_grid release];
 	[super dealloc];
 }
-	
+
 - (void)setPattern:(PXPattern *)newPattern
 {
-	if (pattern == newPattern)
+	if (_pattern == newPattern)
 		return;
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
-	pattern = newPattern;
+	_pattern = newPattern;
 	[self setNeedsDisplay:YES];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(redrawPattern:)
 												 name:PXPatternChangedNotificationName
-											   object:pattern];
+											   object:_pattern];
 }
 
 @end
