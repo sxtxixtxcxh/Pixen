@@ -2,38 +2,25 @@
 //  PXPaletteController.h
 //  Pixen
 //
-//  Created by Joe Osborn on 2007.12.12.
-//  Copyright 2007 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "PXCanvas.h"
-@class PXCanvas, PXDocument, PXPaletteView;
+@class PXDocument, PXPaletteView;
 
 typedef enum {
-  PXPaletteModeRecent,
-  PXPaletteModeFrequency,
-  PXPaletteModeColorList
+	PXPaletteModeRecent,
+	PXPaletteModeFrequency
 } PXPaletteMode;
 
 @interface PXPaletteController : NSViewController
-{
-  @private
-	PXPaletteMode mode;
-	PXDocument *document;
-	int recentLimit;
-	PXPalette *frequencyPalette, *recentPalette, *listPalette;
-	IBOutlet PXPaletteView *paletteView;
-}
+
+@property (nonatomic, assign) IBOutlet PXPaletteView *paletteView;
+
+@property (nonatomic, assign) PXDocument *document;
 
 - (BOOL)isPaletteIndexKey:(NSEvent *)event;
-- (void)keyDown:(NSEvent *)event;
 
-- (IBAction)useMostRecentColors:sender;
-- (IBAction)useMostFrequentColors:sender;
-- (IBAction)useColorListColors:sender;
-
-- (void)refreshPalette:(NSNotification *)note;
-- (void)updatePalette:(NSNotification *)note;
+- (IBAction)useMostRecentColors:(id)sender;
+- (IBAction)useMostFrequentColors:(id)sender;
 
 @end

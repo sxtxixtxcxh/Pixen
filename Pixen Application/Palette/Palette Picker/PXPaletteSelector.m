@@ -2,20 +2,27 @@
 //  PXPaletteSelector.m
 //  Pixen
 //
-//  Created by Andy Matuschak on 7/8/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXPaletteSelector.h"
-#import "PXCanvasDocument.h"
-#import "PXCanvas.h"
 
-@implementation PXPaletteSelector
+#import "PXCanvas.h"
+#import "PXCanvasDocument.h"
+
+@implementation PXPaletteSelector {
+	NSMutableArray *_palettes;
+}
+
+@dynamic enabled;
+@synthesize selectionPopup = _selectionPopup, delegate = _delegate;
 
 - (id)init
 {
 	self = [super init];
-	_palettes = [[NSMutableArray alloc] init];
+	if (self) {
+		_palettes = [[NSMutableArray alloc] init];
+	}
 	return self;
 }
 
@@ -25,26 +32,31 @@
 	[super dealloc];
 }
 
-- (void)setEnabled:(BOOL)enabled
+- (BOOL)isEnabled
 {
-	[selectionPopup setEnabled:enabled];
+	return [_selectionPopup isEnabled];
 }
 
-- (void)showPalette:(PXPalette *)pal
+- (void)setEnabled:(BOOL)enabled
 {
-	for (id current in [[selectionPopup menu] itemArray])
+	[_selectionPopup setEnabled:enabled];
+}
+
+- (void)showPalette:(PXPalette *)palette
+{
+	for (id currentItem in [[_selectionPopup menu] itemArray])
 	{
-		if ([[current representedObject] isEqual:pal])
+		if ([[currentItem representedObject] isEqual:palette])
 		{
-			[selectionPopup selectItem:current];
+			[_selectionPopup selectItem:currentItem];
 			return;
 		}
 	}
 }
 
-- (PXPalette *)reloadDataExcluding:(PXCanvasDocument *)aDoc withCurrentPalette:(PXPalette *)currentPalette
+- (PXPalette *)reloadDataWithCurrentPalette:(PXPalette *)currentPalette
 {
-	[selectionPopup removeAllItems];
+	[_selectionPopup removeAllItems];
 	
 	NSUInteger index = [_palettes indexOfObject:currentPalette];
 	
@@ -59,12 +71,12 @@
 	[_palettes addObjectsFromArray:userPalettes];
 	[_palettes addObjectsFromArray:systemPalettes];
 	
-	[selectionPopup setEnabled:YES];
+	[_selectionPopup setEnabled:YES];
 	
 	if (![_palettes count])
 	{
-		[selectionPopup addItemWithTitle:NSLocalizedString(@"No Palettes", @"No Palettes")];
-		[selectionPopup setEnabled:NO];
+		[_selectionPopup addItemWithTitle:NSLocalizedString(@"No Palettes", @"No Palettes")];
+		[_selectionPopup setEnabled:NO];
 	}
 	
 	if (index >= [_palettes count])
@@ -72,45 +84,51 @@
 	
 	for (PXPalette *palette in userPalettes)
 	{
-		NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:palette.name
-													   action:@selector(selectionChanged:)
-												keyEquivalent:@""] autorelease];
-		[item setRepresentedObject:palette];
-		[[selectionPopup menu] addItem:item];
+		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:palette.name
+													  action:@selector(selectionChanged:)
+											   keyEquivalent:@""];
 		[item setTarget:self];
+		[item setRepresentedObject:palette];
+		
+		[[_selectionPopup menu] addItem:item];
+		[item release];
 	}
 	
 	if (([userPalettes count] > 0) && ([systemPalettes count] > 0))
 	{
-		[[selectionPopup menu] addItem:[NSMenuItem separatorItem]];
+		[[_selectionPopup menu] addItem:[NSMenuItem separatorItem]];
 	}
 	
 	for (PXPalette *palette in systemPalettes)
 	{
-		NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:palette.name
-													   action:@selector(selectionChanged:)
-												keyEquivalent:@""] autorelease];
-		[item setRepresentedObject:palette];
-		[[selectionPopup menu] addItem:item];
+		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:palette.name
+													  action:@selector(selectionChanged:)
+											   keyEquivalent:@""];
 		[item setTarget:self];
+		[item setRepresentedObject:palette];
+		
+		[[_selectionPopup menu] addItem:item];
+		[item release];
 	}
+	
 	//FIXME: this should do something about showing the document's palette
+	
 	if (([systemPalettes count]) == 0)
 	{
-		return NULL;
+		return nil;
 	}
-	else
-	{
-		return [_palettes objectAtIndex:index];
-	}
+	
+	return [_palettes objectAtIndex:index];
 }
 
-- (IBAction)selectionChanged:sender
+- (IBAction)selectionChanged:(id)sender
 {
-	for (PXPalette *palette in _palettes) {
-		if ([palette isEqual:[sender representedObject]]) {
-			if ([delegate respondsToSelector:@selector(paletteSelector:selectionDidChangeTo:)])
-				[delegate paletteSelector:self selectionDidChangeTo:palette];
+	for (PXPalette *palette in _palettes)
+	{
+		if ([palette isEqual:[sender representedObject]])
+		{
+			if ([_delegate respondsToSelector:@selector(paletteSelector:selectionDidChangeTo:)])
+				[_delegate paletteSelector:self selectionDidChangeTo:palette];
 			
 			return;
 		}

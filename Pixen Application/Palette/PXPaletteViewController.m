@@ -23,8 +23,6 @@
 - (void)reloadDataAndShowCanvas:(PXCanvas *)canvas;
 - (void)showPalette:(PXPalette *)palette;
 
-- (void)paletteSelector:(PXPaletteSelector *)selector selectionDidChangeTo:(PXPalette *)palette;
-
 @end
 
 
@@ -127,9 +125,9 @@
 - (void)reloadData
 {
 	PXPalette *palette = [paletteView palette];
-	PXPalette *newPalette = [paletteSelector reloadDataExcluding:nil withCurrentPalette:palette];
+	PXPalette *newPalette = [paletteSelector reloadDataWithCurrentPalette:palette];
 	
-	if (palette == NULL) {
+	if (palette == nil) {
 		[self showPalette:newPalette];
 		return;
 	}

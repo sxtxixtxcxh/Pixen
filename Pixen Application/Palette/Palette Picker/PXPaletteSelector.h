@@ -2,31 +2,31 @@
 //  PXPaletteSelector.h
 //  Pixen
 //
-//  Created by Andy Matuschak on 7/8/05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "PXPalette.h"
 
-@class PXCanvasDocument;
-@interface PXPaletteSelector : NSObject {
-  @private
-	IBOutlet NSPopUpButton *selectionPopup;
-	IBOutlet id delegate;
-	
-	NSMutableArray *_palettes;
-}
+@interface PXPaletteSelector : NSObject
+
+@property (nonatomic, getter=isEnabled, assign) BOOL enabled;
+
+@property (nonatomic, assign) IBOutlet NSPopUpButton *selectionPopup;
+
+@property (nonatomic, assign) IBOutlet id delegate;
 
 - (NSArray *)palettes;
 
-- (void)showPalette:(PXPalette *)pal;
-- (PXPalette *)reloadDataExcluding:(PXCanvasDocument *)aDoc withCurrentPalette:(PXPalette *)currentPalette;
-- (IBAction)selectionChanged:sender;
-- (void)setEnabled:(BOOL)enabled;
+- (void)showPalette:(PXPalette *)palette;
+- (PXPalette *)reloadDataWithCurrentPalette:(PXPalette *)currentPalette;
+
+- (IBAction)selectionChanged:(id)sender;
 
 @end
 
-@interface NSObject(PXPaletteSelectorDelegate)
+
+@interface NSObject (PXPaletteSelectorDelegate)
+
 - (void)paletteSelector:(PXPaletteSelector *)selector selectionDidChangeTo:(PXPalette *)palette;
+
 @end

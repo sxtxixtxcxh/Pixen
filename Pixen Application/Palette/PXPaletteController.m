@@ -1,34 +1,55 @@
-  //
-  //  PXPaletteController.m
-  //  Pixen
-  //
-  //  Created by Joe Osborn on 2007.12.12.
-  //  Copyright 2007 Pixen. All rights reserved.
-  //
+//
+//  PXPaletteController.m
+//  Pixen
+//
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXPaletteController.h"
 
-#import "PXToolSwitcher.h"
-#import "PXToolPaletteController.h"
 #import "PXCanvas.h"
 #import "PXCanvas_Layers.h"
-#import "PXPalette.h"
 #import "PXDocument.h"
+#import "PXPalette.h"
 #import "PXPaletteView.h"
+#import "PXToolPaletteController.h"
+#import "PXToolSwitcher.h"
+
+@interface PXPaletteController ()
+
+- (void)refreshPalette:(NSNotification *)note;
+- (void)updatePalette:(NSNotification *)note;
+
+@end
+
 
 @implementation PXPaletteController
+{
+	PXPaletteMode _mode;
+	PXPalette *_frequencyPalette, *_recentPalette;
+}
+
+#define RECENT_LIMIT 32
+
+@synthesize document = _document, paletteView = _paletteView;
 
 - (id)init
 {
 	self = [super initWithNibName:@"PXPaletteController" bundle:nil];
 	
-	frequencyPalette = [[PXPalette alloc] initWithoutBackgroundColor];
-	recentLimit = 32;
-	recentPalette = [[PXPalette alloc] initWithoutBackgroundColor];
-	mode = PXPaletteModeFrequency;
+	_frequencyPalette = [[PXPalette alloc] initWithoutBackgroundColor];
+	_recentPalette = [[PXPalette alloc] initWithoutBackgroundColor];
+	_mode = PXPaletteModeFrequency;
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPalette:) name:@"PXCanvasFrequencyPaletteRefresh" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePalette:) name:@"PXCanvasPaletteUpdate" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(refreshPalette:)
+												 name:@"PXCanvasFrequencyPaletteRefresh"
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(updatePalette:)
+												 name:@"PXCanvasPaletteUpdate"
+											   object:nil];
 	
 	return self;
 }
@@ -36,134 +57,140 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[frequencyPalette release];
-	[recentPalette release];
+	[_frequencyPalette release];
+	[_recentPalette release];
 	[super dealloc];
 }
 
 - (void)awakeFromNib
 {
-	paletteView.highlightEnabled = NO;
+	_paletteView.highlightEnabled = NO;
 }
 
-- (void)setDocument:(PXDocument *)doc
+- (void)setDocument:(PXDocument *)document
 {
-	[paletteView setDocument:doc];
-	document = doc;
-	[self refreshPalette:nil];
-}
-
-- (void)refreshPalette:(NSNotification *)note
-{
-	if(![document containsCanvas:[note object]])
+	if (_document != document)
 	{
-		return;
-	}
-	
-	PXPalette *oldPal = frequencyPalette;
-	frequencyPalette = [[note object] newFrequencyPalette];
-	[oldPal release];
-	if(mode == PXPaletteModeFrequency)
-	{
-		[paletteView setPalette:frequencyPalette];
+		_document = document;
+		
+		[_paletteView setDocument:document];
+		[self refreshPalette:nil];
 	}
 }
 
-- (void)addRecentColor:(NSColor *)c
+- (void)addRecentColor:(NSColor *)color
 {
-	NSUInteger idx = [recentPalette indexOfColor:c];
+	NSUInteger idx = [_recentPalette indexOfColor:color];
 	
 	if (idx != NSNotFound)
 	{
 		if (idx != 0) {
-			[recentPalette removeColorAtIndex:idx];
-			[recentPalette insertColor:c atIndex:0];
+			[_recentPalette removeColorAtIndex:idx];
+			[_recentPalette insertColor:color atIndex:0];
 		}
 	}
 	else
 	{
-		[recentPalette insertColor:c atIndex:0];
+		[_recentPalette insertColor:color atIndex:0];
 		
-		while ([recentPalette colorCount] > recentLimit)
+		while ([_recentPalette colorCount] > RECENT_LIMIT)
 		{
-			[recentPalette removeLastColor];
+			[_recentPalette removeLastColor];
 		}
+	}
+}
+
+- (void)refreshPalette:(NSNotification *)note
+{
+	if (![_document containsCanvas:[note object]])
+		return;
+	
+	[_frequencyPalette release];
+	_frequencyPalette = [[note object] newFrequencyPalette];
+	
+	if (_mode == PXPaletteModeFrequency)
+	{
+		[_paletteView setPalette:_frequencyPalette];
 	}
 }
 
 - (void)updatePalette:(NSNotification *)note
 {
-	if(![document containsCanvas:[note object]])
-	{
+	if (![_document containsCanvas:[note object]])
 		return;
-	}
+	
 	NSDictionary *changes = [note userInfo];
-	//for each canvas
+	
 	NSCountedSet *oldC = [changes objectForKey:@"PXCanvasPaletteUpdateRemoved"];
 	NSCountedSet *newC = [changes objectForKey:@"PXCanvasPaletteUpdateAdded"];
-	for(NSColor *old in oldC)
+	
+	for (NSColor *old in oldC)
 	{
-		// NSLog(@"Color %@ was removed %d times", old, [oldC countForObject:old]);
-		[frequencyPalette decrementCountForColor:old byAmount:[oldC countForObject:old]];
+		[_frequencyPalette decrementCountForColor:old byAmount:[oldC countForObject:old]];
 	}
+	
 	//can do 'recent palette' stuff here too. most draws will consist of one new and many old, so just consider the last 100 new?
-	for(NSColor *new in newC)
+	
+	for (NSColor *new in newC)
 	{
-		//NSLog(@"Color %@ was added %d times", new, [newC countForObject:new]);
-		[frequencyPalette incrementCountForColor:new byAmount:[newC countForObject:new]];
+		[_frequencyPalette incrementCountForColor:new byAmount:[newC countForObject:new]];
 		[self addRecentColor:new];
 	}
-	[paletteView setNeedsRetile];
+	
+	[_paletteView setNeedsRetile];
 }
 
 - (void)useColorAtIndex:(NSUInteger)index
 {
-	PXToolSwitcher *switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
+	PXToolSwitcher *switcher = nil;
 	
+	//FIXME: decouple this
 	if ([NSEvent pressedMouseButtons] == 2 || ([NSEvent modifierFlags] & NSControlKeyMask))
 	{
 		switcher = [[PXToolPaletteController sharedToolPaletteController] rightSwitcher];
 	}
+	else
+	{
+		switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
+	}
 	
-	[switcher setColor:[frequencyPalette colorAtIndex:index]];
+	[switcher setColor:[_frequencyPalette colorAtIndex:index]];
 }
 
 - (void)paletteViewSizeChangedTo:(NSControlSize)size
 {
-	[[NSUserDefaults standardUserDefaults] setInteger:size forKey:PXColorPickerPaletteViewSizeKey];
+	[[NSUserDefaults standardUserDefaults] setInteger:size
+											   forKey:PXColorPickerPaletteViewSizeKey];
 }
 
 - (BOOL)isPaletteIndexKey:(NSEvent *)event
 {
 	NSString *chars = [event characters];
-	//not sure why numpad is unacceptable, but whatever
+	
+	// not sure why numpad is unacceptable, but whatever
 	BOOL numpad = [event modifierFlags] & NSNumericPadKeyMask;
-	return (([chars intValue] != 0) || ([chars characterAtIndex:0] == '0')) && !numpad;
+	
+	return (([chars integerValue] != 0) || ([chars characterAtIndex:0] == '0')) && !numpad;
 }
 
 - (void)keyDown:(NSEvent *)event
 {
 	NSString *chars = [event characters];
-	unsigned index = [chars intValue];
+	NSUInteger index = [chars integerValue];
+	
 	[self useColorAtIndex:index];
 }
 
-- (IBAction)useMostRecentColors:sender;
+- (IBAction)useMostRecentColors:(id)sender
 {
-	mode = PXPaletteModeRecent;
-	[paletteView setPalette:recentPalette];
+	_mode = PXPaletteModeRecent;
+	[_paletteView setPalette:_recentPalette];
 }
 
-- (IBAction)useMostFrequentColors:sender;
+- (IBAction)useMostFrequentColors:(id)sender
 {
-	mode = PXPaletteModeFrequency;
-	[paletteView setPalette:frequencyPalette];
-}
-
-- (IBAction)useColorListColors:sender;
-{
-	mode = PXPaletteModeColorList;
+	_mode = PXPaletteModeFrequency;
+	[_paletteView setPalette:_frequencyPalette];
 }
 
 @end
-
