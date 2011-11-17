@@ -2,19 +2,14 @@
 //  PXDefaultBackgroundTemplateView.h
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
-#import <Cocoa/Cocoa.h>
 #import "PXBackgroundTemplateView.h"
 
-@interface PXDefaultBackgroundTemplateView : PXBackgroundTemplateView {
-  @private
-	NSString *backgroundTypeText;
-	BOOL highlighted;
-	BOOL activeDragTarget;
-}
+@interface PXDefaultBackgroundTemplateView : PXBackgroundTemplateView
 
 @property (nonatomic, retain) NSString *backgroundTypeText;
-
-- (void)setActiveDragTarget:(BOOL)activeDragTarget;
+@property (nonatomic, assign) BOOL activeDragTarget;
 
 @end

@@ -20,6 +20,6 @@
 @property (nonatomic, readonly) IBOutlet NSTextField *templateClassNameField;
 @property (nonatomic, readonly) IBOutlet PXBackgroundPreviewView *imageView;
 
-- (void)setHighlighted:(BOOL)highlighted;
+@property (nonatomic, getter=isHighlighted, assign) BOOL highlighted;
 
 @end

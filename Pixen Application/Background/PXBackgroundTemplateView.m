@@ -11,6 +11,7 @@
 @implementation PXBackgroundTemplateView
 
 @synthesize background, templateNameField, templateClassNameField, imageView;
+@synthesize highlighted = _highlighted;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -57,15 +58,19 @@
 
 - (void)setHighlighted:(BOOL)highlighted
 {
-	if(highlighted)
-	{
-		[templateClassNameField setTextColor:[NSColor whiteColor]];
-		[templateNameField setTextColor:[NSColor whiteColor]];
-	}
-	else
-	{
-		[templateClassNameField setTextColor:[NSColor disabledControlTextColor]];
-		[templateNameField setTextColor:[NSColor blackColor]];
+	if (_highlighted != highlighted) {
+		_highlighted = highlighted;
+		
+		if (highlighted)
+		{
+			[templateClassNameField setTextColor:[NSColor whiteColor]];
+			[templateNameField setTextColor:[NSColor whiteColor]];
+		}
+		else
+		{
+			[templateClassNameField setTextColor:[NSColor disabledControlTextColor]];
+			[templateNameField setTextColor:[NSColor blackColor]];
+		}
 	}
 }
 
