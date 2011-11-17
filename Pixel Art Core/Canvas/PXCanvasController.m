@@ -336,15 +336,16 @@
 	[backgroundController showWindow:self];	
 }
 
-- (void)gridSettingsController:(id)aController
-			   updatedWithSize:(NSSize)aSize
+- (void)gridSettingsController:(PXGridSettingsController *)controller
+			   updatedWithSize:(NSSize)size
 						 color:(NSColor *)color
 					shouldDraw:(BOOL)shouldDraw {
 	
 	PXGrid *grid = [canvas grid];
-	[grid setUnitSize:aSize];
+	[grid setUnitSize:size];
 	[grid setColor:color];
 	[grid setShouldDraw:shouldDraw];
+	
 	[canvas changed];
 }
 

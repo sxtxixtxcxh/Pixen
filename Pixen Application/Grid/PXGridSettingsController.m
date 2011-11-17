@@ -2,20 +2,27 @@
 //  PXGridSettingsController.m
 //  Pixen
 //
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 #import "PXGridSettingsController.h"
+
 #import "PXDefaults.h"
 
 @implementation PXGridSettingsController
 
+@synthesize colorWell, shouldDrawCheckBox, colorLabel, sizeLabel;
 @synthesize width, height, color, shouldDraw, delegate;
 
 - (id)init
 {
-	if ( ! ( self = [super initWithWindowNibName:@"PXGridSettings"] ))
-		return nil;
-	
-	return self;
+	return [super initWithWindowNibName:@"PXGridSettings"];
+}
+
+- (void)dealloc
+{
+	[color release];
+	[super dealloc];
 }
 
 - (void)showWindow:(id)sender
@@ -26,21 +33,29 @@
 
 - (IBAction)update:(id)sender
 {
-	if ([shouldDrawCheckBox state] == NSOnState) {
+	if ([shouldDrawCheckBox state] == NSOnState)
+	{
 		[sizeLabel setTextColor:[NSColor blackColor]];
 		[colorLabel setTextColor:[NSColor blackColor]];
-	} else {
+	}
+	else
+	{
 		if ([colorWell isActive])
+		{
 			[[NSColorPanel sharedColorPanel] close];
+		}
 		
 		[sizeLabel setTextColor:[NSColor disabledControlTextColor]];
 		[colorLabel setTextColor:[NSColor disabledControlTextColor]];
 	}
 	
-	[delegate gridSettingsController:self
-					 updatedWithSize:NSMakeSize(self.width, self.height)
-							   color:self.color
-						  shouldDraw:self.shouldDraw];
+	if ([delegate respondsToSelector:@selector(gridSettingsController:updatedWithSize:color:shouldDraw:)])
+	{
+		[delegate gridSettingsController:self
+						 updatedWithSize:NSMakeSize(self.width, self.height)
+								   color:self.color
+							  shouldDraw:self.shouldDraw];
+	}
 }
 
 - (IBAction)useAsDefaults:(id)sender

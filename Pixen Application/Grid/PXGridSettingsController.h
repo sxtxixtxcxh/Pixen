@@ -2,30 +2,15 @@
 //  PXGridSettingsController.h
 //  Pixen
 //
-
-#import <AppKit/AppKit.h>
-
-@interface NSObject(PXGridSettingsPrompterDelegate)
-
-- (void)gridSettingsController:(id)aController
-			   updatedWithSize:(NSSize)aSize
-						 color:(NSColor *)color
-					shouldDraw:(BOOL)shouldDraw;
-
-@end
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//
 
 @interface PXGridSettingsController : NSWindowController
-{
-  @private
-	IBOutlet NSColorWell *colorWell;
-	IBOutlet NSButton *shouldDrawCheckBox;
-	IBOutlet NSTextField *colorLabel, *sizeLabel;
-	
-	int width, height;
-	NSColor *color;
-	id delegate;
-	BOOL shouldDraw;
-}
+
+@property (nonatomic, assign) IBOutlet NSColorWell *colorWell;
+@property (nonatomic, assign) IBOutlet NSButton *shouldDrawCheckBox;
+@property (nonatomic, assign) IBOutlet NSTextField *colorLabel;
+@property (nonatomic, assign) IBOutlet NSTextField *sizeLabel;
 
 @property (nonatomic, assign) int width;
 @property (nonatomic, assign) int height;
@@ -37,5 +22,15 @@
 - (IBAction)update:(id)sender;
 - (IBAction)useAsDefaults:(id)sender;
 - (IBAction)displayHelp:(id)sender;
+
+@end
+
+
+@interface NSObject (PXGridSettingsPrompterDelegate)
+
+- (void)gridSettingsController:(PXGridSettingsController *)controller
+			   updatedWithSize:(NSSize)size
+						 color:(NSColor *)color
+					shouldDraw:(BOOL)shouldDraw;
 
 @end
