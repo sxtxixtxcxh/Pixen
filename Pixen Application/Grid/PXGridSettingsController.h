@@ -6,6 +6,19 @@
 //
 
 @interface PXGridSettingsController : NSWindowController
+{
+    NSColorWell *_colorWell;
+    NSButton *_shouldDrawCheckBox;
+    NSTextField *_colorLabel;
+    NSTextField *_sizeLabel;
+
+    int _width;
+    int _height;
+    NSColor *_color;
+    BOOL _shouldDraw;
+
+    id _delegate;
+}
 
 @property (nonatomic, assign) IBOutlet NSColorWell *colorWell;
 @property (nonatomic, assign) IBOutlet NSButton *shouldDrawCheckBox;

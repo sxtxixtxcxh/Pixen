@@ -10,9 +10,7 @@
 #import "PXCanvas.h"
 #import "PXCanvas_Drawing.h"
 
-@implementation PXCanvasPrintView {
-	PXCanvas *_canvas;
-}
+@implementation PXCanvasPrintView
 
 + (id)viewForCanvas:(PXCanvas *)aCanvas
 {

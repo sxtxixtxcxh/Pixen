@@ -6,6 +6,11 @@
 //
 
 @interface PXNewCelButton : NSView
+{
+	NSCellStateValue _state;
+	NSBezierPath *_buttonPath, *_plusPath;
+    id _delegate;
+}
 
 @property (nonatomic, assign) IBOutlet id delegate;
 

@@ -10,6 +10,9 @@
 @class PXLayerController;
 
 @interface PXLayerCollectionView : PXDeleteCollectionView
+{
+    PXLayerController *_layerController;
+}
 
 @property (nonatomic, assign) PXLayerController *layerController;
 

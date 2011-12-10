@@ -8,6 +8,10 @@
 #import "PXToolPropertiesController.h"
 
 @interface PXFillToolPropertiesController : PXToolPropertiesController
+{
+    BOOL _contiguous;
+    int _tolerance;
+}
 
 @property (nonatomic, assign) BOOL contiguous;
 @property (nonatomic, assign) int tolerance;

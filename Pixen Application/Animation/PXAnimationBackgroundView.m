@@ -7,9 +7,7 @@
 
 #import "PXAnimationBackgroundView.h"
 		
-@implementation PXAnimationBackgroundView {
-	NSGradient *_horizontalGradient;
-}
+@implementation PXAnimationBackgroundView
 
 @synthesize filmStrip = _filmStrip;
 

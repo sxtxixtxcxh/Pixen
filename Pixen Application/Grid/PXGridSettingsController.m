@@ -11,8 +11,8 @@
 
 @implementation PXGridSettingsController
 
-@synthesize colorWell, shouldDrawCheckBox, colorLabel, sizeLabel;
-@synthesize width, height, color, shouldDraw, delegate;
+@synthesize colorWell = _colorWell, shouldDrawCheckBox = _shouldDrawCheckBox, colorLabel = _colorLabel, sizeLabel = _sizeLabel;
+@synthesize width = _width, height = _height, color = _color, shouldDraw = _shouldDraw, delegate = _delegate;
 
 - (id)init
 {
@@ -21,7 +21,7 @@
 
 - (void)dealloc
 {
-	[color release];
+	self.color = nil;
 	[super dealloc];
 }
 
@@ -33,25 +33,25 @@
 
 - (IBAction)update:(id)sender
 {
-	if ([shouldDrawCheckBox state] == NSOnState)
+	if ([self.shouldDrawCheckBox state] == NSOnState)
 	{
-		[sizeLabel setTextColor:[NSColor blackColor]];
-		[colorLabel setTextColor:[NSColor blackColor]];
+		[self.sizeLabel setTextColor:[NSColor blackColor]];
+		[self.colorLabel setTextColor:[NSColor blackColor]];
 	}
 	else
 	{
-		if ([colorWell isActive])
+		if ([self.colorWell isActive])
 		{
 			[[NSColorPanel sharedColorPanel] close];
 		}
 		
-		[sizeLabel setTextColor:[NSColor disabledControlTextColor]];
-		[colorLabel setTextColor:[NSColor disabledControlTextColor]];
+		[self.sizeLabel setTextColor:[NSColor disabledControlTextColor]];
+		[self.colorLabel setTextColor:[NSColor disabledControlTextColor]];
 	}
 	
-	if ([delegate respondsToSelector:@selector(gridSettingsController:updatedWithSize:color:shouldDraw:)])
+	if ([self.delegate respondsToSelector:@selector(gridSettingsController:updatedWithSize:color:shouldDraw:)])
 	{
-		[delegate gridSettingsController:self
+		[self.delegate gridSettingsController:self
 						 updatedWithSize:NSMakeSize(self.width, self.height)
 								   color:self.color
 							  shouldDraw:self.shouldDraw];
@@ -78,7 +78,7 @@
 
 - (void)windowWillClose:(NSNotification *)notification
 {
-	if ([colorWell isActive])
+	if ([self.colorWell isActive])
 	{
 		[[NSColorPanel sharedColorPanel] close];
 	}

@@ -7,9 +7,7 @@
 
 #import "PXPreviewResizeSizeView.h"
 
-@implementation PXPreviewResizeSizeView {
-	NSAttributedString *_scaleString;
-}
+@implementation PXPreviewResizeSizeView
 
 - (id)initWithFrame:(NSRect)frame
 {

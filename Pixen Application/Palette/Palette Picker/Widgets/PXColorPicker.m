@@ -13,10 +13,7 @@
 
 int kPXColorPickerMode = 23421337;
 
-@implementation PXColorPicker {
-	PXPaletteViewController *_vc;
-	NSImage *_icon;
-}
+@implementation PXColorPicker
 
 // NSColorPicker overrides
 - (void)alphaControlAddedOrRemoved:(id)sender {}

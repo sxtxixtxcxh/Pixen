@@ -5,7 +5,7 @@
 //  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-@class PXDocument, PXPaletteView;
+@class PXDocument, PXPalette, PXPaletteView;
 
 typedef enum {
 	PXPaletteModeRecent,
@@ -13,6 +13,12 @@ typedef enum {
 } PXPaletteMode;
 
 @interface PXPaletteController : NSViewController
+{
+	PXPaletteMode _mode;
+	PXPalette *_frequencyPalette, *_recentPalette;
+    PXPaletteView *_paletteView;
+    PXDocument *_document;
+}
 
 @property (nonatomic, assign) IBOutlet PXPaletteView *paletteView;
 

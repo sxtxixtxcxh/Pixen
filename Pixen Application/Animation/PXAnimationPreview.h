@@ -8,6 +8,12 @@
 @class PXCel;
 
 @interface PXAnimationPreview : NSView
+{
+	NSTimer *_animationTimer;
+	PXCel *_currentCel;
+	NSUInteger _currentIndex;
+    id _dataSource;
+}
 
 @property (nonatomic, assign) IBOutlet id dataSource;
 

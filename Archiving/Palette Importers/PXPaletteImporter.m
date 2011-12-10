@@ -12,9 +12,7 @@
 #import "PathUtilities.h"
 #import "PXPalette.h"
 
-@implementation PXPaletteImporter {
-	NSOpenPanel *_openPanel;
-}
+@implementation PXPaletteImporter
 
 - (void)importPaletteAtPath:(NSString *)path
 {

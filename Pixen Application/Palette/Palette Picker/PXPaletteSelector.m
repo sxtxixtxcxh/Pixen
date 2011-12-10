@@ -10,9 +10,7 @@
 #import "PXCanvas.h"
 #import "PXCanvasDocument.h"
 
-@implementation PXPaletteSelector {
-	NSMutableArray *_palettes;
-}
+@implementation PXPaletteSelector
 
 @dynamic enabled;
 @synthesize selectionPopup = _selectionPopup, delegate = _delegate;

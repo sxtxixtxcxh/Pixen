@@ -12,10 +12,7 @@
 #import "NSMutableArray+ReorderingAdditions.h"
 #import "PathUtilities.h"
 
-@implementation PXPalette {
-	NSMutableArray *_colors;
-	NSMapTable *_frequencies;
-}
+@implementation PXPalette
 
 @synthesize name = _name, canSave = _canSave, isSystemPalette = _isSystemPalette;
 

@@ -11,11 +11,7 @@
 #import "OSJASCPALWriter.h"
 #import "OSPALWriter.h"
 
-@implementation PXPaletteExporter {
-	NSSavePanel *_savePanel;
-	NSPopUpButton *_typeSelector;
-	PXPalette *_palette;
-}
+@implementation PXPaletteExporter
 
 + (NSArray *)types
 {

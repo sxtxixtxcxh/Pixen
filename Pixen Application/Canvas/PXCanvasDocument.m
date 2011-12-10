@@ -26,9 +26,7 @@
 
 BOOL isPowerOfTwo(int num);
 
-@implementation PXCanvasDocument {
-	PXCanvasPrintView *_printableView;
-}
+@implementation PXCanvasDocument
 
 @synthesize canvas = _canvas;
 

@@ -6,6 +6,9 @@
 //
 
 @interface PXLayerDetailsView : NSView
+{
+    BOOL _selected;
+}
 
 @property (nonatomic, assign) BOOL selected;
 

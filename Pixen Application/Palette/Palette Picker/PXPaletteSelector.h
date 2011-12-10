@@ -8,6 +8,12 @@
 #import "PXPalette.h"
 
 @interface PXPaletteSelector : NSObject
+{
+	NSMutableArray *_palettes;
+    BOOL _enabled;
+    NSPopUpButton *_selectionPopup;
+    id _delegate;
+}
 
 @property (nonatomic, getter=isEnabled, assign) BOOL enabled;
 

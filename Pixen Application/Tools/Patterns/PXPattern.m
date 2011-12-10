@@ -7,10 +7,7 @@
 
 #import "PXPattern.h"
 
-@implementation PXPattern {
-	NSMutableSet *_points;
-	NSMutableArray *_pointsInBounds;
-}
+@implementation PXPattern
 
 @synthesize size = _size;
 

@@ -10,7 +10,15 @@ typedef enum {
 	PXPreferencesTabHotkeys
 } PXPreferencesTab;
 
+@class PXGeneralPreferencesController;
+@class PXHotkeysPreferencesController;
+
 @interface PXPreferencesController : NSWindowController
+{
+	PXGeneralPreferencesController *_generalVC;
+	PXHotkeysPreferencesController *_hotkeysVC;
+	PXPreferencesTab _selectedTab;
+}
 
 + (id)sharedPreferencesController;
 

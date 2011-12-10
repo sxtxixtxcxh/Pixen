@@ -9,10 +9,7 @@
 
 #import "NSBezierPath+PXRoundedRectangleAdditions.h"
 
-@implementation PXNewCelButton {
-	NSCellStateValue _state;
-	NSBezierPath *_buttonPath, *_plusPath;
-}
+@implementation PXNewCelButton
 
 @synthesize delegate = _delegate;
 

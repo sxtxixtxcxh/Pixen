@@ -8,9 +8,7 @@
 #import "OSPlasticButtonCell.h"
 #import "OSRectAdditions.h"
 
-@implementation OSPlasticButtonCell {
-	NSImage *_glass, *_glassHighlighted;
-}
+@implementation OSPlasticButtonCell
 
 - (void)dealloc
 {

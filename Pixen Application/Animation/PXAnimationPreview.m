@@ -16,11 +16,7 @@
 @end
 
 
-@implementation PXAnimationPreview {
-	NSTimer *_animationTimer;
-	PXCel *_currentCel;
-	NSUInteger _currentIndex;
-}
+@implementation PXAnimationPreview
 
 @synthesize dataSource = _dataSource;
 

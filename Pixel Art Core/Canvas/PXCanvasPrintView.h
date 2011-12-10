@@ -8,6 +8,9 @@
 @class PXCanvas;
 
 @interface PXCanvasPrintView : NSView
+{
+	PXCanvas *_canvas;
+}
 
 + (id)viewForCanvas:(PXCanvas *)aCanvas;
 

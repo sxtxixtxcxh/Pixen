@@ -8,6 +8,9 @@
 #import <WebKit/WebKit.h>
 
 @interface PXWelcomeController : NSWindowController
+{
+    WebView *_webView;
+}
 
 @property (nonatomic, assign) IBOutlet WebView *webView;
 

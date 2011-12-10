@@ -8,6 +8,9 @@
 @class PXPreset;
 
 @interface PXPresetsManager : NSObject
+{
+	NSMutableArray *_presets;
+}
 
 + (id)sharedPresetsManager;
 

@@ -8,6 +8,9 @@
 @class PXCanvas, PXCanvasWindowController;
 
 @interface PXDocument : NSDocument
+{
+    PXCanvasWindowController *_windowController;
+}
 
 @property (nonatomic, retain) PXCanvasWindowController *windowController;
 

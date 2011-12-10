@@ -13,9 +13,7 @@
 #import "PXToolSwitcher.h"
 #import "PXToolPaletteController.h"
 
-@implementation PXPalettePanel {
-	PXPaletteViewController *_vc;
-}
+@implementation PXPalettePanel
 
 + (id)popWithPalette:(PXPalette *)palette fromWindow:(NSWindow *)window
 {

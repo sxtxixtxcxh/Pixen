@@ -6,6 +6,9 @@
 //
 
 @interface PXPreviewResizeSizeView : NSView
+{
+	NSAttributedString *_scaleString;
+}
 
 - (BOOL)updateScale:(CGFloat)scale;
 - (NSSize)scaleStringSize;

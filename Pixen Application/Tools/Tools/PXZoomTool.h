@@ -13,5 +13,8 @@ typedef enum {
 } PXZoomType;
 
 @interface PXZoomTool : PXTool
+{
+	PXZoomType _zoomType;
+}
 
 @end

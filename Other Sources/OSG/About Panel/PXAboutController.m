@@ -21,9 +21,7 @@
 @end
 
 
-@implementation PXAboutController {
-	PXAboutPanel *_aboutPanel;
-}
+@implementation PXAboutController
 
 @synthesize creditsView = _creditsView, versionField = _versionField;
 

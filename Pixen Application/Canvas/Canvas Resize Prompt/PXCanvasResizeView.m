@@ -9,10 +9,7 @@
 
 #import <math.h>
 
-@implementation PXCanvasResizeView {
-	NSPoint _position;
-	NSAffineTransform *_scaleTransform;
-}
+@implementation PXCanvasResizeView
 
 @synthesize backgroundColor = _backgroundColor, cachedImage = _cachedImage;
 @synthesize newImageSize = _newSize, oldImageSize = _oldSize;

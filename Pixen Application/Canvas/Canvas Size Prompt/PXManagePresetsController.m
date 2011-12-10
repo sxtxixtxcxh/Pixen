@@ -10,9 +10,7 @@
 #import "PXPreset.h"
 #import "PXPresetsManager.h"
 
-@implementation PXManagePresetsController {
-	NSArray *_presets;
-}
+@implementation PXManagePresetsController
 
 @synthesize tableView = _tableView, canDeletePreset = _canDeletePreset;
 

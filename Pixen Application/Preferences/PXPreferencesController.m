@@ -10,11 +10,7 @@
 #import "PXGeneralPreferencesController.h"
 #import "PXHotkeysPreferencesController.h"
 
-@implementation PXPreferencesController {
-	PXGeneralPreferencesController *_generalVC;
-	PXHotkeysPreferencesController *_hotkeysVC;
-	PXPreferencesTab _selectedTab;
-}
+@implementation PXPreferencesController
 
 + (id)sharedPreferencesController
 {

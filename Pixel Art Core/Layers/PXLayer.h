@@ -20,6 +20,10 @@
 	NSImage *cachedSourceOutImage;
 	
 	PXCanvas *canvas;
+
+    BOOL _visible;
+    NSString *_name;
+    CGFloat _opacity;
 }
 
 @property (nonatomic, assign) BOOL visible;

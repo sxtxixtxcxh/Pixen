@@ -7,9 +7,7 @@
 
 #import "PXPaletteViewSizeSelector.h"
 
-@implementation PXPaletteViewSizeSelector {
-	NSImage *_bigImage, *_smallImage;
-}
+@implementation PXPaletteViewSizeSelector
 
 @synthesize controlSize = _controlSize, delegate = _delegate;
 

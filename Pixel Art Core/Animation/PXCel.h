@@ -10,6 +10,10 @@
 @class PXCanvas, PXAnimation;
 
 @interface PXCel : NSObject < NSCoding, NSCopying >
+{
+    PXCanvas *_canvas;
+    NSTimeInterval _duration;
+}
 
 @property (nonatomic, retain) PXCanvas *canvas;
 

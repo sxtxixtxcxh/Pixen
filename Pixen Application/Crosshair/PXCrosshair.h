@@ -8,6 +8,9 @@
 @class PXTool;
 
 @interface PXCrosshair : NSObject
+{
+    NSPoint _cursorPosition;
+}
 
 @property (nonatomic, assign) NSPoint cursorPosition;
 @property (nonatomic, readonly) NSColor *color;

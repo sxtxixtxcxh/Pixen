@@ -6,6 +6,19 @@
 //
 
 @interface PXInfoPanelController : NSWindowController
+{
+    NSTextField *_cursorX;
+    NSTextField *_cursorY;
+    NSTextField *_width;
+    NSTextField *_height;
+    NSTextField *_red;
+    NSTextField *_green;
+    NSTextField *_blue;
+    NSTextField *_alpha;
+    NSTextField *_hex;
+    
+    NSPoint _draggingOrigin;
+}
 
 @property (nonatomic, assign) IBOutlet NSTextField *cursorX;
 @property (nonatomic, assign) IBOutlet NSTextField *cursorY;

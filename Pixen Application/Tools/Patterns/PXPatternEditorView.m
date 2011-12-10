@@ -10,10 +10,7 @@
 #import "PXGrid.h"
 #import "PXPattern.h"
 
-@implementation PXPatternEditorView {
-	PXGrid *_grid;
-	BOOL _erasing;
-}
+@implementation PXPatternEditorView
 
 @synthesize pattern = _pattern;
 @synthesize delegate = _delegate;

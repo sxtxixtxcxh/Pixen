@@ -9,9 +9,7 @@
 
 #import "PXPaletteViewSizeSelector.h"
 
-@implementation PXPaletteViewScrollView {
-	PXPaletteViewSizeSelector *_sizeSelector;
-}
+@implementation PXPaletteViewScrollView
 
 @dynamic controlSize;
 

@@ -7,9 +7,7 @@
 
 #import "PXLayerPaneBackgroundView.h"
 
-@implementation PXLayerPaneBackgroundView {
-	NSGradient *_gradient;
-}
+@implementation PXLayerPaneBackgroundView
 
 - (id)initWithFrame:(NSRect)frame
 {

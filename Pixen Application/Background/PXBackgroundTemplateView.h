@@ -12,6 +12,7 @@
 	IBOutlet NSView *view;
 	IBOutlet NSTextField *templateNameField, *templateClassNameField;
 	IBOutlet PXBackgroundPreviewView *imageView;
+    BOOL _highlighted;
 }
 
 @property (nonatomic, retain) PXBackground *background;

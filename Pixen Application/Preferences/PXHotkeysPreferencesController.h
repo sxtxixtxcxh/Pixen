@@ -6,6 +6,9 @@
 //
 
 @interface PXHotkeysPreferencesController : NSViewController
+{
+    NSForm *_form;
+}
 
 @property (nonatomic, assign) IBOutlet NSForm *form;
 

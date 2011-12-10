@@ -9,7 +9,7 @@
 
 @implementation PXGrid
 
-@synthesize unitSize, color, shouldDraw;
+@synthesize unitSize = _unitSize, color = _color, shouldDraw = _shouldDraw;
 
 - (id)init
 {
@@ -50,7 +50,7 @@
 
 - (void)drawRect:(NSRect)drawingRect
 {
-	if (!shouldDraw)
+	if (!self.shouldDraw)
 		return;
 	
 	NSSize dimensions = drawingRect.size;
@@ -61,15 +61,15 @@
 	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
 	[NSBezierPath setDefaultLineWidth:0.0f];
 	
-	[color set];
+	[self.color set];
 	
-	for (CGFloat i = 0.0f; i < dimensions.width + unitSize.width; i += unitSize.width)
+	for (CGFloat i = 0.0f; i < dimensions.width + self.unitSize.width; i += self.unitSize.width)
 	{
 		[NSBezierPath strokeLineFromPoint:NSMakePoint(i, 0.0f)
 								  toPoint:NSMakePoint(i, dimensions.height)];
 	}
 	
-	for (CGFloat i = 0.0f; i < dimensions.height + unitSize.height; i += unitSize.height)
+	for (CGFloat i = 0.0f; i < dimensions.height + self.unitSize.height; i += self.unitSize.height)
 	{
 		[NSBezierPath strokeLineFromPoint:NSMakePoint(0.0f, i)
 								  toPoint:NSMakePoint(dimensions.width, i)];
@@ -100,9 +100,9 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-	return [[PXGrid allocWithZone:zone] initWithUnitSize:unitSize
-												   color:color
-											  shouldDraw:shouldDraw];
+	return [[PXGrid allocWithZone:zone] initWithUnitSize:self.unitSize
+												   color:self.color
+											  shouldDraw:self.shouldDraw];
 }
 
 @end

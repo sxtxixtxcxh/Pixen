@@ -8,6 +8,11 @@
 #import "PXPalette.h"
 
 @interface PXPaletteExporter : NSObject < NSOpenSavePanelDelegate >
+{
+	NSSavePanel *_savePanel;
+	NSPopUpButton *_typeSelector;
+	PXPalette *_palette;
+}
 
 - (void)runWithPalette:(PXPalette *)palette inWindow:(NSWindow *)window;
 

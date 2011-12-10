@@ -9,9 +9,7 @@
 
 #import "PXPreset.h"
 
-@implementation PXPresetsManager {
-	NSMutableArray *_presets;
-}
+@implementation PXPresetsManager
 
 + (id)sharedPresetsManager
 {

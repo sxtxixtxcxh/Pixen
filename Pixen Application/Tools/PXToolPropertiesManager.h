@@ -13,6 +13,10 @@ typedef enum {
 } PXToolPropertiesSide;
 
 @interface PXToolPropertiesManager : NSWindowController
+{
+    PXToolPropertiesSide _side;
+    PXToolPropertiesController *_propertiesController;
+}
 
 @property (nonatomic, readonly) PXToolPropertiesSide side;
 

@@ -6,6 +6,11 @@
 //
 
 @interface PXPreset : NSObject < NSCoding >
+{
+    NSString *_name;
+    NSSize _size;
+    NSColor *_color;
+}
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) NSSize size;

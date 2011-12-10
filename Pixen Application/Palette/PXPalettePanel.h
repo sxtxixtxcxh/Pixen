@@ -10,6 +10,9 @@
 @class PXPaletteView, PXPaletteViewController;
 
 @interface PXPalettePanel : NSPanel
+{
+	PXPaletteViewController *_vc;
+}
 
 + (id)popWithPalette:(PXPalette *)palette fromWindow:(NSWindow *)window;
 - (id)initWithPalette:(PXPalette *)palette;

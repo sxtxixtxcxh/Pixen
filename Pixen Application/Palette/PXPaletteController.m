@@ -24,10 +24,6 @@
 
 
 @implementation PXPaletteController
-{
-	PXPaletteMode _mode;
-	PXPalette *_frequencyPalette, *_recentPalette;
-}
 
 #define RECENT_LIMIT 32
 

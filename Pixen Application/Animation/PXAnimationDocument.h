@@ -10,6 +10,9 @@
 @class PXAnimation;
 
 @interface PXAnimationDocument : PXDocument
+{
+    PXAnimation *_animation;
+}
 
 @property (nonatomic, readonly) PXAnimation *animation;
 
