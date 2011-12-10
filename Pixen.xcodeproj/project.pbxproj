@@ -43,7 +43,7 @@
 		C953831913FC477100440AB5 /* PXSequenceExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C953831713FC477100440AB5 /* PXSequenceExportViewController.m */; };
 		C96541EB13FF44A600F1F83C /* PXDeleteCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = C96541E913FF44A600F1F83C /* PXDeleteCollectionView.h */; };
 		C96541EC13FF44A600F1F83C /* PXDeleteCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C96541EA13FF44A600F1F83C /* PXDeleteCollectionView.m */; };
-		C969A18E13D2012A00F1C1FE /* QLPlugin.qlgenerator in CopyFiles */ = {isa = PBXBuildFile; fileRef = C969A18A13D200B400F1C1FE /* QLPlugin.qlgenerator */; };
+		C969A18E13D2012A00F1C1FE /* QLPlugin.qlgenerator in Copy QuickLook plugin */ = {isa = PBXBuildFile; fileRef = C969A18A13D200B400F1C1FE /* QLPlugin.qlgenerator */; };
 		C96BABB513ABD3AB00015C92 /* PXHotkeysPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */; };
 		C96BABBB13ABD44A00015C92 /* PXHotkeysPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */; };
 		C96BABBC13ABD44A00015C92 /* PXHotkeysPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */; };
@@ -451,7 +451,7 @@
 		EAC917A50CE7DC7300E519E1 /* prevcelpressed.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917450CE7DC7300E519E1 /* prevcelpressed.png */; };
 		EAC917A60CE7DC7300E519E1 /* Remove.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC917460CE7DC7300E519E1 /* Remove.tiff */; };
 		EAC917A70CE7DC7300E519E1 /* titlebargradient.tif in Resources */ = {isa = PBXBuildFile; fileRef = EAC917470CE7DC7300E519E1 /* titlebargradient.tif */; };
-		EAC917DC0CE7DDDF00E519E1 /* colorpalette.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EAC917090CE7DC7300E519E1 /* colorpalette.png */; };
+		EAC917DC0CE7DDDF00E519E1 /* colorpalette.png in Copy Color Palette */ = {isa = PBXBuildFile; fileRef = EAC917090CE7DC7300E519E1 /* colorpalette.png */; };
 		EAC918150CE7DF8100E519E1 /* PXCanvasView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5482DC0513E2DB000101DE /* PXCanvasView.h */; };
 		EACDBD810878B37100564512 /* PXBackgroundTemplateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACDBD7F0878B37100564512 /* PXBackgroundTemplateView.xib */; };
 		EAF6941A06A9AE0B0019D8D7 /* PXCanvas.h in Headers */ = {isa = PBXBuildFile; fileRef = EA495593054C6943009A8EE7 /* PXCanvas.h */; };
@@ -495,24 +495,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		618AE6F3087E712200A9FA9B /* CopyFiles */ = {
+		618AE6F3087E712200A9FA9B /* Copy Color Palette */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = ColorPickers/PXColorPicker.bundle/Contents;
 			dstSubfolderSpec = 7;
 			files = (
-				EAC917DC0CE7DDDF00E519E1 /* colorpalette.png in CopyFiles */,
+				EAC917DC0CE7DDDF00E519E1 /* colorpalette.png in Copy Color Palette */,
 			);
+			name = "Copy Color Palette";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		61DF7262087921B700402897 /* CopyFiles */ = {
+		61DF7262087921B700402897 /* Copy QuickLook plugin */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Contents/Library/QuickLook;
 			dstSubfolderSpec = 1;
 			files = (
-				C969A18E13D2012A00F1C1FE /* QLPlugin.qlgenerator in CopyFiles */,
+				C969A18E13D2012A00F1C1FE /* QLPlugin.qlgenerator in Copy QuickLook plugin */,
 			);
+			name = "Copy QuickLook plugin";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -2181,12 +2183,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 616BAEA508553EFB004CF172 /* Build configuration list for PBXNativeTarget "Pixen" */;
 			buildPhases = (
-				EAF6940906A9AE0B0019D8D7 /* Headers */,
-				EAF6946206A9AE0B0019D8D7 /* Resources */,
 				EAF694B706A9AE0B0019D8D7 /* Sources */,
+				EAF6940906A9AE0B0019D8D7 /* Headers */,
 				EAF6951006A9AE0B0019D8D7 /* Frameworks */,
-				61DF7262087921B700402897 /* CopyFiles */,
-				618AE6F3087E712200A9FA9B /* CopyFiles */,
+				EAF6946206A9AE0B0019D8D7 /* Resources */,
+				61DF7262087921B700402897 /* Copy QuickLook plugin */,
+				618AE6F3087E712200A9FA9B /* Copy Color Palette */,
 			);
 			buildRules = (
 			);
@@ -3030,7 +3032,7 @@
 				616BAEA608553EFB004CF172 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		616BAEA908553EFB004CF172 /* Build configuration list for PBXProject "Pixen" */ = {
 			isa = XCConfigurationList;
@@ -3039,7 +3041,7 @@
 				616BAEAA08553EFB004CF172 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
