@@ -2,8 +2,7 @@
 //  PXSequenceExportViewController.m
 //  Pixen
 //
-//  Created by Matt Rajca on 8/17/11.
-//  Copyright 2011 Matt Rajca. All rights reserved.
+//  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
 #import "PXSequenceExportViewController.h"
@@ -18,67 +17,68 @@
 
 - (id)init
 {
-	self = [super initWithNibName:@"PXSequenceExportView" bundle:nil];
-	return self;
+	return [super initWithNibName:@"PXSequenceExportView" bundle:nil];
 }
 
 - (void)dealloc
 {
-	[_fileTypes release];
+	[_typesController removeObserver:self forKeyPath:@"selectionIndex"];
 	[_fileTemplate release];
+	
 	[super dealloc];
 }
 
-- (NSArray *)fileTypes
+- (void)awakeFromNib
 {
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		
-		_fileTypes = [[NSMutableArray alloc] init];
-		
-		for (NSString *type in [PXCanvasDocument writableTypes]) {
-			if (UTTypeEqualNSString(type, PixenImageFileTypeOld) ||
-				UTTypeEqualNSString(type, PixenAnimationFileType) ||
-				UTTypeEqualNSString(type, PixenAnimationFileTypeOld)) {
-				
-				continue;
-			}
+	for (NSString *type in [PXCanvasDocument writableTypes]) {
+		if (UTTypeEqualNSString(type, PixenImageFileTypeOld) ||
+			UTTypeEqualNSString(type, PixenAnimationFileType) ||
+			UTTypeEqualNSString(type, PixenAnimationFileTypeOld)) {
 			
-			NSString *displayName = (NSString *) UTTypeCopyDescription((__bridge CFStringRef)type);
-			
-			if (displayName) {
-				[_fileTypes addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-									   displayName, @"name", type, @"uti", nil]];
-				[displayName release];
-			}
+			continue;
 		}
 		
-		[self changedSelection:nil];
+		NSString *displayName = (NSString *) UTTypeCopyDescription( (__bridge CFStringRef) type);
 		
-	});
+		if (displayName) {
+			[_typesController addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+										 displayName, @"name", type, @"uti", nil]];
+			[displayName release];
+		}
+	}
 	
-	return _fileTypes;
+	[_typesController addObserver:self
+					   forKeyPath:@"selectionIndex"
+						  options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew)
+						  context:NULL];
+	
+	[_typesController setSelectionIndex:0];
 }
 
-- (IBAction)changedSelection:(id)sender
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	[_typesController setSelectionIndex:[sender indexOfSelectedItem]];
+	if (![keyPath isEqualToString:@"selectionIndex"])
+		return;
 	
-	NSDictionary *dictionary = (NSDictionary *) UTTypeCopyDeclaration((__bridge CFStringRef)[self selectedUTI]);
-	id ext = [[dictionary valueForKey:(NSString *)kUTTypeTagSpecificationKey] valueForKey:(NSString *)kUTTagClassFilenameExtension];
+	NSDictionary *dictionary = (NSDictionary *) UTTypeCopyDeclaration( (__bridge CFStringRef) [self selectedUTI]);
+	id ext = [[dictionary valueForKey:(NSString *) kUTTypeTagSpecificationKey] valueForKey:(NSString *) kUTTagClassFilenameExtension];
 	
 	if ([ext isKindOfClass:[NSArray class]])
 		ext = [ext objectAtIndex:0];
 	
-	NSString *template = [[_fileTemplate stringByDeletingPathExtension] stringByAppendingPathExtension:ext];
-	self.fileTemplate = template;
+	self.fileTemplate = [[_fileTemplate stringByDeletingPathExtension] stringByAppendingPathExtension:ext];
 	
 	[dictionary release];
 }
 
 - (NSString *)selectedUTI
 {
-	return [[_fileTypes objectAtIndex:[_typesController selectionIndex]] valueForKey:@"uti"];
+	NSArray *selectedUTIs = [_typesController selectedObjects];
+	
+	if (![selectedUTIs count])
+		return nil;
+	
+	return [[selectedUTIs objectAtIndex:0] valueForKey:@"uti"];
 }
 
 @end
