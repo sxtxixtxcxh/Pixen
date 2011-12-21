@@ -37,6 +37,8 @@
 			<array>
 				<string>pxa</string>
 			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>PixenAnim</string>
 			<key>CFBundleTypeName</key>
 			<string>Pixen Animation</string>
 			<key>CFBundleTypeOSTypes</key>
@@ -293,6 +295,8 @@
 			<array>
 				<string>pxa</string>
 			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>PixenAnim</string>
 			<key>CFBundleTypeName</key>
 			<string>Pixen Animation</string>
 			<key>CFBundleTypeOSTypes</key>
@@ -382,6 +386,8 @@
 			</array>
 			<key>UTTypeDescription</key>
 			<string>Pixen Animation</string>
+			<key>UTTypeIconFile</key>
+			<string>PixenAnim</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.Pixen.pxan</string>
 			<key>UTTypeReferenceURL</key>
@@ -433,6 +439,8 @@
 			</array>
 			<key>UTTypeDescription</key>
 			<string>Pixen Animation (Old UTI)</string>
+			<key>UTTypeIconFile</key>
+			<string>PixenAnim</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.opensword.pxan</string>
 			<key>UTTypeReferenceURL</key>

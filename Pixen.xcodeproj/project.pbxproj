@@ -50,6 +50,7 @@
 		C9799FB013AD69C000E261EE /* PXShapeToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9799FAE13AD69C000E261EE /* PXShapeToolPropertiesView.xib */; };
 		C9799FB813AD6ED900E261EE /* PXPencilToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9799FB613AD6ED900E261EE /* PXPencilToolPropertiesView.xib */; };
 		C9799FBB13AD745500E261EE /* PXEyedropperToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9799FB913AD745500E261EE /* PXEyedropperToolPropertiesView.xib */; };
+		C97FDB2614A161DB00371079 /* PixenAnim.icns in Resources */ = {isa = PBXBuildFile; fileRef = C97FDB2514A161DB00371079 /* PixenAnim.icns */; };
 		C984251213AFC142000072C5 /* PXPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = C984251013AFC142000072C5 /* PXPreview.xib */; };
 		C9A0858E13DE3EB600C27061 /* PXDiscoverPixen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A0858A13DE3EB600C27061 /* PXDiscoverPixen.xib */; };
 		C9A0859113DE3ECD00C27061 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A0859013DE3ECD00C27061 /* WebKit.framework */; };
@@ -574,6 +575,7 @@
 		C9799FAF13AD69C000E261EE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXShapeToolPropertiesView.xib; sourceTree = "<group>"; };
 		C9799FB713AD6ED900E261EE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPencilToolPropertiesView.xib; sourceTree = "<group>"; };
 		C9799FBA13AD745500E261EE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXEyedropperToolPropertiesView.xib; sourceTree = "<group>"; };
+		C97FDB2514A161DB00371079 /* PixenAnim.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PixenAnim.icns; sourceTree = "<group>"; };
 		C984251113AFC142000072C5 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreview.xib; sourceTree = "<group>"; };
 		C9A0858B13DE3EB600C27061 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXDiscoverPixen.xib; sourceTree = "<group>"; };
 		C9A0859013DE3ECD00C27061 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -1873,6 +1875,7 @@
 				EAC916E40CE7DC7300E519E1 /* LockedIcon.icns */,
 				EAC916E50CE7DC7300E519E1 /* Pixen.icns */,
 				EAC916E60CE7DC7300E519E1 /* Pixen.png */,
+				C97FDB2514A161DB00371079 /* PixenAnim.icns */,
 				EAC916E70CE7DC7300E519E1 /* pixenbig.png */,
 				EAC916E80CE7DC7300E519E1 /* PixenDoc.icns */,
 				EAC916E90CE7DC7300E519E1 /* Preferences Icons */,
@@ -2382,6 +2385,7 @@
 				C9FD44E113FD70FC00CEE4FC /* PXPatternEditor.xib in Resources */,
 				C9ADD4AA1400844B00257E38 /* PXPatternItem.xib in Resources */,
 				C91F07D3142D0BAB007F812C /* PXInfoPanel.xib in Resources */,
+				C97FDB2614A161DB00371079 /* PixenAnim.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
