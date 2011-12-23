@@ -162,11 +162,11 @@
 {
 	[self pause:nil];
 	
-	_currentIndex--;
-	
-	if (_currentIndex == NSNotFound) {
-		_currentIndex = [_dataSource numberOfCels] - 1;
+	if (_currentIndex == 0) {
+		_currentIndex = [_dataSource numberOfCels];
 	}
+	
+	_currentIndex--;
 	
 	[self refreshCurrentCel];
 }
