@@ -28,6 +28,7 @@
 
 @implementation PXLayerCollectionViewItem
 
+@synthesize backgroundView = _backgroundView;
 @synthesize layerController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -98,8 +99,6 @@
 	item = [[[NSMenuItem alloc] init] autorelease];
 	[item setTitle:NSLocalizedString(@"Delete", @"Delete")];
 	[item setAction:@selector(delete:)];
-	[item setKeyEquivalent:[NSString stringWithCharacters:(const unichar[]){NSDeleteCharacter} length:1]];
-	[item setKeyEquivalentModifierMask:0];
 	[item setTarget:self];
 	[menu addItem:item];
 	
@@ -263,6 +262,9 @@
 	[super setSelected:state];
 	
 	if (state) {
+		[[nameField cell] setBackgroundStyle:NSBackgroundStyleLowered];
+		[[opacityField cell] setBackgroundStyle:NSBackgroundStyleLowered];
+		
 		if (nameField.isEditing) {
 			[[nameField cell] setTextColor:[NSColor blackColor]];
 		}
@@ -273,11 +275,14 @@
 		[[opacityField cell] setTextColor:[NSColor whiteColor]];
 	}
 	else {
+		[[nameField cell] setBackgroundStyle:NSBackgroundStyleLight];
+		[[opacityField cell] setBackgroundStyle:NSBackgroundStyleLight];
+		
 		[[nameField cell] setTextColor:[NSColor blackColor]];
 		[[opacityField cell] setTextColor:[NSColor grayColor]];
 	}
 	
-	[backgroundView setSelected:state];
+	[_backgroundView setSelected:state];
 }
 
 @end
