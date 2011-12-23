@@ -28,7 +28,7 @@
 		}
 	}
 	
-	[super sendEvent: theEvent];
+	[super sendEvent:theEvent];
 }
 
 @end
