@@ -122,7 +122,7 @@
 		{
 			[filmStrip reloadData];
 			[animationPreview reloadData];
-			[animationPreview play:self];
+			[animationPreview play];
 		}
 	}
 }
@@ -141,7 +141,7 @@
 	
 	[filmStrip reloadData];
 	[animationPreview reloadData];
-	[animationPreview play:self];
+	[animationPreview play];
 	
 	if ([keyPath isEqualToString:@"countOfCels"]) {
 		// If the change involved the number of cels getting bigger, this means a new cel was added; we should activate it.
@@ -165,7 +165,7 @@
 	}
 }
 
-- (NSInteger)numberOfCels
+- (NSUInteger)numberOfCels
 {
 	return NSEqualSizes([animation size], NSZeroSize) ? 0 : [animation countOfCels];
 }

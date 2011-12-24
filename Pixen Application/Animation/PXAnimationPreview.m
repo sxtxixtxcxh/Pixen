@@ -44,7 +44,7 @@
 	return (_animationTimer != nil);
 }
 
-- (void)setDataSource:(id)ds
+- (void)setDataSource:(id < PXAnimationPreviewDataSource >)ds
 {
 	if (_dataSource != ds) {
 		[self stop];
@@ -71,7 +71,7 @@
 	[_currentCel release];
 	_currentCel = nil;
 	
-	[self pause:nil];
+	[self pause];
 	
 	_currentIndex = NSNotFound;
 }
@@ -124,14 +124,14 @@
 				   fraction:1.0f];
 }
 
-- (IBAction)play:(id)sender
+- (void)play
 {
 	[self willChangeValueForKey:@"isPlaying"];
 	[self incrementFromTimer:nil];
 	[self didChangeValueForKey:@"isPlaying"];
 }
 
-- (IBAction)pause:(id)sender
+- (void)pause
 {
 	[self willChangeValueForKey:@"isPlaying"];
 	
@@ -145,22 +145,22 @@
 - (IBAction)playPause:(id)sender
 {
 	if ([self isPlaying]) {
-		[self pause:sender];
+		[self pause];
 	}
 	else {
-		[self play:sender];
+		[self play];
 	}
 }
 
 - (IBAction)stepForward:(id)sender
 {
-	[self pause:nil];
+	[self pause];
 	[self incrementFrame];
 }
 
 - (IBAction)stepBackward:(id)sender
 {
-	[self pause:nil];
+	[self pause];
 	
 	if (_currentIndex == 0) {
 		_currentIndex = [_dataSource numberOfCels];

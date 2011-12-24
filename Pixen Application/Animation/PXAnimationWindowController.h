@@ -7,10 +7,11 @@
 //  Copyright 2005 Pixen. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "PXAnimationPreview.h"
 #import "PXCanvasWindowController.h"
-@class PXAnimation, PXCel, PXFilmStripView, PXAnimationPreview;
-@interface PXAnimationWindowController : PXCanvasWindowController {
+
+@class PXAnimation, PXCel, PXFilmStripView;
+@interface PXAnimationWindowController : PXCanvasWindowController < PXAnimationPreviewDataSource > {
   @private
 	PXAnimation *animation;
 	IBOutlet NSSplitView *outerSplitView;
