@@ -43,8 +43,8 @@
 	[[self.creditsView textStorage] setAttributedString:attributedString];
 	[attributedString release];
 	
-	NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey: (NSString *) kCFBundleVersionKey];
-	version = [@"Version " stringByAppendingString:version];
+	NSString *versionNum = [[[NSBundle mainBundle] infoDictionary] valueForKey: (NSString *) kCFBundleVersionKey];
+	NSString *version = [NSString stringWithFormat:NSLocalizedString(@"VERSION_STRING", nil), versionNum];
 	
 	[self.versionField setStringValue:version];
 }

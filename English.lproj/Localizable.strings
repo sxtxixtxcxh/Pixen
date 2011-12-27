@@ -241,3 +241,6 @@
 "ALREADY_SYSTEM_PALETTE" = "There is already a system palette by that name.";
 /* Would you like to pick a different name for %@? */
 "PICK_DIFFERENT_NAME" = "Would you like to pick a different name for %@?";
+
+/* About */
+"VERSION_STRING" = "Version %@";
