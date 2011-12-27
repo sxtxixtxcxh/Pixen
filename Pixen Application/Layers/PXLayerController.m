@@ -26,6 +26,8 @@
 
 - (NSUInteger)invertLayerIndex:(NSUInteger)index;
 
+- (void)highlightLayerAtIndex:(NSUInteger)index;
+
 @end
 
 
