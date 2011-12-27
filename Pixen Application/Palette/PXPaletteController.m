@@ -69,7 +69,6 @@
 	{
 		_document = document;
 		
-		[_paletteView setDocument:document];
 		[self refreshPalette:nil];
 	}
 }

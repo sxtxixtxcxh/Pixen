@@ -7,14 +7,13 @@
 
 #import "PXPaletteView.h"
 
-#import "PXDocument.h"
 #import "PXPaletteColorLayer.h"
 
 @implementation PXPaletteView
 
 const CGFloat viewMargin = 1.0f;
 
-@synthesize enabled, highlightEnabled, controlSize, document, palette, delegate;
+@synthesize enabled, highlightEnabled, controlSize, palette, delegate;
 
 - (id)initWithFrame:(NSRect)frameRect
 {

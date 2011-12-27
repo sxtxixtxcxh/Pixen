@@ -13,7 +13,6 @@
 @interface PXPaletteView : NSView
 {
   @private
-	PXDocument *document;
 	PXPalette *palette;
 	NSMutableArray *paletteIndices;
 	
@@ -29,7 +28,6 @@
 @property (nonatomic, assign) BOOL highlightEnabled;
 @property (nonatomic, assign) NSControlSize controlSize;
 
-@property (nonatomic, assign) PXDocument *document;
 @property (nonatomic, assign) PXPalette *palette;
 
 @property (nonatomic, assign) id delegate;
