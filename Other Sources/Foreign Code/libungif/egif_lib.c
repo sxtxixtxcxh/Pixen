@@ -237,7 +237,7 @@ EGifPutScreenDesc(GifFileType * GifFile,
 /* First write the version prefix into the file. */
 #ifndef DEBUG_NO_PREFIX
     if (WRITE(GifFile, (unsigned char *)GifVersionPrefix,
-              strlen(GifVersionPrefix)) != (int)strlen(GifVersionPrefix)) {
+              (int)strlen(GifVersionPrefix)) != strlen(GifVersionPrefix)) {
         _GifError = E_GIF_ERR_WRITE_FAILED;
         return GIF_ERROR;
     }
