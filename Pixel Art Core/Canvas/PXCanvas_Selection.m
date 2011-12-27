@@ -60,14 +60,12 @@
 	return rects;
 }
 
-- (PXLayer *)promoteSelection
+- (void)promoteSelection
 {
-	PXLayer *newLayer = nil;
-	
 	[self beginUndoGrouping]; {
-		newLayer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Promoted Selection", @"Promoted Selection")
-											 size:[self size]
-									fillWithColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]] autorelease];
+		PXLayer *newLayer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Promoted Selection", @"Promoted Selection")
+													  size:[self size]
+											 fillWithColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]] autorelease];
 		
 		int i, j;
 		NSPoint point;
@@ -90,12 +88,9 @@
 		}
 		
 		[self addLayer:newLayer];
-		[self activateLayer:newLayer];
 		[self layersChanged];
 		[self deselect];
 	} [self endUndoGrouping:NSLocalizedString(@"Promote Selection to Layer", @"Promote Selection to Layer")];
-	
-	return newLayer;
 }
 
 - (void)setHasSelection:(BOOL)newSelection

@@ -1284,16 +1284,16 @@
 		EA31F96A0CE7CD9300EC481B /* Layers */ = {
 			isa = PBXGroup;
 			children = (
+				EA31F96F0CE7CD9300EC481B /* PXLayerCollectionView.h */,
+				EA31F9700CE7CD9300EC481B /* PXLayerCollectionView.m */,
+				D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */,
+				D88A735013A93CCD00B56402 /* PXLayerCollectionViewItem.m */,
 				EA31F96B0CE7CD9300EC481B /* PXLayerController.h */,
 				EA31F96C0CE7CD9300EC481B /* PXLayerController.m */,
 				EA31F96D0CE7CD9300EC481B /* PXLayerDetailsView.h */,
 				EA31F96E0CE7CD9300EC481B /* PXLayerDetailsView.m */,
-				D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */,
-				D88A735013A93CCD00B56402 /* PXLayerCollectionViewItem.m */,
 				615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */,
 				615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */,
-				EA31F96F0CE7CD9300EC481B /* PXLayerCollectionView.h */,
-				EA31F9700CE7CD9300EC481B /* PXLayerCollectionView.m */,
 				EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */,
 				EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */,
 			);

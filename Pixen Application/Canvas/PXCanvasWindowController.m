@@ -80,7 +80,6 @@
 	NSView *paletteView = [paletteController view];
 	[paletteSplit addSubview:paletteView];
 	[canvasController setLayerController:layerController];
-	[layerController setSubview:layerSplit];
 	[layerSplit addSubview:[layerController view]];
 	[self updateFrameSizes];
 	[self prepareToolbar];
@@ -141,7 +140,6 @@
 {
 	[super setDocument:doc];
 	[canvasController setDocument:doc];
-	[layerController setDocument:doc];
 	[paletteController setDocument:doc];
 }
 

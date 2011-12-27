@@ -68,9 +68,10 @@
 	if (activeLayer == aLayer || !aLayer)
 		return;
 	
-	//if([[self undoManager] groupingLevel] != 0) { [[[self undoManager] prepareWithInvocationTarget:self] activateLayer:activeLayer]; }
-	
 	activeLayer = aLayer;
+	
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc postNotificationName:PXCanvasLayerSelectionDidChangeNotificationName object:self];
 }
 
 - (void)layersChanged
@@ -150,6 +151,15 @@
 		[[[self undoManager] prepareWithInvocationTarget:self] removeLayer:aLayer];
 		[aLayer setCanvas:self];
 		[layers insertObject:aLayer atIndex:index];
+		
+		NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
+							  aLayer, PXLayerKey,
+							  [NSNumber numberWithUnsignedInteger:index], PXLayerIndexKey, nil];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasAddedLayerNotificationName
+															object:self
+														  userInfo:info];
+		
 		[self activateLayer:aLayer];
 		[self refreshWholePalette];
 		[self changed];
@@ -169,6 +179,14 @@
 		NSUInteger newIndex = [layers indexOfObject:layer];
 		[[[self undoManager] prepareWithInvocationTarget:self] insertLayer:layer atIndex:index];
 		[layers removeObject:layer];
+		
+		NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
+							  [NSNumber numberWithUnsignedInteger:index-1], PXLayerIndexKey, nil];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasRemovedLayerNotificationName
+															object:self
+														  userInfo:info];
+		
 		if(newIndex >= [layers count])
 		{
 			newIndex = [layers count] - 1;
@@ -244,7 +262,7 @@
 	} [self endUndoGrouping:[NSString stringWithFormat:NSLocalizedString(@"Rotate Layer", @"Rotate Layer"), degrees, [NSString degreeString]]];
 }
 
-- (PXLayer *)duplicateLayerAtIndex:(NSUInteger)index
+- (void)duplicateLayerAtIndex:(NSUInteger)index
 {
 	PXLayer *result = [[[layers objectAtIndex:index] copy] autorelease];
 	result.name = [result.name stringByAppendingString:NSLocalizedString(@" Copy", @" Copy")];
@@ -252,8 +270,6 @@
 	[self beginUndoGrouping]; {
 		[self insertLayer:result atIndex:index+1];
 	} [self endUndoGrouping:NSLocalizedString(@"Duplicate Layer", @"Duplicate Layer")];
-	
-	return result;
 }
 
 - (void)flipLayerHorizontally:aLayer

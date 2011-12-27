@@ -5,8 +5,10 @@
 //  Copyright 2011 Pixen Project. All rights reserved.
 //
 
-extern NSString *PXLayerSelectionDidChangeName;
-extern NSString *PXCanvasLayerSelectionDidChangeName;
+extern NSString *PXCanvasLayerSelectionDidChangeNotificationName;
+extern NSString *PXCanvasAddedLayerNotificationName;
+extern NSString *PXCanvasRemovedLayerNotificationName;
+
 extern NSString *PXCanvasSizeChangedNotificationName;
 extern NSString *PXCanvasChangedNotificationName;
 extern NSString *PXPatternChangedNotificationName;

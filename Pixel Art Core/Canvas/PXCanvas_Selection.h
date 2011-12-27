@@ -15,7 +15,7 @@
 - (NSData *)selectionData;
 - (BOOL)hasSelection;
 - (void)setHasSelection:(BOOL)hasSelection;
-- (PXLayer *)promoteSelection;
+- (void)promoteSelection;
 - (void)deselect;
 - (void)selectPixelAtPoint:(NSPoint)point;
 - (void)deselectPixelAtPoint:(NSPoint)point;

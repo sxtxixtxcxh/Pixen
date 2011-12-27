@@ -75,6 +75,7 @@ NSString *PXLayerOpacityKey = @"PXLayerOpacity";
 NSString *PXLayerNameKey = @"PXLayerName";
 
 NSString *PXLayerKey = @"layer";
+NSString *PXLayerIndexKey = @"layerIndex";
 
 NSString *PXFadeOpacityKey = @"opacity";
 NSString *PXFadeDirectionKey = @"direction";

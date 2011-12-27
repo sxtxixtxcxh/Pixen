@@ -43,7 +43,6 @@
 - (NSScrollView *)scrollView;
 - (PXLayerController *)layerController;
 - window;
-- (void)layerSelectionDidChange:(NSNotification *) aNotification;
 - (void)setLayerController:contro;
 - (void)prepare;
 - (void)toolSwitched:(NSNotification *)notification;
