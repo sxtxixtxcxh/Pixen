@@ -160,7 +160,7 @@
 		[sheetImageView setImage:[self spriteSheetImage]];
 	}
 	else {
-		[sheetImageView setImage:[NSImage imageNamed:@"Pixen"]];
+		[sheetImageView setImage:[NSImage imageNamed:@"Pixen128"]];
 	}
 }
 

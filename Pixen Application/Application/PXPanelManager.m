@@ -5,7 +5,7 @@
 
 #import "PXPanelManager.h"
 #import "PXWelcomeController.h"
-#import "PXAboutController.h"
+#import "PXAboutWindowController.h"
 #import "PXToolPaletteController.h"
 #import "PXToolPropertiesManager.h"
 #import "PXPreferencesController.h"
@@ -306,7 +306,7 @@ static PXPanelManager *sharedManager = nil;
 
 - (IBAction)showAbout: (id)sender
 {
-	[[PXAboutController sharedAboutController] showPanel:self];
+	[[PXAboutWindowController sharedController] showWindow:self];
 }
 
 - (IBAction)showToolPalette: (id)sender

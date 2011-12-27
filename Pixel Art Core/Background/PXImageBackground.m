@@ -50,7 +50,7 @@
 {
 	if ( ! ( self = [super init] ) ) 
 		return nil;
-    image = [[NSImage imageNamed:@"Pixen"] retain];
+    image = [[NSImage imageNamed:@"Pixen128"] retain];
     [self setColor:[NSColor whiteColor]];
     return self;
 }

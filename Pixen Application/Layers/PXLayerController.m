@@ -5,12 +5,10 @@
 
 #import "PXLayerController.h"
 
-#import "PXAnimationDocument.h"
 #import "PXCanvas_CopyPaste.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Selection.h"
-#import "PXCanvas.h"
 #import "PXCanvasDocument.h"
 #import "PXLayer.h"
 #import "PXLayerCollectionView.h"
@@ -20,20 +18,21 @@
 
 @interface PXLayerController ()
 
-- (void)updateRemoveButtonStatus;
+- (void)updateRemoveButtonState;
 
 - (void)reloadData;
 
-- (void)propagateSelectedLayer:(NSUInteger)row;
+- (void)propagateLayerAtIndex:(NSUInteger)index;
 
-- (NSUInteger)invertLayerIndex:(NSUInteger)anIndex;
+- (NSUInteger)invertLayerIndex:(NSUInteger)index;
 
 @end
 
 
 @implementation PXLayerController
 
-@synthesize document, canvas;
+@synthesize layersView = _layersView, removeButton = _removeButton, layersArray = _layersArray;
+@synthesize canvas = _canvas;
 
 - (id)init
 {
@@ -42,11 +41,10 @@
 
 - (id)initWithCanvas:(PXCanvas *)aCanvas
 {
-	if ( ! ( self = [self init]))
-		return nil;
-	
-	[self setCanvas:aCanvas];
-	
+	self = [self init];
+	if (self) {
+		[self setCanvas:aCanvas];
+	}
 	return self;
 }
 
@@ -54,277 +52,107 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
-	[layersView removeObserver:self forKeyPath:@"selectionIndexes"];
-	[canvas release];
+	[_layersView removeObserver:self forKeyPath:@"selectionIndexes"];
+	[_layersArray release];
 	
 	[super dealloc];
 }
 
 - (void)awakeFromNib
 {
-	[layersView setLayerController:self];
-	[layersView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
-	[layersView setDraggingSourceOperationMask:NSDragOperationNone forLocal:NO];
-	[layersView setMinItemSize:NSMakeSize(200.0f, 49.0f)];
-	[layersView setMaxItemSize:NSMakeSize(0.0f, 49.0f)];
-	[layersView registerForDraggedTypes:[NSArray arrayWithObject:PXLayerRowPboardType]];
+	[_layersView setLayerController:self];
+	[_layersView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
+	[_layersView setDraggingSourceOperationMask:NSDragOperationNone forLocal:NO];
+	[_layersView setMinItemSize:NSMakeSize(200.0f, 49.0f)];
+	[_layersView setMaxItemSize:NSMakeSize(0.0f, 49.0f)];
+	[_layersView registerForDraggedTypes:[NSArray arrayWithObject:PXLayerRowPboardType]];
 	
-	[layersView addObserver:self
-				 forKeyPath:@"selectionIndexes"
-					options:NSKeyValueObservingOptionNew
-					context:NULL];
+	[_layersView addObserver:self
+				  forKeyPath:@"selectionIndexes"
+					 options:NSKeyValueObservingOptionNew
+					 context:NULL];
 }
 
-- (void)canvasLayerChanged:(NSNotification *)notification
+#pragma mark -
+#pragma mark UI
+
+- (void)updateRemoveButtonState
 {
-	[self selectRow:[canvas indexOfLayer:[canvas activeLayer]]];
+	[_removeButton setEnabled:([[_canvas layers] count] > 1)];
 }
 
-- (void)updateRemoveButtonStatus
-{
-	[removeButton setEnabled:([[canvas layers] count] > 1)];
-}
-
-- (BOOL)isSubviewCollapsed
-{
-	return [ (NSSplitView *) [subview superview] isSubviewCollapsed:subview];
-}
+#pragma mark -
+#pragma mark Helper
 
 - (void)setCanvas:(PXCanvas *)aCanvas
 {
-	if (canvas != aCanvas)
+	if (_canvas != aCanvas)
 	{
 		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 		[nc removeObserver:self];
 		
-		[canvas release];
-		canvas = [aCanvas retain];
+		_canvas = aCanvas;
 		
-		if (canvas)
+		if (_canvas)
 		{
-			[nc addObserver:self
-				   selector:@selector(canvasLayerChanged:)
-					   name:PXCanvasLayerSelectionDidChangeName
-					 object:canvas];
-			
 			[self reloadData];
+			
+			[nc addObserver:self
+				   selector:@selector(selectionDidChange:)
+					   name:PXCanvasLayerSelectionDidChangeNotificationName
+					 object:_canvas];
+			
+			[nc addObserver:self
+				   selector:@selector(addedLayer:)
+					   name:PXCanvasAddedLayerNotificationName
+					 object:_canvas];
+			
+			[nc addObserver:self
+				   selector:@selector(removedLayer:)
+					   name:PXCanvasRemovedLayerNotificationName
+					 object:_canvas];
 		}
 	}
 }
 
+#pragma mark -
+#pragma mark Data
+
 - (void)reloadData
 {
-	for (NSUInteger n = 0; n < [[layersArray arrangedObjects] count]; n++) {
-		PXLayerCollectionViewItem *item = (PXLayerCollectionViewItem *) [layersView itemAtIndex:n];
+	for (NSUInteger n = 0; n < [[_layersArray arrangedObjects] count]; n++) {
+		PXLayerCollectionViewItem *item = (PXLayerCollectionViewItem *) [_layersView itemAtIndex:n];
 		[item unload];
 	}
 	
-	[layersArray removeObjects:[layersArray arrangedObjects]];
+	[_layersArray removeObjects:[_layersArray arrangedObjects]];
 	
-	for (PXLayer *layer in [canvas layers]) {
-		[layersArray insertObject:layer atArrangedObjectIndex:0];
+	for (PXLayer *layer in [_canvas layers]) {
+		[_layersArray insertObject:layer atArrangedObjectIndex:0];
 	}
 	
 	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.0f);
 	dispatch_after(popTime, dispatch_get_main_queue(), ^{
-		[self selectRow:0];
+		[self selectLayerAtIndex:0];
 	});
 }
 
-- (void)selectNextLayer
+- (NSUInteger)invertLayerIndex:(NSUInteger)index
 {
-	[self selectRow:[self invertLayerIndex:[[layersView selectionIndexes] firstIndex]+1]];
+	NSInteger newIndex = [[_canvas layers] count] - index - 1;
+	
+	if (newIndex < 0)
+		return NSNotFound;
+	
+	return newIndex;
 }
 
-- (void)selectPreviousLayer
-{
-	[self selectRow:[self invertLayerIndex:[[layersView selectionIndexes] firstIndex]-1]];
-}
+#pragma mark -
+#pragma mark Selection
 
-- (void)selectRow:(NSUInteger)index
+- (void)selectionDidChange:(NSNotification *)notification
 {
-	if (index == NSNotFound || index >= [[canvas layers] count])
-	{
-		[self selectRow:[[canvas layers] indexOfObject:[canvas activeLayer]]];
-		return;
-	}
-	
-	[layersView setSelectionIndexes:[NSIndexSet indexSetWithIndex:[self invertLayerIndex:index]]];
-	
-	[self updateRemoveButtonStatus];
-	[self propagateSelectedLayer:index];
-}
-
-- (void)setSubview:(NSView *)sv
-{
-	if (subview == sv)
-		return;
-	
-	subview = sv;
-	lastSubviewHeight = [subview frame].size.height;
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(splitViewWillResizeSubviews:)
-												 name:NSSplitViewWillResizeSubviewsNotification
-											   object:[subview superview]];
-}
-
-// this is the handler the snippet above refers to
-- (void)splitViewWillResizeSubviews:(id)object
-{
-	lastSubviewHeight = [subview frame].size.height;
-}
-
-// wire this to the UI control you wish to use to toggle the
-// expanded / collapsed state of splitViewSubViewLeft
-- (void)expandSubview
-{
-	NSSplitView *splitView = (NSSplitView *) [subview superview];
-	[splitView adjustSubviews];
-	
-	if ([splitView isSubviewCollapsed:subview]) {
-		[splitView setPosition:lastSubviewHeight ofDividerAtIndex:0];
-	}
-}
-
-- (void)collapseSubview
-{
-	NSSplitView *splitView = (NSSplitView *) [subview superview];
-	[splitView adjustSubviews];
-	
-	if ([splitView isSubviewCollapsed:subview]) {
-		[splitView setPosition:[splitView minPossiblePositionOfDividerAtIndex:0]
-			  ofDividerAtIndex:0];
-	}
-}
-
-- (IBAction)addLayer:(id)sender
-{
-	layersCreated++;
-	
-	PXLayer *layer = [[PXLayer alloc] initWithName:[NSString stringWithFormat:NSLocalizedString(@"New Layer %d", @"New Layer %d"), layersCreated]
-											  size:[canvas size]
-									 fillWithColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
-	
-	//[[[self document] undoManager] beginUndoGrouping];
-	
-	[canvas addLayer:layer];
-	[layer release];
-	
-	//[[[self document] undoManager] endUndoGrouping];
-	
-	[layersArray insertObject:layer atArrangedObjectIndex:0];
-	
-	[self selectRow:[[canvas layers] count]];
-}
-
-- (void)promoteSelection
-{
-	PXLayer *layer = [canvas promoteSelection];
-	[layersArray insertObject:layer atArrangedObjectIndex:0];
-	
-	[self selectRow:[[canvas layers] count]];
-}
-
-- (void)copySelectedLayer
-{
-	NSUInteger idx = [[layersView selectionIndexes] indexGreaterThanOrEqualToIndex:0];
-	
-	if (idx == NSNotFound || idx >= [[canvas layers] count])
-		return;
-	
-	PXLayer *layer = [[canvas layers] objectAtIndex:[self invertLayerIndex:idx]];
-	[self copyLayerObject:layer];
-}
-
-- (void)copyLayerObject:(PXLayer *)layer
-{
-	[canvas copyLayer:layer toPasteboard:[NSPasteboard generalPasteboard]];
-}
-
-- (void)cutSelectedLayer
-{
-	NSUInteger idx = [[layersView selectionIndexes] indexGreaterThanOrEqualToIndex:0];
-	
-	if (idx == NSNotFound || idx >= [[canvas layers] count])
-		return;
-	
-	PXLayer *layer = [[canvas layers] objectAtIndex:[self invertLayerIndex:idx]];
-	[self cutLayerObject:layer];
-}
-
-- (void)cutLayerObject:(PXLayer *)layer
-{
-	if ([[canvas layers] count] <= 1)
-		return;
-	
-	NSUInteger index = [[canvas layers] indexOfObject:layer];
-	
-	PXLayerCollectionViewItem *item = (PXLayerCollectionViewItem *) [layersView itemAtIndex:[self invertLayerIndex:index]];
-	[item unload];
-	
-	[layersArray removeObjectAtArrangedObjectIndex:[self invertLayerIndex:index]];
-	[canvas cutLayer:layer];
-	
-	[self selectRow:MAX(index - 1, 0)];
-}
-
-- (void)pasteLayer
-{
-	PXLayer *layer = [canvas pasteLayer];
-	[layersArray insertObject:layer atArrangedObjectIndex:0];
-	
-	[self selectRow:[[canvas layers] count]];
-}
-
-- (void)duplicateSelectedLayer
-{
-	NSInteger index = [self invertLayerIndex:[[layersView selectionIndexes] firstIndex]];
-	
-	PXLayer *dupLayer = [canvas duplicateLayerAtIndex:index++];
-	[layersArray insertObject:dupLayer atArrangedObjectIndex:[self invertLayerIndex:index]];
-	
-	[self selectRow:index];
-}
-
-- (void)duplicateLayerObject:(PXLayer *)layer
-{
-	NSInteger index = [[canvas layers] indexOfObject:layer];
-	
-	PXLayer *dupLayer = [canvas duplicateLayerAtIndex:index++];
-	[layersArray insertObject:dupLayer atArrangedObjectIndex:[self invertLayerIndex:index]];
-	
-	[self selectRow:index];
-}
-
-- (void)removeLayerAtCanvasLayersIndex:(NSUInteger)index
-{
-	if ([[canvas layers] count] <= 1)
-		return;
-	
-	PXLayerCollectionViewItem *item = (PXLayerCollectionViewItem *) [layersView itemAtIndex:[self invertLayerIndex:index]];
-	[item unload];
-	
-	[layersArray removeObjectAtArrangedObjectIndex:[self invertLayerIndex:index]];
-	[canvas removeLayerAtIndex:index];
-	
-	NSUInteger newIndex = MAX(index - 1, 0);
-	[self selectRow:newIndex];
-}
-
-- (void)removeLayerObject:(PXLayer *)layer
-{
-	[self removeLayerAtCanvasLayersIndex:[[canvas layers] indexOfObject:layer]];
-}
-
-- (IBAction)removeLayer:(id)sender
-{
-	NSUInteger idx = [[layersView selectionIndexes] indexGreaterThanOrEqualToIndex:0];
-	
-	if (idx == NSNotFound || idx >= [[canvas layers] count])
-		return;
-	
-	[self removeLayerAtCanvasLayersIndex:[self invertLayerIndex:idx]];
+	[self highlightLayerAtIndex:[_canvas indexOfLayer:[_canvas activeLayer]]];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -332,87 +160,241 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-	if (!canvas)
+	if (!_canvas) {
+		NSLog(@"NIL C");
 		return;
+	}
 	
-	NSIndexSet *newSel = [change objectForKey:NSKeyValueChangeNewKey];
-	NSUInteger idx = [newSel indexGreaterThanOrEqualToIndex:0];
+	NSUInteger index = [[change objectForKey:NSKeyValueChangeNewKey] firstIndex];
 	
-	if (idx == NSNotFound || idx >= [[canvas layers] count]) {
-		[self selectRow:0];
+	if (index == NSNotFound || index >= [[_canvas layers] count]) {
+		NSLog(@"Err");
+		[self selectLayerAtIndex:0];
 	}
 	else {
-		[self propagateSelectedLayer:[self invertLayerIndex:idx]];
+		[self propagateLayerAtIndex:[self invertLayerIndex:index]];
 	}
 }
 
-- (void)propagateSelectedLayer:(NSUInteger)row
+- (void)propagateLayerAtIndex:(NSUInteger)index
 {
-	if (!canvas || row == NSNotFound)
+	if (index == NSNotFound) {
+		NSLog(@"ERR");
 		return;
+	}
 	
-	PXLayer *layer = [[canvas layers] objectAtIndex:row];
-	
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-	
-	[nc postNotificationName:PXLayerSelectionDidChangeName
-					  object:self
-					userInfo:[NSDictionary dictionaryWithObject:layer forKey:PXLayerKey]];
+	PXLayer *layer = [[_canvas layers] objectAtIndex:index];
+	[_canvas activateLayer:layer];
 }
 
-- (NSUInteger)invertLayerIndex:(NSUInteger)anIndex
+- (void)selectNextLayer
 {
-	NSInteger idx = [[canvas layers] count] - anIndex - 1;
-	
-	if (idx < 0)
-		return NSNotFound;
-	
-	return idx;
+	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
+	[self selectLayerAtIndex:[self invertLayerIndex:index+1]];
 }
 
-- (void)mergeDownLayerAtCanvasLayersIndex:(NSUInteger)index
+- (void)selectPreviousLayer
 {
-	if (index >= [[canvas layers] count])
+	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
+	[self selectLayerAtIndex:[self invertLayerIndex:index-1]];
+}
+
+- (void)selectLayerAtIndex:(NSUInteger)index
+{
+	if (index == NSNotFound || index >= [[_canvas layers] count])
+	{
+		NSLog(@"Err");
+		[self selectLayerAtIndex:[[_canvas layers] indexOfObject:[_canvas activeLayer]]];
+		return;
+	}
+	
+	[self highlightLayerAtIndex:index];
+	[self propagateLayerAtIndex:index];
+}
+
+- (void)highlightLayerAtIndex:(NSUInteger)index
+{
+	if (index == NSNotFound || index >= [[_canvas layers] count]) {
+		NSLog(@"Error");
+		return;
+	}
+	
+	[_layersView setSelectionIndexes:[NSIndexSet indexSetWithIndex:[self invertLayerIndex:index]]];
+}
+
+#pragma mark -
+#pragma mark Adding
+
+- (void)addedLayer:(NSNotification *)notification
+{
+	PXLayer *layer = [[notification userInfo] objectForKey:PXLayerKey];
+	NSUInteger index = [[[notification userInfo] objectForKey:PXLayerIndexKey] unsignedIntegerValue];
+	
+	[_layersArray insertObject:layer atArrangedObjectIndex:[self invertLayerIndex:index]];
+	
+	[self updateRemoveButtonState];
+}
+
+- (IBAction)addLayer:(id)sender
+{
+	_layersCreated++;
+	
+	PXLayer *layer = [[PXLayer alloc] initWithName:[NSString stringWithFormat:NSLocalizedString(@"New Layer %d", @"New Layer %d"), _layersCreated]
+											  size:[_canvas size]
+									 fillWithColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
+	
+	[_canvas addLayer:layer];
+	[layer release];
+}
+
+- (void)promoteSelection
+{
+	[_canvas promoteSelection];
+}
+
+#pragma mark -
+#pragma mark Cut, Copy, and Paste
+
+- (void)copySelectedLayer
+{
+	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
+	
+	if (index == NSNotFound || index >= [[_canvas layers] count]) {
+		NSLog(@"Error");
+		return;
+	}
+	
+	PXLayer *layer = [[_canvas layers] objectAtIndex:[self invertLayerIndex:index]];
+	[self copyLayerObject:layer];
+}
+
+- (void)copyLayerObject:(PXLayer *)layer
+{
+	[_canvas copyLayer:layer toPasteboard:[NSPasteboard generalPasteboard]];
+}
+
+- (void)cutSelectedLayer
+{
+	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
+	
+	if (index == NSNotFound || index >= [[_canvas layers] count]) {
+		NSLog(@"Error");
+		return;
+	}
+	
+	PXLayer *layer = [[_canvas layers] objectAtIndex:[self invertLayerIndex:index]];
+	[self cutLayerObject:layer];
+}
+
+- (void)cutLayerObject:(PXLayer *)layer
+{
+	if ([[_canvas layers] count] <= 1)
 		return;
 	
-	PXLayerCollectionViewItem *item = (PXLayerCollectionViewItem *) [layersView itemAtIndex:[self invertLayerIndex:index]];
+	[_canvas cutLayer:layer];
+}
+
+- (void)pasteLayer
+{
+	[_canvas pasteLayer];
+}
+
+#pragma mark -
+#pragma mark Duplicating
+
+- (void)duplicateSelectedLayer
+{
+	NSUInteger index = [self invertLayerIndex:[[_layersView selectionIndexes] firstIndex]];
+	[_canvas duplicateLayerAtIndex:index];
+}
+
+- (void)duplicateLayerObject:(PXLayer *)layer
+{
+	NSUInteger index = [[_canvas layers] indexOfObject:layer];
+	[_canvas duplicateLayerAtIndex:index];
+}
+
+#pragma mark -
+#pragma mark Removing
+
+- (void)removedLayer:(NSNotification *)notification
+{
+	NSUInteger index = [[[notification userInfo] objectForKey:PXLayerIndexKey] unsignedIntegerValue];
+	
+	PXLayerCollectionViewItem *item = (PXLayerCollectionViewItem *) [_layersView itemAtIndex:[self invertLayerIndex:index]];
 	[item unload];
 	
-	[layersArray removeObjectAtArrangedObjectIndex:[self invertLayerIndex:index]];
+	[_layersArray removeObjectAtArrangedObjectIndex:[self invertLayerIndex:index]];
 	
-	PXLayer *layer = [[canvas layers] objectAtIndex:index];
-	BOOL wasActive = layer == [canvas activeLayer];
-	[canvas mergeDownLayer:layer];
+	[self updateRemoveButtonState];
+}
+
+- (void)removeLayerAtIndex:(NSUInteger)index
+{
+	if ([[_canvas layers] count] <= 1)
+		return;
 	
-	if (wasActive) {
-		[self selectRow:MAX(index - 1, 0)];
+	[_canvas removeLayerAtIndex:index];
+}
+
+- (void)removeLayerObject:(PXLayer *)layer
+{
+	[self removeLayerAtIndex:[[_canvas layers] indexOfObject:layer]];
+}
+
+- (IBAction)removeLayer:(id)sender
+{
+	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
+	
+	if (index == NSNotFound || index >= [[_canvas layers] count]) {
+		NSLog(@"Error");
+		return;
 	}
-	else {
-		[self selectRow:[canvas indexOfLayer:[canvas activeLayer]]];
-	}
+	
+	[self removeLayerAtIndex:[self invertLayerIndex:index]];
+}
+
+- (void)deleteKeyPressedInCollectionView:(NSCollectionView *)view
+{
+	[self removeLayer:self];
+}
+
+#pragma mark -
+#pragma mark Merging
+
+- (void)mergeDownLayerAtIndex:(NSUInteger)index
+{
+	PXLayer *layer = [[_canvas layers] objectAtIndex:index];
+	[_canvas mergeDownLayer:layer];
 }
 
 - (void)mergeDownLayerObject:(PXLayer *)layer
 {
-	[self mergeDownLayerAtCanvasLayersIndex:[[canvas layers] indexOfObject:layer]];
+	[self mergeDownLayerAtIndex:[[_canvas layers] indexOfObject:layer]];
 }
 
 - (void)mergeDownSelectedLayer
 {
-	[self mergeDownLayerAtCanvasLayersIndex:[self invertLayerIndex:[[layersView selectionIndexes] firstIndex]]];
+	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
+	[self mergeDownLayerAtIndex:[self invertLayerIndex:index]];
 }
 
-- (BOOL)collectionView:(NSCollectionView *)cv
+#pragma mark -
+#pragma mark Reordering
+
+/*
+
+- (BOOL)collectionView:(NSCollectionView *)collectionView
    writeItemsAtIndexes:(NSIndexSet *)rows
 		  toPasteboard:(NSPasteboard *)pboard
 {
 	[pboard declareTypes:[NSArray arrayWithObject:PXLayerRowPboardType] owner:self];
-	[pboard setString:[NSString stringWithFormat:@"%d", [self invertLayerIndex:[rows firstIndex]]] forType:PXLayerRowPboardType];
+	
+	[pboard setString:[NSString stringWithFormat:@"%d", [self invertLayerIndex:[rows firstIndex]]]
+			  forType:PXLayerRowPboardType];
 	
 	return YES;
 }
-
-/*
 
 - (NSDragOperation)collectionView:(NSCollectionView *)collectionView
 					 validateDrop:(id < NSDraggingInfo >)info
@@ -422,22 +404,6 @@
 	if (![[[info draggingPasteboard] types] containsObject:PXLayerRowPboardType])
 		return NSDragOperationNone;
 	
-	NSInteger idx = *idxP;
-	NSCollectionViewDropOperation operation = *operationP;
-	
-	NSUInteger sourceIdx = [self invertLayerIndex:[[[info draggingPasteboard] stringForType:PXLayerRowPboardType] intValue]];
-	if ( idx == sourceIdx + 1 || idx == sourceIdx)
-	{
-		return NSDragOperationNone;
-	}
-	
-	if (operation == NSCollectionViewDropOn) 
-	{ 
-		if (idx == sourceIdx - 1)
-			return NSDragOperationNone;
-		*operationP = NSCollectionViewDropBefore;
-	}
-	
 	return NSDragOperationMove;
 }
 
@@ -446,46 +412,16 @@
 				 index:(NSInteger)idx
 		 dropOperation:(NSCollectionViewDropOperation)dropOperation {
 	
-	PXLayer *layer = [[canvas layers] objectAtIndex:[[[info draggingPasteboard] stringForType:PXLayerRowPboardType] intValue]];
+	PXLayer *layer = [[_canvas layers] objectAtIndex:[[[info draggingPasteboard] stringForType:PXLayerRowPboardType] intValue]];
 	
-	[canvas moveLayer:layer toIndex:[self invertLayerIndex:idx]];
-	[self selectRow:[[canvas layers] indexOfObject:layer]];
+	[_canvas moveLayer:layer toIndex:[self invertLayerIndex:idx]];
+	[self selectLayerAtIndex:[[_canvas layers] indexOfObject:layer]];
 	
 	return YES;
 }
+ 
+ */
 
-- (NSImage *)collectionView:(NSCollectionView *)collectionView
-draggingImageForItemsAtIndexes:(NSIndexSet *)dragIndexes
-				  withEvent:(NSEvent *)dragEvent
-					 offset:(NSPointPointer)dragImageOffset {
-	
-	PXLayerDetailsView *v = (PXLayerDetailsView *) [[collectionView itemAtIndex:[dragIndexes firstIndex]] view];
-	
-	NSData *viewData = [v dataWithPDFInsideRect:[v bounds]];
-	NSImage *viewImage = [[[NSImage alloc] initWithData:viewData] autorelease];
-	NSImage *bgImage = [[[NSImage alloc] initWithSize:[v bounds].size] autorelease];
-	[bgImage lockFocus];
-	[[[NSColor whiteColor] colorWithAlphaComponent:0.66] set];
-	NSRectFill([v bounds]);
-	[[[NSColor lightGrayColor] colorWithAlphaComponent:0.66] set];
-	[[NSBezierPath bezierPathWithRect:[v bounds]] stroke];
-	[viewImage compositeToPoint:NSZeroPoint fromRect:[v bounds] operation:NSCompositeSourceOver fraction:0.66];
-	[bgImage unlockFocus];
-	
-	NSPoint locationInView = [v convertPoint:[dragEvent locationInWindow] fromView:nil];
-	locationInView.x -= NSWidth([v frame]) / 2;
-	locationInView.x *= -1;
-	locationInView.y -= NSHeight([v frame]) / 2;
-	locationInView.y *= -1;
-	*dragImageOffset = locationInView;
-	
-	return bgImage;
-}
-*/
-
-- (void)deleteKeyPressedInCollectionView:(NSCollectionView *)view
-{
-	[self removeLayer:self];
-}
+#pragma mark -
 
 @end

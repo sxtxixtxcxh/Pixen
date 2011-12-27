@@ -3,33 +3,28 @@
 //  Pixen
 //
 
-#import <AppKit/AppKit.h>
 #import "PXCanvas.h"
 
-@class PXLayer, PXLayerCollectionView, PXCanvas, PXDocument;
+@class PXLayer, PXLayerCollectionView;
 
 @interface PXLayerController : NSViewController < NSCollectionViewDelegate >
 {
   @private
-	IBOutlet PXLayerCollectionView *layersView;
-	IBOutlet NSButton *removeButton;
-	IBOutlet NSArrayController *layersArray;
-	NSView *subview;
+	PXLayerCollectionView *_layersView;
+	NSButton *_removeButton;
+	NSArrayController *_layersArray;
 	
-	PXCanvas *canvas;
-	PXDocument *document;
-	NSUInteger layersCreated;
-	
-	// for programmatic expand/collapse
-	CGFloat lastSubviewHeight;
+	PXCanvas *_canvas;
+	NSUInteger _layersCreated;
 }
 
-@property (nonatomic, assign) PXDocument *document;
-@property (nonatomic, retain) PXCanvas *canvas;
+@property (nonatomic, assign) IBOutlet PXLayerCollectionView *layersView;
+@property (nonatomic, assign) IBOutlet NSButton *removeButton;
+@property (nonatomic, retain) IBOutlet NSArrayController *layersArray;
+
+@property (nonatomic, assign) PXCanvas *canvas;
 
 - (id)initWithCanvas:(PXCanvas *)aCanvas;
-
-- (void)setSubview:(NSView *)sv;
 
 - (void)selectNextLayer;
 - (void)selectPreviousLayer;
@@ -39,7 +34,7 @@
 - (IBAction)removeLayer:(id)sender;
 - (void)removeLayerObject:(PXLayer *)layer;
 
-- (void)selectRow:(NSUInteger)index;
+- (void)selectLayerAtIndex:(NSUInteger)index;
 
 - (void)promoteSelection;
 

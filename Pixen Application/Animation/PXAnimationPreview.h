@@ -6,21 +6,24 @@
 //
 
 @class PXCel;
+@protocol PXAnimationPreviewDataSource;
 
 @interface PXAnimationPreview : NSView
 {
+  @private
 	NSTimer *_animationTimer;
 	PXCel *_currentCel;
 	NSUInteger _currentIndex;
-    id _dataSource;
+	id < PXAnimationPreviewDataSource > _dataSource;
 }
 
-@property (nonatomic, assign) IBOutlet id dataSource;
+@property (nonatomic, assign) IBOutlet id < PXAnimationPreviewDataSource > dataSource;
 
 - (BOOL)isPlaying;
 
-- (IBAction)play:(id)sender;
-- (IBAction)pause:(id)sender;
+- (void)play;
+- (void)pause;
+
 - (IBAction)playPause:(id)sender; // if it's paused, play. if it's playing, pause.
 - (IBAction)stepForward:(id)sender;
 - (IBAction)stepBackward:(id)sender;
@@ -30,7 +33,7 @@
 @end
 
 
-@interface NSObject (PXAnimationPreviewDataSource)
+@protocol PXAnimationPreviewDataSource < NSObject >
 
 - (NSUInteger)numberOfCels;
 - (id)celAtIndex:(NSUInteger)currentIndex;

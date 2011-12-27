@@ -68,21 +68,12 @@
 	[super dealloc];
 }
 
-- (void)layerSelectionDidChange:(NSNotification *) aNotification
-{
-	[canvas activateLayer:[[aNotification userInfo] objectForKey:PXLayerKey]];
-}
-
 - (void)setLayerController:(PXLayerController *)contro
 {
 	layerController = contro;
 	[layerController setCanvas:canvas];
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	
-	[nc addObserver:self 
-		   selector:@selector(layerSelectionDidChange:) 
-			   name:PXLayerSelectionDidChangeName 
-			 object:layerController];
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	
 	[nc postNotificationName:PXCanvasLayersChangedNotificationName
 					  object:canvas];

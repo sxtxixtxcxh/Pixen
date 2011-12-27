@@ -7,8 +7,10 @@
 
 #import "PXNotifications.h"
 
-NSString *PXLayerSelectionDidChangeName = @"PXLayerDidChange";
-NSString *PXCanvasLayerSelectionDidChangeName = @"PXCanvasLayerDidChange";
+NSString *PXCanvasLayerSelectionDidChangeNotificationName = @"PXCanvasLayerSelectionDidChange";
+NSString *PXCanvasAddedLayerNotificationName = @"PXCanvasAddedLayer";
+NSString *PXCanvasRemovedLayerNotificationName = @"PXCanvasRemovedLayer";
+
 NSString *PXCanvasSizeChangedNotificationName = @"PXCanvasSizeChanged";
 NSString *PXCanvasChangedNotificationName = @"PXCanvasChanged";
 NSString *PXPatternChangedNotificationName = @"PXPatternChanged";

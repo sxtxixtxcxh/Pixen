@@ -34,7 +34,7 @@
 
 - (void)rotateLayer:(PXLayer *)layer byDegrees:(int)degrees;
 
-- (PXLayer *)duplicateLayerAtIndex:(NSUInteger)index;
+- (void)duplicateLayerAtIndex:(NSUInteger)index;
 - (void)flipLayerHorizontally:aLayer;
 - (void)flipLayerVertically:aLayer;
 

@@ -72,7 +72,7 @@
 	{
 		[self removeLayer:layer];
 		
-		[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasLayerSelectionDidChangeName
+		[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasLayerSelectionDidChangeNotificationName
 															object:self];
 	}
 	
@@ -94,9 +94,6 @@
 	if (layer)
 	{
 		[self activateLayer:layer];
-		
-		[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasLayerSelectionDidChangeName
-															object:self];
 	}
 }
 

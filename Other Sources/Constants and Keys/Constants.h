@@ -74,6 +74,7 @@ extern NSString *PXLayerOpacityKey;
 extern NSString *PXLayerNameKey;
 
 extern NSString *PXLayerKey;
+extern NSString *PXLayerIndexKey;
 
 extern NSString *PXFadeOpacityKey;
 extern NSString *PXFadeDirectionKey;
