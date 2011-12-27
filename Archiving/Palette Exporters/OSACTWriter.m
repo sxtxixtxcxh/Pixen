@@ -39,7 +39,7 @@
 	NSUInteger colorCount = [palette colorCount];
 	if (colorCount > 256)
 	{
-		NSLog(@"This palette has more than 256 colors, and the ACT format only supports that many; %ld will be truncated.", colorCount-256);
+		NSLog(@"This palette has more than 256 colors, and the ACT format only supports that many; %lu will be truncated.", colorCount-256);
 		colorCount = 256;
 	}
 	int i;
