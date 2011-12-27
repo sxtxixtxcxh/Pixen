@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">11C37</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1923</string>
-		<string key="IBDocument.AppKitVersion">1138.15</string>
+		<string key="IBDocument.SystemVersion">11C74</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.AppKitVersion">1138.23</string>
 		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1923</string>
+			<string key="NS.object.0">1938</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSScroller</string>
@@ -77,7 +77,6 @@
 															<int key="NSvFlags">256</int>
 															<string key="NSFrame">{{167, 137.5}, {100, 100}}</string>
 															<reference key="NSSuperview" ref="982967362"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="811726592"/>
 															<string key="NSReuseIdentifierKey">_NS:414</string>
 														</object>
@@ -85,7 +84,6 @@
 													<string key="NSFrameSize">{449, 390}</string>
 													<string key="NSBounds">{{167, 138}, {449, 390}}</string>
 													<reference key="NSSuperview" ref="1065111099"/>
-													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="638439009"/>
 													<string key="NSReuseIdentifierKey">_NS:412</string>
 													<reference key="NSDocView" ref="638439009"/>
@@ -105,7 +103,6 @@
 													<int key="NSvFlags">256</int>
 													<string key="NSFrame">{{434, 0}, {15, 384}}</string>
 													<reference key="NSSuperview" ref="1065111099"/>
-													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="548797692"/>
 													<string key="NSReuseIdentifierKey">_NS:419</string>
 													<reference key="NSTarget" ref="1065111099"/>
@@ -118,7 +115,6 @@
 													<int key="NSvFlags">256</int>
 													<string key="NSFrame">{{0, 375}, {443, 15}}</string>
 													<reference key="NSSuperview" ref="1065111099"/>
-													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="217560335"/>
 													<string key="NSReuseIdentifierKey">_NS:423</string>
 													<int key="NSsFlags">1</int>
@@ -129,7 +125,6 @@
 											</array>
 											<string key="NSFrameSize">{449, 390}</string>
 											<reference key="NSSuperview" ref="292925212"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="982967362"/>
 											<string key="NSReuseIdentifierKey">_NS:410</string>
 											<int key="NSsFlags">133168</int>
@@ -140,7 +135,6 @@
 									</array>
 									<string key="NSFrameSize">{449, 390}</string>
 									<reference key="NSSuperview" ref="214384056"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="1065111099"/>
 									<string key="NSReuseIdentifierKey">_NS:599</string>
 									<string key="NSClassName">NSView</string>
@@ -162,7 +156,6 @@
 															<int key="NSvFlags">4370</int>
 															<string key="NSFrameSize">{190, 390}</string>
 															<reference key="NSSuperview" ref="371404591"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="432504371"/>
 															<string key="NSReuseIdentifierKey">_NS:3876</string>
 															<string key="NSMinGridSize">{0, 0}</string>
@@ -184,7 +177,6 @@
 													</array>
 													<string key="NSFrameSize">{190, 390}</string>
 													<reference key="NSSuperview" ref="768350252"/>
-													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="866328524"/>
 													<string key="NSReuseIdentifierKey">_NS:3874</string>
 													<reference key="NSDocView" ref="866328524"/>
@@ -196,7 +188,6 @@
 													<int key="NSvFlags">-2147483392</int>
 													<string key="NSFrame">{{234, 1}, {15, 143}}</string>
 													<reference key="NSSuperview" ref="768350252"/>
-													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="838492888"/>
 													<string key="NSReuseIdentifierKey">_NS:3881</string>
 													<reference key="NSTarget" ref="768350252"/>
@@ -209,7 +200,6 @@
 													<int key="NSvFlags">-2147483392</int>
 													<string key="NSFrame">{{1, 144}, {233, 15}}</string>
 													<reference key="NSSuperview" ref="768350252"/>
-													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="203733394"/>
 													<string key="NSReuseIdentifierKey">_NS:3883</string>
 													<int key="NSsFlags">1</int>
@@ -220,7 +210,6 @@
 											</array>
 											<string key="NSFrameSize">{190, 390}</string>
 											<reference key="NSSuperview" ref="548797692"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="371404591"/>
 											<string key="NSReuseIdentifierKey">_NS:3872</string>
 											<int key="NSsFlags">133680</int>
@@ -231,7 +220,6 @@
 									</array>
 									<string key="NSFrame">{{450, 0}, {190, 390}}</string>
 									<reference key="NSSuperview" ref="214384056"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="768350252"/>
 									<string key="NSReuseIdentifierKey">_NS:601</string>
 									<string key="NSClassName">NSView</string>
@@ -239,7 +227,6 @@
 							</array>
 							<string key="NSFrame">{{0, 26}, {640, 390}}</string>
 							<reference key="NSSuperview" ref="1006"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="292925212"/>
 							<string key="NSReuseIdentifierKey">_NS:597</string>
 							<bool key="NSIsVertical">YES</bool>
@@ -250,8 +237,6 @@
 							<int key="NSvFlags">289</int>
 							<string key="NSFrame">{{608, 3}, {22, 19}}</string>
 							<reference key="NSSuperview" ref="1006"/>
-							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:3196</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="75085485">
@@ -282,7 +267,6 @@
 							<int key="NSvFlags">294</int>
 							<string key="NSFrame">{{9, 6}, {442, 14}}</string>
 							<reference key="NSSuperview" ref="1006"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="356238979"/>
 							<string key="NSReuseIdentifierKey">_NS:3983</string>
 							<bool key="NSEnabled">YES</bool>
@@ -308,10 +292,9 @@
 					</array>
 					<string key="NSFrameSize">{640, 416}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="214384056"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">PatternEditor</string>
 				<bool key="NSAutorecalculatesContentBorderThicknessMinY">NO</bool>
@@ -626,90 +609,16 @@
 			<nil key="sourceID"/>
 			<int key="maxID">63</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">PXDeleteCollectionView</string>
-					<string key="superclassName">NSCollectionView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PXDeleteCollectionView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">PXPatternEditorController</string>
-					<string key="superclassName">NSWindowController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">newPattern:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">newPattern:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">newPattern:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="editorView">PXPatternEditorView</string>
-						<string key="patternsController">NSArrayController</string>
-						<string key="promptField">NSTextField</string>
-						<string key="scrollView">NSScrollView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="editorView">
-							<string key="name">editorView</string>
-							<string key="candidateClassName">PXPatternEditorView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="patternsController">
-							<string key="name">patternsController</string>
-							<string key="candidateClassName">NSArrayController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="promptField">
-							<string key="name">promptField</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="scrollView">
-							<string key="name">scrollView</string>
-							<string key="candidateClassName">NSScrollView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PXPatternEditorController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">PXPatternEditorView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PXPatternEditorView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">PXPatternItem</string>
-					<string key="superclassName">NSCollectionViewItem</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PXPatternItem.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<real value="1060" key="NS.object.0"/>
 		</object>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
-			<real value="1060" key="NS.object.0"/>
-		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>
-			<real value="3200" key="NS.object.0"/>
+			<real value="4000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
