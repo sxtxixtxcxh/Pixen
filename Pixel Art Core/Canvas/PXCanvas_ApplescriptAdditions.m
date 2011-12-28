@@ -69,14 +69,9 @@
 - (id)handleSetColorScriptCommand:(id)command
 {
 	NSDictionary *arguments = [command evaluatedArguments];
-	NSArray *colorArray = [arguments objectForKey:@"toColor"];
+	NSColor *color = [arguments objectForKey:@"toColor"];
 	int x = [[arguments objectForKey:@"atX"] intValue];
 	int y = [[arguments objectForKey:@"atY"] intValue];
-	
-	NSColor *color = [NSColor colorWithCalibratedRed:[[colorArray objectAtIndex:0] floatValue] / 65535
-											   green:[[colorArray objectAtIndex:1] floatValue] / 65535
-												blue:[[colorArray objectAtIndex:2] floatValue] / 65535
-											   alpha:1.0f];
 	
 	NSPoint changedPoint = NSMakePoint(x, y);
 	
