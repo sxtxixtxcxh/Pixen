@@ -60,7 +60,7 @@
 	NSString *name = [[command evaluatedArguments] objectForKey:@"layerName"];
 	PXLayer *layer = [self layerNamed:name];
 	
-	if (layer)
+	if (layer && [[self layers] count] > 1)
 		[self removeLayer:layer];
 	
 	return nil;
