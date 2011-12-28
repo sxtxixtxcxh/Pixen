@@ -418,7 +418,6 @@
 		EAC917770CE7DC7300E519E1 /* UnlockedIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EAC917130CE7DC7300E519E1 /* UnlockedIcon.icns */; };
 		EAC917850CE7DC7300E519E1 /* Pixen.scriptSuite in Resources */ = {isa = PBXBuildFile; fileRef = EAC917230CE7DC7300E519E1 /* Pixen.scriptSuite */; };
 		EAC917860CE7DC7300E519E1 /* Pixen.scriptTerminology in Resources */ = {isa = PBXBuildFile; fileRef = EAC917240CE7DC7300E519E1 /* Pixen.scriptTerminology */; };
-		EAC917870CE7DC7300E519E1 /* Pixen.suiteModel in Resources */ = {isa = PBXBuildFile; fileRef = EAC917250CE7DC7300E519E1 /* Pixen.suiteModel */; };
 		EAC917880CE7DC7300E519E1 /* Add.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC917270CE7DC7300E519E1 /* Add.tiff */; };
 		EAC917890CE7DC7300E519E1 /* ants.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC917280CE7DC7300E519E1 /* ants.tiff */; };
 		EAC9178A0CE7DC7300E519E1 /* colorWellBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917290CE7DC7300E519E1 /* colorWellBackground.png */; };
@@ -955,7 +954,6 @@
 		EAC917130CE7DC7300E519E1 /* UnlockedIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = UnlockedIcon.icns; sourceTree = "<group>"; };
 		EAC917230CE7DC7300E519E1 /* Pixen.scriptSuite */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pixen.scriptSuite; sourceTree = "<group>"; };
 		EAC917240CE7DC7300E519E1 /* Pixen.scriptTerminology */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pixen.scriptTerminology; sourceTree = "<group>"; };
-		EAC917250CE7DC7300E519E1 /* Pixen.suiteModel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Pixen.suiteModel; sourceTree = "<group>"; };
 		EAC917270CE7DC7300E519E1 /* Add.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Add.tiff; sourceTree = "<group>"; };
 		EAC917280CE7DC7300E519E1 /* ants.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ants.tiff; sourceTree = "<group>"; };
 		EAC917290CE7DC7300E519E1 /* colorWellBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = colorWellBackground.png; sourceTree = "<group>"; };
@@ -1955,7 +1953,6 @@
 			children = (
 				EAC917230CE7DC7300E519E1 /* Pixen.scriptSuite */,
 				EAC917240CE7DC7300E519E1 /* Pixen.scriptTerminology */,
-				EAC917250CE7DC7300E519E1 /* Pixen.suiteModel */,
 			);
 			path = Scripting;
 			sourceTree = "<group>";
@@ -2319,7 +2316,6 @@
 				EAC917770CE7DC7300E519E1 /* UnlockedIcon.icns in Resources */,
 				EAC917850CE7DC7300E519E1 /* Pixen.scriptSuite in Resources */,
 				EAC917860CE7DC7300E519E1 /* Pixen.scriptTerminology in Resources */,
-				EAC917870CE7DC7300E519E1 /* Pixen.suiteModel in Resources */,
 				EAC917880CE7DC7300E519E1 /* Add.tiff in Resources */,
 				EAC917890CE7DC7300E519E1 /* ants.tiff in Resources */,
 				EAC9178A0CE7DC7300E519E1 /* colorWellBackground.png in Resources */,

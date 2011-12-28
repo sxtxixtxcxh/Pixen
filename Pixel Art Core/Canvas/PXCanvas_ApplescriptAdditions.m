@@ -10,53 +10,25 @@
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_Modifying.h"
 #import "PXLayer.h"
-#import "PXLayerController.h"
-#import "PXNotifications.h"
 
 @implementation PXCanvas (ApplescriptAdditions)
 
-- (PXLayer *)layerNamed:(NSString *)aName
+- (PXLayer *)layerNamed:(NSString *)name
 {
 	for (PXLayer *current in layers)
 	{
-		if ([[current name] isEqualToString:aName])
-		{
+		if ([current.name isEqualToString:name])
 			return current;
-		}
 	}
-	
-	return nil;
-}
-
-- (id)handleGetColorScriptCommand:(id)command
-{
-	NSDictionary *arguments = [command evaluatedArguments];
-	
-	return [self colorAtPoint:NSMakePoint([[arguments objectForKey:@"atX"] intValue], [[arguments objectForKey:@"atY"] intValue])];
-}
-
-- (id)handleSetColorScriptCommand:(id)command
-{
-	NSDictionary *arguments = [command evaluatedArguments];
-	NSArray *colorArray = [arguments objectForKey:@"toColor"];
-	
-	NSColor *color = [NSColor colorWithCalibratedRed:[[colorArray objectAtIndex:0] floatValue] / 65535
-											   green:[[colorArray objectAtIndex:1] floatValue] / 65535
-												blue:[[colorArray objectAtIndex:2] floatValue] / 65535
-											   alpha:1.0f];
-	
-	NSPoint changedPoint = NSMakePoint([[arguments objectForKey:@"atX"] intValue], [[arguments objectForKey:@"atY"] intValue]);
-	
-	[self setColor:color atPoint:changedPoint];
-	[self changedInRect:NSMakeRect(changedPoint.x, changedPoint.y, 1.0f, 1.0f)];
 	
 	return nil;
 }
 
 - (id)handleAddLayerScriptCommand:(id)command
 {
-	PXLayer *layer = [[PXLayer alloc] initWithName:[[command evaluatedArguments] objectForKey:@"layerName"]
-											  size:[self size]];
+	NSString *name = [[command evaluatedArguments] objectForKey:@"layerName"];
+	
+	PXLayer *layer = [[PXLayer alloc] initWithName:name size:[self size]];
 	
 	[self addLayer:layer];
 	[layer release];
@@ -64,37 +36,67 @@
 	return nil;
 }
 
-- (id)handleRemoveLayerScriptCommand:(id)command
+- (id)handleGetColorScriptCommand:(id)command
 {
-	PXLayer *layer = [self layerNamed:[[command evaluatedArguments] objectForKey:@"layerName"]];
+	NSDictionary *arguments = [command evaluatedArguments];
+	int x = [[arguments objectForKey:@"atX"] intValue];
+	int y = [[arguments objectForKey:@"atY"] intValue];
 	
-	if (layer)
-	{
-		[self removeLayer:layer];
-		
-		[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasLayerSelectionDidChangeNotificationName
-															object:self];
-	}
-	
-	return nil;
+	return [self colorAtPoint:NSMakePoint(x, y)];
 }
 
 - (id)handleMoveLayerScriptCommand:(id)command
 {
-	[self moveLayer:[layers objectAtIndex:[[[command evaluatedArguments] objectForKey:@"atIndex"] intValue]]
-			toIndex:[[[command evaluatedArguments] objectForKey:@"toIndex"] intValue]];
+	int atIndex = [[[command evaluatedArguments] objectForKey:@"atIndex"] intValue];
+	int toIndex = [[[command evaluatedArguments] objectForKey:@"toIndex"] intValue];
+	
+	[self moveLayer:[layers objectAtIndex:atIndex] toIndex:toIndex];
 	
 	return nil;
 }
 
-- (void)setActiveLayerName:(NSString *)aName
+- (id)handleRemoveLayerScriptCommand:(id)command
 {
-	PXLayer *layer = [self layerNamed:aName];
+	NSString *name = [[command evaluatedArguments] objectForKey:@"layerName"];
+	PXLayer *layer = [self layerNamed:name];
 	
 	if (layer)
-	{
+		[self removeLayer:layer];
+	
+	return nil;
+}
+
+- (id)handleSetColorScriptCommand:(id)command
+{
+	NSDictionary *arguments = [command evaluatedArguments];
+	NSArray *colorArray = [arguments objectForKey:@"toColor"];
+	int x = [[arguments objectForKey:@"atX"] intValue];
+	int y = [[arguments objectForKey:@"atY"] intValue];
+	
+	NSColor *color = [NSColor colorWithCalibratedRed:[[colorArray objectAtIndex:0] floatValue] / 65535
+											   green:[[colorArray objectAtIndex:1] floatValue] / 65535
+												blue:[[colorArray objectAtIndex:2] floatValue] / 65535
+											   alpha:1.0f];
+	
+	NSPoint changedPoint = NSMakePoint(x, y);
+	
+	[self setColor:color atPoint:changedPoint];
+	[self changedInRect:NSMakeRect(changedPoint.x, changedPoint.y, 1.0f, 1.0f)];
+	
+	return nil;
+}
+
+- (NSString *)activeLayerName
+{
+	return [self activeLayer].name;
+}
+
+- (void)setActiveLayerName:(NSString *)name
+{
+	PXLayer *layer = [self layerNamed:name];
+	
+	if (layer)
 		[self activateLayer:layer];
-	}
 }
 
 - (int)height

@@ -9,8 +9,14 @@
 
 @interface PXCanvas (ApplescriptAdditions)
 
+- (id)handleAddLayerScriptCommand:(id)command;
 - (id)handleGetColorScriptCommand:(id)command;
+- (id)handleMoveLayerScriptCommand:(id)command;
+- (id)handleRemoveLayerScriptCommand:(id)command;
 - (id)handleSetColorScriptCommand:(id)command;
+
+- (NSString *)activeLayerName;
+- (void)setActiveLayerName:(NSString *)name;
 
 - (int)height;
 - (void)setHeight:(int)height;
