@@ -99,30 +99,14 @@
 		[self activateLayer:layer];
 }
 
-- (int)height
-{
-	return (int) [self size].height;
-}
-
-- (void)setHeight:(int)height
-{
-	NSSize newSize = [self size];
-	newSize.height = height;
-	
-	[self setSize:newSize];
-}
-
 - (int)width
 {
 	return (int) [self size].width;
 }
 
-- (void)setWidth:(int)width
+- (int)height
 {
-	NSSize newSize = [self size];
-	newSize.width = width;
-	
-	[self setSize:newSize];
+	return (int) [self size].height;
 }
 
 @end

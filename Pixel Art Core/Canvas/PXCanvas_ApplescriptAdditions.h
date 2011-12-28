@@ -18,10 +18,7 @@
 - (NSString *)activeLayerName;
 - (void)setActiveLayerName:(NSString *)name;
 
-- (int)height;
-- (void)setHeight:(int)height;
-
 - (int)width;
-- (void)setWidth:(int)width;
+- (int)height;
 
 @end
