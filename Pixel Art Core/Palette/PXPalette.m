@@ -282,13 +282,13 @@ NSArray *CreateGrayList()
 	CGFloat minDistance = INFINITY;
 	NSColor *closestColor = nil;
 	
-	for (NSColor *color in _colors)
+	for (NSColor *current in _colors)
 	{
-		CGFloat distance = [color distanceTo:color];
+		CGFloat distance = [current distanceTo:color];
 		
 		if (distance < minDistance) {
 			minDistance = distance;
-			closestColor = color;
+			closestColor = current;
 		}
 	}
 	
