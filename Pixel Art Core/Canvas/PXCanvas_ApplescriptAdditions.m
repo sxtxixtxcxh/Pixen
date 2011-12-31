@@ -50,7 +50,7 @@
 	int atIndex = [[[command evaluatedArguments] objectForKey:@"atIndex"] intValue];
 	int toIndex = [[[command evaluatedArguments] objectForKey:@"toIndex"] intValue];
 	
-	[self moveLayer:[layers objectAtIndex:atIndex] toIndex:toIndex];
+	[self moveLayerAtIndex:atIndex toIndex:toIndex];
 	
 	return nil;
 }

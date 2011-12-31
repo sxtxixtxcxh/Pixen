@@ -60,11 +60,6 @@ extern NSString *PXPaletteSuffix;
 extern NSString *MicrosoftPaletteSuffix;
 extern NSString *AdobePaletteSuffix;
 
-extern NSString *DSStoreFileName;
-
-extern NSString *PXCanvasOldLayersCountKey;
-extern NSString *PXCanvasNewLayerKey;
-
 extern NSString *PXActiveLayerKey;
 
 extern NSString *PXMergeLayersKey;
@@ -76,15 +71,10 @@ extern NSString *PXLayerNameKey;
 extern NSString *PXLayerKey;
 extern NSString *PXLayerIndexKey;
 
-extern NSString *PXFadeOpacityKey;
-extern NSString *PXFadeDirectionKey;
-
 extern NSString *PXInfoPanelFrameAutosaveName;
 
-extern NSString *PXSubNotificationNameKey;
-extern NSString *PXChangedIndexKey;
-extern NSString *PXAdjustIndicesKey;
 extern NSString *PXSourceIndexKey;
+extern NSString *PXTargetIndexKey;
 
 extern NSString *PXPalettePanelFrameKey;
 extern NSString *PXPalettePanelPaletteViewSizeKey;

@@ -72,11 +72,6 @@
 {
 	layerController = contro;
 	[layerController setCanvas:canvas];
-	
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-	
-	[nc postNotificationName:PXCanvasLayersChangedNotificationName
-					  object:canvas];
 }
 
 - (void)prepare

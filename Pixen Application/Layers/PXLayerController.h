@@ -16,6 +16,7 @@
 	
 	PXCanvas *_canvas;
 	NSUInteger _layersCreated;
+	BOOL _ignoreSelectionChange;
 }
 
 @property (nonatomic, assign) IBOutlet PXLayerCollectionView *layersView;

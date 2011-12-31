@@ -29,7 +29,7 @@
 - (void)insertTempLayer:(PXLayer *)layer atIndex:(NSUInteger)index;
 - (void)removeTempLayer:(PXLayer *)layer;
 
-- (void)moveLayer:(PXLayer *)aLayer toIndex:(NSUInteger)anIndex;
+- (void)moveLayerAtIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)targetIndex;
 - (void)layersChanged;
 
 - (void)rotateLayer:(PXLayer *)layer byDegrees:(int)degrees;

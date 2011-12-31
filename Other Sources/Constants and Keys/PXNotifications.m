@@ -10,13 +10,13 @@
 NSString *PXCanvasLayerSelectionDidChangeNotificationName = @"PXCanvasLayerSelectionDidChange";
 NSString *PXCanvasAddedLayerNotificationName = @"PXCanvasAddedLayer";
 NSString *PXCanvasRemovedLayerNotificationName = @"PXCanvasRemovedLayer";
+NSString *PXCanvasMovedLayerNotificationName = @"PXCanvasMovedLayer";
 
 NSString *PXCanvasSizeChangedNotificationName = @"PXCanvasSizeChanged";
 NSString *PXCanvasChangedNotificationName = @"PXCanvasChanged";
 NSString *PXPatternChangedNotificationName = @"PXPatternChanged";
 NSString *PXCanvasSelectionChangedNotificationName = @"PXCanvasSelectionChanged";
 NSString *PXCanvasSelectionStatusChangedNotificationName = @"PXCanvasSelectionStatusChanged";
-NSString *PXCanvasLayersChangedNotificationName = @"PXCanvasLayersChanged";
 NSString *PXToolDidChangeNotificationName = @"PXToolDidChange";
 NSString *PXToolColorDidChangeNotificationName = @"PXToolColorDidChange";
 NSString *PXSelectionMaskChangedNotificationName = @"PXSelectionMaskChanged";

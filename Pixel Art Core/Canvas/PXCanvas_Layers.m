@@ -10,6 +10,7 @@
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Selection.h"
 #import "PXLayer.h"
+#import "NSMutableArray+ReorderingAdditions.h"
 #import "NSString_DegreeString.h"
 
 @implementation PXCanvas(Layers)
@@ -65,7 +66,7 @@
 
 - (void)activateLayer:(PXLayer *)aLayer
 {
-	if (activeLayer == aLayer || !aLayer)
+	if (!aLayer)
 		return;
 	
 	activeLayer = aLayer;
@@ -76,8 +77,6 @@
 
 - (void)layersChanged
 {
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-	[nc postNotificationName:PXCanvasLayersChangedNotificationName object:self];
 	[self changed];
 }
 
@@ -222,27 +221,30 @@
 	[self changed];
 }
 
-- (void)moveLayer:(PXLayer*) aLayer toIndex:(NSUInteger)targetIndex
+- (void)moveLayerAtIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)targetIndex
 {
+	if (targetIndex == NSNotFound || targetIndex >= [layers count])
+		targetIndex = [layers count] - 1;
+	
+	if (sourceIndex == targetIndex)
+		return;
+	
 	[self beginUndoGrouping]; {
-		[[[self undoManager] prepareWithInvocationTarget:self] moveLayer:aLayer toIndex:[layers indexOfObject:aLayer]];
-		NSMutableArray *newLayers = [layers mutableCopy];
-		NSUInteger sourceIndex = [layers indexOfObject:aLayer];
-		if (targetIndex != NSNotFound)
-		{
-			id residentLayer = [layers objectAtIndex:targetIndex];
-			[newLayers removeObjectAtIndex:sourceIndex];
-			[newLayers insertObject:aLayer atIndex:[newLayers indexOfObject:residentLayer]+1];
-		}
-		else
-		{
-			[newLayers removeObjectAtIndex:sourceIndex];
-			[newLayers insertObject:aLayer atIndex:0];
-		}
-		[layers release];
-		layers = newLayers;		
+		[[[self undoManager] prepareWithInvocationTarget:self] moveLayerAtIndex:targetIndex toIndex:sourceIndex];
+		
+		[layers moveObjectAtIndex:sourceIndex toIndex:targetIndex];
+		
+		NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
+							  [NSNumber numberWithUnsignedInteger:sourceIndex], PXSourceIndexKey,
+							  [NSNumber numberWithUnsignedInteger:targetIndex], PXTargetIndexKey, nil];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasMovedLayerNotificationName
+															object:self
+														  userInfo:info];
+		
+		[self activateLayer:[layers objectAtIndex:targetIndex]];
+		[self changed];
 	} [self endUndoGrouping:NSLocalizedString(@"Reorder Layer", @"Reorder Layer")];
-	[self layersChanged];
 }
 
 - (void)rotateLayer:(PXLayer *)layer byDegrees:(int)degrees

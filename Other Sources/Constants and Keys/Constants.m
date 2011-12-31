@@ -61,11 +61,6 @@ NSString *PXPaletteSuffix = @"pxpalette";
 NSString *MicrosoftPaletteSuffix = @"pal";
 NSString *AdobePaletteSuffix = @"act";
 
-NSString *DSStoreFileName = @".DS_Store";
-
-NSString *PXCanvasOldLayersCountKey = @"PXCanvasOldLayersCount";
-NSString *PXCanvasNewLayerKey = @"PXCanvasNewLayer";
-
 NSString *PXActiveLayerKey = @"activeLayer";
 
 NSString *PXMergeLayersKey = @"PXMergeLayers";
@@ -77,15 +72,10 @@ NSString *PXLayerNameKey = @"PXLayerName";
 NSString *PXLayerKey = @"layer";
 NSString *PXLayerIndexKey = @"layerIndex";
 
-NSString *PXFadeOpacityKey = @"opacity";
-NSString *PXFadeDirectionKey = @"direction";
-
 NSString *PXInfoPanelFrameAutosaveName = @"PXInfoPanelFrame";
 
-NSString *PXSubNotificationNameKey = @"realNotification";
-NSString *PXChangedIndexKey = @"changedIndex";
-NSString *PXAdjustIndicesKey = @"adjustIndices";
 NSString *PXSourceIndexKey = @"sourceIndex";
+NSString *PXTargetIndexKey = @"targetIndex";
 
 NSString *PXPalettePanelFrameKey = @"PXPalettePanelFrame";
 NSString *PXPalettePanelPaletteViewSizeKey = @"PXPalettePanelPaletteViewSize";

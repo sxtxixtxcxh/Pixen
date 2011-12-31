@@ -113,6 +113,11 @@
 				   selector:@selector(removedLayer:)
 					   name:PXCanvasRemovedLayerNotificationName
 					 object:_canvas];
+			
+			[nc addObserver:self
+				   selector:@selector(movedLayer:)
+					   name:PXCanvasMovedLayerNotificationName
+					 object:_canvas];
 		}
 	}
 }
@@ -154,7 +159,9 @@
 
 - (void)selectionDidChange:(NSNotification *)notification
 {
+	_ignoreSelectionChange = YES;
 	[self highlightLayerAtIndex:[_canvas indexOfLayer:[_canvas activeLayer]]];
+	_ignoreSelectionChange = NO;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -162,15 +169,13 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-	if (!_canvas) {
-		NSLog(@"NIL C");
+	if (_ignoreSelectionChange)
 		return;
-	}
 	
 	NSUInteger index = [[change objectForKey:NSKeyValueChangeNewKey] firstIndex];
 	
 	if (index == NSNotFound || index >= [[_canvas layers] count]) {
-		NSLog(@"Err");
+		NSLog(@"Invalid index");
 		[self selectLayerAtIndex:0];
 	}
 	else {
@@ -181,7 +186,7 @@
 - (void)propagateLayerAtIndex:(NSUInteger)index
 {
 	if (index == NSNotFound) {
-		NSLog(@"ERR");
+		NSLog(@"Invalid index");
 		return;
 	}
 	
@@ -205,7 +210,7 @@
 {
 	if (index == NSNotFound || index >= [[_canvas layers] count])
 	{
-		NSLog(@"Err");
+		NSLog(@"Invalid index");
 		[self selectLayerAtIndex:[[_canvas layers] indexOfObject:[_canvas activeLayer]]];
 		return;
 	}
@@ -217,7 +222,7 @@
 - (void)highlightLayerAtIndex:(NSUInteger)index
 {
 	if (index == NSNotFound || index >= [[_canvas layers] count]) {
-		NSLog(@"Error");
+		NSLog(@"Invalid index");
 		return;
 	}
 	
@@ -262,7 +267,7 @@
 	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
 	
 	if (index == NSNotFound || index >= [[_canvas layers] count]) {
-		NSLog(@"Error");
+		NSLog(@"Invalid index");
 		return;
 	}
 	
@@ -280,7 +285,7 @@
 	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
 	
 	if (index == NSNotFound || index >= [[_canvas layers] count]) {
-		NSLog(@"Error");
+		NSLog(@"Invalid index");
 		return;
 	}
 	
@@ -349,7 +354,7 @@
 	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
 	
 	if (index == NSNotFound || index >= [[_canvas layers] count]) {
-		NSLog(@"Error");
+		NSLog(@"Invalid index");
 		return;
 	}
 	
@@ -384,7 +389,18 @@
 #pragma mark -
 #pragma mark Reordering
 
-/*
+- (void)movedLayer:(NSNotification *)notification
+{
+	NSDictionary *userInfo = [notification userInfo];
+	NSUInteger sourceIndex = [self invertLayerIndex:[[userInfo objectForKey:PXSourceIndexKey] unsignedIntegerValue]];
+	NSUInteger targetIndex = [self invertLayerIndex:[[userInfo objectForKey:PXTargetIndexKey] unsignedIntegerValue]];
+	
+	id obj = [[[_layersArray arrangedObjects] objectAtIndex:sourceIndex] retain];
+	[_layersArray removeObjectAtArrangedObjectIndex:sourceIndex];
+	[_layersArray insertObject:obj atArrangedObjectIndex:targetIndex];
+	
+	[obj release];
+}
 
 - (BOOL)collectionView:(NSCollectionView *)collectionView
    writeItemsAtIndexes:(NSIndexSet *)rows
@@ -392,37 +408,47 @@
 {
 	[pboard declareTypes:[NSArray arrayWithObject:PXLayerRowPboardType] owner:self];
 	
-	[pboard setString:[NSString stringWithFormat:@"%d", [self invertLayerIndex:[rows firstIndex]]]
-			  forType:PXLayerRowPboardType];
+	[pboard setPropertyList:[NSNumber numberWithUnsignedInteger:[self invertLayerIndex:[rows firstIndex]]]
+					forType:PXLayerRowPboardType];
 	
 	return YES;
 }
 
 - (NSDragOperation)collectionView:(NSCollectionView *)collectionView
 					 validateDrop:(id < NSDraggingInfo >)info
-					proposedIndex:(NSInteger *)idxP
+					proposedIndex:(NSInteger *)indexP
 					dropOperation:(NSCollectionViewDropOperation *)operationP {
 	
 	if (![[[info draggingPasteboard] types] containsObject:PXLayerRowPboardType])
 		return NSDragOperationNone;
+	
+	if ((*operationP) == NSCollectionViewDropOn)
+		*operationP = NSCollectionViewDropBefore;
 	
 	return NSDragOperationMove;
 }
 
 - (BOOL)collectionView:(NSCollectionView *)collectionView
 			acceptDrop:(id < NSDraggingInfo >)info
-				 index:(NSInteger)idx
+				 index:(NSInteger)index
 		 dropOperation:(NSCollectionViewDropOperation)dropOperation {
 	
-	PXLayer *layer = [[_canvas layers] objectAtIndex:[[[info draggingPasteboard] stringForType:PXLayerRowPboardType] intValue]];
+	NSUInteger sourceIndex = [[[info draggingPasteboard] propertyListForType:PXLayerRowPboardType] unsignedIntegerValue];
+	NSUInteger targetIndex = [self invertLayerIndex:index];
 	
-	[_canvas moveLayer:layer toIndex:[self invertLayerIndex:idx]];
-	[self selectLayerAtIndex:[[_canvas layers] indexOfObject:layer]];
+	if (sourceIndex > targetIndex)
+		targetIndex++;
+	
+	if (targetIndex == NSNotFound)
+		targetIndex = 0;
+	
+	if (targetIndex == sourceIndex)
+		return NO;
+	
+	[_canvas moveLayerAtIndex:sourceIndex toIndex:targetIndex];
 	
 	return YES;
 }
- 
- */
 
 #pragma mark -
 
