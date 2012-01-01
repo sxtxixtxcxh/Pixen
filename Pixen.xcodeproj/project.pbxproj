@@ -54,6 +54,8 @@
 		C9799FBB13AD745500E261EE /* PXEyedropperToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9799FB913AD745500E261EE /* PXEyedropperToolPropertiesView.xib */; };
 		C97FDB2614A161DB00371079 /* PixenAnim.icns in Resources */ = {isa = PBXBuildFile; fileRef = C97FDB2514A161DB00371079 /* PixenAnim.icns */; };
 		C984251213AFC142000072C5 /* PXPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = C984251013AFC142000072C5 /* PXPreview.xib */; };
+		C99F0C2714AFEE3900EE1823 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C99F0C2614AFEE3900EE1823 /* Sparkle.framework */; };
+		C99F0C2914AFEE5B00EE1823 /* Sparkle.framework in Copy Sparkle */ = {isa = PBXBuildFile; fileRef = C99F0C2614AFEE3900EE1823 /* Sparkle.framework */; };
 		C9A0858E13DE3EB600C27061 /* PXDiscoverPixen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A0858A13DE3EB600C27061 /* PXDiscoverPixen.xib */; };
 		C9A0859113DE3ECD00C27061 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A0859013DE3ECD00C27061 /* WebKit.framework */; };
 		C9A0859313DE3F0100C27061 /* PixenIntro in Resources */ = {isa = PBXBuildFile; fileRef = C9A0859213DE3F0100C27061 /* PixenIntro */; };
@@ -516,6 +518,17 @@
 			name = "Copy QuickLook plugin";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C99F0C2814AFEE4D00EE1823 /* Copy Sparkle */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C99F0C2914AFEE5B00EE1823 /* Sparkle.framework in Copy Sparkle */,
+			);
+			name = "Copy Sparkle";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -578,6 +591,7 @@
 		C9799FBA13AD745500E261EE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXEyedropperToolPropertiesView.xib; sourceTree = "<group>"; };
 		C97FDB2514A161DB00371079 /* PixenAnim.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PixenAnim.icns; sourceTree = "<group>"; };
 		C984251113AFC142000072C5 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreview.xib; sourceTree = "<group>"; };
+		C99F0C2614AFEE3900EE1823 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Frameworks and Palettes/Sparkle.framework"; sourceTree = "<group>"; };
 		C9A0858B13DE3EB600C27061 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXDiscoverPixen.xib; sourceTree = "<group>"; };
 		C9A0859013DE3ECD00C27061 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		C9A0859213DE3F0100C27061 /* PixenIntro */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PixenIntro; path = Resources/PixenIntro; sourceTree = "<group>"; };
@@ -1002,6 +1016,7 @@
 				BF269FE6091307BF00B7A218 /* QTKit.framework in Frameworks */,
 				D8B300DC13AFC443004E83F3 /* QuartzCore.framework in Frameworks */,
 				C9A0859113DE3ECD00C27061 /* WebKit.framework in Frameworks */,
+				C99F0C2714AFEE3900EE1823 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1011,10 +1026,11 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D8B300DB13AFC443004E83F3 /* QuartzCore.framework */,
-				61BB8ED608FB58F9009C75A6 /* QTKit.framework */,
 				EA5E9EE70877237800FCE6FE /* Carbon.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
+				61BB8ED608FB58F9009C75A6 /* QTKit.framework */,
+				D8B300DB13AFC443004E83F3 /* QuartzCore.framework */,
+				C99F0C2614AFEE3900EE1823 /* Sparkle.framework */,
 				C9A0859013DE3ECD00C27061 /* WebKit.framework */,
 			);
 			name = "Linked Frameworks";
@@ -2191,6 +2207,7 @@
 				EAF6946206A9AE0B0019D8D7 /* Resources */,
 				61DF7262087921B700402897 /* Copy QuickLook plugin */,
 				618AE6F3087E712200A9FA9B /* Copy Color Palette */,
+				C99F0C2814AFEE4D00EE1823 /* Copy Sparkle */,
 			);
 			buildRules = (
 			);
@@ -2917,6 +2934,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"\"$(SRCROOT)/Frameworks and Palettes\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/Frameworks and Palettes\"";
@@ -2950,6 +2968,7 @@
 					"$(SRCROOT)",
 					/System/Library/Frameworks,
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"\"$(SRCROOT)/Frameworks and Palettes\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks and Palettes\"";
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
