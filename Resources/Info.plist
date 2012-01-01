@@ -460,5 +460,7 @@
 	</array>
 	<key>SUFeedURL</key>
 	<string>http://philippec.github.com/Pixen/appcast.xml</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
 </dict>
 </plist>
