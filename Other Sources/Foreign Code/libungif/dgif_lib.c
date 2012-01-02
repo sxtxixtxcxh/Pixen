@@ -48,14 +48,15 @@
     ((GifFilePrivateType*)_gif->Private)->Read(_gif,_buf,_len) : \
     fread(_buf,1,_len,((GifFilePrivateType*)_gif->Private)->File))
 
-static int DGifGetWord(GifFileType *GifFile, int *Word);
+static int DGifGetWord(GifFileType *GifFile, GifWord *Word);
 static int DGifSetupDecompress(GifFileType *GifFile);
 static int DGifDecompressLine(GifFileType *GifFile, GifPixelType *Line,
                               int LineLen);
-static int DGifGetPrefixChar(unsigned int *Prefix, int Code, int ClearCode);
+static int DGifGetPrefixChar(GifPrefixType *Prefix, int Code, int ClearCode);
 static int DGifDecompressInput(GifFileType *GifFile, int *Code);
 static int DGifBufferedInput(GifFileType *GifFile, GifByteType *Buf,
                              GifByteType *NextByte);
+#ifndef _GBA_NO_FILEIO
 
 /******************************************************************************
  * Open a new gif file for read, given by its name.
@@ -158,6 +159,8 @@ DGifOpenFileHandle(int FileHandle) {
 
     return GifFile;
 }
+
+#endif /* _GBA_NO_FILEIO */
 
 /******************************************************************************
  * GifFileType constructor with user supplied input function (TVT)
@@ -263,6 +266,7 @@ DGifGetScreenDesc(GifFileType * GifFile) {
         for (i = 0; i < GifFile->SColorMap->ColorCount; i++) {
             if (READ(GifFile, Buf, 3) != 3) {
                 FreeMapObject(GifFile->SColorMap);
+                GifFile->SColorMap = NULL;
                 _GifError = D_GIF_ERR_READ_FAILED;
                 return GIF_ERROR;
             }
@@ -364,6 +368,7 @@ DGifGetImageDesc(GifFileType * GifFile) {
             if (READ(GifFile, Buf, 3) != 3) {
                 FreeMapObject(GifFile->Image.ColorMap);
                 _GifError = D_GIF_ERR_READ_FAILED;
+                GifFile->Image.ColorMap = NULL;
                 return GIF_ERROR;
             }
             GifFile->Image.ColorMap->Colors[i].Red = Buf[0];
@@ -614,7 +619,7 @@ DGifCloseFile(GifFileType * GifFile) {
  *****************************************************************************/
 static int
 DGifGetWord(GifFileType * GifFile,
-            int *Word) {
+            GifWord *Word) {
 
     unsigned char c[2];
 
@@ -693,7 +698,7 @@ DGifSetupDecompress(GifFileType * GifFile) {
 
     int i, BitsPerPixel;
     GifByteType CodeSize;
-    unsigned int *Prefix;
+    GifPrefixType *Prefix;
     GifFilePrivateType *Private = (GifFilePrivateType *)GifFile->Private;
 
     READ(GifFile, &CodeSize, 1);    /* Read Code size from file. */
@@ -732,7 +737,7 @@ DGifDecompressLine(GifFileType * GifFile,
     int i = 0;
     int j, CrntCode, EOFCode, ClearCode, CrntPrefix, LastCode, StackPtr;
     GifByteType *Stack, *Suffix;
-    unsigned int *Prefix;
+    GifPrefixType *Prefix;
     GifFilePrivateType *Private = (GifFilePrivateType *) GifFile->Private;
 
     StackPtr = Private->StackPtr;
@@ -854,7 +859,7 @@ DGifDecompressLine(GifFileType * GifFile,
  * the maximum possible if image O.k. - LZ_MAX_CODE times.
  *****************************************************************************/
 static int
-DGifGetPrefixChar(unsigned int *Prefix,
+DGifGetPrefixChar(GifPrefixType *Prefix,
                   int Code,
                   int ClearCode) {
 
@@ -916,13 +921,18 @@ DGifDecompressInput(GifFileType * GifFile,
     GifFilePrivateType *Private = (GifFilePrivateType *)GifFile->Private;
 
     GifByteType NextByte;
-    static unsigned int CodeMasks[] = {
+    static unsigned short CodeMasks[] = {
         0x0000, 0x0001, 0x0003, 0x0007,
         0x000f, 0x001f, 0x003f, 0x007f,
         0x00ff, 0x01ff, 0x03ff, 0x07ff,
         0x0fff
     };
-
+    /* The image can't contain more than LZ_BITS per code. */
+    if (Private->RunningBits > LZ_BITS) {
+        _GifError = D_GIF_ERR_IMAGE_DEFECT;
+        return GIF_ERROR;
+    }
+    
     while (Private->CrntShiftState < Private->RunningBits) {
         /* Needs to get more bytes from input stream for next code: */
         if (DGifBufferedInput(GifFile, Private->Buf, &NextByte) == GIF_ERROR) {
@@ -938,9 +948,13 @@ DGifDecompressInput(GifFileType * GifFile,
     Private->CrntShiftState -= Private->RunningBits;
 
     /* If code cannot fit into RunningBits bits, must raise its size. Note
-     * however that codes above 4095 are used for special signaling.  */
-    if (++Private->RunningCode > Private->MaxCode1 &&
-        Private->RunningBits < LZ_BITS) {
+     * however that codes above 4095 are used for special signaling.
+     * If we're using LZ_BITS bits already and we're at the max code, just
+     * keep using the table as it is, don't increment Private->RunningCode.
+     */
+    if (Private->RunningCode < LZ_MAX_CODE + 2 &&
+            ++Private->RunningCode > Private->MaxCode1 &&
+            Private->RunningBits < LZ_BITS) {
         Private->MaxCode1 <<= 1;
         Private->RunningBits++;
     }
@@ -964,6 +978,14 @@ DGifBufferedInput(GifFileType * GifFile,
             _GifError = D_GIF_ERR_READ_FAILED;
             return GIF_ERROR;
         }
+        /* There shouldn't be any empty data blocks here as the LZW spec
+         * says the LZW termination code should come first.  Therefore we
+         * shouldn't be inside this routine at that point.
+         */
+        if (Buf[0] == 0) {
+            _GifError = D_GIF_ERR_IMAGE_DEFECT;
+            return GIF_ERROR;
+        }
         if (READ(GifFile, &Buf[1], Buf[0]) != Buf[0]) {
             _GifError = D_GIF_ERR_READ_FAILED;
             return GIF_ERROR;
@@ -978,6 +1000,7 @@ DGifBufferedInput(GifFileType * GifFile,
 
     return GIF_OK;
 }
+#ifndef _GBA_NO_FILEIO
 
 /******************************************************************************
  * This routine reads an entire GIF into core, hanging all its state info off
@@ -1064,3 +1087,4 @@ DGifSlurp(GifFileType * GifFile) {
 
     return (GIF_OK);
 }
+#endif /* _GBA_NO_FILEIO */

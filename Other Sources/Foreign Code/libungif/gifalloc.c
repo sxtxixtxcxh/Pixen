@@ -89,7 +89,12 @@ FreeMapObject(ColorMapObject * Object) {
     if (Object != NULL) {
         free(Object->Colors);
         free(Object);
-        Object = NULL;
+        /*** FIXME:
+         * When we are willing to break API we need to make this function
+         * FreeMapObject(ColorMapObject **Object)
+         * and do this assignment to NULL here:
+         * *Object = NULL;
+         */
     }
 }
 
@@ -311,8 +316,10 @@ FreeLastSavedImage(GifFileType *GifFile) {
     sp = &GifFile->SavedImages[GifFile->ImageCount];
 
     /* Deallocate its Colormap */
-    if (sp->ImageDesc.ColorMap)
+    if (sp->ImageDesc.ColorMap) {
         FreeMapObject(sp->ImageDesc.ColorMap);
+        sp->ImageDesc.ColorMap = NULL;
+    }
 
     /* Deallocate the image data */
     if (sp->RasterBits)
@@ -399,6 +406,11 @@ MakeSavedImage(GifFileType * GifFile,
                  * For the moment, the actual blocks can take their
                  * chances with free().  We'll fix this later. 
                  *** FIXME: [Better check this out... Toshio]
+                 * 2004 May 27: Looks like this was an ESR note.
+                 * It means the blocks are shallow copied from InFile to
+                 * OutFile.  However, I don't see that in this code....
+                 * Did ESR fix it but never remove this note (And other notes
+                 * in gifspnge?)
                  */
             }
         }
@@ -417,8 +429,10 @@ FreeSavedImages(GifFileType * GifFile) {
     }
     for (sp = GifFile->SavedImages;
          sp < GifFile->SavedImages + GifFile->ImageCount; sp++) {
-        if (sp->ImageDesc.ColorMap)
+        if (sp->ImageDesc.ColorMap) {
             FreeMapObject(sp->ImageDesc.ColorMap);
+            sp->ImageDesc.ColorMap = NULL;
+        }
 
         if (sp->RasterBits)
             free((char *)sp->RasterBits);

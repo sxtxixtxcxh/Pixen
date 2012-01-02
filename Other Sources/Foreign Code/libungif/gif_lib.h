@@ -48,6 +48,13 @@ typedef int GifBooleanType;
 typedef unsigned char GifPixelType;
 typedef unsigned char *GifRowType;
 typedef unsigned char GifByteType;
+#ifdef _GBA_OPTMEM
+    typedef unsigned short GifPrefixType;
+    typedef short GifWord;
+#else
+    typedef unsigned int GifPrefixType;
+    typedef int GifWord;
+#endif
 
 #define GIF_MESSAGE(Msg) fprintf(stderr, "\n%s: %s\n", PROGRAM_NAME, Msg)
 #define GIF_EXIT(Msg)    { GIF_MESSAGE(Msg); exit(-3); }
@@ -69,13 +76,13 @@ typedef struct ColorMapObject {
 } ColorMapObject;
 
 typedef struct GifImageDesc {
-    int Left, Top, Width, Height,   /* Current image dimensions. */
+    GifWord Left, Top, Width, Height,   /* Current image dimensions. */
       Interlace;                    /* Sequential/Interlaced lines. */
     ColorMapObject *ColorMap;       /* The local color map */
 } GifImageDesc;
 
 typedef struct GifFileType {
-    int SWidth, SHeight,        /* Screen dimensions. */
+    GifWord SWidth, SHeight,        /* Screen dimensions. */
       SColorResolution,         /* How many colors can we generate? */
       SBackGroundColor;         /* I hope you understand this one... */
     ColorMapObject *SColorMap;  /* NULL if not exists. */
@@ -145,12 +152,12 @@ int EGifPutLine(GifFileType * GifFile, GifPixelType * GifLine,
 int EGifPutPixel(GifFileType * GifFile, GifPixelType GifPixel);
 int EGifPutComment(GifFileType * GifFile, const char *GifComment);
 int EGifPutExtensionFirst(GifFileType * GifFile, int GifExtCode,
-                          size_t GifExtLen, const VoidPtr GifExtension);
+                          int GifExtLen, const VoidPtr GifExtension);
 int EGifPutExtensionNext(GifFileType * GifFile, int GifExtCode,
-                         size_t GifExtLen, const VoidPtr GifExtension);
+                         int GifExtLen, const VoidPtr GifExtension);
 int EGifPutExtensionLast(GifFileType * GifFile, int GifExtCode,
-                         size_t GifExtLen, const VoidPtr GifExtension);
-int EGifPutExtension(GifFileType * GifFile, int GifExtCode, size_t GifExtLen,
+                         int GifExtLen, const VoidPtr GifExtension);
+int EGifPutExtension(GifFileType * GifFile, int GifExtCode, int GifExtLen,
                      const VoidPtr GifExtension);
 int EGifPutCode(GifFileType * GifFile, int GifCodeSize,
                 const GifByteType * GifCodeBlock);
@@ -173,12 +180,13 @@ int EGifCloseFile(GifFileType * GifFile);
  * O.K., here are the routines one can access in order to decode GIF file:     
  * (GIF_LIB file DGIF_LIB.C).                              
  *****************************************************************************/
-
+#ifndef _GBA_NO_FILEIO
 GifFileType *DGifOpenFileName(const char *GifFileName);
 GifFileType *DGifOpenFileHandle(int GifFileHandle);
+int DGifSlurp(GifFileType * GifFile);
+#endif /* _GBA_NO_FILEIO */
 GifFileType *DGifOpen(void *userPtr, InputFunc readFunc);    /* new one
                                                              * (TVT) */
-int DGifSlurp(GifFileType * GifFile);
 int DGifGetScreenDesc(GifFileType * GifFile);
 int DGifGetRecordType(GifFileType * GifFile, GifRecordType * GifType);
 int DGifGetImageDesc(GifFileType * GifFile);
@@ -231,7 +239,9 @@ extern int GifQuietPrint;
 /******************************************************************************
  * O.K., here are the routines from GIF_LIB file GIF_ERR.C.              
 ******************************************************************************/
+#ifndef _GBA_NO_FILEIO
 extern void PrintGifError(void);
+#endif /* _GBA_NO_FILEIO */
 extern int GifLastError(void);
 
 /******************************************************************************
@@ -299,7 +309,11 @@ extern void FreeSavedImages(GifFileType * GifFile);
 #define GIF_FONT_HEIGHT 8
 extern unsigned char AsciiTable[][GIF_FONT_WIDTH];
 /*
-extern void DrawText(SavedImage * Image,
+#ifdef _WIN32
+    extern void DrawGifText(SavedImage * Image,
+#else
+    extern void DrawText(SavedImage * Image,
+#endif
                      const int x, const int y,
                      const char *legend, const int color);
 */

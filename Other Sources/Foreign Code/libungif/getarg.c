@@ -158,8 +158,8 @@ static char *MyMalloc(unsigned size);
 
 int
 GAGetArgs(int argc,
-					char **argv,
-					char *CtrlStr, ...);
+          char **argv,
+          char *CtrlStr, ...);
 
 /***************************************************************************
  * Routine to access the    command    line argument and interpret them:       
@@ -408,7 +408,7 @@ GAGetParmeters(int *Parameters[],
 
     return ARG_OK;
 }
-
+    
 /***************************************************************************
  * Routine to get few parameters into one pointer such that the returned
  * pointer actually points on a block of pointers to the parameters...

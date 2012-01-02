@@ -29,6 +29,7 @@ GifLastError(void) {
 
     return i;
 }
+#ifndef _GBA_NO_FILEIO
 
 /*****************************************************************************
  * Print the last GIF error to stderr.                         
@@ -116,3 +117,4 @@ PrintGifError(void) {
     else
         fprintf(stderr, "\nGIF-LIB undefined error %d.\n", _GifError);
 }
+#endif /* _GBA_NO_FILEIO */

@@ -30,8 +30,6 @@ int GifQuietPrint = FALSE;
 int GifQuietPrint = TRUE;
 #endif /* __MSDOS__ */
 
-void GifQprintf(char *Format, ...);
-
 /*****************************************************************************
  * Same as fprintf to stderr but with optional print.
  *****************************************************************************/

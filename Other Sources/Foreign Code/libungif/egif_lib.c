@@ -75,7 +75,6 @@ static int EGifBufferedOutput(GifFileType * GifFile, GifByteType * Buf,
  * Returns GifFileType pointer dynamically allocated which serves as the gif
  * info record. _GifError is cleared if succesfull.
  *****************************************************************************/
-#include <errno.h>
 GifFileType *
 EGifOpenFileName(const char *FileName,
                  int TestExistance) {
@@ -97,7 +96,6 @@ EGifOpenFileName(const char *FileName,
                           , S_IREAD | S_IWRITE);
 
     if (FileHandle == -1) {
-      printf("gif open errno: %d\n", errno);
         _GifError = E_GIF_ERR_OPEN_FAILED;
         return NULL;
     }
@@ -393,7 +391,7 @@ EGifPutImageDesc(GifFileType * GifFile,
 }
 
 /******************************************************************************
- *  Put one full scanned line (Line) of length LineLen into GIF file.
+ * Put one full scanned line (Line) of length LineLen into GIF file.
  *****************************************************************************/
 int
 EGifPutLine(GifFileType * GifFile,
@@ -461,20 +459,53 @@ EGifPutPixel(GifFileType * GifFile,
 int
 EGifPutComment(GifFileType * GifFile,
                const char *Comment) {
-    
-    return EGifPutExtension(GifFile, COMMENT_EXT_FUNC_CODE, strlen(Comment),
-                            Comment);
+  
+    unsigned int length = (unsigned int) strlen(Comment);
+    char *buf;
+
+    if (length <= 255) {
+        return EGifPutExtension(GifFile, COMMENT_EXT_FUNC_CODE,
+                                length, Comment);
+    } else {
+        buf = (char *)Comment;
+        if (EGifPutExtensionFirst(GifFile, COMMENT_EXT_FUNC_CODE, 255, buf)
+                == GIF_ERROR) {
+            return GIF_ERROR;
+        }
+        length -= 255;
+        buf = buf + 255;
+
+        /* Break the comment into 255 byte sub blocks */
+        while (length > 255) {
+            if (EGifPutExtensionNext(GifFile, 0, 255, buf) == GIF_ERROR) {
+                return GIF_ERROR;
+            }
+            buf = buf + 255;
+            length -= 255;
+        }
+        /* Output any partial block and the clear code. */
+        if (length > 0) {
+            if (EGifPutExtensionLast(GifFile, 0, length, buf) == GIF_ERROR) {
+                return GIF_ERROR;
+            }
+        } else {
+            if (EGifPutExtensionLast(GifFile, 0, 0, NULL) == GIF_ERROR) {
+                return GIF_ERROR;
+            }
+        }
+    }
+    return GIF_OK;
 }
 
 /******************************************************************************
  * Put a first extension block (see GIF manual) into gif file.  Here more
- * extensions can be dumped using EGifPutExtensionMid until
+ * extensions can be dumped using EGifPutExtensionNext until
  * EGifPutExtensionLast is invoked.
  *****************************************************************************/
 int
 EGifPutExtensionFirst(GifFileType * GifFile,
                       int ExtCode,
-                      size_t ExtLen,
+                      int ExtLen,
                       const VoidPtr Extension) {
 
     GifByteType Buf[3];
@@ -486,15 +517,16 @@ EGifPutExtensionFirst(GifFileType * GifFile,
         return GIF_ERROR;
     }
 
-    if (ExtCode == 0)
-        fwrite(&ExtLen, 1, 1, Private->File);
-    else {
+    if (ExtCode == 0) {
+        WRITE(GifFile, (GifByteType *)&ExtLen, 1);
+    } else {
         Buf[0] = '!';
         Buf[1] = ExtCode;
         Buf[2] = ExtLen;
-        fwrite(Buf, 1, 3, Private->File);
+        WRITE(GifFile, Buf, 3);
     }
-    fwrite(Extension, 1, ExtLen, Private->File);
+
+    WRITE(GifFile, Extension, ExtLen);
 
     return GIF_OK;
 }
@@ -505,7 +537,7 @@ EGifPutExtensionFirst(GifFileType * GifFile,
 int
 EGifPutExtensionNext(GifFileType * GifFile,
                      int ExtCode,
-                     size_t ExtLen,
+                     int ExtLen,
                      const VoidPtr Extension) {
 
     GifByteType Buf;
@@ -518,8 +550,8 @@ EGifPutExtensionNext(GifFileType * GifFile,
     }
 
     Buf = ExtLen;
-    fwrite(&Buf, 1, 1, Private->File);
-    fwrite(Extension, 1, ExtLen, Private->File);
+    WRITE(GifFile, &Buf, 1);
+    WRITE(GifFile, Extension, ExtLen);
 
     return GIF_OK;
 }
@@ -530,7 +562,7 @@ EGifPutExtensionNext(GifFileType * GifFile,
 int
 EGifPutExtensionLast(GifFileType * GifFile,
                      int ExtCode,
-                     size_t ExtLen,
+                     int ExtLen,
                      const VoidPtr Extension) {
 
     GifByteType Buf;
@@ -542,23 +574,30 @@ EGifPutExtensionLast(GifFileType * GifFile,
         return GIF_ERROR;
     }
 
-    Buf = ExtLen;
-    fwrite(&Buf, 1, 1, Private->File);
-    fwrite(Extension, 1, ExtLen, Private->File);
+    /* If we are given an extension sub-block output it now. */
+    if (ExtLen > 0) {
+        Buf = ExtLen;
+        WRITE(GifFile, &Buf, 1);
+        WRITE(GifFile, Extension, ExtLen);
+    }
 
+    /* Write the block terminator */
     Buf = 0;
-    fwrite(&Buf, 1, 1, Private->File);
+    WRITE(GifFile, &Buf, 1);
 
     return GIF_OK;
 }
 
 /******************************************************************************
  * Put an extension block (see GIF manual) into gif file.
+ * Warning: This function is only useful for Extension blocks that have at
+ * most one subblock.  Extensions with more than one subblock need to use the
+ * EGifPutExtension{First,Next,Last} functions instead.
  *****************************************************************************/
 int
 EGifPutExtension(GifFileType * GifFile,
                  int ExtCode,
-                 size_t ExtLen,
+                 int ExtLen,
                  const VoidPtr Extension) {
 
     GifByteType Buf[3];
@@ -573,12 +612,12 @@ EGifPutExtension(GifFileType * GifFile,
     if (ExtCode == 0)
         WRITE(GifFile, (GifByteType *)&ExtLen, 1);
     else {
-        Buf[0] = '!';
-        Buf[1] = ExtCode;
-        Buf[2] = ExtLen;
+        Buf[0] = '!';       /* Extension Introducer 0x21 */
+        Buf[1] = ExtCode;   /* Extension Label */
+        Buf[2] = ExtLen;    /* Extension length */
         WRITE(GifFile, Buf, 3);
     }
-    WRITE(GifFile, Extension, (int)ExtLen);
+    WRITE(GifFile, Extension, ExtLen);
     Buf[0] = 0;
     WRITE(GifFile, Buf, 1);
 
@@ -607,8 +646,11 @@ EGifPutCode(GifFileType * GifFile,
 
     /* No need to dump code size as Compression set up does any for us: */
     /* 
-     * Buf = CodeSize; if (WRITE(GifFile, &Buf, 1) != 1) { _GifError =
-     * E_GIF_ERR_WRITE_FAILED; return GIF_ERROR; }
+     * Buf = CodeSize;
+     * if (WRITE(GifFile, &Buf, 1) != 1) {
+     *      _GifError = E_GIF_ERR_WRITE_FAILED;
+     *      return GIF_ERROR;
+     * }
      */
 
     return EGifPutCodeNext(GifFile, CodeBlock);
@@ -627,8 +669,8 @@ EGifPutCodeNext(GifFileType * GifFile,
     GifFilePrivateType *Private = (GifFilePrivateType *)GifFile->Private;
 
     if (CodeBlock != NULL) {
-        if (WRITE(GifFile, CodeBlock, CodeBlock[0] + 1) !=
-               (unsigned)(CodeBlock[0] + 1)) {
+        if (WRITE(GifFile, CodeBlock, CodeBlock[0] + 1)
+               != (unsigned)(CodeBlock[0] + 1)) {
             _GifError = E_GIF_ERR_WRITE_FAILED;
             return GIF_ERROR;
         }
@@ -654,7 +696,7 @@ EGifCloseFile(GifFileType * GifFile) {
     GifFilePrivateType *Private;
     FILE *File;
 
-    if (GifFile == NULL || GifFile->Private == NULL)
+    if (GifFile == NULL)
         return GIF_ERROR;
 
     Private = (GifFilePrivateType *) GifFile->Private;
@@ -669,10 +711,14 @@ EGifCloseFile(GifFileType * GifFile) {
     Buf = ';';
     WRITE(GifFile, &Buf, 1);
 
-    if (GifFile->Image.ColorMap)
+    if (GifFile->Image.ColorMap) {
         FreeMapObject(GifFile->Image.ColorMap);
-    if (GifFile->SColorMap)
+        GifFile->Image.ColorMap = NULL;
+    }
+    if (GifFile->SColorMap) {
         FreeMapObject(GifFile->SColorMap);
+        GifFile->SColorMap = NULL;
+    }
     if (Private) {
         free((char *)Private);
     }
@@ -896,6 +942,7 @@ int
 EGifSpew(GifFileType * GifFileOut) {
 
     int i, j, gif89 = FALSE;
+    int bOff;   /* Block Offset for adding sub blocks in Extensions */
     char SavedStamp[GIF_STAMP_LEN + 1];
 
     for (i = 0; i < GifFileOut->ImageCount; i++) {
@@ -941,11 +988,31 @@ EGifSpew(GifFileType * GifFileOut) {
         if (sp->ExtensionBlocks) {
             for (j = 0; j < sp->ExtensionBlockCount; j++) {
                 ep = &sp->ExtensionBlocks[j];
-                if (EGifPutExtension(GifFileOut,
-                                     (ep->Function !=
-                                      0) ? ep->Function : '\0', ep->ByteCount,
-                                     ep->Bytes) == GIF_ERROR)
-                    return (GIF_ERROR);
+                if (j == sp->ExtensionBlockCount - 1 || (ep+1)->Function != 0) {
+                    /*** FIXME: Must check whether outputting
+                     * <ExtLen><Extension> is ever valid or if we should just
+                     * drop anything with a 0 for the Function.  (And whether
+                     * we should drop here or in EGifPutExtension)
+                     */
+                    if (EGifPutExtension(GifFileOut,
+                                         (ep->Function != 0) ? ep->Function : '\0',
+                                         ep->ByteCount,
+                                         ep->Bytes) == GIF_ERROR) {
+                        return (GIF_ERROR);
+                    }
+                } else {
+                    EGifPutExtensionFirst(GifFileOut, ep->Function, ep->ByteCount, ep->Bytes);
+                    for (bOff = j+1; bOff < sp->ExtensionBlockCount; bOff++) {
+                        ep = &sp->ExtensionBlocks[bOff];
+                        if (ep->Function != 0) {
+                            break;
+                        }
+                        EGifPutExtensionNext(GifFileOut, 0,
+                                ep->ByteCount, ep->Bytes);
+                    }
+                    EGifPutExtensionLast(GifFileOut, 0, 0, NULL);
+                    j = bOff-1;
+                }
             }
         }
 

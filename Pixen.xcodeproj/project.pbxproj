@@ -297,7 +297,6 @@
 		EA31FC830CE7D7C200EC481B /* PXDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FBF00CE7D7C200EC481B /* PXDefaults.m */; };
 		EA31FC840CE7D7C200EC481B /* PXNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FBF10CE7D7C200EC481B /* PXNotifications.h */; };
 		EA31FC850CE7D7C200EC481B /* PXNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FBF20CE7D7C200EC481B /* PXNotifications.m */; };
-		EA31FCA10CE7D7C200EC481B /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = EA31FC120CE7D7C200EC481B /* COPYING */; };
 		EA31FCA20CE7D7C200EC481B /* dev2gif.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC130CE7D7C200EC481B /* dev2gif.c */; };
 		EA31FCA30CE7D7C200EC481B /* dgif_lib.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC140CE7D7C200EC481B /* dgif_lib.c */; };
 		EA31FCA40CE7D7C200EC481B /* egif_lib.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC150CE7D7C200EC481B /* egif_lib.c */; };
@@ -833,7 +832,6 @@
 		EA31FBF00CE7D7C200EC481B /* PXDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXDefaults.m; sourceTree = "<group>"; };
 		EA31FBF10CE7D7C200EC481B /* PXNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXNotifications.h; sourceTree = "<group>"; };
 		EA31FBF20CE7D7C200EC481B /* PXNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXNotifications.m; sourceTree = "<group>"; };
-		EA31FC120CE7D7C200EC481B /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
 		EA31FC130CE7D7C200EC481B /* dev2gif.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dev2gif.c; sourceTree = "<group>"; };
 		EA31FC140CE7D7C200EC481B /* dgif_lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dgif_lib.c; sourceTree = "<group>"; };
 		EA31FC150CE7D7C200EC481B /* egif_lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = egif_lib.c; sourceTree = "<group>"; };
@@ -1642,7 +1640,6 @@
 		EA31FC110CE7D7C200EC481B /* libungif */ = {
 			isa = PBXGroup;
 			children = (
-				EA31FC120CE7D7C200EC481B /* COPYING */,
 				EA31FC130CE7D7C200EC481B /* dev2gif.c */,
 				EA31FC140CE7D7C200EC481B /* dgif_lib.c */,
 				EA31FC150CE7D7C200EC481B /* egif_lib.c */,
@@ -2285,7 +2282,6 @@
 				EA4A6C3F08A98133007BAC7F /* PXAnimationDocument.nib in Resources */,
 				61A956BC08AD76CF009BB89F /* OSProgressPopup.nib in Resources */,
 				61FED6C408BCC646005E51EA /* PXSequenceExportView.xib in Resources */,
-				EA31FCA10CE7D7C200EC481B /* COPYING in Resources */,
 				EAC917480CE7DC7300E519E1 /* actiongear.png in Resources */,
 				EAC917490CE7DC7300E519E1 /* arrow.tiff in Resources */,
 				EAC9174A0CE7DC7300E519E1 /* imagesizeinfo.png in Resources */,

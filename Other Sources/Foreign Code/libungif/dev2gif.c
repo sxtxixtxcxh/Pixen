@@ -25,14 +25,14 @@
 #include <graphics.h>
 #endif /* __MSDOS__ */
 
-#ifdef HAVE_LIBGL_S
-#include <gl/gl.h>
-#endif /* HAVE_LIBGL_S */
-
 #ifdef HAVE_LIBX11
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #endif /* HAVE_LIBX11 */
+
+#ifdef HAVE_LIBGL_S
+#include <gl/gl.h>
+#endif /* HAVE_LIBGL_S */
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -128,7 +128,9 @@ DumpScreen2Gif(const char *FileName,
 #endif /* __MSDOS__ */
 #if defined(HAVE_LIBGL_S)
     long *RGBBuffer;
+#ifndef HAVE_LIBX11
     GifColorType ColorMap256[256];
+#endif /* Undefined HAVE_LIBX11 */
 #endif /* HAVE_LIBGL_S */
 #ifdef HAVE_LIBX11
     XImage *XImg;
@@ -137,7 +139,6 @@ DumpScreen2Gif(const char *FileName,
     XColor XColorTable[256];    /* Up to 256 colors in X. */
     XWindowAttributes WinAttr;
 #endif /* HAVE_LIBX11 */
-
     switch (ReqGraphDriver) {    /* Return on non supported screens. */
 #ifdef __MSDOS__
       case HERCMONO:

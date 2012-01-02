@@ -30,7 +30,7 @@
 #define IS_WRITEABLE(Private)   (Private->FileState & FILE_STATE_WRITE)
 
 typedef struct GifFilePrivateType {
-    int FileState, FileHandle,  /* Where all this data goes to! */
+    GifWord FileState, FileHandle,  /* Where all this data goes to! */
       BitsPerPixel,     /* Bits per pixel (Codes uses at least this + 1). */
       ClearCode,   /* The CLEAR LZ code. */
       EOFCode,     /* The EOF LZ code. */
@@ -49,7 +49,7 @@ typedef struct GifFilePrivateType {
     GifByteType Buf[256];   /* Compressed input is buffered here. */
     GifByteType Stack[LZ_MAX_CODE]; /* Decoded pixels are stacked here. */
     GifByteType Suffix[LZ_MAX_CODE + 1];    /* So we can trace the codes. */
-    unsigned int Prefix[LZ_MAX_CODE + 1];
+    GifPrefixType Prefix[LZ_MAX_CODE + 1];
 } GifFilePrivateType;
 
 extern int _GifError;
