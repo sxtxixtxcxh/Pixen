@@ -408,7 +408,7 @@ GAGetParmeters(int *Parameters[],
 
     return ARG_OK;
 }
-    
+
 /***************************************************************************
  * Routine to get few parameters into one pointer such that the returned
  * pointer actually points on a block of pointers to the parameters...
