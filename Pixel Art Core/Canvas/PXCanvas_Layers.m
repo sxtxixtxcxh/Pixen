@@ -249,17 +249,26 @@
 
 - (void)rotateLayer:(PXLayer *)layer byDegrees:(int)degrees
 {
+	if (![layers containsObject:layer])
+		return;
+	
 	[self beginUndoGrouping]; {
-		[[[self undoManager] prepareWithInvocationTarget:self] rotateLayer:layer byDegrees:360 - degrees];
-		NSSize oldSize = [self size];
-		NSUInteger index = [layers indexOfObject:layer];
-		if(index == NSNotFound) { return; }
+		[[[self undoManager] prepareWithInvocationTarget:self] rotateLayer:layer
+																 byDegrees:360 - degrees];
+		
+		NSSize previousCanvasSize = [self size];
+		
 		[layer rotateByDegrees:degrees];
-		if (!NSEqualSizes(oldSize, [self size]))
-		{
-			[self setSize:[self size]];
-			[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasSizeChangedNotificationName object:self];
+		
+		if (!NSEqualSizes([self size], previousCanvasSize)) {
+			[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasSizeChangedNotificationName
+																object:self];
 		}
+		else {
+			if (!NSEqualSizes([layer size], previousCanvasSize))
+				[layer setSize:previousCanvasSize];
+		}
+		
 		[self changed];
 	} [self endUndoGrouping:[NSString stringWithFormat:NSLocalizedString(@"Rotate Layer", @"Rotate Layer"), degrees, [NSString degreeString]]];
 }

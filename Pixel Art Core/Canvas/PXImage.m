@@ -453,13 +453,16 @@ void PXImage_setSize(PXImage *self, NSSize newSize, NSPoint origin, NSColor * ba
 
 void PXImage_rotateByDegrees(PXImage *self, int degrees)
 {
-	if (degrees != 90 && degrees != 180 && degrees != 270) { return; } // only support orthogonal rotation
+	if (degrees != 90 && degrees != 180 && degrees != 270)
+		return; // only support orthogonal rotation
+	
 	int i, j;
 	PXImage *dup = PXImage_copy(self);
 	
 	// update our size if necessary
 	int oldWidth = self->width;
 	int oldHeight = self->height;
+	
 	if (degrees != 180)
 	{
 		self->height = oldWidth;
@@ -470,7 +473,8 @@ void PXImage_rotateByDegrees(PXImage *self, int degrees)
 	{
 		for (i = 0; i < oldWidth; i++)
 		{
-			int x=0, y=0;
+			int x = 0, y = 0;
+			
 			if (degrees == 270)
 			{
 				x = j;
@@ -486,9 +490,11 @@ void PXImage_rotateByDegrees(PXImage *self, int degrees)
 				x = self->width - 1 - j;
 				y = i;
 			}
+			
 			PXImage_setColorAtXY(dup, PXImage_colorAtXY(self, i, j), x, y);
 		}
 	}
+	
 	PXImage_swapTiles(self, dup);
 	PXImage_release(dup);
 }
