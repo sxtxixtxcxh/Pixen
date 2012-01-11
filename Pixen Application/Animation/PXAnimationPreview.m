@@ -64,6 +64,8 @@
 													  selector:@selector(incrementFromTimer:)
 													  userInfo:nil
 													   repeats:NO] retain];
+	
+	[[NSRunLoop currentRunLoop] addTimer:_animationTimer forMode:NSRunLoopCommonModes];
 }
 
 - (void)stop
