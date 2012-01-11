@@ -2,44 +2,44 @@
 //  PXCanvasResizePrompter.h
 //  Pixen
 //
-
-#import <AppKit/AppKit.h>
+//  Copyright 2005-2012 Pixen Project. All rights reserved.
+//
 
 @class PXCanvasResizeView;
 
 @interface PXCanvasResizePrompter : NSWindowController
 {
   @private
-	IBOutlet NSTextField *heightField, *widthField;
-	IBOutlet PXCanvasResizeView *resizeView;
-	IBOutlet NSColorWell *bgColorWell;
-	NSImage *cachedImage;
-	id delegate;
+	PXCanvasResizeView *_resizeView;
+	NSTextField *_widthField, *_heightField;
+	NSColorWell *_backgroundColorWell;
+	id _delegate;
 }
+
+@property (nonatomic, assign) IBOutlet PXCanvasResizeView *resizeView;
+@property (nonatomic, assign) IBOutlet NSTextField *widthField, *heightField;
+@property (nonatomic, assign) IBOutlet NSColorWell *backgroundColorWell;
+
+@property (nonatomic, assign) NSColor *backgroundColor;
 
 @property (nonatomic, assign) id delegate;
 
 - (void)promptInWindow:(NSWindow *)window;
 
-- (IBAction)cancel:(id)sender;
-- (IBAction)updateBgColor:(id)sender;
 - (IBAction)updateSize:(id)sender;
+- (IBAction)updateBackgroundColor:(id)sender;
+- (IBAction)displayHelp:(id)sender;
+
+- (IBAction)cancel:(id)sender;
 - (IBAction)useEnteredFrame:(id)sender;
 
 - (void)setCurrentSize:(NSSize)size;
 - (void)setCachedImage:(NSImage *)image;
 
-- (NSTextField *)widthField;
-- (NSTextField *)heightField;
-- (PXCanvasResizeView *)resizeView;
-
-- (NSColor *)backgroundColor;
-- (void)setBackgroundColor:(NSColor *)c;
-
 @end
 
 
-@interface NSObject(PXCanvasResizePrompterDelegate)
+@interface NSObject (PXCanvasResizePrompterDelegate)
 
 - (void)prompter:(PXCanvasResizePrompter *)aPrompter didFinishWithSize:(NSSize)size
 		position:(NSPoint)position backgroundColor:(NSColor *)color;

@@ -2,6 +2,8 @@
 //  PXCanvasResizePrompter.m
 //  Pixen
 //
+//  Copyright 2005-2012 Pixen Project. All rights reserved.
+//
 
 #import "PXCanvasResizePrompter.h"
 
@@ -9,23 +11,32 @@
 
 @implementation PXCanvasResizePrompter
 
-@synthesize delegate;
+@synthesize resizeView = _resizeView, widthField = _widthField, heightField = _heightField;
+@synthesize backgroundColorWell = _backgroundColorWell;
+@synthesize delegate = _delegate;
+
+@dynamic backgroundColor;
 
 - (id)init
 {
-	if ( ! (self = [super initWithWindowNibName:@"PXCanvasResizePrompt"] ))
-		return nil;
-	
-	return self;
+	return [super initWithWindowNibName:@"PXCanvasResizePrompt"];
+}
+
+- (NSColor *)backgroundColor
+{
+	return [_resizeView backgroundColor];
+}
+
+- (void)setBackgroundColor:(NSColor *)color
+{
+	[_backgroundColorWell setColor:color];
+	[_resizeView setBackgroundColor:color];
 }
 
 - (void)promptInWindow:(NSWindow *)window
 {
-	if ([[[NSProcessInfo processInfo] arguments] containsObject:@"-SenTest"])
-		return;
-	
-	[resizeView setTopOffset:0];
-	[resizeView setLeftOffset:0];
+	[_resizeView setTopOffset:0];
+	[_resizeView setLeftOffset:0];
 	
 	[NSApp beginSheet:[self window]
 	   modalForWindow:window
@@ -34,30 +45,22 @@
 		  contextInfo:NULL];
 }
 
-- (NSColor *)backgroundColor
+- (IBAction)updateSize:(id)sender
 {
-	return [resizeView backgroundColor];
-}
-
-- (void)setBackgroundColor:(NSColor *)c
-{
-	[bgColorWell setColor:c];
-	[resizeView setBackgroundColor:c];
-}
-
-- (IBAction)updateBgColor:(id)sender
-{
-	[resizeView setBackgroundColor:[bgColorWell color]];
-}
-
-- (IBAction)useEnteredFrame:(id)sender
-{
-	[delegate prompter:self didFinishWithSize:[resizeView newImageSize]
-			  position:[resizeView resultPosition]
-	   backgroundColor:[bgColorWell color]];
+	int width = [_widthField intValue];
+	int height = [_heightField intValue];
 	
-	[NSApp endSheet:[self window]];
-	[self close];
+	[_resizeView setNewImageSize:NSMakeSize(width, height)];
+}
+
+- (IBAction)updateBackgroundColor:(id)sender
+{
+	[_resizeView setBackgroundColor:[_backgroundColorWell color]];
+}
+
+- (IBAction)displayHelp:(id)sender
+{
+	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"resize" inBook:@"Pixen Help"];
 }
 
 - (IBAction)cancel:(id)sender
@@ -66,46 +69,30 @@
 	[self close];
 }
 
-- (PXCanvasResizeView *)resizeView
+- (IBAction)useEnteredFrame:(id)sender
 {
-	return resizeView;
-}
-
-- (NSTextField *)widthField
-{
-	return widthField;
-}
-
-- (NSTextField *)heightField
-{
-	return heightField;
-}
-
-- (IBAction)updateSize:(id)sender
-{
-	int width = [[self widthField] intValue];
-	int height = [[self heightField] intValue];
+	[self updateSize:nil];
 	
-	[resizeView setNewImageSize:NSMakeSize(width, height)];
+	[_delegate prompter:self
+	  didFinishWithSize:[_resizeView newImageSize]
+			   position:[_resizeView resultPosition]
+		backgroundColor:[_backgroundColorWell color]];
+	
+	[self cancel:nil];
 }
 
 - (void)setCurrentSize:(NSSize)size
 {
-	[[self widthField] setIntValue:size.width];
-	[[self heightField] setIntValue:size.height];
+	[_widthField setIntValue:size.width];
+	[_heightField setIntValue:size.height];
 	
-	[resizeView setNewImageSize:size];
-	[resizeView setOldImageSize:size];
-}
-
-- (IBAction)displayHelp:(id)sender
-{
-	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"resize" inBook:@"Pixen Help"];
+	[_resizeView setNewImageSize:size];
+	[_resizeView setOldImageSize:size];
 }
 
 - (void)setCachedImage:(NSImage *)image
 {
-	[resizeView setCachedImage:image];
+	[_resizeView setCachedImage:image];
 }
 
 @end
