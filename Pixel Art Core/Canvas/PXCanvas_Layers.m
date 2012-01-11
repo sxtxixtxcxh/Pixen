@@ -223,6 +223,9 @@
 
 - (void)moveLayerAtIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)targetIndex
 {
+	if (sourceIndex >= [layers count])
+		sourceIndex = [layers count] - 1;
+	
 	if (targetIndex == NSNotFound || targetIndex >= [layers count])
 		targetIndex = [layers count] - 1;
 	

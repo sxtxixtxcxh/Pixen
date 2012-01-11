@@ -50,6 +50,12 @@
 	int atIndex = [[[command evaluatedArguments] objectForKey:@"atIndex"] intValue];
 	int toIndex = [[[command evaluatedArguments] objectForKey:@"toIndex"] intValue];
 	
+	if (atIndex < 0)
+		atIndex = 0;
+	
+	if (toIndex < 0)
+		toIndex = 0;
+	
 	[self moveLayerAtIndex:atIndex toIndex:toIndex];
 	
 	return nil;

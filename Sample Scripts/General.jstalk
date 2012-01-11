@@ -1,0 +1,34 @@
+// This script was written to test Pixen's AppleScript support
+// It should be run on a new document at least 4x4 px in size
+
+var pixen = [SBApplication applicationWithBundleIdentifier:"com.Pixen.Pixen"];
+var docs = [pixen documents];
+
+if ([docs count]) {
+    var canvas = [[docs objectAtIndex:0] canvas];
+    
+    print("Width: " + [canvas width]);
+    print("Height: " + [canvas height]);
+    print("Active Layer: " + [canvas activeLayerName]);
+    
+    [canvas addLayerNamed:"New Layer"];
+    print([canvas activeLayerName]); // should print 'New Layer'
+    
+    [canvas removeLayerNamed:"New Layer"];
+    print([canvas activeLayerName]); // should print 'Main Layer'
+    
+    [canvas addLayerNamed:"Square"];
+    
+    for (var x = 0; x < 4; x++) {
+        for (var y = 0; y < 4; y++) {
+            [canvas setColorAtX:x atY:y toColor:[NSColor blueColor]];
+        }
+    }
+    
+    print([canvas getColorAtX:0 atY:0]); // should be RGB 0 0 1
+    
+    [canvas setActiveLayerName:"Main Layer"];
+    print([canvas getColorAtX:0 atY:0]); // should be RGB 0 0 0
+    
+    [canvas moveLayerAtIndex:0 toIndex:1];
+}

@@ -58,14 +58,18 @@
 
 - (void)setColor:(NSColor *)color atPoint:(NSPoint)aPoint
 {
-	if(![self containsPoint:aPoint]) { return; }
+	if (![self containsPoint:aPoint])
+		return;
+	
 	[self setColor:color atPoint:[self correct:aPoint] onLayer:activeLayer];
 }
 
-- (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint onLayer:(PXLayer *)l
+- (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint onLayer:(PXLayer *)layer
 {
-  [self refreshPaletteDecreaseColorCount:[l colorAtPoint:aPoint] increaseColorCount:aColor];
-  [l setColor:aColor atPoint:aPoint];
+	[self refreshPaletteDecreaseColorCount:[layer colorAtPoint:aPoint]
+						increaseColorCount:aColor];
+	
+	[layer setColor:aColor atPoint:aPoint];
 }
 
 - (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer
@@ -121,15 +125,13 @@
 	return [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 }
 
-
-- (NSColor*) colorAtPoint:(NSPoint)aPoint
+- (NSColor *)colorAtPoint:(NSPoint)aPoint
 {
-	if( ! [self containsPoint:aPoint] ) 
-		return nil; 
+	if (![self containsPoint:aPoint])
+		return nil;
 	
 	return [activeLayer colorAtPoint:aPoint];
 }
-
 
 - (void)rotateByDegrees:(int)degrees
 {
