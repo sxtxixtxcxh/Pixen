@@ -2,7 +2,7 @@
 //  PXToolPropertiesManager.m
 //  Pixen
 //
-//  Copyright 2011 Pixen Project. All rights reserved.
+//  Copyright 2011-2012 Pixen Project. All rights reserved.
 //
 
 #import "PXToolPropertiesManager.h"
@@ -22,10 +22,12 @@
 
 @implementation PXToolPropertiesManager (Private)
 
-- (void)toolDidChange:(NSNotification *)aNotification
+- (void)toolDidChange:(NSNotification *)notification
 {
+	PXTool *tool = [[notification userInfo] objectForKey:PXNewToolKey];
+	
 	NSMutableString *title = [NSMutableString string];
-	[title appendString:[[[aNotification userInfo] objectForKey:PXNewToolKey] name]];
+	[title appendString:[tool name]];
 	[title appendString:@" ("];
 	
 	if (self.side == PXToolPropertiesSideLeft) {
@@ -40,7 +42,6 @@
 	
 	[self.window setTitle:title];
 	
-	PXTool *tool = [[aNotification userInfo] objectForKey:PXNewToolKey];
 	PXToolPropertiesController *controller = [tool propertiesController];
 	
 	if (!controller) {
@@ -61,21 +62,13 @@
 - (void)awakeFromNib
 {
 	[ (NSPanel *) self.window setBecomesKeyOnlyIfNeeded:YES];
-	
-	if (self.side == PXToolPropertiesSideLeft) {
-		[self.window setFrameAutosaveName:@"PXLeftToolPropertiesFrame"];
-	}
-	else {
-		[self.window setFrameAutosaveName:@"PXRightToolPropertiesFrame"];
-	}
-	
-	[self setPropertiesController:[[PXToolPropertiesController new] autorelease]];
 }
 
 - (void)dealloc
 {
 	[_propertiesController release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
 	[super dealloc];
 }
 
@@ -84,22 +77,11 @@
 	self = [super initWithWindowNibName:@"PXToolProperties"];
 	if (self) {
 		_side = aSide;
-		
-		PXToolSwitcher *switcher = aSide == PXToolPropertiesSideLeft ?
-		[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] :
-		[[PXToolPaletteController sharedToolPaletteController] rightSwitcher];
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(toolDidChange:)
-													 name:PXToolDidChangeNotificationName
-												   object:switcher];
-		
-		[switcher requestToolChangeNotification];
 	}
 	return self;
 }
 
-+ (id)leftToolPropertiesManager
++ (PXToolPropertiesManager *)leftToolPropertiesManager
 {
 	static PXToolPropertiesManager *leftInstance = nil;
 	static dispatch_once_t leftOnceToken;
@@ -111,7 +93,7 @@
 	return leftInstance;
 }
 
-+ (id)rightToolPropertiesManager
++ (PXToolPropertiesManager *)rightToolPropertiesManager
 {
 	static PXToolPropertiesManager *rightInstance = nil;
 	static dispatch_once_t rightOnceToken;
@@ -123,7 +105,8 @@
 	return rightInstance;
 }
 
-- (void)setPropertiesController:(PXToolPropertiesController *)aController {
+- (void)setPropertiesController:(PXToolPropertiesController *)aController
+{
 	if (_propertiesController != aController)
 	{
 		[_propertiesController release];
@@ -144,12 +127,38 @@
 			frame.origin.y += deltaY;
 			frame.size.height -= deltaY;
 			
-			[[window animator] setFrame:frame display:YES];
+			if ([window isVisible])
+				[[window animator] setFrame:frame display:YES];
+			else
+				[window setFrame:frame display:YES];
 			
 			[[window contentView] addSubview:childView];
-			[[window contentView] addSubview:aController.view];
 		}
 	}
+}
+
+- (void)showWindow:(id)sender
+{
+	BOOL isLeft = (_side == PXToolPropertiesSideLeft);
+	NSString *key = isLeft ? PXLeftToolPropertiesFrameKey : PXRightToolPropertiesFrameKey;
+	NSRect frame = NSRectFromString([[NSUserDefaults standardUserDefaults] stringForKey:key]);
+	
+	if (!NSEqualRects(frame, NSZeroRect)) {
+		NSWindow *window = [self window];
+		[window setFrame:frame display:YES];
+	}
+	
+	PXToolPaletteController *controller = [PXToolPaletteController sharedToolPaletteController];
+	PXToolSwitcher *switcher = isLeft ? [controller leftSwitcher] : [controller rightSwitcher];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(toolDidChange:)
+												 name:PXToolDidChangeNotificationName
+											   object:switcher];
+	
+	[switcher requestToolChangeNotification];
+	
+	[super showWindow:sender];
 }
 
 @end

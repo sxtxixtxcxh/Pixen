@@ -107,22 +107,33 @@ static PXPanelManager *sharedManager = nil;
 	[PXSpriteSheetExporter sharedSpriteSheetExporter];
 }
 
+- (NSRect)archivableRectForToolPropertiesWindow:(NSWindow *)window
+{
+	NSRect rect = [window frame];
+	rect.origin.y += rect.size.height;
+	rect.size.height = 0;
+	
+	return rect;
+}
+
 - (void)archivePanelStates
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	BOOL boolTmp;
 	
-	//Panel leftToolPropertiesPanel
-	boolTmp = [[self leftToolPropertiesPanel] isVisible];
-	[defaults setBool:boolTmp forKey:PXLeftToolPropertiesIsOpenKey];
+	NSWindow *window = [PXToolPropertiesManager leftToolPropertiesManager].window;
 	
-	//rightToolPropertiesPanel
-	boolTmp= [[self rightToolPropertiesPanel] isVisible];
-	[defaults setBool:boolTmp forKey:PXRightToolPropertiesIsOpenKey];
+	[defaults setBool:[window isVisible] forKey:PXLeftToolPropertiesIsOpenKey];
+	[defaults setObject:NSStringFromRect([self archivableRectForToolPropertiesWindow:window])
+				 forKey:PXLeftToolPropertiesFrameKey];
+	
+	window = [PXToolPropertiesManager rightToolPropertiesManager].window;
+	
+	[defaults setBool:[window isVisible] forKey:PXRightToolPropertiesIsOpenKey];
+	[defaults setObject:NSStringFromRect([self archivableRectForToolPropertiesWindow:window])
+				 forKey:PXRightToolPropertiesFrameKey];
 	
 	//info Panel
-	boolTmp = [[self infoPanel] isVisible];
-	[defaults setBool:boolTmp forKey:PXInfoPanelIsOpenKey];
+	[defaults setBool:[[self infoPanel] isVisible] forKey:PXInfoPanelIsOpenKey];
 	
 	// Popout color panels
 	NSMutableArray *archivedPalettePanels = [NSMutableArray array];
@@ -228,21 +239,6 @@ static PXPanelManager *sharedManager = nil;
 	}
 }
 
-- (NSPanel *)leftToolPropertiesPanel
-{
-	return (NSPanel *) [PXToolPropertiesManager leftToolPropertiesManager].window;
-}
-
-- (NSPanel *)rightToolPropertiesPanel
-{
-	return (NSPanel *) [PXToolPropertiesManager rightToolPropertiesManager].window;
-}
-
-- (NSPanel *)preferencesPanel
-{
-	return (NSPanel *)[[PXPreferencesController sharedPreferencesController] window];
-}
-
 - (NSPanel *)infoPanel
 {
 	return (NSPanel *) [[PXInfoPanelController sharedInfoPanelController] window];
@@ -270,22 +266,36 @@ static PXPanelManager *sharedManager = nil;
 
 - (IBAction)showLeftToolProperties: (id)sender
 {
-	[self show:[self leftToolPropertiesPanel]];
+	[[PXToolPropertiesManager leftToolPropertiesManager] showWindow:nil];
 }
 
 - (IBAction)toggleLeftToolProperties: (id)sender
 {
-	[self toggle:[self leftToolPropertiesPanel]];
+	PXToolPropertiesManager *manager = [PXToolPropertiesManager leftToolPropertiesManager];
+	
+	if ([manager.window isVisible]) {
+		[manager close];
+	}
+	else {
+		[manager showWindow:nil];
+	}
 }
 
 - (IBAction)showRightToolProperties: (id)sender
 {
-	[self show:[self rightToolPropertiesPanel]];
+	[[PXToolPropertiesManager rightToolPropertiesManager] showWindow:nil];
 }
 
 - (IBAction)toggleRightToolProperties: (id)sender
 {
-	[self toggle:[self rightToolPropertiesPanel]];
+	PXToolPropertiesManager *manager = [PXToolPropertiesManager rightToolPropertiesManager];
+	
+	if ([manager.window isVisible]) {
+		[manager close];
+	}
+	else {
+		[manager showWindow:nil];
+	}
 }
 
 - (IBAction)showPreferences: (id)sender

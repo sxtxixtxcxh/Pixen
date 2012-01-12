@@ -2,7 +2,7 @@
 //  PXToolPropertiesManager.h
 //  Pixen
 //
-//  Copyright 2011 Pixen Project. All rights reserved.
+//  Copyright 2011-2012 Pixen Project. All rights reserved.
 //
 
 @class PXToolPropertiesController;
@@ -14,8 +14,9 @@ typedef enum {
 
 @interface PXToolPropertiesManager : NSWindowController
 {
-    PXToolPropertiesSide _side;
-    PXToolPropertiesController *_propertiesController;
+  @private
+	PXToolPropertiesSide _side;
+	PXToolPropertiesController *_propertiesController;
 }
 
 @property (nonatomic, readonly) PXToolPropertiesSide side;

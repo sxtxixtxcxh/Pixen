@@ -34,7 +34,11 @@ NSString *PXAutosaveEnabledKey = @"PXAutosaveEnabled";
 NSString *PXDirtyFilesKey = @"PXDirtyFiles";
 
 NSString *PXLeftToolPropertiesIsOpenKey = @"PXLeftToolPropertiesIsOpen";
+NSString *PXLeftToolPropertiesFrameKey = @"PXLeftToolPropertiesFrame";
+
 NSString *PXRightToolPropertiesIsOpenKey = @"PXRightToolPropertiesIsOpen";
+NSString *PXRightToolPropertiesFrameKey = @"PXRightToolPropertiesFrame";
+
 NSString *PXInfoPanelIsOpenKey = @"PXInfoPanelIsOpen";
 NSString *PXPaletteIsOpenKey = @"PXPaletteIsOpen";
 NSString *PXNumericDrawingToolIsOpenKey = @"PXNumericDrawingToolIsOpen";
