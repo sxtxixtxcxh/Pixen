@@ -17,7 +17,7 @@
 	IBOutlet id zoomPercentageBox;
 	IBOutlet id zoomStepper;
 	IBOutlet NSView *zoomView;
-	id previewController;
+	
 	PXCanvasResizePrompter *resizePrompter;
 	PXScaleController *scaleController;
 	PXLayerController *layerController;
@@ -52,7 +52,6 @@
 - (void)windowDidResignMain:note;
 - (void)windowDidBecomeMain:(NSNotification *) aNotification;
 - (void)prepare;
-- (void)updatePreview;
 - (void)updateCanvasSize;
 - (void)updateFrameSizes;
 @end

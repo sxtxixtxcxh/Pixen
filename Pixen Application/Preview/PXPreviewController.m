@@ -437,6 +437,10 @@
 	[self centerContent];
 	[self updateTrackingRectAssumingInside:NO];
 	[view setNeedsDisplay:YES];
+	
+	PXDocument *document = [[NSDocumentController sharedDocumentController] currentDocument];
+	[self setCanvas:[document canvas]];
+	
 	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:PXPreviewWindowIsOpenKey];
 }
 

@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@class PXCanvas, PXCanvasView, PXBackground, PXGridSettingsController, PXLayerController, PXBackgroundController, PXPreviewController;
+@class PXCanvas, PXCanvasView, PXBackground, PXGridSettingsController, PXLayerController, PXBackgroundController;
 @interface PXCanvasController : NSObject {
   @private
 	PXCanvas *canvas;
@@ -19,7 +19,6 @@
 	IBOutlet NSWindow *window;
 	PXGridSettingsController *_gridSettingsController;
 	
-	PXPreviewController *previewController;
 	PXLayerController *layerController;
 	PXBackgroundController *backgroundController;
 	

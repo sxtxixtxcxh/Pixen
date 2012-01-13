@@ -44,7 +44,6 @@
 	
 	backgroundController = [[PXBackgroundController alloc] init];
 	[backgroundController setDelegate:self];
-	previewController = [PXPreviewController sharedPreviewController];
 	//this exists to fix a bug relating to autosave frames and scrollers appearing
 	[view setFrame:NSMakeRect(1, 1, 1, 1)];
 
@@ -197,8 +196,8 @@
 - (void)updatePreview
 {
 	[canvas updatePreviewSize];
-	[previewController setCanvas:canvas];
-	[previewController window];
+	
+	[[PXPreviewController sharedPreviewController] setCanvas:canvas];
 }
 
 - mainBackground

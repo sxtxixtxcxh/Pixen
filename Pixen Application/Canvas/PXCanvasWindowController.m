@@ -42,7 +42,6 @@
 	layerController = [[PXLayerController alloc] init];
 	[layerController setNextResponder:self];
 	paletteController = [[PXPaletteController alloc] init];
-	previewController = [PXPreviewController sharedPreviewController];
 
 	return self;
 }
@@ -126,14 +125,7 @@
 	if (canvas != aCanvas) {
 		canvas = aCanvas;
 		[canvasController setCanvas:canvas];
-		
-		[self updatePreview];
 	}
-}
-
-- (void)updatePreview
-{
-	[canvasController updatePreview];
 }
 
 - (void)setDocument:(NSDocument *)doc
@@ -158,7 +150,7 @@
 		[canvasController activate];
 		[self updateFrameSizes];
 		[[PXInfoPanelController sharedInfoPanelController] setCanvasSize:[canvas size]];
-		[self updatePreview];
+		[canvasController updatePreview];
 	}
 }
 

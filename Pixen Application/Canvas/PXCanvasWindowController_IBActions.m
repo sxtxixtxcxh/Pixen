@@ -21,6 +21,7 @@
 #import "PXPaletteExporter.h"
 #import "PXPalettePanel.h"
 #import "PXLayerController.h"
+#import "PXPreviewController.h"
 
 #import "PXDocumentController.h"
 #import "PXAnimationDocument.h"
@@ -281,18 +282,18 @@
 
 - (IBAction)showPreviewWindow:(NSEvent *) sender
 {
-	[previewController showWindow:self];
+	[[PXPreviewController sharedPreviewController] showWindow:self];
 }
 
-- (IBAction)togglePreviewWindow: (id) sender
+- (IBAction)togglePreviewWindow:(id)sender
 {
-	if ([[previewController window] isVisible])
-	{
-		[[previewController window] performClose:self];
+	PXPreviewController *controller = [PXPreviewController sharedPreviewController];
+	
+	if ([controller isWindowLoaded] && [[controller window] isVisible]) {
+		[controller close];
 	}
-	else
-	{
-		[previewController showWindow:self];
+	else {
+		[controller showWindow:self];
 	}
 }
 
