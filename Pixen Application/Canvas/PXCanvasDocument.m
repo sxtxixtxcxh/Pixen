@@ -16,7 +16,6 @@
 #import "PXCanvas_Layers.h"
 #import "PXPalette.h"
 #import "PXCanvasView.h"
-#import "PXCanvasPrintView.h"
 #import "PXLayerController.h"
 #import "PXIconExporter.h"
 #import "PXAnimatedGifExporter.h"
@@ -58,7 +57,6 @@ BOOL isPowerOfTwo(int num);
 	[self.windowController releaseCanvas];
 	
 	[_canvas release];
-	[_printableView release];
 	
 	[super dealloc];
 }
@@ -270,30 +268,6 @@ BOOL isPowerOfTwo(int num)
 	}
 	
 	return NO;
-}
-
-- (void)printDocumentWithSettings:(NSDictionary *)printSettings
-				   showPrintPanel:(BOOL)showPanels delegate:(id)delegate
-				 didPrintSelector:(SEL)didPrintSelector contextInfo:(void *)contextInfo {
-	
-	if (!_printableView) {
-		_printableView = [[PXCanvasPrintView viewForCanvas:[self canvas]] retain];
-	}
-	
-	float scale = [[[[self printInfo] dictionary] objectForKey:NSPrintScalingFactor] floatValue];
-	
-	NSAffineTransform *transform = [NSAffineTransform transform];
-	[transform scaleXBy:scale yBy:scale];
-	
-	[_printableView setBoundsOrigin:[transform transformPoint:[_printableView frame].origin]];
-	[_printableView setBoundsSize:[transform transformSize:[_printableView frame].size]];
-	
-	NSPrintOperation *op = [NSPrintOperation printOperationWithView:_printableView
-														  printInfo:[self printInfo]];
-	[op setShowsPrintPanel:showPanels];
-	[op setShowsProgressPanel:showPanels];
-	
-	[self runModalPrintOperation:op delegate:nil didRunSelector:NULL contextInfo:NULL];
 }
 
 @end

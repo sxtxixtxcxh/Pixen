@@ -5,11 +5,13 @@
 //  Copyright 2005-2011 Pixen Project. All rights reserved.
 //
 
-@class PXCanvas, PXCanvasWindowController;
+@class PXCanvas, PXCanvasPrintView, PXCanvasWindowController;
 
 @interface PXDocument : NSDocument
 {
-    PXCanvasWindowController *_windowController;
+  @private
+	PXCanvasPrintView *_printableView;
+	PXCanvasWindowController *_windowController;
 }
 
 @property (nonatomic, retain) PXCanvasWindowController *windowController;

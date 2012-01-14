@@ -7,12 +7,12 @@
 
 #import "PXDocument.h"
 
-@class PXCanvas, PXCanvasController, PXCanvasPrintView;
+@class PXCanvas, PXCanvasController;
 
 @interface PXCanvasDocument : PXDocument
 {
-	PXCanvasPrintView *_printableView;
-    PXCanvas *_canvas;
+  @private
+	PXCanvas *_canvas;
 }
 
 @property (nonatomic, retain) PXCanvas *canvas;
