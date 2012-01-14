@@ -26,7 +26,7 @@
 
 @implementation PXCanvasWindowController
 
-@synthesize scaleController, canvasController, resizePrompter, canvas;
+@synthesize scaleController, canvasController, resizePrompter = _resizePrompter, canvas;
 @synthesize splitView, layerSplit, canvasSplit, paletteSplit;
 
 
@@ -57,11 +57,21 @@
 
 - (PXCanvasResizePrompter *)resizePrompter
 {
-	if (!resizePrompter) {
-		resizePrompter = [[PXCanvasResizePrompter alloc] init];
+	if (!_resizePrompter) {
+		_resizePrompter = [[PXCanvasResizePrompter alloc] init];
+		_resizePrompter.delegate = self;
+		
+		[_resizePrompter loadWindow];
 	}
 	
-	return resizePrompter;
+	return _resizePrompter;
+}
+
+- (void)prompter:(PXCanvasResizePrompter *)prompter didFinishWithSize:(NSSize)size
+		position:(NSPoint)position backgroundColor:(NSColor *)color
+{
+	[canvas setSize:size withOrigin:position backgroundColor:color];
+	[canvasController updateCanvasSize];
 }
 
 - (NSView*)layerSplit;
@@ -101,7 +111,7 @@
 	[canvasController deactivate];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[layerController release];
-	[resizePrompter release];
+	[_resizePrompter release];
 	[scaleController release];
 	[toolbar release];
 	

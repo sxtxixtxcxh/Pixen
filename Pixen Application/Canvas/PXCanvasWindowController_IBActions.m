@@ -8,7 +8,6 @@
 #import "PXCanvasWindowController_IBActions.h"
 #import "PXCanvas_Layers.h"
 #import "PXToolPaletteController.h"
-#import "PXCanvasResizePrompter.h"
 #import "PXCanvas_ImportingExporting.h"
 #import "PXCanvas_CopyPaste.h"
 #import "PXCanvasDocument.h"
@@ -93,18 +92,15 @@
 	[canvas rotateByDegrees:180];
 }
 
-- (IBAction)resizeCanvas:(id) sender
+- (IBAction)resizeCanvas:(id)sender
 {
-	PXCanvasResizePrompter *prompter = self.resizePrompter;
+	NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey:PXDefaultNewDocumentBackgroundColor];
 	
-	[prompter loadWindow];
-	[prompter setDelegate:self];
-	//FIXME: this stuff should use the canvas's mainbackground to draw the resize area stuffies.  otherwise the matte color won't show up very well
-	[prompter setBackgroundColor:
-	 [NSKeyedUnarchiver unarchiveObjectWithData:
-	  [[NSUserDefaults standardUserDefaults] objectForKey:PXDefaultNewDocumentBackgroundColor]]];
-	[prompter setCurrentSize:[canvas size]];
-	[prompter setCachedImage:[canvas displayImage]];
+	PXCanvasResizePrompter *prompter = self.resizePrompter;
+	prompter.backgroundColor = [NSKeyedUnarchiver unarchiveObjectWithData:colorData];
+	prompter.currentSize = [canvas size];
+	prompter.cachedImage = [canvas displayImage];
+	
 	[prompter promptInWindow:[self window]];
 }
 
@@ -310,12 +306,6 @@
 - (IBAction)redrawCanvas: (id) sender
 {
 	[canvas changed];
-}
-
-- (void)prompter:(PXCanvasResizePrompter *)aPrompter didFinishWithSize:(NSSize)size position:(NSPoint)position backgroundColor:(NSColor *)color
-{
-	[canvas setSize:size withOrigin:position backgroundColor:color];
-	[canvasController updateCanvasSize];
 }
 
 - (IBAction)cut:sender

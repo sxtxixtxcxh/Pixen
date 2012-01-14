@@ -4,21 +4,22 @@
 //  Created by Joe Osborn on Sat Sep 13 2003.
 //  Copyright (c) 2003 Pixen. All rights reserved.
 //
-#import <AppKit/AppKit.h>
 
-@class PXCanvasController, PXLayerController, PXPaletteController, PXScaleController, PXCanvasResizePrompter;
+#import "PXCanvasResizePrompter.h"
+
+@class PXCanvasController, PXLayerController, PXPaletteController, PXScaleController;
 @class PXCanvas, PXCanvasView, PXBackground;
 
-@interface PXCanvasWindowController : NSWindowController
+@interface PXCanvasWindowController : NSWindowController < PXCanvasResizePrompterDelegate >
 {
   @private
 	PXCanvas *canvas;
-
+	
 	IBOutlet id zoomPercentageBox;
 	IBOutlet id zoomStepper;
 	IBOutlet NSView *zoomView;
 	
-	PXCanvasResizePrompter *resizePrompter;
+	PXCanvasResizePrompter *_resizePrompter;
 	PXScaleController *scaleController;
 	PXLayerController *layerController;
 	PXPaletteController *paletteController;

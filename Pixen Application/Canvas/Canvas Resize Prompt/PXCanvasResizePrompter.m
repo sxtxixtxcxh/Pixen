@@ -15,7 +15,7 @@
 @synthesize backgroundColorWell = _backgroundColorWell;
 @synthesize delegate = _delegate;
 
-@dynamic backgroundColor;
+@dynamic backgroundColor, currentSize, cachedImage;
 
 - (id)init
 {
@@ -33,10 +33,34 @@
 	[_resizeView setBackgroundColor:color];
 }
 
+- (NSSize)currentSize
+{
+	return [_resizeView newImageSize];
+}
+
+- (void)setCurrentSize:(NSSize)size
+{
+	[_widthField setIntValue:size.width];
+	[_heightField setIntValue:size.height];
+	
+	[_resizeView setNewImageSize:size];
+	[_resizeView setOldImageSize:size];
+}
+
+- (NSImage *)cachedImage
+{
+	return [_resizeView cachedImage];
+}
+
+- (void)setCachedImage:(NSImage *)image
+{
+	[_resizeView setCachedImage:image];
+}
+
 - (void)promptInWindow:(NSWindow *)window
 {
-	[_resizeView setTopOffset:0];
-	[_resizeView setLeftOffset:0];
+	[_resizeView setTopOffset:0.0f];
+	[_resizeView setLeftOffset:0.0f];
 	
 	[NSApp beginSheet:[self window]
 	   modalForWindow:window
@@ -47,10 +71,7 @@
 
 - (IBAction)updateSize:(id)sender
 {
-	int width = [_widthField intValue];
-	int height = [_heightField intValue];
-	
-	[_resizeView setNewImageSize:NSMakeSize(width, height)];
+	[_resizeView setNewImageSize:NSMakeSize([_widthField intValue], [_heightField intValue])];
 }
 
 - (IBAction)updateBackgroundColor:(id)sender
@@ -75,24 +96,10 @@
 	
 	[_delegate prompter:self
 	  didFinishWithSize:[_resizeView newImageSize]
-			   position:[_resizeView resultPosition]
-		backgroundColor:[_backgroundColorWell color]];
+			   position:[_resizeView resultantPosition]
+		backgroundColor:[_resizeView backgroundColor]];
 	
 	[self cancel:nil];
-}
-
-- (void)setCurrentSize:(NSSize)size
-{
-	[_widthField setIntValue:size.width];
-	[_heightField setIntValue:size.height];
-	
-	[_resizeView setNewImageSize:size];
-	[_resizeView setOldImageSize:size];
-}
-
-- (void)setCachedImage:(NSImage *)image
-{
-	[_resizeView setCachedImage:image];
 }
 
 @end
