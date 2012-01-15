@@ -2,7 +2,7 @@
 //  NSArray_DeepMutableCopy.m
 //  Pixen
 //
-//  Copyright 2004-2011 Pixen Project. All rights reserved.
+//  Copyright 2004-2012 Pixen Project. All rights reserved.
 //
 
 #import "NSArray_DeepMutableCopy.h"

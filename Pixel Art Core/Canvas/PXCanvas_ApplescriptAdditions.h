@@ -2,7 +2,7 @@
 //  PXCanvas_ApplescriptAdditions.h
 //  Pixen
 //
-//  Copyright 2005-2011 Pixen Project. All rights reserved.
+//  Copyright 2005-2012 Pixen Project. All rights reserved.
 //
 
 #import "PXCanvas.h"

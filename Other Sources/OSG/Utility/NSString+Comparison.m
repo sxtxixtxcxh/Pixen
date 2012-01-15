@@ -2,7 +2,7 @@
 //  NSString+Comparison.m
 //  Pixen
 //
-//  Copyright 2009-2011 Pixen Project. All rights reserved.
+//  Copyright 2009-2012 Pixen Project. All rights reserved.
 //
 
 #import "NSString+Comparison.h"

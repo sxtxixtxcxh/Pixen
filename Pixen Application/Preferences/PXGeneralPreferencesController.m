@@ -2,7 +2,7 @@
 //  PXGeneralPreferencesController.m
 //  Pixen
 //
-//  Copyright Matt Rajca 2011. All rights reserved.
+//  Copyright Matt Rajca 2012. All rights reserved.
 //
 
 #import "PXGeneralPreferencesController.h"

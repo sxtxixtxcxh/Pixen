@@ -2,7 +2,7 @@
 //  PXPaletteView.m
 //  Pixen
 //
-//  Copyright 2011 Pixen. All rights reserved.
+//  Copyright 2011-2012 Pixen. All rights reserved.
 //
 
 #import "PXPaletteView.h"

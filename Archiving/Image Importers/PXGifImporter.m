@@ -2,7 +2,7 @@
 //  PXGifImporter.m
 //  Pixen
 //
-//  Copyright 2004-2011 Pixen Project. All rights reserved.
+//  Copyright 2004-2012 Pixen Project. All rights reserved.
 //
 
 #import "PXGifImporter.h"

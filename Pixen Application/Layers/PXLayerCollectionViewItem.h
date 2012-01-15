@@ -3,7 +3,7 @@
 //  Pixen
 //
 //  Created by Joseph C Osborn on 2011.06.15.
-//  Copyright 2011 Universal Happy-Maker. All rights reserved.
+//  Copyright 2011-2012 Universal Happy-Maker. All rights reserved.
 //
 
 @class PXLayerDetailsView, PXNSImageView, PXLayerTextField, PXLayerController, PXLayer;
