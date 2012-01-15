@@ -3,7 +3,6 @@
 //  Pixen
 //
 
-#import <AppKit/AppKit.h>
 #import "PXPalette.h"
 
 typedef struct {

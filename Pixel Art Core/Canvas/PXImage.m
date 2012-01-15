@@ -4,7 +4,7 @@
 //
 
 #import "PXImage.h"
-#import <Foundation/NSGeometry.h>
+
 #import "PXPalette.h"
 
 int PXTileBitsPerComponent = 8;

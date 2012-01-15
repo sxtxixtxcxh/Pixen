@@ -6,7 +6,6 @@
 //  Copyright 2011 Matt Rajca. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "PXPalette.h"
 
 @class PXPaletteView, PXPaletteSelector, PXNamePrompter;

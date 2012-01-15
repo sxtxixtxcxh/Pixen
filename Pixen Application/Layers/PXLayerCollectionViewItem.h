@@ -6,8 +6,6 @@
 //  Copyright 2011 Universal Happy-Maker. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @class PXLayerDetailsView, PXNSImageView, PXLayerTextField, PXLayerController, PXLayer;
 
 @interface PXLayerCollectionViewItem : NSCollectionViewItem {

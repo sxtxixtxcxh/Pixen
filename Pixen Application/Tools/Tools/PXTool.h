@@ -27,10 +27,10 @@
 //  Copyright (c) 2003 Pixen. All rights reserved.
 //
 
-#import <AppKit/AppKit.h>
-
 #import "PXCanvasController.h"
+
 @class PXToolSwitcher, PXToolPropertiesController, PXPattern, PXCanvas;
+
 @interface PXTool : NSObject 
 {
   @private

@@ -6,8 +6,6 @@
 //  Copyright (c) 2004 Pixen. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <AppKit/NSColor.h>
 #import "gif_lib.h"
 
 @class PXCanvas;

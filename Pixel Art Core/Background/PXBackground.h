@@ -3,13 +3,7 @@
 //  Pixen
 //
 
-#import <Foundation/NSObject.h>
-#import <Foundation/NSGeometry.h>
-
-#import <AppKit/NSNibDeclarations.h>
-
 @class PXCanvas;
-@class NSString, NSAffineTransform, NSView, NSImage;
 
 @interface PXBackground : NSViewController <NSCoding, NSCopying>
 {

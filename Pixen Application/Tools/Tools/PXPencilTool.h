@@ -27,8 +27,8 @@
 //  Copyright (c) 2003 Pixen. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "PXTool.h"
+
 @class PXLayer, PXCanvas;
 
 @interface PXPencilTool : PXTool 

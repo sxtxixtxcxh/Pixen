@@ -5,10 +5,11 @@
 //  Copyright 2011 Pixen Project. All rights reserved.
 //
 
-#import <AppKit/AppKit.h>
 #import "PXImage.h"
 #import "PXPalette.h"
+
 @class PXLayerController, PXCanvas;
+
 @interface PXLayer : NSObject <NSCoding, NSCopying> {
   @private
 	PXImage *image;

@@ -3,8 +3,6 @@
 //  Pixen
 //
 
-#import <AppKit/AppKit.h>
-
 @class PXManagePresetsController, PXNamePrompter, PXNSImageView;
 
 @interface PXImageSizePrompter : NSWindowController < NSWindowDelegate > {

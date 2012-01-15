@@ -28,7 +28,6 @@
 //  Copyright (c) 2004 Pixen. All rights reserved.
 //
 
-#import <AppKit/AppKit.h>
 #import "PXToolPropertiesController.h"
 
 @interface PXShapeToolPropertiesController : PXToolPropertiesController

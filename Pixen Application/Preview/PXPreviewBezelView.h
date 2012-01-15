@@ -6,8 +6,6 @@
 //  Copyright 2005 Pixen. All rights reserved.
 //
 
-#import <AppKit/NSView.h>
-
 @interface PXPreviewBezelView : NSView < NSAnimatablePropertyContainer > {
   @private
 	NSImage * actionGear;

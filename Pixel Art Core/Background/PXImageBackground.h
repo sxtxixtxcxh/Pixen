@@ -4,9 +4,6 @@
 //
 
 #import "PXMonotoneBackground.h"
-@class NSButton;
-@class NSImage;
-@class NSTextField;
 
 @interface PXImageBackground : PXMonotoneBackground 
 {

@@ -8,7 +8,6 @@
 
 #import "PXPreviewBezelView.h"
 
-#import <AppKit/NSBezierPath.h>
 #import <QuartzCore/QuartzCore.h>
 #import "NSBezierPath+PXRoundedRectangleAdditions.h"
 

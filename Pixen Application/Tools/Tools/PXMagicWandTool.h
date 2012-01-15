@@ -6,7 +6,6 @@
 //  Copyright (c) 2004 Pixen. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "PXFillTool.h"
 #import "PXCanvas.h"
 

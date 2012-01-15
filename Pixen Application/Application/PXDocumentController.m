@@ -39,9 +39,6 @@
 
 #import "PXCanvas_ImportingExporting.h"
 
-#import <Foundation/NSFileManager.h>
-#import <AppKit/NSAlert.h>
-
 /***********************************/
 /******** Private method ***********/
 /***********************************/

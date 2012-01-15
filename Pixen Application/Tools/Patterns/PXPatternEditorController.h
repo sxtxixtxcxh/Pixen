@@ -3,8 +3,6 @@
 //  Pixen
 //
 
-#import <AppKit/AppKit.h>
-
 @class PXPattern, PXPatternEditorView;
 
 @interface PXPatternEditorController : NSWindowController < NSCollectionViewDelegate > {

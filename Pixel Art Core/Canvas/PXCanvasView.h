@@ -3,7 +3,6 @@
 //  Pixen
 //
 
-#import <AppKit/AppKit.h>
 @class PXCanvas, PXCrosshair, PXBackground;
 
 @interface PXCanvasView : NSView 

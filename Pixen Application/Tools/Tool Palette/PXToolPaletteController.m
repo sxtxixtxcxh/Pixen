@@ -7,16 +7,6 @@
 #import "PXToolSwitcher.h"
 #import "PXPanelManager.h"
 
-
-#import <Foundation/NSNotification.h>
-#import <Foundation/NSUserDefaults.h>
-
-#import <AppKit/NSButton.h>
-#import <AppKit/NSColorPanel.h>
-#import <AppKit/NSNibLoading.h>
-#import <AppKit/NSEvent.h>
-#import <AppKit/NSPanel.h>
-
 #import "PXNotifications.h"
 
 @interface PXToolPaletteController (Private)

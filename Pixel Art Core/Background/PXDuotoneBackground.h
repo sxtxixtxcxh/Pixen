@@ -4,7 +4,6 @@
 //
 
 #import "PXMonotoneBackground.h"
-@class NSColor;
 
 @interface PXDuotoneBackground : PXMonotoneBackground 
 {

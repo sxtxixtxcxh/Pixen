@@ -26,11 +26,6 @@
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/NSObject.h>
-#import <AppKit/NSNibDeclarations.h>
-
-@class NSTextField, NSPanel, NSWindow;
-
 @interface PXNamePrompter : NSWindowController
 {
   @private

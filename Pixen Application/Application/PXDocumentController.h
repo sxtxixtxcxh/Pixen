@@ -3,9 +3,6 @@
 //  Pixen
 //
 
-#import <Foundation/NSObject.h>
-#import <AppKit/NSNibDeclarations.h>
-
 @interface PXDocumentController: NSDocumentController
 {
   @private

@@ -28,8 +28,6 @@
 //  Copyright (c) 2004 Pixen. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import "PXLinearTool.h"
 
 @class PXCanvas, PXLayer;

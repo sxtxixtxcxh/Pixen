@@ -3,12 +3,6 @@
 //  Pixen
 //
 
-#import <Foundation/NSObject.h>
-
-#import <AppKit/NSNibDeclarations.h>
-
-@class NSPanel;
-
 @interface PXPanelManager : NSObject < NSWindowDelegate >
 {
   @private

@@ -3,15 +3,7 @@
 //  Pixen
 //
 
-#import <Foundation/NSObject.h>
-#import <AppKit/NSNibDeclarations.h>
-
 @class PXTool, PXCanvasController;
-@class NSString;
-@class NSColor;
-@class NSColorWell;
-@class NSEvent;
-@class NSImage;
 
 typedef enum {
 	PXPencilToolTag = 0,

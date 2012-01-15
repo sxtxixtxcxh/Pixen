@@ -4,7 +4,6 @@
 //
 
 #import "PXDuotoneBackground.h"
-#import <AppKit/NSColorWell.h>
 
 @implementation PXDuotoneBackground
 
