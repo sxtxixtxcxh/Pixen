@@ -16,7 +16,6 @@
 #import "PXCanvasResizePrompter.h"
 #import "PXScaleController.h"
 #import "PXCanvasDocument.h"
-#import "PXPreviewController.h"
 #import "PXInfoPanelController.h"
 #import "PXPaletteController.h"
 
@@ -135,6 +134,8 @@
 	if (canvas != aCanvas) {
 		canvas = aCanvas;
 		[canvasController setCanvas:canvas];
+		
+		[canvasController updatePreview];
 	}
 }
 
