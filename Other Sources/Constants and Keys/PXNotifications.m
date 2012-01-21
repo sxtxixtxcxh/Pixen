@@ -33,15 +33,6 @@ NSString *PXDocumentChangedDisplayNameNotificationName = @"PXDocumentChangedDisp
 NSString *PXToolDoubleClickedNotificationName = @"PXToolDoubleClicked";
 
 NSString *PXPaletteChangedNotificationName = @"PXPaletteChanged";
-NSString *PXPaletteRemovedColorNotificationName = @"PXPaletteRemovedColor";
-NSString *PXPaletteSwappedColorsNotificationName = @"PXPaletteSwappedColors";
-NSString *PXPaletteMovedColorNotificationName = @"PXPaletteMovedColor";
-NSString *PXPaletteCycledColorsNotificationName = @"PXPaletteCycledColors";
-NSString *PXPaletteChangedColorNotificationName = @"PXPaletteChangedColor";
-NSString *PXPaletteAddedColorNotificationName = @"PXPaletteAddedColor";
-NSString *PXPaletteResizedNotificationName = @"PXPaletteResized";
-NSString *PXPaletteLockedNotificationName = @"PXPaletteLocked";
-NSString *PXPaletteUnlockedNotificationName = @"PXPaletteUnlocked";
 
 NSString *PXUnlockToolSwitcherNotificationName = @"PXUnlockToolSwitcher";
 NSString *PXLockToolSwitcherNotificationName = @"PXLockToolSwitcher";
