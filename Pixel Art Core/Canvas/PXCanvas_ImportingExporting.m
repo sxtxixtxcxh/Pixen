@@ -56,10 +56,11 @@
 {
 	NSImageRep *firstRep = [[anImage representations] objectAtIndex:0];
 	NSSize newSize = NSMakeSize((int)[firstRep pixelsWide], (int)[firstRep pixelsHigh]);
-	for (PXLayer *current in layers)
-	{
-		[current setSize:newSize withOrigin:NSZeroPoint backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
+	
+	for (PXLayer *currentLayer in layers) {
+		[currentLayer setSize:newSize withOrigin:NSZeroPoint backgroundColor:PXGetClearColor()];
 	}
+	
 	free(selectionMask);
 	selectionMask = calloc(newSize.width * newSize.height, sizeof(BOOL));
 	selectedRect = NSZeroRect;

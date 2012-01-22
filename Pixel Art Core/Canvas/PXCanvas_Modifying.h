@@ -6,23 +6,24 @@
 //  Copyright 2005 Pixen. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "PXCanvas.h"
 
 @interface PXCanvas(Modifying)
-- (BOOL)canDrawAtPoint:(NSPoint) aPoint;
-- (NSColor *) mergedColorAtPoint:(NSPoint)aPoint;
-- (NSColor *) surfaceColorAtPoint:(NSPoint)aPoint;
-- (NSColor*) colorAtPoint:(NSPoint) aPoint;
-- (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint;
-- (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint onLayer:(PXLayer *)layer;
-- (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds;
-- (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer;
+
+- (BOOL)canDrawAtPoint:(NSPoint)aPoint;
+
+- (PXColor)mergedColorAtPoint:(NSPoint)aPoint;
+- (PXColor)surfaceColorAtPoint:(NSPoint)aPoint;
+- (PXColor)colorAtPoint:(NSPoint)aPoint;
+
+- (void)setColor:(PXColor)color atPoint:(NSPoint)aPoint;
+- (void)setColor:(PXColor)color atPoint:(NSPoint)aPoint onLayer:(PXLayer *)layer;
+- (void)setColor:(PXColor)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds;
+- (void)setColor:(PXColor)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer;
+
 - (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
-+ (void)reduceColorsInCanvases:(NSArray*)canvases 
-				  toColorCount:(int)colors
-			  withTransparency:(BOOL)transparency 
-					matteColor:(NSColor *)matteColor;
++ (void)reduceColorsInCanvases:(NSArray *)canvases toColorCount:(int)colors
+			  withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
 
 - (NSPoint)correct:(NSPoint)aPoint;
 - (BOOL)containsPoint:(NSPoint)aPoint;
@@ -31,23 +32,23 @@
 - (BOOL)wraps;
 - (void)setWraps:(BOOL)newWraps;
 - (void)setWraps:(BOOL)newWraps suppressRedraw:(BOOL)suppress;
+
 - (void)changedInRect:(NSRect)rect;
 - (void)changed;
 
 - (void)flipHorizontally;
 - (void)flipVertically;
 
-
 - (void)clearUndoBuffers;
 - (void)registerForUndo;
-- (void)registerForUndoWithDrawnPoints:(NSArray *)pts
-							 oldColors:(NSArray *)oldC
-							 newColors:(NSArray *)newC
-							   inLayer:(PXLayer *)layer
+- (void)registerForUndoWithDrawnPoints:(NSPointerArray *)points oldColors:(NSPointerArray *)oldColors
+							 newColors:(NSPointerArray *)newColors inLayer:(PXLayer *)layer
 							   undoing:(BOOL)undoing;
-- (void)replaceColorsAtPoints:(NSArray *)pts withColors:(NSArray *)colors inLayer:layer;
-- (void)bufferUndoAtPoint:(NSPoint)pt fromColor:(NSColor *)oldColor toColor:(NSColor *)newColor;
 
+- (void)replaceColorsAtPoints:(NSPointerArray *)points withColors:(NSPointerArray *)colors inLayer:(PXLayer *)layer;
 
-- (void)applyImage:(NSImage *)img toLayer:(PXLayer *)layer;
+- (void)bufferUndoAtPoint:(NSPoint)aPoint fromColor:(PXColor)oldColor toColor:(PXColor)newColor;
+
+- (void)applyImage:(NSImage *)image toLayer:(PXLayer *)layer;
+
 @end

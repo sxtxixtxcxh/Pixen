@@ -50,24 +50,19 @@
  
  */
 
-- (NSColor *)compositeColorAtPoint:(NSPoint)aPoint
-						fromCanvas:(PXCanvas *)canvas
+- (PXColor)compositeColorAtPoint:(NSPoint)aPoint fromCanvas:(PXCanvas *)canvas
 {
 	if (![canvas containsPoint:aPoint])
 	{
-		return nil;
+		NSAssert(0, @"[PXEyedropperTool compositeColorAtPoint:fromCanvas:] - the given point is outside canvas bounds (this should never execute)");
 	}
-	else
+	
+	if ([EYE_PC colorSource] == PXActiveLayerColorSource)
 	{
-		if ([EYE_PC colorSource] == PXActiveLayerColorSource)
-		{
-			return [[canvas activeLayer] colorAtPoint:aPoint];
-		}
-		else
-		{
-			return [canvas surfaceColorAtPoint:aPoint];
-		}
+		return [[canvas activeLayer] colorAtPoint:aPoint];
 	}
+	
+	return [canvas surfaceColorAtPoint:aPoint];
 }
 
 - (void)eyedropAtPoint:(NSPoint)aPoint fromCanvasController:(PXCanvasController *)controller
@@ -82,8 +77,7 @@
 	else
 		usedSwitcher = [[PXToolPaletteController sharedToolPaletteController] rightSwitcher];
 	
-	[usedSwitcher setColor:[self compositeColorAtPoint:aPoint
-											fromCanvas:[controller canvas]]];
+	[usedSwitcher setColor:PXColorToNSColor([self compositeColorAtPoint:aPoint fromCanvas:[controller canvas]])];
 }
 
 

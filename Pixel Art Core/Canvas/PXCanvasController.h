@@ -6,11 +6,12 @@
 //  Copyright 2005 Pixen. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-
+#import "PXColor.h"
 
 @class PXCanvas, PXCanvasView, PXBackground, PXGridSettingsController, PXLayerController, PXBackgroundController;
-@interface PXCanvasController : NSObject {
+
+@interface PXCanvasController : NSObject
+{
   @private
 	PXCanvas *canvas;
 	IBOutlet PXCanvasView *view;
@@ -30,8 +31,8 @@
 	
 	NSPoint panLeftovers; // used to integerify the pan coords
 	
-	NSColor *oldColor;
-
+	PXColor oldColor;
+	
 	id delegate;
 	BOOL wraps; // used in setCanvas
 }
@@ -47,7 +48,6 @@
 - (void)toolSwitched:(NSNotification *)notification;
 - (void)canvasSizeDidChange:(NSNotification *) aNotification;
 - (PXCanvas *) canvas;
-- (void)setColor:(NSColor *) aColor;
 - (void)setCanvas:(PXCanvas *)canv;
 - (void)canvasDidChange:(NSNotification *) aNotification;
 - (void)activate;
@@ -109,5 +109,4 @@
 - (void)canvasController:(PXCanvasController *)controller zoomInOnCanvasPoint:(NSPoint)point;
 - (void)canvasController:(PXCanvasController *)controller zoomOutOnCanvasPoint:(NSPoint)point;
 - (void)zoomToFitCanvasController:(PXCanvasController *)controller;
-- (void)canvasController:(PXCanvasController *)controller setSize:(NSSize)size backgroundColor:(NSColor *)bg;
 @end

@@ -3,17 +3,17 @@
 //  Pixen
 //
 
-#import "PXPalette.h"
-#import "PXLayer.h"
 #import "PXGrid.h"
+#import "PXLayer.h"
+#import "PXPalette.h"
 
-typedef BOOL * PXSelectionMask;
+typedef BOOL *PXSelectionMask;
 
-@class PXBackgroundConfig, PXBackground;
+@class PXBackground, PXBackgroundConfig;
 
-@interface PXCanvas : NSObject <NSCopying>
+@interface PXCanvas : NSObject < NSCopying >
 {
-	@private
+  @private
 	NSMutableArray *layers;
 	
 //I want to move these to the document somehow, eventually.
@@ -31,17 +31,17 @@ typedef BOOL * PXSelectionMask;
 	NSRect canvasRect;  //Cached because [self size] and NSMakeRect slow things down when containsPoint is called a bunch
 	NSRect selectedRect;
 	NSUndoManager *undoManager; // Cached from PXCanvasDocument
-	NSMutableArray *drawnPoints, *oldColors, *newColors;
-
+	NSPointerArray *_drawnPoints, *_oldColors, *_newColors;
+	
 //these are slightly easier to move, but will still suck to move.
 	PXBackgroundConfig *bgConfig;
 	PXGrid *grid;
 	BOOL wraps;
 	NSSize previewSize;
-  
-  BOOL frequencyPaletteDirty;
-  NSCountedSet *minusColors;
-  NSCountedSet *plusColors;
+	
+	BOOL frequencyPaletteDirty;
+	NSCountedSet *_minusColors;
+	NSCountedSet *_plusColors;
 }
 
 @property (nonatomic, retain) PXGrid *grid;
@@ -49,7 +49,7 @@ typedef BOOL * PXSelectionMask;
 @property (nonatomic, readonly) NSArray *tempLayers;
 
 - (void)refreshWholePalette;
-- (void)refreshPaletteDecreaseColorCount:(NSColor *)down increaseColorCount:(NSColor *)up;
+- (void)refreshPaletteDecreaseColorCount:(PXColor)down increaseColorCount:(PXColor)up;
 
 - (void)setUndoManager:(NSUndoManager *)manager;
 - (NSUndoManager *)undoManager;
@@ -57,10 +57,11 @@ typedef BOOL * PXSelectionMask;
 - (void)recacheSize;
 
 - (NSSize)size;
-- (void)setSize:(NSSize)newSize 
- 	withOrigin:(NSPoint)origin
-backgroundColor:(NSColor *)color;
-- (void)setSize:(NSSize)aSize;
+
+- (void)setSize:(NSSize)newSize;
+- (void)setSize:(NSSize)newSize withOrigin:(NSPoint)origin backgroundColor:(PXColor)color;
+
+- (void)updatePreviewSize;
 
 - (NSSize)previewSize;
 - (void)setPreviewSize:(NSSize)size;
@@ -68,8 +69,8 @@ backgroundColor:(NSColor *)color;
 - (void)beginUndoGrouping;
 - (void)endUndoGrouping;
 - (void)endUndoGrouping:(NSString *)action;
-- (void)updatePreviewSize;
-- (NSColor *)eraseColor;
+
+- (PXColor)eraseColor;
 
 - (PXPalette *)newFrequencyPalette;
 

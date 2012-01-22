@@ -248,7 +248,7 @@
 	
 	PXLayer *layer = [[PXLayer alloc] initWithName:[NSString stringWithFormat:NSLocalizedString(@"New Layer %d", @"New Layer %d"), _layersCreated]
 											  size:[_canvas size]
-									 fillWithColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
+									 fillWithColor:PXGetClearColor()];
 	
 	[_canvas addLayer:layer];
 	[layer release];

@@ -3,6 +3,7 @@
 //  Pixen
 //
 
+#import "PXColor.h"
 #import "PXPalette.h"
 
 typedef struct {
@@ -14,10 +15,10 @@ typedef struct {
 typedef struct {
 	PXTile** tiles;
 	unsigned tileCount;
-	CGColorSpaceRef colorspace;	
-
+	CGColorSpaceRef colorspace;
+	
 	int retainCount;
-		
+	
 	int width, height;
 } PXImage;
 
@@ -30,26 +31,24 @@ PXImage *PXImage_copy(PXImage *self);
 PXImage *PXImage_retain(PXImage *self);
 PXImage *PXImage_release(PXImage *self);
 
-NSColor *PXImage_backgroundColor(PXImage *self);
+PXColor PXImage_colorAtIndex(PXImage *self, unsigned index);
+PXColor PXImage_colorAtXY(PXImage *self, int x, int y);
 
-NSColor *PXImage_colorAtIndex(PXImage *self, int loc);
-NSColor *PXImage_colorAtXY(PXImage *self, int x, int y);
-void PXImage_setColorAtXY(PXImage *self, NSColor *color, int x, int y);
-void PXImage_setColorAtIndex(PXImage *self, NSColor *c, unsigned loc);
-void PXImage_clear(PXImage *self, NSColor *c);
+void PXImage_setColorAtXY(PXImage *self, PXColor color, int x, int y);
+void PXImage_setColorAtIndex(PXImage *self, PXColor color, unsigned index);
+
+void PXImage_clear(PXImage *self, PXColor color);
 
 void PXImage_flipHorizontally(PXImage *self);
 void PXImage_flipVertically(PXImage *self);
 void PXImage_translate(PXImage *self, int deltaX, int deltaY, BOOL wrap);
 void PXImage_rotateByDegrees(PXImage *self, int degrees);
 
-void PXImage_setSize(PXImage *self, NSSize newSize, NSPoint origin, NSColor * backgroundColor);
+void PXImage_setSize(PXImage *self, NSSize newSize, NSPoint origin, PXColor backgroundColor);
 
 void PXImage_drawInRectFromRectWithOperationFraction(PXImage *self, NSRect dst, NSRect src, NSCompositingOperation operation, double opacity);
 void PXImage_compositeUnder(PXImage *self, PXImage *other, BOOL blend);
 void PXImage_compositeUnderInRect(PXImage *self, PXImage *other, NSRect aRect, BOOL blend);
-
-NSColor * PXImage_blendColors(PXImage * self, NSColor * bottomColor, NSColor * topColor);
 
 NSData *PXImage_encodedData(PXImage *self);
 PXImage *PXImage_initWithData(PXImage *self, NSData *data);

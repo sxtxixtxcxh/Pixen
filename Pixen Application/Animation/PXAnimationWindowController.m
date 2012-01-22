@@ -60,14 +60,6 @@
 	}
 }
 
-- (void)canvasController:(PXCanvasController *)controller setSize:(NSSize)size backgroundColor:(NSColor*)bg
-{
-	[animation setSize:size withOrigin:NSZeroPoint backgroundColor:bg undo:NO];
-	[self setAnimation:animation];
-	[[[self document] undoManager] removeAllActions];
-	[[self document] updateChangeCount:NSChangeCleared];
-}
-
 - (void)activateCel:(PXCel *)cel
 {
 	NSInteger newCelIndex = [animation indexOfObjectInCels:cel];
@@ -505,19 +497,16 @@
 	[super scaleCanvas:self];
 }
 
-- (void)prompter:aPrompter
-didFinishWithSize:(NSSize)aSize
-		position:(NSPoint)position
- backgroundColor:(NSColor *)color
+- (void)prompter:(PXCanvasResizePrompter *)prompter didFinishWithSize:(NSSize)size position:(NSPoint)position backgroundColor:(NSColor *)color
 {
-	[animation setSize:aSize withOrigin:position backgroundColor:color];
+	[animation setSize:size withOrigin:position backgroundColor:PXColorFromNSColor(color)];
 }
 
 - (IBAction)crop:sender
 {
 	NSRect selectedRect = [self.canvas selectedRect];
 	[[[self document] undoManager] beginUndoGrouping];
-	[animation setSize:selectedRect.size withOrigin:NSMakePoint(NSMinX(selectedRect) * -1, NSMinY(selectedRect) * -1) backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
+	[animation setSize:selectedRect.size withOrigin:NSMakePoint(NSMinX(selectedRect) * -1, NSMinY(selectedRect) * -1) backgroundColor:PXGetClearColor()];
 	[self.canvas deselect];
 	[[[self document] undoManager] endUndoGrouping];
 }

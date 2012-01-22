@@ -12,77 +12,13 @@
 #import "PXLayer.h"
 #import "PXBackgroundConfig.h"
 
-@interface PXFrequencyEntry : NSObject
-{
-	int count;
-	NSColor *color;
-}
-+ withColor:c;
-- initWithColor:c;
-- (int)count;
-- (NSColor *)color;
-- (void)increment;
-@end
-@implementation PXFrequencyEntry
-
-+ (id)withColor:(NSColor *)c
-{
-	return [[[self alloc] initWithColor:c] autorelease];
-}
-
-- (id)initWithColor:(NSColor *)c
-{
-	self = [super init];
-	count = 1;
-	color = [c retain];
-	return self;
-}
-
-- (void)dealloc
-{
-	[color release];
-	[super dealloc];
-}
-
-- (int)count
-{
-	return count;
-}
-
-- (NSColor *)color
-{
-	return color;
-}
-
-- (void)increment
-{
-	count++;
-}
-
-- (NSComparisonResult)compare:(PXFrequencyEntry *)other
-{
-	return count < [other count];
-}
-
-@end
-
-
 @implementation PXCanvas
 
 @synthesize tempLayers, grid;
 
--(id)copyWithZone:(NSZone*) zone
+- (id)copyWithZone:(NSZone *)zone
 {
 	return [[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:self]] retain];
-}
-
-- (id)_rawInit
-{
-	if (![super init]) return nil;
-  plusColors = [[NSCountedSet alloc] init];
-  minusColors = [[NSCountedSet alloc] init];
-  frequencyPaletteDirty = NO;
-	return self;
 }
 
 - (void)recacheSize
@@ -95,36 +31,35 @@
 	if ( ! (self = [super init]))
 		return nil;
 	
-	plusColors = [[NSCountedSet alloc] init];
-	minusColors = [[NSCountedSet alloc] init];
-	frequencyPaletteDirty = NO;
+	_minusColors = [[NSCountedSet alloc] init];
+	_plusColors = [[NSCountedSet alloc] init];
+	
 	layers = [[NSMutableArray alloc] initWithCapacity:23];
 	grid = [[PXGrid alloc] init];
 	bgConfig = [[PXBackgroundConfig alloc] init];
-	wraps = NO;
-	drawnPoints = nil;
-	oldColors = nil;
-	newColors = nil;
+	
 	return self;
 }
 
 - (void)dealloc
 {
 	if (selectionMask)
-	{
 		free(selectionMask);
-	}
 	
 	[tempLayers release];
-	[drawnPoints release];
-	[oldColors release];
-	[newColors release];
 	[layers release];
 	[bgConfig release];
-  [minusColors release];
-  [plusColors release];
 	[grid release];
+	
+	[_drawnPoints release];
+	[_oldColors release];
+	[_newColors release];
+	
+	[_minusColors release];
+	[_plusColors release];
+	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
 	[super dealloc];
 }
 
@@ -158,8 +93,8 @@
 
 - (void)clearIncrementalPaletteRefresh
 {
-	[minusColors removeAllObjects];
-	[plusColors removeAllObjects];
+	[_minusColors removeAllObjects];
+	[_plusColors removeAllObjects];
 }
 
 //could be coalesced by timer or update/undo group; would rather do it with undo.
@@ -176,7 +111,9 @@
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasPaletteUpdate"
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:minusColors, @"PXCanvasPaletteUpdateRemoved", plusColors, @"PXCanvasPaletteUpdateAdded", nil]];
+													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+																(id) _minusColors, @"PXCanvasPaletteUpdateRemoved",
+																(id) _plusColors, @"PXCanvasPaletteUpdateAdded", nil]];
 	[self clearIncrementalPaletteRefresh];
 }
 
@@ -191,25 +128,24 @@
 	}
 }
 
-- (void)refreshPaletteDecreaseColorCount:(NSColor *)down increaseColorCount:(NSColor *)up
+- (void)refreshPaletteDecreaseColorCount:(PXColor)down increaseColorCount:(PXColor)up
 {
-	if ([down isEqual:up])
+	if (PXColorEqualsColor(down, up))
 		return;
 	
 	[[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(reallyRefreshIncrementalPalette:) object:nil];
 	
-	[minusColors addObject:down];
-	[plusColors addObject:up];
+	[_minusColors addObject:PXColorToNSColor(down)];
+	[_plusColors addObject:PXColorToNSColor(up)];
 	
 	[self performSelector:@selector(reallyRefreshIncrementalPalette:) withObject:nil afterDelay:0.5f];
 }
 
-- (void)setSize:(NSSize)aSize 
-	 withOrigin:(NSPoint)origin
-backgroundColor:(NSColor *)color
+- (void)setSize:(NSSize)newSize withOrigin:(NSPoint)origin backgroundColor:(PXColor)color
 {
-	unsigned newMaskLength = sizeof(BOOL) * aSize.width * aSize.height;
-	PXSelectionMask newMask = calloc(aSize.width * aSize.height, sizeof(BOOL));
+	unsigned newMaskLength = sizeof(BOOL) * newSize.width * newSize.height;
+	PXSelectionMask newMask = calloc(newSize.width * newSize.height, sizeof(BOOL));
+	
 	/* we'll just toss the selection when the canvas resizes.  that's not too heinous.
 	int i, j;
 	NSSize oldSize = [self size];
@@ -234,7 +170,7 @@ backgroundColor:(NSColor *)color
 			[self setLayersNoResize:[[layers deepMutableCopy] autorelease] fromLayers:layers];
 			for (PXLayer *current in layers)
 			{
-				[current setSize:aSize withOrigin:origin backgroundColor:color];
+				[current setSize:newSize withOrigin:origin backgroundColor:color];
 			}
 			[self setMaskData:newData withOldMaskData:oldData];
         //NSLog(@"Mask data updated - copied %@", [[layers lastObject] name]);
@@ -244,8 +180,11 @@ backgroundColor:(NSColor *)color
 	}
 	else 
 	{
-		[self insertLayer:[[[PXLayer alloc] initWithName:NSLocalizedString(@"Main Layer", @"Main Layer") size:aSize fillWithColor:color] autorelease] atIndex:0];
-    [self reallyRefreshWholePalette:nil];
+		[self insertLayer:[[[PXLayer alloc] initWithName:NSLocalizedString(@"Main Layer", @"Main Layer")
+													size:newSize
+										   fillWithColor:color] autorelease] atIndex:0];
+		
+		[self reallyRefreshWholePalette:nil];
 		[self activateLayer:[layers objectAtIndex:0]];
 		[[self undoManager] removeAllActions];
 		selectionMask = newMask;
@@ -256,13 +195,9 @@ backgroundColor:(NSColor *)color
 	[self updatePreviewSize];
 }
 
-- (void)setSize:(NSSize)aSize
+- (void)setSize:(NSSize)newSize
 {
-	NSColor *color = [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0];
-	
-	[self setSize:aSize
-	   withOrigin:NSZeroPoint 
-  backgroundColor:color];
+	[self setSize:newSize withOrigin:NSZeroPoint backgroundColor:PXGetClearColor()];
 }
 
 - (NSSize)previewSize
@@ -273,9 +208,9 @@ backgroundColor:(NSColor *)color
 	return previewSize;
 }
 
-- (void)setPreviewSize:(NSSize)aSize
+- (void)setPreviewSize:(NSSize)size
 {
-	previewSize = aSize;
+	previewSize = size;
 }
 
 - (void)beginUndoGrouping
@@ -295,40 +230,38 @@ backgroundColor:(NSColor *)color
 	[[self undoManager] endUndoGrouping];
 }
 
-- (NSColor *)eraseColor
+- (PXColor)eraseColor
 {
-	if([layers count] > 0)
-	{
-		return PXImage_backgroundColor([(PXLayer *)[layers objectAtIndex:0] image]);
-	}
-	return [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	return PXGetClearColor();
 }
 
 - (PXPalette *)newFrequencyPalette
 {
-	PXPalette *freqPal = [[PXPalette alloc] initWithoutBackgroundColor];
-	NSSize sz = [self size];
-	float w = sz.width;
-	float h = sz.height;
+	PXPalette *palette = [[PXPalette alloc] initWithoutBackgroundColor];
+	
+	CGFloat w = [self size].width;
+	CGFloat h = [self size].height;
+	
 	NSCountedSet *colors = [NSCountedSet set];
-	for (PXLayer * current in layers)
+	
+	for (PXLayer *current in layers)
 	{
-		int i;
-		for (i = 0; i < w; i++)
+		for (CGFloat i = 0; i < w; i++)
 		{
-			int j;
-			for (j = 0; j < h; j++)
+			for (CGFloat j = 0; j < h; j++)
 			{
-				NSColor *color = [current colorAtPoint:NSMakePoint(i, j)];
-				[colors addObject:color];
+				PXColor color = [current colorAtPoint:NSMakePoint(i, j)];
+				[colors addObject:PXColorToNSColor(color)];
 			}
 		}
 	}
-	for(NSColor *c in colors)
+	
+	for (NSColor *color in colors)
 	{
-		[freqPal incrementCountForColor:c byAmount:[colors countForObject:c]];
+		[palette incrementCountForColor:color byAmount:[colors countForObject:color]];
 	}
-	return freqPal;
+	
+	return palette;
 }
 
 @end

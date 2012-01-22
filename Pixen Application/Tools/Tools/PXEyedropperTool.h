@@ -9,7 +9,7 @@
 
 @interface PXEyedropperTool : PXTool
 
-- (NSColor *)compositeColorAtPoint:(NSPoint)aPoint fromCanvas:(PXCanvas *)canvas;
+- (PXColor)compositeColorAtPoint:(NSPoint)aPoint fromCanvas:(PXCanvas *)canvas;
 
 - (void)mouseDownAt:(NSPoint)aPoint fromCanvasController:(PXCanvasController *)controller;
 

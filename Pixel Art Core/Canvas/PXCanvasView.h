@@ -3,7 +3,7 @@
 //  Pixen
 //
 
-@class PXCanvas, PXCrosshair, PXBackground;
+@class PXBackground, PXCanvas, PXCrosshair, PXGrid;
 
 @interface PXCanvasView : NSView 
 {
@@ -77,7 +77,7 @@
 
 - (void)setShouldDrawMainBackground:(BOOL)newShouldDraw;
 - (void)setShouldDrawGrid:(BOOL)newShouldDraw;
-- grid;
+- (PXGrid *)grid;
 - (NSRect)convertFromViewToCanvasRect:(NSRect)viewRect;
 
 - (void)setAcceptsFirstMouse:(BOOL)accepts;

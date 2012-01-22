@@ -94,21 +94,25 @@ fromCanvasController:(PXCanvasController *) controller
 	if (topMost - borderWidth < bottomMost) {
 		borderWidth = topMost - bottomMost;
 	}
+	
 	if (shouldFill)
     {
 		// careful about backwards-drawn rectangles...
-		NSColor * oldColor = [self colorForCanvas:canvas];
-		if (![SHAPE_PC shouldUseMainColorForFill])
-		{ 
-			self.color = [SHAPE_PC fillColor];
+		PXColor oldColor = [self colorForCanvas:canvas];
+		
+		if (![SHAPE_PC shouldUseMainColorForFill]) {
+			self.color = PXColorFromNSColor([SHAPE_PC fillColor]);
 		}
+		
 		[self drawRect:NSMakeRect(leftMost + borderWidth,
 								  bottomMost + borderWidth,
-								  rightMost - leftMost - 2*borderWidth,
-								  topMost - bottomMost - 2*borderWidth)
+								  rightMost - leftMost - 2 * borderWidth,
+								  topMost - bottomMost - 2 * borderWidth)
 			  inCanvas:canvas];
+		
 		self.color = oldColor;
     }
+	
 	[self drawRect:NSMakeRect(leftMost, bottomMost, rightMost - leftMost, borderWidth) inCanvas:canvas];
 	[self drawRect:NSMakeRect(leftMost, topMost-borderWidth, rightMost - leftMost, borderWidth) inCanvas:canvas];
 	[self drawRect:NSMakeRect(leftMost, bottomMost, borderWidth, topMost - bottomMost) inCanvas:canvas];

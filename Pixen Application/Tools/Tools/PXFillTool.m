@@ -64,11 +64,14 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 	return NO; 
 }
 
-- (BOOL)shouldAbandonFillingAtPoint:(NSPoint)aPoint
-			   fromCanvasController:(PXCanvasController *)controller
+- (BOOL)shouldAbandonFillingAtPoint:(NSPoint)aPoint fromCanvasController:(PXCanvasController *)controller
 {
-	if([[self colorForCanvas:[controller canvas]] isEqual:[[controller canvas] colorAtPoint:aPoint]])
-		return YES;	
+	if (![[controller canvas] containsPoint:aPoint])
+		return YES;
+	
+	if (PXColorEqualsColor([self colorForCanvas:[controller canvas]], [[controller canvas] colorAtPoint:aPoint]))
+		return YES;
+	
 	return NO;
 }
 
@@ -84,13 +87,17 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 
 - (void)fillPointsFromPoint:(NSPoint)aPoint forCanvasController:(PXCanvasController *)controller
 {
-	PXCanvas * canvas = [controller canvas];
+	PXCanvas *canvas = [controller canvas];
+	
+	if (![canvas containsPoint:aPoint])
+		return;
+	
 	aPoint = [canvas correct:aPoint];
-	NSColor * initialColor = [canvas colorAtPoint:aPoint];
-	NSColor * fillColor = [self colorForCanvas:[controller canvas]];
+	PXColor initialColor = [canvas colorAtPoint:aPoint];
+	PXColor fillColor = [self colorForCanvas:[controller canvas]];
 	int canvasWidth = [canvas size].width;
 	int canvasHeight = [canvas size].height;
-	float tolerance = [FILL_PC tolerance] / 255.0f;
+	int tolerance = [FILL_PC tolerance];
 	BOOL * points = (BOOL *)malloc((canvasWidth + 1) * (canvasHeight + 1) * sizeof(BOOL));
 	memset(points, NO, (canvasWidth + 1) * (canvasHeight + 1));
 	NSMutableArray * consideredPoints = [[NSMutableArray alloc] initWithCapacity:(canvasWidth * canvasHeight)];
@@ -127,7 +134,7 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 			checkingPoint = [canvas correct:NSMakePoint(xPointAxis + 1, canvasHeight - yPointAxis)];
 			if(points[CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)] == NO && (hasSelection == NO || [canvas pointIsSelected:checkingPoint] == YES))
 			{
-				if([[activeLayer colorAtPoint:checkingPoint] distanceTo:initialColor] <= tolerance  && [canvas containsPoint:checkingPoint] == YES)
+				if(PXColorDistanceToColor([activeLayer colorAtPoint:checkingPoint], initialColor) <= tolerance  && [canvas containsPoint:checkingPoint] == YES)
 				{
 					NSNumber * pointIndex = [NSNumber numberWithInt:CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)];		
 					points[CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)]  = YES;
@@ -146,7 +153,7 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 			checkingPoint = [canvas correct:NSMakePoint(xPointAxis - 1, canvasHeight - yPointAxis)];
 			if(points[CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)]  == NO && (hasSelection == NO || [canvas pointIsSelected:checkingPoint] == YES))
 			{
-				if([[activeLayer colorAtPoint:checkingPoint] distanceTo:initialColor] <= tolerance && [canvas containsPoint:checkingPoint] == YES)
+				if(PXColorDistanceToColor([activeLayer colorAtPoint:checkingPoint], initialColor) <= tolerance && [canvas containsPoint:checkingPoint] == YES)
 				{
 					NSNumber * pointIndex = [NSNumber numberWithInt:CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)];		
 					points[CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)]  = YES;
@@ -165,7 +172,7 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 			checkingPoint = [canvas correct:NSMakePoint(xPointAxis, canvasHeight - (yPointAxis + 1))];
 			if(points[CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)]  == NO && (hasSelection == NO || [canvas pointIsSelected:checkingPoint] == YES))
 			{
-				if([[activeLayer colorAtPoint:checkingPoint] distanceTo:initialColor] <= tolerance  && [canvas containsPoint:checkingPoint] == YES)
+				if(PXColorDistanceToColor([activeLayer colorAtPoint:checkingPoint], initialColor) <= tolerance  && [canvas containsPoint:checkingPoint] == YES)
 				{
 					NSNumber * pointIndex = [NSNumber numberWithInt:CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)];
 					points[CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)]  = YES;
@@ -184,7 +191,7 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 			checkingPoint = [canvas correct:NSMakePoint(xPointAxis, canvasHeight - (yPointAxis - 1))];
 			if(points[CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)]  == NO && (hasSelection == NO || [canvas pointIsSelected:checkingPoint] == YES))
 			{
-				if([[activeLayer colorAtPoint:checkingPoint] distanceTo:initialColor] <= tolerance && [canvas containsPoint:checkingPoint] == YES)
+				if(PXColorDistanceToColor([activeLayer colorAtPoint:checkingPoint], initialColor) <= tolerance && [canvas containsPoint:checkingPoint] == YES)
 				{
 					NSNumber * pointIndex = [NSNumber numberWithInt:CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)];
 					points[CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)]  = YES;
@@ -212,7 +219,7 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 		upperBound = canvasHeight - 1;
 		for (i = 0; i < canvasWidth * canvasHeight; i++)
 		{
-			if ([[activeLayer colorAtIndex:i] distanceTo:initialColor] <= tolerance && (hasSelection == NO || [canvas indexIsSelected:i] == YES))
+			if (PXColorDistanceToColor([activeLayer colorAtIndex:i], initialColor) <= tolerance && (hasSelection == NO || [canvas indexIsSelected:i] == YES))
 			{
 				[pointsToFill addObject:[NSNumber numberWithInt:i+canvasWidth]]; // not sure why this works...
 			}
@@ -224,10 +231,9 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 	[pointsToFill release];
 	free(points);
 	[canvas registerForUndo];
-	return;
 }
 
-- (void)fillPixelsInBOOLArray:(NSArray *)fillPoints withColor:(NSColor *)newColor withBoundsRect:(NSRect)bounds ofCanvas:(PXCanvas *)canvas
+- (void)fillPixelsInBOOLArray:(NSArray *)fillPoints withColor:(PXColor)newColor withBoundsRect:(NSRect)bounds ofCanvas:(PXCanvas *)canvas
 {
 	int canvasWidth = [canvas size].width;
 	id indices = [NSMutableArray arrayWithCapacity:[fillPoints count]];
@@ -238,6 +244,7 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 		int yLoc = (val - (val % canvasWidth))/canvasWidth - 1;
 		[indices addObject:[NSNumber numberWithInt:xLoc + (yLoc * canvasWidth)]];
 	}
+	
 	[canvas setColor:newColor atIndices:indices updateIn:bounds];
 	[canvas changedInRect:bounds];
 }

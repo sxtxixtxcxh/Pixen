@@ -23,7 +23,7 @@
 	return NSLocalizedString(@"ERASER_ACTION", @"Erasure");
 }
 
-- (NSColor *)colorForCanvas:(PXCanvas *)canvas
+- (PXColor)colorForCanvas:(PXCanvas *)canvas
 {
 	return [canvas eraseColor];
 }

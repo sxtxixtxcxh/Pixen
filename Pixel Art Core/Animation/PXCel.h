@@ -5,14 +5,16 @@
 //  Copyright 2005-2012 Pixen Project. All rights reserved.
 //
 
+#import "PXColor.h"
 #import "PXPalette.h"
 
-@class PXCanvas, PXAnimation;
+@class PXAnimation, PXCanvas;
 
 @interface PXCel : NSObject < NSCoding, NSCopying >
 {
-    PXCanvas *_canvas;
-    NSTimeInterval _duration;
+  @private
+	PXCanvas *_canvas;
+	NSTimeInterval _duration;
 }
 
 @property (nonatomic, retain) PXCanvas *canvas;
@@ -29,7 +31,7 @@
 
 - (void)setUndoManager:(NSUndoManager *)manager;
 
-- (void)setSize:(NSSize)size withOrigin:(NSPoint)origin backgroundColor:(NSColor *)bgcolor;
+- (void)setSize:(NSSize)size withOrigin:(NSPoint)origin backgroundColor:(PXColor)color;
 
 - (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(CGFloat)frac;
 

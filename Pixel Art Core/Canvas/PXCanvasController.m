@@ -114,11 +114,6 @@
 	return canvas;
 }
 
-- (void)setColor:(NSColor *) aColor
-{
-	[[PXToolPaletteController sharedToolPaletteController] setColor:aColor];
-}
-
 - (void)setCanvas:(PXCanvas *)canv
 {
 	if (canvas != canv) {
@@ -281,7 +276,7 @@
 		for (j = NSMinY(selectedRect); j < NSMaxY(selectedRect); j++)
 		{
 			NSPoint point = NSMakePoint(i, j);
-			if ([canvas pointIsSelected:point] && [[canvas colorAtPoint:point] alphaComponent] >= 0.5)
+			if ([canvas pointIsSelected:point] && [canvas colorAtPoint:point].a > 127)
 			{
 				NSRect newRect = NSMakeRect(i - NSMinX(selectedRect), j - NSMinY(selectedRect), 1, 1);
 				patternRect = NSUnionRect(patternRect, newRect);
@@ -297,7 +292,7 @@
 		for (j = NSMinY(selectedRect); j < NSMaxY(selectedRect); j++)
 		{
 			NSPoint point = NSMakePoint(i, j);
-			if ([canvas pointIsSelected:point] && [[canvas colorAtPoint:point] alphaComponent] >= 0.5)
+			if ([canvas pointIsSelected:point] && [canvas colorAtPoint:point].a > 127)
 			{
 				[pattern addPoint:NSMakePoint(i - NSMinX(selectedRect) - NSMinX(patternRect), j - NSMinY(selectedRect) - NSMinY(patternRect))];
 			}
@@ -305,7 +300,7 @@
 	}
 	[canvas deselect];
 	[currentTool setPattern:pattern];
-	[canvas changedInRect:NSInsetRect([canvas selectedRect], -2, -2)];	
+	[canvas changedInRect:NSInsetRect([canvas selectedRect], -2, -2)];
 }
 
 - (void)backgroundChanged:(id)changed
@@ -407,7 +402,7 @@
 	[view centerOn:[view convertFromCanvasToViewPoint:point]];
 }
 
-- (void)mouseDown:(NSEvent *)event forTool:aTool
+- (void)mouseDown:(NSEvent *)event forTool:(PXTool *)aTool
 {
 	if(downEventOccurred) 
 		return; 
@@ -424,20 +419,21 @@
 	
 	if(! [aTool respondsToSelector:@selector(mouseDownAt:fromCanvasController:)]) 
 		return; 
-	[oldColor release];
-	oldColor = [[aTool colorForCanvas:canvas] retain];
+	
+	oldColor = [aTool colorForCanvas:canvas];
+	
 	BOOL isTabletEvent = ([event type] == NSTabletPoint) || ([event subtype] == NSTabletPointEventSubtype);
 	if(isTabletEvent && [self caresAboutPressure])
 	{
-		NSColor *color = [oldColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-		float pressure = [event pressure];
-		[aTool setColor:[NSColor colorWithCalibratedRed:[color redComponent] green:[color greenComponent] blue:[color blueComponent] alpha:pressure * [color alphaComponent]]];
+		PXColor color = oldColor;
+		color.a *= [event pressure];
+		[aTool setColor:color];
 	}
 	initialPoint = [event locationInWindow];
 	[aTool mouseDownAt:[view convertFromWindowToCanvasPoint:initialPoint] fromCanvasController:self];	
 }
 
-- (void)mouseDragged:(NSEvent *)event forTool:aTool
+- (void)mouseDragged:(NSEvent *)event forTool:(PXTool *)aTool
 {
 	if(!downEventOccurred)  
 		return; 
@@ -448,9 +444,9 @@
 	BOOL isTabletEvent = ([event type] == NSTabletPoint) || ([event subtype] == NSTabletPointEventSubtype);
 	if(isTabletEvent && [self caresAboutPressure])
 	{
-		NSColor *color = [oldColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-		float pressure = [event pressure];
-		[aTool setColor:[NSColor colorWithCalibratedRed:[color redComponent] green:[color greenComponent] blue:[color blueComponent] alpha:pressure * [color alphaComponent]]];
+		PXColor color = oldColor;
+		color.a *= [event pressure];
+		[aTool setColor:color];
 	}	
 	NSPoint endPoint = [event locationInWindow];
 	[aTool mouseDraggedFrom:[view convertFromWindowToCanvasPoint:initialPoint] 
@@ -460,7 +456,7 @@
 	initialPoint = endPoint;
 }
 
-- (void)mouseUpAt:(NSPoint)loc forTool:aTool
+- (void)mouseUpAt:(NSPoint)loc forTool:(PXTool *)aTool
 {
 	if(!downEventOccurred) 
 		return; 
@@ -476,7 +472,7 @@
 	[aTool setColor:oldColor];
 }
 
-- (void)mouseMovedTo:(NSPoint)point forTool:aTool
+- (void)mouseMovedTo:(NSPoint)point forTool:(PXTool *)aTool
 {
 	if(![aTool respondsToSelector:@selector(mouseMovedTo:fromCanvasController:)]) 
 		return; 

@@ -187,17 +187,14 @@ NSMutableArray * toolNames;
 	[tools makeObjectsPerformSelector:@selector(clearBezier)];
 }
 
-- (void)setColor:(NSColor *)col
+- (void)setColor:(NSColor *)color
 {
 	//FIXME: coupled
-	[col retain];
 	[_color release];
-	_color = col;
+	_color = [color retain];
 	
-	for (id current in tools)
-	{
-		if ([current respondsToSelector:@selector(setColor:)]) 
-			[current setColor:_color]; 
+	for (PXTool *currentTool in tools) {
+		[currentTool setColor:PXColorFromNSColor(_color)];
 	}
 	
 	[colorWell setColor:_color];
@@ -208,7 +205,7 @@ NSMutableArray * toolNames;
 
 - (IBAction)colorChanged:(id)sender
 {
-	[self setColor:[colorWell color]];
+	[self setColor:[[colorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
 }
 
 - (IBAction)toolClicked:(id)sender

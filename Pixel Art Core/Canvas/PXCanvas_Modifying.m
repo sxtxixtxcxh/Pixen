@@ -7,15 +7,18 @@
 //
 
 #import "PXCanvas_Modifying.h"
-#import "PXCanvas_Layers.h"
-#import "PXCanvas_ImportingExporting.h"
-#import "PXLayer.h"
-#import "PXCanvas_Selection.h"
-#import "gif_lib.h"
-#import "NSString_DegreeString.h"
 
+#import "NSString_DegreeString.h"
+#import "PXCanvas_ImportingExporting.h"
+#import "PXCanvas_Layers.h"
+#import "PXCanvas_Selection.h"
+#import "PXLayer.h"
+#import "gif_lib.h"
 
 @implementation PXCanvas(Modifying)
+
+NSUInteger PointSizeF (const void *item);
+NSUInteger ColorSizeF (const void *item);
 
 - (BOOL)wraps
 {
@@ -56,7 +59,7 @@
 	return corrected;	
 }
 
-- (void)setColor:(NSColor *)color atPoint:(NSPoint)aPoint
+- (void)setColor:(PXColor)color atPoint:(NSPoint)aPoint
 {
 	if (![self containsPoint:aPoint])
 		return;
@@ -64,71 +67,79 @@
 	[self setColor:color atPoint:[self correct:aPoint] onLayer:activeLayer];
 }
 
-- (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint onLayer:(PXLayer *)layer
+- (void)setColor:(PXColor)color atPoint:(NSPoint)aPoint onLayer:(PXLayer *)layer
 {
 	[self refreshPaletteDecreaseColorCount:[layer colorAtPoint:aPoint]
-						increaseColorCount:aColor];
+						increaseColorCount:color];
 	
-	[layer setColor:aColor atPoint:aPoint];
+	[layer setColor:color atPoint:aPoint];
 }
 
-- (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer
+- (void)setColor:(PXColor)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer
 {
-	if([indices count] == 0) { return; }
+	if ([indices count] == 0)
+		return;
+	
 	for (id current in indices)
 	{
 		int val = [current intValue];
 		int x = val % (int)[self size].width;
 		int y = [self size].height - ((val - x)/[self size].width) - 1;
-    NSColor *oldColor = [layer colorAtIndex:val];
-    NSPoint pt = NSMakePoint(x, y);
+		PXColor oldColor = [layer colorAtIndex:val];
+		NSPoint pt = NSMakePoint(x, y);
 		[self bufferUndoAtPoint:pt fromColor:oldColor toColor:color];
 		[self setColor:color atPoint:pt onLayer:layer];
 	}
 	[self changedInRect:bounds];
 }
 
-- (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds
+- (void)setColor:(PXColor)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds
 {
 	[self setColor:color atIndices:indices updateIn:bounds onLayer:activeLayer];
 }
 
-- (NSColor *) mergedColorAtPoint:(NSPoint)aPoint
+- (PXColor)mergedColorAtPoint:(NSPoint)aPoint
 {
-  NSColor * currentColor = [NSColor clearColor];
-  for(PXLayer *layer in layers)
-  {
-    if([layer visible] && [layer opacity] > 0)
-    {
-      NSColor *layerColor = [layer colorAtPoint:aPoint];
-      layerColor = [layerColor colorWithAlphaComponent:([layer opacity]/100.0f) * [layerColor alphaComponent]];
-      currentColor = PXImage_blendColors(nil, currentColor, layerColor);
-    }
-  }
-  return [currentColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];  
+	PXColor currentColor = PXGetClearColor();
+	
+	for (PXLayer *layer in layers)
+	{
+		if ([layer visible] && [layer opacity] > 0)
+		{
+			PXColor layerColor = [layer colorAtPoint:aPoint];
+			layerColor.a *= ([layer opacity] / 100.0f);
+			
+			currentColor = PXColorBlendWithColor(currentColor, layerColor);
+		}
+	}
+	
+	return currentColor;
 }
 
 
-- (NSColor *) surfaceColorAtPoint:(NSPoint)aPoint
+- (PXColor)surfaceColorAtPoint:(NSPoint)aPoint
 {
-  for(PXLayer *layer in [layers reverseObjectEnumerator])
-  {
-    if([layer visible] && [layer opacity] > 0)
-    {
-      NSColor *layerColor = [layer colorAtPoint:aPoint];
-      if([layerColor alphaComponent] > 0)
-      {
-        return layerColor;
-      }
-    }
-  }
-	return [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	for (PXLayer *layer in [layers reverseObjectEnumerator])
+	{
+		if ([layer visible] && [layer opacity] > 0)
+		{
+			PXColor layerColor = [layer colorAtPoint:aPoint];
+			
+			if (layerColor.a > 0)
+			{
+				return layerColor;
+			}
+		}
+	}
+	
+	return PXGetClearColor();
 }
 
-- (NSColor *)colorAtPoint:(NSPoint)aPoint
+- (PXColor)colorAtPoint:(NSPoint)aPoint
 {
-	if (![self containsPoint:aPoint])
-		return nil;
+	if (![self containsPoint:aPoint]) {
+		NSAssert(0, @"[PXCanvas colorAtPoint:] - no canvas (this should never execute)");
+	}
 	
 	return [activeLayer colorAtPoint:aPoint];
 }
@@ -163,16 +174,15 @@
 					userInfo:dict];
 }
 
-- (BOOL)canDrawAtPoint:(NSPoint)point
+- (BOOL)canDrawAtPoint:(NSPoint)aPoint
 {
-	if([self hasSelection])
+	if ([self hasSelection])
 	{
-		if (![self pointIsSelected:point]) 
-		{
-			return NO; 
-		}
+		if (![self pointIsSelected:aPoint])
+			return NO;
 	}
-	if (!NSPointInRect(point, canvasRect))
+	
+	if (!NSPointInRect(aPoint, canvasRect))
 		return NO;
 	
 	return YES;
@@ -206,10 +216,7 @@
 						  matteColor:matteColor];
 }
 
-+(void)reduceColorsInCanvases:(NSArray*)canvases 
-				 toColorCount:(int)colors
-			 withTransparency:(BOOL)transparency 
-				   matteColor:(NSColor *)matteColor;
++ (void)reduceColorsInCanvases:(NSArray *)canvases toColorCount:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor
 {
 	PXCanvas *first = [canvases objectAtIndex:0];
 	unsigned char *red = calloc([first size].width * [first size].height * [canvases count], sizeof(unsigned char));
@@ -294,76 +301,92 @@
 	[palette release];
 }
 
+NSUInteger PointSizeF (const void *item) {
+	return sizeof(NSPoint);
+}
+
+NSUInteger ColorSizeF (const void *item) {
+	return sizeof(PXColor);
+}
+
 - (void)clearUndoBuffers
 {
-	[drawnPoints release];
-	drawnPoints = [[NSMutableArray alloc] initWithCapacity:200];
+	NSPointerFunctionsOptions options = (NSPointerFunctionsStructPersonality|NSPointerFunctionsMallocMemory|NSPointerFunctionsCopyIn);
 	
-	[oldColors release];
-	oldColors = [[NSMutableArray alloc] initWithCapacity:200];
+	NSPointerFunctions *pointF = [NSPointerFunctions pointerFunctionsWithOptions:options];
+	[pointF setSizeFunction:&PointSizeF];
 	
-	[newColors release];
-	newColors = [[NSMutableArray alloc] initWithCapacity:200];
+	NSPointerFunctions *colorF = [NSPointerFunctions pointerFunctionsWithOptions:options];
+	[colorF setSizeFunction:&ColorSizeF];
+	
+	[_drawnPoints release];
+	_drawnPoints = [[NSPointerArray alloc] initWithPointerFunctions:pointF];
+	
+	[_oldColors release];
+	_oldColors = [[NSPointerArray alloc] initWithPointerFunctions:colorF];
+	
+	[_newColors release];
+	_newColors = [[NSPointerArray alloc] initWithPointerFunctions:colorF];
 }
 
 - (void)registerForUndo
 {
-	[self registerForUndoWithDrawnPoints:drawnPoints
-							   oldColors:oldColors 
-							   newColors:newColors 
+	[self registerForUndoWithDrawnPoints:_drawnPoints
+							   oldColors:_oldColors
+							   newColors:_newColors
 								 inLayer:[self activeLayer] 
 								 undoing:NO];
 }
 
-- (void)registerForUndoWithDrawnPoints:(NSArray *)pts
-							 oldColors:(NSArray *)oldC
-							 newColors:(NSArray *)newC
-							   inLayer:(PXLayer *)layer
+- (void)registerForUndoWithDrawnPoints:(NSPointerArray *)points oldColors:(NSPointerArray *)oldColors
+							 newColors:(NSPointerArray *)newColors inLayer:(PXLayer *)layer
 							   undoing:(BOOL)undoing
 {
-	[[[self undoManager] prepareWithInvocationTarget:self] registerForUndoWithDrawnPoints:pts
-																				oldColors:newC
-																				newColors:oldC
+	[[[self undoManager] prepareWithInvocationTarget:self] registerForUndoWithDrawnPoints:points
+																				oldColors:newColors
+																				newColors:oldColors
 																				  inLayer:layer
 																				  undoing:YES];
-	if(undoing)
-	{
-		[self replaceColorsAtPoints:pts withColors:newC inLayer:layer];
+	
+	if (undoing) {
+		[self replaceColorsAtPoints:points withColors:newColors inLayer:layer];
 	}
 }
 
-- (void)replaceColorsAtPoints:(NSArray *)pts withColors:(NSArray *)colors inLayer:layer
+- (void)replaceColorsAtPoints:(NSPointerArray *)points withColors:(NSPointerArray *)colors inLayer:(PXLayer *)layer
 {
 	NSRect changedRect = NSZeroRect;
-	NSPoint pt;
-	if([pts count] > 0) {
-		pt = [[pts objectAtIndex:0] pointValue];
-		changedRect = NSMakeRect(pt.x, pt.y, 1, 1);
+	NSPoint point;
+	
+	if ([points count] > 0) {
+		point = *(NSPoint *) [points pointerAtIndex:0];
+		changedRect = NSMakeRect(point.x, point.y, 1.0f, 1.0f);
 	}
-	NSInteger i;
-	for (i = [pts count]-1; i >= 0; i--) 
+	
+	for (NSInteger i = [points count] - 1; i >= 0; i--)
 	{
-		pt = [[pts objectAtIndex:i] pointValue];
-		NSColor *c = [colors objectAtIndex:i];
-		if([c isEqual:[NSNull null]]) {
-			c = [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-		}
-		[self setColor:c atPoint:pt onLayer:layer];
-		changedRect = NSUnionRect(changedRect, NSMakeRect(pt.x, pt.y, 1, 1));
+		point = *(NSPoint *) [points pointerAtIndex:i];
+		
+		PXColor color = *(PXColor *) [colors pointerAtIndex:i];
+		[self setColor:color atPoint:point onLayer:layer];
+		
+		changedRect = NSUnionRect(changedRect, NSMakeRect(point.x, point.y, 1.0f, 1.0f));
 	}
+	
 	[self changedInRect:changedRect];
 }
 
-- (void)bufferUndoAtPoint:(NSPoint)pt fromColor:(NSColor *)oldColor toColor:(NSColor *)newColor
+- (void)bufferUndoAtPoint:(NSPoint)aPoint fromColor:(PXColor)oldColor toColor:(PXColor)newColor
 {
-	[drawnPoints addObject:[NSValue valueWithPoint:pt]];
-	[oldColors addObject:((oldColor == nil) ? (id)[NSNull null] : (id)oldColor)];
-	[newColors addObject:(newColor == nil) ? (id)[NSNull null] : (id)newColor];
+	[_drawnPoints addPointer:&aPoint];
+	[_oldColors addPointer:&oldColor];
+	[_newColors addPointer:&newColor];
 }
 
-- (void)applyImage:(NSImage *)img toLayer:(PXLayer *)layer
+- (void)applyImage:(NSImage *)image toLayer:(PXLayer *)layer
 {
-  [layer applyImage:img];
-  [self refreshWholePalette];
+	[layer applyImage:image];
+	[self refreshWholePalette];
 }
+
 @end

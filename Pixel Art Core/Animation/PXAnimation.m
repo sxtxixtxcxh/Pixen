@@ -74,7 +74,7 @@
 
 - (void)setSize:(NSSize)aSize
 {
-	[self setSize:aSize withOrigin:NSZeroPoint backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
+	[self setSize:aSize withOrigin:NSZeroPoint backgroundColor:PXGetClearColor()];
 }
 
 - (void)_willChangeSize:(BOOL)undo
@@ -95,25 +95,26 @@
 	}
 }
 
-- (void)setSize:(NSSize)aSize withOrigin:(NSPoint)origin backgroundColor:(NSColor *)bgcolor
+- (void)setSize:(NSSize)aSize withOrigin:(NSPoint)origin backgroundColor:(PXColor)color
 {
-	[self setSize:aSize withOrigin:origin backgroundColor:bgcolor undo:YES];
+	[self setSize:aSize withOrigin:origin backgroundColor:color undo:YES];
 }
 
-- (void)setSize:(NSSize)aSize withOrigin:(NSPoint)origin backgroundColor:(NSColor *)bgcolor undo:(BOOL)undo
+- (void)setSize:(NSSize)aSize withOrigin:(NSPoint)origin backgroundColor:(PXColor)color undo:(BOOL)undo
 {
-	if(undo)
-	{
+	if (undo) {
 		[undoManager beginUndoGrouping];
 	}
+	
 	[self _willChangeSize:undo];
-	for (id current in cels)
-	{
-		[current setSize:aSize withOrigin:origin backgroundColor:bgcolor];
+	
+	for (PXCel *currentCel in cels) {
+		[currentCel setSize:aSize withOrigin:origin backgroundColor:color];
 	}
+	
 	[self _didChangeSize:undo];
-	if(undo)
-	{
+	
+	if (undo) {
 		[undoManager endUndoGrouping];
 	}
 }
@@ -250,9 +251,9 @@
 
 - (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor
 {
-	[PXCanvas reduceColorsInCanvases:[cels valueForKey:@"canvas"] 
+	[PXCanvas reduceColorsInCanvases:[cels valueForKey:@"canvas"]
 						toColorCount:colors
-					withTransparency:transparency 
+					withTransparency:transparency
 						  matteColor:matteColor];
 }
 

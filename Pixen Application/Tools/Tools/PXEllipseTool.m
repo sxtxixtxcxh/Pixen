@@ -55,16 +55,16 @@
 	return [NSCursor crosshairCursor];
 }
 
-- (void)drawPointsAddingToArray:(NSMutableArray *)points 
-					 ifTracking:(BOOL)tracking 
-						  withX:(int)x 
+- (void)drawPointsAddingToArray:(NSMutableArray *)points
+					 ifTracking:(BOOL)tracking
+						  withX:(int)x
 							  y:(int)y
 							 cx:(int)cx
 							 cy:(int)cy
 					  evenWidth:(BOOL)evenWidth
 					 evenHeight:(BOOL)evenHeight
-					borderWidth:(int)borderWidth
-					   inCanvas:(PXCanvas *)canvas 
+					borderWidth:(CGFloat)borderWidth
+					   inCanvas:(PXCanvas *)canvas
 			  goingHorizontally:(BOOL)horiz
 {
 	int cWidth;
@@ -89,10 +89,10 @@
 		NSPoint p3 = NSMakePoint(cxn-dx, cyp+dy);
 		NSPoint p4 = NSMakePoint(cxn-dx, cyn-dy);	
 		if (tracking) {
-				[points addObject:NSStringFromPoint(p1)];
-				[points addObject:NSStringFromPoint(p2)];
-				[points addObject:NSStringFromPoint(p3)];
-				[points addObject:NSStringFromPoint(p4)];
+			[points addObject:NSStringFromPoint(p1)];
+			[points addObject:NSStringFromPoint(p2)];
+			[points addObject:NSStringFromPoint(p3)];
+			[points addObject:NSStringFromPoint(p4)];
 		}
 		[self drawPixelAtPoint:p1 inCanvas:canvas];
 		[self drawPixelAtPoint:p2 inCanvas:canvas];
@@ -102,8 +102,8 @@
 }
 
 - (NSArray *)plotEllipseInscribedInRect:(NSRect)bound
-						  withLineWidth:(int)borderWidth
-						 trackingPoints:(BOOL)tracking 
+						  withLineWidth:(CGFloat)borderWidth
+						 trackingPoints:(BOOL)tracking
 							   inCanvas:(PXCanvas *)canvas
 {
 	NSMutableArray *points = [NSMutableArray array];
@@ -139,7 +139,7 @@
 			xChange += twoBSquared;
 		}
 	}
-    
+	
 	x = 0;
 	y = yRadius;
 	xChange = yRadius * yRadius;
@@ -147,7 +147,7 @@
 	error = 0;
 	stoppingX = 0;
 	stoppingY = twoASquared * yRadius;
-    
+	
 	while (stoppingX <= stoppingY) {
 		[self drawPointsAddingToArray:points ifTracking:tracking withX:x y:y cx:cx cy:cy evenWidth:evenWidth evenHeight:evenHeight borderWidth:borderWidth inCanvas:canvas goingHorizontally:NO];
 		x++;
@@ -166,24 +166,24 @@
 
 
 - (void)plotFilledEllipseInscribedInRect:(NSRect)bound
-						   withLineWidth:(int)borderWidth 
-						   withFillColor:(NSColor *)fillColor 
+						   withLineWidth:(CGFloat)borderWidth
+						   withFillColor:(PXColor)fillColor
 								inCanvas:(PXCanvas *)canvas
 {
 	NSArray *points = [self plotEllipseInscribedInRect:bound withLineWidth:borderWidth trackingPoints:YES inCanvas:canvas];
 	NSEnumerator *pointEnumerator = [points objectEnumerator];
 	id start, end;
 	NSPoint startPoint, endPoint;
-	NSColor * oldColor = self.color;
+	PXColor oldColor = self.color;
 	
 	if (![SHAPE_PC shouldUseMainColorForFill]) 
-    { 
+	{ 
 		self.color = fillColor;
-    }
+	}
 	
 	while ((start = [pointEnumerator nextObject]) 
 		   && (end = [pointEnumerator nextObject])) 
-    {
+	{
 		startPoint = NSPointFromString(start);
 		endPoint = NSPointFromString(end);
 		while ([points containsObject:NSStringFromPoint(startPoint)]) {
@@ -196,13 +196,13 @@
 		if (startPoint.y > endPoint.y) {
 			[self drawLineFrom:startPoint to:endPoint inCanvas:canvas];
 		}
-    }
+	}
 	
 	self.color = oldColor;
 }
 
 - (void)plotUnfilledEllipseInscribedInRect:(NSRect)bound 
-							 withLineWidth:(int)borderWidth
+							 withLineWidth:(CGFloat)borderWidth
 								  inCanvas:(PXCanvas *)canvas
 {
 	[self plotEllipseInscribedInRect:(NSRect)bound 
@@ -211,22 +211,21 @@
 							inCanvas:canvas];
 }
 
-- (NSRect)getEllipseBoundFromdrawFromPoint:(NSPoint)origin
-								   toPoint:(NSPoint)aPoint
+- (NSRect)getEllipseBoundFromdrawFromPoint:(NSPoint)origin toPoint:(NSPoint)aPoint
 {
-    NSPoint start = origin;
-    NSPoint end = aPoint;
-    if (aPoint.x < start.x)
-    {
+	NSPoint start = origin;
+	NSPoint end = aPoint;
+	if (aPoint.x < start.x)
+	{
 		start.x = aPoint.x;
 		end.x = origin.x + 1;
-    }
+	}
 	else
 	{
 		end.x++;
 	}
 	
-    if (aPoint.y < start.y)
+	if (aPoint.y < start.y)
 	{
 		start.y = aPoint.y;
 		end.y = origin.y + 1;
@@ -235,20 +234,18 @@
 	{
 		end.y++;
 	}
-    return NSMakeRect(start.x, start.y, end.x - start.x, end.y - start.y);
+	return NSMakeRect(start.x, start.y, end.x - start.x, end.y - start.y);
 }
 
-- (void)finalDrawFromPoint:(NSPoint)origin
-				   toPoint:(NSPoint)aPoint
-				  inCanvas:(PXCanvas *)canvas
+- (void)finalDrawFromPoint:(NSPoint)origin toPoint:(NSPoint)aPoint inCanvas:(PXCanvas *)canvas
 {
-	NSRect ellipseBound = [self getEllipseBoundFromdrawFromPoint:(NSPoint)origin 
+	NSRect ellipseBound = [self getEllipseBoundFromdrawFromPoint:(NSPoint)origin
 														 toPoint:aPoint];
 	
 	if ([SHAPE_PC shouldFill]) {
 		[self plotFilledEllipseInscribedInRect:ellipseBound
 								 withLineWidth:[SHAPE_PC borderWidth]
-								 withFillColor:([SHAPE_PC shouldUseMainColorForFill]) ? [self colorForCanvas:canvas] : [SHAPE_PC fillColor]
+								 withFillColor:[SHAPE_PC shouldUseMainColorForFill] ? [self colorForCanvas:canvas] : PXColorFromNSColor([SHAPE_PC fillColor])
 									  inCanvas:canvas];
 		
 	} else {
@@ -259,14 +256,12 @@
 	}
 }
 
-- (void)drawFromPoint:(NSPoint)origin
-			  toPoint:(NSPoint)finalPoint
-			 inCanvas:(PXCanvas *)canvas
+- (void)drawFromPoint:(NSPoint)origin toPoint:(NSPoint)finalPoint inCanvas:(PXCanvas *)canvas
 {
 	[super drawFromPoint:origin toPoint:finalPoint inCanvas:canvas];
 	NSRect ellipseBound = [self getEllipseBoundFromdrawFromPoint:(NSPoint)origin
 														 toPoint:finalPoint];
-    [self plotUnfilledEllipseInscribedInRect:ellipseBound
+	[self plotUnfilledEllipseInscribedInRect:ellipseBound
 							   withLineWidth:[SHAPE_PC borderWidth]
 									inCanvas:canvas];
 }

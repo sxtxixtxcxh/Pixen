@@ -43,13 +43,13 @@
 	return @"";
 }
 
-- init
+- (id)init
 {
 	self = [super init];
-	if (self != nil) {
+	if (self) {
 		path = [[NSBezierPath bezierPath] retain];
 		wrappedPath = [[NSBezierPath bezierPath] retain];
-		color = [[[NSColor blackColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace] retain];
+		color = PXGetBlackColor();
 		initialLoad = YES;
 	}
 	return self;
@@ -74,8 +74,8 @@
 {
 	[wrappedPath release];
 	[path release];
-	[color release];
 	[propertiesController release];
+	
 	[super dealloc];
 }
 
@@ -107,7 +107,7 @@ fromCanvasController:(PXCanvasController*)controller
 	return NSMakeRect(aPoint.x, aPoint.y, 1, 1);
 }
 
-- (NSColor *)colorForCanvas:(PXCanvas *)canvas
+- (PXColor)colorForCanvas:(PXCanvas *)canvas
 {
 	return color;
 }

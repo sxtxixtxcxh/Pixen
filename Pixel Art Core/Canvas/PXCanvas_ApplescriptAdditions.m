@@ -42,7 +42,7 @@
 	int x = [[arguments objectForKey:@"atX"] intValue];
 	int y = [[arguments objectForKey:@"atY"] intValue];
 	
-	return [self colorAtPoint:NSMakePoint(x, y)];
+	return PXColorToNSColor([self colorAtPoint:NSMakePoint(x, y)]);
 }
 
 - (id)handleMoveLayerScriptCommand:(id)command
@@ -75,7 +75,7 @@
 - (id)handleSetColorScriptCommand:(id)command
 {
 	NSDictionary *arguments = [command evaluatedArguments];
-	NSColor *color = [arguments objectForKey:@"toColor"];
+	PXColor color = PXColorFromNSColor([arguments objectForKey:@"toColor"]);
 	int x = [[arguments objectForKey:@"atX"] intValue];
 	int y = [[arguments objectForKey:@"atY"] intValue];
 	

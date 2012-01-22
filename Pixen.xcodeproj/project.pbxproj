@@ -26,6 +26,8 @@
 		BF1A538807ECD9200017A44E /* PXImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1A538607ECD9200017A44E /* PXImage.m */; };
 		BF269FE6091307BF00B7A218 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BB8ED608FB58F9009C75A6 /* QTKit.framework */; };
 		C912F26D13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib in Resources */ = {isa = PBXBuildFile; fileRef = C912F26B13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib */; };
+		C915E26C14C29349001A3A88 /* PXColor.h in Headers */ = {isa = PBXBuildFile; fileRef = C915E26A14C29349001A3A88 /* PXColor.h */; };
+		C915E26D14C29349001A3A88 /* PXColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C915E26B14C29349001A3A88 /* PXColor.m */; };
 		C91F07D3142D0BAB007F812C /* PXInfoPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = C91F07D1142D0BAB007F812C /* PXInfoPanel.xib */; };
 		C92A1E9213B12CAB0007235A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C92A1E9013B12CAB0007235A /* MainMenu.xib */; };
 		C93DB17F13ABC6BE006D42FE /* PXPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93DB17D13ABC6BE006D42FE /* PXPreferences.xib */; };
@@ -562,6 +564,8 @@
 		BF1A538507ECD9200017A44E /* PXImage.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PXImage.h; sourceTree = "<group>"; };
 		BF1A538607ECD9200017A44E /* PXImage.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PXImage.m; sourceTree = "<group>"; };
 		C912F26C13D5CDC100C0CF29 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXSpriteSheetExporter.xib; sourceTree = "<group>"; };
+		C915E26A14C29349001A3A88 /* PXColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXColor.h; sourceTree = "<group>"; };
+		C915E26B14C29349001A3A88 /* PXColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXColor.m; sourceTree = "<group>"; };
 		C91F07D2142D0BAB007F812C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXInfoPanel.xib; sourceTree = "<group>"; };
 		C92A1E9113B12CAB0007235A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		C93DB17E13ABC6BE006D42FE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreferences.xib; sourceTree = "<group>"; };
@@ -1766,6 +1770,8 @@
 		EA686509054C630200EE395F /* Canvas */ = {
 			isa = PBXGroup;
 			children = (
+				C915E26A14C29349001A3A88 /* PXColor.h */,
+				C915E26B14C29349001A3A88 /* PXColor.m */,
 				BF1A538507ECD9200017A44E /* PXImage.h */,
 				BF1A538607ECD9200017A44E /* PXImage.m */,
 				EA495593054C6943009A8EE7 /* PXCanvas.h */,
@@ -2188,6 +2194,7 @@
 				C9ADD4A61400821300257E38 /* PXPatternItem.h in Headers */,
 				C9F7F16C142BE3D500AB8E37 /* UTType+NSString.h in Headers */,
 				C968A8DE14A5213E00905E3D /* PXAboutWindowController.h in Headers */,
+				C915E26C14C29349001A3A88 /* PXColor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2571,6 +2578,7 @@
 				C9ADD4A71400821300257E38 /* PXPatternItem.m in Sources */,
 				C9F7F16D142BE3D500AB8E37 /* UTType+NSString.m in Sources */,
 				C968A8DF14A5213E00905E3D /* PXAboutWindowController.m in Sources */,
+				C915E26D14C29349001A3A88 /* PXColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

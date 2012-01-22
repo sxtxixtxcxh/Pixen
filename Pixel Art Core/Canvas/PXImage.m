@@ -5,8 +5,6 @@
 
 #import "PXImage.h"
 
-#import "PXPalette.h"
-
 int PXTileBitsPerComponent = 8;
 int PXTileComponentsPerPixel = 4;
 int PXTileDimension = 256;
@@ -14,14 +12,13 @@ int PXTileDimension = 256;
 PXTile* PXTileCreate(CGPoint loc, CGSize size, unsigned char *data);
 void PXTileRelease(PXTile* t);
 void PXTileDraw(PXTile* t, CGRect source, CGRect dest);
-NSColor *PXTileColorAtXY(PXTile *t, int xv, int yv);
-void PXTileSetAtXY(PXTile *t, int xv, int yv, NSColor *color);
+PXColor *PXTileColorAtXY(PXTile *t, int xv, int yv);
+void PXTileSetAtXY(PXTile *t, int xv, int yv, PXColor color);
 unsigned int PXTileGetData(PXTile *t, unsigned char **data);
 PXImage *PXImage_alloc(void);
 PXTile *PXImage_tileAtXY(PXImage *self, int xv, int yv);
 void PXImage_swapTiles(PXImage *self, PXImage *other);
 void PXImage_drawRect(PXImage *self, NSRect rect, double opacity);
-
 
 PXTile* PXTileCreate(CGPoint loc, CGSize size, unsigned char *data)
 {
@@ -69,54 +66,49 @@ void PXTileDraw(PXTile* t, CGRect source, CGRect dest)
     CGContextRef target = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
 	CGContextDrawImage(target, dest, t->image);
 }
-NSColor *PXTileColorAtXY(PXTile *t, int xv, int yv)
+
+PXColor *PXTileColorAtXY(PXTile *t, int xv, int yv)
 {
-	if(xv < t->location.x || xv >= t->location.x + CGBitmapContextGetWidth(t->painting)) { return NULL; }
-	if(yv < t->location.y || yv >= t->location.y + CGBitmapContextGetHeight(t->painting)) { return NULL; }
+	if (xv < t->location.x || xv >= t->location.x + CGBitmapContextGetWidth(t->painting))
+		return NULL;
+	
+	if (yv < t->location.y || yv >= t->location.y + CGBitmapContextGetHeight(t->painting))
+		return NULL;
+	
 	unsigned x = xv - t->location.x;
 	unsigned y = yv - t->location.y;
 	
 	unsigned char *data = CGBitmapContextGetData(t->painting);
 	size_t bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
-	size_t startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y)*bytesPerRow+x*PXTileComponentsPerPixel;
-	float a,b,c,d;
-	d = data[startIndex+3] / 255.0;
-	if(d > 0)
-	{
-		a = data[startIndex+0] / (255.0*d);
-		b = data[startIndex+1] / (255.0*d);
-		c = data[startIndex+2] / (255.0*d);
-	}
-	else
-	{
-		a = b = c = 0;
-	}
-	const CGFloat components[4] = {a, b, c, d};
-	return [NSColor colorWithColorSpace:[NSColorSpace genericRGBColorSpace] components:components count:4];
+	size_t startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y) * bytesPerRow + x * PXTileComponentsPerPixel;
+	
+	return (PXColor *) (data + startIndex);
 }
-void PXTileSetAtXY(PXTile *t, int xv, int yv, NSColor *color)
+
+void PXTileSetAtXY(PXTile *t, int xv, int yv, PXColor color)
 {
-	if(xv < t->location.x || xv >= t->location.x + CGBitmapContextGetWidth(t->painting)) { return; }
-	if(yv < t->location.y || yv >= t->location.y + CGBitmapContextGetHeight(t->painting)) { return; }
+	if (xv < t->location.x || xv >= t->location.x + CGBitmapContextGetWidth(t->painting))
+		return;
+	
+	if (yv < t->location.y || yv >= t->location.y + CGBitmapContextGetHeight(t->painting))
+		return;
+	
 	unsigned x = xv - t->location.x;
 	unsigned y = yv - t->location.y;
 	
-	if(t->image)
-	{		
+	if (t->image)
+	{
 		CGImageRelease(t->image);
 		t->image = NULL;
 	}
+	
 	unsigned char *data = CGBitmapContextGetData(t->painting);
 	NSUInteger bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
-	NSUInteger startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y)*bytesPerRow+x*PXTileComponentsPerPixel;
-	CGFloat components[4];
-	[color getComponents:components];
-	CGFloat a = components[3];
-	data[startIndex+0] = a*components[0]*255;
-	data[startIndex+1] = a*components[1]*255;
-	data[startIndex+2] = a*components[2]*255;
-	data[startIndex+3] = a*255;
+	NSUInteger startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y) * bytesPerRow + x * PXTileComponentsPerPixel;
+	
+	memcpy(data + startIndex, &color, sizeof(color));
 }
+
 unsigned int PXTileGetData(PXTile *t, unsigned char **data)
 {
 	if(data != NULL)
@@ -174,13 +166,16 @@ PXImage *PXImage_initWithCoder(PXImage *self, NSCoder *coder, PXPalette *palette
 	self->tiles = NULL;
 	if([dict objectForKey:@"colorIndices"]) {
 		NSUInteger imageSize = self->width * self->height;
-		unsigned int *colorIndices = (unsigned int *)malloc(sizeof(unsigned int) * imageSize);
+		
+		unsigned int *colorIndices = (unsigned int *) malloc(sizeof(unsigned int) * imageSize);
 		memcpy(colorIndices, [[dict objectForKey:@"colorIndices"] bytes], sizeof(unsigned int) * imageSize);
-		for(int i = 0; i < imageSize; i++) {
-			NSColor *col = [palette colorAtIndex:colorIndices[i]];
-			PXImage_setColorAtXY(self, col, i%self->width, (int)(i/self->width));
+		
+		for (int i = 0; i < imageSize; i++) {
+			PXColor color = PXColorFromNSColor([palette colorAtIndex:colorIndices[i]]);
+			PXImage_setColorAtXY(self, color, i % self->width, (int)(i / self->width));
 		}
-	} else {
+	}
+	else {
 		NSArray *tileArray = [dict objectForKey:@"tiles"];
 		if(tileArray.count > 0) {
 			self->tiles = calloc([tileArray count], sizeof(PXTile *));
@@ -291,57 +286,57 @@ PXTile *PXImage_tileAtXY(PXImage *self, int xv, int yv)
 	return t;
 }
 
-NSColor *PXImage_colorAtIndex(PXImage *self, int loc)
+PXColor PXImage_colorAtIndex(PXImage *self, unsigned index)
 {
-	int xLoc = loc % self->width;
-	int yLoc = (loc - (loc % self->width))/self->width;
+	int xLoc = index % self->width;
+	int yLoc = (index - (index % self->width))/self->width;
+	
 	return PXImage_colorAtXY(self, xLoc, self->height - yLoc - 1);
 }
 
-NSColor *PXImage_backgroundColor(PXImage *self)
+PXColor PXImage_colorAtXY(PXImage *self, int x, int y)
 {
-	return [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	PXColor *color = PXTileColorAtXY(PXImage_tileAtXY(self, x, y), x, y);
+	
+	if (color == NULL) {
+		@throw [NSException exceptionWithName:NSInternalInconsistencyException
+									   reason:@"A NULL color shouldn't be returned from the image"
+									 userInfo:nil];
+	}
+	
+	return (*color);
 }
 
-NSColor *PXImage_colorAtXY(PXImage *self, int x, int y)
-{
-	NSColor *c = PXTileColorAtXY(PXImage_tileAtXY(self, x, y), x, y);
-	
-	if (c == nil)
-		return PXImage_backgroundColor(self);
-	
-	return c;
-}
-
-void PXImage_setColorAtIndex(PXImage *self, NSColor *c, unsigned loc)
+void PXImage_setColorAtIndex(PXImage *self, PXColor color, unsigned loc)
 {
 	int xLoc = loc % self->width;
 	int yLoc = (loc - (loc % self->width))/self->width;
-	PXImage_setColorAtXY(self, c, xLoc, self->height - yLoc - 1);
+	PXImage_setColorAtXY(self, color, xLoc, self->height - yLoc - 1);
 }
 
-void PXImage_setColorAtXY(PXImage *self, NSColor *color, int xv, int yv)
+void PXImage_setColorAtXY(PXImage *self, PXColor color, int xv, int yv)
 {
 	PXTile *t = PXImage_tileAtXY(self, xv, yv);
-	
-	NSColor *c = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	PXTileSetAtXY(t, xv, yv, c);
+	PXTileSetAtXY(t, xv, yv, color);
 }
 
-void PXImage_clear(PXImage *self, NSColor *c)
+void PXImage_clear(PXImage *self, PXColor color)
 {
-	c = [c colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	
-	CGFloat r = [c redComponent], g = [c greenComponent], b = [c blueComponent], a = [c alphaComponent];
-	
 	for (int y = 0; y < self->height; y += PXTileDimension)
 	{
 		for (int x = 0; x < self->width; x += PXTileDimension)
 		{
 			PXTile *tile = PXImage_tileAtXY(self, x, y);
 			
-			CGContextSetRGBFillColor(tile->painting, r, g, b, a);
-			CGContextFillRect(tile->painting, CGRectMake(0.0f, 0.0f, PXTileDimension, PXTileDimension));
+			unsigned char *data = CGBitmapContextGetData(tile->painting);
+			size_t size = CGBitmapContextGetWidth(tile->painting) * CGBitmapContextGetHeight(tile->painting);
+			
+			for (size_t n = 0; n < size; n++) {
+				data[n*PXTileComponentsPerPixel+0] = color.r;
+				data[n*PXTileComponentsPerPixel+1] = color.g;
+				data[n*PXTileComponentsPerPixel+2] = color.b;
+				data[n*PXTileComponentsPerPixel+3] = color.a;
+			}
 			
 			if (tile->image)
 			{
@@ -354,12 +349,12 @@ void PXImage_clear(PXImage *self, NSColor *c)
 
 void PXImage_flipHorizontally(PXImage *self)
 {
-	NSColor * leftColor, *rightColor;
 	int x, y;
 	for (y=0; y<self->height; y++) {
 		for (x=0; x<self->width/2; x++) {
-			leftColor = PXImage_colorAtXY(self, x, y);
-			rightColor = PXImage_colorAtXY(self, self->width - x - 1, y);
+			PXColor leftColor = PXImage_colorAtXY(self, x, y);
+			PXColor rightColor = PXImage_colorAtXY(self, self->width - x - 1, y);
+			
 			PXImage_setColorAtXY(self, rightColor, x, y);
 			PXImage_setColorAtXY(self, leftColor, self->width - x - 1, y);
 		}
@@ -368,12 +363,12 @@ void PXImage_flipHorizontally(PXImage *self)
 
 void PXImage_flipVertically(PXImage *self)
 {
-	NSColor * leftColor, *rightColor;
 	int x, y;
 	for (y=0; y<self->height/2; y++) {
 		for (x=0; x<self->width; x++) {
-			leftColor = PXImage_colorAtXY(self, x, y);
-			rightColor = PXImage_colorAtXY(self, x, self->height - y - 1);
+			PXColor leftColor = PXImage_colorAtXY(self, x, y);
+			PXColor rightColor = PXImage_colorAtXY(self, x, self->height - y - 1);
+			
 			PXImage_setColorAtXY(self, rightColor, x, y);
 			PXImage_setColorAtXY(self, leftColor, x, self->height - y - 1);
 		}
@@ -427,7 +422,7 @@ void PXImage_swapTiles(PXImage *self, PXImage *other)
 	other->tiles = swapT;
 }
 
-void PXImage_setSize(PXImage *self, NSSize newSize, NSPoint origin, NSColor * backgroundColor)
+void PXImage_setSize(PXImage *self, NSSize newSize, NSPoint origin, PXColor backgroundColor)
 {
 	PXImage *dup = PXImage_initWithSize(PXImage_alloc(), newSize);
 	int i, j;
@@ -502,10 +497,7 @@ void PXImage_rotateByDegrees(PXImage *self, int degrees)
 void PXImage_compositeUnderInRect(PXImage *self, PXImage *other, NSRect aRect, BOOL blend)
 {
 	int i, j;
-	
-	NSColor * topColor;
-	NSColor * bottomColor;
-	NSColor * usedColor;
+	PXColor topColor, bottomColor, usedColor;
 	
     for (i = NSMinX(aRect); i < NSMaxX(aRect); i++)
     {
@@ -516,9 +508,9 @@ void PXImage_compositeUnderInRect(PXImage *self, PXImage *other, NSRect aRect, B
 			usedColor = topColor;
 			
 			if (blend) {
-				usedColor = PXImage_blendColors(self, bottomColor, topColor);
+				usedColor = PXColorBlendWithColor(bottomColor, topColor);
 			}
-			if ([usedColor alphaComponent] != 0)
+			if (usedColor.a != 0)
 			{
 				PXImage_setColorAtXY(self, usedColor, i, j);
 			}
@@ -565,36 +557,6 @@ void PXImage_drawInRectFromRectWithOperationFraction(PXImage *self, NSRect dst, 
 	}
 	CGContextTranslateCTM(target, fullDest.origin.x, fullDest.origin.y);
   [transform release];
-}
-
-NSColor * PXImage_blendColors(PXImage * self, NSColor * bottomColor, NSColor * topColor)
-{
-	bottomColor = [bottomColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	topColor = [topColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	float compositeRedComponent;
-	float compositeGreenComponent;
-	float compositeBlueComponent;
-	float compositeAlphaComponent;
-	float topBlueComponent = [topColor blueComponent];
-	float topRedComponent = [topColor redComponent];
-	float topGreenComponent = [topColor greenComponent];
-	float topAlphaComponent = [topColor alphaComponent];
-	float bottomBlueComponent = [bottomColor blueComponent];
-	float bottomRedComponent = [bottomColor redComponent];
-	float bottomGreenComponent = [bottomColor greenComponent];
-	float bottomAlphaComponent = [bottomColor alphaComponent];			
-	compositeAlphaComponent = topAlphaComponent + bottomAlphaComponent - (topAlphaComponent * bottomAlphaComponent);
-	if(compositeAlphaComponent == 0)
-	{
-		return [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0];
-	}
-	else
-	{	
-		compositeRedComponent = bottomRedComponent + ((topRedComponent - bottomRedComponent) * (topAlphaComponent / compositeAlphaComponent));
-		compositeBlueComponent = bottomBlueComponent + ((topBlueComponent - bottomBlueComponent) * (topAlphaComponent / compositeAlphaComponent));
-		compositeGreenComponent = bottomGreenComponent + ((topGreenComponent - bottomGreenComponent) * (topAlphaComponent / compositeAlphaComponent));
-		return [NSColor colorWithCalibratedRed:compositeRedComponent green:compositeGreenComponent blue:compositeBlueComponent alpha:compositeAlphaComponent];
-	}	
 }
 
 NSImage *PXImage_NSImage(PXImage *self)

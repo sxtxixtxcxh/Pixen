@@ -25,8 +25,7 @@
 	unsigned int keyMask;
 }
 
-//singleton
-+(id) sharedToolPaletteController;
++ (PXToolPaletteController *)sharedToolPaletteController;
 
 - (void)clearBeziers;
 

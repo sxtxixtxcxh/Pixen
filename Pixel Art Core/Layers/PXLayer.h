@@ -10,7 +10,8 @@
 
 @class PXLayerController, PXCanvas;
 
-@interface PXLayer : NSObject <NSCoding, NSCopying> {
+@interface PXLayer : NSObject < NSCoding, NSCopying >
+{
   @private
 	PXImage *image;
 	NSPoint origin;
@@ -21,10 +22,10 @@
 	NSImage *cachedSourceOutImage;
 	
 	PXCanvas *canvas;
-
-    BOOL _visible;
-    NSString *_name;
-    CGFloat _opacity;
+	
+	BOOL _visible;
+	NSString *_name;
+	CGFloat _opacity;
 }
 
 @property (nonatomic, assign) BOOL visible;
@@ -34,17 +35,17 @@
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image origin:(NSPoint)origin size:(NSSize)sz;
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image size:(NSSize)sz;
 
-- (id) initWithName:(NSString *)aName image:(PXImage *)anImage;
+- (id)initWithName:(NSString *)aName image:(PXImage *)anImage;
 - (id)initWithName:(NSString *)aName size:(NSSize)size;
-- initWithName:(NSString *)aName size:(NSSize)size fillWithColor:(NSColor *)c;
+- (id)initWithName:(NSString *)aName size:(NSSize)size fillWithColor:(PXColor)color;
 
 - (PXImage *)image;
+
 //- (void)setUndoManager:(NSUndoManager *)man;
+
 - (NSSize)size;
-- (void)setSize:(NSSize)aSize;
-- (void)setSize:(NSSize)newSize 
-	 withOrigin:(NSPoint)origin
-backgroundColor:(NSColor *)color;
+- (void)setSize:(NSSize)newSize;
+- (void)setSize:(NSSize)newSize withOrigin:(NSPoint)origin backgroundColor:(PXColor)color;
 
 - (NSPoint)origin;
 - (void)setOrigin:(NSPoint)pt;
@@ -52,10 +53,11 @@ backgroundColor:(NSColor *)color;
 - (void)setCanvas:(PXCanvas *)canvas;
 - (PXCanvas *)canvas;
 
-- (NSColor *)colorAtIndex:(unsigned int)index;
-- (NSColor *)colorAtPoint:(NSPoint)aPoint;
-- (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint;
-- (void)setColor:(NSColor *)c atIndex:(unsigned int)loc;
+- (PXColor)colorAtIndex:(unsigned int)index;
+- (PXColor)colorAtPoint:(NSPoint)aPoint;
+
+- (void)setColor:(PXColor)color atPoint:(NSPoint)aPoint;
+- (void)setColor:(PXColor)color atIndex:(unsigned int)index;
 
 - (void)moveToPoint:(NSPoint)newOrigin;
 - (void)translateXBy:(float)amountX yBy:(float)amountY;
@@ -68,6 +70,7 @@ backgroundColor:(NSColor *)color;
 - (void)compositeNoBlendUnder:(PXLayer *)aLayer inRect:(NSRect)aRect;
 - (NSImage *)displayImage;
 - (NSImage *)exportImage;
+
 - (void)adaptToPalette:(PXPalette *)p withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
 
 - (void)meldBezier:(NSBezierPath *)path ofColor:(NSColor *)color;
@@ -82,4 +85,5 @@ backgroundColor:(NSColor *)color;
 - (void)applyImage:(NSImage *)img;
 
 - (PXLayer *)layerAfterApplyingMove;
+
 @end

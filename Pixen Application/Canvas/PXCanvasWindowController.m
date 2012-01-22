@@ -69,7 +69,7 @@
 - (void)prompter:(PXCanvasResizePrompter *)prompter didFinishWithSize:(NSSize)size
 		position:(NSPoint)position backgroundColor:(NSColor *)color
 {
-	[canvas setSize:size withOrigin:position backgroundColor:color];
+	[canvas setSize:size withOrigin:position backgroundColor:PXColorFromNSColor(color)];
 	[canvasController updateCanvasSize];
 }
 
@@ -181,13 +181,6 @@
 - (void)updateCanvasSize
 {
 	[canvasController updateCanvasSize];
-}
-
-- (void)canvasController:(PXCanvasController *)controller setSize:(NSSize)size backgroundColor:(NSColor *)bg
-{
-	[canvas setSize:size withOrigin:NSZeroPoint backgroundColor:bg];
-	[[[self document] undoManager] removeAllActions];
-	[[self document] updateChangeCount:NSChangeCleared];
 }
 
 - (void)mouseMoved:event

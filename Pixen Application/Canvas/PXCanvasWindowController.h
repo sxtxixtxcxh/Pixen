@@ -24,7 +24,7 @@
 	PXLayerController *layerController;
 	PXPaletteController *paletteController;
 	
-	id toolbar;
+	NSToolbar *toolbar;
 	IBOutlet PXCanvasController *canvasController;
 	
 	IBOutlet NSSplitView *splitView;

@@ -284,7 +284,7 @@ void PXDebugRect(NSRect r, float alpha)
 	return [canvas alternateBackground];
 }
 
-- grid
+- (PXGrid *)grid
 {
 	return [canvas grid];
 }
@@ -583,7 +583,11 @@ void PXDebugRect(NSRect r, float alpha)
 		currentTool = [paletteController leftTool];
 	}
 	if (drawsToolBeziers && [currentTool shouldUseBezierDrawing] && [[self window] isMainWindow]) {
-		[canvas meldBezier:([canvas wraps] ? [currentTool wrappedPath] : [currentTool path]) ofColor:[[currentTool colorForCanvas:canvas] colorWithAlphaComponent:([[canvas activeLayer] opacity] / 100.0f) * [[currentTool colorForCanvas:canvas] alphaComponent]]];
+		PXColor color = [currentTool colorForCanvas:canvas];
+		color.a *= ([[canvas activeLayer] opacity] / 100.0f);
+		
+		[canvas meldBezier:([canvas wraps] ? [currentTool wrappedPath] : [currentTool path])
+				   ofColor:PXColorToNSColor(color)];
 	}
 	
 	float factor = (zoomPercentage / 100.0);
@@ -799,16 +803,26 @@ void PXDebugRect(NSRect r, float alpha)
 
 - (void)updateInfoPanelWithMousePosition:(NSPoint)point dragging:(BOOL)dragging
 {
-	if (![[[PXInfoPanelController sharedInfoPanelController] window] isVisible]) { return; }
+	if (![[[PXInfoPanelController sharedInfoPanelController] window] isVisible])
+		return;
 	
 	NSPoint cursorPoint = point;
 	cursorPoint.y = [canvas size].height - cursorPoint.y - 1;
+	
 	if (!dragging) {
 		[[PXInfoPanelController sharedInfoPanelController] setDraggingOrigin:cursorPoint];
 	}
+	
 	[[PXInfoPanelController sharedInfoPanelController] setCursorPosition:cursorPoint];
-	NSColor *currentColor = [[[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEyedropperToolTag] compositeColorAtPoint:point fromCanvas:canvas];
-	[[PXInfoPanelController sharedInfoPanelController] setColorInfo:currentColor];
+	
+	if ([canvas containsPoint:point])
+	{
+		PXColor currentColor = [[[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEyedropperToolTag] compositeColorAtPoint:point fromCanvas:canvas];
+		[[PXInfoPanelController sharedInfoPanelController] setColorInfo:currentColor];
+	}
+	else {
+		[[PXInfoPanelController sharedInfoPanelController] setNoColorInfo];
+	}
 }
 
 - (void)scrollWheel:(NSEvent *)event

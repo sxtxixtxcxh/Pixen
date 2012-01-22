@@ -65,7 +65,7 @@
 	[self beginUndoGrouping]; {
 		PXLayer *newLayer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Promoted Selection", @"Promoted Selection")
 													  size:[self size]
-											 fillWithColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]] autorelease];
+											 fillWithColor:PXGetClearColor()] autorelease];
 		
 		int i, j;
 		NSPoint point;
@@ -485,34 +485,42 @@
 
 - (void)deleteSelection
 {
-	if (![self hasSelection]) return; 
+	if (![self hasSelection])
+		return;
+	
 	[self beginUndoGrouping]; {
 		PXLayer *newLayer = [[activeLayer copy] autorelease];
+		PXColor color = [self eraseColor];
 		int i, j;
-		NSColor *color = [self eraseColor];
+		
 		for (i = 0; i < [self size].width; i++)
 		{
 			for (j = 0; j < [self size].height; j++)
 			{
 				NSPoint point = NSMakePoint(i, j);
-				if ([self pointIsSelected:point])
-				{
+				
+				if ([self pointIsSelected:point]) {
 					[self setColor:color atPoint:point onLayer:newLayer];
 				}
 			}
 		}
+		
 		[self replaceLayer:activeLayer withLayer:newLayer actionName:NSLocalizedString(@"Delete Selection", @"Delete Selection")];
 		[self activateLayer:newLayer];
 		[self deselect];
-	} [self endUndoGrouping:NSLocalizedString(@"Delete Selection", @"Delete Selection")];	
+	} [self endUndoGrouping:NSLocalizedString(@"Delete Selection", @"Delete Selection")];
 }
 
 - (void)cropToSelection
 {
-	if (![self hasSelection]) { return; }
+	if (![self hasSelection])
+		return;
+	
 	[self beginUndoGrouping]; {
-		[self setSize:selectedRect.size withOrigin:NSMakePoint(NSMinX(selectedRect) * -1, NSMinY(selectedRect) * -1)
-	  backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
+		[self setSize:selectedRect.size
+		   withOrigin:NSMakePoint(NSMinX(selectedRect) * -1, NSMinY(selectedRect) * -1)
+	  backgroundColor:PXGetClearColor()];
+		
 		[self deselect];
 	} [self endUndoGrouping:NSLocalizedString(@"Crop", @"Crop")];
 }

@@ -37,7 +37,8 @@
 	[super dealloc];
 }
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"PixenIntro" ofType:nil];
 	path = [path stringByAppendingPathComponent:@"index.html"];
 	NSURL *url = [NSURL fileURLWithPath:path];

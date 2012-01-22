@@ -6,8 +6,8 @@
 //
 
 #import "PXCanvasWindowController_IBActions.h"
+
 #import "PXCanvas_Layers.h"
-#import "PXToolPaletteController.h"
 #import "PXCanvas_ImportingExporting.h"
 #import "PXCanvas_CopyPaste.h"
 #import "PXCanvasDocument.h"
@@ -16,11 +16,13 @@
 #import "PXCanvas_Selection.h"
 #import "PXCanvasController.h"
 #import "PXScaleController.h"
-#import "PXTool.h"
 #import "PXPaletteExporter.h"
 #import "PXPalettePanel.h"
 #import "PXLayerController.h"
 #import "PXPreviewController.h"
+#import "PXTool.h"
+#import "PXToolPaletteController.h"
+#import "PXToolSwitcher.h"
 
 #import "PXDocumentController.h"
 #import "PXAnimationDocument.h"
@@ -111,13 +113,13 @@
 
 - (IBAction)increaseOpacity:(id)sender
 {
-	id switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
+	PXToolSwitcher *switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
 	[switcher setColor:[[switcher color] colorWithAlphaComponent:[[switcher color] alphaComponent] + 0.1f]];
 }
 
 - (IBAction)decreaseOpacity:(id) sender
 {
-	id switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
+	PXToolSwitcher *switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
 	[switcher setColor:[[switcher color] colorWithAlphaComponent:[[switcher color] alphaComponent] - 0.1f]];
 }
 

@@ -80,16 +80,16 @@
 	return NSLocalizedString(@"PENCIL_ACTION", @"Drawing");
 }
 
-- (void)drawWithOldColor:(NSColor *)oldColor 
-				newColor:(NSColor *)newColor
+- (void)drawWithOldColor:(PXColor)oldColor
+				newColor:(PXColor)newColor
 				 atPoint:(NSPoint)aPoint
-				 inLayer:(PXLayer *)aLayer 
-				ofCanvas:(PXCanvas *) aCanvas
+				 inLayer:(PXLayer *)aLayer
+				ofCanvas:(PXCanvas *)aCanvas
 {
-	if(![aCanvas canDrawAtPoint:aPoint]) 
-    {
-		return; 
+	if (![aCanvas canDrawAtPoint:aPoint]) {
+		return;
     }
+	
 	if ([self shouldUseBezierDrawing])
 	{
 		[self.path appendBezierPathWithRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
@@ -110,14 +110,15 @@
 			[self.wrappedPath appendBezierPathWithRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
 		}
 	}
-	else// if (![oldColor isEqualTo:newColor])
+	else // if (![oldColor isEqualTo:newColor])
 	{
 		[aCanvas bufferUndoAtPoint:aPoint fromColor:oldColor toColor:newColor];
 		[aCanvas setColor:newColor atPoint:aPoint onLayer:aLayer];
-
+		
 		if (!NSEqualRects(changedRect, NSZeroRect)) {
 			changedRect = NSUnionRect(changedRect, NSMakeRect(aPoint.x, aPoint.y, 1, 1));
-		} else {
+		}
+		else {
 			changedRect = NSMakeRect(aPoint.x, aPoint.y, 1, 1);
 		}
 	}
@@ -126,11 +127,15 @@
 - (void)drawPixelAtPoint:(NSPoint)aPoint inCanvas:(PXCanvas *)aCanvas
 {
 	if (![self.propertiesController respondsToSelector:@selector(lineThickness)]) {
-		[self drawWithOldColor:[aCanvas colorAtPoint:aPoint] 
-					  newColor:[self colorForCanvas:aCanvas] 
-					   atPoint:aPoint 
-					   inLayer:[aCanvas activeLayer] 
+		if (![aCanvas containsPoint:aPoint])
+			return;
+		
+		[self drawWithOldColor:[aCanvas colorAtPoint:aPoint]
+					  newColor:[self colorForCanvas:aCanvas]
+					   atPoint:aPoint
+					   inLayer:[aCanvas activeLayer]
 					  ofCanvas:aCanvas];
+		
 		return;
 	}
 	
@@ -143,9 +148,9 @@
 			point.x += ceilf(aPoint.x - ([PENCIL_PC patternSize].width / 2));
 			point.y += ceilf(aPoint.y - ([PENCIL_PC patternSize].height / 2));
 			
-			[self drawWithOldColor:[aCanvas colorAtPoint:point] 
-						  newColor:[self colorForCanvas:aCanvas] 
-						   atPoint:point 
+			[self drawWithOldColor:[aCanvas colorAtPoint:point]
+						  newColor:[self colorForCanvas:aCanvas]
+						   atPoint:point
 						   inLayer:[aCanvas activeLayer]
 						  ofCanvas:aCanvas];
 		}
@@ -161,10 +166,15 @@
 	for (x=NSMinX(rect); x<NSMaxX(rect); x++) {
 		for (y=NSMinY(rect); y<NSMaxY(rect); y++) {
 			NSPoint loc = NSMakePoint(x,y);
-			[self drawWithOldColor:[aCanvas colorAtPoint:loc] 
-						  newColor:[self colorForCanvas:aCanvas] 
-						   atPoint:loc 
-						   inLayer:[aCanvas activeLayer] 
+			
+			if (![aCanvas containsPoint:loc]) {
+				continue;
+			}
+			
+			[self drawWithOldColor:[aCanvas colorAtPoint:loc]
+						  newColor:[self colorForCanvas:aCanvas]
+						   atPoint:loc
+						   inLayer:[aCanvas activeLayer]
 						  ofCanvas:aCanvas];
 		}
 	}

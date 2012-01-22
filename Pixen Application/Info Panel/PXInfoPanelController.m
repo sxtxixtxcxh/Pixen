@@ -42,26 +42,23 @@
 	[self.height setStringValue:[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"HEIGHT", @"Height"), (int)(size.height)]];
 }
 
-- (void)setColorInfo:(NSColor *)color
+- (void)setColorInfo:(PXColor)color
 {
-	if (color)
-	{
-		color = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-		
-		[self.red setStringValue:[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"RED", @"Red"), (int) roundf([color redComponent] * 255)]];
-		[self.green setStringValue:[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"GREEN", @"Green"), (int) roundf([color greenComponent] * 255)]];
-		[self.blue setStringValue:[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"BLUE", @"Blue"), (int) roundf([color blueComponent] * 255)]];
-		[self.alpha setStringValue:[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"ALPHA", @"Alpha"), (int) roundf([color alphaComponent] * 255)]];
-		[self.hex setStringValue:[NSString stringWithFormat:@"%@: #%02X%02X%02X", NSLocalizedString(@"Hex", @"Hex"), (int) roundf([color redComponent] * 255), (int) roundf([color greenComponent] * 255), (int) roundf([color blueComponent] * 255)]];
-	}
-	else
-	{
-		[self.red setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"RED", @"Red")]];
-		[self.green setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"GREEN", @"Green")]];
-		[self.blue setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"BLUE", @"Blue")]];
-		[self.alpha setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"ALPHA", @"Alpha")]];
-		[self.hex setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"Hex", @"Hex")]];
-	}
+	[self.red   setStringValue:[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"RED", @"Red"),     color.r]];
+	[self.green setStringValue:[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"GREEN", @"Green"), color.g]];
+	[self.blue  setStringValue:[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"BLUE", @"Blue"),   color.b]];
+	[self.alpha setStringValue:[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"ALPHA", @"Alpha"), color.a]];
+	[self.hex   setStringValue:[NSString stringWithFormat:@"%@: #%02X%02X%02X", NSLocalizedString(@"Hex", @"Hex"),
+								color.r, color.g, color.b, color.a]];
+}
+
+- (void)setNoColorInfo
+{
+	[self.red   setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"RED", @"Red")]];
+	[self.green setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"GREEN", @"Green")]];
+	[self.blue  setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"BLUE", @"Blue")]];
+	[self.alpha setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"ALPHA", @"Alpha")]];
+	[self.hex   setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"Hex", @"Hex")]];
 }
 
 - (void)setCursorPosition:(NSPoint)point

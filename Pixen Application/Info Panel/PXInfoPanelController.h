@@ -5,6 +5,8 @@
 //  Copyright 2005-2012 Pixen Project. All rights reserved.
 //
 
+#import "PXColor.h"
+
 @interface PXInfoPanelController : NSWindowController
 {
     NSTextField *_cursorX;
@@ -35,7 +37,9 @@
 + (id)sharedInfoPanelController;
 
 - (void)setCursorPosition:(NSPoint)point;
-- (void)setColorInfo:(NSColor *)color;
+- (void)setColorInfo:(PXColor)color;
 - (void)setCanvasSize:(NSSize)size;
+
+- (void)setNoColorInfo;
 
 @end

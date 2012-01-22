@@ -75,8 +75,9 @@
 	// we clear the selected area in the active layer and copy the selected pixels
 	// into a pximage of our own to be drawn each frame. whoo.
 	// this is O(N), incidentally. but just over selected pixels, not the whole canvas.
+	PXColor clear = [canvas eraseColor];
 	int i, j;
-	NSColor *clear = [canvas eraseColor];
+	
 	for (i = NSMinX(selectedRect); i < NSMaxX(selectedRect); i++)
 	{
 		for (j = NSMinY(selectedRect); j < NSMaxY(selectedRect); j++)

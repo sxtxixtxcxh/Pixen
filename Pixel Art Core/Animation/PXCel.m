@@ -112,9 +112,9 @@
 	[self.canvas setSize:size];
 }
 
-- (void)setSize:(NSSize)size withOrigin:(NSPoint)origin backgroundColor:(NSColor *)bgcolor
+- (void)setSize:(NSSize)size withOrigin:(NSPoint)origin backgroundColor:(PXColor)color
 {
-	[self.canvas setSize:size withOrigin:origin backgroundColor:bgcolor];
+	[self.canvas setSize:size withOrigin:origin backgroundColor:color];
 }
 
 - (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(CGFloat)frac

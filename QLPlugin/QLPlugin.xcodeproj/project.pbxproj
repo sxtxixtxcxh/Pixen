@@ -23,6 +23,8 @@
 		C969A16E13D200B300F1C1FE /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C969A16D13D200B300F1C1FE /* ApplicationServices.framework */; };
 		C969A17013D200B300F1C1FE /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C969A16F13D200B300F1C1FE /* CoreServices.framework */; };
 		C969A17213D200B300F1C1FE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C969A17113D200B300F1C1FE /* CoreFoundation.framework */; };
+		C9758E6014C22DBC00415350 /* PXColor.h in Headers */ = {isa = PBXBuildFile; fileRef = C9758E5F14C22DBC00415350 /* PXColor.h */; };
+		C9758E6414C22E5500415350 /* PXColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C9758E6214C22DC100415350 /* PXColor.m */; };
 		C99681C91404413400177CC6 /* PXPalette.h in Headers */ = {isa = PBXBuildFile; fileRef = C99681C71404413400177CC6 /* PXPalette.h */; };
 		C99681CA1404413400177CC6 /* PXPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = C99681C81404413400177CC6 /* PXPalette.m */; };
 		C99681CD140441D000177CC6 /* NSMutableArray+ReorderingAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C99681CB140441D000177CC6 /* NSMutableArray+ReorderingAdditions.h */; };
@@ -56,6 +58,8 @@
 		C969A16D13D200B300F1C1FE /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		C969A16F13D200B300F1C1FE /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		C969A17113D200B300F1C1FE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		C9758E5F14C22DBC00415350 /* PXColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXColor.h; path = "../../Pixel Art Core/Canvas/PXColor.h"; sourceTree = "<group>"; };
+		C9758E6214C22DC100415350 /* PXColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXColor.m; path = "../../Pixel Art Core/Canvas/PXColor.m"; sourceTree = "<group>"; };
 		C99681C71404413400177CC6 /* PXPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXPalette.h; path = "../../Pixel Art Core/Palette/PXPalette.h"; sourceTree = "<group>"; };
 		C99681C81404413400177CC6 /* PXPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXPalette.m; path = "../../Pixel Art Core/Palette/PXPalette.m"; sourceTree = "<group>"; };
 		C99681CB140441D000177CC6 /* NSMutableArray+ReorderingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+ReorderingAdditions.h"; path = "../../Other Sources/OSG/Utility/NSMutableArray+ReorderingAdditions.h"; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 				C99681CC140441D000177CC6 /* NSMutableArray+ReorderingAdditions.m */,
 				C99681D11404428700177CC6 /* PathUtilities.h */,
 				C99681D21404428700177CC6 /* PathUtilities.m */,
+				C9758E5F14C22DBC00415350 /* PXColor.h */,
+				C9758E6214C22DC100415350 /* PXColor.m */,
 				C9246E4613D216B200835F09 /* PXImage.h */,
 				C9246E4713D216B200835F09 /* PXImage.m */,
 				C99681C71404413400177CC6 /* PXPalette.h */,
@@ -188,6 +194,7 @@
 				C99681CD140441D000177CC6 /* NSMutableArray+ReorderingAdditions.h in Headers */,
 				C99681D31404428700177CC6 /* PathUtilities.h in Headers */,
 				C99681D7140442DC00177CC6 /* Constants.h in Headers */,
+				C9758E6014C22DBC00415350 /* PXColor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +273,7 @@
 				C99681CE140441D000177CC6 /* NSMutableArray+ReorderingAdditions.m in Sources */,
 				C99681D41404428700177CC6 /* PathUtilities.m in Sources */,
 				C99681D8140442DC00177CC6 /* Constants.m in Sources */,
+				C9758E6414C22E5500415350 /* PXColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

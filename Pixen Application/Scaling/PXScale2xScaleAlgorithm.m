@@ -43,7 +43,7 @@
 	}
 	PXLayer *layerCopy;
 	int x, y;
-	NSColor /* *A,*/ *B, /* *C,*/ *D, *E, *F, /* *G,*/ *H, /* *I,*/ *E0, *E1, *E2, *E3;
+	PXColor /* *A,*/ B, /* *C,*/ D, E, F, /* *G,*/ H, /* *I,*/ E0, E1, E2, E3;
 	int xScale = size.width / [canvas size].width;
 	int yScale = size.height / [canvas size].height;
 	int layerWidth, layerHeight;
@@ -76,11 +76,11 @@
 					H = [layerCopy colorAtPoint:NSMakePoint(x    , y + 1)];
 					// I = [layerCopy colorAtPoint:NSMakePoint(x + 1, y + 1)];
 					
-					if (![B isEqual:H] && ![D isEqual:F]) {
-						E0 = [D isEqual:B] ? D : E;
-						E1 = [B isEqual:F] ? F : E;
-						E2 = [D isEqual:H] ? D : E;
-						E3 = [H isEqual:F] ? F : E;
+					if (!PXColorEqualsColor(B, H) && !PXColorEqualsColor(D, F)) {
+						E0 = PXColorEqualsColor(D, B) ? D : E;
+						E1 = PXColorEqualsColor(B, F) ? F : E;
+						E2 = PXColorEqualsColor(D, H) ? D : E;
+						E3 = PXColorEqualsColor(H, F) ? F : E;
 					} else {
 						E0 = E;
 						E1 = E;

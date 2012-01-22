@@ -52,9 +52,6 @@
 		image = PXImage_retain(anImage);
 	}
 	origin = NSZeroPoint;
-	meldedColor = nil;
-	meldedBezier = nil;
-	canvas = nil;
 	
 	self.opacity = 100;
 	self.visible = YES;
@@ -64,17 +61,17 @@
 
 - (id)initWithName:(NSString *)aName size:(NSSize)size
 {
-	return [self initWithName:aName size:size fillWithColor:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
+	return [self initWithName:aName size:size fillWithColor:PXGetClearColor()];
 }
 
-- (id)initWithName:(NSString *)aName size:(NSSize)size fillWithColor:(NSColor *)c
+- (id)initWithName:(NSString *)aName size:(NSSize)size fillWithColor:(PXColor)color
 {
 	self = [self initWithName:aName image:nil];
 	if (self) {
 		image = PXImage_initWithSize(PXImage_alloc(), size);
 		
 		if (image)
-			PXImage_clear(image, c);
+			PXImage_clear(image, color);
 	}
 	return self;
 }
@@ -102,32 +99,36 @@
 	}
 }
 
-- (NSColor *)colorAtIndex:(unsigned int)index
+- (PXColor)colorAtIndex:(unsigned int)index
 {
-	if (!canvas) { return nil; }
+	if (!canvas) {
+		NSAssert(0, @"[PXLayer colorAtIndex:] - no canvas (this should never execute)");
+	}
+	
 	return PXImage_colorAtIndex(image, index);
 }
 
-- (NSColor *)colorAtPoint:(NSPoint)pt
+- (PXColor)colorAtPoint:(NSPoint)pt
 {
 	NSPoint point = pt;
-	if(canvas)
+	
+	if (canvas)
 	{
 		point = [canvas correct:pt];
-		if(point.x >= [self size].width ||
-		   point.x < 0 ||
-		   point.y >= [self size].height ||
-		   point.y < 0)
-		{
-			return [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+		
+		if (point.x >= [self size].width || point.x < 0 ||
+			point.y >= [self size].height || point.y < 0) {
+			
+			return PXGetClearColor();
 		}
 	}
+	
 	return PXImage_colorAtXY(image, point.x, point.y);
 }
 
-- (void)setColor:(NSColor *)c atIndex:(unsigned int)loc
+- (void)setColor:(PXColor)color atIndex:(unsigned int)index
 {
-	PXImage_setColorAtIndex(image, c, loc);
+	PXImage_setColorAtIndex(image, color, index);
 }
 
 - (void)setOpacity:(CGFloat)state
@@ -138,20 +139,21 @@
 	}
 }
 
-- (void)setColor:(NSColor *)color atPoint:(NSPoint)pt
+- (void)setColor:(PXColor)color atPoint:(NSPoint)pt
 {
 	NSPoint point = pt;
-	if(canvas)
+	
+	if (canvas)
 	{
 		point = [canvas correct:pt];
-		if(point.x >= [self size].width ||
-		   point.x < 0 ||
-		   point.y >= [self size].height ||
-		   point.y < 0)
-		{
+		
+		if (point.x >= [self size].width || point.x < 0 ||
+			point.y >= [self size].height || point.y < 0) {
+			
 			return;
 		}
 	}
+	
 	PXImage_setColorAtXY(image, color, point.x, point.y);
 }
 
@@ -196,7 +198,7 @@
 	meldedBezier = nil;
 }
 
-- (void)setSize:(NSSize)newSize withOrigin:(NSPoint)point backgroundColor:(NSColor *)color
+- (void)setSize:(NSSize)newSize withOrigin:(NSPoint)point backgroundColor:(PXColor)color
 {
 	PXImage_setSize(image, newSize, point, color);
 }
@@ -326,9 +328,17 @@
 			for (j=NSMinY(aRect); j < NSMaxY(aRect); j++)
 			{
 				NSPoint point = NSMakePoint(i, j);
-				id color1 = PXImage_colorAtXY(image,point.x,point.y), color2 = PXImage_colorAtXY([aLayer image],point.x,point.y);
-				PXImage_setColorAtXY(image,((flattenOpacity) ? [color1 colorWithAlphaComponent:[color1 alphaComponent]*([self opacity]/100.00)] : color1),point.x,point.y);
-				PXImage_setColorAtXY([aLayer image],((flattenOpacity) ? [color2 colorWithAlphaComponent:[color2 alphaComponent]*([aLayer opacity]/100.00)] : color2),point.x,point.y);
+				
+				PXColor color1 = PXImage_colorAtXY(image, point.x, point.y);
+				PXColor color2 = PXImage_colorAtXY([aLayer image], point.x, point.y);
+				
+				if (flattenOpacity) {
+					color1.a *= [self opacity] / 100.0f;
+					color2.a *= [self opacity] / 100.0f;
+				}
+				
+				PXImage_setColorAtXY(image, color1, point.x, point.y);
+				PXImage_setColorAtXY([aLayer image], color2, point.x, point.y);
 			}
 		}
 	}
@@ -411,32 +421,33 @@
 
 - (void)applyImage:(NSImage *)anImage
 {
-	NSBitmapImageRep *imageRep=nil;
-    //this is probably pretty fragile.  there should be a better way of doing this, no?
-	NSImageRep *ir = [[anImage representations] objectAtIndex:0];
+    // this is probably pretty fragile. there should be a better way of doing this, no?
+	NSImageRep *firstRep = [[anImage representations] objectAtIndex:0];
+	NSBitmapImageRep *imageRep = nil;
 	
-	if (![ir isKindOfClass:[NSBitmapImageRep class]])
+	if (![firstRep isKindOfClass:[NSBitmapImageRep class]])
 	{
 		[anImage lockFocus];
 		imageRep = [NSBitmapImageRep imageRepWithData:[anImage TIFFRepresentation]];
-		imageRep = [imageRep bitmapImageRepByConvertingToColorSpace:[NSColorSpace genericRGBColorSpace] renderingIntent:0];
 		[anImage unlockFocus];
 	}
 	else
 	{
-		imageRep = (NSBitmapImageRep *) ir;
-		imageRep = [imageRep bitmapImageRepByRetaggingWithColorSpace:[NSColorSpace deviceRGBColorSpace]];
+		imageRep = (NSBitmapImageRep *) firstRep;
 	}
-	int width = floorf([imageRep pixelsWide]);
-	int height = floorf([imageRep pixelsHigh]);
-	NSPoint dest = NSZeroPoint;
-	for(int i = 0; i < width; i++)
+	
+	imageRep = [imageRep bitmapImageRepByConvertingToColorSpace:[NSColorSpace genericRGBColorSpace]
+												renderingIntent:NSColorRenderingIntentDefault];
+	
+	NSInteger width = [imageRep pixelsWide];
+	NSInteger height = [imageRep pixelsHigh];
+	
+	for (NSInteger i = 0; i < width; i++)
 	{
-		dest.x = i;
-		for (int j = 0; j < height; j++)
+		for (NSInteger j = 0; j < height; j++)
 		{
-			dest.y = height - j - 1;
-			[self setColor:[imageRep colorAtX:i y:j] atPoint:dest]; 
+			[self setColor:PXColorFromNSColor([imageRep colorAtX:i y:j])
+				   atPoint:NSMakePoint(i, height - j - 1)];
 		}
 	}
 }
@@ -447,7 +458,7 @@
 	id rep = [NSBitmapImageRep imageRepWithData:[outputImage TIFFRepresentation]];
 	unsigned char *bitmapData = [rep bitmapData];
 	int i;
-	id calibratedClear = [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	NSColor *calibratedClear = [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 	if (![rep hasAlpha])
 		transparency = NO;
 	for (i = 0; i < [self size].width * [self size].height; i++)
@@ -468,7 +479,7 @@
 			color = [NSColor colorWithCalibratedRed:bitmapData[base + 0] / 255.0f green:bitmapData[base + 1] / 255.0f blue:bitmapData[base + 2] / 255.0f alpha:1];
 		}
 		
-		[self setColor:[p colorClosestToColor:color] atIndex:i];
+		[self setColor:PXColorFromNSColor([p colorClosestToColor:color]) atIndex:i];
 	}
 }
 

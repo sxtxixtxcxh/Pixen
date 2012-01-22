@@ -117,7 +117,7 @@
 	[super dealloc];
 }
 
-+ (id)sharedToolPaletteController
++ (PXToolPaletteController *)sharedToolPaletteController
 {
 	static PXToolPaletteController *singleInstance = nil;
 	static dispatch_once_t onceToken;
