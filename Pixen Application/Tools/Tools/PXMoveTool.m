@@ -78,6 +78,8 @@
 	PXColor clear = [canvas eraseColor];
 	int i, j;
 	
+	[canvas beginColorUpdates];
+	
 	for (i = NSMinX(selectedRect); i < NSMaxX(selectedRect); i++)
 	{
 		for (j = NSMinY(selectedRect); j < NSMaxY(selectedRect); j++)
@@ -94,6 +96,8 @@
 			[canvas setColor:clear atPoint:point];
 		}
 	}
+	
+	[canvas endColorUpdates];
 	
 	[moveLayer moveToPoint:selectedRect.origin]; // move to initial point
 	[canvas addTempLayer:moveLayer];

@@ -81,8 +81,10 @@
 	
 	NSPoint changedPoint = NSMakePoint(x, y);
 	
+	[self beginColorUpdates];
 	[self setColor:color atPoint:changedPoint];
 	[self changedInRect:NSMakeRect(changedPoint.x, changedPoint.y, 1.0f, 1.0f)];
+	[self endColorUpdates];
 	
 	return nil;
 }

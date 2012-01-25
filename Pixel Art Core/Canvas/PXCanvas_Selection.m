@@ -73,6 +73,8 @@
 		
 		NSUndoManager *um = [self undoManager];
 		
+		[self beginColorUpdates];
+		
 		for (i = 0; i < [self size].width; i++)
 		{
 			for (j = 0; j < [self size].height; j++)
@@ -86,6 +88,8 @@
 				}
 			}
 		}
+		
+		[self endColorUpdates];
 		
 		[self addLayer:newLayer];
 		[self layersChanged];
@@ -252,6 +256,9 @@
 	int i, j;
 	PXLayer *tempLayer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Pasted Layer", @"Pasted Layer") size:[self size]] autorelease];
 	[tempLayer setCanvas:self];
+	
+	[self beginColorUpdates];
+	
 	for (i = NSMinX(selectionRect); i < NSMaxX(selectionRect); i++)
 	{
 		for (j = NSMinY(selectionRect); j < NSMaxY(selectionRect); j++)
@@ -263,6 +270,9 @@
              onLayer:tempLayer];
 		}
 	}
+	
+	[self endColorUpdates];
+	
 	return [NSKeyedArchiver archivedDataWithRootObject:tempLayer];
 }
 
@@ -493,6 +503,8 @@
 		PXColor color = [self eraseColor];
 		int i, j;
 		
+		[self beginColorUpdates];
+		
 		for (i = 0; i < [self size].width; i++)
 		{
 			for (j = 0; j < [self size].height; j++)
@@ -504,6 +516,8 @@
 				}
 			}
 		}
+		
+		[self endColorUpdates];
 		
 		[self replaceLayer:activeLayer withLayer:newLayer actionName:NSLocalizedString(@"Delete Selection", @"Delete Selection")];
 		[self activateLayer:newLayer];

@@ -51,6 +51,8 @@
 	layerHeight = [canvas size].height;
 	NSAutoreleasePool *pool;
 	
+	[canvas beginColorUpdates];
+	
 	while (xScale > 1 && yScale > 1) {
 		layerWidth = layerWidth << 1;
 		layerHeight = layerHeight << 1;
@@ -98,9 +100,10 @@
 		}
 		xScale = xScale >> 1;
 		yScale = yScale >> 1;
-		[canvas layersChanged];
 	}
+	
 	[canvas changed];
+	[canvas endColorUpdates];
 }
 
 @end

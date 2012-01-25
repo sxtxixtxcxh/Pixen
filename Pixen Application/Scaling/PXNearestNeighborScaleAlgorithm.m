@@ -43,6 +43,8 @@
 	float xScale = size.width / [canvas size].width;
 	float yScale = size.height / [canvas size].height;
 	
+	[canvas beginColorUpdates];
+	
 	for (PXLayer *layer in [canvas layers])
 	{
 		layerCopy = [[layer copy] autorelease];
@@ -58,8 +60,8 @@
 		}
 	}
 	
-	[canvas layersChanged];
 	[canvas changed];
+	[canvas endColorUpdates];
 }
 
 @end

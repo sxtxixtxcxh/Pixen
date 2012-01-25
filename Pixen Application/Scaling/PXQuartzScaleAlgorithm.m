@@ -50,7 +50,6 @@
 		[canvas applyImage:newLayerImage toLayer:layer];
 	}
 	
-	[canvas layersChanged];
 	[canvas changed];
 }
 

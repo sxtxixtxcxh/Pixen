@@ -91,54 +91,46 @@
 	[self changed];
 }
 
-- (void)clearIncrementalPaletteRefresh
-{
-	[_minusColors removeAllObjects];
-	[_plusColors removeAllObjects];
-}
+#pragma mark -
+#pragma mark Frequency Palette
 
-//could be coalesced by timer or update/undo group; would rather do it with undo.
-- (void)reallyRefreshWholePalette:ignored
+- (void)beginColorUpdates
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasFrequencyPaletteRefresh" object:self userInfo:nil];
-	frequencyPaletteDirty = NO;
-	[self clearIncrementalPaletteRefresh];
-}
-
-- (void)reallyRefreshIncrementalPalette:ignored
-{
-	// NSLog(@"incremental update");
 	
+}
+
+- (void)endColorUpdates
+{
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasPaletteUpdate"
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
 																(id) _minusColors, @"PXCanvasPaletteUpdateRemoved",
 																(id) _plusColors, @"PXCanvasPaletteUpdateAdded", nil]];
-	[self clearIncrementalPaletteRefresh];
+	
+	[_minusColors removeAllObjects];
+	[_plusColors removeAllObjects];
+}
+
+- (void)reallyRefreshWholePalette
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasFrequencyPaletteRefresh"
+														object:self
+													  userInfo:nil];
+	
+	frequencyPaletteDirty = NO;
+	
+	[_minusColors removeAllObjects];
+	[_plusColors removeAllObjects];
 }
 
 - (void)refreshWholePalette
 {
-	if (!frequencyPaletteDirty)
-	{
+	if (!frequencyPaletteDirty) {
 		frequencyPaletteDirty = YES;
 		
 		[[self class] cancelPreviousPerformRequestsWithTarget:self];
-		[self performSelector:@selector(reallyRefreshWholePalette:) withObject:nil afterDelay:0.5f];
+		[self performSelector:@selector(reallyRefreshWholePalette) withObject:nil afterDelay:0.5f];
 	}
-}
-
-- (void)refreshPaletteDecreaseColorCount:(PXColor)down increaseColorCount:(PXColor)up
-{
-	if (PXColorEqualsColor(down, up))
-		return;
-	
-	[[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(reallyRefreshIncrementalPalette:) object:nil];
-	
-	[_minusColors addObject:PXColorToNSColor(down)];
-	[_plusColors addObject:PXColorToNSColor(up)];
-	
-	[self performSelector:@selector(reallyRefreshIncrementalPalette:) withObject:nil afterDelay:0.5f];
 }
 
 - (void)setSize:(NSSize)newSize withOrigin:(NSPoint)origin backgroundColor:(PXColor)color
@@ -184,7 +176,7 @@
 													size:newSize
 										   fillWithColor:color] autorelease] atIndex:0];
 		
-		[self reallyRefreshWholePalette:nil];
+		[self reallyRefreshWholePalette];
 		[self activateLayer:[layers objectAtIndex:0]];
 		[[self undoManager] removeAllActions];
 		selectionMask = newMask;

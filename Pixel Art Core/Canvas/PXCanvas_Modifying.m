@@ -69,10 +69,14 @@ NSUInteger ColorSizeF (const void *item);
 
 - (void)setColor:(PXColor)color atPoint:(NSPoint)aPoint onLayer:(PXLayer *)layer
 {
-	[self refreshPaletteDecreaseColorCount:[layer colorAtPoint:aPoint]
-						increaseColorCount:color];
+	PXColor down = [layer colorAtPoint:aPoint];
 	
-	[layer setColor:color atPoint:aPoint];
+	if (!PXColorEqualsColor(down, color)) {
+		[_minusColors addObject:PXColorToNSColor(down)];
+		[_plusColors addObject:PXColorToNSColor(color)];
+		
+		[layer setColor:color atPoint:aPoint];
+	}
 }
 
 - (void)setColor:(PXColor)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer
@@ -80,7 +84,9 @@ NSUInteger ColorSizeF (const void *item);
 	if ([indices count] == 0)
 		return;
 	
-	for (id current in indices)
+	[self beginColorUpdates];
+	
+	for (NSNumber *current in indices)
 	{
 		int val = [current intValue];
 		int x = val % (int)[self size].width;
@@ -90,7 +96,9 @@ NSUInteger ColorSizeF (const void *item);
 		[self bufferUndoAtPoint:pt fromColor:oldColor toColor:color];
 		[self setColor:color atPoint:pt onLayer:layer];
 	}
+	
 	[self changedInRect:bounds];
+	[self endColorUpdates];
 }
 
 - (void)setColor:(PXColor)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds
@@ -363,6 +371,8 @@ NSUInteger ColorSizeF (const void *item) {
 		changedRect = NSMakeRect(point.x, point.y, 1.0f, 1.0f);
 	}
 	
+	[self beginColorUpdates];
+	
 	for (NSInteger i = [points count] - 1; i >= 0; i--)
 	{
 		point = *(NSPoint *) [points pointerAtIndex:i];
@@ -374,6 +384,7 @@ NSUInteger ColorSizeF (const void *item) {
 	}
 	
 	[self changedInRect:changedRect];
+	[self endColorUpdates];
 }
 
 - (void)bufferUndoAtPoint:(NSPoint)aPoint fromColor:(PXColor)oldColor toColor:(PXColor)newColor

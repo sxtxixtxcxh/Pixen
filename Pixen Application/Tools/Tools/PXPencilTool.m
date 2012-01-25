@@ -75,7 +75,7 @@
 	return controller;
 }
 
--(NSString *)  actionName
+- (NSString *)actionName
 {
 	return NSLocalizedString(@"PENCIL_ACTION", @"Drawing");
 }
@@ -214,6 +214,7 @@ fromCanvasController:(PXCanvasController*) controller
 	[[[controller canvas] undoManager] setActionName:[self actionName]];
 	isDragging = YES;
 	[[controller canvas] clearUndoBuffers];
+	[[controller canvas] beginColorUpdates];
 	if (![self drawsInitialPixel]) { return; }
 	if (!shiftDown || [controller lastDrawnPoint].x == -1) {
 		[self drawPixelAtPoint:aPoint inCanvas:[controller canvas]];
@@ -284,6 +285,7 @@ fromCanvasController:(PXCanvasController *)controller
 fromCanvasController:(PXCanvasController *) controller
 {
 	[[controller canvas] registerForUndo];
+	[[controller canvas] endColorUpdates];
 	[super mouseUpAt:aPoint fromCanvasController:controller];
 	isDragging = NO;
 	shouldUseBezierDrawing = NO;

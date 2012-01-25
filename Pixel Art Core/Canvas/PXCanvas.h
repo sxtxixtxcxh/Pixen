@@ -49,7 +49,9 @@ typedef BOOL *PXSelectionMask;
 @property (nonatomic, readonly) NSArray *tempLayers;
 
 - (void)refreshWholePalette;
-- (void)refreshPaletteDecreaseColorCount:(PXColor)down increaseColorCount:(PXColor)up;
+
+- (void)beginColorUpdates;
+- (void)endColorUpdates;
 
 - (void)setUndoManager:(NSUndoManager *)manager;
 - (NSUndoManager *)undoManager;
