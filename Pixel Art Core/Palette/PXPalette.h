@@ -9,13 +9,14 @@
 
 @interface PXPalette : NSObject < NSCoding, NSCopying, NSFastEnumeration >
 {
-    NSString *_name;
-    BOOL _canSave;
-    BOOL _isSystemPalette;
+  @private
+	NSString *_name;
+	BOOL _canSave;
+	BOOL _isSystemPalette;
 	NSMutableArray *_colors;
 	NSMapTable *_frequencies;
-
 }
+
 @property (nonatomic, copy) NSString *name;
 
 @property (nonatomic, assign) BOOL canSave;
