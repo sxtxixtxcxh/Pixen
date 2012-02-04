@@ -239,6 +239,8 @@ static NSArray *algorithms = nil;
 
 - (IBAction)scale:(id) sender
 {
+	[self synchronizeForms:nil];
+	
 	if ( [[self currentAlgorithm] canScaleCanvas:[canvasController canvas] 
 										  toSize:newSize]) 
     {
