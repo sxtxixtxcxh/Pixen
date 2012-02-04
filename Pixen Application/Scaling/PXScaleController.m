@@ -43,10 +43,10 @@ static NSArray *algorithms = nil;
 	if ([self isWindowLoaded]) 
     {
 		newSize = [[canvasController canvas] size];
-		[[self pixelsWideField] setFloatValue:newSize.width];
-		[[self pixelsHighField] setFloatValue:newSize.height];
-		[[self percentageWideField] setFloatValue:100.0f];
-		[[self percentageHighField] setFloatValue:100.0f];
+		[pixelsWideField setFloatValue:newSize.width];
+		[pixelsHighField setFloatValue:newSize.height];
+		[percentageWideField setFloatValue:100.0f];
+		[percentageHighField setFloatValue:100.0f];
     }
 	
 	[NSApp beginSheet:[self window]
@@ -54,26 +54,6 @@ static NSArray *algorithms = nil;
 		modalDelegate:nil
 	   didEndSelector:NULL
 		  contextInfo:NULL];
-}
-
-- pixelsWideField
-{
-	return pixelsWideField;
-}
-
-- pixelsHighField
-{
-	return pixelsHighField;
-}
-
-- percentageWideField
-{
-	return percentageWideField;
-}
-
-- percentageHighField
-{
-	return percentageHighField;
 }
 
 - (void)awakeFromNib
@@ -144,17 +124,17 @@ static NSArray *algorithms = nil;
 {
 	NSSize oldSize = [[canvasController canvas] size];
 	NSSize directSizeInput;
-	float xScale = [[self percentageWideField] floatValue] / 100.0f;
-	float yScale = [[self percentageHighField] floatValue] / 100.0f;
+	float xScale = [percentageWideField floatValue] / 100.0f;
+	float yScale = [percentageHighField floatValue] / 100.0f;
 	
-	directSizeInput.width = [[self pixelsWideField] floatValue];
+	directSizeInput.width = [pixelsWideField floatValue];
 	
 	if (fabs(oldSize.width * xScale - newSize.width) > .01) 
     {
 		directSizeInput.width = oldSize.width * xScale;
     }
 	
-	directSizeInput.height = [[self pixelsHighField] floatValue];
+	directSizeInput.height = [pixelsHighField floatValue];
 	
 	if (fabs(oldSize.height * yScale - newSize.height) > .01) 
     {  
@@ -168,16 +148,16 @@ static NSArray *algorithms = nil;
 {
 	NSSize oldSize = [[canvasController canvas] size];
 	NSSize directSizeInput = [self directSizeInput];
-	float xScale = [[self percentageWideField] floatValue] / 100.0f;
-	float yScale = [[self percentageHighField] floatValue] / 100.0f;
+	float xScale = [percentageWideField floatValue] / 100.0f;
+	float yScale = [percentageHighField floatValue] / 100.0f;
 	BOOL scaleProportionally = ([scaleProportionallyCheckbox state] == NSOnState);
-	directSizeInput.width = [[self pixelsWideField] floatValue];
+	directSizeInput.width = [pixelsWideField floatValue];
 	
 	if (fabs(oldSize.width * xScale - newSize.width) > .01) {
 		directSizeInput.width = oldSize.width * xScale;
 	}
 	
-	directSizeInput.height = [[self pixelsHighField] floatValue];
+	directSizeInput.height = [pixelsHighField floatValue];
 	
 	if (fabs(oldSize.height * yScale - newSize.height) > .01) {
 		directSizeInput.height = oldSize.height * yScale;
@@ -207,10 +187,10 @@ static NSArray *algorithms = nil;
 	if (newSize.height < 1) {
 		newSize.height = 1;
 	}
-	[[self pixelsWideField] setFloatValue:newSize.width];
-	[[self pixelsHighField] setFloatValue:newSize.height];
-	[[self percentageWideField] setFloatValue:newSize.width / oldSize.width * 100.0f];
-	[[self percentageHighField] setFloatValue:newSize.height / oldSize.height * 100.0f];
+	[pixelsWideField setFloatValue:newSize.width];
+	[pixelsHighField setFloatValue:newSize.height];
+	[percentageWideField setFloatValue:newSize.width / oldSize.width * 100.0f];
+	[percentageHighField setFloatValue:newSize.height / oldSize.height * 100.0f];
 }
 
 - (IBAction)updateToScalePropotionally:(id) sender

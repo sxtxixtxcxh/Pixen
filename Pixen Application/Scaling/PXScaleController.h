@@ -34,9 +34,5 @@
 - (IBAction)scale:(id) sender;
 - (void)scaleCanvas:(PXCanvas *)canvas;
 - (void)setDelegate:delegate withCallback:(SEL)callback;
-- pixelsWideField;
-- pixelsHighField;
-- percentageWideField;
-- percentageHighField;
 
 @end
