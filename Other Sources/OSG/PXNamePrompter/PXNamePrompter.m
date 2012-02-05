@@ -95,8 +95,10 @@
 // Maybye do external check or use formater for nameField
 - (IBAction)useEnteredName:(id)sender
 {
-	if ([[nameField stringValue] isEqualToString:@""])
+	if ([[nameField stringValue] isEqualToString:@""]) {
+		NSBeep();
 		return;
+	}
 	
 	if (_runningModal) {
 		[NSApp stopModal];
