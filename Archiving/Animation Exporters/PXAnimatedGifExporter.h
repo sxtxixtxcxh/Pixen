@@ -1,30 +1,31 @@
 //
 //  PXAnimatedGifExporter.h
-//  Pixen-XCode
+//  Pixen
 //
-//  Created by Andy Matuschak on Fri Jul 16 2004.
-//  Copyright (c) 2004 Pixen. All rights reserved.
+//  Copyright 2004-2012 Pixen Project. All rights reserved.
 //
 
 #import "gif_lib.h"
 
-@class PXCanvas;
+@class PXCanvas, PXPalette;
+
 @interface PXAnimatedGifExporter : NSObject
 {
   @private
-	GifFileType * gifFile;
-	NSData *finalData;
-	int iterations;
+	NSString *_temporaryPath;
+	GifFileType *_gifFile;
 	
-	BOOL firstImage;
-	NSString *tempFilePath;
+	ColorMapObject *_colorMap;
+	int _colorCount;
+	int _transparencyIndex;
+	
+	NSSize _size;
 }
 
-- initWithSize:(NSSize)size iterations:(int)iterations;
-- (int)writeHeaderWithSize:(NSSize)size usingColorMap:(ColorMapObject *)colorMap ofSize:(int)numberOfColors withTransparentColor:(int)color;
-- (NSColor *)writeCanvas:(PXCanvas *)canvas withDuration:(NSTimeInterval)duration origin:(NSPoint)origin transparentColor:aColor;
-- (NSColor *)writeCanvas:(PXCanvas *)canvas withDuration:(NSTimeInterval)duration transparentColor:aColor;
-- (void)finalizeExport;
-- data;
+- (id)initWithSize:(NSSize)size palette:(PXPalette *)palette;
+
+- (BOOL)writeCanvas:(PXCanvas *)canvas withDuration:(NSTimeInterval)duration;
+
+- (NSData *)finalizeExport;
 
 @end

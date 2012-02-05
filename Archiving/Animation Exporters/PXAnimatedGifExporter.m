@@ -1,231 +1,259 @@
 //
 //  PXAnimatedGifExporter.m
-//  Pixen-XCode
+//  Pixen
 //
-//  Created by Andy Matuschak on Fri Jul 16 2004.
-//  Copyright (c) 2004 Pixen. All rights reserved.
+//  Copyright 2004-2012 Pixen Project. All rights reserved.
 //
 
 #import "PXAnimatedGifExporter.h"
+
 #import "gif_lib.h"
 #import "PXCanvas.h"
 #import "PXCanvas_Modifying.h"
 #import "PXPalette.h"
 
 #define GIF_ITERATION_HEADER "NETSCAPE2.0"
+#define GIF_ITERATION_LENGTH 3
+
+#define GIF_VERSION "89a"
+
+@interface PXAnimatedGifExporter ()
+
+- (ColorMapObject *)colorMapWithPalette:(PXPalette *)palette colorCount:(int *)outColorCount mapSize:(int *)outMapSize;
+- (BOOL)writeHeaderUsingColorMap:(ColorMapObject *)colorMap ofSize:(int)mapSize;
+
+@end
+
 
 @implementation PXAnimatedGifExporter
 
-- (id)initWithSize:(NSSize)aSize iterations:(int)someIterations
+- (id)initWithSize:(NSSize)size palette:(PXPalette *)palette
 {
+	NSParameterAssert(palette);
+	
 	self = [super init];
-	iterations = someIterations;
-	EGifSetGifVersion("89a");
-	tempFilePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"pxa_gif_export.gif"] retain];
-	gifFile = EGifOpenFileName([tempFilePath UTF8String], NO);
-	firstImage = YES;
+	if (self)
+	{
+		EGifSetGifVersion(GIF_VERSION);
+		
+		_transparencyIndex = -1;
+		
+		int mapSize = 0;
+		_colorMap = [self colorMapWithPalette:palette colorCount:&_colorCount mapSize:&mapSize];
+		
+		if (!_colorMap)
+		{
+			NSLog(@"Failed to generate a color map for the GIF animation");
+			[self release];
+			return nil;
+		}
+		
+		_temporaryPath = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"pxa_gif_export.gif"] retain];
+		_gifFile = EGifOpenFileName([_temporaryPath UTF8String], NO);
+		_size = size;
+		
+		if (![self writeHeaderUsingColorMap:_colorMap ofSize:mapSize])
+		{
+			NSLog(@"Failed to write the header of the GIF animation");
+			
+			[self finalizeExport];
+			[self release];
+			
+			return nil;
+		}
+	}
 	return self;
 }
 
 - (void)dealloc
 {
-    //the GIF file gets closed on export
-	[finalData release];
+	[_temporaryPath release];
+	
+	if (_colorMap)
+		FreeMapObject(_colorMap);
+	
 	[super dealloc];
 }
 
-- (int)writeHeaderWithSize:(NSSize)size usingColorMap:(ColorMapObject *)colorMap ofSize:(int)numberOfColors withTransparentColor:(int)transColor
+- (ColorMapObject *)colorMapWithPalette:(PXPalette *)palette colorCount:(int *)outColorCount mapSize:(int *)outMapSize
 {
-	iterations = 0;
-	char iterationString[3];
-	iterationString[0] = 0x01;
-	iterationString[1] = 0 % 256;
-	iterationString[2] = 0 / 256;
-//	iterationString[3] = 0;
-	
-	int result = EGifPutScreenDesc(gifFile, size.width, size.height, numberOfColors, transColor, colorMap);
-	if (result == GIF_ERROR) { return result; }
-	result = EGifPutExtensionFirst(gifFile, 0xFF, strlen(GIF_ITERATION_HEADER), GIF_ITERATION_HEADER);
-	if (result == GIF_ERROR) { return result; }
-	result = EGifPutExtensionLast(gifFile, 0, 3, iterationString);
-	if (result == GIF_ERROR) { return result; }
-	
-	return GIF_OK;
-}
-
-- (NSColor *)writeCanvas:(PXCanvas *)canvas withDuration:(NSTimeInterval)duration origin:(NSPoint)origin transparentColor:aColor
-{	
-	PXPalette *palette = [canvas newFrequencyPalette];
-	NSUInteger colorCount = [palette colorCount];
-	// The animated gif writer only supports <= 256 color palettes. If you have a palette bigger than that, quantize it first then come back.
-	if (colorCount > 256)
+	// The animated GIF writer only supports <= 256 color palettes. If you have a palette bigger than that, quantize it first then come back.
+	if ([palette colorCount] > 256)
 	{
-		[NSException raise:@"PXTooManyColorsException" format:@"PXAnimatedGifExporter requires <= 256 colors in the palette."];
-		[palette release];
-		return nil;
+		[NSException raise:NSInternalInconsistencyException format:@"PXAnimatedGifExporter requires <= 256 colors in the palette."];
+		return NULL;
 	}
 	
-	int i, j;
-	NSSize size = [canvas size];
+	int colorCount = (int) [palette colorCount];
 	
-	// First we must determine if the palette has any transparent (< .5 alpha) colors.
+	// If we're using alpha, we have to remove all the colors in the palette with alpha < .5 and replace them with a single color entry for the previously-determined transparent color.
+	// In order to do that, we must first go through and find how many colors we're -really- going to have.
+	int colorMapSize = 0;
 	BOOL hasAlpha = NO;
-	for (i = 0; i < size.width; i++)
+	
+	for (int i = 0; i < colorCount; i++)
 	{
-		for (j = 0; j < size.height; j++)
-		{
-			if ([canvas mergedColorAtPoint:NSMakePoint(i, j)].a <= 127)
-			{
-				hasAlpha = YES;
-				break;
-			}
+		// We're only including colors that are (or will be) opaque
+		if ([[palette colorAtIndex:i] alphaComponent] >= .5) {
+			colorMapSize++;
+		}
+		else {
+			hasAlpha = YES;
 		}
 	}
 	
-	// If we're using alpha, we have to remove all the colors in the palette with alpha < .5 and replace them all with a single color entry for the previously determined transparent color. In order to do that, we must first go through and find how many colors we're -really- going to have.
-	int colorMapSize = 0;
-	for (i = 0; i < colorCount; i++)
-	{
-		// We're only including colors that are (or will be) opaque.
-		if ([[palette colorAtIndex:i] alphaComponent] >= .5)
-			colorMapSize++;
-	}
 	if (hasAlpha)
-		colorMapSize++; // Add one more at the end for the transparent index.
+		colorMapSize++; // Add one more color at the end for the transparency index
 	
-	// We now set up the GIF color map with the PXPalette.  It has to be a power of two size.
+	// Set up the GIF color map. It has to be a power of two size.
 	int mapSize = MAX(pow(2, ceilf(log2(colorMapSize))), 2);
 	ColorMapObject *colorMap = MakeMapObject(mapSize, NULL);
+	
 	if (colorMap == NULL)
 	{
-		[NSException raise:@"GIF Error" format:@"Couldn't allocate color map."];
-		[palette release];
-		return nil;
+		[NSException raise:NSInternalInconsistencyException format:@"Couldn't allocate the color map."];
+		return NULL;
 	}
-	//colorMap->BitsPerPixel = 8;
+	
 	int mapIndex = 0;
-	for (i = 0; i < colorCount; i++)
+	
+	for (int i = 0; i < colorCount; i++)
 	{
 		// Check to see if the current color is transparent; if so, don't deal with it now: we'll add the sole transparent color at the end.
-		NSColor *c = [palette colorAtIndex:i];
-		if ([c alphaComponent] < 0.5) { continue; }
-		NSColor *color = [c colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+		NSColor *color = [[palette colorAtIndex:i] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+		
+		if ([color alphaComponent] < 0.5)
+			continue;
+		
 		colorMap->Colors[mapIndex].Red = (int) roundf([color redComponent] * 255);
 		colorMap->Colors[mapIndex].Green = (int) roundf([color greenComponent] * 255);
 		colorMap->Colors[mapIndex].Blue = (int) roundf([color blueComponent] * 255);
+		
 		mapIndex++;
 	}
-	int transparentIndex = -1;
-	// Now if we're using alpha, we add a color to be used as transparent.
+	
+	// If we're using alpha, we add a color to be used as transparent.
 	if (hasAlpha)
 	{
 		colorMap->Colors[mapIndex].Red = 255;
 		colorMap->Colors[mapIndex].Green = 255;
 		colorMap->Colors[mapIndex].Blue = 255;
-		transparentIndex = mapIndex;
+		
+		_transparencyIndex = mapIndex;
 	}
+	
+	if (outColorCount)
+		*outColorCount = colorMapSize;
+	
+	if (outMapSize)
+		*outMapSize = mapSize;
+	
+	return colorMap;
+}
+
+- (BOOL)writeHeaderUsingColorMap:(ColorMapObject *)colorMap ofSize:(int)mapSize
+{
+	char iterationString[GIF_ITERATION_LENGTH] = { 0x01, 0, 0 };
+	
+	if (EGifPutScreenDesc(_gifFile, (int) _size.width, (int) _size.height, mapSize, 0, colorMap) == GIF_ERROR)
+		return NO;
+	
+	if (EGifPutExtensionFirst(_gifFile, 0xFF, strlen(GIF_ITERATION_HEADER), GIF_ITERATION_HEADER) == GIF_ERROR)
+		return NO;
+	
+	if (EGifPutExtensionLast(_gifFile, 0, GIF_ITERATION_LENGTH, iterationString) == GIF_ERROR)
+		return NO;
+	
+	return YES;
+}
+
+- (BOOL)writeCanvas:(PXCanvas *)canvas withDuration:(NSTimeInterval)duration
+{
+	int w = (int) _size.width, h = (int) _size.height;
 	
 	// We will now actually populate the output buffer with the indices
-	GifByteType *outputBuffer = malloc(size.width * size.height * sizeof(GifByteType));
+	GifByteType *outputBuffer = malloc(w * h * sizeof(GifByteType));
+	
 	int bufferIndex = 0;
-	for (j = size.height - 1; j >= 0; j--)
+	
+	for (int j = h - 1; j >= 0; j--)
 	{
-		for (i = 0; i < size.width; i++, bufferIndex++)
+		for (int i = 0; i < w; i++, bufferIndex++)
 		{
 			NSPoint point = NSMakePoint(i, j);
-			if ([canvas mergedColorAtPoint:point].a <= 127) // transparent colors
-			{
-				outputBuffer[bufferIndex] = transparentIndex;
+			
+			if ([canvas mergedColorAtPoint:point].a <= 127) { // transparent colors
+				outputBuffer[bufferIndex] = _transparencyIndex;
 			}
-			else // opaque colors
+			else
 			{
-				// If we're using alpha, we could potentially have changed around index ordering due to the removal of partially or multiple transparent colors. Thus, we must go through the color map and find the appropriate color... but since that's kind of slow, we'll still use PXCanvas's functionality here so long as we're not using alpha.
-				//if (hasAlpha)
-				//{
-					PXColor color = [canvas mergedColorAtPoint:point];
-					for (mapIndex = 0; mapIndex < colorMapSize; mapIndex++)
+				// opaque colors
+				PXColor color = [canvas mergedColorAtPoint:point];
+				
+				for (int mapIndex = 0; mapIndex < _colorCount; mapIndex++)
+				{
+					if (color.r == _colorMap->Colors[mapIndex].Red && color.g == _colorMap->Colors[mapIndex].Green && color.b == _colorMap->Colors[mapIndex].Blue)
 					{
-						if (color.r == colorMap->Colors[mapIndex].Red && color.g == colorMap->Colors[mapIndex].Green && color.b == colorMap->Colors[mapIndex].Blue)
-						{
-							outputBuffer[bufferIndex] = mapIndex;
-							break;
-						}
+						outputBuffer[bufferIndex] = mapIndex;
+						break;
 					}
-				//}
+				}
 			}
 		}
 	}
-		
-	if (firstImage)
-	{
-		firstImage = NO;
-		if ([self writeHeaderWithSize:size usingColorMap:colorMap ofSize:mapSize withTransparentColor:(hasAlpha ? 0 : 0)] == GIF_ERROR)
-		{
-			NSLog(@"Failed to write header of GIF\n");
-			[palette release];
-			return nil;
-		}
-	}
 	
-	hasAlpha = YES; // this... works for some reason. I KNOW NOT WHY
-	// If we're using alpha, use 2 as our disposal method (which uses the background color); otherwise no redraw is required: code 0.
-	unsigned char disposalMethod = hasAlpha ? 2 : 0;
+	int tempDuration = (int) (duration * 100);
 	
-	int tempDuration = duration *= 100;
 	unsigned char extension[4] = { 0 };
-	extension[0] = hasAlpha | (disposalMethod << 2); // byte 1 is a flag; 00000001 turns transparency on.
+	extension[0] = 9;                  // byte 1 is a flag; 00000001 turns transparency on.
 	extension[1] = tempDuration % 256; // byte 2 is delay time, presumably for animation.
 	extension[2] = tempDuration / 256; // byte 3 is continued delay time.
-	extension[3] = transparentIndex; // byte 4 is the index of the transparent color in the palette.
-	int result = EGifPutExtension(gifFile, 0xF9, sizeof(extension), extension); // 0xf9 is the transparency extension magic code		
-	if (result == GIF_ERROR) 
-	{ 
-		NSLog(@"Couldn't write GIF image extension block.\n"); 
-		[palette release];
-		return nil; 
-	}
-	EGifPutImageDesc(gifFile, (int)origin.x, (int)origin.y, size.width, size.height, 0, NULL);
-	if (result == GIF_ERROR)
-	{ 
-		NSLog(@"Couldn't write GIF image description.\n"); 
-		[palette release];
-		return nil; 
-	}
-
-	GifByteType * position = outputBuffer;
-	for (i = 0; i < size.height; i++)
+	extension[3] = _transparencyIndex; // byte 4 is the index of the transparent color in the palette.
+	
+	if (EGifPutExtension(_gifFile, 0xF9, sizeof(extension), extension) == GIF_ERROR) // 0xF9 is the transparency extension magic code
 	{
-		result = EGifPutLine(gifFile, position, size.width);
-		if (result == GIF_ERROR) {
-			NSLog(@"Couldn't write GIF line number %d\n", i);
-			[palette release];
-			return nil;
-		}
-		position += (int)size.width;
+		free(outputBuffer);
+		NSLog(@"Couldn't write the GIF image extension block");
+		return NO;
 	}
+	
+	if (EGifPutImageDesc(_gifFile, 0, 0, w, h, 0, NULL) == GIF_ERROR)
+	{
+		free(outputBuffer);
+		NSLog(@"Couldn't write the GIF image description");
+		return NO;
+	}
+	
+	GifByteType *position = outputBuffer;
+	
+	for (int i = 0; i < h; i++)
+	{
+		if (EGifPutLine(_gifFile, position, w) == GIF_ERROR)
+		{
+			free(outputBuffer);
+			NSLog(@"Couldn't write the GIF line number %d", i);
+			return NO;
+		}
+		
+		position += w;
+	}
+	
 	free(outputBuffer);
-	FreeMapObject(colorMap);
-	[palette release];
-
-	return nil;
+	
+	return YES;
 }
 
-- (NSColor *)writeCanvas:(PXCanvas *)canvas withDuration:(NSTimeInterval)duration transparentColor:aColor
+- (NSData *)finalizeExport
 {
-	return [self writeCanvas:(PXCanvas *)canvas withDuration:duration origin:NSZeroPoint transparentColor:aColor];
-}
-
-- (void)finalizeExport
-{
-	EGifCloseFile(gifFile);
-	finalData = [[NSData dataWithContentsOfFile:tempFilePath] retain];
-	remove([tempFilePath UTF8String]);
-	[tempFilePath release];
-}
-
-- data
-{
-	return finalData;
+	if (_gifFile) {
+		EGifCloseFile(_gifFile);
+		_gifFile = NULL;
+	}
+	
+	NSData *data = [NSData dataWithContentsOfFile:_temporaryPath];
+	remove([_temporaryPath UTF8String]);
+	
+	return data;
 }
 
 @end

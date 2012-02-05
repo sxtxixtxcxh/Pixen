@@ -109,35 +109,43 @@
 	return nil;
 }
 
-- (NSData *)dataOfType:(NSString *)aType error:(NSError **)err
+- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 {
-	if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) aType))
+	if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) typeName))
 	{
-		OSProgressPopup *popup = [OSProgressPopup sharedProgressPopup];
-		PXAnimatedGifExporter *exporter = [[[PXAnimatedGifExporter alloc] initWithSize:[_animation size] iterations:1] autorelease];
-		int i;
-		NSUInteger numberOfCels = [_animation countOfCels];
-		[popup setMaxProgress:numberOfCels];
+		PXAnimation *exportAnimation = [[_animation copy] autorelease];
+		[exportAnimation reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
 		
+		NSUInteger numberOfCels = [exportAnimation countOfCels];
+		
+		OSProgressPopup *popup = [OSProgressPopup sharedProgressPopup];
+		[popup setProgress:0];
+		[popup setMaxProgress:numberOfCels];
 		[popup beginOperationWithStatusText:[NSString stringWithFormat:@"Exporting GIF... (1 of %d)", numberOfCels]
 							   parentWindow:[self.windowController window]];
 		
-		[popup setProgress:0];
-		PXAnimation *exportAnimation = [[_animation copy] autorelease];
-		[exportAnimation reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
-		NSColor *transparentColor = nil;
-		for (i = 0; i < numberOfCels; i++)
+		PXPalette *palette = [exportAnimation newFrequencyPaletteForAllCels];
+		
+		PXAnimatedGifExporter *exporter = [[PXAnimatedGifExporter alloc] initWithSize:[exportAnimation size] palette:palette];
+		[palette release];
+		
+		for (NSUInteger i = 0; i < numberOfCels; i++)
 		{
-			PXCanvas * celCanvas = [[exportAnimation celAtIndex:i] canvas];
-			transparentColor = [exporter writeCanvas:celCanvas withDuration:[[exportAnimation celAtIndex:i] duration] transparentColor:transparentColor];
+			PXCel *cel = [exportAnimation celAtIndex:i];
+			[exporter writeCanvas:[cel canvas] withDuration:[cel duration]];
+			
 			[popup setStatusText:[NSString stringWithFormat:@"Exporting GIF... (%d of %d)", i + 1, numberOfCels]];
 			[popup setProgress:i + 1];
 		}
 		
-		[exporter finalizeExport];
+		NSData *data = [exporter finalizeExport];
+		[exporter release];
+		
 		[popup endOperation];
-		return [exporter data];
+		
+		return data;
 	}
+	
 	return nil;
 }
 

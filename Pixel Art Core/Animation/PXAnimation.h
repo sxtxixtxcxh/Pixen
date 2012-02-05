@@ -8,7 +8,7 @@
 
 #import "PXColor.h"
 
-@class PXCel;
+@class PXCel, PXPalette;
 
 @interface PXAnimation : NSObject < NSCopying >
 {
@@ -21,6 +21,8 @@
 - (PXCel *)celAtIndex:(NSUInteger)index;
 - (NSUInteger)indexOfObjectInCels:(PXCel *)cel;
 - (NSUInteger)countOfCels;
+
+- (PXPalette *)newFrequencyPaletteForAllCels;
 
 - (NSSize)size;
 - (void)setSize:(NSSize)aSize;

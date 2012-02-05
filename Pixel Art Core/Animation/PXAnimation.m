@@ -7,10 +7,12 @@
 //
 
 #import "PXAnimation.h"
+
 #import "PXCel.h"
 #import "PXCanvas.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_Modifying.h"
+#import "PXPalette.h"
 #import "NSMutableArray+ReorderingAdditions.h"
 
 #import "gif_lib.h"
@@ -57,6 +59,36 @@
 - (NSArray *)canvases
 {
   return [cels valueForKey:@"canvas"];
+}
+
+- (PXPalette *)newFrequencyPaletteForAllCels
+{
+	PXPalette *palette = [[PXPalette alloc] initWithoutBackgroundColor];
+	NSCountedSet *colors = [NSCountedSet set];
+	
+	CGFloat w = [self size].width;
+	CGFloat h = [self size].height;
+	
+	for (PXCel *cel in cels)
+	{
+		PXCanvas *canvas = [cel canvas];
+		
+		for (CGFloat i = 0; i < w; i++)
+		{
+			for (CGFloat j = 0; j < h; j++)
+			{
+				PXColor color = [canvas mergedColorAtPoint:NSMakePoint(i, j)];
+				[colors addObject:PXColorToNSColor(color)];
+			}
+		}
+	}
+	
+	for (NSColor *color in colors)
+	{
+		[palette incrementCountForColor:color byAmount:[colors countForObject:color]];
+	}
+	
+	return palette;
 }
 
 - (NSSize)size

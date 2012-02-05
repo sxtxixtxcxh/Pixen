@@ -11,7 +11,8 @@
 
 @interface PXAnimationDocument : PXDocument
 {
-    PXAnimation *_animation;
+  @private
+	PXAnimation *_animation;
 }
 
 @property (nonatomic, readonly) PXAnimation *animation;
