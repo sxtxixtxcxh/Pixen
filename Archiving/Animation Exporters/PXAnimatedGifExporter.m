@@ -202,7 +202,7 @@
 		}
 	}
 	
-	int tempDuration = (int) (duration * 100);
+	int tempDuration = (int) roundf(duration * 100);
 	
 	unsigned char extension[4] = { 0 };
 	extension[0] = 9;                  // byte 1 is a flag; 00000001 turns transparency on.
