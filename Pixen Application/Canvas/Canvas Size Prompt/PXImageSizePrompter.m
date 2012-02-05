@@ -43,6 +43,19 @@
 	[super dealloc];
 }
 
+- (void)setNilValueForKey:(NSString *)key
+{
+	if ([key isEqualToString:@"width"]) {
+		[self setValue:[NSNumber numberWithInteger:1] forKey:@"width"];
+	}
+	else if ([key isEqualToString:@"height"]) {
+		[self setValue:[NSNumber numberWithInteger:1] forKey:@"height"];
+	}
+	else {
+		[super setNilValueForKey:key];
+	}
+}
+
 - (void)windowDidLoad
 {
 	[super windowDidLoad];
