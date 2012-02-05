@@ -59,15 +59,15 @@
 	_context = contextInfo;
 	
 	[self loadWindow];
+	
 	[promptString setStringValue:string];
+	[nameField setStringValue:entry];
 	
 	[NSApp beginSheet:self.window
 	   modalForWindow:window
 		modalDelegate:nil
 	   didEndSelector:NULL
 		  contextInfo:NULL];
-	
-	[nameField setStringValue:entry];
 }
 
 + (NSString *)promptModalWithPromptString:(NSString *)string
