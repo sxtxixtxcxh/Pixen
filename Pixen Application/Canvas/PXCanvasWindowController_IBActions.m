@@ -56,7 +56,7 @@
 	[cocoaImage removeRepresentation:[[cocoaImage representations] objectAtIndex:0]];
 	[cocoaImage addRepresentation:bitmapRep];
 	
-	[[[[doc animation] objectInCelsAtIndex:0] canvas] replaceActiveLayerWithImage:cocoaImage];
+	[[[[doc animation] celAtIndex:0] canvas] replaceActiveLayerWithImage:cocoaImage];
 	[cocoaImage release];
 	
 	[doc makeWindowControllers];

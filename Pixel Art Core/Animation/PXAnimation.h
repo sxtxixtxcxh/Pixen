@@ -18,7 +18,7 @@
 }
 
 - (NSArray *)canvases;
-- (PXCel *)objectInCelsAtIndex:(NSUInteger)index;
+- (PXCel *)celAtIndex:(NSUInteger)index;
 - (NSUInteger)indexOfObjectInCels:(PXCel *)cel;
 - (NSUInteger)countOfCels;
 

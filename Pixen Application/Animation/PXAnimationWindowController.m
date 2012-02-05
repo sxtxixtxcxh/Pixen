@@ -275,7 +275,7 @@
 
 - (id)celAtIndex:(NSUInteger)currentIndex
 {
-	return [animation objectInCelsAtIndex:currentIndex];
+	return [animation celAtIndex:currentIndex];
 }
 - (NSTimeInterval)durationOfCelAtIndex:(NSUInteger)currentIndex
 {
@@ -300,7 +300,7 @@
 	NSInteger newIndex = [filmStrip selectedIndex] + 1;
 	if (newIndex == NSNotFound) {newIndex = [animation countOfCels];}
 	[animation insertNewCelAtIndex:newIndex];
-	[[animation objectInCelsAtIndex:newIndex] setDuration:[[animation objectInCelsAtIndex:newIndex - 1] duration]];
+	[[animation celAtIndex:newIndex] setDuration:[[animation celAtIndex:newIndex - 1] duration]];
 }
 
 - (void)filmStripSelectionDidChange:note
@@ -420,7 +420,7 @@
 		filePath = [filePath stringByAppendingString:finalTemplate];
 		
 		NSString *type = [prompter selectedUTI];
-		PXCanvas *cnv = [[animation objectInCelsAtIndex:i-1] canvas];
+		PXCanvas *cnv = [[animation celAtIndex:i-1] canvas];
 		
 		NSData *data = [PXCanvasDocument dataRepresentationOfType:type withCanvas:cnv];
 		[data writeToFile:filePath atomically:YES];
@@ -448,8 +448,8 @@
 	NSInteger i;
 	for (i = 0; i < celCount; i++)
 	{
-		[exporter addImage:[[animation objectInCelsAtIndex:i] displayImage] 
-				 forLength:[[animation objectInCelsAtIndex:i] duration]];
+		[exporter addImage:[[animation celAtIndex:i] displayImage] 
+				 forLength:[[animation celAtIndex:i] duration]];
 	}
 	
 	[exporter exportToPath:[[panel URL] path] parentWindow:[self window]];
@@ -483,8 +483,8 @@
 		NSInteger i;
 		for (i = 0; i < celCount; i++)
 		{
-			if ([[animation objectInCelsAtIndex:i] canvas] == currentCanvas) { continue; }
-			[self.scaleController scaleCanvas:[[animation objectInCelsAtIndex:i] canvas]];
+			if ([[animation celAtIndex:i] canvas] == currentCanvas) { continue; }
+			[self.scaleController scaleCanvas:[[animation celAtIndex:i] canvas]];
 		}
 	}
 	[[[self document] undoManager] endUndoGrouping];

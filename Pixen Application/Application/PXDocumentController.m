@@ -550,7 +550,7 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	PXAnimationDocument *animationDocument = (PXAnimationDocument *)[self makeUntitledDocumentOfType:PixenAnimationFileType showSizePrompt:NO error:nil];
 	
-	[[animationDocument animation] removeCel:[[animationDocument animation] objectInCelsAtIndex:0]];
+	[[animationDocument animation] removeCel:[[animationDocument animation] celAtIndex:0]];
 	
 	NSMutableArray *images = [[[NSMutableArray alloc] initWithCapacity:[[openPanel URLs] count]] autorelease];
     for (NSURL *currentURL in [openPanel URLs])

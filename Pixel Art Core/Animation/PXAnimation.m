@@ -39,7 +39,7 @@
 	return newAnimation;
 }
 
-- (PXCel *)objectInCelsAtIndex:(NSUInteger)index 
+- (PXCel *)celAtIndex:(NSUInteger)index 
 {
 	return [cels objectAtIndex:index];
 }
@@ -201,7 +201,7 @@
 {
 	[self willChangeValueForKey:@"countOfCels"];
 	[undoManager beginUndoGrouping];
-	PXCel *cel = [[[self objectInCelsAtIndex:originalIndex] copy] autorelease];
+	PXCel *cel = [[[self celAtIndex:originalIndex] copy] autorelease];
 	[cel setUndoManager:undoManager];
 	[[undoManager prepareWithInvocationTarget:self] removeCel:cel];
 	[cels insertObject:cel atIndex:insertionIndex];
@@ -214,7 +214,7 @@
 {
 	[self willChangeValueForKey:@"countOfCels"];
 	[undoManager beginUndoGrouping];
-	[[undoManager prepareWithInvocationTarget:self] insertObject:[self objectInCelsAtIndex:index] inCelsAtIndex:index];
+	[[undoManager prepareWithInvocationTarget:self] insertObject:[self celAtIndex:index] inCelsAtIndex:index];
 	[cels removeObjectAtIndex:index];
 	[undoManager setActionName:NSLocalizedString(@"Delete Cel", @"Delete Cel")];
 	[undoManager endUndoGrouping];
@@ -237,7 +237,7 @@
 	int i;
 	[spriteSheet lockFocus];
 	for (i=0; i<[self countOfCels]; i++) {
-    PXCel *cel = [self objectInCelsAtIndex:i];
+    PXCel *cel = [self celAtIndex:i];
 		[[cel displayImage] compositeToPoint:compositePoint operation:NSCompositeSourceOver];
 		compositePoint.x += [cel size].width + margin;
 		if (compositePoint.x + [cel size].width > imageSize.width) {

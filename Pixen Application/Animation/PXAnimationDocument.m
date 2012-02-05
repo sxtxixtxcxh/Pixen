@@ -43,7 +43,7 @@
 
 - (PXCanvas *)canvas
 {
-	return [[_animation objectInCelsAtIndex:0] canvas];
+	return [[_animation celAtIndex:0] canvas];
 }
 
 - (NSArray *)canvases
@@ -76,7 +76,7 @@
 		int i;
 		for (i = 0; i < [_animation countOfCels]; i++)
 		{
-			PXCel *current = [_animation objectInCelsAtIndex:i];
+			PXCel *current = [_animation celAtIndex:i];
 			NSFileWrapper *file = [[[NSFileWrapper alloc] initRegularFileWithContents:[NSKeyedArchiver archivedDataWithRootObject:[current canvas]]] autorelease];
 			[files setObject:file forKey:[NSString stringWithFormat:@"%d.%@", i, PXISuffix]];
 			[celData addObject:[current info]];
@@ -128,8 +128,8 @@
 		NSColor *transparentColor = nil;
 		for (i = 0; i < numberOfCels; i++)
 		{
-			PXCanvas * celCanvas = [[exportAnimation objectInCelsAtIndex:i] canvas];
-			transparentColor = [exporter writeCanvas:celCanvas withDuration:[[exportAnimation objectInCelsAtIndex:i] duration] transparentColor:transparentColor];
+			PXCanvas * celCanvas = [[exportAnimation celAtIndex:i] canvas];
+			transparentColor = [exporter writeCanvas:celCanvas withDuration:[[exportAnimation celAtIndex:i] duration] transparentColor:transparentColor];
 			[popup setStatusText:[NSString stringWithFormat:@"Exporting GIF... (%d of %d)", i + 1, numberOfCels]];
 			[popup setProgress:i + 1];
 		}
@@ -146,7 +146,7 @@
 	if (UTTypeEqualNSString(docType, PixenAnimationFileType) ||
 		UTTypeEqualNSString(docType, PixenAnimationFileTypeOld))
 	{
-		[_animation removeCel:[_animation objectInCelsAtIndex:0]];
+		[_animation removeCel:[_animation celAtIndex:0]];
 		NSDictionary *files = [wrapper fileWrappers];
 		NSString *error = nil;
 		NSData *plistData = [[files objectForKey:@"CelData.plist"] regularFileContents];
@@ -198,7 +198,7 @@
 {
 	if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) docType))
 	{
-		[_animation removeCel:[_animation objectInCelsAtIndex:0]];
+		[_animation removeCel:[_animation celAtIndex:0]];
 		NSImage *tempImage = [[[NSImage alloc] initWithData:data] autorelease];
 		NSBitmapImageRep *bitmapRep = [[tempImage representations] objectAtIndex:0];
 		int frameCount = [[bitmapRep valueForProperty:NSImageFrameCount] intValue];
