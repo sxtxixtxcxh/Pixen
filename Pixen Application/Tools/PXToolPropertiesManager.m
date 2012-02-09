@@ -72,11 +72,11 @@
 	[super dealloc];
 }
 
-- (id)initWithSide:(PXToolPropertiesSide)aSide
+- (id)initWithSide:(PXToolPropertiesSide)side
 {
 	self = [super initWithWindowNibName:@"PXToolProperties"];
 	if (self) {
-		_side = aSide;
+		_side = side;
 	}
 	return self;
 }
@@ -105,23 +105,23 @@
 	return rightInstance;
 }
 
-- (void)setPropertiesController:(PXToolPropertiesController *)aController
+- (void)setPropertiesController:(PXToolPropertiesController *)controller
 {
-	if (_propertiesController != aController)
+	if (_propertiesController != controller)
 	{
 		[_propertiesController release];
-		_propertiesController = [aController retain];
+		_propertiesController = [controller retain];
 		
 		for (NSView *subview in [[self.window contentView] subviews])
 		{
 			[subview removeFromSuperview];
 		}
 		
-		if (aController)
+		if (controller)
 		{
 			NSWindow *window = self.window;
-			NSView *childView = aController.view;
 			NSRect frame = window.frame;
+			NSView *childView = controller.view;
 			
 			CGFloat deltaY = [ (NSView *) [window contentView] bounds].size.height - childView.bounds.size.height;
 			frame.origin.y += deltaY;
@@ -137,15 +137,14 @@
 	}
 }
 
-- (void)showWindow:(id)sender
+- (void)windowDidLoad
 {
 	BOOL isLeft = (_side == PXToolPropertiesSideLeft);
 	NSString *key = isLeft ? PXLeftToolPropertiesFrameKey : PXRightToolPropertiesFrameKey;
 	NSRect frame = NSRectFromString([[NSUserDefaults standardUserDefaults] stringForKey:key]);
 	
 	if (!NSEqualRects(frame, NSZeroRect)) {
-		NSWindow *window = [self window];
-		[window setFrame:frame display:YES];
+		[self.window setFrame:frame display:YES];
 	}
 	
 	PXToolPaletteController *controller = [PXToolPaletteController sharedToolPaletteController];
@@ -157,8 +156,6 @@
 											   object:switcher];
 	
 	[switcher requestToolChangeNotification];
-	
-	[super showWindow:sender];
 }
 
 @end

@@ -4,6 +4,8 @@
 //
 
 #import "PXPanelManager.h"
+
+#import "NSWindowController+Additions.h"
 #import "PXWelcomeController.h"
 #import "PXAboutWindowController.h"
 #import "PXToolPaletteController.h"
@@ -264,38 +266,24 @@ static PXPanelManager *sharedManager = nil;
 	return (NSPanel *)[[PXPreviewController sharedPreviewController] window];
 }
 
-- (IBAction)showLeftToolProperties: (id)sender
+- (IBAction)showLeftToolProperties:(id)sender
 {
 	[[PXToolPropertiesManager leftToolPropertiesManager] showWindow:nil];
 }
 
-- (IBAction)toggleLeftToolProperties: (id)sender
+- (IBAction)toggleLeftToolProperties:(id)sender
 {
-	PXToolPropertiesManager *manager = [PXToolPropertiesManager leftToolPropertiesManager];
-	
-	if ([manager.window isVisible]) {
-		[manager close];
-	}
-	else {
-		[manager showWindow:nil];
-	}
+	[[PXToolPropertiesManager leftToolPropertiesManager] toggleWindow];
 }
 
-- (IBAction)showRightToolProperties: (id)sender
+- (IBAction)showRightToolProperties:(id)sender
 {
 	[[PXToolPropertiesManager rightToolPropertiesManager] showWindow:nil];
 }
 
-- (IBAction)toggleRightToolProperties: (id)sender
+- (IBAction)toggleRightToolProperties:(id)sender
 {
-	PXToolPropertiesManager *manager = [PXToolPropertiesManager rightToolPropertiesManager];
-	
-	if ([manager.window isVisible]) {
-		[manager close];
-	}
-	else {
-		[manager showWindow:nil];
-	}
+	[[PXToolPropertiesManager rightToolPropertiesManager] toggleWindow];
 }
 
 - (IBAction)showPreferences: (id)sender

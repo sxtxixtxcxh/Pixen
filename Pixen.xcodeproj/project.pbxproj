@@ -26,6 +26,8 @@
 		BF1A538807ECD9200017A44E /* PXImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1A538607ECD9200017A44E /* PXImage.m */; };
 		BF269FE6091307BF00B7A218 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BB8ED608FB58F9009C75A6 /* QTKit.framework */; };
 		C903DADE14CBBD6800D82028 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = C903DADD14CBBD6800D82028 /* dsa_pub.pem */; };
+		C9104A5B14E38AAC00025103 /* NSWindowController+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = C9104A5914E38AAC00025103 /* NSWindowController+Additions.h */; };
+		C9104A5C14E38AAC00025103 /* NSWindowController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C9104A5A14E38AAC00025103 /* NSWindowController+Additions.m */; };
 		C912F26D13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib in Resources */ = {isa = PBXBuildFile; fileRef = C912F26B13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib */; };
 		C915E26C14C29349001A3A88 /* PXColor.h in Headers */ = {isa = PBXBuildFile; fileRef = C915E26A14C29349001A3A88 /* PXColor.h */; };
 		C915E26D14C29349001A3A88 /* PXColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C915E26B14C29349001A3A88 /* PXColor.m */; };
@@ -565,6 +567,8 @@
 		BF1A538507ECD9200017A44E /* PXImage.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PXImage.h; sourceTree = "<group>"; };
 		BF1A538607ECD9200017A44E /* PXImage.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PXImage.m; sourceTree = "<group>"; };
 		C903DADD14CBBD6800D82028 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		C9104A5914E38AAC00025103 /* NSWindowController+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindowController+Additions.h"; sourceTree = "<group>"; };
+		C9104A5A14E38AAC00025103 /* NSWindowController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindowController+Additions.m"; sourceTree = "<group>"; };
 		C912F26C13D5CDC100C0CF29 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXSpriteSheetExporter.xib; sourceTree = "<group>"; };
 		C915E26A14C29349001A3A88 /* PXColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXColor.h; sourceTree = "<group>"; };
 		C915E26B14C29349001A3A88 /* PXColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXColor.m; sourceTree = "<group>"; };
@@ -1156,6 +1160,8 @@
 		EA31F8610CE7BD8B00EC481B /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				C9104A5914E38AAC00025103 /* NSWindowController+Additions.h */,
+				C9104A5A14E38AAC00025103 /* NSWindowController+Additions.m */,
 				EA31F8640CE7BD8B00EC481B /* PXDocumentController.h */,
 				EA31F8650CE7BD8B00EC481B /* PXDocumentController.m */,
 				EA31F8660CE7BD8B00EC481B /* PXPanelManager.h */,
@@ -2198,6 +2204,7 @@
 				C9F7F16C142BE3D500AB8E37 /* UTType+NSString.h in Headers */,
 				C968A8DE14A5213E00905E3D /* PXAboutWindowController.h in Headers */,
 				C915E26C14C29349001A3A88 /* PXColor.h in Headers */,
+				C9104A5B14E38AAC00025103 /* NSWindowController+Additions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2583,6 +2590,7 @@
 				C9F7F16D142BE3D500AB8E37 /* UTType+NSString.m in Sources */,
 				C968A8DF14A5213E00905E3D /* PXAboutWindowController.m in Sources */,
 				C915E26D14C29349001A3A88 /* PXColor.m in Sources */,
+				C9104A5C14E38AAC00025103 /* NSWindowController+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,6 +26,6 @@ typedef enum {
 + (PXToolPropertiesManager *)leftToolPropertiesManager;
 + (PXToolPropertiesManager *)rightToolPropertiesManager;
 
-- (id)initWithSide:(PXToolPropertiesSide)aSide;
+- (id)initWithSide:(PXToolPropertiesSide)side;
 
 @end
