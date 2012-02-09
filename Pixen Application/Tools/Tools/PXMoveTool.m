@@ -273,16 +273,18 @@
 		nudgeAmount = 10;
 	}
 	
-	if ([[event characters] characterAtIndex:0] == NSUpArrowFunctionKey) {
+	unichar key = [[event characters] characterAtIndex:0];
+	
+	if (key == NSUpArrowFunctionKey && !([event modifierFlags] & NSCommandKeyMask)) {
 		nudgeDest.y = nudgeAmount;
 	}
-	else if ([[event characters] characterAtIndex:0] == NSRightArrowFunctionKey) {
+	else if (key == NSRightArrowFunctionKey) {
 		nudgeDest.x = nudgeAmount;
 	}
-	else if ([[event characters] characterAtIndex:0] == NSDownArrowFunctionKey) {
+	else if (key == NSDownArrowFunctionKey && !([event modifierFlags] & NSCommandKeyMask)) {
 		nudgeDest.y = -nudgeAmount;
 	}
-	else if ([[event characters] characterAtIndex:0] == NSLeftArrowFunctionKey) {
+	else if (key == NSLeftArrowFunctionKey) {
 		nudgeDest.x = -nudgeAmount;
 	}
 	
