@@ -406,7 +406,10 @@ void PXImage_translate(PXImage *self, int deltaX, int deltaY, BOOL wrap)
 				WRAP(Dst)
 				WRAP(Src)
 			}
-			PXImage_setColorAtXY(self, PXImage_colorAtXY(copy, xSrc, ySrc), xDst, yDst);
+			
+			BOOL outOfBounds = (xSrc < 0 || ySrc < 0);
+			PXColor color = outOfBounds ? PXGetClearColor() : PXImage_colorAtXY(copy, xSrc, ySrc);
+			PXImage_setColorAtXY(self, color, xDst, yDst);
 		}
 	}
 	PXImage_release(copy);
