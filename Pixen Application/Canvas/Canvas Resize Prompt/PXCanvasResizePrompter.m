@@ -29,6 +29,8 @@
 
 - (void)setBackgroundColor:(NSColor *)color
 {
+	color = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	
 	[_backgroundColorWell setColor:color];
 	[_resizeView setBackgroundColor:color];
 }
@@ -76,7 +78,7 @@
 
 - (IBAction)updateBackgroundColor:(id)sender
 {
-	[_resizeView setBackgroundColor:[[_backgroundColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
+	[self setBackgroundColor:[_backgroundColorWell color]];
 }
 
 - (IBAction)displayHelp:(id)sender
