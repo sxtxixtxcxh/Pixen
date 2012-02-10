@@ -76,7 +76,7 @@
 
 - (IBAction)updateBackgroundColor:(id)sender
 {
-	[_resizeView setBackgroundColor:[_backgroundColorWell color]];
+	[_resizeView setBackgroundColor:[[_backgroundColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
 }
 
 - (IBAction)displayHelp:(id)sender
