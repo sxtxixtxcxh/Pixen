@@ -2993,7 +2993,6 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = /Applications;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
-				LIBRARY_STYLE = STATIC;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "-funroll-loops";
 				PRODUCT_NAME = Pixen;
@@ -3004,7 +3003,6 @@
 					"-Wall",
 				);
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
