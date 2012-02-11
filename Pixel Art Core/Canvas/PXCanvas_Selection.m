@@ -499,10 +499,10 @@
 		return;
 	
 	[self beginUndoGrouping]; {
-		PXLayer *newLayer = [[activeLayer copy] autorelease];
 		PXColor color = [self eraseColor];
 		int i, j;
 		
+		[self clearUndoBuffers];
 		[self beginColorUpdates];
 		
 		for (i = 0; i < [self size].width; i++)
@@ -512,16 +512,18 @@
 				NSPoint point = NSMakePoint(i, j);
 				
 				if ([self pointIsSelected:point]) {
-					[self setColor:color atPoint:point onLayer:newLayer];
+					PXColor oldColor = [activeLayer colorAtPoint:point];
+					
+					[self bufferUndoAtPoint:point fromColor:oldColor toColor:color];
+					[self setColor:color atPoint:point onLayer:activeLayer];
 				}
 			}
 		}
 		
-		[self endColorUpdates];
-		
-		[self replaceLayer:activeLayer withLayer:newLayer actionName:NSLocalizedString(@"Delete Selection", @"Delete Selection")];
-		[self activateLayer:newLayer];
+		[self registerForUndo];
 		[self deselect];
+		[self changed];
+		[self endColorUpdates];
 	} [self endUndoGrouping:NSLocalizedString(@"Delete Selection", @"Delete Selection")];
 }
 
