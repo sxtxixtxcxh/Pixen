@@ -7,6 +7,7 @@
 
 #import "PXCanvasWindowController_IBActions.h"
 
+#import "NSWindowController+Additions.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_ImportingExporting.h"
 #import "PXCanvas_CopyPaste.h"
@@ -286,13 +287,7 @@
 - (IBAction)togglePreviewWindow:(id)sender
 {
 	PXPreviewController *controller = [PXPreviewController sharedPreviewController];
-	
-	if ([controller isWindowLoaded] && [[controller window] isVisible]) {
-		[controller close];
-	}
-	else {
-		[controller showWindow:self];
-	}
+	[controller toggleWindow];
 }
 
 - (IBAction)showBackgroundInfo:(id) sender
