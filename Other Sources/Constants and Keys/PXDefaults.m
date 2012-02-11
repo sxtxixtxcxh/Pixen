@@ -47,7 +47,6 @@ NSString *PXPreviewWindowIsOpenKey = @"PXPreviewWindowIsOpen";
 NSString *PXSelectedScaleAlgorithmKey = @"PXSelectedScaleAlgorithm";
 
 NSString *PXLayerDrawerWidthKey = @"PXLayerDrawerWidth";
-NSString *PXToolPreviewEnabledKey = @"PXToolPreviewEnabled";
 NSString *PXPreviousCelOverlayEnabledKey = @"PXPreviousCelOverlayEnabled";
 
 NSString *PXVersionKey = @"PXVersion";

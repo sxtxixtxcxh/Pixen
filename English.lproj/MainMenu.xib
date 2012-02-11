@@ -731,15 +731,6 @@
 									<reference key="NSOnImage" ref="130733852"/>
 									<reference key="NSMixedImage" ref="295545801"/>
 								</object>
-								<object class="NSMenuItem" id="109344420">
-									<reference key="NSMenu" ref="522027000"/>
-									<string key="NSTitle">Tool Preview</string>
-									<string key="NSKeyEquiv">P</string>
-									<int key="NSKeyEquivModMask">1572864</int>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="130733852"/>
-									<reference key="NSMixedImage" ref="295545801"/>
-								</object>
 								<object class="NSMenuItem" id="356721259">
 									<reference key="NSMenu" ref="522027000"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -1813,14 +1804,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">toggleToolPreview:</string>
-						<reference key="source" ref="199577436"/>
-						<reference key="destination" ref="109344420"/>
-					</object>
-					<int key="connectionID">438</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">setPatternToSelection:</string>
 						<reference key="source" ref="199577436"/>
 						<reference key="destination" ref="27874331"/>
@@ -2864,7 +2847,6 @@
 							<reference ref="356721259"/>
 							<reference ref="638452759"/>
 							<reference ref="297930681"/>
-							<reference ref="109344420"/>
 						</array>
 						<reference key="parent" ref="470442987"/>
 					</object>
@@ -2931,11 +2913,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">397</int>
 						<reference key="object" ref="297930681"/>
-						<reference key="parent" ref="522027000"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">437</int>
-						<reference key="object" ref="109344420"/>
 						<reference key="parent" ref="522027000"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -3223,7 +3200,6 @@
 				<string key="428.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="429.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="430.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="437.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="440.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="442.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="443.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>

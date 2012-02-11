@@ -109,20 +109,6 @@ NSString *palettesSubdirName = @"Palettes";
 
 @implementation PXDocumentController
 
-- (void)updateShowsToolPreviewCache
-{
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:PXToolPreviewEnabledKey] == nil)
-	{
-		cachedShowsToolPreview = YES;
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:PXToolPreviewEnabledKey];
-	}
-	else
-	{
-		cachedShowsToolPreview = [[NSUserDefaults standardUserDefaults] boolForKey:PXToolPreviewEnabledKey];
-	}
-}
-
-
 - (void)updateShowsPreviousCelOverlayCache
 {
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:PXPreviousCelOverlayEnabledKey] == nil)
@@ -149,7 +135,6 @@ NSString *palettesSubdirName = @"Palettes";
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[self updateShowsToolPreviewCache];
 	[self updateShowsPreviousCelOverlayCache];
 	
 	//Create some directories needs to store backgrounds and Colors 
@@ -337,24 +322,6 @@ NSString *palettesSubdirName = @"Palettes";
 	[[[[self currentDocument] windowControllers] objectAtIndex:0] redrawCanvas:self];
 }
 
-- (BOOL)showsToolPreview
-{
-	return cachedShowsToolPreview;
-}
-
-- (IBAction)toggleToolPreview:sender
-{
-	BOOL showToolPreview = [[NSUserDefaults standardUserDefaults] boolForKey:PXToolPreviewEnabledKey];
-	cachedShowsToolPreview = !showToolPreview;
-	if (!cachedShowsToolPreview) // clear what's there
-	{
-		[[PXToolPaletteController sharedToolPaletteController] clearBeziers];
-	}
-	[[NSUserDefaults standardUserDefaults] setBool:cachedShowsToolPreview forKey:PXToolPreviewEnabledKey];
-	//FIXME: coupled to canvas window controller 
-	[[[[self currentDocument] windowControllers] objectAtIndex:0] redrawCanvas:self];
-}
-
 - (BOOL)showsPreviousCelOverlay
 {
 	return cachedShowsPreviousCelOverlay;
@@ -391,13 +358,6 @@ NSString *palettesSubdirName = @"Palettes";
 		BOOL showCrosshairs = [[NSUserDefaults standardUserDefaults] boolForKey:PXCrosshairEnabledKey];
 		[anItem setTitle:(showCrosshairs) ? NSLocalizedString(@"HIDE_ALIGNMENT_CROSSHAIRS", @"Hide Alignment Crosshairs") :
 		 NSLocalizedString(@"SHOW_ALIGNMENT_CROSSHAIRS", @"Show Alignment Crosshairs")];
-		return YES;
-	}
-	else if ([anItem action] == @selector(toggleToolPreview:))
-	{
-		BOOL showsToolPreview = [self showsToolPreview];
-		[anItem setTitle:(showsToolPreview) ? NSLocalizedString(@"HIDE_TOOL_PREVIEW", @"Hide Tool Preview") :
-		 NSLocalizedString(@"SHOW_TOOL_PREVIEW", @"Show Tool Preview")];
 		return YES;
 	}
 	else if ([anItem action] == @selector(togglePreviousCelOverlay:))

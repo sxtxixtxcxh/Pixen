@@ -258,7 +258,7 @@ fromCanvasController:(PXCanvasController *)controller
 
 - (NSRect)crosshairRectCenteredAtPoint:(NSPoint)aPoint
 {
-	if (self.path == nil || [self.path isEmpty] || ![[NSUserDefaults standardUserDefaults] boolForKey:PXToolPreviewEnabledKey]) {
+	if (self.path == nil || [self.path isEmpty]) {
 		return [super crosshairRectCenteredAtPoint:aPoint];
 	}
 	return [self.path bounds];
