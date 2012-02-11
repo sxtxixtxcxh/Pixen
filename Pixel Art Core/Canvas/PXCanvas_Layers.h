@@ -40,6 +40,6 @@
 
 - (void)mergeDownLayer:aLayer;
 
-- (void)moveLayer:(PXLayer *)aLayer byX:(int)x y:(int)y;
-- (void)replaceLayer:(PXLayer *)old withLayer:(PXLayer *)new actionName:(NSString *)act;
+- (void)moveLayer:(PXLayer *)layer byOffset:(NSPoint)offset;
+
 @end

@@ -121,29 +121,6 @@
 	} [self endUndoGrouping:NSLocalizedString(@"Add Layer", @"Add Layer")];
 }
 
-- (void)replaceLayer:(PXLayer *)old withLayer:(PXLayer *)new actionName:(NSString *)act
-{
-	NSInteger index = [layers indexOfObject:old];
-	NSInteger activeIndex = [layers indexOfObject:activeLayer];
-	if(index == NSNotFound) { return; }
-	[self beginUndoGrouping]; {
-		[[undoManager prepareWithInvocationTarget:self] replaceLayer:new withLayer:old actionName:act];
-		[new setCanvas:self];
-		[layers replaceObjectAtIndex:index withObject:new];
-		if(activeIndex != NSNotFound)
-		{
-			[self activateLayer:[layers objectAtIndex:activeIndex]];
-		}
-		if(![layers containsObject:activeLayer])
-		{
-			[self activateLayer:new];
-		}
-		[self layersChanged];
-		[self changed];
-		[self refreshWholePalette];
-	} [self endUndoGrouping:act];
-}
-
 - (void)insertLayer:(PXLayer *) aLayer atIndex:(NSUInteger)index
 {
 	[self beginUndoGrouping]; {
@@ -318,12 +295,12 @@
 	} [self endUndoGrouping:NSLocalizedString(@"Merge Down", @"Merge Down")];
 }
 
-- (void)moveLayer:(PXLayer *)layer byX:(int)x y:(int)y
+- (void)moveLayer:(PXLayer *)layer byOffset:(NSPoint)offset
 {
-	[layer setOrigin:NSMakePoint(x, y)];
-	PXLayer *new = [layer layerAfterApplyingMove];
-	[new setOrigin:NSZeroPoint];
-	[self replaceLayer:layer withLayer:new actionName:NSLocalizedString(@"Move", @"Move")];
+	[layer translateContentsByOffset:offset];
+	
+	[self changed];
+	[self refreshWholePalette];
 }
 
 @end

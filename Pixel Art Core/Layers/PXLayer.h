@@ -84,6 +84,6 @@
 
 - (void)applyImage:(NSImage *)img;
 
-- (PXLayer *)layerAfterApplyingMove;
+- (void)translateContentsByOffset:(NSPoint)offset;
 
 @end

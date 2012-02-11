@@ -412,11 +412,9 @@
 	return copy;
 }
 
-- (PXLayer *)layerAfterApplyingMove
+- (void)translateContentsByOffset:(NSPoint)offset
 {
-	PXLayer *newLayer = [[self copy] autorelease];
-	PXImage_setSize(newLayer->image, [self size], [self origin], [canvas eraseColor]);
-	return newLayer;
+	PXImage_setSize(image, [self size], offset, [canvas eraseColor]);
 }
 
 - (void)applyImage:(NSImage *)anImage

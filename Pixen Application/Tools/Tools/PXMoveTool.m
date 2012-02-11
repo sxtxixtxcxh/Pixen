@@ -241,7 +241,7 @@
 	}
 	else
 	{
-		[canvas moveLayer:moveLayer byX:[moveLayer origin].x y:[moveLayer origin].y];
+		[canvas moveLayer:moveLayer byOffset:[moveLayer origin]];
 		[moveLayer moveToPoint:NSZeroPoint];
 		
 		if (type == PXMoveTypeCopying)
