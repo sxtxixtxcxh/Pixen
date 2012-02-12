@@ -140,7 +140,10 @@
 	
 	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.0f);
 	dispatch_after(popTime, dispatch_get_main_queue(), ^{
+		
 		[self selectLayerAtIndex:0];
+		[self updateRemoveButtonState];
+		
 	});
 }
 
