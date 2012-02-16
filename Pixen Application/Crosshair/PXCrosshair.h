@@ -16,6 +16,6 @@
 @property (nonatomic, readonly) NSColor *color;
 @property (nonatomic, readonly) BOOL shouldDraw;
 
-- (void)drawRect:(NSRect)drawingRect withTool:(PXTool *)tool tileOffset:(NSPoint)offset;
+- (void)drawRect:(NSRect)drawingRect withTool:(PXTool *)tool tileOffset:(NSPoint)offset scale:(CGFloat)scale;
 
 @end

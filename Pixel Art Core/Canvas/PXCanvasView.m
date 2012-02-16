@@ -667,12 +667,14 @@ void PXDebugRect(NSRect r, float alpha)
 		[gridTransform invert];
 		[gridTransform concat];
 	}
-	if ([[self window] isMainWindow])
-	{	
-		[crosshair drawRect:gridRect withTool:currentTool tileOffset:NSMakePoint(xCenter, yCenter)];
-	}
+	
 	[transform invert];
 	[transform concat];
+	
+	if ([[self window] isMainWindow]) {
+		[crosshair drawRect:gridRect withTool:currentTool tileOffset:NSMakePoint(xCenter, yCenter) scale:zoomPercentage/100.0f];
+	}
+	
 	[transform invert];
 	
 	// the selection unfortunately needs to be drawn outside the transform

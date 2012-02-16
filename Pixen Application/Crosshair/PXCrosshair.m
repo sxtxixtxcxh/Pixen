@@ -15,7 +15,7 @@
 @synthesize cursorPosition = _cursorPosition;
 @dynamic color, shouldDraw;
 
-- (void)drawRect:(NSRect)drawingRect withTool:(PXTool *)tool tileOffset:(NSPoint)offset
+- (void)drawRect:(NSRect)drawingRect withTool:(PXTool *)tool tileOffset:(NSPoint)offset scale:(CGFloat)scale
 {
 	if (![self shouldDraw]) 
 		return; 
@@ -31,17 +31,40 @@
 	[NSBezierPath setDefaultLineWidth:0];
 	[[self color] set];
 	
-	[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMinX(rect), NSMinY(drawingRect)) 
-							  toPoint:NSMakePoint(NSMinX(rect), NSMaxY(drawingRect))];
-	
-	[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMinX(drawingRect), NSMinY(rect)) 
-							  toPoint:NSMakePoint(NSMaxX(drawingRect), NSMinY(rect))];
+	NSAffineTransform *transform = [NSAffineTransform transform];
+	[transform scaleBy:scale];
+	[transform concat];
 	
 	[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMaxX(rect), NSMinY(drawingRect))
 							  toPoint:NSMakePoint(NSMaxX(rect), NSMaxY(drawingRect))];
 	
-	[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMinX(drawingRect), NSMaxY(rect)) 
+	[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMinX(drawingRect), NSMaxY(rect))
 							  toPoint:NSMakePoint(NSMaxX(drawingRect), NSMaxY(rect))];
+	
+	[transform invert];
+	[transform concat];
+	
+	transform = [NSAffineTransform transform];
+	[transform translateXBy:-1.0f yBy:0.0f];
+	[transform scaleBy:scale];
+	[transform concat];
+	
+	[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMinX(rect), NSMinY(drawingRect)) 
+							  toPoint:NSMakePoint(NSMinX(rect), NSMaxY(drawingRect))];
+	
+	[transform invert];
+	[transform concat];
+	
+	transform = [NSAffineTransform transform];
+	[transform translateXBy:0.0f yBy:-1.0f];
+	[transform scaleBy:scale];
+	[transform concat];
+	
+	[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMinX(drawingRect), NSMinY(rect)) 
+							  toPoint:NSMakePoint(NSMaxX(drawingRect), NSMinY(rect))];
+	
+	[transform invert];
+	[transform concat];
 	
 	[NSBezierPath setDefaultLineWidth:lineWidth];
 	
