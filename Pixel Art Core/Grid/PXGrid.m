@@ -88,7 +88,7 @@
 	{
 		self.shouldDraw = NO;
 		self.unitSize = NSMakeSize(1.0f, 1.0f);
-		self.color = [NSColor blackColor];
+		self.color = [NSColor colorWithCalibratedWhite:0.2f alpha:0.5f];
 	}
 	else
 	{
