@@ -412,6 +412,16 @@
 	return copy;
 }
 
+- (NSData *)colorData
+{
+	return PXImage_colorData(image);
+}
+
+- (void)setColorData:(NSData *)data
+{
+	PXImage_setColorData(image, data);
+}
+
 - (void)translateContentsByOffset:(NSPoint)offset
 {
 	PXImage_setSize(image, [self size], offset, [canvas eraseColor]);

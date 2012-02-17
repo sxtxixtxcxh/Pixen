@@ -84,6 +84,9 @@
 
 - (void)applyImage:(NSImage *)img;
 
+- (NSData *)colorData;
+- (void)setColorData:(NSData *)data;
+
 - (void)translateContentsByOffset:(NSPoint)offset;
 
 @end

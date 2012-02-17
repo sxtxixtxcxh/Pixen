@@ -37,6 +37,9 @@ PXColor PXImage_colorAtXY(PXImage *self, int x, int y);
 void PXImage_setColorAtXY(PXImage *self, PXColor color, int x, int y);
 void PXImage_setColorAtIndex(PXImage *self, PXColor color, unsigned index);
 
+NSData *PXImage_colorData(PXImage *self);
+void PXImage_setColorData(PXImage *self, NSData *data);
+
 void PXImage_clear(PXImage *self, PXColor color);
 
 void PXImage_flipHorizontally(PXImage *self);

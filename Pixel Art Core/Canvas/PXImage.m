@@ -320,6 +320,52 @@ void PXImage_setColorAtXY(PXImage *self, PXColor color, int xv, int yv)
 	PXTileSetAtXY(t, xv, yv, color);
 }
 
+NSData *PXImage_colorData(PXImage *self)
+{
+	NSMutableData *colorData = [[NSMutableData alloc] init];
+	
+	for (int y = 0; y < self->height; y += PXTileDimension)
+	{
+		for (int x = 0; x < self->width; x += PXTileDimension)
+		{
+			PXTile *tile = PXImage_tileAtXY(self, x, y);
+			
+			unsigned char *data = CGBitmapContextGetData(tile->painting);
+			size_t size = CGBitmapContextGetWidth(tile->painting) * CGBitmapContextGetHeight(tile->painting) * PXTileComponentsPerPixel;
+			
+			[colorData appendBytes:data length:size];
+		}
+	}
+	
+	return [colorData autorelease];
+}
+
+void PXImage_setColorData(PXImage *self, NSData *colorData)
+{
+	size_t offset = 0;
+	
+	for (int y = 0; y < self->height; y += PXTileDimension)
+	{
+		for (int x = 0; x < self->width; x += PXTileDimension)
+		{
+			PXTile *tile = PXImage_tileAtXY(self, x, y);
+			
+			unsigned char *data = CGBitmapContextGetData(tile->painting);
+			size_t size = CGBitmapContextGetWidth(tile->painting) * CGBitmapContextGetHeight(tile->painting) * PXTileComponentsPerPixel;
+			
+			[colorData getBytes:data range:NSMakeRange(offset, size)];
+			
+			offset += size;
+			
+			if (tile->image)
+			{
+				CGImageRelease(tile->image);
+				tile->image = NULL;
+			}
+		}
+	}
+}
+
 void PXImage_clear(PXImage *self, PXColor color)
 {
 	for (int y = 0; y < self->height; y += PXTileDimension)

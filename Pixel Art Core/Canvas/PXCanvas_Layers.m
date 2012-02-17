@@ -295,9 +295,22 @@
 	} [self endUndoGrouping:NSLocalizedString(@"Merge Down", @"Merge Down")];
 }
 
+- (void)restoreColorData:(NSData *)data onLayer:(PXLayer *)layer
+{
+	[layer setColorData:data];
+	
+	[self changed];
+	[self refreshWholePalette];
+}
+
 - (void)moveLayer:(PXLayer *)layer byOffset:(NSPoint)offset
 {
-	[layer translateContentsByOffset:offset];
+	[self beginUndoGrouping]; {
+		NSData *colorData = [layer colorData];
+		[[[self undoManager] prepareWithInvocationTarget:self] restoreColorData:colorData onLayer:layer];
+		
+		[layer translateContentsByOffset:offset];
+	} [self endUndoGrouping:NSLocalizedString(@"MOVE_ACTION", nil)];
 	
 	[self changed];
 	[self refreshWholePalette];
