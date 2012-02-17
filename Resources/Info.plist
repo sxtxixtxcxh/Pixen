@@ -189,6 +189,8 @@
 			<array>
 				<string>PXPa</string>
 			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>PixenPalette</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
@@ -203,6 +205,8 @@
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Adobe Palette</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>PixenPalette</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
@@ -217,6 +221,8 @@
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Jasc Palette</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>PixenPalette</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
@@ -231,6 +237,8 @@
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Microsoft Palette</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>PixenPalette</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
