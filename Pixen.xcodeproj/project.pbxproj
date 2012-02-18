@@ -574,8 +574,8 @@
 		C9104A5914E38AAC00025103 /* NSWindowController+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindowController+Additions.h"; sourceTree = "<group>"; };
 		C9104A5A14E38AAC00025103 /* NSWindowController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindowController+Additions.m"; sourceTree = "<group>"; };
 		C912F26C13D5CDC100C0CF29 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXSpriteSheetExporter.xib; sourceTree = "<group>"; };
-		C915E26A14C29349001A3A88 /* PXColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXColor.h; sourceTree = "<group>"; };
-		C915E26B14C29349001A3A88 /* PXColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXColor.m; sourceTree = "<group>"; };
+		C915E26A14C29349001A3A88 /* PXColor.h */ = {isa = PBXFileReference; fileEncoding = 4; name = PXColor.h; path = ../Canvas/PXColor.h; sourceTree = "<group>"; };
+		C915E26B14C29349001A3A88 /* PXColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXColor.m; path = ../Canvas/PXColor.m; sourceTree = "<group>"; };
 		C91F07D2142D0BAB007F812C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXInfoPanel.xib; sourceTree = "<group>"; };
 		C92A1E9113B12CAB0007235A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		C931682314E9857C00B3E817 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
@@ -1562,6 +1562,8 @@
 		EA31FB5B0CE7D44B00EC481B /* Palette */ = {
 			isa = PBXGroup;
 			children = (
+				C915E26A14C29349001A3A88 /* PXColor.h */,
+				C915E26B14C29349001A3A88 /* PXColor.m */,
 				EA31FB5C0CE7D44B00EC481B /* PXPalette.h */,
 				EA31FB5D0CE7D44B00EC481B /* PXPalette.m */,
 			);
@@ -1820,8 +1822,6 @@
 		EA686509054C630200EE395F /* Canvas */ = {
 			isa = PBXGroup;
 			children = (
-				C915E26A14C29349001A3A88 /* PXColor.h */,
-				C915E26B14C29349001A3A88 /* PXColor.m */,
 				BF1A538507ECD9200017A44E /* PXImage.h */,
 				BF1A538607ECD9200017A44E /* PXImage.m */,
 				EA495593054C6943009A8EE7 /* PXCanvas.h */,
