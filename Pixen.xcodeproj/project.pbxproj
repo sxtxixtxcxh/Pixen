@@ -59,6 +59,9 @@
 		C9799FBB13AD745500E261EE /* PXEyedropperToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9799FB913AD745500E261EE /* PXEyedropperToolPropertiesView.xib */; };
 		C97C7F0E14EF17DA0089A637 /* PixenPalette.icns in Resources */ = {isa = PBXBuildFile; fileRef = C97C7F0D14EF17DA0089A637 /* PixenPalette.icns */; };
 		C97FDB2614A161DB00371079 /* PixenAnim.icns in Resources */ = {isa = PBXBuildFile; fileRef = C97FDB2514A161DB00371079 /* PixenAnim.icns */; };
+		C98182C414F0212C0052616F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C98182C314F0212C0052616F /* SenTestingKit.framework */; };
+		C98182D014F0212C0052616F /* PaletteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C98182CF14F0212C0052616F /* PaletteTests.m */; };
+		C98182D514F022B00052616F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		C984251213AFC142000072C5 /* PXPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = C984251013AFC142000072C5 /* PXPreview.xib */; };
 		C985C89914C119DF0091EF22 /* PXCanvasResizePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = C985C89714C119DF0091EF22 /* PXCanvasResizePrompt.xib */; };
 		C9A0858E13DE3EB600C27061 /* PXDiscoverPixen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A0858A13DE3EB600C27061 /* PXDiscoverPixen.xib */; };
@@ -601,6 +604,12 @@
 		C9799FBA13AD745500E261EE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXEyedropperToolPropertiesView.xib; sourceTree = "<group>"; };
 		C97C7F0D14EF17DA0089A637 /* PixenPalette.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PixenPalette.icns; sourceTree = "<group>"; };
 		C97FDB2514A161DB00371079 /* PixenAnim.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PixenAnim.icns; sourceTree = "<group>"; };
+		C98182C214F0212C0052616F /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C98182C314F0212C0052616F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		C98182CA14F0212C0052616F /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
+		C98182CE14F0212C0052616F /* PaletteTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaletteTests.h; sourceTree = "<group>"; };
+		C98182CF14F0212C0052616F /* PaletteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaletteTests.m; sourceTree = "<group>"; };
+		C98182D114F0212C0052616F /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		C984251113AFC142000072C5 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreview.xib; sourceTree = "<group>"; };
 		C985C89814C119DF0091EF22 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXCanvasResizePrompt.xib; sourceTree = "<group>"; };
 		C9A0858B13DE3EB600C27061 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXDiscoverPixen.xib; sourceTree = "<group>"; };
@@ -1017,6 +1026,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C98182BE14F0212C0052616F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C98182D514F022B00052616F /* Cocoa.framework in Frameworks */,
+				C98182C414F0212C0052616F /* SenTestingKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EAF6951006A9AE0B0019D8D7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1040,6 +1058,7 @@
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 				61BB8ED608FB58F9009C75A6 /* QTKit.framework */,
 				D8B300DB13AFC443004E83F3 /* QuartzCore.framework */,
+				C98182C314F0212C0052616F /* SenTestingKit.framework */,
 				C931682314E9857C00B3E817 /* Sparkle.framework */,
 				C9A0859013DE3ECD00C27061 /* WebKit.framework */,
 			);
@@ -1049,8 +1068,8 @@
 		1058C7A8FEA54F5311CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */,
 				2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */,
+				2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -1059,6 +1078,7 @@
 			isa = PBXGroup;
 			children = (
 				EAF6951706A9AE0B0019D8D7 /* Pixen.app */,
+				C98182C214F0212C0052616F /* Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1074,6 +1094,7 @@
 				EA31FBEB0CE7D7C200EC481B /* Other Sources */,
 				EAC916DF0CE7DC7300E519E1 /* Resources */,
 				EA90F6CC06D1239C001755A6 /* Localizable Resources */,
+				C98182C814F0212C0052616F /* Tests */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 				EAF6951606A9AE0B0019D8D7 /* Info.plist */,
@@ -1126,6 +1147,25 @@
 				C969A18A13D200B400F1C1FE /* QLPlugin.qlgenerator */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C98182C814F0212C0052616F /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C98182CE14F0212C0052616F /* PaletteTests.h */,
+				C98182CF14F0212C0052616F /* PaletteTests.m */,
+				C98182C914F0212C0052616F /* Supporting Files */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		C98182C914F0212C0052616F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C98182CA14F0212C0052616F /* Tests-Info.plist */,
+				C98182D114F0212C0052616F /* Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		D88FA99E13DD265000175A2F /* AMAssociatedObject */ = {
@@ -2214,6 +2254,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		C98182C114F0212C0052616F /* Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C98182D214F0212C0052616F /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildPhases = (
+				C98182BD14F0212C0052616F /* Sources */,
+				C98182BE14F0212C0052616F /* Frameworks */,
+				C98182BF14F0212C0052616F /* Resources */,
+				C98182C014F0212C0052616F /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tests;
+			productName = Tests;
+			productReference = C98182C214F0212C0052616F /* Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		EAF6940806A9AE0B0019D8D7 /* Pixen */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 616BAEA508553EFB004CF172 /* Build configuration list for PBXNativeTarget "Pixen" */;
@@ -2265,6 +2323,7 @@
 			projectRoot = "";
 			targets = (
 				EAF6940806A9AE0B0019D8D7 /* Pixen */,
+				C98182C114F0212C0052616F /* Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -2280,6 +2339,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C98182BF14F0212C0052616F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EAF6946206A9AE0B0019D8D7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2421,7 +2487,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C98182C014F0212C0052616F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		C98182BD14F0212C0052616F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C98182D014F0212C0052616F /* PaletteTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EAF694B706A9AE0B0019D8D7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3040,6 +3130,48 @@
 			};
 			name = Release;
 		};
+		C98182D314F0212C0052616F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		C98182D414F0212C0052616F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3057,6 +3189,15 @@
 			buildConfigurations = (
 				616BAEAB08553EFB004CF172 /* Release */,
 				616BAEAA08553EFB004CF172 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C98182D214F0212C0052616F /* Build configuration list for PBXNativeTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C98182D314F0212C0052616F /* Release */,
+				C98182D414F0212C0052616F /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
