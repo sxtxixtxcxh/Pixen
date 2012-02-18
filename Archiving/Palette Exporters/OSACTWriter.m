@@ -37,10 +37,10 @@
 {
 	NSMutableData *data = [NSMutableData data];
 	NSUInteger colorCount = [palette colorCount];
-	if (colorCount > 256)
+	if (colorCount > 256L)
 	{
-		NSLog(@"This palette has more than 256 colors, and the ACT format only supports that many; %lu will be truncated.", colorCount-256);
-		colorCount = 256;
+		NSLog(@"This palette has more than 256 colors, and the ACT format only supports that many; %lu will be truncated.", colorCount-256L);
+		colorCount = 256L;
 	}
 	int i;
 	for (i = 0; i < colorCount; i++)
