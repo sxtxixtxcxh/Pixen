@@ -52,8 +52,8 @@
 	[grid release];
 	
 	[_drawnPoints release];
-	[_oldColors release];
-	[_newColors release];
+	PXColorArrayRelease(_oldColors);
+	PXColorArrayRelease(_newColors);
 	
 	[_minusColors release];
 	[_plusColors release];

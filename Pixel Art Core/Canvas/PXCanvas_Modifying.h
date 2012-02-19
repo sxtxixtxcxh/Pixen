@@ -41,11 +41,11 @@
 
 - (void)clearUndoBuffers;
 - (void)registerForUndo;
-- (void)registerForUndoWithDrawnPoints:(NSPointerArray *)points oldColors:(NSPointerArray *)oldColors
-							 newColors:(NSPointerArray *)newColors inLayer:(PXLayer *)layer
+- (void)registerForUndoWithDrawnPoints:(NSPointerArray *)points oldColors:(PXColorArrayRef)oldColors
+							 newColors:(PXColorArrayRef)newColors inLayer:(PXLayer *)layer
 							   undoing:(BOOL)undoing;
 
-- (void)replaceColorsAtPoints:(NSPointerArray *)points withColors:(NSPointerArray *)colors inLayer:(PXLayer *)layer;
+- (void)replaceColorsAtPoints:(NSPointerArray *)points withColors:(PXColorArrayRef)colors inLayer:(PXLayer *)layer;
 
 - (void)bufferUndoAtPoint:(NSPoint)aPoint fromColor:(PXColor)oldColor toColor:(PXColor)newColor;
 

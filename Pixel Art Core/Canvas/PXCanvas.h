@@ -3,6 +3,7 @@
 //  Pixen
 //
 
+#import "PXColorArray.h"
 #import "PXGrid.h"
 #import "PXLayer.h"
 #import "PXPalette.h"
@@ -31,7 +32,8 @@ typedef BOOL *PXSelectionMask;
 	NSRect canvasRect;  //Cached because [self size] and NSMakeRect slow things down when containsPoint is called a bunch
 	NSRect selectedRect;
 	NSUndoManager *undoManager; // Cached from PXCanvasDocument
-	NSPointerArray *_drawnPoints, *_oldColors, *_newColors;
+	NSPointerArray *_drawnPoints;
+	PXColorArrayRef _oldColors, _newColors;
 	
 //these are slightly easier to move, but will still suck to move.
 	PXBackgroundConfig *bgConfig;

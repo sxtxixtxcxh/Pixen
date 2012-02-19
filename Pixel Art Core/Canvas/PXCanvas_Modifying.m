@@ -18,7 +18,6 @@
 @implementation PXCanvas(Modifying)
 
 NSUInteger PointSizeF (const void *item);
-NSUInteger ColorSizeF (const void *item);
 
 - (BOOL)wraps
 {
@@ -313,10 +312,6 @@ NSUInteger PointSizeF (const void *item) {
 	return sizeof(NSPoint);
 }
 
-NSUInteger ColorSizeF (const void *item) {
-	return sizeof(PXColor);
-}
-
 - (void)clearUndoBuffers
 {
 	NSPointerFunctionsOptions options = (NSPointerFunctionsStructPersonality|NSPointerFunctionsMallocMemory|NSPointerFunctionsCopyIn);
@@ -324,17 +319,14 @@ NSUInteger ColorSizeF (const void *item) {
 	NSPointerFunctions *pointF = [NSPointerFunctions pointerFunctionsWithOptions:options];
 	[pointF setSizeFunction:&PointSizeF];
 	
-	NSPointerFunctions *colorF = [NSPointerFunctions pointerFunctionsWithOptions:options];
-	[colorF setSizeFunction:&ColorSizeF];
-	
 	[_drawnPoints release];
 	_drawnPoints = [[NSPointerArray alloc] initWithPointerFunctions:pointF];
 	
-	[_oldColors release];
-	_oldColors = [[NSPointerArray alloc] initWithPointerFunctions:colorF];
+	PXColorArrayRelease(_oldColors);
+	_oldColors = PXColorArrayCreate();
 	
-	[_newColors release];
-	_newColors = [[NSPointerArray alloc] initWithPointerFunctions:colorF];
+	PXColorArrayRelease(_newColors);
+	_newColors = PXColorArrayCreate();
 }
 
 - (void)registerForUndo
@@ -346,10 +338,13 @@ NSUInteger ColorSizeF (const void *item) {
 								 undoing:NO];
 }
 
-- (void)registerForUndoWithDrawnPoints:(NSPointerArray *)points oldColors:(NSPointerArray *)oldColors
-							 newColors:(NSPointerArray *)newColors inLayer:(PXLayer *)layer
+- (void)registerForUndoWithDrawnPoints:(NSPointerArray *)points oldColors:(PXColorArrayRef)oldColors
+							 newColors:(PXColorArrayRef)newColors inLayer:(PXLayer *)layer
 							   undoing:(BOOL)undoing
 {
+	PXColorArrayRetain(newColors);
+	PXColorArrayRetain(oldColors);
+	
 	[[[self undoManager] prepareWithInvocationTarget:self] registerForUndoWithDrawnPoints:points
 																				oldColors:newColors
 																				newColors:oldColors
@@ -358,10 +353,13 @@ NSUInteger ColorSizeF (const void *item) {
 	
 	if (undoing) {
 		[self replaceColorsAtPoints:points withColors:newColors inLayer:layer];
+		
+		PXColorArrayRelease(newColors);
+		PXColorArrayRelease(oldColors);
 	}
 }
 
-- (void)replaceColorsAtPoints:(NSPointerArray *)points withColors:(NSPointerArray *)colors inLayer:(PXLayer *)layer
+- (void)replaceColorsAtPoints:(NSPointerArray *)points withColors:(PXColorArrayRef)colors inLayer:(PXLayer *)layer
 {
 	NSRect changedRect = NSZeroRect;
 	NSPoint point;
@@ -377,7 +375,7 @@ NSUInteger ColorSizeF (const void *item) {
 	{
 		point = *(NSPoint *) [points pointerAtIndex:i];
 		
-		PXColor color = *(PXColor *) [colors pointerAtIndex:i];
+		PXColor color = PXColorArrayColorAtIndex(colors, i);
 		[self setColor:color atPoint:point onLayer:layer];
 		
 		changedRect = NSUnionRect(changedRect, NSMakeRect(point.x, point.y, 1.0f, 1.0f));
@@ -390,8 +388,9 @@ NSUInteger ColorSizeF (const void *item) {
 - (void)bufferUndoAtPoint:(NSPoint)aPoint fromColor:(PXColor)oldColor toColor:(PXColor)newColor
 {
 	[_drawnPoints addPointer:&aPoint];
-	[_oldColors addPointer:&oldColor];
-	[_newColors addPointer:&newColor];
+	
+	PXColorArrayAppendColor(_oldColors, oldColor);
+	PXColorArrayAppendColor(_newColors, newColor);
 }
 
 - (void)applyImage:(NSImage *)image toLayer:(PXLayer *)layer
