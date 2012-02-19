@@ -78,6 +78,10 @@
 		C9B1FA5E13D732FC00BB7CF7 /* PXManagePresetsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9B1FA5C13D732FC00BB7CF7 /* PXManagePresetsWindow.xib */; };
 		C9D58D8B14F0316B00A62C10 /* PXColor.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D58D8914F0316B00A62C10 /* PXColor.h */; };
 		C9D58D8C14F0316B00A62C10 /* PXColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D58D8A14F0316B00A62C10 /* PXColor.m */; };
+		C9D58D8F14F031EB00A62C10 /* PXColorArray.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D58D8D14F031EB00A62C10 /* PXColorArray.h */; };
+		C9D58D9014F031EB00A62C10 /* PXColorArray.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D58D8E14F031EB00A62C10 /* PXColorArray.m */; };
+		C9D58D9114F031FC00A62C10 /* PXColorArray.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D58D8E14F031EB00A62C10 /* PXColorArray.m */; };
+		C9D58D9214F031FD00A62C10 /* PXColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D58D8A14F0316B00A62C10 /* PXColor.m */; };
 		C9DC4D9B13D0E6D70065C1A6 /* PXImageSizePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9DC4D9913D0E6D70065C1A6 /* PXImageSizePrompt.xib */; };
 		C9DC4D9E13D0E91B0065C1A6 /* PXPresetsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C9DC4D9C13D0E91B0065C1A6 /* PXPresetsManager.h */; };
 		C9DC4D9F13D0E91B0065C1A6 /* PXPresetsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DC4D9D13D0E91B0065C1A6 /* PXPresetsManager.m */; };
@@ -626,6 +630,8 @@
 		C9B1FA5D13D732FC00BB7CF7 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXManagePresetsWindow.xib; sourceTree = "<group>"; };
 		C9D58D8914F0316B00A62C10 /* PXColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXColor.h; sourceTree = "<group>"; };
 		C9D58D8A14F0316B00A62C10 /* PXColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXColor.m; sourceTree = "<group>"; };
+		C9D58D8D14F031EB00A62C10 /* PXColorArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXColorArray.h; sourceTree = "<group>"; };
+		C9D58D8E14F031EB00A62C10 /* PXColorArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXColorArray.m; sourceTree = "<group>"; };
 		C9DC4D9A13D0E6D70065C1A6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXImageSizePrompt.xib; sourceTree = "<group>"; };
 		C9DC4D9C13D0E91B0065C1A6 /* PXPresetsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPresetsManager.h; sourceTree = "<group>"; };
 		C9DC4D9D13D0E91B0065C1A6 /* PXPresetsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPresetsManager.m; sourceTree = "<group>"; };
@@ -1564,6 +1570,8 @@
 			children = (
 				C9D58D8914F0316B00A62C10 /* PXColor.h */,
 				C9D58D8A14F0316B00A62C10 /* PXColor.m */,
+				C9D58D8D14F031EB00A62C10 /* PXColorArray.h */,
+				C9D58D8E14F031EB00A62C10 /* PXColorArray.m */,
 				EA31FB5C0CE7D44B00EC481B /* PXPalette.h */,
 				EA31FB5D0CE7D44B00EC481B /* PXPalette.m */,
 			);
@@ -2248,6 +2256,7 @@
 				C968A8DE14A5213E00905E3D /* PXAboutWindowController.h in Headers */,
 				C9104A5B14E38AAC00025103 /* NSWindowController+Additions.h in Headers */,
 				C9D58D8B14F0316B00A62C10 /* PXColor.h in Headers */,
+				C9D58D8F14F031EB00A62C10 /* PXColorArray.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2509,6 +2518,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C98182D014F0212C0052616F /* PaletteTests.m in Sources */,
+				C9D58D9214F031FD00A62C10 /* PXColor.m in Sources */,
+				C9D58D9114F031FC00A62C10 /* PXColorArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2685,6 +2696,7 @@
 				C968A8DF14A5213E00905E3D /* PXAboutWindowController.m in Sources */,
 				C9104A5C14E38AAC00025103 /* NSWindowController+Additions.m in Sources */,
 				C9D58D8C14F0316B00A62C10 /* PXColor.m in Sources */,
+				C9D58D9014F031EB00A62C10 /* PXColorArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
