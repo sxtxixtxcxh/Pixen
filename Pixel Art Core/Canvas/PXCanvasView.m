@@ -4,6 +4,8 @@
 //
 
 #import "PXCanvasView.h"
+
+#import "NSWindowController+Additions.h"
 #import "PXCanvas.h"
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Drawing.h"
@@ -805,7 +807,7 @@ void PXDebugRect(NSRect r, float alpha)
 
 - (void)updateInfoPanelWithMousePosition:(NSPoint)point dragging:(BOOL)dragging
 {
-	if (![[[PXInfoPanelController sharedInfoPanelController] window] isVisible])
+	if (![[PXInfoPanelController sharedInfoPanelController] isVisible])
 		return;
 	
 	NSPoint cursorPoint = point;
