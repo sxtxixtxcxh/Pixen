@@ -41,8 +41,9 @@
 
 - (void)zoomToIndex:(float)index
 {
-	if(index < 0 || index >= [zoomPercentageBox numberOfItems]) { 
+	if (index < 0 || index >= [zoomPercentageBox numberOfItems]) {
 		NSBeep();
+		return;
 	}
 	
 	[zoomPercentageBox selectItemAtIndex:index];

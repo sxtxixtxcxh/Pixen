@@ -209,6 +209,14 @@
 	}
 	else if ([anItem action] == @selector(setPatternToSelection:))
 		return [[self canvas] hasSelection] && [[[PXToolPaletteController sharedToolPaletteController] currentTool] supportsPatterns];
+	else if ([anItem action] == @selector(zoomOut:))
+	{
+		return ([zoomPercentageBox indexOfSelectedItem] < [zoomPercentageBox numberOfItems]-1);
+	}
+	else if ([anItem action] == @selector(zoomIn:))
+	{
+		return ([zoomPercentageBox indexOfSelectedItem] > 0);
+	}
 	
 	return YES;
 }
