@@ -19,6 +19,7 @@
 
 @end
 
+
 @interface NSObject (PXPaletteViewSizeSelectorDelegateProtocol)
 
 - (void)sizeSelector:(PXPaletteViewSizeSelector *)selector selectedSize:(NSControlSize)size;

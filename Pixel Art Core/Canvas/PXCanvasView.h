@@ -86,14 +86,16 @@
 - (void)updateCrosshairs:(NSPoint)newLocation;
 - (void)updateInfoPanelWithMousePosition:(NSPoint)point dragging:(BOOL)dragging;
 
-
 - (PXBackground *)mainBackground;
 - (PXBackground *)alternateBackground;
+
 @end
+
 
 void PXDebugRect(NSRect r, float alpha);
 
-@interface NSObject(PXCanvasViewDelegate)
+@interface NSObject (PXCanvasViewDelegate)
+
 - (void)mouseDown:(NSEvent *)event;
 - (void)mouseUp:(NSEvent *)event;
 - (void)mouseDragged:(NSEvent *)event;
@@ -102,4 +104,5 @@ void PXDebugRect(NSRect r, float alpha);
 - (void)eraserUp:(NSEvent *)event;
 - (void)eraserDragged:(NSEvent *)event;
 - (void)eraserMoved:(NSEvent *)event;
+
 @end

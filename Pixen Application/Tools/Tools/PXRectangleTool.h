@@ -14,6 +14,6 @@
 	NSRect lastRect;
 }
 
-- (void)drawRect:(NSRect)aRect inCanvas:(PXCanvas *) aCanvas;
+- (void)drawRect:(NSRect)aRect inCanvas:(PXCanvas *)aCanvas;
 
 @end

@@ -10,6 +10,7 @@
 #import "PXCanvas.h"
 
 @interface PXCanvas(CopyPaste)
+
 - (NSInteger)runPasteTooBigAlert:(NSString *)pastedThing size:(NSSize)aSize;
 - (BOOL)canContinuePasteOf:(NSString *)pastedThing size:(NSSize)aSize;
 - (void)pasteLayer:(PXLayer *)layer;
@@ -26,4 +27,5 @@
 - (void)cutLayer:(PXLayer *)aLayer;
 - (void)copyActiveLayer;
 - (void)pasteLayer;
+
 @end

@@ -57,6 +57,7 @@
 
 @end
 
+
 @interface NSObject(OSStackedViewDelegate)
 
 - (void)stackedView:(OSStackedView *)aStackedView

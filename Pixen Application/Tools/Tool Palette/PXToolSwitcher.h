@@ -34,16 +34,15 @@ typedef enum {
 	BOOL _locked;
 }
 
-- (id) init;
-- (id) selectedTool;
+- (id)selectedTool;
 
-- (id) toolWithTag:(PXToolTag)tag;
-- (PXToolTag)tagForTool:(id) aTool;
-- (void)setIcon:(NSImage *) anImage forTool:(id)aTool;
+- (id)toolWithTag:(PXToolTag)tag;
+- (PXToolTag)tagForTool:(id)aTool;
+- (void)setIcon:(NSImage *)anImage forTool:(id)aTool;
 - (void)clearBeziers;
 
 	//Manage color/colorWell
-- (NSColor*) color;
+- (NSColor *)color;
 - (void)setColor:(NSColor *)aColor;
 - (void)activateColorWell;
 

@@ -10,6 +10,7 @@
 #import "PXCanvas.h"
 
 @interface PXCanvas(Layers)
+
 - (PXLayer *) activeLayer;
 - (void)activateLayer:(PXLayer *) aLayer;
 - (NSArray *) layers;

@@ -42,11 +42,8 @@
 @property (nonatomic, readonly) IBOutlet NSView *layerSplit, *canvasSplit, *paletteSplit;
 
 - (PXCanvasView *)view;
-- (id) initWithWindowNibName:name;
-- (void)awakeFromNib;
 - (NSView *)layerSplit;
 - (NSView *)canvasSplit;
-- (void)dealloc;
 - (void)windowWillClose:note;
 - (void)releaseCanvas;
 - (void)setDocument:(NSDocument *)doc;
@@ -55,4 +52,5 @@
 - (void)prepare;
 - (void)updateCanvasSize;
 - (void)updateFrameSizes;
+
 @end

@@ -39,8 +39,6 @@
 
 @property (nonatomic, assign) id delegate;
 
-- (id)init;
-
 - (void)promptInWindow:(NSWindow *)window context:(id)contextInfo;
 
 - (void)promptInWindow:(NSWindow *)window context:(id)contextInfo

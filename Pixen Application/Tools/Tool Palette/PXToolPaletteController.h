@@ -44,11 +44,11 @@
 - (BOOL)usingRightTool;
 
 	//Accessor methods
--(id) leftTool;
--(id) rightTool;
--(id) currentTool;
--(PXToolSwitcher *) leftSwitcher;
--(PXToolSwitcher *) rightSwitcher;
--(NSPanel *) toolPanel;
+- (id)leftTool;
+- (id)rightTool;
+- (id)currentTool;
+- (PXToolSwitcher *)leftSwitcher;
+- (PXToolSwitcher *)rightSwitcher;
+- (NSPanel *)toolPanel;
 
 @end

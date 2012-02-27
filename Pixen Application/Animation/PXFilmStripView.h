@@ -56,7 +56,9 @@
 
 @end
 
+
 @interface NSObject (PXFilmStripDataSource)
+
 - (NSInteger)numberOfCels;
 - celAtIndex:(NSInteger)index;
 - (NSArray *)draggedTypesForFilmStripView:view;
@@ -65,9 +67,12 @@
 - (BOOL)insertCelIntoFilmStripView:view fromPasteboard:(NSPasteboard *)pboard atIndex:(NSInteger)targetDraggingIndex;
 - (BOOL)moveCelInFilmStripView:view fromIndex:(NSInteger)index1 toIndex:(NSInteger)index2;
 - (BOOL)copyCelInFilmStripView:view atIndex:(NSInteger)currentIndex toIndex:(NSInteger)anotherIndex;
+
 @end
+
 
 @interface NSObject (PXFilmStripDelegate)
-- (void)filmStripSelectionDidChange:(NSNotification *)note;
-@end
 
+- (void)filmStripSelectionDidChange:(NSNotification *)note;
+
+@end

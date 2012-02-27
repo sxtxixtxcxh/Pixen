@@ -33,4 +33,5 @@
 - (NSRect)functionalRect;
 - (void)setFunctionalRect:(NSRect)fr;
 - (NSSize)scaledSizeForImage:(NSImage *)image;
+
 @end

@@ -29,6 +29,9 @@
 
 @end
 
+
 @interface NSObject(PXPreviewResizePrompterDelegate)
+
 - (void)prompter:(PXPreviewResizePrompter *)p didFinishWithZoomFactor:(float)fac;
+
 @end

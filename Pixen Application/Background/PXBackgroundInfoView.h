@@ -29,7 +29,10 @@
 
 @end
 
+
 @interface NSObject(PXBackgroundInfoViewDelegate)
+
 - (void)backgroundInfoView:(PXBackgroundInfoView *)infoView receivedBackground:(PXBackground *)bg;
 - (void)dragFailedForInfoView:(PXBackgroundInfoView *)infoView;
+
 @end

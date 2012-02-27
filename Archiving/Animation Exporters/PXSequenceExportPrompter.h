@@ -22,8 +22,8 @@
 
 - (id)initWithDocument:(NSDocument *)document;
 
-- (void)beginSheetModalForWindow:(NSWindow *)parentWindow 
-				   modalDelegate:(id)delegate 
+- (void)beginSheetModalForWindow:(NSWindow *)parentWindow
+				   modalDelegate:(id)delegate
 				  didEndSelector:(SEL)didEndSelector;
 
 @end

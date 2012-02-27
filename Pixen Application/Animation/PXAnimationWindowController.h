@@ -1,4 +1,3 @@
-
 //
 //  PXAnimationWindowController.h
 //  Pixen

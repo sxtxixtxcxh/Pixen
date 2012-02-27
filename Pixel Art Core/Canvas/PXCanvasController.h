@@ -98,7 +98,6 @@
 - (void)panViewWithEvent:(NSEvent *)event;
 - (BOOL)caresAboutPressure;
 
-
 - (void)setLastDrawnPoint:(NSPoint)point;
 - (NSPoint)lastDrawnPoint;
 
@@ -106,7 +105,9 @@
 
 
 @interface NSObject(PXCanvasControllerDelegate)
+
 - (void)canvasController:(PXCanvasController *)controller zoomInOnCanvasPoint:(NSPoint)point;
 - (void)canvasController:(PXCanvasController *)controller zoomOutOnCanvasPoint:(NSPoint)point;
 - (void)zoomToFitCanvasController:(PXCanvasController *)controller;
+
 @end

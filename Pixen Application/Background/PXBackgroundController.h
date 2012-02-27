@@ -23,14 +23,15 @@
 
 @end
 
-@interface NSObject(PXBackgroundControllerDelegate)
+
+@interface NSObject (PXBackgroundControllerDelegate)
 
 - (void)backgroundChanged:(NSNotification *)changed;
 
 - (PXBackground *)mainBackground;
 - (PXBackground *)alternateBackground;
-- (void)setMainBackground:(PXBackground *) aBackground;
-- (void)setAlternateBackground:(PXBackground *) aBackground;
+- (void)setMainBackground:(PXBackground *)bg;
+- (void)setAlternateBackground:(PXBackground *)bg;
 
 - (PXBackground *)defaultMainBackground;
 - (void)setDefaultMainBackground:(PXBackground *)bg;
@@ -38,6 +39,7 @@
 - (void)setDefaultAlternateBackground:(PXBackground *)bg;
 
 @end
+
 
 @interface PXBackgroundTemplateScrollView : NSScrollView
 
