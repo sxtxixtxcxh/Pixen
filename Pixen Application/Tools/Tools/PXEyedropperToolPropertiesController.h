@@ -19,7 +19,8 @@ typedef enum _PXToolButtonType {
 	PXRightButtonTool
 } PXToolButtonType;
 
-@interface PXEyedropperToolPropertiesController : PXToolPropertiesController {
+@interface PXEyedropperToolPropertiesController : PXToolPropertiesController
+{
   @private
 	PXEyedropperColorSourceType colorSource;
 	PXToolButtonType buttonType;

@@ -27,7 +27,7 @@ typedef enum {
 	NSMutableArray *tools;
 	IBOutlet NSMatrix *toolsMatrix;
 	IBOutlet NSColorWell *colorWell;
-@private 
+	
 	NSColor *_color;
 	PXTool *_tool;
 	PXTool *_lastTool;

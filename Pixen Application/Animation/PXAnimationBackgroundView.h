@@ -7,8 +7,9 @@
 
 @interface PXAnimationBackgroundView : NSView
 {
+  @private
 	NSGradient *_horizontalGradient;
-    NSScrollView *_filmStrip;
+	NSScrollView *_filmStrip;
 }
 
 @property (nonatomic, retain) IBOutlet NSScrollView *filmStrip;

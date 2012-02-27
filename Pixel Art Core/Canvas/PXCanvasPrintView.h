@@ -9,6 +9,7 @@
 
 @interface PXCanvasPrintView : NSView
 {
+  @private
 	PXCanvas *_canvas;
 }
 

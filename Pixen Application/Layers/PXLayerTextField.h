@@ -8,13 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-@interface PXLayerTextField : NSTextField {
+@interface PXLayerTextField : NSTextField
+{
   @private
 	BOOL isEditing;
 	BOOL isFirstEnd;
 	BOOL reachedByClicking;
 }
+
 - (void)useEditAppearance;
 
 @property (nonatomic, readonly, getter=isEditing) BOOL editing;

@@ -10,7 +10,8 @@
 
 @class PXSequenceExportViewController;
 
-@interface PXSequenceExportPrompter : NSObject {
+@interface PXSequenceExportPrompter : NSObject
+{
   @private
 	PXSequenceExportViewController *vc;
 	NSSavePanel *savePanel;

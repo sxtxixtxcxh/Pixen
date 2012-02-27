@@ -7,6 +7,7 @@
 
 @interface PXPaletteImporter : NSObject
 {
+  @private
 	NSOpenPanel *_openPanel;
 }
 

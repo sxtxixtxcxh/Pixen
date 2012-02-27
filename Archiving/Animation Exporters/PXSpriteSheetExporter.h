@@ -8,7 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface PXSpriteSheetExporter : NSWindowController {
+@interface PXSpriteSheetExporter : NSWindowController
+{
   @private
 	IBOutlet NSTableView *animationsTable;
 	IBOutlet NSImageView *sheetImageView;

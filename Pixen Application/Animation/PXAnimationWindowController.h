@@ -11,7 +11,9 @@
 #import "PXCanvasWindowController.h"
 
 @class PXAnimation, PXCel, PXFilmStripView;
-@interface PXAnimationWindowController : PXCanvasWindowController < PXAnimationPreviewDataSource > {
+
+@interface PXAnimationWindowController : PXCanvasWindowController < PXAnimationPreviewDataSource >
+{
   @private
 	PXAnimation *animation;
 	IBOutlet NSSplitView *outerSplitView;
@@ -26,9 +28,11 @@
 	PXCel *activeCel;
 	NSInteger activeIndex;
 }
+
 - (void)setAnimation:anim;
 - (void)activateCel:(PXCel *)cel;
 - (IBAction)deleteCel:sender;
 - (IBAction)duplicateCel:sender;
 - (void)writeCelsAtIndices:(NSIndexSet *)indices toPasteboard:(NSPasteboard *)pboard;
+
 @end

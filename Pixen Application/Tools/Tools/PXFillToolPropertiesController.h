@@ -9,8 +9,9 @@
 
 @interface PXFillToolPropertiesController : PXToolPropertiesController
 {
-    BOOL _contiguous;
-    int _tolerance;
+  @private
+	BOOL _contiguous;
+	int _tolerance;
 }
 
 @property (nonatomic, assign) BOOL contiguous;

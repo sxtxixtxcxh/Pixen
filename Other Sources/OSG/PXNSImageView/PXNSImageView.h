@@ -24,6 +24,7 @@
 
 @interface PXNSImageView : NSImageView
 {
+  @private
 	NSRect functionalRect;
 	float scaleFactor;
 	NSShadow *shadow;

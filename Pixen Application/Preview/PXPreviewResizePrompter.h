@@ -8,8 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-@interface PXPreviewResizePrompter : NSWindowController {
+@interface PXPreviewResizePrompter : NSWindowController
+{
   @private
 	IBOutlet NSTextField * zoomPercentage, * width, * height;
 	NSSize canvasSize;

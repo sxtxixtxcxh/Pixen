@@ -9,6 +9,7 @@
 
 @interface PXPresetsManager : NSObject
 {
+  @private
 	NSMutableArray *_presets;
 }
 

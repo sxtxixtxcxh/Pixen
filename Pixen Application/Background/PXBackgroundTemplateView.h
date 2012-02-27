@@ -6,13 +6,15 @@
 #import <Cocoa/Cocoa.h>
 
 @class PXBackground, PXBackgroundPreviewView;
-@interface PXBackgroundTemplateView : NSView {
+
+@interface PXBackgroundTemplateView : NSView
+{
   @private
 	PXBackground *background;
 	IBOutlet NSView *view;
 	IBOutlet NSTextField *templateNameField, *templateClassNameField;
 	IBOutlet PXBackgroundPreviewView *imageView;
-    BOOL _highlighted;
+	BOOL _highlighted;
 }
 
 @property (nonatomic, retain) PXBackground *background;

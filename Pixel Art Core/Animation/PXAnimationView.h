@@ -9,7 +9,8 @@
 
 @interface PXAnimationView : PXCanvasView
 {
-    NSImage *_previousCelImage;
+  @private
+	NSImage *_previousCelImage;
 }
 
 @property (nonatomic, retain) NSImage *previousCelImage;

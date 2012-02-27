@@ -15,6 +15,7 @@ typedef enum {
 
 @interface PXPreferencesController : NSWindowController
 {
+  @private
 	PXGeneralPreferencesController *_generalVC;
 	PXHotkeysPreferencesController *_hotkeysVC;
 	PXPreferencesTab _selectedTab;

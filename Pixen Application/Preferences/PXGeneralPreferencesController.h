@@ -7,7 +7,8 @@
 
 @interface PXGeneralPreferencesController : NSViewController
 {
-    NSTextField *_autoBackupFrequency;
+  @private
+	NSTextField *_autoBackupFrequency;
 }
 
 @property (nonatomic, assign) IBOutlet NSTextField *autoBackupFrequency;

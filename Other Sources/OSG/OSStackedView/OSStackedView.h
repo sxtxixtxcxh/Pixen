@@ -28,8 +28,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-@interface OSStackedView : NSView {
+@interface OSStackedView : NSView
+{
+  @private
 	id delegate;
 	id views;
 	NSInteger tag;
@@ -39,6 +40,7 @@
 	
 	NSPoint dragOffset;
 }
+
 - (NSView *)selectedView;
 - (NSUInteger)selectedRow;
 - (void)stackSubview:(NSView *)sub;

@@ -8,7 +8,8 @@
 
 @class PXLayerDetailsView, PXNSImageView, PXLayerTextField, PXLayerController, PXLayer;
 
-@interface PXLayerCollectionViewItem : NSCollectionViewItem {
+@interface PXLayerCollectionViewItem : NSCollectionViewItem
+{
   @private
 	PXLayerDetailsView *_backgroundView;
 	IBOutlet PXLayerTextField *nameField;

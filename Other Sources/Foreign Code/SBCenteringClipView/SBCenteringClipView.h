@@ -5,10 +5,7 @@
 //FIXME: licence ???
 
 @interface SBCenteringClipView : NSClipView
-{
-}
 
--(void)centerDocument;
+- (void)centerDocument;
 
 @end
-

@@ -6,7 +6,8 @@
 //  Copyright 2005 Pixen. All rights reserved.
 //
 
-@interface PXPreviewBezelView : NSView < NSAnimatablePropertyContainer > {
+@interface PXPreviewBezelView : NSView < NSAnimatablePropertyContainer >
+{
   @private
 	NSImage * actionGear;
 	NSMenu * menu;

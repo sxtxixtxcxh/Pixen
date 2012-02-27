@@ -7,8 +7,9 @@
 
 @interface PXClickableView : NSView
 {
-    BOOL _selected;
-    id _delegate;
+  @private
+	BOOL _selected;
+	id _delegate;
 }
 
 @property (nonatomic, assign) BOOL selected;

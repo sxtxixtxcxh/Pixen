@@ -9,8 +9,9 @@
 
 @interface PXMonotoneBackground : PXBackground
 {
-    NSColorWell *_colorWell;
-    NSColor *_color;
+  @private
+	NSColorWell *_colorWell;
+	NSColor *_color;
 }
 
 @property (nonatomic, assign) IBOutlet NSColorWell *colorWell;

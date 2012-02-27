@@ -9,8 +9,10 @@
 #import <Cocoa/Cocoa.h>
 
 @class OSProgressThread;
+
 @interface OSProgressPopup : NSObject
 {
+  @private
 	BOOL operationActive;
 	IBOutlet NSTextField *statusField;
 	IBOutlet NSProgressIndicator *progressIndicator;

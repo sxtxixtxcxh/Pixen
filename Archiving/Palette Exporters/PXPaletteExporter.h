@@ -9,6 +9,7 @@
 
 @interface PXPaletteExporter : NSObject < NSOpenSavePanelDelegate >
 {
+  @private
 	NSSavePanel *_savePanel;
 	NSPopUpButton *_typeSelector;
 	PXPalette *_palette;

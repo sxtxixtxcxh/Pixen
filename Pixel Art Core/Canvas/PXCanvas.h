@@ -17,11 +17,11 @@ typedef BOOL *PXSelectionMask;
   @private
 	NSMutableArray *layers;
 	
-//I want to move these to the document somehow, eventually.
-//Maybe for Pixen 5... but it would require a huge overhaul
-//of mostly everything to allow for moving around responsibilities
-//at this point.  is it worth it?  yeah, probably.  but do I have time
-//for it now?  well...  --joe
+	//I want to move these to the document somehow, eventually.
+	//Maybe for Pixen 5... but it would require a huge overhaul
+	//of mostly everything to allow for moving around responsibilities
+	//at this point.  is it worth it?  yeah, probably.  but do I have time
+	//for it now?  well...  --joe
 	PXLayer *activeLayer;
 	NSMutableArray *tempLayers;
 	
@@ -35,7 +35,7 @@ typedef BOOL *PXSelectionMask;
 	NSPointerArray *_drawnPoints;
 	PXColorArrayRef _oldColors, _newColors;
 	
-//these are slightly easier to move, but will still suck to move.
+	//these are slightly easier to move, but will still suck to move.
 	PXBackgroundConfig *bgConfig;
 	PXGrid *grid;
 	BOOL wraps;

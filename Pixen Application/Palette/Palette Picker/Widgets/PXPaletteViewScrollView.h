@@ -9,8 +9,9 @@
 
 @interface PXPaletteViewScrollView : NSScrollView
 {
+  @private
 	PXPaletteViewSizeSelector *_sizeSelector;
-    NSControlSize _controlSize;
+	NSControlSize _controlSize;
 }
 
 @property (nonatomic, assign) NSControlSize controlSize;

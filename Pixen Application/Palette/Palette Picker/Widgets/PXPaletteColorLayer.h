@@ -7,10 +7,11 @@
 
 @interface PXPaletteColorLayer : CALayer
 {
-    NSUInteger _index;
-    NSColor *_color;
-    NSControlSize _controlSize;
-    BOOL _highlighted;
+  @private
+	NSUInteger _index;
+	NSColor *_color;
+	NSControlSize _controlSize;
+	BOOL _highlighted;
 }
 
 @property (nonatomic, assign) NSUInteger index;

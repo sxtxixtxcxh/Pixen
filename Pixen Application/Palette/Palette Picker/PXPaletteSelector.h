@@ -9,10 +9,11 @@
 
 @interface PXPaletteSelector : NSObject
 {
+  @private
 	NSMutableArray *_palettes;
-    BOOL _enabled;
-    NSPopUpButton *_selectionPopup;
-    id _delegate;
+	BOOL _enabled;
+	NSPopUpButton *_selectionPopup;
+	id _delegate;
 }
 
 @property (nonatomic, getter=isEnabled, assign) BOOL enabled;

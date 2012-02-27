@@ -10,7 +10,8 @@
 
 @class PXPaletteView, PXPaletteSelector, PXNamePrompter;
 
-@interface PXPaletteViewController : NSViewController {
+@interface PXPaletteViewController : NSViewController
+{
   @private
 	IBOutlet PXPaletteView *paletteView;
 	NSButton *addColorButton;

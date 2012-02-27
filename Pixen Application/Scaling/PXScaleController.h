@@ -15,7 +15,6 @@
 	IBOutlet NSTextField *pixelsWideField, *pixelsHighField, *percentageWideField, *percentageHighField;
 	IBOutlet NSTextView *algorithmInfoView;
 	
-	
 	id delegate;
 	SEL callback;
 	

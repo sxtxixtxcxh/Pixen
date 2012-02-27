@@ -7,9 +7,10 @@
 
 @interface PXPattern : NSObject < NSCopying, NSCoding >
 {
+  @private
 	NSMutableSet *_points;
 	NSMutableArray *_pointsInBounds;
-    NSSize _size;
+	NSSize _size;
 }
 
 @property (nonatomic, assign) NSSize size;

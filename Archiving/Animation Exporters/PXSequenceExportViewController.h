@@ -8,8 +8,8 @@
 @interface PXSequenceExportViewController : NSViewController
 {
   @private
-    NSArrayController *_typesController;
-    NSString *_fileTemplate;
+	NSArrayController *_typesController;
+	NSString *_fileTemplate;
 }
 
 @property (nonatomic, assign) IBOutlet NSArrayController *typesController;

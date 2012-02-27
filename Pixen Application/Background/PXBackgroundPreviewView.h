@@ -5,8 +5,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-@interface PXBackgroundPreviewView : NSView {
+@interface PXBackgroundPreviewView : NSView
+{
   @private
 	NSImage *image;
 	NSRect functionalRect;

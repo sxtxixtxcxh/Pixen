@@ -5,7 +5,8 @@
 
 @class PXManagePresetsController, PXNamePrompter, PXNSImageView;
 
-@interface PXImageSizePrompter : NSWindowController < NSWindowDelegate > {
+@interface PXImageSizePrompter : NSWindowController < NSWindowDelegate >
+{
   @private
 	IBOutlet PXNSImageView *preview;
 	IBOutlet NSView *widthIndicator, *heightIndicator;

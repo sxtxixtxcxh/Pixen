@@ -9,7 +9,8 @@
 
 @interface PXCrosshair : NSObject
 {
-    NSPoint _cursorPosition;
+  @private
+	NSPoint _cursorPosition;
 }
 
 @property (nonatomic, assign) NSPoint cursorPosition;

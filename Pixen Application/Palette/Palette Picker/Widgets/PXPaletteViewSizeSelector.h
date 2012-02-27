@@ -7,10 +7,11 @@
 
 @interface PXPaletteViewSizeSelector : NSView
 {
+  @private
 	NSImage *_bigImage;
-    NSImage *_smallImage;
-    NSControlSize _controlSize;
-    id _delegate;
+	NSImage *_smallImage;
+	NSControlSize _controlSize;
+	id _delegate;
 }
 
 @property (nonatomic, assign) NSControlSize controlSize;

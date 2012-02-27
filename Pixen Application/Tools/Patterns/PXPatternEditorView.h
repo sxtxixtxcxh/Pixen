@@ -9,10 +9,11 @@
 
 @interface PXPatternEditorView : NSView
 {
+  @private
 	PXGrid *_grid;
 	BOOL _erasing;
-    PXPattern *_pattern;
-    id _delegate;
+	PXPattern *_pattern;
+	id _delegate;
 }
 
 @property (nonatomic, assign) PXPattern *pattern;

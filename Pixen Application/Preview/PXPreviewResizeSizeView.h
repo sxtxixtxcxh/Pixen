@@ -7,6 +7,7 @@
 
 @interface PXPreviewResizeSizeView : NSView
 {
+  @private
 	NSAttributedString *_scaleString;
 }
 

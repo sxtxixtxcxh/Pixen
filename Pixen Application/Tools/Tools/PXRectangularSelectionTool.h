@@ -39,6 +39,7 @@
 	BOOL isAdding;
 	BOOL isSubtracting;
 }
+
 - (void)mouseDownAt:(NSPoint)aPoint
 fromCanvasController:(PXCanvasController *)controller;
 
@@ -49,4 +50,5 @@ fromCanvasController:(PXCanvasController *)controller;
 - (void)startMovingCanvas:(PXCanvas *) canvas;
 
 - (void)stopMovingCanvas:(PXCanvas *)canvas;
+
 @end

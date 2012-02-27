@@ -9,6 +9,7 @@
 
 @interface PXColorPicker : NSColorPicker < NSColorPickingDefault, NSColorPickingCustom >
 {
+  @private
 	PXPaletteViewController *_vc;
 	NSImage *_icon;
 }

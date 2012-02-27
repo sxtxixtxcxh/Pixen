@@ -5,7 +5,8 @@
 
 @class PXPattern, PXPatternEditorView;
 
-@interface PXPatternEditorController : NSWindowController < NSCollectionViewDelegate > {
+@interface PXPatternEditorController : NSWindowController < NSCollectionViewDelegate >
+{
   @private
 	PXPattern *_pattern;
 	NSString *toolName, *patternFileName;

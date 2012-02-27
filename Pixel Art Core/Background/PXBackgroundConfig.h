@@ -9,10 +9,11 @@
 
 @interface PXBackgroundConfig : NSObject < NSCoding >
 {
-    PXBackground *_mainBackground;
-    PXBackground *_alternateBackground;
-    PXBackground *_mainPreviewBackground;
-    PXBackground *_alternatePreviewBackground;
+  @private
+	PXBackground *_mainBackground;
+	PXBackground *_alternateBackground;
+	PXBackground *_mainPreviewBackground;
+	PXBackground *_alternatePreviewBackground;
 }
 
 @property (nonatomic, retain) PXBackground *mainBackground;

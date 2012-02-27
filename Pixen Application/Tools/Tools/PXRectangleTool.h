@@ -8,7 +8,6 @@
 
 #import "PXLinearTool.h"
 
-
 @interface PXRectangleTool : PXLinearTool 
 {
   @private

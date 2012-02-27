@@ -11,6 +11,7 @@
 
 @interface PXPalettePanel : NSPanel
 {
+  @private
 	PXPaletteViewController *_vc;
 }
 

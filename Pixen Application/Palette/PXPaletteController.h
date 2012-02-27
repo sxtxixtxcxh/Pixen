@@ -14,10 +14,11 @@ typedef enum {
 
 @interface PXPaletteController : NSViewController
 {
+  @private
 	PXPaletteMode _mode;
 	PXPalette *_frequencyPalette, *_recentPalette;
-    PXPaletteView *_paletteView;
-    PXDocument *_document;
+	PXPaletteView *_paletteView;
+	PXDocument *_document;
 }
 
 @property (nonatomic, assign) IBOutlet PXPaletteView *paletteView;

@@ -9,7 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 @class QTMovie;
-@interface OSQTExporter : NSObject {
+
+@interface OSQTExporter : NSObject
+{
   @private
 	NSString *tempPath;
 	
@@ -19,4 +21,5 @@
 
 - (void)addImage:(NSImage *)image forLength:(NSTimeInterval)seconds;
 - (void)exportToPath:(NSString *)path parentWindow:(NSWindow *)newParentWindow;
+
 @end

@@ -3,12 +3,13 @@
 #import <Cocoa/Cocoa.h>
 
 @class PXBackgroundInfoView, PXBackgroundsTableView, PXBackground, OSStackedView, PXDefaultBackgroundTemplateView;
+
 @interface PXBackgroundController : NSWindowController
 {
   @private
-    IBOutlet PXBackgroundInfoView *alternateBackgroundView;
-    IBOutlet PXBackgroundInfoView *mainBackgroundView;
-    IBOutlet OSStackedView *mainStack, *defaultsStack;
+	IBOutlet PXBackgroundInfoView *alternateBackgroundView;
+	IBOutlet PXBackgroundInfoView *mainBackgroundView;
+	IBOutlet OSStackedView *mainStack, *defaultsStack;
 	id delegate;
 	NSMutableArray *mainViews, *defaultsViews;
 }
@@ -23,6 +24,7 @@
 @end
 
 @interface NSObject(PXBackgroundControllerDelegate)
+
 - (void)backgroundChanged:(NSNotification *)changed;
 
 - (PXBackground *)mainBackground;
@@ -38,6 +40,8 @@
 @end
 
 @interface PXBackgroundTemplateScrollView : NSScrollView
+
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)info;
 - (NSDragOperation)draggingExited:(id <NSDraggingInfo>)info;
+
 @end
