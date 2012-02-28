@@ -1,9 +1,8 @@
 //
 //  PXMagicWandTool.h
-//  Pixen-XCode
+//  Pixen
 //
-//  Created by Andy Matuschak on Sat Jun 12 2004.
-//  Copyright (c) 2004 Pixen. All rights reserved.
+//  Copyright 2004-2012 Pixen Project. All rights reserved.
 //
 
 #import "PXFillTool.h"

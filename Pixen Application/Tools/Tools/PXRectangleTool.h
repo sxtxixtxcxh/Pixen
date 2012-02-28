@@ -1,9 +1,8 @@
 //
 //  PXRectangleTool.h
-//  Pixen-XCode
+//  Pixen
 //
-//  Created by Andy Matuschak on Wed Mar 10 2004.
-//  Copyright (c) 2004 Pixen. All rights reserved.
+//  Copyright 2004-2012 Pixen Project. All rights reserved.
 //
 
 #import "PXLinearTool.h"

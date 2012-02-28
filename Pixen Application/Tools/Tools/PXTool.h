@@ -1,9 +1,8 @@
 //
 //  PXTool.h
-//  Pixen-XCode
+//  Pixen
 //
-//  Created by Joe Osborn on Sat Dec 06 2003.
-//  Copyright (c) 2003 Pixen. All rights reserved.
+//  Copyright 2003-2012 Pixen Project. All rights reserved.
 //
 
 #import "PXColor.h"
