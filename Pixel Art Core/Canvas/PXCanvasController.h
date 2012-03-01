@@ -8,7 +8,7 @@
 
 #import "PXColor.h"
 
-@class PXCanvas, PXCanvasView, PXBackground, PXGridSettingsController, PXLayerController, PXBackgroundController;
+@class PXCanvas, PXCanvasView, PXBackground, PXLayerController, PXBackgroundController;
 
 @interface PXCanvasController : NSObject
 {
@@ -18,7 +18,6 @@
 	IBOutlet NSScrollView *scrollView;
 	NSDocument *document;
 	IBOutlet NSWindow *window;
-	PXGridSettingsController *_gridSettingsController;
 	
 	PXLayerController *layerController;
 	PXBackgroundController *backgroundController;
@@ -64,7 +63,6 @@
 - (void)toggleShouldTile;
 - (void)setPatternToSelection;
 - (void)showBackgroundInfo;
-- (void)showGridSettings;
 - (void)updateCanvasSizeZoomingToFit:(BOOL)zooming;
 - (void)updateCanvasSize;
 - document;

@@ -16,6 +16,7 @@
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Selection.h"
 #import "PXCanvasController.h"
+#import "PXGridSettingsController.h"
 #import "PXScaleController.h"
 #import "PXPaletteExporter.h"
 #import "PXPalettePanel.h"
@@ -303,9 +304,36 @@
 	[canvasController showBackgroundInfo];
 }
 
-- (IBAction)showGridSettingsPrompter:(id) sender
+- (IBAction)showGridSettingsPrompter:(id)sender
 {
-	[canvasController showGridSettings];
+	if (!_gridSettingsController) {
+		_gridSettingsController = [[PXGridSettingsController alloc] init];
+		_gridSettingsController.delegate = self;
+	}
+	
+	_gridSettingsController.width = (int) [[canvas grid] unitSize].width;
+	_gridSettingsController.height = (int) [[canvas grid] unitSize].height;
+	_gridSettingsController.color = [[canvas grid] color];
+	_gridSettingsController.shouldDraw = [[canvas grid] shouldDraw] ? YES : NO;
+	
+	NSString *title = [NSString stringWithFormat:@"%@ - %@", NSLocalizedString(@"Grid", @"Grid"),
+					   [[self document] displayName]];
+	
+	[[_gridSettingsController window] setTitle:title];
+	[_gridSettingsController showWindow:self];
+}
+
+- (void)gridSettingsController:(PXGridSettingsController *)controller
+			   updatedWithSize:(NSSize)size
+						 color:(NSColor *)color
+					shouldDraw:(BOOL)shouldDraw {
+	
+	PXGrid *grid = [canvas grid];
+	[grid setUnitSize:size];
+	[grid setColor:color];
+	[grid setShouldDraw:shouldDraw];
+	
+	[canvas changed];
 }
 
 - (IBAction)redrawCanvas: (id) sender

@@ -25,8 +25,6 @@
 #import "PXTool.h"
 #import "PXCanvasDocument.h"
 #import "PXPattern.h"
-#import "PXGridSettingsController.h"
-#import "PXGrid.h"
 #import "PXToolSwitcher.h"
 
 @implementation PXCanvasController
@@ -311,38 +309,6 @@
 	[[backgroundController window] setTitle:[NSString stringWithFormat:@"%@ - %@", NSLocalizedString(@"Backgrounds", @"Backgrounds"), [[self document] displayName]]];
 	[backgroundController setPreviewImage:[canvas displayImage]];
 	[backgroundController showWindow:self];	
-}
-
-- (void)gridSettingsController:(PXGridSettingsController *)controller
-			   updatedWithSize:(NSSize)size
-						 color:(NSColor *)color
-					shouldDraw:(BOOL)shouldDraw {
-	
-	PXGrid *grid = [canvas grid];
-	[grid setUnitSize:size];
-	[grid setColor:color];
-	[grid setShouldDraw:shouldDraw];
-	
-	[canvas changed];
-}
-
-- (void)showGridSettings
-{
-	if (!_gridSettingsController) {
-		_gridSettingsController = [[PXGridSettingsController alloc] init];
-		_gridSettingsController.delegate = self;
-	}
-	
-	_gridSettingsController.width = (int) [[view grid] unitSize].width;
-	_gridSettingsController.height = (int) [[view grid] unitSize].height;
-	_gridSettingsController.color = [[view grid] color];
-	_gridSettingsController.shouldDraw = [[view grid] shouldDraw] ? YES : NO;
-	
-	NSString *title = [NSString stringWithFormat:@"%@ - %@", NSLocalizedString(@"Grid", @"Grid"),
-					   [[self document] displayName]];
-	
-	[[_gridSettingsController window] setTitle:title];
-	[_gridSettingsController showWindow:self];
 }
 
 - (void)updateCanvasSizeZoomingToFit:(BOOL)zooming

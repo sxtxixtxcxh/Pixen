@@ -7,7 +7,7 @@
 
 #import "PXCanvasResizePrompter.h"
 
-@class PXCanvasController, PXLayerController, PXPaletteController, PXScaleController;
+@class PXCanvasController, PXGridSettingsController, PXLayerController, PXPaletteController, PXScaleController;
 @class PXCanvas, PXCanvasView, PXBackground;
 
 @interface PXCanvasWindowController : NSWindowController < PXCanvasResizePrompterDelegate >
@@ -19,6 +19,7 @@
 	IBOutlet id zoomStepper;
 	IBOutlet NSView *zoomView;
 	
+	PXGridSettingsController *_gridSettingsController;
 	PXCanvasResizePrompter *_resizePrompter;
 	PXScaleController *scaleController;
 	PXLayerController *layerController;
