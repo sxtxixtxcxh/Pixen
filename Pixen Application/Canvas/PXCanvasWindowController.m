@@ -121,6 +121,7 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[self setCanvas:nil];
+	[_gridSettingsController close];
 }
 
 - (void)releaseCanvas
