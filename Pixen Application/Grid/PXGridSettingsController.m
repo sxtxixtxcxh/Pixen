@@ -19,6 +19,19 @@
 	return [super initWithWindowNibName:@"PXGridSettings"];
 }
 
+- (void)setNilValueForKey:(NSString *)key
+{
+	if ([key isEqualToString:@"width"]) {
+		[self setValue:[NSNumber numberWithInt:1] forKey:@"width"];
+	}
+	else if ([key isEqualToString:@"height"]) {
+		[self setValue:[NSNumber numberWithInt:1] forKey:@"height"];
+	}
+	else {
+		[super setNilValueForKey:key];
+	}
+}
+
 - (void)dealloc
 {
 	self.color = nil;
