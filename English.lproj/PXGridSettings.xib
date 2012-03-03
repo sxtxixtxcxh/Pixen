@@ -43,7 +43,7 @@
 			<object class="NSWindowTemplate" id="892236356">
 				<int key="NSWindowStyleMask">23</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{272, 172}, {230, 150}}</string>
+				<string key="NSWindowRect">{{272, 172}, {200, 150}}</string>
 				<int key="NSWTFlags">-1535638528</int>
 				<string key="NSWindowTitle">Grid Settings</string>
 				<string key="NSWindowClass">NSPanel</string>
@@ -394,7 +394,7 @@
 							<reference key="NSFont" ref="26"/>
 						</object>
 					</array>
-					<string key="NSFrameSize">{230, 150}</string>
+					<string key="NSFrameSize">{200, 150}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="683811965"/>
