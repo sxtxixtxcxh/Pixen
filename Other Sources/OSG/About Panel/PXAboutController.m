@@ -7,15 +7,6 @@
 
 #import "PXAboutController.h"
 
-/*
-@interface PXAboutController ()
-
-- (void)loadCreditsText;
-
-@end
- */
-
-
 @implementation PXAboutController
 
 @synthesize webView = _webView;
@@ -25,32 +16,18 @@
 	return [super initWithNibName:@"PXAbout" bundle:nil];
 }
 
-/*
 - (void)awakeFromNib
 {
-	[self loadCreditsText];
+	NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:CFBundleShortVersionKey];
+	
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"Credits" ofType:@"html"];
+	
+	NSString *string = [[NSString alloc] initWithContentsOfFile:path encoding:NSASCIIStringEncoding error:nil];
+	string = [string stringByReplacingOccurrencesOfString:@"VERSION_PLACEHOLDER" withString:version];
+	
+	NSURL *baseURL = [[NSBundle mainBundle] resourceURL];
+	
+	[[_webView mainFrame] loadHTMLString:string baseURL:baseURL];
 }
-
-- (void)loadCreditsText
-{
-	NSString *creditsPath = [[NSBundle mainBundle] pathForResource:@"Credits" ofType:@"html"];
-	NSData *htmlData = [NSData dataWithContentsOfFile:creditsPath];
-	
-	if (!htmlData)
-		return;
-	
-	NSAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithHTML:htmlData
-																				   options:nil
-																		documentAttributes:nil];
-	
-	[[self.creditsView textStorage] setAttributedString:attributedString];
-	[attributedString release];
-	
-	NSString *versionNum = [[[NSBundle mainBundle] infoDictionary] valueForKey:CFBundleShortVersionKey];
-	NSString *version = [NSString stringWithFormat:NSLocalizedString(@"VERSION_STRING", nil), versionNum];
-	
-	[self.versionField setStringValue:version];
-}
- */
 
 @end
