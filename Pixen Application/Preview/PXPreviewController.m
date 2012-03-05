@@ -4,6 +4,8 @@
 //
 
 #import "PXPreviewController.h"
+
+#import "NSWindowController+Additions.h"
 #import "PXCanvas.h"
 #import "PXCanvas_Backgrounds.h"
 #import "PXCanvas_ImportingExporting.h"
@@ -122,7 +124,7 @@
 {
 	[resizeSizeWindow release];
 	[bezelView release];
-	[[NSUserDefaults standardUserDefaults] setBool:[[self window] isVisible] forKey:PXPreviewWindowIsOpenKey];
+	[[NSUserDefaults standardUserDefaults] setBool:[self isVisible] forKey:PXPreviewWindowIsOpenKey];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
@@ -137,8 +139,9 @@
     {
 		return; 
     }
-	if([[self window] isVisible])
-    {
+	
+	if ([self isVisible])
+	{
 		[view setNeedsDisplayInCanvasRect:updateRect];
 		[bezelView setNeedsDisplay:YES];
 		updateRect = NSZeroRect;
@@ -199,9 +202,9 @@
 
 - (void)liveResize
 {
-	if (![[self window] isVisible]) {
+	if (![self isVisible])
 		return;
-	}
+	
 	NSSize newSize;
 	if (NSEqualSizes([canvas previewSize], NSZeroSize))
 		newSize = NSMakeSize(64, 64);
@@ -334,10 +337,8 @@
 
 - (void)updateResizeSizeViewScale
 {
-	if(![self hasUsableCanvas] || ![[self window] isVisible]) 
-    {
+	if (![self hasUsableCanvas] || ![self isVisible])
 		return;
-    }
 	
 	if (![[resizeSizeWindow contentView] updateScale:[view zoomPercentage]/100]) {
 		return;
@@ -480,10 +481,10 @@
 
 - (void)canvasDidChange:(NSNotification *)aNotification
 {
-	if([[self window] isVisible])
-    {
+	if ([self isVisible])
+	{
 		updateRect = NSUnionRect(updateRect, [[[aNotification userInfo] objectForKey:PXChangedRectKey] rectValue]);
-    }
+	}
 }
 
 - (void)sizeToSenderTitlePercent:(id)sender
