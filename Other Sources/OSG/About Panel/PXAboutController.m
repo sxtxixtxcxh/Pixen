@@ -18,6 +18,8 @@
 
 - (void)awakeFromNib
 {
+	[_webView setPolicyDelegate:self];
+	
 	NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:CFBundleShortVersionKey];
 	
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"Credits" ofType:@"html"];
@@ -28,6 +30,19 @@
 	NSURL *baseURL = [[NSBundle mainBundle] resourceURL];
 	
 	[[_webView mainFrame] loadHTMLString:string baseURL:baseURL];
+}
+
+- (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation
+		request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener
+{
+	NSURL *url = [request URL];
+	
+	if ([url host] || [[url scheme] isEqualToString:@"mailto"]) {
+		[[NSWorkspace sharedWorkspace] openURL:url];
+	}
+	else {
+		[listener use];
+	}
 }
 
 @end
