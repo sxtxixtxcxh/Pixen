@@ -46,17 +46,27 @@
 	[super dealloc];
 }
 
-- (id)initWithFrame:(NSRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
+- (id)initWithFrame:(NSRect)frame
+{
+	self = [super initWithFrame:frame];
+	if (self) {
 		actionGear = [[NSImage imageNamed:@"actiongear"] retain];
+		
 		menu = [[NSMenu alloc] initWithTitle:NSLocalizedString(@"PXPreviewBezelMenu", @"PXPreviewBezelMenu")];
 		[[menu addItemWithTitle:NSLocalizedString(@"Size To...", @"Size To...") action:@selector(sizeTo:) keyEquivalent:@""] setTarget:delegate];
-		[[menu addItemWithTitle:NSLocalizedString(@"Actual Size", @"Actual Size") action:@selector(sizeToActual:) keyEquivalent:@""] setTarget:delegate];
+		
 		[menu addItem:[NSMenuItem separatorItem]];
+		
+		[[menu addItemWithTitle:@"50%" action:@selector(sizeToSenderTitlePercent:) keyEquivalent:@""] setTarget:delegate];
+		[[menu addItemWithTitle:@"100%" action:@selector(sizeToSenderTitlePercent:) keyEquivalent:@""] setTarget:delegate];
+		[[menu addItemWithTitle:@"200%" action:@selector(sizeToSenderTitlePercent:) keyEquivalent:@""] setTarget:delegate];
+		[[menu addItemWithTitle:@"400%" action:@selector(sizeToSenderTitlePercent:) keyEquivalent:@""] setTarget:delegate];
+		
+		[menu addItem:[NSMenuItem separatorItem]];
+		
 		[[menu addItemWithTitle:NSLocalizedString(@"Set Background...", @"Set Background...") action:@selector(setBackground:) keyEquivalent:@""] setTarget:delegate];
-    }
-    return self;
+	}
+	return self;
 }
 
 - (void)drawCapsuleInRect:(NSRect)rect withFillColor:(NSColor *)fillColor outlineColor:(NSColor *)outlineColor

@@ -39,7 +39,7 @@
 - (void)initializeWindow;
 - (void)setCanvas:(PXCanvas *) aCanvas;
 - (void)canvasDidChange:(NSNotification *)aNotification;
-- (void)sizeToActual:sender;
+- (void)sizeToSenderTitlePercent:(id)sender;
 - (void)sizeTo:sender;
 - (void)prompter:(PXPreviewResizePrompter *)prompter didFinishWithZoomFactor:(float)factor;
 

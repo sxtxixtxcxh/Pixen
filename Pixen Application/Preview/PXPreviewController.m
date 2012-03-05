@@ -486,32 +486,19 @@
     }
 }
 
-- (void)sizeToActual:sender
+- (void)sizeToSenderTitlePercent:(id)sender
 {
-	if(![self hasUsableCanvas]) { return; }
-	NSSize canvasSize = [canvas size];
-	if(canvasSize.width <= 0 || canvasSize.height <= 0)
-	{
+	if (![self hasUsableCanvas])
 		return;
-	}
-	NSSize previewSize;
-	if (canvasSize.width > 1024 || canvasSize.height > 1024)
-	{
-		if (canvasSize.width > canvasSize.height)
-		{
-			previewSize.width = 1024;
-			previewSize.height = canvasSize.height * (1024 / canvasSize.width);
-		}
-		else
-		{
-			previewSize.height = 1024;
-			previewSize.width = canvasSize.width * (1024 / canvasSize.height);
-		}
-	}
-	else
-	{	
-		previewSize = canvasSize;
-	}
+	
+	NSSize canvasSize = [canvas size];
+	
+	if (canvasSize.width <= 0 || canvasSize.height <= 0)
+		return;
+	
+	CGFloat factor = [[sender title] intValue] / 100.0f;
+	
+	NSSize previewSize = NSMakeSize(canvasSize.width * factor, canvasSize.height * factor);
 	[canvas setPreviewSize:previewSize];
 	[self setCanvasSize:previewSize];
 	[self liveResize];
