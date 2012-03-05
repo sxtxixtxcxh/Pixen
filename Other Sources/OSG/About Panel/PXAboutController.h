@@ -5,14 +5,14 @@
 //  Copyright 2005-2012 Pixen Project. All rights reserved.
 //
 
+#import <WebKit/WebKit.h>
+
 @interface PXAboutController : NSViewController
 {
   @private
-	NSTextView *_creditsView;
-	NSTextField *_versionField;
+	WebView *_webView;
 }
 
-@property (nonatomic, assign) IBOutlet NSTextView *creditsView;
-@property (nonatomic, assign) IBOutlet NSTextField *versionField;
+@property (nonatomic, assign) IBOutlet WebView *webView;
 
 @end

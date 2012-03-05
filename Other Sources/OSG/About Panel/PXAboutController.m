@@ -7,22 +7,25 @@
 
 #import "PXAboutController.h"
 
+/*
 @interface PXAboutController ()
 
 - (void)loadCreditsText;
 
 @end
+ */
 
 
 @implementation PXAboutController
 
-@synthesize creditsView = _creditsView, versionField = _versionField;
+@synthesize webView = _webView;
 
 - (id)init
 {
 	return [super initWithNibName:@"PXAbout" bundle:nil];
 }
 
+/*
 - (void)awakeFromNib
 {
 	[self loadCreditsText];
@@ -48,5 +51,6 @@
 	
 	[self.versionField setStringValue:version];
 }
+ */
 
 @end
