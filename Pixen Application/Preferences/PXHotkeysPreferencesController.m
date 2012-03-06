@@ -7,16 +7,13 @@
 
 #import "PXHotkeysPreferencesController.h"
 
-#import "PXHotkeyFormatter.h"
-
 @implementation PXHotkeysPreferencesController
 
 @synthesize form = _form;
 
 - (id)init
 {
-	self = [super initWithNibName:@"PXHotkeysPreferences" bundle:nil];
-	return self;
+	return [super initWithNibName:@"PXHotkeysPreferences" bundle:nil];
 }
 
 - (void)dealloc
@@ -29,8 +26,29 @@
 {
 	for (NSCell *currentCell in [self.form cells])
 	{
-		[currentCell setFormatter:[[[PXHotkeyFormatter alloc] init] autorelease]];
+		PXHotkeyFormatter *formatter = [[PXHotkeyFormatter alloc] init];
+		formatter.delegate = self;
+		
+		[currentCell setFormatter:formatter];
+		[formatter release];
 	}
+}
+
+- (BOOL)hotkeyFormatter:(PXHotkeyFormatter *)formatter isCharacterTaken:(unichar)character
+{
+	for (NSCell *currentCell in [self.form cells])
+	{
+		NSString *hotkey = [currentCell stringValue];
+		
+		if ([hotkey length]) {
+			if ([hotkey characterAtIndex:0] == character) {
+				NSBeep();
+				return YES;
+			}
+		}
+	}
+	
+	return NO;
 }
 
 @end

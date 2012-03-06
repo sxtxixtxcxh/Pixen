@@ -9,6 +9,8 @@
 
 @implementation PXHotkeyFormatter
 
+@synthesize delegate = _delegate;
+
 - (NSString *)stringForObjectValue:(id)anObject
 {
 	if (![anObject isKindOfClass:[NSString class]])
@@ -18,7 +20,7 @@
 	{
 		unichar theCharacter = [anObject characterAtIndex:([anObject length] - 1)];
 		
-		if(![[NSCharacterSet letterCharacterSet] characterIsMember:theCharacter])
+		if (![[NSCharacterSet letterCharacterSet] characterIsMember:theCharacter])
 			return nil;
 		
 		return [NSString stringWithFormat:@"%c", theCharacter];
@@ -36,7 +38,13 @@
 	{
 		unichar theCharacter = [partialString characterAtIndex:([partialString length] - 1)];
 		
-		if(![[NSCharacterSet letterCharacterSet] characterIsMember:theCharacter])
+		if (![[NSCharacterSet letterCharacterSet] characterIsMember:theCharacter])
+		{
+			*newString = nil;
+			return NO;
+		}
+		
+		if ([self.delegate hotkeyFormatter:self isCharacterTaken:theCharacter])
 		{
 			*newString = nil;
 			return NO;

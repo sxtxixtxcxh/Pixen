@@ -5,7 +5,9 @@
 //  Copyright 2011-2012 Pixen Project. All rights reserved.
 //
 
-@interface PXHotkeysPreferencesController : NSViewController
+#import "PXHotkeyFormatter.h"
+
+@interface PXHotkeysPreferencesController : NSViewController < PXHotkeyFormatterDelegate >
 {
   @private
 	NSForm *_form;
