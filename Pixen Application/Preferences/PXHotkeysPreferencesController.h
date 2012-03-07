@@ -15,4 +15,6 @@
 
 @property (nonatomic, assign) IBOutlet NSForm *form;
 
+- (IBAction)updateCell:(id)sender;
+
 @end

@@ -34,6 +34,8 @@ typedef enum {
 	BOOL _locked;
 }
 
++ (NSArray *)toolClasses;
+
 - (id)selectedTool;
 
 - (id)toolWithTag:(PXToolTag)tag;
