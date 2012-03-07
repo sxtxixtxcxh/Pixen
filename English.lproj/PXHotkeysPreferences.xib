@@ -123,7 +123,7 @@
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="865968481"/>
 								<reference key="NSControlView" ref="940219614"/>
-								<int key="NSTag">4</int>
+								<int key="NSTag">8</int>
 								<double key="NSTitleWidth">84</double>
 								<object class="NSCell" key="NSTitleCell">
 									<int key="NSCellFlags">67239424</int>
@@ -155,7 +155,7 @@
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="865968481"/>
 								<reference key="NSControlView" ref="940219614"/>
-								<int key="NSTag">5</int>
+								<int key="NSTag">4</int>
 								<double key="NSTitleWidth">84</double>
 								<object class="NSCell" key="NSTitleCell">
 									<int key="NSCellFlags">67239424</int>
@@ -171,7 +171,7 @@
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="865968481"/>
 								<reference key="NSControlView" ref="940219614"/>
-								<int key="NSTag">6</int>
+								<int key="NSTag">7</int>
 								<double key="NSTitleWidth">84</double>
 								<object class="NSCell" key="NSTitleCell">
 									<int key="NSCellFlags">67239424</int>
@@ -187,7 +187,7 @@
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="865968481"/>
 								<reference key="NSControlView" ref="940219614"/>
-								<int key="NSTag">7</int>
+								<int key="NSTag">10</int>
 								<double key="NSTitleWidth">84</double>
 								<object class="NSCell" key="NSTitleCell">
 									<int key="NSCellFlags">67239424</int>
@@ -203,7 +203,7 @@
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="865968481"/>
 								<reference key="NSControlView" ref="940219614"/>
-								<int key="NSTag">8</int>
+								<int key="NSTag">11</int>
 								<double key="NSTitleWidth">84</double>
 								<object class="NSCell" key="NSTitleCell">
 									<int key="NSCellFlags">67239424</int>
@@ -219,7 +219,7 @@
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="865968481"/>
 								<reference key="NSControlView" ref="940219614"/>
-								<int key="NSTag">10</int>
+								<int key="NSTag">5</int>
 								<double key="NSTitleWidth">84</double>
 								<object class="NSCell" key="NSTitleCell">
 									<int key="NSCellFlags">67239424</int>
@@ -235,7 +235,7 @@
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="865968481"/>
 								<reference key="NSControlView" ref="940219614"/>
-								<int key="NSTag">11</int>
+								<int key="NSTag">6</int>
 								<double key="NSTitleWidth">84</double>
 								<object class="NSCell" key="NSTitleCell">
 									<int key="NSCellFlags">67239424</int>
