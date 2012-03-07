@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PXPencilTool</key>
+	<string>p</string>
+	<key>PXEraserTool</key>
+	<string>e</string>
+	<key>PXEyedropperTool</key>
+	<string>d</string>
+	<key>PXZoomTool</key>
+	<string>z</string>
+	<key>PXFillTool</key>
+	<string>f</string>
+	<key>PXLineTool</key>
+	<string>l</string>
+	<key>PXRectangularSelectionTool</key>
+	<string>s</string>
+	<key>PXMoveTool</key>
+	<string>m</string>
+	<key>PXRectangleTool</key>
+	<string>r</string>
+	<key>PXEllipseTool</key>
+	<string>o</string>
+	<key>PXMagicWandTool</key>
+	<string>w</string>
+	<key>PXLassoTool</key>
+	<string>a</string>
+</dict>
+</plist>

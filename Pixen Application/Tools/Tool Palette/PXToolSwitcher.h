@@ -65,8 +65,6 @@ typedef enum {
 - (void)commandKeyDown;
 - (void)commandKeyUp;
 
-- (void)checkUserDefaults;
-
 - (void)requestToolChangeNotification;
 
 @end

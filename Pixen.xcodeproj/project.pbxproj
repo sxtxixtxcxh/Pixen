@@ -68,6 +68,7 @@
 		C9A6BE1713ACFBC50028B141 /* PXToolProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1513ACFBC50028B141 /* PXToolProperties.xib */; };
 		C9A6BE1A13AD008C0028B141 /* PXBlankPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1813AD008C0028B141 /* PXBlankPropertiesView.xib */; };
 		C9A6BE1D13AD07B10028B141 /* PXFillToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1B13AD07B10028B141 /* PXFillToolPropertiesView.xib */; };
+		C9AD353D1506DD7800A4B25C /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9AD353C1506DD7800A4B25C /* Defaults.plist */; };
 		C9ADD4A214007FE500257E38 /* PXClickableView.h in Headers */ = {isa = PBXBuildFile; fileRef = C9ADD4A014007FE500257E38 /* PXClickableView.h */; };
 		C9ADD4A314007FE500257E38 /* PXClickableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9ADD4A114007FE500257E38 /* PXClickableView.m */; };
 		C9ADD4A61400821300257E38 /* PXPatternItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C9ADD4A41400821300257E38 /* PXPatternItem.h */; };
@@ -620,6 +621,7 @@
 		C9A6BE1613ACFBC50028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXToolProperties.xib; sourceTree = "<group>"; };
 		C9A6BE1913AD008C0028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXBlankPropertiesView.xib; sourceTree = "<group>"; };
 		C9A6BE1C13AD07B10028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXFillToolPropertiesView.xib; sourceTree = "<group>"; };
+		C9AD353C1506DD7800A4B25C /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		C9ADD4A014007FE500257E38 /* PXClickableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXClickableView.h; sourceTree = "<group>"; };
 		C9ADD4A114007FE500257E38 /* PXClickableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXClickableView.m; sourceTree = "<group>"; };
 		C9ADD4A41400821300257E38 /* PXPatternItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPatternItem.h; sourceTree = "<group>"; };
@@ -1937,6 +1939,7 @@
 			isa = PBXGroup;
 			children = (
 				C903DADD14CBBD6800D82028 /* dsa_pub.pem */,
+				C9AD353C1506DD7800A4B25C /* Defaults.plist */,
 				EAC916E00CE7DC7300E519E1 /* Icons */,
 				EAC917220CE7DC7300E519E1 /* Scripting */,
 				EAC917260CE7DC7300E519E1 /* Widget Parts */,
@@ -2491,6 +2494,7 @@
 				C985C89914C119DF0091EF22 /* PXCanvasResizePrompt.xib in Resources */,
 				C903DADE14CBBD6800D82028 /* dsa_pub.pem in Resources */,
 				C97C7F0E14EF17DA0089A637 /* PixenPalette.icns in Resources */,
+				C9AD353D1506DD7800A4B25C /* Defaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

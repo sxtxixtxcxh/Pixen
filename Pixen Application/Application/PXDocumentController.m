@@ -135,6 +135,10 @@ NSString *palettesSubdirName = @"Palettes";
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+	NSString *defaultsPath = [[NSBundle mainBundle] pathForResource:@"Defaults" ofType:@"plist"];
+	[defaults registerDefaults:[NSDictionary dictionaryWithContentsOfFile:defaultsPath]];
+	
 	[self updateShowsPreviousCelOverlayCache];
 	
 	//Create some directories needs to store backgrounds and Colors 
