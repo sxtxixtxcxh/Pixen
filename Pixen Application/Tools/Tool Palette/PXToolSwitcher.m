@@ -28,13 +28,13 @@ NSMutableArray * toolNames;
 
 + (NSArray *)toolClasses
 {
-	return [NSArray arrayWithObjects:[PXPencilTool class],
-			[PXEraserTool class], [PXEyedropperTool class],
-			[PXZoomTool class], [PXFillTool class],
-			[PXLineTool class], [PXRectangularSelectionTool class],
-			[PXMoveTool class], [PXRectangleTool class],
-			[PXEllipseTool class], [PXMagicWandTool class],
-			[PXLassoTool class], nil];
+	return [NSArray arrayWithObjects:
+			[PXPencilTool class], [PXEraserTool class],
+			[PXEyedropperTool class], [PXZoomTool class],
+			[PXRectangularSelectionTool class], [PXMagicWandTool class],
+			[PXLassoTool class], [PXMoveTool class],
+			[PXFillTool class], [PXLineTool class],
+			[PXRectangleTool class], [PXEllipseTool class], nil];
 }
 
 +(id) toolNames
