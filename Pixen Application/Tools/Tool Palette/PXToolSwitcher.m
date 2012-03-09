@@ -20,8 +20,6 @@
 
 #import "PXColorPicker.h"
 
-NSMutableArray * toolNames;
-
   // a protocol interface + bundle loader would be better
 
 @implementation PXToolSwitcher
@@ -37,9 +35,9 @@ NSMutableArray * toolNames;
 			[PXRectangleTool class], [PXEllipseTool class], nil];
 }
 
-+(id) toolNames
++ (NSArray *)toolNames
 {
-  return [[self toolClasses] valueForKey:@"description"];
+	return [[self toolClasses] valueForKey:@"className"];
 }
 
 - (void)lock
