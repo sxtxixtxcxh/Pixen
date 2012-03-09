@@ -183,7 +183,12 @@ NSMutableArray * toolNames;
 	
 	for (NSString *current in [PXToolSwitcher toolNames])
 	{
-		if ([chars characterAtIndex:0] == [[[NSUserDefaults standardUserDefaults] objectForKey:current] characterAtIndex:0])
+		NSString *hotkey = [[NSUserDefaults standardUserDefaults] objectForKey:current];
+		
+		if (![hotkey length])
+			continue;
+		
+		if ([chars characterAtIndex:0] == [hotkey characterAtIndex:0])
 		{
 			[self useToolTagged:(PXToolTag)[[PXToolSwitcher toolNames] indexOfObject:current]];
 			break;
