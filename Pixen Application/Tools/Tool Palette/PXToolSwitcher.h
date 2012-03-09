@@ -10,14 +10,14 @@ typedef enum {
 	PXEraserToolTag,
 	PXEyedropperToolTag,
 	PXZoomToolTag,
+	PXRectangularSelectionToolTag,
+	PXMagicWandToolTag,
+	PXLassoToolTag,
+	PXMoveToolTag,
 	PXFillToolTag,
 	PXLineToolTag,
-	PXRectangularSelectionToolTag,
-	PXMoveToolTag,
 	PXRectangleToolTag,
-	PXEllipseToolTag,
-	PXMagicWandToolTag,
-	PXLassoToolTag
+	PXEllipseToolTag
 } PXToolTag;
 
 
