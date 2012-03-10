@@ -13,7 +13,6 @@
 
 #import "PXDocumentController.h"
 #import "PXDocument.h"
-#import "PXAboutController.h"
 #import "PXWelcomeController.h"
 #import "PXPreferencesController.h"
 #import "PXCanvasWindowController.h"

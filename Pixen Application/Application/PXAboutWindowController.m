@@ -1,19 +1,31 @@
 //
-//  PXAboutController.m
+//  PXAboutWindowController.m
 //  Pixen
 //
 //  Copyright 2005-2012 Pixen Project. All rights reserved.
 //
 
-#import "PXAboutController.h"
+#import "PXAboutWindowController.h"
 
-@implementation PXAboutController
+@implementation PXAboutWindowController
 
 @synthesize webView = _webView;
 
++ (id)sharedController
+{
+	static PXAboutWindowController *singleInstance = nil;
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		singleInstance = [[self alloc] init];
+	});
+	
+	return singleInstance;
+}
+
 - (id)init
 {
-	return [super initWithNibName:@"PXAbout" bundle:nil];
+	return [super initWithWindowNibName:@"PXAbout"];
 }
 
 - (void)awakeFromNib

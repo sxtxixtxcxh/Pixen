@@ -45,9 +45,6 @@
 		C953831913FC477100440AB5 /* PXSequenceExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C953831713FC477100440AB5 /* PXSequenceExportViewController.m */; };
 		C96541EB13FF44A600F1F83C /* PXDeleteCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = C96541E913FF44A600F1F83C /* PXDeleteCollectionView.h */; };
 		C96541EC13FF44A600F1F83C /* PXDeleteCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C96541EA13FF44A600F1F83C /* PXDeleteCollectionView.m */; };
-		C968A8DB14A51FF900905E3D /* PXAbout.xib in Resources */ = {isa = PBXBuildFile; fileRef = C968A8D914A51FF900905E3D /* PXAbout.xib */; };
-		C968A8DE14A5213E00905E3D /* PXAboutWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = C968A8DC14A5213E00905E3D /* PXAboutWindowController.h */; };
-		C968A8DF14A5213E00905E3D /* PXAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C968A8DD14A5213E00905E3D /* PXAboutWindowController.m */; };
 		C968A8E114A5292700905E3D /* Pixen128.png in Resources */ = {isa = PBXBuildFile; fileRef = C968A8E014A5292700905E3D /* Pixen128.png */; };
 		C969A18E13D2012A00F1C1FE /* QLPlugin.qlgenerator in Copy QuickLook plugin */ = {isa = PBXBuildFile; fileRef = C969A18A13D200B400F1C1FE /* QLPlugin.qlgenerator */; };
 		C96BABB513ABD3AB00015C92 /* PXHotkeysPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */; };
@@ -94,6 +91,9 @@
 		C9E088A413D5BDCE002A0AD4 /* magic_bw.png in Resources */ = {isa = PBXBuildFile; fileRef = C9E088A313D5BDCE002A0AD4 /* magic_bw.png */; };
 		C9E088A613D5BF17002A0AD4 /* zoomIn_bw.png in Resources */ = {isa = PBXBuildFile; fileRef = C9E088A513D5BF17002A0AD4 /* zoomIn_bw.png */; };
 		C9E088A813D5C03D002A0AD4 /* eyedropper_bw.png in Resources */ = {isa = PBXBuildFile; fileRef = C9E088A713D5C03D002A0AD4 /* eyedropper_bw.png */; };
+		C9ECD4D6150BECB6001F686C /* PXAbout.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9ECD4D4150BECB6001F686C /* PXAbout.xib */; };
+		C9ECD4D9150BEF39001F686C /* PXAboutWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = C9ECD4D7150BEF39001F686C /* PXAboutWindowController.h */; };
+		C9ECD4DA150BEF39001F686C /* PXAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9ECD4D8150BEF39001F686C /* PXAboutWindowController.m */; };
 		C9F4E5FE13AD8F6500345D5D /* PXLayerDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F4E5FC13AD8F6500345D5D /* PXLayerDetailsView.xib */; };
 		C9F7F16C142BE3D500AB8E37 /* UTType+NSString.h in Headers */ = {isa = PBXBuildFile; fileRef = C9F7F16A142BE3D500AB8E37 /* UTType+NSString.h */; };
 		C9F7F16D142BE3D500AB8E37 /* UTType+NSString.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F7F16B142BE3D500AB8E37 /* UTType+NSString.m */; };
@@ -325,10 +325,6 @@
 		EA31FCC10CE7D7C200EC481B /* SBCenteringClipView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC3D0CE7D7C200EC481B /* SBCenteringClipView.h */; };
 		EA31FCC20CE7D7C200EC481B /* SBCenteringClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC3E0CE7D7C200EC481B /* SBCenteringClipView.m */; };
 		EA31FCD30CE7D7C200EC481B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC530CE7D7C200EC481B /* main.m */; };
-		EA31FCD40CE7D7C200EC481B /* PXAboutController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC560CE7D7C200EC481B /* PXAboutController.h */; };
-		EA31FCD50CE7D7C200EC481B /* PXAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC570CE7D7C200EC481B /* PXAboutController.m */; };
-		EA31FCD60CE7D7C200EC481B /* PXAboutPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC580CE7D7C200EC481B /* PXAboutPanel.h */; };
-		EA31FCD70CE7D7C200EC481B /* PXAboutPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC590CE7D7C200EC481B /* PXAboutPanel.m */; };
 		EA31FCDE0CE7D7C200EC481B /* OSProgressPopup.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC620CE7D7C200EC481B /* OSProgressPopup.h */; };
 		EA31FCDF0CE7D7C200EC481B /* OSProgressPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC630CE7D7C200EC481B /* OSProgressPopup.m */; };
 		EA31FCE00CE7D7C200EC481B /* OSStackedView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC650CE7D7C200EC481B /* OSStackedView.h */; };
@@ -592,9 +588,6 @@
 		C953831713FC477100440AB5 /* PXSequenceExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PXSequenceExportViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C96541E913FF44A600F1F83C /* PXDeleteCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXDeleteCollectionView.h; sourceTree = "<group>"; };
 		C96541EA13FF44A600F1F83C /* PXDeleteCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXDeleteCollectionView.m; sourceTree = "<group>"; };
-		C968A8DA14A51FF900905E3D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXAbout.xib; sourceTree = "<group>"; };
-		C968A8DC14A5213E00905E3D /* PXAboutWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAboutWindowController.h; sourceTree = "<group>"; };
-		C968A8DD14A5213E00905E3D /* PXAboutWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAboutWindowController.m; sourceTree = "<group>"; };
 		C968A8E014A5292700905E3D /* Pixen128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pixen128.png; sourceTree = "<group>"; };
 		C969A18513D200B300F1C1FE /* QLPlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QLPlugin.xcodeproj; path = QLPlugin/QLPlugin.xcodeproj; sourceTree = "<group>"; };
 		C96BABB413ABD3AB00015C92 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXHotkeysPreferences.xib; sourceTree = "<group>"; };
@@ -642,6 +635,9 @@
 		C9E088A313D5BDCE002A0AD4 /* magic_bw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magic_bw.png; sourceTree = "<group>"; };
 		C9E088A513D5BF17002A0AD4 /* zoomIn_bw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomIn_bw.png; sourceTree = "<group>"; };
 		C9E088A713D5C03D002A0AD4 /* eyedropper_bw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyedropper_bw.png; sourceTree = "<group>"; };
+		C9ECD4D5150BECB6001F686C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXAbout.xib; sourceTree = "<group>"; };
+		C9ECD4D7150BEF39001F686C /* PXAboutWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAboutWindowController.h; sourceTree = "<group>"; };
+		C9ECD4D8150BEF39001F686C /* PXAboutWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAboutWindowController.m; sourceTree = "<group>"; };
 		C9F4E5FD13AD8F6500345D5D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXLayerDetailsView.xib; sourceTree = "<group>"; };
 		C9F7F16A142BE3D500AB8E37 /* UTType+NSString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UTType+NSString.h"; sourceTree = "<group>"; };
 		C9F7F16B142BE3D500AB8E37 /* UTType+NSString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UTType+NSString.m"; sourceTree = "<group>"; };
@@ -872,10 +868,6 @@
 		EA31FC3D0CE7D7C200EC481B /* SBCenteringClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCenteringClipView.h; sourceTree = "<group>"; };
 		EA31FC3E0CE7D7C200EC481B /* SBCenteringClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCenteringClipView.m; sourceTree = "<group>"; };
 		EA31FC530CE7D7C200EC481B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		EA31FC560CE7D7C200EC481B /* PXAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAboutController.h; sourceTree = "<group>"; };
-		EA31FC570CE7D7C200EC481B /* PXAboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAboutController.m; sourceTree = "<group>"; };
-		EA31FC580CE7D7C200EC481B /* PXAboutPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAboutPanel.h; sourceTree = "<group>"; };
-		EA31FC590CE7D7C200EC481B /* PXAboutPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAboutPanel.m; sourceTree = "<group>"; };
 		EA31FC620CE7D7C200EC481B /* OSProgressPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSProgressPopup.h; sourceTree = "<group>"; };
 		EA31FC630CE7D7C200EC481B /* OSProgressPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSProgressPopup.m; sourceTree = "<group>"; };
 		EA31FC650CE7D7C200EC481B /* OSStackedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSStackedView.h; sourceTree = "<group>"; };
@@ -1206,6 +1198,8 @@
 			children = (
 				C9104A5914E38AAC00025103 /* NSWindowController+Additions.h */,
 				C9104A5A14E38AAC00025103 /* NSWindowController+Additions.m */,
+				C9ECD4D7150BEF39001F686C /* PXAboutWindowController.h */,
+				C9ECD4D8150BEF39001F686C /* PXAboutWindowController.m */,
 				EA31F8640CE7BD8B00EC481B /* PXDocumentController.h */,
 				EA31F8650CE7BD8B00EC481B /* PXDocumentController.m */,
 				EA31F8660CE7BD8B00EC481B /* PXPanelManager.h */,
@@ -1726,7 +1720,6 @@
 		EA31FC540CE7D7C200EC481B /* OSG */ = {
 			isa = PBXGroup;
 			children = (
-				EA31FC550CE7D7C200EC481B /* About Panel */,
 				61A22B8F0D2323B500430CCD /* OSPlasticButtonCell */,
 				EA31FC610CE7D7C200EC481B /* OSProgressPopup */,
 				EA31FC640CE7D7C200EC481B /* OSStackedView */,
@@ -1736,19 +1729,6 @@
 				EA31FC700CE7D7C200EC481B /* Utility */,
 			);
 			path = OSG;
-			sourceTree = "<group>";
-		};
-		EA31FC550CE7D7C200EC481B /* About Panel */ = {
-			isa = PBXGroup;
-			children = (
-				EA31FC560CE7D7C200EC481B /* PXAboutController.h */,
-				EA31FC570CE7D7C200EC481B /* PXAboutController.m */,
-				EA31FC580CE7D7C200EC481B /* PXAboutPanel.h */,
-				EA31FC590CE7D7C200EC481B /* PXAboutPanel.m */,
-				C968A8DC14A5213E00905E3D /* PXAboutWindowController.h */,
-				C968A8DD14A5213E00905E3D /* PXAboutWindowController.m */,
-			);
-			path = "About Panel";
 			sourceTree = "<group>";
 		};
 		EA31FC610CE7D7C200EC481B /* OSProgressPopup */ = {
@@ -1860,7 +1840,6 @@
 			isa = PBXGroup;
 			children = (
 				C92A1E9013B12CAB0007235A /* MainMenu.xib */,
-				C968A8D914A51FF900905E3D /* PXAbout.xib */,
 				EACDBD7F0878B37100564512 /* PXBackgroundTemplateView.xib */,
 				C9A6BE1813AD008C0028B141 /* PXBlankPropertiesView.xib */,
 				C94A9ED813B114DE0034AFE3 /* PXCanvasDocument.xib */,
@@ -1897,6 +1876,7 @@
 				EA6864B3054C5EDE00EE395F /* PXBackgroundController.nib */,
 				EAE126CF054F41A9001208D9 /* PXImageBackgroundConfigurator.nib */,
 				C900F4BC1509882F00DC6702 /* PXToolPalette.xib */,
+				C9ECD4D4150BECB6001F686C /* PXAbout.xib */,
 			);
 			name = NIBs;
 			sourceTree = "<group>";
@@ -2209,8 +2189,6 @@
 				EA31FCA90CE7D7C200EC481B /* gif_lib.h in Headers */,
 				EA31FCAA0CE7D7C200EC481B /* gif_lib_private.h in Headers */,
 				EA31FCC10CE7D7C200EC481B /* SBCenteringClipView.h in Headers */,
-				EA31FCD40CE7D7C200EC481B /* PXAboutController.h in Headers */,
-				EA31FCD60CE7D7C200EC481B /* PXAboutPanel.h in Headers */,
 				EA31FCDE0CE7D7C200EC481B /* OSProgressPopup.h in Headers */,
 				EA31FCE00CE7D7C200EC481B /* OSStackedView.h in Headers */,
 				EA31FCE20CE7D7C200EC481B /* PXActionButton.h in Headers */,
@@ -2247,10 +2225,10 @@
 				C9ADD4A214007FE500257E38 /* PXClickableView.h in Headers */,
 				C9ADD4A61400821300257E38 /* PXPatternItem.h in Headers */,
 				C9F7F16C142BE3D500AB8E37 /* UTType+NSString.h in Headers */,
-				C968A8DE14A5213E00905E3D /* PXAboutWindowController.h in Headers */,
 				C9104A5B14E38AAC00025103 /* NSWindowController+Additions.h in Headers */,
 				C9D58D8B14F0316B00A62C10 /* PXColor.h in Headers */,
 				C9D58D8F14F031EB00A62C10 /* PXColorArray.h in Headers */,
+				C9ECD4D9150BEF39001F686C /* PXAboutWindowController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2479,13 +2457,13 @@
 				C9ADD4AA1400844B00257E38 /* PXPatternItem.xib in Resources */,
 				C91F07D3142D0BAB007F812C /* PXInfoPanel.xib in Resources */,
 				C97FDB2614A161DB00371079 /* PixenAnim.icns in Resources */,
-				C968A8DB14A51FF900905E3D /* PXAbout.xib in Resources */,
 				C968A8E114A5292700905E3D /* Pixen128.png in Resources */,
 				C985C89914C119DF0091EF22 /* PXCanvasResizePrompt.xib in Resources */,
 				C903DADE14CBBD6800D82028 /* dsa_pub.pem in Resources */,
 				C97C7F0E14EF17DA0089A637 /* PixenPalette.icns in Resources */,
 				C9AD353D1506DD7800A4B25C /* Defaults.plist in Resources */,
 				C900F4BE1509882F00DC6702 /* PXToolPalette.xib in Resources */,
+				C9ECD4D6150BECB6001F686C /* PXAbout.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2651,8 +2629,6 @@
 				EA31FCAD0CE7D7C200EC481B /* quantize.c in Sources */,
 				EA31FCC20CE7D7C200EC481B /* SBCenteringClipView.m in Sources */,
 				EA31FCD30CE7D7C200EC481B /* main.m in Sources */,
-				EA31FCD50CE7D7C200EC481B /* PXAboutController.m in Sources */,
-				EA31FCD70CE7D7C200EC481B /* PXAboutPanel.m in Sources */,
 				EA31FCDF0CE7D7C200EC481B /* OSProgressPopup.m in Sources */,
 				EA31FCE10CE7D7C200EC481B /* OSStackedView.m in Sources */,
 				EA31FCE30CE7D7C200EC481B /* PXActionButton.m in Sources */,
@@ -2687,10 +2663,10 @@
 				C9ADD4A314007FE500257E38 /* PXClickableView.m in Sources */,
 				C9ADD4A71400821300257E38 /* PXPatternItem.m in Sources */,
 				C9F7F16D142BE3D500AB8E37 /* UTType+NSString.m in Sources */,
-				C968A8DF14A5213E00905E3D /* PXAboutWindowController.m in Sources */,
 				C9104A5C14E38AAC00025103 /* NSWindowController+Additions.m in Sources */,
 				C9D58D8C14F0316B00A62C10 /* PXColor.m in Sources */,
 				C9D58D9014F031EB00A62C10 /* PXColorArray.m in Sources */,
+				C9ECD4DA150BEF39001F686C /* PXAboutWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2841,14 +2817,6 @@
 			name = PXCanvasDocument.xib;
 			sourceTree = "<group>";
 		};
-		C968A8D914A51FF900905E3D /* PXAbout.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C968A8DA14A51FF900905E3D /* English */,
-			);
-			name = PXAbout.xib;
-			sourceTree = "<group>";
-		};
 		C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2951,6 +2919,14 @@
 				C9DC4D9A13D0E6D70065C1A6 /* English */,
 			);
 			name = PXImageSizePrompt.xib;
+			sourceTree = "<group>";
+		};
+		C9ECD4D4150BECB6001F686C /* PXAbout.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9ECD4D5150BECB6001F686C /* English */,
+			);
+			name = PXAbout.xib;
 			sourceTree = "<group>";
 		};
 		C9F4E5FC13AD8F6500345D5D /* PXLayerDetailsView.xib */ = {
