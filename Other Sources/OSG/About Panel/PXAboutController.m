@@ -25,11 +25,12 @@
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"Credits" ofType:@"html"];
 	
 	NSString *string = [[NSString alloc] initWithContentsOfFile:path encoding:NSASCIIStringEncoding error:nil];
-	string = [string stringByReplacingOccurrencesOfString:@"VERSION_PLACEHOLDER" withString:version];
+	NSString *contents = [string stringByReplacingOccurrencesOfString:@"VERSION_PLACEHOLDER" withString:version];
+	[string release];
 	
 	NSURL *baseURL = [[NSBundle mainBundle] resourceURL];
 	
-	[[_webView mainFrame] loadHTMLString:string baseURL:baseURL];
+	[[_webView mainFrame] loadHTMLString:contents baseURL:baseURL];
 }
 
 - (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation
