@@ -7,8 +7,6 @@
 
 #import <WebKit/WebKit.h>
 
-@class PXAboutPanel;
-
 @interface PXAboutWindowController : NSWindowController < NSWindowDelegate >
 {
   @private
