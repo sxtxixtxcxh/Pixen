@@ -286,8 +286,6 @@
 		EA31FBA50CE7D59700EC481B /* PXSpriteSheetExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB720CE7D59700EC481B /* PXSpriteSheetExporter.m */; };
 		EA31FBAA0CE7D59700EC481B /* PXIconExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB780CE7D59700EC481B /* PXIconExporter.h */; };
 		EA31FBAB0CE7D59700EC481B /* PXIconExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB790CE7D59700EC481B /* PXIconExporter.m */; };
-		EA31FBAE0CE7D59700EC481B /* PXBitmapImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB7D0CE7D59700EC481B /* PXBitmapImporter.h */; };
-		EA31FBAF0CE7D59700EC481B /* PXBitmapImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB7E0CE7D59700EC481B /* PXBitmapImporter.m */; };
 		EA31FBB00CE7D59700EC481B /* PXGifImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB7F0CE7D59700EC481B /* PXGifImporter.h */; };
 		EA31FBB10CE7D59700EC481B /* PXGifImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB800CE7D59700EC481B /* PXGifImporter.m */; };
 		EA31FBBC0CE7D59700EC481B /* OSACTWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB8D0CE7D59700EC481B /* OSACTWriter.h */; };
@@ -835,8 +833,6 @@
 		EA31FB720CE7D59700EC481B /* PXSpriteSheetExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSpriteSheetExporter.m; sourceTree = "<group>"; };
 		EA31FB780CE7D59700EC481B /* PXIconExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXIconExporter.h; sourceTree = "<group>"; };
 		EA31FB790CE7D59700EC481B /* PXIconExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXIconExporter.m; sourceTree = "<group>"; };
-		EA31FB7D0CE7D59700EC481B /* PXBitmapImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXBitmapImporter.h; sourceTree = "<group>"; };
-		EA31FB7E0CE7D59700EC481B /* PXBitmapImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXBitmapImporter.m; sourceTree = "<group>"; };
 		EA31FB7F0CE7D59700EC481B /* PXGifImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGifImporter.h; sourceTree = "<group>"; };
 		EA31FB800CE7D59700EC481B /* PXGifImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGifImporter.m; sourceTree = "<group>"; };
 		EA31FB8D0CE7D59700EC481B /* OSACTWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSACTWriter.h; sourceTree = "<group>"; };
@@ -1628,8 +1624,6 @@
 		EA31FB7C0CE7D59700EC481B /* Image Importers */ = {
 			isa = PBXGroup;
 			children = (
-				EA31FB7D0CE7D59700EC481B /* PXBitmapImporter.h */,
-				EA31FB7E0CE7D59700EC481B /* PXBitmapImporter.m */,
 				EA31FB7F0CE7D59700EC481B /* PXGifImporter.h */,
 				EA31FB800CE7D59700EC481B /* PXGifImporter.m */,
 			);
@@ -2199,7 +2193,6 @@
 				EA31FBA20CE7D59700EC481B /* PXSequenceExportPrompter.h in Headers */,
 				EA31FBA40CE7D59700EC481B /* PXSpriteSheetExporter.h in Headers */,
 				EA31FBAA0CE7D59700EC481B /* PXIconExporter.h in Headers */,
-				EA31FBAE0CE7D59700EC481B /* PXBitmapImporter.h in Headers */,
 				EA31FBB00CE7D59700EC481B /* PXGifImporter.h in Headers */,
 				EA31FBBC0CE7D59700EC481B /* OSACTWriter.h in Headers */,
 				EA31FBBE0CE7D59700EC481B /* OSJASCPALWriter.h in Headers */,
@@ -2635,7 +2628,6 @@
 				EA31FBA30CE7D59700EC481B /* PXSequenceExportPrompter.m in Sources */,
 				EA31FBA50CE7D59700EC481B /* PXSpriteSheetExporter.m in Sources */,
 				EA31FBAB0CE7D59700EC481B /* PXIconExporter.m in Sources */,
-				EA31FBAF0CE7D59700EC481B /* PXBitmapImporter.m in Sources */,
 				EA31FBB10CE7D59700EC481B /* PXGifImporter.m in Sources */,
 				EA31FBBD0CE7D59700EC481B /* OSACTWriter.m in Sources */,
 				EA31FBBF0CE7D59700EC481B /* OSJASCPALWriter.m in Sources */,
