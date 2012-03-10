@@ -125,26 +125,6 @@ BOOL isPowerOfTwo(int num)
 	{
 		return [canvas imageDataWithType:NSBMPFileType properties:nil];
 	}
-	else if (UTTypeEqual(kUTTypePICT, (__bridge CFStringRef) aType))
-	{
-		NSMutableData *pictData = [NSMutableData data];
-		
-		CGImageDestinationRef pictOutput = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)pictData,
-																			kUTTypePICT,
-																			1,
-																			NULL);
-		
-		CGImageDestinationAddImage(pictOutput,
-								   [[canvas displayImage] CGImageForProposedRect:NULL
-																		 context:nil
-																		   hints:nil],
-								   NULL);
-		
-		CGImageDestinationFinalize(pictOutput);
-		CFRelease(pictOutput);
-		
-		return pictData;
-	}
 	
 	return nil;
 }
