@@ -134,8 +134,7 @@ static PXPanelManager *sharedManager = nil;
 	[defaults setObject:NSStringFromRect([self archivableRectForToolPropertiesWindow:window])
 				 forKey:PXRightToolPropertiesFrameKey];
 	
-	//info Panel
-	[defaults setBool:[[self infoPanel] isVisible] forKey:PXInfoPanelIsOpenKey];
+	[defaults setBool:[[PXInfoPanelController sharedInfoPanelController] isVisible] forKey:PXInfoPanelIsOpenKey];
 	
 	// Popout color panels
 	NSMutableArray *archivedPalettePanels = [NSMutableArray array];
