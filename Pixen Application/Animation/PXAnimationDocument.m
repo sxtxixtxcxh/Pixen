@@ -78,6 +78,8 @@
 
 - (NSFileWrapper *)fileWrapperOfType:(NSString *)aType error:(NSError **)outError
 {
+	[[NSUserDefaults standardUserDefaults] setObject:aType forKey:[self lastSavedFileTypeKey]];
+	
 	if (UTTypeEqualNSString(aType, PixenAnimationFileType) ||
 		UTTypeEqualNSString(aType, PixenAnimationFileTypeOld))
 	{
