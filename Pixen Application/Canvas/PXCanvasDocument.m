@@ -82,36 +82,14 @@ BOOL isPowerOfTwo(int num)
 	return (logResult == (int)logResult);
 }
 
-- (BOOL)prepareSavePanel:(NSSavePanel *)savePanel
+- (NSString *)lastSavedFileTypeKey
 {
-	NSString *lastType = [[NSUserDefaults standardUserDefaults] stringForKey:PXLastSavedFileType];
-	
-	if (!lastType)
-		lastType = PixenImageFileType;
-	
-	NSView *accessoryView = [savePanel accessoryView];
-	NSPopUpButton *popUpButton = nil;
-	
-	if ([[accessoryView subviews] count]) {
-		NSView *box = [[accessoryView subviews] objectAtIndex:0];
-		
-		if ([[box subviews] count]) {
-			for (NSView *view in [box subviews]) {
-				if ([view isKindOfClass:[NSPopUpButton class]]) {
-					popUpButton = (NSPopUpButton *) view;
-					break;
-				}
-			}
-		}
-	}
-	
-	if (popUpButton) {
-		NSString *name = (NSString *) UTTypeCopyDescription((__bridge CFStringRef)lastType);
-		[popUpButton selectItemWithTitle:name];
-		[name release];
-	}
-	
-	return YES;
+	return PXLastSavedFileType;
+}
+
+- (NSString *)defaultFileType
+{
+	return PixenImageFileType;
 }
 
 + (NSData *)dataRepresentationOfType:(NSString *)aType withCanvas:(PXCanvas *)canvas
@@ -173,7 +151,7 @@ BOOL isPowerOfTwo(int num)
 
 - (NSData *)dataOfType:(NSString *)type error:(NSError **)err
 {
-	[[NSUserDefaults standardUserDefaults] setObject:type forKey:PXLastSavedFileType];
+	[[NSUserDefaults standardUserDefaults] setObject:type forKey:[self lastSavedFileTypeKey]];
 	
 	if (UTTypeEqual(kUTTypeJPEG, (__bridge CFStringRef) type))
 	{

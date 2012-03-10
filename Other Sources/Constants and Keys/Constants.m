@@ -36,6 +36,7 @@ NSString *PXInfinityDescription = @"inf";
 NSString *PXNanDescription = @"nan";
 
 NSString *PXLastSavedFileType = @"PXLastSavedFileType";
+NSString *PXLastSavedAnimationFileType = @"PXLastSavedAnimationFileType";
 
 NSString *PixenImageFileType = @"com.Pixen.pxim";
 NSString *PixenImageFileTypeOld = @"com.opensword.pxim";

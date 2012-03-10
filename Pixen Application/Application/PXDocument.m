@@ -86,6 +86,60 @@
 														object:self];
 }
 
+- (NSString *)lastSavedFileTypeKey
+{
+	return nil;
+}
+
+- (NSString *)defaultFileType
+{
+	return nil;
+}
+
+- (NSPopUpButton *)popUpButtonInSavePanel:(NSSavePanel *)panel
+{
+	NSView *accessoryView = [panel accessoryView];
+	NSPopUpButton *popUpButton = nil;
+	
+	if ([[accessoryView subviews] count]) {
+		NSView *box = [[accessoryView subviews] objectAtIndex:0];
+		
+		if ([[box subviews] count]) {
+			for (NSView *view in [box subviews]) {
+				if ([view isKindOfClass:[NSPopUpButton class]]) {
+					popUpButton = (NSPopUpButton *) view;
+					break;
+				}
+			}
+		}
+	}
+	
+	return popUpButton;
+}
+
+- (BOOL)prepareSavePanel:(NSSavePanel *)savePanel
+{
+	NSString *lastType = [[NSUserDefaults standardUserDefaults] stringForKey:[self lastSavedFileTypeKey]];
+	
+	if (!lastType)
+		lastType = [self defaultFileType];
+	
+	NSPopUpButton *popUpButton = [self popUpButtonInSavePanel:savePanel];
+	
+	if (!popUpButton)
+		return NO;
+	
+	NSString *description = (NSString *) UTTypeCopyDescription( (__bridge CFStringRef) lastType);
+	[popUpButton selectItemWithTitle:description];
+	[description release];
+	
+	[popUpButton sendAction:[popUpButton action] to:[popUpButton target]];
+	
+	[savePanel setAllowedFileTypes:[NSArray arrayWithObject:lastType]];
+	
+	return YES;
+}
+
 - (void)printDocumentWithSettings:(NSDictionary *)printSettings
 				   showPrintPanel:(BOOL)showPanels delegate:(id)delegate
 				 didPrintSelector:(SEL)didPrintSelector contextInfo:(void *)contextInfo

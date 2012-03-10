@@ -66,6 +66,16 @@
 	[ (PXAnimationWindowController *) self.windowController setAnimation:_animation];
 }
 
+- (NSString *)lastSavedFileTypeKey
+{
+	return PXLastSavedAnimationFileType;
+}
+
+- (NSString *)defaultFileType
+{
+	return PixenAnimationFileType;
+}
+
 - (NSFileWrapper *)fileWrapperOfType:(NSString *)aType error:(NSError **)outError
 {
 	if (UTTypeEqualNSString(aType, PixenAnimationFileType) ||
@@ -111,6 +121,8 @@
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 {
+	[[NSUserDefaults standardUserDefaults] setObject:typeName forKey:[self lastSavedFileTypeKey]];
+	
 	if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) typeName))
 	{
 		PXAnimation *exportAnimation = [[_animation copy] autorelease];

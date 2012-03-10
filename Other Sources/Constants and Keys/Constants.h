@@ -35,6 +35,7 @@ extern NSString *PXInfinityDescription;
 extern NSString *PXNanDescription;
 
 extern NSString *PXLastSavedFileType;
+extern NSString *PXLastSavedAnimationFileType;
 
 extern NSString *PixenImageFileType;
 extern NSString *PixenImageFileTypeOld;

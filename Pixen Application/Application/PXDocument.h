@@ -26,4 +26,7 @@
 
 - (NSString *)frameAutosaveName;
 
+- (NSString *)lastSavedFileTypeKey;
+- (NSString *)defaultFileType;
+
 @end
