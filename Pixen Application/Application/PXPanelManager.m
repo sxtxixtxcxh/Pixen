@@ -231,15 +231,6 @@ static PXPanelManager *sharedManager = nil;
 	[panel performClose:self];
 }
 
-- (void)toggle:panel
-{
-	if ([panel isVisible]) {
-		[self hide:panel];
-	} else {
-		[self show:panel];
-	}
-}
-
 - (NSPanel *)infoPanel
 {
 	return (NSPanel *) [[PXInfoPanelController sharedInfoPanelController] window];
