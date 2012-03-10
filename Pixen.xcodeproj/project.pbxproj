@@ -935,7 +935,6 @@
 		EA5D223108A90FEE006D4AE9 /* PXCanvasController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvasController.h; sourceTree = "<group>"; };
 		EA5D223208A90FEE006D4AE9 /* PXCanvasController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasController.m; sourceTree = "<group>"; };
 		EA5E9EE70877237800FCE6FE /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
-		EA68641E054C583900EE395F /* Release Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Release Notes.rtf"; sourceTree = "<group>"; };
 		EA6864B4054C5EDE00EE395F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXBackgroundController.nib; sourceTree = "<group>"; };
 		EA88F45C05D1C172003DEBD3 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXLayerController.xib; sourceTree = "<group>"; };
 		EA9E180C0557104F00119DF5 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXNamePrompt.xib; sourceTree = "<group>"; };
@@ -1095,7 +1094,6 @@
 			isa = PBXGroup;
 			children = (
 				C969A18513D200B300F1C1FE /* QLPlugin.xcodeproj */,
-				EA68641E054C583900EE395F /* Release Notes.rtf */,
 				2A37F4ABFDCFA73011CA2CEA /* Pixen Application */,
 				EA31F7380CE7B79A00EC481B /* Pixel Art Core */,
 				EA31FB690CE7D59700EC481B /* Archiving */,
