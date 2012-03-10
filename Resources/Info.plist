@@ -286,7 +286,7 @@
 				<string>PXIm</string>
 			</array>
 			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<string>Viewer</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.opensword.pxim</string>
@@ -312,7 +312,7 @@
 				<string>PXAn</string>
 			</array>
 			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<string>Viewer</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.opensword.pxan</string>
