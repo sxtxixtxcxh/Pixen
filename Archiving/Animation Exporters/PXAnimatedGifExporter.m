@@ -94,7 +94,7 @@
 	for (int i = 0; i < colorCount; i++)
 	{
 		// We're only including colors that are (or will be) opaque
-		if ([[palette colorAtIndex:i] alphaComponent] >= .5) {
+		if ([palette colorAtIndex:i].a > 127) {
 			colorMapSize++;
 		}
 		else {
@@ -120,14 +120,14 @@
 	for (int i = 0; i < colorCount; i++)
 	{
 		// Check to see if the current color is transparent; if so, don't deal with it now: we'll add the sole transparent color at the end.
-		NSColor *color = [[palette colorAtIndex:i] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+		PXColor color = [palette colorAtIndex:i];
 		
-		if ([color alphaComponent] < 0.5)
+		if (color.a <= 127)
 			continue;
 		
-		colorMap->Colors[mapIndex].Red = (int) roundf([color redComponent] * 255);
-		colorMap->Colors[mapIndex].Green = (int) roundf([color greenComponent] * 255);
-		colorMap->Colors[mapIndex].Blue = (int) roundf([color blueComponent] * 255);
+		colorMap->Colors[mapIndex].Red = color.a;
+		colorMap->Colors[mapIndex].Green = color.g;
+		colorMap->Colors[mapIndex].Blue = color.b;
 		
 		mapIndex++;
 	}

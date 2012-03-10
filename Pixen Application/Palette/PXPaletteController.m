@@ -73,7 +73,7 @@
 	}
 }
 
-- (void)addRecentColor:(NSColor *)color
+- (void)addRecentColor:(PXColor)color
 {
 	NSUInteger idx = [_recentPalette indexOfColor:color];
 	
@@ -121,15 +121,17 @@
 	
 	for (NSColor *old in oldC)
 	{
-		[_frequencyPalette decrementCountForColor:old byAmount:[oldC countForObject:old]];
+		[_frequencyPalette decrementCountForColor:PXColorFromNSColor(old) byAmount:[oldC countForObject:old]];
 	}
 	
 	//can do 'recent palette' stuff here too. most draws will consist of one new and many old, so just consider the last 100 new?
 	
 	for (NSColor *new in newC)
 	{
-		[_frequencyPalette incrementCountForColor:new byAmount:[newC countForObject:new]];
-		[self addRecentColor:new];
+		PXColor pxColor = PXColorFromNSColor(new);
+		
+		[_frequencyPalette incrementCountForColor:pxColor byAmount:[newC countForObject:new]];
+		[self addRecentColor:pxColor];
 	}
 	
 	[_paletteView setNeedsRetile];
@@ -149,7 +151,7 @@
 		switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
 	}
 	
-	[switcher setColor:[_frequencyPalette colorAtIndex:index]];
+	[switcher setColor:PXColorToNSColor([_frequencyPalette colorAtIndex:index])];
 }
 
 - (void)paletteViewSizeChangedTo:(NSControlSize)size

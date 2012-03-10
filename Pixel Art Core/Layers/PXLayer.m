@@ -487,7 +487,7 @@
 			color = [NSColor colorWithCalibratedRed:bitmapData[base + 0] / 255.0f green:bitmapData[base + 1] / 255.0f blue:bitmapData[base + 2] / 255.0f alpha:1];
 		}
 		
-		[self setColor:PXColorFromNSColor([p colorClosestToColor:color]) atIndex:i];
+		[self setColor:[p colorClosestToColor:PXColorFromNSColor(color)] atIndex:i];
 	}
 }
 

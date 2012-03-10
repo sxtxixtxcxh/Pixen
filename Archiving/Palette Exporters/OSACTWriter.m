@@ -45,11 +45,11 @@
 	int i;
 	for (i = 0; i < colorCount; i++)
 	{
-		NSColor *color = [[palette colorAtIndex:i] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+		PXColor color = [palette colorAtIndex:i];
 		char colorData[3];
-		colorData[0] = (int) roundf([color redComponent] * 255);
-		colorData[1] = (int) roundf([color greenComponent] * 255);
-		colorData[2] = (int) roundf([color blueComponent] * 255);
+		colorData[0] = color.r;
+		colorData[1] = color.g;
+		colorData[2] = color.b;
 		[data appendBytes:colorData length:3];
 	}
 	// ACT files must be exactly 768 bytes, so we pad with black.

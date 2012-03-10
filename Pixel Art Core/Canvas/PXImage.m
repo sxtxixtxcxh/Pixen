@@ -171,7 +171,7 @@ PXImage *PXImage_initWithCoder(PXImage *self, NSCoder *coder, PXPalette *palette
 		memcpy(colorIndices, [[dict objectForKey:@"colorIndices"] bytes], sizeof(unsigned int) * imageSize);
 		
 		for (int i = 0; i < imageSize; i++) {
-			PXColor color = PXColorFromNSColor([palette colorAtIndex:colorIndices[i]]);
+			PXColor color = [palette colorAtIndex:colorIndices[i]];
 			PXImage_setColorAtXY(self, color, i % self->width, (int)(i / self->width));
 		}
 	}

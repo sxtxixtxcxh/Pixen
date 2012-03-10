@@ -250,7 +250,7 @@
 	
 	for (NSColor *color in colors)
 	{
-		[palette incrementCountForColor:color byAmount:[colors countForObject:color]];
+		[palette incrementCountForColor:PXColorFromNSColor(color) byAmount:[colors countForObject:color]];
 	}
 	
 	return palette;

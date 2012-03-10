@@ -81,7 +81,7 @@
 		switcher = [[PXToolPaletteController sharedToolPaletteController] rightSwitcher];
 	}
 	
-	[switcher setColor:[[_vc.paletteView palette] colorAtIndex:index]];
+	[switcher setColor:PXColorToNSColor([[_vc.paletteView palette] colorAtIndex:index])];
 }
 
 - (void)paletteView:(PXPaletteView *)pv modifyColorAtIndex:(NSUInteger)index

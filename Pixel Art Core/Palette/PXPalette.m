@@ -20,6 +20,7 @@ static NSMutableArray *systemPalettes;
 static NSMutableArray *userPalettes;
 
 NSArray *CreateGrayList(void);
+NSUInteger ColorSize (const void *item);
 
 #define LOG_COLOR	[NSColor colorWithCalibratedRed:rgb green:rgb blue:rgb alpha:log2(64 - i) * 0.1667]
 
@@ -77,12 +78,12 @@ NSArray *CreateGrayList()
 			
 			for (NSString *currentKey in [current allKeys])
 			{
-				[palette addColor:[current colorWithKey:currentKey]];
+				[palette addColor:PXColorFromNSColor([[current colorWithKey:currentKey] colorUsingColorSpaceName:NSCalibratedRGBColorSpace])];
 			}
 			
 			palette.isSystemPalette = YES;
 			palette.canSave = NO;
-
+			
 			[systemPalettes addObject:palette];
 			[palette release];
 		}
@@ -96,7 +97,7 @@ NSArray *CreateGrayList()
 		
 		for (NSColor *currentColor in grays)
 		{
-			[palette addColor:currentColor];
+			[palette addColor:PXColorFromNSColor(currentColor)];
 		}
 		
 		[systemPalettes addObject:palette];
@@ -156,14 +157,23 @@ NSArray *CreateGrayList()
 	return self;
 }
 
+NSUInteger ColorSize (const void *item)
+{
+	return sizeof(PXColor);
+}
+
 - (id)initWithoutBackgroundColor
 {
 	self = [super init];
 	if (self) {
-		_colors = [[NSMutableArray alloc] init];
-		_frequencies = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsObjectPersonality
-												 valueOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory
-													 capacity:0];
+		_colors = PXColorArrayCreate();
+		
+		NSPointerFunctions *keyFunctions = [NSPointerFunctions pointerFunctionsWithOptions:NSPointerFunctionsStructPersonality | NSPointerFunctionsCopyIn | NSPointerFunctionsMallocMemory];
+		NSPointerFunctions *valueFunctions = [NSPointerFunctions pointerFunctionsWithOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory];
+		
+		keyFunctions.sizeFunction = ColorSize;
+		
+		_frequencies = [[NSMapTable alloc] initWithKeyPointerFunctions:keyFunctions valuePointerFunctions:valueFunctions capacity:0];
 	}
 	return self;
 }
@@ -173,7 +183,10 @@ NSArray *CreateGrayList()
 	self = [self initWithoutBackgroundColor];
 	if (self) {
 		self.name = [dict objectForKey:@"name"];
-		[_colors addObjectsFromArray:[dict objectForKey:@"colors"]];
+		
+		for (NSColor *color in [dict objectForKey:@"colors"]) {
+			PXColorArrayAppendColor(_colors, PXColorFromNSColor(color));
+		}
 	}
 	return self;
 }
@@ -185,9 +198,10 @@ NSArray *CreateGrayList()
 
 - (void)dealloc
 {
-	[_colors release];
 	[_frequencies release];
 	[_name release];
+	
+	PXColorArrayRelease(_colors);
 	
 	[super dealloc];
 }
@@ -196,11 +210,6 @@ NSArray *CreateGrayList()
 {
 	[aCoder encodeObject:[self dictForArchiving] forKey:@"palette"];
 	[aCoder encodeObject:[NSNumber numberWithInt:3] forKey:@"paletteVersion"];
-}
-
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained *)stackbuf count:(NSUInteger)len
-{
-	return [_colors countByEnumeratingWithState:state objects:stackbuf count:len];
 }
 
 - (BOOL)isEqual:(id)object
@@ -215,54 +224,57 @@ NSArray *CreateGrayList()
 
 - (void)addBackgroundColor
 {
-	[self addColorWithoutDuplicating:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
+	[self addColorWithoutDuplicating:PXGetClearColor()];
 }
 
 - (NSUInteger)colorCount
 {
-	return [_colors count];
+	return PXColorArrayCount(_colors);
 }
 
-- (NSColor *)colorAtIndex:(NSUInteger)index
+- (PXColor)colorAtIndex:(NSUInteger)index
 {
-	return [_colors objectAtIndex:index];
+	return PXColorArrayColorAtIndex(_colors, index);
 }
 
-- (NSUInteger)indexOfColor:(NSColor *)color
+- (NSUInteger)indexOfColor:(PXColor)color
 {
-	return [_colors indexOfObject:color];
+	return PXColorArrayIndexOfColor(_colors, color);
 }
 
-- (void)addColor:(NSColor *)color
+- (void)addColor:(PXColor)color
 {
-	[_colors addObject:color];
+	PXColorArrayAppendColor(_colors, color);
 }
 
-- (void)addColorWithoutDuplicating:(NSColor *)color
+- (void)addColorWithoutDuplicating:(PXColor)color
 {
-	if ([_colors indexOfObject:color] == NSNotFound) {
-		[_colors addObject:color];
+	if ([self indexOfColor:color] == NSNotFound) {
+		[self addColor:color];
 	}
 }
 
-- (void)insertColor:(NSColor *)color atIndex:(NSUInteger)index
+- (void)insertColor:(PXColor)color atIndex:(NSUInteger)index
 {
-	[_colors insertObject:color atIndex:index];
+	PXColorArrayInsertColorAtIndex(_colors, index, color);
 }
 
 - (void)removeColorAtIndex:(NSUInteger)index
 {
-	[_colors removeObjectAtIndex:index];
+	PXColorArrayRemoveColorAtIndex(_colors, index);
 }
 
 - (void)removeLastColor
 {
-	[_colors removeLastObject];
+	NSUInteger count = PXColorArrayCount(_colors);
+	
+	if (count)
+		PXColorArrayRemoveColorAtIndex(_colors, count-1);
 }
 
-- (void)replaceColorAtIndex:(NSUInteger)index withColor:(NSColor *)color
+- (void)replaceColorAtIndex:(NSUInteger)index withColor:(PXColor)color
 {
-	[_colors replaceObjectAtIndex:index withObject:color];
+	//	CFArrayReplaceValues(_colors, CFRangeMake(index, 1), &color, 1);
 }
 
 - (id)copyWithZone:(NSZone *)zone
@@ -270,50 +282,51 @@ NSArray *CreateGrayList()
 	PXPalette *newPalette = [[PXPalette alloc] initWithoutBackgroundColor];
 	newPalette.name = self.name;
 	
-	for (NSColor *color in _colors) {
+	PXColorArrayEnumerateWithBlock(_colors, ^(PXColor color) {
 		[newPalette addColor:color];
-	}
+	});
 	
 	return newPalette;
 }
 
-- (NSColor *)colorClosestToColor:(NSColor *)color
+- (PXColor)colorClosestToColor:(PXColor)toColor
 {
-	CGFloat minDistance = INFINITY;
-	NSColor *closestColor = nil;
+	__block CGFloat minDistance = INFINITY;
+	__block PXColor closestColor = PXGetClearColor();
 	
-	for (NSColor *current in _colors)
-	{
-		CGFloat distance = [current distanceTo:color];
+	PXColorArrayEnumerateWithBlock(_colors, ^(PXColor color) {
+		
+		CGFloat distance = PXColorDistanceToColor(color, toColor);
 		
 		if (distance < minDistance) {
 			minDistance = distance;
-			closestColor = current;
+			closestColor = color;
 		}
-	}
+		
+	});
 	
 	return closestColor;
 }
 
-- (void)incrementCountForColor:(NSColor *)color byAmount:(NSInteger)amount
+- (void)incrementCountForColor:(PXColor)color byAmount:(NSInteger)amount
 {
-	NSUInteger currIndex = [_colors indexOfObject:color];
+	NSUInteger currIndex = [self indexOfColor:color];
 	
 	if (currIndex == NSNotFound) {
-		[_colors addObject:color];
-		currIndex = [_colors count]-1;
+		[self addColor:color];
+		currIndex = PXColorArrayCount(_colors)-1;
 	}
 	
-	int value = (int) NSMapGet(_frequencies, (__bridge const void *) color);
+	int value = (int) NSMapGet(_frequencies, &color);
 	value += amount;
 	
-	NSMapInsert(_frequencies, (__bridge const void *) color, (void *) value);
+	NSMapInsert(_frequencies, &color, (void *) value);
 	
 	NSUInteger finalIndex = NSNotFound;
 	
 	for (NSInteger n = (currIndex-1); n >= 0; n--) {
-		NSColor *nextColor = [_colors objectAtIndex:n];
-		int nextValue = (int) NSMapGet(_frequencies, (__bridge const void *) nextColor);
+		PXColor nextColor = [self colorAtIndex:n];
+		int nextValue = (int) NSMapGet(_frequencies, &nextColor);
 		
 		if (nextValue <= value) {
 			finalIndex = n;
@@ -324,34 +337,34 @@ NSArray *CreateGrayList()
 	}
 	
 	if (finalIndex != NSNotFound) {
-		[_colors moveObjectAtIndex:currIndex toIndex:finalIndex];
+		PXColorArrayMoveColor(_colors, currIndex, finalIndex);
 	}
 }
 
-- (void)decrementCountForColor:(NSColor *)color byAmount:(NSInteger)amount
+- (void)decrementCountForColor:(PXColor)color byAmount:(NSInteger)amount
 {
-	NSUInteger currIndex = [_colors indexOfObject:color];
+	NSUInteger currIndex = [self indexOfColor:color];
 	
 	if (currIndex == NSNotFound)
 		return;
 	
-	int value = (int) NSMapGet(_frequencies, (__bridge const void *) color);
+	int value = (int) NSMapGet(_frequencies, &color);
 	value -= amount;
 	
 	if (value == 0) {
-		NSMapRemove(_frequencies, (__bridge const void *) color);
-		[_colors removeObject:color];
+		NSMapRemove(_frequencies, &color);
+		PXColorArrayRemoveColorAtIndex(_colors, [self indexOfColor:color]);
 		
 		return;
 	}
 	
-	NSMapInsert(_frequencies, (__bridge const void *) color, (void *) value);
+	NSMapInsert(_frequencies, &color, (void *) value);
 	
 	NSUInteger finalIndex = NSNotFound;
 	
-	for (NSInteger n = currIndex+1; n < [_colors count]; n++) {
-		NSColor *nextColor = [_colors objectAtIndex:n];
-		int nextValue = (int) NSMapGet(_frequencies, (__bridge const void *) nextColor);
+	for (NSInteger n = (currIndex+1); n < PXColorArrayCount(_colors); n++) {
+		PXColor nextColor = [self colorAtIndex:n];
+		int nextValue = (int) NSMapGet(_frequencies, &nextColor);
 		
 		if (value <= nextValue) {
 			finalIndex = n;
@@ -362,7 +375,7 @@ NSArray *CreateGrayList()
 	}
 	
 	if (finalIndex != NSNotFound) {
-		[_colors moveObjectAtIndex:currIndex toIndex:finalIndex];
+		PXColorArrayMoveColor(_colors, currIndex, finalIndex);
 	}
 }
 
@@ -393,7 +406,14 @@ NSArray *CreateGrayList()
 {
 	NSMutableDictionary *paletteDict = [NSMutableDictionary dictionaryWithCapacity:2];
 	[paletteDict setObject:self.name forKey:@"name"];
-	[paletteDict setObject:_colors forKey:@"colors"];
+	
+	NSMutableArray *colors = [NSMutableArray array];
+	
+	PXColorArrayEnumerateWithBlock(_colors, ^(PXColor color) {
+		[colors addObject:PXColorToNSColor(color)];
+	});
+	
+	[paletteDict setObject:colors forKey:@"colors"];
 	
 	return paletteDict;
 }

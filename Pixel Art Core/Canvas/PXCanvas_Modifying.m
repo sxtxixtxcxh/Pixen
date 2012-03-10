@@ -288,11 +288,11 @@ NSUInteger PointSizeF (const void *item);
 	PXPalette *palette = [[PXPalette alloc] init];
 	for (i = 0; i < size; i++)
 	{
-		[palette addColor:[NSColor colorWithCalibratedRed:map[i].Red / 255.0f green:map[i].Green / 255.0f blue:map[i].Blue / 255.0f alpha:1]];
+		[palette addColor:PXColorMake(map[i].Red, map[i].Green, map[i].Blue, 255)];
 	}
 	
 	if (transparency)
-		[palette addColorWithoutDuplicating:[[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
+		[palette addColorWithoutDuplicating:PXGetClearColor()];
 	
 	for (id current in canvases)
 	{

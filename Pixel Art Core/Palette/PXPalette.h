@@ -7,13 +7,16 @@
 
 #import <AppKit/AppKit.h>
 
-@interface PXPalette : NSObject < NSCoding, NSCopying, NSFastEnumeration >
+#import "PXColor.h"
+#import "PXColorArray.h"
+
+@interface PXPalette : NSObject < NSCoding, NSCopying >
 {
   @private
 	NSString *_name;
 	BOOL _canSave;
 	BOOL _isSystemPalette;
-	NSMutableArray *_colors;
+	PXColorArrayRef _colors;
 	NSMapTable *_frequencies;
 }
 
@@ -31,22 +34,22 @@
 - (void)addBackgroundColor;
 
 - (NSUInteger)colorCount;
-- (NSColor *)colorAtIndex:(NSUInteger)index;
-- (NSUInteger)indexOfColor:(NSColor *)color;
+- (PXColor)colorAtIndex:(NSUInteger)index;
+- (NSUInteger)indexOfColor:(PXColor)color;
 
-- (void)addColor:(NSColor *)color;
-- (void)addColorWithoutDuplicating:(NSColor *)color;
-- (void)insertColor:(NSColor *)color atIndex:(NSUInteger)index;
+- (void)addColor:(PXColor)color;
+- (void)addColorWithoutDuplicating:(PXColor)color;
+- (void)insertColor:(PXColor)color atIndex:(NSUInteger)index;
 
 - (void)removeColorAtIndex:(NSUInteger)index;
 - (void)removeLastColor;
 
-- (void)replaceColorAtIndex:(NSUInteger)index withColor:(NSColor *)color;
+- (void)replaceColorAtIndex:(NSUInteger)index withColor:(PXColor)color;
 
-- (NSColor *)colorClosestToColor:(NSColor *)color;
+- (PXColor)colorClosestToColor:(PXColor)color;
 
-- (void)incrementCountForColor:(NSColor *)color byAmount:(NSInteger)amount;
-- (void)decrementCountForColor:(NSColor *)color byAmount:(NSInteger)amount;
+- (void)incrementCountForColor:(PXColor)color byAmount:(NSInteger)amount;
+- (void)decrementCountForColor:(PXColor)color byAmount:(NSInteger)amount;
 
 - (void)removeFile;
 - (void)save;

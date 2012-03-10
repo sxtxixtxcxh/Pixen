@@ -31,6 +31,8 @@
 		C99681D41404428700177CC6 /* PathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C99681D21404428700177CC6 /* PathUtilities.m */; };
 		C99681D7140442DC00177CC6 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = C99681D5140442DC00177CC6 /* Constants.h */; };
 		C99681D8140442DC00177CC6 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C99681D6140442DC00177CC6 /* Constants.m */; };
+		C99E20C2150BF88C00BC3068 /* PXColorArray.h in Headers */ = {isa = PBXBuildFile; fileRef = C99E20C0150BF88C00BC3068 /* PXColorArray.h */; };
+		C99E20C3150BF88C00BC3068 /* PXColorArray.m in Sources */ = {isa = PBXBuildFile; fileRef = C99E20C1150BF88C00BC3068 /* PXColorArray.m */; };
 		C9D58D9614F0321900A62C10 /* PXColor.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D58D9414F0321900A62C10 /* PXColor.h */; };
 		C9D58D9714F0321900A62C10 /* PXColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D58D9514F0321900A62C10 /* PXColor.m */; };
 		D88FA9AB13DD274A00175A2F /* NSObject+AssociatedObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FA9A913DD274A00175A2F /* NSObject+AssociatedObjects.h */; };
@@ -66,6 +68,8 @@
 		C99681D21404428700177CC6 /* PathUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathUtilities.m; path = "../../Other Sources/OSG/Utility/PathUtilities.m"; sourceTree = "<group>"; };
 		C99681D5140442DC00177CC6 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = "../../Other Sources/Constants and Keys/Constants.h"; sourceTree = "<group>"; };
 		C99681D6140442DC00177CC6 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = "../../Other Sources/Constants and Keys/Constants.m"; sourceTree = "<group>"; };
+		C99E20C0150BF88C00BC3068 /* PXColorArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXColorArray.h; path = "../../Pixel Art Core/Palette/PXColorArray.h"; sourceTree = "<group>"; };
+		C99E20C1150BF88C00BC3068 /* PXColorArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXColorArray.m; path = "../../Pixel Art Core/Palette/PXColorArray.m"; sourceTree = "<group>"; };
 		C9D58D9414F0321900A62C10 /* PXColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXColor.h; path = "../../Pixel Art Core/Palette/PXColor.h"; sourceTree = "<group>"; };
 		C9D58D9514F0321900A62C10 /* PXColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXColor.m; path = "../../Pixel Art Core/Palette/PXColor.m"; sourceTree = "<group>"; };
 		D88FA9A913DD274A00175A2F /* NSObject+AssociatedObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AssociatedObjects.h"; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 				C99681D21404428700177CC6 /* PathUtilities.m */,
 				C9D58D9414F0321900A62C10 /* PXColor.h */,
 				C9D58D9514F0321900A62C10 /* PXColor.m */,
+				C99E20C0150BF88C00BC3068 /* PXColorArray.h */,
+				C99E20C1150BF88C00BC3068 /* PXColorArray.m */,
 				C9246E4613D216B200835F09 /* PXImage.h */,
 				C9246E4713D216B200835F09 /* PXImage.m */,
 				C99681C71404413400177CC6 /* PXPalette.h */,
@@ -195,6 +201,7 @@
 				C99681D31404428700177CC6 /* PathUtilities.h in Headers */,
 				C99681D7140442DC00177CC6 /* Constants.h in Headers */,
 				C9D58D9614F0321900A62C10 /* PXColor.h in Headers */,
+				C99E20C2150BF88C00BC3068 /* PXColorArray.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +281,7 @@
 				C99681D41404428700177CC6 /* PathUtilities.m in Sources */,
 				C99681D8140442DC00177CC6 /* Constants.m in Sources */,
 				C9D58D9714F0321900A62C10 /* PXColor.m in Sources */,
+				C99E20C3150BF88C00BC3068 /* PXColorArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

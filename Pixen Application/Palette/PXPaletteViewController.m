@@ -87,7 +87,7 @@
 	if (!palette.canSave)
 		return;
 	
-	[palette addColorWithoutDuplicating:[[NSColorPanel sharedColorPanel] color]];
+	[palette addColorWithoutDuplicating:PXColorFromNSColor([[NSColorPanel sharedColorPanel] color])];
 	[palette save];
 	
 	[self.paletteView setNeedsRetile];

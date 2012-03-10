@@ -109,7 +109,7 @@ const CGFloat viewMargin = 1.0f;
 	for (NSUInteger n = 0; n < [palette colorCount]; n++) {
 		PXPaletteColorLayer *colorLayer = [PXPaletteColorLayer layer];
 		colorLayer.index = n;
-		colorLayer.color = [palette colorAtIndex:n];
+		colorLayer.color = PXColorToNSColor([palette colorAtIndex:n]);
 		colorLayer.controlSize = controlSize;
 		
 		[self.layer addSublayer:colorLayer];
@@ -350,7 +350,7 @@ const CGFloat viewMargin = 1.0f;
 	NSPoint point = [self convertPoint:[sender draggingLocation] fromView:nil];
 	NSUInteger index = [self indexOfCelAtPoint:point];
 	
-	[palette replaceColorAtIndex:index withColor:color];
+	[palette replaceColorAtIndex:index withColor:PXColorFromNSColor(color)];
 	[palette save];
 	
 	return YES;

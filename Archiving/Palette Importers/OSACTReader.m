@@ -54,7 +54,7 @@
 		blue = bytes[i * 3 + 2];
 		
 		// There's a bunch of black at the end of the file to pad it to 768 bytes; if we already have a black color in our palette and we find another black, it means that the file is over.
-		if ((red == 0) && (green == 0) && (blue == 0) && [palette indexOfColor:[[NSColor blackColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]] != NSNotFound)
+		if ((red == 0) && (green == 0) && (blue == 0) && [palette indexOfColor:PXGetBlackColor()] != NSNotFound)
 		{
 			// If the rest of the file is black, break.
 			int j = 0;
@@ -70,7 +70,7 @@
 			if (shouldBreak)
 				break;
 		}
-		[palette addColor:[NSColor colorWithCalibratedRed:red / 255.0 green:green / 255.0 blue:blue / 255.0 alpha:1]];
+		[palette addColor:PXColorMake(red, green, blue, 255)];
 	}
 	return [palette autorelease];
 }
