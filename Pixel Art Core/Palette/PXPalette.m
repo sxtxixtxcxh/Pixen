@@ -290,6 +290,7 @@ NSArray *CreateGrayList()
 - (void)replaceColorAtIndex:(NSUInteger)index withColor:(PXColor)color
 {
 	//	CFArrayReplaceValues(_colors, CFRangeMake(index, 1), &color, 1);
+#warning TODO: implement
 }
 
 - (id)copyWithZone:(NSZone *)zone
