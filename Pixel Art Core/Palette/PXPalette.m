@@ -214,11 +214,16 @@ NSArray *CreateGrayList()
 {
 	if (!_frequencyTable) {
 		_frequencyTableSize = FREQUENCY_BLOCK;
-		_frequencyTable = malloc(sizeof(NSUInteger) * _frequencyTableSize);
+		_frequencyTable = malloc(sizeof(NSUInteger) * FREQUENCY_BLOCK);
+		
+		bzero(_frequencyTable, FREQUENCY_BLOCK * sizeof(NSUInteger));
 	}
 	else {
+		_frequencyTable = realloc(_frequencyTable, sizeof(NSUInteger) * (_frequencyTableSize + FREQUENCY_BLOCK));
+		
+		bzero(_frequencyTable + _frequencyTableSize, FREQUENCY_BLOCK * sizeof(NSUInteger));
+		
 		_frequencyTableSize += FREQUENCY_BLOCK;
-		_frequencyTable = realloc(_frequencyTable, sizeof(NSUInteger) * _frequencyTableSize);
 	}
 }
 
