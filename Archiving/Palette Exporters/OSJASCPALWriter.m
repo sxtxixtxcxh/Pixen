@@ -41,10 +41,9 @@
 	NSUInteger colorCount = [palette colorCount];
 	[string appendFormat:@"%d\n", colorCount];
 	
-	for (NSColor *color in palette)
-	{
-		[string appendFormat:@"%d %d %d\n", (int) roundf([color redComponent] * 255), (int) roundf([color greenComponent] * 255), (int) roundf([color blueComponent] * 255)];
-	}
+	[palette enumerateWithBlock:^(PXColor color) {
+		[string appendFormat:@"%d %d %d\n", color.r, color.g, color.b];
+	}];
 	
 	return [string dataUsingEncoding:NSASCIIStringEncoding];
 }

@@ -252,6 +252,11 @@ NSArray *CreateGrayList()
 	return PXColorArrayIndexOfColor(_colors, color);
 }
 
+- (void)enumerateWithBlock:(PXColorArrayEnumerationBlock)block
+{
+	PXColorArrayEnumerateWithBlock(_colors, block);
+}
+
 - (void)addColor:(PXColor)color
 {
 	PXColorArrayAppendColor(_colors, color);

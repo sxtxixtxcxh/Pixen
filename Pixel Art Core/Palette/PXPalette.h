@@ -38,6 +38,8 @@
 - (PXColor)colorAtIndex:(NSUInteger)index;
 - (NSUInteger)indexOfColor:(PXColor)color;
 
+- (void)enumerateWithBlock:(PXColorArrayEnumerationBlock)block;
+
 - (void)addColor:(PXColor)color;
 - (void)addColorWithoutDuplicating:(PXColor)color;
 - (void)insertColor:(PXColor)color atIndex:(NSUInteger)index;

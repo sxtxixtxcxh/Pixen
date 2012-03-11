@@ -72,15 +72,15 @@ typedef struct
 	[data appendBytes:riffHeader length:4];
 	
 	// Write the color data.
-	for (NSColor *color in palette)
-	{
+	[palette enumerateWithBlock:^(PXColor color) {
 		char colorData[4];
-		colorData[0] = (int) roundf([color redComponent] * 255);
-		colorData[1] = (int) roundf([color greenComponent] * 255);
-		colorData[2] = (int) roundf([color blueComponent] * 255);
+		colorData[0] = color.r;
+		colorData[1] = color.g;
+		colorData[2] = color.b;
 		colorData[3] = 0;
+		
 		[data appendBytes:colorData length:4];
-	}
+	}];
 	
 	return data;
 }
