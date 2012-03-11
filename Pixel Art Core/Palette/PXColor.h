@@ -20,7 +20,10 @@ PXColor PXColorMake(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 PXColor PXColorFromNSColor(NSColor *color);
 NSColor *PXColorToNSColor(PXColor color);
 
-BOOL PXColorEqualsColor(PXColor color, PXColor otherColor);
+NS_INLINE BOOL PXColorEqualsColor(PXColor color, PXColor otherColor) {
+	return !memcmp(&color, &otherColor, 4);
+}
+
 int PXColorDistanceToColor(PXColor color, PXColor otherColor);
 
 PXColor PXColorBlendWithColor(PXColor bottomColor, PXColor topColor);

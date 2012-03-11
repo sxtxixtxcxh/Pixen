@@ -37,12 +37,6 @@ NSColor *PXColorToNSColor(PXColor color)
 									  blue:color.b / 255.0f alpha:color.a / 255.0f];
 }
 
-BOOL PXColorEqualsColor(PXColor color, PXColor otherColor)
-{
-	return color.r == otherColor.r && color.g == otherColor.g &&
-		   color.b == otherColor.b && color.a == otherColor.a;
-}
-
 int PXColorDistanceToColor(PXColor color, PXColor otherColor)
 {
 	int r = color.r - otherColor.r;

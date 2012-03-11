@@ -152,14 +152,10 @@ void PXColorArrayMoveColor(PXColorArrayRef self, NSUInteger sourceIndex, NSUInte
 
 NSUInteger PXColorArrayColorInfoAtIndex(PXColorArrayRef self, NSUInteger index)
 {
-	NSCAssert(index < self->_count, @"Out-of-bounds index");
-	
 	return self->_colors[index].info;
 }
 
 void PXColorArraySetColorInfoAtIndex(PXColorArrayRef self, NSUInteger index, NSUInteger info)
 {
-	NSCAssert(index < self->_count, @"Out-of-bounds index");
-	
 	self->_colors[index].info = info;
 }
