@@ -12,7 +12,16 @@
 #import "NSMutableArray+ReorderingAdditions.h"
 #import "PathUtilities.h"
 
+@interface PXPalette ()
+
+- (void)resizeFrequencyTable;
+
+@end
+
+
 @implementation PXPalette
+
+#define FREQUENCY_BLOCK 64
 
 @synthesize name = _name, canSave = _canSave, isSystemPalette = _isSystemPalette;
 
@@ -20,7 +29,6 @@ static NSMutableArray *systemPalettes;
 static NSMutableArray *userPalettes;
 
 NSArray *CreateGrayList(void);
-NSUInteger ColorSize (const void *item);
 
 #define LOG_COLOR	[NSColor colorWithCalibratedRed:rgb green:rgb blue:rgb alpha:log2(64 - i) * 0.1667]
 
@@ -157,23 +165,11 @@ NSArray *CreateGrayList()
 	return self;
 }
 
-NSUInteger ColorSize (const void *item)
-{
-	return sizeof(PXColor);
-}
-
 - (id)initWithoutBackgroundColor
 {
 	self = [super init];
 	if (self) {
 		_colors = PXColorArrayCreate();
-		
-		NSPointerFunctions *keyFunctions = [NSPointerFunctions pointerFunctionsWithOptions:NSPointerFunctionsStructPersonality | NSPointerFunctionsCopyIn | NSPointerFunctionsMallocMemory];
-		NSPointerFunctions *valueFunctions = [NSPointerFunctions pointerFunctionsWithOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory];
-		
-		keyFunctions.sizeFunction = ColorSize;
-		
-		_frequencies = [[NSMapTable alloc] initWithKeyPointerFunctions:keyFunctions valuePointerFunctions:valueFunctions capacity:0];
 	}
 	return self;
 }
@@ -198,10 +194,12 @@ NSUInteger ColorSize (const void *item)
 
 - (void)dealloc
 {
-	[_frequencies release];
 	[_name release];
 	
 	PXColorArrayRelease(_colors);
+	
+	if (_frequencyTable)
+		free(_frequencyTable);
 	
 	[super dealloc];
 }
@@ -210,6 +208,18 @@ NSUInteger ColorSize (const void *item)
 {
 	[aCoder encodeObject:[self dictForArchiving] forKey:@"palette"];
 	[aCoder encodeObject:[NSNumber numberWithInt:3] forKey:@"paletteVersion"];
+}
+
+- (void)resizeFrequencyTable
+{
+	if (!_frequencyTable) {
+		_frequencyTableSize = FREQUENCY_BLOCK;
+		_frequencyTable = malloc(sizeof(NSUInteger) * _frequencyTableSize);
+	}
+	else {
+		_frequencyTableSize += FREQUENCY_BLOCK;
+		_frequencyTable = realloc(_frequencyTable, sizeof(NSUInteger) * _frequencyTableSize);
+	}
 }
 
 - (BOOL)isEqual:(id)object
@@ -317,18 +327,16 @@ NSUInteger ColorSize (const void *item)
 		currIndex = PXColorArrayCount(_colors)-1;
 	}
 	
-	int value = (int) NSMapGet(_frequencies, &color);
-	value += amount;
+	if (currIndex >= _frequencyTableSize)
+		[self resizeFrequencyTable];
 	
-	NSMapInsert(_frequencies, &color, (void *) value);
+	NSUInteger value = _frequencyTable[currIndex] + amount;
+	_frequencyTable[currIndex] = value;
 	
 	NSUInteger finalIndex = NSNotFound;
 	
 	for (NSInteger n = (currIndex-1); n >= 0; n--) {
-		PXColor nextColor = [self colorAtIndex:n];
-		int nextValue = (int) NSMapGet(_frequencies, &nextColor);
-		
-		if (nextValue <= value) {
+		if (_frequencyTable[n] <= value) {
 			finalIndex = n;
 		}
 		else {
@@ -348,25 +356,18 @@ NSUInteger ColorSize (const void *item)
 	if (currIndex == NSNotFound)
 		return;
 	
-	int value = (int) NSMapGet(_frequencies, &color);
-	value -= amount;
+	NSUInteger value = _frequencyTable[currIndex] - amount;
+	_frequencyTable[currIndex] = value;
 	
 	if (value == 0) {
-		NSMapRemove(_frequencies, &color);
-		PXColorArrayRemoveColorAtIndex(_colors, [self indexOfColor:color]);
-		
+		PXColorArrayRemoveColorAtIndex(_colors, currIndex);
 		return;
 	}
-	
-	NSMapInsert(_frequencies, &color, (void *) value);
 	
 	NSUInteger finalIndex = NSNotFound;
 	
 	for (NSInteger n = (currIndex+1); n < PXColorArrayCount(_colors); n++) {
-		PXColor nextColor = [self colorAtIndex:n];
-		int nextValue = (int) NSMapGet(_frequencies, &nextColor);
-		
-		if (value <= nextValue) {
+		if (value <= _frequencyTable[n]) {
 			finalIndex = n;
 		}
 		else {
