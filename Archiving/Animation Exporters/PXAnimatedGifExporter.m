@@ -125,7 +125,7 @@
 		if (color.a <= 127)
 			continue;
 		
-		colorMap->Colors[mapIndex].Red = color.a;
+		colorMap->Colors[mapIndex].Red = color.r;
 		colorMap->Colors[mapIndex].Green = color.g;
 		colorMap->Colors[mapIndex].Blue = color.b;
 		
