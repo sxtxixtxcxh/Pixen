@@ -35,7 +35,7 @@ img.left {
 	margin-bottom: 16px;
 }
 img.shadow {
-	-webkit-box-shadow: gray 0 1px 4px;
+	-webkit-box-shadow: rgba(0,0,0,0.6) 0 1px 5px;
 }
 a.button {
 	background-color: #DADFE2;
