@@ -9,6 +9,7 @@
 
 typedef struct {
 	uint8_t r, g, b, a;
+	NSUInteger info;
 } PXColor;
 
 PXColor PXGetBlackColor(void);

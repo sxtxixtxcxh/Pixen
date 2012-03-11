@@ -12,16 +12,7 @@
 #import "NSMutableArray+ReorderingAdditions.h"
 #import "PathUtilities.h"
 
-@interface PXPalette ()
-
-- (void)resizeFrequencyTable;
-
-@end
-
-
 @implementation PXPalette
-
-#define FREQUENCY_BLOCK 64
 
 @synthesize name = _name, canSave = _canSave, isSystemPalette = _isSystemPalette;
 
@@ -198,9 +189,6 @@ NSArray *CreateGrayList()
 	
 	PXColorArrayRelease(_colors);
 	
-	if (_frequencyTable)
-		free(_frequencyTable);
-	
 	[super dealloc];
 }
 
@@ -208,23 +196,6 @@ NSArray *CreateGrayList()
 {
 	[aCoder encodeObject:[self dictForArchiving] forKey:@"palette"];
 	[aCoder encodeObject:[NSNumber numberWithInt:3] forKey:@"paletteVersion"];
-}
-
-- (void)resizeFrequencyTable
-{
-	if (!_frequencyTable) {
-		_frequencyTableSize = FREQUENCY_BLOCK;
-		_frequencyTable = malloc(sizeof(NSUInteger) * FREQUENCY_BLOCK);
-		
-		bzero(_frequencyTable, FREQUENCY_BLOCK * sizeof(NSUInteger));
-	}
-	else {
-		_frequencyTable = realloc(_frequencyTable, sizeof(NSUInteger) * (_frequencyTableSize + FREQUENCY_BLOCK));
-		
-		bzero(_frequencyTable + _frequencyTableSize, FREQUENCY_BLOCK * sizeof(NSUInteger));
-		
-		_frequencyTableSize += FREQUENCY_BLOCK;
-	}
 }
 
 - (BOOL)isEqual:(id)object
@@ -338,16 +309,15 @@ NSArray *CreateGrayList()
 		currIndex = PXColorArrayCount(_colors)-1;
 	}
 	
-	if (currIndex >= _frequencyTableSize)
-		[self resizeFrequencyTable];
+	NSUInteger value = PXColorArrayColorInfoAtIndex(_colors, currIndex);
+	value += amount;
 	
-	NSUInteger value = _frequencyTable[currIndex] + amount;
-	_frequencyTable[currIndex] = value;
+	PXColorArraySetColorInfoAtIndex(_colors, currIndex, value);
 	
 	NSUInteger finalIndex = NSNotFound;
 	
 	for (NSInteger n = (currIndex-1); n >= 0; n--) {
-		if (_frequencyTable[n] <= value) {
+		if (PXColorArrayColorInfoAtIndex(_colors, n) <= value) {
 			finalIndex = n;
 		}
 		else {
@@ -367,18 +337,20 @@ NSArray *CreateGrayList()
 	if (currIndex == NSNotFound)
 		return;
 	
-	NSUInteger value = _frequencyTable[currIndex] - amount;
-	_frequencyTable[currIndex] = value;
+	NSUInteger value = PXColorArrayColorInfoAtIndex(_colors, currIndex);
+	value -= amount;
 	
 	if (value == 0) {
 		PXColorArrayRemoveColorAtIndex(_colors, currIndex);
 		return;
 	}
 	
+	PXColorArraySetColorInfoAtIndex(_colors, currIndex, value);
+	
 	NSUInteger finalIndex = NSNotFound;
 	
 	for (NSInteger n = (currIndex+1); n < PXColorArrayCount(_colors); n++) {
-		if (value <= _frequencyTable[n]) {
+		if (value <= PXColorArrayColorInfoAtIndex(_colors, n)) {
 			finalIndex = n;
 		}
 		else {

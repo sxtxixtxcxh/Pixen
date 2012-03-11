@@ -12,7 +12,7 @@ int PXTileDimension = 256;
 PXTile* PXTileCreate(CGPoint loc, CGSize size, unsigned char *data);
 void PXTileRelease(PXTile* t);
 void PXTileDraw(PXTile* t, CGRect source, CGRect dest);
-PXColor *PXTileColorAtXY(PXTile *t, int xv, int yv);
+PXColor PXTileColorAtXY(PXTile *t, int xv, int yv, BOOL *outSuccess);
 void PXTileSetAtXY(PXTile *t, int xv, int yv, PXColor color);
 unsigned int PXTileGetData(PXTile *t, unsigned char **data);
 PXImage *PXImage_alloc(void);
@@ -67,13 +67,21 @@ void PXTileDraw(PXTile* t, CGRect source, CGRect dest)
 	CGContextDrawImage(target, dest, t->image);
 }
 
-PXColor *PXTileColorAtXY(PXTile *t, int xv, int yv)
+PXColor PXTileColorAtXY(PXTile *t, int xv, int yv, BOOL *outSuccess)
 {
-	if (xv < t->location.x || xv >= t->location.x + CGBitmapContextGetWidth(t->painting))
-		return NULL;
+	if (xv < t->location.x || xv >= t->location.x + CGBitmapContextGetWidth(t->painting)) {
+		if (outSuccess)
+			*outSuccess = NO;
+		
+		return PXGetClearColor();
+	}
 	
-	if (yv < t->location.y || yv >= t->location.y + CGBitmapContextGetHeight(t->painting))
-		return NULL;
+	if (yv < t->location.y || yv >= t->location.y + CGBitmapContextGetHeight(t->painting)) {
+		if (outSuccess)
+			*outSuccess = NO;
+		
+		return PXGetClearColor();
+	}
 	
 	unsigned x = xv - t->location.x;
 	unsigned y = yv - t->location.y;
@@ -82,7 +90,13 @@ PXColor *PXTileColorAtXY(PXTile *t, int xv, int yv)
 	size_t bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
 	size_t startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y) * bytesPerRow + x * PXTileComponentsPerPixel;
 	
-	return (PXColor *) (data + startIndex);
+	if (outSuccess)
+		*outSuccess = YES;
+	
+	PXColor color;
+	memcpy(&color, data + startIndex, sizeof(unsigned char) * 4);
+	
+	return color;
 }
 
 void PXTileSetAtXY(PXTile *t, int xv, int yv, PXColor color)
@@ -106,7 +120,7 @@ void PXTileSetAtXY(PXTile *t, int xv, int yv, PXColor color)
 	NSUInteger bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
 	NSUInteger startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y) * bytesPerRow + x * PXTileComponentsPerPixel;
 	
-	memcpy(data + startIndex, &color, sizeof(color));
+	memcpy(data + startIndex, &color, 4);
 }
 
 unsigned int PXTileGetData(PXTile *t, unsigned char **data)
@@ -296,15 +310,16 @@ PXColor PXImage_colorAtIndex(PXImage *self, unsigned index)
 
 PXColor PXImage_colorAtXY(PXImage *self, int x, int y)
 {
-	PXColor *color = PXTileColorAtXY(PXImage_tileAtXY(self, x, y), x, y);
+	BOOL success = NO;
+	PXColor color = PXTileColorAtXY(PXImage_tileAtXY(self, x, y), x, y, &success);
 	
-	if (color == NULL) {
+	if (!success) {
 		@throw [NSException exceptionWithName:NSInternalInconsistencyException
 									   reason:@"A NULL color shouldn't be returned from the image"
 									 userInfo:nil];
 	}
 	
-	return (*color);
+	return color;
 }
 
 void PXImage_setColorAtIndex(PXImage *self, PXColor color, unsigned loc)

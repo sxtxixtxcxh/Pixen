@@ -17,8 +17,6 @@
 	BOOL _canSave;
 	BOOL _isSystemPalette;
 	PXColorArrayRef _colors;
-	NSUInteger *_frequencyTable;
-	NSUInteger _frequencyTableSize;
 }
 
 @property (nonatomic, copy) NSString *name;

@@ -29,3 +29,6 @@ void PXColorArrayInsertColorAtIndex(PXColorArrayRef self, NSUInteger index, PXCo
 void PXColorArrayRemoveColorAtIndex(PXColorArrayRef self, NSUInteger index);
 
 void PXColorArrayMoveColor(PXColorArrayRef self, NSUInteger sourceIndex, NSUInteger targetIndex);
+
+NSUInteger PXColorArrayColorInfoAtIndex(PXColorArrayRef self, NSUInteger index);
+void PXColorArraySetColorInfoAtIndex(PXColorArrayRef self, NSUInteger index, NSUInteger info);
