@@ -41,11 +41,7 @@
 			  image:(PXImage *)anImage
 {
 	self = [super init];
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self
-		   selector:@selector(paletteChanged:)
-			   name:PXPaletteChangedNotificationName
-			 object:nil];
+	
 	[self setName:aName];
 	if(anImage)
 	{

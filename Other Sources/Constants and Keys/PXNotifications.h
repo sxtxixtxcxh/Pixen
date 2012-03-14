@@ -30,8 +30,6 @@ extern NSString *PXDocumentChangedDisplayNameNotificationName;
 
 extern NSString *PXToolDoubleClickedNotificationName;
 
-extern NSString *PXPaletteChangedNotificationName;
-
 extern NSString *PXUnlockToolSwitcherNotificationName;
 extern NSString *PXLockToolSwitcherNotificationName;
 

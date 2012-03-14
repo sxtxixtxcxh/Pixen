@@ -25,11 +25,6 @@ const CGFloat viewMargin = 1.0f;
 		controlSize = NSRegularControlSize;
 		highlightEnabled = YES;
 		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(paletteChanged:)
-													 name:PXPaletteChangedNotificationName
-												   object:nil];
-		
 		[self registerForDraggedTypes:[NSArray arrayWithObject:NSPasteboardTypeColor]];
 	}
 	return self;
@@ -136,11 +131,6 @@ const CGFloat viewMargin = 1.0f;
 - (BOOL)acceptsFirstMouse:(NSEvent *)event
 {
 	return YES;
-}
-
-- (void)paletteChanged:(NSNotification *)notification
-{
-	[self setNeedsRetile];
 }
 
 - (void)setPalette:(PXPalette *)pal

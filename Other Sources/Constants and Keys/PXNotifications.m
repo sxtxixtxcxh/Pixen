@@ -32,8 +32,6 @@ NSString *PXDocumentChangedDisplayNameNotificationName = @"PXDocumentChangedDisp
 
 NSString *PXToolDoubleClickedNotificationName = @"PXToolDoubleClicked";
 
-NSString *PXPaletteChangedNotificationName = @"PXPaletteChanged";
-
 NSString *PXUnlockToolSwitcherNotificationName = @"PXUnlockToolSwitcher";
 NSString *PXLockToolSwitcherNotificationName = @"PXLockToolSwitcher";
 
