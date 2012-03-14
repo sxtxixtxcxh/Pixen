@@ -203,7 +203,7 @@
 
 - (void)updatePreview:(NSNotification *)notification
 {
-	[[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(updatePreviewReal) object:nil];
+	[[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
 	[self performSelector:@selector(updatePreviewReal) withObject:nil afterDelay:0.05f];
 }
 
