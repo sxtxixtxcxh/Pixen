@@ -76,6 +76,6 @@ typedef BOOL *PXSelectionMask;
 
 - (PXColor)eraseColor;
 
-- (PXPalette *)newFrequencyPalette;
++ (PXPalette *)frequencyPaletteForLayers:(NSArray *)layers;
 
 @end

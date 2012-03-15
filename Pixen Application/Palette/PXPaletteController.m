@@ -27,11 +27,13 @@
 
 #define RECENT_LIMIT 32
 
-@synthesize document = _document, paletteView = _paletteView;
+@synthesize document = _document, paletteView = _paletteView, progressIndicator = _progressIndicator;
 
 - (id)init
 {
 	self = [super initWithNibName:@"PXPaletteController" bundle:nil];
+	
+	_frequencyQueue = dispatch_queue_create("com.Pixen.queue.FrequencyPalette", DISPATCH_QUEUE_SERIAL);
 	
 	_frequencyPalette = [[PXPalette alloc] initWithoutBackgroundColor];
 	_recentPalette = [[PXPalette alloc] initWithoutBackgroundColor];
@@ -55,6 +57,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[_frequencyPalette release];
 	[_recentPalette release];
+	dispatch_release(_frequencyQueue);
 	[super dealloc];
 }
 
@@ -97,16 +100,33 @@
 
 - (void)refreshPalette:(NSNotification *)note
 {
-	if (![_document containsCanvas:[note object]])
+	PXCanvas *canvas = [note object];
+	
+	if (![_document containsCanvas:canvas])
 		return;
 	
-	[_frequencyPalette release];
-	_frequencyPalette = [[note object] newFrequencyPalette];
+	[_progressIndicator startAnimation:nil];
 	
-	if (_mode == PXPaletteModeFrequency)
-	{
-		[_paletteView setPalette:_frequencyPalette];
-	}
+	NSArray *layers = [[[canvas layers] copy] autorelease];
+	
+	dispatch_async(_frequencyQueue, ^{
+		
+		PXPalette *palette = [PXCanvas frequencyPaletteForLayers:layers];
+		
+		[_frequencyPalette release];
+		_frequencyPalette = [palette retain];
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			
+			if (_mode == PXPaletteModeFrequency) {
+				[_paletteView setPalette:_frequencyPalette];
+			}
+			
+			[_progressIndicator stopAnimation:nil];
+			
+		});
+		
+	});
 }
 
 - (void)updatePalette:(NSNotification *)note
@@ -116,25 +136,33 @@
 	
 	NSDictionary *changes = [note userInfo];
 	
-	NSCountedSet *oldC = [changes objectForKey:@"PXCanvasPaletteUpdateRemoved"];
-	NSCountedSet *newC = [changes objectForKey:@"PXCanvasPaletteUpdateAdded"];
+	NSCountedSet *oldC = [[[changes objectForKey:@"PXCanvasPaletteUpdateRemoved"] copy] autorelease];
+	NSCountedSet *newC = [[[changes objectForKey:@"PXCanvasPaletteUpdateAdded"] copy] autorelease];
 	
-	for (NSColor *old in oldC)
-	{
-		[_frequencyPalette decrementCountForColor:PXColorFromNSColor(old) byAmount:[oldC countForObject:old]];
-	}
-	
-	//can do 'recent palette' stuff here too. most draws will consist of one new and many old, so just consider the last 100 new?
-	
-	for (NSColor *new in newC)
-	{
-		PXColor pxColor = PXColorFromNSColor(new);
+	dispatch_async(_frequencyQueue, ^{
 		
-		[_frequencyPalette incrementCountForColor:pxColor byAmount:[newC countForObject:new]];
-		[self addRecentColor:pxColor];
-	}
-	
-	[_paletteView setNeedsRetile];
+		for (NSColor *old in oldC)
+		{
+			[_frequencyPalette decrementCountForColor:PXColorFromNSColor(old) byAmount:[oldC countForObject:old]];
+		}
+		
+		//can do 'recent palette' stuff here too. most draws will consist of one new and many old, so just consider the last 100 new?
+		
+		for (NSColor *new in newC)
+		{
+			[_frequencyPalette incrementCountForColor:PXColorFromNSColor(new) byAmount:[newC countForObject:new]];
+			
+#warning TODO: reimplement recents
+			//[self addRecentColor:pxColor];
+		}
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			
+			[_paletteView setNeedsRetile];
+			
+		});
+		
+	});
 }
 
 - (void)useColorAtIndex:(NSUInteger)index

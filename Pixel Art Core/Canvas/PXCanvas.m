@@ -227,12 +227,14 @@
 	return PXGetClearColor();
 }
 
-- (PXPalette *)newFrequencyPalette
++ (PXPalette *)frequencyPaletteForLayers:(NSArray *)layers
 {
 	PXPalette *palette = [[PXPalette alloc] initWithoutBackgroundColor];
 	
-	CGFloat w = [self size].width;
-	CGFloat h = [self size].height;
+	PXLayer *firstLayer = [layers objectAtIndex:0];
+	
+	CGFloat w = [firstLayer size].width;
+	CGFloat h = [firstLayer size].height;
 	
 	NSCountedSet *colors = [NSCountedSet set];
 	
@@ -253,7 +255,7 @@
 		[palette incrementCountForColor:PXColorFromNSColor(color) byAmount:[colors countForObject:color]];
 	}
 	
-	return palette;
+	return [palette autorelease];
 }
 
 @end
