@@ -153,7 +153,6 @@
 	palette.name = NSLocalizedString(@"Document Palette", nil);
 	
 	[exporter runWithPalette:palette inWindow:[self window]];
-	[palette release];
 }
 
 - (IBAction)mergeDown:(id) sender
