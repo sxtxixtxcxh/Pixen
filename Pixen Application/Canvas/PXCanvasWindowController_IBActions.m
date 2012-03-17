@@ -149,7 +149,7 @@
 {
 	PXPaletteExporter *exporter = [[PXPaletteExporter alloc] init];
 	
-	PXPalette *palette = [canvas newFrequencyPalette];
+	PXPalette *palette = [PXCanvas frequencyPaletteForLayers:[canvas layers]];
 	palette.name = NSLocalizedString(@"Document Palette", nil);
 	
 	[exporter runWithPalette:palette inWindow:[self window]];
