@@ -33,7 +33,7 @@
 {
 	self = [super initWithNibName:@"PXPaletteController" bundle:nil];
 	
-	_frequencyQueue = dispatch_queue_create("com.Pixen.queue.FrequencyPalette", DISPATCH_QUEUE_SERIAL);
+	_frequencyQueue = dispatch_queue_create("com.Pixen.queue.FrequencyPalette", 0);
 	
 	_frequencyPalette = [[PXPalette alloc] initWithoutBackgroundColor];
 	_recentPalette = [[PXPalette alloc] initWithoutBackgroundColor];
