@@ -44,6 +44,8 @@ const CGFloat viewMargin = 1.0f;
 												 selector:@selector(scrollViewDidScroll:)
 													 name:NSViewBoundsDidChangeNotification
 												   object:superview];
+		
+		[self reload];
 	}
 }
 
