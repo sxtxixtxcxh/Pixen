@@ -86,7 +86,7 @@
 	if (!palette.canSave)
 		return;
 	
-	[palette addColorWithoutDuplicating:PXColorFromNSColor([[NSColorPanel sharedColorPanel] color])];
+	[palette addColorWithoutDuplicating:PXColorFromNSColor([[[NSColorPanel sharedColorPanel] color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace])];
 	[palette save];
 	
 	[self.paletteView reload];
