@@ -89,7 +89,7 @@
 	[palette addColorWithoutDuplicating:PXColorFromNSColor([[NSColorPanel sharedColorPanel] color])];
 	[palette save];
 	
-	[self.paletteView setNeedsRetile];
+	[self.paletteView reload];
 }
 
 - (IBAction)installPalette:sender

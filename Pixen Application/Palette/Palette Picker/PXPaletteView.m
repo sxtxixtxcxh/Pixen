@@ -7,27 +7,49 @@
 
 #import "PXPaletteView.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "PXPaletteColorLayer.h"
 
 @implementation PXPaletteView
 
 const CGFloat viewMargin = 1.0f;
 
-@synthesize enabled, highlightEnabled, controlSize, palette, delegate;
+@synthesize highlightEnabled, controlSize, palette, delegate;
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil) {
-		[self setEnabled:YES];
+	self = [super initWithFrame:frameRect];
+	if (self) {
+		_visibleLayers = [NSMutableSet new];
+		_recycledLayers = [NSMutableSet new];
 		
 		selectionIndex = NSNotFound;
-		palette = NULL;
 		controlSize = NSRegularControlSize;
 		highlightEnabled = YES;
 		
 		[self registerForDraggedTypes:[NSArray arrayWithObject:NSPasteboardTypeColor]];
 	}
 	return self;
+}
+
+- (void)viewDidMoveToSuperview
+{
+	NSView *superview = [self superview];
+	
+	if ([superview isKindOfClass:[NSClipView class]]) {
+		[superview setPostsBoundsChangedNotifications:YES];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(scrollViewDidScroll:)
+													 name:NSViewBoundsDidChangeNotification
+												   object:superview];
+	}
+}
+
+- (void)scrollViewDidScroll:(NSNotification *)notification
+{
+	[self retile];
 }
 
 - (void)awakeFromNib
@@ -39,9 +61,6 @@ const CGFloat viewMargin = 1.0f;
 {
 	CALayer *rootLayer = [self layer];
 	rootLayer.geometryFlipped = YES;
-	rootLayer.layoutManager = self;
-	
-	[self setNeedsRetile];
 }
 
 - (BOOL)acceptsFirstResponder
@@ -52,6 +71,11 @@ const CGFloat viewMargin = 1.0f;
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	[palette release];
+	[_visibleLayers release];
+	[_recycledLayers release];
+	
 	[super dealloc];
 }
 
@@ -60,72 +84,120 @@ const CGFloat viewMargin = 1.0f;
 	return YES;
 }
 
+- (void)reload
+{
+	[CATransaction begin];
+	[CATransaction setDisableActions:YES];
+	
+	for (PXPaletteColorLayer *layer in _visibleLayers)
+	{
+		[_recycledLayers addObject:layer];
+		[layer removeFromSuperlayer];
+	}
+	
+	[_visibleLayers minusSet:_recycledLayers];
+	
+	[self size];
+	[self retile];
+	
+	[CATransaction commit];
+}
+
 - (void)size
 {
 	width = (controlSize == NSRegularControlSize ? 32 : 16) + viewMargin;
-	height = width;
 	columns = NSWidth([self bounds]) / width;
 	rows = palette ? ceilf((float)(([palette colorCount])) / columns) : 0;
+	
+	[self setFrameSize:NSMakeSize(NSWidth([[self superview] bounds]), MAX(rows * width + viewMargin*2, NSHeight([[self superview] bounds])))];
 }
 
 - (void)viewDidEndLiveResize
 {
-	[self size];
-	[self.layer setNeedsLayout];
+	[self reload];
 }
 
-- (void)layoutSublayersOfLayer:(CALayer *)superlayer
+- (PXPaletteColorLayer *)dequeueRecycledLayer
 {
-	for (CALayer *layer in [superlayer sublayers]) {
-		if (![layer isKindOfClass:[PXPaletteColorLayer class]])
-			continue;
-		
-		NSUInteger n = [ (PXPaletteColorLayer *) layer index];
-		
-		NSUInteger i = n % columns;
-		NSUInteger j = n / columns;
-		
-		layer.frame = CGRectMake(viewMargin*2 + i*width, viewMargin*2 + j*height, width - viewMargin*2, height - viewMargin*2);
+	PXPaletteColorLayer *layer = [_recycledLayers anyObject];
+	
+	if (layer) {
+		[[layer retain] autorelease];
+		[_recycledLayers removeObject:layer];
 	}
+	
+	return layer;
+}
+
+- (BOOL)isDisplayingLayerForIndex:(NSUInteger)index
+{
+	for (PXPaletteColorLayer *layer in _visibleLayers) {
+		if (layer.index == index)
+			return YES;
+	}
+	
+	return NO;
 }
 
 - (void)retile
 {
-	selectionIndex = NSNotFound;
-	
-	[self size];
-	[self setFrameSize:NSMakeSize(NSWidth([[self superview] bounds]), MAX(rows * height + viewMargin*2, NSHeight([[self superview] bounds])))];
-	
-	self.layer.sublayers = nil;
-	
 	if (!palette)
 		return;
 	
-	for (NSUInteger n = 0; n < [palette colorCount]; n++) {
-		PXPaletteColorLayer *colorLayer = [PXPaletteColorLayer layer];
-		colorLayer.index = n;
-		colorLayer.color = PXColorToNSColor([palette colorAtIndex:n]);
-		colorLayer.controlSize = controlSize;
-		
-		[self.layer addSublayer:colorLayer];
-		[colorLayer setNeedsDisplay];
+	NSRect visibleBounds = [[self superview] bounds];
+	
+	NSInteger firstIndex = floorf(NSMinY(visibleBounds) / width) * columns;
+	NSInteger lastIndex = ceilf(NSMaxY(visibleBounds) / width) * columns + columns;
+	
+	firstIndex = MAX(firstIndex, 0);
+	lastIndex = MIN(lastIndex, MAX([palette colorCount], 1) - 1);
+	
+	[CATransaction begin];
+	[CATransaction setDisableActions:YES];
+	
+	// Recycle no-longer-visible layers
+	for (PXPaletteColorLayer *layer in _visibleLayers)
+	{
+		if (layer.index < firstIndex || layer.index > lastIndex) {
+			[_recycledLayers addObject:layer];
+			[layer removeFromSuperlayer];
+		}
 	}
 	
-	[self.layer setNeedsLayout];
+	[_visibleLayers minusSet:_recycledLayers];
 	
-	/*
-	 if(!enabled)
-	 {
-	 [[NSColor colorWithDeviceWhite:1 alpha:.2] set];
-	 NSRectFillUsingOperation([self visibleRect], NSCompositeSourceOver);
-	 }
-	 */
-}
-
-- (void)setNeedsRetile
-{
-	[[self class] cancelPreviousPerformRequestsWithTarget:self];
-	[self performSelector:@selector(retile) withObject:nil afterDelay:0.0f];
+	if (![palette colorCount]) {
+		[CATransaction commit];
+		return;
+	}
+	
+	// add missing layers
+	for (NSUInteger n = firstIndex; n <= lastIndex; n++)
+	{
+		if ([self isDisplayingLayerForIndex:n])
+			continue;
+		
+		PXPaletteColorLayer *layer = [self dequeueRecycledLayer];
+		
+		if (!layer) {
+			layer = [PXPaletteColorLayer layer];
+		}
+		
+		NSUInteger i = n % columns;
+		NSUInteger j = n / columns;
+		
+		layer.frame = CGRectMake(viewMargin*2 + i*width, viewMargin*2 + j*width, width - viewMargin*2, width - viewMargin*2);
+		
+		layer.index = n;
+		layer.color = PXColorToNSColor([palette colorAtIndex:n]);
+		layer.controlSize = controlSize;
+		
+		[self.layer addSublayer:layer];
+		
+		[_visibleLayers addObject:layer];
+	}
+	
+	[CATransaction commit];
 }
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)event
@@ -135,10 +207,15 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)setPalette:(PXPalette *)pal
 {
-	[palette release];
-	palette = [pal retain];
-	
-	[self setNeedsRetile];
+	if (palette != pal)
+	{
+		selectionIndex = NSNotFound;
+		
+		[palette release];
+		palette = [pal retain];
+		
+		[self reload];
+	}
 }
 
 - (void)rightMouseDown:(NSEvent *)event
@@ -158,8 +235,8 @@ const CGFloat viewMargin = 1.0f;
 
 - (NSUInteger)indexOfCelAtPoint:(NSPoint)point
 {
-	int firstRow = MAX(floorf(NSMinY([self visibleRect]) / height), 0);
-	int lastRow = MIN(ceilf(NSMaxY([self visibleRect]) / height), rows-1);
+	int firstRow = MAX(floorf(NSMinY([self visibleRect]) / width), 0);
+	int lastRow = MIN(ceilf(NSMaxY([self visibleRect]) / width), rows-1);
 	
 	int i, j;
 	for (j = firstRow; j <= lastRow; j++)
@@ -168,10 +245,10 @@ const CGFloat viewMargin = 1.0f;
 		{
 			NSUInteger index = j * columns + i;
 			
-			if (index >= ([palette colorCount]))
+			if (index >= [palette colorCount])
 				break;
 			
-			NSRect frame = NSMakeRect(viewMargin*2 + i*width, viewMargin*2 + j*height, width - viewMargin*2, height - viewMargin*2);
+			NSRect frame = NSMakeRect(viewMargin*2 + i*width, viewMargin*2 + j*width, width - viewMargin*2, width - viewMargin*2);
 			
 			if (NSPointInRect(point, frame))
 				return index;
@@ -183,16 +260,18 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)setControlSize:(NSControlSize)aSize
 {
-	controlSize = aSize;
-	[self setNeedsRetile];
+	if (controlSize != aSize) {
+		controlSize = aSize;
+		
+		[self reload];
+	}
 }
 
 - (void)sizeSelector:selector selectedSize:(NSControlSize)aSize
 {
 	[self setControlSize:aSize];
 	
-	if ([delegate respondsToSelector:@selector(paletteViewSizeChangedTo:)])
-	{
+	if ([delegate respondsToSelector:@selector(paletteViewSizeChangedTo:)]) {
 		[delegate paletteViewSizeChangedTo:aSize];
 	}
 }
@@ -210,12 +289,12 @@ const CGFloat viewMargin = 1.0f;
 	[palette removeColorAtIndex:selectionIndex];
 	[palette save];
 	
-	[self retile];
+	[self reload];
 }
 
 - (void)moveLeft:(id)sender
 {
-	if (selectionIndex > 0) {
+	if (selectionIndex > 0 && selectionIndex != NSNotFound) {
 		NSUInteger index = selectionIndex;
 		
 		[self toggleHighlightOnLayerAtIndex:selectionIndex];
@@ -232,7 +311,7 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)moveRight:(id)sender
 {
-	if (selectionIndex < ([palette colorCount]-1)) {
+	if (selectionIndex < ([palette colorCount]-1) && selectionIndex != NSNotFound) {
 		NSUInteger index = selectionIndex;
 		
 		[self toggleHighlightOnLayerAtIndex:selectionIndex];
@@ -288,7 +367,7 @@ const CGFloat viewMargin = 1.0f;
 		[self toggleHighlightOnLayerAtIndex:selectionIndex];
 	}
 	
-	if (!palette || !enabled)
+	if (!palette)
 		return;
 	
 	NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];

@@ -158,7 +158,7 @@
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			
-			[_paletteView setNeedsRetile];
+			[_paletteView reload];
 			
 		});
 		

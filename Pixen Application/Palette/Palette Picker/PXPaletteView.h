@@ -5,38 +5,32 @@
 //  Copyright 2011-2012 Pixen. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "PXPalette.h"
-
-@class PXDocument;
 
 @interface PXPaletteView : NSView
 {
   @private
 	PXPalette *palette;
-	NSMutableArray *paletteIndices;
 	
 	int rows, columns;
 	NSUInteger selectionIndex;
-	float width, height;
-	BOOL enabled, highlightEnabled;
+	CGFloat width;
+	BOOL highlightEnabled;
 	NSControlSize controlSize;
 	IBOutlet id delegate;
+	
+	NSMutableSet *_visibleLayers;
+	NSMutableSet *_recycledLayers;
 }
 
-@property (nonatomic, assign) BOOL enabled;
 @property (nonatomic, assign) BOOL highlightEnabled;
 @property (nonatomic, assign) NSControlSize controlSize;
 
-@property (nonatomic, assign) PXPalette *palette;
+@property (nonatomic, retain) PXPalette *palette;
 
 @property (nonatomic, assign) id delegate;
 
-- (void)setupLayer;
-- (void)setNeedsRetile;
-
-- (NSUInteger)indexOfCelAtPoint:(NSPoint)point;
-- (void)toggleHighlightOnLayerAtIndex:(NSUInteger)index;
+- (void)reload;
 
 @end
 
