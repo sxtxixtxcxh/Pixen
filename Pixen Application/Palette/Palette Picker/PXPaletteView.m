@@ -45,7 +45,7 @@ const CGFloat viewMargin = 1.0f;
 													 name:NSViewBoundsDidChangeNotification
 												   object:superview];
 		
-		[self reload];
+		[self performSelector:@selector(reload) withObject:nil afterDelay:0.0f];
 	}
 }
 
