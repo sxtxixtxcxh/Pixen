@@ -149,6 +149,14 @@
 	[NSGraphicsContext restoreGraphicsState];
 }
 
+- (void)setControlSize:(NSControlSize)controlSize
+{
+	if (_controlSize != controlSize) {
+		_controlSize = controlSize;
+		[self setNeedsDisplay];
+	}
+}
+
 - (void)setIndex:(NSUInteger)newIndex
 {
 	if (_index != newIndex) {
