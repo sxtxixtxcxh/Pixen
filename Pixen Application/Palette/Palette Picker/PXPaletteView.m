@@ -193,6 +193,7 @@ const CGFloat viewMargin = 1.0f;
 		layer.index = n;
 		layer.color = PXColorToNSColor([palette colorAtIndex:n]);
 		layer.controlSize = controlSize;
+		layer.highlighted = (n == selectionIndex);
 		
 		[self.layer addSublayer:layer];
 		
