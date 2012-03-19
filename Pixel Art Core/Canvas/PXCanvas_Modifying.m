@@ -263,9 +263,9 @@ NSUInteger PointSizeF (const void *item);
 				{
 					NSColor *sourceColor = [NSColor colorWithCalibratedRed:bitmapData[base + 0] / 255.0f green:bitmapData[base + 1] / 255.0f blue:bitmapData[base + 2] / 255.0f alpha:1];
 					NSColor *resultColor = [matteColor blendedColorWithFraction:(bitmapData[base + 3] / 255.0f) ofColor:sourceColor];
-					red[quantizedPixels] = (int) roundf([resultColor redComponent] * 255);
-					green[quantizedPixels] = (int) roundf([resultColor greenComponent] * 255);
-					blue[quantizedPixels] = (int) roundf([resultColor blueComponent] * 255);
+					red[quantizedPixels] = (unsigned char) round([resultColor redComponent] * 255);
+					green[quantizedPixels] = (unsigned char) round([resultColor greenComponent] * 255);
+					blue[quantizedPixels] = (unsigned char) round([resultColor blueComponent] * 255);
 				}
 				else
 				{

@@ -137,10 +137,10 @@ typedef struct
 		{
 			NSColor *color = [NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 			byte colors[4];
-			colors[3] = (int) roundf([color alphaComponent] * 255);
-			colors[2] = (int) roundf([color redComponent] * 255);
-			colors[1] = (int) roundf([color greenComponent] * 255);
-			colors[0] = (int) roundf([color blueComponent] * 255);
+			colors[3] = (byte) round([color alphaComponent] * 255);
+			colors[2] = (byte) round([color redComponent] * 255);
+			colors[1] = (byte) round([color greenComponent] * 255);
+			colors[0] = (byte) round([color blueComponent] * 255);
 			[data appendBytes:colors length:4 * sizeof(byte)];
 			bytesWritten += 4;
 		}

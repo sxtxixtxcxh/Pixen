@@ -9,7 +9,6 @@
 
 @interface NSColor (PXPaletteAdditions)
 
-- (unsigned int)paletteHash;
 - (float)distanceTo:(NSColor *)other;
 
 @end
