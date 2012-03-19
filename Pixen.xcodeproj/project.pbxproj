@@ -47,6 +47,8 @@
 		C96541EC13FF44A600F1F83C /* PXDeleteCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C96541EA13FF44A600F1F83C /* PXDeleteCollectionView.m */; };
 		C968A8E114A5292700905E3D /* Pixen128.png in Resources */ = {isa = PBXBuildFile; fileRef = C968A8E014A5292700905E3D /* Pixen128.png */; };
 		C969A18E13D2012A00F1C1FE /* QLPlugin.qlgenerator in Copy QuickLook plugin */ = {isa = PBXBuildFile; fileRef = C969A18A13D200B400F1C1FE /* QLPlugin.qlgenerator */; };
+		C96AF5C81517FE1200E6FF67 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C96AF5C71517FE1200E6FF67 /* CrashReporter.framework */; };
+		C96AF5C91517FE2C00E6FF67 /* CrashReporter.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C96AF5C71517FE1200E6FF67 /* CrashReporter.framework */; };
 		C96BABB513ABD3AB00015C92 /* PXHotkeysPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */; };
 		C96BABBB13ABD44A00015C92 /* PXHotkeysPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */; };
 		C96BABBC13ABD44A00015C92 /* PXHotkeysPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */; };
@@ -99,7 +101,7 @@
 		C9F7F16D142BE3D500AB8E37 /* UTType+NSString.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F7F16B142BE3D500AB8E37 /* UTType+NSString.m */; };
 		C9FD44E113FD70FC00CEE4FC /* PXPatternEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FD44DF13FD70FC00CEE4FC /* PXPatternEditor.xib */; };
 		C9FEE51B13AF81AF004FFC3C /* PXGridSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FEE51913AF81AF004FFC3C /* PXGridSettings.xib */; };
-		C9FEF7B514E986B50028F8AA /* Sparkle.framework in Copy Sparkle */ = {isa = PBXBuildFile; fileRef = C931682314E9857C00B3E817 /* Sparkle.framework */; };
+		C9FEF7B514E986B50028F8AA /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C931682314E9857C00B3E817 /* Sparkle.framework */; };
 		D88A735113A93CCD00B56402 /* PXLayerCollectionViewItem.h in Headers */ = {isa = PBXBuildFile; fileRef = D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */; };
 		D88A735213A93CCD00B56402 /* PXLayerCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D88A735013A93CCD00B56402 /* PXLayerCollectionViewItem.m */; };
 		D88FA9A113DD265000175A2F /* NSObject+AssociatedObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FA99F13DD265000175A2F /* NSObject+AssociatedObjects.h */; };
@@ -525,15 +527,16 @@
 			name = "Copy QuickLook plugin";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C99F0C2814AFEE4D00EE1823 /* Copy Sparkle */ = {
+		C99F0C2814AFEE4D00EE1823 /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C9FEF7B514E986B50028F8AA /* Sparkle.framework in Copy Sparkle */,
+				C96AF5C91517FE2C00E6FF67 /* CrashReporter.framework in Copy Frameworks */,
+				C9FEF7B514E986B50028F8AA /* Sparkle.framework in Copy Frameworks */,
 			);
-			name = "Copy Sparkle";
+			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -590,6 +593,7 @@
 		C96541EA13FF44A600F1F83C /* PXDeleteCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXDeleteCollectionView.m; sourceTree = "<group>"; };
 		C968A8E014A5292700905E3D /* Pixen128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pixen128.png; sourceTree = "<group>"; };
 		C969A18513D200B300F1C1FE /* QLPlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QLPlugin.xcodeproj; path = QLPlugin/QLPlugin.xcodeproj; sourceTree = "<group>"; };
+		C96AF5C71517FE1200E6FF67 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CrashReporter.framework; path = Frameworks/CrashReporter.framework; sourceTree = "<group>"; };
 		C96BABB413ABD3AB00015C92 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXHotkeysPreferences.xib; sourceTree = "<group>"; };
 		C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXHotkeysPreferencesController.h; sourceTree = "<group>"; };
 		C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXHotkeysPreferencesController.m; sourceTree = "<group>"; };
@@ -1040,6 +1044,7 @@
 				D8B300DC13AFC443004E83F3 /* QuartzCore.framework in Frameworks */,
 				C9A0859113DE3ECD00C27061 /* WebKit.framework in Frameworks */,
 				C931682414E9857C00B3E817 /* Sparkle.framework in Frameworks */,
+				C96AF5C81517FE1200E6FF67 /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1051,6 +1056,7 @@
 			children = (
 				EA5E9EE70877237800FCE6FE /* Carbon.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
+				C96AF5C71517FE1200E6FF67 /* CrashReporter.framework */,
 				61BB8ED608FB58F9009C75A6 /* QTKit.framework */,
 				D8B300DB13AFC443004E83F3 /* QuartzCore.framework */,
 				C98182C314F0212C0052616F /* SenTestingKit.framework */,
@@ -2263,7 +2269,7 @@
 				EAF6946206A9AE0B0019D8D7 /* Resources */,
 				61DF7262087921B700402897 /* Copy QuickLook plugin */,
 				618AE6F3087E712200A9FA9B /* Copy Color Palette */,
-				C99F0C2814AFEE4D00EE1823 /* Copy Sparkle */,
+				C99F0C2814AFEE4D00EE1823 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
