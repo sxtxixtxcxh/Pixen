@@ -159,6 +159,7 @@
 - (void)windowDidLoad
 {
 	[[self window] setBackgroundColor:[NSColor lightGrayColor]];
+	[[self window] setMovableByWindowBackground:YES];
 	[view setCrosshair:nil];
 	[view setShouldDrawSelectionMarquee:NO];
 	[view setDelegate:bezelView]; // for mouse up

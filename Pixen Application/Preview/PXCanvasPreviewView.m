@@ -11,6 +11,11 @@
 
 @implementation PXCanvasPreviewView
 
+- (BOOL)mouseDownCanMoveWindow
+{
+	return YES;
+}
+
 - (PXBackground *)mainBackground
 {
 	return [self.canvas mainPreviewBackground];
