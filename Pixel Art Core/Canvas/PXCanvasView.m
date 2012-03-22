@@ -864,13 +864,20 @@ void PXDebugRect(NSRect r, float alpha)
 		[self updateCrosshairs:coords];
 		[self updateInfoPanelWithMousePosition:coords dragging:dragging];
 		
-		if([crosshair shouldDraw])
+		if ([crosshair shouldDraw])
 		{
-			float x = NSMinX([self visibleRect]);
-			float y = NSMinY([self visibleRect]);
-			float w = NSWidth([self visibleRect]);
-			float h = NSHeight([self visibleRect]);
-			float unitSize = zoomPercentage / 100.0;
+			CGFloat x = NSMinX([self visibleRect]);
+			CGFloat y = NSMinY([self visibleRect]);
+			CGFloat w = NSWidth([self visibleRect]);
+			CGFloat h = NSHeight([self visibleRect]);
+			
+			// TODO: fix coupling
+			PXToolPaletteController *paletteController = [PXToolPaletteController sharedToolPaletteController];
+			
+			PXTool *currentTool = [paletteController currentTool];
+			CGFloat thickness = CGRectGetWidth([currentTool crosshairRectCenteredAtPoint:coords]);
+			CGFloat unitSize = zoomPercentage / 100.0 * thickness;
+			
 			NSPoint oldLoc = [self convertFromCanvasToViewPoint:oldCursorLoc];
 			NSPoint newLoc = [self convertPoint:locationInWindow fromView:nil];
 			
@@ -883,6 +890,7 @@ void PXDebugRect(NSRect r, float alpha)
 			[self setNeedsDisplayInRect:oldVertical];
 			[self setNeedsDisplayInRect:newVertical];
 		}
+		
 		lastMousePosition = coords;
 	}
 }
