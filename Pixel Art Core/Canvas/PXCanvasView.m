@@ -875,7 +875,7 @@ void PXDebugRect(NSRect r, float alpha)
 			PXToolPaletteController *paletteController = [PXToolPaletteController sharedToolPaletteController];
 			
 			PXTool *currentTool = [paletteController currentTool];
-			CGFloat thickness = CGRectGetWidth([currentTool crosshairRectCenteredAtPoint:coords]);
+			CGFloat thickness = NSWidth([currentTool crosshairRectCenteredAtPoint:coords]);
 			CGFloat unitSize = zoomPercentage / 100.0 * thickness;
 			
 			NSPoint oldLoc = [self convertFromCanvasToViewPoint:oldCursorLoc];
