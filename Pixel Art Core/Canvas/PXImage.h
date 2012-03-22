@@ -37,6 +37,8 @@ PXColor PXImage_colorAtXY(PXImage *self, int x, int y);
 void PXImage_setColorAtXY(PXImage *self, PXColor color, int x, int y);
 void PXImage_setColorAtIndex(PXImage *self, PXColor color, unsigned index);
 
+void PXImage_replaceColorWithColor(PXImage *self, PXColor srcColor, PXColor destColor);
+
 NSData *PXImage_colorData(PXImage *self);
 void PXImage_setColorData(PXImage *self, NSData *data);
 

@@ -335,6 +335,37 @@ void PXImage_setColorAtXY(PXImage *self, PXColor color, int xv, int yv)
 	PXTileSetAtXY(t, xv, yv, color);
 }
 
+void PXImage_replaceColorWithColor(PXImage *self, PXColor srcColor, PXColor destColor)
+{
+	for (int y = 0; y < self->height; y += PXTileDimension)
+	{
+		for (int x = 0; x < self->width; x += PXTileDimension)
+		{
+			PXTile *tile = PXImage_tileAtXY(self, x, y);
+			
+			unsigned char *data = CGBitmapContextGetData(tile->painting);
+			size_t size = CGBitmapContextGetWidth(tile->painting) * CGBitmapContextGetHeight(tile->painting);
+			
+			for (size_t n = 0; n < size; n++) {
+				const void *mem = (data + n*PXTileComponentsPerPixel);
+				
+				if (!memcmp(mem, &srcColor, 4)) {
+					data[n*PXTileComponentsPerPixel+0] = destColor.r;
+					data[n*PXTileComponentsPerPixel+1] = destColor.g;
+					data[n*PXTileComponentsPerPixel+2] = destColor.b;
+					data[n*PXTileComponentsPerPixel+3] = destColor.a;
+				}
+			}
+			
+			if (tile->image)
+			{
+				CGImageRelease(tile->image);
+				tile->image = NULL;
+			}
+		}
+	}
+}
+
 NSData *PXImage_colorData(PXImage *self)
 {
 	NSMutableData *colorData = [[NSMutableData alloc] init];

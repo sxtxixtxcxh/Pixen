@@ -15,7 +15,8 @@
 
 const CGFloat viewMargin = 1.0f;
 
-@synthesize highlightEnabled, controlSize, palette, delegate;
+@synthesize allowsColorSelection, allowsColorModification, controlSize, palette, delegate;
+@synthesize selectionIndex;
 
 - (id)initWithFrame:(NSRect)frameRect
 {
@@ -26,7 +27,7 @@ const CGFloat viewMargin = 1.0f;
 		
 		selectionIndex = NSNotFound;
 		controlSize = NSRegularControlSize;
-		highlightEnabled = YES;
+		allowsColorSelection = allowsColorModification = YES;
 		
 		[self registerForDraggedTypes:[NSArray arrayWithObject:NSPasteboardTypeColor]];
 	}
@@ -270,6 +271,15 @@ const CGFloat viewMargin = 1.0f;
 	}
 }
 
+- (void)setSelectionIndex:(NSUInteger)index
+{
+	if (selectionIndex != index) {
+		selectionIndex = index;
+		
+		[self reload];
+	}
+}
+
 - (void)sizeSelector:selector selectedSize:(NSControlSize)aSize
 {
 	[self setControlSize:aSize];
@@ -331,7 +341,7 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)toggleHighlightOnLayerAtIndex:(NSUInteger)index
 {
-	if (!highlightEnabled)
+	if (!allowsColorSelection)
 		return;
 	
 	for (CALayer *layer in [[self layer] sublayers])
@@ -358,7 +368,7 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)keyDown:(NSEvent *)theEvent
 {
-	if (!highlightEnabled)
+	if (!allowsColorSelection)
 		return; // disable moveRight:, moveLeft:, and deleteBackward:
 	
 	[self interpretKeyEvents:[NSArray arrayWithObject:theEvent]];
@@ -435,7 +445,7 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)mouseDown:(NSEvent *)event
 {
-	if ([event clickCount] == 2 && highlightEnabled) {
+	if ([event clickCount] == 2 && allowsColorModification) {
 		NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
 		NSUInteger index = [self indexOfCelAtPoint:point];
 		

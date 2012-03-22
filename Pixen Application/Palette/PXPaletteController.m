@@ -9,6 +9,7 @@
 
 #import "PXCanvas.h"
 #import "PXCanvas_Layers.h"
+#import "PXCanvas_Modifying.h"
 #import "PXDocument.h"
 #import "PXPalette.h"
 #import "PXPaletteView.h"
@@ -63,7 +64,9 @@
 
 - (void)awakeFromNib
 {
-	_paletteView.highlightEnabled = NO;
+	_paletteView.allowsColorSelection = NO;
+	_paletteView.allowsColorModification = YES;
+	_paletteView.delegate = self;
 }
 
 - (void)setDocument:(PXDocument *)document
@@ -206,15 +209,55 @@
 	[self useColorAtIndex:index];
 }
 
+- (void)changeColor:(id)sender
+{
+	NSUInteger index = [_paletteView selectionIndex];
+	
+	if (index == NSNotFound)
+		return;
+	
+	PXCanvas *canvas = [_document canvas];
+	
+	PXColor srcColor = [_frequencyPalette colorAtIndex:index];
+	PXColor destColor = PXColorFromNSColor([[sender color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]);
+	
+	for (PXLayer *layer in [canvas layers]) {
+		PXImage_replaceColorWithColor([layer image], srcColor, destColor);
+	}
+	
+	[canvas changed];
+	[canvas refreshWholePalette];
+	
+	_paletteView.selectionIndex = NSNotFound;
+}
+
+- (void)paletteView:(PXPaletteView *)pv modifyColorAtIndex:(NSUInteger)index
+{
+	NSColor *color = PXColorToNSColor([_frequencyPalette colorAtIndex:index]);
+	
+	NSColorPanel *colorPanel = [NSColorPanel sharedColorPanel];
+	[colorPanel setContinuous:NO];
+	[colorPanel setColor:color];
+	[colorPanel setTarget:self];
+	[colorPanel setAction:@selector(changeColor:)];
+	[colorPanel makeKeyAndOrderFront:nil];
+	
+	_paletteView.selectionIndex = index;
+}
+
 - (IBAction)useMostRecentColors:(id)sender
 {
 	_mode = PXPaletteModeRecent;
+	
+	[_paletteView setAllowsColorModification:NO];
 	[_paletteView setPalette:_recentPalette];
 }
 
 - (IBAction)useMostFrequentColors:(id)sender
 {
 	_mode = PXPaletteModeFrequency;
+	
+	[_paletteView setAllowsColorModification:YES];
 	[_paletteView setPalette:_frequencyPalette];
 }
 

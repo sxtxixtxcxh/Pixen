@@ -15,7 +15,7 @@
 	int rows, columns;
 	NSUInteger selectionIndex;
 	CGFloat width;
-	BOOL highlightEnabled;
+	BOOL allowsColorSelection, allowsColorModification;
 	NSControlSize controlSize;
 	IBOutlet id delegate;
 	
@@ -23,8 +23,11 @@
 	NSMutableSet *_recycledLayers;
 }
 
-@property (nonatomic, assign) BOOL highlightEnabled;
+@property (nonatomic, assign) BOOL allowsColorSelection;
+@property (nonatomic, assign) BOOL allowsColorModification;
 @property (nonatomic, assign) NSControlSize controlSize;
+
+@property (nonatomic, assign) NSUInteger selectionIndex;
 
 @property (nonatomic, retain) PXPalette *palette;
 
