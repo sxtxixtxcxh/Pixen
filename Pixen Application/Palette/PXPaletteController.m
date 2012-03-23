@@ -235,6 +235,10 @@
 {
 	NSColor *color = PXColorToNSColor([_frequencyPalette colorAtIndex:index]);
 	
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:NSWindowWillCloseNotification
+												  object:nil];
+	
 	NSColorPanel *colorPanel = [NSColorPanel sharedColorPanel];
 	[colorPanel setContinuous:NO];
 	[colorPanel setColor:color];
@@ -242,7 +246,17 @@
 	[colorPanel setAction:@selector(changeColor:)];
 	[colorPanel makeKeyAndOrderFront:nil];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(closedColorPanel:)
+												 name:NSWindowWillCloseNotification
+											   object:colorPanel];
+	
 	_paletteView.selectionIndex = index;
+}
+
+- (void)closedColorPanel:(NSNotification *)notification
+{
+	_paletteView.selectionIndex = NSNotFound;
 }
 
 - (IBAction)useMostRecentColors:(id)sender
