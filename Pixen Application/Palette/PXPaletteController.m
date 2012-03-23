@@ -67,6 +67,10 @@
 	_paletteView.allowsColorSelection = NO;
 	_paletteView.allowsColorModification = YES;
 	_paletteView.delegate = self;
+	
+	NSResponder *nextResponder = [_paletteView nextResponder];
+	[_paletteView setNextResponder:self];
+	[self setNextResponder:nextResponder];
 }
 
 - (void)setDocument:(PXDocument *)document
@@ -242,8 +246,6 @@
 	NSColorPanel *colorPanel = [NSColorPanel sharedColorPanel];
 	[colorPanel setContinuous:NO];
 	[colorPanel setColor:color];
-	[colorPanel setTarget:self];
-	[colorPanel setAction:@selector(changeColor:)];
 	[colorPanel makeKeyAndOrderFront:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
