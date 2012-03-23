@@ -40,6 +40,9 @@
 - (void)startMovingSelectionFromPoint:(NSPoint)aPoint fromCanvasController:(PXCanvasController *)controller
 {
 	PXCanvas *canvas = [controller canvas];
+	PXLayer *activeLayer = [canvas activeLayer];
+	
+	[[[canvas undoManager] prepareWithInvocationTarget:canvas] restoreColorData:[activeLayer colorData] onLayer:activeLayer];
 	
 	lastSelectedRect = selectedRect = [canvas selectedRect]; // O(N)
 	selectionOrigin = selectedRect.origin;
