@@ -25,6 +25,8 @@
 + (void)reduceColorsInCanvases:(NSArray *)canvases toColorCount:(int)colors
 			  withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
 
+- (void)replaceColor:(PXColor)color withColor:(PXColor)destColor;
+
 - (NSPoint)correct:(NSPoint)aPoint;
 - (BOOL)containsPoint:(NSPoint)aPoint;
 - (void)rotateByDegrees:(int)degrees;

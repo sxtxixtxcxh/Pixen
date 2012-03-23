@@ -28,6 +28,9 @@
 /* Grid Tooltip */
 "GRID_TOOLTIP" = "Show the grid settings";
 
+/* Color Replacement Undo */
+"COLOR_REPLACEMENT" = "Color Replacement";
+
 /* Color Bank Label */
 "COLOR_BANK_LABEL" = "Color Bank";
 /* Color Bank Tooltip */

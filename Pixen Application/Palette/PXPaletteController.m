@@ -225,12 +225,7 @@
 	PXColor srcColor = [_frequencyPalette colorAtIndex:index];
 	PXColor destColor = PXColorFromNSColor([[sender color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]);
 	
-	for (PXLayer *layer in [canvas layers]) {
-		PXImage_replaceColorWithColor([layer image], srcColor, destColor);
-	}
-	
-	[canvas changed];
-	[canvas refreshWholePalette];
+	[canvas replaceColor:srcColor withColor:destColor];
 	
 	_paletteView.selectionIndex = NSNotFound;
 }

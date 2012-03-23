@@ -105,6 +105,35 @@ NSUInteger PointSizeF (const void *item);
 	[self setColor:color atIndices:indices updateIn:bounds onLayer:activeLayer];
 }
 
+- (void)setColorData:(NSData *)data onLayer:(PXLayer *)layer
+{
+	[[[self undoManager] prepareWithInvocationTarget:self] setColorData:[layer colorData] onLayer:layer];
+	
+	[layer setColorData:data];
+	
+	[self changed];
+	[self refreshWholePalette];
+}
+
+- (void)replaceColor:(PXColor)color withColor:(PXColor)destColor
+{
+	NSUndoManager *um = [self undoManager];
+	
+	[um beginUndoGrouping];
+	
+	for (PXLayer *layer in layers) {
+		[[um prepareWithInvocationTarget:self] setColorData:[layer colorData] onLayer:layer];
+		
+		PXImage_replaceColorWithColor([layer image], color, destColor);
+	}
+	
+	[um setActionName:NSLocalizedString(@"COLOR_REPLACEMENT", nil)];
+	[um endUndoGrouping];
+	
+	[self changed];
+	[self refreshWholePalette];
+}
+
 - (PXColor)mergedColorAtPoint:(NSPoint)aPoint
 {
 	PXColor currentColor = PXGetClearColor();
