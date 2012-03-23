@@ -25,6 +25,8 @@
 + (void)reduceColorsInCanvases:(NSArray *)canvases toColorCount:(int)colors
 			  withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
 
+- (void)restoreColorData:(NSData *)data onLayer:(PXLayer *)layer;
+
 - (void)replaceColor:(PXColor)color withColor:(PXColor)destColor;
 
 - (NSPoint)correct:(NSPoint)aPoint;

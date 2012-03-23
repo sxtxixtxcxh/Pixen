@@ -295,14 +295,6 @@
 	} [self endUndoGrouping:NSLocalizedString(@"Merge Down", @"Merge Down")];
 }
 
-- (void)restoreColorData:(NSData *)data onLayer:(PXLayer *)layer
-{
-	[layer setColorData:data];
-	
-	[self changed];
-	[self refreshWholePalette];
-}
-
 - (void)moveLayer:(PXLayer *)layer byOffset:(NSPoint)offset
 {
 	[self beginUndoGrouping]; {

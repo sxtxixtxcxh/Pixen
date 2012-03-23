@@ -105,9 +105,9 @@ NSUInteger PointSizeF (const void *item);
 	[self setColor:color atIndices:indices updateIn:bounds onLayer:activeLayer];
 }
 
-- (void)setColorData:(NSData *)data onLayer:(PXLayer *)layer
+- (void)restoreColorData:(NSData *)data onLayer:(PXLayer *)layer
 {
-	[[[self undoManager] prepareWithInvocationTarget:self] setColorData:[layer colorData] onLayer:layer];
+	[[[self undoManager] prepareWithInvocationTarget:self] restoreColorData:[layer colorData] onLayer:layer];
 	
 	[layer setColorData:data];
 	
@@ -122,7 +122,7 @@ NSUInteger PointSizeF (const void *item);
 	[um beginUndoGrouping];
 	
 	for (PXLayer *layer in layers) {
-		[[um prepareWithInvocationTarget:self] setColorData:[layer colorData] onLayer:layer];
+		[[um prepareWithInvocationTarget:self] restoreColorData:[layer colorData] onLayer:layer];
 		
 		PXImage_replaceColorWithColor([layer image], color, destColor);
 	}
