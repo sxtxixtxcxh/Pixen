@@ -2,76 +2,18 @@
 //  PXSpriteSheetExporter.m
 //  Pixen
 //
-//  Created by Ian Henderson on 12.08.05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2012 Pixen Project. All rights reserved.
 //
 
 #import "PXSpriteSheetExporter.h"
-#import "PXDocumentController.h"
-#import "PXAnimationDocument.h"
+
 #import "PXAnimation.h"
+#import "PXAnimationDocument.h"
+#import "PXDocumentController.h"
 
 @implementation PXSpriteSheetExporter
 
-- (id)init
-{
-	if ( ! (self = [super initWithWindowNibName:@"PXSpriteSheetExporter"]))
-		return nil;
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentsChanged:) name:PXDocumentDidCloseNotificationName object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentsChanged:) name:PXDocumentOpenedNotificationName object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentsChanged:) name:PXDocumentChangedDisplayNameNotificationName object:nil];
-	
-	return self;
-}
-
-- (void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
-}
-
-- (void)recacheDocumentRepresentations
-{
-	NSArray *animationDocuments = [[PXDocumentController sharedDocumentController] animationDocuments];
-	
-	NSArray *oldRepresentations = documentRepresentations;
-	documentRepresentations = [[NSMutableArray alloc] init];
-	
-	for (PXAnimationDocument *doc in animationDocuments)
-    {
-		BOOL included = NO;
-		
-		for (NSDictionary *oldRep in oldRepresentations)
-        {
-			if ([oldRep objectForKey:@"document"] == doc) {
-				included = [[oldRep objectForKey:@"included"] boolValue];
-				break;
-			}
-		}
-		
-		NSDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-							  doc, @"document", [doc displayName], @"displayName",
-							  [NSNumber numberWithBool:included], @"included", nil];
-		
-		[ (NSMutableArray *) documentRepresentations addObject:dict];
-	}
-	
-	[oldRepresentations release];
-}
-
-- (void)documentsChanged:(NSNotification *)notification
-{
-	PXAnimationDocument *doc = [notification object];
-	
-	if ([doc isKindOfClass:[PXAnimationDocument class]]) {
-		[self willChangeValueForKey:@"documentRepresentations"];
-		[self recacheDocumentRepresentations];
-		[self didChangeValueForKey:@"documentRepresentations"];
-		
-		[self updatePreview:nil];
-	}
-}
+@synthesize sheetImageView, documentRepresentationsController;
 
 + (id)sharedSpriteSheetExporter
 {
@@ -85,13 +27,73 @@
 	return sharedSpriteSheetExporter;
 }
 
-- (NSArray *)documentRepresentations
+- (id)init
 {
-	if (!documentRepresentations) {
-		[self recacheDocumentRepresentations];
+	self = [super initWithWindowNibName:@"PXSpriteSheetExporter"];
+	if (self) {
+		NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+		
+		[center addObserver:self selector:@selector(documentsChanged:) name:PXDocumentOpenedNotificationName object:nil];
+		[center addObserver:self selector:@selector(documentsChanged:) name:PXDocumentDidCloseNotificationName object:nil];
+		[center addObserver:self selector:@selector(documentsChanged:) name:PXDocumentChangedDisplayNameNotificationName object:nil];
+	}
+	return self;
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[super dealloc];
+}
+
+- (NSDictionary *)findRepresentationForDocument:(PXAnimationDocument *)document
+{
+	for (NSDictionary *rep in [documentRepresentationsController arrangedObjects])
+	{
+		if ([rep objectForKey:@"document"] == document)
+			return rep;
 	}
 	
-	return documentRepresentations;
+	return nil;
+}
+
+- (void)recacheDocumentRepresentations
+{
+	NSArray *oldRepresentations = [[documentRepresentationsController arrangedObjects] copy];
+	[documentRepresentationsController removeObjects:oldRepresentations];
+	
+	NSArray *animationDocuments = [[PXDocumentController sharedDocumentController] animationDocuments];
+	
+	for (PXAnimationDocument *doc in animationDocuments)
+	{
+		BOOL included = NO;
+		
+		for (NSDictionary *oldRep in oldRepresentations)
+		{
+			if ([oldRep objectForKey:@"document"] == doc) {
+				included = [[oldRep objectForKey:@"included"] boolValue];
+				break;
+			}
+		}
+		
+		NSDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+							  doc, @"document", [doc displayName], @"displayName",
+							  [NSNumber numberWithBool:included], @"included", nil];
+		
+		[documentRepresentationsController addObject:dict];
+	}
+	
+	[oldRepresentations release];
+}
+
+- (void)documentsChanged:(NSNotification *)notification
+{
+	PXAnimationDocument *doc = [notification object];
+	
+	if ([doc isKindOfClass:[PXAnimationDocument class]]) {
+		[self recacheDocumentRepresentations];
+		[self updatePreview:nil];
+	}
 }
 
 - (NSColor *)backgroundColor
@@ -108,8 +110,8 @@
 	NSMutableArray *animationSheets = [NSMutableArray array];
 	NSSize sheetSize = NSMakeSize(padding*2, padding*2);
 	
-	for (NSDictionary *docRep in documentRepresentations)
-    {
+	for (NSDictionary *docRep in [documentRepresentationsController arrangedObjects])
+	{
 		PXAnimation *animation = [[docRep objectForKey:@"document"] animation];
 		
 		if ([[docRep objectForKey:@"included"] boolValue]) {
@@ -166,6 +168,7 @@
 
 - (void)windowDidLoad
 {
+	[self recacheDocumentRepresentations];
 	[self updatePreview:self];
 }
 
@@ -201,7 +204,7 @@
 	[savePanel setExtensionHidden:NO];
 	[savePanel setCanSelectHiddenExtension:NO];
 	[savePanel setTitle:@"Save Sprite Sheet"];
-	[savePanel setAllowedFileTypes: [NSArray arrayWithObject: (NSString *) kUTTypePNG]];
+	[savePanel setAllowedFileTypes:[NSArray arrayWithObject: (NSString *) kUTTypePNG]];
 	
 	[savePanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
 		

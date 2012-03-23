@@ -2,28 +2,25 @@
 //  PXSpriteSheetExporter.h
 //  Pixen
 //
-//  Created by Ian Henderson on 12.08.05.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2012 Pixen Project. All rights reserved.
 //
-
-#import <Cocoa/Cocoa.h>
 
 @interface PXSpriteSheetExporter : NSWindowController
 {
   @private
-	IBOutlet NSTableView *animationsTable;
-	IBOutlet NSImageView *sheetImageView;
-	NSArray *documentRepresentations;
+	NSImageView *sheetImageView;
+	NSArrayController *documentRepresentationsController;
 	BOOL closeOnEndSheet;
 }
+
+@property (nonatomic, assign) IBOutlet NSImageView *sheetImageView;
+
+@property (nonatomic, assign) IBOutlet NSArrayController *documentRepresentationsController;
 
 + (id)sharedSpriteSheetExporter;
 
 - (IBAction)export:(id)sender;
 
-- (NSArray *)documentRepresentations;
 - (IBAction)updatePreview:(id)sender;
-
-- (void)recacheDocumentRepresentations;
 
 @end

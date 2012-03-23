@@ -21,7 +21,6 @@
 - (NSPanel *)welcomePanel;
 - (NSPanel *)toolPalettePanel;
 - (NSPanel *)previewPanel;
-- (NSPanel *)spriteSheetExporterPanel;
 
 - (IBAction)showPreferences:(id)sender;
 - (IBAction)showInfo:(id)sender;

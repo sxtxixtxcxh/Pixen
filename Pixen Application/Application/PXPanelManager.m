@@ -104,9 +104,6 @@ static PXPanelManager *sharedManager = nil;
 		
 		[panel makeKeyAndOrderFront:self];
 	}
-	
-	// make sure this gets document open/close notification
-	[PXSpriteSheetExporter sharedSpriteSheetExporter];
 }
 
 - (NSRect)archivableRectForToolPropertiesWindow:(NSWindow *)window
@@ -246,11 +243,6 @@ static PXPanelManager *sharedManager = nil;
 	return [[PXToolPaletteController sharedToolPaletteController] toolPanel];
 }
 
-- (NSPanel *)spriteSheetExporterPanel
-{
-	return (NSPanel *)[[PXSpriteSheetExporter sharedSpriteSheetExporter] window];
-}
-
 - (NSPanel *)previewPanel
 {
 	return (NSPanel *)[[PXPreviewController sharedPreviewController] window];
@@ -304,8 +296,7 @@ static PXPanelManager *sharedManager = nil;
 
 - (IBAction)showSpriteSheetExporter: (id)sender
 {
-  [[PXSpriteSheetExporter sharedSpriteSheetExporter] recacheDocumentRepresentations];
-	[self show:[self spriteSheetExporterPanel]];
+	[[PXSpriteSheetExporter sharedSpriteSheetExporter] showWindow:nil];
 }
 
 - (IBAction)showPreviewPanel: (id)sender
