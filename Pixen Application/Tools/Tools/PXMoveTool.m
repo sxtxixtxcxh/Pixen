@@ -92,6 +92,7 @@
 	}
 	
 	PXCanvas *canvas = [controller canvas];
+	[canvas beginUndoGrouping];
 	
 	if ([canvas hasSelection])
 	{
@@ -237,6 +238,7 @@
 	}
 	
 	type = PXMoveTypeNone;
+	[canvas endUndoGrouping:[self actionName]];
 }
 
 - (void)keyDown:(NSEvent *)event fromCanvasController:(PXCanvasController *)cc
