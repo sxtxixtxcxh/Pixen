@@ -509,6 +509,14 @@
 					</object>
 					<int key="connectionID">31</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">anchorView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="952613926"/>
+					</object>
+					<int key="connectionID">66</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -762,7 +770,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">65</int>
+			<int key="maxID">66</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -797,11 +805,16 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="anchorView">PXCanvasAnchorView</string>
 						<string key="backgroundColorWell">NSColorWell</string>
 						<string key="heightField">NSTextField</string>
 						<string key="widthField">NSTextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="anchorView">
+							<string key="name">anchorView</string>
+							<string key="candidateClassName">PXCanvasAnchorView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="backgroundColorWell">
 							<string key="name">backgroundColorWell</string>
 							<string key="candidateClassName">NSColorWell</string>

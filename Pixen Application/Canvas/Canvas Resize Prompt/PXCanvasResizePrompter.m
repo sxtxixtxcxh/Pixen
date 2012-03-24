@@ -7,10 +7,13 @@
 
 #import "PXCanvasResizePrompter.h"
 
+#import "PXCanvasAnchorView.h"
+
 @implementation PXCanvasResizePrompter
 
 @synthesize widthField = _widthField, heightField = _heightField;
-@synthesize backgroundColorWell = _backgroundColorWell;
+@synthesize backgroundColorWell = _backgroundColorWell, anchorView = _anchorView;
+@synthesize oldSize = _oldSize;
 @synthesize delegate = _delegate;
 
 @dynamic backgroundColor, currentSize;
@@ -63,9 +66,11 @@
 
 - (IBAction)useEnteredFrame:(id)sender
 {
+	NSPoint position = [_anchorView topLeftPositionWithOldSize:_oldSize newSize:[self currentSize]];
+	
 	[_delegate canvasResizePrompter:self
 				  didFinishWithSize:[self currentSize]
-						   position:NSZeroPoint
+						   position:position
 					backgroundColor:[[_backgroundColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
 	
 	[self cancel:nil];

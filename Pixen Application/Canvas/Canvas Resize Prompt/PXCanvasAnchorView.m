@@ -118,4 +118,44 @@
 	[icon drawInRect:iconRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 }
 
+- (NSPoint)topLeftPositionWithOldSize:(NSSize)size newSize:(NSSize)newSize
+{
+	NSPoint position;
+	
+	switch (_anchor) {
+		case PXCanvasAnchorTopLeft:
+			position = NSMakePoint(0.0f, newSize.height - size.height);
+			break;
+		case PXCanvasAnchorTopCenter:
+			position = NSMakePoint(floorf((newSize.width - size.width) / 2), newSize.height - size.height);
+			break;
+		case PXCanvasAnchorTopRight:
+			position = NSMakePoint(newSize.width - size.width, newSize.height - size.height);
+			break;
+		case PXCanvasAnchorCenterLeft:
+			position = NSMakePoint(0.0f, floorf((newSize.height - size.height) / 2));
+			break;
+		case PXCanvasAnchorCenter:
+			position = NSMakePoint(floorf((newSize.width - size.width) / 2), floorf((newSize.height - size.height) / 2));
+			break;
+		case PXCanvasAnchorCenterRight:
+			position = NSMakePoint(newSize.width - size.width, floorf((newSize.height - size.height) / 2));
+			break;
+		case PXCanvasAnchorBottomLeft:
+			position = NSZeroPoint;
+			break;
+		case PXCanvasAnchorBottomCenter:
+			position = NSMakePoint(floorf((newSize.width - size.width) / 2), 0.0f);
+			break;
+		case PXCanvasAnchorBottomRight:
+			position = NSMakePoint(newSize.width - size.width, 0.0f);
+			break;
+		default:
+			position = NSZeroPoint;
+			break;
+	}
+	
+	return position;
+}
+
 @end

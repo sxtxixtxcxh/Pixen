@@ -25,4 +25,6 @@ typedef enum {
 
 @property (nonatomic, assign) PXCanvasAnchor anchor;
 
+- (NSPoint)topLeftPositionWithOldSize:(NSSize)size newSize:(NSSize)newSize;
+
 @end
