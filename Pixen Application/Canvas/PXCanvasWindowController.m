@@ -66,8 +66,8 @@
 	return _resizePrompter;
 }
 
-- (void)prompter:(PXCanvasResizePrompter *)prompter didFinishWithSize:(NSSize)size
-		position:(NSPoint)position backgroundColor:(NSColor *)color
+- (void)canvasResizePrompter:(PXCanvasResizePrompter *)prompter didFinishWithSize:(NSSize)size
+					position:(NSPoint)position backgroundColor:(NSColor *)color
 {
 	[canvas setSize:size withOrigin:position backgroundColor:PXColorFromNSColor(color)];
 	[canvasController updateCanvasSize];

@@ -167,8 +167,6 @@
 		EA31F9650CE7BF0900EC481B /* PXImageSizePrompter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F95E0CE7BF0900EC481B /* PXImageSizePrompter.m */; };
 		EA31F9660CE7BF0900EC481B /* PXCanvasResizePrompter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9600CE7BF0900EC481B /* PXCanvasResizePrompter.h */; };
 		EA31F9670CE7BF0900EC481B /* PXCanvasResizePrompter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9610CE7BF0900EC481B /* PXCanvasResizePrompter.m */; };
-		EA31F9680CE7BF0900EC481B /* PXCanvasResizeView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9620CE7BF0900EC481B /* PXCanvasResizeView.h */; };
-		EA31F9690CE7BF0900EC481B /* PXCanvasResizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9630CE7BF0900EC481B /* PXCanvasResizeView.m */; };
 		EA31F9760CE7CD9300EC481B /* PXLayerController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F96B0CE7CD9300EC481B /* PXLayerController.h */; };
 		EA31F9770CE7CD9300EC481B /* PXLayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F96C0CE7CD9300EC481B /* PXLayerController.m */; };
 		EA31F9780CE7CD9300EC481B /* PXLayerDetailsView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F96D0CE7CD9300EC481B /* PXLayerDetailsView.h */; };
@@ -712,8 +710,6 @@
 		EA31F95E0CE7BF0900EC481B /* PXImageSizePrompter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXImageSizePrompter.m; sourceTree = "<group>"; };
 		EA31F9600CE7BF0900EC481B /* PXCanvasResizePrompter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvasResizePrompter.h; sourceTree = "<group>"; };
 		EA31F9610CE7BF0900EC481B /* PXCanvasResizePrompter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasResizePrompter.m; sourceTree = "<group>"; };
-		EA31F9620CE7BF0900EC481B /* PXCanvasResizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvasResizeView.h; sourceTree = "<group>"; };
-		EA31F9630CE7BF0900EC481B /* PXCanvasResizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasResizeView.m; sourceTree = "<group>"; };
 		EA31F96B0CE7CD9300EC481B /* PXLayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerController.h; sourceTree = "<group>"; };
 		EA31F96C0CE7CD9300EC481B /* PXLayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerController.m; sourceTree = "<group>"; };
 		EA31F96D0CE7CD9300EC481B /* PXLayerDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerDetailsView.h; sourceTree = "<group>"; };
@@ -1343,8 +1339,6 @@
 			children = (
 				EA31F9600CE7BF0900EC481B /* PXCanvasResizePrompter.h */,
 				EA31F9610CE7BF0900EC481B /* PXCanvasResizePrompter.m */,
-				EA31F9620CE7BF0900EC481B /* PXCanvasResizeView.h */,
-				EA31F9630CE7BF0900EC481B /* PXCanvasResizeView.m */,
 			);
 			path = "Canvas Resize Prompt";
 			sourceTree = "<group>";
@@ -2118,7 +2112,6 @@
 				EA31F9450CE7BE8200EC481B /* PXGridSettingsController.h in Headers */,
 				EA31F9640CE7BF0900EC481B /* PXImageSizePrompter.h in Headers */,
 				EA31F9660CE7BF0900EC481B /* PXCanvasResizePrompter.h in Headers */,
-				EA31F9680CE7BF0900EC481B /* PXCanvasResizeView.h in Headers */,
 				EA31F9760CE7CD9300EC481B /* PXLayerController.h in Headers */,
 				EA31F9780CE7CD9300EC481B /* PXLayerDetailsView.h in Headers */,
 				EA31F97A0CE7CD9300EC481B /* PXLayerCollectionView.h in Headers */,
@@ -2552,7 +2545,6 @@
 				EA31F9460CE7BE8200EC481B /* PXGridSettingsController.m in Sources */,
 				EA31F9650CE7BF0900EC481B /* PXImageSizePrompter.m in Sources */,
 				EA31F9670CE7BF0900EC481B /* PXCanvasResizePrompter.m in Sources */,
-				EA31F9690CE7BF0900EC481B /* PXCanvasResizeView.m in Sources */,
 				EA31F9770CE7CD9300EC481B /* PXLayerController.m in Sources */,
 				EA31F9790CE7CD9300EC481B /* PXLayerDetailsView.m in Sources */,
 				EA31F97B0CE7CD9300EC481B /* PXLayerCollectionView.m in Sources */,

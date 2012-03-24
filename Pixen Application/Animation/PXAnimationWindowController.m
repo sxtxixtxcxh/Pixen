@@ -497,7 +497,8 @@
 	[super scaleCanvas:self];
 }
 
-- (void)prompter:(PXCanvasResizePrompter *)prompter didFinishWithSize:(NSSize)size position:(NSPoint)position backgroundColor:(NSColor *)color
+- (void)canvasResizePrompter:(PXCanvasResizePrompter *)prompter didFinishWithSize:(NSSize)size
+					position:(NSPoint)position backgroundColor:(NSColor *)color
 {
 	[animation setSize:size withOrigin:position backgroundColor:PXColorFromNSColor(color)];
 }

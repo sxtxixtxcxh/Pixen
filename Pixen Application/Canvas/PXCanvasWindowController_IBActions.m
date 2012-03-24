@@ -103,7 +103,6 @@
 	PXCanvasResizePrompter *prompter = self.resizePrompter;
 	prompter.backgroundColor = [NSKeyedUnarchiver unarchiveObjectWithData:colorData];
 	prompter.currentSize = [canvas size];
-	prompter.cachedImage = [canvas displayImage];
 	
 	[prompter promptInWindow:[self window]];
 }
