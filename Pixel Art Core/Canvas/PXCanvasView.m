@@ -860,35 +860,12 @@ void PXDebugRect(NSRect r, float alpha)
 {
 	NSPoint coords = [self convertFromWindowToCanvasPoint:locationInWindow];
 	if (!NSEqualPoints(coords, lastMousePosition)) {
-		NSPoint oldCursorLoc = [crosshair cursorPosition];
 		[self updateCrosshairs:coords];
 		[self updateInfoPanelWithMousePosition:coords dragging:dragging];
 		
 		if ([crosshair shouldDraw])
 		{
-			CGFloat x = NSMinX([self visibleRect]);
-			CGFloat y = NSMinY([self visibleRect]);
-			CGFloat w = NSWidth([self visibleRect]);
-			CGFloat h = NSHeight([self visibleRect]);
-			
-			// TODO: fix coupling
-			PXToolPaletteController *paletteController = [PXToolPaletteController sharedToolPaletteController];
-			
-			PXTool *currentTool = [paletteController currentTool];
-			CGFloat thickness = NSWidth([currentTool crosshairRectCenteredAtPoint:coords]);
-			CGFloat unitSize = zoomPercentage / 100.0 * thickness;
-			
-			NSPoint oldLoc = [self convertFromCanvasToViewPoint:oldCursorLoc];
-			NSPoint newLoc = [self convertPoint:locationInWindow fromView:nil];
-			
-			NSRect oldHorizontal = NSMakeRect(x, oldLoc.y-unitSize*2, w, unitSize*4);
-			NSRect oldVertical = NSMakeRect(oldLoc.x-unitSize*2, y, unitSize*4, h);
-			NSRect newHorizontal = NSMakeRect(x, newLoc.y-unitSize*2, w, unitSize*4);
-			NSRect newVertical = NSMakeRect(newLoc.x-unitSize*2, y, unitSize*4, h);
-			[self setNeedsDisplayInRect:oldHorizontal];
-			[self setNeedsDisplayInRect:newHorizontal];
-			[self setNeedsDisplayInRect:oldVertical];
-			[self setNeedsDisplayInRect:newVertical];
+			[self setNeedsDisplay:YES];
 		}
 		
 		lastMousePosition = coords;
