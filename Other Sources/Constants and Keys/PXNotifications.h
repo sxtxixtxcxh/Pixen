@@ -9,6 +9,7 @@ extern NSString *PXCanvasLayerSelectionDidChangeNotificationName;
 extern NSString *PXCanvasAddedLayerNotificationName;
 extern NSString *PXCanvasRemovedLayerNotificationName;
 extern NSString *PXCanvasMovedLayerNotificationName;
+extern NSString *PXCanvasSetLayersNotificationName;
 
 extern NSString *PXCanvasSizeChangedNotificationName;
 extern NSString *PXCanvasChangedNotificationName;

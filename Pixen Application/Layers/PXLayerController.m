@@ -118,12 +118,22 @@
 				   selector:@selector(movedLayer:)
 					   name:PXCanvasMovedLayerNotificationName
 					 object:_canvas];
+			
+			[nc addObserver:self
+				   selector:@selector(setLayers:)
+					   name:PXCanvasSetLayersNotificationName
+					 object:_canvas];
 		}
 	}
 }
 
 #pragma mark -
 #pragma mark Data
+
+- (void)setLayers:(NSNotification *)notification
+{
+	[self reloadData];
+}
 
 - (void)reloadData
 {

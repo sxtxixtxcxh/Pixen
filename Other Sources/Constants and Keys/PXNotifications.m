@@ -11,6 +11,7 @@ NSString *PXCanvasLayerSelectionDidChangeNotificationName = @"PXCanvasLayerSelec
 NSString *PXCanvasAddedLayerNotificationName = @"PXCanvasAddedLayer";
 NSString *PXCanvasRemovedLayerNotificationName = @"PXCanvasRemovedLayer";
 NSString *PXCanvasMovedLayerNotificationName = @"PXCanvasMovedLayer";
+NSString *PXCanvasSetLayersNotificationName = @"PXCanvasSetLayers";
 
 NSString *PXCanvasSizeChangedNotificationName = @"PXCanvasSizeChanged";
 NSString *PXCanvasChangedNotificationName = @"PXCanvasChanged";

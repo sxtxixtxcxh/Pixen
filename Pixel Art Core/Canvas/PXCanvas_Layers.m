@@ -109,6 +109,8 @@
 	[layers release];
 	layers = mutableNewLayers;
 	
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasSetLayersNotificationName object:self];
+	
 	[self activateLayer:[mutableNewLayers objectAtIndex:oldActiveIndex]];
 	[self refreshWholePalette];
 	[self layersChanged];
