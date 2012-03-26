@@ -177,6 +177,11 @@
 
 - (void)keyDown:(NSEvent *)event fromCanvasController:(PXCanvasController *)cc
 {
+	NSUInteger modifierFlags = [event modifierFlags] & NSDeviceIndependentModifierFlagsMask;
+	
+	if (modifierFlags != 0)
+		return;
+	
 	NSString *chars = [[event charactersIgnoringModifiers] lowercaseString];
 	
 	for (NSString *current in [PXToolSwitcher toolNames])
