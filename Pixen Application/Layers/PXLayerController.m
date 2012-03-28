@@ -90,6 +90,8 @@
 {
 	if (_canvas != aCanvas)
 	{
+		NSString *layerName = [[_canvas activeLayer] name];
+		
 		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 		[nc removeObserver:self];
 		
@@ -123,6 +125,13 @@
 				   selector:@selector(setLayers:)
 					   name:PXCanvasSetLayersNotificationName
 					 object:_canvas];
+			
+			if (layerName) {
+				PXLayer *layer = [_canvas layerNamed:layerName];
+				
+				if (layer)
+					[_canvas activateLayer:layer];
+			}
 		}
 	}
 }

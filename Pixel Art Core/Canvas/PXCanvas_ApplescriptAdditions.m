@@ -13,17 +13,6 @@
 
 @implementation PXCanvas (ApplescriptAdditions)
 
-- (PXLayer *)layerNamed:(NSString *)name
-{
-	for (PXLayer *current in layers)
-	{
-		if ([current.name isEqualToString:name])
-			return current;
-	}
-	
-	return nil;
-}
-
 - (id)handleAddLayerScriptCommand:(id)command
 {
 	NSString *name = [[command evaluatedArguments] objectForKey:@"layerName"];

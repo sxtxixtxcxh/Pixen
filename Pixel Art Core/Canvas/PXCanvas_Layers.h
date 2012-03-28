@@ -15,6 +15,7 @@
 - (void)activateLayer:(PXLayer *) aLayer;
 - (NSArray *) layers;
 - (NSUInteger)indexOfLayer:(PXLayer *) aLayer;
+- (PXLayer *)layerNamed:(NSString *)name;
 
 - (void)setLayers:(NSArray *) newLayers;
 - (void)setLayers:(NSArray*)layers fromLayers:(NSArray *)oldLayers;

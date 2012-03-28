@@ -90,6 +90,17 @@
 	return [layers indexOfObject:aLayer];
 }
 
+- (PXLayer *)layerNamed:(NSString *)name
+{
+	for (PXLayer *current in layers)
+	{
+		if ([current.name isEqualToString:name])
+			return current;
+	}
+	
+	return nil;
+}
+
 - (void)setLayers:(NSArray *) newLayers
 {
 	if (layers == newLayers)
