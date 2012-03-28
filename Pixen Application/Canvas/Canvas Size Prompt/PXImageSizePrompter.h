@@ -27,6 +27,8 @@
 	BOOL accepted;
 }
 
+@property (nonatomic, assign) IBOutlet NSTextField *promptField;
+
 @property (nonatomic, readonly) NSSize size;
 
 @property (nonatomic, assign) NSInteger width;

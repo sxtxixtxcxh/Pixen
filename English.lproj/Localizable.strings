@@ -66,6 +66,11 @@
 /* Zoom Tooltip */
 "ZOOM_TOOLTIP" = "Modify the zoom percentage of the zoom";
 
+/* New Animation prompt title */
+"NEW_ANIMATION" = "New Animation";
+/* Animation size prompt */
+"ANIMATION_SIZE_PROMPT" = "Specify the size of the animation.";
+
 /* Backgrounds Save As */
 "BACKGROUNDS_SAVE_AS" = "Save as new configuration…";
 /* Backgrounds Delete */

@@ -24,6 +24,7 @@
 
 @implementation PXImageSizePrompter
 
+@synthesize promptField = _promptField;
 @synthesize width = _width, height = _height, backgroundColor;
 @dynamic size;
 

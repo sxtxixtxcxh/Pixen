@@ -406,6 +406,11 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	PXImageSizePrompter *prompter = [[PXImageSizePrompter alloc] init];
 	
+	if ([typeName isEqualToString:PixenAnimationFileType]) {
+		[prompter.window setTitle:NSLocalizedString(@"NEW_ANIMATION", nil)];
+		[prompter.promptField setStringValue:NSLocalizedString(@"ANIMATION_SIZE_PROMPT", nil)];
+	}
+	
 	if (![prompter runModal]) {
 		[prompter release];
 		
