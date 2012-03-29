@@ -8,6 +8,7 @@
 @interface PXImageSizePrompter : NSWindowController < NSWindowDelegate >
 {
   @private
+	NSTextField *_promptField;
 	IBOutlet PXNSImageView *preview;
 	IBOutlet NSView *widthIndicator, *heightIndicator;
 	IBOutlet NSPopUpButton *presetsButton;
