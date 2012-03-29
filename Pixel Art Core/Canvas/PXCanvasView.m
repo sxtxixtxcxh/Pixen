@@ -42,6 +42,7 @@ void PXDebugRect(NSRect r, float alpha)
 @implementation PXCanvasView
 
 @synthesize canvas, zoomPercentage, delegate;
+@synthesize usesToolCursors = _usesToolCursors;
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)event
 {
@@ -74,6 +75,7 @@ void PXDebugRect(NSRect r, float alpha)
 	shouldDrawGrid = YES;
 	shouldDrawMainBackground = YES;
 	trackingRect = -1;
+	_usesToolCursors = YES;
 	
 	crosshair = [[PXCrosshair alloc] init];
 	drawsSelectionMarquee = YES;
@@ -772,7 +774,7 @@ void PXDebugRect(NSRect r, float alpha)
 {
 	NSCursor *toolCursor = [[[PXToolPaletteController sharedToolPaletteController] currentTool] cursor];
 	
-	if (toolCursor) {
+	if (toolCursor && _usesToolCursors) {
 		[self addCursorRect:[self visibleRect] cursor:toolCursor];
 	}
 	

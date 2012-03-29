@@ -31,6 +31,7 @@
 	NSTrackingRectTag trackingRect;
 	
 	NSPoint lastMousePosition;
+	BOOL _usesToolCursors;
 	
 	BOOL erasing;
 	
@@ -39,6 +40,8 @@
 
 @property (nonatomic, assign) PXCanvas *canvas;
 @property (nonatomic, assign) float zoomPercentage;
+
+@property (nonatomic, assign) BOOL usesToolCursors;
 
 @property (nonatomic, assign) id delegate;
 
