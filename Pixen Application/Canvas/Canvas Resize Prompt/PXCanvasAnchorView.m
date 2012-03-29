@@ -114,8 +114,7 @@
 	NSRectFill(iconRect);
 	
 	NSImage *icon = [NSImage imageNamed:@"Pixen128"];
-	[icon setFlipped:YES];
-	[icon drawInRect:iconRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
+	[icon drawInRect:iconRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f respectFlipped:YES hints:nil];
 }
 
 - (NSPoint)topLeftPositionWithOldSize:(NSSize)size newSize:(NSSize)newSize
