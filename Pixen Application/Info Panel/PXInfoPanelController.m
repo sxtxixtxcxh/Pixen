@@ -13,17 +13,6 @@
 @synthesize red = _red, green = _green, blue = _blue, alpha = _alpha, hex = _hex;
 @synthesize draggingOrigin = _draggingOrigin;
 
-- (id)init
-{
-	return [super initWithWindowNibName:@"PXInfoPanel"];
-}
-
-- (void)windowDidLoad
-{
-	[ (NSPanel *) self.window setBecomesKeyOnlyIfNeeded:YES];
-	[self.window setFrameAutosaveName:PXInfoPanelFrameAutosaveName];
-}
-
 + (id)sharedInfoPanelController
 {
 	static PXInfoPanelController *singleInstance = nil;
@@ -34,6 +23,37 @@
 	});
 	
 	return singleInstance;
+}
+
+- (id)init
+{
+	return [super initWithWindowNibName:@"PXInfoPanel"];
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	[super dealloc];
+}
+
+- (void)windowDidLoad
+{
+	[ (NSPanel *) self.window setBecomesKeyOnlyIfNeeded:YES];
+	[self.window setFrameAutosaveName:PXInfoPanelFrameAutosaveName];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(closedDocument:)
+												 name:PXDocumentDidCloseNotificationName
+											   object:nil];
+}
+
+- (void)closedDocument:(NSNotification *)notification
+{
+	if (![[[NSDocumentController sharedDocumentController] documents] count]) {
+		[self setNoColorInfo];
+		[self setNoSize];
+	}
 }
 
 - (void)setCanvasSize:(NSSize)size
@@ -59,6 +79,15 @@
 	[self.blue  setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"BLUE", @"Blue")]];
 	[self.alpha setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"ALPHA", @"Alpha")]];
 	[self.hex   setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"Hex", @"Hex")]];
+}
+
+- (void)setNoSize
+{
+	[self.width   setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"WIDTH", @"Width")]];
+	[self.height  setStringValue:[NSString stringWithFormat:@"%@: --", NSLocalizedString(@"HEIGHT", @"Height")]];
+	
+	[self.cursorX setStringValue:@"X: --"];
+	[self.cursorY setStringValue:@"Y: --"];
 }
 
 - (void)setCursorPosition:(NSPoint)point
