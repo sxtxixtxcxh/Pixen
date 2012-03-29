@@ -129,8 +129,14 @@
 			if (layerName) {
 				PXLayer *layer = [_canvas layerNamed:layerName];
 				
-				if (layer)
-					[_canvas activateLayer:layer];
+				if (layer) {
+					dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.0);
+					dispatch_after(popTime, dispatch_get_main_queue(), ^{
+						
+						[_canvas activateLayer:layer];
+						
+					});
+				}
 			}
 		}
 	}
