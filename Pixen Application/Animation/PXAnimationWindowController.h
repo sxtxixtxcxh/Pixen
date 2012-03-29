@@ -20,7 +20,6 @@
 	IBOutlet PXAnimationPreview *animationPreview;
 	
 	IBOutlet NSView *topSubview;
-	unsigned oldMin, oldMax;
 	
 	IBOutlet NSButton *playPauseButton;
 	

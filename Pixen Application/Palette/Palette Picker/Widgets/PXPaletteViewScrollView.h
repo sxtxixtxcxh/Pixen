@@ -11,7 +11,6 @@
 {
   @private
 	PXPaletteViewSizeSelector *_sizeSelector;
-	NSControlSize _controlSize;
 }
 
 @property (nonatomic, assign) NSControlSize controlSize;

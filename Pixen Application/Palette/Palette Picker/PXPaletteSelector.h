@@ -11,7 +11,6 @@
 {
   @private
 	NSMutableArray *_palettes;
-	BOOL _enabled;
 	NSPopUpButton *_selectionPopup;
 	id _delegate;
 }

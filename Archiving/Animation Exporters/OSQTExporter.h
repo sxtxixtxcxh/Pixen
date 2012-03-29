@@ -13,8 +13,6 @@
 @interface OSQTExporter : NSObject
 {
   @private
-	NSString *tempPath;
-	
 	QTMovie *qtMovie;
 	NSWindow *parentWindow;
 }

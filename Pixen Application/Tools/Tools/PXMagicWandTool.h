@@ -14,9 +14,6 @@
 	BOOL isMoving, isAdding, isSubtracting;
 	NSPoint origin;
 	NSRect selectedRect, lastSelectedRect;
-	int oldLayerIndex, oldLastLayerIndex;
-	
-	PXSelectionMask oldMask;
 }
 
 @end

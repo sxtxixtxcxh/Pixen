@@ -23,7 +23,6 @@
 	PXBackgroundController *backgroundController;
 	
 	NSPoint initialPoint;
-	NSPoint mouseMovePoint;
 	NSPoint lastDrawnPoint;
 	BOOL downEventOccurred;
 	BOOL usingSpaceKey;
