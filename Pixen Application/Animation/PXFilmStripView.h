@@ -18,7 +18,6 @@
 	
 	NSRect *celRects;
 	NSInteger celRectsCount;
-	NSBezierPath *spokeHolePath;
 	
 	NSRect updateRect;
 	NSTimer *updateTimer;
