@@ -47,8 +47,6 @@
 		C96541EC13FF44A600F1F83C /* PXDeleteCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C96541EA13FF44A600F1F83C /* PXDeleteCollectionView.m */; };
 		C968A8E114A5292700905E3D /* Pixen128.png in Resources */ = {isa = PBXBuildFile; fileRef = C968A8E014A5292700905E3D /* Pixen128.png */; };
 		C969A18E13D2012A00F1C1FE /* QLPlugin.qlgenerator in Copy QuickLook plugin */ = {isa = PBXBuildFile; fileRef = C969A18A13D200B400F1C1FE /* QLPlugin.qlgenerator */; };
-		C96AF5C81517FE1200E6FF67 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C96AF5C71517FE1200E6FF67 /* CrashReporter.framework */; };
-		C96AF5C91517FE2C00E6FF67 /* CrashReporter.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C96AF5C71517FE1200E6FF67 /* CrashReporter.framework */; };
 		C96BABB513ABD3AB00015C92 /* PXHotkeysPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */; };
 		C96BABBB13ABD44A00015C92 /* PXHotkeysPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */; };
 		C96BABBC13ABD44A00015C92 /* PXHotkeysPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */; };
@@ -533,7 +531,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C96AF5C91517FE2C00E6FF67 /* CrashReporter.framework in Copy Frameworks */,
 				C9FEF7B514E986B50028F8AA /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -593,7 +590,6 @@
 		C96541EA13FF44A600F1F83C /* PXDeleteCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXDeleteCollectionView.m; sourceTree = "<group>"; };
 		C968A8E014A5292700905E3D /* Pixen128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pixen128.png; sourceTree = "<group>"; };
 		C969A18513D200B300F1C1FE /* QLPlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QLPlugin.xcodeproj; path = QLPlugin/QLPlugin.xcodeproj; sourceTree = "<group>"; };
-		C96AF5C71517FE1200E6FF67 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CrashReporter.framework; path = Frameworks/CrashReporter.framework; sourceTree = "<group>"; };
 		C96BABB413ABD3AB00015C92 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXHotkeysPreferences.xib; sourceTree = "<group>"; };
 		C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXHotkeysPreferencesController.h; sourceTree = "<group>"; };
 		C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXHotkeysPreferencesController.m; sourceTree = "<group>"; };
@@ -1039,7 +1035,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C931682414E9857C00B3E817 /* Sparkle.framework in Frameworks */,
-				C96AF5C81517FE1200E6FF67 /* CrashReporter.framework in Frameworks */,
 				EAF6951106A9AE0B0019D8D7 /* Cocoa.framework in Frameworks */,
 				EA5E9EE80877237800FCE6FE /* Carbon.framework in Frameworks */,
 				BF269FE6091307BF00B7A218 /* QTKit.framework in Frameworks */,
@@ -1056,7 +1051,6 @@
 			children = (
 				EA5E9EE70877237800FCE6FE /* Carbon.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
-				C96AF5C71517FE1200E6FF67 /* CrashReporter.framework */,
 				61BB8ED608FB58F9009C75A6 /* QTKit.framework */,
 				D8B300DB13AFC443004E83F3 /* QuartzCore.framework */,
 				C98182C314F0212C0052616F /* SenTestingKit.framework */,
