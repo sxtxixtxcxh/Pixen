@@ -7,7 +7,9 @@
 //
 
 #import "PXFilmStripView.h"
+
 #import "NSBezierPath+PXRoundedRectangleAdditions.h"
+#import "PXCel.h"
 
 static int PXFilmStripIntercelSpacing = 10;
 static int PXFilmStripVerticalPadding = 20;
@@ -331,7 +333,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 		
 		if (!NSIntersectsRect(rect, celRects[i])) { continue; }
 		
-		id currentCel = [dataSource celAtIndex:i];
+		PXCel *currentCel = [dataSource celAtIndex:i];
 		NSSize celSize = [currentCel size];
 		
 		NSBezierPath *roundedPath = [NSBezierPath bezierPathWithRect:celRects[i]];
