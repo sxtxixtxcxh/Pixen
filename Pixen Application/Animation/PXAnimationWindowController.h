@@ -6,28 +6,25 @@
 //  Copyright 2005 Pixen. All rights reserved.
 //
 
-#import "PXAnimationPreview.h"
 #import "PXCanvasWindowController.h"
 
 @class PXAnimation, PXCel, PXFilmStripView;
 
-@interface PXAnimationWindowController : PXCanvasWindowController < PXAnimationPreviewDataSource >
+@interface PXAnimationWindowController : PXCanvasWindowController
 {
   @private
 	PXAnimation *animation;
 	IBOutlet NSSplitView *outerSplitView;
 	IBOutlet PXFilmStripView *filmStrip;
-	IBOutlet PXAnimationPreview *animationPreview;
 	
 	IBOutlet NSView *topSubview;
-	
-	IBOutlet NSButton *playPauseButton;
 	
 	PXCel *activeCel;
 	NSInteger activeIndex;
 }
 
-- (void)setAnimation:anim;
+@property (nonatomic, assign) PXAnimation *animation;
+
 - (void)activateCel:(PXCel *)cel;
 - (IBAction)deleteCel:sender;
 - (IBAction)duplicateCel:sender;

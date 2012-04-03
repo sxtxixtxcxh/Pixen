@@ -14,7 +14,6 @@
 #import "PXAnimation.h"
 #import "PXCel.h"
 #import "PXFilmStripView.h"
-#import "PXAnimationPreview.h"
 #import "PXSequenceExportPrompter.h"
 #import "PXCanvasDocument.h"
 #import "PXAnimationView.h"
@@ -25,11 +24,11 @@
 
 @implementation PXAnimationWindowController
 
+@synthesize animation;
+
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[animationPreview removeObserver:self forKeyPath:@"isPlaying"];
-	[animationPreview setDataSource:nil];
 	[filmStrip setDataSource:nil];
 	[filmStrip setDelegate:nil];
 	[self setAnimation:nil];
@@ -86,7 +85,6 @@
 {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(canvasDidChange:) name:PXCanvasChangedNotificationName object:nil];
 	[(NSClipView *)[filmStrip superview] setCopiesOnScroll:NO]; // prevent weird visual bugs
-	[animationPreview addObserver:self forKeyPath:@"isPlaying" options:NSKeyValueObservingOptionNew context:NULL];
 	[super awakeFromNib];
 }
 
@@ -113,27 +111,16 @@
 		if(!NSEqualSizes([anim size], NSZeroSize))
 		{
 			[filmStrip reloadData];
-			[animationPreview reloadData];
-			[animationPreview play];
 		}
 	}
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath 
-											ofObject:(id)object 
-												change:(NSDictionary *)change 
-											 context:(void *)context
+					  ofObject:(id)object 
+						change:(NSDictionary *)change 
+					   context:(void *)context
 {
-	if (object == animationPreview) {
-		BOOL isPlaying = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
-		NSString *imageName = (isPlaying ? @"pausecel" : @"playcel");
-		[playPauseButton setImage:[NSImage imageNamed:imageName]];
-		return;
-	}
-	
 	[filmStrip reloadData];
-	[animationPreview reloadData];
-	[animationPreview play];
 	
 	if ([keyPath isEqualToString:@"countOfCels"]) {
 		// If the change involved the number of cels getting bigger, this means a new cel was added; we should activate it.

@@ -287,15 +287,14 @@
 	[canvasController setPatternToSelection];
 }
 
-- (IBAction)showPreviewWindow:(NSEvent *) sender
+- (IBAction)showPreviewWindow:(id)sender
 {
 	[[PXPreviewController sharedPreviewController] showWindow:self];
 }
 
 - (IBAction)togglePreviewWindow:(id)sender
 {
-	PXPreviewController *controller = [PXPreviewController sharedPreviewController];
-	[controller toggleWindow];
+	[[PXPreviewController sharedPreviewController] toggleWindow];
 }
 
 - (IBAction)showBackgroundInfo:(id) sender

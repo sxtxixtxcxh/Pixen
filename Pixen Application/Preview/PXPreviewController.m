@@ -6,10 +6,12 @@
 #import "PXPreviewController.h"
 
 #import "NSWindowController+Additions.h"
+#import "PXAnimation.h"
 #import "PXCanvas.h"
 #import "PXCanvas_Backgrounds.h"
 #import "PXCanvas_ImportingExporting.h"
 #import "PXCanvasPreviewView.h"
+#import "PXCel.h"
 #import "PXBackgrounds.h"
 #import "PXBackgroundController.h"
 #import "PXDefaults.h"
@@ -32,6 +34,14 @@
 	return NSHeight([self frame]) - NSHeight([ (NSView *) [self contentView] frame]);
 }
 @end
+
+
+@interface PXPreviewController ()
+
+- (void)setCanvas:(PXCanvas *)aCanvas updateScale:(BOOL)updateScale;
+
+@end
+
 
 @implementation PXPreviewController
 
@@ -71,10 +81,10 @@
 	[bezelView setAutoresizingMask:NSViewMinXMargin | NSViewMinYMargin];
 	[[[self window] contentView] addSubview:bezelView];
 	
-	[[NSNotificationCenter defaultCenter]  addObserver:self 
-											  selector:@selector(documentClosed:) 
-												  name:PXDocumentWillCloseNotificationName
-												object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(documentClosed:)
+												 name:PXDocumentWillCloseNotificationName
+											   object:nil];
 	
 	[(NSPanel *)[self window] setBecomesKeyOnlyIfNeeded:YES];
 	[bezelView setDelegate:self];
@@ -96,16 +106,124 @@
 	return instance;
 }
 
-- (void)windowWillClose:(NSNotification *) notification
+#pragma mark -
+#pragma mark Animation
+
+- (void)setAnimation:(PXAnimation *)animation
 {
-	[[NSUserDefaults standardUserDefaults] setBool:NO
-											forKey:PXPreviewWindowIsOpenKey];
+	if (_animation != animation) {
+		[_animation release];
+		_animation = [animation retain];
+		
+		if (animation) {
+			PXCel *firstCel = [animation celAtIndex:0];
+			[self setCanvas:[firstCel canvas] updateScale:YES];
+			
+			_currentAnimationCelIndex = 0;
+			
+			[self playAnimation];
+		}
+	}
+}
+
+- (void)incrementFrame
+{
+	_currentAnimationCelIndex++;
+	
+	if (_currentAnimationCelIndex >= [_animation countOfCels]) {
+		_currentAnimationCelIndex = 0;
+	}
+	
+	[self setCanvas:[[_animation celAtIndex:_currentAnimationCelIndex] canvas] updateScale:NO];
+}
+
+- (void)incrementFromTimer:(NSTimer *)timer
+{
+	[self incrementFrame];
+	
+	[_animationTimer invalidate];
+	[_animationTimer release];
+	
+	_animationTimer = [[NSTimer scheduledTimerWithTimeInterval:[[_animation celAtIndex:_currentAnimationCelIndex] duration]
+														target:self
+													  selector:@selector(incrementFromTimer:)
+													  userInfo:nil
+													   repeats:NO] retain];
+	
+	[[NSRunLoop currentRunLoop] addTimer:_animationTimer forMode:NSRunLoopCommonModes];
+}
+
+- (void)playAnimation
+{
+	[self incrementFromTimer:nil];
+}
+
+- (void)pauseAnimation
+{
+	[_animationTimer invalidate];
+	[_animationTimer release];
+	_animationTimer = nil;
+}
+
+- (void)stopAnimation
+{
+	[self pauseAnimation];
+	
+	_currentAnimationCelIndex = NSNotFound;
+}
+
+- (IBAction)playPause:(id)sender
+{
+	if (_animationTimer != nil) {
+		[self pauseAnimation];
+	}
+	else {
+		[self playAnimation];
+	}
+}
+
+- (IBAction)stepForward:(id)sender
+{
+	[self pauseAnimation];
+	[self incrementFrame];
+}
+
+- (IBAction)stepBackward:(id)sender
+{
+	[self pauseAnimation];
+	
+	if (_currentAnimationCelIndex == 0) {
+		_currentAnimationCelIndex = [_animation countOfCels];
+	}
+	
+	_currentAnimationCelIndex--;
+	
+	[self setCanvas:[[_animation celAtIndex:_currentAnimationCelIndex] canvas] updateScale:NO];
+}
+
+#pragma mark -
+
+- (void)setSingleCanvas:(PXCanvas *)aCanvas
+{
+	if (_animation) {
+		[self stopAnimation];
+		
+		[_animation release];
+		_animation = nil;
+	}
+	
+	[self setCanvas:aCanvas updateScale:YES];
+}
+
+- (void)windowWillClose:(NSNotification *)notification
+{
+	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:PXPreviewWindowIsOpenKey];
 }
 
 - (void)documentClosed:(NSNotification *)notification
 {
 	if ([[notification object] canvas] == canvas) {
-		[self setCanvas:nil];
+		[self setCanvas:nil updateScale:NO];
 	}
 }
 
@@ -117,11 +235,13 @@
 - (void)mouseExited:(NSEvent *)event
 {
 	[ (PXPreviewBezelView *) [bezelView animator] setOpacity:0.33f];
-	
 }
 
 - (void)dealloc
 {
+	[self pauseAnimation];
+	[_animation release];
+	
 	[resizeSizeWindow release];
 	[bezelView release];
 	[[NSUserDefaults standardUserDefaults] setBool:[self isVisible] forKey:PXPreviewWindowIsOpenKey];
@@ -414,7 +534,7 @@
 			}
 			else
 				newSize = [ (NSView *) [[self window] contentView] frame].size;
-			[canvas setPreviewSize:newSize];
+			[self setPreviewSize:newSize];
 			[self sizeToCanvas];
 		}
 		[self centerContent];
@@ -442,12 +562,12 @@
 	[view setNeedsDisplay:YES];
 	
 	PXDocument *document = [[NSDocumentController sharedDocumentController] currentDocument];
-	[self setCanvas:[document canvas]];
+	[self setCanvas:[document canvas] updateScale:YES];
 	
 	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:PXPreviewWindowIsOpenKey];
 }
 
-- (void)setCanvas:(PXCanvas *) aCanvas
+- (void)setCanvas:(PXCanvas *) aCanvas updateScale:(BOOL)updateScale
 {
 	//we have to do all this no matter what so there aren't inconsistency-bugs
 	[view setCanvas:nil];
@@ -473,7 +593,7 @@
 	[self initializeWindow];
 	[self liveResize];
 	[self updateViewPercentage];
-	if (canvas != oldCanvas) {
+	if (canvas != oldCanvas && updateScale) {
 		[self updateResizeSizeViewScale];
 	}
 	[self updateTrackingRectAssumingInside:NO];
@@ -486,6 +606,19 @@
 	if ([self isVisible])
 	{
 		updateRect = NSUnionRect(updateRect, [[[aNotification userInfo] objectForKey:PXChangedRectKey] rectValue]);
+	}
+}
+
+- (void)setPreviewSize:(NSSize)size
+{
+	if (_animation) {
+		for (NSUInteger n = 0; n < [_animation countOfCels]; n++) {
+			PXCel *cel = [_animation celAtIndex:n];
+			[[cel canvas] setPreviewSize:size];
+		}
+	}
+	else {
+		[canvas setPreviewSize:size];
 	}
 }
 
@@ -502,7 +635,7 @@
 	CGFloat factor = [[sender title] intValue] / 100.0f;
 	
 	NSSize previewSize = NSMakeSize(canvasSize.width * factor, canvasSize.height * factor);
-	[canvas setPreviewSize:previewSize];
+	[self setPreviewSize:previewSize];
 	[self setCanvasSize:previewSize];
 	[self liveResize];
 	[self updateResizeSizeViewScale];
@@ -521,7 +654,7 @@
 - (void)prompter:(PXPreviewResizePrompter *)prompter didFinishWithZoomFactor:(float)factor
 {
 	NSSize previewSize = NSMakeSize([canvas size].width * factor, [canvas size].height * factor);
-	[canvas setPreviewSize:previewSize];
+	[self setPreviewSize:previewSize];
 	[self setCanvasSize:previewSize];
 	[self liveResize];
 	[self updateResizeSizeViewScale];

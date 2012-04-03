@@ -9,7 +9,6 @@
 #import "PXCanvasController.h"
 #import "PXDocumentController.h"
 #import "PXBackgroundController.h"
-#import "PXPreviewController.h"
 #import "PXToolPaletteController.h"
 #import "PXInfoPanelController.h"
 #import "PXLayerController.h"
@@ -186,8 +185,6 @@
 - (void)updatePreview
 {
 	[canvas updatePreviewSize];
-	
-	[[PXPreviewController sharedPreviewController] setCanvas:canvas];
 }
 
 - mainBackground

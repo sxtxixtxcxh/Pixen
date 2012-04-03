@@ -243,11 +243,6 @@ static PXPanelManager *sharedManager = nil;
 	return [[PXToolPaletteController sharedToolPaletteController] toolPanel];
 }
 
-- (NSPanel *)previewPanel
-{
-	return (NSPanel *)[[PXPreviewController sharedPreviewController] window];
-}
-
 - (IBAction)showLeftToolProperties:(id)sender
 {
 	[[PXToolPropertiesManager leftToolPropertiesManager] showWindow:nil];
@@ -299,9 +294,9 @@ static PXPanelManager *sharedManager = nil;
 	[[PXSpriteSheetExporter sharedSpriteSheetExporter] showWindow:nil];
 }
 
-- (IBAction)showPreviewPanel: (id)sender
+- (IBAction)showPreviewPanel:(id)sender
 {
-	[self show:[self previewPanel]];
+	[[PXPreviewController sharedPreviewController] showWindow:nil];
 }
 
 @end

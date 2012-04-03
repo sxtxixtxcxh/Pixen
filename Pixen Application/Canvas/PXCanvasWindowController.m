@@ -5,6 +5,7 @@
 
 #import "PXDocumentController.h"
 
+#import "PXAnimationWindowController.h"
 #import "PXCanvasWindowController.h"
 #import "PXCanvasWindowController_Toolbar.h"
 #import "PXCanvasWindowController_Zooming.h"
@@ -18,6 +19,7 @@
 #import "PXCanvasDocument.h"
 #import "PXInfoPanelController.h"
 #import "PXPaletteController.h"
+#import "PXPreviewController.h"
 
 //Taken from a man calling himself "BROCK BRANDENBERG" 
 //who is here to save the day.
@@ -135,8 +137,6 @@
 	if (canvas != aCanvas) {
 		canvas = aCanvas;
 		[canvasController setCanvas:canvas];
-		
-		[canvasController updatePreview];
 	}
 }
 
@@ -155,14 +155,21 @@
 	}
 }
 
-- (void)windowDidBecomeMain:(NSNotification *) aNotification
+- (void)windowDidBecomeMain:(NSNotification *)notification
 {
-	if([aNotification object] == [self window])
+	if ([notification object] == [self window])
 	{
 		[canvasController activate];
 		[self updateFrameSizes];
 		[[PXInfoPanelController sharedInfoPanelController] setCanvasSize:[canvas size]];
-		[canvasController updatePreview];
+		
+		//FIXME: tight coupling
+		if ([self isKindOfClass:[PXAnimationWindowController class]]) {
+			[[PXPreviewController sharedPreviewController] setAnimation:[ (PXAnimationWindowController *) self animation]];
+		}
+		else {
+			[[PXPreviewController sharedPreviewController] setSingleCanvas:canvas];
+		}
 	}
 }
 

@@ -3,7 +3,7 @@
 //  Pixen
 //
 
-@class PXCanvas, PXCanvasPreviewView, PXPreviewBezelView, PXBackgroundController, PXPreviewResizePrompter;
+@class PXAnimation, PXCanvas, PXCanvasPreviewView, PXPreviewBezelView, PXBackgroundController, PXPreviewResizePrompter;
 
 @interface PXPreviewController : NSWindowController
 {
@@ -15,6 +15,10 @@
 	PXPreviewBezelView *bezelView;
 	NSTrackingRectTag trackingTag;
 	
+	PXAnimation *_animation;
+	NSTimer *_animationTimer;
+	NSUInteger _currentAnimationCelIndex;
+	
 	BOOL liveResizing;
 	NSSize sizingFactor;
 	
@@ -22,6 +26,9 @@
 }
 
 + (id)sharedPreviewController;
+
+- (void)setAnimation:(PXAnimation *)animation;
+- (void)setSingleCanvas:(PXCanvas *)aCanvas;
 
 - (BOOL)hasUsableCanvas;
 - (void)documentClosed:(NSNotification *)notification;
@@ -37,7 +44,6 @@
 - (void)centerContent;
 - (void)windowDidResize:(NSNotification *)aNotification;
 - (void)initializeWindow;
-- (void)setCanvas:(PXCanvas *) aCanvas;
 - (void)canvasDidChange:(NSNotification *)aNotification;
 - (void)sizeToSenderTitlePercent:(id)sender;
 - (void)sizeTo:sender;

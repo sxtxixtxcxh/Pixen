@@ -20,7 +20,6 @@
 - (NSPanel *)infoPanel;
 - (NSPanel *)welcomePanel;
 - (NSPanel *)toolPalettePanel;
-- (NSPanel *)previewPanel;
 
 - (IBAction)showPreferences:(id)sender;
 - (IBAction)showInfo:(id)sender;
