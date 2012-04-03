@@ -50,6 +50,7 @@
 		C96BABB513ABD3AB00015C92 /* PXHotkeysPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */; };
 		C96BABBB13ABD44A00015C92 /* PXHotkeysPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */; };
 		C96BABBC13ABD44A00015C92 /* PXHotkeysPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */; };
+		C973F0D8152B93810084A158 /* PXAnimationDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = C973F0D6152B93810084A158 /* PXAnimationDocument.xib */; };
 		C9799FB013AD69C000E261EE /* PXShapeToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9799FAE13AD69C000E261EE /* PXShapeToolPropertiesView.xib */; };
 		C9799FB813AD6ED900E261EE /* PXPencilToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9799FB613AD6ED900E261EE /* PXPencilToolPropertiesView.xib */; };
 		C9799FBB13AD745500E261EE /* PXEyedropperToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9799FB913AD745500E261EE /* PXEyedropperToolPropertiesView.xib */; };
@@ -143,8 +144,6 @@
 		EA31F92D0CE7BE6C00EC481B /* PXAnimationBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9160CE7BE6C00EC481B /* PXAnimationBackgroundView.m */; };
 		EA31F92E0CE7BE6C00EC481B /* PXAnimationDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9170CE7BE6C00EC481B /* PXAnimationDocument.h */; };
 		EA31F92F0CE7BE6C00EC481B /* PXAnimationDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9180CE7BE6C00EC481B /* PXAnimationDocument.m */; };
-		EA31F9300CE7BE6C00EC481B /* PXAnimationPreview.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9190CE7BE6C00EC481B /* PXAnimationPreview.h */; };
-		EA31F9310CE7BE6C00EC481B /* PXAnimationPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F91A0CE7BE6C00EC481B /* PXAnimationPreview.m */; };
 		EA31F9320CE7BE6C00EC481B /* PXAnimationWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F91B0CE7BE6C00EC481B /* PXAnimationWindowController.h */; };
 		EA31F9330CE7BE6C00EC481B /* PXAnimationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F91C0CE7BE6C00EC481B /* PXAnimationWindowController.m */; };
 		EA31F9340CE7BE6C00EC481B /* PXFilmStripView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F91D0CE7BE6C00EC481B /* PXFilmStripView.h */; };
@@ -352,7 +351,6 @@
 		EA31FCF60CE7D7C200EC481B /* Pixen_Prefix.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC7F0CE7D7C200EC481B /* Pixen_Prefix.h */; };
 		EA4A6C0508A97E26007BAC7F /* PXAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4A6C0308A97E26007BAC7F /* PXAnimation.h */; };
 		EA4A6C0608A97E26007BAC7F /* PXAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4A6C0408A97E26007BAC7F /* PXAnimation.m */; };
-		EA4A6C3F08A98133007BAC7F /* PXAnimationDocument.nib in Resources */ = {isa = PBXBuildFile; fileRef = EA4A6C3D08A98133007BAC7F /* PXAnimationDocument.nib */; };
 		EA4A6C4F08A98259007BAC7F /* PXCel.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4A6C4D08A98259007BAC7F /* PXCel.h */; };
 		EA4A6C5008A98259007BAC7F /* PXCel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4A6C4E08A98259007BAC7F /* PXCel.m */; };
 		EA561870089DB48400C12231 /* PXCanvas_Drawing.h in Headers */ = {isa = PBXBuildFile; fileRef = EA56186E089DB48400C12231 /* PXCanvas_Drawing.h */; };
@@ -593,6 +591,7 @@
 		C96BABB413ABD3AB00015C92 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXHotkeysPreferences.xib; sourceTree = "<group>"; };
 		C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXHotkeysPreferencesController.h; sourceTree = "<group>"; };
 		C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXHotkeysPreferencesController.m; sourceTree = "<group>"; };
+		C973F0D7152B93810084A158 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXAnimationDocument.xib; sourceTree = "<group>"; };
 		C9799FAF13AD69C000E261EE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXShapeToolPropertiesView.xib; sourceTree = "<group>"; };
 		C9799FB713AD6ED900E261EE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPencilToolPropertiesView.xib; sourceTree = "<group>"; };
 		C9799FBA13AD745500E261EE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXEyedropperToolPropertiesView.xib; sourceTree = "<group>"; };
@@ -686,8 +685,6 @@
 		EA31F9160CE7BE6C00EC481B /* PXAnimationBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAnimationBackgroundView.m; sourceTree = "<group>"; };
 		EA31F9170CE7BE6C00EC481B /* PXAnimationDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAnimationDocument.h; sourceTree = "<group>"; };
 		EA31F9180CE7BE6C00EC481B /* PXAnimationDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PXAnimationDocument.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		EA31F9190CE7BE6C00EC481B /* PXAnimationPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAnimationPreview.h; sourceTree = "<group>"; };
-		EA31F91A0CE7BE6C00EC481B /* PXAnimationPreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAnimationPreview.m; sourceTree = "<group>"; };
 		EA31F91B0CE7BE6C00EC481B /* PXAnimationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAnimationWindowController.h; sourceTree = "<group>"; };
 		EA31F91C0CE7BE6C00EC481B /* PXAnimationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAnimationWindowController.m; sourceTree = "<group>"; };
 		EA31F91D0CE7BE6C00EC481B /* PXFilmStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXFilmStripView.h; sourceTree = "<group>"; };
@@ -899,7 +896,6 @@
 		EA495594054C6943009A8EE7 /* PXCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvas.m; sourceTree = "<group>"; };
 		EA4A6C0308A97E26007BAC7F /* PXAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAnimation.h; sourceTree = "<group>"; };
 		EA4A6C0408A97E26007BAC7F /* PXAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAnimation.m; sourceTree = "<group>"; };
-		EA4A6C3E08A98133007BAC7F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXAnimationDocument.nib; sourceTree = "<group>"; };
 		EA4A6C4D08A98259007BAC7F /* PXCel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCel.h; sourceTree = "<group>"; };
 		EA4A6C4E08A98259007BAC7F /* PXCel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCel.m; sourceTree = "<group>"; };
 		EA5482DC0513E2DB000101DE /* PXCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvasView.h; sourceTree = "<group>"; };
@@ -1277,8 +1273,6 @@
 				EA31F9160CE7BE6C00EC481B /* PXAnimationBackgroundView.m */,
 				EA31F9170CE7BE6C00EC481B /* PXAnimationDocument.h */,
 				EA31F9180CE7BE6C00EC481B /* PXAnimationDocument.m */,
-				EA31F9190CE7BE6C00EC481B /* PXAnimationPreview.h */,
-				EA31F91A0CE7BE6C00EC481B /* PXAnimationPreview.m */,
 				EA31F91B0CE7BE6C00EC481B /* PXAnimationWindowController.h */,
 				EA31F91C0CE7BE6C00EC481B /* PXAnimationWindowController.m */,
 				EA31F91D0CE7BE6C00EC481B /* PXFilmStripView.h */,
@@ -1872,7 +1866,7 @@
 				618AE58F087E6FEA00A9FA9B /* PXPalette.nib */,
 				61A956BA08AD76CF009BB89F /* OSProgressPopup.nib */,
 				C91F07D1142D0BAB007F812C /* PXInfoPanel.xib */,
-				EA4A6C3D08A98133007BAC7F /* PXAnimationDocument.nib */,
+				C973F0D6152B93810084A158 /* PXAnimationDocument.xib */,
 				EA6864B3054C5EDE00EE395F /* PXBackgroundController.nib */,
 				EAE126CF054F41A9001208D9 /* PXImageBackgroundConfigurator.nib */,
 				C900F4BC1509882F00DC6702 /* PXToolPalette.xib */,
@@ -2100,7 +2094,6 @@
 				EA31F8A10CE7BDE800EC481B /* PXCrosshair.h in Headers */,
 				EA31F92C0CE7BE6C00EC481B /* PXAnimationBackgroundView.h in Headers */,
 				EA31F92E0CE7BE6C00EC481B /* PXAnimationDocument.h in Headers */,
-				EA31F9300CE7BE6C00EC481B /* PXAnimationPreview.h in Headers */,
 				EA31F9320CE7BE6C00EC481B /* PXAnimationWindowController.h in Headers */,
 				EA31F9340CE7BE6C00EC481B /* PXFilmStripView.h in Headers */,
 				EA31F9360CE7BE6C00EC481B /* PXNewCelButton.h in Headers */,
@@ -2345,7 +2338,6 @@
 				EACDBD810878B37100564512 /* PXBackgroundTemplateView.xib in Resources */,
 				618AE591087E6FEA00A9FA9B /* PXPalette.nib in Resources */,
 				610F37DE0899A5DE00567E90 /* PixenHelp in Resources */,
-				EA4A6C3F08A98133007BAC7F /* PXAnimationDocument.nib in Resources */,
 				61A956BC08AD76CF009BB89F /* OSProgressPopup.nib in Resources */,
 				61FED6C408BCC646005E51EA /* PXSequenceExportView.xib in Resources */,
 				EAC917480CE7DC7300E519E1 /* actiongear.png in Resources */,
@@ -2464,6 +2456,7 @@
 				C9AD353D1506DD7800A4B25C /* Defaults.plist in Resources */,
 				C900F4BE1509882F00DC6702 /* PXToolPalette.xib in Resources */,
 				C9ECD4D6150BECB6001F686C /* PXAbout.xib in Resources */,
+				C973F0D8152B93810084A158 /* PXAnimationDocument.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2534,7 +2527,6 @@
 				EA31F8A20CE7BDE800EC481B /* PXCrosshair.m in Sources */,
 				EA31F92D0CE7BE6C00EC481B /* PXAnimationBackgroundView.m in Sources */,
 				EA31F92F0CE7BE6C00EC481B /* PXAnimationDocument.m in Sources */,
-				EA31F9310CE7BE6C00EC481B /* PXAnimationPreview.m in Sources */,
 				EA31F9330CE7BE6C00EC481B /* PXAnimationWindowController.m in Sources */,
 				EA31F9350CE7BE6C00EC481B /* PXFilmStripView.m in Sources */,
 				EA31F9370CE7BE6C00EC481B /* PXNewCelButton.m in Sources */,
@@ -2825,6 +2817,14 @@
 			name = PXHotkeysPreferences.xib;
 			sourceTree = "<group>";
 		};
+		C973F0D6152B93810084A158 /* PXAnimationDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C973F0D7152B93810084A158 /* English */,
+			);
+			name = PXAnimationDocument.xib;
+			sourceTree = "<group>";
+		};
 		C9799FAE13AD69C000E261EE /* PXShapeToolPropertiesView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2951,14 +2951,6 @@
 				C9FEE51A13AF81AF004FFC3C /* English */,
 			);
 			name = PXGridSettings.xib;
-			sourceTree = "<group>";
-		};
-		EA4A6C3D08A98133007BAC7F /* PXAnimationDocument.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EA4A6C3E08A98133007BAC7F /* English */,
-			);
-			name = PXAnimationDocument.nib;
 			sourceTree = "<group>";
 		};
 		EA6864B3054C5EDE00EE395F /* PXBackgroundController.nib */ = {
