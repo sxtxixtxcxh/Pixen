@@ -670,6 +670,19 @@
 
 // backgrounds delegate stuff
 
+- (void)performSetBackground:(SEL)method background:(PXBackground *)background
+{
+	if (_animation) {
+		for (NSUInteger n = 0; n < [_animation countOfCels]; n++) {
+			PXCel *cel = [_animation celAtIndex:n];
+			[[cel canvas] performSelector:method withObject:background];
+		}
+	}
+	else {
+		[canvas performSelector:method withObject:background];
+	}
+}
+
 - (void)backgroundChanged:(id)changed
 {
 	[view resetCursorRects];
@@ -688,14 +701,14 @@
 
 - (void)setMainBackground:(PXBackground *) aBackground
 {
-	[canvas setMainPreviewBackground:aBackground];
+	[self performSetBackground:@selector(setMainPreviewBackground:) background:aBackground];
 	[view resetCursorRects];
 	[view display];
 }
 
 - (void)setAlternateBackground:(PXBackground *) aBackground
 {
-	[canvas setAlternatePreviewBackground:aBackground];
+	[self performSetBackground:@selector(setAlternatePreviewBackground:) background:aBackground];
 	[view resetCursorRects];
 	[view display];
 }
