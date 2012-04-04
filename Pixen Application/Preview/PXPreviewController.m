@@ -45,6 +45,8 @@
 
 @implementation PXPreviewController
 
+@synthesize view, controlView, playPauseButton;
+
 - (BOOL)hasUsableCanvas
 {
 	return canvas && !NSEqualSizes([canvas size], NSZeroSize);
@@ -155,11 +157,15 @@
 
 - (void)playAnimation
 {
+	[playPauseButton setImage:[NSImage imageNamed:@"Pause"]];
+	
 	[self incrementFromTimer:nil];
 }
 
 - (void)pauseAnimation
 {
+	[playPauseButton setImage:[NSImage imageNamed:@"Play"]];
+	
 	[_animationTimer invalidate];
 	[_animationTimer release];
 	_animationTimer = nil;
@@ -230,11 +236,17 @@
 - (void)mouseEntered:(NSEvent *)event
 {
 	[ (PXPreviewBezelView *) [bezelView animator] setOpacity:0.75f];
+	
+	if (_animation)
+		[[controlView animator] setAlphaValue:1.0f];
 }
 
 - (void)mouseExited:(NSEvent *)event
 {
 	[ (PXPreviewBezelView *) [bezelView animator] setOpacity:0.33f];
+	
+	if (_animation)
+		[[controlView animator] setAlphaValue:0.0f];
 }
 
 - (void)dealloc
@@ -270,7 +282,6 @@
 
 - (void)updateTrackingRectAssumingInside:(BOOL)inside
 {
-	[self mouseExited:nil];
 	NSRect trackingFrame = [ (NSView *) [[self window] contentView] frame];
 	if (trackingTag != -1) { [view removeTrackingRect:trackingTag]; }
 	trackingTag = [[[self window] contentView] addTrackingRect:trackingFrame owner:self userData:nil assumeInside:inside];

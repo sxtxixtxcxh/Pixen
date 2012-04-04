@@ -3,12 +3,15 @@
 //  Pixen
 //
 
-@class PXAnimation, PXCanvas, PXCanvasPreviewView, PXPreviewBezelView, PXBackgroundController, PXPreviewResizePrompter;
+@class PXAnimation, PXCanvas, PXCanvasPreviewView, PXPreviewBezelView, PXPreviewControlView, PXBackgroundController, PXPreviewResizePrompter;
 
 @interface PXPreviewController : NSWindowController
 {
   @private
-	IBOutlet PXCanvasPreviewView *view;
+	PXCanvasPreviewView *view;
+	PXPreviewControlView *controlView;
+	NSButton *playPauseButton;
+	
 	PXCanvas *canvas;
 	NSRect updateRect;
 	NSWindow *resizeSizeWindow;
@@ -24,6 +27,10 @@
 	
 	PXBackgroundController *backgroundController;
 }
+
+@property (nonatomic, assign) IBOutlet PXCanvasPreviewView *view;
+@property (nonatomic, assign) IBOutlet PXPreviewControlView *controlView;
+@property (nonatomic, assign) IBOutlet NSButton *playPauseButton;
 
 + (id)sharedPreviewController;
 
