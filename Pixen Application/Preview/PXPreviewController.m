@@ -212,6 +212,8 @@
 - (void)setSingleCanvas:(PXCanvas *)aCanvas
 {
 	if (_animation) {
+		[controlView setAlphaValue:0.0f];
+		
 		[self stopAnimation];
 		
 		[_animation release];
@@ -229,7 +231,7 @@
 - (void)documentClosed:(NSNotification *)notification
 {
 	if ([[notification object] canvas] == canvas) {
-		[self setCanvas:nil updateScale:NO];
+		[self setSingleCanvas:nil];
 	}
 }
 
