@@ -46,6 +46,7 @@ extern NSString *PixenPaletteType;
 extern NSString *MicrosoftPaletteType;
 extern NSString *JascPaletteType;
 extern NSString *AdobePaletteType;
+extern NSString *GimpPaletteType;
 
 extern NSString *CFBundleShortVersionKey;
 extern NSString *CFBundleVersionKey;
@@ -60,6 +61,7 @@ extern NSString *PXPatternSuffix;
 extern NSString *PXPaletteSuffix;
 extern NSString *MicrosoftPaletteSuffix;
 extern NSString *AdobePaletteSuffix;
+extern NSString *GimpPaletteSuffix;
 
 extern NSString *PXActiveLayerKey;
 

@@ -10,12 +10,13 @@
 #import "OSACTWriter.h"
 #import "OSJASCPALWriter.h"
 #import "OSPALWriter.h"
+#import "GPLWriter.h"
 
 @implementation PXPaletteExporter
 
 + (NSArray *)types
 {
-	return [NSArray arrayWithObjects:PixenPaletteType, MicrosoftPaletteType, JascPaletteType, AdobePaletteType, nil];
+	return [NSArray arrayWithObjects:PixenPaletteType, MicrosoftPaletteType, JascPaletteType, AdobePaletteType, GimpPaletteType, nil];
 }
 
 - (void)dealloc
@@ -50,7 +51,9 @@
 		}
 		else if ([type isEqualToString:AdobePaletteType]) {
 			writer = [OSACTWriter sharedACTWriter];
-		}
+		} else if ([type isEqualToString:GimpPaletteType]) {
+            writer = [GPLWriter sharedGPLWriter];
+        }
 		
 		if (writer == nil) {
 			[NSApp stopModal];
@@ -83,9 +86,10 @@
 		path = [basename stringByAppendingPathExtension:MicrosoftPaletteSuffix];
 	else if ([type isEqualToString:JascPaletteType])
 		path = [basename stringByAppendingPathExtension:MicrosoftPaletteSuffix];
-	else
+	else if ([type isEqualToString:AdobePaletteType])
 		path = [basename stringByAppendingPathExtension:AdobePaletteSuffix];
-	
+	else if ([type isEqualToString:GimpPaletteType])
+        path = [basename stringByAppendingPathExtension:GimpPaletteSuffix];
 	return path;
 }
 
@@ -102,7 +106,7 @@
 	_palette = [aPalette retain];
 	
 	_savePanel = [[NSSavePanel savePanel] retain];
-	[_savePanel setAllowedFileTypes:[NSArray arrayWithObjects:PXPaletteSuffix, MicrosoftPaletteSuffix, AdobePaletteSuffix, nil]];
+	[_savePanel setAllowedFileTypes:[NSArray arrayWithObjects:PXPaletteSuffix, MicrosoftPaletteSuffix, AdobePaletteSuffix, GimpPaletteSuffix, nil]];
 	[_savePanel setPrompt:@"Export"];
 	[_savePanel setExtensionHidden:YES];
 	[_savePanel setNameFieldStringValue:_palette.name];

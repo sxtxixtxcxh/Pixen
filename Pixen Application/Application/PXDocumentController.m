@@ -257,7 +257,7 @@ NSString *palettesSubdirName = @"Palettes";
 			[[NSNotificationCenter defaultCenter] postNotificationName:PXPatternsChangedNotificationName object:self userInfo:[NSDictionary dictionaryWithObject:patterns forKey:@"patterns"]];
 		}
 	}
-	if([[filename pathExtension] isEqual:PXPaletteSuffix] || [[filename pathExtension] isEqual:MicrosoftPaletteSuffix] || [[filename pathExtension] isEqual:AdobePaletteSuffix])
+	if([[filename pathExtension] isEqual:PXPaletteSuffix] || [[filename pathExtension] isEqual:MicrosoftPaletteSuffix] || [[filename pathExtension] isEqual:AdobePaletteSuffix] || [[filename pathExtension] isEqualToString:GimpPaletteSuffix])
 	{
 		id paletteName = [filename lastPathComponent];
 		id dest = [GetPixenPaletteDirectory() stringByAppendingPathComponent:paletteName];
