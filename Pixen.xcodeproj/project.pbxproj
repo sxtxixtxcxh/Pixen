@@ -3040,7 +3040,6 @@
 				GCC_PREFIX_HEADER = "Other Sources/Pixen_Prefix.h";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
-				INSTALL_PATH = "";
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = Pixen;
