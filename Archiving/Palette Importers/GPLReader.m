@@ -39,7 +39,6 @@
 - (PXPalette *)paletteWithData:(NSData *)data
 {
 	NSString *string = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-	NSString *error = @"Couldn't read GPL color data";
 	
 	NSScanner *scanner = [NSScanner scannerWithString:string];
 	[string release];
@@ -73,19 +72,19 @@
 		
 		if (![scanner scanInt:&red])
 		{
-			[NSException raise:@"OSFileError" format:error];
+			[NSException raise:@"OSFileError" format:@"Couldn't read GPL color data"];
 			return nil;
 		}
 		
 		if (![scanner scanInt:&green])
 		{
-			[NSException raise:@"OSFileError" format:error];
+			[NSException raise:@"OSFileError" format:@"Couldn't read GPL color data"];
 			return nil;
 		}
 		
 		if (![scanner scanInt:&blue])
 		{
-			[NSException raise:@"OSFileError" format:error];
+			[NSException raise:@"OSFileError" format:@"Couldn't read GPL color data"];
 			return nil;
 		}
 		
