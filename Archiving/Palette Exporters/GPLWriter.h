@@ -6,14 +6,12 @@
 //  Copyright 2012 Collin Sanford. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import "PXPalette.h"
 
 @interface GPLWriter : NSObject
 
 + (id)sharedGPLWriter;
-    
+
 - (NSData *)palDataForPalette:(PXPalette *)palette;
 
 @end
