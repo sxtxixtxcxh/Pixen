@@ -314,10 +314,6 @@
 	
 	[view sizeToCanvas];
 	[self updatePreview];
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	BOOL zoomToFit = [defaults boolForKey:PXZoomNewDocumentsToFitKey];	
-	if (zooming && zoomToFit)
-		[delegate zoomToFitCanvasController:self];
 }
 
 - (void)updateCanvasSize

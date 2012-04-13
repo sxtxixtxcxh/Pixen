@@ -158,7 +158,6 @@ NSString *palettesSubdirName = @"Palettes";
 		[defaults setBool:YES forKey:@"SUCheckAtStartup"];
 		[defaults setInteger:60 forKey:PXAutosaveIntervalKey];
 		[defaults setBool:YES forKey:PXAutosaveEnabledKey];
-		[defaults setBool:YES forKey:PXZoomNewDocumentsToFitKey];
 		[defaults setBool:YES forKey:PXInfoPanelIsOpenKey];
 		[defaults setBool:YES forKey:PXHasRunBeforeKey];
 		[defaults synchronize];
@@ -170,7 +169,6 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	if ( [defaults floatForKey:PXVersionKey] < 3 ) // <3 <3 <3
 	{
-		[defaults setBool:YES forKey:PXZoomNewDocumentsToFitKey];
 		[defaults setFloat:3 forKey:@"PXVersion"];
 	}
 	

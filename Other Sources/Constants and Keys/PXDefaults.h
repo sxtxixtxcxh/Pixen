@@ -24,8 +24,6 @@ extern NSString *PXDefaultNewDocumentWidth;
 extern NSString *PXDefaultNewDocumentHeight;
 extern NSString *PXDefaultNewDocumentBackgroundColor;
 
-extern NSString *PXZoomNewDocumentsToFitKey;
-
 extern NSString *PXAutosaveIntervalKey;
 extern NSString *PXAutosaveEnabledKey;
 
