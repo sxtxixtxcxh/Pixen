@@ -7,10 +7,10 @@
 
 #import "PXPaletteExporter.h"
 
+#import "GPLWriter.h"
 #import "OSACTWriter.h"
 #import "OSJASCPALWriter.h"
 #import "OSPALWriter.h"
-#import "GPLWriter.h"
 
 @implementation PXPaletteExporter
 
@@ -51,9 +51,10 @@
 		}
 		else if ([type isEqualToString:AdobePaletteType]) {
 			writer = [OSACTWriter sharedACTWriter];
-		} else if ([type isEqualToString:GimpPaletteType]) {
-            writer = [GPLWriter sharedGPLWriter];
-        }
+		}
+		else if ([type isEqualToString:GimpPaletteType]) {
+			writer = [GPLWriter sharedGPLWriter];
+		}
 		
 		if (writer == nil) {
 			[NSApp stopModal];
@@ -89,7 +90,8 @@
 	else if ([type isEqualToString:AdobePaletteType])
 		path = [basename stringByAppendingPathExtension:AdobePaletteSuffix];
 	else if ([type isEqualToString:GimpPaletteType])
-        path = [basename stringByAppendingPathExtension:GimpPaletteSuffix];
+		path = [basename stringByAppendingPathExtension:GimpPaletteSuffix];
+	
 	return path;
 }
 
