@@ -8,7 +8,6 @@
 
 #import "GPLWriter.h"
 
-
 @implementation GPLWriter
 
 - (id)init
@@ -39,14 +38,14 @@
 {
 	NSMutableString *string = [NSMutableString string];
 	[string appendString:@"GIMP Palette\n"];
-    [string appendString:@"Name: "];
-    [string appendString:palette.name];
-    [string appendString:@"\nColumns: 16\n#\n"];
+	[string appendString:@"Name: "];
+	[string appendString:palette.name];
+	[string appendString:@"\nColumns: 16\n#\n"];
 	
-    __block int i = 1;
+	__block int i = 1;
 	[palette enumerateWithBlock:^(PXColor color) {
 		[string appendFormat:@"%d %d %d Color %d\n", color.r, color.g, color.b, i];
-        i++;
+		i++;
 	}];
 	
 	return [string dataUsingEncoding:NSASCIIStringEncoding];
