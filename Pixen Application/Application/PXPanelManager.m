@@ -228,11 +228,6 @@ static PXPanelManager *sharedManager = nil;
 	[panel performClose:self];
 }
 
-- (NSPanel *)infoPanel
-{
-	return (NSPanel *) [[PXInfoPanelController sharedInfoPanelController] window];
-}
-
 - (NSPanel *)welcomePanel
 {
 	return (NSPanel *)[[PXWelcomeController sharedWelcomeController] window];
@@ -268,9 +263,9 @@ static PXPanelManager *sharedManager = nil;
 	[[PXPreferencesController sharedPreferencesController] showWindow:nil];
 }
 
-- (IBAction)showInfo: (id)sender
+- (IBAction)showInfo:(id)sender
 {
-	[self show:[self infoPanel]];
+	[[PXInfoPanelController sharedInfoPanelController] showWindow:nil];
 }
 
 - (IBAction)showWelcome: (id)sender

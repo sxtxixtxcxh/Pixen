@@ -17,7 +17,6 @@
 - (void)addPalettePanel:(NSPanel *)panel;
 - (void)removePalettePanel:(NSPanel *)panel;
 
-- (NSPanel *)infoPanel;
 - (NSPanel *)welcomePanel;
 - (NSPanel *)toolPalettePanel;
 
