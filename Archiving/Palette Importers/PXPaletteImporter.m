@@ -9,8 +9,10 @@
 #import "OSPALReader.h"
 #import "OSJASCPALReader.h"
 #import "OSACTReader.h"
+#import "GPLReader.h"
 #import "PathUtilities.h"
 #import "PXPalette.h"
+#import "Constants.h"
 
 @implementation PXPaletteImporter
 
@@ -39,7 +41,9 @@
 	else if ([[path pathExtension] isEqualToString:AdobePaletteSuffix])
 	{
 		reader = [OSACTReader sharedACTReader];
-	}
+	} else if ([[path pathExtension] isEqualToString:GimpPaletteSuffix]) {
+        reader = [GPLReader sharedGPLReader];
+    }
 	
 	NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
 	NSString *base = [NSString stringWithString:name];
@@ -117,7 +121,7 @@
 	[_openPanel setCanChooseDirectories:NO];
 	[_openPanel setPrompt:@"Install"];
 	[_openPanel setTitle:@"Install"];
-	[_openPanel setAllowedFileTypes:[NSArray arrayWithObjects:PXPaletteSuffix, MicrosoftPaletteSuffix, AdobePaletteSuffix, nil]];
+	[_openPanel setAllowedFileTypes:[NSArray arrayWithObjects:PXPaletteSuffix, MicrosoftPaletteSuffix, AdobePaletteSuffix, GimpPaletteSuffix, nil]];
 	
 	if (window) {
 		[_openPanel beginSheetModalForWindow:window

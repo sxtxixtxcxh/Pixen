@@ -47,6 +47,7 @@ NSString *PixenPaletteType = @"Pixen Palette Format (.pxpalette)";
 NSString *MicrosoftPaletteType = @"Microsoft RAW Palette Format (.pal)";
 NSString *JascPaletteType = @"Jasc Paint Shop Pro Palette Format (.pal)";
 NSString *AdobePaletteType = @"Adobe Color Table (.act)";
+NSString *GimpPaletteType = @"Gimp Palette Format (.gpl)";
 
 NSString *CFBundleShortVersionKey = @"CFBundleShortVersionString";
 NSString *CFBundleNameKey = @"CFBundleName";
@@ -61,6 +62,7 @@ NSString *PXPatternSuffix = @"pxpattern";
 NSString *PXPaletteSuffix = @"pxpalette";
 NSString *MicrosoftPaletteSuffix = @"pal";
 NSString *AdobePaletteSuffix = @"act";
+NSString *GimpPaletteSuffix = @"gpl";
 
 NSString *PXActiveLayerKey = @"activeLayer";
 
