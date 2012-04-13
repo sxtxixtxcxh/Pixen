@@ -68,7 +68,6 @@
 										<reference key="NSSuperview" ref="629727439"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="887176516"/>
-										<bool key="NSViewIsLayerTreeHost">YES</bool>
 										<int key="NSViewLayerContentsRedrawPolicy">2</int>
 										<string key="NSClassName">PXPaletteView</string>
 									</object>

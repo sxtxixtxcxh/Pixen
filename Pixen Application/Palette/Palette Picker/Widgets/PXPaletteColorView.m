@@ -1,11 +1,11 @@
 //
-//  PXPaletteColorLayer.m
+//  PXPaletteColorView.m
 //  Pixen
 //
 //  Copyright 2005-2012 Pixen Project. All rights reserved.
 //
 
-#import "PXPaletteColorLayer.h"
+#import "PXPaletteColorView.h"
 
 #import "NSBezierPath+PXRoundedRectangleAdditions.h"
 
@@ -44,7 +44,7 @@
 @end
 
 
-@implementation PXPaletteColorLayer
+@implementation PXPaletteColorView
 
 @synthesize color = _color, index = _index, controlSize = _controlSize, highlighted = _highlighted;
 
@@ -52,6 +52,11 @@
 {
 	[_color release];
 	[super dealloc];
+}
+
+- (BOOL)isFlipped
+{
+	return YES;
 }
 
 - (void)drawColorSwatchWithFrame:(NSRect)rect
@@ -95,12 +100,9 @@
 	}
 }
 
-- (void)drawInContext:(CGContextRef)ctx
+- (void)drawRect:(NSRect)dirtyRect
 {
-	[NSGraphicsContext saveGraphicsState];
-	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithGraphicsPort:ctx flipped:YES]];
-	
-	NSRect frame = NSRectFromCGRect([self bounds]);
+	NSRect frame = [self bounds];
 	[self.color set];
 	
 	[self drawColorSwatchWithFrame:frame];
@@ -132,7 +134,6 @@
 															 inCorners:OSBottomLeftCorner];
 	
 	if ([self controlSize] != NSRegularControlSize) {
-		[NSGraphicsContext restoreGraphicsState];
 		return;
 	}
 	
@@ -142,18 +143,18 @@
 	[badgeString drawAtPoint:NSMakePoint(NSMaxX(frame) - badgeSize.width + 3, NSMaxY(frame) - badgeSize.height - verticalTextOffset)];
 	
 	if (self.highlighted) {
-		NSSetFocusRingStyle(NSFocusRingAbove);
-		NSFrameRectWithWidthUsingOperation(NSInsetRect(frame, -1, -1), 2.0f, NSCompositeSourceOver);
+		[[NSGraphicsContext currentContext] saveGraphicsState];
+		NSSetFocusRingStyle(NSFocusRingOnly);
+		[[NSBezierPath bezierPathWithRect:frame] fill];
+		[[NSGraphicsContext currentContext] restoreGraphicsState];
 	}
-	
-	[NSGraphicsContext restoreGraphicsState];
 }
 
 - (void)setControlSize:(NSControlSize)controlSize
 {
 	if (_controlSize != controlSize) {
 		_controlSize = controlSize;
-		[self setNeedsDisplay];
+		[self setNeedsDisplay:YES];
 	}
 }
 
@@ -161,7 +162,7 @@
 {
 	if (_index != newIndex) {
 		_index = newIndex;
-		[self setNeedsDisplay];
+		[self setNeedsDisplay:YES];
 	}
 }
 
@@ -171,7 +172,7 @@
 		[_color release];
 		_color = [newColor retain];
 		
-		[self setNeedsDisplay];
+		[self setNeedsDisplay:YES];
 	}
 }
 
@@ -179,7 +180,7 @@
 {
 	if (_highlighted != state) {
 		_highlighted = state;
-		[self setNeedsDisplay];
+		[self setNeedsDisplay:YES];
 	}
 }
 

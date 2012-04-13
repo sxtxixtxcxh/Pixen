@@ -1,11 +1,11 @@
 //
-//  PXPaletteColorLayer.h
+//  PXPaletteColorView.h
 //  Pixen
 //
 //  Copyright 2005-2012 Pixen Project. All rights reserved.
 //
 
-@interface PXPaletteColorLayer : CALayer
+@interface PXPaletteColorView : NSView
 {
   @private
 	NSUInteger _index;

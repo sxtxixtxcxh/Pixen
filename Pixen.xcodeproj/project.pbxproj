@@ -192,8 +192,8 @@
 		EA31F9AE0CE7CE4800EC481B /* PXPaletteView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F98C0CE7CE4800EC481B /* PXPaletteView.m */; };
 		EA31F9B10CE7CE4800EC481B /* PXColorPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9960CE7CE4800EC481B /* PXColorPicker.h */; };
 		EA31F9B20CE7CE4800EC481B /* PXColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9970CE7CE4800EC481B /* PXColorPicker.m */; };
-		EA31F9B30CE7CE4800EC481B /* PXPaletteColorLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9980CE7CE4800EC481B /* PXPaletteColorLayer.h */; };
-		EA31F9B40CE7CE4800EC481B /* PXPaletteColorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9990CE7CE4800EC481B /* PXPaletteColorLayer.m */; };
+		EA31F9B30CE7CE4800EC481B /* PXPaletteColorView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9980CE7CE4800EC481B /* PXPaletteColorView.h */; };
+		EA31F9B40CE7CE4800EC481B /* PXPaletteColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9990CE7CE4800EC481B /* PXPaletteColorView.m */; };
 		EA31F9B50CE7CE4800EC481B /* PXPaletteViewScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F99A0CE7CE4800EC481B /* PXPaletteViewScrollView.h */; };
 		EA31F9B60CE7CE4800EC481B /* PXPaletteViewScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F99B0CE7CE4800EC481B /* PXPaletteViewScrollView.m */; };
 		EA31F9B70CE7CE4800EC481B /* PXPaletteViewSizeSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F99C0CE7CE4800EC481B /* PXPaletteViewSizeSelector.h */; };
@@ -735,8 +735,8 @@
 		EA31F98C0CE7CE4800EC481B /* PXPaletteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteView.m; sourceTree = "<group>"; wrapsLines = 1; };
 		EA31F9960CE7CE4800EC481B /* PXColorPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXColorPicker.h; sourceTree = "<group>"; };
 		EA31F9970CE7CE4800EC481B /* PXColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXColorPicker.m; sourceTree = "<group>"; };
-		EA31F9980CE7CE4800EC481B /* PXPaletteColorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteColorLayer.h; sourceTree = "<group>"; };
-		EA31F9990CE7CE4800EC481B /* PXPaletteColorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteColorLayer.m; sourceTree = "<group>"; };
+		EA31F9980CE7CE4800EC481B /* PXPaletteColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteColorView.h; sourceTree = "<group>"; };
+		EA31F9990CE7CE4800EC481B /* PXPaletteColorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteColorView.m; sourceTree = "<group>"; };
 		EA31F99A0CE7CE4800EC481B /* PXPaletteViewScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteViewScrollView.h; sourceTree = "<group>"; };
 		EA31F99B0CE7CE4800EC481B /* PXPaletteViewScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteViewScrollView.m; sourceTree = "<group>"; };
 		EA31F99C0CE7CE4800EC481B /* PXPaletteViewSizeSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteViewSizeSelector.h; sourceTree = "<group>"; };
@@ -1400,8 +1400,8 @@
 			children = (
 				EA31F9960CE7CE4800EC481B /* PXColorPicker.h */,
 				EA31F9970CE7CE4800EC481B /* PXColorPicker.m */,
-				EA31F9980CE7CE4800EC481B /* PXPaletteColorLayer.h */,
-				EA31F9990CE7CE4800EC481B /* PXPaletteColorLayer.m */,
+				EA31F9980CE7CE4800EC481B /* PXPaletteColorView.h */,
+				EA31F9990CE7CE4800EC481B /* PXPaletteColorView.m */,
 				EA31F99A0CE7CE4800EC481B /* PXPaletteViewScrollView.h */,
 				EA31F99B0CE7CE4800EC481B /* PXPaletteViewScrollView.m */,
 				EA31F99C0CE7CE4800EC481B /* PXPaletteViewSizeSelector.h */,
@@ -2119,7 +2119,7 @@
 				EA31F9AB0CE7CE4800EC481B /* PXPaletteSelector.h in Headers */,
 				EA31F9AD0CE7CE4800EC481B /* PXPaletteView.h in Headers */,
 				EA31F9B10CE7CE4800EC481B /* PXColorPicker.h in Headers */,
-				EA31F9B30CE7CE4800EC481B /* PXPaletteColorLayer.h in Headers */,
+				EA31F9B30CE7CE4800EC481B /* PXPaletteColorView.h in Headers */,
 				EA31F9B50CE7CE4800EC481B /* PXPaletteViewScrollView.h in Headers */,
 				EA31F9B70CE7CE4800EC481B /* PXPaletteViewSizeSelector.h in Headers */,
 				EA31F9BB0CE7CE4800EC481B /* PXPalettePanel.h in Headers */,
@@ -2551,7 +2551,7 @@
 				EA31F9AC0CE7CE4800EC481B /* PXPaletteSelector.m in Sources */,
 				EA31F9AE0CE7CE4800EC481B /* PXPaletteView.m in Sources */,
 				EA31F9B20CE7CE4800EC481B /* PXColorPicker.m in Sources */,
-				EA31F9B40CE7CE4800EC481B /* PXPaletteColorLayer.m in Sources */,
+				EA31F9B40CE7CE4800EC481B /* PXPaletteColorView.m in Sources */,
 				EA31F9B60CE7CE4800EC481B /* PXPaletteViewScrollView.m in Sources */,
 				EA31F9B80CE7CE4800EC481B /* PXPaletteViewSizeSelector.m in Sources */,
 				EA31F9BC0CE7CE4800EC481B /* PXPalettePanel.m in Sources */,

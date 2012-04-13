@@ -19,8 +19,8 @@
 	NSControlSize controlSize;
 	IBOutlet id delegate;
 	
-	NSMutableSet *_visibleLayers;
-	NSMutableSet *_recycledLayers;
+	NSMutableSet *_visibleViews;
+	NSMutableSet *_recycledViews;
 }
 
 @property (nonatomic, assign) BOOL allowsColorSelection;
