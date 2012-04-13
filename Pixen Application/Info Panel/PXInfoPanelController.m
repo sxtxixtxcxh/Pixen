@@ -68,7 +68,7 @@
 	[self.blue  setStringValue:[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"BLUE", @"Blue"),   color.b]];
 	[self.alpha setStringValue:[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"ALPHA", @"Alpha"), color.a]];
 	[self.hex   setStringValue:[NSString stringWithFormat:@"%@: #%02X%02X%02X", NSLocalizedString(@"Hex", @"Hex"),
-								color.r, color.g, color.b, color.a]];
+								color.r, color.g, color.b]];
 }
 
 - (void)setNoColorInfo
