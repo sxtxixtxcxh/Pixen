@@ -7,8 +7,8 @@
 //
 
 #import "GPLReader.h"
-#import "PXPalette.h"
 
+#import "PXPalette.h"
 
 @implementation GPLReader
 
@@ -39,49 +39,61 @@
 - (PXPalette *)paletteWithData:(NSData *)data
 {
 	NSString *string = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+	NSString *error = @"Couldn't read GPL color data";
+	
 	NSScanner *scanner = [NSScanner scannerWithString:string];
-    NSString *error = @"Couldn't read GPL color data";
 	[string release];
+	
 	if (![scanner scanString:@"GIMP Palette\n" intoString:nil])
 	{
 		[NSException raise:@"OSFileError" format:@"This GPL file has an invalid header"];
-		return NULL;
+		return nil;
 	}
-    NSString *paletteName;
-	if (![scanner scanString:@"Name:" intoString:NULL]
-        || ![scanner scanUpToString:@"\n" intoString:&paletteName])
+	
+	NSString *paletteName;
+	
+	if (![scanner scanString:@"Name:" intoString:NULL] || ![scanner scanUpToString:@"\n" intoString:&paletteName])
 	{
-		[NSException raise:@"OSFileError" format:@"Couldn't read color count from JASC PAL data"];
-		return NULL;
+		[NSException raise:@"OSFileError" format:@"Couldn't read palette name from GPL file"];
+		return nil;
 	}
+	
 	PXPalette *palette = [[PXPalette alloc] initWithoutBackgroundColor];
 	palette.name = paletteName;
-    if (![scanner scanUpToString:@"#\n" intoString:NULL] ||
-        ![scanner scanString:@"#\n" intoString:NULL]) {
-        [NSException raise:@"OSFileError" format:@"Couldn't read color count from JASC PAL data"];
-		return NULL;
-    }
-    while ([scanner isAtEnd] == NO) {
+	
+	if (![scanner scanUpToString:@"#\n" intoString:NULL] || ![scanner scanString:@"#\n" intoString:NULL])
+	{
+		[NSException raise:@"OSFileError" format:@"Couldn't read color count from GPL file"];
+		return nil;
+	}
+	
+	while ([scanner isAtEnd] == NO)
+	{
 		int red, green, blue;
+		
 		if (![scanner scanInt:&red])
 		{
 			[NSException raise:@"OSFileError" format:error];
-			return NULL;
+			return nil;
 		}
+		
 		if (![scanner scanInt:&green])
 		{
 			[NSException raise:@"OSFileError" format:error];
-			return NULL;
+			return nil;
 		}
+		
 		if (![scanner scanInt:&blue])
 		{
 			[NSException raise:@"OSFileError" format:error];
-			return NULL;
+			return nil;
 		}
+		
 		[palette addColor:PXColorMake(red, green, blue, 255)];
-        [scanner scanUpToString:@"\n" intoString:NULL];
-        [scanner scanString:@"\n" intoString:NULL];
+		[scanner scanUpToString:@"\n" intoString:NULL];
+		[scanner scanString:@"\n" intoString:NULL];
 	}
+	
 	return [palette autorelease];
 }
 
