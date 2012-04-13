@@ -7,7 +7,6 @@
 {
   @private
 	BOOL cachedShowsPreviousCelOverlay;
-	NSTimer *mouseTrackingTimer;
 }
 
 - (IBAction)newFromClipboard:sender;

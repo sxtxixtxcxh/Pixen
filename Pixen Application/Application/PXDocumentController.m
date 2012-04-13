@@ -172,12 +172,6 @@ NSString *palettesSubdirName = @"Palettes";
 		[defaults setFloat:3 forKey:@"PXVersion"];
 	}
 	
-	mouseTrackingTimer = [[NSTimer scheduledTimerWithTimeInterval:.05
-														   target:self
-														 selector:@selector(updateMousePosition:)
-														 userInfo:nil
-														  repeats:YES] retain];
-	
 	[self rescheduleAutosave];
 }
 
@@ -200,20 +194,6 @@ NSString *palettesSubdirName = @"Palettes";
 	for (PXCanvasDocument *current in [self documents])
 	{
 		[[[current canvasController] view] setAcceptsFirstMouse:NO];
-	}
-}
-
-- (void)updateMousePosition:(NSTimer *)timer
-{
-	PXCanvasDocument *doc = [self currentDocument];
-	if(doc)
-	{
-		//FIXME: coupled to canvas controller
-		PXCanvasController *canvasController = [doc canvasController];
-		NSWindow *window = [canvasController window];
-		if (![window isKeyWindow]) {
-			[canvasController updateMousePosition:[window mouseLocationOutsideOfEventStream]];
-		}
 	}
 }
 
@@ -283,10 +263,7 @@ NSString *palettesSubdirName = @"Palettes";
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
 	[[PXPanelManager sharedManager] archivePanelStates];
-	[mouseTrackingTimer invalidate];
-	[mouseTrackingTimer release];
 }
-
 
 //IBAction 
 
