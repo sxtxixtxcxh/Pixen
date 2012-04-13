@@ -6,13 +6,13 @@
 //
 
 #import "PXPaletteImporter.h"
+
+#import "GPLReader.h"
 #import "OSPALReader.h"
 #import "OSJASCPALReader.h"
 #import "OSACTReader.h"
-#import "GPLReader.h"
 #import "PathUtilities.h"
 #import "PXPalette.h"
-#import "Constants.h"
 
 @implementation PXPaletteImporter
 
@@ -41,9 +41,11 @@
 	else if ([[path pathExtension] isEqualToString:AdobePaletteSuffix])
 	{
 		reader = [OSACTReader sharedACTReader];
-	} else if ([[path pathExtension] isEqualToString:GimpPaletteSuffix]) {
-        reader = [GPLReader sharedGPLReader];
-    }
+	}
+	else if ([[path pathExtension] isEqualToString:GimpPaletteSuffix])
+	{
+		reader = [GPLReader sharedGPLReader];
+	}
 	
 	NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
 	NSString *base = [NSString stringWithString:name];
