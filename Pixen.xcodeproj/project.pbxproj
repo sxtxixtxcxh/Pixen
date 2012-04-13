@@ -61,6 +61,10 @@
 		C98182D514F022B00052616F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		C984251213AFC142000072C5 /* PXPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = C984251013AFC142000072C5 /* PXPreview.xib */; };
 		C985C89914C119DF0091EF22 /* PXCanvasResizePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = C985C89714C119DF0091EF22 /* PXCanvasResizePrompt.xib */; };
+		C989DF9A15386C3400B055D5 /* GPLWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = C989DF9815386C3400B055D5 /* GPLWriter.h */; };
+		C989DF9B15386C3400B055D5 /* GPLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C989DF9915386C3400B055D5 /* GPLWriter.m */; };
+		C989DF9E15386C3D00B055D5 /* GPLReader.h in Headers */ = {isa = PBXBuildFile; fileRef = C989DF9C15386C3D00B055D5 /* GPLReader.h */; };
+		C989DF9F15386C3D00B055D5 /* GPLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C989DF9D15386C3D00B055D5 /* GPLReader.m */; };
 		C99236FA152CD1F000EC3AE5 /* Previous.png in Resources */ = {isa = PBXBuildFile; fileRef = C99236F9152CD1F000EC3AE5 /* Previous.png */; };
 		C99236FC152CD37400EC3AE5 /* Next.png in Resources */ = {isa = PBXBuildFile; fileRef = C99236FB152CD37400EC3AE5 /* Next.png */; };
 		C99236FE152CD6AB00EC3AE5 /* Play.png in Resources */ = {isa = PBXBuildFile; fileRef = C99236FD152CD6AB00EC3AE5 /* Play.png */; };
@@ -603,6 +607,10 @@
 		C98182D114F0212C0052616F /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		C984251113AFC142000072C5 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreview.xib; sourceTree = "<group>"; };
 		C985C89814C119DF0091EF22 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXCanvasResizePrompt.xib; sourceTree = "<group>"; };
+		C989DF9815386C3400B055D5 /* GPLWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPLWriter.h; sourceTree = "<group>"; };
+		C989DF9915386C3400B055D5 /* GPLWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPLWriter.m; sourceTree = "<group>"; };
+		C989DF9C15386C3D00B055D5 /* GPLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPLReader.h; sourceTree = "<group>"; };
+		C989DF9D15386C3D00B055D5 /* GPLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPLReader.m; sourceTree = "<group>"; };
 		C99236F9152CD1F000EC3AE5 /* Previous.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Previous.png; sourceTree = "<group>"; };
 		C99236FB152CD37400EC3AE5 /* Next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Next.png; sourceTree = "<group>"; };
 		C99236FD152CD6AB00EC3AE5 /* Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Play.png; sourceTree = "<group>"; };
@@ -1619,6 +1627,8 @@
 		EA31FB8C0CE7D59700EC481B /* Palette Exporters */ = {
 			isa = PBXGroup;
 			children = (
+				C989DF9815386C3400B055D5 /* GPLWriter.h */,
+				C989DF9915386C3400B055D5 /* GPLWriter.m */,
 				EA31FB8D0CE7D59700EC481B /* OSACTWriter.h */,
 				EA31FB8E0CE7D59700EC481B /* OSACTWriter.m */,
 				EA31FB8F0CE7D59700EC481B /* OSJASCPALWriter.h */,
@@ -1634,6 +1644,8 @@
 		EA31FB950CE7D59700EC481B /* Palette Importers */ = {
 			isa = PBXGroup;
 			children = (
+				C989DF9C15386C3D00B055D5 /* GPLReader.h */,
+				C989DF9D15386C3D00B055D5 /* GPLReader.m */,
 				EA31FB960CE7D59700EC481B /* OSACTReader.h */,
 				EA31FB970CE7D59700EC481B /* OSACTReader.m */,
 				EA31FB980CE7D59700EC481B /* OSJASCPALReader.h */,
@@ -2217,6 +2229,8 @@
 				C9ECD4D9150BEF39001F686C /* PXAboutWindowController.h in Headers */,
 				C9C7D460151E21F2009BBCA8 /* PXCanvasAnchorView.h in Headers */,
 				C9F1077C152CCB7000FF2FD5 /* PXPreviewControlView.h in Headers */,
+				C989DF9A15386C3400B055D5 /* GPLWriter.h in Headers */,
+				C989DF9E15386C3D00B055D5 /* GPLReader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2651,6 +2665,8 @@
 				C9ECD4DA150BEF39001F686C /* PXAboutWindowController.m in Sources */,
 				C9C7D461151E21F2009BBCA8 /* PXCanvasAnchorView.m in Sources */,
 				C9F1077D152CCB7000FF2FD5 /* PXPreviewControlView.m in Sources */,
+				C989DF9B15386C3400B055D5 /* GPLWriter.m in Sources */,
+				C989DF9F15386C3D00B055D5 /* GPLReader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
