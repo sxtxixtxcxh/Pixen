@@ -40,7 +40,6 @@
 - (void)windowDidLoad
 {
 	[ (NSPanel *) self.window setBecomesKeyOnlyIfNeeded:YES];
-	[self.window setFrameAutosaveName:PXInfoPanelFrameAutosaveName];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(closedDocument:)

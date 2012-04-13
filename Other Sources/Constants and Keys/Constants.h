@@ -74,8 +74,6 @@ extern NSString *PXLayerNameKey;
 extern NSString *PXLayerKey;
 extern NSString *PXLayerIndexKey;
 
-extern NSString *PXInfoPanelFrameAutosaveName;
-
 extern NSString *PXSourceIndexKey;
 extern NSString *PXTargetIndexKey;
 

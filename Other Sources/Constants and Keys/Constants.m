@@ -75,8 +75,6 @@ NSString *PXLayerNameKey = @"PXLayerName";
 NSString *PXLayerKey = @"layer";
 NSString *PXLayerIndexKey = @"layerIndex";
 
-NSString *PXInfoPanelFrameAutosaveName = @"PXInfoPanelFrame";
-
 NSString *PXSourceIndexKey = @"sourceIndex";
 NSString *PXTargetIndexKey = @"targetIndex";
 
