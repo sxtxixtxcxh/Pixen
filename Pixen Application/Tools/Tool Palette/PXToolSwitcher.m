@@ -18,8 +18,6 @@
 #import "PXLassoTool.h"
 #import "PXNotifications.h"
 
-#import "PXColorPicker.h"
-
   // a protocol interface + bundle loader would be better
 
 @implementation PXToolSwitcher
