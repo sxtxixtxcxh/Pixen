@@ -414,28 +414,9 @@ void PXImage_setColorData(PXImage *self, NSData *colorData)
 
 void PXImage_clear(PXImage *self, PXColor color)
 {
-	for (int y = 0; y < self->height; y += PXTileDimension)
+	for (unsigned int n = 0; n < self->width * self->height; n++)
 	{
-		for (int x = 0; x < self->width; x += PXTileDimension)
-		{
-			PXTile *tile = PXImage_tileAtXY(self, x, y);
-			
-			unsigned char *data = CGBitmapContextGetData(tile->painting);
-			size_t size = CGBitmapContextGetWidth(tile->painting) * CGBitmapContextGetHeight(tile->painting);
-			
-			for (size_t n = 0; n < size; n++) {
-				data[n*PXTileComponentsPerPixel+0] = color.r;
-				data[n*PXTileComponentsPerPixel+1] = color.g;
-				data[n*PXTileComponentsPerPixel+2] = color.b;
-				data[n*PXTileComponentsPerPixel+3] = color.a;
-			}
-			
-			if (tile->image)
-			{
-				CGImageRelease(tile->image);
-				tile->image = NULL;
-			}
-		}
+		PXImage_setColorAtIndex(self, color, n);
 	}
 }
 
