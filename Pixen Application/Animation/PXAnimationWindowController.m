@@ -282,11 +282,21 @@
 	return proposedFrameSize;
 }
 
+- (IBAction)newCel:(id)sender
+{
+	[self newCelButtonClicked:nil];
+}
+
 - (void)newCelButtonClicked:(id)sender
 {
 	NSInteger newIndex = [filmStrip selectedIndex] + 1;
-	if (newIndex == NSNotFound) {newIndex = [animation countOfCels];}
+	
+	if (newIndex == NSNotFound) {
+		newIndex = [animation countOfCels];
+	}
+	
 	[animation insertNewCelAtIndex:newIndex];
+	
 	[[animation celAtIndex:newIndex] setDuration:[[animation celAtIndex:newIndex - 1] duration]];
 }
 

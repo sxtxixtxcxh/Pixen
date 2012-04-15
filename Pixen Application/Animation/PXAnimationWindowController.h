@@ -26,6 +26,7 @@
 @property (nonatomic, assign) PXAnimation *animation;
 
 - (void)activateCel:(PXCel *)cel;
+- (IBAction)newCel:(id)sender;
 - (IBAction)deleteCel:sender;
 - (IBAction)duplicateCel:sender;
 - (void)writeCelsAtIndices:(NSIndexSet *)indices toPasteboard:(NSPasteboard *)pboard;
