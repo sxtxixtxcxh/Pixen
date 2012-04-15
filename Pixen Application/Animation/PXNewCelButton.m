@@ -21,13 +21,13 @@ const CGFloat PXPlusButtonPadding = 12.0f;
 	self = [super initWithFrame:frame];
 	if (self) {
 		_buttonPath = [[NSBezierPath bezierPathWithRoundedRect:NSInsetRect([self bounds], 4.0f, 4.0f) cornerRadius:10.0f] retain];
-		[_buttonPath setLineWidth:3.0f];
+		[_buttonPath setLineWidth:2.5f];
 		
 		CGFloat pattern[2] = { 9.0f, 3.0f };
 		[_buttonPath setLineDash:pattern count:2 phase:0.0f];
 		
 		_plusPath = [[NSBezierPath bezierPath] retain];
-		[_plusPath setLineWidth:2.5f];
+		[_plusPath setLineWidth:2.0f];
 		
 		NSPoint tempPoint = NSMakePoint(NSMaxX([self bounds]) - PXPlusButtonSize / 2 - PXPlusButtonPadding,
 										NSMaxY([self bounds]) - PXPlusButtonSize - PXPlusButtonPadding);
