@@ -7,6 +7,10 @@
 
 #import "PXInfoPanelController.h"
 
+#import "PXAnimation.h"
+#import "PXAnimationDocument.h"
+#import "PXCanvasDocument.h"
+
 @implementation PXInfoPanelController
 
 @synthesize cursorX = _cursorX, cursorY = _cursorY, width = _width, height = _height;
@@ -45,6 +49,15 @@
 											 selector:@selector(closedDocument:)
 												 name:PXDocumentDidCloseNotificationName
 											   object:nil];
+	
+	id document = [[NSDocumentController sharedDocumentController] currentDocument];
+	
+	if ([document isKindOfClass:[PXCanvasDocument class]]) {
+		[self setCanvasSize:[[document canvas] size]];
+	}
+	else if ([document isKindOfClass:[PXAnimationDocument class]]) {
+		[self setCanvasSize:[[document animation] size]];
+	}
 }
 
 - (void)closedDocument:(NSNotification *)notification
