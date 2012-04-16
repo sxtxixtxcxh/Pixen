@@ -201,17 +201,14 @@
 
 - (void)optionKeyDown
 {
-  if( ! [_tool optionKeyDown] ) { 
-		[self useToolTagged:PXEyedropperToolTag];
-  }
+	[_tool optionKeyDown];
 }
 
 - (void)optionKeyUp
 {
-  if( ! [_tool optionKeyUp] ) { 
-		[self useTool:_lastTool];
-  }
+	[_tool optionKeyUp];
 }
+
 - (void)shiftKeyDown
 {
   [_tool shiftKeyDown];
