@@ -163,6 +163,7 @@
 											<string key="NSFrame">{{1, 0}, {839, 160}}</string>
 											<reference key="NSSuperview" ref="768165516"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView" ref="1065435040"/>
 											<string key="NSClassName">PXAnimationBackgroundView</string>
 											<string key="NSExtension">NSView</string>
 										</object>
@@ -239,7 +240,7 @@
 																			<string key="NSFrameSize">{50, 50}</string>
 																			<reference key="NSSuperview" ref="321947866"/>
 																			<reference key="NSWindow"/>
-																			<reference key="NSNextKeyView" ref="159283463"/>
+																			<reference key="NSNextKeyView" ref="188915958"/>
 																			<string key="NSClassName">PXAnimationView</string>
 																			<string key="NSExtension">NSView</string>
 																		</object>
@@ -266,7 +267,6 @@
 																	<string key="NSFrame">{{496, 1}, {15, 528}}</string>
 																	<reference key="NSSuperview" ref="837403884"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView" ref="188915958"/>
 																	<reference key="NSTarget" ref="837403884"/>
 																	<string key="NSAction">_doScroller:</string>
 																	<double key="NSCurValue">1</double>
@@ -278,6 +278,7 @@
 																	<string key="NSFrame">{{1, 520}, {504, 15}}</string>
 																	<reference key="NSSuperview" ref="837403884"/>
 																	<reference key="NSWindow"/>
+																	<reference key="NSNextKeyView" ref="159283463"/>
 																	<int key="NSsFlags">1</int>
 																	<reference key="NSTarget" ref="837403884"/>
 																	<string key="NSAction">_doScroller:</string>
@@ -335,7 +336,7 @@
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
 			<object class="NSCustomView" id="965645719">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">256</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSBox" id="490026646">
@@ -351,6 +352,7 @@
 										<int key="NSvFlags">261</int>
 										<string key="NSFrame">{{117, 3}, {15, 22}}</string>
 										<reference key="NSSuperview" ref="209945795"/>
+										<reference key="NSWindow"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSStepperCell" key="NSCell" id="609207444">
 											<int key="NSCellFlags">917024</int>
@@ -367,11 +369,12 @@
 										<int key="NSvFlags">261</int>
 										<string key="NSFrame">{{14, 2}, {100, 22}}</string>
 										<reference key="NSSuperview" ref="209945795"/>
+										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="819878669"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSComboBoxCell" key="NSCell" id="224084874">
 											<int key="NSCellFlags">343014976</int>
-											<int key="NSCellFlags2">132096</int>
+											<int key="NSCellFlags2">4326400</int>
 											<object class="NSFont" key="NSSupport" id="26">
 												<string key="NSName">LucidaGrande</string>
 												<double key="NSSize">11</double>
@@ -532,11 +535,13 @@
 								</array>
 								<string key="NSFrameSize">{167, 28}</string>
 								<reference key="NSSuperview" ref="490026646"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="566930861"/>
 							</object>
 						</array>
 						<string key="NSFrame">{{-10, 0}, {167, 28}}</string>
 						<reference key="NSSuperview" ref="965645719"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="209945795"/>
 						<string key="NSOffsets">{0, 0}</string>
 						<object class="NSTextFieldCell" key="NSTitleCell">
@@ -562,6 +567,8 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{124, 28}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="490026646"/>
 				<string key="NSClassName">NSView</string>
 				<string key="NSExtension">NSResponder</string>
