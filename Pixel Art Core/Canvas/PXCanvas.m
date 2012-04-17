@@ -244,6 +244,7 @@
 		{
 			for (CGFloat j = 0; j < h; j++)
 			{
+				//TODO: get rid of PXColor -> NSColor conversion
 				PXColor color = [current colorAtPoint:NSMakePoint(i, j)];
 				[colors addObject:PXColorToNSColor(color)];
 			}
