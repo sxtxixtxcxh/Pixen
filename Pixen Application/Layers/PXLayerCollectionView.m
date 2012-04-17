@@ -23,6 +23,8 @@
 - (NSCollectionViewItem *)newItemForRepresentedObject:(id)object
 {
 	PXLayerCollectionViewItem *item = [[PXLayerCollectionViewItem alloc] init];
+	[item loadView];
+	
 	item.representedObject = object;
 	item.layerController = self.layerController;
 	
