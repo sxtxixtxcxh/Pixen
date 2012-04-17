@@ -28,7 +28,7 @@
 @implementation PXCanvasWindowController
 
 @synthesize scaleController, canvasController, resizePrompter = _resizePrompter, canvas;
-@synthesize splitView, layerSplit, canvasSplit, paletteSplit;
+@synthesize splitView, sidebarSplit, layerSplit, canvasSplit, paletteSplit;
 
 
 - (PXCanvasView *)view

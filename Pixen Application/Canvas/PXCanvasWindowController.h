@@ -29,7 +29,7 @@
 	IBOutlet PXCanvasController *canvasController;
 	
 	IBOutlet NSSplitView *splitView;
-	IBOutlet NSView *sidebarSplit, *layerSplit, *canvasSplit, *paletteSplit;
+	NSView *sidebarSplit, *layerSplit, *canvasSplit, *paletteSplit;
 }
 
 @property (nonatomic, readonly) IBOutlet PXCanvasController *canvasController;
@@ -40,7 +40,7 @@
 @property (nonatomic, assign) PXCanvas *canvas;
 
 @property (nonatomic, readonly) IBOutlet NSSplitView *splitView;
-@property (nonatomic, readonly) IBOutlet NSView *layerSplit, *canvasSplit, *paletteSplit;
+@property (nonatomic, assign) IBOutlet NSView *sidebarSplit, *layerSplit, *canvasSplit, *paletteSplit;
 
 - (PXCanvasView *)view;
 - (NSView *)layerSplit;

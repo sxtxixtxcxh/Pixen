@@ -336,7 +336,7 @@
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
 			<object class="NSCustomView" id="965645719">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">256</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSBox" id="490026646">
@@ -352,7 +352,6 @@
 										<int key="NSvFlags">261</int>
 										<string key="NSFrame">{{117, 3}, {15, 22}}</string>
 										<reference key="NSSuperview" ref="209945795"/>
-										<reference key="NSWindow"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSStepperCell" key="NSCell" id="609207444">
 											<int key="NSCellFlags">917024</int>
@@ -369,7 +368,6 @@
 										<int key="NSvFlags">261</int>
 										<string key="NSFrame">{{14, 2}, {100, 22}}</string>
 										<reference key="NSSuperview" ref="209945795"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="819878669"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSComboBoxCell" key="NSCell" id="224084874">
@@ -535,13 +533,11 @@
 								</array>
 								<string key="NSFrameSize">{167, 28}</string>
 								<reference key="NSSuperview" ref="490026646"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="566930861"/>
 							</object>
 						</array>
 						<string key="NSFrame">{{-10, 0}, {167, 28}}</string>
 						<reference key="NSSuperview" ref="965645719"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="209945795"/>
 						<string key="NSOffsets">{0, 0}</string>
 						<object class="NSTextFieldCell" key="NSTitleCell">
@@ -567,8 +563,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{124, 28}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="490026646"/>
 				<string key="NSClassName">NSView</string>
 				<string key="NSExtension">NSResponder</string>
@@ -690,6 +684,14 @@
 						<reference key="destination" ref="689449836"/>
 					</object>
 					<int key="connectionID">337</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">sidebarSplit</string>
+						<reference key="source" ref="794361026"/>
+						<reference key="destination" ref="570277151"/>
+					</object>
+					<int key="connectionID">341</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1093,7 +1095,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">340</int>
+			<int key="maxID">341</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
