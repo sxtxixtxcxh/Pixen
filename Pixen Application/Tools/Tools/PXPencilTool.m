@@ -127,6 +127,10 @@
 			point.x += ceilf(aPoint.x - ([PENCIL_PC patternSize].width / 2));
 			point.y += ceilf(aPoint.y - ([PENCIL_PC patternSize].height / 2));
 			
+			if (![aCanvas containsPoint:point]) {
+				continue;
+			}
+			
 			[self drawWithOldColor:[aCanvas colorAtPoint:point]
 						  newColor:[self colorForCanvas:aCanvas]
 						   atPoint:point
