@@ -288,7 +288,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="786388540">
 								<int key="NSCellFlags">68288064</int>
 								<int key="NSCellFlags2">272761856</int>
-								<string key="NSContents">Double-click on a pattern in the right sidebar to load it in the editor</string>
+								<string key="NSContents">Double-click on a pattern in the sidebar on the right to load it in the editor</string>
 								<reference key="NSSupport" ref="26"/>
 								<string key="NSCellIdentifier">_NS:3983</string>
 								<reference key="NSControlView" ref="203733394"/>
