@@ -32,6 +32,7 @@ typedef enum {
 	PXTool *_tool;
 	PXTool *_lastTool;
 	BOOL _locked;
+	BOOL _showingTemporaryEyedropper;
 }
 
 + (NSArray *)toolClasses;

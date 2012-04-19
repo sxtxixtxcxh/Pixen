@@ -37,7 +37,6 @@
 - (BOOL)keyWasDown:(NSUInteger)mask;
 - (BOOL)isMask:(NSUInteger)newMask upEventForModifierMask:(unsigned int)mask;
 - (BOOL)isMask:(NSUInteger)newMask downEventForModifierMask:(unsigned int)mask;
-- (void)flagsChanged:(NSEvent *)theEvent;
 
 - (void)rightMouseDown;
 - (void)rightMouseUp;

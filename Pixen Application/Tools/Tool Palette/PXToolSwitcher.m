@@ -201,31 +201,63 @@
 
 - (void)optionKeyDown
 {
-	[_tool optionKeyDown];
+	if (![_tool optionKeyDown]) {
+		[self useToolTagged:PXEyedropperToolTag];
+		_showingTemporaryEyedropper = YES;
+	}
+	else {
+		[_tool optionKeyDown];
+	}
 }
 
 - (void)optionKeyUp
 {
-	[_tool optionKeyUp];
+	if (_showingTemporaryEyedropper) {
+		[self useTool:_lastTool];
+		_showingTemporaryEyedropper = NO;
+	}
+	else {
+		[_tool optionKeyUp];
+	}
 }
 
 - (void)shiftKeyDown
 {
-  [_tool shiftKeyDown];
+	if (_showingTemporaryEyedropper) {
+		[_lastTool shiftKeyDown];
+		return;
+	}
+	
+	[_tool shiftKeyDown];
 }
 
 - (void)shiftKeyUp
 {
-  [_tool shiftKeyUp];
+	if (_showingTemporaryEyedropper) {
+		[_lastTool shiftKeyUp];
+		return;
+	}
+	
+	[_tool shiftKeyUp];
 }
 
 - (void)commandKeyDown
 {
+	if (_showingTemporaryEyedropper) {
+		[_lastTool commandKeyDown];
+		return;
+	}
+	
 	[_tool commandKeyDown];
 }
 
 - (void)commandKeyUp
 {
+	if (_showingTemporaryEyedropper) {
+		[_lastTool commandKeyUp];
+		return;
+	}
+	
 	[_tool commandKeyUp];
 }
 

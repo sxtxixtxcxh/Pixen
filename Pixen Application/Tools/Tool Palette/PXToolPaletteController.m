@@ -168,6 +168,11 @@
 //FIXME: use named constant?
 	[[self window] setFrameAutosaveName:@"PXToolPaletteFrame"];
 	keyMask = 0x0;
+	
+	[NSEvent addLocalMonitorForEventsMatchingMask:NSFlagsChangedMask handler:^NSEvent *(NSEvent *e) {
+		[self flagsChanged:e];
+		return e;
+	}];
 }
 
 - (void)clearBeziers;

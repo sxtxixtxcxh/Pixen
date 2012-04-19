@@ -438,11 +438,9 @@
 
 - (void)updateMousePosition:(NSPoint)newLocation
 {
-	[[PXToolPaletteController sharedToolPaletteController] flagsChanged:[NSApp currentEvent]];
 	if (!downEventOccurred) {
 		NSPoint canvasPoint = [view convertFromWindowToCanvasPoint:newLocation];
 		[view updateMousePosition:newLocation dragging:NO];
-		[[PXToolPaletteController sharedToolPaletteController] flagsChanged:[NSApp currentEvent]];
 		[self mouseMovedTo:canvasPoint forTool:[[PXToolPaletteController sharedToolPaletteController] leftTool]];
 		[self mouseMovedTo:canvasPoint forTool:[[PXToolPaletteController sharedToolPaletteController] rightTool]];
 	}
@@ -593,7 +591,6 @@
 
 - (void)flagsChanged:(NSEvent *) event
 {
-	[[PXToolPaletteController sharedToolPaletteController] flagsChanged:event];
 	[self updateMousePosition:[[self window] mouseLocationOutsideOfEventStream]];
 }
 
