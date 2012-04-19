@@ -129,7 +129,7 @@
 	NSButton *button = [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"CANCEL")];
 	[button setKeyEquivalent:@"\r"];
 	
-	[alert setMessageText:NSLocalizedString(@"Really delete the selected pattern?", @"PATTERN_DELETE_PROMPT")];
+	[alert setMessageText:NSLocalizedString(@"Are you sure you want to delete the selected pattern?", @"PATTERN_DELETE_PROMPT")];
 	[alert setInformativeText:NSLocalizedString(@"This operation cannot be undone.", @"PATTERN_DELETE_INFORMATIVE_TEXT")];
 	
 	[alert beginSheetModalForWindow:[self window]
