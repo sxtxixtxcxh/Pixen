@@ -544,6 +544,9 @@
 	if (self.sidebarSplit == subview)
 		return NO;
 	
+	if (topSubview == subview)
+		return NO;
+	
 	return YES;
 }
 
