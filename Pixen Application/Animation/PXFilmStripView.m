@@ -19,7 +19,7 @@ static int PXFilmStripSpokeHoleEdgeTendency = 1; // By how much the spoke holes 
 static int PXFilmStripPropertiesOffset = 15; // how far the properties (index & duration) are up from the bottom of the strip
 static int PXFilmStripPropertiesHeight = 22;
 static int PXFilmStripMinimumScaledCelWidth = 16; // this is the lowest for it to be even displayed
-static int PXFilmStripMinimumScaledCelHeight = 16; // this is the lowest for it to be even displayed
+static int PXFilmStripMinimumScaledCelHeight = 32; // this is the lowest for it to be even displayed
 static int PXFilmStripMinimumCelWidth = 50; // lower than this and it gets extra padding
 static int PXFilmStripMaximumCelWidth = 200; // higher than this and it's scaled down some more
 
