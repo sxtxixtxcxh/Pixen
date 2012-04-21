@@ -196,10 +196,10 @@
 								<reference key="NSSupport" ref="210705946"/>
 								<reference key="NSControlView" ref="234636888"/>
 								<int key="NSButtonFlags">-2038284033</int>
-								<int key="NSButtonFlags2">268435457</int>
+								<int key="NSButtonFlags2">1</int>
 								<reference key="NSAlternateImage" ref="210705946"/>
 								<string key="NSAlternateContents"/>
-								<string key="NSKeyEquivalent">.</string>
+								<string type="base64-UTF8" key="NSKeyEquivalent">Gw</string>
 								<int key="NSPeriodicDelay">200</int>
 								<int key="NSPeriodicInterval">25</int>
 							</object>
