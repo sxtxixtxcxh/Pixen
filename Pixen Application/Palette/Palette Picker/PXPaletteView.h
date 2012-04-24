@@ -7,6 +7,8 @@
 
 #import "PXPalette.h"
 
+@class PXInsertionView;
+
 @interface PXPaletteView : NSView
 {
   @private
@@ -21,6 +23,10 @@
 	
 	NSMutableSet *_visibleViews;
 	NSMutableSet *_recycledViews;
+	
+	NSUInteger _clickedCelIndex;
+	BOOL _dragging;
+	PXInsertionView *_insertionView;
 }
 
 @property (nonatomic, assign) BOOL allowsColorSelection;

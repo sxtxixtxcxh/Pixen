@@ -84,6 +84,8 @@
 		C9B1FA5A13D7328D00BB7CF7 /* PXManagePresetsController.h in Headers */ = {isa = PBXBuildFile; fileRef = C9B1FA5813D7328D00BB7CF7 /* PXManagePresetsController.h */; };
 		C9B1FA5B13D7328D00BB7CF7 /* PXManagePresetsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FA5913D7328D00BB7CF7 /* PXManagePresetsController.m */; };
 		C9B1FA5E13D732FC00BB7CF7 /* PXManagePresetsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9B1FA5C13D732FC00BB7CF7 /* PXManagePresetsWindow.xib */; };
+		C9B3A69D1547200F00872BF2 /* PXInsertionView.h in Headers */ = {isa = PBXBuildFile; fileRef = C9B3A69B1547200F00872BF2 /* PXInsertionView.h */; };
+		C9B3A69E1547200F00872BF2 /* PXInsertionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B3A69C1547200F00872BF2 /* PXInsertionView.m */; };
 		C9C7D460151E21F2009BBCA8 /* PXCanvasAnchorView.h in Headers */ = {isa = PBXBuildFile; fileRef = C9C7D45E151E21F2009BBCA8 /* PXCanvasAnchorView.h */; };
 		C9C7D461151E21F2009BBCA8 /* PXCanvasAnchorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C7D45F151E21F2009BBCA8 /* PXCanvasAnchorView.m */; };
 		C9D58D8B14F0316B00A62C10 /* PXColor.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D58D8914F0316B00A62C10 /* PXColor.h */; };
@@ -630,6 +632,8 @@
 		C9B1FA5813D7328D00BB7CF7 /* PXManagePresetsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXManagePresetsController.h; sourceTree = "<group>"; };
 		C9B1FA5913D7328D00BB7CF7 /* PXManagePresetsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXManagePresetsController.m; sourceTree = "<group>"; };
 		C9B1FA5D13D732FC00BB7CF7 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXManagePresetsWindow.xib; sourceTree = "<group>"; };
+		C9B3A69B1547200F00872BF2 /* PXInsertionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXInsertionView.h; sourceTree = "<group>"; };
+		C9B3A69C1547200F00872BF2 /* PXInsertionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXInsertionView.m; sourceTree = "<group>"; };
 		C9C7D45E151E21F2009BBCA8 /* PXCanvasAnchorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvasAnchorView.h; sourceTree = "<group>"; };
 		C9C7D45F151E21F2009BBCA8 /* PXCanvasAnchorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasAnchorView.m; sourceTree = "<group>"; };
 		C9D58D8914F0316B00A62C10 /* PXColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXColor.h; sourceTree = "<group>"; };
@@ -1386,6 +1390,8 @@
 		EA31F9810CE7CE4800EC481B /* Palette Picker */ = {
 			isa = PBXGroup;
 			children = (
+				C9B3A69B1547200F00872BF2 /* PXInsertionView.h */,
+				C9B3A69C1547200F00872BF2 /* PXInsertionView.m */,
 				EA31F9890CE7CE4800EC481B /* PXPaletteSelector.h */,
 				EA31F98A0CE7CE4800EC481B /* PXPaletteSelector.m */,
 				EA31F98B0CE7CE4800EC481B /* PXPaletteView.h */,
@@ -2231,6 +2237,7 @@
 				C9F1077C152CCB7000FF2FD5 /* PXPreviewControlView.h in Headers */,
 				C989DF9A15386C3400B055D5 /* GPLWriter.h in Headers */,
 				C989DF9E15386C3D00B055D5 /* GPLReader.h in Headers */,
+				C9B3A69D1547200F00872BF2 /* PXInsertionView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2667,6 +2674,7 @@
 				C9F1077D152CCB7000FF2FD5 /* PXPreviewControlView.m in Sources */,
 				C989DF9B15386C3400B055D5 /* GPLWriter.m in Sources */,
 				C989DF9F15386C3D00B055D5 /* GPLReader.m in Sources */,
+				C9B3A69E1547200F00872BF2 /* PXInsertionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

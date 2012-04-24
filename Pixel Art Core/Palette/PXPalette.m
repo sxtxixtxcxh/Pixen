@@ -269,6 +269,11 @@ NSArray *CreateGrayList()
 #warning TODO: implement
 }
 
+- (void)moveColorAtIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)targetIndex
+{
+	PXColorArrayMoveColor(_colors, sourceIndex, targetIndex);
+}
+
 - (id)copyWithZone:(NSZone *)zone
 {
 	PXPalette *newPalette = [[PXPalette alloc] initWithoutBackgroundColor];

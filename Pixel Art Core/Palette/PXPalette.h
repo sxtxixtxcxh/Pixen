@@ -46,6 +46,7 @@
 - (void)removeLastColor;
 
 - (void)replaceColorAtIndex:(NSUInteger)index withColor:(PXColor)color;
+- (void)moveColorAtIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)targetIndex;
 
 - (PXColor)colorClosestToColor:(PXColor)color;
 

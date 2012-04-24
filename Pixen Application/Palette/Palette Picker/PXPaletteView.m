@@ -7,6 +7,7 @@
 
 #import "PXPaletteView.h"
 
+#import "PXInsertionView.h"
 #import "PXPaletteColorView.h"
 
 @implementation PXPaletteView
@@ -26,6 +27,8 @@ const CGFloat viewMargin = 1.0f;
 		selectionIndex = NSNotFound;
 		controlSize = NSRegularControlSize;
 		allowsColorSelection = allowsColorModification = YES;
+		
+		_clickedCelIndex = NSNotFound;
 		
 		[self registerForDraggedTypes:[NSArray arrayWithObject:NSPasteboardTypeColor]];
 	}
@@ -88,9 +91,14 @@ const CGFloat viewMargin = 1.0f;
 	[self retile];
 }
 
+- (int)celSize
+{
+	return (controlSize == NSRegularControlSize ? 32 : 16);
+}
+
 - (void)size
 {
-	width = (controlSize == NSRegularControlSize ? 32 : 16) + viewMargin;
+	width = [self celSize] + viewMargin;
 	columns = NSWidth([self bounds]) / width;
 	rows = palette ? ceilf((float)(([palette colorCount])) / columns) : 0;
 	
@@ -429,31 +437,66 @@ const CGFloat viewMargin = 1.0f;
 
 - (void)mouseDown:(NSEvent *)event
 {
+	NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
+	NSUInteger index = [self indexOfCelAtPoint:point];
+	
+	if (index == NSNotFound)
+		return;
+	
 	if ([event clickCount] == 2 && allowsColorModification) {
-		NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
-		NSUInteger index = [self indexOfCelAtPoint:point];
-		
-		if (index == NSNotFound)
-			return;
-		
 		if ([delegate respondsToSelector:@selector(paletteView:modifyColorAtIndex:)])
 			[delegate paletteView:self modifyColorAtIndex:index];
+	}
+	else if ([event clickCount] == 1 && palette.canSave) {
+		_clickedCelIndex = index;
+	}
+}
+
+- (void)mouseDragged:(NSEvent *)event
+{
+	[self autoscroll:event];
+	
+	if (_clickedCelIndex != NSNotFound) {
+		_dragging = YES;
+		
+		NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
+		point.x = (int) ((point.x + [self celSize] / 2) / width) * width;
+		point.y = (int) (point.y / width) * width;
+		
+		if (!_insertionView) {
+			_insertionView = [[PXInsertionView alloc] initWithFrame:NSZeroRect];
+			[self addSubview:_insertionView];
+		}
+		
+		_insertionView.frame = NSMakeRect(point.x, point.y, 2.0f, [self celSize] + viewMargin * 2);
+	}
+}
+
+- (void)mouseUp:(NSEvent *)event
+{
+	if (_dragging) {
+		int row = _insertionView.frame.origin.y / width;
+		int col = (_insertionView.frame.origin.x + [self celSize] / 2) / width;
+		
+		int n = row * columns + col;
+		
+		[palette moveColorAtIndex:_clickedCelIndex toIndex:n];
+		
+		selectionIndex = NSNotFound;
+		[self reload];
+		
+		[_insertionView removeFromSuperview];
+		
+		[_insertionView release];
+		_insertionView = nil;
+		
+		_clickedCelIndex = NSNotFound;
+		_dragging = NO;
 		
 		return;
 	}
 	
 	[self activateIndexWithEvent:event];
-}
-
-- (void)mouseDragged:(NSEvent *)event
-{
-	[self activateIndexWithEvent:event];
-	[self autoscroll:event];
-}
-
-- (void)mouseUp:(NSEvent *)event
-{
-	// [self activateIndexWithEvent:event];
 }
 
 @end
