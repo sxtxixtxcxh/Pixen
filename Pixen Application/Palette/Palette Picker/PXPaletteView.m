@@ -435,6 +435,14 @@ const CGFloat viewMargin = 1.0f;
 	return self;
 }
 
+- (int)proposedCelIndexAtPoint:(NSPoint)point
+{
+	int row = point.y / width;
+	int col = (point.x + [self celSize] / 2) / width;
+	
+	return row * columns + col;
+}
+
 - (void)mouseDown:(NSEvent *)event
 {
 	NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
@@ -463,6 +471,11 @@ const CGFloat viewMargin = 1.0f;
 		point.x = (int) ((point.x + [self celSize] / 2) / width) * width;
 		point.y = (int) (point.y / width) * width;
 		
+		int n = [self proposedCelIndexAtPoint:point];
+		
+		if (n > [palette colorCount])
+			return;
+		
 		if (!_insertionView) {
 			_insertionView = [[PXInsertionView alloc] initWithFrame:NSZeroRect];
 			[self addSubview:_insertionView];
@@ -475,10 +488,7 @@ const CGFloat viewMargin = 1.0f;
 - (void)mouseUp:(NSEvent *)event
 {
 	if (_dragging) {
-		int row = _insertionView.frame.origin.y / width;
-		int col = (_insertionView.frame.origin.x + [self celSize] / 2) / width;
-		
-		int n = row * columns + col;
+		int n = [self proposedCelIndexAtPoint:_insertionView.frame.origin];
 		
 		[palette moveColorAtIndex:_clickedCelIndex toIndex:n];
 		
