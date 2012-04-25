@@ -241,15 +241,12 @@ NSString *palettesSubdirName = @"Palettes";
 	if ([ext isEqual:PXPaletteSuffix] || [ext isEqual:MicrosoftPaletteSuffix] || [ext isEqual:AdobePaletteSuffix] || [ext isEqualToString:GimpPaletteSuffix])
 	{
 		NSString *paletteName = [filename lastPathComponent];
-		NSString *dest = [GetPixenPaletteDirectory() stringByAppendingPathComponent:paletteName];
+		NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Install palette \"%@\"?", @"Install palette \"%@\"?"), paletteName];
 		
-		NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Install Palette \"%@\"?", @"Install Palette \"%@\"?"), paletteName];
-		
-		NSInteger result = [[NSAlert alertWithMessageText:message
-											defaultButton:NSLocalizedString(@"Install", @"Install")
-										  alternateButton:NSLocalizedString(@"Cancel", @"CANCEL")
-											  otherButton:nil
-								informativeTextWithFormat:NSLocalizedString(@"%@ will be copied to %@.", @"%@ will be copied to %@."), [filename stringByAbbreviatingWithTildeInPath], [dest stringByAbbreviatingWithTildeInPath]] runModal];
+		NSInteger result = NSRunAlertPanel(NSLocalizedString(@"Confirmation", @"Confirmation"),
+										   message,
+										   NSLocalizedString(@"Install", @"Install"),
+										   NSLocalizedString(@"Cancel", @"Cancel"), nil);
 		
 		if (result == NSAlertDefaultReturn)
 		{
@@ -258,9 +255,9 @@ NSString *palettesSubdirName = @"Palettes";
 			[importer release];
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:PXUserPalettesChangedNotificationName object:self];
-			
-			return YES;
 		}
+		
+		return YES;
 	}
 
 	NSError *err = nil;
