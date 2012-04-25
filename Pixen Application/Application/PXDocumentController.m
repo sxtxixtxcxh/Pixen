@@ -241,7 +241,7 @@ NSString *palettesSubdirName = @"Palettes";
 	if ([ext isEqual:PXPaletteSuffix] || [ext isEqual:MicrosoftPaletteSuffix] || [ext isEqual:AdobePaletteSuffix] || [ext isEqualToString:GimpPaletteSuffix])
 	{
 		NSString *paletteName = [filename lastPathComponent];
-		NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Install palette \"%@\"?", @"Install palette \"%@\"?"), paletteName];
+		NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Install palette '%@'?", @"Install palette '%@'?"), paletteName];
 		
 		NSInteger result = NSRunAlertPanel(NSLocalizedString(@"Confirmation", @"Confirmation"),
 										   message,
