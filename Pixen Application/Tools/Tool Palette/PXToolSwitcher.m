@@ -177,22 +177,21 @@
 {
 	NSUInteger modifierFlags = [event modifierFlags] & NSDeviceIndependentModifierFlagsMask;
 	
-	if (modifierFlags != 0)
-		return;
-	
-	NSString *chars = [[event charactersIgnoringModifiers] lowercaseString];
-	
-	for (NSString *current in [PXToolSwitcher toolNames])
-	{
-		NSString *hotkey = [[NSUserDefaults standardUserDefaults] objectForKey:current];
+	if (modifierFlags == 0) {
+		NSString *chars = [[event charactersIgnoringModifiers] lowercaseString];
 		
-		if (![hotkey length])
-			continue;
-		
-		if ([chars characterAtIndex:0] == [hotkey characterAtIndex:0])
+		for (NSString *current in [PXToolSwitcher toolNames])
 		{
-			[self useToolTagged:(PXToolTag)[[PXToolSwitcher toolNames] indexOfObject:current]];
-			break;
+			NSString *hotkey = [[NSUserDefaults standardUserDefaults] objectForKey:current];
+			
+			if (![hotkey length])
+				continue;
+			
+			if ([chars characterAtIndex:0] == [hotkey characterAtIndex:0])
+			{
+				[self useToolTagged:(PXToolTag)[[PXToolSwitcher toolNames] indexOfObject:current]];
+				break;
+			}
 		}
 	}
 	
