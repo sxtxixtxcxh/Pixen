@@ -235,12 +235,23 @@ NSString *palettesSubdirName = @"Palettes";
 			[[NSNotificationCenter defaultCenter] postNotificationName:PXPatternsChangedNotificationName object:self userInfo:[NSDictionary dictionaryWithObject:patterns forKey:@"patterns"]];
 		}
 	}
-	if([[filename pathExtension] isEqual:PXPaletteSuffix] || [[filename pathExtension] isEqual:MicrosoftPaletteSuffix] || [[filename pathExtension] isEqual:AdobePaletteSuffix] || [[filename pathExtension] isEqualToString:GimpPaletteSuffix])
+	
+	NSString *ext = [filename pathExtension];
+	
+	if ([ext isEqual:PXPaletteSuffix] || [ext isEqual:MicrosoftPaletteSuffix] || [ext isEqual:AdobePaletteSuffix] || [ext isEqualToString:GimpPaletteSuffix])
 	{
-		id paletteName = [filename lastPathComponent];
-		id dest = [GetPixenPaletteDirectory() stringByAppendingPathComponent:paletteName];
-		NSInteger result = [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Install Palette \"%@\"?", @"Instal Palette \"%@\"?"), paletteName] defaultButton:NSLocalizedString(@"Install", @"Install") alternateButton:NSLocalizedString(@"Cancel", @"CANCEL") otherButton:nil informativeTextWithFormat:NSLocalizedString(@"%@ will be copied to %@.", @"%@ will be copied to %@."), [filename stringByAbbreviatingWithTildeInPath], [dest stringByAbbreviatingWithTildeInPath]] runModal];
-		if(result == NSAlertDefaultReturn)
+		NSString *paletteName = [filename lastPathComponent];
+		NSString *dest = [GetPixenPaletteDirectory() stringByAppendingPathComponent:paletteName];
+		
+		NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Install Palette \"%@\"?", @"Install Palette \"%@\"?"), paletteName];
+		
+		NSInteger result = [[NSAlert alertWithMessageText:message
+											defaultButton:NSLocalizedString(@"Install", @"Install")
+										  alternateButton:NSLocalizedString(@"Cancel", @"CANCEL")
+											  otherButton:nil
+								informativeTextWithFormat:NSLocalizedString(@"%@ will be copied to %@.", @"%@ will be copied to %@."), [filename stringByAbbreviatingWithTildeInPath], [dest stringByAbbreviatingWithTildeInPath]] runModal];
+		
+		if (result == NSAlertDefaultReturn)
 		{
 			PXPaletteImporter *importer = [[PXPaletteImporter alloc] init];
 			[importer importPaletteAtPath:filename];
@@ -251,6 +262,7 @@ NSString *palettesSubdirName = @"Palettes";
 			return YES;
 		}
 	}
+
 	NSError *err = nil;
 	NSDocument *doc = [self openDocumentWithContentsOfURL:[NSURL fileURLWithPath:filename] display:YES error:&err];
 	if(err) {
