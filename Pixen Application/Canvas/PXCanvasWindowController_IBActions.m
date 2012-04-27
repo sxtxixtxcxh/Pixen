@@ -116,13 +116,19 @@
 - (IBAction)increaseOpacity:(id)sender
 {
 	PXToolSwitcher *switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
-	[switcher setColor:[[switcher color] colorWithAlphaComponent:[[switcher color] alphaComponent] + 0.1f]];
+	NSColor *color = [switcher color];
+	CGFloat a = MIN([color alphaComponent] + 0.1f, 1.0f);
+	
+	[switcher setColor:[color colorWithAlphaComponent:a]];
 }
 
-- (IBAction)decreaseOpacity:(id) sender
+- (IBAction)decreaseOpacity:(id)sender
 {
 	PXToolSwitcher *switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
-	[switcher setColor:[[switcher color] colorWithAlphaComponent:[[switcher color] alphaComponent] - 0.1f]];
+	NSColor *color = [switcher color];
+	CGFloat a = MAX([color alphaComponent] - 0.1f, 0.0f);
+	
+	[switcher setColor:[color colorWithAlphaComponent:a]];
 }
 
 - (IBAction)duplicateDocument:(id)sender
@@ -217,6 +223,16 @@
 	else if ([anItem action] == @selector(zoomIn:))
 	{
 		return ([zoomPercentageBox indexOfSelectedItem] > 0);
+	}
+	else if ([anItem action] == @selector(increaseOpacity:))
+	{
+		PXToolSwitcher *switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
+		return ([[switcher color] alphaComponent] < 1.0f);
+	}
+	else if ([anItem action] == @selector(decreaseOpacity:))
+	{
+		PXToolSwitcher *switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
+		return ([[switcher color] alphaComponent] > 0.0f);
 	}
 	
 	return YES;
