@@ -37,17 +37,30 @@
 
 - (PXPalette *)paletteWithData:(NSData *)data
 {
-	if ([data length] != 768)
+	if ([data length] != 768 && [data length] != 772)
 	{
-		[NSException raise:@"OSFileError" format:@"This is an invalid ACT palette: normal ACT palettes are exactly 768 bytes long; this one is %d", [data length]];
+		[NSException raise:@"OSFileError" format:@"This is an invalid ACT palette: normal ACT palettes are exactly 768 or 772 bytes long; this one is %d", [data length]];
 		return NULL;
 	}
+	
+	int expectedColorCount = -1;
+	
+	if ([data length] == 772) {
+		uint16_t c = 0;
+		[data getBytes:&c range:NSMakeRange(768, 2)];
+		
+		expectedColorCount = NSSwapBigShortToHost(c);
+	}
+	
 	PXPalette *palette = [[PXPalette alloc] initWithoutBackgroundColor];
 	palette.name = @"Imported palette";
 	int i;
 	const unsigned char *bytes = [data bytes];
 	for (i = 0; i < 256; i++)
 	{
+		if (i == expectedColorCount)
+			break;
+		
 		int red, green, blue;
 		red = bytes[i * 3 + 0];
 		green = bytes[i * 3 + 1];
