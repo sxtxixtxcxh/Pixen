@@ -111,6 +111,7 @@
 	[_plusColors removeAllObjects];
 }
 
+//FIXME: write a single-layer variant of reallyRefreshWholePalette:
 - (void)reallyRefreshWholePalette
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasFrequencyPaletteRefresh"
