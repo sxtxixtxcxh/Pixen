@@ -35,7 +35,7 @@
 {
 	for (NSCell *currentCell in [self.form cells])
 	{
-		NSString *toolClassName = [self classNameForToolWithTag:[currentCell tag]];
+		NSString *toolClassName = [self classNameForToolWithTag: (PXToolTag) [currentCell tag]];
 		NSString *hotkey = [[NSUserDefaults standardUserDefaults] stringForKey:toolClassName];
 		
 		[currentCell setStringValue:hotkey];
@@ -75,7 +75,7 @@
 	id cell = [sender cellAtIndex:[sender indexOfSelectedItem]];
 	
 	[[NSUserDefaults standardUserDefaults] setObject:[cell stringValue]
-											  forKey:[self classNameForToolWithTag:[cell tag]]];
+											  forKey:[self classNameForToolWithTag: (PXToolTag) [cell tag]]];
 }
 
 @end
