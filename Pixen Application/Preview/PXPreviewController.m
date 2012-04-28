@@ -588,7 +588,7 @@
 	[nc removeObserver:self 
 				  name:PXCanvasChangedNotificationName 
 				object:canvas];
-	id oldCanvas = canvas;
+	PXCanvas *oldCanvas = canvas;
 	canvas = aCanvas;
 	if (aCanvas == nil) 
     {
@@ -728,7 +728,7 @@
 
 - (PXBackground *)defaultMainBackground
 {
-	id data = [[NSUserDefaults standardUserDefaults] objectForKey:PXPreviewDefaultMainBackgroundKey];
+	NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:PXPreviewDefaultMainBackgroundKey];
 	return data ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : nil;
 }
 
@@ -739,7 +739,7 @@
 
 - (PXBackground *)defaultAlternateBackground
 {
-	id data = [[NSUserDefaults standardUserDefaults] objectForKey:PXPreviewDefaultAlternateBackgroundKey];
+	NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:PXPreviewDefaultAlternateBackgroundKey];
 	return data ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : nil;
 }
 

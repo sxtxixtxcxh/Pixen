@@ -33,8 +33,8 @@
 		{
 			unsigned newMaskLength = sizeof(BOOL) * sz.width * sz.height;
 			PXSelectionMask newMask = calloc(sz.width * sz.height, sizeof(BOOL));
-			id newData = [NSData dataWithBytes:newMask length:newMaskLength];
-			id oldData = [NSData dataWithBytes:selectionMask length:[self selectionMaskSize]];
+			NSData *newData = [NSData dataWithBytes:newMask length:newMaskLength];
+			NSData *oldData = [NSData dataWithBytes:selectionMask length:[self selectionMaskSize]];
 			[self setMaskData:newData withOldMaskData:oldData];
 			free(newMask);
 			[[NSNotificationCenter defaultCenter] postNotificationName:PXSelectionMaskChangedNotificationName object:self];
@@ -163,7 +163,7 @@
 - (void)removeLayerAtIndex:(NSUInteger)index
 {
 	BOOL wasActive = ([self indexOfLayer:activeLayer] == index);
-	id layer = [layers objectAtIndex:index];
+	PXLayer *layer = [layers objectAtIndex:index];
 	[self beginUndoGrouping]; {
 		NSUInteger newIndex = [layers indexOfObject:layer];
 		[[[self undoManager] prepareWithInvocationTarget:self] insertLayer:layer atIndex:index];
