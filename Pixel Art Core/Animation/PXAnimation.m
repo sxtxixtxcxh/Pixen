@@ -98,7 +98,7 @@
 
 - (void)setSizeNoUndo:(NSSize)aSize
 {
-	for (id current in cels)
+	for (PXCel *current in cels)
 	{
 		[current setSize:aSize];
 	}
@@ -215,7 +215,7 @@
 	if(index1 == index2) { return; }
 	[self willChangeValueForKey:@"countOfCels"];
 	[undoManager beginUndoGrouping];
-	id cel = [cels objectAtIndex:index1];
+	PXCel *cel = [cels objectAtIndex:index1];
 	[cels insertObject:cel atIndex:index2];
 	NSUInteger removeIndex = index1;
 	if(index1 > index2)

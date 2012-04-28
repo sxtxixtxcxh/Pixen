@@ -213,7 +213,7 @@
 
 - (PXBackground *)defaultMainBackground
 {
-	id data = [[NSUserDefaults standardUserDefaults] objectForKey:PXCanvasDefaultMainBackgroundKey];
+	NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:PXCanvasDefaultMainBackgroundKey];
 	return data ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : nil;
 }
 
@@ -224,7 +224,7 @@
 
 - (PXBackground *)defaultAlternateBackground
 {
-	id data = [[NSUserDefaults standardUserDefaults] objectForKey:PXCanvasDefaultAlternateBackgroundKey];
+	NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:PXCanvasDefaultAlternateBackgroundKey];
 	return data ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : nil;
 }
 
@@ -457,7 +457,7 @@
 - (void)eraserDown:(NSEvent *)event
 {
 	if (usingSpaceKey) { return; }
-	id eraser = [[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEraserToolTag];
+	PXTool *eraser = [[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEraserToolTag];
 	[self mouseDown:event forTool:eraser];
 }
 
@@ -468,19 +468,19 @@
 		[self panViewWithEvent:event];
 		return;
 	}
-	id eraser = [[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEraserToolTag];
+	PXTool *eraser = [[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEraserToolTag];
 	[self mouseDragged:event forTool:eraser];
 }
 
 - (void)eraserUp:(NSEvent *)event
 {
-	id eraser = [[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEraserToolTag];
+	PXTool *eraser = [[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEraserToolTag];
 	[self mouseUpAt:[view convertFromWindowToCanvasPoint:[event locationInWindow]] forTool:eraser];
 }
 
 - (void)eraserMoved:(NSEvent *)event
 {
-	id eraser = [[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEraserToolTag];
+	PXTool *eraser = [[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEraserToolTag];
 	[self mouseMovedTo:[view convertFromWindowToCanvasPoint:[[self window] mouseLocationOutsideOfEventStream]] forTool:eraser];
 	[self mouseMoved:event];
 }

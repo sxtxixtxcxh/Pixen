@@ -606,7 +606,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 		return; // something should be selected
 	}
 	NSInteger index = [selectedIndices firstIndex];
-	id cel = [dataSource celAtIndex:index];
+	PXCel *cel = [dataSource celAtIndex:index];
 	NSSize realCelSize = [cel size];
 	NSRect celRect = celRects[index];
 	NSRect imageRect = NSMakeRect(5,5,NSWidth(celRect),NSHeight(celRect));
