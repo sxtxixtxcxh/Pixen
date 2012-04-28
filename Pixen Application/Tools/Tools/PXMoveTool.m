@@ -37,6 +37,11 @@
 	return [NSCursor openHandCursor];
 }
 
+- (BOOL)supportsPatterns
+{
+	return NO;
+}
+
 - (void)startMovingSelectionFromPoint:(NSPoint)aPoint fromCanvasController:(PXCanvasController *)controller
 {
 	PXCanvas *canvas = [controller canvas];
