@@ -140,7 +140,7 @@
 	}
 }
 
-- (void)setDocument:(NSDocument *)doc
+- (void)setDocument:(PXDocument *)doc
 {
 	[super setDocument:doc];
 	[canvasController setDocument:doc];

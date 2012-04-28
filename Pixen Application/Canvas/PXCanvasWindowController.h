@@ -8,7 +8,7 @@
 #import "PXCanvasResizePrompter.h"
 
 @class PXCanvasController, PXGridSettingsController, PXLayerController, PXPaletteController, PXScaleController;
-@class PXCanvas, PXCanvasView, PXBackground;
+@class PXCanvas, PXCanvasView, PXBackground, PXDocument;
 
 @interface PXCanvasWindowController : NSWindowController < PXCanvasResizePrompterDelegate >
 {
@@ -47,7 +47,7 @@
 - (NSView *)canvasSplit;
 - (void)windowWillClose:note;
 - (void)releaseCanvas;
-- (void)setDocument:(NSDocument *)doc;
+- (void)setDocument:(PXDocument *)doc;
 - (void)windowDidResignMain:note;
 - (void)windowDidBecomeMain:(NSNotification *) aNotification;
 - (void)prepare;
