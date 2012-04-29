@@ -232,7 +232,7 @@
 		C969A15D13D200B300F1C1FE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "";
 			};
 			buildConfigurationList = C969A16013D200B300F1C1FE /* Build configuration list for PBXProject "QLPlugin" */;
