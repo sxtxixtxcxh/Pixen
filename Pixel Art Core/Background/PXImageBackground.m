@@ -121,32 +121,13 @@
 	size.height = ceilf(size.height);
 	NSPoint imageLocation = origin;
 	imageLocation = [newTransform transformPoint:imageLocation];
-	NSSize imageSize = [aCanvas size];
 	
 	[newTransform invert];
 	[newTransform concat];
 	[self.color set];
 	NSRectFill(NSMakeRect(origin.x, origin.y, size.width, size.height));
-	if(![aCanvas wraps])
-	{
-		[image drawInRect:NSMakeRect(0, 0, [aCanvas size].width, [aCanvas size].height) fromRect:NSMakeRect(0, 0, [image size].width, [image size].height) operation:NSCompositeSourceOver fraction:1];
-	}
-	else
-	{
-		int xTiles = (size.width / imageSize.width) + 1;
-		int yTiles = (size.height / imageSize.height) + 1;
-		int i, j;
-		NSRect imgRect = NSMakeRect(imageLocation.x, imageLocation.y, imageSize.width, imageSize.height);
-		for (i = 0; i < xTiles; i++)
-		{
-			imgRect.origin.x = i * imageSize.width + imageLocation.x;
-			for (j = 0; j < yTiles; j++)
-			{
-				imgRect.origin.y = j * imageSize.height + imageLocation.y;
-				[image drawInRect:imgRect fromRect:NSMakeRect(0, 0, [image size].width, [image size].height) operation:NSCompositeSourceOver fraction:1];
-			}
-		}	
-	}
+	
+	[image drawInRect:NSMakeRect(0, 0, [aCanvas size].width, [aCanvas size].height) fromRect:NSMakeRect(0, 0, [image size].width, [image size].height) operation:NSCompositeSourceOver fraction:1];
 	
 	[newTransform invert];
 	[newTransform concat];

@@ -19,43 +19,9 @@
 
 NSUInteger PointSizeF (const void *item);
 
-- (BOOL)wraps
-{
-	return wraps;
-}
-
-- (void)setWraps:(BOOL)newWraps suppressRedraw:(BOOL)suppress
-{
-	wraps = newWraps;
-	if (!suppress)
-		[self changed];	
-}
-
-- (void)setWraps:(BOOL)newWraps
-{
-	[self setWraps:newWraps suppressRedraw:NO];
-}
-
 - (BOOL)containsPoint:(NSPoint)aPoint
 {
-	return wraps || NSPointInRect(aPoint, canvasRect);
-}
-
-- (NSPoint)correct:(NSPoint)aPoint
-{
-	if(!wraps) { return aPoint; }
-	NSPoint corrected = aPoint;
-	while(corrected.x < 0)
-	{
-		corrected.x += [self size].width;
-	}
-	while(corrected.y < 0)
-	{
-		corrected.y += [self size].height;
-	}
-	corrected.x = (int)(corrected.x) % (int)([self size].width);
-	corrected.y = (int)(corrected.y) % (int)([self size].height);
-	return corrected;	
+	return NSPointInRect(aPoint, canvasRect);
 }
 
 - (void)setColor:(PXColor)color atPoint:(NSPoint)aPoint
@@ -63,7 +29,7 @@ NSUInteger PointSizeF (const void *item);
 	if (![self containsPoint:aPoint])
 		return;
 	
-	[self setColor:color atPoint:[self correct:aPoint] onLayer:activeLayer];
+	[self setColor:color atPoint:aPoint onLayer:activeLayer];
 }
 
 - (void)setColor:(PXColor)color atPoint:(NSPoint)aPoint onLayer:(PXLayer *)layer

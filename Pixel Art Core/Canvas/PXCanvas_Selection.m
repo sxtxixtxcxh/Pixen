@@ -17,46 +17,7 @@
 
 - (NSArray *)boundedRectsFromRect:(NSRect)rect
 {
-	if(![self wraps])
-	{
-		return [NSArray arrayWithObject:NSStringFromRect(NSIntersectionRect(rect, NSMakeRect(0, 0, [self size].width, [self size].height)))];
-	}
-	NSRect newRect = rect;
-	NSMutableArray *rects = [NSMutableArray array];
-	while(NSMinX(newRect) < 0)
-	{
-		newRect.origin.x += [self size].width;
-	}
-	while(NSMinY(newRect) < 0)
-	{
-		newRect.origin.y += [self size].height;
-	}
-	if(NSWidth(newRect) >= [self size].width)
-	{
-		newRect.origin.x = 0;
-		newRect.size.width = [self size].width;
-	}
-	if(NSHeight(newRect) >= [self size].height)
-	{
-		newRect.origin.y = 0;
-		newRect.size.height = [self size].width;
-	}
-	if(NSMaxX(newRect) >= [self size].width)
-	{
-		NSSize newSize = NSMakeSize([self size].width - NSMinX(newRect), NSHeight(newRect));
-		NSRect newRectComponent = NSMakeRect(0, NSMinY(newRect), NSWidth(newRect) - newSize.width, NSHeight(newRect));
-		newRect.size = newSize;
-		[rects addObject:NSStringFromRect(newRectComponent)];
-	}
-	if(NSMaxY(newRect) >= [self size].height)
-	{
-		NSSize newSize = NSMakeSize(NSWidth(newRect), [self size].height - NSMinX(newRect));
-		NSRect newRectComponent = NSMakeRect(NSMinX(newRect), 0, NSWidth(newRect), NSHeight(newRect) - newSize.height);
-		newRect.size = newSize;
-		[rects addObject:NSStringFromRect(newRectComponent)];
-	}
-	[rects addObject:NSStringFromRect(newRect)];
-	return rects;
+	return [NSArray arrayWithObject:NSStringFromRect(NSIntersectionRect(rect, NSMakeRect(0, 0, [self size].width, [self size].height)))];
 }
 
 - (void)promoteSelection
@@ -145,9 +106,8 @@
 	} [self endUndoGrouping:NSLocalizedString(@"Select None", @"Select None")];
 }
 
-- (void)deselectPixelAtPoint:(NSPoint)pt
+- (void)deselectPixelAtPoint:(NSPoint)point
 {
-	NSPoint point = [self correct:pt];
 	[self setSelectionMaskBit:NO inRect:NSMakeRect(point.x, point.y, 1, 1)];
 }
 
@@ -181,9 +141,8 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXSelectionMaskChangedNotificationName object:self];
 }
 
-- (void)selectPixelAtPoint:(NSPoint)pt
+- (void)selectPixelAtPoint:(NSPoint)point
 {
-	NSPoint point = [self correct:pt];
 	[self setSelectionMaskBit:YES inRect:NSMakeRect(point.x, point.y, 1, 1)];
 }
 
@@ -200,7 +159,6 @@
 			for (i = NSMinX(rect); i < NSMaxX(rect); i++)
 			{
 				NSPoint loc = NSMakePoint(i, j);
-				loc = [self correct:loc];
 				unsigned index = (int)(loc.x) + (int)(height - loc.y - 1) * width;
 				if(selectionMask[index] != maskValue)
 				{
@@ -369,20 +327,15 @@
 	[self beginUndoGrouping]; {
 		NSData *oldMask = [NSData dataWithBytes:selectionMask length:[self selectionMaskSize]];
 		PXSelectionMask sourceMask = selectionMask;
-		if(wraps)
-		{
-			sourceMask = (PXSelectionMask)malloc([self selectionMaskSize]);
-			memcpy(sourceMask, selectionMask, [self selectionMaskSize]);
-		}
 		for (y = startY; y*deltaY <= endY*deltaY; y+=deltaY)
 		{
 			for (x = startX; x*deltaX <= endX*deltaX; x+=deltaX)
 			{
-				NSPoint loc = [self correct:NSMakePoint(x, y)];
-				NSPoint offLoc = [self correct:NSMakePoint(x-xOffset, y-yOffset)];
+				NSPoint loc = NSMakePoint(x, y);
+				NSPoint offLoc = NSMakePoint(x-xOffset, y-yOffset);
 				unsigned initialIndex = (int)((int)(loc.x) + ((int)(loc.y) * size.width));
 				unsigned finalIndex = (int)((int)(offLoc.x) + ((int)(offLoc.y) * size.width));
-				if ((!wraps) && (offLoc.x < 0 || offLoc.y < 0 || offLoc.x >= size.width || offLoc.y >= size.height)) 
+				if ((offLoc.x < 0 || offLoc.y < 0 || offLoc.x >= size.width || offLoc.y >= size.height)) 
 				{
 					selectionMask[initialIndex] = 0;
 				} 
@@ -391,10 +344,6 @@
 					selectionMask[initialIndex] = sourceMask[finalIndex];
 				}
 			}
-		}
-		if(wraps)
-		{
-			free(sourceMask);
 		}
 //FIXME: slow in large images, can it be avoided?
 		[self setMaskData:[NSData dataWithBytes:selectionMask length:[self selectionMaskSize]] withOldMaskData:oldMask];

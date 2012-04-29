@@ -21,7 +21,6 @@
 	[coder encodeObject:layers forKey:@"layers"];
 	
 	[coder encodeObject:bgConfig forKey:@"bgConfig"];
-	[coder encodeBool:wraps forKey:@"wraps"];
 	[coder encodeObject:grid forKey:@"grid"];
 	[coder encodeSize:previewSize forKey:@"previewSize"];
 }
@@ -84,7 +83,6 @@
 			grid = [[PXGrid alloc] initWithCoder:coder];
 		}
 		[self setPreviewSize:[coder decodeSizeForKey:@"previewSize"]];
-		wraps = [coder decodeBoolForKey:@"wraps"];
 	}
 	canvasRect = NSMakeRect(0, 0, [self size].width, [self size].height);
 	activeLayer = [layers lastObject];

@@ -110,8 +110,6 @@
 	
 	if (canvas)
 	{
-		point = [canvas correct:pt];
-		
 		if (point.x >= [self size].width || point.x < 0 ||
 			point.y >= [self size].height || point.y < 0) {
 			
@@ -141,8 +139,6 @@
 	
 	if (canvas)
 	{
-		point = [canvas correct:pt];
-		
 		if (point.x >= [self size].width || point.x < 0 ||
 			point.y >= [self size].height || point.y < 0) {
 			
@@ -216,8 +212,8 @@
 
 - (void)finalizeMotion
 {
-	NSPoint point = [canvas correct:origin];
-	PXImage_translate(image, point.x, point.y, [canvas wraps]);
+	NSPoint point = origin;
+	PXImage_translate(image, point.x, point.y, NO);
 	origin = NSZeroPoint;
 	[canvas changedInRect:NSMakeRect(0, 0, [self size].width, [self size].height)];
 }

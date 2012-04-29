@@ -92,7 +92,6 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 	if (![canvas containsPoint:aPoint])
 		return;
 	
-	aPoint = [canvas correct:aPoint];
 	PXColor initialColor = [canvas colorAtPoint:aPoint];
 	PXColor fillColor = [self colorForCanvas:[controller canvas]];
 	int canvasWidth = [canvas size].width;
@@ -131,7 +130,7 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 			xPointAxis = [[consideredPoints lastObject] intValue] % canvasWidth;
 			yPointAxis = ([[consideredPoints lastObject] intValue] - ([[consideredPoints lastObject] intValue] % canvasWidth)) / canvasWidth ;
 			[consideredPoints removeLastObject];
-			checkingPoint = [canvas correct:NSMakePoint(xPointAxis + 1, canvasHeight - yPointAxis)];
+			checkingPoint = NSMakePoint(xPointAxis + 1, canvasHeight - yPointAxis);
 			if(points[CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)] == NO && (hasSelection == NO || [canvas pointIsSelected:checkingPoint] == YES))
 			{
 				if(PXColorDistanceToColor([activeLayer colorAtPoint:checkingPoint], initialColor) <= tolerance  && [canvas containsPoint:checkingPoint] == YES)
@@ -150,7 +149,7 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 					}
 				}
 			}
-			checkingPoint = [canvas correct:NSMakePoint(xPointAxis - 1, canvasHeight - yPointAxis)];
+			checkingPoint = NSMakePoint(xPointAxis - 1, canvasHeight - yPointAxis);
 			if(points[CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)]  == NO && (hasSelection == NO || [canvas pointIsSelected:checkingPoint] == YES))
 			{
 				if(PXColorDistanceToColor([activeLayer colorAtPoint:checkingPoint], initialColor) <= tolerance && [canvas containsPoint:checkingPoint] == YES)
@@ -169,7 +168,7 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 					}
 				}
 			}
-			checkingPoint = [canvas correct:NSMakePoint(xPointAxis, canvasHeight - (yPointAxis + 1))];
+			checkingPoint = NSMakePoint(xPointAxis, canvasHeight - (yPointAxis + 1));
 			if(points[CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)]  == NO && (hasSelection == NO || [canvas pointIsSelected:checkingPoint] == YES))
 			{
 				if(PXColorDistanceToColor([activeLayer colorAtPoint:checkingPoint], initialColor) <= tolerance  && [canvas containsPoint:checkingPoint] == YES)
@@ -188,7 +187,7 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 					}
 				}
 			}
-			checkingPoint = [canvas correct:NSMakePoint(xPointAxis, canvasHeight - (yPointAxis - 1))];
+			checkingPoint = NSMakePoint(xPointAxis, canvasHeight - (yPointAxis - 1));
 			if(points[CombineAxis(checkingPoint.x, checkingPoint.y, canvasWidth, canvasHeight)]  == NO && (hasSelection == NO || [canvas pointIsSelected:checkingPoint] == YES))
 			{
 				if(PXColorDistanceToColor([activeLayer colorAtPoint:checkingPoint], initialColor) <= tolerance && [canvas containsPoint:checkingPoint] == YES)

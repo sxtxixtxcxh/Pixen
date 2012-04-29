@@ -119,8 +119,6 @@
 		
 		if (canvas)
 		{
-			[canvas setWraps:wraps];
-			
 			[[NSNotificationCenter defaultCenter] addObserver:self
 													 selector:@selector(canvasDidChange:)
 														 name:PXCanvasChangedNotificationName
@@ -231,19 +229,6 @@
 - (void)setDefaultAlternateBackground:(PXBackground *)bg
 {
 	[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:bg] forKey:PXCanvasDefaultAlternateBackgroundKey];
-}
-
-- (void)toggleShouldTile
-{
-	BOOL newWraps = ![canvas wraps];
-	[canvas setWraps:newWraps];
-	if (newWraps)
-		[view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-	else
-		[view setAutoresizingMask:NSViewNotSizable];		
-	[view setZoomPercentage:[view zoomPercentage]]; // resizes the view accordingly
-	[view setNeedsDisplay:YES];	
-	wraps = newWraps;
 }
 
 - (NSScrollView *)scrollView

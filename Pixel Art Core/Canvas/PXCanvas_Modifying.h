@@ -29,13 +29,8 @@
 
 - (void)replaceColor:(PXColor)color withColor:(PXColor)destColor;
 
-- (NSPoint)correct:(NSPoint)aPoint;
 - (BOOL)containsPoint:(NSPoint)aPoint;
 - (void)rotateByDegrees:(int)degrees;
-
-- (BOOL)wraps;
-- (void)setWraps:(BOOL)newWraps;
-- (void)setWraps:(BOOL)newWraps suppressRedraw:(BOOL)suppress;
 
 - (void)changedInRect:(NSRect)rect;
 - (void)changed;

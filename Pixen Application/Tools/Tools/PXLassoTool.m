@@ -194,7 +194,7 @@
 				currentPoint.y = rintf((differencePoint.y/differencePoint.x)*(currentPoint.x-initialPoint.x) + initialPoint.y);
 			}
 			
-			if([[controller canvas] wraps] || NSPointInRect(currentPoint, NSMakeRect(0, 0, [[controller canvas] size].width, [[controller canvas] size].height)))
+			if(NSPointInRect(currentPoint, NSMakeRect(0, 0, [[controller canvas] size].width, [[controller canvas] size].height)))
 			{
 				[self drawPixelAtPoint:currentPoint inCanvas:[controller canvas]];
 			}

@@ -182,12 +182,6 @@
 		return [[[self canvas] layers] count] > 1 && [[[self canvas] layers] lastObject] != [[self canvas] activeLayer];
 	else if ([anItem action] == @selector(nextLayer:))
 		return [[[self canvas] layers] count] > 1 && [[[self canvas] layers] objectAtIndex:0] != [[self canvas] activeLayer];
-	else if ([anItem action] == @selector(shouldTileToggled:))
-	{
-		[anItem setTitle:([canvas wraps]) ? NSLocalizedString(@"HIDE_TILED_VIEW", @"Hide Tiled View") :
-		 NSLocalizedString(@"SHOW_TILED_VIEW", @"Show Tiled View")];
-		return YES;
-	}
 	else if ([anItem action] == @selector(cut:) || [anItem action] == @selector(copy:) ||
 			 [anItem action] == @selector(copyMerged:) || [anItem action] == @selector(selectNone:) ||
 			 [anItem action] == @selector(delete:)) {
@@ -292,11 +286,6 @@
 - (IBAction)previousLayer:(id) sender
 {
 	[[canvasController layerController] selectPreviousLayer];
-}
-
-- (IBAction) shouldTileToggled: (id) sender
-{
-	[canvasController toggleShouldTile];
 }
 
 - (IBAction)setPatternToSelection:sender

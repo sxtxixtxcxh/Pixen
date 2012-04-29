@@ -32,7 +32,6 @@
 	PXColor oldColor;
 	
 	id delegate;
-	BOOL wraps; // used in setCanvas
 }
 
 @property (nonatomic, assign) id delegate;
@@ -59,7 +58,6 @@
 - (void)setDefaultMainBackground:(PXBackground *)bg;
 - (PXBackground *)defaultAlternateBackground;
 - (void)setDefaultAlternateBackground:(PXBackground *)bg;
-- (void)toggleShouldTile;
 - (void)setPatternToSelection;
 - (void)showBackgroundInfo;
 - (void)updateCanvasSizeZoomingToFit:(BOOL)zooming;

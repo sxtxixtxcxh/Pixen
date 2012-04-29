@@ -88,22 +88,6 @@
 	if ([self shouldUseBezierDrawing])
 	{
 		[self.path appendBezierPathWithRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
-		if ([aCanvas wraps]) {
-			NSSize canvasSize = [aCanvas size];
-			while (aPoint.x >= canvasSize.width) {
-				aPoint.x -= canvasSize.width;
-			}
-			while (aPoint.y >= canvasSize.height) {
-				aPoint.y -= canvasSize.height;
-			}
-			while (aPoint.x < 0) {
-				aPoint.x += canvasSize.width;
-			}
-			while (aPoint.y < 0) {
-				aPoint.y += canvasSize.height;
-			}
-			[self.wrappedPath appendBezierPathWithRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
-		}
 	}
 	else // if (![oldColor isEqualTo:newColor])
 	{

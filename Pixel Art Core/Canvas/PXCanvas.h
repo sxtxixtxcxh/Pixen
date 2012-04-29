@@ -38,7 +38,6 @@ typedef BOOL *PXSelectionMask;
 	//these are slightly easier to move, but will still suck to move.
 	PXBackgroundConfig *bgConfig;
 	PXGrid *grid;
-	BOOL wraps;
 	NSSize previewSize;
 	
 	BOOL frequencyPaletteDirty;

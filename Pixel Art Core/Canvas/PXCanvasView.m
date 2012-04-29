@@ -118,32 +118,9 @@ void PXDebugRect(NSRect r, float alpha)
 }
 
 - (void)setNeedsDisplayInCanvasRect:(NSRect)rect
-{	
-	if ([canvas wraps])
-	{
-		int xTiles = 0;
-		int yTiles = 0;
-		NSRect r = [self convertFromViewToCanvasRect:[self visibleRect]];
-		while(((xTiles * [canvas size].width)) < NSWidth(r)) { xTiles++; }
-		if(xTiles % 2 == 0) { xTiles += 1; }
-		while(((yTiles * [canvas size].height)) < NSHeight(r)) { yTiles++; }
-		if(yTiles % 2 == 0) { yTiles += 1; }
-		float i, j;
-		for (i = 0; i < xTiles; i++)
-		{
-			for (j = 0; j < yTiles; j++)
-			{
-				float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(r)) / 2.0);
-				float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(r)) / 2.0);
-				[self setNeedsDisplayInRect:[self convertFromCanvasToViewRect:NSInsetRect(NSMakeRect(xLoc + NSMinX(rect), yLoc + NSMinY(rect), NSWidth(rect), NSHeight(rect)), -1, -1)]];
-			}
-		}	
-	}
-	else
-	{
-		NSRect buffedRect = [self convertFromCanvasToViewRect:NSInsetRect(rect, -1, -1)];
-		[self setNeedsDisplayInRect:buffedRect];
-	}
+{
+	NSRect buffedRect = [self convertFromCanvasToViewRect:NSInsetRect(rect, -1, -1)];
+	[self setNeedsDisplayInRect:buffedRect];
 }
 
 - (void)setCanvas:(PXCanvas *) aCanvas
@@ -188,11 +165,6 @@ void PXDebugRect(NSRect r, float alpha)
 {
 	NSPoint point = [self convertFromViewToCanvasPoint:[self convertPoint:location fromView:nil]];
 	//modify the point's origin
-	NSRect canvasRect = [self convertFromViewToCanvasRect:[self bounds]];
-	float xCenter = [canvas wraps] ? (NSWidth(canvasRect) - [canvas size].width) / 2.0 : 0;
-	float yCenter = [canvas wraps] ? (NSHeight(canvasRect) - [canvas size].height) / 2.0 : 0;
-	point.x -= xCenter;
-	point.y -= yCenter;
 	point.x = floorf(point.x);
 	point.y = floorf(point.y);
 	return point;
@@ -224,19 +196,7 @@ void PXDebugRect(NSRect r, float alpha)
 	
 	
 	transform = [self setupTransform];
-	NSSize transformedSize;
-	
-	// if we're tiling, make ourselves fit to the clipview
-	if ([canvas wraps] && drawsWrappedCanvases)
-	{
-		transformedSize = [transform transformSize:[canvas size]];
-		transformedSize.width = MAX(transformedSize.width, NSWidth([[self superview] frame]));
-		transformedSize.height = MAX(transformedSize.height, NSHeight([[self superview] frame])); 
-	}
-	else
-	{
-		transformedSize = NSMakeSize([transform transformSize:[canvas size]].width, [transform transformSize:[canvas size]].height);
-	}
+	NSSize transformedSize = NSMakeSize([transform transformSize:[canvas size]].width, [transform transformSize:[canvas size]].height);
 	[self setFrameSize:transformedSize];
 	
 	[self centerOn:[self convertFromCanvasToViewPoint:centeredPoint]];
@@ -350,17 +310,16 @@ void PXDebugRect(NSRect r, float alpha)
 			for (j = MAX(NSMinY(rect), 0); j < MIN(NSMaxY(rect), height); j++)
 			{
 				if(!mask[i + (j * width)]) { continue; }
-				if(![canvas wraps])
+				
+				if(i == 0)
 				{
-					if(i == 0)
-					{
-						[self drawBezierFromPoint:NSMakePoint(i, j) toPoint:NSMakePoint(i, j + 1)];
-					}
-					else if((i + 1) == (width))
-					{
-						[self drawBezierFromPoint:NSMakePoint(i+1, j) toPoint:NSMakePoint(i+1, j + 1)];
-					}
+					[self drawBezierFromPoint:NSMakePoint(i, j) toPoint:NSMakePoint(i, j + 1)];
 				}
+				else if((i + 1) == (width))
+				{
+					[self drawBezierFromPoint:NSMakePoint(i+1, j) toPoint:NSMakePoint(i+1, j + 1)];
+				}
+				
 				if ((((i - 1) + (j * width)) < (width * height)))
 				{
 					if (!mask[(i - 1) + (j * width)]) 
@@ -368,7 +327,7 @@ void PXDebugRect(NSRect r, float alpha)
 						[self drawBezierFromPoint:NSMakePoint(i, j) toPoint:NSMakePoint(i, j + 1)];
 					}
 				}
-				else if(![canvas wraps])
+				else
 				{	
 					[self drawBezierFromPoint:NSMakePoint(i, j) toPoint:NSMakePoint(i, j + 1)];
 				}
@@ -380,7 +339,7 @@ void PXDebugRect(NSRect r, float alpha)
 						[self drawBezierFromPoint:NSMakePoint(i + 1, j) toPoint:NSMakePoint(i + 1, j + 1)];
 					}
 				}
-				else if(![canvas wraps])
+				else
 				{	
 					[self drawBezierFromPoint:NSMakePoint(i + 1, j) toPoint:NSMakePoint(i + 1, j + 1)];
 				}
@@ -392,7 +351,7 @@ void PXDebugRect(NSRect r, float alpha)
 						[self drawBezierFromPoint:NSMakePoint(i, j) toPoint:NSMakePoint(i + 1, j)];
 					}
 				}
-				else if(![canvas wraps])
+				else
 				{	
 					[self drawBezierFromPoint:NSMakePoint(i, j) toPoint:NSMakePoint(i + 1, j)];
 				}
@@ -404,7 +363,7 @@ void PXDebugRect(NSRect r, float alpha)
 						[self drawBezierFromPoint:NSMakePoint(i, j + 1) toPoint:NSMakePoint(i + 1, j + 1)];
 					}
 				}
-				else if(![canvas wraps])
+				else
 				{	
 					[self drawBezierFromPoint:NSMakePoint(i, j + 1) toPoint:NSMakePoint(i + 1, j + 1)];
 				}
@@ -542,19 +501,8 @@ void PXDebugRect(NSRect r, float alpha)
 	
 	NSRect canvasRect = [self convertFromViewToCanvasRect:[self bounds]];
 	
-	float xCenter = [canvas wraps] ? (NSWidth(canvasRect) - [canvas size].width) / 2.0 : 0;
-	float yCenter = [canvas wraps] ? (NSHeight(canvasRect) - [canvas size].height) / 2.0 : 0;
-	int xTiles = 0;
-	int yTiles = 0;
-	BOOL oldCanvasWraps = [canvas wraps];
-	[canvas setWraps:[canvas wraps] && drawsWrappedCanvases suppressRedraw:YES];
-	if([canvas wraps])
-	{
-		while(((xTiles * [canvas size].width)) < NSWidth(canvasRect)) { xTiles++; }
-		if(xTiles % 2 == 0) { xTiles += 1; }
-		while(((yTiles * [canvas size].height)) < NSHeight(canvasRect)) { yTiles++; }
-		if(yTiles % 2 == 0) { yTiles += 1; }
-	}
+	float xCenter = 0;
+	float yCenter = 0;
 	
 	NSAffineTransform *bgTransform = [self setupTransform];
 	[bgTransform translateXBy:xCenter yBy:yCenter];
@@ -586,68 +534,18 @@ void PXDebugRect(NSRect r, float alpha)
 		PXColor color = [currentTool colorForCanvas:canvas];
 		color.a *= ([[canvas activeLayer] opacity] / 100.0f);
 		
-		[canvas meldBezier:([canvas wraps] ? [currentTool wrappedPath] : [currentTool path])
-				   ofColor:PXColorToNSColor(color)];
+		[canvas meldBezier:[currentTool path] ofColor:PXColorToNSColor(color)];
 	}
 	
-	float factor = (zoomPercentage / 100.0);
-	if ([canvas wraps])
-	{
-		NSRect destination = NSMakeRect(0, 0, [canvas size].width * factor, [canvas size].height * factor);
-		NSRect source = NSMakeRect(0, 0, [canvas size].width, [canvas size].height);
-		float i, j;
-		for (i = 0; i < xTiles; i++)
-		{
-			for (j = 0; j < yTiles; j++)
-			{
-				float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(canvasRect)) / 2.0);
-				float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(canvasRect)) / 2.0);
-				if(NSIntersectsRect(rect, NSMakeRect(xLoc*factor, yLoc*factor, [canvas size].width*factor, [canvas size].height*factor)))
-				{
-					//					CGContextScaleCTM([[NSGraphicsContext currentContext] graphicsPort], factor, factor);
-					CGContextTranslateCTM([[NSGraphicsContext currentContext] graphicsPort], xLoc*factor, yLoc*factor);
-					[canvas drawInRect:destination fromRect:source];
-					CGContextTranslateCTM([[NSGraphicsContext currentContext] graphicsPort], -xLoc*factor, -yLoc*factor);
-					//					CGContextScaleCTM([[NSGraphicsContext currentContext] graphicsPort], 1.0/factor, 1.0/factor);
-				}
-			}
-		}
-	}
-	else
-	{
-		//			CGContextScaleCTM([[NSGraphicsContext currentContext] graphicsPort], factor, factor);
-		[canvas drawInRect:rect fromRect:[self convertFromViewToCanvasRect:rect]];      
-		//			CGContextScaleCTM([[NSGraphicsContext currentContext] graphicsPort], 1.0/factor, 1.0/factor);
-	}
+	//			CGContextScaleCTM([[NSGraphicsContext currentContext] graphicsPort], factor, factor);
+	[canvas drawInRect:rect fromRect:[self convertFromViewToCanvasRect:rect]];      
+	//			CGContextScaleCTM([[NSGraphicsContext currentContext] graphicsPort], 1.0/factor, 1.0/factor);
+	
 	[canvas unmeldBezier];
 	[transform concat];
 	
-	
-	if ([canvas wraps])
-	{
-		float i, j;
-		for (i = 0; i < xTiles; i++)
-		{
-			for (j = 0; j < yTiles; j++)
-			{
-				float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(canvasRect)) / 2.0);
-				float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(canvasRect)) / 2.0);
-				NSAffineTransform *toolTransform = [NSAffineTransform transform];
-				[toolTransform translateXBy:xLoc yBy:yLoc];
-				[toolTransform concat];
-				if (drawsToolBeziers) {
-					[currentTool drawRectOnTop:rect inView:self withTransform:transform];
-				}
-				[toolTransform invert];
-				[toolTransform concat];
-			}
-		}
-	}
-	else
-	{
-		if (drawsToolBeziers) {
-			[currentTool drawRectOnTop:rect inView:self withTransform:transform];
-		}
+	if (drawsToolBeziers) {
+		[currentTool drawRectOnTop:rect inView:self withTransform:transform];
 	}
 	
 	NSRect gridRect = canvasRect;
@@ -682,25 +580,8 @@ void PXDebugRect(NSRect r, float alpha)
 	// code. sorry.
 	if ([canvas hasSelection] && drawsSelectionMarquee)
 	{
-		if ([canvas wraps])
-		{
-			float i, j;
-			for (i = 0; i < xTiles; i++)
-			{
-				for (j = 0; j < yTiles; j++)
-				{
-					float xLoc = i * [canvas size].width - ((xTiles * [canvas size].width - NSWidth(canvasRect)) / 2.0);
-					float yLoc = j * [canvas size].height - ((yTiles * [canvas size].height - NSHeight(canvasRect)) / 2.0);
-					[self drawSelectionMarqueeWithRect:rect offset:NSMakePoint(xLoc, yLoc)];
-				}
-			}
-		}
-		else
-		{
-			[self drawSelectionMarqueeWithRect:rect offset:NSMakePoint(xCenter, yCenter)];
-		}
+		[self drawSelectionMarqueeWithRect:rect offset:NSMakePoint(xCenter, yCenter)];
 	}
-	[canvas setWraps:oldCanvasWraps suppressRedraw:YES];
 }
 
 - (void)setDrawsWrappedCanvases:(BOOL)draws
