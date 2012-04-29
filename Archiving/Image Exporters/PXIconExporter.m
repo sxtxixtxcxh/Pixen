@@ -135,7 +135,7 @@ typedef struct
 		int bytesWritten = 0;
 		for (i = 0; i < canvasSize.width; i++)
 		{
-			NSColor *color = [NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+			NSColor *color = NSReadPixel(NSMakePoint(i, j));
 			byte colors[4];
 			colors[3] = (byte) round([color alphaComponent] * 255);
 			colors[2] = (byte) round([color redComponent] * 255);
