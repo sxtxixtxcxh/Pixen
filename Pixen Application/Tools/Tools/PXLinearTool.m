@@ -25,6 +25,8 @@
 	return self;
 }
 
+- (void)drawRectOnTop:(NSRect)rect inView:(PXCanvasView *)view withTransform:(NSAffineTransform *)transform { }
+
 - (NSPoint)transformOrigin:(NSPoint)origin withDrawingPoint:(NSPoint)aPoint
 {
 	if (centeredOnOrigin) {

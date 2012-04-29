@@ -81,6 +81,8 @@ fromCanvasController:(PXCanvasController*)controller
 	return nil;
 }
 
+- (void)drawRectOnTop:(NSRect)rect inView:(PXCanvasView *)view withTransform:(NSAffineTransform *)transform { }
+
 - (NSRect)crosshairRectCenteredAtPoint:(NSPoint)aPoint
 {
 	return NSMakeRect(aPoint.x, aPoint.y, 1, 1);

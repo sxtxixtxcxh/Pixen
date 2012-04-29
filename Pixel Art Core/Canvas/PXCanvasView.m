@@ -29,10 +29,6 @@
 
 #import "PXCanvasController.h"
 
-@interface PXTool(DrawRectOnTopInViewWarningSilencer)
-- (void)drawRectOnTop:(NSRect)rect inView:(PXCanvasView *)view;
-@end
-
 void PXDebugRect(NSRect r, float alpha)
 {
 	[[NSColor colorWithDeviceRed:(rand() % 255) / 255.0 green:(rand() % 255) / 255.0 blue:(rand() % 255) / 255.0 alpha:alpha] set];
@@ -639,8 +635,8 @@ void PXDebugRect(NSRect r, float alpha)
 				NSAffineTransform *toolTransform = [NSAffineTransform transform];
 				[toolTransform translateXBy:xLoc yBy:yLoc];
 				[toolTransform concat];
-				if (drawsToolBeziers && [currentTool respondsToSelector:@selector(drawRectOnTop:inView:)]) {
-					[currentTool drawRectOnTop:rect inView:self];
+				if (drawsToolBeziers) {
+					[currentTool drawRectOnTop:rect inView:self withTransform:transform];
 				}
 				[toolTransform invert];
 				[toolTransform concat];
@@ -649,8 +645,8 @@ void PXDebugRect(NSRect r, float alpha)
 	}
 	else
 	{
-		if (drawsToolBeziers && [currentTool respondsToSelector:@selector(drawRectOnTop:inView:)]) {
-			[currentTool drawRectOnTop:rect inView:self];
+		if (drawsToolBeziers) {
+			[currentTool drawRectOnTop:rect inView:self withTransform:transform];
 		}
 	}
 	

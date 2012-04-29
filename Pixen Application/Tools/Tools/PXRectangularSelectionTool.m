@@ -121,7 +121,7 @@ fromCanvasController:(PXCanvasController *) controller
 	[view displayRect:[view convertFromCanvasToViewRect:modifiedRect]];
 }
 
-- (void)drawRectOnTop:(NSRect)rect inView:(PXCanvasView *)view
+- (void)drawRectOnTop:(NSRect)rect inView:(PXCanvasView *)view withTransform:(NSAffineTransform *)transform
 {
 	// selection drawing (while still dragging) is now O(1). hooray.
 	if (!self.isClicking || isMoving) { return; }

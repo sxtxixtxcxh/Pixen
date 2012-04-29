@@ -49,6 +49,7 @@ fromCanvasController:(PXCanvasController *)controller;
 
 - (void)keyDown:(NSEvent *)event fromCanvasController:(PXCanvasController *)cc;
 
+- (void)drawRectOnTop:(NSRect)rect inView:(PXCanvasView *)view withTransform:(NSAffineTransform *)transform;
 - (NSRect)crosshairRectCenteredAtPoint:(NSPoint)aPoint;
 
 - (PXColor)colorForCanvas:(PXCanvas *)canvas;

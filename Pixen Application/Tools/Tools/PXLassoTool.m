@@ -75,7 +75,7 @@
 	[linePath lineToPoint:point];
 }
 
-- (void)drawRectOnTop:(NSRect)rect inView:view
+- (void)drawRectOnTop:(NSRect)rect inView:(PXCanvasView *)view withTransform:(NSAffineTransform *)transform
 {
 	if (!self.isClicking || isMoving) 
 	{
