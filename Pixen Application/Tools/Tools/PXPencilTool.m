@@ -254,7 +254,7 @@ fromCanvasController:(PXCanvasController *)controller
 
 - (void)drawRectOnTop:(NSRect)rect inView:(PXCanvasView *)view withTransform:(NSAffineTransform *)transform
 {
-	if (![self.path elementCount])
+	if (![self.path elementCount] || ![[view window] isMainWindow])
 		return;
 	
 	[transform invert];
