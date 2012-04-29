@@ -713,15 +713,6 @@
 									<reference key="NSOnImage" ref="130733852"/>
 									<reference key="NSMixedImage" ref="295545801"/>
 								</object>
-								<object class="NSMenuItem" id="638452759">
-									<reference key="NSMenu" ref="522027000"/>
-									<string key="NSTitle">Show Tile View</string>
-									<string key="NSKeyEquiv">t</string>
-									<int key="NSKeyEquivModMask">1048576</int>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="130733852"/>
-									<reference key="NSMixedImage" ref="295545801"/>
-								</object>
 								<object class="NSMenuItem" id="297930681">
 									<reference key="NSMenu" ref="522027000"/>
 									<string key="NSTitle">Alignment Crosshairs</string>
@@ -1657,14 +1648,6 @@
 						<reference key="destination" ref="913807839"/>
 					</object>
 					<int key="connectionID">309</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">shouldTileToggled:</string>
-						<reference key="source" ref="199577436"/>
-						<reference key="destination" ref="638452759"/>
-					</object>
-					<int key="connectionID">326</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2845,7 +2828,6 @@
 							<reference ref="277030124"/>
 							<reference ref="120006715"/>
 							<reference ref="356721259"/>
-							<reference ref="638452759"/>
 							<reference ref="297930681"/>
 						</array>
 						<reference key="parent" ref="470442987"/>
@@ -2903,11 +2885,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">318</int>
 						<reference key="object" ref="356721259"/>
-						<reference key="parent" ref="522027000"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">319</int>
-						<reference key="object" ref="638452759"/>
 						<reference key="parent" ref="522027000"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -3167,7 +3144,6 @@
 				<string key="306.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="307.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="318.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="319.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="327.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="329.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="333.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3701,7 +3677,6 @@
 						<string key="selectAll:">id</string>
 						<string key="selectNone:">id</string>
 						<string key="setPatternToSelection:">id</string>
-						<string key="shouldTileToggled:">id</string>
 						<string key="showBackgroundInfo:">id</string>
 						<string key="showGridSettingsPrompter:">id</string>
 						<string key="showPreviewWindow:">NSEvent</string>
@@ -3848,10 +3823,6 @@
 						</object>
 						<object class="IBActionInfo" key="setPatternToSelection:">
 							<string key="name">setPatternToSelection:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="shouldTileToggled:">
-							<string key="name">shouldTileToggled:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showBackgroundInfo:">
