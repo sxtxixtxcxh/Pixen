@@ -21,6 +21,7 @@ typedef enum {
 	PXPaletteView *_paletteView;
 	PXDocument *_document;
 	
+	//FIXME: evaluate thread-safety
 	dispatch_queue_t _frequencyQueue;
 }
 
