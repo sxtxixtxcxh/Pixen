@@ -414,13 +414,15 @@ const CGFloat viewMargin = 1.0f;
 	if (![colors count])
 		return NO;
 	
-	NSColor *color = [colors objectAtIndex:0];
+	NSColor *color = [[colors objectAtIndex:0] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 	
 	NSPoint point = [self convertPoint:[sender draggingLocation] fromView:nil];
 	NSUInteger index = [self indexOfCelAtPoint:point];
 	
 	[palette replaceColorAtIndex:index withColor:PXColorFromNSColor(color)];
 	[palette save];
+	
+	[self reload];
 	
 	return YES;
 }

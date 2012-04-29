@@ -21,6 +21,8 @@ NSUInteger PXColorArrayCount(PXColorArrayRef self);
 NSUInteger PXColorArrayIndexOfColor(PXColorArrayRef self, PXColor color);
 PXColor PXColorArrayColorAtIndex(PXColorArrayRef self, NSUInteger index);
 
+void PXColorArraySetColorAtIndex(PXColorArrayRef self, NSUInteger index, PXColor color);
+
 void PXColorArrayEnumerateWithBlock(PXColorArrayRef self, PXColorArrayEnumerationBlock block);
 
 void PXColorArrayAppendColor(PXColorArrayRef self, PXColor color);

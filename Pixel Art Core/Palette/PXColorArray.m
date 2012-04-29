@@ -89,6 +89,13 @@ PXColor PXColorArrayColorAtIndex(PXColorArrayRef self, NSUInteger index)
 	return self->_colors[index];
 }
 
+void PXColorArraySetColorAtIndex(PXColorArrayRef self, NSUInteger index, PXColor color)
+{
+	NSCAssert(index < self->_count, @"Out-of-bounds index");
+	
+	self->_colors[index] = color;
+}
+
 void PXColorArrayEnumerateWithBlock(PXColorArrayRef self, PXColorArrayEnumerationBlock block)
 {
 	for (NSUInteger i = 0; i < self->_count; i++) {

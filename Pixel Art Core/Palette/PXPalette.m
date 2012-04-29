@@ -256,8 +256,7 @@ NSArray *CreateGrayList()
 
 - (void)replaceColorAtIndex:(NSUInteger)index withColor:(PXColor)color
 {
-	//	CFArrayReplaceValues(_colors, CFRangeMake(index, 1), &color, 1);
-#warning TODO: implement
+	PXColorArraySetColorAtIndex(_colors, index, color);
 }
 
 - (void)moveColorAtIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)targetIndex
