@@ -119,8 +119,6 @@
 	origin.y = floorf(origin.y);
 	size.width = ceilf(size.width);
 	size.height = ceilf(size.height);
-	NSPoint imageLocation = origin;
-	imageLocation = [newTransform transformPoint:imageLocation];
 	
 	[newTransform invert];
 	[newTransform concat];
