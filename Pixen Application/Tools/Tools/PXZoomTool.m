@@ -10,7 +10,7 @@
 #import "PXCanvasController.h"
 #import "PXToolSwitcher.h"
 
-// should implement 'drag to create rect and zoom to fit that rect'
+//TODO: should implement 'drag to create rect and zoom to fit that rect'
 
 @implementation PXZoomTool
 
