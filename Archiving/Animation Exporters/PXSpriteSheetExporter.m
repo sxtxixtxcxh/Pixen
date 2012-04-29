@@ -169,6 +169,11 @@
 - (void)windowDidLoad
 {
 	[self recacheDocumentRepresentations];
+}
+
+- (void)showWindow:(id)sender
+{
+	[super showWindow:sender];
 	[self updatePreview:self];
 }
 
