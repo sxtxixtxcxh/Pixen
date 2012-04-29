@@ -17,7 +17,6 @@
 @synthesize name = _name, canSave = _canSave, isSystemPalette = _isSystemPalette;
 
 static NSMutableArray *systemPalettes;
-static NSMutableArray *userPalettes;
 
 NSArray *CreateGrayList(void);
 
@@ -121,30 +120,22 @@ NSArray *CreateGrayList()
 	
 	[paths sortUsingSelector:@selector(compareNumeric:)];
 	
-	NSUInteger newCount = [paths count];
+	NSMutableArray *userPalettes = [[NSMutableArray alloc] init];
 	
-	if (userPalettes == nil)
-		userPalettes = [[NSMutableArray alloc] init];
-	
-	if (newCount != [userPalettes count])
+	for (NSUInteger i = 0; i < [paths count]; i++)
 	{
-		[userPalettes removeAllObjects];
+		NSString *path = [[GetPixenPaletteDirectory() stringByAppendingPathComponent:[paths objectAtIndex:i]] stringByAppendingPathExtension:PXPaletteSuffix];
+		NSDictionary *object = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
 		
-		for (NSUInteger i = 0; i < [paths count]; i++)
-		{
-			NSString *path = [[GetPixenPaletteDirectory() stringByAppendingPathComponent:[paths objectAtIndex:i]] stringByAppendingPathExtension:PXPaletteSuffix];
-			NSDictionary *object = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
-			
-			PXPalette *palette = [[PXPalette alloc] initWithDictionary:object];
-			palette.isSystemPalette = NO;
-			palette.canSave = YES;
-			
-			[userPalettes addObject:palette];
-			[palette release];
-		}
+		PXPalette *palette = [[PXPalette alloc] initWithDictionary:object];
+		palette.isSystemPalette = NO;
+		palette.canSave = YES;
+		
+		[userPalettes addObject:palette];
+		[palette release];
 	}
 	
-	return userPalettes;
+	return [userPalettes autorelease];
 }
 
 - (id)init
