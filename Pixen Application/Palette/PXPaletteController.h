@@ -23,6 +23,7 @@ typedef enum {
 	
 	//FIXME: evaluate thread-safety
 	dispatch_queue_t _frequencyQueue;
+	dispatch_queue_t _recentQueue;
 }
 
 @property (nonatomic, assign) IBOutlet NSProgressIndicator *progressIndicator;

@@ -35,6 +35,7 @@
 	self = [super initWithNibName:@"PXPaletteController" bundle:nil];
 	
 	_frequencyQueue = dispatch_queue_create("com.Pixen.queue.FrequencyPalette", 0);
+	_recentQueue = dispatch_queue_create("com.Pixen.queue.RecentPalette", 0);
 	
 	_frequencyPalette = [[PXPalette alloc] initWithoutBackgroundColor];
 	_recentPalette = [[PXPalette alloc] initWithoutBackgroundColor];
@@ -59,6 +60,7 @@
 	[_frequencyPalette release];
 	[_recentPalette release];
 	dispatch_release(_frequencyQueue);
+	dispatch_release(_recentQueue);
 	[super dealloc];
 }
 
@@ -157,10 +159,14 @@
 		
 		for (NSColor *new in newC)
 		{
-			[_frequencyPalette incrementCountForColor:PXColorFromNSColor(new) byAmount:[newC countForObject:new]];
+			PXColor color = PXColorFromNSColor(new);
+			[_frequencyPalette incrementCountForColor:color byAmount:[newC countForObject:new]];
 			
-#warning TODO: reimplement recents
-			//[self addRecentColor:pxColor];
+			dispatch_async(_recentQueue, ^{
+				
+				[self addRecentColor:color];
+				
+			});
 		}
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
@@ -186,7 +192,9 @@
 		switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
 	}
 	
-	[switcher setColor:PXColorToNSColor([_frequencyPalette colorAtIndex:index])];
+	PXPalette *palette = _mode == PXPaletteModeFrequency ? _frequencyPalette : _recentPalette;
+	
+	[switcher setColor:PXColorToNSColor([palette colorAtIndex:index])];
 }
 
 - (void)paletteViewSizeChangedTo:(NSControlSize)size
