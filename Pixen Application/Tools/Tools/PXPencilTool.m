@@ -11,7 +11,6 @@
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_Drawing.h"
 #import "PXCanvasController.h"
-#import "PXCanvasView.h"
 #import "PXPencilToolPropertiesController.h"
 #import "InterpolatePoint.h"
 
@@ -37,6 +36,11 @@
 	return YES;
 }
 
+- (NSCursor *)cursor
+{
+	return [NSCursor crosshairCursor];
+}
+
 -(id)  init
 {
 	if (! ( self = [super init] ) ) 
@@ -45,21 +49,6 @@
 	shiftDown = NO;
 	changedRect = NSZeroRect;
 	return self;
-}
-
-- (NSCursor *)cursor
-{
-	static NSCursor *cursor;
-	static dispatch_once_t onceToken;
-	
-	dispatch_once(&onceToken, ^{
-		NSImage *image = [[NSImage alloc] initWithSize:NSMakeSize(24.0f, 24.0f)];
-		
-		cursor = [[NSCursor alloc] initWithImage:image hotSpot:NSZeroPoint];
-		[image release];
-	});
-	
-	return cursor;
 }
 
 - (PXToolPropertiesController *)createPropertiesController
@@ -222,12 +211,7 @@ fromCanvasController:(PXCanvasController *)controller
 		[self drawPixelAtPoint:aPoint inCanvas:[controller canvas]];
 		[[controller canvas] changedInRect:lastBezierBounds];
 		if (![self.path isEmpty]) {
-			int factor = [[controller view] zoomPercentage] / 100;
-			
-			if (factor == 0)
-				factor = -12;
-			
-			NSRect bezierBounds = NSInsetRect([self.path bounds], MIN(-12+factor, 0), MIN(-12+factor, 0));
+			NSRect bezierBounds = [self.path bounds];
 			[[controller canvas] changedInRect:bezierBounds];
 			lastBezierBounds = bezierBounds;
 		}
@@ -250,92 +234,6 @@ fromCanvasController:(PXCanvasController *)controller
 		return [super crosshairRectCenteredAtPoint:aPoint];
 	}
 	return [self.path bounds];
-}
-
-- (void)drawRectOnTop:(NSRect)rect inView:(PXCanvasView *)view withTransform:(NSAffineTransform *)transform
-{
-	if (![self.path elementCount] || ![[view window] isMainWindow])
-		return;
-	
-	[transform invert];
-	[transform concat];
-	
-	CGFloat x = NSMidX([self.path bounds]);
-	CGFloat y = NSMidY([self.path bounds]);
-	
-	CGFloat factor = [view zoomPercentage] / 100;
-	 
-	CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
-	CGContextSaveGState(context);
-	CGContextSetLineWidth(context, 1.0);
-	
-	CGMutablePathRef path1 = CGPathCreateMutable();
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor)-10,floorf(y*factor));
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor)-7,floorf(y*factor));
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor)-4,floorf(y*factor));
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor)-3,floorf(y*factor));
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor)+3,floorf(y*factor));
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor)+4,floorf(y*factor));
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor)+7,floorf(y*factor));
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor)+10,floorf(y*factor));
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)-10);
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)-7);
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)-4);
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)-3);
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)+3);
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)+4);
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)+7);
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)+10);
-	
-	CGContextAddPath(context, path1);
-	CGPathRelease(path1);
-	
-	CGContextSetRGBStrokeColor(context, 0.2f, 0.2f, 0.2f, 1.0f);
-	CGContextStrokePath(context);
-	
-	path1 = CGPathCreateMutable();
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor)-12,floorf(y*factor));
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor)-11,floorf(y*factor));
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor)-6,floorf(y*factor));
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor)-5,floorf(y*factor));
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor)+5,floorf(y*factor));
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor)+6,floorf(y*factor));
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor)+11,floorf(y*factor));
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor)+12,floorf(y*factor));
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)-12);
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)-11);
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)-6);
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)-5);
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)+5);
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)+6);
-	
-	CGPathMoveToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)+11);
-	CGPathAddLineToPoint(path1, NULL, floorf(x*factor),floorf(y*factor)+12);
-	
-	CGContextAddPath(context, path1);
-	CGPathRelease(path1);
-	
-	CGContextSetRGBStrokeColor(context, 1.0f, 1.0f, 1.0f, 1.0f);
-	CGContextStrokePath(context);
-	
-	CGContextRestoreGState(context);
-	
-	[transform invert];
 }
 
 - (void)mouseDraggedFrom:(NSPoint)initialPoint 
