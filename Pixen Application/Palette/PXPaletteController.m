@@ -162,7 +162,7 @@
 			PXColor color = PXColorFromNSColor(new);
 			[_frequencyPalette incrementCountForColor:color byAmount:[newC countForObject:new]];
 			
-			dispatch_async(_recentQueue, ^{
+			dispatch_sync(_recentQueue, ^{
 				
 				[self addRecentColor:color];
 				
