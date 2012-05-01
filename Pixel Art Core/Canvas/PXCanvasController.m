@@ -48,9 +48,15 @@
 											 selector:@selector(canvasSizeDidChange:) 
 												 name:PXCanvasSizeChangedNotificationName 
 											   object:nil];
+	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(toolSwitched:) 
 												 name:PXToolDidChangeNotificationName
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(cursorChanged:)
+												 name:PXToolCursorChangedNotificationName
 											   object:nil];
 }
 
@@ -83,6 +89,12 @@
 	[scrollView setDocumentView:view];
 	[view setCanvas:canvas];
 	[layerController setCanvas:canvas];
+}
+
+- (void)cursorChanged:(NSNotification *)notification
+{
+	[window discardCursorRects];
+	[window resetCursorRects];
 }
 
 - (void)toolSwitched:(NSNotification *)notification

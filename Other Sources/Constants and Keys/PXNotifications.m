@@ -20,6 +20,7 @@ NSString *PXCanvasSelectionChangedNotificationName = @"PXCanvasSelectionChanged"
 NSString *PXCanvasSelectionStatusChangedNotificationName = @"PXCanvasSelectionStatusChanged";
 NSString *PXToolDidChangeNotificationName = @"PXToolDidChange";
 NSString *PXToolColorDidChangeNotificationName = @"PXToolColorDidChange";
+NSString *PXToolCursorChangedNotificationName = @"PXToolCursorChanged";
 NSString *PXSelectionMaskChangedNotificationName = @"PXSelectionMaskChanged";
 NSString *PXBackgroundChangedNotificationName = @"PXBackgroundChanged";
 NSString *PXBackgroundTemplateInstalledNotificationName = @"PXBackgroundTemplateInstalled";

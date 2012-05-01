@@ -19,6 +19,7 @@ extern NSString *PXCanvasSelectionStatusChangedNotificationName;
 extern NSString *PXSelectionMaskChangedNotificationName;
 extern NSString *PXToolDidChangeNotificationName;
 extern NSString *PXToolColorDidChangeNotificationName;
+extern NSString *PXToolCursorChangedNotificationName;
 extern NSString *PXBackgroundChangedNotificationName;
 extern NSString *PXBackgroundTemplateInstalledNotificationName;
 extern NSString *PXUserPalettesChangedNotificationName;

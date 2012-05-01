@@ -31,7 +31,9 @@
 
 - (NSCursor *)cursor
 {
-	return [[[NSCursor alloc] initWithImage:[NSImage imageNamed:@"zoomIn_bw.png"]
+	NSString *name = _zoomType == PXZoomIn ? @"zoomIn_bw.png" : @"zoomOut_bw.png";
+	
+	return [[[NSCursor alloc] initWithImage:[NSImage imageNamed:name]
 									hotSpot:NSMakePoint(5.0f, 5.0f)] autorelease];
 }
 
@@ -50,6 +52,10 @@
 - (BOOL)optionKeyUp
 {
 	_zoomType = PXZoomIn;
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXToolCursorChangedNotificationName
+														object:self];
+	
 	[self.switcher setIcon:[NSImage imageNamed:@"zoomIn"] forTool:self];
 	return YES;
 }
@@ -57,6 +63,10 @@
 - (BOOL)optionKeyDown
 {
 	_zoomType = PXZoomOut;
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXToolCursorChangedNotificationName
+														object:self];
+	
 	[self.switcher setIcon:[NSImage imageNamed:@"zoomOut"] forTool:self];
 	return YES;
 }
