@@ -446,8 +446,18 @@
 	{
 		for (NSInteger j = 0; j < height; j++)
 		{
-			[self setColor:PXColorFromNSColor([imageRep colorAtX:i y:j])
-				   atPoint:NSMakePoint(i, height - j - 1)];
+			CGFloat components[4];
+			[[imageRep colorAtX:i y:j] getComponents:components];
+			
+			CGFloat a = components[3];
+			
+			PXColor color;
+			color.r = round(a * components[0] * 255);
+			color.g = round(a * components[1] * 255);
+			color.b = round(a * components[2] * 255);
+			color.a = round(a * 255);
+			
+			[self setColor:color atPoint:NSMakePoint(i, height - j - 1)];
 		}
 	}
 }
