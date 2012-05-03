@@ -67,6 +67,22 @@
 	[self layersChanged];
 }
 
+- (void)pasteLayerWithImage:(NSImage *)image atIndex:(NSUInteger)index
+{
+	if (![self canContinuePasteOf:NSLocalizedString(@"image", @"image") size:[image size]])
+		return;
+	
+	NSPoint origin = NSMakePoint(([self size].width - [image size].width) / 2, ([self size].height - [image size].height) / 2);
+	
+	PXLayer *layer = [PXLayer layerWithName:NSLocalizedString(@"Pasted Layer", @"Pasted Layer")
+									  image:image
+									 origin:origin
+									   size:[self size]];
+	
+	[self deselect];
+	[self insertLayer:layer atIndex:index];
+}
+
 - (PXLayer *)layerForPastingFromPasteboard:(NSPasteboard *)board type:(NSString *)type
 {
 	PXLayer *layer = nil;

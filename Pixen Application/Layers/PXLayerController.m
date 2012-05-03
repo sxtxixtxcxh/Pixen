@@ -62,12 +62,14 @@
 
 - (void)awakeFromNib
 {
+	NSArray *types = [NSArray arrayWithObjects:PXLayerRowPboardType, NSFilenamesPboardType, nil];
+	
 	[_layersView setLayerController:self];
 	[_layersView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
-	[_layersView setDraggingSourceOperationMask:NSDragOperationNone forLocal:NO];
+	[_layersView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
 	[_layersView setMinItemSize:NSMakeSize(200.0f, 49.0f)];
 	[_layersView setMaxItemSize:NSMakeSize(0.0f, 49.0f)];
-	[_layersView registerForDraggedTypes:[NSArray arrayWithObject:PXLayerRowPboardType]];
+	[_layersView registerForDraggedTypes:types];
 	
 	[_layersView addObserver:self
 				  forKeyPath:@"selectionIndexes"
@@ -193,9 +195,9 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context
+					  ofObject:(id)object
+						change:(NSDictionary *)change
+					   context:(void *)context
 {
 	if (_ignoreSelectionChange)
 		return;
@@ -442,18 +444,35 @@
 	return YES;
 }
 
+- (NSDictionary *)imageFileOptions
+{
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			[NSNumber numberWithBool:YES], NSPasteboardURLReadingFileURLsOnlyKey,
+			[NSImage imageTypes], NSPasteboardURLReadingContentsConformToTypesKey, nil];
+}
+
 - (NSDragOperation)collectionView:(NSCollectionView *)collectionView
 					 validateDrop:(id < NSDraggingInfo >)info
 					proposedIndex:(NSInteger *)indexP
 					dropOperation:(NSCollectionViewDropOperation *)operationP {
 	
-	if (![[[info draggingPasteboard] types] containsObject:PXLayerRowPboardType])
-		return NSDragOperationNone;
+	if ([[[info draggingPasteboard] types] containsObject:PXLayerRowPboardType]) {
+		if ((*operationP) == NSCollectionViewDropOn)
+			*operationP = NSCollectionViewDropBefore;
+		
+		return NSDragOperationMove;
+	}
 	
-	if ((*operationP) == NSCollectionViewDropOn)
-		*operationP = NSCollectionViewDropBefore;
+	NSArray *classes = [NSArray arrayWithObject:[NSURL class]];
 	
-	return NSDragOperationMove;
+	if ([[info draggingPasteboard] canReadObjectForClasses:classes options:[self imageFileOptions]]) {
+		if ((*operationP) == NSCollectionViewDropOn)
+			*operationP = NSCollectionViewDropBefore;
+		
+		return NSDragOperationGeneric;
+	}
+	
+	return NSDragOperationNone;
 }
 
 - (BOOL)collectionView:(NSCollectionView *)collectionView
@@ -461,21 +480,42 @@
 				 index:(NSInteger)index
 		 dropOperation:(NSCollectionViewDropOperation)dropOperation {
 	
-	NSUInteger sourceIndex = [[[info draggingPasteboard] propertyListForType:PXLayerRowPboardType] unsignedIntegerValue];
-	NSUInteger targetIndex = [self invertLayerIndex:index];
+	NSArray *classes = [NSArray arrayWithObject:[NSURL class]];
 	
-	if (sourceIndex > targetIndex)
-		targetIndex++;
+	if ([[info draggingPasteboard] canReadObjectForClasses:classes options:[self imageFileOptions]])
+	{
+		NSArray *urls = [[info draggingPasteboard] readObjectsForClasses:classes options:[self imageFileOptions]];
+		
+		for (NSURL *url in urls) {
+			NSImage *image = [[NSImage alloc] initWithContentsOfURL:url];
+			
+			[_canvas pasteLayerWithImage:image atIndex:[self invertLayerIndex:index-1]];
+			[image release];
+			
+			return YES;
+		}
+	}
 	
-	if (targetIndex == NSNotFound)
-		targetIndex = 0;
+	if ([[[info draggingPasteboard] types] containsObject:PXLayerRowPboardType])
+	{
+		NSUInteger sourceIndex = [[[info draggingPasteboard] propertyListForType:PXLayerRowPboardType] unsignedIntegerValue];
+		NSUInteger targetIndex = [self invertLayerIndex:index];
+		
+		if (sourceIndex > targetIndex)
+			targetIndex++;
+		
+		if (targetIndex == NSNotFound)
+			targetIndex = 0;
+		
+		if (targetIndex == sourceIndex)
+			return NO;
+		
+		[_canvas moveLayerAtIndex:sourceIndex toIndex:targetIndex];
+		
+		return YES;
+	}
 	
-	if (targetIndex == sourceIndex)
-		return NO;
-	
-	[_canvas moveLayerAtIndex:sourceIndex toIndex:targetIndex];
-	
-	return YES;
+	return NO;
 }
 
 #pragma mark -
