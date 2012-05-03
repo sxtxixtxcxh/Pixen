@@ -456,6 +456,7 @@
 			color.g = round(a * components[1] * 255);
 			color.b = round(a * components[2] * 255);
 			color.a = round(a * 255);
+			color.info = 0;
 			
 			[self setColor:color atPoint:NSMakePoint(i, height - j - 1)];
 		}
