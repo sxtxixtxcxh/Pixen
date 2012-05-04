@@ -299,11 +299,17 @@
 	BOOL wasActive = aLayer == activeLayer;
 	NSUInteger index = [layers indexOfObject:aLayer];
 	[self beginUndoGrouping]; {
+		[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];
 		[[layers objectAtIndex:index-1] compositeUnder:[layers objectAtIndex:index] flattenOpacity:YES];
 		[self removeLayerAtIndex:index];
 		if(wasActive)
 		{
-			[self activateLayer:[layers objectAtIndex:index - 1]];		
+			dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.0);
+			dispatch_after(popTime, dispatch_get_main_queue(), ^{
+				
+				[self activateLayer:[layers objectAtIndex:index - 1]];
+				
+			});
 		}
 	} [self endUndoGrouping:NSLocalizedString(@"Merge Down", @"Merge Down")];
 }
