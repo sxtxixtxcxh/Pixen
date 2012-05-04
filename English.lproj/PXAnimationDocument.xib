@@ -253,10 +253,10 @@
 																	<object class="NSColor" key="NSBGColor">
 																		<int key="NSColorSpace">6</int>
 																		<string key="NSCatalogName">System</string>
-																		<string key="NSColorName">headerColor</string>
-																		<object class="NSColor" key="NSColor" id="180323968">
+																		<string key="NSColorName">windowBackgroundColor</string>
+																		<object class="NSColor" key="NSColor" id="592405135">
 																			<int key="NSColorSpace">3</int>
-																			<bytes key="NSWhite">MQA</bytes>
+																			<bytes key="NSWhite">MC41AA</bytes>
 																		</object>
 																	</object>
 																	<int key="NScvFlags">4</int>
@@ -441,7 +441,10 @@
 												<int key="NSColorSpace">6</int>
 												<string key="NSCatalogName">System</string>
 												<string key="NSColorName">textBackgroundColor</string>
-												<reference key="NSColor" ref="180323968"/>
+												<object class="NSColor" key="NSColor" id="180323968">
+													<int key="NSColorSpace">3</int>
+													<bytes key="NSWhite">MQA</bytes>
+												</object>
 											</object>
 											<object class="NSColor" key="NSTextColor" id="854122030">
 												<int key="NSColorSpace">6</int>
@@ -511,10 +514,7 @@
 													<int key="NSColorSpace">6</int>
 													<string key="NSCatalogName">System</string>
 													<string key="NSColorName">gridColor</string>
-													<object class="NSColor" key="NSColor">
-														<int key="NSColorSpace">3</int>
-														<bytes key="NSWhite">MC41AA</bytes>
-													</object>
+													<reference key="NSColor" ref="592405135"/>
 												</object>
 												<double key="NSRowHeight">16</double>
 												<string key="NSAction">tableViewAction:</string>
@@ -1247,7 +1247,6 @@
 						<string key="selectAll:">id</string>
 						<string key="selectNone:">id</string>
 						<string key="setPatternToSelection:">id</string>
-						<string key="shouldTileToggled:">id</string>
 						<string key="showBackgroundInfo:">id</string>
 						<string key="showGridSettingsPrompter:">id</string>
 						<string key="showPreviewWindow:">NSEvent</string>
@@ -1394,10 +1393,6 @@
 						</object>
 						<object class="IBActionInfo" key="setPatternToSelection:">
 							<string key="name">setPatternToSelection:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="shouldTileToggled:">
-							<string key="name">shouldTileToggled:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showBackgroundInfo:">

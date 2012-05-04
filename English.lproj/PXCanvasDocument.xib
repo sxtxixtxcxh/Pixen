@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
 		<string key="IBDocument.SystemVersion">11D50</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
 		<string key="IBDocument.AppKitVersion">1138.32</string>
 		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1938</string>
+			<string key="NS.object.0">2182</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSComboBoxCell</string>
@@ -132,10 +132,10 @@
 													<object class="NSColor" key="NSBGColor">
 														<int key="NSColorSpace">6</int>
 														<string key="NSCatalogName">System</string>
-														<string key="NSColorName">headerColor</string>
-														<object class="NSColor" key="NSColor" id="485663854">
+														<string key="NSColorName">windowBackgroundColor</string>
+														<object class="NSColor" key="NSColor" id="897115144">
 															<int key="NSColorSpace">3</int>
-															<bytes key="NSWhite">MQA</bytes>
+															<bytes key="NSWhite">MC41AA</bytes>
 														</object>
 													</object>
 													<int key="NScvFlags">4</int>
@@ -146,7 +146,6 @@
 													<string key="NSFrame">{{385, 1}, {15, 586}}</string>
 													<reference key="NSSuperview" ref="611315938"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView"/>
 													<reference key="NSTarget" ref="611315938"/>
 													<string key="NSAction">_doScroller:</string>
 													<double key="NSCurValue">1</double>
@@ -204,7 +203,7 @@
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
 			<object class="NSCustomView" id="344111175">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">256</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSBox" id="12890499">
@@ -220,6 +219,7 @@
 										<int key="NSvFlags">261</int>
 										<string key="NSFrame">{{117, 3}, {15, 22}}</string>
 										<reference key="NSSuperview" ref="35785786"/>
+										<reference key="NSWindow"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSStepperCell" key="NSCell" id="714381963">
 											<int key="NSCellFlags">917024</int>
@@ -236,6 +236,7 @@
 										<int key="NSvFlags">261</int>
 										<string key="NSFrame">{{14, 2}, {100, 22}}</string>
 										<reference key="NSSuperview" ref="35785786"/>
+										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="133572339"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSComboBoxCell" key="NSCell" id="644351094">
@@ -308,7 +309,10 @@
 												<int key="NSColorSpace">6</int>
 												<string key="NSCatalogName">System</string>
 												<string key="NSColorName">textBackgroundColor</string>
-												<reference key="NSColor" ref="485663854"/>
+												<object class="NSColor" key="NSColor" id="485663854">
+													<int key="NSColorSpace">3</int>
+													<bytes key="NSWhite">MQA</bytes>
+												</object>
 											</object>
 											<object class="NSColor" key="NSTextColor" id="424741143">
 												<int key="NSColorSpace">6</int>
@@ -381,10 +385,7 @@
 													<int key="NSColorSpace">6</int>
 													<string key="NSCatalogName">System</string>
 													<string key="NSColorName">gridColor</string>
-													<object class="NSColor" key="NSColor">
-														<int key="NSColorSpace">3</int>
-														<bytes key="NSWhite">MC41AA</bytes>
-													</object>
+													<reference key="NSColor" ref="897115144"/>
 												</object>
 												<double key="NSRowHeight">16</double>
 												<string key="NSAction">tableViewAction:</string>
@@ -404,11 +405,13 @@
 								</array>
 								<string key="NSFrameSize">{167, 28}</string>
 								<reference key="NSSuperview" ref="12890499"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="846471551"/>
 							</object>
 						</array>
 						<string key="NSFrame">{{-10, 0}, {167, 28}}</string>
 						<reference key="NSSuperview" ref="344111175"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="35785786"/>
 						<string key="NSOffsets">{0, 0}</string>
 						<object class="NSTextFieldCell" key="NSTitleCell">
@@ -434,6 +437,8 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{124, 28}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="12890499"/>
 				<string key="NSClassName">NSView</string>
 				<string key="NSExtension">NSResponder</string>
@@ -895,7 +900,6 @@
 						<string key="selectAll:">id</string>
 						<string key="selectNone:">id</string>
 						<string key="setPatternToSelection:">id</string>
-						<string key="shouldTileToggled:">id</string>
 						<string key="showBackgroundInfo:">id</string>
 						<string key="showGridSettingsPrompter:">id</string>
 						<string key="showPreviewWindow:">NSEvent</string>
@@ -1042,10 +1046,6 @@
 						</object>
 						<object class="IBActionInfo" key="setPatternToSelection:">
 							<string key="name">setPatternToSelection:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="shouldTileToggled:">
-							<string key="name">shouldTileToggled:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showBackgroundInfo:">
