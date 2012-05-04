@@ -272,6 +272,8 @@
 			}
 		}
 	}
+	
+	[self setHasSelection:NO];
 }
 
 - (NSRect)selectedRect
@@ -487,16 +489,6 @@
 		
 		[self deselect];
 	} [self endUndoGrouping:NSLocalizedString(@"Crop", @"Crop")];
-}
-
-- (void)reallocateSelection
-{
-	if (selectionMask) {
-		free(selectionMask);
-	}
-	selectionMask = calloc([self size].width * [self size].height, sizeof(BOOL));
-	selectedRect = NSZeroRect;
-	hasSelection = NO;
 }
 
 @end

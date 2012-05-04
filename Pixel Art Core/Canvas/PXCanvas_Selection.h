@@ -38,7 +38,6 @@
 - (void)deleteSelection;
 - (void)cropToSelection;
 - (void)setSelectionMaskBit:(BOOL)bit atIndices:(NSArray *)indices;
-- (void)reallocateSelection;
 - (void)invertSelection;
 - (void)setSelectionOrigin:(NSPoint)orig;
 
