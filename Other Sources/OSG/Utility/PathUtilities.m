@@ -11,30 +11,14 @@
 
 NSString *GetApplicationSupportDirectory()
 {
-	//Check the Library user path
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	BOOL isDir;
-	NSString *path;
+	NSArray *urls = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask];
 	
-	if ([paths count] == 0)
-	{
-		[NSException raise:@"Directory Error" format:@"Surprisingly, there was no Library."];
-		return @"";
-	}
-	
-	path = [paths objectAtIndex:0];
-	
-	//Application Support
-	path = [path stringByAppendingPathComponent:@"Application Support"];
-	
-	if ((![fileManager fileExistsAtPath:path isDirectory:&isDir]) || !isDir)
-	{
+	if (![urls count]) {
 		[NSException raise:@"Directory Error" format:@"Surprisingly, there was no Application Support directory."];
-		return @"";
+		return nil;
 	}
 	
-	return path;
+	return [[urls objectAtIndex:0] path];
 }
 
 NSString *GetPixenSupportDirectory()
