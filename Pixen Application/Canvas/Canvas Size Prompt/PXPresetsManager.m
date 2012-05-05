@@ -7,6 +7,7 @@
 
 #import "PXPresetsManager.h"
 
+#import "PathUtilities.h"
 #import "PXPreset.h"
 
 @implementation PXPresetsManager
@@ -25,8 +26,7 @@
 
 - (NSString *)presetsPath
 {
-	NSString *appSupport = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
-	NSString *pixen = [appSupport stringByAppendingPathComponent:@"Pixen"];
+	NSString *pixen = GetPixenSupportDirectory();
 	
 	NSFileManager *manager = [NSFileManager defaultManager];
 	
