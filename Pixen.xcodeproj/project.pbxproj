@@ -395,7 +395,6 @@
 		EAC917480CE7DC7300E519E1 /* actiongear.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916E10CE7DC7300E519E1 /* actiongear.png */; };
 		EAC917490CE7DC7300E519E1 /* arrow.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC916E20CE7DC7300E519E1 /* arrow.tiff */; };
 		EAC9174A0CE7DC7300E519E1 /* imagesizeinfo.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916E30CE7DC7300E519E1 /* imagesizeinfo.png */; };
-		EAC9174B0CE7DC7300E519E1 /* LockedIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EAC916E40CE7DC7300E519E1 /* LockedIcon.icns */; };
 		EAC9174C0CE7DC7300E519E1 /* Pixen.icns in Resources */ = {isa = PBXBuildFile; fileRef = EAC916E50CE7DC7300E519E1 /* Pixen.icns */; };
 		EAC9174F0CE7DC7300E519E1 /* PixenDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = EAC916E80CE7DC7300E519E1 /* PixenDoc.icns */; };
 		EAC917510CE7DC7300E519E1 /* HotkeysPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC916EB0CE7DC7300E519E1 /* HotkeysPreferences.tiff */; };
@@ -436,7 +435,6 @@
 		EAC917740CE7DC7300E519E1 /* toolproperties.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917100CE7DC7300E519E1 /* toolproperties.png */; };
 		EAC917750CE7DC7300E519E1 /* zoom100.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917110CE7DC7300E519E1 /* zoom100.png */; };
 		EAC917760CE7DC7300E519E1 /* zoomfit.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917120CE7DC7300E519E1 /* zoomfit.png */; };
-		EAC917770CE7DC7300E519E1 /* UnlockedIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EAC917130CE7DC7300E519E1 /* UnlockedIcon.icns */; };
 		EAC917850CE7DC7300E519E1 /* Pixen.scriptSuite in Resources */ = {isa = PBXBuildFile; fileRef = EAC917230CE7DC7300E519E1 /* Pixen.scriptSuite */; };
 		EAC917860CE7DC7300E519E1 /* Pixen.scriptTerminology in Resources */ = {isa = PBXBuildFile; fileRef = EAC917240CE7DC7300E519E1 /* Pixen.scriptTerminology */; };
 		EAC917880CE7DC7300E519E1 /* Add.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC917270CE7DC7300E519E1 /* Add.tiff */; };
@@ -952,7 +950,6 @@
 		EAC916E10CE7DC7300E519E1 /* actiongear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actiongear.png; sourceTree = "<group>"; };
 		EAC916E20CE7DC7300E519E1 /* arrow.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = arrow.tiff; sourceTree = "<group>"; };
 		EAC916E30CE7DC7300E519E1 /* imagesizeinfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagesizeinfo.png; sourceTree = "<group>"; };
-		EAC916E40CE7DC7300E519E1 /* LockedIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = LockedIcon.icns; sourceTree = "<group>"; };
 		EAC916E50CE7DC7300E519E1 /* Pixen.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Pixen.icns; sourceTree = "<group>"; };
 		EAC916E80CE7DC7300E519E1 /* PixenDoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PixenDoc.icns; sourceTree = "<group>"; };
 		EAC916EB0CE7DC7300E519E1 /* HotkeysPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = HotkeysPreferences.tiff; sourceTree = "<group>"; };
@@ -993,7 +990,6 @@
 		EAC917100CE7DC7300E519E1 /* toolproperties.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolproperties.png; sourceTree = "<group>"; };
 		EAC917110CE7DC7300E519E1 /* zoom100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoom100.png; sourceTree = "<group>"; };
 		EAC917120CE7DC7300E519E1 /* zoomfit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomfit.png; sourceTree = "<group>"; };
-		EAC917130CE7DC7300E519E1 /* UnlockedIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = UnlockedIcon.icns; sourceTree = "<group>"; };
 		EAC917230CE7DC7300E519E1 /* Pixen.scriptSuite */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pixen.scriptSuite; sourceTree = "<group>"; };
 		EAC917240CE7DC7300E519E1 /* Pixen.scriptTerminology */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pixen.scriptTerminology; sourceTree = "<group>"; };
 		EAC917270CE7DC7300E519E1 /* Add.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Add.tiff; sourceTree = "<group>"; };
@@ -1937,7 +1933,6 @@
 				EAC916E10CE7DC7300E519E1 /* actiongear.png */,
 				EAC916E20CE7DC7300E519E1 /* arrow.tiff */,
 				EAC916E30CE7DC7300E519E1 /* imagesizeinfo.png */,
-				EAC916E40CE7DC7300E519E1 /* LockedIcon.icns */,
 				C99236FB152CD37400EC3AE5 /* Next.png */,
 				C99236FF152CDD0000EC3AE5 /* Pause.png */,
 				EAC916E50CE7DC7300E519E1 /* Pixen.icns */,
@@ -1950,7 +1945,6 @@
 				EAC916E90CE7DC7300E519E1 /* Preferences Icons */,
 				EAC916EC0CE7DC7300E519E1 /* Tool Icons */,
 				EAC917070CE7DC7300E519E1 /* Toolbar Icons */,
-				EAC917130CE7DC7300E519E1 /* UnlockedIcon.icns */,
 			);
 			path = Icons;
 			sourceTree = "<group>";
@@ -2362,7 +2356,6 @@
 				EAC917480CE7DC7300E519E1 /* actiongear.png in Resources */,
 				EAC917490CE7DC7300E519E1 /* arrow.tiff in Resources */,
 				EAC9174A0CE7DC7300E519E1 /* imagesizeinfo.png in Resources */,
-				EAC9174B0CE7DC7300E519E1 /* LockedIcon.icns in Resources */,
 				EAC9174C0CE7DC7300E519E1 /* Pixen.icns in Resources */,
 				EAC9174F0CE7DC7300E519E1 /* PixenDoc.icns in Resources */,
 				EAC917510CE7DC7300E519E1 /* HotkeysPreferences.tiff in Resources */,
@@ -2403,7 +2396,6 @@
 				EAC917740CE7DC7300E519E1 /* toolproperties.png in Resources */,
 				EAC917750CE7DC7300E519E1 /* zoom100.png in Resources */,
 				EAC917760CE7DC7300E519E1 /* zoomfit.png in Resources */,
-				EAC917770CE7DC7300E519E1 /* UnlockedIcon.icns in Resources */,
 				EAC917850CE7DC7300E519E1 /* Pixen.scriptSuite in Resources */,
 				EAC917860CE7DC7300E519E1 /* Pixen.scriptTerminology in Resources */,
 				EAC917880CE7DC7300E519E1 /* Add.tiff in Resources */,
