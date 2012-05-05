@@ -2,6 +2,7 @@ body {
 	font-family: "Lucida Grande";
 	background-image: url("old_mathematics.png");
 	margin: 20px;
+	-webkit-user-select: none;
 }
 h1 {
 	color: #1E4152;
@@ -33,6 +34,11 @@ img.left {
 	margin-top: 2px;
 	margin-right: 16px;
 	margin-bottom: 16px;
+}
+img.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 img.shadow {
 	-webkit-box-shadow: rgba(0,0,0,0.6) 0 1px 5px;
