@@ -205,11 +205,18 @@ NSString *palettesSubdirName = @"Palettes";
 			}
 		}
 	}
-	if([[filename pathExtension] isEqual:PXPatternSuffix])
+	
+	if ([[filename pathExtension] isEqual:PXPatternSuffix])
 	{
 		NSString *patternName = [filename lastPathComponent];
-		NSInteger result = [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Install Pattern \"%@\"?", @"Install Pattern \"%@\"?"), patternName] defaultButton:NSLocalizedString(@"Install", @"Install") alternateButton:NSLocalizedString(@"Cancel", @"CANCEL") otherButton:nil informativeTextWithFormat:NSLocalizedString(@"The pattern %@ will be added to Pixen's saved pattern list.", @"The pattern %@ will be added to Pixen's saved pattern list."), [filename stringByAbbreviatingWithTildeInPath]] runModal];
-		if(result == NSAlertDefaultReturn)
+		NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Install pattern '%@'?", @"Install pattern '%@'?"), patternName];
+		
+		NSInteger result = NSRunAlertPanel(NSLocalizedString(@"Confirmation", @"Confirmation"),
+										   message,
+										   NSLocalizedString(@"Install", @"Install"),
+										   NSLocalizedString(@"Cancel", @"Cancel"), nil);
+		
+		if (result == NSAlertDefaultReturn)
 		{
 			NSString *patternArchiveFilename = GetPixenPatternFile();
 			NSArray *patterns = [[NSKeyedUnarchiver unarchiveObjectWithFile:patternArchiveFilename] arrayByAddingObject:[NSKeyedUnarchiver unarchiveObjectWithFile:filename]];
