@@ -595,6 +595,7 @@
 		C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXHotkeysPreferencesController.h; sourceTree = "<group>"; };
 		C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXHotkeysPreferencesController.m; sourceTree = "<group>"; };
 		C973F0D7152B93810084A158 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXAnimationDocument.xib; sourceTree = "<group>"; };
+		C975003D1556FB0900F62EA8 /* Pixen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Pixen.entitlements; path = ../Pixen.entitlements; sourceTree = "<group>"; };
 		C9799FAF13AD69C000E261EE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXShapeToolPropertiesView.xib; sourceTree = "<group>"; };
 		C9799FB713AD6ED900E261EE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPencilToolPropertiesView.xib; sourceTree = "<group>"; };
 		C9799FBA13AD745500E261EE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXEyedropperToolPropertiesView.xib; sourceTree = "<group>"; };
@@ -1920,6 +1921,7 @@
 			children = (
 				C903DADD14CBBD6800D82028 /* dsa_pub.pem */,
 				C9AD353C1506DD7800A4B25C /* Defaults.plist */,
+				C975003D1556FB0900F62EA8 /* Pixen.entitlements */,
 				EAC916E00CE7DC7300E519E1 /* Icons */,
 				EAC917220CE7DC7300E519E1 /* Scripting */,
 				EAC917260CE7DC7300E519E1 /* Widget Parts */,
@@ -3027,6 +3029,8 @@
 		616BAEA608553EFB004CF172 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Pixen.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
@@ -3052,6 +3056,8 @@
 		616BAEA708553EFB004CF172 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Pixen.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
