@@ -156,8 +156,6 @@ NSString *palettesSubdirName = @"Palettes";
 		//id welcome = [[PXWelcomeController alloc] init];
 		[defaults setBool:YES forKey:@"PXActivateColorWellOnStartup"];
 		[defaults setBool:YES forKey:@"SUCheckAtStartup"];
-		[defaults setInteger:60 forKey:PXAutosaveIntervalKey];
-		[defaults setBool:YES forKey:PXAutosaveEnabledKey];
 		[defaults setBool:YES forKey:PXInfoPanelIsOpenKey];
 		[defaults setBool:YES forKey:PXHasRunBeforeKey];
 		[defaults synchronize];
@@ -170,22 +168,6 @@ NSString *palettesSubdirName = @"Palettes";
 	if ( [defaults floatForKey:PXVersionKey] < 3 ) // <3 <3 <3
 	{
 		[defaults setFloat:3 forKey:@"PXVersion"];
-	}
-	
-	[self rescheduleAutosave];
-}
-
-- (void)rescheduleAutosave
-{
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
-	NSTimeInterval repeatTime = [defaults floatForKey:PXAutosaveIntervalKey];
-	if([defaults boolForKey:PXAutosaveEnabledKey])
-	{
-		[self setAutosavingDelay:repeatTime];
-	}
-	else
-	{
-		[self setAutosavingDelay:0];
 	}
 }
 

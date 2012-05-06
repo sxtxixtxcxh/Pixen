@@ -18,7 +18,6 @@
 - (IBAction)newAnimationDocument:sender;
 
 - (NSArray *)animationDocuments;
-- (void)rescheduleAutosave;
 
 @end
 

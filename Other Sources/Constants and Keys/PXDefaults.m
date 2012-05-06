@@ -26,9 +26,6 @@ NSString *PXDefaultNewDocumentWidth = @"PXDefaultNewDocumentWidth";
 NSString *PXDefaultNewDocumentHeight = @"PXDefaultNewDocumentHeight";
 NSString *PXDefaultNewDocumentBackgroundColor = @"PXDefaultNewDocumentBackgroundColor";
 
-NSString *PXAutosaveIntervalKey = @"PXAutosaveInterval";
-NSString *PXAutosaveEnabledKey = @"PXAutosaveEnabled";
-
 NSString *PXDirtyFilesKey = @"PXDirtyFiles";
 
 NSString *PXLeftToolPropertiesIsOpenKey = @"PXLeftToolPropertiesIsOpen";
