@@ -60,15 +60,23 @@
 	if (![keyPath isEqualToString:@"selectionIndex"])
 		return;
 	
-	NSDictionary *dictionary = (NSDictionary *) UTTypeCopyDeclaration( (__bridge CFStringRef) [self selectedUTI]);
-	id ext = [[dictionary valueForKey:(NSString *) kUTTypeTagSpecificationKey] valueForKey:(NSString *) kUTTagClassFilenameExtension];
+	NSString *uti = [self selectedUTI];
+	id ext = nil;
 	
-	if ([ext isKindOfClass:[NSArray class]])
-		ext = [ext objectAtIndex:0];
+	if ([uti rangeOfString:@"Pixen"].location != NSNotFound) {
+		ext = @"pxi";
+	}
+	else {
+		NSDictionary *dictionary = (NSDictionary *) UTTypeCopyDeclaration( (__bridge CFStringRef) uti);
+		ext = [[dictionary valueForKey:(NSString *) kUTTypeTagSpecificationKey] valueForKey:(NSString *) kUTTagClassFilenameExtension];
+		
+		if ([ext isKindOfClass:[NSArray class]])
+			ext = [ext objectAtIndex:0];
+		
+		[dictionary release];
+	}
 	
 	self.fileTemplate = [[_fileTemplate stringByDeletingPathExtension] stringByAppendingPathExtension:ext];
-	
-	[dictionary release];
 }
 
 - (NSString *)selectedUTI
