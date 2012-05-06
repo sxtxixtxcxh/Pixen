@@ -74,25 +74,21 @@
 	[NSApp stopModal];
 }
 
-- (NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag
+- (void)selectedType:(id)sender
 {
 	NSString *type = [[_typeSelector selectedItem] title];
+	NSString *ext = PXPaletteSuffix;
 	
-	NSString *basename = [[filename lastPathComponent] stringByDeletingPathExtension];
-	NSString *path = nil;
-	
-	if ([type isEqualToString:PixenPaletteType])
-		path = [basename stringByAppendingPathExtension:PXPaletteSuffix];
-	else if ([type isEqualToString:MicrosoftPaletteType])
-		path = [basename stringByAppendingPathExtension:MicrosoftPaletteSuffix];
+	if ([type isEqualToString:MicrosoftPaletteType])
+		ext = MicrosoftPaletteSuffix;
 	else if ([type isEqualToString:JascPaletteType])
-		path = [basename stringByAppendingPathExtension:MicrosoftPaletteSuffix];
+		ext = MicrosoftPaletteSuffix;
 	else if ([type isEqualToString:AdobePaletteType])
-		path = [basename stringByAppendingPathExtension:AdobePaletteSuffix];
+		ext = AdobePaletteSuffix;
 	else if ([type isEqualToString:GimpPaletteType])
-		path = [basename stringByAppendingPathExtension:GimpPaletteSuffix];
+		ext = GimpPaletteSuffix;
 	
-	return path;
+	[_savePanel setAllowedFileTypes:[NSArray arrayWithObject:ext]];
 }
 
 - (void)runWithPalette:(PXPalette *)aPalette inWindow:(NSWindow *)window
@@ -112,11 +108,15 @@
 	[_savePanel setPrompt:@"Export"];
 	[_savePanel setExtensionHidden:YES];
 	[_savePanel setNameFieldStringValue:_palette.name];
-	[_savePanel setDelegate:self];
 	
 	_typeSelector = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(0, 0, 250, 40) pullsDown:NO];
 	[_typeSelector addItemsWithTitles:[[self class] types]];
+	[_typeSelector setTarget:self];
+	[_typeSelector setAction:@selector(selectedType:)];
+	
 	[_savePanel setAccessoryView:_typeSelector];
+	
+	[self selectedType:_typeSelector];
 	
 	[_savePanel beginSheetModalForWindow:window completionHandler:^(NSInteger result) {
 		[self panelDidEndWithReturnCode:result];

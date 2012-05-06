@@ -7,7 +7,7 @@
 
 #import "PXPalette.h"
 
-@interface PXPaletteExporter : NSObject < NSOpenSavePanelDelegate >
+@interface PXPaletteExporter : NSObject
 {
   @private
 	NSSavePanel *_savePanel;
