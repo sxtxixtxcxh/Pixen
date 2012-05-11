@@ -31,7 +31,6 @@
 
 - (void)promptInWindow:(NSWindow *)window;
 
-- (IBAction)displayHelp:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)useEnteredFrame:(id)sender;
 

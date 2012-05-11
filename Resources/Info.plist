@@ -313,10 +313,6 @@
 	<string>Pixen</string>
 	<key>CFBundleGetInfoString</key>
 	<string>A pixel art program</string>
-	<key>CFBundleHelpBookFolder</key>
-	<string>PixenHelp</string>
-	<key>CFBundleHelpBookName</key>
-	<string>Pixen Help</string>
 	<key>CFBundleIconFile</key>
 	<string>Pixen</string>
 	<key>CFBundleIdentifier</key>

@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">11C62</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1934</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
-		<string key="IBDocument.HIToolboxVersion">567.00</string>
+		<string key="IBDocument.SystemVersion">11E53</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
+		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1934</string>
+			<string key="NS.object.0">2182</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSTextField</string>
@@ -17,8 +17,6 @@
 			<string>NSScrollView</string>
 			<string>NSTextFieldCell</string>
 			<string>NSCustomView</string>
-			<string>NSButtonCell</string>
-			<string>NSButton</string>
 			<string>NSScroller</string>
 			<string>NSCustomObject</string>
 		</array>
@@ -312,6 +310,7 @@
 									<string key="NSFrame">{{-100, -100}, {15, 121}}</string>
 									<reference key="NSSuperview" ref="547095140"/>
 									<reference key="NSWindow"/>
+									<bool key="NSEnabled">YES</bool>
 									<reference key="NSTarget" ref="547095140"/>
 									<string key="NSAction">_doScroller:</string>
 									<double key="NSCurValue">0.81132078170776367</double>
@@ -322,6 +321,7 @@
 									<string key="NSFrame">{{-100, -100}, {219, 15}}</string>
 									<reference key="NSSuperview" ref="547095140"/>
 									<reference key="NSWindow"/>
+									<bool key="NSEnabled">YES</bool>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="547095140"/>
 									<string key="NSAction">_doScroller:</string>
@@ -332,34 +332,10 @@
 							<reference key="NSSuperview" ref="581235643"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="373971703"/>
-							<int key="NSsFlags">133634</int>
+							<int key="NSsFlags">133826</int>
 							<reference key="NSVScroller" ref="715510790"/>
 							<reference key="NSHScroller" ref="897389666"/>
 							<reference key="NSContentView" ref="373971703"/>
-						</object>
-						<object class="NSButton" id="948672468">
-							<reference key="NSNextResponder" ref="581235643"/>
-							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{591, 14}, {21, 23}}</string>
-							<reference key="NSSuperview" ref="581235643"/>
-							<reference key="NSWindow"/>
-							<bool key="NSEnabled">YES</bool>
-							<object class="NSButtonCell" key="NSCell" id="636772347">
-								<int key="NSCellFlags">67239424</int>
-								<int key="NSCellFlags2">134217728</int>
-								<string key="NSContents"/>
-								<reference key="NSSupport" ref="907856007"/>
-								<reference key="NSControlView" ref="948672468"/>
-								<int key="NSButtonFlags">-2038284033</int>
-								<int key="NSButtonFlags2">33</int>
-								<reference key="NSAlternateImage" ref="907856007"/>
-								<string key="NSAlternateContents"/>
-								<object class="NSMutableString" key="NSKeyEquivalent">
-									<characters key="NS.bytes"/>
-								</object>
-								<int key="NSPeriodicDelay">200</int>
-								<int key="NSPeriodicInterval">25</int>
-							</object>
 						</object>
 					</array>
 					<string key="NSFrameSize">{629, 426}</string>
@@ -558,7 +534,6 @@
 							<reference ref="729259534"/>
 							<reference ref="397713533"/>
 							<reference ref="547095140"/>
-							<reference ref="948672468"/>
 						</array>
 						<reference key="parent" ref="1024843273"/>
 					</object>
@@ -665,14 +640,6 @@
 						<reference key="parent" ref="547095140"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">226</int>
-						<reference key="object" ref="948672468"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="636772347"/>
-						</array>
-						<reference key="parent" ref="581235643"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">229</int>
 						<reference key="object" ref="591144537"/>
 						<reference key="parent" ref="148850664"/>
@@ -691,11 +658,6 @@
 						<int key="objectID">232</int>
 						<reference key="object" ref="931319111"/>
 						<reference key="parent" ref="594557794"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">233</int>
-						<reference key="object" ref="636772347"/>
-						<reference key="parent" ref="948672468"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">234</int>
@@ -741,12 +703,10 @@
 				<string key="219.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="225.CustomClassName">PXBackgroundTemplateScrollView</string>
 				<string key="225.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="226.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="229.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="230.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="231.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="232.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="233.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="234.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="235.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="236.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>

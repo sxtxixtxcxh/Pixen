@@ -208,11 +208,6 @@ static NSArray *algorithms = nil;
     }
 }
 
-- (IBAction)displayHelp:sender
-{
-	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"scale" inBook:@"Pixen Help"];	
-}
-
 - (void)scaleCanvas:(PXCanvas *)canvas
 {
 	[canvas beginUndoGrouping]; {

@@ -183,11 +183,6 @@ typedef enum _PXStackType
 	[alternateBackgroundView setBackground:alternateBG];
 }
 
-- (IBAction)displayHelp:sender
-{
-	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"workingwithbackgrounds" inBook:@"Pixen Help"];
-}
-
 - (void)dragFailedForInfoView:(PXBackgroundInfoView *)infoView
 {
 	if(infoView == alternateBackgroundView)

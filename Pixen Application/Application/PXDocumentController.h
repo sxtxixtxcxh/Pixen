@@ -9,6 +9,8 @@
 	BOOL cachedShowsPreviousCelOverlay;
 }
 
+- (IBAction)displayHelp:(id)sender;
+
 - (IBAction)newFromClipboard:sender;
 
 - (BOOL)showsPreviousCelOverlay;

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		610F37DE0899A5DE00567E90 /* PixenHelp in Resources */ = {isa = PBXBuildFile; fileRef = 610F37D30899A5DD00567E90 /* PixenHelp */; };
 		6117816108ABA7F30098DCC4 /* PXAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6117815F08ABA7F30098DCC4 /* PXAnimationView.h */; };
 		6117816208ABA7F30098DCC4 /* PXAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6117816008ABA7F30098DCC4 /* PXAnimationView.m */; };
 		615C3B610D15038F00ACFA33 /* PXLayerPaneBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */; };
@@ -545,7 +544,6 @@
 		2A37F4BAFDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = English; path = English.lproj/Credits.html; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		610F37D40899A5DD00567E90 /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = English.lproj/PixenHelp; sourceTree = "<group>"; };
 		6117815F08ABA7F30098DCC4 /* PXAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PXAnimationView.h; sourceTree = "<group>"; };
 		6117816008ABA7F30098DCC4 /* PXAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PXAnimationView.m; sourceTree = "<group>"; };
 		615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerPaneBackgroundView.h; sourceTree = "<group>"; };
@@ -1893,7 +1891,6 @@
 		EA90F6CC06D1239C001755A6 /* Localizable Resources */ = {
 			isa = PBXGroup;
 			children = (
-				610F37D30899A5DD00567E90 /* PixenHelp */,
 				C9A0859213DE3F0100C27061 /* PixenIntro */,
 				61BD25D3067A1E1D0054A2BB /* Localizable.strings */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.html */,
@@ -2352,7 +2349,6 @@
 				619DC353085BCD37007EF7F7 /* PXPreviewResizePrompt.xib in Resources */,
 				EACDBD810878B37100564512 /* PXBackgroundTemplateView.xib in Resources */,
 				618AE591087E6FEA00A9FA9B /* PXPalette.nib in Resources */,
-				610F37DE0899A5DE00567E90 /* PixenHelp in Resources */,
 				61A956BC08AD76CF009BB89F /* OSProgressPopup.nib in Resources */,
 				61FED6C408BCC646005E51EA /* PXSequenceExportView.xib in Resources */,
 				EAC917480CE7DC7300E519E1 /* actiongear.png in Resources */,
@@ -2701,14 +2697,6 @@
 				2A37F4BAFDCFA73011CA2CEA /* English */,
 			);
 			name = Credits.html;
-			sourceTree = "<group>";
-		};
-		610F37D30899A5DD00567E90 /* PixenHelp */ = {
-			isa = PBXVariantGroup;
-			children = (
-				610F37D40899A5DD00567E90 /* English */,
-			);
-			name = PixenHelp;
 			sourceTree = "<group>";
 		};
 		615E87F206A31AF8002445B8 /* PXLayerController.xib */ = {

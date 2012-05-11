@@ -53,11 +53,6 @@
 		  contextInfo:NULL];
 }
 
-- (IBAction)displayHelp:(id)sender
-{
-	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"resize" inBook:@"Pixen Help"];
-}
-
 - (IBAction)cancel:(id)sender
 {
 	[NSApp endSheet:[self window]];

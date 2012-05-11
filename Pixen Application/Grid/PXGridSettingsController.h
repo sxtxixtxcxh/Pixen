@@ -35,7 +35,6 @@
 
 - (IBAction)update:(id)sender;
 - (IBAction)useAsDefaults:(id)sender;
-- (IBAction)displayHelp:(id)sender;
 
 @end
 

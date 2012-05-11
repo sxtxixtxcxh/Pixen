@@ -84,11 +84,6 @@
 	[self update:self];
 }
 
-- (IBAction)displayHelp:(id)sender
-{
-	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"grid" inBook:@"Pixen Help"];
-}
-
 - (void)windowWillClose:(NSNotification *)notification
 {
 	if ([self.colorWell isActive])

@@ -128,6 +128,11 @@ NSString *palettesSubdirName = @"Palettes";
 	[importer release];
 }
 
+- (IBAction)displayHelp:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/Pixen/Pixen/wiki"]];
+}
+
 //
 // Delegate methods
 //

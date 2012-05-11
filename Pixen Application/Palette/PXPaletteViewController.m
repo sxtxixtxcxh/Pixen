@@ -276,11 +276,6 @@
 	}
 }
 
-- (IBAction)displayHelp:sender
-{
-	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"workingwithpalettes" inBook:@"Pixen Help"];
-}
-
 - (IBAction)newPalette:sender
 {
 	PXPalette *newPal = [[PXPalette alloc] initWithoutBackgroundColor];

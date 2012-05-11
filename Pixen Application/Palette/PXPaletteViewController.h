@@ -34,7 +34,6 @@
 - (IBAction)exportPalette:sender;
 - (IBAction)duplicatePalette:sender;
 - (IBAction)deletePalette:sender;
-- (IBAction)displayHelp:sender;
 - (IBAction)newPalette:sender;
 - (IBAction)renamePalette:sender;
 
