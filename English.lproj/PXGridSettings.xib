@@ -191,7 +191,6 @@
 							<string key="NSFrame">{{112, 42}, {74, 46}}</string>
 							<reference key="NSSuperview" ref="1038945403"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<int key="NSNumRows">2</int>
 							<int key="NSNumCols">1</int>
@@ -742,15 +741,10 @@
 					<string key="className">PXGridSettingsController</string>
 					<string key="superclassName">NSWindowController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="displayHelp:">id</string>
 						<string key="update:">id</string>
 						<string key="useAsDefaults:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="displayHelp:">
-							<string key="name">displayHelp:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="update:">
 							<string key="name">update:</string>
 							<string key="candidateClassName">id</string>
