@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11D50</string>
+		<string key="IBDocument.SystemVersion">11E53</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
-		<string key="IBDocument.AppKitVersion">1138.32</string>
-		<string key="IBDocument.HIToolboxVersion">568.00</string>
+		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">2182</string>
@@ -337,7 +337,7 @@
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
 			<object class="NSCustomView" id="965645719">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">256</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSBox" id="490026646">
@@ -353,6 +353,7 @@
 										<int key="NSvFlags">261</int>
 										<string key="NSFrame">{{117, 3}, {15, 22}}</string>
 										<reference key="NSSuperview" ref="209945795"/>
+										<reference key="NSWindow"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSStepperCell" key="NSCell" id="609207444">
 											<int key="NSCellFlags">917024</int>
@@ -369,6 +370,7 @@
 										<int key="NSvFlags">261</int>
 										<string key="NSFrame">{{14, 2}, {100, 22}}</string>
 										<reference key="NSSuperview" ref="209945795"/>
+										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="819878669"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSComboBoxCell" key="NSCell" id="224084874">
@@ -534,11 +536,13 @@
 								</array>
 								<string key="NSFrameSize">{167, 28}</string>
 								<reference key="NSSuperview" ref="490026646"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="566930861"/>
 							</object>
 						</array>
 						<string key="NSFrame">{{-10, 0}, {167, 28}}</string>
 						<reference key="NSSuperview" ref="965645719"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="209945795"/>
 						<string key="NSOffsets">{0, 0}</string>
 						<object class="NSTextFieldCell" key="NSTitleCell">
@@ -564,6 +568,8 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{124, 28}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="490026646"/>
 				<string key="NSClassName">NSView</string>
 				<string key="NSExtension">NSResponder</string>
@@ -1088,6 +1094,7 @@
 				<string key="51.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="52.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="53.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="55.CustomClassName">PXPercentFormatter</string>
 				<string key="55.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1529,6 +1536,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/PXNewCelButton.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PXPercentFormatter</string>
+					<string key="superclassName">NSNumberFormatter</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PXPercentFormatter.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
