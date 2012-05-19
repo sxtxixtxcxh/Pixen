@@ -175,6 +175,31 @@
 	}];
 }
 
+- (void)enterFullScreenWithDuration:(NSTimeInterval)duration
+{
+	NSWindow *window = [self window];
+	
+	_lastFrameFS = [window frame];
+	
+	NSRect frame = _lastFrameFS;
+	frame.origin.x = 20.0f;
+	
+	[NSAnimationContext beginGrouping];
+	[[NSAnimationContext currentContext] setDuration:duration];
+	[[window animator] setFrame:frame display:YES];
+	[NSAnimationContext endGrouping];
+}
+
+- (void)exitFullScreenWithDuration:(NSTimeInterval)duration
+{
+	NSWindow *window = [self window];
+	
+	[NSAnimationContext beginGrouping];
+	[[NSAnimationContext currentContext] setDuration:duration];
+	[[window animator] setFrame:_lastFrameFS display:YES];
+	[NSAnimationContext endGrouping];
+}
+
 - (void)clearBeziers;
 {
 	[rightSwitcher clearBeziers];

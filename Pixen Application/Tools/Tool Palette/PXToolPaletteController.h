@@ -23,9 +23,14 @@
 	BOOL controlKeyDown;
 	BOOL rightMouseDown;
 	unsigned int keyMask;
+	
+	NSRect _lastFrameFS;
 }
 
 + (PXToolPaletteController *)sharedToolPaletteController;
+
+- (void)enterFullScreenWithDuration:(NSTimeInterval)duration;
+- (void)exitFullScreenWithDuration:(NSTimeInterval)duration;
 
 - (void)clearBeziers;
 

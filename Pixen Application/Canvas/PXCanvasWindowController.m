@@ -20,6 +20,7 @@
 #import "PXInfoPanelController.h"
 #import "PXPaletteController.h"
 #import "PXPreviewController.h"
+#import "PXToolPaletteController.h"
 
 //Taken from a man calling himself "BROCK BRANDENBERG" 
 //who is here to save the day.
@@ -95,6 +96,33 @@
 	[self prepareToolbar];
 	[[self window] setAcceptsMouseMovedEvents:YES];
 }
+
+#pragma mark -
+#pragma mark Full Screen
+
+- (NSSize)window:(NSWindow *)window willUseFullScreenContentSize:(NSSize)proposedSize
+{
+	proposedSize.width -= 252.0f; // leave some room for the Tools palette
+	
+	return proposedSize;
+}
+
+- (void)windowWillEnterFullScreen:(NSNotification *)notification
+{
+	[[PXToolPaletteController sharedToolPaletteController] enterFullScreenWithDuration:1.0];
+}
+
+- (void)windowWillExitFullScreen:(NSNotification *)notification
+{
+	[[PXToolPaletteController sharedToolPaletteController] exitFullScreenWithDuration:1.0];
+}
+
+- (NSApplicationPresentationOptions)window:(NSWindow *)window willUseFullScreenPresentationOptions:(NSApplicationPresentationOptions)proposedOptions
+{
+	return (proposedOptions | NSApplicationPresentationAutoHideToolbar);
+}
+
+#pragma mark -
 
 - (void)updateFrameSizes
 {
