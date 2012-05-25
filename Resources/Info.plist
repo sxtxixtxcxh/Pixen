@@ -14,7 +14,7 @@
 			<key>CFBundleTypeIconFile</key>
 			<string>PixenDoc</string>
 			<key>CFBundleTypeName</key>
-			<string>Pixen Image</string>
+			<string>Pixen image</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>PXIm</string>
@@ -168,7 +168,7 @@
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>CFBundleTypeName</key>
-			<string>ico image</string>
+			<string>ICO image</string>
 			<key>NSDocumentClass</key>
 			<string>PXCanvasDocument</string>
 			<key>NSPersistentStoreTypeKey</key>
