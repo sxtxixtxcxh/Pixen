@@ -294,6 +294,7 @@
 	[[self window] setBackgroundColor:[NSColor lightGrayColor]];
 	[[self window] setMovableByWindowBackground:YES];
 	[view setUsesToolCursors:NO];
+	[view setUpdatesInfoPanel:NO];
 	[view setCrosshair:nil];
 	[view setShouldDrawSelectionMarquee:NO];
 	[view setDelegate:bezelView]; // for mouse up

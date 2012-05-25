@@ -42,7 +42,7 @@ void PXDebugRect(NSRect r, float alpha)
 @implementation PXCanvasView
 
 @synthesize canvas, zoomPercentage, delegate;
-@synthesize usesToolCursors = _usesToolCursors;
+@synthesize usesToolCursors = _usesToolCursors, updatesInfoPanel = _updatesInfoPanel;
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)event
 {
@@ -76,6 +76,7 @@ void PXDebugRect(NSRect r, float alpha)
 	shouldDrawMainBackground = YES;
 	trackingRect = -1;
 	_usesToolCursors = YES;
+	_updatesInfoPanel = YES;
 	
 	crosshair = [[PXCrosshair alloc] init];
 	drawsSelectionMarquee = YES;
@@ -690,6 +691,9 @@ void PXDebugRect(NSRect r, float alpha)
 
 - (void)updateInfoPanelWithMousePosition:(NSPoint)point dragging:(BOOL)dragging
 {
+	if (!_updatesInfoPanel)
+		return;
+	
 	if (![[PXInfoPanelController sharedInfoPanelController] isVisible])
 		return;
 	

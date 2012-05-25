@@ -31,7 +31,7 @@
 	NSTrackingRectTag trackingRect;
 	
 	NSPoint lastMousePosition;
-	BOOL _usesToolCursors;
+	BOOL _usesToolCursors, _updatesInfoPanel;
 	
 	BOOL erasing;
 	
@@ -42,6 +42,7 @@
 @property (nonatomic, assign) float zoomPercentage;
 
 @property (nonatomic, assign) BOOL usesToolCursors;
+@property (nonatomic, assign) BOOL updatesInfoPanel;
 
 @property (nonatomic, assign) id delegate;
 
