@@ -361,7 +361,7 @@
 				<string>public.image</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Pixen Image</string>
+			<string>Pixen image</string>
 			<key>UTTypeIconFile</key>
 			<string>PixenDoc.icns</string>
 			<key>UTTypeIdentifier</key>
