@@ -71,6 +71,8 @@
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
+			<key>CFBundleTypeName</key>
+			<string>GIF image</string>
 			<key>NSDocumentClass</key>
 			<string>PXCanvasDocument</string>
 		</dict>
@@ -88,6 +90,8 @@
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
+			<key>CFBundleTypeName</key>
+			<string>JPEG image</string>
 			<key>NSDocumentClass</key>
 			<string>PXCanvasDocument</string>
 		</dict>
@@ -108,6 +112,8 @@
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
+			<key>CFBundleTypeName</key>
+			<string>PNG image</string>
 			<key>NSDocumentClass</key>
 			<string>PXCanvasDocument</string>
 		</dict>
@@ -125,6 +131,8 @@
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
+			<key>CFBundleTypeName</key>
+			<string>TIFF image</string>
 			<key>NSDocumentClass</key>
 			<string>PXCanvasDocument</string>
 		</dict>
@@ -141,6 +149,8 @@
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
+			<key>CFBundleTypeName</key>
+			<string>BMP image</string>
 			<key>NSDocumentClass</key>
 			<string>PXCanvasDocument</string>
 		</dict>
@@ -157,6 +167,8 @@
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
+			<key>CFBundleTypeName</key>
+			<string>ico image</string>
 			<key>NSDocumentClass</key>
 			<string>PXCanvasDocument</string>
 			<key>NSPersistentStoreTypeKey</key>
@@ -167,14 +179,14 @@
 			<array>
 				<string>pxpalette</string>
 			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>PixenPalette</string>
 			<key>CFBundleTypeName</key>
 			<string>Palette</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>PXPa</string>
 			</array>
-			<key>CFBundleTypeIconFile</key>
-			<string>PixenPalette</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
@@ -187,10 +199,10 @@
 			<array>
 				<string>act</string>
 			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>PixenPalette</string>
 			<key>CFBundleTypeName</key>
 			<string>Adobe Palette</string>
-			<key>CFBundleTypeIconFile</key>
-			<string>PixenPalette</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
@@ -203,10 +215,10 @@
 			<array>
 				<string>pal</string>
 			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>PixenPalette</string>
 			<key>CFBundleTypeName</key>
 			<string>Jasc Palette</string>
-			<key>CFBundleTypeIconFile</key>
-			<string>PixenPalette</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
@@ -219,10 +231,10 @@
 			<array>
 				<string>pal</string>
 			</array>
-			<key>CFBundleTypeName</key>
-			<string>Microsoft Palette</string>
 			<key>CFBundleTypeIconFile</key>
 			<string>PixenPalette</string>
+			<key>CFBundleTypeName</key>
+			<string>Microsoft Palette</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
@@ -236,13 +248,9 @@
 				<string>pxpattern</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>Pattern</string>
+			<string>Pixen Pattern</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>LSTypeIsPackage</key>
-			<false/>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>Binary</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -324,11 +332,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.5b9</string>
+	<string>3.5</string>
 	<key>CFBundleSignature</key>
 	<string>PiXn</string>
 	<key>CFBundleVersion</key>
-	<string>3.5.0.9</string>
+	<string>3.5.10</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.graphics-design</string>
 	<key>LSMinimumSystemVersion</key>
@@ -339,6 +347,12 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<key>SUFeedURL</key>
+	<string>http://philippec.github.com/Pixen/appcast.xml</string>
+	<key>SUPublicDSAKeyFile</key>
+	<string>dsa_pub.pem</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -446,11 +460,5 @@
 			</dict>
 		</dict>
 	</array>
-	<key>SUFeedURL</key>
-	<string>http://philippec.github.com/Pixen/appcast.xml</string>
-	<key>SUEnableAutomaticChecks</key>
-	<true/>
-	<key>SUPublicDSAKeyFile</key>
-	<string>dsa_pub.pem</string>
 </dict>
 </plist>
