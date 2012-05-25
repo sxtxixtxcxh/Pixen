@@ -55,3 +55,35 @@ NSString *GetPixenPatternFile()
 {
 	return [GetPixenSupportDirectory() stringByAppendingPathComponent:@"Patterns.pxpatternarchive"];
 }
+
+NSString *GetDescriptionForDocumentType(NSString *uti)
+{
+	if ([uti isEqualToString:@"com.Pixen.pxim"]) {
+		return @"Pixen image";
+	}
+	else if ([uti isEqualToString:@"com.Pixen.pxan"]) {
+		return @"Pixen animation";
+	}
+	else if ([uti isEqualToString:@"com.compuserve.gif"]) {
+		return @"GIF image";
+	}
+	else if ([uti isEqualToString:@"public.jpeg"]) {
+		return @"JPEG image";
+	}
+	else if ([uti isEqualToString:@"public.png"]) {
+		return @"PNG image";
+	}
+	else if ([uti isEqualToString:@"public.tiff"]) {
+		return @"TIFF image";
+	}
+	else if ([uti isEqualToString:@"com.microsoft.bmp"]) {
+		return @"BMP image";
+	}
+	else if ([uti isEqualToString:@"com.microsoft.ico"]) {
+		return @"ICO image";
+	}
+	
+	@throw [NSException exceptionWithName:NSGenericException reason:@"Invalid type" userInfo:nil];
+	
+	return nil;
+}

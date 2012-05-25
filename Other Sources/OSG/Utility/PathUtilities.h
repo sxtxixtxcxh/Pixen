@@ -16,3 +16,5 @@ extern NSString *GetBackgroundImagesDirectory(void);
 
 extern NSString *GetPixenPatternFile(void);
 extern NSString *GetPathForBackgroundNamed(NSString *name);
+
+extern NSString *GetDescriptionForDocumentType(NSString *uti);

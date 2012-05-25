@@ -7,6 +7,7 @@
 
 #import "PXDocument.h"
 
+#import "PathUtilities.h"
 #import "PXCanvas.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvasPrintView.h"
@@ -129,9 +130,8 @@
 	if (!popUpButton)
 		return NO;
 	
-	NSString *description = (NSString *) UTTypeCopyDescription( (__bridge CFStringRef) lastType);
+	NSString *description = GetDescriptionForDocumentType(lastType);
 	[popUpButton selectItemWithTitle:description];
-	[description release];
 	
 	[popUpButton sendAction:[popUpButton action] to:[popUpButton target]];
 	
