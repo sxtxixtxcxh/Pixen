@@ -40,7 +40,7 @@
 			<key>CFBundleTypeIconFile</key>
 			<string>PixenAnim</string>
 			<key>CFBundleTypeName</key>
-			<string>Pixen Animation</string>
+			<string>Pixen animation</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>PXAn</string>
@@ -387,7 +387,7 @@
 				<string>public.composite-content</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Pixen Animation</string>
+			<string>Pixen animation</string>
 			<key>UTTypeIconFile</key>
 			<string>PixenAnim</string>
 			<key>UTTypeIdentifier</key>
