@@ -1,7 +1,9 @@
 Pixen
 =====
 
-Welcome to Pixen, a free, open source pixel editor for Mac OS X! Milestone releases of Pixen can be accessed by clicking on the 'Downloads' button above.
+Welcome to Pixen, a free, open source pixel art editor for Mac OS X!
+
+**Pixen is now available on the [Mac App Store](http://itunes.apple.com/us/app/pixen/id525180431?mt=12)!**
 
 **Follow us on Twitter [@pixenapp](http://twitter.com/pixenapp)!**
 
