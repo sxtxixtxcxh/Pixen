@@ -99,9 +99,10 @@
 - (IBAction)resizeCanvas:(id)sender
 {
 	NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey:PXDefaultNewDocumentBackgroundColor];
+	NSColor *backgroundColor = colorData ? [NSKeyedUnarchiver unarchiveObjectWithData:colorData] : [NSColor clearColor];
 	
 	PXCanvasResizePrompter *prompter = self.resizePrompter;
-	prompter.backgroundColor = [NSKeyedUnarchiver unarchiveObjectWithData:colorData];
+	prompter.backgroundColor = backgroundColor;
 	prompter.oldSize = [canvas size];
 	prompter.currentSize = [canvas size];
 	
