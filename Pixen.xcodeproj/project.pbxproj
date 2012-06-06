@@ -1045,12 +1045,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C931682414E9857C00B3E817 /* Sparkle.framework in Frameworks */,
 				C93429E3157EE5BB00186FA9 /* Accelerate.framework in Frameworks */,
-				EAF6951106A9AE0B0019D8D7 /* Cocoa.framework in Frameworks */,
 				EA5E9EE80877237800FCE6FE /* Carbon.framework in Frameworks */,
+				EAF6951106A9AE0B0019D8D7 /* Cocoa.framework in Frameworks */,
 				BF269FE6091307BF00B7A218 /* QTKit.framework in Frameworks */,
 				D8B300DC13AFC443004E83F3 /* QuartzCore.framework in Frameworks */,
+				C931682414E9857C00B3E817 /* Sparkle.framework in Frameworks */,
 				C9A0859113DE3ECD00C27061 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
