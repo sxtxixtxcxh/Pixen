@@ -34,6 +34,11 @@
 		C91F07D3142D0BAB007F812C /* PXInfoPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = C91F07D1142D0BAB007F812C /* PXInfoPanel.xib */; };
 		C92A1E9213B12CAB0007235A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C92A1E9013B12CAB0007235A /* MainMenu.xib */; };
 		C931682414E9857C00B3E817 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C931682314E9857C00B3E817 /* Sparkle.framework */; };
+		C93429DD157EE58900186FA9 /* ICOFamily.h in Headers */ = {isa = PBXBuildFile; fileRef = C93429D8157EE58900186FA9 /* ICOFamily.h */; };
+		C93429DE157EE58900186FA9 /* ICOFamily.m in Sources */ = {isa = PBXBuildFile; fileRef = C93429D9157EE58900186FA9 /* ICOFamily.m */; };
+		C93429E0157EE58900186FA9 /* NSMutableData+EndianValues.h in Headers */ = {isa = PBXBuildFile; fileRef = C93429DB157EE58900186FA9 /* NSMutableData+EndianValues.h */; };
+		C93429E1157EE58900186FA9 /* NSMutableData+EndianValues.m in Sources */ = {isa = PBXBuildFile; fileRef = C93429DC157EE58900186FA9 /* NSMutableData+EndianValues.m */; };
+		C93429E3157EE5BB00186FA9 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93429E2157EE5BB00186FA9 /* Accelerate.framework */; };
 		C93DB17F13ABC6BE006D42FE /* PXPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93DB17D13ABC6BE006D42FE /* PXPreferences.xib */; };
 		C93DB18213ABC8BE006D42FE /* PXGeneralPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93DB18013ABC8BE006D42FE /* PXGeneralPreferences.xib */; };
 		C93DB18613ABC963006D42FE /* PXGeneralPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C93DB18313ABC963006D42FE /* PXGeneralPreferencesController.h */; };
@@ -297,8 +302,6 @@
 		EA31FBA30CE7D59700EC481B /* PXSequenceExportPrompter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB700CE7D59700EC481B /* PXSequenceExportPrompter.m */; };
 		EA31FBA40CE7D59700EC481B /* PXSpriteSheetExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB710CE7D59700EC481B /* PXSpriteSheetExporter.h */; };
 		EA31FBA50CE7D59700EC481B /* PXSpriteSheetExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB720CE7D59700EC481B /* PXSpriteSheetExporter.m */; };
-		EA31FBAA0CE7D59700EC481B /* PXIconExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB780CE7D59700EC481B /* PXIconExporter.h */; };
-		EA31FBAB0CE7D59700EC481B /* PXIconExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB790CE7D59700EC481B /* PXIconExporter.m */; };
 		EA31FBB00CE7D59700EC481B /* PXGifImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB7F0CE7D59700EC481B /* PXGifImporter.h */; };
 		EA31FBB10CE7D59700EC481B /* PXGifImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB800CE7D59700EC481B /* PXGifImporter.m */; };
 		EA31FBBC0CE7D59700EC481B /* OSACTWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB8D0CE7D59700EC481B /* OSACTWriter.h */; };
@@ -579,6 +582,11 @@
 		C91F07D2142D0BAB007F812C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXInfoPanel.xib; sourceTree = "<group>"; };
 		C92A1E9113B12CAB0007235A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		C931682314E9857C00B3E817 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
+		C93429D8157EE58900186FA9 /* ICOFamily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICOFamily.h; sourceTree = "<group>"; };
+		C93429D9157EE58900186FA9 /* ICOFamily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICOFamily.m; sourceTree = "<group>"; };
+		C93429DB157EE58900186FA9 /* NSMutableData+EndianValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+EndianValues.h"; sourceTree = "<group>"; };
+		C93429DC157EE58900186FA9 /* NSMutableData+EndianValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData+EndianValues.m"; sourceTree = "<group>"; };
+		C93429E2157EE5BB00186FA9 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		C93DB17E13ABC6BE006D42FE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreferences.xib; sourceTree = "<group>"; };
 		C93DB18113ABC8BE006D42FE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXGeneralPreferences.xib; sourceTree = "<group>"; };
 		C93DB18313ABC963006D42FE /* PXGeneralPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGeneralPreferencesController.h; sourceTree = "<group>"; };
@@ -843,8 +851,6 @@
 		EA31FB700CE7D59700EC481B /* PXSequenceExportPrompter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSequenceExportPrompter.m; sourceTree = "<group>"; };
 		EA31FB710CE7D59700EC481B /* PXSpriteSheetExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSpriteSheetExporter.h; sourceTree = "<group>"; };
 		EA31FB720CE7D59700EC481B /* PXSpriteSheetExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSpriteSheetExporter.m; sourceTree = "<group>"; };
-		EA31FB780CE7D59700EC481B /* PXIconExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXIconExporter.h; sourceTree = "<group>"; };
-		EA31FB790CE7D59700EC481B /* PXIconExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXIconExporter.m; sourceTree = "<group>"; };
 		EA31FB7F0CE7D59700EC481B /* PXGifImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGifImporter.h; sourceTree = "<group>"; };
 		EA31FB800CE7D59700EC481B /* PXGifImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXGifImporter.m; sourceTree = "<group>"; };
 		EA31FB8D0CE7D59700EC481B /* OSACTWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSACTWriter.h; sourceTree = "<group>"; };
@@ -1040,6 +1046,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C931682414E9857C00B3E817 /* Sparkle.framework in Frameworks */,
+				C93429E3157EE5BB00186FA9 /* Accelerate.framework in Frameworks */,
 				EAF6951106A9AE0B0019D8D7 /* Cocoa.framework in Frameworks */,
 				EA5E9EE80877237800FCE6FE /* Carbon.framework in Frameworks */,
 				BF269FE6091307BF00B7A218 /* QTKit.framework in Frameworks */,
@@ -1054,6 +1061,7 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C93429E2157EE5BB00186FA9 /* Accelerate.framework */,
 				EA5E9EE70877237800FCE6FE /* Carbon.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 				61BB8ED608FB58F9009C75A6 /* QTKit.framework */,
@@ -1138,6 +1146,17 @@
 				61A22B910D2323B500430CCD /* OSPlasticButtonCell.m */,
 			);
 			path = OSPlasticButtonCell;
+			sourceTree = "<group>";
+		};
+		C93429D7157EE58900186FA9 /* ICOFamily */ = {
+			isa = PBXGroup;
+			children = (
+				C93429D8157EE58900186FA9 /* ICOFamily.h */,
+				C93429D9157EE58900186FA9 /* ICOFamily.m */,
+				C93429DB157EE58900186FA9 /* NSMutableData+EndianValues.h */,
+				C93429DC157EE58900186FA9 /* NSMutableData+EndianValues.m */,
+			);
+			path = ICOFamily;
 			sourceTree = "<group>";
 		};
 		C969A18613D200B300F1C1FE /* Products */ = {
@@ -1590,7 +1609,7 @@
 			isa = PBXGroup;
 			children = (
 				EA31FB6A0CE7D59700EC481B /* Animation Exporters */,
-				EA31FB730CE7D59700EC481B /* Image Exporters */,
+				C93429D7157EE58900186FA9 /* ICOFamily */,
 				EA31FB7C0CE7D59700EC481B /* Image Importers */,
 				EA31FB8C0CE7D59700EC481B /* Palette Exporters */,
 				EA31FB950CE7D59700EC481B /* Palette Importers */,
@@ -1613,15 +1632,6 @@
 				EA31FB720CE7D59700EC481B /* PXSpriteSheetExporter.m */,
 			);
 			path = "Animation Exporters";
-			sourceTree = "<group>";
-		};
-		EA31FB730CE7D59700EC481B /* Image Exporters */ = {
-			isa = PBXGroup;
-			children = (
-				EA31FB780CE7D59700EC481B /* PXIconExporter.h */,
-				EA31FB790CE7D59700EC481B /* PXIconExporter.m */,
-			);
-			path = "Image Exporters";
 			sourceTree = "<group>";
 		};
 		EA31FB7C0CE7D59700EC481B /* Image Importers */ = {
@@ -2178,7 +2188,6 @@
 				EA31FBA00CE7D59700EC481B /* PXAnimatedGifExporter.h in Headers */,
 				EA31FBA20CE7D59700EC481B /* PXSequenceExportPrompter.h in Headers */,
 				EA31FBA40CE7D59700EC481B /* PXSpriteSheetExporter.h in Headers */,
-				EA31FBAA0CE7D59700EC481B /* PXIconExporter.h in Headers */,
 				EA31FBB00CE7D59700EC481B /* PXGifImporter.h in Headers */,
 				EA31FBBC0CE7D59700EC481B /* OSACTWriter.h in Headers */,
 				EA31FBBE0CE7D59700EC481B /* OSJASCPALWriter.h in Headers */,
@@ -2241,6 +2250,8 @@
 				C989DF9E15386C3D00B055D5 /* GPLReader.h in Headers */,
 				C9B3A69D1547200F00872BF2 /* PXInsertionView.h in Headers */,
 				C91C4F9415602F8000EA4AF5 /* PXPercentFormatter.h in Headers */,
+				C93429DD157EE58900186FA9 /* ICOFamily.h in Headers */,
+				C93429E0157EE58900186FA9 /* NSMutableData+EndianValues.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2609,7 +2620,6 @@
 				EA31FBA10CE7D59700EC481B /* PXAnimatedGifExporter.m in Sources */,
 				EA31FBA30CE7D59700EC481B /* PXSequenceExportPrompter.m in Sources */,
 				EA31FBA50CE7D59700EC481B /* PXSpriteSheetExporter.m in Sources */,
-				EA31FBAB0CE7D59700EC481B /* PXIconExporter.m in Sources */,
 				EA31FBB10CE7D59700EC481B /* PXGifImporter.m in Sources */,
 				EA31FBBD0CE7D59700EC481B /* OSACTWriter.m in Sources */,
 				EA31FBBF0CE7D59700EC481B /* OSJASCPALWriter.m in Sources */,
@@ -2677,6 +2687,8 @@
 				C989DF9F15386C3D00B055D5 /* GPLReader.m in Sources */,
 				C9B3A69E1547200F00872BF2 /* PXInsertionView.m in Sources */,
 				C91C4F9515602F8000EA4AF5 /* PXPercentFormatter.m in Sources */,
+				C93429DE157EE58900186FA9 /* ICOFamily.m in Sources */,
+				C93429E1157EE58900186FA9 /* NSMutableData+EndianValues.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

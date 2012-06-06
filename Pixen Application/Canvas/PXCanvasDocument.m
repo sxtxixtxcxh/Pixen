@@ -17,11 +17,11 @@
 #import "PXPalette.h"
 #import "PXCanvasView.h"
 #import "PXLayerController.h"
-#import "PXIconExporter.h"
 #import "PXAnimatedGifExporter.h"
 #import "PXLayer.h"
 #import "PXCanvasWindowController_IBActions.h"
 #import "UTType+NSString.h"
+#import "ICOFamily.h"
 
 BOOL isPowerOfTwo(int num);
 
@@ -106,8 +106,10 @@ BOOL isPowerOfTwo(int num)
 	}
 	else if (UTTypeEqual(kUTTypeICO, (__bridge CFStringRef) aType))
 	{
-		PXIconExporter *iconExporter = [[[PXIconExporter alloc] init] autorelease];
-		return [iconExporter iconDataForCanvas:canvas];
+		ICOFamily *myFamily = [ICOFamily family];
+		[myFamily setImage:[canvas displayImage] forCustomSize:[canvas size]];
+		
+		return [myFamily data];
 	}
 	else if (UTTypeEqual(kUTTypePNG, (__bridge CFStringRef) aType))
 	{
@@ -208,7 +210,9 @@ BOOL isPowerOfTwo(int num)
 		NSImage *image = [[[NSImage alloc] initWithData:data] autorelease];
 		
 		if (!image) {
-			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:-1 userInfo:nil];
+			if (error)
+				*error = [NSError errorWithDomain:NSCocoaErrorDomain code:-1 userInfo:nil];
+			
 			return NO;
 		}
 		
