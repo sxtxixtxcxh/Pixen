@@ -21,7 +21,6 @@
 #import "PXLayer.h"
 #import "PXCanvasWindowController_IBActions.h"
 #import "UTType+NSString.h"
-#import "ICOFamily.h"
 
 BOOL isPowerOfTwo(int num);
 
