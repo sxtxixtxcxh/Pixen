@@ -20,6 +20,7 @@
 
 - (NSImage *)exportImageWithBackgroundColor:(NSColor *)color;
 - (NSImage *)exportImage; // suitable for writing to file
+- (NSImageRep *)exportImageRep;
 - (NSImage *)displayImage; // suitable for drawing to the screen
 
 @end

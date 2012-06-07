@@ -33,6 +33,21 @@
 	return self = nil;
 }
 
+- (NSBitmapImageRep *)exportImageRep {
+	NSRect frame = NSMakeRect(0.0f, 0.0f, [self size].width, [self size].height);
+	
+	NSImage *outputImage = [self exportImage];
+	[outputImage lockFocus];
+	
+	NSBitmapImageRep *rep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:frame] autorelease];
+	
+	[outputImage unlockFocus];
+	
+	// And now, we interrupt our regularly scheduled codegram for a hack: remove color profile info from the rep because we don't handle it on loading.
+	[rep setProperty:NSImageColorSyncProfileData withValue:nil];
+	
+	return rep;
+}
 
 - (NSData *)imageDataWithType:(NSBitmapImageFileType)storageType
 				   properties:(NSDictionary *)properties

@@ -106,10 +106,17 @@ BOOL isPowerOfTwo(int num)
 	}
 	else if (UTTypeEqual(kUTTypeICO, (__bridge CFStringRef) aType))
 	{
-		ICOFamily *myFamily = [ICOFamily family];
-		[myFamily setImage:[canvas displayImage] forCustomSize:[canvas size]];
+		NSMutableData *data = [NSMutableData new];
 		
-		return [myFamily data];
+		CGImageDestinationRef dest = CGImageDestinationCreateWithData((CFMutableDataRef)data,
+																	  CFSTR("com.microsoft.ico"),
+																	  1,
+																	  NULL);
+		
+		CGImageDestinationAddImage(dest, [[canvas exportImageRep] CGImage], NULL);
+		CGImageDestinationFinalize(dest);
+		
+		return [data autorelease];
 	}
 	else if (UTTypeEqual(kUTTypePNG, (__bridge CFStringRef) aType))
 	{
