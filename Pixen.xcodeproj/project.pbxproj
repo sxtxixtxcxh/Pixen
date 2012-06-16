@@ -439,9 +439,6 @@
 		EAC917860CE7DC7300E519E1 /* Pixen.scriptTerminology in Resources */ = {isa = PBXBuildFile; fileRef = EAC917240CE7DC7300E519E1 /* Pixen.scriptTerminology */; };
 		EAC917880CE7DC7300E519E1 /* Add.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC917270CE7DC7300E519E1 /* Add.tiff */; };
 		EAC917890CE7DC7300E519E1 /* ants.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC917280CE7DC7300E519E1 /* ants.tiff */; };
-		EAC9178E0CE7DC7300E519E1 /* highlight_blue.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC9172D0CE7DC7300E519E1 /* highlight_blue.tiff */; };
-		EAC9178F0CE7DC7300E519E1 /* highlight_graphite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC9172E0CE7DC7300E519E1 /* highlight_graphite.tiff */; };
-		EAC917900CE7DC7300E519E1 /* highlight_grey.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC9172F0CE7DC7300E519E1 /* highlight_grey.tiff */; };
 		EAC9179B0CE7DC7300E519E1 /* palette_big_aqua.tif in Resources */ = {isa = PBXBuildFile; fileRef = EAC9173B0CE7DC7300E519E1 /* palette_big_aqua.tif */; };
 		EAC9179C0CE7DC7300E519E1 /* palette_big_graphite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC9173C0CE7DC7300E519E1 /* palette_big_graphite.tiff */; };
 		EAC9179D0CE7DC7300E519E1 /* palette_small_aqua.tif in Resources */ = {isa = PBXBuildFile; fileRef = EAC9173D0CE7DC7300E519E1 /* palette_small_aqua.tif */; };
@@ -983,9 +980,6 @@
 		EAC917240CE7DC7300E519E1 /* Pixen.scriptTerminology */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pixen.scriptTerminology; sourceTree = "<group>"; };
 		EAC917270CE7DC7300E519E1 /* Add.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Add.tiff; sourceTree = "<group>"; };
 		EAC917280CE7DC7300E519E1 /* ants.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ants.tiff; sourceTree = "<group>"; };
-		EAC9172D0CE7DC7300E519E1 /* highlight_blue.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = highlight_blue.tiff; sourceTree = "<group>"; };
-		EAC9172E0CE7DC7300E519E1 /* highlight_graphite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = highlight_graphite.tiff; sourceTree = "<group>"; };
-		EAC9172F0CE7DC7300E519E1 /* highlight_grey.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = highlight_grey.tiff; sourceTree = "<group>"; };
 		EAC9173B0CE7DC7300E519E1 /* palette_big_aqua.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = palette_big_aqua.tif; sourceTree = "<group>"; };
 		EAC9173C0CE7DC7300E519E1 /* palette_big_graphite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = palette_big_graphite.tiff; sourceTree = "<group>"; };
 		EAC9173D0CE7DC7300E519E1 /* palette_small_aqua.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = palette_small_aqua.tif; sourceTree = "<group>"; };
@@ -1999,9 +1993,6 @@
 				EAC917270CE7DC7300E519E1 /* Add.tiff */,
 				EAC917280CE7DC7300E519E1 /* ants.tiff */,
 				61A22A230D2073E500430CCD /* Frequency.tiff */,
-				EAC9172D0CE7DC7300E519E1 /* highlight_blue.tiff */,
-				EAC9172E0CE7DC7300E519E1 /* highlight_graphite.tiff */,
-				EAC9172F0CE7DC7300E519E1 /* highlight_grey.tiff */,
 				61A22A060D20715000430CCD /* History.tiff */,
 				EAC9173B0CE7DC7300E519E1 /* palette_big_aqua.tif */,
 				EAC9173C0CE7DC7300E519E1 /* palette_big_graphite.tiff */,
@@ -2350,9 +2341,6 @@
 				EAC917860CE7DC7300E519E1 /* Pixen.scriptTerminology in Resources */,
 				EAC917880CE7DC7300E519E1 /* Add.tiff in Resources */,
 				EAC917890CE7DC7300E519E1 /* ants.tiff in Resources */,
-				EAC9178E0CE7DC7300E519E1 /* highlight_blue.tiff in Resources */,
-				EAC9178F0CE7DC7300E519E1 /* highlight_graphite.tiff in Resources */,
-				EAC917900CE7DC7300E519E1 /* highlight_grey.tiff in Resources */,
 				EAC9179B0CE7DC7300E519E1 /* palette_big_aqua.tif in Resources */,
 				EAC9179C0CE7DC7300E519E1 /* palette_big_graphite.tiff in Resources */,
 				EAC9179D0CE7DC7300E519E1 /* palette_small_aqua.tif in Resources */,
