@@ -6,9 +6,5 @@
 //
 
 @interface OSPlasticButtonCell : NSButtonCell
-{
-  @private
-	NSImage *_glass, *_glassHighlighted;
-}
 
 @end

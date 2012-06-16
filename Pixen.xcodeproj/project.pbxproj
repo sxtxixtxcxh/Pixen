@@ -440,9 +440,6 @@
 		EAC917880CE7DC7300E519E1 /* Add.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC917270CE7DC7300E519E1 /* Add.tiff */; };
 		EAC917890CE7DC7300E519E1 /* ants.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC917280CE7DC7300E519E1 /* ants.tiff */; };
 		EAC9178A0CE7DC7300E519E1 /* colorWellBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917290CE7DC7300E519E1 /* colorWellBackground.png */; };
-		EAC9178B0CE7DC7300E519E1 /* glass-h-graphite.tif in Resources */ = {isa = PBXBuildFile; fileRef = EAC9172A0CE7DC7300E519E1 /* glass-h-graphite.tif */; };
-		EAC9178C0CE7DC7300E519E1 /* glass-h.tif in Resources */ = {isa = PBXBuildFile; fileRef = EAC9172B0CE7DC7300E519E1 /* glass-h.tif */; };
-		EAC9178D0CE7DC7300E519E1 /* glass.tif in Resources */ = {isa = PBXBuildFile; fileRef = EAC9172C0CE7DC7300E519E1 /* glass.tif */; };
 		EAC9178E0CE7DC7300E519E1 /* highlight_blue.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC9172D0CE7DC7300E519E1 /* highlight_blue.tiff */; };
 		EAC9178F0CE7DC7300E519E1 /* highlight_graphite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC9172E0CE7DC7300E519E1 /* highlight_graphite.tiff */; };
 		EAC917900CE7DC7300E519E1 /* highlight_grey.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC9172F0CE7DC7300E519E1 /* highlight_grey.tiff */; };
@@ -996,9 +993,6 @@
 		EAC917270CE7DC7300E519E1 /* Add.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Add.tiff; sourceTree = "<group>"; };
 		EAC917280CE7DC7300E519E1 /* ants.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ants.tiff; sourceTree = "<group>"; };
 		EAC917290CE7DC7300E519E1 /* colorWellBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = colorWellBackground.png; sourceTree = "<group>"; };
-		EAC9172A0CE7DC7300E519E1 /* glass-h-graphite.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "glass-h-graphite.tif"; sourceTree = "<group>"; };
-		EAC9172B0CE7DC7300E519E1 /* glass-h.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "glass-h.tif"; sourceTree = "<group>"; };
-		EAC9172C0CE7DC7300E519E1 /* glass.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = glass.tif; sourceTree = "<group>"; };
 		EAC9172D0CE7DC7300E519E1 /* highlight_blue.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = highlight_blue.tiff; sourceTree = "<group>"; };
 		EAC9172E0CE7DC7300E519E1 /* highlight_graphite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = highlight_graphite.tiff; sourceTree = "<group>"; };
 		EAC9172F0CE7DC7300E519E1 /* highlight_grey.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = highlight_grey.tiff; sourceTree = "<group>"; };
@@ -2024,9 +2018,6 @@
 				EAC917280CE7DC7300E519E1 /* ants.tiff */,
 				EAC917290CE7DC7300E519E1 /* colorWellBackground.png */,
 				61A22A230D2073E500430CCD /* Frequency.tiff */,
-				EAC9172A0CE7DC7300E519E1 /* glass-h-graphite.tif */,
-				EAC9172B0CE7DC7300E519E1 /* glass-h.tif */,
-				EAC9172C0CE7DC7300E519E1 /* glass.tif */,
 				EAC9172D0CE7DC7300E519E1 /* highlight_blue.tiff */,
 				EAC9172E0CE7DC7300E519E1 /* highlight_graphite.tiff */,
 				EAC9172F0CE7DC7300E519E1 /* highlight_grey.tiff */,
@@ -2395,9 +2386,6 @@
 				EAC917880CE7DC7300E519E1 /* Add.tiff in Resources */,
 				EAC917890CE7DC7300E519E1 /* ants.tiff in Resources */,
 				EAC9178A0CE7DC7300E519E1 /* colorWellBackground.png in Resources */,
-				EAC9178B0CE7DC7300E519E1 /* glass-h-graphite.tif in Resources */,
-				EAC9178C0CE7DC7300E519E1 /* glass-h.tif in Resources */,
-				EAC9178D0CE7DC7300E519E1 /* glass.tif in Resources */,
 				EAC9178E0CE7DC7300E519E1 /* highlight_blue.tiff in Resources */,
 				EAC9178F0CE7DC7300E519E1 /* highlight_graphite.tiff in Resources */,
 				EAC917900CE7DC7300E519E1 /* highlight_grey.tiff in Resources */,
