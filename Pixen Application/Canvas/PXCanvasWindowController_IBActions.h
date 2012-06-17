@@ -39,6 +39,7 @@
 - (IBAction)showBackgroundInfo:(id)sender;
 - (IBAction)showGridSettingsPrompter:(id)sender;
 - (IBAction)redrawCanvas:(id)sender;
+- (IBAction)fill:(id)sender;
 
 - (IBAction)selectAll:(id)sender;
 - (IBAction)selectNone:(id)sender;

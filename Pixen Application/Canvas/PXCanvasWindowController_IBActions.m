@@ -346,6 +346,14 @@
 	[canvas changed];
 }
 
+- (IBAction)fill:(id)sender
+{
+	PXToolSwitcher *switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
+	PXColor color = PXColorFromNSColor([switcher color]);
+	
+	[canvas fillWithColor:color];
+}
+
 - (IBAction)cut:sender
 {
 	[canvas cutSelection];

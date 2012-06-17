@@ -71,6 +71,34 @@ NSUInteger PointSizeF (const void *item);
 	[self setColor:color atIndices:indices updateIn:bounds onLayer:activeLayer];
 }
 
+- (void)fillWithColor:(PXColor)color
+{
+	if (![self hasSelection]) {
+		PXImage_clear([activeLayer image], color);
+		[self refreshWholePalette];
+		[self changed];
+		return;
+	}
+	
+	[self beginColorUpdates];
+	
+	int width = [self size].width;
+	int height = [self size].height;
+	
+	for (int x = 0; x < width; x++) {
+		for (int y = 0; y < height; y++) {
+			NSUInteger index = width * y + x;
+			
+			if (selectionMask[index]) {
+				[self setColor:color atPoint:NSMakePoint(x, height - y - 1)];
+			}
+		}
+	}
+	
+	[self changed];
+	[self endColorUpdates];
+}
+
 - (void)restoreColorData:(NSData *)data onLayer:(PXLayer *)layer
 {
 	[[[self undoManager] prepareWithInvocationTarget:self] restoreColorData:[layer colorData] onLayer:layer];

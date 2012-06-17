@@ -21,6 +21,8 @@
 - (void)setColor:(PXColor)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds;
 - (void)setColor:(PXColor)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer;
 
+- (void)fillWithColor:(PXColor)color;
+
 - (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
 + (void)reduceColorsInCanvases:(NSArray *)canvases toColorCount:(int)colors
 			  withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
