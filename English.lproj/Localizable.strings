@@ -250,5 +250,8 @@
 /* Would you like to pick a different name for %@? */
 "PICK_DIFFERENT_NAME" = "Would you like to pick a different name for %@?";
 
+"FILL_CANVAS" = "Fill Canvas";
+"FILL_SELECTION" = "Fill Selection";
+
 /* About */
 "VERSION_STRING" = "Version %@";

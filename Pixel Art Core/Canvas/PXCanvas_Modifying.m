@@ -71,32 +71,56 @@ NSUInteger PointSizeF (const void *item);
 	[self setColor:color atIndices:indices updateIn:bounds onLayer:activeLayer];
 }
 
+- (void)fillWholeCanvasWithColor:(PXColor)color
+{
+	[self beginUndoGrouping]; {
+		[[[self undoManager] prepareWithInvocationTarget:self] restoreColorData:[activeLayer colorData] onLayer:activeLayer];
+		
+		PXImage_clear([activeLayer image], color);
+		
+		[self changed];
+		[self refreshWholePalette];
+	} [self endUndoGrouping:NSLocalizedString(@"FILL_CANVAS", nil)];
+}
+
+- (void)fillSelectionWithColor:(PXColor)color
+{
+	[self beginUndoGrouping]; {
+		[self clearUndoBuffers];
+		[self beginColorUpdates];
+		
+		int width = [self size].width;
+		int height = [self size].height;
+		
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				NSUInteger index = width * y + x;
+				
+				if (selectionMask[index]) {
+					NSPoint pt = NSMakePoint(x, height - y - 1);
+					
+					PXColor oldColor = [activeLayer colorAtIndex:index];
+					[self bufferUndoAtPoint:pt fromColor:oldColor toColor:color];
+					
+					[self setColor:color atPoint:pt];
+				}
+			}
+		}
+		
+		[self registerForUndo];
+		[self changed];
+		[self endColorUpdates];
+	} [self endUndoGrouping:NSLocalizedString(@"FILL_SELECTION", nil)];
+}
+
 - (void)fillWithColor:(PXColor)color
 {
 	if (![self hasSelection]) {
-		PXImage_clear([activeLayer image], color);
-		[self refreshWholePalette];
-		[self changed];
-		return;
+		[self fillWholeCanvasWithColor:color];
 	}
-	
-	[self beginColorUpdates];
-	
-	int width = [self size].width;
-	int height = [self size].height;
-	
-	for (int x = 0; x < width; x++) {
-		for (int y = 0; y < height; y++) {
-			NSUInteger index = width * y + x;
-			
-			if (selectionMask[index]) {
-				[self setColor:color atPoint:NSMakePoint(x, height - y - 1)];
-			}
-		}
+	else {
+		[self fillSelectionWithColor:color];
 	}
-	
-	[self changed];
-	[self endColorUpdates];
 }
 
 - (void)restoreColorData:(NSData *)data onLayer:(PXLayer *)layer
