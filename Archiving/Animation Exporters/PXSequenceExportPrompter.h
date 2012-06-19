@@ -14,10 +14,10 @@
 {
   @private
 	PXSequenceExportViewController *vc;
-	NSSavePanel *savePanel;
+	NSOpenPanel *savePanel;
 }
 
-@property (nonatomic, readonly) NSSavePanel *savePanel;
+@property (nonatomic, readonly) NSOpenPanel *savePanel;
 @property (nonatomic, readonly) NSString *fileTemplate, *selectedUTI;
 
 - (id)initWithDocument:(NSDocument *)document;
