@@ -7,10 +7,11 @@
 //
 
 #import "PXCanvasWindowController.h"
+#import "PXScaleController.h"
 
 @class PXAnimation, PXCel, PXFilmStripView;
 
-@interface PXAnimationWindowController : PXCanvasWindowController
+@interface PXAnimationWindowController : PXCanvasWindowController < PXScaleControllerDelegate >
 {
   @private
 	PXAnimation *animation;

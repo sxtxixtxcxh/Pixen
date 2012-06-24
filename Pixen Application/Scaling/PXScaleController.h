@@ -4,6 +4,7 @@
 //
 
 @class PXCanvasWindowController, PXCanvas;
+@protocol PXScaleControllerDelegate;
 
 @interface PXScaleController : NSWindowController 
 {
@@ -15,13 +16,14 @@
 	IBOutlet NSTextField *pixelsWideField, *pixelsHighField, *percentageWideField, *percentageHighField;
 	IBOutlet NSTextView *algorithmInfoView;
 	
-	id delegate;
-	SEL callback;
+	id < PXScaleControllerDelegate > delegate;
 	
 	NSSize newSize;
 	
 	PXCanvasWindowController *canvasController;
 }
+
+@property (nonatomic, assign) id < PXScaleControllerDelegate > delegate;
 
 - (void)scaleCanvasFromController:(PXCanvasWindowController *)canvasController
 				   modalForWindow:(NSWindow *)theWindow;
@@ -32,6 +34,12 @@
 - (IBAction)cancel:(id) sender;
 - (IBAction)scale:(id) sender;
 - (void)scaleCanvas:(PXCanvas *)canvas;
-- (void)setDelegate:delegate withCallback:(SEL)callback;
+
+@end
+
+
+@protocol PXScaleControllerDelegate
+
+- (void)scaleControllerDidFinish:(PXScaleController *)controller scale:(BOOL)scale;
 
 @end

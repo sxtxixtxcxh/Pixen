@@ -17,6 +17,8 @@
 
 static NSArray *algorithms = nil;
 
+@synthesize delegate;
+
 + (void)initialize
 {
 	static BOOL ready = NO;
@@ -251,16 +253,9 @@ static NSArray *algorithms = nil;
 	
 	if (delegate)
 	{
-		[delegate performSelector:callback withObject:self withObject:[NSNumber numberWithBool:[[self currentAlgorithm] canScaleCanvas:[canvasController canvas] toSize:newSize]]];
+		[delegate scaleControllerDidFinish:self scale:[[self currentAlgorithm] canScaleCanvas:[canvasController canvas] toSize:newSize]];
 	}
 	delegate = nil;
-	callback = NULL;
-}
-
-- (void)setDelegate:aDelegate withCallback:(SEL)aCallback
-{
-	delegate = aDelegate;
-	callback = aCallback;
 }
 
 @end

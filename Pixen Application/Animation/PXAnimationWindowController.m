@@ -19,7 +19,6 @@
 #import "PXAnimationView.h"
 #import "OSQTExporter.h"
 #import "PXCanvasWindowController_IBActions.h"
-#import "PXScaleController.h"
 #import "Constants.h"
 
 @implementation PXAnimationWindowController
@@ -471,9 +470,9 @@
 					  }];
 }
 
-- (void)scalePrompterFinished:prompter shouldScale:shouldScale
+- (void)scaleControllerDidFinish:(PXScaleController *)controller scale:(BOOL)scale
 {
-	if ([shouldScale boolValue])
+	if (scale)
 	{
 		PXCanvas *currentCanvas = [activeCel canvas];
 		NSInteger celCount = [animation countOfCels];
@@ -489,7 +488,8 @@
 
 - (IBAction)scaleCanvas:(id) sender
 {
-	[self.scaleController setDelegate:self withCallback:@selector(scalePrompterFinished:shouldScale:)];
+	self.scaleController.delegate = self;
+	
 	[[[self document] undoManager] beginUndoGrouping];
 	[super scaleCanvas:self];
 }
