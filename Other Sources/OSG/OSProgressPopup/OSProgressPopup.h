@@ -19,10 +19,6 @@
 	IBOutlet NSButton *cancelButton;
 	IBOutlet NSWindow *window;
 	
-	SEL _selector;
-	SEL _didEndSelector;
-	id _target;
-	
 	NSOperationQueue *_workQueue;
 	BOOL indeterminate;
 }
@@ -32,9 +28,6 @@
 
 // Use this method to begin a non-threaded operation with the progress popup.
 - (void)beginOperationWithStatusText:(NSString *)statusText parentWindow:(NSWindow *)parentWindow;
-
-// Use this method to begin an operation with the progress popup. If you don't care about getting sent a message when the thread exits, 
-- (void)beginOperationWithSelector:(SEL)selector target:target object:object didEndSelector:(SEL)didEndSelector statusText:(NSString *)statusText parentWindow:(NSWindow *)parentWindow;
 
 - (void)endOperation;
 

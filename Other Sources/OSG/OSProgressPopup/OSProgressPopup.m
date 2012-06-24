@@ -80,11 +80,6 @@ static NSLock *popupLock = nil;
 	[popupLock unlock];
 }
 
-- (void)forwardStartSelector:(id)userInfo
-{
-	[_target performSelector:_selector withObject:userInfo];
-}
-
 - (void)endOperation
 {
 	[popupLock lock];
@@ -117,15 +112,6 @@ static NSLock *popupLock = nil;
 	}
 }
 
-- (void)forwardEndSelector:(id)userInfo
-{
-	if (_didEndSelector)
-		[_target performSelector:_didEndSelector withObject:userInfo];
-	
-	[self endOperation];
-}
-
-
 - (void)beginOperationWithStatusText:(NSString *)statusText parentWindow:(NSWindow *)parentWindow
 {
 	[popupLock lock];
@@ -142,31 +128,6 @@ static NSLock *popupLock = nil;
 	[popupLock unlock];
 	
 	[NSApp beginSheet:window modalForWindow:parentWindow modalDelegate:self didEndSelector:NULL contextInfo:nil];
-	
-}
-
-- (void)beginOperationWithSelector:(SEL)selector target:target object:object didEndSelector:(SEL)didEndSelector statusText:(NSString *)statusText parentWindow:(NSWindow *)parentWindow
-{
-	[popupLock lock];
-	_target = target;
-	_selector = selector;
-	_didEndSelector = didEndSelector;
-	[popupLock unlock];
-	
-	[self beginOperationWithStatusText:statusText parentWindow:parentWindow];
-	
-	if (!_workQueue) {
-		_workQueue = [[NSOperationQueue alloc] init];
-		[_workQueue setMaxConcurrentOperationCount:1];
-	}
-	
-	[_workQueue addOperationWithBlock:^{
-		[self forwardStartSelector:object];
-		
-		[[NSOperationQueue mainQueue] addOperationWithBlock:^{
-			[self performSelector:@selector(forwardEndSelector:)];
-		}];
-	}];
 }
 
 @end
