@@ -19,6 +19,8 @@
 
 @implementation PXAnimation
 
+@synthesize undoManager;
+
 - (id)init
 {
 	self = [super init];
@@ -151,16 +153,14 @@
 	}
 }
 
-- (NSUndoManager *)undoManager
+- (void)setUndoManager:(NSUndoManager *)man
 {
-	return undoManager;
-}
-
-- (void)setUndoManager:man
-{
-	undoManager = man;
-	[undoManager setGroupsByEvent:NO];
-	[cels setValue:man forKey:@"undoManager"];
+	if (undoManager != man) {
+		undoManager = man;
+		
+		[undoManager setGroupsByEvent:NO];
+		[cels setValue:man forKey:@"undoManager"];
+	}
 }
 
 - (void)insertObject:(PXCel *)cel inCelsAtIndex:(NSUInteger)index

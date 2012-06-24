@@ -12,6 +12,6 @@
 	NSScrollView *_filmStrip;
 }
 
-@property (nonatomic, retain) IBOutlet NSScrollView *filmStrip;
+@property (nonatomic, assign) IBOutlet NSScrollView *filmStrip;
 
 @end

@@ -16,7 +16,7 @@
 
 @implementation PXLayer
 
-@synthesize visible = _visible, name = _name, opacity = _opacity;
+@synthesize visible = _visible, name = _name, opacity = _opacity, canvas;
 
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image origin:(NSPoint)origin size:(NSSize)sz
 {
@@ -165,16 +165,6 @@
 		return NSZeroSize;
 	}
 	return NSMakeSize(image->width, image->height);
-}
-
-- (void)setCanvas:(PXCanvas *)c
-{
-	canvas = c;
-}
-
-- (PXCanvas *)canvas
-{
-	return canvas;
 }
 
 - (void)meldBezier:(NSBezierPath *)path ofColor:(NSColor *)color

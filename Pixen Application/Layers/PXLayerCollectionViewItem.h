@@ -16,7 +16,6 @@
 	IBOutlet PXNSImageView *thumbnailView;
 	IBOutlet NSTextField *opacityField;
 	
-	PXLayer *layer;
 	PXLayerController *layerController;
 }
 

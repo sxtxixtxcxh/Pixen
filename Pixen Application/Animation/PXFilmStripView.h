@@ -39,8 +39,8 @@
 }
 
 @property (nonatomic, assign) id delegate;
+@property (nonatomic, assign) id dataSource;
 
-- (void)setDataSource:dataSource;
 - (void)reloadData;
 - (float)minimumHeight;
 

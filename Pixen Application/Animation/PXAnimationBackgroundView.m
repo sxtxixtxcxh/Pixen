@@ -25,8 +25,6 @@
 - (void)dealloc
 {
 	[_horizontalGradient release];
-	[_filmStrip release];
-	
 	[super dealloc];
 }
 

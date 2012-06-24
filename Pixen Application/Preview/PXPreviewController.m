@@ -46,6 +46,7 @@
 @implementation PXPreviewController
 
 @synthesize view, controlView, playPauseButton;
+@synthesize animation = _animation, singleCanvas = canvas;
 
 - (BOOL)hasUsableCanvas
 {
@@ -114,8 +115,7 @@
 - (void)setAnimation:(PXAnimation *)animation
 {
 	if (_animation != animation) {
-		[_animation release];
-		_animation = [animation retain];
+		_animation = animation;
 		
 		if (animation) {
 			PXCel *firstCel = [animation celAtIndex:0];
@@ -216,7 +216,6 @@
 		
 		[self stopAnimation];
 		
-		[_animation release];
 		_animation = nil;
 	}
 	
@@ -254,7 +253,6 @@
 - (void)dealloc
 {
 	[self pauseAnimation];
-	[_animation release];
 	
 	[resizeSizeWindow release];
 	[bezelView release];

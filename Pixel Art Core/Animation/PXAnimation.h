@@ -17,6 +17,8 @@
 	NSUndoManager *undoManager;
 }
 
+@property (nonatomic, assign) NSUndoManager *undoManager;
+
 - (NSArray *)canvases;
 - (PXCel *)celAtIndex:(NSUInteger)index;
 - (NSUInteger)indexOfObjectInCels:(PXCel *)cel;
@@ -29,9 +31,6 @@
 - (void)setSizeNoUndo:(NSSize)aSize;
 - (void)setSize:(NSSize)aSize withOrigin:(NSPoint)origin backgroundColor:(PXColor)color;
 - (void)setSize:(NSSize)aSize withOrigin:(NSPoint)origin backgroundColor:(PXColor)color undo:(BOOL)undo;
-
-- (NSUndoManager *)undoManager;
-- (void)setUndoManager:(NSUndoManager *)manager;
 
 - (void)insertObject:(PXCel *)cel inCelsAtIndex:(NSUInteger)index;
 - (void)addNewCel;

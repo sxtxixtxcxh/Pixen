@@ -32,6 +32,8 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) CGFloat opacity;
 
+@property (nonatomic, assign) PXCanvas *canvas;
+
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image origin:(NSPoint)origin size:(NSSize)sz;
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image size:(NSSize)sz;
 
@@ -49,9 +51,6 @@
 
 - (NSPoint)origin;
 - (void)setOrigin:(NSPoint)pt;
-
-- (void)setCanvas:(PXCanvas *)canvas;
-- (PXCanvas *)canvas;
 
 - (PXColor)colorAtIndex:(unsigned int)index;
 - (PXColor)colorAtPoint:(NSPoint)aPoint;

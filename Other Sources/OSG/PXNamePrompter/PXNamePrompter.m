@@ -56,7 +56,6 @@
 - (NSString *)promptModalWithPromptString:(NSString *)string
 {
 	_runningModal = YES;
-	_modalString = nil;
 	[promptString setStringValue:string];
 	NSInteger result = [NSApp runModalForWindow:self.window];
 	_runningModal = NO;

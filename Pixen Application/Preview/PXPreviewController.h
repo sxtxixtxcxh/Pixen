@@ -32,10 +32,10 @@
 @property (nonatomic, assign) IBOutlet PXPreviewControlView *controlView;
 @property (nonatomic, assign) IBOutlet NSButton *playPauseButton;
 
-+ (id)sharedPreviewController;
+@property (nonatomic, assign) PXAnimation *animation;
+@property (nonatomic, assign) PXCanvas *singleCanvas;
 
-- (void)setAnimation:(PXAnimation *)animation;
-- (void)setSingleCanvas:(PXCanvas *)aCanvas;
++ (id)sharedPreviewController;
 
 - (BOOL)hasUsableCanvas;
 - (void)documentClosed:(NSNotification *)notification;

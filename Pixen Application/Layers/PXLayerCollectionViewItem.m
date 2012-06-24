@@ -59,15 +59,11 @@
 	
 	[super setRepresentedObject:representedObject];
 	
-	layer = nil;
-	
 	if ([self representedObject]) {
-		layer = [self representedObject];
-		
 		[nc addObserver:self
 			   selector:@selector(updatePreview:)
 				   name:PXCanvasChangedNotificationName
-				 object:[layer canvas]];
+				 object:[[self layer] canvas]];
 	}
 }
 
@@ -179,7 +175,7 @@
 {
 	if ([anItem action] == @selector(mergeDown:)) {
 		NSArray *layers = [[layerController canvas] layers];
-		return [layers count] > 1 && [layers objectAtIndex:0] != layer;
+		return [layers count] > 1 && [layers objectAtIndex:0] != [self layer];
 	}
 	else if ([anItem action] == @selector(cutLayer:) || [anItem action] == @selector(delete:)) {
 		NSArray *layers = [[layerController canvas] layers];
@@ -197,7 +193,7 @@
 
 - (void)updatePreviewReal
 {
-	[thumbnailView setImage:[layer displayImage]];
+	[thumbnailView setImage:[[self layer] displayImage]];
 	[thumbnailView setNeedsDisplay:YES];
 }
 
@@ -207,54 +203,59 @@
 	[self performSelector:@selector(updatePreviewReal) withObject:nil afterDelay:0.05f];
 }
 
+- (PXLayer *)layer
+{
+	return [self representedObject];
+}
+
 - (void)delete:(id)sender
 {
-	[layerController removeLayerObject:layer];
+	[layerController removeLayerObject:[self layer]];
 }
 
 - (void)duplicate:(id)sender
 {
-	[layerController duplicateLayerObject:layer];
+	[layerController duplicateLayerObject:[self layer]];
 }
 
 - (void)mergeDown:(id)sender
 {
-	[layerController mergeDownLayerObject:layer];
+	[layerController mergeDownLayerObject:[self layer]];
 }
 
 - (void)cutLayer:(id)sender
 {
-	[layerController cutLayerObject:layer];
+	[layerController cutLayerObject:[self layer]];
 }
 
 - (void)copyLayer:(id)sender
 {
-	[layerController copyLayerObject:layer];
+	[layerController copyLayerObject:[self layer]];
 }
 
 - (void)rotateLayerCounterclockwise:(id)sender
 {
-	[[layer canvas] rotateLayer:layer byDegrees:90];
+	[[[self layer] canvas] rotateLayer:[self layer] byDegrees:90];
 }
 
 - (void)rotateLayerClockwise:(id)sender
 {
-	[[layer canvas] rotateLayer:layer byDegrees:270];
+	[[[self layer] canvas] rotateLayer:[self layer] byDegrees:270];
 }
 
 - (void)rotateLayer180:(id)sender
 {
-	[[layer canvas] rotateLayer:layer byDegrees:180];
+	[[[self layer] canvas] rotateLayer:[self layer] byDegrees:180];
 }
 
 - (void)flipLayerHorizontally:(id)sender
 {
-	[[layer canvas] flipLayerHorizontally:layer];
+	[[[self layer] canvas] flipLayerHorizontally:[self layer]];
 }
 
 - (void)flipLayerVertically:(id)sender
 {
-	[[layer canvas] flipLayerVertically:layer];
+	[[[self layer] canvas] flipLayerVertically:[self layer]];
 }
 
 - (void)setSelected:(BOOL)state

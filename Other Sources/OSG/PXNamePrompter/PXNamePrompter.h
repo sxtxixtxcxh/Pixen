@@ -13,7 +13,6 @@
 	id _context;
 	id _delegate;
 	BOOL _runningModal;
-	NSString *_modalString;
 }
 
 @property (nonatomic, assign) id delegate;
