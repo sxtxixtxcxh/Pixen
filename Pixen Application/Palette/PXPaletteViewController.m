@@ -313,7 +313,6 @@
 	PXPalette *palette = [paletteView palette];
 	
 	[namePrompter promptInWindow:[[self view] window]
-						 context:NULL
 					promptString:[NSString stringWithFormat:NSLocalizedString(@"Rename the palette '%@'", @"Rename the palette '%@'"), palette.name]
 					defaultEntry:palette.name];
 }

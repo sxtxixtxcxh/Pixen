@@ -20,22 +20,18 @@
 	return self;
 }
 
-- (void)promptInWindow:(NSWindow *)window context:(id)contextInfo
+- (void)promptInWindow:(NSWindow *)window
 {
 	[self promptInWindow:window
-				 context:contextInfo
 			promptString:NSLocalizedString(@"Please name the new configuration.",
 										   @"Please name the new configuration.")
 			defaultEntry:@""];
 }
 
 - (void)promptInWindow:(NSWindow *)window
-			   context:(id)contextInfo
 		  promptString:(NSString *)string
 		  defaultEntry:(NSString *)entry
 {
-	_context = contextInfo;
-	
 	[self loadWindow];
 	
 	[promptString setStringValue:string];
@@ -83,7 +79,7 @@
 	}
 	
 	if ([_delegate respondsToSelector:@selector(prompter:didFinishWithName:context:)])
-		[_delegate prompter:self didFinishWithName:[nameField stringValue] context:_context];
+		[_delegate prompter:self didFinishWithName:[nameField stringValue] context:NULL];
 	
 	[NSApp endSheet:self.window];
 	[self.window close];
@@ -103,7 +99,7 @@
 	[self.window close];
 	
 	if ([_delegate respondsToSelector:@selector(prompter:didCancelWithContext:)])
-		[_delegate prompter:self didCancelWithContext:_context];
+		[_delegate prompter:self didCancelWithContext:NULL];
 }
 
 @end

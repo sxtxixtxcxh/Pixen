@@ -127,7 +127,6 @@
 	}
 	
 	[prompter promptInWindow:[self window]
-					 context:NULL
 				promptString:@"Enter a name for this preset:"
 				defaultEntry:@""];
 }
