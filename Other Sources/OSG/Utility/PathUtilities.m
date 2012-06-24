@@ -58,7 +58,7 @@ NSString *GetPixenPatternFile()
 
 NSString *GetDescriptionForDocumentType(NSString *uti)
 {
-	CFStringRef cfUTI = (CFStringRef) uti;
+	CFStringRef cfUTI = (__bridge CFStringRef) uti;
 	
 	if (UTTypeEqual(cfUTI, CFSTR("com.Pixen.pxim"))) {
 		return @"Pixen image";

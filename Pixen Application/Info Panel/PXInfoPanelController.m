@@ -9,6 +9,7 @@
 
 #import "PXAnimation.h"
 #import "PXAnimationDocument.h"
+#import "PXCanvas.h"
 #import "PXCanvasDocument.h"
 
 @implementation PXInfoPanelController

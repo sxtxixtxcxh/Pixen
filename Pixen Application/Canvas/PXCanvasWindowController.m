@@ -16,6 +16,7 @@
 #import "PXLayerController.h"
 #import "PXCanvasResizePrompter.h"
 #import "PXScaleController.h"
+#import "PXGridSettingsController.h"
 #import "PXCanvasDocument.h"
 #import "PXInfoPanelController.h"
 #import "PXPaletteController.h"

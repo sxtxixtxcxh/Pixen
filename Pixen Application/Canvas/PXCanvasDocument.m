@@ -107,7 +107,7 @@ BOOL isPowerOfTwo(int num)
 	{
 		NSMutableData *data = [NSMutableData new];
 		
-		CGImageDestinationRef dest = CGImageDestinationCreateWithData((CFMutableDataRef)data,
+		CGImageDestinationRef dest = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)data,
 																	  CFSTR("com.microsoft.ico"),
 																	  1,
 																	  NULL);

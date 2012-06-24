@@ -21,6 +21,7 @@
 #import "PXCrosshair.h"
 #import "PXPreviewResizeSizeView.h"
 #import "PXPreviewBezelView.h"
+#import "PXPreviewControlView.h"
 #import "PXPreviewResizePrompter.h"
 #import "PXNotifications.h"
 

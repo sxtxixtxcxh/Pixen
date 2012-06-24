@@ -112,14 +112,13 @@ const CGFloat viewMargin = 1.0f;
 
 - (PXPaletteColorView *)dequeueRecycledView
 {
-	PXPaletteColorView *view = [_recycledViews anyObject];
+	PXPaletteColorView *view = [[_recycledViews anyObject] retain];
 	
 	if (view) {
-		[[view retain] autorelease];
 		[_recycledViews removeObject:view];
 	}
 	
-	return view;
+	return [view autorelease];
 }
 
 - (BOOL)isDisplayingViewForIndex:(NSUInteger)index
