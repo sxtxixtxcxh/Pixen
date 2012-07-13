@@ -112,7 +112,7 @@ BOOL isPowerOfTwo(int num)
 																	  1,
 																	  NULL);
 		
-		CGImageDestinationAddImage(dest, [[canvas exportImageRep] CGImage], NULL);
+		CGImageDestinationAddImage(dest, [[canvas imageRep] CGImage], NULL);
 		CGImageDestinationFinalize(dest);
 		CFRelease(dest);
 		

@@ -22,6 +22,7 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[cachedEmptyPath release];
+	[previewImage release];
 	[super dealloc];
 }
 

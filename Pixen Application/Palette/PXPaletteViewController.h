@@ -17,7 +17,6 @@
 	NSButton *addColorButton;
 	NSTextField *infoField;
 	IBOutlet PXPaletteSelector *paletteSelector;
-	IBOutlet NSPopUpButton *gearMenu;
 	PXNamePrompter *namePrompter;
 	id delegate;
 }

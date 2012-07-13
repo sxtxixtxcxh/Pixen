@@ -51,9 +51,6 @@
 
 - (void)awakeFromNib
 {
-	[gearMenu setImage:[NSImage imageNamed:@"actiongear"]];
-	[gearMenu setEnabled:YES];
-	
 	[infoField setAlphaValue:0.0f];
 	
 	namePrompter = [[PXNamePrompter alloc] init];
@@ -268,8 +265,6 @@
 	if (currentPalette) {
 		[paletteSelector showPalette:palette];
 	}
-	
-	[gearMenu setEnabled:YES];
 	
 	if ([delegate respondsToSelector:@selector(paletteViewControllerDidShowPalette:)]) {
 		[delegate paletteViewControllerDidShowPalette:palette];

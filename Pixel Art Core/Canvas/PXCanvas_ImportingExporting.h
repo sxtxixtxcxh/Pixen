@@ -18,9 +18,6 @@
 
 - (void)replaceActiveLayerWithImage:(NSImage *)anImage;
 
-- (NSImage *)exportImageWithBackgroundColor:(NSColor *)color;
-- (NSImage *)exportImage; // suitable for writing to file
-- (NSBitmapImageRep *)exportImageRep;
-- (NSImage *)displayImage; // suitable for drawing to the screen
+- (NSBitmapImageRep *)imageRep; // suitable for drawing to the screen
 
 @end

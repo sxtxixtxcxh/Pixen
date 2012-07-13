@@ -9,7 +9,6 @@
 @interface PXPreviewBezelView : NSView < NSAnimatablePropertyContainer >
 {
   @private
-	NSImage * actionGear;
 	NSMenu * menu;
 	id delegate;
 	CGFloat alpha;

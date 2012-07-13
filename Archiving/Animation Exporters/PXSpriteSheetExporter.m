@@ -7,6 +7,7 @@
 
 #import "PXSpriteSheetExporter.h"
 
+#import "NSImage+Reps.h"
 #import "PXAnimation.h"
 #import "PXAnimationDocument.h"
 #import "PXDocumentController.h"
@@ -101,7 +102,7 @@
 	return [NSColor whiteColor];
 }
 
-- (NSImage *)spriteSheetImage
+- (NSBitmapImageRep *)spriteSheetImageRep
 {
 	int interAnimationMargin = 0;
 	int interCelMargin = 0;
@@ -132,9 +133,19 @@
 	
 	sheetSize.height -= interAnimationMargin;
 	
-	NSImage *spriteSheet = [[[NSImage alloc] initWithSize:sheetSize] autorelease];
+	NSBitmapImageRep *spriteSheet = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+																			pixelsWide:sheetSize.width
+																			pixelsHigh:sheetSize.height
+																		 bitsPerSample:8
+																	   samplesPerPixel:4
+																			  hasAlpha:YES
+																			  isPlanar:NO
+																		colorSpaceName:NSCalibratedRGBColorSpace
+																		   bytesPerRow:sheetSize.width * 4
+																		  bitsPerPixel:32];
 	
-	[spriteSheet lockFocus];
+	[NSGraphicsContext saveGraphicsState];
+	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithBitmapImageRep:spriteSheet]];
 	
 	[[NSColor clearColor] set];
 	NSRectFill(NSMakeRect(0.0f,0.0f,sheetSize.width,sheetSize.height));
@@ -149,17 +160,17 @@
 		currentPoint.y += interAnimationMargin;
 	}
 	
-	[spriteSheet unlockFocus];
+	[NSGraphicsContext restoreGraphicsState];
 	
-	return spriteSheet;
+	return [spriteSheet autorelease];
 }
 
 - (IBAction)updatePreview:(id)sender
 {
-	NSImage *img = [self spriteSheetImage];
+	NSImage *img = [NSImage imageWithBitmapImageRep:[self spriteSheetImageRep]];
 	
 	if (img) {
-		[sheetImageView setImage:[self spriteSheetImage]];
+		[sheetImageView setImage:img];
 	}
 	else {
 		[sheetImageView setImage:[NSImage imageNamed:@"Pixen128"]];
@@ -185,15 +196,10 @@
 		closeOnEndSheet = YES;
 	}
 	
-	NSImage *spriteSheet = [self spriteSheetImage];
-	NSRect spriteSheetRect = { NSZeroPoint, [spriteSheet size] };
+	NSBitmapImageRep *spriteSheet = [self spriteSheetImageRep];
 	
-	[spriteSheet lockFocus];
-	NSBitmapImageRep *bitmap = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:spriteSheetRect] autorelease];
-	[spriteSheet unlockFocus];
-	
-	[[bitmap representationUsingType:NSPNGFileType properties:nil] writeToURL:[sheet URL]
-																   atomically:YES];
+	[[spriteSheet representationUsingType:NSPNGFileType properties:nil] writeToURL:[sheet URL]
+																		atomically:YES];
 }
 
 - (void)windowDidEndSheet:(NSNotification *)notification

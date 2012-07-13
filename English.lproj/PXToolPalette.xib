@@ -86,7 +86,7 @@
 												<int key="NSCellFlags2">33554432</int>
 												<object class="NSCustomResource" key="NSContents">
 													<string key="NSClassName">NSImage</string>
-													<string key="NSResourceName">titlebargradient</string>
+													<string key="NSResourceName">TitlebarGradient</string>
 												</object>
 												<int key="NSAlign">0</int>
 												<int key="NSScale">1</int>
@@ -485,7 +485,6 @@
 											<string key="NSFrame">{{0, 29}, {88, 235}}</string>
 											<reference key="NSSuperview" ref="847276768"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="131116049"/>
 											<bool key="NSEnabled">YES</bool>
 											<int key="NSNumRows">6</int>
 											<int key="NSNumCols">2</int>
@@ -704,6 +703,7 @@
 											<string key="NSFrame">{{-1, 0}, {88, 30}}</string>
 											<reference key="NSSuperview" ref="847276768"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView" ref="249181605"/>
 											<bool key="NSEnabled">YES</bool>
 											<bool key="NSIsBordered">YES</bool>
 											<object class="NSColor" key="NSColor">
@@ -717,7 +717,7 @@
 											<string key="NSFrame">{{-1, 262}, {89, 5}}</string>
 											<reference key="NSSuperview" ref="847276768"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="249181605"/>
+											<reference key="NSNextKeyView" ref="131116049"/>
 											<string key="NSOffsets">{0, 0}</string>
 											<object class="NSTextFieldCell" key="NSTitleCell">
 												<int key="NSCellFlags">67239424</int>
@@ -1651,6 +1651,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="TitlebarGradient">{1, 17}</string>
 			<string key="ellipse">{16, 16}</string>
 			<string key="eraser">{16, 16}</string>
 			<string key="eyedropper">{16, 16}</string>
@@ -1662,7 +1663,6 @@
 			<string key="pencil">{16, 16}</string>
 			<string key="rectangle">{16, 16}</string>
 			<string key="squareselect">{16, 16}</string>
-			<string key="titlebargradient">{1, 17}</string>
 			<string key="zoomIn">{16, 16}</string>
 		</dictionary>
 	</data>

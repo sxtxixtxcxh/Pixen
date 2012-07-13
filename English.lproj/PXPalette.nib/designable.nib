@@ -285,14 +285,15 @@
 						<string key="NSFrame">{{209, 278}, {42, 22}}</string>
 						<reference key="NSSuperview" ref="314497084"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="836002209"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSPopUpButtonCell" key="NSCell" id="941347821">
 							<int key="NSCellFlags">-2076049856</int>
-							<int key="NSCellFlags2">132096</int>
+							<int key="NSCellFlags2">134349824</int>
 							<reference key="NSSupport" ref="26"/>
 							<reference key="NSControlView" ref="479196117"/>
-							<int key="NSButtonFlags">109199615</int>
-							<int key="NSButtonFlags2">1</int>
+							<int key="NSButtonFlags">110248191</int>
+							<int key="NSButtonFlags2">65</int>
 							<reference key="NSAlternateImage" ref="937505456"/>
 							<string key="NSAlternateContents"/>
 							<object class="NSMutableString" key="NSKeyEquivalent">
@@ -307,6 +308,10 @@
 								<string key="NSKeyEquiv"/>
 								<int key="NSKeyEquivModMask">1048576</int>
 								<int key="NSMnemonicLoc">2147483647</int>
+								<object class="NSCustomResource" key="NSImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">NSActionTemplate</string>
+								</object>
 								<reference key="NSOnImage" ref="844388825"/>
 								<reference key="NSMixedImage" ref="495774584"/>
 								<string key="NSAction">_popUpItemAction:</string>
@@ -930,7 +935,6 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="addColorButton">NSButton</string>
-						<string key="gearMenu">NSPopUpButton</string>
 						<string key="infoField">NSTextField</string>
 						<string key="paletteSelector">PXPaletteSelector</string>
 						<string key="paletteView">PXPaletteView</string>
@@ -939,10 +943,6 @@
 						<object class="IBToOneOutletInfo" key="addColorButton">
 							<string key="name">addColorButton</string>
 							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="gearMenu">
-							<string key="name">gearMenu</string>
-							<string key="candidateClassName">NSPopUpButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="infoField">
 							<string key="name">infoField</string>
@@ -985,6 +985,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NSActionTemplate">{15, 15}</string>
 			<string key="NSAddTemplate">{8, 8}</string>
 			<string key="NSMenuCheckmark">{11, 11}</string>
 			<string key="NSMenuMixedState">{10, 3}</string>

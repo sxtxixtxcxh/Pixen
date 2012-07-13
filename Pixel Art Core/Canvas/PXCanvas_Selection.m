@@ -7,6 +7,8 @@
 //
 
 #import "PXCanvas_Selection.h"
+
+#import "NSImage+Reps.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_CopyPaste.h"
 #import "PXCanvas_Modifying.h"
@@ -377,43 +379,43 @@
 	selectionOrigin = orig;
 }
 
-- selectionDataWithType:(NSBitmapImageFileType)storageType 
-						 properties:(NSDictionary *)properties
+- selectionDataWithType:(NSBitmapImageFileType)storageType
+			 properties:(NSDictionary *)properties
 {
 	if (![self hasSelection])
 		return [self imageDataWithType:storageType properties:properties];
+	
 	NSRect selectionRect = [self selectedRect];
 	
-	NSImage *tempImage = [[[NSImage alloc] initWithSize:selectionRect.size] autorelease];
 	BOOL mergeLayers = [[properties objectForKey:PXMergeLayersKey] boolValue];
+	NSBitmapImageRep *sourceImageRep = mergeLayers ? [self imageRep] : [activeLayer imageRep];
 	
-	[tempImage lockFocus];
-	int i, j;
+	NSBitmapImageRep *tempImageRep = [[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+																			  pixelsWide:selectionRect.size.width
+																			  pixelsHigh:selectionRect.size.height
+																		   bitsPerSample:8
+																		 samplesPerPixel:4
+																				hasAlpha:YES
+																				isPlanar:NO
+																		  colorSpaceName:NSCalibratedRGBColorSpace
+																			 bytesPerRow:selectionRect.size.width * 4
+																			bitsPerPixel:32] autorelease];
 	
-	//We need to draw a selection mask so we can do a SourceIn composite
-	//Would this be better with a bezier path or something?
-	
-	[[NSColor blackColor] set];
-	for (i = NSMinX(selectionRect); i < NSMaxX(selectionRect); i++)
+	for (int i = NSMinX(selectionRect); i < NSMaxX(selectionRect); i++)
 	{
-		for (j = NSMinY(selectionRect); j < NSMaxY(selectionRect); j++)
+		for (int j = NSMinY(selectionRect); j < NSMaxY(selectionRect); j++)
 		{
 			if ([self pointIsSelected:NSMakePoint(i,j)])
 			{
-				NSRectFill(NSMakeRect(i - NSMinX(selectionRect), j - NSMinY(selectionRect), 1, 1));
+				NSUInteger m[4];
+				[sourceImageRep getPixel:m atX:i y:[self size].height - j - 1];
+				
+				[tempImageRep setPixel:m atX:i - NSMinX(selectionRect) y:NSHeight(selectionRect) - 1 - (j - NSMinY(selectionRect))];
 			}
 		}
 	}
-	NSImage *cocoaImage = mergeLayers ? [self exportImage] : [activeLayer exportImage];
-	[cocoaImage compositeToPoint:NSZeroPoint 
-											fromRect:selectionRect 
-										 operation:NSCompositeSourceIn];
 	
-	NSRect rect = selectionRect;
-	rect.origin = NSZeroPoint;
-	NSBitmapImageRep *rep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:rect] autorelease];		
-	[tempImage unlockFocus];
-	return [rep representationUsingType:storageType properties:properties];		
+	return [tempImageRep representationUsingType:storageType properties:properties];
 }
 
 - (PXSelectionMask)selectionMask

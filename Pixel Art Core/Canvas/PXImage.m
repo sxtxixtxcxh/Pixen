@@ -54,6 +54,8 @@ void PXTileRelease(PXTile* t)
 		free(data);
 	}
 	CGImageRelease(t->image);
+	
+	free(t);
 }
 void PXTileDraw(PXTile* t, CGRect source, CGRect dest)
 {
@@ -635,88 +637,33 @@ void PXImage_drawInRectFromRectWithOperationFraction(PXImage *self, NSRect dst, 
   [transform release];
 }
 
-NSImage *PXImage_NSImage(PXImage *self)
+NSBitmapImageRep *PXImage_imageRep(PXImage *self)
 {
 	if ((self->width <= 0) || (self->height <= 0))
 		return nil;
-
-	NSImage *nsimage = [[NSImage alloc] initWithSize:NSMakeSize(self->width, self->height)];
-
-	if (!nsimage)
-		return nil;
-
-	[nsimage lockFocus];
-	PXImage_drawRect(self, NSMakeRect(0, 0, self->width, self->height), 1);
-	[nsimage unlockFocus];
-	return [nsimage autorelease];
-}
-
-NSImage *PXImage_bitmapImage(PXImage *self)
-{
-	id nsimage = PXImage_NSImage(self);
-	id rep = [[nsimage representations] objectAtIndex:0];
-	if (![rep isKindOfClass:[NSBitmapImageRep class]])
-	{
-//		NSLog(@"Converting cached to bitmap...");
-		NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:[nsimage TIFFRepresentation]];
-		
-		[nsimage removeRepresentation:rep];
-		[nsimage addRepresentation:imageRep];
-	}
-	rep = [[nsimage representations] objectAtIndex:0]; // could be different now.
-	if (![rep hasAlpha])
-	{
-		unsigned char * newData = malloc(self->width * self->height * 4);
-		NSBitmapImageRep *tempRep = [NSBitmapImageRep imageRepWithData:[rep TIFFRepresentation]];
-		unsigned char * oldData = [tempRep bitmapData];
-		int i, j;
-		NSSize imageSize = NSMakeSize([tempRep pixelsWide], [tempRep pixelsHigh]);
-		NSInteger bytesPerRow = [tempRep bytesPerRow];
-		NSInteger samplesPerPixel = [tempRep samplesPerPixel];
-		for (j = 0; j < imageSize.height; j++)
-		{
-			for (i = 0; i < imageSize.width; i++)
-			{
-				NSInteger oldBase = j * bytesPerRow + i * samplesPerPixel;
-				NSInteger newBase = j * 4 * self->width + i * 4;
-				newData[newBase + 0] = oldData[oldBase + 0];
-				newData[newBase + 1] = oldData[oldBase + 1];
-				newData[newBase + 2] = oldData[oldBase + 2];
-				newData[newBase + 3] = 255;
-			}
-		}
-		id imageRep = [[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&newData 
-															   pixelsWide:self->width 
-															   pixelsHigh:self->height 
-															bitsPerSample:8 
-														  samplesPerPixel:4 
-																 hasAlpha:YES 
-																 isPlanar:NO 
-														   colorSpaceName:NSCalibratedRGBColorSpace 
-															  bytesPerRow:self->width * 4 
-															 bitsPerPixel:32] autorelease];
-		[nsimage removeRepresentation:rep];
-		[nsimage addRepresentation:imageRep];
-	}
-	rep = [[nsimage representations] objectAtIndex:0]; // could be different now.
 	
-	if ([[rep valueForKey:@"bitmapFormat"] intValue] & 1) // == argb instead of rgba
-	{
-		unsigned char *bitmapData = [rep bitmapData];
-		int i, j;
-		for (j = 0; j < self->height; j++)
-		{
-			for (i = 0; i < self->width; i++)
-			{
-				NSInteger baseIndex = j * [rep bytesPerRow] + i*4;
-				unsigned char temp;
-				temp = bitmapData[baseIndex];
-				bitmapData[baseIndex] = bitmapData[baseIndex+1];
-				bitmapData[baseIndex+1] = bitmapData[baseIndex+2];
-				bitmapData[baseIndex+2] = bitmapData[baseIndex+3];
-				bitmapData[baseIndex+3] = temp;
-			}
-		}
-	}	
-	return nsimage;
+	NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+																		 pixelsWide:self->width
+																		 pixelsHigh:self->height
+																	  bitsPerSample:8
+																	samplesPerPixel:4
+																		   hasAlpha:YES
+																		   isPlanar:NO
+																	 colorSpaceName:NSCalibratedRGBColorSpace
+																		bytesPerRow:self->width * 4
+																	   bitsPerPixel:32];
+	
+	if (!imageRep)
+		return nil;
+	
+	NSGraphicsContext *ctx = [NSGraphicsContext graphicsContextWithBitmapImageRep:imageRep];
+	
+	[NSGraphicsContext saveGraphicsState];
+	[NSGraphicsContext setCurrentContext:ctx];
+	
+	PXImage_drawRect(self, NSMakeRect(0, 0, self->width, self->height), 1);
+	
+	[NSGraphicsContext restoreGraphicsState];
+	
+	return [imageRep autorelease];
 }

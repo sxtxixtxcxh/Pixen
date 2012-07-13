@@ -39,15 +39,31 @@
 	
 	for (PXLayer *layer in [canvas layers])
 	{
-		NSImage *newLayerImage = [[[NSImage alloc] initWithSize:size] autorelease];
 		int oldOpacity = [layer opacity];
 		[layer setOpacity:100];
-		[newLayerImage lockFocus];
+		
+		NSBitmapImageRep *layerImageRep = [[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+																				   pixelsWide:size.width
+																				   pixelsHigh:size.height
+																				bitsPerSample:8
+																			  samplesPerPixel:4
+																					 hasAlpha:YES
+																					 isPlanar:NO
+																			   colorSpaceName:NSCalibratedRGBColorSpace
+																				  bytesPerRow:size.width * 4
+																				 bitsPerPixel:32] autorelease];
+		
+		[NSGraphicsContext saveGraphicsState];
+		[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithBitmapImageRep:layerImageRep]];
+		
 		[layer drawInRect:(NSRect){NSZeroPoint, size} fromRect:(NSRect){NSZeroPoint, [layer size]} operation:NSCompositeCopy fraction:1];
-		[newLayerImage unlockFocus];
+		
+		[NSGraphicsContext restoreGraphicsState];
+		
 		[layer setOpacity:oldOpacity];
 		[layer setSize:size];
-		[canvas applyImage:newLayerImage toLayer:layer];
+		
+		[canvas applyImageRep:layerImageRep toLayer:layer];
 	}
 	
 	[canvas changed];

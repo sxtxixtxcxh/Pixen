@@ -7,6 +7,7 @@
 
 #import "PXCanvasWindowController_IBActions.h"
 
+#import "NSImage+Reps.h"
 #import "NSWindowController+Additions.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_ImportingExporting.h"
@@ -49,17 +50,8 @@
 	
 	[docController addDocument:doc];
 	
-	NSImage *cocoaImage = [[[self canvas] exportImage] retain];
-	[cocoaImage lockFocus];
-	
-	NSBitmapImageRep *bitmapRep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:(NSRect){NSZeroPoint,[cocoaImage size]}] autorelease];
-	[cocoaImage unlockFocus];
-	
-	[cocoaImage removeRepresentation:[[cocoaImage representations] objectAtIndex:0]];
-	[cocoaImage addRepresentation:bitmapRep];
-	
+	NSImage *cocoaImage = [NSImage imageWithBitmapImageRep:[[self canvas] imageRep]];
 	[[[[doc animation] celAtIndex:0] canvas] replaceActiveLayerWithImage:cocoaImage];
-	[cocoaImage release];
 	
 	[doc makeWindowControllers];
 	[doc showWindows];

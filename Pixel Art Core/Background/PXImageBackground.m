@@ -73,7 +73,11 @@
 	
 	if ([panel runModal] == NSFileHandlingPanelOKButton)
 	{
-		[self setImage:[[PXCanvas canvasWithContentsOfFile:[[panel URL] path]] displayImage]];
+		NSImage *img = [[NSImage alloc] initWithContentsOfURL:[panel URL]];
+		
+		[self setImage:img];
+		[img release];
+		
 		[imageNameField setStringValue:[[[panel URL] path] lastPathComponent]];
 	}
 }

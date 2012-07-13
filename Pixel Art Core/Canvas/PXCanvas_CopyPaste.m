@@ -153,11 +153,7 @@
 		[board addTypes:[NSArray arrayWithObject:NSTIFFPboardType] owner:self];
 	}
 	
-	NSImage *layerImage = [layer exportImage];
-	[layerImage lockFocus];
-	
-	NSBitmapImageRep *bitmapRep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0.0f, 0.0f, [layerImage size].width, [layerImage size].height)] autorelease];
-	[layerImage unlockFocus];
+	NSBitmapImageRep *bitmapRep = [layer imageRep];
 	
 	[board setData:[NSKeyedArchiver archivedDataWithRootObject:layer]
 		   forType:PXLayerPboardType];

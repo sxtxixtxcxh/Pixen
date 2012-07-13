@@ -8,6 +8,7 @@
 
 #import "PXLayerCollectionViewItem.h"
 
+#import "NSImage+Reps.h"
 #import "PXCanvas.h"
 #import "PXCanvas_CopyPaste.h"
 #import "PXCanvas_Layers.h"
@@ -193,7 +194,9 @@
 
 - (void)updatePreviewReal
 {
-	[thumbnailView setImage:[[self layer] displayImage]];
+	NSImage *image = [NSImage imageWithBitmapImageRep:[[self layer] imageRep]];
+	
+	[thumbnailView setImage:image];
 	[thumbnailView setNeedsDisplay:YES];
 }
 

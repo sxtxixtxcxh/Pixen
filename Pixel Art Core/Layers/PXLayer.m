@@ -24,11 +24,26 @@
 	// okay, now we have to make sure the image is the same size as the canvas
 	// if it isn't, the weird premade image thing will cause serious problems.
 	// soooo... haxx!
-	NSImage *layerImage = [[[NSImage alloc] initWithSize:sz] autorelease];
-	[layerImage lockFocus]; {
-		[image drawAtPoint:origin fromRect:NSMakeRect(0, 0, [image size].width, [image size].height) operation:NSCompositeCopy fraction:1];			
-	} [layerImage unlockFocus];
-	[layer applyImage:layerImage];
+	NSBitmapImageRep *layerImageRep = [[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+																			   pixelsWide:sz.width
+																			   pixelsHigh:sz.height
+																			bitsPerSample:8
+																		  samplesPerPixel:4
+																				 hasAlpha:YES
+																				 isPlanar:NO
+																		   colorSpaceName:NSCalibratedRGBColorSpace
+																			  bytesPerRow:sz.width * 4
+																			 bitsPerPixel:32] autorelease];
+	
+	[NSGraphicsContext saveGraphicsState];
+	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithBitmapImageRep:layerImageRep]];
+	
+	[image drawAtPoint:origin fromRect:NSMakeRect(0, 0, [image size].width, [image size].height) operation:NSCompositeCopy fraction:1];
+
+	[NSGraphicsContext restoreGraphicsState];
+	
+	[layer applyImageRep:layerImageRep];
+	
 	return [layer autorelease];
 }
 
@@ -338,14 +353,9 @@
 	PXImage_compositeUnderInRect(image, [aLayer image], aRect, NO);	
 }
 
-- (NSImage *)exportImage
+- (NSBitmapImageRep *)imageRep
 {
-	return PXImage_bitmapImage(image);
-}
-
-- (NSImage *)displayImage
-{
-	return PXImage_NSImage(image);
+	return PXImage_imageRep(image);
 }
 
 - (void)flipHorizontally
@@ -409,23 +419,8 @@
 	PXImage_setSize(image, [self size], offset, [canvas eraseColor]);
 }
 
-- (void)applyImage:(NSImage *)anImage
+- (void)applyImageRep:(NSBitmapImageRep *)imageRep
 {
-    // this is probably pretty fragile. there should be a better way of doing this, no?
-	NSImageRep *firstRep = [[anImage representations] objectAtIndex:0];
-	NSBitmapImageRep *imageRep = nil;
-	
-	if (![firstRep isKindOfClass:[NSBitmapImageRep class]])
-	{
-		[anImage lockFocus];
-		imageRep = [NSBitmapImageRep imageRepWithData:[anImage TIFFRepresentation]];
-		[anImage unlockFocus];
-	}
-	else
-	{
-		imageRep = (NSBitmapImageRep *) firstRep;
-	}
-	
 	imageRep = [imageRep bitmapImageRepByConvertingToColorSpace:[NSColorSpace genericRGBColorSpace]
 												renderingIntent:NSColorRenderingIntentDefault];
 	
@@ -455,8 +450,8 @@
 
 - (void)adaptToPalette:(PXPalette *)p withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor
 {
-	id outputImage = [[[self displayImage] copy] autorelease];
-	id rep = [NSBitmapImageRep imageRepWithData:[outputImage TIFFRepresentation]];
+	NSBitmapImageRep *rep = [[[self imageRep] copy] autorelease];
+	
 	unsigned char *bitmapData = [rep bitmapData];
 	int i;
 	NSColor *calibratedClear = [[NSColor clearColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];

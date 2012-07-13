@@ -50,6 +50,6 @@
 
 - (void)bufferUndoAtPoint:(NSPoint)aPoint fromColor:(PXColor)oldColor toColor:(PXColor)newColor;
 
-- (void)applyImage:(NSImage *)image toLayer:(PXLayer *)layer;
+- (void)applyImageRep:(NSBitmapImageRep *)imageRep toLayer:(PXLayer *)layer;
 
 @end

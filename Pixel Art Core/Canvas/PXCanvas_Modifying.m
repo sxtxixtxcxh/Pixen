@@ -94,7 +94,7 @@ NSUInteger PointSizeF (const void *item);
 		
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				NSUInteger index = width * y + x;
+				int index = width * y + x;
 				
 				if (selectionMask[index]) {
 					NSPoint pt = NSMakePoint(x, height - y - 1);
@@ -285,24 +285,23 @@ NSUInteger PointSizeF (const void *item);
 		{
 			[NSException raise:@"Reduction Exception" format:@"Canvas sizes not equal!"];
 		}
-		NSImage *image = [[[current displayImage] copy] autorelease];
-		id bitmapRep = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
+		NSBitmapImageRep *bitmapRep = [current imageRep];
 		unsigned char *bitmapData = [bitmapRep bitmapData];
 		
 		if ([bitmapRep samplesPerPixel] == 3)
 		{
-			for (i = 0; i < [image size].width * [image size].height; i++)
+			for (i = 0; i < [bitmapRep size].width * [bitmapRep size].height; i++)
 			{
 				int base = (i * 3);
 				red[quantizedPixels + i] = bitmapData[base + 0];
 				green[quantizedPixels + i] = bitmapData[base + 1];
 				blue[quantizedPixels + i] = bitmapData[base + 2];
 			}
-			quantizedPixels += [image size].width * [image size].height;
+			quantizedPixels += [bitmapRep size].width * [bitmapRep size].height;
 		}
 		else
 		{
-			for (i = 0; i < [image size].width * [image size].height; i++)
+			for (i = 0; i < [bitmapRep size].width * [bitmapRep size].height; i++)
 			{
 				int base = (i * 4);
 				if (bitmapData[base + 3] == 0 && transparency) { continue; }
@@ -440,9 +439,9 @@ NSUInteger PointSizeF (const void *item) {
 	PXColorArrayAppendColor(_newColors, newColor);
 }
 
-- (void)applyImage:(NSImage *)image toLayer:(PXLayer *)layer
+- (void)applyImageRep:(NSBitmapImageRep *)imageRep toLayer:(PXLayer *)layer
 {
-	[layer applyImage:image];
+	[layer applyImageRep:imageRep];
 	[self refreshWholePalette];
 }
 

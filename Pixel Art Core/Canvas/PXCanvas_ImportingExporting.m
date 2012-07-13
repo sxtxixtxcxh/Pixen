@@ -33,43 +33,20 @@
 	return self = nil;
 }
 
-- (NSBitmapImageRep *)exportImageRep {
-	NSRect frame = NSMakeRect(0.0f, 0.0f, [self size].width, [self size].height);
-	
-	NSImage *outputImage = [self exportImage];
-	[outputImage lockFocus];
-	
-	NSBitmapImageRep *rep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:frame] autorelease];
-	
-	[outputImage unlockFocus];
-	
-	// And now, we interrupt our regularly scheduled codegram for a hack: remove color profile info from the rep because we don't handle it on loading.
-	[rep setProperty:NSImageColorSyncProfileData withValue:nil];
-	
-	return rep;
-}
-
 - (NSData *)imageDataWithType:(NSBitmapImageFileType)storageType
 				   properties:(NSDictionary *)properties
 {
-	NSBitmapImageRep *rep;
-	NSRect frame = NSMakeRect(0, 0, [self size].width, [self size].height);
-	// We use a white background color for jpegs because of a bug in 10.3
-	NSImage *outputImage = ((storageType == NSJPEGFileType) ? [self exportImageWithBackgroundColor:[NSColor whiteColor]] : [self displayImage]);
-	
-	[outputImage lockFocus];
-	rep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:frame] autorelease];
-	[outputImage unlockFocus];
-	
-	// And now, we interrupt our regularly scheduled codegram for a hack: remove color profile info from the rep because we don't handle it on loading.
-	[rep setProperty:NSImageColorSyncProfileData withValue:nil];
-	
-	return [rep representationUsingType:storageType properties:properties];
-}	
+	return [[self imageRep] representationUsingType:storageType properties:properties];
+}
 
 - (void)replaceActiveLayerWithImage:(NSImage *)anImage
 {
-	NSImageRep *firstRep = [[anImage representations] objectAtIndex:0];
+	if (![[[anImage representations] objectAtIndex:0] isKindOfClass:[NSBitmapImageRep class]]) {
+		@throw [NSException exceptionWithName:NSGenericException reason:@"Not a bitmap file" userInfo:nil];
+		return;
+	}
+	
+	NSBitmapImageRep *firstRep = [[anImage representations] objectAtIndex:0];
 	NSSize newSize = NSMakeSize((int)[firstRep pixelsWide], (int)[firstRep pixelsHigh]);
 	
 	for (PXLayer *currentLayer in layers) {
@@ -85,7 +62,7 @@
 		[[layers lastObject] setCanvas:self];
 		[self activateLayer:[layers lastObject]];
 	}
-	[self applyImage:anImage toLayer:activeLayer];
+	[self applyImageRep:firstRep toLayer:activeLayer];
 	[self updatePreviewSize];
 	[self layersChanged];
 }
@@ -97,60 +74,48 @@
 	return self;
 }
 
-- (NSImage *)displayImage
+- (NSBitmapImageRep *)imageRep
 {
-	NSImage *imageCopy = [[NSImage alloc] initWithSize:[self size]];
-	[imageCopy lockFocus];
+	NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+																		 pixelsWide:[self size].width
+																		 pixelsHigh:[self size].height
+																	  bitsPerSample:8
+																	samplesPerPixel:4
+																		   hasAlpha:YES
+																		   isPlanar:NO
+																	 colorSpaceName:NSCalibratedRGBColorSpace
+																		bytesPerRow:[self size].width * 4
+																	   bitsPerPixel:32];
+	
+	NSGraphicsContext *ctx = [NSGraphicsContext graphicsContextWithBitmapImageRep:imageRep];
+	
+	[NSGraphicsContext saveGraphicsState];
+	[NSGraphicsContext setCurrentContext:ctx];
+	
+	NSRect r = NSMakeRect(0, 0, [self size].width, [self size].height);
 	
 	[[NSColor clearColor] set];
-	NSRectFill(NSMakeRect(0, 0, [self size].width, [self size].height));
+	NSRectFill(r);
 	
 	for (PXLayer *layer in layers)
 	{
 		if ([layer visible] && [layer opacity] > 0)
 		{
-			[[layer displayImage] compositeToPoint:canvasRect.origin
-										  fromRect:canvasRect
-										 operation:NSCompositeSourceOver
-										  fraction:[layer opacity] / 100.0f];
+			[[layer imageRep] drawInRect:r
+								fromRect:r
+							   operation:NSCompositeSourceOver
+								fraction:[layer opacity] / 100.0f
+						  respectFlipped:NO
+								   hints:nil];
 		}
 	}
 	
-	[imageCopy unlockFocus];
-	return [imageCopy autorelease];	
-}
-
-- (NSImage *)exportImageWithBackgroundColor:(NSColor *)color
-{
-	NSImage *imageCopy = [[NSImage alloc] initWithSize:[self size]];
-	[imageCopy lockFocus];
-	// We fill the color (if necessary) after because of the backwards order in which we're doing this
-	if (color)
-	{
-		[color set];
-		NSRectFillUsingOperation(canvasRect, NSCompositeSourceOver);
-	}
+	[NSGraphicsContext restoreGraphicsState];
 	
-	for (PXLayer *layer in layers)
-	{
-		if ([layer visible] && [layer opacity] > 0)
-		{
-			[[layer exportImage] compositeToPoint:canvasRect.origin
-										 fromRect:canvasRect
-										operation:NSCompositeSourceOver
-										 fraction:[layer opacity] / 100.0f];
-		}
-	}
+	// And now, we interrupt our regularly scheduled codegram for a hack: remove color profile info from the rep because we don't handle it on loading.
+	[imageRep setProperty:NSImageColorSyncProfileData withValue:nil];
 	
-	[imageCopy unlockFocus];
-	//this probably won't do any good... but there aren't any reps before the above execute.  Replace with ImageIO!
-	// [[[imageCopy representations] objectAtIndex:0] setColorSpaceName:NSDeviceRGBColorSpace];
-	return [imageCopy autorelease];	
-}
-
-- (NSImage *)exportImage
-{
-	return [self exportImageWithBackgroundColor:nil];
+	return [imageRep autorelease];
 }
 
 @end

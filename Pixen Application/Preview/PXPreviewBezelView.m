@@ -41,7 +41,6 @@
 
 - (void)dealloc
 {
-	[actionGear release];
 	[menu release];
 	[super dealloc];
 }
@@ -50,8 +49,6 @@
 {
 	self = [super initWithFrame:frame];
 	if (self) {
-		actionGear = [[NSImage imageNamed:@"actiongear"] retain];
-		
 		menu = [[NSMenu alloc] initWithTitle:NSLocalizedString(@"PXPreviewBezelMenu", @"PXPreviewBezelMenu")];
 		[[menu addItemWithTitle:NSLocalizedString(@"Size To...", @"Size To...") action:@selector(sizeTo:) keyEquivalent:@""] setTarget:delegate];
 		
@@ -95,7 +92,11 @@
 	[path fill];
 	[[[NSColor darkGrayColor] colorWithAlphaComponent:alpha] set];
 	[path stroke];
-	[actionGear compositeToPoint:NSMakePoint(3, 1) operation:NSCompositeSourceOver fraction:alpha];
+	
+	[[NSImage imageNamed:NSImageNameActionTemplate] drawInRect:NSMakeRect(4, 3, 12, 12)
+													  fromRect:NSZeroRect
+													 operation:NSCompositeSourceOver
+													  fraction:alpha];
 }
 
 @end

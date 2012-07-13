@@ -7,6 +7,7 @@
 
 #import "PXCel.h"
 
+#import "NSImage+Reps.h"
 #import "PXAnimation.h"
 #import "PXCanvas.h"
 #import "PXCanvas_Drawing.h"
@@ -124,7 +125,7 @@
 
 - (NSImage *)displayImage
 {
-	return [self.canvas displayImage];
+	return [NSImage imageWithBitmapImageRep:[self.canvas imageRep]];
 }
 
 @end

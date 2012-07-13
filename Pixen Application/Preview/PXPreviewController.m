@@ -5,8 +5,10 @@
 
 #import "PXPreviewController.h"
 
+#import "NSImage+Reps.h"
 #import "NSWindowController+Additions.h"
 #import "PXAnimation.h"
+#import "PXAnimationDocument.h"
 #import "PXCanvas.h"
 #import "PXCanvas_Backgrounds.h"
 #import "PXCanvas_ImportingExporting.h"
@@ -126,6 +128,10 @@
 			
 			[self playAnimation];
 		}
+		else {
+			[self stopAnimation];
+			[self setSingleCanvas:nil];
+		}
 	}
 }
 
@@ -230,8 +236,17 @@
 
 - (void)documentClosed:(NSNotification *)notification
 {
-	if ([[notification object] canvas] == canvas) {
-		[self setSingleCanvas:nil];
+	PXDocument *document = [notification object];
+	
+	if ([document isKindOfClass:[PXCanvasDocument class]]) {
+		if ([[notification object] canvas] == canvas) {
+			[self setSingleCanvas:nil];
+		}
+	}
+	else if ([document isKindOfClass:[PXAnimationDocument class]]) {
+		if ([[notification object] animation] == _animation) {
+			[self setAnimation:nil];
+		}
 	}
 }
 
@@ -675,7 +690,9 @@
 
 - (void)setBackground:sender
 {
-	[backgroundController setPreviewImage:[canvas displayImage]];
+	NSImage *image = [NSImage imageWithBitmapImageRep:[canvas imageRep]];
+	[backgroundController setPreviewImage:image];
+	
 	[[backgroundController window] setTitle:NSLocalizedString(@"Backgrounds - Preview", @"Backgrounds - Preview")];
 	[backgroundController showWindow:self];
 	[backgroundController reloadData];
