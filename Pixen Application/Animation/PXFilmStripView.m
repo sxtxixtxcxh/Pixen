@@ -280,7 +280,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	if (index > 9999)
 		fontSize = floorf(fontSize * .85);
 	
-	NSMutableAttributedString *badgeString = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", index + 1]
+	NSMutableAttributedString *badgeString = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", index + 1]
 																	   attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor colorWithDeviceWhite:0 alpha:0.75], NSForegroundColorAttributeName, [NSFont systemFontOfSize:fontSize], NSFontAttributeName, nil]] autorelease];
 	
 	// Exceuse me for my mdrfkr hardcoded numbers.

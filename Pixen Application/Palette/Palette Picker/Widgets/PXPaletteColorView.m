@@ -112,7 +112,7 @@
 	if (self.index > 9999)
 		fontSize = floorf(fontSize * .85);
 	
-	NSAttributedString *badgeString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", self.index]
+	NSAttributedString *badgeString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", self.index]
 																	   attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor whiteColor], NSForegroundColorAttributeName, [NSFont systemFontOfSize:fontSize], NSFontAttributeName, nil]] autorelease];
 	
 	NSSize badgeSize = [badgeString size];

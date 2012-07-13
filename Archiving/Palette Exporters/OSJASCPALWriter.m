@@ -39,7 +39,7 @@
 	[string appendString:@"JASC-PAL\n0100\n"];
 	
 	NSUInteger colorCount = [palette colorCount];
-	[string appendFormat:@"%d\n", colorCount];
+	[string appendFormat:@"%ld\n", colorCount];
 	
 	[palette enumerateWithBlock:^(PXColor color) {
 		[string appendFormat:@"%d %d %d\n", color.r, color.g, color.b];

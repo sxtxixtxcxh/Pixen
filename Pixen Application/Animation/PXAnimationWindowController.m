@@ -391,8 +391,7 @@
 - (void)exportSequencePrompterDidEnd:(PXSequenceExportPrompter *)prompter
 {
 	NSString *fileTemplate = [prompter fileTemplate];
-	NSInteger i;
-	NSInteger numberOfCels = [animation countOfCels];
+	NSUInteger numberOfCels = [animation countOfCels];
 	NSString *directoryPath = [[[prompter savePanel] URL] path];
 	NSError *error = nil;
 	
@@ -406,7 +405,7 @@
 		return;
 	}
 	
-	for (i = 1; i <= numberOfCels; i++)
+	for (NSUInteger i = 1; i <= numberOfCels; i++)
 	{
 		NSString *filePath = [[directoryPath copy] autorelease];
 		
@@ -414,7 +413,7 @@
 			filePath = [filePath stringByAppendingString:@"/"];
 		
 		NSString *finalTemplate = [fileTemplate stringByReplacingOccurrencesOfString:@"%f"
-																		  withString:[NSString stringWithFormat:@"%d", i]];
+																		  withString:[NSString stringWithFormat:@"%ld", i]];
 		filePath = [filePath stringByAppendingString:finalTemplate];
 		
 		NSString *type = [prompter selectedUTI];

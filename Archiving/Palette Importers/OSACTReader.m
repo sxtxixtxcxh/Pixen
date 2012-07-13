@@ -39,7 +39,7 @@
 {
 	if ([data length] != 768 && [data length] != 772)
 	{
-		[NSException raise:@"OSFileError" format:@"This is an invalid ACT palette: normal ACT palettes are exactly 768 or 772 bytes long; this one is %d", [data length]];
+		[NSException raise:@"OSFileError" format:@"This is an invalid ACT palette: normal ACT palettes are exactly 768 or 772 bytes long; this one is %ld", [data length]];
 		return NULL;
 	}
 	
