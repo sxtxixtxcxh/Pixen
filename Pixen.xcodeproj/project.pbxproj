@@ -35,7 +35,6 @@
 		C92A1E9213B12CAB0007235A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C92A1E9013B12CAB0007235A /* MainMenu.xib */; };
 		C92C867015A5EF5500D915D9 /* NSImage+Reps.h in Headers */ = {isa = PBXBuildFile; fileRef = C92C866E15A5EF5500D915D9 /* NSImage+Reps.h */; };
 		C92C867115A5EF5500D915D9 /* NSImage+Reps.m in Sources */ = {isa = PBXBuildFile; fileRef = C92C866F15A5EF5500D915D9 /* NSImage+Reps.m */; };
-		C931682414E9857C00B3E817 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C931682314E9857C00B3E817 /* Sparkle.framework */; };
 		C93429E3157EE5BB00186FA9 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93429E2157EE5BB00186FA9 /* Accelerate.framework */; };
 		C93DB17F13ABC6BE006D42FE /* PXPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93DB17D13ABC6BE006D42FE /* PXPreferences.xib */; };
 		C93DB18213ABC8BE006D42FE /* PXGeneralPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93DB18013ABC8BE006D42FE /* PXGeneralPreferences.xib */; };
@@ -123,7 +122,6 @@
 		C9F7F16D142BE3D500AB8E37 /* UTType+NSString.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F7F16B142BE3D500AB8E37 /* UTType+NSString.m */; };
 		C9FD44E113FD70FC00CEE4FC /* PXPatternEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FD44DF13FD70FC00CEE4FC /* PXPatternEditor.xib */; };
 		C9FEE51B13AF81AF004FFC3C /* PXGridSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FEE51913AF81AF004FFC3C /* PXGridSettings.xib */; };
-		C9FEF7B514E986B50028F8AA /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C931682314E9857C00B3E817 /* Sparkle.framework */; };
 		D88A735113A93CCD00B56402 /* PXLayerCollectionViewItem.h in Headers */ = {isa = PBXBuildFile; fileRef = D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */; };
 		D88A735213A93CCD00B56402 /* PXLayerCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D88A735013A93CCD00B56402 /* PXLayerCollectionViewItem.m */; };
 		D88FA9A113DD265000175A2F /* NSObject+AssociatedObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FA99F13DD265000175A2F /* NSObject+AssociatedObjects.h */; };
@@ -512,7 +510,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C9FEF7B514E986B50028F8AA /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1002,7 +999,6 @@
 				EAF6951106A9AE0B0019D8D7 /* Cocoa.framework in Frameworks */,
 				BF269FE6091307BF00B7A218 /* QTKit.framework in Frameworks */,
 				D8B300DC13AFC443004E83F3 /* QuartzCore.framework in Frameworks */,
-				C931682414E9857C00B3E817 /* Sparkle.framework in Frameworks */,
 				C9A0859113DE3ECD00C27061 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2926,7 +2922,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Pixen.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2938,6 +2934,7 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				PRODUCT_NAME = Pixen;
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -2952,7 +2949,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Pixen.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -2968,6 +2965,7 @@
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				OTHER_CFLAGS = "-funroll-loops";
 				PRODUCT_NAME = Pixen;
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -3005,7 +3003,7 @@
 		616BAEAB08553EFB004CF172 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = s;
