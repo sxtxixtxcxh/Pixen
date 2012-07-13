@@ -33,9 +33,9 @@
 		C91C4F9515602F8000EA4AF5 /* PXPercentFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = C91C4F9315602F8000EA4AF5 /* PXPercentFormatter.m */; };
 		C91F07D3142D0BAB007F812C /* PXInfoPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = C91F07D1142D0BAB007F812C /* PXInfoPanel.xib */; };
 		C92A1E9213B12CAB0007235A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C92A1E9013B12CAB0007235A /* MainMenu.xib */; };
-		C931682414E9857C00B3E817 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C931682314E9857C00B3E817 /* Sparkle.framework */; };
 		C92C867015A5EF5500D915D9 /* NSImage+Reps.h in Headers */ = {isa = PBXBuildFile; fileRef = C92C866E15A5EF5500D915D9 /* NSImage+Reps.h */; };
 		C92C867115A5EF5500D915D9 /* NSImage+Reps.m in Sources */ = {isa = PBXBuildFile; fileRef = C92C866F15A5EF5500D915D9 /* NSImage+Reps.m */; };
+		C931682414E9857C00B3E817 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C931682314E9857C00B3E817 /* Sparkle.framework */; };
 		C93429E3157EE5BB00186FA9 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93429E2157EE5BB00186FA9 /* Accelerate.framework */; };
 		C93DB17F13ABC6BE006D42FE /* PXPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93DB17D13ABC6BE006D42FE /* PXPreferences.xib */; };
 		C93DB18213ABC8BE006D42FE /* PXGeneralPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93DB18013ABC8BE006D42FE /* PXGeneralPreferences.xib */; };
