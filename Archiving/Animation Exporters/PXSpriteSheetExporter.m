@@ -167,9 +167,10 @@
 
 - (IBAction)updatePreview:(id)sender
 {
-	NSImage *img = [NSImage imageWithBitmapImageRep:[self spriteSheetImageRep]];
+	NSBitmapImageRep *imageRep = [self spriteSheetImageRep];
 	
-	if (img) {
+	if (imageRep) {
+		NSImage *img = [NSImage imageWithBitmapImageRep:imageRep];
 		[sheetImageView setImage:img];
 	}
 	else {
