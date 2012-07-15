@@ -41,7 +41,7 @@
 - (void)moveCelFromIndex:(NSUInteger)index1 toIndex:(NSUInteger)index2;
 - (void)copyCelFromIndex:(NSUInteger)originalIndex toIndex:(NSUInteger)insertionIndex;
 
-- (NSImage *)spriteSheetWithCelMargin:(int)margin;
+- (NSBitmapImageRep *)spriteSheetWithCelMargin:(int)margin;
 - (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
 
 @end

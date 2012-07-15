@@ -116,7 +116,7 @@
 		PXAnimation *animation = [[docRep objectForKey:@"document"] animation];
 		
 		if ([[docRep objectForKey:@"included"] boolValue]) {
-			NSImage *spriteSheetRow = [animation spriteSheetWithCelMargin:interCelMargin];
+			NSBitmapImageRep *spriteSheetRow = [animation spriteSheetWithCelMargin:interCelMargin];
 			
 			if ([spriteSheetRow size].width > sheetSize.width) {
 				sheetSize.width = [spriteSheetRow size].width;
@@ -152,9 +152,14 @@
 	
 	NSPoint currentPoint = NSMakePoint(padding, 0.0f);
 	
-	for (NSImage *row in animationSheets)
+	for (NSBitmapImageRep *row in animationSheets)
 	{
-		[row drawAtPoint:currentPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
+		[row drawInRect:NSMakeRect(currentPoint.x, currentPoint.y, [row size].width, [row size].height)
+			   fromRect:NSZeroRect
+			  operation:NSCompositeSourceOver
+			   fraction:1.0f
+		 respectFlipped:NO
+				  hints:nil];
 		
 		currentPoint.y += [row size].height;
 		currentPoint.y += interAnimationMargin;

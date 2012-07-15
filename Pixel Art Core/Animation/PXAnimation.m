@@ -10,6 +10,7 @@
 
 #import "PXCel.h"
 #import "PXCanvas.h"
+#import "PXCanvas_ImportingExporting.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_Modifying.h"
 #import "PXPalette.h"
@@ -258,27 +259,48 @@
 	[self removeObjectFromCelsAtIndex:[cels indexOfObject:cel]];
 }
 
-- (NSImage *)spriteSheetWithCelMargin:(int)margin
+- (NSBitmapImageRep *)spriteSheetWithCelMargin:(int)margin
 {
 	int fullWidth = [self countOfCels]*[self size].width + ([self countOfCels] - 1)*margin;
-  int width = fullWidth; //could change this if multirow sheets were desirable.  they're not.
+	int width = fullWidth; //could change this if multirow sheets were desirable.  they're not.
 	int cellsHigh = (int)(ceilf((float)fullWidth/(float)width));
 	NSSize imageSize = NSMakeSize(MIN(fullWidth, width), cellsHigh*[self size].height + (cellsHigh - 1)*margin);
-	NSImage *spriteSheet = [[[NSImage alloc] initWithSize:imageSize] autorelease];
+	
+	NSBitmapImageRep *spriteSheet = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+																			pixelsWide:imageSize.width
+																			pixelsHigh:imageSize.height
+																		 bitsPerSample:8
+																	   samplesPerPixel:4
+																			  hasAlpha:YES
+																			  isPlanar:NO
+																		colorSpaceName:NSCalibratedRGBColorSpace
+																		   bytesPerRow:0
+																		  bitsPerPixel:32];
+	
 	NSPoint compositePoint = NSMakePoint(0, imageSize.height - [self size].height);
-	int i;
-	[spriteSheet lockFocus];
-	for (i=0; i<[self countOfCels]; i++) {
-    PXCel *cel = [self celAtIndex:i];
-		[[cel displayImage] compositeToPoint:compositePoint operation:NSCompositeSourceOver];
+	
+	[NSGraphicsContext saveGraphicsState];
+	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithBitmapImageRep:spriteSheet]];
+	
+	for (PXCel *cel in cels) {
+		[[cel.canvas imageRep] drawInRect:NSMakeRect(compositePoint.x, compositePoint.y, [cel size].width, [cel size].height)
+								 fromRect:NSZeroRect
+								operation:NSCompositeSourceOver
+								 fraction:1.0f
+						   respectFlipped:NO
+									hints:nil];
+		
 		compositePoint.x += [cel size].width + margin;
+		
 		if (compositePoint.x + [cel size].width > imageSize.width) {
 			compositePoint.x = 0;
 			compositePoint.y += [cel size].height + margin;
 		}
 	}
-	[spriteSheet unlockFocus];
-	return spriteSheet;
+	
+	[NSGraphicsContext restoreGraphicsState];
+	
+	return [spriteSheet autorelease];
 }
 
 - (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor
