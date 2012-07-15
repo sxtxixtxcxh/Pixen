@@ -31,8 +31,8 @@
 
 @property (nonatomic, weak) IBOutlet PXCanvasController *canvasController;
 
-@property (nonatomic, readonly) PXScaleController *scaleController;
-@property (nonatomic, readonly) PXCanvasResizePrompter *resizePrompter;
+@property (nonatomic, strong, readonly) PXScaleController *scaleController;
+@property (nonatomic, strong, readonly) PXCanvasResizePrompter *resizePrompter;
 
 @property (nonatomic, weak) PXCanvas *canvas;
 

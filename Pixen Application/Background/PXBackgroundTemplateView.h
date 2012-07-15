@@ -19,9 +19,9 @@
 
 @property (nonatomic, strong) PXBackground *background;
 
-@property (weak, nonatomic, readonly) IBOutlet NSTextField *templateNameField;
-@property (weak, nonatomic, readonly) IBOutlet NSTextField *templateClassNameField;
-@property (weak, nonatomic, readonly) IBOutlet PXBackgroundPreviewView *imageView;
+@property (weak, nonatomic) IBOutlet NSTextField *templateNameField;
+@property (weak, nonatomic) IBOutlet NSTextField *templateClassNameField;
+@property (weak, nonatomic) IBOutlet PXBackgroundPreviewView *imageView;
 
 @property (nonatomic, getter=isHighlighted, assign) BOOL highlighted;
 
