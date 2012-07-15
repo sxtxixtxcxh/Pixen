@@ -9,41 +9,6 @@
 
 #import "NSBezierPath+PXRoundedRectangleAdditions.h"
 
-@interface NSImage (PXTintedImage)
-
-- (NSImage *)tintedImage;
-
-@end
-
-@implementation NSImage (PXTintedImage)
-
-- (NSImage *)tintedImage
-{
-	NSImage *tintImage = [[[NSImage alloc] initWithSize:[self size]] autorelease];
-	
-	[tintImage lockFocus];
-	[[[NSColor blackColor] colorWithAlphaComponent:1] set];
-	[[NSBezierPath bezierPathWithRect:(NSRect){NSZeroPoint, [self size]}] fill];
-	[tintImage unlockFocus];
-	
-	NSImage *tintMaskImage = [[[NSImage alloc] initWithSize:[self size]] autorelease];
-	[tintMaskImage lockFocus];
-	[self compositeToPoint:NSZeroPoint operation:NSCompositeCopy];
-	[tintImage compositeToPoint:NSZeroPoint operation:NSCompositeSourceIn];
-	[tintMaskImage unlockFocus];
-	
-	NSImage *newImage = [[[NSImage alloc] initWithSize:[self size]] autorelease];
-	[newImage lockFocus];
-	[self dissolveToPoint:NSZeroPoint fraction:0.6];
-	[tintMaskImage compositeToPoint:NSZeroPoint operation:NSCompositeDestinationAtop];
-	[newImage unlockFocus];
-	
-	return newImage;
-}
-
-@end
-
-
 @implementation PXPaletteColorView
 
 @synthesize color = _color, index = _index, controlSize = _controlSize, highlighted = _highlighted;
