@@ -205,7 +205,7 @@
 			[celImage lockFocus];
 			[[NSColor clearColor] set];
 			NSRectFill(celImageRect);
-			[image compositeToPoint:destRect.origin operation:NSCompositeCopy];
+			[image drawAtPoint:destRect.origin fromRect:NSZeroRect operation:NSCompositeCopy fraction:1.0f];
 			NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithFocusedViewRect:celImageRect];
 			[celImage unlockFocus];
 			[celImage removeRepresentation:[[celImage representations] objectAtIndex:0]];
