@@ -15,21 +15,19 @@
 
 + (id)canvasWithContentsOfFile:(NSString *)aFile
 {
-	return [[[self alloc] initWithContentsOfFile:aFile] autorelease];
+	return [[self alloc] initWithContentsOfFile:aFile];
 }
 
 - (id)initWithContentsOfFile:(NSString *)aFile
 {
 	if([[aFile pathExtension] isEqualToString:PXISuffix])
 	{
-		[self release];
-		return self = [[NSKeyedUnarchiver unarchiveObjectWithFile:aFile] retain];
+		return self = [NSKeyedUnarchiver unarchiveObjectWithFile:aFile];
 	}
 	else
 	{
-		return [self initWithImage:[[[NSImage alloc] initWithContentsOfFile:aFile] autorelease]];
+		return [self initWithImage:[[NSImage alloc] initWithContentsOfFile:aFile]];
 	}
-	[self release];
 	return self = nil;
 }
 
@@ -58,7 +56,7 @@
 	selectedRect = NSZeroRect;
 	if([layers count] == 0)
 	{
-		[layers addObject:[[[PXLayer alloc] initWithName:@"Main Layer" size:newSize] autorelease]];
+		[layers addObject:[[PXLayer alloc] initWithName:@"Main Layer" size:newSize]];
 		[[layers lastObject] setCanvas:self];
 		[self activateLayer:[layers lastObject]];
 	}
@@ -112,7 +110,7 @@
 	
 	[NSGraphicsContext restoreGraphicsState];
 	
-	return [imageRep autorelease];
+	return imageRep;
 }
 
 @end

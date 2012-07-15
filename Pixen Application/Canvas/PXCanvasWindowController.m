@@ -140,12 +140,6 @@
 {
 	[canvasController deactivate];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[layerController release];
-	[_resizePrompter release];
-	[scaleController release];
-	[toolbar release];
-	
-	[super dealloc];
 }
 
 - (void)windowWillClose:note

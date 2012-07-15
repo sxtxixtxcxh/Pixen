@@ -8,12 +8,8 @@
 #import <WebKit/WebKit.h>
 
 @interface PXAboutWindowController : NSWindowController < NSWindowDelegate >
-{
-  @private
-	WebView *_webView;
-}
 
-@property (nonatomic, assign) IBOutlet WebView *webView;
+@property (nonatomic, weak) IBOutlet WebView *webView;
 
 + (id)sharedController;
 

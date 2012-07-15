@@ -53,7 +53,7 @@
 
 - (PXToolPropertiesController *)createPropertiesController
 {
-	PXPencilToolPropertiesController *controller = [[PXPencilToolPropertiesController new] autorelease];
+	PXPencilToolPropertiesController *controller = [PXPencilToolPropertiesController new];
 	[controller setToolName:[self name]];
 	
 	return controller;

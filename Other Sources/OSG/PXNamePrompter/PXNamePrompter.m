@@ -46,7 +46,7 @@
 
 + (NSString *)promptModalWithPromptString:(NSString *)string
 {
-	return [[[[self alloc] init] autorelease] promptModalWithPromptString:string];
+	return [[[self alloc] init] promptModalWithPromptString:string];
 }
 
 - (NSString *)promptModalWithPromptString:(NSString *)string

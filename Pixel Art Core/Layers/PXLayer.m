@@ -24,7 +24,7 @@
 	// okay, now we have to make sure the image is the same size as the canvas
 	// if it isn't, the weird premade image thing will cause serious problems.
 	// soooo... haxx!
-	NSBitmapImageRep *layerImageRep = [[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+	NSBitmapImageRep *layerImageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
 																			   pixelsWide:sz.width
 																			   pixelsHigh:sz.height
 																			bitsPerSample:8
@@ -33,7 +33,7 @@
 																				 isPlanar:NO
 																		   colorSpaceName:NSCalibratedRGBColorSpace
 																			  bytesPerRow:sz.width * 4
-																			 bitsPerPixel:32] autorelease];
+																			 bitsPerPixel:32];
 	
 	[NSGraphicsContext saveGraphicsState];
 	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithBitmapImageRep:layerImageRep]];
@@ -44,7 +44,7 @@
 	
 	[layer applyImageRep:layerImageRep];
 	
-	return [layer autorelease];
+	return layer;
 }
 
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image size:(NSSize)sz
@@ -89,12 +89,8 @@
 
 - (void)dealloc
 {
-	[_name release];
-	[meldedBezier release];
-	[meldedColor release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	PXImage_release(image);
-	[super dealloc];
 }
 
 - (PXImage *)image
@@ -184,14 +180,12 @@
 
 - (void)meldBezier:(NSBezierPath *)path ofColor:(NSColor *)color
 {
-	[meldedColor release];
-	meldedColor = [color retain];
-	meldedBezier = [path retain];
+	meldedColor = color;
+	meldedBezier = path;
 }
 
 - (void)unmeldBezier
 {
-	[meldedBezier release];
 	meldedBezier = nil;
 }
 
@@ -250,7 +244,6 @@
 			   (fullSize.width > [cachedSourceOutImage size].width) || 
 			   (fullSize.height > [cachedSourceOutImage size].height))
 			{
-				[cachedSourceOutImage release];
 				cachedSourceOutImage = [[NSImage alloc] initWithSize:fullSize];
 			}
 			[cachedSourceOutImage lockFocus];
@@ -450,7 +443,7 @@
 
 - (void)adaptToPalette:(PXPalette *)p withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor
 {
-	NSBitmapImageRep *rep = [[[self imageRep] copy] autorelease];
+	NSBitmapImageRep *rep = [[self imageRep] copy];
 	
 	unsigned char *bitmapData = [rep bitmapData];
 	int i;

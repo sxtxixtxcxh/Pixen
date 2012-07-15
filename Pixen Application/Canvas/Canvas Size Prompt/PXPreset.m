@@ -29,11 +29,4 @@
 	[aCoder encodeObject:self.color forKey:@"color"];
 }
 
-- (void)dealloc
-{
-	[_name release];
-	[_color release];
-	[super dealloc];
-}
-
 @end

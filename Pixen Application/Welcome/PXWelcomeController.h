@@ -8,12 +8,8 @@
 #import <WebKit/WebKit.h>
 
 @interface PXWelcomeController : NSWindowController
-{
-  @private
-	WebView *_webView;
-}
 
-@property (nonatomic, assign) IBOutlet WebView *webView;
+@property (nonatomic, weak) IBOutlet WebView *webView;
 
 + (id)sharedWelcomeController;
 

@@ -12,16 +12,16 @@
   @private
 	PXBackground *background;
 	IBOutlet NSView *view;
-	IBOutlet NSTextField *templateNameField, *templateClassNameField;
-	IBOutlet PXBackgroundPreviewView *imageView;
+	IBOutlet NSTextField *__weak templateNameField, *__weak templateClassNameField;
+	IBOutlet PXBackgroundPreviewView *__weak imageView;
 	BOOL _highlighted;
 }
 
-@property (nonatomic, retain) PXBackground *background;
+@property (nonatomic, strong) PXBackground *background;
 
-@property (nonatomic, readonly) IBOutlet NSTextField *templateNameField;
-@property (nonatomic, readonly) IBOutlet NSTextField *templateClassNameField;
-@property (nonatomic, readonly) IBOutlet PXBackgroundPreviewView *imageView;
+@property (weak, nonatomic, readonly) IBOutlet NSTextField *templateNameField;
+@property (weak, nonatomic, readonly) IBOutlet NSTextField *templateClassNameField;
+@property (weak, nonatomic, readonly) IBOutlet PXBackgroundPreviewView *imageView;
 
 @property (nonatomic, getter=isHighlighted, assign) BOOL highlighted;
 

@@ -26,20 +26,14 @@
 {
 	self = [super init];
 	cels = [[NSMutableArray alloc] initWithCapacity:100];
-	[cels addObject:[[[PXCel alloc] init] autorelease]];
+	[cels addObject:[[PXCel alloc] init]];
 	return self;
-}
-
-- (void)dealloc
-{
-	[cels release];
-	[super dealloc];
 }
 
 - (id)copyWithZone:(NSZone *)zone
 {
 	PXAnimation *newAnimation = [[PXAnimation alloc] init];
-	[newAnimation setValue:[[cels deepMutableCopy] autorelease] forKey:@"cels"];
+	[newAnimation setValue:[cels deepMutableCopy] forKey:@"cels"];
 	[newAnimation setUndoManager:undoManager];
 	return newAnimation;
 }
@@ -197,7 +191,7 @@
 
 - (void)insertNewCelAtIndex:(NSUInteger)index
 {
-	PXCel *newCel = [[[PXCel alloc] init] autorelease];
+	PXCel *newCel = [[PXCel alloc] init];
 	[newCel setSize:[self size]];
 	if(index <= [cels count] && index > 0)
 	{
@@ -234,7 +228,7 @@
 {
 	[self willChangeValueForKey:@"countOfCels"];
 	[undoManager beginUndoGrouping];
-	PXCel *cel = [[[self celAtIndex:originalIndex] copy] autorelease];
+	PXCel *cel = [[self celAtIndex:originalIndex] copy];
 	[cel setUndoManager:undoManager];
 	[[undoManager prepareWithInvocationTarget:self] removeCel:cel];
 	[cels insertObject:cel atIndex:insertionIndex];
@@ -300,7 +294,7 @@
 	
 	[NSGraphicsContext restoreGraphicsState];
 	
-	return [spriteSheet autorelease];
+	return spriteSheet;
 }
 
 - (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor

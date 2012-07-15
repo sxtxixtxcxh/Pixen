@@ -12,7 +12,7 @@
 - (void)moveObjectAtIndex:(NSUInteger)initialIndex toIndex:(NSUInteger)targetIndex
 {
 	if (targetIndex != initialIndex) {
-		id obj = [[self objectAtIndex:initialIndex] retain];
+		id obj = [self objectAtIndex:initialIndex];
 		[self removeObjectAtIndex:initialIndex];
 		
 		if (targetIndex >= [self count]) {
@@ -21,8 +21,6 @@
 		else {
 			[self insertObject:obj atIndex:targetIndex];
 		}
-		
-		[obj release];
 	}
 }
 

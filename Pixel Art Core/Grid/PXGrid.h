@@ -6,15 +6,9 @@
 //
 
 @interface PXGrid : NSObject < NSCopying, NSCoding >
-{
-  @private
-	NSSize _unitSize;
-	NSColor *_color;
-	BOOL _shouldDraw;
-}
 
 @property (nonatomic, assign) NSSize unitSize;
-@property (nonatomic, retain) NSColor *color;
+@property (nonatomic, strong) NSColor *color;
 @property (nonatomic, assign) BOOL shouldDraw;
 
 - (id)initWithUnitSize:(NSSize)unitSize color:(NSColor *)color shouldDraw:(BOOL)shouldDraw;

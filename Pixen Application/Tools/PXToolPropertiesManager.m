@@ -45,7 +45,7 @@
 	PXToolPropertiesController *controller = [tool propertiesController];
 	
 	if (!controller) {
-		self.propertiesController = [[PXToolPropertiesController new] autorelease];
+		self.propertiesController = [PXToolPropertiesController new];
 	}
 	else {
 		self.propertiesController = controller;
@@ -66,10 +66,7 @@
 
 - (void)dealloc
 {
-	[_propertiesController release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	
-	[super dealloc];
 }
 
 - (id)initWithSide:(PXToolPropertiesSide)side
@@ -109,8 +106,7 @@
 {
 	if (_propertiesController != controller)
 	{
-		[_propertiesController release];
-		_propertiesController = [controller retain];
+		_propertiesController = controller;
 		
 		for (NSView *subview in [[self.window contentView] subviews])
 		{

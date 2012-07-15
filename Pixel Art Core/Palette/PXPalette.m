@@ -83,7 +83,6 @@ NSArray *CreateGrayList()
 			palette.canSave = NO;
 			
 			[systemPalettes addObject:palette];
-			[palette release];
 		}
 		
 		NSMutableArray *grays = [NSMutableArray arrayWithArray:CreateGrayList()];
@@ -99,7 +98,6 @@ NSArray *CreateGrayList()
 		}
 		
 		[systemPalettes addObject:palette];
-		[palette release];
 	}
 	
 	return systemPalettes;
@@ -132,10 +130,9 @@ NSArray *CreateGrayList()
 		palette.canSave = YES;
 		
 		[userPalettes addObject:palette];
-		[palette release];
 	}
 	
-	return [userPalettes autorelease];
+	return userPalettes;
 }
 
 - (id)init
@@ -176,11 +173,7 @@ NSArray *CreateGrayList()
 
 - (void)dealloc
 {
-	[_name release];
-	
 	PXColorArrayRelease(_colors);
-	
-	[super dealloc];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder

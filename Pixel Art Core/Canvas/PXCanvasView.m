@@ -97,18 +97,12 @@ void PXDebugRect(NSRect r, float alpha)
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[cachedMarqueePath release];
 	[marqueeAnimationTimer invalidate];
-	[marqueeAnimationTimer release];
-	[crosshair release];
-	[antsPattern release];
-	[super dealloc];
 }
 
 - (void)setCrosshair:aCrosshair
 {
-	[crosshair release];
-	crosshair = [aCrosshair retain];
+	crosshair = aCrosshair;
 }
 
 - (PXCrosshair *)crosshair
@@ -118,7 +112,6 @@ void PXDebugRect(NSRect r, float alpha)
 
 - (void)selectionMaskChanged:(NSNotification *)notification
 {
-	[cachedMarqueePath release];
 	cachedMarqueePath = nil;
 }
 
@@ -214,7 +207,6 @@ void PXDebugRect(NSRect r, float alpha)
 	NSRect rect = [self visibleRect];
 	centeredPoint = [self convertFromViewToCanvasPoint:NSMakePoint(NSMinX(rect) + NSWidth(rect)/2, NSMinY(rect) + NSHeight(rect)/2)];
 	zoomPercentage = percent;
-	[cachedMarqueePath release];
 	cachedMarqueePath = nil;
 	[self sizeToCanvas];
 	[self updateInfoPanelWithMousePosition:[self convertFromWindowToCanvasPoint:[[self window] mouseLocationOutsideOfEventStream]] dragging:NO];
@@ -259,16 +251,15 @@ void PXDebugRect(NSRect r, float alpha)
 	if((marqueeAnimationTimer != nil) && [marqueeAnimationTimer isValid])
 	{
 		[marqueeAnimationTimer invalidate];
-		[marqueeAnimationTimer release];
 		marqueeAnimationTimer = nil;
 	}
 	if ([canvas hasSelection])
 	{
-		marqueeAnimationTimer = [[NSTimer scheduledTimerWithTimeInterval:0.10f
+		marqueeAnimationTimer = [NSTimer scheduledTimerWithTimeInterval:0.10f
 																  target:self
 																selector:@selector(animateMarquee:)
 																userInfo:nil
-																 repeats:YES] retain];
+																 repeats:YES];
 	}
 }
 
@@ -404,7 +395,7 @@ void PXDebugRect(NSRect r, float alpha)
 	NSBezierPath *path = [self cachedSelectionMarqueePath];
 	
 	if (antsPattern == nil)
-		antsPattern = [[NSColor colorWithPatternImage:[NSImage imageNamed:@"ants"]] retain];
+		antsPattern = [NSColor colorWithPatternImage:[NSImage imageNamed:@"ants"]];
 	
 	[antsPattern set];
 	[[NSGraphicsContext currentContext] setPatternPhase:marqueePatternOffset];

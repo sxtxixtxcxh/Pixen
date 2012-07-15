@@ -13,10 +13,9 @@
   @private
 	IBOutlet NSTextField * zoomPercentage, * width, * height;
 	NSSize canvasSize;
-	id delegate;
 }
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, weak) id delegate;
 
 - (IBAction)resize:sender;
 - (IBAction)cancel:sender;

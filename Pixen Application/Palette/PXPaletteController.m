@@ -57,11 +57,8 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[_frequencyPalette release];
-	[_recentPalette release];
 	dispatch_release(_frequencyQueue);
 	dispatch_release(_recentQueue);
-	[super dealloc];
 }
 
 - (void)awakeFromNib
@@ -116,14 +113,13 @@
 	
 	[_progressIndicator startAnimation:nil];
 	
-	NSArray *layers = [[[canvas layers] copy] autorelease];
+	NSArray *layers = [[canvas layers] copy];
 	
 	dispatch_async(_frequencyQueue, ^{
 		
 		PXPalette *palette = [PXCanvas frequencyPaletteForLayers:layers];
 		
-		[_frequencyPalette release];
-		_frequencyPalette = [palette retain];
+		_frequencyPalette = palette;
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			
@@ -145,8 +141,8 @@
 	
 	NSDictionary *changes = [note userInfo];
 	
-	NSCountedSet *oldC = [[[changes objectForKey:@"PXCanvasPaletteUpdateRemoved"] copy] autorelease];
-	NSCountedSet *newC = [[[changes objectForKey:@"PXCanvasPaletteUpdateAdded"] copy] autorelease];
+	NSCountedSet *oldC = [[changes objectForKey:@"PXCanvasPaletteUpdateRemoved"] copy];
+	NSCountedSet *newC = [[changes objectForKey:@"PXCanvasPaletteUpdateAdded"] copy];
 	
 	dispatch_async(_frequencyQueue, ^{
 		

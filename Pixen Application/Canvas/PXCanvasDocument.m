@@ -33,7 +33,7 @@ BOOL isPowerOfTwo(int num);
 	if ( ! ( self = [super init] ) ) 
 		return nil;
 	
-	self.canvas = [[PXCanvas new] autorelease];
+	self.canvas = [PXCanvas new];
 	
 	[[self undoManager] removeAllActions];
 	[self updateChangeCount:NSChangeCleared];
@@ -44,8 +44,7 @@ BOOL isPowerOfTwo(int num);
 - (void)setCanvas:(PXCanvas *)aCanvas
 {
 	if (_canvas != aCanvas) {
-		[_canvas release];
-		_canvas = [aCanvas retain];
+		_canvas = aCanvas;
 		
 		[_canvas setUndoManager:[self undoManager]];
 	}
@@ -54,10 +53,6 @@ BOOL isPowerOfTwo(int num);
 - (void)dealloc
 {
 	[self.windowController releaseCanvas];
-	
-	[_canvas release];
-	
-	[super dealloc];
 }
 
 - (PXCanvasController *)canvasController
@@ -67,7 +62,7 @@ BOOL isPowerOfTwo(int num);
 
 - (void)initWindowController
 {
-	self.windowController = [[[PXCanvasWindowController alloc] initWithWindowNibName:@"PXCanvasDocument"] autorelease];
+	self.windowController = [[PXCanvasWindowController alloc] initWithWindowNibName:@"PXCanvasDocument"];
 }
 
 - (void)setWindowControllerData
@@ -116,7 +111,7 @@ BOOL isPowerOfTwo(int num)
 		CGImageDestinationFinalize(dest);
 		CFRelease(dest);
 		
-		return [data autorelease];
+		return data;
 	}
 	else if (UTTypeEqual(kUTTypePNG, (__bridge CFStringRef) aType))
 	{
@@ -169,7 +164,7 @@ BOOL isPowerOfTwo(int num)
 		{
 			if ([[board types] containsObject:type])
 			{
-				NSImage *image = [[[NSImage alloc] initWithPasteboard:board] autorelease];
+				NSImage *image = [[NSImage alloc] initWithPasteboard:board];
 				
 				[_canvas setSize:NSMakeSize(ceilf([image size].width), ceilf([image size].height))];
 				[_canvas pasteFromPasteboard:board type:PXNSImagePboardType];
@@ -208,13 +203,13 @@ BOOL isPowerOfTwo(int num)
 	}
 	else if (UTTypeEqual(kUTTypeBMP, (__bridge CFStringRef) aType))
 	{
-		self.canvas = [[PXCanvas new] autorelease];
+		self.canvas = [PXCanvas new];
 		
-		[_canvas replaceActiveLayerWithImage:[[[NSImage alloc] initWithData:data] autorelease]];
+		[_canvas replaceActiveLayerWithImage:[[NSImage alloc] initWithData:data]];
 	}
 	else
 	{
-		NSImage *image = [[[NSImage alloc] initWithData:data] autorelease];
+		NSImage *image = [[NSImage alloc] initWithData:data];
 		
 		if (!image) {
 			if (error)
@@ -223,7 +218,7 @@ BOOL isPowerOfTwo(int num)
 			return NO;
 		}
 		
-		self.canvas = [[[PXCanvas alloc] initWithImage:image] autorelease];
+		self.canvas = [[PXCanvas alloc] initWithImage:image];
 	}
 	
 	if (_canvas)

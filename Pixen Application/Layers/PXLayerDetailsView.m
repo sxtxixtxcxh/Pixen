@@ -33,7 +33,6 @@
 		
 		NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:start endingColor:end];
 		[gradient drawInRect:[self bounds] angle:270.0f];
-		[gradient release];
 	}
 }
 

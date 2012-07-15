@@ -71,7 +71,6 @@
 - (void)dealloc
 {
 	[self unload];
-	[super dealloc];
 }
 
 - (void)focusOnName
@@ -93,19 +92,19 @@
 	
 	NSMenuItem *item;
 	
-	item = [[[NSMenuItem alloc] init] autorelease];
+	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Delete", @"Delete")];
 	[item setAction:@selector(delete:)];
 	[item setTarget:self];
 	[menu addItem:item];
 	
-	item = [[[NSMenuItem alloc] init] autorelease];
+	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Duplicate", @"Duplicate")];
 	[item setAction:@selector(duplicate:)];
 	[item setTarget:self];
 	[menu addItem:item];
 	
-	item = [[[NSMenuItem alloc] init] autorelease];
+	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Merge Down", @"Merge Down")];
 	[item setAction:@selector(mergeDown:)];
 	[item setTarget:self];
@@ -113,13 +112,13 @@
 	
 	[menu addItem:[NSMenuItem separatorItem]];
 	
-	item = [[[NSMenuItem alloc] init] autorelease];
+	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Cut", @"Cut")];
 	[item setAction:@selector(cutLayer:)];
 	[item setTarget:self];
 	[menu addItem:item];
 	
-	item = [[[NSMenuItem alloc] init] autorelease];
+	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Copy", @"Copy")];
 	[item setAction:@selector(copyLayer:)];
 	[item setTarget:self];
@@ -127,22 +126,21 @@
 	
 	NSMenu *subMenu = [[NSMenu alloc] initWithTitle:NSLocalizedString(@"Transform Layer", @"Transform Layer")];
 	
-	NSMenuItem *subMenuItem = [[[NSMenuItem alloc] init] autorelease];
+	NSMenuItem *subMenuItem = [[NSMenuItem alloc] init];
 	[subMenuItem setTitle:NSLocalizedString(@"Transform Layer", @"Transform Layer")];
 	
 	[menu addItem:[NSMenuItem separatorItem]];
 	[menu addItem:subMenuItem];
 	
 	[menu setSubmenu:subMenu forItem:subMenuItem];
-	[subMenu release];
 	
-	item = [[[NSMenuItem alloc] init] autorelease];
+	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Flip Horizontally", @"Flip Horizontally")];
 	[item setAction:@selector(flipLayerHorizontally:)];
 	[item setTarget:self];
 	[subMenu addItem:item];
 	
-	item = [[[NSMenuItem alloc] init] autorelease];
+	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Flip Vertically", @"Flip Vertically")];
 	[item setAction:@selector(flipLayerVertically:)];
 	[item setTarget:self];
@@ -150,26 +148,25 @@
 	
 	[subMenu addItem:[NSMenuItem separatorItem]];
 	
-	item = [[[NSMenuItem alloc] init] autorelease];
+	item = [[NSMenuItem alloc] init];
 	[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Rotate 90%@ Left", @"Rotate 90%@ Left"), [self degreeString]]];
 	[item setAction:@selector(rotateLayerCounterclockwise:)];
 	[item setTarget:self];
 	[subMenu addItem:item];
 	
-	item = [[[NSMenuItem alloc] init] autorelease];
+	item = [[NSMenuItem alloc] init];
 	[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Rotate 90%@ Right", @"Rotate 90%@ Right"), [self degreeString]]];
 	[item setAction:@selector(rotateLayerClockwise:)];
 	[item setTarget:self];
 	[subMenu addItem:item];
 	
-	item = [[[NSMenuItem alloc] init] autorelease];
+	item = [[NSMenuItem alloc] init];
 	[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Rotate 180%@", @"Rotate 180%@"), [self degreeString]]];
 	[item setAction:@selector(rotateLayer180:)];
 	[item setTarget:self];
 	[subMenu addItem:item];
 	
 	[self.view setMenu:menu];
-	[menu release];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)anItem

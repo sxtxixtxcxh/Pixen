@@ -22,12 +22,6 @@
 														endingColor:endColor];
 }
 
-- (void)dealloc
-{
-	[_horizontalGradient release];
-	[super dealloc];
-}
-
 - (void)drawRect:(NSRect)rect {
 	NSRect visibleRect = [self bounds];	
 	NSPoint middle = NSMakePoint(NSMidX(visibleRect), NSMidY(visibleRect));

@@ -26,8 +26,8 @@
 {
 	self = [super init];
 	if (self) {
-		path = [[NSBezierPath bezierPath] retain];
-		wrappedPath = [[NSBezierPath bezierPath] retain];
+		path = [NSBezierPath bezierPath];
+		wrappedPath = [NSBezierPath bezierPath];
 		color = PXGetBlackColor();
 		initialLoad = YES;
 	}
@@ -37,7 +37,7 @@
 - (PXToolPropertiesController *)propertiesController
 {
 	if (initialLoad) {
-		propertiesController = [[self createPropertiesController] retain];
+		propertiesController = [self createPropertiesController];
 		initialLoad = NO;
 	}
 	
@@ -47,15 +47,6 @@
 - (PXToolPropertiesController *)createPropertiesController
 {
 	return nil;
-}
-
-- (void)dealloc
-{
-	[wrappedPath release];
-	[path release];
-	[propertiesController release];
-	
-	[super dealloc];
 }
 
 - (void)keyDown:(NSEvent *)event fromCanvasController:(PXCanvasController *)cc

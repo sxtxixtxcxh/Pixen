@@ -23,7 +23,7 @@
 	if ( ! (self = [super init]))
 		return nil;
 	
-	self.canvas = [[PXCanvas new] autorelease];
+	self.canvas = [PXCanvas new];
 	self.duration = 1.0f;
 	
 	return self;
@@ -54,7 +54,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-	PXCel *cel = [[PXCel alloc] initWithCanvas:[[self.canvas copyWithZone:zone] autorelease]
+	PXCel *cel = [[PXCel alloc] initWithCanvas:[self.canvas copyWithZone:zone]
 									  duration:self.duration];
 	[[cel canvas] setGrid:[self.canvas grid]];
 	
@@ -71,7 +71,7 @@
 	if ( ! (self = [super init]))
 		return nil;
 	
-	self.canvas = [[PXCanvas new] autorelease];
+	self.canvas = [PXCanvas new];
 	[self.canvas setUndoManager:[animation undoManager]];
 	[self.canvas replaceActiveLayerWithImage:image];
 	
@@ -80,12 +80,6 @@
 	[animation insertObject:self inCelsAtIndex:index];
 	
 	return self;
-}
-
-- (void)dealloc
-{
-	[_canvas release];
-	[super dealloc];
 }
 
 - (NSDictionary *)info

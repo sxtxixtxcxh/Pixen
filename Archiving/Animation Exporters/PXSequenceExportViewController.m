@@ -23,9 +23,6 @@
 - (void)dealloc
 {
 	[_typesController removeObserver:self forKeyPath:@"selectionIndex"];
-	[_fileTemplate release];
-	
-	[super dealloc];
 }
 
 - (void)awakeFromNib
@@ -38,12 +35,11 @@
 			continue;
 		}
 		
-		NSString *displayName = (NSString *) UTTypeCopyDescription( (__bridge CFStringRef) type);
+		NSString *displayName = (NSString *) CFBridgingRelease(UTTypeCopyDescription( (__bridge CFStringRef) type));
 		
 		if (displayName) {
 			[_typesController addObject:[NSDictionary dictionaryWithObjectsAndKeys:
 										 displayName, @"name", type, @"uti", nil]];
-			[displayName release];
 		}
 	}
 	
@@ -67,13 +63,11 @@
 		ext = @"pxi";
 	}
 	else {
-		NSDictionary *dictionary = (NSDictionary *) UTTypeCopyDeclaration( (__bridge CFStringRef) uti);
+		NSDictionary *dictionary = (NSDictionary *) CFBridgingRelease(UTTypeCopyDeclaration( (__bridge CFStringRef) uti));
 		ext = [[dictionary valueForKey:(NSString *) kUTTypeTagSpecificationKey] valueForKey:(NSString *) kUTTagClassFilenameExtension];
 		
 		if ([ext isKindOfClass:[NSArray class]])
 			ext = [ext objectAtIndex:0];
-		
-		[dictionary release];
 	}
 	
 	self.fileTemplate = [[_fileTemplate stringByDeletingPathExtension] stringByAppendingPathExtension:ext];

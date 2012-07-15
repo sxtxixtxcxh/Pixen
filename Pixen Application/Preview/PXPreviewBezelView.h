@@ -10,11 +10,10 @@
 {
   @private
 	NSMenu * menu;
-	id delegate;
 	CGFloat alpha;
 }
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, weak) id delegate;
 
 @property (nonatomic, assign) CGFloat opacity;
 

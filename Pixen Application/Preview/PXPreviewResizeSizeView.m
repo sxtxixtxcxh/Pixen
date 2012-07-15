@@ -19,18 +19,11 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[_scaleString release];
-	[super dealloc];
-}
-
 - (BOOL)updateScale:(CGFloat)scale
 {
 	if (scale > 100000)
 		return NO;
 	
-	[_scaleString release];
 	_scaleString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d%%", (int)(scale * 100)]
 												   attributes:[NSDictionary dictionaryWithObjectsAndKeys:
 															   [NSFont fontWithName:@"Verdana" size:20.0f], NSFontAttributeName,

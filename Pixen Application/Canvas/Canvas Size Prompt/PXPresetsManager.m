@@ -54,12 +54,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-    [_presets release];
-	[super dealloc];
-}
-
 - (NSArray *)presets
 {
 	return _presets;
@@ -104,7 +98,6 @@
 		preset.color = color;
 		
 		[_presets addObject:preset];
-		[preset release];
 	}
 	
 	[self persistPresets];

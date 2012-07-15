@@ -20,19 +20,13 @@
 	NSColor *meldedColor;
 	
 	NSImage *cachedSourceOutImage;
-	
-	PXCanvas *canvas;
-	
-	BOOL _visible;
-	NSString *_name;
-	CGFloat _opacity;
 }
 
 @property (nonatomic, assign) BOOL visible;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) CGFloat opacity;
 
-@property (nonatomic, assign) PXCanvas *canvas;
+@property (nonatomic, weak) PXCanvas *canvas;
 
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image origin:(NSPoint)origin size:(NSSize)sz;
 + (PXLayer *)layerWithName:(NSString *)name image:(NSImage *)image size:(NSSize)sz;

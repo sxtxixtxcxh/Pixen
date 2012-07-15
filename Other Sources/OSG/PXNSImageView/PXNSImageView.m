@@ -61,12 +61,6 @@
 	[self initialize];
 }
 
-- (void)dealloc
-{
-	[shadow release];
-	[super dealloc];
-}
-
 - (NSSize)scaledSizeForImage:(NSImage *)image
 {
 	NSSize imageSize = [image size];

@@ -11,11 +11,10 @@
 	NSImage *_bigImage;
 	NSImage *_smallImage;
 	NSControlSize _controlSize;
-	id _delegate;
 }
 
 @property (nonatomic, assign) NSControlSize controlSize;
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, weak) id delegate;
 
 @end
 

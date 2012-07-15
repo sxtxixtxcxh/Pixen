@@ -15,6 +15,6 @@
 	PXAnimation *_animation;
 }
 
-@property (nonatomic, readonly) PXAnimation *animation;
+@property (nonatomic, strong, readonly) PXAnimation *animation;
 
 @end

@@ -46,7 +46,7 @@
 
 + containingView:(NSView *)aView
 {
-	return [[[self alloc] initWithView:aView] autorelease];
+	return [[self alloc] initWithView:aView];
 }
 
 - initWithView:(NSView *)aView
@@ -175,8 +175,6 @@
 - (void)dealloc
 {
 	[self clearStack];
-	[views release];
-	[super dealloc];
 }
 
 - (NSView *)selectedView
@@ -194,8 +192,8 @@
 	BOOL oldHighlight = [element isHighlighted];
 	[element setHighlighted:YES];
 	NSData *viewData = [element dataWithPDFInsideRect:[element bounds]];
-	NSImage *viewImage = [[[NSImage alloc] initWithData:viewData] autorelease];
-	NSImage *bgImage = [[[NSImage alloc] initWithSize:[element bounds].size] autorelease];
+	NSImage *viewImage = [[NSImage alloc] initWithData:viewData];
+	NSImage *bgImage = [[NSImage alloc] initWithSize:[element bounds].size];
 	[bgImage lockFocus];
 	[[[NSColor whiteColor] colorWithAlphaComponent:0.66] set];
 	NSRectFill([element bounds]);

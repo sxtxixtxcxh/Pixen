@@ -41,7 +41,6 @@
 	NSString *string = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	
 	NSScanner *scanner = [NSScanner scannerWithString:string];
-	[string release];
 	
 	if (![scanner scanString:@"GIMP Palette\n" intoString:nil])
 	{
@@ -93,7 +92,7 @@
 		[scanner scanString:@"\n" intoString:NULL];
 	}
 	
-	return [palette autorelease];
+	return palette;
 }
 
 @end

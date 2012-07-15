@@ -38,10 +38,6 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[backgroundColor release];
-	[image release];
-	[manageWC release];
-	[super dealloc];
 }
 
 - (void)setNilValueForKey:(NSString *)key
@@ -152,7 +148,6 @@
 
 - (IBAction)changedColor:(id)sender
 {
-	[image release];
 	image = nil;
 	
 	[preview setImage:[self imageWithWidth:self.width height:self.height]];
@@ -187,7 +182,7 @@
 	
 	NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:PXCanvasDefaultMainBackgroundKey];
 	
-	PXBackground *background = (data) ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : [[[PXSlashyBackground alloc] init] autorelease];
+	PXBackground *background = (data) ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : [[PXSlashyBackground alloc] init];
 	NSSize ceiledSize = NSMakeSize(ceilf(imageSize.width), ceilf(imageSize.height));
 	[background drawRect:(NSRect){NSZeroPoint, ceiledSize} withinRect:(NSRect){NSZeroPoint, ceiledSize}];
 	
@@ -247,7 +242,6 @@
 	[self window];
 	[self updateFieldsFromDefaults];
 	
-	[image release];
 	image = nil;
 	
 	[preview setImage:[self imageWithWidth:self.width height:self.height]];
@@ -255,11 +249,11 @@
 	
 	initialSize = targetSize = [self size];
 	
-	animationTimer = [[NSTimer scheduledTimerWithTimeInterval:0.05f
+	animationTimer = [NSTimer scheduledTimerWithTimeInterval:0.05f
 													   target:self
 													 selector:@selector(updatePreviewImageFrame:)
 													 userInfo:nil
-													  repeats:YES] retain];
+													  repeats:YES];
 	
 	[[NSRunLoop currentRunLoop] addTimer:animationTimer forMode:NSRunLoopCommonModes];
 	
@@ -280,7 +274,6 @@
 	previewSize.width = targetSize.width * (1.0 - projectedFraction) + initialSize.width * projectedFraction;
 	previewSize.height = targetSize.height * (1.0 - projectedFraction) + initialSize.height * projectedFraction;
 	
-	[image release];
 	image = nil;
 	
 	[preview setImage:[self imageWithWidth:previewSize.width height:previewSize.height]];
@@ -303,7 +296,6 @@
 	[[NSUserDefaults standardUserDefaults] setInteger:self.height forKey:PXDefaultNewDocumentHeight];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.backgroundColor] forKey:PXDefaultNewDocumentBackgroundColor];
 	
-	[image release];
 	image = nil;
 	
 	initialSize = [preview functionalRect].size;
@@ -336,7 +328,6 @@
 	if (animationTimer)
 		[animationTimer invalidate];
 	
-	[animationTimer release];
 	animationTimer = nil;
 	
 	accepted = YES;

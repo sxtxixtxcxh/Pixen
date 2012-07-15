@@ -26,7 +26,7 @@
 
 - (PXToolPropertiesController *)createPropertiesController
 {
-	return [[PXShapeToolPropertiesController new] autorelease];
+	return [PXShapeToolPropertiesController new];
 }
 
 - (NSCursor *)cursor

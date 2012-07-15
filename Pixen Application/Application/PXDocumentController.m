@@ -125,7 +125,6 @@ NSString *palettesSubdirName = @"Palettes";
 {
 	PXPaletteImporter *importer = [[PXPaletteImporter alloc] init];
 	[importer runInWindow:nil];
-	[importer release];
 }
 
 - (IBAction)displayHelp:(id)sender
@@ -246,7 +245,6 @@ NSString *palettesSubdirName = @"Palettes";
 		{
 			PXPaletteImporter *importer = [[PXPaletteImporter alloc] init];
 			[importer importPaletteAtPath:filename];
-			[importer release];
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:PXUserPalettesChangedNotificationName object:self];
 		}
@@ -358,7 +356,7 @@ NSString *palettesSubdirName = @"Palettes";
 	if (isAnimated)
 	{
 		NSError *error=nil;
-		PXAnimationDocument *doc = [[[PXAnimationDocument alloc] initWithContentsOfURL:aURL ofType:(NSString *)kUTTypeGIF error:&error] autorelease];
+		PXAnimationDocument *doc = [[PXAnimationDocument alloc] initWithContentsOfURL:aURL ofType:(NSString *)kUTTypeGIF error:&error];
 		if(error) {
 			[self presentError:error];
 		}
@@ -390,8 +388,6 @@ NSString *palettesSubdirName = @"Palettes";
 	}
 	
 	if (![prompter runModal]) {
-		[prompter release];
-		
 		if (outError)
 			*outError = nil;
 		
@@ -401,7 +397,6 @@ NSString *palettesSubdirName = @"Palettes";
 	id document = [super makeUntitledDocumentOfType:typeName error:outError];
 	
 	if (!document) {
-		[prompter release];
 		return nil;
 	}
 	
@@ -409,8 +404,6 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	[[document canvas] setSize:[prompter size] withOrigin:NSZeroPoint backgroundColor:PXColorFromNSColor(color)];
 	[[document canvasController] updateCanvasSize];
-	
-	[prompter release];
 	
 	return document;
 }
@@ -498,7 +491,7 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	[[animationDocument animation] removeCel:[[animationDocument animation] celAtIndex:0]];
 	
-	NSMutableArray *images = [[[NSMutableArray alloc] initWithCapacity:[[openPanel URLs] count]] autorelease];
+	NSMutableArray *images = [[NSMutableArray alloc] initWithCapacity:[[openPanel URLs] count]];
     for (NSURL *currentURL in [openPanel URLs])
 	{
 		[images addObject:[PXCanvas canvasWithContentsOfFile:[currentURL path]]];
@@ -507,7 +500,7 @@ NSString *palettesSubdirName = @"Palettes";
 	float defaultDuration = 1.0f;
 	for(PXCanvas *current in images)
 	{
-		[[animationDocument animation] addCel:[[[PXCel alloc] initWithCanvas:current duration:defaultDuration] autorelease]];
+		[[animationDocument animation] addCel:[[PXCel alloc] initWithCanvas:current duration:defaultDuration]];
 	}	
 	[self addDocument:animationDocument];
 	[animationDocument makeWindowControllers];

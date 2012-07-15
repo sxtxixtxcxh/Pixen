@@ -110,8 +110,6 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[_grid release];
-	[super dealloc];
 }
 
 - (void)setPattern:(PXPattern *)newPattern

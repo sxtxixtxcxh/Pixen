@@ -6,13 +6,8 @@
 //
 
 @interface PXSequenceExportViewController : NSViewController
-{
-  @private
-	NSArrayController *_typesController;
-	NSString *_fileTemplate;
-}
 
-@property (nonatomic, assign) IBOutlet NSArrayController *typesController;
+@property (nonatomic, strong) IBOutlet NSArrayController *typesController;
 
 @property (nonatomic, copy) NSString *fileTemplate;
 @property (nonatomic, readonly) NSString *selectedUTI;

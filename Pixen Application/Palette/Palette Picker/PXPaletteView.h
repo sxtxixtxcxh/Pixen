@@ -19,7 +19,6 @@
 	CGFloat width;
 	BOOL allowsColorSelection, allowsColorModification;
 	NSControlSize controlSize;
-	IBOutlet id delegate;
 	
 	NSMutableSet *_visibleViews;
 	NSMutableSet *_recycledViews;
@@ -35,9 +34,9 @@
 
 @property (nonatomic, assign) NSUInteger selectionIndex;
 
-@property (nonatomic, retain) PXPalette *palette;
+@property (nonatomic, strong) PXPalette *palette;
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, weak) id delegate;
 
 - (void)reload;
 

@@ -129,7 +129,6 @@
 		}
 		else if (type == PXMoveTypeMoving) {
 			[canvas removeTempLayer:copyLayer];
-			[copyLayer release];
 			copyLayer = nil;
 		}
 	}
@@ -138,7 +137,6 @@
 			NSPoint origin = [copyLayer origin];
 			
 			[canvas removeTempLayer:copyLayer];
-			[copyLayer release];
 			copyLayer = nil;
 			
 			[moveLayer moveToPoint:origin];
@@ -205,7 +203,6 @@
 			[[canvas activeLayer] compositeUnder:copyLayer flattenOpacity:YES];
 			
 			[canvas removeTempLayer:copyLayer];
-			[copyLayer release];
 			copyLayer = nil;
 		}
 		
@@ -215,7 +212,6 @@
 		[[canvas activeLayer] compositeUnder:moveLayer flattenOpacity:YES];
 		
 		[canvas removeTempLayer:moveLayer];
-		[moveLayer release];
 		moveLayer = nil;
 		
 		[canvas finalizeSelectionMotion];
@@ -237,7 +233,6 @@
 			[[canvas activeLayer] compositeUnder:copyLayer flattenOpacity:YES];
 			
 			[canvas removeTempLayer:copyLayer];
-			[copyLayer release];
 			copyLayer = nil;
 		}
 		

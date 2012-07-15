@@ -47,7 +47,7 @@
 	
 	for (PXLayer *layer in [canvas layers])
 	{
-		layerCopy = [[layer copy] autorelease];
+		layerCopy = [layer copy];
 		[layer setSize:size];
 		
 		for (x=0; x<size.width; x++) {

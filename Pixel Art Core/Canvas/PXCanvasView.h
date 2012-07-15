@@ -8,8 +8,6 @@
 @interface PXCanvasView : NSView 
 {
   @private
-	PXCanvas *canvas;
-	
 	PXCrosshair *crosshair;
 	NSAffineTransform *transform;
 	
@@ -34,17 +32,15 @@
 	BOOL _usesToolCursors, _updatesInfoPanel;
 	
 	BOOL erasing;
-	
-	id delegate;
 }
 
-@property (nonatomic, assign) PXCanvas *canvas;
+@property (nonatomic, weak) PXCanvas *canvas;
 @property (nonatomic, assign) float zoomPercentage;
 
 @property (nonatomic, assign) BOOL usesToolCursors;
 @property (nonatomic, assign) BOOL updatesInfoPanel;
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, weak) id delegate;
 
 - (void)setCrosshair:aCrosshair;
 - (PXCrosshair *)crosshair;

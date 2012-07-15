@@ -41,14 +41,9 @@
 			
 			if (palette)
 				[coder associateValue:palette withKey:@"palette"];
-		}	
-		
-		if (layers) {
-			[layers release];
-			layers = nil;
 		}
 		
-		layers = [[coder decodeObjectForKey:@"layers"] retain];
+		layers = [coder decodeObjectForKey:@"layers"];
 		for (PXLayer *current in layers)
 		{
 			[current setCanvas:self];
@@ -56,28 +51,15 @@
 		
 		if(isIndexedImage) {
 			[coder associateValue:nil withKey:@"palette"];
-			if(palette) {
-				[palette release];
-			}
 		}
 		
-		if (bgConfig) {
-			[bgConfig release];
-			bgConfig = nil;
-		}
-		
-		bgConfig = [[coder decodeObjectForKey:@"bgConfig"] retain];
+		bgConfig = [coder decodeObjectForKey:@"bgConfig"];
 		if(!bgConfig)
 		{
 			bgConfig = [[PXBackgroundConfig alloc] initWithCoder:coder];
 		}
 		
-		if (grid) {
-			[grid release];
-			grid = nil;
-		}
-		
-		grid = [[coder decodeObjectForKey:@"grid"] retain];
+		grid = [coder decodeObjectForKey:@"grid"];
 		if(!grid)
 		{
 			grid = [[PXGrid alloc] initWithCoder:coder];

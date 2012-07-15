@@ -14,17 +14,10 @@
 
 @synthesize backgroundTypeText = _backgroundTypeText, activeDragTarget = _activeDragTarget;
 
-- (void)dealloc
-{
-	[_backgroundTypeText release];
-	[super dealloc];
-}
-
 - (void)setBackgroundTypeText:(NSString *)typeText
 {
 	if (_backgroundTypeText != typeText) {
-		[_backgroundTypeText release];
-		_backgroundTypeText = [typeText retain];
+		_backgroundTypeText = [typeText copy];
 		
 		NSString *text = [NSString stringWithFormat:NSLocalizedString(@"Default %@", @"Default %@"), typeText];
 		
@@ -93,7 +86,6 @@
 	[textCell setTextColor:[self isHighlighted] ? [NSColor whiteColor] : [NSColor disabledControlTextColor]];
 	[textCell setStringValue:NSLocalizedString(@"Default Alternate Background", @"ALTERNATE_BACKGROUND_INFO")];
 	[textCell drawWithFrame:drawFrame inView:self];
-	[textCell release];
 }
 
 - (void)drawRect:(NSRect)rect

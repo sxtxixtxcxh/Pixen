@@ -14,12 +14,6 @@
 
 @synthesize previousCelImage = _previousCelImage;
 
-- (void)dealloc
-{
-	[_previousCelImage release];
-	[super dealloc];
-}
-
 - (void)drawRect:(NSRect)rect
 {
 	[super drawRect:rect];

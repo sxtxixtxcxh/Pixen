@@ -26,8 +26,8 @@
 
 - (NSCursor *)cursor
 {
-	return [[[NSCursor alloc] initWithImage:[NSImage imageNamed:@"magic_bw"]
-									hotSpot:NSMakePoint(4.0f, 4.0f)] autorelease];
+	return [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"magic_bw"]
+									hotSpot:NSMakePoint(4.0f, 4.0f)];
 }
 
 - (BOOL)shiftKeyDown

@@ -6,32 +6,18 @@
 //
 
 @interface PXGridSettingsController : NSWindowController
-{
-  @private
-	NSColorWell *_colorWell;
-	NSButton *_shouldDrawCheckBox;
-	NSTextField *_colorLabel;
-	NSTextField *_sizeLabel;
-	
-	int _width;
-	int _height;
-	NSColor *_color;
-	BOOL _shouldDraw;
-	
-	id _delegate;
-}
 
-@property (nonatomic, assign) IBOutlet NSColorWell *colorWell;
-@property (nonatomic, assign) IBOutlet NSButton *shouldDrawCheckBox;
-@property (nonatomic, assign) IBOutlet NSTextField *colorLabel;
-@property (nonatomic, assign) IBOutlet NSTextField *sizeLabel;
+@property (nonatomic, weak) IBOutlet NSColorWell *colorWell;
+@property (nonatomic, weak) IBOutlet NSButton *shouldDrawCheckBox;
+@property (nonatomic, weak) IBOutlet NSTextField *colorLabel;
+@property (nonatomic, weak) IBOutlet NSTextField *sizeLabel;
 
 @property (nonatomic, assign) int width;
 @property (nonatomic, assign) int height;
-@property (nonatomic, retain) NSColor *color;
+@property (nonatomic, strong) NSColor *color;
 @property (nonatomic, assign) BOOL shouldDraw;
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, weak) id delegate;
 
 - (IBAction)update:(id)sender;
 - (IBAction)useAsDefaults:(id)sender;

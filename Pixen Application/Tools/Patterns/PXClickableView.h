@@ -9,12 +9,11 @@
 {
   @private
 	BOOL _selected;
-	id _delegate;
 }
 
 @property (nonatomic, assign) BOOL selected;
 
-@property (nonatomic, assign) IBOutlet id delegate;
+@property (nonatomic, weak) IBOutlet id delegate;
 
 @end
 

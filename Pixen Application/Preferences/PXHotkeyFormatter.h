@@ -8,12 +8,8 @@
 @protocol PXHotkeyFormatterDelegate;
 
 @interface PXHotkeyFormatter : NSFormatter
-{
-  @private
-	id < PXHotkeyFormatterDelegate > _delegate;
-}
 
-@property (nonatomic, assign) id < PXHotkeyFormatterDelegate > delegate;
+@property (nonatomic, weak) id < PXHotkeyFormatterDelegate > delegate;
 
 - (NSString *)stringForObjectValue:(id)anObject;
 - (BOOL)getObjectValue:(id *)anObject forString:(NSString *)string errorDescription:(NSString **)error;

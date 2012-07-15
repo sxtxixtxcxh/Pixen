@@ -92,7 +92,7 @@
 		[layer setSize:[self size]];
 	}
 	else if ([type isEqualToString:PXNSImagePboardType]) {
-		NSImage *image = [[[NSImage alloc] initWithPasteboard:board] autorelease];
+		NSImage *image = [[NSImage alloc] initWithPasteboard:board];
 		
 		if (![self canContinuePasteOf:NSLocalizedString(@"image", @"image") size:[image size]])
 			return nil;

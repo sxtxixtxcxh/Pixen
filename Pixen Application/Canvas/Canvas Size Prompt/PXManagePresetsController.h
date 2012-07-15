@@ -9,11 +9,10 @@
 {
   @private
 	NSArray *_presets;
-	NSTableView *_tableView;
 	BOOL _canDeletePreset;
 }
 
-@property (nonatomic, assign) IBOutlet NSTableView *tableView;
+@property (nonatomic, weak) IBOutlet NSTableView *tableView;
 
 @property (nonatomic, assign) BOOL canDeletePreset;
 

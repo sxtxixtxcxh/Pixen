@@ -31,12 +31,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	self.webView = nil;
-	[super dealloc];
-}
-
 - (void)awakeFromNib
 {
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"PixenIntro" ofType:nil];

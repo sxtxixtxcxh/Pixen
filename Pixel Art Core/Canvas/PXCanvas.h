@@ -22,7 +22,7 @@ typedef BOOL *PXSelectionMask;
 	//of mostly everything to allow for moving around responsibilities
 	//at this point.  is it worth it?  yeah, probably.  but do I have time
 	//for it now?  well...  --joe
-	PXLayer *activeLayer;
+	PXLayer *__weak activeLayer;
 	NSMutableArray *tempLayers;
 	
 	PXSelectionMask selectionMask;
@@ -31,7 +31,7 @@ typedef BOOL *PXSelectionMask;
 	
 	NSRect canvasRect;  //Cached because [self size] and NSMakeRect slow things down when containsPoint is called a bunch
 	NSRect selectedRect;
-	NSUndoManager *undoManager; // Cached from PXCanvasDocument
+	NSUndoManager *__weak undoManager; // Cached from PXCanvasDocument
 	NSPointerArray *_drawnPoints;
 	PXColorArrayRef _oldColors, _newColors;
 	
@@ -45,9 +45,9 @@ typedef BOOL *PXSelectionMask;
 	NSCountedSet *_plusColors;
 }
 
-@property (nonatomic, retain) PXGrid *grid;
+@property (nonatomic, strong) PXGrid *grid;
 
-@property (nonatomic, readonly) NSArray *tempLayers;
+@property (nonatomic, strong, readonly) NSArray *tempLayers;
 
 - (void)refreshWholePalette;
 

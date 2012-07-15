@@ -41,13 +41,13 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 
 - (PXToolPropertiesController *)createPropertiesController
 {
-	return [[PXFillToolPropertiesController new] autorelease];
+	return [PXFillToolPropertiesController new];
 }
 
 - (NSCursor *)cursor
 {
-	return [[[NSCursor alloc] initWithImage:[NSImage imageNamed:@"paintbucket_bw.png"]
-									hotSpot:NSMakePoint(11.0f, 15.0f)] autorelease];
+	return [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"paintbucket_bw.png"]
+									hotSpot:NSMakePoint(11.0f, 15.0f)];
 }
 
 - (BOOL)commandKeyDown 
@@ -226,8 +226,6 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 	}
 	NSRect bounds = NSMakeRect(leftBound, lowerBound, rightBound - leftBound + 1, upperBound - lowerBound + 1);
 	[self fillPixelsInBOOLArray:pointsToFill withColor:fillColor withBoundsRect:bounds ofCanvas:canvas];
-	[consideredPoints release];
-	[pointsToFill release];
 	free(points);
 	[canvas registerForUndo];
 }

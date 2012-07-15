@@ -11,10 +11,9 @@
 {
   @private
 	PXCanvasPrintView *_printableView;
-	PXCanvasWindowController *_windowController;
 }
 
-@property (nonatomic, retain) PXCanvasWindowController *windowController;
+@property (nonatomic, strong) PXCanvasWindowController *windowController;
 
 - (PXCanvas *)canvas;
 - (NSArray *)canvases;

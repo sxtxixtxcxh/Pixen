@@ -14,10 +14,9 @@
 {
   @private
 	NSMutableArray *cels;
-	NSUndoManager *undoManager;
 }
 
-@property (nonatomic, assign) NSUndoManager *undoManager;
+@property (nonatomic, weak) NSUndoManager *undoManager;
 
 - (NSArray *)canvases;
 - (PXCel *)celAtIndex:(NSUInteger)index;

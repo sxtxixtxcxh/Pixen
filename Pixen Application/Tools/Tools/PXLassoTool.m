@@ -137,8 +137,7 @@
 		
 		self.path = [NSBezierPath bezierPath];
 		[self.path appendBezierPathWithRect:NSMakeRect(aPoint.x, aPoint.y, 1, 1)];
-		[linePath release];
-		linePath = [[NSBezierPath bezierPath] retain];
+		linePath = [NSBezierPath bezierPath];
 		[linePath moveToPoint:origin];
 	}
 }

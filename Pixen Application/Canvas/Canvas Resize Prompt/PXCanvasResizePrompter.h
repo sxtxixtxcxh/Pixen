@@ -9,25 +9,16 @@
 @protocol PXCanvasResizePrompterDelegate;
 
 @interface PXCanvasResizePrompter : NSWindowController
-{
-  @private
-	PXCanvasAnchorView *_anchorView;
-	NSTextField *_widthField, *_heightField;
-	NSColorWell *_backgroundColorWell;
-	NSSize _oldSize;
-	
-	id < PXCanvasResizePrompterDelegate > _delegate;
-}
 
-@property (nonatomic, assign) IBOutlet PXCanvasAnchorView *anchorView;
-@property (nonatomic, assign) IBOutlet NSTextField *widthField, *heightField;
-@property (nonatomic, assign) IBOutlet NSColorWell *backgroundColorWell;
+@property (nonatomic, weak) IBOutlet PXCanvasAnchorView *anchorView;
+@property (nonatomic, weak) IBOutlet NSTextField *widthField, *heightField;
+@property (nonatomic, weak) IBOutlet NSColorWell *backgroundColorWell;
 
-@property (nonatomic, retain) NSColor *backgroundColor;
+@property (nonatomic, strong) NSColor *backgroundColor;
 @property (nonatomic, assign) NSSize oldSize;
 @property (nonatomic, assign) NSSize currentSize;
 
-@property (nonatomic, assign) id < PXCanvasResizePrompterDelegate > delegate;
+@property (nonatomic, weak) id < PXCanvasResizePrompterDelegate > delegate;
 
 - (void)promptInWindow:(NSWindow *)window;
 

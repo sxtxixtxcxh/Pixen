@@ -64,12 +64,6 @@ const CGFloat viewMargin = 1.0f;
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	
-	[palette release];
-	[_visibleViews release];
-	[_recycledViews release];
-	
-	[super dealloc];
 }
 
 - (BOOL)isFlipped
@@ -112,13 +106,13 @@ const CGFloat viewMargin = 1.0f;
 
 - (PXPaletteColorView *)dequeueRecycledView
 {
-	PXPaletteColorView *view = [[_recycledViews anyObject] retain];
+	PXPaletteColorView *view = [_recycledViews anyObject];
 	
 	if (view) {
 		[_recycledViews removeObject:view];
 	}
 	
-	return [view autorelease];
+	return view;
 }
 
 - (BOOL)isDisplayingViewForIndex:(NSUInteger)index
@@ -173,7 +167,7 @@ const CGFloat viewMargin = 1.0f;
 		NSRect frame = NSMakeRect(viewMargin*2 + i*width, viewMargin*2 + j*width, width - viewMargin*2, width - viewMargin*2);
 		
 		if (!view) {
-			view = [[[PXPaletteColorView alloc] initWithFrame:frame] autorelease];
+			view = [[PXPaletteColorView alloc] initWithFrame:frame];
 		}
 		else {
 			[view setFrame:frame];
@@ -201,8 +195,7 @@ const CGFloat viewMargin = 1.0f;
 	{
 		selectionIndex = NSNotFound;
 		
-		[palette release];
-		palette = [pal retain];
+		palette = pal;
 		
 		[self reload];
 	}
@@ -497,8 +490,6 @@ const CGFloat viewMargin = 1.0f;
 		[self reload];
 		
 		[_insertionView removeFromSuperview];
-		
-		[_insertionView release];
 		_insertionView = nil;
 		
 		_clickedCelIndex = NSNotFound;

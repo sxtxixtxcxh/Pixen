@@ -38,7 +38,6 @@
 	
 	NSString *string = [[NSString alloc] initWithContentsOfFile:path encoding:NSASCIIStringEncoding error:nil];
 	NSString *contents = [string stringByReplacingOccurrencesOfString:@"VERSION_PLACEHOLDER" withString:version];
-	[string release];
 	
 	NSURL *baseURL = [[NSBundle mainBundle] resourceURL];
 	

@@ -8,10 +8,9 @@
 @interface PXBackgroundPreviewView : NSView
 {
   @private
-	NSImage *image;
 	NSRect functionalRect;
 }
 
-@property (nonatomic, retain) NSImage *image;
+@property (nonatomic, strong) NSImage *image;
 
 @end

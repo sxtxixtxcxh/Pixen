@@ -27,18 +27,11 @@
 - (NSImage *)previewImageOfSize:(NSSize)size
 {
 	NSRect imageRect = NSInsetRect(NSMakeRect(0, 0, size.width, size.height), 5, 5);
-	NSImage *previewImage = [[[NSImage alloc] initWithSize:imageRect.size] autorelease];
+	NSImage *previewImage = [[NSImage alloc] initWithSize:imageRect.size];
 	[previewImage lockFocus];
 	[self drawRect:NSInsetRect(imageRect, -5, -5) withinRect:NSInsetRect(imageRect, -5, -5)];
 	[previewImage unlockFocus];
 	return previewImage;
-}
-
-- (void)dealloc
-{
-	[self setName:nil];
-	[self setCachedImage:nil];
-	[super dealloc];
 }
 
 - (id)init
@@ -72,7 +65,7 @@
 	if (cachedImage == nil || !NSEqualSizes(size, cachedImageSize)) {
 		cachedImageSize = size;
 		
-		self.cachedImage = [[[NSImage alloc] initWithSize:size] autorelease];
+		self.cachedImage = [[NSImage alloc] initWithSize:size];
 		[cachedImage lockFocus];
 		
 		NSRect rect = NSMakeRect(0, 0, size.width, size.height);

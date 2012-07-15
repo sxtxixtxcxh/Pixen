@@ -15,21 +15,18 @@ typedef enum {
 @interface PXPaletteController : NSViewController
 {
   @private
-	NSProgressIndicator *_progressIndicator;
 	PXPaletteMode _mode;
 	PXPalette *_frequencyPalette, *_recentPalette;
-	PXPaletteView *_paletteView;
-	PXDocument *_document;
 	
 	//FIXME: evaluate thread-safety
 	dispatch_queue_t _frequencyQueue;
 	dispatch_queue_t _recentQueue;
 }
 
-@property (nonatomic, assign) IBOutlet NSProgressIndicator *progressIndicator;
-@property (nonatomic, assign) IBOutlet PXPaletteView *paletteView;
+@property (nonatomic, weak) IBOutlet NSProgressIndicator *progressIndicator;
+@property (nonatomic, weak) IBOutlet PXPaletteView *paletteView;
 
-@property (nonatomic, assign) PXDocument *document;
+@property (nonatomic, weak) PXDocument *document;
 
 - (BOOL)isPaletteIndexKey:(NSEvent *)event;
 

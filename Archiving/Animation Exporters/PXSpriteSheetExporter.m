@@ -44,7 +44,6 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
 }
 
 - (NSDictionary *)findRepresentationForDocument:(PXAnimationDocument *)document
@@ -83,8 +82,6 @@
 		
 		[documentRepresentationsController addObject:dict];
 	}
-	
-	[oldRepresentations release];
 }
 
 - (void)documentsChanged:(NSNotification *)notification
@@ -167,7 +164,7 @@
 	
 	[NSGraphicsContext restoreGraphicsState];
 	
-	return [spriteSheet autorelease];
+	return spriteSheet;
 }
 
 - (IBAction)updatePreview:(id)sender

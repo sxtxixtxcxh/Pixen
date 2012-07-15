@@ -12,8 +12,7 @@
 
 - (void)setImage:(NSImage *)im
 {
-	[image release];
-	image = [im retain];
+	image = im;
 	NSSize imageSize = [image size];
 	NSSize viewSize = [self bounds].size;
 	functionalRect.origin = NSZeroPoint;
@@ -59,7 +58,6 @@
 	[path setLineJoinStyle:NSMiterLineJoinStyle];
 	[shadow set];
 	[path fill];
-	[shadow release];
 	[NSGraphicsContext restoreGraphicsState];
 	[[self image] drawInRect:rectBounds
 					fromRect:NSMakeRect(0, 0, [[self image] size].width, [[self image] size].height)

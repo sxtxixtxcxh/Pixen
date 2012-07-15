@@ -8,7 +8,6 @@
 @interface PXImageSizePrompter : NSWindowController < NSWindowDelegate >
 {
   @private
-	NSTextField *_promptField;
 	IBOutlet PXNSImageView *preview;
 	IBOutlet NSView *widthIndicator, *heightIndicator;
 	IBOutlet NSPopUpButton *presetsButton;
@@ -28,13 +27,13 @@
 	BOOL accepted;
 }
 
-@property (nonatomic, assign) IBOutlet NSTextField *promptField;
+@property (nonatomic, weak) IBOutlet NSTextField *promptField;
 
 @property (nonatomic, readonly) NSSize size;
 
 @property (nonatomic, assign) NSInteger width;
 @property (nonatomic, assign) NSInteger height;
-@property (nonatomic, retain) NSColor *backgroundColor;
+@property (nonatomic, strong) NSColor *backgroundColor;
 
 - (BOOL)runModal;
 

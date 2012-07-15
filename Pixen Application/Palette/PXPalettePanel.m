@@ -33,7 +33,7 @@
 	[panel setFrame:[window frame] display:NO];
 	previousPoint = [panel cascadeTopLeftFromPoint:topLeft];
 	
-	return [panel autorelease];
+	return panel;
 }
 
 - (id)initWithPalette:(PXPalette *)palette
@@ -55,12 +55,6 @@
 	[_vc reloadDataAndShow:palette];
 	
 	return self;
-}
-
-- (void)dealloc
-{
-    [_vc release];
-    [super dealloc];
 }
 
 - (PXPaletteView *)paletteView

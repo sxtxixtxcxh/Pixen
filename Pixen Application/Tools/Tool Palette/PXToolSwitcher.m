@@ -62,7 +62,7 @@
 	
 	for (Class current in [[self class] toolClasses])
 	{
-		[tools addObject:[[[current alloc] init] autorelease]];
+		[tools addObject:[[current alloc] init]];
 	}
 	
 	[tools makeObjectsPerformSelector:@selector(setSwitcher:) withObject:self];
@@ -72,12 +72,6 @@
 	_locked = NO;
 	
 	return self;
-}
-
-- (void)dealloc
-{
-  [tools release];
-  [super dealloc];
 }
 
 - (id) selectedTool
@@ -144,8 +138,7 @@
 - (void)setColor:(NSColor *)color
 {
 	//FIXME: coupled
-	[_color release];
-	_color = [color retain];
+	_color = color;
 	
 	for (PXTool *currentTool in tools) {
 		[currentTool setColor:PXColorFromNSColor(_color)];

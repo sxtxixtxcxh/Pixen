@@ -11,12 +11,6 @@
 
 @synthesize image = _image;
 
-- (void)dealloc
-{
-	[_image release];
-	[super dealloc];
-}
-
 - (void)drawRect:(NSRect)rect
 {
 	NSPoint point;

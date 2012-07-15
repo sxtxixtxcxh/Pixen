@@ -8,13 +8,8 @@
 #import "PXBackgroundTemplateView.h"
 
 @interface PXDefaultBackgroundTemplateView : PXBackgroundTemplateView
-{
-  @private
-	NSString *_backgroundTypeText;
-	BOOL _activeDragTarget;
-}
 
-@property (nonatomic, retain) NSString *backgroundTypeText;
+@property (nonatomic, copy) NSString *backgroundTypeText;
 @property (nonatomic, assign) BOOL activeDragTarget;
 
 @end

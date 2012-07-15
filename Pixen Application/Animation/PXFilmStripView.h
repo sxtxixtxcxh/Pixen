@@ -11,9 +11,6 @@
 @interface PXFilmStripView : NSView
 {
   @private
-	IBOutlet id dataSource;
-	IBOutlet id delegate;
-	
 	NSImage *spokeHoleCache;
 	
 	NSRect *celRects;
@@ -38,8 +35,8 @@
 	NSInteger activeCelForField;
 }
 
-@property (nonatomic, assign) id delegate;
-@property (nonatomic, assign) id dataSource;
+@property (nonatomic, weak) IBOutlet id delegate;
+@property (nonatomic, weak) IBOutlet id dataSource;
 
 - (void)reloadData;
 - (float)minimumHeight;

@@ -39,12 +39,6 @@
 	}
 }
 
-- (void)dealloc
-{
-	[menu release];
-	[super dealloc];
-}
-
 - (id)initWithFrame:(NSRect)frame
 {
 	self = [super initWithFrame:frame];

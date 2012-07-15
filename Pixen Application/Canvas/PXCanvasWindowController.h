@@ -13,11 +13,12 @@
 @interface PXCanvasWindowController : NSWindowController < PXCanvasResizePrompterDelegate >
 {
   @private
-	PXCanvas *canvas;
-	
 	IBOutlet id zoomPercentageBox;
 	IBOutlet id zoomStepper;
 	IBOutlet NSView *zoomView;
+	
+	PXCanvasController *__weak canvasController;
+	PXCanvas *__weak canvas;
 	
 	PXGridSettingsController *_gridSettingsController;
 	PXCanvasResizePrompter *_resizePrompter;
@@ -26,21 +27,17 @@
 	PXPaletteController *paletteController;
 	
 	NSToolbar *toolbar;
-	IBOutlet PXCanvasController *canvasController;
-	
-	IBOutlet NSSplitView *splitView;
-	NSView *sidebarSplit, *layerSplit, *canvasSplit, *paletteSplit;
 }
 
-@property (nonatomic, readonly) IBOutlet PXCanvasController *canvasController;
+@property (nonatomic, weak) IBOutlet PXCanvasController *canvasController;
 
 @property (nonatomic, readonly) PXScaleController *scaleController;
 @property (nonatomic, readonly) PXCanvasResizePrompter *resizePrompter;
 
-@property (nonatomic, assign) PXCanvas *canvas;
+@property (nonatomic, weak) PXCanvas *canvas;
 
-@property (nonatomic, readonly) IBOutlet NSSplitView *splitView;
-@property (nonatomic, assign) IBOutlet NSView *sidebarSplit, *layerSplit, *canvasSplit, *paletteSplit;
+@property (nonatomic, weak) IBOutlet NSSplitView *splitView;
+@property (nonatomic, weak) IBOutlet NSView *sidebarSplit, *layerSplit, *canvasSplit, *paletteSplit;
 
 - (PXCanvasView *)view;
 - (NSView *)layerSplit;

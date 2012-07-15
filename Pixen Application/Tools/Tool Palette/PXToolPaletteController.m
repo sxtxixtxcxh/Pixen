@@ -112,9 +112,6 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[leftSwitcher release];
-	[rightSwitcher release];
-	[super dealloc];
 }
 
 + (PXToolPaletteController *)sharedToolPaletteController

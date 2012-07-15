@@ -21,12 +21,6 @@
 	[self addSubview:_sizeSelector];
 }
 
-- (void)dealloc
-{
-	[_sizeSelector release];
-	[super dealloc];
-}
-
 - (void)tile
 {
 	[super tile];

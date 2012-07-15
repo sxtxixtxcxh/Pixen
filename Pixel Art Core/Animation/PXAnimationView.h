@@ -8,11 +8,7 @@
 #import "PXCanvasView.h"
 
 @interface PXAnimationView : PXCanvasView
-{
-  @private
-	NSImage *_previousCelImage;
-}
 
-@property (nonatomic, retain) NSImage *previousCelImage;
+@property (nonatomic, strong) NSImage *previousCelImage;
 
 @end

@@ -18,7 +18,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-	return [[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:self]] retain];
+	return [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:self]];
 }
 
 - (void)recacheSize
@@ -46,21 +46,10 @@
 	if (selectionMask)
 		free(selectionMask);
 	
-	[tempLayers release];
-	[layers release];
-	[bgConfig release];
-	[grid release];
-	
-	[_drawnPoints release];
 	PXColorArrayRelease(_oldColors);
 	PXColorArrayRelease(_newColors);
 	
-	[_minusColors release];
-	[_plusColors release];
-	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	
-	[super dealloc];
 }
 
 - (void)setUndoManager:(NSUndoManager *)manager
@@ -160,7 +149,7 @@
 			NSData *newData = [NSData dataWithBytes:newMask length:newMaskLength];
 			NSData *oldData = [NSData dataWithBytes:selectionMask length:[self selectionMaskSize]];
 			
-			[self setLayersNoResize:[[layers deepMutableCopy] autorelease] fromLayers:layers];
+			[self setLayersNoResize:[layers deepMutableCopy] fromLayers:layers];
 			for (PXLayer *current in layers)
 			{
 				[current setSize:newSize withOrigin:origin backgroundColor:color];
@@ -173,9 +162,9 @@
 	}
 	else 
 	{
-		[self insertLayer:[[[PXLayer alloc] initWithName:NSLocalizedString(@"Main Layer", @"Main Layer")
+		[self insertLayer:[[PXLayer alloc] initWithName:NSLocalizedString(@"Main Layer", @"Main Layer")
 													size:newSize
-										   fillWithColor:color] autorelease] atIndex:0];
+										   fillWithColor:color] atIndex:0];
 		
 		[self reallyRefreshWholePalette];
 		[self activateLayer:[layers objectAtIndex:0]];
@@ -257,7 +246,7 @@
 		[palette incrementCountForColor:PXColorFromNSColor(color) byAmount:[colors countForObject:color]];
 	}
 	
-	return [palette autorelease];
+	return palette;
 }
 
 @end

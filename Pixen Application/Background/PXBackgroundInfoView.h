@@ -15,17 +15,16 @@
 	NSBezierPath *cachedBackgroundPath;
 	NSPoint dragOrigin;
 	
-	PXBackground *background;
-	
 	NSImage *previewImage;
 	BOOL isActiveDragTarget;
 }
 
 - (IBAction)nameChanged:(id)sender;
 - (void)setPreviewImage:(NSImage *)img;
-- (void)setBackground:(PXBackground *)bg;
 
-@property (nonatomic, readonly) NSTextField *nameField;
+@property (nonatomic, weak) PXBackground *background;
+
+@property (nonatomic, strong, readonly) NSTextField *nameField;
 
 @end
 

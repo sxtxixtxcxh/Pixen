@@ -53,7 +53,7 @@
 		
 		[palette addColor:PXColorMake(red, green, blue, 255)];
 	}
-	return [palette autorelease];
+	return palette;
 }
 
 @end

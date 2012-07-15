@@ -8,12 +8,10 @@
 @interface PXBackground : NSViewController <NSCoding, NSCopying>
 {
   @private
-	NSString *name;
 	NSSize cachedImageSize;
-	NSImage *cachedImage;
 }
 
-@property (nonatomic, retain) NSImage *cachedImage;
+@property (nonatomic, strong) NSImage *cachedImage;
 @property (nonatomic, copy) NSString *name;
 
 - (NSImage *)previewImageOfSize:(NSSize)size;

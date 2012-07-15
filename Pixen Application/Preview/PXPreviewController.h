@@ -8,17 +8,11 @@
 @interface PXPreviewController : NSWindowController
 {
   @private
-	PXCanvasPreviewView *view;
-	PXPreviewControlView *controlView;
-	NSButton *playPauseButton;
-	
-	PXCanvas *canvas;
 	NSRect updateRect;
 	NSWindow *resizeSizeWindow;
 	PXPreviewBezelView *bezelView;
 	NSTrackingRectTag trackingTag;
 	
-	PXAnimation *_animation;
 	NSTimer *_animationTimer;
 	NSUInteger _currentAnimationCelIndex;
 	
@@ -28,12 +22,12 @@
 	PXBackgroundController *backgroundController;
 }
 
-@property (nonatomic, assign) IBOutlet PXCanvasPreviewView *view;
-@property (nonatomic, assign) IBOutlet PXPreviewControlView *controlView;
-@property (nonatomic, assign) IBOutlet NSButton *playPauseButton;
+@property (nonatomic, weak) IBOutlet PXCanvasPreviewView *view;
+@property (nonatomic, weak) IBOutlet PXPreviewControlView *controlView;
+@property (nonatomic, weak) IBOutlet NSButton *playPauseButton;
 
-@property (nonatomic, assign) PXAnimation *animation;
-@property (nonatomic, assign) PXCanvas *singleCanvas;
+@property (nonatomic, weak) PXAnimation *animation;
+@property (nonatomic, weak) PXCanvas *singleCanvas;
 
 + (id)sharedPreviewController;
 

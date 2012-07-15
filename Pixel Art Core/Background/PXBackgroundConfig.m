@@ -43,16 +43,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[_mainBackground release];
-	[_mainPreviewBackground release];
-	[_alternateBackground release];
-	[_alternatePreviewBackground release];
-	
-	[super dealloc];
-}
-
 - (void)encodeWithCoder:(NSCoder *)coder
 {
 	[coder encodeObject:self.mainBackground forKey:@"mainBackground"];
@@ -79,7 +69,7 @@
 	}
 	else
 	{
-		PXSlashyBackground *background = [[[PXSlashyBackground alloc] init] autorelease];
+		PXSlashyBackground *background = [[PXSlashyBackground alloc] init];
 		[self setMainBackground:background];
 		
 		[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:background]
@@ -104,7 +94,7 @@
 	}
 	else
 	{
-		PXMonotoneBackground *background = [[[PXMonotoneBackground alloc] init] autorelease];
+		PXMonotoneBackground *background = [[PXMonotoneBackground alloc] init];
 		[self setMainPreviewBackground:background];
 		
 		[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:background]

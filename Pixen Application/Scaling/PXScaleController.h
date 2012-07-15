@@ -16,14 +16,12 @@
 	IBOutlet NSTextField *pixelsWideField, *pixelsHighField, *percentageWideField, *percentageHighField;
 	IBOutlet NSTextView *algorithmInfoView;
 	
-	id < PXScaleControllerDelegate > delegate;
-	
 	NSSize newSize;
 	
 	PXCanvasWindowController *canvasController;
 }
 
-@property (nonatomic, assign) id < PXScaleControllerDelegate > delegate;
+@property (nonatomic, weak) id < PXScaleControllerDelegate > delegate;
 
 - (void)scaleCanvasFromController:(PXCanvasWindowController *)canvasController
 				   modalForWindow:(NSWindow *)theWindow;

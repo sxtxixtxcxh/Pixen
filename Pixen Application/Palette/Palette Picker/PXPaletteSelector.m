@@ -24,12 +24,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[_palettes release];
-	[super dealloc];
-}
-
 - (BOOL)isEnabled
 {
 	return [_selectionPopup isEnabled];
@@ -89,7 +83,6 @@
 		[item setRepresentedObject:palette];
 		
 		[[_selectionPopup menu] addItem:item];
-		[item release];
 	}
 	
 	if (([userPalettes count] > 0) && ([systemPalettes count] > 0))
@@ -106,7 +99,6 @@
 		[item setRepresentedObject:palette];
 		
 		[[_selectionPopup menu] addItem:item];
-		[item release];
 	}
 	
 	//FIXME: this should do something about showing the document's palette

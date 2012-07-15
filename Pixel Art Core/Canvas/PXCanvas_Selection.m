@@ -25,9 +25,9 @@
 - (void)promoteSelection
 {
 	[self beginUndoGrouping]; {
-		PXLayer *newLayer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Promoted Selection", @"Promoted Selection")
+		PXLayer *newLayer = [[PXLayer alloc] initWithName:NSLocalizedString(@"Promoted Selection", @"Promoted Selection")
 													  size:[self size]
-											 fillWithColor:PXGetClearColor()] autorelease];
+											 fillWithColor:PXGetClearColor()];
 		
 		int i, j;
 		NSPoint point;
@@ -213,7 +213,7 @@
 {
 	NSRect selectionRect = [self selectedRect];
 	int i, j;
-	PXLayer *tempLayer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Pasted Layer", @"Pasted Layer") size:[self size]] autorelease];
+	PXLayer *tempLayer = [[PXLayer alloc] initWithName:NSLocalizedString(@"Pasted Layer", @"Pasted Layer") size:[self size]];
 	[tempLayer setCanvas:self];
 	
 	[self beginColorUpdates];
@@ -390,7 +390,7 @@
 	BOOL mergeLayers = [[properties objectForKey:PXMergeLayersKey] boolValue];
 	NSBitmapImageRep *sourceImageRep = mergeLayers ? [self imageRep] : [activeLayer imageRep];
 	
-	NSBitmapImageRep *tempImageRep = [[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+	NSBitmapImageRep *tempImageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
 																			  pixelsWide:selectionRect.size.width
 																			  pixelsHigh:selectionRect.size.height
 																		   bitsPerSample:8
@@ -399,7 +399,7 @@
 																				isPlanar:NO
 																		  colorSpaceName:NSCalibratedRGBColorSpace
 																			 bytesPerRow:selectionRect.size.width * 4
-																			bitsPerPixel:32] autorelease];
+																			bitsPerPixel:32];
 	
 	for (int i = NSMinX(selectionRect); i < NSMaxX(selectionRect); i++)
 	{

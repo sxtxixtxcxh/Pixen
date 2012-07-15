@@ -117,7 +117,6 @@
 		[layer setCanvas:self];
 	}
 	
-	[layers release];
 	layers = mutableNewLayers;
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasSetLayersNotificationName object:self];
@@ -268,7 +267,7 @@
 
 - (void)duplicateLayerAtIndex:(NSUInteger)index
 {
-	PXLayer *result = [[[layers objectAtIndex:index] copy] autorelease];
+	PXLayer *result = [[layers objectAtIndex:index] copy];
 	result.name = [result.name stringByAppendingString:NSLocalizedString(@" Copy", @" Copy")];
 	
 	[self beginUndoGrouping]; {
@@ -299,7 +298,7 @@
 	BOOL wasActive = aLayer == activeLayer;
 	NSUInteger index = [layers indexOfObject:aLayer];
 	[self beginUndoGrouping]; {
-		[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];
+		[self setLayers:[layers deepMutableCopy] fromLayers:layers];
 		[[layers objectAtIndex:index-1] compositeUnder:[layers objectAtIndex:index] flattenOpacity:YES];
 		[self removeLayerAtIndex:index];
 		if(wasActive)

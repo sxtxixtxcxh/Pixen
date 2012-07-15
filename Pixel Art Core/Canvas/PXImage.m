@@ -385,7 +385,7 @@ NSData *PXImage_colorData(PXImage *self)
 		}
 	}
 	
-	return [colorData autorelease];
+	return colorData;
 }
 
 void PXImage_setColorData(PXImage *self, NSData *colorData)
@@ -634,7 +634,6 @@ void PXImage_drawInRectFromRectWithOperationFraction(PXImage *self, NSRect dst, 
 		PXTileDraw(self->tiles[i], source, CGRectMake(drawPoint.x, drawPoint.y, drawSize.width, drawSize.height));
 	}
 	CGContextTranslateCTM(target, fullDest.origin.x, fullDest.origin.y);
-  [transform release];
 }
 
 NSBitmapImageRep *PXImage_imageRep(PXImage *self)
@@ -665,5 +664,5 @@ NSBitmapImageRep *PXImage_imageRep(PXImage *self)
 	
 	[NSGraphicsContext restoreGraphicsState];
 	
-	return [imageRep autorelease];
+	return imageRep;
 }

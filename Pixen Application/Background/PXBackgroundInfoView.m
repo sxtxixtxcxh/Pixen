@@ -8,7 +8,7 @@
 
 @implementation PXBackgroundInfoView
 
-@synthesize nameField;
+@synthesize nameField, background;
 
 - (id)initWithFrame:(NSRect)frameRect
 {
@@ -21,9 +21,6 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[cachedEmptyPath release];
-	[previewImage release];
-	[super dealloc];
 }
 
 - (void)mouseDown:event
@@ -42,8 +39,8 @@
 		return;
 	
 	NSData *viewData = [self dataWithPDFInsideRect:[self bounds]];
-	NSImage *viewImage = [[[NSImage alloc] initWithData:viewData] autorelease];
-	NSImage *bgImage = [[[NSImage alloc] initWithSize:[self bounds].size] autorelease];
+	NSImage *viewImage = [[NSImage alloc] initWithData:viewData];
+	NSImage *bgImage = [[NSImage alloc] initWithSize:[self bounds].size];
 	[bgImage lockFocus];
 	[[[NSColor whiteColor] colorWithAlphaComponent:0.66] set];
 	[[[NSColor lightGrayColor] colorWithAlphaComponent:0.66] set];
@@ -61,7 +58,7 @@
 {
 	if (!cachedEmptyPath)
 	{
-		cachedEmptyPath = [[NSBezierPath bezierPathWithRoundedRect:NSInsetRect([self bounds], 5, 5) cornerRadius:15] retain];
+		cachedEmptyPath = [NSBezierPath bezierPathWithRoundedRect:NSInsetRect([self bounds], 5, 5) cornerRadius:15];
 		[cachedEmptyPath setLineWidth:4];
 		CGFloat pattern[2] = { 15.0, 5.0 };
 		if (!isActiveDragTarget)
@@ -74,7 +71,7 @@
 {
 	if (!cachedBackgroundPath)
 	{
-		cachedBackgroundPath = [[NSBezierPath bezierPathWithRoundedRect:NSInsetRect([self bounds], 5, 5) cornerRadius:15] retain];
+		cachedBackgroundPath = [NSBezierPath bezierPathWithRoundedRect:NSInsetRect([self bounds], 5, 5) cornerRadius:15];
 		[cachedBackgroundPath setLineWidth:(isActiveDragTarget ? 3 : 1)];
 	}
 	return cachedBackgroundPath;
@@ -97,7 +94,6 @@
 		[textCell setTextColor:[NSColor disabledControlTextColor]];
 		[textCell setStringValue:NSLocalizedString(@"Drag a template here, and it will be displayed when the mouse is outside of the canvas.", @"ALTERNATE_BACKGROUND_INFO")];
 		[textCell drawWithFrame:drawFrame inView:self];
-        [textCell release];
 	}
 	else
 	{
@@ -108,7 +104,7 @@
 			[path stroke];
 		}
 		[[NSColor whiteColor] set];
-		NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
+		NSShadow *shadow = [[NSShadow alloc] init];
 		[shadow setShadowOffset:NSMakeSize(0, -2)];
 		[shadow setShadowBlurRadius:4];
 		[shadow setShadowColor:[NSColor blackColor]];
@@ -132,9 +128,7 @@
 	if ([[self backgroundPath] containsPoint:[self convertPoint:[sender draggingLocation] fromView:nil]])
 	{
 		isActiveDragTarget = YES;
-		[cachedEmptyPath release];
 		cachedEmptyPath = nil;
-		[cachedBackgroundPath release];
 		cachedBackgroundPath = nil;
 		[self setNeedsDisplay:YES];
 		return NSDragOperationCopy;
@@ -142,9 +136,7 @@
 	else
 	{
 		isActiveDragTarget = NO;
-		[cachedEmptyPath release];
 		cachedEmptyPath = nil;
-		[cachedBackgroundPath release];
 		cachedBackgroundPath = nil;
 		[self setNeedsDisplay:YES];
 		if ([[NSFileManager defaultManager] fileExistsAtPath:[[NSPasteboard pasteboardWithName:NSDragPboard] stringForType:PXBackgroundNamePboardType]])
@@ -160,9 +152,7 @@
 - (void)draggedImage:(NSImage *)anImage endedAt:(NSPoint)aPoint operation:(NSDragOperation)operation
 {
 	isActiveDragTarget = NO;
-	[cachedEmptyPath release];
 	cachedEmptyPath = nil;
-	[cachedBackgroundPath release];
 	cachedBackgroundPath = nil;
 	[self setNeedsDisplay:YES];
 	if(operation == NSDragOperationNone)
@@ -188,7 +178,7 @@
 		centeredRect.size.width /= aspectRatio;
 		centeredRect.origin.x += ((NSWidth([imageView bounds]) - 10) - NSWidth(centeredRect)) / 2.0;
 	}
-	NSImage *backgroundImage = [[[background previewImageOfSize:[imageView bounds].size] copy] autorelease];
+	NSImage *backgroundImage = [[background previewImageOfSize:[imageView bounds].size] copy];
 	[backgroundImage lockFocus];
 	[previewImage drawInRect:centeredRect fromRect:NSMakeRect(0, 0, [previewImage size].width, [previewImage size].height) operation:NSCompositeSourceOver fraction:1];
 	[backgroundImage unlockFocus];
@@ -198,17 +188,14 @@
 
 - (void)setPreviewImage:(NSImage *)img
 {
-	[previewImage release];
-	previewImage = [img retain];
+	previewImage = img;
 	[self fixThumbnailImage];
 }
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
 	isActiveDragTarget = NO;
-	[cachedEmptyPath release];
 	cachedEmptyPath = nil;
-	[cachedBackgroundPath release];
 	cachedBackgroundPath = nil;
 	[self setNeedsDisplay:YES];
 	NSPasteboard *pasteboard = [sender draggingPasteboard];

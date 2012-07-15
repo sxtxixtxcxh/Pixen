@@ -8,15 +8,8 @@
 #import "PXToolPropertiesController.h"
 
 @interface PXShapeToolPropertiesController : PXToolPropertiesController
-{
-  @private
-	NSColor *fillColor;
-	BOOL shouldFill;
-	BOOL shouldUseMainColorForFill;
-	int borderWidth;
-}
 
-@property (nonatomic, retain) NSColor *fillColor;
+@property (nonatomic, strong) NSColor *fillColor;
 @property (nonatomic, assign) BOOL shouldFill;
 @property (nonatomic, assign) BOOL shouldUseMainColorForFill;
 @property (nonatomic, assign) int borderWidth;

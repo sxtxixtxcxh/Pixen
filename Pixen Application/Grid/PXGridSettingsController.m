@@ -32,12 +32,6 @@
 	}
 }
 
-- (void)dealloc
-{
-	self.color = nil;
-	[super dealloc];
-}
-
 - (void)showWindow:(id)sender
 {
 	[super showWindow:sender];

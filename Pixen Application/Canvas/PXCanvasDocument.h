@@ -10,12 +10,8 @@
 @class PXCanvas, PXCanvasController;
 
 @interface PXCanvasDocument : PXDocument
-{
-  @private
-	PXCanvas *_canvas;
-}
 
-@property (nonatomic, retain) PXCanvas *canvas;
+@property (nonatomic, strong) PXCanvas *canvas;
 
 + (NSData *)dataRepresentationOfType:(NSString *)aType withCanvas:(PXCanvas *)canvas;
 - (void)loadFromPasteboard:(NSPasteboard *)board;

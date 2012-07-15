@@ -30,8 +30,6 @@
 
 - (void)setBackColor:(NSColor *)aColor
 {
-	[aColor retain];
-	[backColor release];
 	backColor = aColor;
 	
 	if (aColor)
@@ -80,12 +78,6 @@
 	self = [super initWithCoder:coder];
 	[self setBackColor:[coder decodeObjectForKey:@"backColor"]];
 	return self;
-}
-
-- (void)dealloc
-{
-	[self setBackColor:nil];
-	[super dealloc];
 }
 
 @end

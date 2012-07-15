@@ -9,18 +9,16 @@
 {
   @private
 	PXPattern *_pattern;
-	NSString *toolName, *patternFileName;
 	IBOutlet NSArrayController *patternsController;
 	IBOutlet NSScrollView *scrollView;
 	IBOutlet PXPatternEditorView *editorView;
 	IBOutlet NSTextField *promptField;
-	id delegate;
 }
 
 @property (nonatomic, copy) NSString *toolName;
 @property (nonatomic, copy) NSString *patternFileName;
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, weak) id delegate;
 
 - (void)setPattern:(PXPattern *)pattern;
 

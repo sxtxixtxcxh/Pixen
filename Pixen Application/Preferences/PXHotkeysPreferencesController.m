@@ -25,12 +25,6 @@
 	return [super initWithNibName:@"PXHotkeysPreferences" bundle:nil];
 }
 
-- (void)dealloc
-{
-	self.form = nil;
-	[super dealloc];
-}
-
 - (void)awakeFromNib
 {
 	for (NSCell *currentCell in [self.form cells])
@@ -44,7 +38,6 @@
 		formatter.delegate = self;
 		
 		[currentCell setFormatter:formatter];
-		[formatter release];
 	}
 }
 

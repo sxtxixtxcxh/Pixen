@@ -10,11 +10,10 @@
   @private
 	IBOutlet NSTextField *nameField;
 	IBOutlet NSTextField *promptString;
-	id _delegate;
 	BOOL _runningModal;
 }
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, weak) id delegate;
 
 - (void)promptInWindow:(NSWindow *)window;
 

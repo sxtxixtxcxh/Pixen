@@ -18,7 +18,6 @@
 	
 	NSMutableSet *pointsCopy = [_points mutableCopy];
 	[newPattern setPoints:pointsCopy];
-	[pointsCopy release];
 	
 	return newPattern;
 }
@@ -73,7 +72,7 @@
 	
 	[image unlockFocus];
 	
-	return [image autorelease];
+	return image;
 }
 
 - (id)initWithCoder:(NSCoder *)coder
@@ -92,27 +91,15 @@
 	[coder encodeSize:self.size forKey:@"size"];
 }
 
-- (void)dealloc
-{
-	[_points release];
-	[_pointsInBounds release];
-	[super dealloc];
-}
-
 - (void)setSize:(NSSize)newSize
 {
 	_size = newSize;
-	
-	[_pointsInBounds release];
 	_pointsInBounds = nil;
 }
 
 - (void)setPoints:(NSMutableSet *)newPoints
 {
-	[_points release];
-	_points = [newPoints retain];
-	
-	[_pointsInBounds release];
+	_points = newPoints;
 	_pointsInBounds = nil;
 }
 
@@ -140,7 +127,6 @@
 														object:self
 													  userInfo:nil];
 	
-	[_pointsInBounds release];
 	_pointsInBounds = nil;
 }
 
@@ -152,7 +138,6 @@
 														object:self
 													  userInfo:nil];
 	
-	[_pointsInBounds release];
 	_pointsInBounds = nil;
 }
 

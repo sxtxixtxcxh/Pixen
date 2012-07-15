@@ -351,7 +351,6 @@ NSUInteger PointSizeF (const void *item);
 	}
 	
 	free(red); free(green); free(blue); free(output); free(map);
-	[palette release];
 }
 
 NSUInteger PointSizeF (const void *item) {
@@ -365,7 +364,6 @@ NSUInteger PointSizeF (const void *item) {
 	NSPointerFunctions *pointF = [NSPointerFunctions pointerFunctionsWithOptions:options];
 	[pointF setSizeFunction:&PointSizeF];
 	
-	[_drawnPoints release];
 	_drawnPoints = [[NSPointerArray alloc] initWithPointerFunctions:pointF];
 	
 	PXColorArrayRelease(_oldColors);

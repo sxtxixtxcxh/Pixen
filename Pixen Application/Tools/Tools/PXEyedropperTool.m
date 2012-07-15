@@ -26,13 +26,13 @@
 
 - (PXToolPropertiesController *)createPropertiesController
 {
-	return [[PXEyedropperToolPropertiesController new] autorelease];
+	return [PXEyedropperToolPropertiesController new];
 }
 
 - (NSCursor *)cursor
 {
-	return [[[NSCursor alloc] initWithImage:[NSImage imageNamed:@"eyedropper_bw.png"]
-									hotSpot:NSMakePoint(14.0f, 14.0f)] autorelease];
+	return [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"eyedropper_bw.png"]
+									hotSpot:NSMakePoint(14.0f, 14.0f)];
 }
 
 /*

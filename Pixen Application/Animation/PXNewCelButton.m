@@ -20,13 +20,13 @@ const CGFloat PXPlusButtonPadding = 12.0f;
 {
 	self = [super initWithFrame:frame];
 	if (self) {
-		_buttonPath = [[NSBezierPath bezierPathWithRoundedRect:NSInsetRect([self bounds], 4.0f, 4.0f) cornerRadius:10.0f] retain];
+		_buttonPath = [NSBezierPath bezierPathWithRoundedRect:NSInsetRect([self bounds], 4.0f, 4.0f) cornerRadius:10.0f];
 		[_buttonPath setLineWidth:2.5f];
 		
 		CGFloat pattern[2] = { 9.0f, 3.0f };
 		[_buttonPath setLineDash:pattern count:2 phase:0.0f];
 		
-		_plusPath = [[NSBezierPath bezierPath] retain];
+		_plusPath = [NSBezierPath bezierPath];
 		[_plusPath setLineWidth:2.0f];
 		
 		NSPoint tempPoint = NSMakePoint(NSMaxX([self bounds]) - PXPlusButtonSize / 2 - PXPlusButtonPadding,
@@ -46,13 +46,6 @@ const CGFloat PXPlusButtonPadding = 12.0f;
 		[self setToolTip:NSLocalizedString(@"ADD_CEL", @"ADD_CEL")];
 	}
 	return self;
-}
-
-- (void)dealloc
-{
-	[_buttonPath release];
-	[_plusPath release];
-	[super dealloc];
 }
 
 - (void)drawRect:(NSRect)rect

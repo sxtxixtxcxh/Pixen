@@ -52,17 +52,9 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[self setColor:nil];
-	[self setColorWell:nil];
-	[super dealloc];
-}
-
 - (void)setColor:(NSColor *)aColor
 {
-	[_color release];
-	_color = [aColor retain];
+	_color = aColor;
 	
 	if (aColor)
 	{

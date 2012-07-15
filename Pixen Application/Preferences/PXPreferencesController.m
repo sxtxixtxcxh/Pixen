@@ -31,13 +31,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[_generalVC release];
-	[_hotkeysVC release];
-	[super dealloc];
-}
-
 - (void)awakeFromNib
 {
 	[[[self window] toolbar] setSelectedItemIdentifier:@"General"];

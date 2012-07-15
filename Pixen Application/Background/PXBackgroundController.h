@@ -10,11 +10,10 @@
 	IBOutlet PXBackgroundInfoView *alternateBackgroundView;
 	IBOutlet PXBackgroundInfoView *mainBackgroundView;
 	IBOutlet OSStackedView *mainStack, *defaultsStack;
-	id delegate;
 	NSMutableArray *mainViews, *defaultsViews;
 }
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, weak) id delegate;
 
 - (void)reloadData;
 - (void)setPreviewImage:(NSImage *)img;

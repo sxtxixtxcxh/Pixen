@@ -20,12 +20,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[fillColor release];
-	[super dealloc];
-}
-
 - (NSString *)nibName
 {
 	return @"PXShapeToolPropertiesView";

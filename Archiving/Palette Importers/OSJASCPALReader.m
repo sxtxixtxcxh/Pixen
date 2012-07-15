@@ -37,7 +37,6 @@
 {
 	NSString *string = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	NSScanner *scanner = [NSScanner scannerWithString:string];
-	[string release];
 	if (![scanner scanString:@"JASC-PAL\n0100\n" intoString:nil])
 	{
 		[NSException raise:@"OSFileError" format:@"This JASC-PAL has an invalid header or unsupported version (this object supports only 0100)"];
@@ -72,7 +71,7 @@
 		}
 		[palette addColor:PXColorMake(red, green, blue, 255)];
 	}
-	return [palette autorelease];
+	return palette;
 }
 
 @end

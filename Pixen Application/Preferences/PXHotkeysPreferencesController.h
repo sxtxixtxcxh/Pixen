@@ -8,12 +8,8 @@
 #import "PXHotkeyFormatter.h"
 
 @interface PXHotkeysPreferencesController : NSViewController < PXHotkeyFormatterDelegate >
-{
-  @private
-	NSForm *_form;
-}
 
-@property (nonatomic, assign) IBOutlet NSForm *form;
+@property (nonatomic, weak) IBOutlet NSForm *form;
 
 - (IBAction)updateCell:(id)sender;
 

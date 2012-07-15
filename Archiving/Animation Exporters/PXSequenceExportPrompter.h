@@ -17,7 +17,7 @@
 	NSOpenPanel *savePanel;
 }
 
-@property (nonatomic, readonly) NSOpenPanel *savePanel;
+@property (nonatomic, strong, readonly) NSOpenPanel *savePanel;
 @property (nonatomic, readonly) NSString *fileTemplate, *selectedUTI;
 
 - (id)initWithDocument:(NSDocument *)document;

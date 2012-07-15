@@ -13,16 +13,10 @@
 
 @implementation OSQTExporter
 
-- (void)dealloc
-{
-	[qtMovie release];
-	[super dealloc];
-}
-
 - (void)addImage:(NSImage *)image forLength:(NSTimeInterval)seconds
 {
 	// Paste the passed image on a white background so transparency doesn't look black.
-	NSImage *newImage = [[[NSImage alloc] initWithSize:[image size]] autorelease];
+	NSImage *newImage = [[NSImage alloc] initWithSize:[image size]];
 	[newImage lockFocus];
 	[[NSColor whiteColor] set];
 	NSRectFill(NSMakeRect(0, 0, [image size].width, [image size].height));
@@ -70,7 +64,7 @@ withAttributes:(NSDictionary *)attributes
 	{
 		case QTMovieOperationBeginPhase:
 			[pop setCanCancel:YES];
-			[pop beginOperationWithStatusText:@"Exporting Movie..." parentWindow:parentWindow];
+			[pop beginOperationWithStatusText:@"Exporting Movie..." parentWindow:nil];
 			break;
 		case QTMovieOperationUpdatePercentPhase:
 			[[OSProgressPopup sharedProgressPopup] setProgress:[percent doubleValue] * 100];

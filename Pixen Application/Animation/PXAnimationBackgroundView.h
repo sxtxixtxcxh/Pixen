@@ -9,9 +9,8 @@
 {
   @private
 	NSGradient *_horizontalGradient;
-	NSScrollView *_filmStrip;
 }
 
-@property (nonatomic, assign) IBOutlet NSScrollView *filmStrip;
+@property (nonatomic, weak) IBOutlet NSScrollView *filmStrip;
 
 @end

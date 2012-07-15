@@ -33,8 +33,8 @@
 {
 	NSString *name = _zoomType == PXZoomIn ? @"zoomIn_bw.png" : @"zoomOut_bw.png";
 	
-	return [[[NSCursor alloc] initWithImage:[NSImage imageNamed:name]
-									hotSpot:NSMakePoint(5.0f, 5.0f)] autorelease];
+	return [[NSCursor alloc] initWithImage:[NSImage imageNamed:name]
+									hotSpot:NSMakePoint(5.0f, 5.0f)];
 }
 
 - (void)mouseDownAt:(NSPoint)aPoint fromCanvasController:(PXCanvasController *)controller

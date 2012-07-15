@@ -29,8 +29,8 @@ typedef enum {
 	IBOutlet NSColorWell *colorWell;
 	
 	NSColor *_color;
-	PXTool *_tool;
-	PXTool *_lastTool;
+	PXTool *__weak _tool;
+	PXTool *__weak _lastTool;
 	BOOL _locked;
 	BOOL _showingTemporaryEyedropper;
 }

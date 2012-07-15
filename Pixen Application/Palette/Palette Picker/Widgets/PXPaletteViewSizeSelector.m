@@ -16,25 +16,18 @@
     if (self) {
 		if ([NSColor currentControlTint] == NSGraphiteControlTint)
 		{
-			_smallImage = [[NSImage imageNamed:@"palette_small_graphite"] retain];
-			_bigImage = [[NSImage imageNamed:@"palette_big_graphite"] retain];
+			_smallImage = [NSImage imageNamed:@"palette_small_graphite"];
+			_bigImage = [NSImage imageNamed:@"palette_big_graphite"];
 		}
 		else
 		{
-			_smallImage = [[NSImage imageNamed:@"palette_small_aqua"] retain];
-			_bigImage = [[NSImage imageNamed:@"palette_big_aqua"] retain];
+			_smallImage = [NSImage imageNamed:@"palette_small_aqua"];
+			_bigImage = [NSImage imageNamed:@"palette_big_aqua"];
 		}
 		
 		self.controlSize = NSRegularControlSize;
     }
     return self;
-}
-
-- (void)dealloc
-{
-	[_smallImage release];
-	[_bigImage release];
-	[super dealloc];
 }
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)event

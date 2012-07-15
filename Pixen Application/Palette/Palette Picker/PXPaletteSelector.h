@@ -11,15 +11,13 @@
 {
   @private
 	NSMutableArray *_palettes;
-	NSPopUpButton *_selectionPopup;
-	id _delegate;
 }
 
 @property (nonatomic, getter=isEnabled, assign) BOOL enabled;
 
-@property (nonatomic, assign) IBOutlet NSPopUpButton *selectionPopup;
+@property (nonatomic, weak) IBOutlet NSPopUpButton *selectionPopup;
 
-@property (nonatomic, assign) IBOutlet id delegate;
+@property (nonatomic, weak) IBOutlet id delegate;
 
 - (NSArray *)palettes;
 

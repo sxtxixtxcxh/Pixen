@@ -67,9 +67,6 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[canvas deselect];
 	[backgroundController close];
-	[backgroundController release];
-	
-	[super dealloc];
 }
 
 - (void)setLayerController:(PXLayerController *)contro
@@ -83,7 +80,7 @@
 	[view setDelegate:self];
 	
 	// Programmatically create our scrollview and canvas view
-	SBCenteringClipView *clip = [[[SBCenteringClipView alloc] initWithFrame:[[scrollView contentView] frame]] autorelease];
+	SBCenteringClipView *clip = [[SBCenteringClipView alloc] initWithFrame:[[scrollView contentView] frame]];
 	[clip setBackgroundColor:[NSColor lightGrayColor]];
 	[clip setCopiesOnScroll:NO];
 	
@@ -275,7 +272,7 @@
 		}
 	}
 //FIXME: undo goes here?
-	PXPattern *pattern = [[[PXPattern alloc] init] autorelease];
+	PXPattern *pattern = [[PXPattern alloc] init];
 	[pattern setSize:patternRect.size];
 	// now we loop through again and actually set the points
 	for (i = NSMinX(selectedRect); i < NSMaxX(selectedRect); i++)

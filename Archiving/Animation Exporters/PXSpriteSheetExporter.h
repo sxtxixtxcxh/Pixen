@@ -8,14 +8,12 @@
 @interface PXSpriteSheetExporter : NSWindowController
 {
   @private
-	NSImageView *sheetImageView;
-	NSArrayController *documentRepresentationsController;
 	BOOL closeOnEndSheet;
 }
 
-@property (nonatomic, assign) IBOutlet NSImageView *sheetImageView;
+@property (nonatomic, weak) IBOutlet NSImageView *sheetImageView;
 
-@property (nonatomic, assign) IBOutlet NSArrayController *documentRepresentationsController;
+@property (nonatomic, weak) IBOutlet NSArrayController *documentRepresentationsController;
 
 + (id)sharedSpriteSheetExporter;
 

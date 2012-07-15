@@ -42,11 +42,6 @@ static PXPanelManager *sharedManager = nil;
 	return self;
 }
 
-- (void)dealloc
-{
-	[_palettePanels release];
-	[super dealloc];
-}
 - (void)restorePanelStates
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -95,7 +90,6 @@ static PXPanelManager *sharedManager = nil;
 		PXPalettePanel *panel = [[PXPalettePanel alloc] initWithPalette:palette];
 		
 		[self addPalettePanel:panel];
-		[panel release];
 		
 		[panel setFrame:NSRectFromString([current objectForKey:PXPalettePanelFrameKey])
 				display:NO];

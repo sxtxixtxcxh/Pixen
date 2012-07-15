@@ -74,9 +74,8 @@
 	
 	[resizeSizeWindow setOpaque:NO];
 	[resizeSizeWindow setHasShadow:YES];
-	[resizeSizeWindow setContentView:[[[PXPreviewResizeSizeView alloc] 
-				      initWithFrame:NSMakeRect(0, 0, 60, 27)]
-		autorelease]];
+	[resizeSizeWindow setContentView:[[PXPreviewResizeSizeView alloc] 
+				      initWithFrame:NSMakeRect(0, 0, 60, 27)]];
 	[resizeSizeWindow setLevel:NSPopUpMenuWindowLevel];
 	
 	NSRect contentFrame = [ (NSView *) [[self window] contentView] frame];
@@ -151,13 +150,12 @@
 	[self incrementFrame];
 	
 	[_animationTimer invalidate];
-	[_animationTimer release];
 	
-	_animationTimer = [[NSTimer scheduledTimerWithTimeInterval:[[_animation celAtIndex:_currentAnimationCelIndex] duration]
+	_animationTimer = [NSTimer scheduledTimerWithTimeInterval:[[_animation celAtIndex:_currentAnimationCelIndex] duration]
 														target:self
 													  selector:@selector(incrementFromTimer:)
 													  userInfo:nil
-													   repeats:NO] retain];
+													   repeats:NO];
 	
 	[[NSRunLoop currentRunLoop] addTimer:_animationTimer forMode:NSRunLoopCommonModes];
 }
@@ -174,7 +172,6 @@
 	[playPauseButton setImage:[NSImage imageNamed:@"Play"]];
 	
 	[_animationTimer invalidate];
-	[_animationTimer release];
 	_animationTimer = nil;
 }
 
@@ -270,13 +267,9 @@
 {
 	[self pauseAnimation];
 	
-	[resizeSizeWindow release];
-	[bezelView release];
 	[[NSUserDefaults standardUserDefaults] setBool:[self isVisible] forKey:PXPreviewWindowIsOpenKey];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	
-	[super dealloc];
 }
 
 // the timer exists to limit the preview window to

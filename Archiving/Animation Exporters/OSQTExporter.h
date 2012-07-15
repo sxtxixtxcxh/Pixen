@@ -14,7 +14,6 @@
 {
   @private
 	QTMovie *qtMovie;
-	NSWindow *parentWindow;
 }
 
 - (void)addImage:(NSImage *)image forLength:(NSTimeInterval)seconds;

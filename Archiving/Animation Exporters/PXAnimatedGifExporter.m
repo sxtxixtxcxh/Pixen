@@ -44,11 +44,10 @@
 		if (!_colorMap)
 		{
 			NSLog(@"Failed to generate a color map for the GIF animation");
-			[self release];
 			return nil;
 		}
 		
-		_temporaryPath = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"pxa_gif_export.gif"] retain];
+		_temporaryPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"pxa_gif_export.gif"];
 		_gifFile = EGifOpenFileName([_temporaryPath UTF8String], NO);
 		_size = size;
 		
@@ -57,7 +56,6 @@
 			NSLog(@"Failed to write the header of the GIF animation");
 			
 			[self finalizeExport];
-			[self release];
 			
 			return nil;
 		}
@@ -67,12 +65,8 @@
 
 - (void)dealloc
 {
-	[_temporaryPath release];
-	
 	if (_colorMap)
 		FreeMapObject(_colorMap);
-	
-	[super dealloc];
 }
 
 - (ColorMapObject *)colorMapWithPalette:(PXPalette *)palette colorCount:(int *)outColorCount mapSize:(int *)outMapSize

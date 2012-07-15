@@ -13,12 +13,6 @@
 
 @synthesize color = _color, index = _index, controlSize = _controlSize, highlighted = _highlighted;
 
-- (void)dealloc
-{
-	[_color release];
-	[super dealloc];
-}
-
 - (BOOL)isFlipped
 {
 	return YES;
@@ -77,8 +71,8 @@
 	if (self.index > 9999)
 		fontSize = floorf(fontSize * .85);
 	
-	NSAttributedString *badgeString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", self.index]
-																	   attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor whiteColor], NSForegroundColorAttributeName, [NSFont systemFontOfSize:fontSize], NSFontAttributeName, nil]] autorelease];
+	NSAttributedString *badgeString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", self.index]
+																	   attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor whiteColor], NSForegroundColorAttributeName, [NSFont systemFontOfSize:fontSize], NSFontAttributeName, nil]];
 	
 	NSSize badgeSize = [badgeString size];
 	badgeSize.width += 6.5f;
@@ -134,8 +128,7 @@
 - (void)setColor:(NSColor *)newColor
 {
 	if (_color != newColor) {
-		[_color release];
-		_color = [newColor retain];
+		_color = newColor;
 		
 		[self setNeedsDisplay:YES];
 	}

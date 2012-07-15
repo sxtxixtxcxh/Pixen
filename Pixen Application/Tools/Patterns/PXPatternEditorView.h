@@ -12,13 +12,11 @@
   @private
 	PXGrid *_grid;
 	BOOL _erasing;
-	PXPattern *_pattern;
-	id _delegate;
 }
 
-@property (nonatomic, assign) PXPattern *pattern;
+@property (nonatomic, weak) PXPattern *pattern;
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, weak) id delegate;
 
 @end
 

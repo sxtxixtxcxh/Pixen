@@ -14,20 +14,13 @@
 
 - (NSImage *)previewImageOfSize:(NSSize)size
 {
-	NSImage *result = [[[NSImage alloc] initWithSize:size] autorelease];
+	NSImage *result = [[NSImage alloc] initWithSize:size];
 	[result lockFocus];
 	[self.color set];
 	NSRectFill(NSMakeRect(0, 0, size.width, size.height));
 	[image drawInRect:NSMakeRect(0, 0, size.width, size.height) fromRect:NSMakeRect(0, 0, [image size].width, [image size].height) operation:NSCompositeSourceOver fraction:1];
 	[result unlockFocus];
 	return result;
-}
-
-- (void)dealloc
-{
-	[image release];
-	image = nil;
-	[super dealloc];
 }
 
 -(NSString *) defaultName
@@ -50,7 +43,7 @@
 {
 	if ( ! ( self = [super init] ) ) 
 		return nil;
-    image = [[NSImage imageNamed:@"Pixen128"] retain];
+    image = [NSImage imageNamed:@"Pixen128"];
     [self setColor:[NSColor whiteColor]];
     return self;
 }
@@ -76,7 +69,6 @@
 		NSImage *img = [[NSImage alloc] initWithContentsOfURL:[panel URL]];
 		
 		[self setImage:img];
-		[img release];
 		
 		[imageNameField setStringValue:[[[panel URL] path] lastPathComponent]];
 	}
@@ -90,8 +82,6 @@
 
 - (void)setImage:(NSImage *)anImage
 {
-	[anImage retain];
-	[image release];
 	image = anImage;
 	[image setBackgroundColor:self.color];
 	if(![[self name] isEqualToString:[self defaultName]]) 

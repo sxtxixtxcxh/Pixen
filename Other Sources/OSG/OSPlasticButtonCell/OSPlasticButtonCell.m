@@ -26,8 +26,6 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	
-	[super dealloc];
 }
 
 - (void)redraw:(id)sender
@@ -71,7 +69,6 @@
 	gradientRect.size.height -= 1.0f;
 	
 	[gradient drawInRect:gradientRect angle:270];
-	[gradient release];
 	
 	[[NSColor grayColor] set];
 	[NSBezierPath setDefaultLineWidth:1];

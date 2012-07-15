@@ -10,20 +10,17 @@
 @interface PXLayerController : NSViewController < NSCollectionViewDelegate >
 {
   @private
-	PXLayerCollectionView *_layersView;
-	NSButton *_removeButton;
 	NSArrayController *_layersArray;
 	
-	PXCanvas *_canvas;
 	NSUInteger _layersCreated;
 	BOOL _ignoreSelectionChange;
 }
 
-@property (nonatomic, assign) IBOutlet PXLayerCollectionView *layersView;
-@property (nonatomic, assign) IBOutlet NSButton *removeButton;
-@property (nonatomic, retain) IBOutlet NSArrayController *layersArray;
+@property (nonatomic, weak) IBOutlet PXLayerCollectionView *layersView;
+@property (nonatomic, weak) IBOutlet NSButton *removeButton;
+@property (nonatomic, strong) IBOutlet NSArrayController *layersArray;
 
-@property (nonatomic, assign) PXCanvas *canvas;
+@property (nonatomic, weak) PXCanvas *canvas;
 
 - (id)initWithCanvas:(PXCanvas *)aCanvas;
 

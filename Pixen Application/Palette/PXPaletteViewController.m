@@ -45,8 +45,6 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    [namePrompter release];
-    [super dealloc];
 }
 
 - (void)awakeFromNib
@@ -93,14 +91,12 @@
 {
 	PXPaletteImporter *importer = [[PXPaletteImporter alloc] init];
 	[importer runInWindow:[[self view] window]];
-	[importer release];
 }
 
 - (IBAction)exportPalette:sender
 {
 	PXPaletteExporter *exporter = [[PXPaletteExporter alloc] init];
 	[exporter runWithPalette:[paletteView palette] inWindow:[[self view] window]];
-	[exporter release];
 }
 
 - (IBAction)popOut:sender
@@ -183,14 +179,13 @@
 														object:self];
 	
 	[self showPalette:newPal];
-	[newPal release];
 }
 
 - (IBAction)deletePalette:sender
 {
 	NSString *name = [paletteView palette].name;
 	
-	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	NSAlert *alert = [[NSAlert alloc] init];
 	[[alert addButtonWithTitle:NSLocalizedString(@"Delete", @"DELETE")] setKeyEquivalent:@""];
 	
 	NSButton *button = [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"CANCEL")];
@@ -292,7 +287,6 @@
 	[newPal save];
 	
 	[self reloadDataAndShow:newPal];
-	[newPal release];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXUserPalettesChangedNotificationName
 														object:self];

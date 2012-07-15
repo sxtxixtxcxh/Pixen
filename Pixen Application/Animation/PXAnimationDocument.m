@@ -30,8 +30,6 @@
 - (void)dealloc
 {
 	[ (PXAnimationWindowController *) self.windowController setAnimation:nil];
-	[_animation release];
-	[super dealloc];
 }
 
 //FIXME: consider removing these three once coupling decreases
@@ -58,7 +56,7 @@
 
 - (void)initWindowController
 {
-	self.windowController = [[[PXAnimationWindowController alloc] initWithWindowNibName:@"PXAnimationDocument"] autorelease];
+	self.windowController = [[PXAnimationWindowController alloc] initWithWindowNibName:@"PXAnimationDocument"];
 }
 
 - (void)setWindowControllerData
@@ -89,7 +87,7 @@
 		for (i = 0; i < [_animation countOfCels]; i++)
 		{
 			PXCel *current = [_animation celAtIndex:i];
-			NSFileWrapper *file = [[[NSFileWrapper alloc] initRegularFileWithContents:[NSKeyedArchiver archivedDataWithRootObject:[current canvas]]] autorelease];
+			NSFileWrapper *file = [[NSFileWrapper alloc] initRegularFileWithContents:[NSKeyedArchiver archivedDataWithRootObject:[current canvas]]];
 			[files setObject:file forKey:[NSString stringWithFormat:@"%d.%@", i, PXISuffix]];
 			[celData addObject:[current info]];
 		}
@@ -98,11 +96,10 @@
 		if(!xmlData)
 		{
 			NSLog(@"%@", error);
-			[error release];
 			return nil;
 		}
-		[files setObject:[[[NSFileWrapper alloc] initRegularFileWithContents:xmlData] autorelease] forKey:@"CelData.plist"];
-		return [[[NSFileWrapper alloc] initDirectoryWithFileWrappers:files] autorelease];
+		[files setObject:[[NSFileWrapper alloc] initRegularFileWithContents:xmlData] forKey:@"CelData.plist"];
+		return [[NSFileWrapper alloc] initDirectoryWithFileWrappers:files];
 	}
 	else if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef)aType))
 	{
@@ -115,7 +112,7 @@
 		}
 		else
 		{
-			return [[[NSFileWrapper alloc] initRegularFileWithContents:data] autorelease];
+			return [[NSFileWrapper alloc] initRegularFileWithContents:data];
 		}
 	}
 	return nil;
@@ -127,7 +124,7 @@
 	
 	if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) typeName))
 	{
-		PXAnimation *exportAnimation = [[_animation copy] autorelease];
+		PXAnimation *exportAnimation = [_animation copy];
 		[exportAnimation reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
 		
 		NSUInteger numberOfCels = [exportAnimation countOfCels];
@@ -141,7 +138,6 @@
 		PXPalette *palette = [exportAnimation newFrequencyPaletteForAllCels];
 		
 		PXAnimatedGifExporter *exporter = [[PXAnimatedGifExporter alloc] initWithSize:[exportAnimation size] palette:palette];
-		[palette release];
 		
 		for (NSUInteger i = 0; i < numberOfCels; i++)
 		{
@@ -153,7 +149,6 @@
 		}
 		
 		NSData *data = [exporter finalizeExport];
-		[exporter release];
 		
 		[popup endOperation];
 		
@@ -176,7 +171,6 @@
 		if(!plist)
 		{
 			NSLog(@"%@", error);
-			[error release];
 			return NO;
 		}
 		if([plist count] == 0) { return NO; }
@@ -198,7 +192,6 @@
 			}
 			
 			[_animation addCel:cel];
-			[cel release];
 		}
 		
 		[[self undoManager] removeAllActions];
@@ -221,14 +214,14 @@
 	if (UTTypeEqual(kUTTypeGIF, (__bridge CFStringRef) docType))
 	{
 		[_animation removeCel:[_animation celAtIndex:0]];
-		NSImage *tempImage = [[[NSImage alloc] initWithData:data] autorelease];
+		NSImage *tempImage = [[NSImage alloc] initWithData:data];
 		NSBitmapImageRep *bitmapRep = [[tempImage representations] objectAtIndex:0];
 		int frameCount = [[bitmapRep valueForProperty:NSImageFrameCount] intValue];
 		int i;
 		for (i = 0; i < frameCount; i++)
 		{
 			[bitmapRep setProperty:NSImageCurrentFrame withValue:[NSNumber numberWithInt:i]];
-			PXCel *newCel = [[[PXCel alloc] initWithImage:[[tempImage copy] autorelease] animation:_animation] autorelease];
+			PXCel *newCel = [[PXCel alloc] initWithImage:[tempImage copy] animation:_animation];
 			// PXCel is retained by the animation in the initializer used above
 			// [newCel retain];
 			[newCel setDuration:[[bitmapRep valueForProperty:NSImageCurrentFrameDuration] floatValue]];

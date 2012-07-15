@@ -13,7 +13,7 @@
 	NSImage *image = [[NSImage alloc] initWithSize:[rep size]];
 	[image addRepresentation:rep];
 	
-	return [image autorelease];
+	return image;
 }
 
 @end

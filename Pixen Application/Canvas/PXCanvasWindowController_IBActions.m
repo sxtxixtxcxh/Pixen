@@ -137,7 +137,7 @@
 		return;
 	}
 	
-	[newDocument setCanvas: [[canvas copy] autorelease]];
+	[newDocument setCanvas: [canvas copy]];
 	
 	[[NSDocumentController sharedDocumentController] addDocument:newDocument];
 	[newDocument makeWindowControllers];
@@ -152,7 +152,6 @@
 	palette.name = NSLocalizedString(@"Document Palette", nil);
 	
 	[exporter runWithPalette:palette inWindow:[self window]];
-	[exporter release];
 }
 
 - (IBAction)mergeDown:(id) sender

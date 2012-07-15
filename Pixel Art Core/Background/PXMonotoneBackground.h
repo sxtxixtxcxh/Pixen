@@ -8,15 +8,10 @@
 #import "PXBackground.h"
 
 @interface PXMonotoneBackground : PXBackground
-{
-  @private
-	NSColorWell *_colorWell;
-	NSColor *_color;
-}
 
-@property (nonatomic, assign) IBOutlet NSColorWell *colorWell;
+@property (nonatomic, weak) IBOutlet NSColorWell *colorWell;
 
-@property (nonatomic, retain) NSColor *color;
+@property (nonatomic, strong) NSColor *color;
 
 - (IBAction)configuratorColorChanged:(id)sender;
 

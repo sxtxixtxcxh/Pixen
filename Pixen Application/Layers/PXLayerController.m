@@ -55,9 +55,6 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	[_layersView removeObserver:self forKeyPath:@"selectionIndexes"];
-	[_layersArray release];
-	
-	[super dealloc];
 }
 
 - (void)awakeFromNib
@@ -281,7 +278,6 @@
 									 fillWithColor:PXGetClearColor()];
 	
 	[_canvas addLayer:layer];
-	[layer release];
 }
 
 - (void)promoteSelection
@@ -425,11 +421,9 @@
 	NSUInteger sourceIndex = [self invertLayerIndex:[[userInfo objectForKey:PXSourceIndexKey] unsignedIntegerValue]];
 	NSUInteger targetIndex = [self invertLayerIndex:[[userInfo objectForKey:PXTargetIndexKey] unsignedIntegerValue]];
 	
-	id obj = [[[_layersArray arrangedObjects] objectAtIndex:sourceIndex] retain];
+	id obj = [[_layersArray arrangedObjects] objectAtIndex:sourceIndex];
 	[_layersArray removeObjectAtArrangedObjectIndex:sourceIndex];
 	[_layersArray insertObject:obj atArrangedObjectIndex:targetIndex];
-	
-	[obj release];
 }
 
 - (BOOL)collectionView:(NSCollectionView *)collectionView
@@ -490,7 +484,6 @@
 			NSImage *image = [[NSImage alloc] initWithContentsOfURL:url];
 			
 			[_canvas pasteLayerWithImage:image atIndex:[self invertLayerIndex:index-1]];
-			[image release];
 			
 			return YES;
 		}

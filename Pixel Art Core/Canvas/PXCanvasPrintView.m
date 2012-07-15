@@ -14,20 +14,14 @@
 
 + (id)viewForCanvas:(PXCanvas *)aCanvas
 {
-	return [[[self alloc] initWithCanvas:aCanvas] autorelease];	
+	return [[self alloc] initWithCanvas:aCanvas];	
 }
 
 - (id)initWithCanvas:(PXCanvas *)aCanvas
 {
 	self = [super initWithFrame:NSMakeRect(0, 0, [aCanvas size].width, [aCanvas size].height)];
-	_canvas = [aCanvas retain];
+	_canvas = aCanvas;
 	return self;
-}
-
-- (void)dealloc
-{
-	[_canvas release];
-	[super dealloc];
 }
 
 - (void)drawRect:(NSRect)rect 

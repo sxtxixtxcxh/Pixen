@@ -13,7 +13,7 @@
 
 + (id)algorithm
 {
-	return [[[self alloc] init] autorelease];
+	return [[self alloc] init];
 }
 
 - (NSString *)name

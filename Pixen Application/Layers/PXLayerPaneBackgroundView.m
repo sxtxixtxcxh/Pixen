@@ -27,12 +27,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[_gradient release];
-	[super dealloc];
-}
-
 - (void)drawRect:(NSRect)rect
 {
 	NSRect targetRect = NSMakeRect(0.0f, 0.0f, NSWidth([self bounds]), 23.0f);

@@ -13,13 +13,13 @@
 @interface PXCanvasController : NSObject
 {
   @private
-	PXCanvas *canvas;
+	PXCanvas *__weak canvas;
 	IBOutlet PXCanvasView *view;
 	IBOutlet NSScrollView *scrollView;
-	NSDocument *document;
+	NSDocument *__weak document;
 	IBOutlet NSWindow *window;
 	
-	PXLayerController *layerController;
+	PXLayerController *__weak layerController;
 	PXBackgroundController *backgroundController;
 	
 	NSPoint initialPoint;
@@ -30,11 +30,9 @@
 	NSPoint panLeftovers; // used to integerify the pan coords
 	
 	PXColor oldColor;
-	
-	id delegate;
 }
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, weak) id delegate;
 
 - (PXCanvasView *)view;
 - (NSScrollView *)scrollView;

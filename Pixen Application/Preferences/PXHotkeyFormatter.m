@@ -62,7 +62,7 @@
 
 - (BOOL)getObjectValue:(id *)anObject forString:(NSString *)string errorDescription:(NSString **)error
 {
-	*anObject = [[string copy] autorelease];
+	*anObject = [string copy];
 	return YES;
 }
 
@@ -72,7 +72,7 @@
 - (NSAttributedString *)attributedStringForObjectValue:(id)anObject
 									 defaultAttributes:(NSDictionary *)attributes
 {
-	return [[[NSAttributedString alloc] initWithString:[self stringForObjectValue:anObject]] autorelease];
+	return [[NSAttributedString alloc] initWithString:[self stringForObjectValue:anObject]];
 }
 
 @end

@@ -23,7 +23,7 @@
 	vc = [[PXSequenceExportViewController alloc] init];
 	vc.fileTemplate = [NSString stringWithFormat:@"%@ %%f", [[aDocument displayName] stringByDeletingPathExtension]];
 	
-	savePanel = [[NSOpenPanel openPanel] retain];
+	savePanel = [NSOpenPanel openPanel];
 	[savePanel setTitle:@"Choose Target Folder"];
 	[savePanel setPrompt:@"Export"];
 	[savePanel setCanCreateDirectories:YES];
@@ -32,13 +32,6 @@
 	[savePanel setAccessoryView:vc.view];
 	
 	return self;
-}
-
-- (void)dealloc
-{
-	[savePanel release];
-	[vc release];
-	[super dealloc];
 }
 
 - (void)beginSheetModalForWindow:(NSWindow *)parentWindow

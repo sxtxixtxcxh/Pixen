@@ -36,8 +36,6 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	self.tableView = nil;
-    [super dealloc];
 }
 
 - (void)presetsChanged:(NSNotification *)notification

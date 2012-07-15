@@ -32,7 +32,6 @@
 	[filmStrip setDataSource:nil];
 	[filmStrip setDelegate:nil];
 	[self setAnimation:nil];
-	[super dealloc];
 }
 
 - (void)canvasDidChange:notification
@@ -181,10 +180,10 @@
 {
 	NSString *type = [pboard availableTypeFromArray:[self draggedTypesForFilmStripView:view]];
 	if ([[NSImage imagePasteboardTypes] containsObject:type]) {
-		NSImage *image = [[[NSImage alloc] initWithPasteboard:pboard] autorelease];
+		NSImage *image = [[NSImage alloc] initWithPasteboard:pboard];
 		NSImage *celImage;
 		if (!NSEqualSizes([image size], [animation size])) {
-			celImage = [[[NSImage alloc] initWithSize:[animation size]] autorelease];
+			celImage = [[NSImage alloc] initWithSize:[animation size]];
 			NSRect celImageRect = NSMakeRect(0, 0, [animation size].width, [animation size].height);
 			NSRect destRect = celImageRect;
 			if ([image size].width > [animation size].width || [image size].height > [animation size].height) {
@@ -210,13 +209,12 @@
 			[celImage unlockFocus];
 			[celImage removeRepresentation:[[celImage representations] objectAtIndex:0]];
 			[celImage addRepresentation:bitmap];
-            [bitmap release];
 
 		} else {
 			celImage = image;
 		}
 		
-		PXCel *cel = [[[PXCel alloc] initWithImage:celImage animation:animation atIndex:targetDraggingIndex] autorelease];
+		PXCel *cel = [[PXCel alloc] initWithImage:celImage animation:animation atIndex:targetDraggingIndex];
 		return (cel != nil);
 	} else if ([type isEqualToString:PXCelPboardType]) {
 		[animation insertObject:[NSKeyedUnarchiver unarchiveObjectWithData:[pboard dataForType:PXCelPboardType]] inCelsAtIndex:targetDraggingIndex];
@@ -226,9 +224,9 @@
 		BOOL loadedSomething = NO;
 		for (NSString *filename in [filenames sortedArrayUsingSelector:@selector(compareNumeric:)])
     {
-			NSImage *image = [[[NSImage alloc] initWithContentsOfFile:filename] autorelease];
+			NSImage *image = [[NSImage alloc] initWithContentsOfFile:filename];
 			if (image != nil) {
-				PXCel *cel = [[[PXCel alloc] initWithImage:image animation:animation atIndex:targetDraggingIndex] autorelease];
+				PXCel *cel = [[PXCel alloc] initWithImage:image animation:animation atIndex:targetDraggingIndex];
 				if (!loadedSomething) 
         {
 					loadedSomething = (cel != nil);
@@ -407,7 +405,7 @@
 	
 	for (NSUInteger i = 1; i <= numberOfCels; i++)
 	{
-		NSString *filePath = [[directoryPath copy] autorelease];
+		NSString *filePath = [directoryPath copy];
 		
 		if (![filePath hasSuffix:@"/"])
 			filePath = [filePath stringByAppendingString:@"/"];
@@ -450,7 +448,6 @@
 	}
 	
 	[exporter exportToPath:[[panel URL] path] parentWindow:[self window]];
-	[exporter release];
 }
 
 - (IBAction)exportToQuicktime:sender

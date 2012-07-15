@@ -34,7 +34,7 @@ NSString *PXZoom = @"PXZoom";
 	 itemForItemIdentifier:(NSString *)itemIdentifier
  willBeInsertedIntoToolbar:(BOOL)flag
 {
-	NSToolbarItem *item = [[[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier] autorelease];
+	NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
 	if ([itemIdentifier isEqualToString:PXBackgroundConfigurator])
 	{
 		[item setLabel:NSLocalizedString(@"BACKGROUND_LABEL", @"Background Label")];

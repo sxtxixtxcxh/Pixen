@@ -42,7 +42,7 @@
 		int oldOpacity = [layer opacity];
 		[layer setOpacity:100];
 		
-		NSBitmapImageRep *layerImageRep = [[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+		NSBitmapImageRep *layerImageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
 																				   pixelsWide:size.width
 																				   pixelsHigh:size.height
 																				bitsPerSample:8
@@ -51,7 +51,7 @@
 																					 isPlanar:NO
 																			   colorSpaceName:NSCalibratedRGBColorSpace
 																				  bytesPerRow:size.width * 4
-																				 bitsPerPixel:32] autorelease];
+																				 bitsPerPixel:32];
 		
 		[NSGraphicsContext saveGraphicsState];
 		[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithBitmapImageRep:layerImageRep]];

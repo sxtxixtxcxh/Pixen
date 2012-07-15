@@ -20,7 +20,6 @@
 	PXLayer *layer = [[PXLayer alloc] initWithName:name size:[self size]];
 	
 	[self addLayer:layer];
-	[layer release];
 	
 	return nil;
 }

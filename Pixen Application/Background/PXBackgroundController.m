@@ -23,10 +23,10 @@ typedef enum _PXStackType
 {
     static id backgrounds = nil;
     if(backgrounds == nil) { backgrounds = [[NSArray alloc] initWithObjects:
-		[[[PXSlashyBackground alloc] init] autorelease], 
-		[[[PXMonotoneBackground alloc] init] autorelease], 
-		[[[PXCheckeredBackground alloc] init] autorelease], 
-		[[[PXImageBackground alloc] init] autorelease], 
+		[[PXSlashyBackground alloc] init], 
+		[[PXMonotoneBackground alloc] init], 
+		[[PXCheckeredBackground alloc] init], 
+		[[PXImageBackground alloc] init], 
 		nil]; 
 	}
     return backgrounds;
@@ -77,11 +77,8 @@ typedef enum _PXStackType
 - (void)dealloc
 {
 	[mainStack clearStack];
-	[mainViews release];
 	[defaultsStack clearStack];
-	[defaultsViews release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
 }
 
 - (void)backgroundInstalled:(NSNotification *)note
@@ -134,7 +131,7 @@ typedef enum _PXStackType
 	
 	for (id template in templates)
 	{
-		id newView = [[[class alloc] init] autorelease];
+		id newView = [[class alloc] init];
 		
 		if (template == [NSNull null])
 			[newView setBackground:nil];
@@ -144,8 +141,6 @@ typedef enum _PXStackType
 		[views addObject:newView];
 		[stack stackSubview:newView];
 	}
-	
-    [header release];
 }
 
 - (void)populateViews
@@ -224,20 +219,19 @@ typedef enum _PXStackType
 			NSShowAnimationEffect(NSAnimationEffectPoof, poofPoint, NSZeroSize, nil, NULL, nil);
 		[self reloadData];
 	}
-	[contextInfo release];
 }
 
 - (void)tryToDeleteBackgroundAtPath:(NSString *)backgroundPath displayingPoofAtPoint:(NSPoint)point
 {
 	if(![[NSFileManager defaultManager] fileExistsAtPath:backgroundPath]) { NSBeep(); return; }
-	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	NSAlert *alert = [[NSAlert alloc] init];
 	[[alert addButtonWithTitle:NSLocalizedString(@"Delete", @"DELETE")] setKeyEquivalent:@""];
 	NSButton *button = [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"CANCEL")];
 	[button setKeyEquivalent:@"\r"];
 	[alert setMessageText:[NSString stringWithFormat:NSLocalizedString(@"Really delete background template %@?", @"BACKGROUND_DELETE_PROMPT"), [[backgroundPath lastPathComponent] stringByDeletingPathExtension]]];
 	[alert setInformativeText:NSLocalizedString(@"This operation cannot be undone.", @"BACKGROUND_DELETE_INFORMATIVE_TEXT")];
 	[alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(deleteSheetDidEnd:returnCode:contextInfo:)
-						contextInfo:[[NSDictionary dictionaryWithObjectsAndKeys:backgroundPath, PXBackgroundPathKey, NSStringFromPoint(point), PXPoofLocationKey, nil] retain]];
+						contextInfo:CFBridgingRetain([NSDictionary dictionaryWithObjectsAndKeys:backgroundPath, PXBackgroundPathKey, NSStringFromPoint(point), PXPoofLocationKey, nil])];
 }
 
 - (NSString *)pathForBackground:(PXBackground *)background
@@ -259,7 +253,6 @@ typedef enum _PXStackType
 	{
 		[self saveBackground:contextInfo atPath:[self pathForBackground:contextInfo]];
 	}
-	[contextInfo release];
 	[self reloadData];
 }
 
@@ -269,14 +262,14 @@ typedef enum _PXStackType
 	id manager = [NSFileManager defaultManager];
 	if([manager fileExistsAtPath:path])
 	{
-		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+		NSAlert *alert = [[NSAlert alloc] init];
 		[[alert addButtonWithTitle:NSLocalizedString(@"Overwrite", @"OVERWRITE")] setKeyEquivalent:@""];
 		NSButton *button = [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"CANCEL")];
 		[button setKeyEquivalent:@"\r"];
 		[alert setMessageText:[NSString stringWithFormat:NSLocalizedString(@"A background with the name %@ already exists.", @"BACKGROUND_OVERWRITE_PROMPT"), [bg name]]];
 		[alert setInformativeText:NSLocalizedString(@"Would you like to overwrite it?", @"BACKGROUND_OVERWRITE_INFORMATIVE_TEXT")];
 		//need to retain the context info
-		[alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(overwriteSheetDidEnd:returnCode:contextInfo:) contextInfo:[bg retain]];
+		[alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(overwriteSheetDidEnd:returnCode:contextInfo:) contextInfo:CFBridgingRetain(bg)];
 	}
 	else
 	{

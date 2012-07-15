@@ -11,18 +11,13 @@
 @class PXAnimation, PXCanvas;
 
 @interface PXCel : NSObject < NSCoding, NSCopying >
-{
-  @private
-	PXCanvas *_canvas;
-	NSTimeInterval _duration;
-}
 
-@property (nonatomic, retain) PXCanvas *canvas;
+@property (nonatomic, strong) PXCanvas *canvas;
 
 @property (nonatomic, assign) NSSize size;
 @property (nonatomic, assign) NSTimeInterval duration;
 
-@property (nonatomic, retain) NSDictionary *info;
+@property (nonatomic, strong) NSDictionary *info;
 
 - (id)initWithImage:(NSImage *)image animation:(PXAnimation *)animation;
 - (id)initWithImage:(NSImage *)image animation:(PXAnimation *)animation atIndex:(NSUInteger)index;

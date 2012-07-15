@@ -66,7 +66,7 @@ int kPXColorPickerMode = 23421337;
 	
 	self = [super initWithPickerMask:mask colorPanel:owningColorPanel];
 	
-	_icon = [[NSImage imageNamed:@"colorpalette"] retain];
+	_icon = [NSImage imageNamed:@"colorpalette"];
 	
 	_vc = [[PXPaletteViewController alloc] init];
 	[_vc loadView];
@@ -80,13 +80,6 @@ int kPXColorPickerMode = 23421337;
 	[ (PXPaletteViewScrollView *) ([_vc.paletteView enclosingScrollView]) setControlSize:[defs integerForKey:PXColorPickerPaletteViewSizeKey]];
 	
 	return self;
-}
-
-- (void)dealloc
-{
-	[_icon release];
-	[_vc release];
-	[super dealloc];
 }
 
 - (void)paletteViewSizeChangedTo:(NSControlSize)size

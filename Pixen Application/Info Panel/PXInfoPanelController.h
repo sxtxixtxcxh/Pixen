@@ -8,30 +8,16 @@
 #import "PXColor.h"
 
 @interface PXInfoPanelController : NSWindowController
-{
-  @private
-	NSTextField *_cursorX;
-	NSTextField *_cursorY;
-	NSTextField *_width;
-	NSTextField *_height;
-	NSTextField *_red;
-	NSTextField *_green;
-	NSTextField *_blue;
-	NSTextField *_alpha;
-	NSTextField *_hex;
-	
-	NSPoint _draggingOrigin;
-}
 
-@property (nonatomic, assign) IBOutlet NSTextField *cursorX;
-@property (nonatomic, assign) IBOutlet NSTextField *cursorY;
-@property (nonatomic, assign) IBOutlet NSTextField *width;
-@property (nonatomic, assign) IBOutlet NSTextField *height;
-@property (nonatomic, assign) IBOutlet NSTextField *red;
-@property (nonatomic, assign) IBOutlet NSTextField *green;
-@property (nonatomic, assign) IBOutlet NSTextField *blue;
-@property (nonatomic, assign) IBOutlet NSTextField *alpha;
-@property (nonatomic, assign) IBOutlet NSTextField *hex;
+@property (nonatomic, weak) IBOutlet NSTextField *cursorX;
+@property (nonatomic, weak) IBOutlet NSTextField *cursorY;
+@property (nonatomic, weak) IBOutlet NSTextField *width;
+@property (nonatomic, weak) IBOutlet NSTextField *height;
+@property (nonatomic, weak) IBOutlet NSTextField *red;
+@property (nonatomic, weak) IBOutlet NSTextField *green;
+@property (nonatomic, weak) IBOutlet NSTextField *blue;
+@property (nonatomic, weak) IBOutlet NSTextField *alpha;
+@property (nonatomic, weak) IBOutlet NSTextField *hex;
 
 @property (nonatomic, assign) NSPoint draggingOrigin;
 

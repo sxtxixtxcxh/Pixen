@@ -11,17 +11,14 @@
 @interface PXLayerCollectionViewItem : NSCollectionViewItem
 {
   @private
-	PXLayerDetailsView *_backgroundView;
 	IBOutlet PXLayerTextField *nameField;
 	IBOutlet PXNSImageView *thumbnailView;
 	IBOutlet NSTextField *opacityField;
-	
-	PXLayerController *layerController;
 }
 
-@property (nonatomic, assign) PXLayerController *layerController;
+@property (nonatomic, weak) PXLayerController *layerController;
 
-@property (nonatomic, assign) IBOutlet PXLayerDetailsView *backgroundView;
+@property (nonatomic, weak) IBOutlet PXLayerDetailsView *backgroundView;
 
 - (void)focusOnName;
 - (void)unload;

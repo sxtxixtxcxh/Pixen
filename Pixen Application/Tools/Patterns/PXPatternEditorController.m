@@ -26,7 +26,6 @@
 	[clip setCopiesOnScroll:NO];
 	
 	[(NSScrollView *)scrollView setContentView:clip];
-	[clip release];
 	
 	[scrollView setDocumentView:editorView];
 	
@@ -42,7 +41,6 @@
 	
 	[self loadWindow];
 	
-	[_pattern release];
 	_pattern = [pattern copy];
 	
 	NSSize patternSize = [_pattern size];
@@ -64,7 +62,7 @@
 
 - (IBAction)newPattern:(id)sender
 {
-	PXPattern *pattern = [[_pattern copy] autorelease];
+	PXPattern *pattern = [_pattern copy];
 	[self addPattern:pattern];
 	
 	if ([delegate respondsToSelector:@selector(patternEditor:finishedWithPattern:)])
@@ -123,7 +121,7 @@
 	if ([patternsController selectionIndex] == NSNotFound)
 		return;
 	
-	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	NSAlert *alert = [[NSAlert alloc] init];
 	[alert addButtonWithTitle:NSLocalizedString(@"Delete", @"DELETE")];
 	
 	NSButton *button = [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"CANCEL")];
@@ -179,8 +177,6 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[patternFileName release];
-	[super dealloc];
 }
 
 - (BOOL)collectionView:(NSCollectionView *)collectionView writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pasteboard

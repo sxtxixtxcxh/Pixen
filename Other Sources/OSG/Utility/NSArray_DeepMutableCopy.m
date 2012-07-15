@@ -15,7 +15,7 @@
 	
 	for (id current in self)
 	{
-		[new addObject:[[current copy] autorelease]];
+		[new addObject:[current copy]];
 	}
 	
 	return new;

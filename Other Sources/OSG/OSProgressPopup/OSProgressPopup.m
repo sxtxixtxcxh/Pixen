@@ -32,11 +32,6 @@ static NSLock *popupLock = nil;
 	return self;
 }
 
-- (void)dealloc {
-	[_workQueue release];
-	[super dealloc];
-}
-
 + (OSProgressPopup *)sharedProgressPopup
 {
 	[popupLock lock];
