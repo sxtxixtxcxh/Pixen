@@ -154,7 +154,7 @@
 	
 	for (NSImage *row in animationSheets)
 	{
-		[row compositeToPoint:currentPoint operation:NSCompositeSourceOver];
+		[row drawAtPoint:currentPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 		
 		currentPoint.y += [row size].height;
 		currentPoint.y += interAnimationMargin;
