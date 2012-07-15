@@ -47,7 +47,7 @@
 	[bgImage lockFocus];
 	[[[NSColor whiteColor] colorWithAlphaComponent:0.66] set];
 	[[[NSColor lightGrayColor] colorWithAlphaComponent:0.66] set];
-	[viewImage compositeToPoint:NSZeroPoint fromRect:[self bounds] operation:NSCompositeCopy fraction:0.66];
+	[viewImage drawAtPoint:NSZeroPoint fromRect:[self bounds] operation:NSCompositeCopy fraction:0.66];
 	[bgImage unlockFocus];
 
 	NSPasteboard *pasteboard = [NSPasteboard pasteboardWithName:NSDragPboard];
