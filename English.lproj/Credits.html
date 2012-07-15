@@ -31,6 +31,12 @@
 		#left img {
 			margin: 2em auto 0 auto;
 			display: block;
+			content: url('Pixen128.png');
+		}
+		@media screen and (-webkit-min-device-pixel-ratio: 2) {
+			#left img {
+				content: url('Pixen256.png');
+			}
 		}
 		#left p.link {
 			font-size: 12px;
@@ -61,7 +67,7 @@
 		<h1>Pixen<sup>3</sup></h1>
 		<p class="version">Version VERSION_PLACEHOLDER</p>
 		
-		<img src="Pixen128.png" width="128" height="128" />
+		<img width="128" height="128" />
 		<p class="link"><a href="http://www.pixenapp.com">pixenapp.com</a></p>
 	</div>
 	
