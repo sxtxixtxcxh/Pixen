@@ -26,8 +26,7 @@
 	[newImage lockFocus];
 	[[NSColor whiteColor] set];
 	NSRectFill(NSMakeRect(0, 0, [image size].width, [image size].height));
-	[image compositeToPoint:NSZeroPoint 
-								operation:NSCompositeSourceOver];
+	[image drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 	[newImage unlockFocus];
 	
 	if (!qtMovie)
