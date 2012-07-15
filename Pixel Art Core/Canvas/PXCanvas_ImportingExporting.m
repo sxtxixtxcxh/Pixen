@@ -112,9 +112,6 @@
 	
 	[NSGraphicsContext restoreGraphicsState];
 	
-	// And now, we interrupt our regularly scheduled codegram for a hack: remove color profile info from the rep because we don't handle it on loading.
-	[imageRep setProperty:NSImageColorSyncProfileData withValue:nil];
-	
 	return [imageRep autorelease];
 }
 
