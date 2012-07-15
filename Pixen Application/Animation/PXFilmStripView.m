@@ -628,7 +628,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	[cel drawInRect:imageRect fromRect:NSMakeRect(0,0,realCelSize.width,realCelSize.height) operation:NSCompositeSourceOver fraction:1];
 	[celImage unlockFocus];
 	[translucentCelImage lockFocus];
-	[celImage compositeToPoint:NSZeroPoint operation:NSCompositeCopy fraction:0.66];
+	[celImage drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:0.66f];
 	[translucentCelImage unlockFocus];
 	
     NSPasteboard *pboard;
