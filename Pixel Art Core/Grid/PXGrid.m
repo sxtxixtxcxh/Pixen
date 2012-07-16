@@ -63,13 +63,13 @@
 	
 	[self.color set];
 	
-	for (CGFloat i = 0.0f; i < dimensions.width + self.unitSize.width; i += self.unitSize.width)
+	for (CGFloat i = self.unitSize.width; i < dimensions.width + self.unitSize.width; i += self.unitSize.width)
 	{
 		[NSBezierPath strokeLineFromPoint:NSMakePoint(i, 0.0f)
 								  toPoint:NSMakePoint(i, dimensions.height)];
 	}
 	
-	for (CGFloat i = 0.0f; i < dimensions.height + self.unitSize.height; i += self.unitSize.height)
+	for (CGFloat i = self.unitSize.height; i < dimensions.height + self.unitSize.height; i += self.unitSize.height)
 	{
 		[NSBezierPath strokeLineFromPoint:NSMakePoint(0.0f, i)
 								  toPoint:NSMakePoint(dimensions.width, i)];
