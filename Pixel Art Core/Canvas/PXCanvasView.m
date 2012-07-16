@@ -578,6 +578,24 @@ void PXDebugRect(NSRect r, float alpha)
 	{
 		[self drawSelectionMarqueeWithRect:rect offset:NSMakePoint(xCenter, yCenter)];
 	}
+	
+	// draw the outer border
+	[NSGraphicsContext saveGraphicsState];
+	
+	NSRect outerRect = NSInsetRect([self bounds], -1, -1);
+	
+	NSBezierPath *newClipPath = [NSBezierPath bezierPathWithRect:NSIntersectionRect(outerRect, [[self superview] bounds])];
+	[newClipPath setClip];
+	
+	outerRect.size.width -= 1;
+	outerRect.size.height -= 1;
+	
+	NSBezierPath *outerPath = [NSBezierPath bezierPathWithRect:outerRect];
+	
+	[[NSColor blackColor] set];
+	[outerPath stroke];
+	
+	[NSGraphicsContext restoreGraphicsState];
 }
 
 - (void)setDrawsWrappedCanvases:(BOOL)draws
