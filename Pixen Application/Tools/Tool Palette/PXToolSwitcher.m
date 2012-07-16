@@ -22,6 +22,8 @@
 
 @implementation PXToolSwitcher
 
+@synthesize toolsMatrix, colorWell;
+
 + (NSArray *)toolClasses
 {
 	return [NSArray arrayWithObjects:

@@ -9,12 +9,10 @@
 @class PXLayerDetailsView, PXNSImageView, PXLayerTextField, PXLayerController, PXLayer;
 
 @interface PXLayerCollectionViewItem : NSCollectionViewItem
-{
-  @private
-	IBOutlet PXLayerTextField *nameField;
-	IBOutlet PXNSImageView *thumbnailView;
-	IBOutlet NSTextField *opacityField;
-}
+
+@property (nonatomic, weak) IBOutlet PXLayerTextField *nameField;
+@property (nonatomic, weak) IBOutlet PXNSImageView *thumbnailView;
+@property (nonatomic, weak) IBOutlet NSTextField *opacityField;
 
 @property (nonatomic, weak) PXLayerController *layerController;
 

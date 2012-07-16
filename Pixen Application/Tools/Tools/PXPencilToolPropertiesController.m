@@ -14,6 +14,7 @@
 
 @implementation PXPencilToolPropertiesController
 
+@synthesize lineThicknessField, patternButton, clearButton;
 @synthesize lineThickness, pattern = drawingPattern, toolName;
 
 - (NSString *)nibName

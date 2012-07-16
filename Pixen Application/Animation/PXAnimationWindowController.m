@@ -24,6 +24,7 @@
 
 @implementation PXAnimationWindowController
 
+@synthesize outerSplitView, filmStrip, topSubview;
 @synthesize animation;
 
 - (void)dealloc

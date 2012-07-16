@@ -25,8 +25,6 @@ typedef enum {
 {
   @private
 	NSMutableArray *tools;
-	IBOutlet NSMatrix *toolsMatrix;
-	IBOutlet NSColorWell *colorWell;
 	
 	NSColor *_color;
 	PXTool *__weak _tool;
@@ -34,6 +32,9 @@ typedef enum {
 	BOOL _locked;
 	BOOL _showingTemporaryEyedropper;
 }
+
+@property (nonatomic, weak) IBOutlet NSMatrix *toolsMatrix;
+@property (nonatomic, weak) IBOutlet NSColorWell *colorWell;
 
 + (NSArray *)toolClasses;
 

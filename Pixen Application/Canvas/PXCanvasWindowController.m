@@ -29,6 +29,7 @@
 
 @implementation PXCanvasWindowController
 
+@synthesize zoomPercentageBox, zoomStepper, zoomView;
 @synthesize scaleController, canvasController, resizePrompter = _resizePrompter, canvas;
 @synthesize splitView, sidebarSplit, layerSplit, canvasSplit, paletteSplit;
 

@@ -11,13 +11,6 @@
 @interface PXToolPaletteController: NSWindowController
 {
   @private
-	IBOutlet PXToolSwitcher *leftSwitcher;
-	IBOutlet PXToolSwitcher *rightSwitcher;
-	IBOutlet id minimalView;
-	IBOutlet NSBox *rightSwitchView;
-	IBOutlet NSButton *triangle;
-	IBOutlet NSImageView *rightToolGradient;
-	
 	BOOL _locked;
 	BOOL usingRightToolBeforeLock;
 	BOOL controlKeyDown;
@@ -26,6 +19,13 @@
 	
 	NSRect _lastFrameFS;
 }
+
+@property (nonatomic, strong) IBOutlet PXToolSwitcher *leftSwitcher;
+@property (nonatomic, strong) IBOutlet PXToolSwitcher *rightSwitcher;
+@property (nonatomic, weak) IBOutlet id minimalView;
+@property (nonatomic, weak) IBOutlet NSBox *rightSwitchView;
+@property (nonatomic, weak) IBOutlet NSButton *triangle;
+@property (nonatomic, weak) IBOutlet NSImageView *rightToolGradient;
 
 + (PXToolPaletteController *)sharedToolPaletteController;
 

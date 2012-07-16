@@ -14,14 +14,13 @@
 @interface PXAnimationWindowController : PXCanvasWindowController < PXScaleControllerDelegate >
 {
   @private
-	IBOutlet NSSplitView *outerSplitView;
-	IBOutlet PXFilmStripView *filmStrip;
-	
-	IBOutlet NSView *topSubview;
-	
 	PXCel *__weak activeCel;
 	NSInteger activeIndex;
 }
+
+@property (nonatomic, weak) IBOutlet NSSplitView *outerSplitView;
+@property (nonatomic, weak) IBOutlet PXFilmStripView *filmStrip;
+@property (nonatomic, weak) IBOutlet NSView *topSubview;
 
 @property (nonatomic, weak) PXAnimation *animation;
 

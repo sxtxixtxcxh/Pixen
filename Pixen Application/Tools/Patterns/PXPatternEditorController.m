@@ -14,6 +14,7 @@
 
 @implementation PXPatternEditorController
 
+@synthesize patternsController, scrollView, editorView, promptField;
 @synthesize toolName, patternFileName, delegate;
 
 - (void)awakeFromNib

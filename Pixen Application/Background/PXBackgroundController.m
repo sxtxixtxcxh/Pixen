@@ -17,6 +17,7 @@ typedef enum _PXStackType
 
 @implementation PXBackgroundController
 
+@synthesize alternateBackgroundView, mainBackgroundView, mainStack, defaultsStack;
 @synthesize delegate;
 
 - builtinTemplates

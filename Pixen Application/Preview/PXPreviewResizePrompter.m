@@ -11,6 +11,7 @@
 
 @implementation PXPreviewResizePrompter
 
+@synthesize zoomPercentage, width, height;
 @synthesize delegate;
 
 - (id) init

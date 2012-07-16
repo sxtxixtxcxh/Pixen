@@ -7,7 +7,7 @@
 
 @implementation PXDuotoneBackground
 
-@synthesize backColor;
+@synthesize backWell, backColor;
 
 - (NSString *)nibName
 {

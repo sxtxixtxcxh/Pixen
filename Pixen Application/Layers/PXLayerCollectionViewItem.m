@@ -29,6 +29,7 @@
 
 @implementation PXLayerCollectionViewItem
 
+@synthesize nameField, thumbnailView, opacityField;
 @synthesize backgroundView = _backgroundView;
 @synthesize layerController;
 

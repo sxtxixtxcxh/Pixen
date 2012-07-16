@@ -9,11 +9,12 @@
 {
   @private
 	PXPattern *_pattern;
-	IBOutlet NSArrayController *patternsController;
-	IBOutlet NSScrollView *scrollView;
-	IBOutlet PXPatternEditorView *editorView;
-	IBOutlet NSTextField *promptField;
 }
+
+@property (nonatomic, strong) IBOutlet NSArrayController *patternsController;
+@property (nonatomic, weak) IBOutlet NSScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet PXPatternEditorView *editorView;
+@property (nonatomic, weak) IBOutlet NSTextField *promptField;
 
 @property (nonatomic, copy) NSString *toolName;
 @property (nonatomic, copy) NSString *patternFileName;

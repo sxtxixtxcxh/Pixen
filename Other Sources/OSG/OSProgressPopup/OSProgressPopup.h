@@ -14,14 +14,13 @@
 {
   @private
 	BOOL operationActive;
-	IBOutlet NSTextField *statusField;
-	IBOutlet NSProgressIndicator *progressIndicator;
-	IBOutlet NSButton *cancelButton;
-	IBOutlet NSWindow *window;
-	
-	NSOperationQueue *_workQueue;
 	BOOL indeterminate;
 }
+
+@property (nonatomic, weak) IBOutlet NSTextField *statusField;
+@property (nonatomic, weak) IBOutlet NSProgressIndicator *progressIndicator;
+@property (nonatomic, weak) IBOutlet NSButton *cancelButton;
+@property (nonatomic, weak) IBOutlet NSWindow *window;
 
 // This method returns the singleton instance of the progress popup. Don't allocate your own; use this method.
 + (OSProgressPopup *)sharedProgressPopup;

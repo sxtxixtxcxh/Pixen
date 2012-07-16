@@ -9,17 +9,15 @@
 @interface PXScaleController : NSWindowController 
 {
   @private
-	IBOutlet NSPopUpButton *algorithmButton;
-	// currently unused: IBOutlet NSBox *scaleParameterView;
-	
-	IBOutlet NSButton *scaleProportionallyCheckbox;
-	IBOutlet NSTextField *pixelsWideField, *pixelsHighField, *percentageWideField, *percentageHighField;
-	IBOutlet NSTextView *algorithmInfoView;
-	
 	NSSize newSize;
-	
 	PXCanvasWindowController *canvasController;
 }
+
+@property (nonatomic, weak) IBOutlet NSPopUpButton *algorithmButton;
+
+@property (nonatomic, weak) IBOutlet NSButton *scaleProportionallyCheckbox;
+@property (nonatomic, weak) IBOutlet NSTextField *pixelsWideField, *pixelsHighField, *percentageWideField, *percentageHighField;
+@property (nonatomic, unsafe_unretained) IBOutlet NSTextView *algorithmInfoView;
 
 @property (nonatomic, weak) id < PXScaleControllerDelegate > delegate;
 

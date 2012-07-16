@@ -10,7 +10,7 @@
 
 @implementation PXEyedropperToolPropertiesController
 
-@synthesize buttonType;
+@synthesize targetMatrix, buttonType;
 
 - (id)init
 {

@@ -14,10 +14,7 @@
 {
   @private
 	PXCanvas *__weak canvas;
-	IBOutlet PXCanvasView *view;
-	IBOutlet NSScrollView *scrollView;
 	NSDocument *__weak document;
-	IBOutlet NSWindow *window;
 	
 	PXLayerController *__weak layerController;
 	PXBackgroundController *backgroundController;
@@ -32,12 +29,13 @@
 	PXColor oldColor;
 }
 
+@property (nonatomic, weak) IBOutlet PXCanvasView *view;
+@property (nonatomic, weak) IBOutlet NSScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet NSWindow *window;
+
 @property (nonatomic, weak) id delegate;
 
-- (PXCanvasView *)view;
-- (NSScrollView *)scrollView;
 - (PXLayerController *)layerController;
-- window;
 - (void)setLayerController:contro;
 - (void)prepare;
 - (void)toolSwitched:(NSNotification *)notification;
@@ -62,8 +60,6 @@
 - (void)updateCanvasSize;
 - document;
 - (void)setDocument:doc;
-- window;
-- (void)setWindow:win;
 - (void)zoomInOnCanvasPoint:(NSPoint)point;
 - (void)zoomOutOnCanvasPoint:(NSPoint)point;
 

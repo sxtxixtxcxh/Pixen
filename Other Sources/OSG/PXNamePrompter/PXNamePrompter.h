@@ -8,10 +8,11 @@
 @interface PXNamePrompter : NSWindowController
 {
   @private
-	IBOutlet NSTextField *nameField;
-	IBOutlet NSTextField *promptString;
 	BOOL _runningModal;
 }
+
+@property (nonatomic, weak) IBOutlet NSTextField *nameField;
+@property (nonatomic, weak) IBOutlet NSTextField *promptString;
 
 @property (nonatomic, weak) id delegate;
 

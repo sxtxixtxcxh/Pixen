@@ -11,13 +11,12 @@
 {
   @private
 	PXBackground *background;
-	IBOutlet NSView *view;
-	IBOutlet NSTextField *__weak templateNameField, *__weak templateClassNameField;
-	IBOutlet PXBackgroundPreviewView *__weak imageView;
 	BOOL _highlighted;
 }
 
 @property (nonatomic, strong) PXBackground *background;
+
+@property (weak, nonatomic) IBOutlet NSView *view;
 
 @property (weak, nonatomic) IBOutlet NSTextField *templateNameField;
 @property (weak, nonatomic) IBOutlet NSTextField *templateClassNameField;

@@ -24,9 +24,9 @@ typedef enum _PXToolButtonType {
   @private
 	PXEyedropperColorSourceType colorSource;
 	PXToolButtonType buttonType;
-	
-	IBOutlet NSMatrix *targetMatrix;
 }
+
+@property (nonatomic, weak) IBOutlet NSMatrix *targetMatrix;
 
 @property (nonatomic, assign) PXToolButtonType buttonType;
 

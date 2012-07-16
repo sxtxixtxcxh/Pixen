@@ -7,10 +7,6 @@
 @interface PXBackgroundInfoView : NSView
 {
   @private
-	IBOutlet NSView *configuratorContainer;
-	IBOutlet id delegate;
-	IBOutlet PXBackgroundPreviewView *imageView;
-	IBOutlet NSTextField *nameField;
 	NSBezierPath *cachedEmptyPath;
 	NSBezierPath *cachedBackgroundPath;
 	NSPoint dragOrigin;
@@ -22,9 +18,12 @@
 - (IBAction)nameChanged:(id)sender;
 - (void)setPreviewImage:(NSImage *)img;
 
-@property (nonatomic, weak) PXBackground *background;
+@property (nonatomic, weak) IBOutlet NSView *configuratorContainer;
+@property (nonatomic, weak) IBOutlet id delegate;
+@property (nonatomic, weak) IBOutlet PXBackgroundPreviewView *imageView;
+@property (nonatomic, weak) IBOutlet NSTextField *nameField;
 
-@property (nonatomic, strong, readonly) NSTextField *nameField;
+@property (nonatomic, weak) PXBackground *background;
 
 @end
 

@@ -5,11 +5,9 @@
 
 #import "PXMonotoneBackground.h"
 
-@interface PXDuotoneBackground : PXMonotoneBackground 
-{
-  @private
-	IBOutlet NSColorWell *backWell;
-}
+@interface PXDuotoneBackground : PXMonotoneBackground
+
+@property (nonatomic, weak) IBOutlet NSColorWell *backWell;
 
 @property (nonatomic, strong) NSColor *backColor;
 

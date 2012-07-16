@@ -17,6 +17,7 @@
 
 static NSArray *algorithms = nil;
 
+@synthesize algorithmButton, scaleProportionallyCheckbox, pixelsHighField, pixelsWideField, percentageHighField, percentageWideField, algorithmInfoView;
 @synthesize delegate;
 
 + (void)initialize

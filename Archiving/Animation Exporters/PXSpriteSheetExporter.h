@@ -13,7 +13,7 @@
 
 @property (nonatomic, weak) IBOutlet NSImageView *sheetImageView;
 
-@property (nonatomic, weak) IBOutlet NSArrayController *documentRepresentationsController;
+@property (nonatomic, strong) IBOutlet NSArrayController *documentRepresentationsController;
 
 + (id)sharedSpriteSheetExporter;
 

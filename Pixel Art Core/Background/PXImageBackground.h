@@ -9,9 +9,10 @@
 {
   @private
 	NSImage *image;
-	IBOutlet NSTextField *imageNameField;
-	IBOutlet NSButton *browseButton;
 }
+
+@property (nonatomic, weak) IBOutlet NSTextField *imageNameField;
+@property (nonatomic, weak) IBOutlet NSButton *browseButton;
 
 - (IBAction)configuratorBrowseForImageButtonClicked:(id)sender;
 - (void)setImage:(NSImage *) anImage;

@@ -12,6 +12,8 @@
 
 @implementation PXImageBackground
 
+@synthesize imageNameField, browseButton;
+
 - (NSImage *)previewImageOfSize:(NSSize)size
 {
 	NSImage *result = [[NSImage alloc] initWithSize:size];

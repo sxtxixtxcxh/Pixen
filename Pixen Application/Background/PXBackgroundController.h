@@ -7,11 +7,12 @@
 @interface PXBackgroundController : NSWindowController
 {
   @private
-	IBOutlet PXBackgroundInfoView *alternateBackgroundView;
-	IBOutlet PXBackgroundInfoView *mainBackgroundView;
-	IBOutlet OSStackedView *mainStack, *defaultsStack;
 	NSMutableArray *mainViews, *defaultsViews;
 }
+
+@property (nonatomic, weak) IBOutlet PXBackgroundInfoView *alternateBackgroundView;
+@property (nonatomic, weak) IBOutlet PXBackgroundInfoView *mainBackgroundView;
+@property (nonatomic, weak) IBOutlet OSStackedView *mainStack, *defaultsStack;
 
 @property (nonatomic, weak) id delegate;
 

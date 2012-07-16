@@ -10,6 +10,7 @@
 
 @implementation PXNamePrompter
 
+@synthesize nameField, promptString;
 @synthesize delegate = _delegate;
 
 - (id)init

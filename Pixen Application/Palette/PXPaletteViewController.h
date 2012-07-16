@@ -13,10 +13,10 @@
 @interface PXPaletteViewController : NSViewController
 {
   @private
-	IBOutlet PXPaletteSelector *paletteSelector;
 	PXNamePrompter *namePrompter;
 }
 
+@property (nonatomic, weak) IBOutlet PXPaletteSelector *paletteSelector;
 @property (nonatomic, weak) IBOutlet PXPaletteView *paletteView;
 @property (nonatomic, weak) IBOutlet NSButton *addColorButton;
 @property (nonatomic, weak) IBOutlet NSTextField *infoField;

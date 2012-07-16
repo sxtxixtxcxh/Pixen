@@ -12,15 +12,15 @@
 @interface PXPencilToolPropertiesController : PXToolPropertiesController
 {
   @private
-	IBOutlet NSTextField *lineThicknessField;
-	IBOutlet NSButton *patternButton;
-	IBOutlet NSButton *clearButton;
-	
 	PXPattern *drawingPattern;
 	PXPatternEditorController *patternEditor;
 	int lineThickness;
 	NSString *toolName;
 }
+
+@property (nonatomic, weak) IBOutlet NSTextField *lineThicknessField;
+@property (nonatomic, weak) IBOutlet NSButton *patternButton;
+@property (nonatomic, weak) IBOutlet NSButton *clearButton;
 
 @property (nonatomic, assign) int lineThickness;
 @property (nonatomic, strong) PXPattern *pattern;

@@ -24,10 +24,12 @@
 @end
 
 //
-// PXToolPalette : Private categories
+// PXToolPaletteController implementation
 //
 
-@implementation PXToolPaletteController (Private)
+@implementation PXToolPaletteController
+
+@synthesize leftSwitcher, rightSwitcher, minimalView, rightSwitchView, triangle, rightToolGradient;
 
 - (void)_openRightToolSwitcher
 {
@@ -52,19 +54,9 @@
 	NSRect rightFrame = [rightSwitchView frame];
 	[[self window] setFrame:NSMakeRect(NSMinX(windowFrame), NSMinY(windowFrame)+NSHeight(rightFrame), NSWidth(windowFrame), NSHeight(windowFrame)-NSHeight(rightFrame)) display:YES	animate:NO];
 	[triangle setState:NSOffState];
-	[[NSUserDefaults standardUserDefaults] setBool:NO 
+	[[NSUserDefaults standardUserDefaults] setBool:NO
 											forKey:PXRightToolSwitcherIsOpenKey];
 }
-
-@end
-
-
-//
-// PXToolPaletteController implementation
-//
-
-@implementation PXToolPaletteController
-
 
 -(id) init
 {

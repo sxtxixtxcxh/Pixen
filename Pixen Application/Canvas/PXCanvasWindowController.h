@@ -13,12 +13,12 @@
 @interface PXCanvasWindowController : NSWindowController < PXCanvasResizePrompterDelegate >
 {
   @private
-	IBOutlet id zoomPercentageBox;
-	IBOutlet id zoomStepper;
-	IBOutlet NSView *zoomView;
-	
 	PXCanvasController *__weak canvasController;
 	PXCanvas *__weak canvas;
+	
+	id __weak zoomPercentageBox;
+	id __weak zoomStepper;
+	NSView *zoomView;
 	
 	PXGridSettingsController *_gridSettingsController;
 	PXCanvasResizePrompter *_resizePrompter;
@@ -28,6 +28,10 @@
 	
 	NSToolbar *toolbar;
 }
+
+@property (nonatomic, weak) IBOutlet id zoomPercentageBox;
+@property (nonatomic, weak) IBOutlet id zoomStepper;
+@property (nonatomic, strong) IBOutlet NSView *zoomView;
 
 @property (nonatomic, weak) IBOutlet PXCanvasController *canvasController;
 

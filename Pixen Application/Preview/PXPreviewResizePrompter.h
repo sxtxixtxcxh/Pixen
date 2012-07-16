@@ -11,9 +11,10 @@
 @interface PXPreviewResizePrompter : NSWindowController
 {
   @private
-	IBOutlet NSTextField * zoomPercentage, * width, * height;
 	NSSize canvasSize;
 }
+
+@property (nonatomic, weak) IBOutlet NSTextField *zoomPercentage, *width, *height;
 
 @property (nonatomic, weak) id delegate;
 

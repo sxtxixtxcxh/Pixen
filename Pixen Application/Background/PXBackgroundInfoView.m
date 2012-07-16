@@ -8,7 +8,7 @@
 
 @implementation PXBackgroundInfoView
 
-@synthesize nameField, background;
+@synthesize configuratorContainer, delegate, imageView, nameField, background;
 
 - (id)initWithFrame:(NSRect)frameRect
 {

@@ -31,11 +31,7 @@
 @implementation PXCanvasController
 
 @synthesize delegate;
-
-- (PXCanvasView *)view
-{
-	return view;
-}
+@synthesize view, scrollView, window;
 
 - (void)awakeFromNib
 {
@@ -328,16 +324,6 @@
 - (void)setDocument:doc
 {
 	document = doc;
-}
-
-- window
-{
-	return window;
-}
-
-- (void)setWindow:win
-{
-	window = win;
 }
 
 - (PXLayerController *)layerController

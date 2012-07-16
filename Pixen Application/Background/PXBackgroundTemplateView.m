@@ -10,7 +10,7 @@
 
 @implementation PXBackgroundTemplateView
 
-@synthesize background, templateNameField, templateClassNameField, imageView;
+@synthesize background, templateNameField, templateClassNameField, imageView, view;
 @synthesize highlighted = _highlighted;
 
 - (id)initWithFrame:(NSRect)frame

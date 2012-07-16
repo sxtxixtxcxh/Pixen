@@ -12,6 +12,8 @@ static NSLock *popupLock = nil;
 
 @implementation OSProgressPopup
 
+@synthesize statusField, progressIndicator, cancelButton, window;
+
 + (void)initialize
 {
 	popupLock = [[NSLock alloc] init];

@@ -28,7 +28,7 @@
 
 @implementation PXPaletteViewController
 
-@synthesize addColorButton, infoField, paletteView, delegate;
+@synthesize paletteSelector, addColorButton, infoField, paletteView, delegate;
 
 - (id)init
 {

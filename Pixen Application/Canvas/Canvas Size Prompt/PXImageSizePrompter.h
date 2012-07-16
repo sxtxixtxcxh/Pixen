@@ -8,9 +8,6 @@
 @interface PXImageSizePrompter : NSWindowController < NSWindowDelegate >
 {
   @private
-	IBOutlet PXNSImageView *preview;
-	IBOutlet NSView *widthIndicator, *heightIndicator;
-	IBOutlet NSPopUpButton *presetsButton;
 	PXNamePrompter *prompter;
 	PXManagePresetsController *manageWC;
 	
@@ -26,6 +23,10 @@
 	NSRect initialWidthIndicatorFrame;
 	BOOL accepted;
 }
+
+@property (nonatomic, weak) IBOutlet PXNSImageView *preview;
+@property (nonatomic, weak) IBOutlet NSView *widthIndicator, *heightIndicator;
+@property (nonatomic, weak) IBOutlet NSPopUpButton *presetsButton;
 
 @property (nonatomic, weak) IBOutlet NSTextField *promptField;
 
