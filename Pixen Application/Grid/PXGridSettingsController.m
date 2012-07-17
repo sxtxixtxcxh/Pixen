@@ -55,6 +55,7 @@
 	[defaults setFloat:self.height forKey:PXGridUnitHeightKey];
 	[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.color]
 				 forKey:PXGridColorDataKey];
+	[defaults setBool:self.showGrid forKey:PXGridShouldDrawKey];
 	
 	[self update:self];
 }
