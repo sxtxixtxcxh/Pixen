@@ -14,7 +14,6 @@
 NSString *PXBackgroundConfigurator = @"PXBackgroundConfigurator";
 NSString *PXPreview = @"PXPreview";
 NSString *PXToolProperties = @"PXToolProperties";
-NSString *PXGridConfigurator = @"PXGridConfigurator";
 NSString *PXZoomFit = @"PXZoomFit";
 NSString *PXZoom100 = @"PXZoom100";
 NSString *PXScale = @"PXScale";
@@ -56,13 +55,6 @@ NSString *PXZoom = @"PXZoom";
 		[item setTarget:[PXPanelManager sharedManager]];
 		[item setAction:@selector(toggleLeftToolProperties:)];
 		[item setImage:[NSImage imageNamed:@"toolproperties"]];
-	}
-	else if ([itemIdentifier isEqualToString:PXGridConfigurator])
-	{
-		[item setLabel:NSLocalizedString(@"GRID_LABEL", @"Grid Label")];
-		[item setToolTip:NSLocalizedString(@"GRID_TOOLTIP", @"Grid Tooltip")];
-		[item setAction:@selector(showGridSettingsPrompter:)];
-		[item setImage:[NSImage imageNamed:@"grid"]];
 	}
 	else if ([itemIdentifier isEqualToString:PXZoomFit])
 	{		
@@ -114,7 +106,6 @@ NSString *PXZoom = @"PXZoom";
 			PXPreview, PXZoom, 
 			PXZoomFit, PXZoom100,
 			PXResize, PXScale,
-			PXGridConfigurator,
 			NSToolbarCustomizeToolbarItemIdentifier, 
 			NSToolbarSpaceItemIdentifier,
 			NSToolbarSeparatorItemIdentifier,
@@ -124,7 +115,7 @@ NSString *PXZoom = @"PXZoom";
 
 - (NSArray *) toolbarDefaultItemIdentifiers:(NSToolbar *) toolbar
 {
-	return [NSArray arrayWithObjects:PXBackgroundConfigurator, PXGridConfigurator,
+	return [NSArray arrayWithObjects:PXBackgroundConfigurator,
 			NSToolbarSeparatorItemIdentifier, PXPreview,
 			NSToolbarFlexibleSpaceItemIdentifier, PXZoom, nil];
 }
