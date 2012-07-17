@@ -10,8 +10,6 @@
 @interface PXGridSettingsController : NSWindowController
 
 @property (nonatomic, weak) IBOutlet NSColorWell *colorWell;
-@property (nonatomic, weak) IBOutlet NSTextField *colorLabel;
-@property (nonatomic, weak) IBOutlet NSTextField *sizeLabel;
 
 @property (nonatomic, assign) int width;
 @property (nonatomic, assign) int height;

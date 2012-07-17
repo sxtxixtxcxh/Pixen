@@ -11,7 +11,7 @@
 
 @implementation PXGridSettingsController
 
-@synthesize colorWell = _colorWell, colorLabel = _colorLabel, sizeLabel = _sizeLabel;
+@synthesize colorWell = _colorWell;
 @synthesize width = _width, height = _height, color = _color, delegate = _delegate;
 
 - (id)init

@@ -366,22 +366,6 @@
 					<int key="connectionID">12</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">colorLabel</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="548008207"/>
-					</object>
-					<int key="connectionID">26</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">sizeLabel</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="936575385"/>
-					</object>
-					<int key="connectionID">27</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">update:</string>
 						<reference key="source" ref="1001"/>
@@ -652,7 +636,6 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="colorLabel">NSTextField</string>
 						<string key="colorWell">NSColorWell</string>
-						<string key="shouldDrawCheckBox">NSButton</string>
 						<string key="sizeLabel">NSTextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -663,10 +646,6 @@
 						<object class="IBToOneOutletInfo" key="colorWell">
 							<string key="name">colorWell</string>
 							<string key="candidateClassName">NSColorWell</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="shouldDrawCheckBox">
-							<string key="name">shouldDrawCheckBox</string>
-							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="sizeLabel">
 							<string key="name">sizeLabel</string>
