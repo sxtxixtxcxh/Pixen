@@ -12,7 +12,7 @@
 @implementation PXGridSettingsController
 
 @synthesize colorWell = _colorWell;
-@synthesize width = _width, height = _height, color = _color, delegate = _delegate;
+@synthesize showGrid = _showGrid, width = _width, height = _height, color = _color, delegate = _delegate;
 
 - (id)init
 {
@@ -43,7 +43,8 @@
 {
 	[self.delegate gridSettingsController:self
 						  updatedWithSize:NSMakeSize(self.width, self.height)
-									color:self.color];
+									color:self.color
+								  visible:self.showGrid];
 }
 
 - (IBAction)useAsDefaults:(id)sender

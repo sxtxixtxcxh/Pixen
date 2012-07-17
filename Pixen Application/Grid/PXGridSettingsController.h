@@ -11,6 +11,7 @@
 
 @property (nonatomic, weak) IBOutlet NSColorWell *colorWell;
 
+@property (nonatomic, assign) BOOL showGrid;
 @property (nonatomic, assign) int width;
 @property (nonatomic, assign) int height;
 @property (nonatomic, strong) NSColor *color;
@@ -31,6 +32,7 @@
 
 - (void)gridSettingsController:(PXGridSettingsController *)controller
 			   updatedWithSize:(NSSize)size
-						 color:(NSColor *)color;
+						 color:(NSColor *)color
+					   visible:(BOOL)visible;
 
 @end

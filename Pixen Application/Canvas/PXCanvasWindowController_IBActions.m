@@ -329,17 +329,20 @@
 	_gridSettingsController.width = (int) [[canvas grid] unitSize].width;
 	_gridSettingsController.height = (int) [[canvas grid] unitSize].height;
 	_gridSettingsController.color = [[canvas grid] color];
+	_gridSettingsController.showGrid = [[canvas grid] shouldDraw];
 	
 	[_gridSettingsController beginSheetWithParentWindow:[self window]];
 }
 
 - (void)gridSettingsController:(PXGridSettingsController *)controller
 			   updatedWithSize:(NSSize)size
-						 color:(NSColor *)color {
+						 color:(NSColor *)color
+					   visible:(BOOL)visible {
 	
 	PXGrid *grid = [canvas grid];
 	[grid setUnitSize:size];
 	[grid setColor:color];
+	[grid setShouldDraw:visible];
 	
 	[canvas changed];
 }
