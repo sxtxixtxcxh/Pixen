@@ -330,11 +330,7 @@
 	_gridSettingsController.height = (int) [[canvas grid] unitSize].height;
 	_gridSettingsController.color = [[canvas grid] color];
 	
-	NSString *title = [NSString stringWithFormat:@"%@ - %@", NSLocalizedString(@"Grid", @"Grid"),
-					   [[self document] displayName]];
-	
-	[[_gridSettingsController window] setTitle:title];
-	[_gridSettingsController showWindow:self];
+	[_gridSettingsController beginSheetWithParentWindow:[self window]];
 }
 
 - (void)gridSettingsController:(PXGridSettingsController *)controller

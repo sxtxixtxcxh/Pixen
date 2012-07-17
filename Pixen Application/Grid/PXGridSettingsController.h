@@ -20,6 +20,10 @@
 - (IBAction)update:(id)sender;
 - (IBAction)useAsDefaults:(id)sender;
 
+- (IBAction)dismiss:(id)sender;
+
+- (void)beginSheetWithParentWindow:(NSWindow *)parentWindow;
+
 @end
 
 

@@ -32,9 +32,10 @@
 	}
 }
 
-- (void)showWindow:(id)sender
+- (void)beginSheetWithParentWindow:(NSWindow *)parentWindow
 {
-	[super showWindow:sender];
+	[NSApp beginSheet:[self window] modalForWindow:parentWindow modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
+	
 	[self update:nil];
 }
 
@@ -55,6 +56,12 @@
 				 forKey:PXGridColorDataKey];
 	
 	[self update:self];
+}
+
+- (IBAction)dismiss:(id)sender
+{
+	[NSApp endSheet:[self window]];
+	[self.window orderOut:nil];
 }
 
 - (void)windowWillClose:(NSNotification *)notification
