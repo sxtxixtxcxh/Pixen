@@ -32,7 +32,6 @@
 	BOOL _usesToolCursors, _updatesInfoPanel;
 	
 	BOOL erasing;
-	BOOL _redrawBorder;
 }
 
 @property (nonatomic, weak) PXCanvas *canvas;
