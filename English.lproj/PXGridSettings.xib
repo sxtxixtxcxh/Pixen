@@ -41,10 +41,10 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSWindowTemplate" id="892236356">
-				<int key="NSWindowStyleMask">23</int>
+				<int key="NSWindowStyleMask">7</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{272, 172}, {200, 132}}</string>
-				<int key="NSWTFlags">-1535638528</int>
+				<string key="NSWindowRect">{{272, 172}, {244, 148}}</string>
+				<int key="NSWTFlags">611845120</int>
 				<string key="NSWindowTitle">Grid Settings</string>
 				<string key="NSWindowClass">NSPanel</string>
 				<nil key="NSViewClass"/>
@@ -56,19 +56,20 @@
 						<object class="NSButton" id="555123371">
 							<reference key="NSNextResponder" ref="1038945403"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{71, 10}, {120, 28}}</string>
+							<string key="NSFrame">{{92, 13}, {138, 32}}</string>
 							<reference key="NSSuperview" ref="1038945403"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="904181116"/>
 							<string key="NSReuseIdentifierKey">_NS:161</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="719794776">
 								<int key="NSCellFlags">67108864</int>
-								<int key="NSCellFlags2">134348800</int>
+								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents">Use as Defaults</string>
-								<object class="NSFont" key="NSSupport" id="26">
+								<object class="NSFont" key="NSSupport" id="509326073">
 									<string key="NSName">LucidaGrande</string>
-									<double key="NSSize">11</double>
-									<int key="NSfFlags">3100</int>
+									<double key="NSSize">13</double>
+									<int key="NSfFlags">1044</int>
 								</object>
 								<string key="NSCellIdentifier">_NS:161</string>
 								<reference key="NSControlView" ref="555123371"/>
@@ -84,7 +85,7 @@
 						<object class="NSTextField" id="548008207">
 							<reference key="NSNextResponder" ref="1038945403"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{44, 100}, {63, 14}}</string>
+							<string key="NSFrame">{{56, 112}, {73, 17}}</string>
 							<reference key="NSSuperview" ref="1038945403"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="145189852"/>
@@ -92,9 +93,9 @@
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="809924650">
 								<int key="NSCellFlags">68157504</int>
-								<int key="NSCellFlags2">272761856</int>
+								<int key="NSCellFlags2">272630784</int>
 								<string key="NSContents">Grid Color:</string>
-								<reference key="NSSupport" ref="26"/>
+								<reference key="NSSupport" ref="509326073"/>
 								<string key="NSCellIdentifier">_NS:3946</string>
 								<reference key="NSControlView" ref="548008207"/>
 								<object class="NSColor" key="NSBackgroundColor" id="39079126">
@@ -124,7 +125,7 @@
 							<set class="NSMutableSet" key="NSDragTypes">
 								<string>NSColor pasteboard type</string>
 							</set>
-							<string key="NSFrame">{{112, 97}, {44, 20}}</string>
+							<string key="NSFrame">{{134, 109}, {44, 23}}</string>
 							<reference key="NSSuperview" ref="1038945403"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="936575385"/>
@@ -140,17 +141,17 @@
 						<object class="NSTextField" id="936575385">
 							<reference key="NSNextResponder" ref="1038945403"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{12, 73}, {95, 14}}</string>
+							<string key="NSFrame">{{17, 81}, {112, 17}}</string>
 							<reference key="NSSuperview" ref="1038945403"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="904181116"/>
+							<reference key="NSNextKeyView" ref="555123371"/>
 							<string key="NSReuseIdentifierKey">_NS:3946</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="716294372">
 								<int key="NSCellFlags">68157504</int>
-								<int key="NSCellFlags2">272761856</int>
+								<int key="NSCellFlags2">272630784</int>
 								<string key="NSContents">Size of Grid Unit:</string>
-								<reference key="NSSupport" ref="26"/>
+								<reference key="NSSupport" ref="509326073"/>
 								<string key="NSCellIdentifier">_NS:3946</string>
 								<reference key="NSControlView" ref="936575385"/>
 								<reference key="NSBackgroundColor" ref="39079126"/>
@@ -161,10 +162,9 @@
 						<object class="NSForm" id="904181116">
 							<reference key="NSNextResponder" ref="1038945403"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{112, 44}, {74, 46}}</string>
+							<string key="NSFrame">{{134, 53}, {90, 48}}</string>
 							<reference key="NSSuperview" ref="1038945403"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="555123371"/>
 							<bool key="NSEnabled">YES</bool>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							<int key="NSNumRows">2</int>
@@ -181,7 +181,7 @@
 										<int key="NS.mantissa.bo">1</int>
 										<bytes key="NS.mantissa">AQAAAAAAAAAAAAAAAAAAAA</bytes>
 									</object>
-									<reference key="NSSupport" ref="26"/>
+									<reference key="NSSupport" ref="509326073"/>
 									<object class="NSNumberFormatter" key="NSFormatter" id="511130034">
 										<dictionary class="NSMutableDictionary" key="NS.attributes">
 											<boolean value="YES" key="allowsFloats"/>
@@ -238,12 +238,12 @@
 										<bool key="NS.allowsfloats">YES</bool>
 									</object>
 									<reference key="NSControlView" ref="904181116"/>
-									<double key="NSTitleWidth">42.671875</double>
+									<double key="NSTitleWidth">49.703125</double>
 									<object class="NSCell" key="NSTitleCell">
 										<int key="NSCellFlags">67108864</int>
 										<int key="NSCellFlags2">0</int>
 										<string key="NSContents">Width:</string>
-										<reference key="NSSupport" ref="26"/>
+										<reference key="NSSupport" ref="509326073"/>
 										<reference key="NSControlView" ref="904181116"/>
 									</object>
 								</object>
@@ -258,7 +258,7 @@
 										<int key="NS.mantissa.bo">1</int>
 										<bytes key="NS.mantissa">AQAAAAAAAAAAAAAAAAAAAA</bytes>
 									</object>
-									<reference key="NSSupport" ref="26"/>
+									<reference key="NSSupport" ref="509326073"/>
 									<object class="NSNumberFormatter" key="NSFormatter" id="190560754">
 										<dictionary class="NSMutableDictionary" key="NS.attributes">
 											<boolean value="YES" key="allowsFloats"/>
@@ -307,17 +307,17 @@
 									</object>
 									<reference key="NSControlView" ref="904181116"/>
 									<int key="NSTag">1</int>
-									<double key="NSTitleWidth">42.671875</double>
+									<double key="NSTitleWidth">49.703125</double>
 									<object class="NSCell" key="NSTitleCell">
 										<int key="NSCellFlags">67108864</int>
 										<int key="NSCellFlags2">0</int>
 										<string key="NSContents">Height:</string>
-										<reference key="NSSupport" ref="26"/>
+										<reference key="NSSupport" ref="509326073"/>
 										<reference key="NSControlView" ref="904181116"/>
 									</object>
 								</object>
 							</array>
-							<string key="NSCellSize">{74, 20}</string>
+							<string key="NSCellSize">{90, 22}</string>
 							<string key="NSIntercellSpacing">{1, 4}</string>
 							<int key="NSMatrixFlags">67633152</int>
 							<string key="NSCellClass">NSActionCell</string>
@@ -325,13 +325,13 @@
 								<int key="NSCellFlags">342884416</int>
 								<int key="NSCellFlags2">71304192</int>
 								<string key="NSContents"/>
-								<reference key="NSSupport" ref="26"/>
-								<double key="NSTitleWidth">42.671875</double>
+								<reference key="NSSupport" ref="509326073"/>
+								<double key="NSTitleWidth">49.703125</double>
 								<object class="NSCell" key="NSTitleCell">
 									<int key="NSCellFlags">67108864</int>
 									<int key="NSCellFlags2">0</int>
 									<string key="NSContents">Field:</string>
-									<reference key="NSSupport" ref="26"/>
+									<reference key="NSSupport" ref="509326073"/>
 								</object>
 							</object>
 							<int key="NSSelectedRow">-1</int>
@@ -341,10 +341,14 @@
 								<int key="NSColorSpace">3</int>
 								<bytes key="NSWhite">MQA</bytes>
 							</object>
-							<reference key="NSFont" ref="26"/>
+							<object class="NSFont" key="NSFont">
+								<string key="NSName">LucidaGrande</string>
+								<double key="NSSize">11</double>
+								<int key="NSfFlags">3100</int>
+							</object>
 						</object>
 					</array>
-					<string key="NSFrameSize">{200, 132}</string>
+					<string key="NSFrameSize">{244, 148}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="548008207"/>
@@ -492,11 +496,11 @@
 						<int key="objectID">4</int>
 						<reference key="object" ref="1038945403"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="555123371"/>
 							<reference ref="548008207"/>
 							<reference ref="145189852"/>
 							<reference ref="936575385"/>
 							<reference ref="904181116"/>
+							<reference ref="555123371"/>
 						</array>
 						<reference key="parent" ref="892236356"/>
 					</object>
@@ -612,7 +616,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">48</int>
+			<int key="maxID">49</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
