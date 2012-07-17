@@ -123,6 +123,7 @@ void PXDebugRect(NSRect r, float alpha)
 
 - (void)setCanvas:(PXCanvas *) aCanvas
 {
+	_redrawBorder = YES;
 	canvas = aCanvas;
 	[self sizeToCanvas];
 	[self selectionMaskChanged:nil];
@@ -204,6 +205,7 @@ void PXDebugRect(NSRect r, float alpha)
 
 - (void)setZoomPercentage:(float)percent
 {
+	_redrawBorder = YES;
 	NSRect rect = [self visibleRect];
 	centeredPoint = [self convertFromViewToCanvasPoint:NSMakePoint(NSMinX(rect) + NSWidth(rect)/2, NSMinY(rect) + NSHeight(rect)/2)];
 	zoomPercentage = percent;
@@ -579,6 +581,9 @@ void PXDebugRect(NSRect r, float alpha)
 		[self drawSelectionMarqueeWithRect:rect offset:NSMakePoint(xCenter, yCenter)];
 	}
 	
+	if (!_redrawBorder)
+		return;
+	
 	// draw the outer border
 	[[NSGraphicsContext currentContext] saveGraphicsState];
 	
@@ -601,6 +606,8 @@ void PXDebugRect(NSRect r, float alpha)
 	[outerPath stroke];
 	
 	[[NSGraphicsContext currentContext] restoreGraphicsState];
+	
+	_redrawBorder = NO;
 }
 
 - (void)setDrawsWrappedCanvases:(BOOL)draws
