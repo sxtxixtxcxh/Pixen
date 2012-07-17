@@ -11,8 +11,8 @@
 
 @implementation PXGridSettingsController
 
-@synthesize colorWell = _colorWell, shouldDrawCheckBox = _shouldDrawCheckBox, colorLabel = _colorLabel, sizeLabel = _sizeLabel;
-@synthesize width = _width, height = _height, color = _color, shouldDraw = _shouldDraw, delegate = _delegate;
+@synthesize colorWell = _colorWell, colorLabel = _colorLabel, sizeLabel = _sizeLabel;
+@synthesize width = _width, height = _height, color = _color, delegate = _delegate;
 
 - (id)init
 {
@@ -40,36 +40,15 @@
 
 - (IBAction)update:(id)sender
 {
-	if ([self.shouldDrawCheckBox state] == NSOnState)
-	{
-		[self.sizeLabel setTextColor:[NSColor blackColor]];
-		[self.colorLabel setTextColor:[NSColor blackColor]];
-	}
-	else
-	{
-		if ([self.colorWell isActive])
-		{
-			[[NSColorPanel sharedColorPanel] close];
-		}
-		
-		[self.sizeLabel setTextColor:[NSColor disabledControlTextColor]];
-		[self.colorLabel setTextColor:[NSColor disabledControlTextColor]];
-	}
-	
-	if ([self.delegate respondsToSelector:@selector(gridSettingsController:updatedWithSize:color:shouldDraw:)])
-	{
-		[self.delegate gridSettingsController:self
-						 updatedWithSize:NSMakeSize(self.width, self.height)
-								   color:self.color
-							  shouldDraw:self.shouldDraw];
-	}
+	[self.delegate gridSettingsController:self
+						  updatedWithSize:NSMakeSize(self.width, self.height)
+									color:self.color];
 }
 
 - (IBAction)useAsDefaults:(id)sender
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	[defaults setBool:self.shouldDraw forKey:PXGridShouldDrawKey];
 	[defaults setFloat:self.width forKey:PXGridUnitWidthKey];
 	[defaults setFloat:self.height forKey:PXGridUnitHeightKey];
 	[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.color]

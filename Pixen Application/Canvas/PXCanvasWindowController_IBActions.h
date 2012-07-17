@@ -6,8 +6,9 @@
 //
 
 #import "PXCanvasWindowController.h"
+#import "PXGridSettingsController.h"
 
-@interface PXCanvasWindowController (IBActions)
+@interface PXCanvasWindowController (IBActions) < PXGridSettingsPrompterDelegate >
 
 - (void)rotateLayerCounterclockwise:(id)sender;
 - (void)rotateLayerClockwise:(id)sender;
@@ -37,9 +38,11 @@
 - (IBAction)showPreviewWindow:(NSEvent *)sender;
 - (IBAction)togglePreviewWindow:(id)sender;
 - (IBAction)showBackgroundInfo:(id)sender;
-- (IBAction)showGridSettingsPrompter:(id)sender;
 - (IBAction)redrawCanvas:(id)sender;
 - (IBAction)fill:(id)sender;
+
+- (IBAction)toggleGrid:(id)sender;
+- (IBAction)showGridSettingsPrompter:(id)sender;
 
 - (IBAction)selectAll:(id)sender;
 - (IBAction)selectNone:(id)sender;

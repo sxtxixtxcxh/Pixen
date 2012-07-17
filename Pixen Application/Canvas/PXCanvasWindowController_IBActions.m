@@ -220,6 +220,17 @@
 		PXToolSwitcher *switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
 		return ([[switcher color] alphaComponent] > 0.0f);
 	}
+	else if ([anItem action] == @selector(toggleGrid:))
+	{
+		if ([[canvas grid] shouldDraw]) {
+			[anItem setTitle:@"Hide Grid"];
+		}
+		else {
+			[anItem setTitle:@"Show Grid"];
+		}
+		
+		return YES;
+	}
 	
 	return YES;
 }
@@ -300,6 +311,14 @@
 	[canvasController showBackgroundInfo];
 }
 
+- (IBAction)toggleGrid:(id)sender
+{
+	BOOL shouldDraw = [[canvas grid] shouldDraw];
+	[[canvas grid] setShouldDraw:!shouldDraw];
+	
+	[canvas changed];
+}
+
 - (IBAction)showGridSettingsPrompter:(id)sender
 {
 	if (!_gridSettingsController) {
@@ -310,7 +329,6 @@
 	_gridSettingsController.width = (int) [[canvas grid] unitSize].width;
 	_gridSettingsController.height = (int) [[canvas grid] unitSize].height;
 	_gridSettingsController.color = [[canvas grid] color];
-	_gridSettingsController.shouldDraw = [[canvas grid] shouldDraw] ? YES : NO;
 	
 	NSString *title = [NSString stringWithFormat:@"%@ - %@", NSLocalizedString(@"Grid", @"Grid"),
 					   [[self document] displayName]];
@@ -321,13 +339,11 @@
 
 - (void)gridSettingsController:(PXGridSettingsController *)controller
 			   updatedWithSize:(NSSize)size
-						 color:(NSColor *)color
-					shouldDraw:(BOOL)shouldDraw {
+						 color:(NSColor *)color {
 	
 	PXGrid *grid = [canvas grid];
 	[grid setUnitSize:size];
 	[grid setColor:color];
-	[grid setShouldDraw:shouldDraw];
 	
 	[canvas changed];
 }
