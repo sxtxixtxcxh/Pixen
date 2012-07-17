@@ -580,7 +580,7 @@ void PXDebugRect(NSRect r, float alpha)
 	}
 	
 	// draw the outer border
-	[NSGraphicsContext saveGraphicsState];
+	[[NSGraphicsContext currentContext] saveGraphicsState];
 	
 	NSRect outerRect = NSInsetRect([self bounds], -1, -1);
 	
@@ -591,11 +591,16 @@ void PXDebugRect(NSRect r, float alpha)
 	outerRect.size.height -= 1;
 	
 	NSBezierPath *outerPath = [NSBezierPath bezierPathWithRect:outerRect];
+	[outerPath setLineWidth:1.0f];
+	
+	NSAffineTransform *t = [NSAffineTransform transform];
+	[t translateXBy:0.5f yBy:0.5f];
+	[outerPath transformUsingAffineTransform:t];
 	
 	[[NSColor blackColor] set];
 	[outerPath stroke];
 	
-	[NSGraphicsContext restoreGraphicsState];
+	[[NSGraphicsContext currentContext] restoreGraphicsState];
 }
 
 - (void)setDrawsWrappedCanvases:(BOOL)draws
