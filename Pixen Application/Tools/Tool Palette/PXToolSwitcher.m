@@ -132,11 +132,6 @@
 	[colorWell activate:YES];
 }
 
-- (void)clearBeziers
-{
-	[tools makeObjectsPerformSelector:@selector(clearBezier)];
-}
-
 - (void)setColor:(NSColor *)color
 {
 	//FIXME: coupled

@@ -189,12 +189,6 @@
 	[NSAnimationContext endGrouping];
 }
 
-- (void)clearBeziers;
-{
-	[rightSwitcher clearBeziers];
-	[leftSwitcher clearBeziers];
-}
-
 //Action method
 - (IBAction)disclosureClicked:(id)sender
 {

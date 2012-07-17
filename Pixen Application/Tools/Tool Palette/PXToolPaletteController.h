@@ -32,8 +32,6 @@
 - (void)enterFullScreenWithDuration:(NSTimeInterval)duration;
 - (void)exitFullScreenWithDuration:(NSTimeInterval)duration;
 
-- (void)clearBeziers;
-
 	//Action method
 - (IBAction)disclosureClicked:(id)sender;
 

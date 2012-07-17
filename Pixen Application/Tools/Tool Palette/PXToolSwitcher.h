@@ -43,7 +43,6 @@ typedef enum {
 - (id)toolWithTag:(PXToolTag)tag;
 - (PXToolTag)tagForTool:(id)aTool;
 - (void)setIcon:(NSImage *)anImage forTool:(id)aTool;
-- (void)clearBeziers;
 
 	//Manage color/colorWell
 - (NSColor *)color;
