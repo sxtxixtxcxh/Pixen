@@ -312,13 +312,18 @@
 	return YES;
 }
 
-- (NSInteger)selectionIndex
+- (NSUInteger)selectionIndex
 {
 	if ([self.tableView clickedRow] != -1) {
 		return [self.tableView clickedRow];
 	}
 	
-	return [self.tableView selectedRow];
+	NSInteger row = [self.tableView selectedRow];
+	
+	if (row == -1)
+		return NSNotFound;
+	
+	return row;
 }
 
 #pragma mark -
