@@ -438,7 +438,7 @@
 {
 	NSUInteger index = [self selectionIndex];
 	
-	if (index == -1 || index >= [[_canvas layers] count]) {
+	if (index == NSNotFound || index >= [[_canvas layers] count]) {
 		NSLog(@"Invalid index");
 		return;
 	}
@@ -454,7 +454,7 @@
 	
 	NSUInteger index = [self selectionIndex];
 	
-	if (index == -1 || index >= [[_canvas layers] count]) {
+	if (index == NSNotFound || index >= [[_canvas layers] count]) {
 		NSLog(@"Invalid index");
 		return;
 	}
@@ -502,7 +502,7 @@
 {
 	NSUInteger index = [self selectionIndex];
 	
-	if (index == -1 || index >= [[_canvas layers] count]) {
+	if (index == NSNotFound || index >= [[_canvas layers] count]) {
 		NSLog(@"Invalid index");
 		return;
 	}
