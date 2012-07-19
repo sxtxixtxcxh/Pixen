@@ -215,25 +215,25 @@
 
 - (NSMenu *)setupMenu
 {
-	NSMenu *menu = [[NSMenu alloc] initWithTitle:NSLocalizedString(@"Layer", @"Layer")];
+	NSMenu *menu = [[NSMenu alloc] initWithTitle:@"CM"];
 	
 	NSMenuItem *item;
 	
 	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Delete", @"Delete")];
-	[item setAction:@selector(deleteMenu:)];
+	[item setAction:@selector(removeLayer:)];
 	[item setTarget:self];
 	[menu addItem:item];
 	
 	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Duplicate", @"Duplicate")];
-	[item setAction:@selector(duplicateMenu:)];
+	[item setAction:@selector(duplicateSelectedLayer)];
 	[item setTarget:self];
 	[menu addItem:item];
 	
 	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Merge Down", @"Merge Down")];
-	[item setAction:@selector(mergeDown:)];
+	[item setAction:@selector(mergeDownSelectedLayer)];
 	[item setTarget:self];
 	[menu addItem:item];
 	
@@ -241,13 +241,13 @@
 	
 	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Cut", @"Cut")];
-	[item setAction:@selector(cutLayer:)];
+	[item setAction:@selector(cutSelectedLayer)];
 	[item setTarget:self];
 	[menu addItem:item];
 	
 	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Copy", @"Copy")];
-	[item setAction:@selector(copyLayer:)];
+	[item setAction:@selector(copySelectedLayer)];
 	[item setTarget:self];
 	[menu addItem:item];
 	
@@ -263,13 +263,13 @@
 	
 	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Flip Horizontally", @"Flip Horizontally")];
-	[item setAction:@selector(flipLayerHorizontally:)];
+	[item setAction:@selector(flipLayerHorizontally)];
 	[item setTarget:self];
 	[subMenu addItem:item];
 	
 	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Flip Vertically", @"Flip Vertically")];
-	[item setAction:@selector(flipLayerVertically:)];
+	[item setAction:@selector(flipLayerVertically)];
 	[item setTarget:self];
 	[subMenu addItem:item];
 	
@@ -277,19 +277,19 @@
 	
 	item = [[NSMenuItem alloc] init];
 	[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Rotate 90%@ Left", @"Rotate 90%@ Left"), [self degreeString]]];
-	[item setAction:@selector(rotateLayerCounterclockwise:)];
+	[item setAction:@selector(rotateLayerCounterclockwise)];
 	[item setTarget:self];
 	[subMenu addItem:item];
 	
 	item = [[NSMenuItem alloc] init];
 	[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Rotate 90%@ Right", @"Rotate 90%@ Right"), [self degreeString]]];
-	[item setAction:@selector(rotateLayerClockwise:)];
+	[item setAction:@selector(rotateLayerClockwise)];
 	[item setTarget:self];
 	[subMenu addItem:item];
 	
 	item = [[NSMenuItem alloc] init];
 	[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Rotate 180%@", @"Rotate 180%@"), [self degreeString]]];
-	[item setAction:@selector(rotateLayer180:)];
+	[item setAction:@selector(rotateLayer180)];
 	[item setTarget:self];
 	[subMenu addItem:item];
 	
@@ -298,20 +298,21 @@
 
 - (BOOL)validateMenuItem:(NSMenuItem *)anItem
 {
-	/*
-	if ([anItem action] == @selector(mergeDown:)) {
-		NSArray *layers = [[self canvas] layers];
-		return [layers count] > 1 && [layers objectAtIndex:0] != [self layer];
-	}
-	 */
-	if ([anItem action] == @selector(cutLayer:) || [anItem action] == @selector(deleteMenu:)) {
+	if ([self.tableView clickedRow] == -1)
+		return NO;
+	
+	if ([anItem action] == @selector(cutSelectedLayer) || [anItem action] == @selector(removeLayer:)) {
 		return [[self.canvas layers] count] > 1;
+	}
+	else if ([anItem action] == @selector(mergeDownSelectedLayer)) {
+		NSArray *layers = [self.canvas layers];
+		return [layers count] > 1 && [self.tableView clickedRow] < [layers count]-1;
 	}
 	
 	return YES;
 }
 
-- (NSInteger)selectionIndexForContextMenu
+- (NSInteger)selectionIndex
 {
 	if ([self.tableView clickedRow] != -1) {
 		return [self.tableView clickedRow];
@@ -337,7 +338,10 @@
 	
 	NSInteger index = [self.tableView selectedRow];
 	
-	if (index == -1 || index >= [[_canvas layers] count]) {
+	if (index == -1)
+		return;
+	
+	if (index >= [[_canvas layers] count]) {
 		NSLog(@"Invalid index");
 		[self selectLayerAtIndex:0];
 	}
@@ -427,40 +431,30 @@
 
 - (void)copySelectedLayer
 {
-	NSUInteger index = [self.tableView selectedRow];
+	NSInteger index = [self selectionIndex];
 	
-	if (index == NSNotFound || index >= [[_canvas layers] count]) {
+	if (index == -1 || index >= [[_canvas layers] count]) {
 		NSLog(@"Invalid index");
 		return;
 	}
 	
 	PXLayer *layer = [[_canvas layers] objectAtIndex:[self invertLayerIndex:index]];
-	[self copyLayerObject:layer];
-}
-
-- (void)copyLayerObject:(PXLayer *)layer
-{
 	[_canvas copyLayer:layer toPasteboard:[NSPasteboard generalPasteboard]];
 }
 
 - (void)cutSelectedLayer
 {
-	NSUInteger index = [self.tableView selectedRow];
+	if ([[_canvas layers] count] <= 1)
+		return;
 	
-	if (index == NSNotFound || index >= [[_canvas layers] count]) {
+	NSInteger index = [self selectionIndex];
+	
+	if (index == -1 || index >= [[_canvas layers] count]) {
 		NSLog(@"Invalid index");
 		return;
 	}
 	
 	PXLayer *layer = [[_canvas layers] objectAtIndex:[self invertLayerIndex:index]];
-	[self cutLayerObject:layer];
-}
-
-- (void)cutLayerObject:(PXLayer *)layer
-{
-	if ([[_canvas layers] count] <= 1)
-		return;
-	
 	[_canvas cutLayer:layer];
 }
 
@@ -472,33 +466,14 @@
 #pragma mark -
 #pragma mark Duplicating
 
-- (void)duplicateMenu:(id)sender
-{
-	NSUInteger index = [self invertLayerIndex:[self selectionIndexForContextMenu]];
-	PXLayer *layer = [[self.canvas layers] objectAtIndex:index];
-	
-	[self duplicateLayerObject:layer];
-}
-
 - (void)duplicateSelectedLayer
 {
-	NSUInteger index = [self invertLayerIndex:[self.tableView selectedRow]];
-	[_canvas duplicateLayerAtIndex:index];
-}
-
-- (void)duplicateLayerObject:(PXLayer *)layer
-{
-	NSUInteger index = [[_canvas layers] indexOfObject:layer];
+	NSUInteger index = [self invertLayerIndex:[self selectionIndex]];
 	[_canvas duplicateLayerAtIndex:index];
 }
 
 #pragma mark -
 #pragma mark Removing
-
-- (void)deleteMenu:(id)sender
-{
-	[self removeLayerAtIndex:[self invertLayerIndex:[self selectionIndexForContextMenu]]];
-}
 
 - (void)removedLayer:(NSNotification *)notification
 {
@@ -518,26 +493,16 @@
 	[_canvas removeLayerAtIndex:index];
 }
 
-- (void)removeLayerObject:(PXLayer *)layer
-{
-	[self removeLayerAtIndex:[[_canvas layers] indexOfObject:layer]];
-}
-
 - (IBAction)removeLayer:(id)sender
 {
-	NSUInteger index = [self.tableView selectedRow];
+	NSInteger index = [self selectionIndex];
 	
-	if (index == NSNotFound || index >= [[_canvas layers] count]) {
+	if (index == -1 || index >= [[_canvas layers] count]) {
 		NSLog(@"Invalid index");
 		return;
 	}
 	
 	[self removeLayerAtIndex:[self invertLayerIndex:index]];
-}
-
-- (void)deleteKeyPressedInCollectionView:(NSCollectionView *)view
-{
-	[self removeLayer:self];
 }
 
 #pragma mark -
@@ -549,15 +514,56 @@
 	[_canvas mergeDownLayer:layer];
 }
 
-- (void)mergeDownLayerObject:(PXLayer *)layer
-{
-	[self mergeDownLayerAtIndex:[[_canvas layers] indexOfObject:layer]];
-}
-
 - (void)mergeDownSelectedLayer
 {
-	NSUInteger index = [self.tableView selectedRow];
+	NSInteger index = [self selectionIndex];
 	[self mergeDownLayerAtIndex:[self invertLayerIndex:index]];
+}
+
+#pragma mark -
+#pragma mark Flipping
+
+- (void)flipLayerHorizontally
+{
+	NSUInteger index = [self invertLayerIndex:[self selectionIndex]];
+	PXLayer *layer = [[_canvas layers] objectAtIndex:index];
+	
+	[_canvas flipLayerHorizontally:layer];
+}
+
+- (void)flipLayerVertically
+{
+	NSUInteger index = [self invertLayerIndex:[self selectionIndex]];
+	PXLayer *layer = [[_canvas layers] objectAtIndex:index];
+	
+	[_canvas flipLayerVertically:layer];
+}
+
+#pragma mark -
+#pragma mark Rotation
+
+- (void)rotateLayerCounterclockwise
+{
+	NSUInteger index = [self invertLayerIndex:[self selectionIndex]];
+	PXLayer *layer = [[_canvas layers] objectAtIndex:index];
+	
+	[_canvas rotateLayer:layer byDegrees:90];
+}
+
+- (void)rotateLayerClockwise
+{
+	NSUInteger index = [self invertLayerIndex:[self selectionIndex]];
+	PXLayer *layer = [[_canvas layers] objectAtIndex:index];
+	
+	[_canvas rotateLayer:layer byDegrees:270];
+}
+
+- (void)rotateLayer180
+{
+	NSUInteger index = [self invertLayerIndex:[self selectionIndex]];
+	PXLayer *layer = [[_canvas layers] objectAtIndex:index];
+	
+	[_canvas rotateLayer:layer byDegrees:180];
 }
 
 #pragma mark -

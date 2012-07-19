@@ -27,24 +27,17 @@
 - (IBAction)addLayer:(id)sender;
 
 - (IBAction)removeLayer:(id)sender;
-- (void)removeLayerObject:(PXLayer *)layer;
 
 - (void)selectLayerAtIndex:(NSUInteger)index;
 
 - (void)promoteSelection;
 
 - (void)copySelectedLayer;
-- (void)copyLayerObject:(PXLayer *)layer;
-
 - (void)cutSelectedLayer;
-- (void)cutLayerObject:(PXLayer *)layer;
-
 - (void)pasteLayer;
 
 - (void)duplicateSelectedLayer;
-- (void)duplicateLayerObject:(PXLayer *)layer;
 
 - (void)mergeDownSelectedLayer;
-- (void)mergeDownLayerObject:(PXLayer *)layer;
 
 @end
