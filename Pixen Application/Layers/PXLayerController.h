@@ -7,18 +7,15 @@
 
 @class PXLayer, PXLayerCollectionView;
 
-@interface PXLayerController : NSViewController < NSCollectionViewDelegate >
+@interface PXLayerController : NSViewController < NSTableViewDataSource, NSTableViewDelegate >
 {
   @private
-	NSArrayController *_layersArray;
-	
 	NSUInteger _layersCreated;
 	BOOL _ignoreSelectionChange;
 }
 
-@property (nonatomic, weak) IBOutlet PXLayerCollectionView *layersView;
+@property (nonatomic, weak) IBOutlet NSTableView *tableView;
 @property (nonatomic, weak) IBOutlet NSButton *removeButton;
-@property (nonatomic, strong) IBOutlet NSArrayController *layersArray;
 
 @property (nonatomic, weak) PXCanvas *canvas;
 

@@ -96,6 +96,7 @@
 	[super setImage:image];
 	functionalRect = OSCenterRectInRect((NSRect){NSZeroPoint, [image size]}, [self bounds], 4);	
 	scaleFactor = [[self image] size].width / NSWidth(functionalRect);
+	[self setNeedsDisplay:YES];
 }
 
 - (NSRect)functionalRect

@@ -5,22 +5,20 @@
 
 #import "PXLayerController.h"
 
+#import "NSImage+Reps.h"
 #import "PXCanvas_CopyPaste.h"
 #import "PXCanvas_Layers.h"
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Selection.h"
 #import "PXCanvasDocument.h"
 #import "PXLayer.h"
-#import "PXLayerCollectionView.h"
-#import "PXLayerCollectionViewItem.h"
-#import "PXLayerDetailsView.h"
+#import "PXLayerCellView.h"
+#import "PXLayerRowView.h"
 #import "PXNotifications.h"
 
 @interface PXLayerController ()
 
 - (void)updateRemoveButtonState;
-
-- (void)reloadData;
 
 - (void)propagateLayerAtIndex:(NSUInteger)index;
 
@@ -33,7 +31,7 @@
 
 @implementation PXLayerController
 
-@synthesize layersView = _layersView, removeButton = _removeButton, layersArray = _layersArray;
+@synthesize tableView = _tableView, removeButton = _removeButton;
 @synthesize canvas = _canvas;
 
 - (id)init
@@ -53,25 +51,21 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	
-	[_layersView removeObserver:self forKeyPath:@"selectionIndexes"];
 }
 
 - (void)awakeFromNib
 {
 	NSArray *types = [NSArray arrayWithObjects:PXLayerRowPboardType, NSFilenamesPboardType, nil];
 	
-	[_layersView setLayerController:self];
-	[_layersView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
-	[_layersView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
-	[_layersView setMinItemSize:NSMakeSize(200.0f, 49.0f)];
-	[_layersView setMaxItemSize:NSMakeSize(0.0f, 49.0f)];
-	[_layersView registerForDraggedTypes:types];
+	[self.tableView registerForDraggedTypes:types];
+	[self.tableView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
+	[self.tableView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
+	[self.tableView setMenu:[self setupMenu]];
 	
-	[_layersView addObserver:self
-				  forKeyPath:@"selectionIndexes"
-					 options:NSKeyValueObservingOptionNew
-					 context:NULL];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tableViewSelectionDidChange:)
+												 name:NSTableViewSelectionDidChangeNotification
+											   object:self.tableView];
 }
 
 #pragma mark -
@@ -98,7 +92,7 @@
 		
 		if (_canvas)
 		{
-			[self reloadData];
+			[self.tableView reloadData];
 			
 			[nc addObserver:self
 				   selector:@selector(selectionDidChange:)
@@ -125,6 +119,11 @@
 					   name:PXCanvasSetLayersNotificationName
 					 object:_canvas];
 			
+			[nc addObserver:self
+				   selector:@selector(updatePreview:)
+					   name:PXCanvasChangedNotificationName
+					 object:_canvas];
+			
 			if (layerName) {
 				PXLayer *layer = [_canvas layerNamed:layerName];
 				
@@ -142,33 +141,57 @@
 }
 
 #pragma mark -
+#pragma mark Preview
+
+- (void)updatePreviewReal
+{
+	[self.tableView enumerateAvailableRowViewsUsingBlock:^(NSTableRowView *rowView, NSInteger row) {
+		
+		PXLayerCellView *cellView = [rowView viewAtColumn:0];
+		PXLayer *layer = [cellView objectValue];
+		
+		cellView.imageView.image = [NSImage imageWithBitmapImageRep:layer.imageRep];
+		
+	}];
+}
+
+- (void)updatePreview:(NSNotification *)notification
+{
+	[[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
+	[self performSelector:@selector(updatePreviewReal) withObject:nil afterDelay:0.05];
+}
+
+#pragma mark -
 #pragma mark Data
 
 - (void)setLayers:(NSNotification *)notification
 {
-	[self reloadData];
+	[self.tableView reloadData];
 }
 
-- (void)reloadData
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-	for (NSUInteger n = 0; n < [[_layersArray arrangedObjects] count]; n++) {
-		PXLayerCollectionViewItem *item = (PXLayerCollectionViewItem *) [_layersView itemAtIndex:n];
-		[item unload];
-	}
+	return [[self.canvas layers] count];
+}
+
+- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row
+{
+	PXLayerRowView *rowView = [[PXLayerRowView alloc] initWithFrame:NSZeroRect];
 	
-	[_layersArray removeObjects:[_layersArray arrangedObjects]];
+	return rowView;
+}
+
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+	NSTableCellView *cell = [tableView makeViewWithIdentifier:@"LayerCell" owner:self];
 	
-	for (PXLayer *layer in [_canvas layers]) {
-		[_layersArray insertObject:layer atArrangedObjectIndex:0];
-	}
-	
-	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.0f);
-	dispatch_after(popTime, dispatch_get_main_queue(), ^{
-		
-		[self selectLayerAtIndex:0];
-		[self updateRemoveButtonState];
-		
-	});
+	return cell;
+}
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn
+			row:(NSInteger)row
+{
+	return [[self.canvas layers] objectAtIndex:[self invertLayerIndex:row]];
 }
 
 - (NSUInteger)invertLayerIndex:(NSUInteger)index
@@ -182,6 +205,122 @@
 }
 
 #pragma mark -
+#pragma mark Menu
+
+- (NSString *)degreeString
+{
+	UniChar degree[] = { 0x00B0 };
+	return [NSString stringWithCharacters:degree length:1];
+}
+
+- (NSMenu *)setupMenu
+{
+	NSMenu *menu = [[NSMenu alloc] initWithTitle:NSLocalizedString(@"Layer", @"Layer")];
+	
+	NSMenuItem *item;
+	
+	item = [[NSMenuItem alloc] init];
+	[item setTitle:NSLocalizedString(@"Delete", @"Delete")];
+	[item setAction:@selector(deleteMenu:)];
+	[item setTarget:self];
+	[menu addItem:item];
+	
+	item = [[NSMenuItem alloc] init];
+	[item setTitle:NSLocalizedString(@"Duplicate", @"Duplicate")];
+	[item setAction:@selector(duplicateMenu:)];
+	[item setTarget:self];
+	[menu addItem:item];
+	
+	item = [[NSMenuItem alloc] init];
+	[item setTitle:NSLocalizedString(@"Merge Down", @"Merge Down")];
+	[item setAction:@selector(mergeDown:)];
+	[item setTarget:self];
+	[menu addItem:item];
+	
+	[menu addItem:[NSMenuItem separatorItem]];
+	
+	item = [[NSMenuItem alloc] init];
+	[item setTitle:NSLocalizedString(@"Cut", @"Cut")];
+	[item setAction:@selector(cutLayer:)];
+	[item setTarget:self];
+	[menu addItem:item];
+	
+	item = [[NSMenuItem alloc] init];
+	[item setTitle:NSLocalizedString(@"Copy", @"Copy")];
+	[item setAction:@selector(copyLayer:)];
+	[item setTarget:self];
+	[menu addItem:item];
+	
+	NSMenu *subMenu = [[NSMenu alloc] initWithTitle:NSLocalizedString(@"Transform Layer", @"Transform Layer")];
+	
+	NSMenuItem *subMenuItem = [[NSMenuItem alloc] init];
+	[subMenuItem setTitle:NSLocalizedString(@"Transform Layer", @"Transform Layer")];
+	
+	[menu addItem:[NSMenuItem separatorItem]];
+	[menu addItem:subMenuItem];
+	
+	[menu setSubmenu:subMenu forItem:subMenuItem];
+	
+	item = [[NSMenuItem alloc] init];
+	[item setTitle:NSLocalizedString(@"Flip Horizontally", @"Flip Horizontally")];
+	[item setAction:@selector(flipLayerHorizontally:)];
+	[item setTarget:self];
+	[subMenu addItem:item];
+	
+	item = [[NSMenuItem alloc] init];
+	[item setTitle:NSLocalizedString(@"Flip Vertically", @"Flip Vertically")];
+	[item setAction:@selector(flipLayerVertically:)];
+	[item setTarget:self];
+	[subMenu addItem:item];
+	
+	[subMenu addItem:[NSMenuItem separatorItem]];
+	
+	item = [[NSMenuItem alloc] init];
+	[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Rotate 90%@ Left", @"Rotate 90%@ Left"), [self degreeString]]];
+	[item setAction:@selector(rotateLayerCounterclockwise:)];
+	[item setTarget:self];
+	[subMenu addItem:item];
+	
+	item = [[NSMenuItem alloc] init];
+	[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Rotate 90%@ Right", @"Rotate 90%@ Right"), [self degreeString]]];
+	[item setAction:@selector(rotateLayerClockwise:)];
+	[item setTarget:self];
+	[subMenu addItem:item];
+	
+	item = [[NSMenuItem alloc] init];
+	[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Rotate 180%@", @"Rotate 180%@"), [self degreeString]]];
+	[item setAction:@selector(rotateLayer180:)];
+	[item setTarget:self];
+	[subMenu addItem:item];
+	
+	return menu;
+}
+
+- (BOOL)validateMenuItem:(NSMenuItem *)anItem
+{
+	/*
+	if ([anItem action] == @selector(mergeDown:)) {
+		NSArray *layers = [[self canvas] layers];
+		return [layers count] > 1 && [layers objectAtIndex:0] != [self layer];
+	}
+	 */
+	if ([anItem action] == @selector(cutLayer:) || [anItem action] == @selector(deleteMenu:)) {
+		return [[self.canvas layers] count] > 1;
+	}
+	
+	return YES;
+}
+
+- (NSInteger)selectionIndexForContextMenu
+{
+	if ([self.tableView clickedRow] != -1) {
+		return [self.tableView clickedRow];
+	}
+	
+	return [self.tableView selectedRow];
+}
+
+#pragma mark -
 #pragma mark Selection
 
 - (void)selectionDidChange:(NSNotification *)notification
@@ -191,17 +330,14 @@
 	_ignoreSelectionChange = NO;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath
-					  ofObject:(id)object
-						change:(NSDictionary *)change
-					   context:(void *)context
+- (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
 	if (_ignoreSelectionChange)
 		return;
 	
-	NSUInteger index = [[change objectForKey:NSKeyValueChangeNewKey] firstIndex];
+	NSInteger index = [self.tableView selectedRow];
 	
-	if (index == NSNotFound || index >= [[_canvas layers] count]) {
+	if (index == -1 || index >= [[_canvas layers] count]) {
 		NSLog(@"Invalid index");
 		[self selectLayerAtIndex:0];
 	}
@@ -223,13 +359,13 @@
 
 - (void)selectNextLayer
 {
-	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
+	NSUInteger index = [self.tableView selectedRow];
 	[self selectLayerAtIndex:[self invertLayerIndex:index+1]];
 }
 
 - (void)selectPreviousLayer
 {
-	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
+	NSUInteger index = [self.tableView selectedRow];
 	[self selectLayerAtIndex:[self invertLayerIndex:index-1]];
 }
 
@@ -253,7 +389,8 @@
 		return;
 	}
 	
-	[_layersView setSelectionIndexes:[NSIndexSet indexSetWithIndex:[self invertLayerIndex:index]]];
+	[self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:[self invertLayerIndex:index]]
+				byExtendingSelection:NO];
 }
 
 #pragma mark -
@@ -261,10 +398,10 @@
 
 - (void)addedLayer:(NSNotification *)notification
 {
-	PXLayer *layer = [[notification userInfo] objectForKey:PXLayerKey];
 	NSUInteger index = [[[notification userInfo] objectForKey:PXLayerIndexKey] unsignedIntegerValue];
 	
-	[_layersArray insertObject:layer atArrangedObjectIndex:[self invertLayerIndex:index]];
+	[self.tableView insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:[self invertLayerIndex:index]]
+						  withAnimation:NSTableViewAnimationSlideDown];
 	
 	[self updateRemoveButtonState];
 }
@@ -290,7 +427,7 @@
 
 - (void)copySelectedLayer
 {
-	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
+	NSUInteger index = [self.tableView selectedRow];
 	
 	if (index == NSNotFound || index >= [[_canvas layers] count]) {
 		NSLog(@"Invalid index");
@@ -308,7 +445,7 @@
 
 - (void)cutSelectedLayer
 {
-	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
+	NSUInteger index = [self.tableView selectedRow];
 	
 	if (index == NSNotFound || index >= [[_canvas layers] count]) {
 		NSLog(@"Invalid index");
@@ -335,9 +472,17 @@
 #pragma mark -
 #pragma mark Duplicating
 
+- (void)duplicateMenu:(id)sender
+{
+	NSUInteger index = [self invertLayerIndex:[self selectionIndexForContextMenu]];
+	PXLayer *layer = [[self.canvas layers] objectAtIndex:index];
+	
+	[self duplicateLayerObject:layer];
+}
+
 - (void)duplicateSelectedLayer
 {
-	NSUInteger index = [self invertLayerIndex:[[_layersView selectionIndexes] firstIndex]];
+	NSUInteger index = [self invertLayerIndex:[self.tableView selectedRow]];
 	[_canvas duplicateLayerAtIndex:index];
 }
 
@@ -350,14 +495,17 @@
 #pragma mark -
 #pragma mark Removing
 
+- (void)deleteMenu:(id)sender
+{
+	[self removeLayerAtIndex:[self invertLayerIndex:[self selectionIndexForContextMenu]]];
+}
+
 - (void)removedLayer:(NSNotification *)notification
 {
 	NSUInteger index = [[[notification userInfo] objectForKey:PXLayerIndexKey] unsignedIntegerValue];
 	
-	PXLayerCollectionViewItem *item = (PXLayerCollectionViewItem *) [_layersView itemAtIndex:[self invertLayerIndex:index]];
-	[item unload];
-	
-	[_layersArray removeObjectAtArrangedObjectIndex:[self invertLayerIndex:index]];
+	[self.tableView removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:[self invertLayerIndex:index]]
+						  withAnimation:NSTableViewAnimationSlideUp];
 	
 	[self updateRemoveButtonState];
 }
@@ -377,7 +525,7 @@
 
 - (IBAction)removeLayer:(id)sender
 {
-	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
+	NSUInteger index = [self.tableView selectedRow];
 	
 	if (index == NSNotFound || index >= [[_canvas layers] count]) {
 		NSLog(@"Invalid index");
@@ -408,7 +556,7 @@
 
 - (void)mergeDownSelectedLayer
 {
-	NSUInteger index = [[_layersView selectionIndexes] firstIndex];
+	NSUInteger index = [self.tableView selectedRow];
 	[self mergeDownLayerAtIndex:[self invertLayerIndex:index]];
 }
 
@@ -421,9 +569,12 @@
 	NSUInteger sourceIndex = [self invertLayerIndex:[[userInfo objectForKey:PXSourceIndexKey] unsignedIntegerValue]];
 	NSUInteger targetIndex = [self invertLayerIndex:[[userInfo objectForKey:PXTargetIndexKey] unsignedIntegerValue]];
 	
+#warning TODO: rewrite
+	/*
 	id obj = [[_layersArray arrangedObjects] objectAtIndex:sourceIndex];
 	[_layersArray removeObjectAtArrangedObjectIndex:sourceIndex];
 	[_layersArray insertObject:obj atArrangedObjectIndex:targetIndex];
+	 */
 }
 
 - (BOOL)collectionView:(NSCollectionView *)collectionView

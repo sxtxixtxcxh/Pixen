@@ -75,6 +75,12 @@
 		C99236FC152CD37400EC3AE5 /* Next.png in Resources */ = {isa = PBXBuildFile; fileRef = C99236FB152CD37400EC3AE5 /* Next.png */; };
 		C99236FE152CD6AB00EC3AE5 /* Play.png in Resources */ = {isa = PBXBuildFile; fileRef = C99236FD152CD6AB00EC3AE5 /* Play.png */; };
 		C9923700152CDD0000EC3AE5 /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = C99236FF152CDD0000EC3AE5 /* Pause.png */; };
+		C99E209515B88CEF00B8DDFF /* PXLayerTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = C99E209315B88CEF00B8DDFF /* PXLayerTableView.h */; };
+		C99E209615B88CEF00B8DDFF /* PXLayerTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C99E209415B88CEF00B8DDFF /* PXLayerTableView.m */; };
+		C99E209915B8913C00B8DDFF /* PXLayerRowView.h in Headers */ = {isa = PBXBuildFile; fileRef = C99E209715B8913C00B8DDFF /* PXLayerRowView.h */; };
+		C99E209A15B8913C00B8DDFF /* PXLayerRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = C99E209815B8913C00B8DDFF /* PXLayerRowView.m */; };
+		C99E209D15B89E1700B8DDFF /* PXLayerCellView.h in Headers */ = {isa = PBXBuildFile; fileRef = C99E209B15B89E1600B8DDFF /* PXLayerCellView.h */; };
+		C99E209E15B89E1700B8DDFF /* PXLayerCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = C99E209C15B89E1600B8DDFF /* PXLayerCellView.m */; };
 		C9A0858E13DE3EB600C27061 /* PXDiscoverPixen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A0858A13DE3EB600C27061 /* PXDiscoverPixen.xib */; };
 		C9A0859113DE3ECD00C27061 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A0859013DE3ECD00C27061 /* WebKit.framework */; };
 		C9A0859313DE3F0100C27061 /* PixenIntro in Resources */ = {isa = PBXBuildFile; fileRef = C9A0859213DE3F0100C27061 /* PixenIntro */; };
@@ -118,13 +124,10 @@
 		C9F1077C152CCB7000FF2FD5 /* PXPreviewControlView.h in Headers */ = {isa = PBXBuildFile; fileRef = C9F1077A152CCB7000FF2FD5 /* PXPreviewControlView.h */; };
 		C9F1077D152CCB7000FF2FD5 /* PXPreviewControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F1077B152CCB7000FF2FD5 /* PXPreviewControlView.m */; };
 		C9F4AA30154F5BB200C922CC /* zoomOut_bw.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F4AA2F154F5BB200C922CC /* zoomOut_bw.png */; };
-		C9F4E5FE13AD8F6500345D5D /* PXLayerDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F4E5FC13AD8F6500345D5D /* PXLayerDetailsView.xib */; };
 		C9F7F16C142BE3D500AB8E37 /* UTType+NSString.h in Headers */ = {isa = PBXBuildFile; fileRef = C9F7F16A142BE3D500AB8E37 /* UTType+NSString.h */; };
 		C9F7F16D142BE3D500AB8E37 /* UTType+NSString.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F7F16B142BE3D500AB8E37 /* UTType+NSString.m */; };
 		C9FD44E113FD70FC00CEE4FC /* PXPatternEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FD44DF13FD70FC00CEE4FC /* PXPatternEditor.xib */; };
 		C9FEE51B13AF81AF004FFC3C /* PXGridSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FEE51913AF81AF004FFC3C /* PXGridSettings.xib */; };
-		D88A735113A93CCD00B56402 /* PXLayerCollectionViewItem.h in Headers */ = {isa = PBXBuildFile; fileRef = D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */; };
-		D88A735213A93CCD00B56402 /* PXLayerCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D88A735013A93CCD00B56402 /* PXLayerCollectionViewItem.m */; };
 		D88FA9A113DD265000175A2F /* NSObject+AssociatedObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FA99F13DD265000175A2F /* NSObject+AssociatedObjects.h */; };
 		D88FA9A213DD265000175A2F /* NSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = D88FA9A013DD265000175A2F /* NSObject+AssociatedObjects.m */; };
 		D8B300DC13AFC443004E83F3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B300DB13AFC443004E83F3 /* QuartzCore.framework */; };
@@ -188,10 +191,6 @@
 		EA31F9670CE7BF0900EC481B /* PXCanvasResizePrompter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9610CE7BF0900EC481B /* PXCanvasResizePrompter.m */; };
 		EA31F9760CE7CD9300EC481B /* PXLayerController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F96B0CE7CD9300EC481B /* PXLayerController.h */; };
 		EA31F9770CE7CD9300EC481B /* PXLayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F96C0CE7CD9300EC481B /* PXLayerController.m */; };
-		EA31F9780CE7CD9300EC481B /* PXLayerDetailsView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F96D0CE7CD9300EC481B /* PXLayerDetailsView.h */; };
-		EA31F9790CE7CD9300EC481B /* PXLayerDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F96E0CE7CD9300EC481B /* PXLayerDetailsView.m */; };
-		EA31F97A0CE7CD9300EC481B /* PXLayerCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F96F0CE7CD9300EC481B /* PXLayerCollectionView.h */; };
-		EA31F97B0CE7CD9300EC481B /* PXLayerCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9700CE7CD9300EC481B /* PXLayerCollectionView.m */; };
 		EA31F97C0CE7CD9300EC481B /* PXLayerTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */; };
 		EA31F97D0CE7CD9300EC481B /* PXLayerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */; };
 		EA31F97E0CE7CD9300EC481B /* PXInfoPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */; };
@@ -601,6 +600,12 @@
 		C99236FB152CD37400EC3AE5 /* Next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Next.png; sourceTree = "<group>"; };
 		C99236FD152CD6AB00EC3AE5 /* Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Play.png; sourceTree = "<group>"; };
 		C99236FF152CDD0000EC3AE5 /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause.png; sourceTree = "<group>"; };
+		C99E209315B88CEF00B8DDFF /* PXLayerTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerTableView.h; sourceTree = "<group>"; };
+		C99E209415B88CEF00B8DDFF /* PXLayerTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerTableView.m; sourceTree = "<group>"; };
+		C99E209715B8913C00B8DDFF /* PXLayerRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerRowView.h; sourceTree = "<group>"; };
+		C99E209815B8913C00B8DDFF /* PXLayerRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerRowView.m; sourceTree = "<group>"; };
+		C99E209B15B89E1600B8DDFF /* PXLayerCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerCellView.h; sourceTree = "<group>"; };
+		C99E209C15B89E1600B8DDFF /* PXLayerCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerCellView.m; sourceTree = "<group>"; };
 		C9A0858B13DE3EB600C27061 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXDiscoverPixen.xib; sourceTree = "<group>"; };
 		C9A0859013DE3ECD00C27061 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		C9A0859213DE3F0100C27061 /* PixenIntro */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PixenIntro; path = Resources/PixenIntro; sourceTree = "<group>"; };
@@ -642,13 +647,10 @@
 		C9F1077A152CCB7000FF2FD5 /* PXPreviewControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPreviewControlView.h; sourceTree = "<group>"; };
 		C9F1077B152CCB7000FF2FD5 /* PXPreviewControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPreviewControlView.m; sourceTree = "<group>"; };
 		C9F4AA2F154F5BB200C922CC /* zoomOut_bw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomOut_bw.png; sourceTree = "<group>"; };
-		C9F4E5FD13AD8F6500345D5D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXLayerDetailsView.xib; sourceTree = "<group>"; };
 		C9F7F16A142BE3D500AB8E37 /* UTType+NSString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UTType+NSString.h"; sourceTree = "<group>"; };
 		C9F7F16B142BE3D500AB8E37 /* UTType+NSString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UTType+NSString.m"; sourceTree = "<group>"; };
 		C9FD44E013FD70FC00CEE4FC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPatternEditor.xib; sourceTree = "<group>"; };
 		C9FEE51A13AF81AF004FFC3C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXGridSettings.xib; sourceTree = "<group>"; };
-		D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerCollectionViewItem.h; sourceTree = "<group>"; };
-		D88A735013A93CCD00B56402 /* PXLayerCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerCollectionViewItem.m; sourceTree = "<group>"; };
 		D88FA99F13DD265000175A2F /* NSObject+AssociatedObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AssociatedObjects.h"; sourceTree = "<group>"; };
 		D88FA9A013DD265000175A2F /* NSObject+AssociatedObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AssociatedObjects.m"; sourceTree = "<group>"; };
 		D8B300DB13AFC443004E83F3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -712,10 +714,6 @@
 		EA31F9610CE7BF0900EC481B /* PXCanvasResizePrompter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasResizePrompter.m; sourceTree = "<group>"; };
 		EA31F96B0CE7CD9300EC481B /* PXLayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerController.h; sourceTree = "<group>"; };
 		EA31F96C0CE7CD9300EC481B /* PXLayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerController.m; sourceTree = "<group>"; };
-		EA31F96D0CE7CD9300EC481B /* PXLayerDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerDetailsView.h; sourceTree = "<group>"; };
-		EA31F96E0CE7CD9300EC481B /* PXLayerDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerDetailsView.m; sourceTree = "<group>"; };
-		EA31F96F0CE7CD9300EC481B /* PXLayerCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerCollectionView.h; sourceTree = "<group>"; };
-		EA31F9700CE7CD9300EC481B /* PXLayerCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerCollectionView.m; sourceTree = "<group>"; };
 		EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerTextField.h; sourceTree = "<group>"; };
 		EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerTextField.m; sourceTree = "<group>"; };
 		EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXInfoPanelController.h; sourceTree = "<group>"; };
@@ -1307,16 +1305,16 @@
 		EA31F96A0CE7CD9300EC481B /* Layers */ = {
 			isa = PBXGroup;
 			children = (
-				EA31F96F0CE7CD9300EC481B /* PXLayerCollectionView.h */,
-				EA31F9700CE7CD9300EC481B /* PXLayerCollectionView.m */,
-				D88A734F13A93CCD00B56402 /* PXLayerCollectionViewItem.h */,
-				D88A735013A93CCD00B56402 /* PXLayerCollectionViewItem.m */,
+				C99E209B15B89E1600B8DDFF /* PXLayerCellView.h */,
+				C99E209C15B89E1600B8DDFF /* PXLayerCellView.m */,
 				EA31F96B0CE7CD9300EC481B /* PXLayerController.h */,
 				EA31F96C0CE7CD9300EC481B /* PXLayerController.m */,
-				EA31F96D0CE7CD9300EC481B /* PXLayerDetailsView.h */,
-				EA31F96E0CE7CD9300EC481B /* PXLayerDetailsView.m */,
 				615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */,
 				615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */,
+				C99E209715B8913C00B8DDFF /* PXLayerRowView.h */,
+				C99E209815B8913C00B8DDFF /* PXLayerRowView.m */,
+				C99E209315B88CEF00B8DDFF /* PXLayerTableView.h */,
+				C99E209415B88CEF00B8DDFF /* PXLayerTableView.m */,
 				EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */,
 				EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */,
 			);
@@ -1814,7 +1812,6 @@
 				C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */,
 				C9DC4D9913D0E6D70065C1A6 /* PXImageSizePrompt.xib */,
 				615E87F206A31AF8002445B8 /* PXLayerController.xib */,
-				C9F4E5FC13AD8F6500345D5D /* PXLayerDetailsView.xib */,
 				C9B1FA5C13D732FC00BB7CF7 /* PXManagePresetsWindow.xib */,
 				EAA0184E054DCC7B00EF18C2 /* PXMonotoneBackgroundConfigurator.xib */,
 				EA9E180B0557104F00119DF5 /* PXNamePrompt.xib */,
@@ -2038,8 +2035,6 @@
 				EA31F9640CE7BF0900EC481B /* PXImageSizePrompter.h in Headers */,
 				EA31F9660CE7BF0900EC481B /* PXCanvasResizePrompter.h in Headers */,
 				EA31F9760CE7CD9300EC481B /* PXLayerController.h in Headers */,
-				EA31F9780CE7CD9300EC481B /* PXLayerDetailsView.h in Headers */,
-				EA31F97A0CE7CD9300EC481B /* PXLayerCollectionView.h in Headers */,
 				EA31F97C0CE7CD9300EC481B /* PXLayerTextField.h in Headers */,
 				EA31F97E0CE7CD9300EC481B /* PXInfoPanelController.h in Headers */,
 				EA31F9AB0CE7CE4800EC481B /* PXPaletteSelector.h in Headers */,
@@ -2134,7 +2129,6 @@
 				61A22A860D2303EE00430CCD /* OSRectAdditions.h in Headers */,
 				61A22B920D2323B500430CCD /* OSPlasticButtonCell.h in Headers */,
 				EA2EA41B10DB37E50065090C /* NSString+Comparison.h in Headers */,
-				D88A735113A93CCD00B56402 /* PXLayerCollectionViewItem.h in Headers */,
 				C93DB18613ABC963006D42FE /* PXGeneralPreferencesController.h in Headers */,
 				C96BABBB13ABD44A00015C92 /* PXHotkeysPreferencesController.h in Headers */,
 				C94A9EDD13B11BEA0034AFE3 /* PXSplitView.h in Headers */,
@@ -2159,6 +2153,9 @@
 				C9B3A69D1547200F00872BF2 /* PXInsertionView.h in Headers */,
 				C91C4F9415602F8000EA4AF5 /* PXPercentFormatter.h in Headers */,
 				C92C867015A5EF5500D915D9 /* NSImage+Reps.h in Headers */,
+				C99E209515B88CEF00B8DDFF /* PXLayerTableView.h in Headers */,
+				C99E209915B8913C00B8DDFF /* PXLayerRowView.h in Headers */,
+				C99E209D15B89E1700B8DDFF /* PXLayerCellView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2330,7 +2327,6 @@
 				C9799FB013AD69C000E261EE /* PXShapeToolPropertiesView.xib in Resources */,
 				C9799FB813AD6ED900E261EE /* PXPencilToolPropertiesView.xib in Resources */,
 				C9799FBB13AD745500E261EE /* PXEyedropperToolPropertiesView.xib in Resources */,
-				C9F4E5FE13AD8F6500345D5D /* PXLayerDetailsView.xib in Resources */,
 				C9FEE51B13AF81AF004FFC3C /* PXGridSettings.xib in Resources */,
 				C984251213AFC142000072C5 /* PXPreview.xib in Resources */,
 				C94A9EDA13B114DE0034AFE3 /* PXCanvasDocument.xib in Resources */,
@@ -2448,8 +2444,6 @@
 				EA31F9650CE7BF0900EC481B /* PXImageSizePrompter.m in Sources */,
 				EA31F9670CE7BF0900EC481B /* PXCanvasResizePrompter.m in Sources */,
 				EA31F9770CE7CD9300EC481B /* PXLayerController.m in Sources */,
-				EA31F9790CE7CD9300EC481B /* PXLayerDetailsView.m in Sources */,
-				EA31F97B0CE7CD9300EC481B /* PXLayerCollectionView.m in Sources */,
 				EA31F97D0CE7CD9300EC481B /* PXLayerTextField.m in Sources */,
 				EA31F97F0CE7CD9300EC481B /* PXInfoPanelController.m in Sources */,
 				EA31F9AC0CE7CE4800EC481B /* PXPaletteSelector.m in Sources */,
@@ -2548,7 +2542,6 @@
 				61A22A870D2303EE00430CCD /* OSRectAdditions.m in Sources */,
 				61A22B930D2323B500430CCD /* OSPlasticButtonCell.m in Sources */,
 				EA2EA41C10DB37E50065090C /* NSString+Comparison.m in Sources */,
-				D88A735213A93CCD00B56402 /* PXLayerCollectionViewItem.m in Sources */,
 				C93DB18713ABC963006D42FE /* PXGeneralPreferencesController.m in Sources */,
 				C96BABBC13ABD44A00015C92 /* PXHotkeysPreferencesController.m in Sources */,
 				C94A9EDE13B11BEA0034AFE3 /* PXSplitView.m in Sources */,
@@ -2573,6 +2566,9 @@
 				C9B3A69E1547200F00872BF2 /* PXInsertionView.m in Sources */,
 				C91C4F9515602F8000EA4AF5 /* PXPercentFormatter.m in Sources */,
 				C92C867115A5EF5500D915D9 /* NSImage+Reps.m in Sources */,
+				C99E209615B88CEF00B8DDFF /* PXLayerTableView.m in Sources */,
+				C99E209A15B8913C00B8DDFF /* PXLayerRowView.m in Sources */,
+				C99E209E15B89E1700B8DDFF /* PXLayerCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2833,14 +2829,6 @@
 				C9ECD4D5150BECB6001F686C /* English */,
 			);
 			name = PXAbout.xib;
-			sourceTree = "<group>";
-		};
-		C9F4E5FC13AD8F6500345D5D /* PXLayerDetailsView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C9F4E5FD13AD8F6500345D5D /* English */,
-			);
-			name = PXLayerDetailsView.xib;
 			sourceTree = "<group>";
 		};
 		C9FD44DF13FD70FC00CEE4FC /* PXPatternEditor.xib */ = {
