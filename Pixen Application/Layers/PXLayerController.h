@@ -5,8 +5,6 @@
 
 #import "PXCanvas.h"
 
-@class PXLayer, PXLayerCollectionView;
-
 @interface PXLayerController : NSViewController < NSTableViewDataSource, NSTableViewDelegate >
 {
   @private
