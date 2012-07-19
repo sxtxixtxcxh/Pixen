@@ -440,7 +440,7 @@
 								<object class="NSTextField" id="375380796">
 									<reference key="NSNextResponder" ref="79446483"/>
 									<int key="NSvFlags">266</int>
-									<string key="NSFrame">{{74, 25}, {131, 17}}</string>
+									<string key="NSFrame">{{74, 25}, {137, 17}}</string>
 									<reference key="NSSuperview" ref="79446483"/>
 									<reference key="NSNextKeyView" ref="700598919"/>
 									<string key="NSAntiCompressionPriority">{250, 750}</string>
@@ -496,7 +496,7 @@
 								<object class="NSSlider" id="361879231">
 									<reference key="NSNextResponder" ref="79446483"/>
 									<int key="NSvFlags">258</int>
-									<string key="NSFrame">{{119, 9}, {83, 12}}</string>
+									<string key="NSFrame">{{119, 9}, {89, 12}}</string>
 									<reference key="NSSuperview" ref="79446483"/>
 									<reference key="NSNextKeyView" ref="856094889"/>
 									<string key="NSReuseIdentifierKey">_NS:9</string>
