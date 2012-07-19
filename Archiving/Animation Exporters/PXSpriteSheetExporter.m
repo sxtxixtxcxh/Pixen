@@ -10,6 +10,8 @@
 #import "NSImage+Reps.h"
 #import "PXAnimation.h"
 #import "PXAnimationDocument.h"
+#import "PXCanvas_ImportingExporting.h"
+#import "PXCanvasDocument.h"
 #import "PXDocumentController.h"
 
 @implementation PXSpriteSheetExporter
@@ -46,7 +48,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (NSDictionary *)findRepresentationForDocument:(PXAnimationDocument *)document
+- (NSDictionary *)findRepresentationForDocument:(PXDocument *)document
 {
 	for (NSDictionary *rep in [documentRepresentationsController arrangedObjects])
 	{
@@ -62,9 +64,9 @@
 	NSArray *oldRepresentations = [[documentRepresentationsController arrangedObjects] copy];
 	[documentRepresentationsController removeObjects:oldRepresentations];
 	
-	NSArray *animationDocuments = [[PXDocumentController sharedDocumentController] animationDocuments];
+	NSArray *documents = [[PXDocumentController sharedDocumentController] documents];
 	
-	for (PXAnimationDocument *doc in animationDocuments)
+	for (PXDocument *doc in documents)
 	{
 		BOOL included = NO;
 		
@@ -86,9 +88,9 @@
 
 - (void)documentsChanged:(NSNotification *)notification
 {
-	PXAnimationDocument *doc = [notification object];
+	PXDocument *doc = [notification object];
 	
-	if ([doc isKindOfClass:[PXAnimationDocument class]]) {
+	if ([doc isKindOfClass:[PXDocument class]]) {
 		[self recacheDocumentRepresentations];
 		[self updatePreview:nil];
 	}
@@ -110,18 +112,37 @@
 	
 	for (NSDictionary *docRep in [documentRepresentationsController arrangedObjects])
 	{
-		PXAnimation *animation = [[docRep objectForKey:@"document"] animation];
+		PXDocument *document = [docRep objectForKey:@"document"];
 		
-		if ([[docRep objectForKey:@"included"] boolValue]) {
-			NSBitmapImageRep *spriteSheetRow = [animation spriteSheetWithCelMargin:interCelMargin];
-			
-			if ([spriteSheetRow size].width > sheetSize.width) {
-				sheetSize.width = [spriteSheetRow size].width;
+		if ([document isKindOfClass:[PXAnimationDocument class]]) {
+			if ([[docRep objectForKey:@"included"] boolValue]) {
+				PXAnimation *animation = [ (PXAnimationDocument *) document animation];
+				
+				NSBitmapImageRep *spriteSheetRow = [animation spriteSheetWithCelMargin:interCelMargin];
+				
+				if ([spriteSheetRow size].width > sheetSize.width) {
+					sheetSize.width = [spriteSheetRow size].width;
+				}
+				
+				sheetSize.height += [spriteSheetRow size].height + interAnimationMargin;
+				
+				[animationSheets addObject:spriteSheetRow];
 			}
-			
-			sheetSize.height += [spriteSheetRow size].height + interAnimationMargin;
-			
-			[animationSheets addObject:spriteSheetRow];
+		}
+		else if ([document isKindOfClass:[PXCanvasDocument class]]) {
+			if ([[docRep objectForKey:@"included"] boolValue]) {
+				PXCanvas *canvas = [ (PXCanvasDocument *) document canvas];
+				
+				NSBitmapImageRep *spriteSheetRow = [canvas imageRep];
+				
+				if ([spriteSheetRow size].width > sheetSize.width) {
+					sheetSize.width = [spriteSheetRow size].width;
+				}
+				
+				sheetSize.height += [spriteSheetRow size].height + interAnimationMargin;
+				
+				[animationSheets addObject:spriteSheetRow];
+			}
 		}
 	}
 	

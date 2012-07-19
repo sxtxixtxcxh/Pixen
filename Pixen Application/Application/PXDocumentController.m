@@ -456,18 +456,6 @@ NSString *palettesSubdirName = @"Palettes";
 	[doc showWindows];
 }
 
-- (NSArray *)animationDocuments
-{
-	NSMutableArray *animationDocuments = [NSMutableArray array];
-	for (NSDocument *document in [self documents])
-    {
-		if ([document isKindOfClass:[PXAnimationDocument class]]) {
-			[animationDocuments addObject:document];
-		}
-	}
-	return animationDocuments;
-}
-
 - (IBAction)importAnimationFromImageSequence:sender
 {
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];

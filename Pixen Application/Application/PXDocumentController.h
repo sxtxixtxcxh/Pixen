@@ -19,7 +19,5 @@
 
 - (IBAction)newAnimationDocument:sender;
 
-- (NSArray *)animationDocuments;
-
 @end
 
