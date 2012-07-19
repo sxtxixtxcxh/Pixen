@@ -192,6 +192,7 @@
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
 	NSTableCellView *cell = [tableView makeViewWithIdentifier:@"LayerCell" owner:self];
+	cell.imageView.image = nil;
 	
 	return cell;
 }
