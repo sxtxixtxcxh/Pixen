@@ -436,7 +436,7 @@
 
 - (void)copySelectedLayer
 {
-	NSInteger index = [self selectionIndex];
+	NSUInteger index = [self selectionIndex];
 	
 	if (index == -1 || index >= [[_canvas layers] count]) {
 		NSLog(@"Invalid index");
@@ -452,7 +452,7 @@
 	if ([[_canvas layers] count] <= 1)
 		return;
 	
-	NSInteger index = [self selectionIndex];
+	NSUInteger index = [self selectionIndex];
 	
 	if (index == -1 || index >= [[_canvas layers] count]) {
 		NSLog(@"Invalid index");
@@ -500,7 +500,7 @@
 
 - (IBAction)removeLayer:(id)sender
 {
-	NSInteger index = [self selectionIndex];
+	NSUInteger index = [self selectionIndex];
 	
 	if (index == -1 || index >= [[_canvas layers] count]) {
 		NSLog(@"Invalid index");
@@ -521,7 +521,7 @@
 
 - (void)mergeDownSelectedLayer
 {
-	NSInteger index = [self selectionIndex];
+	NSUInteger index = [self selectionIndex];
 	[self mergeDownLayerAtIndex:[self invertLayerIndex:index]];
 }
 
