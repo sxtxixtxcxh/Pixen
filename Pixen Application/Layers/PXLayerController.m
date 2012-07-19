@@ -92,7 +92,7 @@
 		
 		if (_canvas)
 		{
-			[self.tableView reloadData];
+			[self reloadData];
 			
 			[nc addObserver:self
 				   selector:@selector(selectionDidChange:)
@@ -164,9 +164,17 @@
 #pragma mark -
 #pragma mark Data
 
-- (void)setLayers:(NSNotification *)notification
+- (void)reloadData
 {
 	[self.tableView reloadData];
+	
+	[self selectLayerAtIndex:0];
+	[self updateRemoveButtonState];
+}
+
+- (void)setLayers:(NSNotification *)notification
+{
+	[self reloadData];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
