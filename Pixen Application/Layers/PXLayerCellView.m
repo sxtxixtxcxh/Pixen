@@ -9,6 +9,8 @@
 
 @implementation PXLayerCellView
 
+@synthesize opacityField = _opacityField;
+
 - (void)setBackgroundStyle:(NSBackgroundStyle)backgroundStyle
 {
 	[super setBackgroundStyle:backgroundStyle];
