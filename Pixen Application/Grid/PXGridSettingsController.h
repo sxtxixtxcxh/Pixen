@@ -16,7 +16,7 @@
 @property (nonatomic, assign) int height;
 @property (nonatomic, strong) NSColor *color;
 
-@property (nonatomic, weak) id < PXGridSettingsPrompterDelegate > delegate;
+@property (nonatomic, unsafe_unretained) id < PXGridSettingsPrompterDelegate > delegate;
 
 - (IBAction)update:(id)sender;
 - (IBAction)useAsDefaults:(id)sender;

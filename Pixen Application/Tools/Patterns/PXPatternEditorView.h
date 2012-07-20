@@ -16,7 +16,7 @@
 
 @property (nonatomic, weak) PXPattern *pattern;
 
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 @end
 

@@ -14,7 +14,7 @@
 @property (nonatomic, weak) IBOutlet NSTextField *nameField;
 @property (nonatomic, weak) IBOutlet NSTextField *promptString;
 
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 - (void)promptInWindow:(NSWindow *)window;
 

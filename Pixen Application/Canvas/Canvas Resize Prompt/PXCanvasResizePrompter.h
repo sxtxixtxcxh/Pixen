@@ -18,7 +18,7 @@
 @property (nonatomic, assign) NSSize oldSize;
 @property (nonatomic, assign) NSSize currentSize;
 
-@property (nonatomic, weak) id < PXCanvasResizePrompterDelegate > delegate;
+@property (nonatomic, unsafe_unretained) id < PXCanvasResizePrompterDelegate > delegate;
 
 - (void)promptInWindow:(NSWindow *)window;
 

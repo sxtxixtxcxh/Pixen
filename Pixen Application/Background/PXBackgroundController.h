@@ -14,7 +14,7 @@
 @property (nonatomic, weak) IBOutlet PXBackgroundInfoView *mainBackgroundView;
 @property (nonatomic, weak) IBOutlet OSStackedView *mainStack, *defaultsStack;
 
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 - (void)reloadData;
 - (void)setPreviewImage:(NSImage *)img;

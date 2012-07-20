@@ -19,7 +19,7 @@
 @property (nonatomic, weak) IBOutlet NSTextField *pixelsWideField, *pixelsHighField, *percentageWideField, *percentageHighField;
 @property (nonatomic, unsafe_unretained) IBOutlet NSTextView *algorithmInfoView;
 
-@property (nonatomic, weak) id < PXScaleControllerDelegate > delegate;
+@property (nonatomic, unsafe_unretained) id < PXScaleControllerDelegate > delegate;
 
 - (void)scaleCanvasFromController:(PXCanvasWindowController *)canvasController
 				   modalForWindow:(NSWindow *)theWindow;

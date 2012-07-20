@@ -19,11 +19,11 @@
 - (void)setPreviewImage:(NSImage *)img;
 
 @property (nonatomic, weak) IBOutlet NSView *configuratorContainer;
-@property (nonatomic, weak) IBOutlet id delegate;
+@property (nonatomic, unsafe_unretained) IBOutlet id delegate;
 @property (nonatomic, weak) IBOutlet PXBackgroundPreviewView *imageView;
 @property (nonatomic, weak) IBOutlet NSTextField *nameField;
 
-@property (nonatomic, weak) PXBackground *background;
+@property (nonatomic, unsafe_unretained) PXBackground *background;
 
 @end
 

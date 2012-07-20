@@ -19,7 +19,7 @@
 @property (nonatomic, copy) NSString *toolName;
 @property (nonatomic, copy) NSString *patternFileName;
 
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 - (void)setPattern:(PXPattern *)pattern;
 

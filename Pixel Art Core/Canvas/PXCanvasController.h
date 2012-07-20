@@ -16,7 +16,7 @@
 	PXCanvas *__weak canvas;
 	NSDocument *__weak document;
 	
-	PXLayerController *__weak layerController;
+	PXLayerController *__unsafe_unretained layerController;
 	PXBackgroundController *backgroundController;
 	
 	NSPoint initialPoint;
@@ -31,9 +31,9 @@
 
 @property (nonatomic, weak) IBOutlet PXCanvasView *view;
 @property (nonatomic, weak) IBOutlet NSScrollView *scrollView;
-@property (nonatomic, weak) IBOutlet NSWindow *window;
+@property (nonatomic, unsafe_unretained) IBOutlet NSWindow *window;
 
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 - (PXLayerController *)layerController;
 - (void)setLayerController:contro;

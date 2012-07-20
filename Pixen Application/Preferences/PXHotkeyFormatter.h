@@ -9,7 +9,7 @@
 
 @interface PXHotkeyFormatter : NSFormatter
 
-@property (nonatomic, weak) id < PXHotkeyFormatterDelegate > delegate;
+@property (nonatomic, unsafe_unretained) id < PXHotkeyFormatterDelegate > delegate;
 
 - (NSString *)stringForObjectValue:(id)anObject;
 - (BOOL)getObjectValue:(id *)anObject forString:(NSString *)string errorDescription:(NSString **)error;

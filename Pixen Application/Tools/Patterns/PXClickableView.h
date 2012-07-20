@@ -13,7 +13,7 @@
 
 @property (nonatomic, assign) BOOL selected;
 
-@property (nonatomic, weak) IBOutlet id delegate;
+@property (nonatomic, unsafe_unretained) IBOutlet id delegate;
 
 @end
 

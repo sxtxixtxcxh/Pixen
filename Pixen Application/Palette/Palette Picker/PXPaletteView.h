@@ -36,7 +36,7 @@
 
 @property (nonatomic, strong) PXPalette *palette;
 
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 - (void)reload;
 
