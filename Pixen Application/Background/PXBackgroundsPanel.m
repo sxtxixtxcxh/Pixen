@@ -17,6 +17,7 @@
 
 - (void)close
 {
+#warning TODO: this is buggy
 	// The windowWillClose method seems to be getting intercepted somewhere, so we send it manually.
 	[[self delegate] windowWillClose:nil];
 	[super close];

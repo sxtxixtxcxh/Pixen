@@ -21,7 +21,7 @@
 @property (nonatomic, weak) IBOutlet NSButton *addColorButton;
 @property (nonatomic, weak) IBOutlet NSTextField *infoField;
 
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 - (IBAction)addColor:(id)sender;
 
