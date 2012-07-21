@@ -7,6 +7,8 @@
 
 #import "PXLayerTableView.h"
 
+#import "PXLayerTextField.h"
+
 @implementation PXLayerTableView
 
 - (BOOL)acceptsFirstResponder
@@ -14,26 +16,12 @@
 	return NO;
 }
 
-- (void)mouseDown:(NSEvent *)theEvent
+- (BOOL)validateProposedFirstResponder:(NSResponder *)responder forEvent:(NSEvent *)event
 {
-	[super mouseDown:theEvent];
+	if ([responder isKindOfClass:[PXLayerTextField class]])
+		return YES;
 	
-	if (theEvent.clickCount < 2)
-		return;
-	
-	NSPoint point = [self convertPoint:theEvent.locationInWindow fromView:nil];
-	NSInteger row = [self rowAtPoint:point];
-	
-	if (row < 0)
-		return;
-	
-	NSTableCellView *view = [self viewAtColumn:0 row:row makeIfNecessary:NO];
-	
-	point = [view convertPoint:point fromView:self];
-	
-	if (NSPointInRect(point, view.textField.frame)) {
-		[view.textField mouseDown:theEvent];
-	}
+	return [super validateProposedFirstResponder:responder forEvent:event];
 }
 
 @end
