@@ -25,7 +25,6 @@
 		[NSNumber numberWithInt:400],
 		[NSNumber numberWithInt:200], 
 		[NSNumber numberWithInt:100],
-		[NSNumber numberWithInt:50], 
 		nil];
 	[zoomPercentageBox removeAllItems];
 	[zoomPercentageBox addItemsWithObjectValues:itemsObjects];
