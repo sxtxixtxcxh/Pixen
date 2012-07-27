@@ -281,6 +281,9 @@ const CGFloat viewMargin = 1.0f;
 	[palette removeColorAtIndex:selectionIndex];
 	[palette save];
 	
+	if (selectionIndex >= [palette colorCount])
+		selectionIndex = NSNotFound;
+	
 	[self reload];
 }
 
