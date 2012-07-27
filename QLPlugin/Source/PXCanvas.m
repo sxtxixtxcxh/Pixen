@@ -24,27 +24,15 @@
 			if(isIndexedImage) {
 				palette = [[PXPalette alloc] initWithCoder:coder];
 				
-				if (!palette)
-					[palette release];
-				
 				[coder associateValue:palette withKey:@"palette"];
-			}	
-			layers = [[coder decodeObjectForKey:@"layers"] retain];
+			}
+			layers = [coder decodeObjectForKey:@"layers"];
 			if(isIndexedImage) {
 				[coder associateValue:nil withKey:@"palette"];
-				if(palette) {
-					[palette release];
-				}
 			}
     }
 	}
 	return self;
-}
-
-- (void)dealloc
-{
-	[layers release];
-	[super dealloc];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder { }

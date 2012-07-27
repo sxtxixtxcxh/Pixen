@@ -17,24 +17,24 @@ void CancelPreviewGeneration (void* thisInterface, QLPreviewRequestRef preview);
 
 OSStatus GeneratePreviewForURL (void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options)
 {	
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
-	PXCanvas *canvas = [NSKeyedUnarchiver unarchiveObjectWithFile:[ (NSURL *) url path]];
-	
-	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-						  [NSNumber numberWithInt:[canvas size].width], kQLPreviewPropertyWidthKey,
-						  [NSNumber numberWithInt:[canvas size].height], kQLPreviewPropertyHeightKey, nil];
-	
-	CGContextRef ctx = QLPreviewRequestCreateContext(preview, NSSizeToCGSize([canvas size]), 1, (CFDictionaryRef) dict);
-	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithGraphicsPort:ctx flipped:NO]];
-	
-	[canvas draw];
-	
-	QLPreviewRequestFlushContext(preview, ctx);
-	
-	[pool release];
-	
+		PXCanvas *canvas = [NSKeyedUnarchiver unarchiveObjectWithFile:[ (__bridge NSURL *) url path]];
+		
+		NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+							  [NSNumber numberWithInt:[canvas size].width], kQLPreviewPropertyWidthKey,
+							  [NSNumber numberWithInt:[canvas size].height], kQLPreviewPropertyHeightKey, nil];
+		
+		CGContextRef ctx = QLPreviewRequestCreateContext(preview, NSSizeToCGSize([canvas size]), 1, (__bridge CFDictionaryRef) dict);
+		[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithGraphicsPort:ctx flipped:NO]];
+		
+		[canvas draw];
+		
+		QLPreviewRequestFlushContext(preview, ctx);
+		
+		
     return noErr;
+    }
 }
 
 void CancelPreviewGeneration (void* thisInterface, QLPreviewRequestRef preview)

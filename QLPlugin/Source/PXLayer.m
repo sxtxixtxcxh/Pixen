@@ -27,7 +27,6 @@
 - (void)dealloc
 {
 	PXImage_release(image);
-	[super dealloc];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder { }

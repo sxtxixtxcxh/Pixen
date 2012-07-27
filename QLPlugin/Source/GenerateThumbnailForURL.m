@@ -17,20 +17,20 @@ void CancelThumbnailGeneration (void* thisInterface, QLThumbnailRequestRef thumb
 
 OSStatus GenerateThumbnailForURL (void *thisInterface, QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options, CGSize maxSize)
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
-	PXCanvas *canvas = [NSKeyedUnarchiver unarchiveObjectWithFile:[ (NSURL *) url path]];
-	
-	CGContextRef ctx = QLThumbnailRequestCreateContext(thumbnail, NSSizeToCGSize([canvas size]), 1, NULL);
-	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithGraphicsPort:ctx flipped:NO]];
-	
-	[canvas draw];
-	
-	QLThumbnailRequestFlushContext(thumbnail, ctx);
-	
-	[pool release];
-	
+		PXCanvas *canvas = [NSKeyedUnarchiver unarchiveObjectWithFile:[ (__bridge NSURL *) url path]];
+		
+		CGContextRef ctx = QLThumbnailRequestCreateContext(thumbnail, NSSizeToCGSize([canvas size]), 1, NULL);
+		[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithGraphicsPort:ctx flipped:NO]];
+		
+		[canvas draw];
+		
+		QLThumbnailRequestFlushContext(thumbnail, ctx);
+		
+		
     return noErr;
+    }
 }
 
 void CancelThumbnailGeneration (void* thisInterface, QLThumbnailRequestRef thumbnail)
