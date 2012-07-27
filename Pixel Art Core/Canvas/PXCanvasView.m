@@ -541,7 +541,8 @@ void PXDebugRect(NSRect r, float alpha)
 	[transform concat];
 	
 	if (drawsToolBeziers && [currentTool respondsToSelector:@selector(drawRectOnTop:inView:)]) {
-		[currentTool drawRectOnTop:rect inView:self];
+		if ([[self window] isMainWindow])
+			[currentTool drawRectOnTop:rect inView:self];
 	}
 	
 	NSRect gridRect = canvasRect;
