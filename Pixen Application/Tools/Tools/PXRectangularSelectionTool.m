@@ -182,6 +182,7 @@ fromCanvasController:(PXCanvasController *)controller
 		{
 			if (isSubtracting) {
 				[[controller canvas] deselectPixelsInRect:NSRectFromString(current)];
+				[[controller canvas] changed];
 			} else {
 				[[controller canvas] selectPixelsInRect:NSRectFromString(current)];
 			}
