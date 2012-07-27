@@ -48,6 +48,8 @@
 		C94FA7BF15A5DE18000FA307 /* TitlebarGradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C94FA7BD15A5DE18000FA307 /* TitlebarGradient@2x.png */; };
 		C953831813FC477100440AB5 /* PXSequenceExportViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C953831613FC477100440AB5 /* PXSequenceExportViewController.h */; };
 		C953831913FC477100440AB5 /* PXSequenceExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C953831713FC477100440AB5 /* PXSequenceExportViewController.m */; };
+		C95B209415C353F7003D6C2A /* Hotkeys.png in Resources */ = {isa = PBXBuildFile; fileRef = C95B209315C353F7003D6C2A /* Hotkeys.png */; };
+		C95B209615C357F9003D6C2A /* Hotkeys@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C95B209515C357F9003D6C2A /* Hotkeys@2x.png */; };
 		C96541EB13FF44A600F1F83C /* PXDeleteCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = C96541E913FF44A600F1F83C /* PXDeleteCollectionView.h */; };
 		C96541EC13FF44A600F1F83C /* PXDeleteCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C96541EA13FF44A600F1F83C /* PXDeleteCollectionView.m */; };
 		C968A8E114A5292700905E3D /* Pixen128.png in Resources */ = {isa = PBXBuildFile; fileRef = C968A8E014A5292700905E3D /* Pixen128.png */; };
@@ -400,7 +402,6 @@
 		EABD60BA0CE986E3008A1B1E /* PXCanvasPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = EABD60B80CE986E3008A1B1E /* PXCanvasPreviewView.m */; };
 		EAC9174C0CE7DC7300E519E1 /* Pixen.icns in Resources */ = {isa = PBXBuildFile; fileRef = EAC916E50CE7DC7300E519E1 /* Pixen.icns */; };
 		EAC9174F0CE7DC7300E519E1 /* PixenDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = EAC916E80CE7DC7300E519E1 /* PixenDoc.icns */; };
-		EAC917510CE7DC7300E519E1 /* HotkeysPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC916EB0CE7DC7300E519E1 /* HotkeysPreferences.tiff */; };
 		EAC917530CE7DC7300E519E1 /* apencil.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916EE0CE7DC7300E519E1 /* apencil.png */; };
 		EAC917540CE7DC7300E519E1 /* ellipse.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916EF0CE7DC7300E519E1 /* ellipse.png */; };
 		EAC917550CE7DC7300E519E1 /* eraser.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916F00CE7DC7300E519E1 /* eraser.png */; };
@@ -570,6 +571,8 @@
 		C94FA7BD15A5DE18000FA307 /* TitlebarGradient@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TitlebarGradient@2x.png"; sourceTree = "<group>"; };
 		C953831613FC477100440AB5 /* PXSequenceExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSequenceExportViewController.h; sourceTree = "<group>"; };
 		C953831713FC477100440AB5 /* PXSequenceExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PXSequenceExportViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		C95B209315C353F7003D6C2A /* Hotkeys.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hotkeys.png; sourceTree = "<group>"; };
+		C95B209515C357F9003D6C2A /* Hotkeys@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hotkeys@2x.png"; sourceTree = "<group>"; };
 		C96541E913FF44A600F1F83C /* PXDeleteCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXDeleteCollectionView.h; sourceTree = "<group>"; };
 		C96541EA13FF44A600F1F83C /* PXDeleteCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXDeleteCollectionView.m; sourceTree = "<group>"; };
 		C968A8E014A5292700905E3D /* Pixen128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pixen128.png; sourceTree = "<group>"; };
@@ -935,7 +938,6 @@
 		EABD60B80CE986E3008A1B1E /* PXCanvasPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasPreviewView.m; sourceTree = "<group>"; };
 		EAC916E50CE7DC7300E519E1 /* Pixen.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Pixen.icns; sourceTree = "<group>"; };
 		EAC916E80CE7DC7300E519E1 /* PixenDoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PixenDoc.icns; sourceTree = "<group>"; };
-		EAC916EB0CE7DC7300E519E1 /* HotkeysPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = HotkeysPreferences.tiff; sourceTree = "<group>"; };
 		EAC916EE0CE7DC7300E519E1 /* apencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apencil.png; sourceTree = "<group>"; };
 		EAC916EF0CE7DC7300E519E1 /* ellipse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ellipse.png; sourceTree = "<group>"; };
 		EAC916F00CE7DC7300E519E1 /* eraser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eraser.png; sourceTree = "<group>"; };
@@ -1882,6 +1884,8 @@
 		EAC916E00CE7DC7300E519E1 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				C95B209315C353F7003D6C2A /* Hotkeys.png */,
+				C95B209515C357F9003D6C2A /* Hotkeys@2x.png */,
 				C9BA173E15A5CFDC008BC323 /* ImageSizeInfo.png */,
 				C9BA173F15A5CFDC008BC323 /* ImageSizeInfo@2x.png */,
 				C99236FB152CD37400EC3AE5 /* Next.png */,
@@ -1894,19 +1898,10 @@
 				C97C7F0D14EF17DA0089A637 /* PixenPalette.icns */,
 				C99236FD152CD6AB00EC3AE5 /* Play.png */,
 				C99236F9152CD1F000EC3AE5 /* Previous.png */,
-				EAC916E90CE7DC7300E519E1 /* Preferences Icons */,
 				EAC916EC0CE7DC7300E519E1 /* Tool Icons */,
 				EAC917070CE7DC7300E519E1 /* Toolbar Icons */,
 			);
 			path = Icons;
-			sourceTree = "<group>";
-		};
-		EAC916E90CE7DC7300E519E1 /* Preferences Icons */ = {
-			isa = PBXGroup;
-			children = (
-				EAC916EB0CE7DC7300E519E1 /* HotkeysPreferences.tiff */,
-			);
-			path = "Preferences Icons";
 			sourceTree = "<group>";
 		};
 		EAC916EC0CE7DC7300E519E1 /* Tool Icons */ = {
@@ -2277,7 +2272,6 @@
 				61FED6C408BCC646005E51EA /* PXSequenceExportView.xib in Resources */,
 				EAC9174C0CE7DC7300E519E1 /* Pixen.icns in Resources */,
 				EAC9174F0CE7DC7300E519E1 /* PixenDoc.icns in Resources */,
-				EAC917510CE7DC7300E519E1 /* HotkeysPreferences.tiff in Resources */,
 				EAC917530CE7DC7300E519E1 /* apencil.png in Resources */,
 				EAC917540CE7DC7300E519E1 /* ellipse.png in Resources */,
 				EAC917550CE7DC7300E519E1 /* eraser.png in Resources */,
@@ -2366,6 +2360,8 @@
 				C9BFCC7F15C3011400016E09 /* Popout.png in Resources */,
 				C9BFCC8015C3011400016E09 /* Popout@2x.png in Resources */,
 				C9BFCC8C15C3051000016E09 /* PXPalette.xib in Resources */,
+				C95B209415C353F7003D6C2A /* Hotkeys.png in Resources */,
+				C95B209615C357F9003D6C2A /* Hotkeys@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
