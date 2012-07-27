@@ -14,7 +14,6 @@ extern NSString *PXCanvasSetLayersNotificationName;
 extern NSString *PXCanvasSizeChangedNotificationName;
 extern NSString *PXCanvasChangedNotificationName;
 extern NSString *PXPatternChangedNotificationName;
-extern NSString *PXCanvasSelectionChangedNotificationName;
 extern NSString *PXCanvasSelectionStatusChangedNotificationName;
 extern NSString *PXSelectionMaskChangedNotificationName;
 extern NSString *PXToolDidChangeNotificationName;

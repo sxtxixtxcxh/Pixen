@@ -16,7 +16,6 @@ NSString *PXCanvasSetLayersNotificationName = @"PXCanvasSetLayers";
 NSString *PXCanvasSizeChangedNotificationName = @"PXCanvasSizeChanged";
 NSString *PXCanvasChangedNotificationName = @"PXCanvasChanged";
 NSString *PXPatternChangedNotificationName = @"PXPatternChanged";
-NSString *PXCanvasSelectionChangedNotificationName = @"PXCanvasSelectionChanged";
 NSString *PXCanvasSelectionStatusChangedNotificationName = @"PXCanvasSelectionStatusChanged";
 NSString *PXToolDidChangeNotificationName = @"PXToolDidChange";
 NSString *PXToolColorDidChangeNotificationName = @"PXToolColorDidChange";
