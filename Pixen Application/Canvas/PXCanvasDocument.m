@@ -50,11 +50,6 @@ BOOL isPowerOfTwo(int num);
 	}
 }
 
-- (void)dealloc
-{
-	[self.windowController releaseCanvas];
-}
-
 - (PXCanvasController *)canvasController
 {
 	return [self.windowController canvasController];
