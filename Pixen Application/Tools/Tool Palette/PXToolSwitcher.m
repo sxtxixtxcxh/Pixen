@@ -194,9 +194,6 @@
 		[self useToolTagged:PXEyedropperToolTag];
 		_showingTemporaryEyedropper = YES;
 	}
-	else {
-		[_tool optionKeyDown];
-	}
 }
 
 - (void)optionKeyUp
