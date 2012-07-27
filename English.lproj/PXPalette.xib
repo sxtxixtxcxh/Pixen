@@ -45,6 +45,39 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
+					<object class="NSButton" id="133497071">
+						<reference key="NSNextResponder" ref="314497084"/>
+						<int key="NSvFlags">265</int>
+						<string key="NSFrame">{{187, 280}, {24, 20}}</string>
+						<reference key="NSSuperview" ref="314497084"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="479196117"/>
+						<string key="NSReuseIdentifierKey">_NS:22</string>
+						<bool key="NSEnabled">YES</bool>
+						<object class="NSButtonCell" key="NSCell" id="113048036">
+							<int key="NSCellFlags">-2080374784</int>
+							<int key="NSCellFlags2">134348800</int>
+							<string key="NSContents">Gradient Button</string>
+							<object class="NSFont" key="NSSupport" id="26">
+								<string key="NSName">LucidaGrande</string>
+								<double key="NSSize">11</double>
+								<int key="NSfFlags">3100</int>
+							</object>
+							<string key="NSCellIdentifier">_NS:22</string>
+							<reference key="NSControlView" ref="133497071"/>
+							<int key="NSButtonFlags">-2033958912</int>
+							<int key="NSButtonFlags2">34</int>
+							<object class="NSCustomResource" key="NSNormalImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">Popout</string>
+							</object>
+							<string key="NSAlternateContents"/>
+							<string key="NSKeyEquivalent"/>
+							<int key="NSPeriodicDelay">400</int>
+							<int key="NSPeriodicInterval">75</int>
+						</object>
+						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+					</object>
 					<object class="NSTextField" id="551051318">
 						<reference key="NSNextResponder" ref="314497084"/>
 						<int key="NSvFlags">290</int>
@@ -95,11 +128,7 @@
 							<int key="NSCellFlags">-2080374784</int>
 							<int key="NSCellFlags2">134348800</int>
 							<string key="NSContents"/>
-							<object class="NSFont" key="NSSupport" id="26">
-								<string key="NSName">LucidaGrande</string>
-								<double key="NSSize">11</double>
-								<int key="NSfFlags">3100</int>
-							</object>
+							<reference key="NSSupport" ref="26"/>
 							<reference key="NSControlView" ref="151034213"/>
 							<int key="NSButtonFlags">-2033434624</int>
 							<int key="NSButtonFlags2">162</int>
@@ -186,7 +215,7 @@
 						<string key="NSFrame">{{4, 278}, {178, 22}}</string>
 						<reference key="NSSuperview" ref="314497084"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="984532406"/>
+						<reference key="NSNextKeyView" ref="133497071"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSPopUpButtonCell" key="NSCell" id="368028498">
 							<int key="NSCellFlags">-2076180416</int>
@@ -260,37 +289,10 @@
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 					</object>
-					<object class="NSButton" id="984532406">
-						<reference key="NSNextResponder" ref="314497084"/>
-						<int key="NSvFlags">265</int>
-						<string key="NSFrame">{{184, 279}, {18, 20}}</string>
-						<reference key="NSSuperview" ref="314497084"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="479196117"/>
-						<bool key="NSEnabled">YES</bool>
-						<object class="NSButtonCell" key="NSCell" id="660545375">
-							<int key="NSCellFlags">67108864</int>
-							<int key="NSCellFlags2">134348800</int>
-							<string key="NSContents"/>
-							<reference key="NSSupport" ref="26"/>
-							<reference key="NSControlView" ref="984532406"/>
-							<int key="NSButtonFlags">-2030813184</int>
-							<int key="NSButtonFlags2">34</int>
-							<object class="NSCustomResource" key="NSNormalImage">
-								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">popout</string>
-							</object>
-							<string key="NSAlternateContents"/>
-							<string key="NSKeyEquivalent"/>
-							<int key="NSPeriodicDelay">400</int>
-							<int key="NSPeriodicInterval">75</int>
-						</object>
-						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-					</object>
 					<object class="NSPopUpButton" id="479196117">
 						<reference key="NSNextResponder" ref="314497084"/>
 						<int key="NSvFlags">265</int>
-						<string key="NSFrame">{{209, 278}, {42, 22}}</string>
+						<string key="NSFrame">{{216, 278}, {42, 22}}</string>
 						<reference key="NSSuperview" ref="314497084"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="836002209"/>
@@ -450,14 +452,6 @@
 					<int key="connectionID">21</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">popOut:</string>
-						<reference key="source" ref="865131046"/>
-						<reference key="destination" ref="984532406"/>
-					</object>
-					<int key="connectionID">24</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">gearMenu</string>
 						<reference key="source" ref="865131046"/>
@@ -546,6 +540,14 @@
 					<int key="connectionID">63</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">popOut:</string>
+						<reference key="source" ref="865131046"/>
+						<reference key="destination" ref="133497071"/>
+					</object>
+					<int key="connectionID">66</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">selectionPopup</string>
 						<reference key="source" ref="410948436"/>
@@ -602,10 +604,10 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="836002209"/>
 							<reference ref="714837294"/>
-							<reference ref="984532406"/>
-							<reference ref="479196117"/>
 							<reference ref="151034213"/>
 							<reference ref="551051318"/>
+							<reference ref="133497071"/>
+							<reference ref="479196117"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">View</string>
@@ -634,14 +636,6 @@
 						<reference key="parent" ref="314497084"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">22</int>
-						<reference key="object" ref="984532406"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="660545375"/>
-						</array>
-						<reference key="parent" ref="314497084"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">27</int>
 						<reference key="object" ref="479196117"/>
 						<array class="NSMutableArray" key="children">
@@ -662,11 +656,6 @@
 							<reference ref="681900314"/>
 						</array>
 						<reference key="parent" ref="714837294"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">48</int>
-						<reference key="object" ref="660545375"/>
-						<reference key="parent" ref="984532406"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">49</int>
@@ -792,6 +781,19 @@
 						<reference key="object" ref="296557315"/>
 						<reference key="parent" ref="551051318"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">64</int>
+						<reference key="object" ref="133497071"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="113048036"/>
+						</array>
+						<reference key="parent" ref="314497084"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">65</int>
+						<reference key="object" ref="113048036"/>
+						<reference key="parent" ref="133497071"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -804,7 +806,6 @@
 				<string key="15.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="16.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="17.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="22.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="27.CustomClassName">PXActionButton</string>
 				<string key="27.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="28.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -817,7 +818,6 @@
 				<string key="41.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="42.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="47.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="48.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="49.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="51.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -828,6 +828,8 @@
 				<string key="55.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="61.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="62.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="64.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="65.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="9.CustomClassName">PXPaletteViewScrollView</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -836,7 +838,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">63</int>
+			<int key="maxID">66</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -987,7 +989,7 @@
 			<string key="NSAddTemplate">{8, 8}</string>
 			<string key="NSMenuCheckmark">{11, 11}</string>
 			<string key="NSMenuMixedState">{10, 3}</string>
-			<string key="popout">{21, 21}</string>
+			<string key="Popout">{10, 10}</string>
 		</dictionary>
 	</data>
 </archive>
