@@ -11,7 +11,6 @@
 		6117816208ABA7F30098DCC4 /* PXAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6117816008ABA7F30098DCC4 /* PXAnimationView.m */; };
 		615C3B610D15038F00ACFA33 /* PXLayerPaneBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */; };
 		615C3B620D15038F00ACFA33 /* PXLayerPaneBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */; };
-		618AE591087E6FEA00A9FA9B /* PXPalette.nib in Resources */ = {isa = PBXBuildFile; fileRef = 618AE58F087E6FEA00A9FA9B /* PXPalette.nib */; };
 		619DC353085BCD37007EF7F7 /* PXPreviewResizePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.xib */; };
 		61A22A070D20715100430CCD /* History.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A22A060D20715000430CCD /* History.tiff */; };
 		61A22A240D2073E500430CCD /* Frequency.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A22A230D2073E500430CCD /* Frequency.tiff */; };
@@ -100,6 +99,9 @@
 		C9B3A69E1547200F00872BF2 /* PXInsertionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B3A69C1547200F00872BF2 /* PXInsertionView.m */; };
 		C9BA174015A5CFDC008BC323 /* ImageSizeInfo.png in Resources */ = {isa = PBXBuildFile; fileRef = C9BA173E15A5CFDC008BC323 /* ImageSizeInfo.png */; };
 		C9BA174115A5CFDC008BC323 /* ImageSizeInfo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9BA173F15A5CFDC008BC323 /* ImageSizeInfo@2x.png */; };
+		C9BFCC7F15C3011400016E09 /* Popout.png in Resources */ = {isa = PBXBuildFile; fileRef = C9BFCC7D15C3011400016E09 /* Popout.png */; };
+		C9BFCC8015C3011400016E09 /* Popout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9BFCC7E15C3011400016E09 /* Popout@2x.png */; };
+		C9BFCC8C15C3051000016E09 /* PXPalette.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9BFCC8A15C3051000016E09 /* PXPalette.xib */; };
 		C9C7D460151E21F2009BBCA8 /* PXCanvasAnchorView.h in Headers */ = {isa = PBXBuildFile; fileRef = C9C7D45E151E21F2009BBCA8 /* PXCanvasAnchorView.h */; };
 		C9C7D461151E21F2009BBCA8 /* PXCanvasAnchorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C7D45F151E21F2009BBCA8 /* PXCanvasAnchorView.m */; };
 		C9D58D8B14F0316B00A62C10 /* PXColor.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D58D8914F0316B00A62C10 /* PXColor.h */; };
@@ -437,7 +439,6 @@
 		EAC9179C0CE7DC7300E519E1 /* palette_big_graphite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC9173C0CE7DC7300E519E1 /* palette_big_graphite.tiff */; };
 		EAC9179D0CE7DC7300E519E1 /* palette_small_aqua.tif in Resources */ = {isa = PBXBuildFile; fileRef = EAC9173D0CE7DC7300E519E1 /* palette_small_aqua.tif */; };
 		EAC9179E0CE7DC7300E519E1 /* palette_small_graphite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC9173E0CE7DC7300E519E1 /* palette_small_graphite.tiff */; };
-		EAC917A30CE7DC7300E519E1 /* popout.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917430CE7DC7300E519E1 /* popout.png */; };
 		EAC917DC0CE7DDDF00E519E1 /* colorpalette.png in Copy Color Palette */ = {isa = PBXBuildFile; fileRef = EAC917090CE7DC7300E519E1 /* colorpalette.png */; };
 		EAC918150CE7DF8100E519E1 /* PXCanvasView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5482DC0513E2DB000101DE /* PXCanvasView.h */; };
 		EACDBD810878B37100564512 /* PXBackgroundTemplateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACDBD7F0878B37100564512 /* PXBackgroundTemplateView.xib */; };
@@ -525,7 +526,6 @@
 		6117816008ABA7F30098DCC4 /* PXAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PXAnimationView.m; sourceTree = "<group>"; };
 		615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerPaneBackgroundView.h; sourceTree = "<group>"; };
 		615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerPaneBackgroundView.m; sourceTree = "<group>"; };
-		618AE590087E6FEA00A9FA9B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPalette.nib; sourceTree = "<group>"; };
 		619DC352085BCD37007EF7F7 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreviewResizePrompt.xib; sourceTree = "<group>"; };
 		61A22A060D20715000430CCD /* History.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = History.tiff; sourceTree = "<group>"; };
 		61A22A230D2073E500430CCD /* Frequency.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Frequency.tiff; sourceTree = "<group>"; };
@@ -625,6 +625,9 @@
 		C9B3A69C1547200F00872BF2 /* PXInsertionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXInsertionView.m; sourceTree = "<group>"; };
 		C9BA173E15A5CFDC008BC323 /* ImageSizeInfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ImageSizeInfo.png; sourceTree = "<group>"; };
 		C9BA173F15A5CFDC008BC323 /* ImageSizeInfo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageSizeInfo@2x.png"; sourceTree = "<group>"; };
+		C9BFCC7D15C3011400016E09 /* Popout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Popout.png; sourceTree = "<group>"; };
+		C9BFCC7E15C3011400016E09 /* Popout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Popout@2x.png"; sourceTree = "<group>"; };
+		C9BFCC8B15C3051000016E09 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPalette.xib; sourceTree = "<group>"; };
 		C9C7D45E151E21F2009BBCA8 /* PXCanvasAnchorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvasAnchorView.h; sourceTree = "<group>"; };
 		C9C7D45F151E21F2009BBCA8 /* PXCanvasAnchorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasAnchorView.m; sourceTree = "<group>"; };
 		C9D58D8914F0316B00A62C10 /* PXColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXColor.h; sourceTree = "<group>"; };
@@ -971,7 +974,6 @@
 		EAC9173C0CE7DC7300E519E1 /* palette_big_graphite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = palette_big_graphite.tiff; sourceTree = "<group>"; };
 		EAC9173D0CE7DC7300E519E1 /* palette_small_aqua.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = palette_small_aqua.tif; sourceTree = "<group>"; };
 		EAC9173E0CE7DC7300E519E1 /* palette_small_graphite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = palette_small_graphite.tiff; sourceTree = "<group>"; };
-		EAC917430CE7DC7300E519E1 /* popout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popout.png; sourceTree = "<group>"; };
 		EACDBD800878B37100564512 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXBackgroundTemplateView.xib; sourceTree = "<group>"; };
 		EAE126D0054F41A9001208D9 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXImageBackgroundConfigurator.nib; sourceTree = "<group>"; };
 		EAF6951606A9AE0B0019D8D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
@@ -1815,6 +1817,7 @@
 				C9B1FA5C13D732FC00BB7CF7 /* PXManagePresetsWindow.xib */,
 				EAA0184E054DCC7B00EF18C2 /* PXMonotoneBackgroundConfigurator.xib */,
 				EA9E180B0557104F00119DF5 /* PXNamePrompt.xib */,
+				C9BFCC8A15C3051000016E09 /* PXPalette.xib */,
 				EAB650840D108D9000274070 /* PXPaletteController.xib */,
 				C9FD44DF13FD70FC00CEE4FC /* PXPatternEditor.xib */,
 				C9ADD4A81400844B00257E38 /* PXPatternItem.xib */,
@@ -1827,7 +1830,6 @@
 				C9799FAE13AD69C000E261EE /* PXShapeToolPropertiesView.xib */,
 				C912F26B13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib */,
 				C9A6BE1513ACFBC50028B141 /* PXToolProperties.xib */,
-				618AE58F087E6FEA00A9FA9B /* PXPalette.nib */,
 				61A956BA08AD76CF009BB89F /* OSProgressPopup.nib */,
 				C91F07D1142D0BAB007F812C /* PXInfoPanel.xib */,
 				C973F0D6152B93810084A158 /* PXAnimationDocument.xib */,
@@ -1978,7 +1980,8 @@
 				EAC9173C0CE7DC7300E519E1 /* palette_big_graphite.tiff */,
 				EAC9173D0CE7DC7300E519E1 /* palette_small_aqua.tif */,
 				EAC9173E0CE7DC7300E519E1 /* palette_small_graphite.tiff */,
-				EAC917430CE7DC7300E519E1 /* popout.png */,
+				C9BFCC7D15C3011400016E09 /* Popout.png */,
+				C9BFCC7E15C3011400016E09 /* Popout@2x.png */,
 			);
 			path = "Widget Parts";
 			sourceTree = "<group>";
@@ -2270,7 +2273,6 @@
 				EAF694B606A9AE0B0019D8D7 /* PXScalePrompt.xib in Resources */,
 				619DC353085BCD37007EF7F7 /* PXPreviewResizePrompt.xib in Resources */,
 				EACDBD810878B37100564512 /* PXBackgroundTemplateView.xib in Resources */,
-				618AE591087E6FEA00A9FA9B /* PXPalette.nib in Resources */,
 				61A956BC08AD76CF009BB89F /* OSProgressPopup.nib in Resources */,
 				61FED6C408BCC646005E51EA /* PXSequenceExportView.xib in Resources */,
 				EAC9174C0CE7DC7300E519E1 /* Pixen.icns in Resources */,
@@ -2314,7 +2316,6 @@
 				EAC9179C0CE7DC7300E519E1 /* palette_big_graphite.tiff in Resources */,
 				EAC9179D0CE7DC7300E519E1 /* palette_small_aqua.tif in Resources */,
 				EAC9179E0CE7DC7300E519E1 /* palette_small_graphite.tiff in Resources */,
-				EAC917A30CE7DC7300E519E1 /* popout.png in Resources */,
 				EAB650860D108D9000274070 /* PXPaletteController.xib in Resources */,
 				61A22A070D20715100430CCD /* History.tiff in Resources */,
 				61A22A240D2073E500430CCD /* Frequency.tiff in Resources */,
@@ -2362,6 +2363,9 @@
 				C94FA7BE15A5DE18000FA307 /* TitlebarGradient.png in Resources */,
 				C94FA7BF15A5DE18000FA307 /* TitlebarGradient@2x.png in Resources */,
 				C92C281D15B2711900E68937 /* Pixen128@2x.png in Resources */,
+				C9BFCC7F15C3011400016E09 /* Popout.png in Resources */,
+				C9BFCC8015C3011400016E09 /* Popout@2x.png in Resources */,
+				C9BFCC8C15C3051000016E09 /* PXPalette.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2607,14 +2611,6 @@
 			name = PXLayerController.xib;
 			sourceTree = "<group>";
 		};
-		618AE58F087E6FEA00A9FA9B /* PXPalette.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				618AE590087E6FEA00A9FA9B /* English */,
-			);
-			name = PXPalette.nib;
-			sourceTree = "<group>";
-		};
 		619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2813,6 +2809,14 @@
 				C9B1FA5D13D732FC00BB7CF7 /* English */,
 			);
 			name = PXManagePresetsWindow.xib;
+			sourceTree = "<group>";
+		};
+		C9BFCC8A15C3051000016E09 /* PXPalette.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9BFCC8B15C3051000016E09 /* English */,
+			);
+			name = PXPalette.xib;
 			sourceTree = "<group>";
 		};
 		C9DC4D9913D0E6D70065C1A6 /* PXImageSizePrompt.xib */ = {
