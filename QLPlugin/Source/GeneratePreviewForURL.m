@@ -10,15 +10,15 @@ OSStatus GeneratePreviewForURL (void *thisInterface, QLPreviewRequestRef preview
 void CancelPreviewGeneration (void* thisInterface, QLPreviewRequestRef preview);
 
 /* -----------------------------------------------------------------------------
-   Generate a preview for file
-
-   This function's job is to create preview for designated file
-   ----------------------------------------------------------------------------- */
+ Generate a preview for file
+ 
+ This function's job is to create preview for designated file
+ ----------------------------------------------------------------------------- */
 
 OSStatus GeneratePreviewForURL (void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options)
-{	
+{
 	@autoreleasepool {
-	
+		
 		PXCanvas *canvas = [NSKeyedUnarchiver unarchiveObjectWithFile:[ (__bridge NSURL *) url path]];
 		
 		NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -32,9 +32,8 @@ OSStatus GeneratePreviewForURL (void *thisInterface, QLPreviewRequestRef preview
 		
 		QLPreviewRequestFlushContext(preview, ctx);
 		
-		
-    return noErr;
-    }
+		return noErr;
+	}
 }
 
 void CancelPreviewGeneration (void* thisInterface, QLPreviewRequestRef preview)

@@ -18,19 +18,21 @@
 	self = [super init];
 	if (self) {
 		int version = [coder decodeIntForKey:@"version"];
+		
 		if (version <= 4) {
 			BOOL isIndexedImage = [coder containsValueForKey:@"palette"];
-			PXPalette *palette = NULL;
-			if(isIndexedImage) {
-				palette = [[PXPalette alloc] initWithCoder:coder];
-				
+			
+			if (isIndexedImage) {
+				PXPalette *palette = [[PXPalette alloc] initWithCoder:coder];
 				[coder associateValue:palette withKey:@"palette"];
 			}
+			
 			layers = [coder decodeObjectForKey:@"layers"];
-			if(isIndexedImage) {
+			
+			if (isIndexedImage) {
 				[coder associateValue:nil withKey:@"palette"];
 			}
-    }
+		}
 	}
 	return self;
 }
