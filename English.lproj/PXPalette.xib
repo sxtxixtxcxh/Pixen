@@ -300,7 +300,7 @@
 							<int key="NSCellFlags2">134349824</int>
 							<reference key="NSSupport" ref="26"/>
 							<reference key="NSControlView" ref="479196117"/>
-							<int key="NSButtonFlags">110247936</int>
+							<int key="NSButtonFlags">114442240</int>
 							<int key="NSButtonFlags2">65</int>
 							<reference key="NSAlternateImage" ref="937505456"/>
 							<string key="NSAlternateContents"/>
