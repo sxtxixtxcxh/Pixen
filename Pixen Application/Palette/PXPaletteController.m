@@ -231,7 +231,7 @@
 	
 	[canvas replaceColor:srcColor withColor:destColor];
 	
-	_paletteView.selectionIndex = NSNotFound;
+	[_paletteView selectColorAtIndex:NSNotFound];
 }
 
 - (void)paletteView:(PXPaletteView *)pv modifyColorAtIndex:(NSUInteger)index
@@ -252,12 +252,12 @@
 												 name:NSWindowWillCloseNotification
 											   object:colorPanel];
 	
-	_paletteView.selectionIndex = index;
+	[_paletteView selectColorAtIndex:index];
 }
 
 - (void)closedColorPanel:(NSNotification *)notification
 {
-	_paletteView.selectionIndex = NSNotFound;
+	[_paletteView selectColorAtIndex:NSNotFound];
 }
 
 - (IBAction)useMostRecentColors:(id)sender

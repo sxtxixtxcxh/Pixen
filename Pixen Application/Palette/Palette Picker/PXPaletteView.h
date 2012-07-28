@@ -32,13 +32,15 @@
 @property (nonatomic, assign) BOOL allowsColorModification;
 @property (nonatomic, assign) NSControlSize controlSize;
 
-@property (nonatomic, assign) NSUInteger selectionIndex;
+@property (nonatomic, assign, readonly) NSUInteger selectionIndex;
 
 @property (nonatomic, strong) PXPalette *palette;
 
 @property (nonatomic, unsafe_unretained) id delegate;
 
 - (void)reload;
+
+- (void)selectColorAtIndex:(NSUInteger)index;
 
 @end
 

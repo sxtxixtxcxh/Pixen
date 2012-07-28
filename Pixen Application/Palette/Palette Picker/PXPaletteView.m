@@ -10,6 +10,13 @@
 #import "PXInsertionView.h"
 #import "PXPaletteColorView.h"
 
+@interface PXPaletteView ()
+
+@property (nonatomic, assign) NSUInteger selectionIndex;
+
+@end
+
+
 @implementation PXPaletteView
 
 const CGFloat viewMargin = 1.0f;
@@ -83,6 +90,13 @@ const CGFloat viewMargin = 1.0f;
 	
 	[self size];
 	[self retile];
+}
+
+- (void)selectColorAtIndex:(NSUInteger)index
+{
+	self.selectionIndex = index;
+	
+	[self reload];
 }
 
 - (int)celSize
@@ -193,7 +207,7 @@ const CGFloat viewMargin = 1.0f;
 {
 	if (palette != pal)
 	{
-		selectionIndex = NSNotFound;
+		self.selectionIndex = NSNotFound;
 		
 		palette = pal;
 		
@@ -250,15 +264,6 @@ const CGFloat viewMargin = 1.0f;
 	}
 }
 
-- (void)setSelectionIndex:(NSUInteger)index
-{
-	if (selectionIndex != index) {
-		selectionIndex = index;
-		
-		[self reload];
-	}
-}
-
 - (void)sizeSelector:selector selectedSize:(NSControlSize)aSize
 {
 	[self setControlSize:aSize];
@@ -282,7 +287,7 @@ const CGFloat viewMargin = 1.0f;
 	[palette save];
 	
 	if (selectionIndex >= [palette colorCount])
-		selectionIndex = NSNotFound;
+		self.selectionIndex = NSNotFound;
 	
 	[self reload];
 }
@@ -336,11 +341,11 @@ const CGFloat viewMargin = 1.0f;
 		if (index == colorView.index) {
 			if (colorView.highlighted) {
 				colorView.highlighted = NO;
-				selectionIndex = NSNotFound;
+				self.selectionIndex = NSNotFound;
 			}
 			else {
 				colorView.highlighted = YES;
-				selectionIndex = index;
+				self.selectionIndex = index;
 			}
 			
 			break;
@@ -489,7 +494,7 @@ const CGFloat viewMargin = 1.0f;
 		
 		[palette moveColorAtIndex:_clickedCelIndex toIndex:n];
 		
-		selectionIndex = NSNotFound;
+		self.selectionIndex = NSNotFound;
 		[self reload];
 		
 		[_insertionView removeFromSuperview];

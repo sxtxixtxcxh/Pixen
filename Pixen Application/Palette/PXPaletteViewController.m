@@ -28,7 +28,7 @@
 
 @implementation PXPaletteViewController
 
-@synthesize paletteSelector, addColorButton, infoField, paletteView, delegate;
+@synthesize paletteSelector, addColorButton, removeColorButton, infoField, paletteView, delegate;
 
 - (id)init
 {
@@ -53,6 +53,11 @@
 	
 	namePrompter = [[PXNamePrompter alloc] init];
 	[namePrompter setDelegate:self];
+	
+	[self.paletteView addObserver:self
+					   forKeyPath:@"selectionIndex"
+						  options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
+						  context:NULL];
 }
 
 /*
@@ -85,6 +90,16 @@
 	[palette save];
 	
 	[self.paletteView reload];
+}
+
+- (IBAction)removeColor:(id)sender
+{
+	PXPalette *palette = [paletteView palette];
+	
+	if (!palette.canSave)
+		return;
+	
+	[self.paletteView deleteBackward:nil];
 }
 
 - (IBAction)installPalette:sender
@@ -247,19 +262,34 @@
 }
  */
 
+- (void)validateRemoveColorButton
+{
+	if (!paletteView.palette.canSave) {
+		[self.removeColorButton setEnabled:NO];
+		return;
+	}
+	
+	[self.removeColorButton setEnabled:paletteView.selectionIndex != NSNotFound];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	[self validateRemoveColorButton];
+}
+
 - (void)showPalette:(PXPalette *)palette
 {
-	PXPalette *currentPalette = palette;
-	
 	[addColorButton setEnabled:palette.canSave];
 	
 	if ([paletteView palette] != palette) {
 		[paletteView setPalette:palette];
 	}
 	
-	if (currentPalette) {
+	if (palette) {
 		[paletteSelector showPalette:palette];
 	}
+	
+	[self validateRemoveColorButton];
 	
 	if ([delegate respondsToSelector:@selector(paletteViewControllerDidShowPalette:)]) {
 		[delegate paletteViewControllerDidShowPalette:palette];
