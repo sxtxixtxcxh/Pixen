@@ -44,6 +44,7 @@
 
 - (void)dealloc
 {
+	[paletteView removeObserver:self forKeyPath:@"selectionIndex"];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
