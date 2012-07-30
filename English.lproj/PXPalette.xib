@@ -50,7 +50,7 @@
 					<object class="NSSegmentedControl" id="853390148">
 						<reference key="NSNextResponder" ref="314497084"/>
 						<int key="NSvFlags">289</int>
-						<string key="NSFrame">{{206, 6}, {67, 23}}</string>
+						<string key="NSFrame">{{225, 6}, {48, 23}}</string>
 						<reference key="NSSuperview" ref="314497084"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -67,16 +67,24 @@
 							<reference key="NSControlView" ref="853390148"/>
 							<array class="NSMutableArray" key="NSSegmentImages">
 								<object class="NSSegmentItem">
-									<double key="NSSegmentItemWidth">32</double>
+									<double key="NSSegmentItemWidth">23</double>
+									<object class="NSCustomResource" key="NSSegmentItemImage">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">RegularSize</string>
+									</object>
 									<string key="NSSegmentItemLabel"/>
-									<int key="NSSegmentItemImageScaling">0</int>
+									<int key="NSSegmentItemImageScaling">2</int>
 								</object>
 								<object class="NSSegmentItem">
-									<double key="NSSegmentItemWidth">32</double>
+									<double key="NSSegmentItemWidth">22</double>
+									<object class="NSCustomResource" key="NSSegmentItemImage">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">SmallSize</string>
+									</object>
 									<string key="NSSegmentItemLabel"/>
 									<int key="NSSegmentItemTag">1</int>
 									<bool key="NSSegmentItemSelected">YES</bool>
-									<int key="NSSegmentItemImageScaling">0</int>
+									<int key="NSSegmentItemImageScaling">2</int>
 								</object>
 							</array>
 							<int key="NSSelectedSegment">1</int>
@@ -147,9 +155,10 @@
 					<object class="NSTextField" id="551051318">
 						<reference key="NSNextResponder" ref="314497084"/>
 						<int key="NSvFlags">290</int>
-						<string key="NSFrame">{{59, 6}, {142, 23}}</string>
+						<string key="NSFrame">{{59, 6}, {161, 23}}</string>
 						<reference key="NSSuperview" ref="314497084"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="853390148"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="296557315">
 							<int key="NSCellFlags">67108864</int>
@@ -959,7 +968,7 @@
 				<string key="67.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="68.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<integer value="0" key="73.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
+				<integer value="1" key="73.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1128,6 +1137,8 @@
 			<string key="NSMenuMixedState">{10, 3}</string>
 			<string key="NSRemoveTemplate">{8, 8}</string>
 			<string key="Popout">{10, 10}</string>
+			<string key="RegularSize">{9, 9}</string>
+			<string key="SmallSize">{9, 9}</string>
 		</dictionary>
 	</data>
 </archive>

@@ -104,6 +104,10 @@
 		C9BFCC7F15C3011400016E09 /* Popout.png in Resources */ = {isa = PBXBuildFile; fileRef = C9BFCC7D15C3011400016E09 /* Popout.png */; };
 		C9BFCC8015C3011400016E09 /* Popout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9BFCC7E15C3011400016E09 /* Popout@2x.png */; };
 		C9BFCC8C15C3051000016E09 /* PXPalette.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9BFCC8A15C3051000016E09 /* PXPalette.xib */; };
+		C9C3B51B15C6FB6F00BA5E0B /* RegularSize.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C3B51715C6FB6F00BA5E0B /* RegularSize.png */; };
+		C9C3B51C15C6FB6F00BA5E0B /* RegularSize@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C3B51815C6FB6F00BA5E0B /* RegularSize@2x.png */; };
+		C9C3B51D15C6FB6F00BA5E0B /* SmallSize.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C3B51915C6FB6F00BA5E0B /* SmallSize.png */; };
+		C9C3B51E15C6FB6F00BA5E0B /* SmallSize@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C3B51A15C6FB6F00BA5E0B /* SmallSize@2x.png */; };
 		C9C7D460151E21F2009BBCA8 /* PXCanvasAnchorView.h in Headers */ = {isa = PBXBuildFile; fileRef = C9C7D45E151E21F2009BBCA8 /* PXCanvasAnchorView.h */; };
 		C9C7D461151E21F2009BBCA8 /* PXCanvasAnchorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C7D45F151E21F2009BBCA8 /* PXCanvasAnchorView.m */; };
 		C9D58D8B14F0316B00A62C10 /* PXColor.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D58D8914F0316B00A62C10 /* PXColor.h */; };
@@ -432,10 +436,6 @@
 		EAC917850CE7DC7300E519E1 /* Pixen.scriptSuite in Resources */ = {isa = PBXBuildFile; fileRef = EAC917230CE7DC7300E519E1 /* Pixen.scriptSuite */; };
 		EAC917860CE7DC7300E519E1 /* Pixen.scriptTerminology in Resources */ = {isa = PBXBuildFile; fileRef = EAC917240CE7DC7300E519E1 /* Pixen.scriptTerminology */; };
 		EAC917890CE7DC7300E519E1 /* ants.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC917280CE7DC7300E519E1 /* ants.tiff */; };
-		EAC9179B0CE7DC7300E519E1 /* palette_big_aqua.tif in Resources */ = {isa = PBXBuildFile; fileRef = EAC9173B0CE7DC7300E519E1 /* palette_big_aqua.tif */; };
-		EAC9179C0CE7DC7300E519E1 /* palette_big_graphite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC9173C0CE7DC7300E519E1 /* palette_big_graphite.tiff */; };
-		EAC9179D0CE7DC7300E519E1 /* palette_small_aqua.tif in Resources */ = {isa = PBXBuildFile; fileRef = EAC9173D0CE7DC7300E519E1 /* palette_small_aqua.tif */; };
-		EAC9179E0CE7DC7300E519E1 /* palette_small_graphite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC9173E0CE7DC7300E519E1 /* palette_small_graphite.tiff */; };
 		EAC917DC0CE7DDDF00E519E1 /* colorpalette.png in Copy Color Palette */ = {isa = PBXBuildFile; fileRef = EAC917090CE7DC7300E519E1 /* colorpalette.png */; };
 		EAC918150CE7DF8100E519E1 /* PXCanvasView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5482DC0513E2DB000101DE /* PXCanvasView.h */; };
 		EACDBD810878B37100564512 /* PXBackgroundTemplateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACDBD7F0878B37100564512 /* PXBackgroundTemplateView.xib */; };
@@ -627,6 +627,10 @@
 		C9BFCC7D15C3011400016E09 /* Popout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Popout.png; sourceTree = "<group>"; };
 		C9BFCC7E15C3011400016E09 /* Popout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Popout@2x.png"; sourceTree = "<group>"; };
 		C9BFCC8B15C3051000016E09 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPalette.xib; sourceTree = "<group>"; };
+		C9C3B51715C6FB6F00BA5E0B /* RegularSize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RegularSize.png; sourceTree = "<group>"; };
+		C9C3B51815C6FB6F00BA5E0B /* RegularSize@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RegularSize@2x.png"; sourceTree = "<group>"; };
+		C9C3B51915C6FB6F00BA5E0B /* SmallSize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallSize.png; sourceTree = "<group>"; };
+		C9C3B51A15C6FB6F00BA5E0B /* SmallSize@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SmallSize@2x.png"; sourceTree = "<group>"; };
 		C9C7D45E151E21F2009BBCA8 /* PXCanvasAnchorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCanvasAnchorView.h; sourceTree = "<group>"; };
 		C9C7D45F151E21F2009BBCA8 /* PXCanvasAnchorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCanvasAnchorView.m; sourceTree = "<group>"; };
 		C9D58D8914F0316B00A62C10 /* PXColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXColor.h; sourceTree = "<group>"; };
@@ -964,10 +968,6 @@
 		EAC917230CE7DC7300E519E1 /* Pixen.scriptSuite */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pixen.scriptSuite; sourceTree = "<group>"; };
 		EAC917240CE7DC7300E519E1 /* Pixen.scriptTerminology */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pixen.scriptTerminology; sourceTree = "<group>"; };
 		EAC917280CE7DC7300E519E1 /* ants.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ants.tiff; sourceTree = "<group>"; };
-		EAC9173B0CE7DC7300E519E1 /* palette_big_aqua.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = palette_big_aqua.tif; sourceTree = "<group>"; };
-		EAC9173C0CE7DC7300E519E1 /* palette_big_graphite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = palette_big_graphite.tiff; sourceTree = "<group>"; };
-		EAC9173D0CE7DC7300E519E1 /* palette_small_aqua.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = palette_small_aqua.tif; sourceTree = "<group>"; };
-		EAC9173E0CE7DC7300E519E1 /* palette_small_graphite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = palette_small_graphite.tiff; sourceTree = "<group>"; };
 		EACDBD800878B37100564512 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXBackgroundTemplateView.xib; sourceTree = "<group>"; };
 		EAE126D0054F41A9001208D9 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXImageBackgroundConfigurator.nib; sourceTree = "<group>"; };
 		EAF6951606A9AE0B0019D8D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
@@ -1954,17 +1954,17 @@
 		EAC917260CE7DC7300E519E1 /* Widget Parts */ = {
 			isa = PBXGroup;
 			children = (
-				C94FA7BC15A5DE18000FA307 /* TitlebarGradient.png */,
-				C94FA7BD15A5DE18000FA307 /* TitlebarGradient@2x.png */,
 				EAC917280CE7DC7300E519E1 /* ants.tiff */,
 				61A22A230D2073E500430CCD /* Frequency.tiff */,
 				61A22A060D20715000430CCD /* History.tiff */,
-				EAC9173B0CE7DC7300E519E1 /* palette_big_aqua.tif */,
-				EAC9173C0CE7DC7300E519E1 /* palette_big_graphite.tiff */,
-				EAC9173D0CE7DC7300E519E1 /* palette_small_aqua.tif */,
-				EAC9173E0CE7DC7300E519E1 /* palette_small_graphite.tiff */,
 				C9BFCC7D15C3011400016E09 /* Popout.png */,
 				C9BFCC7E15C3011400016E09 /* Popout@2x.png */,
+				C9C3B51715C6FB6F00BA5E0B /* RegularSize.png */,
+				C9C3B51815C6FB6F00BA5E0B /* RegularSize@2x.png */,
+				C9C3B51915C6FB6F00BA5E0B /* SmallSize.png */,
+				C9C3B51A15C6FB6F00BA5E0B /* SmallSize@2x.png */,
+				C94FA7BC15A5DE18000FA307 /* TitlebarGradient.png */,
+				C94FA7BD15A5DE18000FA307 /* TitlebarGradient@2x.png */,
 			);
 			path = "Widget Parts";
 			sourceTree = "<group>";
@@ -2292,10 +2292,6 @@
 				EAC917850CE7DC7300E519E1 /* Pixen.scriptSuite in Resources */,
 				EAC917860CE7DC7300E519E1 /* Pixen.scriptTerminology in Resources */,
 				EAC917890CE7DC7300E519E1 /* ants.tiff in Resources */,
-				EAC9179B0CE7DC7300E519E1 /* palette_big_aqua.tif in Resources */,
-				EAC9179C0CE7DC7300E519E1 /* palette_big_graphite.tiff in Resources */,
-				EAC9179D0CE7DC7300E519E1 /* palette_small_aqua.tif in Resources */,
-				EAC9179E0CE7DC7300E519E1 /* palette_small_graphite.tiff in Resources */,
 				EAB650860D108D9000274070 /* PXPaletteController.xib in Resources */,
 				61A22A070D20715100430CCD /* History.tiff in Resources */,
 				61A22A240D2073E500430CCD /* Frequency.tiff in Resources */,
@@ -2348,6 +2344,10 @@
 				C9BFCC8C15C3051000016E09 /* PXPalette.xib in Resources */,
 				C95B209415C353F7003D6C2A /* Hotkeys.png in Resources */,
 				C95B209615C357F9003D6C2A /* Hotkeys@2x.png in Resources */,
+				C9C3B51B15C6FB6F00BA5E0B /* RegularSize.png in Resources */,
+				C9C3B51C15C6FB6F00BA5E0B /* RegularSize@2x.png in Resources */,
+				C9C3B51D15C6FB6F00BA5E0B /* SmallSize.png in Resources */,
+				C9C3B51E15C6FB6F00BA5E0B /* SmallSize@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
