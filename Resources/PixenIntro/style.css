@@ -64,3 +64,12 @@ a.button.left {
 a.button:hover {
 	background-color: #E5E9EF;
 }
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+	img#icon {
+		content: url("Pixen128_2x.png");
+	}
+	img#crosshair {
+		content: url("Crosshair_2x.png");
+	}
+}
