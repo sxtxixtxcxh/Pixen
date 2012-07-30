@@ -32,8 +32,8 @@ div.center p {
 img.left {
 	float: left;
 	margin-top: 2px;
-	margin-right: 16px;
-	margin-bottom: 16px;
+	margin-right: 20px;
+	margin-bottom: 20px;
 }
 img.center {
 	display: block;
