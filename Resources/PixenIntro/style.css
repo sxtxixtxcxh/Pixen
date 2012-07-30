@@ -72,4 +72,7 @@ a.button:hover {
 	img#crosshair {
 		content: url("Crosshair_2x.png");
 	}
+	img#patterns {
+		content: url("Patterns_2x.png");
+	}
 }
