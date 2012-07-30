@@ -57,6 +57,16 @@
 	return self;
 }
 
+- (NSControlSize)colorControlSize
+{
+	return _vc.colorControlSize;
+}
+
+- (void)setColorControlSize:(NSControlSize)colorControlSize
+{
+	_vc.colorControlSize = colorControlSize;
+}
+
 - (PXPaletteView *)paletteView
 {
 	return _vc.paletteView;

@@ -34,6 +34,8 @@
 {
     self = [super initWithNibName:@"PXPalette" bundle:nil];
     if (self) {
+		_colorControlSize = -1;
+		
 		// [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentAdded:) name:PXDocumentOpenedNotificationName object:nil];
 		// [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentClosed:) name:PXDocumentWillCloseNotificationName object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidBecomeMain:) name:NSWindowDidBecomeMainNotification object:nil];
@@ -67,6 +69,30 @@
 	[self reloadDataAndShowCanvas:[[notification object] canvas]];
 }
  */
+
+- (IBAction)changedControlSize:(id)sender
+{
+	NSControlSize size = [sender selectedSegment] == 1 ? NSSmallControlSize : NSRegularControlSize;
+	[[NSUserDefaults standardUserDefaults] setInteger:size forKey:PXColorPickerPaletteViewSizeKey];
+	
+	[self setColorControlSize:size];
+}
+
+- (void)setColorControlSize:(NSControlSize)colorControlSize
+{
+	if (_colorControlSize != colorControlSize) {
+		_colorControlSize = colorControlSize;
+		
+		[paletteView setControlSize:colorControlSize];
+		
+		if (colorControlSize == NSSmallControlSize) {
+			[self.controlSize selectSegmentWithTag:1];
+		}
+		else {
+			[self.controlSize selectSegmentWithTag:0];
+		}
+	}
+}
 
 - (BOOL)validateMenuItem:(id)item
 {

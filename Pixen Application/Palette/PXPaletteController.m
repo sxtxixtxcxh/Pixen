@@ -193,12 +193,6 @@
 	[switcher setColor:PXColorToNSColor([palette colorAtIndex:index])];
 }
 
-- (void)paletteViewSizeChangedTo:(NSControlSize)size
-{
-	[[NSUserDefaults standardUserDefaults] setInteger:size
-											   forKey:PXColorPickerPaletteViewSizeKey];
-}
-
 - (BOOL)isPaletteIndexKey:(NSEvent *)event
 {
 	NSString *chars = [event characters];

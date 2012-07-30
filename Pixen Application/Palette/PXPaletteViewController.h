@@ -21,6 +21,9 @@
 @property (nonatomic, weak) IBOutlet NSButton *addColorButton;
 @property (nonatomic, weak) IBOutlet NSButton *removeColorButton;
 @property (nonatomic, weak) IBOutlet NSTextField *infoField;
+@property (nonatomic, weak) IBOutlet NSSegmentedControl *controlSize;
+
+@property (nonatomic, assign) NSControlSize colorControlSize;
 
 @property (nonatomic, unsafe_unretained) id delegate;
 

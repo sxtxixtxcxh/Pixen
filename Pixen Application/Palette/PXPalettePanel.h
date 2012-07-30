@@ -15,6 +15,8 @@
 	PXPaletteViewController *_vc;
 }
 
+@property (nonatomic, assign) NSControlSize colorControlSize;
+
 + (id)popWithPalette:(PXPalette *)palette fromWindow:(NSWindow *)window;
 - (id)initWithPalette:(PXPalette *)palette;
 

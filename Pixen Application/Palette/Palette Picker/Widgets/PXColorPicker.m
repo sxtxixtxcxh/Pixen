@@ -9,7 +9,6 @@
 
 #import "PXPaletteView.h"
 #import "PXPaletteViewController.h"
-#import "PXPaletteViewScrollView.h"
 
 int kPXColorPickerMode = 23421337;
 
@@ -76,15 +75,10 @@ int kPXColorPickerMode = 23421337;
 	
 	if ([defs objectForKey:PXColorPickerPaletteViewSizeKey] == nil)
 		[defs setInteger:NSRegularControlSize forKey:PXColorPickerPaletteViewSizeKey];
-	
-	[ (PXPaletteViewScrollView *) ([_vc.paletteView enclosingScrollView]) setControlSize:[defs integerForKey:PXColorPickerPaletteViewSizeKey]];
+
+	[_vc setColorControlSize:[defs integerForKey:PXColorPickerPaletteViewSizeKey]];
 	
 	return self;
-}
-
-- (void)paletteViewSizeChangedTo:(NSControlSize)size
-{
-	[[NSUserDefaults standardUserDefaults] setInteger:size forKey:PXColorPickerPaletteViewSizeKey];
 }
 
 - (void)useColorAtIndex:(NSUInteger)index

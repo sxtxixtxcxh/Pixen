@@ -16,7 +16,6 @@
 #import "PXSpriteSheetExporter.h"
 #import "PXPalette.h"
 #import "PXPaletteView.h"
-#import "PXPaletteViewScrollView.h"
 #import "PXPalettePanel.h"
 
 @implementation PXPanelManager
@@ -94,7 +93,7 @@ static PXPanelManager *sharedManager = nil;
 		[panel setFrame:NSRectFromString([current objectForKey:PXPalettePanelFrameKey])
 				display:NO];
 		
-		[(PXPaletteViewScrollView *)[[panel paletteView] enclosingScrollView] setControlSize:viewSize];
+		panel.colorControlSize = viewSize;
 		
 		[panel makeKeyAndOrderFront:self];
 	}

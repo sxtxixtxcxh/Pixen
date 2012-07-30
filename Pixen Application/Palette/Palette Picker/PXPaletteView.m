@@ -264,15 +264,6 @@ const CGFloat viewMargin = 1.0f;
 	}
 }
 
-- (void)sizeSelector:selector selectedSize:(NSControlSize)aSize
-{
-	[self setControlSize:aSize];
-	
-	if ([delegate respondsToSelector:@selector(paletteViewSizeChangedTo:)]) {
-		[delegate paletteViewSizeChangedTo:aSize];
-	}
-}
-
 - (void)deleteBackward:(id)sender
 {
 	if (!palette)
