@@ -38,6 +38,10 @@
 
 #import "PXCanvas_ImportingExporting.h"
 
+#if GTK
+	#import <Sparkle/Sparkle.h>
+#endif
+
 /***********************************/
 /******** Private method ***********/
 /***********************************/
@@ -132,11 +136,24 @@ NSString *palettesSubdirName = @"Palettes";
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/Pixen/Pixen/wiki"]];
 }
 
+- (void)checkForUpdates:(id)sender
+{
+#if GTK
+	[[SUUpdater sharedUpdater] checkForUpdates:nil];
+#endif
+}
+
 //
 // Delegate methods
 //
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
+#if GTK
+	[[SUUpdater sharedUpdater] setFeedURL:[NSURL URLWithString:@"http://philippec.github.com/Pixen/appcast.xml"]];
+	[[SUUpdater sharedUpdater] setUpdateCheckInterval:60 * 60 * 12];
+	[[SUUpdater sharedUpdater] setAutomaticallyChecksForUpdates:YES];
+#endif
+	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	NSString *defaultsPath = [[NSBundle mainBundle] pathForResource:@"Defaults" ofType:@"plist"];
@@ -317,6 +334,14 @@ NSString *palettesSubdirName = @"Palettes";
 
 - (BOOL)validateMenuItem:(NSMenuItem *)anItem
 {
+	if ([anItem action] == @selector(checkForUpdates:)) {
+#if GTK
+		[anItem setHidden:NO];
+#endif
+		
+		return YES;
+	}
+	
 	if ([anItem action] == @selector(newFromClipboard:))
 	{
 		NSPasteboard *board = [NSPasteboard generalPasteboard];

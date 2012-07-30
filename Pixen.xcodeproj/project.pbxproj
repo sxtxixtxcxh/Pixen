@@ -88,6 +88,455 @@
 		C9A6BE1713ACFBC50028B141 /* PXToolProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1513ACFBC50028B141 /* PXToolProperties.xib */; };
 		C9A6BE1A13AD008C0028B141 /* PXBlankPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1813AD008C0028B141 /* PXBlankPropertiesView.xib */; };
 		C9A6BE1D13AD07B10028B141 /* PXFillToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1B13AD07B10028B141 /* PXFillToolPropertiesView.xib */; };
+		C9ACC0C515C70AB300D157CB /* PXCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5482DD0513E2DB000101DE /* PXCanvasView.m */; };
+		C9ACC0C615C70AB300D157CB /* PXCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = EA495594054C6943009A8EE7 /* PXCanvas.m */; };
+		C9ACC0C715C70AB300D157CB /* PXGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E6F1300608E9FB001B46E8 /* PXGrid.m */; };
+		C9ACC0C815C70AB300D157CB /* PXCanvas_ApplescriptAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A6F50D060E8151008FA11F /* PXCanvas_ApplescriptAdditions.m */; };
+		C9ACC0C915C70AB300D157CB /* PXCanvasPrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA35564406A4AD7B004DE6AE /* PXCanvasPrintView.m */; };
+		C9ACC0CA15C70AB300D157CB /* PXImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1A538607ECD9200017A44E /* PXImage.m */; };
+		C9ACC0CB15C70AB300D157CB /* PXCanvas_Drawing.m in Sources */ = {isa = PBXBuildFile; fileRef = EA56186F089DB48400C12231 /* PXCanvas_Drawing.m */; };
+		C9ACC0CC15C70AB300D157CB /* PXCanvas_ImportingExporting.m in Sources */ = {isa = PBXBuildFile; fileRef = EA56188A089DB5FE00C12231 /* PXCanvas_ImportingExporting.m */; };
+		C9ACC0CD15C70AB300D157CB /* PXCanvas_CopyPaste.m in Sources */ = {isa = PBXBuildFile; fileRef = EA56189A089DB67B00C12231 /* PXCanvas_CopyPaste.m */; };
+		C9ACC0CE15C70AB300D157CB /* PXCanvas_Backgrounds.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5618A4089DB6FA00C12231 /* PXCanvas_Backgrounds.m */; };
+		C9ACC0CF15C70AB300D157CB /* PXCanvas_Selection.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5618B4089DB7C900C12231 /* PXCanvas_Selection.m */; };
+		C9ACC0D015C70AB300D157CB /* PXCanvas_Modifying.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5618CC089DB8CD00C12231 /* PXCanvas_Modifying.m */; };
+		C9ACC0D115C70AB300D157CB /* PXCanvas_Layers.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5618D9089DB93100C12231 /* PXCanvas_Layers.m */; };
+		C9ACC0D215C70AB300D157CB /* PXCanvas_Archiving.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5618ED089DB96D00C12231 /* PXCanvas_Archiving.m */; };
+		C9ACC0D315C70AB300D157CB /* PXCanvasController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D223208A90FEE006D4AE9 /* PXCanvasController.m */; };
+		C9ACC0D415C70AB300D157CB /* PXAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4A6C0408A97E26007BAC7F /* PXAnimation.m */; };
+		C9ACC0D515C70AB300D157CB /* PXCel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4A6C4E08A98259007BAC7F /* PXCel.m */; };
+		C9ACC0D615C70AB300D157CB /* PXAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6117816008ABA7F30098DCC4 /* PXAnimationView.m */; };
+		C9ACC0D715C70AB300D157CB /* PXDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F8650CE7BD8B00EC481B /* PXDocumentController.m */; };
+		C9ACC0D815C70AB300D157CB /* PXPanelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F8670CE7BD8B00EC481B /* PXPanelManager.m */; };
+		C9ACC0D915C70AB300D157CB /* PXHotkeyFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F86A0CE7BD8B00EC481B /* PXHotkeyFormatter.m */; };
+		C9ACC0DA15C70AB300D157CB /* PXPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F86C0CE7BD8B00EC481B /* PXPreferencesController.m */; };
+		C9ACC0DB15C70AB300D157CB /* PXWelcomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F86F0CE7BD8B00EC481B /* PXWelcomeController.m */; };
+		C9ACC0DC15C70AB300D157CB /* PXBackgroundController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F87F0CE7BDE800EC481B /* PXBackgroundController.m */; };
+		C9ACC0DD15C70AB300D157CB /* PXBackgroundInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F8810CE7BDE800EC481B /* PXBackgroundInfoView.m */; };
+		C9ACC0DE15C70AB300D157CB /* PXBackgroundPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F8830CE7BDE800EC481B /* PXBackgroundPreviewView.m */; };
+		C9ACC0DF15C70AB300D157CB /* PXBackgroundsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F8850CE7BDE800EC481B /* PXBackgroundsPanel.m */; };
+		C9ACC0E015C70AB300D157CB /* PXBackgroundTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F8870CE7BDE800EC481B /* PXBackgroundTableHeader.m */; };
+		C9ACC0E115C70AB300D157CB /* PXBackgroundTemplateView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F8890CE7BDE800EC481B /* PXBackgroundTemplateView.m */; };
+		C9ACC0E215C70AB300D157CB /* PXBuiltinBackgroundTemplateView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F88B0CE7BDE800EC481B /* PXBuiltinBackgroundTemplateView.m */; };
+		C9ACC0E315C70AB300D157CB /* PXDefaultBackgroundTemplateView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F88D0CE7BDE800EC481B /* PXDefaultBackgroundTemplateView.m */; };
+		C9ACC0E415C70AB300D157CB /* PXCrosshair.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F8900CE7BDE800EC481B /* PXCrosshair.m */; };
+		C9ACC0E515C70AB300D157CB /* PXAnimationBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9160CE7BE6C00EC481B /* PXAnimationBackgroundView.m */; };
+		C9ACC0E615C70AB300D157CB /* PXAnimationDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9180CE7BE6C00EC481B /* PXAnimationDocument.m */; };
+		C9ACC0E715C70AB300D157CB /* PXAnimationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F91C0CE7BE6C00EC481B /* PXAnimationWindowController.m */; };
+		C9ACC0E815C70AB300D157CB /* PXFilmStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F91E0CE7BE6C00EC481B /* PXFilmStripView.m */; };
+		C9ACC0E915C70AB300D157CB /* PXNewCelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9200CE7BE6C00EC481B /* PXNewCelButton.m */; };
+		C9ACC0EA15C70AB300D157CB /* PXCanvasDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9230CE7BE6C00EC481B /* PXCanvasDocument.m */; };
+		C9ACC0EB15C70AB300D157CB /* PXCanvasWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9250CE7BE6C00EC481B /* PXCanvasWindowController.m */; };
+		C9ACC0EC15C70AB300D157CB /* PXCanvasWindowController_IBActions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9270CE7BE6C00EC481B /* PXCanvasWindowController_IBActions.m */; };
+		C9ACC0ED15C70AB300D157CB /* PXCanvasWindowController_Toolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9290CE7BE6C00EC481B /* PXCanvasWindowController_Toolbar.m */; };
+		C9ACC0EE15C70AB300D157CB /* PXCanvasWindowController_Zooming.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F92B0CE7BE6C00EC481B /* PXCanvasWindowController_Zooming.m */; };
+		C9ACC0EF15C70AB300D157CB /* PXGridSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9440CE7BE8200EC481B /* PXGridSettingsController.m */; };
+		C9ACC0F015C70AB300D157CB /* PXImageSizePrompter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F95E0CE7BF0900EC481B /* PXImageSizePrompter.m */; };
+		C9ACC0F115C70AB300D157CB /* PXCanvasResizePrompter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9610CE7BF0900EC481B /* PXCanvasResizePrompter.m */; };
+		C9ACC0F215C70AB300D157CB /* PXLayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F96C0CE7CD9300EC481B /* PXLayerController.m */; };
+		C9ACC0F315C70AB300D157CB /* PXLayerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */; };
+		C9ACC0F415C70AB300D157CB /* PXInfoPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9750CE7CD9300EC481B /* PXInfoPanelController.m */; };
+		C9ACC0F515C70AB300D157CB /* PXPaletteSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F98A0CE7CE4800EC481B /* PXPaletteSelector.m */; };
+		C9ACC0F615C70AB300D157CB /* PXPaletteView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F98C0CE7CE4800EC481B /* PXPaletteView.m */; };
+		C9ACC0F715C70AB300D157CB /* PXColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9970CE7CE4800EC481B /* PXColorPicker.m */; };
+		C9ACC0F815C70AB300D157CB /* PXPaletteColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9990CE7CE4800EC481B /* PXPaletteColorView.m */; };
+		C9ACC0F915C70AB300D157CB /* PXPalettePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9A20CE7CE4800EC481B /* PXPalettePanel.m */; };
+		C9ACC0FA15C70AB300D157CB /* PXPreviewBezelView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9FF0CE7D02C00EC481B /* PXPreviewBezelView.m */; };
+		C9ACC0FB15C70AB300D157CB /* PXPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA010CE7D02C00EC481B /* PXPreviewController.m */; };
+		C9ACC0FC15C70AB300D157CB /* PXPreviewResizePrompter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA030CE7D02C00EC481B /* PXPreviewResizePrompter.m */; };
+		C9ACC0FD15C70AB300D157CB /* PXPreviewResizeSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA050CE7D02C00EC481B /* PXPreviewResizeSizeView.m */; };
+		C9ACC0FE15C70AB300D157CB /* PXNearestNeighborScaleAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA0A0CE7D02C00EC481B /* PXNearestNeighborScaleAlgorithm.m */; };
+		C9ACC0FF15C70AB300D157CB /* PXQuartzScaleAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA0C0CE7D02C00EC481B /* PXQuartzScaleAlgorithm.m */; };
+		C9ACC10015C70AB300D157CB /* PXScale2xScaleAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA0E0CE7D02C00EC481B /* PXScale2xScaleAlgorithm.m */; };
+		C9ACC10115C70AB300D157CB /* PXScaleAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA100CE7D02C00EC481B /* PXScaleAlgorithm.m */; };
+		C9ACC10215C70AB300D157CB /* PXScaleController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA120CE7D02C00EC481B /* PXScaleController.m */; };
+		C9ACC10315C70AB300D157CB /* PXPattern.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA3A0CE7D1A700EC481B /* PXPattern.m */; };
+		C9ACC10415C70AB300D157CB /* PXPatternEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA3E0CE7D1A700EC481B /* PXPatternEditorController.m */; };
+		C9ACC10515C70AB300D157CB /* PXPatternEditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA400CE7D1A700EC481B /* PXPatternEditorView.m */; };
+		C9ACC10615C70AB300D157CB /* PXToolPropertiesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA440CE7D1A700EC481B /* PXToolPropertiesManager.m */; };
+		C9ACC10715C70AB300D157CB /* PXToolPropertiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA460CE7D1A700EC481B /* PXToolPropertiesController.m */; };
+		C9ACC10815C70AB300D157CB /* PXToolPaletteController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA4B0CE7D1A700EC481B /* PXToolPaletteController.m */; };
+		C9ACC10915C70AB300D157CB /* PXToolSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA4D0CE7D1A700EC481B /* PXToolSwitcher.m */; };
+		C9ACC10A15C70AB300D157CB /* PXEllipseTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA500CE7D1A700EC481B /* PXEllipseTool.m */; };
+		C9ACC10B15C70AB300D157CB /* PXEraserTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA540CE7D1A700EC481B /* PXEraserTool.m */; };
+		C9ACC10C15C70AB300D157CB /* PXEyedropperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA560CE7D1A700EC481B /* PXEyedropperTool.m */; };
+		C9ACC10D15C70AB300D157CB /* PXEyedropperToolPropertiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA580CE7D1A700EC481B /* PXEyedropperToolPropertiesController.m */; };
+		C9ACC10E15C70AB300D157CB /* PXFillTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA5A0CE7D1A700EC481B /* PXFillTool.m */; };
+		C9ACC10F15C70AB300D157CB /* PXFillToolPropertiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA5C0CE7D1A700EC481B /* PXFillToolPropertiesController.m */; };
+		C9ACC11015C70AB300D157CB /* PXLassoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA5E0CE7D1A700EC481B /* PXLassoTool.m */; };
+		C9ACC11115C70AB300D157CB /* PXLinearTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA600CE7D1A700EC481B /* PXLinearTool.m */; };
+		C9ACC11215C70AB300D157CB /* PXLineTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA620CE7D1A700EC481B /* PXLineTool.m */; };
+		C9ACC11315C70AB300D157CB /* PXMagicWandTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA640CE7D1A700EC481B /* PXMagicWandTool.m */; };
+		C9ACC11415C70AB300D157CB /* PXMoveTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA660CE7D1A700EC481B /* PXMoveTool.m */; };
+		C9ACC11515C70AB300D157CB /* PXPencilTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA680CE7D1A700EC481B /* PXPencilTool.m */; };
+		C9ACC11615C70AB300D157CB /* PXPencilToolPropertiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA6A0CE7D1A700EC481B /* PXPencilToolPropertiesController.m */; };
+		C9ACC11715C70AB300D157CB /* PXRectangleTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA6C0CE7D1A700EC481B /* PXRectangleTool.m */; };
+		C9ACC11815C70AB300D157CB /* PXShapeToolPropertiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA6E0CE7D1A700EC481B /* PXShapeToolPropertiesController.m */; };
+		C9ACC11915C70AB300D157CB /* PXRectangularSelectionTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA700CE7D1A700EC481B /* PXRectangularSelectionTool.m */; };
+		C9ACC11A15C70AB300D157CB /* PXTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA720CE7D1A700EC481B /* PXTool.m */; };
+		C9ACC11B15C70AB300D157CB /* PXZoomTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FA740CE7D1A700EC481B /* PXZoomTool.m */; };
+		C9ACC11C15C70AB300D157CB /* PXBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB420CE7D42000EC481B /* PXBackground.m */; };
+		C9ACC11D15C70AB300D157CB /* PXCheckeredBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB450CE7D42000EC481B /* PXCheckeredBackground.m */; };
+		C9ACC11E15C70AB300D157CB /* PXDuotoneBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB470CE7D42000EC481B /* PXDuotoneBackground.m */; };
+		C9ACC11F15C70AB300D157CB /* PXImageBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB490CE7D42000EC481B /* PXImageBackground.m */; };
+		C9ACC12015C70AB300D157CB /* PXMonotoneBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB4B0CE7D42000EC481B /* PXMonotoneBackground.m */; };
+		C9ACC12115C70AB300D157CB /* PXSlashyBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB4D0CE7D42000EC481B /* PXSlashyBackground.m */; };
+		C9ACC12215C70AB300D157CB /* PXPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB5D0CE7D44B00EC481B /* PXPalette.m */; };
+		C9ACC12315C70AB300D157CB /* PXLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB600CE7D44B00EC481B /* PXLayer.m */; };
+		C9ACC12415C70AB300D157CB /* OSQTExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB6C0CE7D59700EC481B /* OSQTExporter.m */; };
+		C9ACC12515C70AB300D157CB /* PXAnimatedGifExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB6E0CE7D59700EC481B /* PXAnimatedGifExporter.m */; };
+		C9ACC12615C70AB300D157CB /* PXSequenceExportPrompter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB700CE7D59700EC481B /* PXSequenceExportPrompter.m */; };
+		C9ACC12715C70AB300D157CB /* PXSpriteSheetExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB720CE7D59700EC481B /* PXSpriteSheetExporter.m */; };
+		C9ACC12815C70AB300D157CB /* PXGifImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB800CE7D59700EC481B /* PXGifImporter.m */; };
+		C9ACC12915C70AB300D157CB /* OSACTWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB8E0CE7D59700EC481B /* OSACTWriter.m */; };
+		C9ACC12A15C70AB300D157CB /* OSJASCPALWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB900CE7D59700EC481B /* OSJASCPALWriter.m */; };
+		C9ACC12B15C70AB300D157CB /* OSPALWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB920CE7D59700EC481B /* OSPALWriter.m */; };
+		C9ACC12C15C70AB300D157CB /* PXPaletteExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB940CE7D59700EC481B /* PXPaletteExporter.m */; };
+		C9ACC12D15C70AB300D157CB /* OSACTReader.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB970CE7D59700EC481B /* OSACTReader.m */; };
+		C9ACC12E15C70AB300D157CB /* OSJASCPALReader.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB990CE7D59700EC481B /* OSJASCPALReader.m */; };
+		C9ACC12F15C70AB300D157CB /* OSPALReader.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB9B0CE7D59700EC481B /* OSPALReader.m */; };
+		C9ACC13015C70AB300D157CB /* PXPaletteImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FB9D0CE7D59700EC481B /* PXPaletteImporter.m */; };
+		C9ACC13115C70AB300D157CB /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FBEE0CE7D7C200EC481B /* Constants.m */; };
+		C9ACC13215C70AB300D157CB /* PXDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FBF00CE7D7C200EC481B /* PXDefaults.m */; };
+		C9ACC13315C70AB300D157CB /* PXNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FBF20CE7D7C200EC481B /* PXNotifications.m */; };
+		C9ACC13415C70AB300D157CB /* dev2gif.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC130CE7D7C200EC481B /* dev2gif.c */; };
+		C9ACC13515C70AB300D157CB /* dgif_lib.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC140CE7D7C200EC481B /* dgif_lib.c */; };
+		C9ACC13615C70AB300D157CB /* egif_lib.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC150CE7D7C200EC481B /* egif_lib.c */; };
+		C9ACC13715C70AB300D157CB /* getarg.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC160CE7D7C200EC481B /* getarg.c */; };
+		C9ACC13815C70AB300D157CB /* gif_err.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC180CE7D7C200EC481B /* gif_err.c */; };
+		C9ACC13915C70AB300D157CB /* gif_font.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC190CE7D7C200EC481B /* gif_font.c */; };
+		C9ACC13A15C70AB300D157CB /* gifalloc.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC1C0CE7D7C200EC481B /* gifalloc.c */; };
+		C9ACC13B15C70AB300D157CB /* qprintf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC1D0CE7D7C200EC481B /* qprintf.c */; };
+		C9ACC13C15C70AB300D157CB /* quantize.c in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC1E0CE7D7C200EC481B /* quantize.c */; };
+		C9ACC13D15C70AB300D157CB /* SBCenteringClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC3E0CE7D7C200EC481B /* SBCenteringClipView.m */; };
+		C9ACC13E15C70AB300D157CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC530CE7D7C200EC481B /* main.m */; };
+		C9ACC13F15C70AB300D157CB /* OSProgressPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC630CE7D7C200EC481B /* OSProgressPopup.m */; };
+		C9ACC14015C70AB300D157CB /* OSStackedView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC660CE7D7C200EC481B /* OSStackedView.m */; };
+		C9ACC14115C70AB300D157CB /* PXActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC690CE7D7C200EC481B /* PXActionButton.m */; };
+		C9ACC14215C70AB300D157CB /* PXNamePrompter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC6C0CE7D7C200EC481B /* PXNamePrompter.m */; };
+		C9ACC14315C70AB300D157CB /* PXNSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC6F0CE7D7C200EC481B /* PXNSImageView.m */; };
+		C9ACC14415C70AB300D157CB /* InterpolatePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC720CE7D7C200EC481B /* InterpolatePoint.m */; };
+		C9ACC14515C70AB300D157CB /* NSArray_DeepMutableCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC740CE7D7C200EC481B /* NSArray_DeepMutableCopy.m */; };
+		C9ACC14615C70AB300D157CB /* NSBezierPath+PXRoundedRectangleAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC760CE7D7C200EC481B /* NSBezierPath+PXRoundedRectangleAdditions.m */; };
+		C9ACC14715C70AB300D157CB /* NSColor+PXPaletteAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC780CE7D7C200EC481B /* NSColor+PXPaletteAdditions.m */; };
+		C9ACC14815C70AB300D157CB /* NSMutableArray+ReorderingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC7A0CE7D7C200EC481B /* NSMutableArray+ReorderingAdditions.m */; };
+		C9ACC14915C70AB300D157CB /* NSString_DegreeString.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC7C0CE7D7C200EC481B /* NSString_DegreeString.m */; };
+		C9ACC14A15C70AB300D157CB /* PathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31FC7E0CE7D7C200EC481B /* PathUtilities.m */; };
+		C9ACC14B15C70AB300D157CB /* PXBackgroundConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EA041A180CE8F72F0095DAA9 /* PXBackgroundConfig.m */; };
+		C9ACC14C15C70AB300D157CB /* PXCanvasPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = EABD60B80CE986E3008A1B1E /* PXCanvasPreviewView.m */; };
+		C9ACC14D15C70AB300D157CB /* PXDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAB76750CEF54F300F2EF66 /* PXDocument.m */; };
+		C9ACC14E15C70AB300D157CB /* PXPaletteController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB6506E0D108D0F00274070 /* PXPaletteController.m */; };
+		C9ACC14F15C70AB300D157CB /* PXLayerPaneBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */; };
+		C9ACC15015C70AB300D157CB /* OSRectAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A22A850D2303EE00430CCD /* OSRectAdditions.m */; };
+		C9ACC15115C70AB300D157CB /* OSPlasticButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A22B910D2323B500430CCD /* OSPlasticButtonCell.m */; };
+		C9ACC15215C70AB300D157CB /* NSString+Comparison.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2EA41A10DB37E50065090C /* NSString+Comparison.m */; };
+		C9ACC15315C70AB300D157CB /* PXGeneralPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93DB18413ABC963006D42FE /* PXGeneralPreferencesController.m */; };
+		C9ACC15415C70AB300D157CB /* PXHotkeysPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96BABB913ABD44A00015C92 /* PXHotkeysPreferencesController.m */; };
+		C9ACC15515C70AB300D157CB /* PXSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = C94A9EDC13B11BEA0034AFE3 /* PXSplitView.m */; };
+		C9ACC15615C70AB300D157CB /* PXPaletteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DE2B2B13BF5899007EC48A /* PXPaletteViewController.m */; };
+		C9ACC15715C70AB300D157CB /* PXPresetsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DC4D9D13D0E91B0065C1A6 /* PXPresetsManager.m */; };
+		C9ACC15815C70AB300D157CB /* PXPreset.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DDEE3A13D0EB4D000464F2 /* PXPreset.m */; };
+		C9ACC15915C70AB300D157CB /* PXManagePresetsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FA5913D7328D00BB7CF7 /* PXManagePresetsController.m */; };
+		C9ACC15A15C70AB300D157CB /* NSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = D88FA9A013DD265000175A2F /* NSObject+AssociatedObjects.m */; };
+		C9ACC15B15C70AB300D157CB /* PXSequenceExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C953831713FC477100440AB5 /* PXSequenceExportViewController.m */; };
+		C9ACC15C15C70AB300D157CB /* PXDeleteCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C96541EA13FF44A600F1F83C /* PXDeleteCollectionView.m */; };
+		C9ACC15D15C70AB300D157CB /* PXClickableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9ADD4A114007FE500257E38 /* PXClickableView.m */; };
+		C9ACC15E15C70AB300D157CB /* PXPatternItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C9ADD4A51400821300257E38 /* PXPatternItem.m */; };
+		C9ACC15F15C70AB300D157CB /* UTType+NSString.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F7F16B142BE3D500AB8E37 /* UTType+NSString.m */; };
+		C9ACC16015C70AB300D157CB /* NSWindowController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C9104A5A14E38AAC00025103 /* NSWindowController+Additions.m */; };
+		C9ACC16115C70AB300D157CB /* PXColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D58D8A14F0316B00A62C10 /* PXColor.m */; };
+		C9ACC16215C70AB300D157CB /* PXColorArray.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D58D8E14F031EB00A62C10 /* PXColorArray.m */; };
+		C9ACC16315C70AB300D157CB /* PXAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9ECD4D8150BEF39001F686C /* PXAboutWindowController.m */; };
+		C9ACC16415C70AB300D157CB /* PXCanvasAnchorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C7D45F151E21F2009BBCA8 /* PXCanvasAnchorView.m */; };
+		C9ACC16515C70AB300D157CB /* PXPreviewControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F1077B152CCB7000FF2FD5 /* PXPreviewControlView.m */; };
+		C9ACC16615C70AB300D157CB /* GPLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C989DF9915386C3400B055D5 /* GPLWriter.m */; };
+		C9ACC16715C70AB300D157CB /* GPLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C989DF9D15386C3D00B055D5 /* GPLReader.m */; };
+		C9ACC16815C70AB300D157CB /* PXInsertionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B3A69C1547200F00872BF2 /* PXInsertionView.m */; };
+		C9ACC16915C70AB300D157CB /* PXPercentFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = C91C4F9315602F8000EA4AF5 /* PXPercentFormatter.m */; };
+		C9ACC16A15C70AB300D157CB /* NSImage+Reps.m in Sources */ = {isa = PBXBuildFile; fileRef = C92C866F15A5EF5500D915D9 /* NSImage+Reps.m */; };
+		C9ACC16B15C70AB300D157CB /* PXLayerTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C99E209415B88CEF00B8DDFF /* PXLayerTableView.m */; };
+		C9ACC16C15C70AB300D157CB /* PXLayerRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = C99E209815B8913C00B8DDFF /* PXLayerRowView.m */; };
+		C9ACC16D15C70AB300D157CB /* PXLayerCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = C99E209C15B89E1600B8DDFF /* PXLayerCellView.m */; };
+		C9ACC16F15C70AB300D157CB /* PXCanvas.h in Headers */ = {isa = PBXBuildFile; fileRef = EA495593054C6943009A8EE7 /* PXCanvas.h */; };
+		C9ACC17015C70AB300D157CB /* PXGrid.h in Headers */ = {isa = PBXBuildFile; fileRef = 61E6F12F0608E9FB001B46E8 /* PXGrid.h */; };
+		C9ACC17115C70AB300D157CB /* PXCanvas_ApplescriptAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A6F50C060E8151008FA11F /* PXCanvas_ApplescriptAdditions.h */; };
+		C9ACC17215C70AB300D157CB /* PXCanvasPrintView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA35564306A4AD7B004DE6AE /* PXCanvasPrintView.h */; };
+		C9ACC17315C70AB300D157CB /* PXImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF1A538507ECD9200017A44E /* PXImage.h */; };
+		C9ACC17415C70AB300D157CB /* PXCanvas_Drawing.h in Headers */ = {isa = PBXBuildFile; fileRef = EA56186E089DB48400C12231 /* PXCanvas_Drawing.h */; };
+		C9ACC17515C70AB300D157CB /* PXCanvas_ImportingExporting.h in Headers */ = {isa = PBXBuildFile; fileRef = EA561889089DB5FE00C12231 /* PXCanvas_ImportingExporting.h */; };
+		C9ACC17615C70AB300D157CB /* PXCanvas_CopyPaste.h in Headers */ = {isa = PBXBuildFile; fileRef = EA561899089DB67B00C12231 /* PXCanvas_CopyPaste.h */; };
+		C9ACC17715C70AB300D157CB /* PXCanvas_Backgrounds.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5618A3089DB6FA00C12231 /* PXCanvas_Backgrounds.h */; };
+		C9ACC17815C70AB300D157CB /* PXCanvas_Selection.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5618B3089DB7C900C12231 /* PXCanvas_Selection.h */; };
+		C9ACC17915C70AB300D157CB /* PXCanvas_Modifying.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5618CB089DB8CD00C12231 /* PXCanvas_Modifying.h */; };
+		C9ACC17A15C70AB300D157CB /* PXCanvas_Layers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5618D8089DB93100C12231 /* PXCanvas_Layers.h */; };
+		C9ACC17B15C70AB300D157CB /* PXCanvas_Archiving.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5618EC089DB96D00C12231 /* PXCanvas_Archiving.h */; };
+		C9ACC17C15C70AB300D157CB /* PXCanvasController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5D223108A90FEE006D4AE9 /* PXCanvasController.h */; };
+		C9ACC17D15C70AB300D157CB /* PXAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4A6C0308A97E26007BAC7F /* PXAnimation.h */; };
+		C9ACC17E15C70AB300D157CB /* PXCel.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4A6C4D08A98259007BAC7F /* PXCel.h */; };
+		C9ACC17F15C70AB300D157CB /* PXAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6117815F08ABA7F30098DCC4 /* PXAnimationView.h */; };
+		C9ACC18015C70AB300D157CB /* PXDocumentController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8640CE7BD8B00EC481B /* PXDocumentController.h */; };
+		C9ACC18115C70AB300D157CB /* PXPanelManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8660CE7BD8B00EC481B /* PXPanelManager.h */; };
+		C9ACC18215C70AB300D157CB /* PXHotkeyFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8690CE7BD8B00EC481B /* PXHotkeyFormatter.h */; };
+		C9ACC18315C70AB300D157CB /* PXPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F86B0CE7BD8B00EC481B /* PXPreferencesController.h */; };
+		C9ACC18415C70AB300D157CB /* PXWelcomeController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F86E0CE7BD8B00EC481B /* PXWelcomeController.h */; };
+		C9ACC18515C70AB300D157CB /* PXBackgroundController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F87E0CE7BDE800EC481B /* PXBackgroundController.h */; };
+		C9ACC18615C70AB300D157CB /* PXBackgroundInfoView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8800CE7BDE800EC481B /* PXBackgroundInfoView.h */; };
+		C9ACC18715C70AB300D157CB /* PXBackgroundPreviewView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8820CE7BDE800EC481B /* PXBackgroundPreviewView.h */; };
+		C9ACC18815C70AB300D157CB /* PXBackgroundsPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8840CE7BDE800EC481B /* PXBackgroundsPanel.h */; };
+		C9ACC18915C70AB300D157CB /* PXBackgroundTableHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8860CE7BDE800EC481B /* PXBackgroundTableHeader.h */; };
+		C9ACC18A15C70AB300D157CB /* PXBackgroundTemplateView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8880CE7BDE800EC481B /* PXBackgroundTemplateView.h */; };
+		C9ACC18B15C70AB300D157CB /* PXBuiltinBackgroundTemplateView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F88A0CE7BDE800EC481B /* PXBuiltinBackgroundTemplateView.h */; };
+		C9ACC18C15C70AB300D157CB /* PXDefaultBackgroundTemplateView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F88C0CE7BDE800EC481B /* PXDefaultBackgroundTemplateView.h */; };
+		C9ACC18D15C70AB300D157CB /* PXCrosshair.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F88F0CE7BDE800EC481B /* PXCrosshair.h */; };
+		C9ACC18E15C70AB300D157CB /* PXAnimationBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9150CE7BE6C00EC481B /* PXAnimationBackgroundView.h */; };
+		C9ACC18F15C70AB300D157CB /* PXAnimationDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9170CE7BE6C00EC481B /* PXAnimationDocument.h */; };
+		C9ACC19015C70AB300D157CB /* PXAnimationWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F91B0CE7BE6C00EC481B /* PXAnimationWindowController.h */; };
+		C9ACC19115C70AB300D157CB /* PXFilmStripView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F91D0CE7BE6C00EC481B /* PXFilmStripView.h */; };
+		C9ACC19215C70AB300D157CB /* PXNewCelButton.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F91F0CE7BE6C00EC481B /* PXNewCelButton.h */; };
+		C9ACC19315C70AB300D157CB /* PXCanvasDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9220CE7BE6C00EC481B /* PXCanvasDocument.h */; };
+		C9ACC19415C70AB300D157CB /* PXCanvasWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9240CE7BE6C00EC481B /* PXCanvasWindowController.h */; };
+		C9ACC19515C70AB300D157CB /* PXCanvasWindowController_IBActions.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9260CE7BE6C00EC481B /* PXCanvasWindowController_IBActions.h */; };
+		C9ACC19615C70AB300D157CB /* PXCanvasWindowController_Toolbar.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9280CE7BE6C00EC481B /* PXCanvasWindowController_Toolbar.h */; };
+		C9ACC19715C70AB300D157CB /* PXCanvasWindowController_Zooming.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F92A0CE7BE6C00EC481B /* PXCanvasWindowController_Zooming.h */; };
+		C9ACC19815C70AB300D157CB /* PXGridSettingsController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9430CE7BE8200EC481B /* PXGridSettingsController.h */; };
+		C9ACC19915C70AB300D157CB /* PXImageSizePrompter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F95D0CE7BF0900EC481B /* PXImageSizePrompter.h */; };
+		C9ACC19A15C70AB300D157CB /* PXCanvasResizePrompter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9600CE7BF0900EC481B /* PXCanvasResizePrompter.h */; };
+		C9ACC19B15C70AB300D157CB /* PXLayerController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F96B0CE7CD9300EC481B /* PXLayerController.h */; };
+		C9ACC19C15C70AB300D157CB /* PXLayerTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */; };
+		C9ACC19D15C70AB300D157CB /* PXInfoPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */; };
+		C9ACC19E15C70AB300D157CB /* PXPaletteSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9890CE7CE4800EC481B /* PXPaletteSelector.h */; };
+		C9ACC19F15C70AB300D157CB /* PXPaletteView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F98B0CE7CE4800EC481B /* PXPaletteView.h */; };
+		C9ACC1A015C70AB300D157CB /* PXColorPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9960CE7CE4800EC481B /* PXColorPicker.h */; };
+		C9ACC1A115C70AB300D157CB /* PXPaletteColorView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9980CE7CE4800EC481B /* PXPaletteColorView.h */; };
+		C9ACC1A215C70AB300D157CB /* PXPalettePanel.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9A10CE7CE4800EC481B /* PXPalettePanel.h */; };
+		C9ACC1A315C70AB300D157CB /* PXPreviewBezelView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9FE0CE7D02C00EC481B /* PXPreviewBezelView.h */; };
+		C9ACC1A415C70AB300D157CB /* PXPreviewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA000CE7D02C00EC481B /* PXPreviewController.h */; };
+		C9ACC1A515C70AB300D157CB /* PXPreviewResizePrompter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA020CE7D02C00EC481B /* PXPreviewResizePrompter.h */; };
+		C9ACC1A615C70AB300D157CB /* PXPreviewResizeSizeView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA040CE7D02C00EC481B /* PXPreviewResizeSizeView.h */; };
+		C9ACC1A715C70AB300D157CB /* PXNearestNeighborScaleAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA090CE7D02C00EC481B /* PXNearestNeighborScaleAlgorithm.h */; };
+		C9ACC1A815C70AB300D157CB /* PXQuartzScaleAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA0B0CE7D02C00EC481B /* PXQuartzScaleAlgorithm.h */; };
+		C9ACC1A915C70AB300D157CB /* PXScale2xScaleAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA0D0CE7D02C00EC481B /* PXScale2xScaleAlgorithm.h */; };
+		C9ACC1AA15C70AB300D157CB /* PXScaleAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA0F0CE7D02C00EC481B /* PXScaleAlgorithm.h */; };
+		C9ACC1AB15C70AB300D157CB /* PXScaleController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA110CE7D02C00EC481B /* PXScaleController.h */; };
+		C9ACC1AC15C70AB300D157CB /* PXPattern.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA390CE7D1A700EC481B /* PXPattern.h */; };
+		C9ACC1AD15C70AB300D157CB /* PXPatternEditorController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA3D0CE7D1A700EC481B /* PXPatternEditorController.h */; };
+		C9ACC1AE15C70AB300D157CB /* PXPatternEditorView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA3F0CE7D1A700EC481B /* PXPatternEditorView.h */; };
+		C9ACC1AF15C70AB300D157CB /* PXToolPropertiesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA430CE7D1A700EC481B /* PXToolPropertiesManager.h */; };
+		C9ACC1B015C70AB300D157CB /* PXToolPropertiesController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA450CE7D1A700EC481B /* PXToolPropertiesController.h */; };
+		C9ACC1B115C70AB300D157CB /* PXToolPaletteController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA4A0CE7D1A700EC481B /* PXToolPaletteController.h */; };
+		C9ACC1B215C70AB300D157CB /* PXToolSwitcher.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA4C0CE7D1A700EC481B /* PXToolSwitcher.h */; };
+		C9ACC1B315C70AB300D157CB /* PXEllipseTool.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA4F0CE7D1A700EC481B /* PXEllipseTool.h */; };
+		C9ACC1B415C70AB300D157CB /* PXEraserTool.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA530CE7D1A700EC481B /* PXEraserTool.h */; };
+		C9ACC1B515C70AB300D157CB /* PXEyedropperTool.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA550CE7D1A700EC481B /* PXEyedropperTool.h */; };
+		C9ACC1B615C70AB300D157CB /* PXEyedropperToolPropertiesController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA570CE7D1A700EC481B /* PXEyedropperToolPropertiesController.h */; };
+		C9ACC1B715C70AB300D157CB /* PXFillTool.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA590CE7D1A700EC481B /* PXFillTool.h */; };
+		C9ACC1B815C70AB300D157CB /* PXFillToolPropertiesController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA5B0CE7D1A700EC481B /* PXFillToolPropertiesController.h */; };
+		C9ACC1B915C70AB300D157CB /* PXLassoTool.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA5D0CE7D1A700EC481B /* PXLassoTool.h */; };
+		C9ACC1BA15C70AB300D157CB /* PXLinearTool.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA5F0CE7D1A700EC481B /* PXLinearTool.h */; };
+		C9ACC1BB15C70AB300D157CB /* PXLineTool.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA610CE7D1A700EC481B /* PXLineTool.h */; };
+		C9ACC1BC15C70AB300D157CB /* PXMagicWandTool.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA630CE7D1A700EC481B /* PXMagicWandTool.h */; };
+		C9ACC1BD15C70AB300D157CB /* PXMoveTool.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA650CE7D1A700EC481B /* PXMoveTool.h */; };
+		C9ACC1BE15C70AB300D157CB /* PXPencilTool.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA670CE7D1A700EC481B /* PXPencilTool.h */; };
+		C9ACC1BF15C70AB300D157CB /* PXPencilToolPropertiesController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA690CE7D1A700EC481B /* PXPencilToolPropertiesController.h */; };
+		C9ACC1C015C70AB300D157CB /* PXRectangleTool.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA6B0CE7D1A700EC481B /* PXRectangleTool.h */; };
+		C9ACC1C115C70AB300D157CB /* PXShapeToolPropertiesController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA6D0CE7D1A700EC481B /* PXShapeToolPropertiesController.h */; };
+		C9ACC1C215C70AB300D157CB /* PXRectangularSelectionTool.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA6F0CE7D1A700EC481B /* PXRectangularSelectionTool.h */; };
+		C9ACC1C315C70AB300D157CB /* PXTool.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA710CE7D1A700EC481B /* PXTool.h */; };
+		C9ACC1C415C70AB300D157CB /* PXZoomTool.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FA730CE7D1A700EC481B /* PXZoomTool.h */; };
+		C9ACC1C515C70AB300D157CB /* PXBackground.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB410CE7D42000EC481B /* PXBackground.h */; };
+		C9ACC1C615C70AB300D157CB /* PXBackgrounds.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB430CE7D42000EC481B /* PXBackgrounds.h */; };
+		C9ACC1C715C70AB300D157CB /* PXCheckeredBackground.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB440CE7D42000EC481B /* PXCheckeredBackground.h */; };
+		C9ACC1C815C70AB300D157CB /* PXDuotoneBackground.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB460CE7D42000EC481B /* PXDuotoneBackground.h */; };
+		C9ACC1C915C70AB300D157CB /* PXImageBackground.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB480CE7D42000EC481B /* PXImageBackground.h */; };
+		C9ACC1CA15C70AB300D157CB /* PXMonotoneBackground.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB4A0CE7D42000EC481B /* PXMonotoneBackground.h */; };
+		C9ACC1CB15C70AB300D157CB /* PXSlashyBackground.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB4C0CE7D42000EC481B /* PXSlashyBackground.h */; };
+		C9ACC1CC15C70AB300D157CB /* PXPalette.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB5C0CE7D44B00EC481B /* PXPalette.h */; };
+		C9ACC1CD15C70AB300D157CB /* PXLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB5F0CE7D44B00EC481B /* PXLayer.h */; };
+		C9ACC1CE15C70AB300D157CB /* OSQTExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB6B0CE7D59700EC481B /* OSQTExporter.h */; };
+		C9ACC1CF15C70AB300D157CB /* PXAnimatedGifExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB6D0CE7D59700EC481B /* PXAnimatedGifExporter.h */; };
+		C9ACC1D015C70AB300D157CB /* PXSequenceExportPrompter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB6F0CE7D59700EC481B /* PXSequenceExportPrompter.h */; };
+		C9ACC1D115C70AB300D157CB /* PXSpriteSheetExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB710CE7D59700EC481B /* PXSpriteSheetExporter.h */; };
+		C9ACC1D215C70AB300D157CB /* PXGifImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB7F0CE7D59700EC481B /* PXGifImporter.h */; };
+		C9ACC1D315C70AB300D157CB /* OSACTWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB8D0CE7D59700EC481B /* OSACTWriter.h */; };
+		C9ACC1D415C70AB300D157CB /* OSJASCPALWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB8F0CE7D59700EC481B /* OSJASCPALWriter.h */; };
+		C9ACC1D515C70AB300D157CB /* OSPALWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB910CE7D59700EC481B /* OSPALWriter.h */; };
+		C9ACC1D615C70AB300D157CB /* PXPaletteExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB930CE7D59700EC481B /* PXPaletteExporter.h */; };
+		C9ACC1D715C70AB300D157CB /* OSACTReader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB960CE7D59700EC481B /* OSACTReader.h */; };
+		C9ACC1D815C70AB300D157CB /* OSJASCPALReader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB980CE7D59700EC481B /* OSJASCPALReader.h */; };
+		C9ACC1D915C70AB300D157CB /* OSPALReader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB9A0CE7D59700EC481B /* OSPALReader.h */; };
+		C9ACC1DA15C70AB300D157CB /* PXPaletteImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FB9C0CE7D59700EC481B /* PXPaletteImporter.h */; };
+		C9ACC1DB15C70AB300D157CB /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FBED0CE7D7C200EC481B /* Constants.h */; };
+		C9ACC1DC15C70AB300D157CB /* PXDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FBEF0CE7D7C200EC481B /* PXDefaults.h */; };
+		C9ACC1DD15C70AB300D157CB /* PXNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FBF10CE7D7C200EC481B /* PXNotifications.h */; };
+		C9ACC1DE15C70AB300D157CB /* getarg.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC170CE7D7C200EC481B /* getarg.h */; };
+		C9ACC1DF15C70AB300D157CB /* gif_lib.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC1A0CE7D7C200EC481B /* gif_lib.h */; };
+		C9ACC1E015C70AB300D157CB /* gif_lib_private.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC1B0CE7D7C200EC481B /* gif_lib_private.h */; };
+		C9ACC1E115C70AB300D157CB /* SBCenteringClipView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC3D0CE7D7C200EC481B /* SBCenteringClipView.h */; };
+		C9ACC1E215C70AB300D157CB /* OSProgressPopup.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC620CE7D7C200EC481B /* OSProgressPopup.h */; };
+		C9ACC1E315C70AB300D157CB /* OSStackedView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC650CE7D7C200EC481B /* OSStackedView.h */; };
+		C9ACC1E415C70AB300D157CB /* PXActionButton.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC680CE7D7C200EC481B /* PXActionButton.h */; };
+		C9ACC1E515C70AB300D157CB /* PXNamePrompter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC6B0CE7D7C200EC481B /* PXNamePrompter.h */; };
+		C9ACC1E615C70AB300D157CB /* PXNSImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC6E0CE7D7C200EC481B /* PXNSImageView.h */; };
+		C9ACC1E715C70AB300D157CB /* InterpolatePoint.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC710CE7D7C200EC481B /* InterpolatePoint.h */; };
+		C9ACC1E815C70AB300D157CB /* NSArray_DeepMutableCopy.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC730CE7D7C200EC481B /* NSArray_DeepMutableCopy.h */; };
+		C9ACC1E915C70AB300D157CB /* NSBezierPath+PXRoundedRectangleAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC750CE7D7C200EC481B /* NSBezierPath+PXRoundedRectangleAdditions.h */; };
+		C9ACC1EA15C70AB300D157CB /* NSColor+PXPaletteAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC770CE7D7C200EC481B /* NSColor+PXPaletteAdditions.h */; };
+		C9ACC1EB15C70AB300D157CB /* NSMutableArray+ReorderingAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC790CE7D7C200EC481B /* NSMutableArray+ReorderingAdditions.h */; };
+		C9ACC1EC15C70AB300D157CB /* NSString_DegreeString.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC7B0CE7D7C200EC481B /* NSString_DegreeString.h */; };
+		C9ACC1ED15C70AB300D157CB /* PathUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC7D0CE7D7C200EC481B /* PathUtilities.h */; };
+		C9ACC1EE15C70AB300D157CB /* Pixen_Prefix.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31FC7F0CE7D7C200EC481B /* Pixen_Prefix.h */; };
+		C9ACC1EF15C70AB300D157CB /* PXCanvasView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5482DC0513E2DB000101DE /* PXCanvasView.h */; };
+		C9ACC1F015C70AB300D157CB /* PXBackgroundConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = EA041A170CE8F72F0095DAA9 /* PXBackgroundConfig.h */; };
+		C9ACC1F115C70AB300D157CB /* PXCanvasPreviewView.h in Headers */ = {isa = PBXBuildFile; fileRef = EABD60B70CE986E3008A1B1E /* PXCanvasPreviewView.h */; };
+		C9ACC1F215C70AB300D157CB /* PXDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAB76740CEF54F300F2EF66 /* PXDocument.h */; };
+		C9ACC1F315C70AB300D157CB /* PXPaletteController.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB6506D0D108D0F00274070 /* PXPaletteController.h */; };
+		C9ACC1F415C70AB300D157CB /* PXLayerPaneBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */; };
+		C9ACC1F515C70AB300D157CB /* OSRectAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A22A840D2303EE00430CCD /* OSRectAdditions.h */; };
+		C9ACC1F615C70AB300D157CB /* OSPlasticButtonCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A22B900D2323B500430CCD /* OSPlasticButtonCell.h */; };
+		C9ACC1F715C70AB300D157CB /* NSString+Comparison.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2EA41910DB37E50065090C /* NSString+Comparison.h */; };
+		C9ACC1F815C70AB300D157CB /* PXGeneralPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C93DB18313ABC963006D42FE /* PXGeneralPreferencesController.h */; };
+		C9ACC1F915C70AB300D157CB /* PXHotkeysPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = C96BABB813ABD44A00015C92 /* PXHotkeysPreferencesController.h */; };
+		C9ACC1FA15C70AB300D157CB /* PXSplitView.h in Headers */ = {isa = PBXBuildFile; fileRef = C94A9EDB13B11BEA0034AFE3 /* PXSplitView.h */; };
+		C9ACC1FB15C70AB300D157CB /* PXPaletteViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C9DE2B2A13BF5899007EC48A /* PXPaletteViewController.h */; };
+		C9ACC1FC15C70AB300D157CB /* PXPresetsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C9DC4D9C13D0E91B0065C1A6 /* PXPresetsManager.h */; };
+		C9ACC1FD15C70AB300D157CB /* PXPreset.h in Headers */ = {isa = PBXBuildFile; fileRef = C9DDEE3913D0EB4D000464F2 /* PXPreset.h */; };
+		C9ACC1FE15C70AB300D157CB /* PXManagePresetsController.h in Headers */ = {isa = PBXBuildFile; fileRef = C9B1FA5813D7328D00BB7CF7 /* PXManagePresetsController.h */; };
+		C9ACC1FF15C70AB300D157CB /* NSObject+AssociatedObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FA99F13DD265000175A2F /* NSObject+AssociatedObjects.h */; };
+		C9ACC20015C70AB300D157CB /* PXSequenceExportViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C953831613FC477100440AB5 /* PXSequenceExportViewController.h */; };
+		C9ACC20115C70AB300D157CB /* PXDeleteCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = C96541E913FF44A600F1F83C /* PXDeleteCollectionView.h */; };
+		C9ACC20215C70AB300D157CB /* PXClickableView.h in Headers */ = {isa = PBXBuildFile; fileRef = C9ADD4A014007FE500257E38 /* PXClickableView.h */; };
+		C9ACC20315C70AB300D157CB /* PXPatternItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C9ADD4A41400821300257E38 /* PXPatternItem.h */; };
+		C9ACC20415C70AB300D157CB /* UTType+NSString.h in Headers */ = {isa = PBXBuildFile; fileRef = C9F7F16A142BE3D500AB8E37 /* UTType+NSString.h */; };
+		C9ACC20515C70AB300D157CB /* NSWindowController+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = C9104A5914E38AAC00025103 /* NSWindowController+Additions.h */; };
+		C9ACC20615C70AB300D157CB /* PXColor.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D58D8914F0316B00A62C10 /* PXColor.h */; };
+		C9ACC20715C70AB300D157CB /* PXColorArray.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D58D8D14F031EB00A62C10 /* PXColorArray.h */; };
+		C9ACC20815C70AB300D157CB /* PXAboutWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = C9ECD4D7150BEF39001F686C /* PXAboutWindowController.h */; };
+		C9ACC20915C70AB300D157CB /* PXCanvasAnchorView.h in Headers */ = {isa = PBXBuildFile; fileRef = C9C7D45E151E21F2009BBCA8 /* PXCanvasAnchorView.h */; };
+		C9ACC20A15C70AB300D157CB /* PXPreviewControlView.h in Headers */ = {isa = PBXBuildFile; fileRef = C9F1077A152CCB7000FF2FD5 /* PXPreviewControlView.h */; };
+		C9ACC20B15C70AB300D157CB /* GPLWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = C989DF9815386C3400B055D5 /* GPLWriter.h */; };
+		C9ACC20C15C70AB300D157CB /* GPLReader.h in Headers */ = {isa = PBXBuildFile; fileRef = C989DF9C15386C3D00B055D5 /* GPLReader.h */; };
+		C9ACC20D15C70AB300D157CB /* PXInsertionView.h in Headers */ = {isa = PBXBuildFile; fileRef = C9B3A69B1547200F00872BF2 /* PXInsertionView.h */; };
+		C9ACC20E15C70AB300D157CB /* PXPercentFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = C91C4F9215602F8000EA4AF5 /* PXPercentFormatter.h */; };
+		C9ACC20F15C70AB300D157CB /* NSImage+Reps.h in Headers */ = {isa = PBXBuildFile; fileRef = C92C866E15A5EF5500D915D9 /* NSImage+Reps.h */; };
+		C9ACC21015C70AB300D157CB /* PXLayerTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = C99E209315B88CEF00B8DDFF /* PXLayerTableView.h */; };
+		C9ACC21115C70AB300D157CB /* PXLayerRowView.h in Headers */ = {isa = PBXBuildFile; fileRef = C99E209715B8913C00B8DDFF /* PXLayerRowView.h */; };
+		C9ACC21215C70AB300D157CB /* PXLayerCellView.h in Headers */ = {isa = PBXBuildFile; fileRef = C99E209B15B89E1600B8DDFF /* PXLayerCellView.h */; };
+		C9ACC21415C70AB300D157CB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93429E2157EE5BB00186FA9 /* Accelerate.framework */; };
+		C9ACC21515C70AB300D157CB /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5E9EE70877237800FCE6FE /* Carbon.framework */; };
+		C9ACC21615C70AB300D157CB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		C9ACC21715C70AB300D157CB /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BB8ED608FB58F9009C75A6 /* QTKit.framework */; };
+		C9ACC21815C70AB300D157CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B300DB13AFC443004E83F3 /* QuartzCore.framework */; };
+		C9ACC21915C70AB300D157CB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A0859013DE3ECD00C27061 /* WebKit.framework */; };
+		C9ACC21B15C70AB300D157CB /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.html */; };
+		C9ACC21C15C70AB300D157CB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
+		C9ACC21D15C70AB300D157CB /* PXBackgroundController.nib in Resources */ = {isa = PBXBuildFile; fileRef = EA6864B3054C5EDE00EE395F /* PXBackgroundController.nib */; };
+		C9ACC21E15C70AB300D157CB /* PXDuotoneBackgroundConfigurator.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAA01849054DCC7000EF18C2 /* PXDuotoneBackgroundConfigurator.xib */; };
+		C9ACC21F15C70AB300D157CB /* PXMonotoneBackgroundConfigurator.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAA0184E054DCC7B00EF18C2 /* PXMonotoneBackgroundConfigurator.xib */; };
+		C9ACC22015C70AB300D157CB /* PXImageBackgroundConfigurator.nib in Resources */ = {isa = PBXBuildFile; fileRef = EAE126CF054F41A9001208D9 /* PXImageBackgroundConfigurator.nib */; };
+		C9ACC22115C70AB300D157CB /* PXNamePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA9E180B0557104F00119DF5 /* PXNamePrompt.xib */; };
+		C9ACC22215C70AB300D157CB /* PXLayerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 615E87F206A31AF8002445B8 /* PXLayerController.xib */; };
+		C9ACC22315C70AB300D157CB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 61BD25D3067A1E1D0054A2BB /* Localizable.strings */; };
+		C9ACC22415C70AB300D157CB /* PXScalePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61F598B9067949D500B8C8CA /* PXScalePrompt.xib */; };
+		C9ACC22515C70AB300D157CB /* PXPreviewResizePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.xib */; };
+		C9ACC22615C70AB300D157CB /* PXBackgroundTemplateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACDBD7F0878B37100564512 /* PXBackgroundTemplateView.xib */; };
+		C9ACC22715C70AB300D157CB /* OSProgressPopup.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61A956BA08AD76CF009BB89F /* OSProgressPopup.nib */; };
+		C9ACC22815C70AB300D157CB /* PXSequenceExportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61FED6C208BCC646005E51EA /* PXSequenceExportView.xib */; };
+		C9ACC22915C70AB300D157CB /* Pixen.icns in Resources */ = {isa = PBXBuildFile; fileRef = EAC916E50CE7DC7300E519E1 /* Pixen.icns */; };
+		C9ACC22A15C70AB300D157CB /* PixenDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = EAC916E80CE7DC7300E519E1 /* PixenDoc.icns */; };
+		C9ACC22B15C70AB300D157CB /* apencil.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916EE0CE7DC7300E519E1 /* apencil.png */; };
+		C9ACC22C15C70AB300D157CB /* ellipse.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916EF0CE7DC7300E519E1 /* ellipse.png */; };
+		C9ACC22D15C70AB300D157CB /* eraser.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916F00CE7DC7300E519E1 /* eraser.png */; };
+		C9ACC22E15C70AB300D157CB /* eyedropper.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916F10CE7DC7300E519E1 /* eyedropper.png */; };
+		C9ACC22F15C70AB300D157CB /* lasso.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916F40CE7DC7300E519E1 /* lasso.png */; };
+		C9ACC23015C70AB300D157CB /* lassoadd.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916F50CE7DC7300E519E1 /* lassoadd.png */; };
+		C9ACC23115C70AB300D157CB /* lassosubtract.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916F60CE7DC7300E519E1 /* lassosubtract.png */; };
+		C9ACC23215C70AB300D157CB /* linetool.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916F70CE7DC7300E519E1 /* linetool.png */; };
+		C9ACC23315C70AB300D157CB /* magic.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916F80CE7DC7300E519E1 /* magic.png */; };
+		C9ACC23415C70AB300D157CB /* magicadd.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916F90CE7DC7300E519E1 /* magicadd.png */; };
+		C9ACC23515C70AB300D157CB /* magicsubtract.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916FA0CE7DC7300E519E1 /* magicsubtract.png */; };
+		C9ACC23615C70AB300D157CB /* move.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916FB0CE7DC7300E519E1 /* move.png */; };
+		C9ACC23715C70AB300D157CB /* paintbrush.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916FC0CE7DC7300E519E1 /* paintbrush.png */; };
+		C9ACC23815C70AB300D157CB /* paintbucket.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916FD0CE7DC7300E519E1 /* paintbucket.png */; };
+		C9ACC23915C70AB300D157CB /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916FE0CE7DC7300E519E1 /* pencil.png */; };
+		C9ACC23A15C70AB300D157CB /* rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC916FF0CE7DC7300E519E1 /* rectangle.png */; };
+		C9ACC23B15C70AB300D157CB /* squareselect.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917010CE7DC7300E519E1 /* squareselect.png */; };
+		C9ACC23C15C70AB300D157CB /* squareselectadd.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917020CE7DC7300E519E1 /* squareselectadd.png */; };
+		C9ACC23D15C70AB300D157CB /* squareselectsubtract.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917030CE7DC7300E519E1 /* squareselectsubtract.png */; };
+		C9ACC23E15C70AB300D157CB /* zoomIn.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917050CE7DC7300E519E1 /* zoomIn.png */; };
+		C9ACC23F15C70AB300D157CB /* zoomOut.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917060CE7DC7300E519E1 /* zoomOut.png */; };
+		C9ACC24015C70AB300D157CB /* bgconf.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917080CE7DC7300E519E1 /* bgconf.png */; };
+		C9ACC24115C70AB300D157CB /* colorpalette.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917090CE7DC7300E519E1 /* colorpalette.png */; };
+		C9ACC24215C70AB300D157CB /* feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9170A0CE7DC7300E519E1 /* feedback.png */; };
+		C9ACC24315C70AB300D157CB /* layerdrawer.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9170C0CE7DC7300E519E1 /* layerdrawer.png */; };
+		C9ACC24415C70AB300D157CB /* preview.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9170D0CE7DC7300E519E1 /* preview.png */; };
+		C9ACC24515C70AB300D157CB /* resize.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9170E0CE7DC7300E519E1 /* resize.png */; };
+		C9ACC24615C70AB300D157CB /* scale.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC9170F0CE7DC7300E519E1 /* scale.png */; };
+		C9ACC24715C70AB300D157CB /* toolproperties.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917100CE7DC7300E519E1 /* toolproperties.png */; };
+		C9ACC24815C70AB300D157CB /* zoom100.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917110CE7DC7300E519E1 /* zoom100.png */; };
+		C9ACC24915C70AB300D157CB /* zoomfit.png in Resources */ = {isa = PBXBuildFile; fileRef = EAC917120CE7DC7300E519E1 /* zoomfit.png */; };
+		C9ACC24A15C70AB300D157CB /* Pixen.scriptSuite in Resources */ = {isa = PBXBuildFile; fileRef = EAC917230CE7DC7300E519E1 /* Pixen.scriptSuite */; };
+		C9ACC24B15C70AB300D157CB /* Pixen.scriptTerminology in Resources */ = {isa = PBXBuildFile; fileRef = EAC917240CE7DC7300E519E1 /* Pixen.scriptTerminology */; };
+		C9ACC24C15C70AB300D157CB /* ants.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC917280CE7DC7300E519E1 /* ants.tiff */; };
+		C9ACC24D15C70AB300D157CB /* PXPaletteController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAB650840D108D9000274070 /* PXPaletteController.xib */; };
+		C9ACC24E15C70AB300D157CB /* History.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A22A060D20715000430CCD /* History.tiff */; };
+		C9ACC24F15C70AB300D157CB /* Frequency.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A22A230D2073E500430CCD /* Frequency.tiff */; };
+		C9ACC25015C70AB300D157CB /* PXPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93DB17D13ABC6BE006D42FE /* PXPreferences.xib */; };
+		C9ACC25115C70AB300D157CB /* PXGeneralPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93DB18013ABC8BE006D42FE /* PXGeneralPreferences.xib */; };
+		C9ACC25215C70AB300D157CB /* PXHotkeysPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96BABB313ABD3AB00015C92 /* PXHotkeysPreferences.xib */; };
+		C9ACC25315C70AB300D157CB /* PXToolProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1513ACFBC50028B141 /* PXToolProperties.xib */; };
+		C9ACC25415C70AB300D157CB /* PXBlankPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1813AD008C0028B141 /* PXBlankPropertiesView.xib */; };
+		C9ACC25515C70AB300D157CB /* PXFillToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A6BE1B13AD07B10028B141 /* PXFillToolPropertiesView.xib */; };
+		C9ACC25615C70AB300D157CB /* PXShapeToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9799FAE13AD69C000E261EE /* PXShapeToolPropertiesView.xib */; };
+		C9ACC25715C70AB300D157CB /* PXPencilToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9799FB613AD6ED900E261EE /* PXPencilToolPropertiesView.xib */; };
+		C9ACC25815C70AB300D157CB /* PXEyedropperToolPropertiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9799FB913AD745500E261EE /* PXEyedropperToolPropertiesView.xib */; };
+		C9ACC25915C70AB300D157CB /* PXGridSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FEE51913AF81AF004FFC3C /* PXGridSettings.xib */; };
+		C9ACC25A15C70AB300D157CB /* PXPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = C984251013AFC142000072C5 /* PXPreview.xib */; };
+		C9ACC25B15C70AB300D157CB /* PXCanvasDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = C94A9ED813B114DE0034AFE3 /* PXCanvasDocument.xib */; };
+		C9ACC25C15C70AB300D157CB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C92A1E9013B12CAB0007235A /* MainMenu.xib */; };
+		C9ACC25D15C70AB300D157CB /* PXImageSizePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9DC4D9913D0E6D70065C1A6 /* PXImageSizePrompt.xib */; };
+		C9ACC25E15C70AB300D157CB /* paintbucket_bw.png in Resources */ = {isa = PBXBuildFile; fileRef = C940AECC13D52E8700724CC0 /* paintbucket_bw.png */; };
+		C9ACC25F15C70AB300D157CB /* magic_bw.png in Resources */ = {isa = PBXBuildFile; fileRef = C9E088A313D5BDCE002A0AD4 /* magic_bw.png */; };
+		C9ACC26015C70AB300D157CB /* zoomIn_bw.png in Resources */ = {isa = PBXBuildFile; fileRef = C9E088A513D5BF17002A0AD4 /* zoomIn_bw.png */; };
+		C9ACC26115C70AB300D157CB /* eyedropper_bw.png in Resources */ = {isa = PBXBuildFile; fileRef = C9E088A713D5C03D002A0AD4 /* eyedropper_bw.png */; };
+		C9ACC26215C70AB300D157CB /* PXSpriteSheetExporter.xib in Resources */ = {isa = PBXBuildFile; fileRef = C912F26B13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib */; };
+		C9ACC26315C70AB300D157CB /* PXManagePresetsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9B1FA5C13D732FC00BB7CF7 /* PXManagePresetsWindow.xib */; };
+		C9ACC26415C70AB300D157CB /* PXDiscoverPixen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9A0858A13DE3EB600C27061 /* PXDiscoverPixen.xib */; };
+		C9ACC26515C70AB300D157CB /* PixenIntro in Resources */ = {isa = PBXBuildFile; fileRef = C9A0859213DE3F0100C27061 /* PixenIntro */; };
+		C9ACC26615C70AB300D157CB /* PXPatternEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FD44DF13FD70FC00CEE4FC /* PXPatternEditor.xib */; };
+		C9ACC26715C70AB300D157CB /* PXPatternItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9ADD4A81400844B00257E38 /* PXPatternItem.xib */; };
+		C9ACC26815C70AB300D157CB /* PXInfoPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = C91F07D1142D0BAB007F812C /* PXInfoPanel.xib */; };
+		C9ACC26915C70AB300D157CB /* PixenAnim.icns in Resources */ = {isa = PBXBuildFile; fileRef = C97FDB2514A161DB00371079 /* PixenAnim.icns */; };
+		C9ACC26A15C70AB300D157CB /* Pixen128.png in Resources */ = {isa = PBXBuildFile; fileRef = C968A8E014A5292700905E3D /* Pixen128.png */; };
+		C9ACC26B15C70AB300D157CB /* PXCanvasResizePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = C985C89714C119DF0091EF22 /* PXCanvasResizePrompt.xib */; };
+		C9ACC26C15C70AB300D157CB /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = C903DADD14CBBD6800D82028 /* dsa_pub.pem */; };
+		C9ACC26D15C70AB300D157CB /* PixenPalette.icns in Resources */ = {isa = PBXBuildFile; fileRef = C97C7F0D14EF17DA0089A637 /* PixenPalette.icns */; };
+		C9ACC26E15C70AB300D157CB /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9AD353C1506DD7800A4B25C /* Defaults.plist */; };
+		C9ACC26F15C70AB300D157CB /* PXToolPalette.xib in Resources */ = {isa = PBXBuildFile; fileRef = C900F4BC1509882F00DC6702 /* PXToolPalette.xib */; };
+		C9ACC27015C70AB300D157CB /* PXAbout.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9ECD4D4150BECB6001F686C /* PXAbout.xib */; };
+		C9ACC27115C70AB300D157CB /* PXAnimationDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = C973F0D6152B93810084A158 /* PXAnimationDocument.xib */; };
+		C9ACC27215C70AB300D157CB /* Previous.png in Resources */ = {isa = PBXBuildFile; fileRef = C99236F9152CD1F000EC3AE5 /* Previous.png */; };
+		C9ACC27315C70AB300D157CB /* Next.png in Resources */ = {isa = PBXBuildFile; fileRef = C99236FB152CD37400EC3AE5 /* Next.png */; };
+		C9ACC27415C70AB300D157CB /* Play.png in Resources */ = {isa = PBXBuildFile; fileRef = C99236FD152CD6AB00EC3AE5 /* Play.png */; };
+		C9ACC27515C70AB300D157CB /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = C99236FF152CDD0000EC3AE5 /* Pause.png */; };
+		C9ACC27615C70AB300D157CB /* zoomOut_bw.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F4AA2F154F5BB200C922CC /* zoomOut_bw.png */; };
+		C9ACC27715C70AB300D157CB /* ImageSizeInfo.png in Resources */ = {isa = PBXBuildFile; fileRef = C9BA173E15A5CFDC008BC323 /* ImageSizeInfo.png */; };
+		C9ACC27815C70AB300D157CB /* ImageSizeInfo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9BA173F15A5CFDC008BC323 /* ImageSizeInfo@2x.png */; };
+		C9ACC27915C70AB300D157CB /* TitlebarGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = C94FA7BC15A5DE18000FA307 /* TitlebarGradient.png */; };
+		C9ACC27A15C70AB300D157CB /* TitlebarGradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C94FA7BD15A5DE18000FA307 /* TitlebarGradient@2x.png */; };
+		C9ACC27B15C70AB300D157CB /* Pixen128@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C92C281C15B2711900E68937 /* Pixen128@2x.png */; };
+		C9ACC27C15C70AB300D157CB /* Popout.png in Resources */ = {isa = PBXBuildFile; fileRef = C9BFCC7D15C3011400016E09 /* Popout.png */; };
+		C9ACC27D15C70AB300D157CB /* Popout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9BFCC7E15C3011400016E09 /* Popout@2x.png */; };
+		C9ACC27E15C70AB300D157CB /* PXPalette.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9BFCC8A15C3051000016E09 /* PXPalette.xib */; };
+		C9ACC27F15C70AB300D157CB /* Hotkeys.png in Resources */ = {isa = PBXBuildFile; fileRef = C95B209315C353F7003D6C2A /* Hotkeys.png */; };
+		C9ACC28015C70AB300D157CB /* Hotkeys@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C95B209515C357F9003D6C2A /* Hotkeys@2x.png */; };
+		C9ACC28115C70AB300D157CB /* RegularSize.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C3B51715C6FB6F00BA5E0B /* RegularSize.png */; };
+		C9ACC28215C70AB300D157CB /* RegularSize@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C3B51815C6FB6F00BA5E0B /* RegularSize@2x.png */; };
+		C9ACC28315C70AB300D157CB /* SmallSize.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C3B51915C6FB6F00BA5E0B /* SmallSize.png */; };
+		C9ACC28415C70AB300D157CB /* SmallSize@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C3B51A15C6FB6F00BA5E0B /* SmallSize@2x.png */; };
+		C9ACC28615C70AB300D157CB /* QLPlugin.qlgenerator in Copy QuickLook plugin */ = {isa = PBXBuildFile; fileRef = C969A18A13D200B400F1C1FE /* QLPlugin.qlgenerator */; };
+		C9ACC28815C70AB300D157CB /* colorpalette.png in Copy Color Palette */ = {isa = PBXBuildFile; fileRef = EAC917090CE7DC7300E519E1 /* colorpalette.png */; };
+		C9ACC29B15C70B9400D157CB /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9ACC29A15C70B9400D157CB /* Sparkle.framework */; };
+		C9ACC29C15C70BAA00D157CB /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C9ACC29A15C70B9400D157CB /* Sparkle.framework */; };
 		C9AD353D1506DD7800A4B25C /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9AD353C1506DD7800A4B25C /* Defaults.plist */; };
 		C9ADD4A214007FE500257E38 /* PXClickableView.h in Headers */ = {isa = PBXBuildFile; fileRef = C9ADD4A014007FE500257E38 /* PXClickableView.h */; };
 		C9ADD4A314007FE500257E38 /* PXClickableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9ADD4A114007FE500257E38 /* PXClickableView.m */; };
@@ -476,6 +925,13 @@
 			remoteGlobalIDString = C969A16713D200B300F1C1FE;
 			remoteInfo = QLPlugin;
 		};
+		C9ACC0C315C70AB300D157CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C969A18513D200B300F1C1FE /* QLPlugin.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C969A16713D200B300F1C1FE;
+			remoteInfo = QLPlugin;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -501,12 +957,35 @@
 			name = "Copy QuickLook plugin";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C99F0C2814AFEE4D00EE1823 /* Copy Frameworks */ = {
+		C9ACC28515C70AB300D157CB /* Copy QuickLook plugin */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/QuickLook;
+			dstSubfolderSpec = 1;
+			files = (
+				C9ACC28615C70AB300D157CB /* QLPlugin.qlgenerator in Copy QuickLook plugin */,
+			);
+			name = "Copy QuickLook plugin";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9ACC28715C70AB300D157CB /* Copy Color Palette */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = ColorPickers/PXColorPicker.bundle/Contents;
+			dstSubfolderSpec = 7;
+			files = (
+				C9ACC28815C70AB300D157CB /* colorpalette.png in Copy Color Palette */,
+			);
+			name = "Copy Color Palette";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9ACC28915C70AB300D157CB /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				C9ACC29C15C70BAA00D157CB /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,7 +1032,6 @@
 		C92C281C15B2711900E68937 /* Pixen128@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pixen128@2x.png"; sourceTree = "<group>"; };
 		C92C866E15A5EF5500D915D9 /* NSImage+Reps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Reps.h"; sourceTree = "<group>"; };
 		C92C866F15A5EF5500D915D9 /* NSImage+Reps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Reps.m"; sourceTree = "<group>"; };
-		C931682314E9857C00B3E817 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		C93429E2157EE5BB00186FA9 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		C93DB17E13ABC6BE006D42FE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreferences.xib; sourceTree = "<group>"; };
 		C93DB18113ABC8BE006D42FE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXGeneralPreferences.xib; sourceTree = "<group>"; };
@@ -611,6 +1089,9 @@
 		C9A6BE1613ACFBC50028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXToolProperties.xib; sourceTree = "<group>"; };
 		C9A6BE1913AD008C0028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXBlankPropertiesView.xib; sourceTree = "<group>"; };
 		C9A6BE1C13AD07B10028B141 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXFillToolPropertiesView.xib; sourceTree = "<group>"; };
+		C9ACC28D15C70AB300D157CB /* Pixen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pixen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9ACC28F15C70AB300D157CB /* PixenGatekeeper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "PixenGatekeeper-Info.plist"; path = "/Users/Matt/Projects/Pixen/PixenGatekeeper-Info.plist"; sourceTree = "<absolute>"; };
+		C9ACC29A15C70B9400D157CB /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		C9AD353C1506DD7800A4B25C /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		C9ADD4A014007FE500257E38 /* PXClickableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXClickableView.h; sourceTree = "<group>"; };
 		C9ADD4A114007FE500257E38 /* PXClickableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXClickableView.m; sourceTree = "<group>"; };
@@ -984,6 +1465,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C9ACC21315C70AB300D157CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9ACC21415C70AB300D157CB /* Accelerate.framework in Frameworks */,
+				C9ACC21515C70AB300D157CB /* Carbon.framework in Frameworks */,
+				C9ACC21615C70AB300D157CB /* Cocoa.framework in Frameworks */,
+				C9ACC21715C70AB300D157CB /* QTKit.framework in Frameworks */,
+				C9ACC21815C70AB300D157CB /* QuartzCore.framework in Frameworks */,
+				C9ACC29B15C70B9400D157CB /* Sparkle.framework in Frameworks */,
+				C9ACC21915C70AB300D157CB /* WebKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EAF6951006A9AE0B0019D8D7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1009,7 +1504,7 @@
 				61BB8ED608FB58F9009C75A6 /* QTKit.framework */,
 				D8B300DB13AFC443004E83F3 /* QuartzCore.framework */,
 				C98182C314F0212C0052616F /* SenTestingKit.framework */,
-				C931682314E9857C00B3E817 /* Sparkle.framework */,
+				C9ACC29A15C70B9400D157CB /* Sparkle.framework */,
 				C9A0859013DE3ECD00C27061 /* WebKit.framework */,
 			);
 			name = "Linked Frameworks";
@@ -1029,6 +1524,7 @@
 			children = (
 				EAF6951706A9AE0B0019D8D7 /* Pixen.app */,
 				C98182C214F0212C0052616F /* Tests.octest */,
+				C9ACC28D15C70AB300D157CB /* Pixen.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1047,6 +1543,7 @@
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 				EAF6951606A9AE0B0019D8D7 /* Info.plist */,
+				C9ACC28F15C70AB300D157CB /* PixenGatekeeper-Info.plist */,
 			);
 			name = Pixen;
 			sourceTree = "<group>";
@@ -1972,6 +2469,177 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		C9ACC16E15C70AB300D157CB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9ACC16F15C70AB300D157CB /* PXCanvas.h in Headers */,
+				C9ACC17015C70AB300D157CB /* PXGrid.h in Headers */,
+				C9ACC17115C70AB300D157CB /* PXCanvas_ApplescriptAdditions.h in Headers */,
+				C9ACC17215C70AB300D157CB /* PXCanvasPrintView.h in Headers */,
+				C9ACC17315C70AB300D157CB /* PXImage.h in Headers */,
+				C9ACC17415C70AB300D157CB /* PXCanvas_Drawing.h in Headers */,
+				C9ACC17515C70AB300D157CB /* PXCanvas_ImportingExporting.h in Headers */,
+				C9ACC17615C70AB300D157CB /* PXCanvas_CopyPaste.h in Headers */,
+				C9ACC17715C70AB300D157CB /* PXCanvas_Backgrounds.h in Headers */,
+				C9ACC17815C70AB300D157CB /* PXCanvas_Selection.h in Headers */,
+				C9ACC17915C70AB300D157CB /* PXCanvas_Modifying.h in Headers */,
+				C9ACC17A15C70AB300D157CB /* PXCanvas_Layers.h in Headers */,
+				C9ACC17B15C70AB300D157CB /* PXCanvas_Archiving.h in Headers */,
+				C9ACC17C15C70AB300D157CB /* PXCanvasController.h in Headers */,
+				C9ACC17D15C70AB300D157CB /* PXAnimation.h in Headers */,
+				C9ACC17E15C70AB300D157CB /* PXCel.h in Headers */,
+				C9ACC17F15C70AB300D157CB /* PXAnimationView.h in Headers */,
+				C9ACC18015C70AB300D157CB /* PXDocumentController.h in Headers */,
+				C9ACC18115C70AB300D157CB /* PXPanelManager.h in Headers */,
+				C9ACC18215C70AB300D157CB /* PXHotkeyFormatter.h in Headers */,
+				C9ACC18315C70AB300D157CB /* PXPreferencesController.h in Headers */,
+				C9ACC18415C70AB300D157CB /* PXWelcomeController.h in Headers */,
+				C9ACC18515C70AB300D157CB /* PXBackgroundController.h in Headers */,
+				C9ACC18615C70AB300D157CB /* PXBackgroundInfoView.h in Headers */,
+				C9ACC18715C70AB300D157CB /* PXBackgroundPreviewView.h in Headers */,
+				C9ACC18815C70AB300D157CB /* PXBackgroundsPanel.h in Headers */,
+				C9ACC18915C70AB300D157CB /* PXBackgroundTableHeader.h in Headers */,
+				C9ACC18A15C70AB300D157CB /* PXBackgroundTemplateView.h in Headers */,
+				C9ACC18B15C70AB300D157CB /* PXBuiltinBackgroundTemplateView.h in Headers */,
+				C9ACC18C15C70AB300D157CB /* PXDefaultBackgroundTemplateView.h in Headers */,
+				C9ACC18D15C70AB300D157CB /* PXCrosshair.h in Headers */,
+				C9ACC18E15C70AB300D157CB /* PXAnimationBackgroundView.h in Headers */,
+				C9ACC18F15C70AB300D157CB /* PXAnimationDocument.h in Headers */,
+				C9ACC19015C70AB300D157CB /* PXAnimationWindowController.h in Headers */,
+				C9ACC19115C70AB300D157CB /* PXFilmStripView.h in Headers */,
+				C9ACC19215C70AB300D157CB /* PXNewCelButton.h in Headers */,
+				C9ACC19315C70AB300D157CB /* PXCanvasDocument.h in Headers */,
+				C9ACC19415C70AB300D157CB /* PXCanvasWindowController.h in Headers */,
+				C9ACC19515C70AB300D157CB /* PXCanvasWindowController_IBActions.h in Headers */,
+				C9ACC19615C70AB300D157CB /* PXCanvasWindowController_Toolbar.h in Headers */,
+				C9ACC19715C70AB300D157CB /* PXCanvasWindowController_Zooming.h in Headers */,
+				C9ACC19815C70AB300D157CB /* PXGridSettingsController.h in Headers */,
+				C9ACC19915C70AB300D157CB /* PXImageSizePrompter.h in Headers */,
+				C9ACC19A15C70AB300D157CB /* PXCanvasResizePrompter.h in Headers */,
+				C9ACC19B15C70AB300D157CB /* PXLayerController.h in Headers */,
+				C9ACC19C15C70AB300D157CB /* PXLayerTextField.h in Headers */,
+				C9ACC19D15C70AB300D157CB /* PXInfoPanelController.h in Headers */,
+				C9ACC19E15C70AB300D157CB /* PXPaletteSelector.h in Headers */,
+				C9ACC19F15C70AB300D157CB /* PXPaletteView.h in Headers */,
+				C9ACC1A015C70AB300D157CB /* PXColorPicker.h in Headers */,
+				C9ACC1A115C70AB300D157CB /* PXPaletteColorView.h in Headers */,
+				C9ACC1A215C70AB300D157CB /* PXPalettePanel.h in Headers */,
+				C9ACC1A315C70AB300D157CB /* PXPreviewBezelView.h in Headers */,
+				C9ACC1A415C70AB300D157CB /* PXPreviewController.h in Headers */,
+				C9ACC1A515C70AB300D157CB /* PXPreviewResizePrompter.h in Headers */,
+				C9ACC1A615C70AB300D157CB /* PXPreviewResizeSizeView.h in Headers */,
+				C9ACC1A715C70AB300D157CB /* PXNearestNeighborScaleAlgorithm.h in Headers */,
+				C9ACC1A815C70AB300D157CB /* PXQuartzScaleAlgorithm.h in Headers */,
+				C9ACC1A915C70AB300D157CB /* PXScale2xScaleAlgorithm.h in Headers */,
+				C9ACC1AA15C70AB300D157CB /* PXScaleAlgorithm.h in Headers */,
+				C9ACC1AB15C70AB300D157CB /* PXScaleController.h in Headers */,
+				C9ACC1AC15C70AB300D157CB /* PXPattern.h in Headers */,
+				C9ACC1AD15C70AB300D157CB /* PXPatternEditorController.h in Headers */,
+				C9ACC1AE15C70AB300D157CB /* PXPatternEditorView.h in Headers */,
+				C9ACC1AF15C70AB300D157CB /* PXToolPropertiesManager.h in Headers */,
+				C9ACC1B015C70AB300D157CB /* PXToolPropertiesController.h in Headers */,
+				C9ACC1B115C70AB300D157CB /* PXToolPaletteController.h in Headers */,
+				C9ACC1B215C70AB300D157CB /* PXToolSwitcher.h in Headers */,
+				C9ACC1B315C70AB300D157CB /* PXEllipseTool.h in Headers */,
+				C9ACC1B415C70AB300D157CB /* PXEraserTool.h in Headers */,
+				C9ACC1B515C70AB300D157CB /* PXEyedropperTool.h in Headers */,
+				C9ACC1B615C70AB300D157CB /* PXEyedropperToolPropertiesController.h in Headers */,
+				C9ACC1B715C70AB300D157CB /* PXFillTool.h in Headers */,
+				C9ACC1B815C70AB300D157CB /* PXFillToolPropertiesController.h in Headers */,
+				C9ACC1B915C70AB300D157CB /* PXLassoTool.h in Headers */,
+				C9ACC1BA15C70AB300D157CB /* PXLinearTool.h in Headers */,
+				C9ACC1BB15C70AB300D157CB /* PXLineTool.h in Headers */,
+				C9ACC1BC15C70AB300D157CB /* PXMagicWandTool.h in Headers */,
+				C9ACC1BD15C70AB300D157CB /* PXMoveTool.h in Headers */,
+				C9ACC1BE15C70AB300D157CB /* PXPencilTool.h in Headers */,
+				C9ACC1BF15C70AB300D157CB /* PXPencilToolPropertiesController.h in Headers */,
+				C9ACC1C015C70AB300D157CB /* PXRectangleTool.h in Headers */,
+				C9ACC1C115C70AB300D157CB /* PXShapeToolPropertiesController.h in Headers */,
+				C9ACC1C215C70AB300D157CB /* PXRectangularSelectionTool.h in Headers */,
+				C9ACC1C315C70AB300D157CB /* PXTool.h in Headers */,
+				C9ACC1C415C70AB300D157CB /* PXZoomTool.h in Headers */,
+				C9ACC1C515C70AB300D157CB /* PXBackground.h in Headers */,
+				C9ACC1C615C70AB300D157CB /* PXBackgrounds.h in Headers */,
+				C9ACC1C715C70AB300D157CB /* PXCheckeredBackground.h in Headers */,
+				C9ACC1C815C70AB300D157CB /* PXDuotoneBackground.h in Headers */,
+				C9ACC1C915C70AB300D157CB /* PXImageBackground.h in Headers */,
+				C9ACC1CA15C70AB300D157CB /* PXMonotoneBackground.h in Headers */,
+				C9ACC1CB15C70AB300D157CB /* PXSlashyBackground.h in Headers */,
+				C9ACC1CC15C70AB300D157CB /* PXPalette.h in Headers */,
+				C9ACC1CD15C70AB300D157CB /* PXLayer.h in Headers */,
+				C9ACC1CE15C70AB300D157CB /* OSQTExporter.h in Headers */,
+				C9ACC1CF15C70AB300D157CB /* PXAnimatedGifExporter.h in Headers */,
+				C9ACC1D015C70AB300D157CB /* PXSequenceExportPrompter.h in Headers */,
+				C9ACC1D115C70AB300D157CB /* PXSpriteSheetExporter.h in Headers */,
+				C9ACC1D215C70AB300D157CB /* PXGifImporter.h in Headers */,
+				C9ACC1D315C70AB300D157CB /* OSACTWriter.h in Headers */,
+				C9ACC1D415C70AB300D157CB /* OSJASCPALWriter.h in Headers */,
+				C9ACC1D515C70AB300D157CB /* OSPALWriter.h in Headers */,
+				C9ACC1D615C70AB300D157CB /* PXPaletteExporter.h in Headers */,
+				C9ACC1D715C70AB300D157CB /* OSACTReader.h in Headers */,
+				C9ACC1D815C70AB300D157CB /* OSJASCPALReader.h in Headers */,
+				C9ACC1D915C70AB300D157CB /* OSPALReader.h in Headers */,
+				C9ACC1DA15C70AB300D157CB /* PXPaletteImporter.h in Headers */,
+				C9ACC1DB15C70AB300D157CB /* Constants.h in Headers */,
+				C9ACC1DC15C70AB300D157CB /* PXDefaults.h in Headers */,
+				C9ACC1DD15C70AB300D157CB /* PXNotifications.h in Headers */,
+				C9ACC1DE15C70AB300D157CB /* getarg.h in Headers */,
+				C9ACC1DF15C70AB300D157CB /* gif_lib.h in Headers */,
+				C9ACC1E015C70AB300D157CB /* gif_lib_private.h in Headers */,
+				C9ACC1E115C70AB300D157CB /* SBCenteringClipView.h in Headers */,
+				C9ACC1E215C70AB300D157CB /* OSProgressPopup.h in Headers */,
+				C9ACC1E315C70AB300D157CB /* OSStackedView.h in Headers */,
+				C9ACC1E415C70AB300D157CB /* PXActionButton.h in Headers */,
+				C9ACC1E515C70AB300D157CB /* PXNamePrompter.h in Headers */,
+				C9ACC1E615C70AB300D157CB /* PXNSImageView.h in Headers */,
+				C9ACC1E715C70AB300D157CB /* InterpolatePoint.h in Headers */,
+				C9ACC1E815C70AB300D157CB /* NSArray_DeepMutableCopy.h in Headers */,
+				C9ACC1E915C70AB300D157CB /* NSBezierPath+PXRoundedRectangleAdditions.h in Headers */,
+				C9ACC1EA15C70AB300D157CB /* NSColor+PXPaletteAdditions.h in Headers */,
+				C9ACC1EB15C70AB300D157CB /* NSMutableArray+ReorderingAdditions.h in Headers */,
+				C9ACC1EC15C70AB300D157CB /* NSString_DegreeString.h in Headers */,
+				C9ACC1ED15C70AB300D157CB /* PathUtilities.h in Headers */,
+				C9ACC1EE15C70AB300D157CB /* Pixen_Prefix.h in Headers */,
+				C9ACC1EF15C70AB300D157CB /* PXCanvasView.h in Headers */,
+				C9ACC1F015C70AB300D157CB /* PXBackgroundConfig.h in Headers */,
+				C9ACC1F115C70AB300D157CB /* PXCanvasPreviewView.h in Headers */,
+				C9ACC1F215C70AB300D157CB /* PXDocument.h in Headers */,
+				C9ACC1F315C70AB300D157CB /* PXPaletteController.h in Headers */,
+				C9ACC1F415C70AB300D157CB /* PXLayerPaneBackgroundView.h in Headers */,
+				C9ACC1F515C70AB300D157CB /* OSRectAdditions.h in Headers */,
+				C9ACC1F615C70AB300D157CB /* OSPlasticButtonCell.h in Headers */,
+				C9ACC1F715C70AB300D157CB /* NSString+Comparison.h in Headers */,
+				C9ACC1F815C70AB300D157CB /* PXGeneralPreferencesController.h in Headers */,
+				C9ACC1F915C70AB300D157CB /* PXHotkeysPreferencesController.h in Headers */,
+				C9ACC1FA15C70AB300D157CB /* PXSplitView.h in Headers */,
+				C9ACC1FB15C70AB300D157CB /* PXPaletteViewController.h in Headers */,
+				C9ACC1FC15C70AB300D157CB /* PXPresetsManager.h in Headers */,
+				C9ACC1FD15C70AB300D157CB /* PXPreset.h in Headers */,
+				C9ACC1FE15C70AB300D157CB /* PXManagePresetsController.h in Headers */,
+				C9ACC1FF15C70AB300D157CB /* NSObject+AssociatedObjects.h in Headers */,
+				C9ACC20015C70AB300D157CB /* PXSequenceExportViewController.h in Headers */,
+				C9ACC20115C70AB300D157CB /* PXDeleteCollectionView.h in Headers */,
+				C9ACC20215C70AB300D157CB /* PXClickableView.h in Headers */,
+				C9ACC20315C70AB300D157CB /* PXPatternItem.h in Headers */,
+				C9ACC20415C70AB300D157CB /* UTType+NSString.h in Headers */,
+				C9ACC20515C70AB300D157CB /* NSWindowController+Additions.h in Headers */,
+				C9ACC20615C70AB300D157CB /* PXColor.h in Headers */,
+				C9ACC20715C70AB300D157CB /* PXColorArray.h in Headers */,
+				C9ACC20815C70AB300D157CB /* PXAboutWindowController.h in Headers */,
+				C9ACC20915C70AB300D157CB /* PXCanvasAnchorView.h in Headers */,
+				C9ACC20A15C70AB300D157CB /* PXPreviewControlView.h in Headers */,
+				C9ACC20B15C70AB300D157CB /* GPLWriter.h in Headers */,
+				C9ACC20C15C70AB300D157CB /* GPLReader.h in Headers */,
+				C9ACC20D15C70AB300D157CB /* PXInsertionView.h in Headers */,
+				C9ACC20E15C70AB300D157CB /* PXPercentFormatter.h in Headers */,
+				C9ACC20F15C70AB300D157CB /* NSImage+Reps.h in Headers */,
+				C9ACC21015C70AB300D157CB /* PXLayerTableView.h in Headers */,
+				C9ACC21115C70AB300D157CB /* PXLayerRowView.h in Headers */,
+				C9ACC21215C70AB300D157CB /* PXLayerCellView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EAF6940906A9AE0B0019D8D7 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -2164,6 +2832,29 @@
 			productReference = C98182C214F0212C0052616F /* Tests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
+		C9ACC0C115C70AB300D157CB /* Pixen Gatekeeper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9ACC28A15C70AB300D157CB /* Build configuration list for PBXNativeTarget "Pixen Gatekeeper" */;
+			buildPhases = (
+				C9ACC0C415C70AB300D157CB /* Sources */,
+				C9ACC16E15C70AB300D157CB /* Headers */,
+				C9ACC21315C70AB300D157CB /* Frameworks */,
+				C9ACC21A15C70AB300D157CB /* Resources */,
+				C9ACC28515C70AB300D157CB /* Copy QuickLook plugin */,
+				C9ACC28715C70AB300D157CB /* Copy Color Palette */,
+				C9ACC28915C70AB300D157CB /* Copy Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C9ACC0C215C70AB300D157CB /* PBXTargetDependency */,
+			);
+			name = "Pixen Gatekeeper";
+			productInstallPath = "$(HOME)/Applications";
+			productName = Pixen;
+			productReference = C9ACC28D15C70AB300D157CB /* Pixen.app */;
+			productType = "com.apple.product-type.application";
+		};
 		EAF6940806A9AE0B0019D8D7 /* Pixen */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 616BAEA508553EFB004CF172 /* Build configuration list for PBXNativeTarget "Pixen" */;
@@ -2174,7 +2865,6 @@
 				EAF6946206A9AE0B0019D8D7 /* Resources */,
 				61DF7262087921B700402897 /* Copy QuickLook plugin */,
 				618AE6F3087E712200A9FA9B /* Copy Color Palette */,
-				C99F0C2814AFEE4D00EE1823 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2215,6 +2905,7 @@
 			projectRoot = "";
 			targets = (
 				EAF6940806A9AE0B0019D8D7 /* Pixen */,
+				C9ACC0C115C70AB300D157CB /* Pixen Gatekeeper */,
 				C98182C114F0212C0052616F /* Tests */,
 			);
 		};
@@ -2235,6 +2926,119 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9ACC21A15C70AB300D157CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9ACC21B15C70AB300D157CB /* Credits.html in Resources */,
+				C9ACC21C15C70AB300D157CB /* InfoPlist.strings in Resources */,
+				C9ACC21D15C70AB300D157CB /* PXBackgroundController.nib in Resources */,
+				C9ACC21E15C70AB300D157CB /* PXDuotoneBackgroundConfigurator.xib in Resources */,
+				C9ACC21F15C70AB300D157CB /* PXMonotoneBackgroundConfigurator.xib in Resources */,
+				C9ACC22015C70AB300D157CB /* PXImageBackgroundConfigurator.nib in Resources */,
+				C9ACC22115C70AB300D157CB /* PXNamePrompt.xib in Resources */,
+				C9ACC22215C70AB300D157CB /* PXLayerController.xib in Resources */,
+				C9ACC22315C70AB300D157CB /* Localizable.strings in Resources */,
+				C9ACC22415C70AB300D157CB /* PXScalePrompt.xib in Resources */,
+				C9ACC22515C70AB300D157CB /* PXPreviewResizePrompt.xib in Resources */,
+				C9ACC22615C70AB300D157CB /* PXBackgroundTemplateView.xib in Resources */,
+				C9ACC22715C70AB300D157CB /* OSProgressPopup.nib in Resources */,
+				C9ACC22815C70AB300D157CB /* PXSequenceExportView.xib in Resources */,
+				C9ACC22915C70AB300D157CB /* Pixen.icns in Resources */,
+				C9ACC22A15C70AB300D157CB /* PixenDoc.icns in Resources */,
+				C9ACC22B15C70AB300D157CB /* apencil.png in Resources */,
+				C9ACC22C15C70AB300D157CB /* ellipse.png in Resources */,
+				C9ACC22D15C70AB300D157CB /* eraser.png in Resources */,
+				C9ACC22E15C70AB300D157CB /* eyedropper.png in Resources */,
+				C9ACC22F15C70AB300D157CB /* lasso.png in Resources */,
+				C9ACC23015C70AB300D157CB /* lassoadd.png in Resources */,
+				C9ACC23115C70AB300D157CB /* lassosubtract.png in Resources */,
+				C9ACC23215C70AB300D157CB /* linetool.png in Resources */,
+				C9ACC23315C70AB300D157CB /* magic.png in Resources */,
+				C9ACC23415C70AB300D157CB /* magicadd.png in Resources */,
+				C9ACC23515C70AB300D157CB /* magicsubtract.png in Resources */,
+				C9ACC23615C70AB300D157CB /* move.png in Resources */,
+				C9ACC23715C70AB300D157CB /* paintbrush.png in Resources */,
+				C9ACC23815C70AB300D157CB /* paintbucket.png in Resources */,
+				C9ACC23915C70AB300D157CB /* pencil.png in Resources */,
+				C9ACC23A15C70AB300D157CB /* rectangle.png in Resources */,
+				C9ACC23B15C70AB300D157CB /* squareselect.png in Resources */,
+				C9ACC23C15C70AB300D157CB /* squareselectadd.png in Resources */,
+				C9ACC23D15C70AB300D157CB /* squareselectsubtract.png in Resources */,
+				C9ACC23E15C70AB300D157CB /* zoomIn.png in Resources */,
+				C9ACC23F15C70AB300D157CB /* zoomOut.png in Resources */,
+				C9ACC24015C70AB300D157CB /* bgconf.png in Resources */,
+				C9ACC24115C70AB300D157CB /* colorpalette.png in Resources */,
+				C9ACC24215C70AB300D157CB /* feedback.png in Resources */,
+				C9ACC24315C70AB300D157CB /* layerdrawer.png in Resources */,
+				C9ACC24415C70AB300D157CB /* preview.png in Resources */,
+				C9ACC24515C70AB300D157CB /* resize.png in Resources */,
+				C9ACC24615C70AB300D157CB /* scale.png in Resources */,
+				C9ACC24715C70AB300D157CB /* toolproperties.png in Resources */,
+				C9ACC24815C70AB300D157CB /* zoom100.png in Resources */,
+				C9ACC24915C70AB300D157CB /* zoomfit.png in Resources */,
+				C9ACC24A15C70AB300D157CB /* Pixen.scriptSuite in Resources */,
+				C9ACC24B15C70AB300D157CB /* Pixen.scriptTerminology in Resources */,
+				C9ACC24C15C70AB300D157CB /* ants.tiff in Resources */,
+				C9ACC24D15C70AB300D157CB /* PXPaletteController.xib in Resources */,
+				C9ACC24E15C70AB300D157CB /* History.tiff in Resources */,
+				C9ACC24F15C70AB300D157CB /* Frequency.tiff in Resources */,
+				C9ACC25015C70AB300D157CB /* PXPreferences.xib in Resources */,
+				C9ACC25115C70AB300D157CB /* PXGeneralPreferences.xib in Resources */,
+				C9ACC25215C70AB300D157CB /* PXHotkeysPreferences.xib in Resources */,
+				C9ACC25315C70AB300D157CB /* PXToolProperties.xib in Resources */,
+				C9ACC25415C70AB300D157CB /* PXBlankPropertiesView.xib in Resources */,
+				C9ACC25515C70AB300D157CB /* PXFillToolPropertiesView.xib in Resources */,
+				C9ACC25615C70AB300D157CB /* PXShapeToolPropertiesView.xib in Resources */,
+				C9ACC25715C70AB300D157CB /* PXPencilToolPropertiesView.xib in Resources */,
+				C9ACC25815C70AB300D157CB /* PXEyedropperToolPropertiesView.xib in Resources */,
+				C9ACC25915C70AB300D157CB /* PXGridSettings.xib in Resources */,
+				C9ACC25A15C70AB300D157CB /* PXPreview.xib in Resources */,
+				C9ACC25B15C70AB300D157CB /* PXCanvasDocument.xib in Resources */,
+				C9ACC25C15C70AB300D157CB /* MainMenu.xib in Resources */,
+				C9ACC25D15C70AB300D157CB /* PXImageSizePrompt.xib in Resources */,
+				C9ACC25E15C70AB300D157CB /* paintbucket_bw.png in Resources */,
+				C9ACC25F15C70AB300D157CB /* magic_bw.png in Resources */,
+				C9ACC26015C70AB300D157CB /* zoomIn_bw.png in Resources */,
+				C9ACC26115C70AB300D157CB /* eyedropper_bw.png in Resources */,
+				C9ACC26215C70AB300D157CB /* PXSpriteSheetExporter.xib in Resources */,
+				C9ACC26315C70AB300D157CB /* PXManagePresetsWindow.xib in Resources */,
+				C9ACC26415C70AB300D157CB /* PXDiscoverPixen.xib in Resources */,
+				C9ACC26515C70AB300D157CB /* PixenIntro in Resources */,
+				C9ACC26615C70AB300D157CB /* PXPatternEditor.xib in Resources */,
+				C9ACC26715C70AB300D157CB /* PXPatternItem.xib in Resources */,
+				C9ACC26815C70AB300D157CB /* PXInfoPanel.xib in Resources */,
+				C9ACC26915C70AB300D157CB /* PixenAnim.icns in Resources */,
+				C9ACC26A15C70AB300D157CB /* Pixen128.png in Resources */,
+				C9ACC26B15C70AB300D157CB /* PXCanvasResizePrompt.xib in Resources */,
+				C9ACC26C15C70AB300D157CB /* dsa_pub.pem in Resources */,
+				C9ACC26D15C70AB300D157CB /* PixenPalette.icns in Resources */,
+				C9ACC26E15C70AB300D157CB /* Defaults.plist in Resources */,
+				C9ACC26F15C70AB300D157CB /* PXToolPalette.xib in Resources */,
+				C9ACC27015C70AB300D157CB /* PXAbout.xib in Resources */,
+				C9ACC27115C70AB300D157CB /* PXAnimationDocument.xib in Resources */,
+				C9ACC27215C70AB300D157CB /* Previous.png in Resources */,
+				C9ACC27315C70AB300D157CB /* Next.png in Resources */,
+				C9ACC27415C70AB300D157CB /* Play.png in Resources */,
+				C9ACC27515C70AB300D157CB /* Pause.png in Resources */,
+				C9ACC27615C70AB300D157CB /* zoomOut_bw.png in Resources */,
+				C9ACC27715C70AB300D157CB /* ImageSizeInfo.png in Resources */,
+				C9ACC27815C70AB300D157CB /* ImageSizeInfo@2x.png in Resources */,
+				C9ACC27915C70AB300D157CB /* TitlebarGradient.png in Resources */,
+				C9ACC27A15C70AB300D157CB /* TitlebarGradient@2x.png in Resources */,
+				C9ACC27B15C70AB300D157CB /* Pixen128@2x.png in Resources */,
+				C9ACC27C15C70AB300D157CB /* Popout.png in Resources */,
+				C9ACC27D15C70AB300D157CB /* Popout@2x.png in Resources */,
+				C9ACC27E15C70AB300D157CB /* PXPalette.xib in Resources */,
+				C9ACC27F15C70AB300D157CB /* Hotkeys.png in Resources */,
+				C9ACC28015C70AB300D157CB /* Hotkeys@2x.png in Resources */,
+				C9ACC28115C70AB300D157CB /* RegularSize.png in Resources */,
+				C9ACC28215C70AB300D157CB /* RegularSize@2x.png in Resources */,
+				C9ACC28315C70AB300D157CB /* SmallSize.png in Resources */,
+				C9ACC28415C70AB300D157CB /* SmallSize@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2377,6 +3181,182 @@
 				C98182D014F0212C0052616F /* PaletteTests.m in Sources */,
 				C9D58D9214F031FD00A62C10 /* PXColor.m in Sources */,
 				C9D58D9114F031FC00A62C10 /* PXColorArray.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9ACC0C415C70AB300D157CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9ACC0C515C70AB300D157CB /* PXCanvasView.m in Sources */,
+				C9ACC0C615C70AB300D157CB /* PXCanvas.m in Sources */,
+				C9ACC0C715C70AB300D157CB /* PXGrid.m in Sources */,
+				C9ACC0C815C70AB300D157CB /* PXCanvas_ApplescriptAdditions.m in Sources */,
+				C9ACC0C915C70AB300D157CB /* PXCanvasPrintView.m in Sources */,
+				C9ACC0CA15C70AB300D157CB /* PXImage.m in Sources */,
+				C9ACC0CB15C70AB300D157CB /* PXCanvas_Drawing.m in Sources */,
+				C9ACC0CC15C70AB300D157CB /* PXCanvas_ImportingExporting.m in Sources */,
+				C9ACC0CD15C70AB300D157CB /* PXCanvas_CopyPaste.m in Sources */,
+				C9ACC0CE15C70AB300D157CB /* PXCanvas_Backgrounds.m in Sources */,
+				C9ACC0CF15C70AB300D157CB /* PXCanvas_Selection.m in Sources */,
+				C9ACC0D015C70AB300D157CB /* PXCanvas_Modifying.m in Sources */,
+				C9ACC0D115C70AB300D157CB /* PXCanvas_Layers.m in Sources */,
+				C9ACC0D215C70AB300D157CB /* PXCanvas_Archiving.m in Sources */,
+				C9ACC0D315C70AB300D157CB /* PXCanvasController.m in Sources */,
+				C9ACC0D415C70AB300D157CB /* PXAnimation.m in Sources */,
+				C9ACC0D515C70AB300D157CB /* PXCel.m in Sources */,
+				C9ACC0D615C70AB300D157CB /* PXAnimationView.m in Sources */,
+				C9ACC0D715C70AB300D157CB /* PXDocumentController.m in Sources */,
+				C9ACC0D815C70AB300D157CB /* PXPanelManager.m in Sources */,
+				C9ACC0D915C70AB300D157CB /* PXHotkeyFormatter.m in Sources */,
+				C9ACC0DA15C70AB300D157CB /* PXPreferencesController.m in Sources */,
+				C9ACC0DB15C70AB300D157CB /* PXWelcomeController.m in Sources */,
+				C9ACC0DC15C70AB300D157CB /* PXBackgroundController.m in Sources */,
+				C9ACC0DD15C70AB300D157CB /* PXBackgroundInfoView.m in Sources */,
+				C9ACC0DE15C70AB300D157CB /* PXBackgroundPreviewView.m in Sources */,
+				C9ACC0DF15C70AB300D157CB /* PXBackgroundsPanel.m in Sources */,
+				C9ACC0E015C70AB300D157CB /* PXBackgroundTableHeader.m in Sources */,
+				C9ACC0E115C70AB300D157CB /* PXBackgroundTemplateView.m in Sources */,
+				C9ACC0E215C70AB300D157CB /* PXBuiltinBackgroundTemplateView.m in Sources */,
+				C9ACC0E315C70AB300D157CB /* PXDefaultBackgroundTemplateView.m in Sources */,
+				C9ACC0E415C70AB300D157CB /* PXCrosshair.m in Sources */,
+				C9ACC0E515C70AB300D157CB /* PXAnimationBackgroundView.m in Sources */,
+				C9ACC0E615C70AB300D157CB /* PXAnimationDocument.m in Sources */,
+				C9ACC0E715C70AB300D157CB /* PXAnimationWindowController.m in Sources */,
+				C9ACC0E815C70AB300D157CB /* PXFilmStripView.m in Sources */,
+				C9ACC0E915C70AB300D157CB /* PXNewCelButton.m in Sources */,
+				C9ACC0EA15C70AB300D157CB /* PXCanvasDocument.m in Sources */,
+				C9ACC0EB15C70AB300D157CB /* PXCanvasWindowController.m in Sources */,
+				C9ACC0EC15C70AB300D157CB /* PXCanvasWindowController_IBActions.m in Sources */,
+				C9ACC0ED15C70AB300D157CB /* PXCanvasWindowController_Toolbar.m in Sources */,
+				C9ACC0EE15C70AB300D157CB /* PXCanvasWindowController_Zooming.m in Sources */,
+				C9ACC0EF15C70AB300D157CB /* PXGridSettingsController.m in Sources */,
+				C9ACC0F015C70AB300D157CB /* PXImageSizePrompter.m in Sources */,
+				C9ACC0F115C70AB300D157CB /* PXCanvasResizePrompter.m in Sources */,
+				C9ACC0F215C70AB300D157CB /* PXLayerController.m in Sources */,
+				C9ACC0F315C70AB300D157CB /* PXLayerTextField.m in Sources */,
+				C9ACC0F415C70AB300D157CB /* PXInfoPanelController.m in Sources */,
+				C9ACC0F515C70AB300D157CB /* PXPaletteSelector.m in Sources */,
+				C9ACC0F615C70AB300D157CB /* PXPaletteView.m in Sources */,
+				C9ACC0F715C70AB300D157CB /* PXColorPicker.m in Sources */,
+				C9ACC0F815C70AB300D157CB /* PXPaletteColorView.m in Sources */,
+				C9ACC0F915C70AB300D157CB /* PXPalettePanel.m in Sources */,
+				C9ACC0FA15C70AB300D157CB /* PXPreviewBezelView.m in Sources */,
+				C9ACC0FB15C70AB300D157CB /* PXPreviewController.m in Sources */,
+				C9ACC0FC15C70AB300D157CB /* PXPreviewResizePrompter.m in Sources */,
+				C9ACC0FD15C70AB300D157CB /* PXPreviewResizeSizeView.m in Sources */,
+				C9ACC0FE15C70AB300D157CB /* PXNearestNeighborScaleAlgorithm.m in Sources */,
+				C9ACC0FF15C70AB300D157CB /* PXQuartzScaleAlgorithm.m in Sources */,
+				C9ACC10015C70AB300D157CB /* PXScale2xScaleAlgorithm.m in Sources */,
+				C9ACC10115C70AB300D157CB /* PXScaleAlgorithm.m in Sources */,
+				C9ACC10215C70AB300D157CB /* PXScaleController.m in Sources */,
+				C9ACC10315C70AB300D157CB /* PXPattern.m in Sources */,
+				C9ACC10415C70AB300D157CB /* PXPatternEditorController.m in Sources */,
+				C9ACC10515C70AB300D157CB /* PXPatternEditorView.m in Sources */,
+				C9ACC10615C70AB300D157CB /* PXToolPropertiesManager.m in Sources */,
+				C9ACC10715C70AB300D157CB /* PXToolPropertiesController.m in Sources */,
+				C9ACC10815C70AB300D157CB /* PXToolPaletteController.m in Sources */,
+				C9ACC10915C70AB300D157CB /* PXToolSwitcher.m in Sources */,
+				C9ACC10A15C70AB300D157CB /* PXEllipseTool.m in Sources */,
+				C9ACC10B15C70AB300D157CB /* PXEraserTool.m in Sources */,
+				C9ACC10C15C70AB300D157CB /* PXEyedropperTool.m in Sources */,
+				C9ACC10D15C70AB300D157CB /* PXEyedropperToolPropertiesController.m in Sources */,
+				C9ACC10E15C70AB300D157CB /* PXFillTool.m in Sources */,
+				C9ACC10F15C70AB300D157CB /* PXFillToolPropertiesController.m in Sources */,
+				C9ACC11015C70AB300D157CB /* PXLassoTool.m in Sources */,
+				C9ACC11115C70AB300D157CB /* PXLinearTool.m in Sources */,
+				C9ACC11215C70AB300D157CB /* PXLineTool.m in Sources */,
+				C9ACC11315C70AB300D157CB /* PXMagicWandTool.m in Sources */,
+				C9ACC11415C70AB300D157CB /* PXMoveTool.m in Sources */,
+				C9ACC11515C70AB300D157CB /* PXPencilTool.m in Sources */,
+				C9ACC11615C70AB300D157CB /* PXPencilToolPropertiesController.m in Sources */,
+				C9ACC11715C70AB300D157CB /* PXRectangleTool.m in Sources */,
+				C9ACC11815C70AB300D157CB /* PXShapeToolPropertiesController.m in Sources */,
+				C9ACC11915C70AB300D157CB /* PXRectangularSelectionTool.m in Sources */,
+				C9ACC11A15C70AB300D157CB /* PXTool.m in Sources */,
+				C9ACC11B15C70AB300D157CB /* PXZoomTool.m in Sources */,
+				C9ACC11C15C70AB300D157CB /* PXBackground.m in Sources */,
+				C9ACC11D15C70AB300D157CB /* PXCheckeredBackground.m in Sources */,
+				C9ACC11E15C70AB300D157CB /* PXDuotoneBackground.m in Sources */,
+				C9ACC11F15C70AB300D157CB /* PXImageBackground.m in Sources */,
+				C9ACC12015C70AB300D157CB /* PXMonotoneBackground.m in Sources */,
+				C9ACC12115C70AB300D157CB /* PXSlashyBackground.m in Sources */,
+				C9ACC12215C70AB300D157CB /* PXPalette.m in Sources */,
+				C9ACC12315C70AB300D157CB /* PXLayer.m in Sources */,
+				C9ACC12415C70AB300D157CB /* OSQTExporter.m in Sources */,
+				C9ACC12515C70AB300D157CB /* PXAnimatedGifExporter.m in Sources */,
+				C9ACC12615C70AB300D157CB /* PXSequenceExportPrompter.m in Sources */,
+				C9ACC12715C70AB300D157CB /* PXSpriteSheetExporter.m in Sources */,
+				C9ACC12815C70AB300D157CB /* PXGifImporter.m in Sources */,
+				C9ACC12915C70AB300D157CB /* OSACTWriter.m in Sources */,
+				C9ACC12A15C70AB300D157CB /* OSJASCPALWriter.m in Sources */,
+				C9ACC12B15C70AB300D157CB /* OSPALWriter.m in Sources */,
+				C9ACC12C15C70AB300D157CB /* PXPaletteExporter.m in Sources */,
+				C9ACC12D15C70AB300D157CB /* OSACTReader.m in Sources */,
+				C9ACC12E15C70AB300D157CB /* OSJASCPALReader.m in Sources */,
+				C9ACC12F15C70AB300D157CB /* OSPALReader.m in Sources */,
+				C9ACC13015C70AB300D157CB /* PXPaletteImporter.m in Sources */,
+				C9ACC13115C70AB300D157CB /* Constants.m in Sources */,
+				C9ACC13215C70AB300D157CB /* PXDefaults.m in Sources */,
+				C9ACC13315C70AB300D157CB /* PXNotifications.m in Sources */,
+				C9ACC13415C70AB300D157CB /* dev2gif.c in Sources */,
+				C9ACC13515C70AB300D157CB /* dgif_lib.c in Sources */,
+				C9ACC13615C70AB300D157CB /* egif_lib.c in Sources */,
+				C9ACC13715C70AB300D157CB /* getarg.c in Sources */,
+				C9ACC13815C70AB300D157CB /* gif_err.c in Sources */,
+				C9ACC13915C70AB300D157CB /* gif_font.c in Sources */,
+				C9ACC13A15C70AB300D157CB /* gifalloc.c in Sources */,
+				C9ACC13B15C70AB300D157CB /* qprintf.c in Sources */,
+				C9ACC13C15C70AB300D157CB /* quantize.c in Sources */,
+				C9ACC13D15C70AB300D157CB /* SBCenteringClipView.m in Sources */,
+				C9ACC13E15C70AB300D157CB /* main.m in Sources */,
+				C9ACC13F15C70AB300D157CB /* OSProgressPopup.m in Sources */,
+				C9ACC14015C70AB300D157CB /* OSStackedView.m in Sources */,
+				C9ACC14115C70AB300D157CB /* PXActionButton.m in Sources */,
+				C9ACC14215C70AB300D157CB /* PXNamePrompter.m in Sources */,
+				C9ACC14315C70AB300D157CB /* PXNSImageView.m in Sources */,
+				C9ACC14415C70AB300D157CB /* InterpolatePoint.m in Sources */,
+				C9ACC14515C70AB300D157CB /* NSArray_DeepMutableCopy.m in Sources */,
+				C9ACC14615C70AB300D157CB /* NSBezierPath+PXRoundedRectangleAdditions.m in Sources */,
+				C9ACC14715C70AB300D157CB /* NSColor+PXPaletteAdditions.m in Sources */,
+				C9ACC14815C70AB300D157CB /* NSMutableArray+ReorderingAdditions.m in Sources */,
+				C9ACC14915C70AB300D157CB /* NSString_DegreeString.m in Sources */,
+				C9ACC14A15C70AB300D157CB /* PathUtilities.m in Sources */,
+				C9ACC14B15C70AB300D157CB /* PXBackgroundConfig.m in Sources */,
+				C9ACC14C15C70AB300D157CB /* PXCanvasPreviewView.m in Sources */,
+				C9ACC14D15C70AB300D157CB /* PXDocument.m in Sources */,
+				C9ACC14E15C70AB300D157CB /* PXPaletteController.m in Sources */,
+				C9ACC14F15C70AB300D157CB /* PXLayerPaneBackgroundView.m in Sources */,
+				C9ACC15015C70AB300D157CB /* OSRectAdditions.m in Sources */,
+				C9ACC15115C70AB300D157CB /* OSPlasticButtonCell.m in Sources */,
+				C9ACC15215C70AB300D157CB /* NSString+Comparison.m in Sources */,
+				C9ACC15315C70AB300D157CB /* PXGeneralPreferencesController.m in Sources */,
+				C9ACC15415C70AB300D157CB /* PXHotkeysPreferencesController.m in Sources */,
+				C9ACC15515C70AB300D157CB /* PXSplitView.m in Sources */,
+				C9ACC15615C70AB300D157CB /* PXPaletteViewController.m in Sources */,
+				C9ACC15715C70AB300D157CB /* PXPresetsManager.m in Sources */,
+				C9ACC15815C70AB300D157CB /* PXPreset.m in Sources */,
+				C9ACC15915C70AB300D157CB /* PXManagePresetsController.m in Sources */,
+				C9ACC15A15C70AB300D157CB /* NSObject+AssociatedObjects.m in Sources */,
+				C9ACC15B15C70AB300D157CB /* PXSequenceExportViewController.m in Sources */,
+				C9ACC15C15C70AB300D157CB /* PXDeleteCollectionView.m in Sources */,
+				C9ACC15D15C70AB300D157CB /* PXClickableView.m in Sources */,
+				C9ACC15E15C70AB300D157CB /* PXPatternItem.m in Sources */,
+				C9ACC15F15C70AB300D157CB /* UTType+NSString.m in Sources */,
+				C9ACC16015C70AB300D157CB /* NSWindowController+Additions.m in Sources */,
+				C9ACC16115C70AB300D157CB /* PXColor.m in Sources */,
+				C9ACC16215C70AB300D157CB /* PXColorArray.m in Sources */,
+				C9ACC16315C70AB300D157CB /* PXAboutWindowController.m in Sources */,
+				C9ACC16415C70AB300D157CB /* PXCanvasAnchorView.m in Sources */,
+				C9ACC16515C70AB300D157CB /* PXPreviewControlView.m in Sources */,
+				C9ACC16615C70AB300D157CB /* GPLWriter.m in Sources */,
+				C9ACC16715C70AB300D157CB /* GPLReader.m in Sources */,
+				C9ACC16815C70AB300D157CB /* PXInsertionView.m in Sources */,
+				C9ACC16915C70AB300D157CB /* PXPercentFormatter.m in Sources */,
+				C9ACC16A15C70AB300D157CB /* NSImage+Reps.m in Sources */,
+				C9ACC16B15C70AB300D157CB /* PXLayerTableView.m in Sources */,
+				C9ACC16C15C70AB300D157CB /* PXLayerRowView.m in Sources */,
+				C9ACC16D15C70AB300D157CB /* PXLayerCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2563,6 +3543,11 @@
 			isa = PBXTargetDependency;
 			name = QLPlugin;
 			targetProxy = C969A18C13D200FF00F1C1FE /* PBXContainerItemProxy */;
+		};
+		C9ACC0C215C70AB300D157CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QLPlugin;
+			targetProxy = C9ACC0C315C70AB300D157CB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3011,6 +3996,49 @@
 			};
 			name = Debug;
 		};
+		C9ACC28B15C70AB300D157CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				COMBINE_HIDPI_IMAGES = NO;
+				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Other Sources/Pixen_Prefix.h";
+				GCC_PREPROCESSOR_DEFINITIONS = "GTK=1";
+				INFOPLIST_FILE = "PixenGatekeeper-Info.plist";
+				INSTALL_PATH = /Applications;
+				PRODUCT_NAME = Pixen;
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C9ACC28C15C70AB300D157CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				COMBINE_HIDPI_IMAGES = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Other Sources/Pixen_Prefix.h";
+				GCC_PREPROCESSOR_DEFINITIONS = "GTK=1";
+				INFOPLIST_FILE = "PixenGatekeeper-Info.plist";
+				PRODUCT_NAME = Pixen;
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3037,6 +4065,15 @@
 			buildConfigurations = (
 				C98182D314F0212C0052616F /* Release */,
 				C98182D414F0212C0052616F /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C9ACC28A15C70AB300D157CB /* Build configuration list for PBXNativeTarget "Pixen Gatekeeper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9ACC28B15C70AB300D157CB /* Release */,
+				C9ACC28C15C70AB300D157CB /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

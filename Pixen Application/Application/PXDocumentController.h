@@ -19,5 +19,7 @@
 
 - (IBAction)newAnimationDocument:sender;
 
+- (IBAction)checkForUpdates:(id)sender;
+
 @end
 
