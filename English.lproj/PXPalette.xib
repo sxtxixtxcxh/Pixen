@@ -73,6 +73,7 @@
 										<string key="NSResourceName">RegularSize</string>
 									</object>
 									<string key="NSSegmentItemLabel"/>
+									<bool key="NSSegmentItemSelected">YES</bool>
 									<int key="NSSegmentItemImageScaling">2</int>
 								</object>
 								<object class="NSSegmentItem">
@@ -83,11 +84,9 @@
 									</object>
 									<string key="NSSegmentItemLabel"/>
 									<int key="NSSegmentItemTag">1</int>
-									<bool key="NSSegmentItemSelected">YES</bool>
 									<int key="NSSegmentItemImageScaling">2</int>
 								</object>
 							</array>
-							<int key="NSSelectedSegment">1</int>
 							<int key="NSSegmentStyle">6</int>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -968,7 +967,7 @@
 				<string key="67.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="68.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<integer value="1" key="73.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
+				<integer value="0" key="73.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
