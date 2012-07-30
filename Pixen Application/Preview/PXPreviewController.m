@@ -46,7 +46,9 @@
 @end
 
 
-@implementation PXPreviewController
+@implementation PXPreviewController {
+	PXPreviewResizePrompter *_resizePrompter;
+}
 
 @synthesize view, controlView, playPauseButton;
 @synthesize animation = _animation, singleCanvas = canvas;
@@ -664,12 +666,17 @@
 
 - (void)sizeTo:sender
 {
-	if(![self hasUsableCanvas]) { return; }
-	PXPreviewResizePrompter * prompter = [[PXPreviewResizePrompter alloc] init];
-	[prompter promptInWindow:[self window]];
-	[prompter setDelegate:self];
-	[prompter setCanvasSize:[canvas size]];
-	[prompter setZoomFactor:[view zoomPercentage] / 100];
+	if (![self hasUsableCanvas])
+		return;
+	
+	if (!_resizePrompter) {
+		_resizePrompter = [[PXPreviewResizePrompter alloc] init];
+		_resizePrompter.delegate = self;
+	}
+	
+	[_resizePrompter promptInWindow:[self window]];
+	[_resizePrompter setCanvasSize:[canvas size]];
+	[_resizePrompter setZoomFactor:[view zoomPercentage] / 100];
 }
 
 - (void)prompter:(PXPreviewResizePrompter *)prompter didFinishWithZoomFactor:(float)factor
