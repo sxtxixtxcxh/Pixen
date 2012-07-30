@@ -75,4 +75,7 @@ a.button:hover {
 	img#patterns {
 		content: url("Patterns_2x.png");
 	}
+	img#properties {
+		content: url("ToolProperties_2x.png");
+	}
 }
