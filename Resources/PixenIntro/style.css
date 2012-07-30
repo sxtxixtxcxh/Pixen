@@ -72,6 +72,9 @@ a.button:hover {
 	img#layers {
 		content: url("Layers_2x.png");
 	}
+	img#animation {
+		content: url("Animation_2x.png");
+	}
 	img#crosshair {
 		content: url("Crosshair_2x.png");
 	}
