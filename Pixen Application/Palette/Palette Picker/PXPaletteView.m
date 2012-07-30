@@ -78,6 +78,12 @@ const CGFloat viewMargin = 1.0f;
 	return YES;
 }
 
+- (void)drawRect:(NSRect)dirtyRect
+{
+	[[NSColor colorWithCalibratedWhite:0.95f alpha:1.0f] set];
+	NSRectFill(dirtyRect);
+}
+
 - (void)reload
 {
 	for (PXPaletteColorView *view in _visibleViews)
