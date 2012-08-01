@@ -193,7 +193,7 @@
 	[self beginUndoGrouping]; {
 		[self copyLayer:aLayer toPasteboard:[NSPasteboard generalPasteboard]];
 		[self removeLayer:aLayer];
-	} [self endUndoGrouping:NSLocalizedString(@"Cut Layer", @"Cut Layer")];
+	} [self endUndoGrouping];
 }
 
 - (void)copyActiveLayer

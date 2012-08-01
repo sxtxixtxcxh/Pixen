@@ -130,7 +130,7 @@
 {
 	[self beginUndoGrouping]; {
 		[self insertLayer:aLayer atIndex:[layers count]];
-	} [self endUndoGrouping:NSLocalizedString(@"Add Layer", @"Add Layer")];
+	} [self endUndoGrouping];
 }
 
 - (void)insertLayer:(PXLayer *) aLayer atIndex:(NSUInteger)index
@@ -151,7 +151,7 @@
 		[self activateLayer:aLayer];
 		[self refreshWholePalette];
 		[self changed];
-	} [self endUndoGrouping:NSLocalizedString(@"Insert Layer", @"Insert Layer")];
+	} [self endUndoGrouping];
 }
 
 - (void)removeLayer: (PXLayer*) aLayer
@@ -185,7 +185,7 @@
 		}
 		[self changed];
 		[self refreshWholePalette];
-	} [self endUndoGrouping:NSLocalizedString(@"Remove Layer", @"Remove Layer")];	
+	} [self endUndoGrouping];
 }
 
 - (void)addTempLayer:(PXLayer *)layer
@@ -272,7 +272,7 @@
 	
 	[self beginUndoGrouping]; {
 		[self insertLayer:result atIndex:index+1];
-	} [self endUndoGrouping:NSLocalizedString(@"Duplicate Layer", @"Duplicate Layer")];
+	} [self endUndoGrouping];
 }
 
 - (void)flipLayerHorizontally:aLayer
@@ -280,7 +280,7 @@
 	[self beginUndoGrouping]; {
 		[[[self undoManager] prepareWithInvocationTarget:self] flipLayerHorizontally:aLayer];
 		[aLayer flipHorizontally];
-	} [self endUndoGrouping:NSLocalizedString(@"Flip Layer Horizontally", @"Flip Layer Horizontally")];
+	} [self endUndoGrouping];
 	[self changed];
 }
 
@@ -289,7 +289,7 @@
 	[self beginUndoGrouping]; {
 		[[[self undoManager] prepareWithInvocationTarget:self] flipLayerVertically:aLayer];
 		[aLayer flipVertically];
-	} [self endUndoGrouping:NSLocalizedString(@"Flip Layer Vertically", @"Flip Layer Vertically")];
+	} [self endUndoGrouping];
 	[self changed];
 }
 
