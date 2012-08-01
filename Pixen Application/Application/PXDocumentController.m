@@ -428,6 +428,7 @@ NSString *palettesSubdirName = @"Palettes";
 	NSColor *color = [[prompter backgroundColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 	
 	[[document canvas] setSize:[prompter size] withOrigin:NSZeroPoint backgroundColor:PXColorFromNSColor(color)];
+	[document updateChangeCount:NSChangeCleared];
 	[[document canvasController] updateCanvasSize];
 	
 	return document;
