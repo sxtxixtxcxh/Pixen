@@ -145,7 +145,6 @@ NSUInteger PointSizeF (const void *item);
 		PXImage_replaceColorWithColor([layer image], color, destColor);
 	}
 	
-	[um setActionName:NSLocalizedString(@"COLOR_REPLACEMENT", nil)];
 	[um endUndoGrouping];
 	
 	[self changed];

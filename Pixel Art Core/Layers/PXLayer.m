@@ -101,7 +101,13 @@
 - (void)setVisible:(BOOL)state
 {
 	if (_visible != state) {
+		NSUndoManager *um = [[self canvas] undoManager];
+		[um beginUndoGrouping];
+		[[um prepareWithInvocationTarget:self] setVisible:_visible];
+		[um endUndoGrouping];
+		
 		_visible = state;
+		
 		[[self canvas] changed];
 	}
 }
