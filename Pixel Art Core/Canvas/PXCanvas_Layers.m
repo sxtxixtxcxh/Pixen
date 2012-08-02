@@ -236,7 +236,7 @@
 		
 		[self activateLayer:[layers objectAtIndex:targetIndex]];
 		[self changed];
-	} [self endUndoGrouping:NSLocalizedString(@"Reorder Layer", @"Reorder Layer")];
+	} [self endUndoGrouping];
 }
 
 - (void)rotateLayer:(PXLayer *)layer byDegrees:(int)degrees
