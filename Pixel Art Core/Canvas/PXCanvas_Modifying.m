@@ -248,7 +248,7 @@ NSUInteger PointSizeF (const void *item);
     {
         [self flipLayerHorizontally:current];
     }
-    [self endUndoGrouping:NSLocalizedString(@"Flip Canvas Horizontally", @"Flip Canvas Horizontally")];
+    [self endUndoGrouping];
 }
 
 - (void)flipVertically
@@ -258,7 +258,7 @@ NSUInteger PointSizeF (const void *item);
     {
         [self flipLayerVertically:current];
     }
-	[self endUndoGrouping:NSLocalizedString(@"Flip Canvas Vertically", @"Flip Canvas Vertically")];
+	[self endUndoGrouping];
 }
 
 - (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor
