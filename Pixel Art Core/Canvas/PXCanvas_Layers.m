@@ -17,15 +17,9 @@
 
 - (void)setLayers:(NSArray *) newLayers fromLayers:(NSArray *)oldLayers
 {
-	[self setLayers:newLayers fromLayers:oldLayers withDescription:NSLocalizedString(@"Set Layers", @"Set Layers")];
-}
-
-- (void)setLayers:(NSArray *) newLayers fromLayers:(NSArray *)oldLayers withDescription:(NSString *)desc
-{
 	[self beginUndoGrouping]; {
 		[[[self undoManager] prepareWithInvocationTarget:self] setLayers:oldLayers 
-															  fromLayers:newLayers
-														 withDescription:desc];
+															  fromLayers:newLayers];
 		NSSize oldSize = [self size];
 		[self setLayers:newLayers];
 		NSSize sz = [self size];
@@ -41,7 +35,7 @@
 			selectedRect = NSZeroRect;
 			[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasSizeChangedNotificationName object:self];
 		}
-	} [self endUndoGrouping:desc];
+	} [self endUndoGrouping];
 }
 
 - (void)setLayersNoResize:(NSArray *) newLayers fromLayers:(NSArray *)oldLayers

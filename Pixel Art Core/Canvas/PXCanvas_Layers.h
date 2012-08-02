@@ -19,7 +19,6 @@
 
 - (void)setLayers:(NSArray *) newLayers;
 - (void)setLayers:(NSArray*)layers fromLayers:(NSArray *)oldLayers;
-- (void)setLayers:(NSArray *) newLayers fromLayers:(NSArray *)oldLayers withDescription:(NSString *)desc;
 - (void)setLayersNoResize:(NSArray *) newLayers fromLayers:(NSArray *)oldLayers;
 
 - (void)addLayer:(PXLayer *)aLayer;
