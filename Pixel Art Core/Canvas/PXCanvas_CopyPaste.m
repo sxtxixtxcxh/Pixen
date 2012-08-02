@@ -213,7 +213,7 @@
 	[self beginUndoGrouping]; {
 		[self copySelection];
 		[self deleteSelection];
-	} [self endUndoGrouping:NSLocalizedString(@"Cut Selection", @"Cut Selection")];	
+	} [self endUndoGrouping];
 }
 
 - (void)paste
