@@ -256,7 +256,7 @@
 			newMask[i] = !(newMask[i]);
 		}
 		[self setMask:newMask];
-	} [self endUndoGrouping:NSLocalizedString(@"Invert Selection", @"Invert Selection")];
+	} [self endUndoGrouping];
 }
 
 - (void)updateSelectionSwitch
