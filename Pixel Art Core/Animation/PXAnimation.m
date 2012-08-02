@@ -153,7 +153,6 @@
 	if (undoManager != man) {
 		undoManager = man;
 		
-		[undoManager setGroupsByEvent:NO];
 		[cels setValue:man forKey:@"undoManager"];
 	}
 }

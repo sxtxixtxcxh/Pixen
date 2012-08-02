@@ -55,7 +55,6 @@
 - (void)setUndoManager:(NSUndoManager *)manager
 {
 	undoManager = manager;
-	[undoManager setGroupsByEvent:NO];
 //	[layers setValue:manager forKey:@"undoManager"];
 }
 

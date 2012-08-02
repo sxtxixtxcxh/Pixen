@@ -159,7 +159,13 @@
 - (void)setOpacity:(CGFloat)state
 {
 	if (_opacity != state) {
+		NSUndoManager *um = [[self canvas] undoManager];
+		[um beginUndoGrouping];
+		[ (PXLayer *) [um prepareWithInvocationTarget:self] setOpacity:_opacity];
+		[um endUndoGrouping];
+		
 		_opacity = state;
+		
 		[[self canvas] changed];
 	}
 }
