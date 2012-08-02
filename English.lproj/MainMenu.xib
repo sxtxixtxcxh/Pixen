@@ -435,7 +435,7 @@
 								</object>
 								<object class="NSMenuItem" id="129644657">
 									<reference key="NSMenu" ref="644071420"/>
-									<string key="NSTitle">Fill With Active Color</string>
+									<string key="NSTitle">Fill with Active Color</string>
 									<string key="NSKeyEquiv">f</string>
 									<int key="NSKeyEquivModMask">1572864</int>
 									<int key="NSMnemonicLoc">2147483647</int>
