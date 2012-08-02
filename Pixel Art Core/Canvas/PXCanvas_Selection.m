@@ -105,7 +105,7 @@
 		[self setHasSelection:NO];
 //FIXME: redraw more intelligently
 		[self changed];
-	} [self endUndoGrouping:NSLocalizedString(@"Select None", @"Select None")];
+	} [self endUndoGrouping];
 }
 
 - (void)deselectPixelAtPoint:(NSPoint)point
