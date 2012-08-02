@@ -80,7 +80,7 @@ NSUInteger PointSizeF (const void *item);
 		
 		[self changed];
 		[self refreshWholePalette];
-	} [self endUndoGrouping:NSLocalizedString(@"FILL_CANVAS", nil)];
+	} [self endUndoGrouping];
 }
 
 - (void)fillSelectionWithColor:(PXColor)color
@@ -110,7 +110,7 @@ NSUInteger PointSizeF (const void *item);
 		[self registerForUndo];
 		[self changed];
 		[self endColorUpdates];
-	} [self endUndoGrouping:NSLocalizedString(@"FILL_SELECTION", nil)];
+	} [self endUndoGrouping];
 }
 
 - (void)fillWithColor:(PXColor)color
