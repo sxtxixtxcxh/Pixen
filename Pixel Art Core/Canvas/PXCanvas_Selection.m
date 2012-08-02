@@ -242,7 +242,7 @@
 		memset(newMask, YES, [self selectionMaskSize]);
 //FIXME: slow in large images, can it be avoided?
 		[self setMask:newMask];
-	} [self endUndoGrouping:NSLocalizedString(@"Select All", @"Select All")];
+	} [self endUndoGrouping];
 }
 
 - (void)invertSelection
