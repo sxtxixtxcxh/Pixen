@@ -305,7 +305,7 @@
 				
 			});
 		}
-	} [self endUndoGrouping:NSLocalizedString(@"Merge Down", @"Merge Down")];
+	} [self endUndoGrouping];
 }
 
 - (void)moveLayer:(PXLayer *)layer byOffset:(NSPoint)offset
