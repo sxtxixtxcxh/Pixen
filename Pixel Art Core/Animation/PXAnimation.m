@@ -241,7 +241,6 @@
 	[undoManager beginUndoGrouping];
 	[[undoManager prepareWithInvocationTarget:self] insertObject:[self celAtIndex:index] inCelsAtIndex:index];
 	[cels removeObjectAtIndex:index];
-	[undoManager setActionName:NSLocalizedString(@"Delete Cel", @"Delete Cel")];
 	[undoManager endUndoGrouping];
 	[self didChangeValueForKey:@"countOfCels"];
 }
