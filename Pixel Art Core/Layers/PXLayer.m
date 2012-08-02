@@ -417,9 +417,9 @@
 {
 	PXLayer * copy = [[[self class] alloc] initWithName:self.name image:PXImage_copy(image)];
 	PXImage_release([copy image]);
-	[copy setCanvas:[self canvas]];
 	[copy setOpacity:self.opacity];
 	[copy setVisible:self.visible];
+	[copy setCanvas:[self canvas]];
 	return copy;
 }
 
