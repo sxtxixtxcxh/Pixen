@@ -476,7 +476,7 @@
 		[self deselect];
 		[self changed];
 		[self endColorUpdates];
-	} [self endUndoGrouping:NSLocalizedString(@"Delete Selection", @"Delete Selection")];
+	} [self endUndoGrouping];
 }
 
 - (void)cropToSelection
