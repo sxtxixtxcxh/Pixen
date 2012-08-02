@@ -278,24 +278,6 @@
 //	[window performClose:sender];
 //}
 
-
-- (BOOL)validateMenuItem:(NSMenuItem *)anItem
-{
-	BOOL v = [[self window] validateMenuItem:anItem];
-	NSUndoManager *manager = [[self document] undoManager];
-	if ([anItem action] == @selector(undo:))
-	{
-		[anItem setTitleWithMnemonic:[manager undoMenuItemTitle]];
-		return [manager canUndo];
-	}
-	if ([anItem action] == @selector(redo:))
-	{
-		[anItem setTitleWithMnemonic:[manager redoMenuItemTitle]];
-		return [manager canRedo];
-	}
-	return v;
-}
-
 - (BOOL)splitView:(NSSplitView *)sender canCollapseSubview:(NSView *)subview {
 	return (subview != canvasSplit);
 }
