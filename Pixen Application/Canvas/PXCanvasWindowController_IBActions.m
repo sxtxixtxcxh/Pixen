@@ -55,7 +55,7 @@
 	
 	[doc makeWindowControllers];
 	[doc showWindows];
-	[doc updateChangeCount:NSChangeReadOtherContents];
+	[doc updateChangeCount:NSChangeCleared];
 }
 
 - (void)rotateLayerCounterclockwise:sender
