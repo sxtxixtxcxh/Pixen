@@ -98,6 +98,20 @@
 	return image;
 }
 
+- (void)setName:(NSString *)name
+{
+	if (_name != name) {
+		if (_name) {
+			NSUndoManager *um = [[self canvas] undoManager];
+			[um beginUndoGrouping];
+			[ (PXLayer *) [um prepareWithInvocationTarget:self] setName:_name];
+			[um endUndoGrouping];
+		}
+		
+		_name = [name copy];
+	}
+}
+
 - (void)setVisible:(BOOL)state
 {
 	if (_visible != state) {
