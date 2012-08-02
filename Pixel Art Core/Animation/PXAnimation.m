@@ -178,7 +178,6 @@
     }
     [self setSize:resultSize];
   }
-	[undoManager setActionName:NSLocalizedString(@"Add Cel", @"Add Cel")];
 	[undoManager endUndoGrouping];
 	[self didChangeValueForKey:@"countOfCels"];
 }
