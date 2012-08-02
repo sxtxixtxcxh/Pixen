@@ -56,7 +56,7 @@
 			[self updatePreviewSize];
 			[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasSizeChangedNotificationName object:self];
 		}
-	} [self endUndoGrouping:NSLocalizedString(@"Set Layers", @"Set Layers")];
+	} [self endUndoGrouping];
 }
 
 - (PXLayer *)activeLayer

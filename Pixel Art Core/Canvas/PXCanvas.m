@@ -157,7 +157,7 @@
         //NSLog(@"Mask data updated - copied %@", [[layers lastObject] name]);
 			free(newMask);
       [self refreshWholePalette];
-		} [self endUndoGrouping:NSLocalizedString(@"Change Canvas Size", @"Change Canvas Size")];
+		} [self endUndoGrouping];
 	}
 	else 
 	{
