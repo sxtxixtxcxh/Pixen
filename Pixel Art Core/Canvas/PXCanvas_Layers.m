@@ -256,7 +256,7 @@
 		}
 		
 		[self changed];
-	} [self endUndoGrouping:[NSString stringWithFormat:NSLocalizedString(@"Rotate Layer", @"Rotate Layer"), degrees, [NSString degreeString]]];
+	} [self endUndoGrouping];
 }
 
 - (void)duplicateLayerAtIndex:(NSUInteger)index
