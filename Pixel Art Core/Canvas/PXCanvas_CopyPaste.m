@@ -9,6 +9,7 @@
 #import "PXCanvas_CopyPaste.h"
 #import "PXCanvas_Selection.h"
 #import "PXCanvas_Layers.h"
+#import "PXCanvas_Modifying.h"
 #import "PXLayer.h"
 
 @implementation PXCanvas(CopyPaste)
@@ -128,6 +129,7 @@
 	
 	[self beginUndoGrouping]; {
 		[self deselect];
+		[[[self undoManager] prepareWithInvocationTarget:self] restoreColorData:[activeLayer colorData] onLayer:activeLayer];
 		[layer compositeUnder:newLayer flattenOpacity:YES];
 	} [self endUndoGrouping];
 }
