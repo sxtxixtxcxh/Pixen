@@ -22,16 +22,6 @@
 	return NSLocalizedString(@"RECTANGULARSELECTION_NAME", @"Rectangular Selection Tool");
 }
 
-- (NSString *) movingActionName
-{
-	return NSLocalizedString(@"SELECTION_MOVE_ACTION", @"Moving");
-}
-
-- (NSString *) actionName
-{
-	return NSLocalizedString(@"RECTANGULARSELECTION_ACTION", @"Selection");
-}
-
 - (NSCursor *)cursor
 {
 	return [NSCursor crosshairCursor];

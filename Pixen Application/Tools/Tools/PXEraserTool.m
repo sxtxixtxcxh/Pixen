@@ -18,11 +18,6 @@
 	return NSLocalizedString(@"ERASER_NAME", @"Eraser Tool");
 }
 
-- (NSString *)actionName
-{
-	return NSLocalizedString(@"ERASER_ACTION", @"Erasure");
-}
-
 - (PXColor)colorForCanvas:(PXCanvas *)canvas
 {
 	return [canvas eraseColor];

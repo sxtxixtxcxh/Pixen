@@ -27,11 +27,6 @@
 	return NSLocalizedString(@"MOVE_NAME", @"Move Tool");
 }
 
--(NSString *)actionName
-{
-	return NSLocalizedString(@"MOVE_ACTION", @"Moving");
-}
-
 - (NSCursor *)cursor
 {
 	return [NSCursor openHandCursor];
@@ -241,7 +236,7 @@
 	}
 	
 	type = PXMoveTypeNone;
-	[canvas endUndoGrouping:[self actionName]];
+	[canvas endUndoGrouping];
 }
 
 - (void)keyDown:(NSEvent *)event fromCanvasController:(PXCanvasController *)cc

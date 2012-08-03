@@ -19,11 +19,6 @@
 	return NSLocalizedString(@"ELLIPSE_NAME", @"Ellipse Tool");
 }
 
--(NSString *)actionName
-{
-	return NSLocalizedString(@"ELLIPSE_ACTION", @"Drawing Ellipse");
-}
-
 - (PXToolPropertiesController *)createPropertiesController
 {
 	return [PXShapeToolPropertiesController new];

@@ -98,18 +98,13 @@ fromCanvasController:(PXCanvasController *)controller
 	
 }
 
-- actionName
-{
-	return NSLocalizedString(@"Drawing", @"Drawing");
-}
-
 - (void)mouseUpAt:(NSPoint)point 
 fromCanvasController:(PXCanvasController *)controller
 {
 	isClicking = NO;
 //FIXME: move undo
 	if ([[[controller canvas] undoManager] groupingLevel] > 0) {
-		[[controller canvas] endUndoGrouping:[self actionName]];
+		[[controller canvas] endUndoGrouping];
 	}
 }
 

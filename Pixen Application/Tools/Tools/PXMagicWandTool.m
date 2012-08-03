@@ -58,11 +58,6 @@
 	return YES;
 }
 
--(NSString *) actionName
-{
-	return NSLocalizedString(@"MAGICWAND_ACTION", @"Selection");
-}
-
 - (void)startMovingCanvas:(PXCanvas *) canvas
 {
 	selectedRect = [canvas selectedRect];
@@ -139,7 +134,7 @@ fromCanvasController:(PXCanvasController *)controller
 	{
 		[super mouseUpAt:aPoint fromCanvasController:controller];
 	}
-	[[controller canvas] endUndoGrouping:[self actionName]];
+	[[controller canvas] endUndoGrouping];
 }
 
 - (BOOL)checkSelectionOnCanvas:(PXCanvas *)canvas

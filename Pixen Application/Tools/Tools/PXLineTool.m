@@ -17,11 +17,6 @@
 	return NSLocalizedString(@"LINE_NAME", @"Line Tool");
 }
 
-- (NSString *)actionName
-{
-	return NSLocalizedString(@"LINE_ACTION", @"Drawing Line");
-}
-
 - (NSCursor *)cursor
 {
 	return [NSCursor crosshairCursor];

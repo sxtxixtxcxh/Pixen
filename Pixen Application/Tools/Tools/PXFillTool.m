@@ -34,11 +34,6 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 	return NSLocalizedString(@"FILL_NAME", @"Fill Tool");
 }
 
-- (NSString *)actionName
-{
-	return NSLocalizedString(@"FILL_ACTION", @"Fill");
-}
-
 - (PXToolPropertiesController *)createPropertiesController
 {
 	return [PXFillToolPropertiesController new];

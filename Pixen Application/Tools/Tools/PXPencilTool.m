@@ -59,11 +59,6 @@
 	return controller;
 }
 
-- (NSString *)actionName
-{
-	return NSLocalizedString(@"PENCIL_ACTION", @"Drawing");
-}
-
 - (void)drawWithOldColor:(PXColor)oldColor
 				newColor:(PXColor)newColor
 				 atPoint:(NSPoint)aPoint
@@ -183,7 +178,6 @@ fromCanvasController:(PXCanvasController*) controller
 {
 	[super mouseDownAt:aPoint fromCanvasController:controller];
 	shouldUseBezierDrawing = NO;
-	[[[controller canvas] undoManager] setActionName:[self actionName]];
 	isDragging = YES;
 	[[controller canvas] clearUndoBuffers];
 	[[controller canvas] beginColorUpdates];

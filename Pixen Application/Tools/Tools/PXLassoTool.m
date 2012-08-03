@@ -30,16 +30,6 @@
 	return self;
 }
 
--(NSString *) actionName
-{
-	return NSLocalizedString(@"LASSO_ACTION", @"Selection");
-}
-
-- (NSString *) movingActionName
-{
-	return NSLocalizedString(@"SELECTION_MOVE_ACTION", @"Moving");
-}
-
 - (NSCursor *)cursor
 {
 	return [NSCursor crosshairCursor];

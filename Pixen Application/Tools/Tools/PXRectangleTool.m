@@ -20,11 +20,6 @@
 	return NSLocalizedString(@"RECTANGLE_NAME", @"Rectangle Tool");
 }
 
--(NSString *) actionName
-{
-	return NSLocalizedString(@"RECTANGLE_ACTION", @"Drawing Rectangle");
-}
-
 - (PXToolPropertiesController *)createPropertiesController
 {
 	return [PXShapeToolPropertiesController new];
