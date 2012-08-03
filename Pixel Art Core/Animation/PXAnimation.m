@@ -230,7 +230,6 @@
 	[cel setUndoManager:undoManager];
 	[[undoManager prepareWithInvocationTarget:self] removeCel:cel];
 	[cels insertObject:cel atIndex:insertionIndex];
-	[undoManager setActionName:NSLocalizedString(@"Copy Cel", @"Copy Cel")];
 	[undoManager endUndoGrouping];
 	[self didChangeValueForKey:@"countOfCels"];
 }
