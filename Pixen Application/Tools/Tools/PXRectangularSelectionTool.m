@@ -178,7 +178,7 @@ fromCanvasController:(PXCanvasController *)controller
 			}
 		}
 	}
-	[[controller canvas] endUndoGrouping:NSLocalizedString(@"Selection", @"Selection")];
+	[[controller canvas] endUndoGrouping];
 	self.isClicking = NO;
 	[[controller canvas] changedInRect:[[controller canvas] selectedRect]];
 	selectedRect = NSZeroRect;

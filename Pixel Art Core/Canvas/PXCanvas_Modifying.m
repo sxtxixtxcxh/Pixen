@@ -204,7 +204,7 @@ NSUInteger PointSizeF (const void *item);
     {
         [self rotateLayer:current byDegrees:degrees];
     }
-    [self endUndoGrouping:[NSString stringWithFormat:NSLocalizedString(@"Rotate %d%@", @"Rotate %d%@"), degrees, [NSString degreeString]]];
+    [self endUndoGrouping];
 }
 
 - (void)changed

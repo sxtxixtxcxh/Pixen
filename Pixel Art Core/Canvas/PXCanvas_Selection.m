@@ -139,7 +139,7 @@
 		[self changed];
 		[[[self undoManager] prepareWithInvocationTarget:self] setSelectionMaskBit:!bit atIndices:changedIndices];
 		selectedRect = NSZeroRect;
-	} [self endUndoGrouping:NSLocalizedString(@"Selection", @"Selection")];
+	} [self endUndoGrouping];
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXSelectionMaskChangedNotificationName object:self];
 }
 
@@ -178,7 +178,7 @@
 			selectedRect = NSZeroRect;
 		}
 		[[[self undoManager] prepareWithInvocationTarget:self] setSelectionMaskBit:!maskValue atIndices:changedIndices];
-	} [self endUndoGrouping:NSLocalizedString(@"Selection", @"Selection")];
+	} [self endUndoGrouping];
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXSelectionMaskChangedNotificationName object:self];
 	[self changedInRect:NSInsetRect([self selectedRect], -1, -1)];
 }
@@ -351,7 +351,7 @@
 		}
 //FIXME: slow in large images, can it be avoided?
 		[self setMaskData:[NSData dataWithBytes:selectionMask length:[self selectionMaskSize]] withOldMaskData:oldMask];
-	} [self endUndoGrouping:NSLocalizedString(@"Move Selection", @"Move Selection")];
+	} [self endUndoGrouping];
 	selectionOrigin = NSZeroPoint;
 //FIXME: redraw more intelligently, change the selected rect appropriately rather than force its recaching
 //	selectedRect.origin.x += xOffset;
@@ -429,7 +429,7 @@
 	selectedRect = NSZeroRect;
 	[self beginUndoGrouping]; {
 		[[[self undoManager] prepareWithInvocationTarget:self] setMaskData:prevMask withOldMaskData:mask];
-	} [self endUndoGrouping:NSLocalizedString(@"Selection", @"Selection")];
+	} [self endUndoGrouping];
 	if([prevMask length] != [mask length])
 	{
 		free(selectionMask);
@@ -490,7 +490,7 @@
 	  backgroundColor:PXGetClearColor()];
 		
 		[self deselect];
-	} [self endUndoGrouping:NSLocalizedString(@"Crop", @"Crop")];
+	} [self endUndoGrouping];
 }
 
 @end

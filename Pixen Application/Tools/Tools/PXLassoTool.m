@@ -230,7 +230,7 @@
 			[canvas finalizeSelectionMotion];
 		}
 	}
-	[canvas endUndoGrouping:NSLocalizedString(@"Selection", @"Selection")];
+	[canvas endUndoGrouping];
 	[canvas updateSelectionSwitch];
 }
 

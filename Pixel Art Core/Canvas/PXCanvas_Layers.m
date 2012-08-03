@@ -315,7 +315,7 @@
 		[[[self undoManager] prepareWithInvocationTarget:self] restoreColorData:colorData onLayer:layer];
 		
 		[layer translateContentsByOffset:offset];
-	} [self endUndoGrouping:NSLocalizedString(@"MOVE_ACTION", nil)];
+	} [self endUndoGrouping];
 	
 	[self changed];
 	[self refreshWholePalette];

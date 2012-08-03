@@ -231,7 +231,7 @@ static NSArray *algorithms = nil;
 								  toSize:newSize];
 	[canvas setHasSelection:NO];
 	
-	} [canvas endUndoGrouping:NSLocalizedString(@"Scale Canvas", @"Scale Canvas")];	
+	} [canvas endUndoGrouping];
 }
 
 - (IBAction)scale:(id) sender

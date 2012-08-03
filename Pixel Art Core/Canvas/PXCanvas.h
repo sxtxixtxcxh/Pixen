@@ -71,7 +71,6 @@ typedef BOOL *PXSelectionMask;
 
 - (void)beginUndoGrouping;
 - (void)endUndoGrouping;
-- (void)endUndoGrouping:(NSString *)action;
 
 - (PXColor)eraseColor;
 

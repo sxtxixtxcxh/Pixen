@@ -199,12 +199,6 @@
 	[[self undoManager] beginUndoGrouping];
 }
 
-- (void)endUndoGrouping:(NSString *)action
-{
-	[[self undoManager] setActionName:action];
-	[self endUndoGrouping];
-}
-
 - (void)endUndoGrouping
 {
     //tried to push palette change groups here, but it doesn't seem to get called during an undo or redo
