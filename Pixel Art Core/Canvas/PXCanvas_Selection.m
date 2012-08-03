@@ -26,14 +26,15 @@
 {
 	[self beginUndoGrouping]; {
 		PXLayer *newLayer = [[PXLayer alloc] initWithName:NSLocalizedString(@"Promoted Selection", @"Promoted Selection")
-													  size:[self size]
-											 fillWithColor:PXGetClearColor()];
+													 size:[self size]
+											fillWithColor:PXGetClearColor()];
 		
 		int i, j;
 		NSPoint point;
 		[newLayer setCanvas:self];
 		
 		NSUndoManager *um = [self undoManager];
+		[[um prepareWithInvocationTarget:self] restoreColorData:[activeLayer colorData] onLayer:activeLayer];
 		
 		[self beginColorUpdates];
 		
@@ -45,7 +46,6 @@
 				{
 					point = NSMakePoint(i, j);
 					[self setColor:[self colorAtPoint:point] atPoint:point onLayer:newLayer];
-					[[um prepareWithInvocationTarget:self] setColor:[self colorAtPoint:point] atPoint:point];
 					[self setColor:[self eraseColor] atPoint:point];
 				}
 			}
@@ -56,7 +56,7 @@
 		[self addLayer:newLayer];
 		[self layersChanged];
 		[self deselect];
-	} [self endUndoGrouping:NSLocalizedString(@"Promote Selection to Layer", @"Promote Selection to Layer")];
+	} [self endUndoGrouping];
 }
 
 - (void)setHasSelection:(BOOL)newSelection
