@@ -205,7 +205,7 @@
 {
 	[self beginUndoGrouping]; {
 		[self pasteLayerFromPasteboard:[NSPasteboard generalPasteboard] type:PXLayerPboardType];
-	} [self endUndoGrouping:NSLocalizedString(@"Paste Layer", @"Paste Layer")];
+	} [self endUndoGrouping];
 }
 
 - (void)cutSelection
