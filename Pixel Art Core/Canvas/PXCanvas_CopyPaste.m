@@ -220,13 +220,13 @@
 {
 	[self beginUndoGrouping]; {
 		[self pasteFromPasteboard:[NSPasteboard generalPasteboard] type:PXNSImagePboardType];
-	} [self endUndoGrouping:NSLocalizedString(@"Paste Selection", @"Paste Selection")];
+	} [self endUndoGrouping];
 }
 - (void)pasteIntoLayer:(PXLayer *)layer
 {
 	[self beginUndoGrouping]; {
 		[self pasteFromPasteboard:[NSPasteboard generalPasteboard] type:PXNSImagePboardType intoLayer:layer];
-	} [self endUndoGrouping:NSLocalizedString(@"Paste Selection", @"Paste Selection")];
+	} [self endUndoGrouping];
 }
 
 @end
