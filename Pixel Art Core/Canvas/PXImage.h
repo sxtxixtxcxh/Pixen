@@ -62,4 +62,5 @@ PXImage *PXImage_initWithData(PXImage *self, NSData *data);
 PXImage *PXImage_initWithCoder(PXImage *self, NSCoder *coder, PXPalette *legacyPalette);
 void PXImage_encodeWithCoder(PXImage *self, NSCoder *coder);
 
+CGImageRef PXImage_quickImage(PXImage *self) CF_RETURNS_RETAINED;
 NSBitmapImageRep *PXImage_imageRep(PXImage *self);

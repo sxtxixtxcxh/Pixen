@@ -63,6 +63,7 @@
 - (void)compositeNoBlendUnder:(PXLayer *)aLayer inRect:(NSRect)aRect;
 
 - (NSBitmapImageRep *)imageRep;
+- (NSImage *)quickImage; // the fastest way to generate a 1x NSImage (used for layer thumbnails)
 
 - (void)adaptToPalette:(PXPalette *)p withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
 

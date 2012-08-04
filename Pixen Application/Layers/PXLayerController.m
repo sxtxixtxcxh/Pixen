@@ -50,6 +50,7 @@
 
 - (void)dealloc
 {
+	[[self class] cancelPreviousPerformRequestsWithTarget:self];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -150,15 +151,15 @@
 		PXLayerCellView *cellView = [rowView viewAtColumn:0];
 		PXLayer *layer = [cellView objectValue];
 		
-		cellView.imageView.image = [NSImage imageWithBitmapImageRep:layer.imageRep];
+		cellView.imageView.image = [layer quickImage];
 		
 	}];
 }
 
 - (void)updatePreview:(NSNotification *)notification
 {
-	[[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
-	[self performSelector:@selector(updatePreviewReal) withObject:nil afterDelay:0.05];
+	[[self class] cancelPreviousPerformRequestsWithTarget:self];
+	[self performSelector:@selector(updatePreviewReal) withObject:nil afterDelay:0.5];
 }
 
 #pragma mark -

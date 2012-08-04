@@ -606,6 +606,35 @@ void PXImage_drawRect(PXImage *self, NSRect rect, double opacity)
 	PXImage_drawInRectFromRectWithOperationFraction(self, rect, rect, NSCompositeSourceOver, opacity);
 }
 
+CGImageRef PXImage_quickImage(PXImage *self)
+{
+	static CGColorSpaceRef colorspace = NULL;
+	
+	if (!colorspace) {
+		colorspace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+	}
+	
+	CGContextRef target = CGBitmapContextCreate(NULL, self->width, self->height, 8, 0, colorspace, kCGImageAlphaPremultipliedLast);
+	
+	for (unsigned i = 0; i < self->tileCount; i++)
+	{
+		PXTile *tile = self->tiles[i];
+		CGPoint tileLoc = tile->location;
+		
+		if (!tile->image) {
+			tile->image = CGBitmapContextCreateImage(tile->painting);
+		}
+		
+		CGImageRef image = tile->image;
+		CGContextDrawImage(target, CGRectMake(tileLoc.x, tileLoc.y, CGImageGetWidth(image), CGImageGetHeight(image)), image);
+	}
+	
+	CGImageRef image2 = CGBitmapContextCreateImage(target);
+	CGContextRelease(target);
+	
+	return image2;
+}
+
 void PXImage_drawInRectFromRectWithOperationFraction(PXImage *self, NSRect dst, NSRect src, NSCompositingOperation operation, double opacity)
 {
 	NSGraphicsContext *nsContext = [NSGraphicsContext currentContext];

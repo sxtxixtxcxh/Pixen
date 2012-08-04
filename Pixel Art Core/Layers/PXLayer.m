@@ -377,6 +377,16 @@
 	return PXImage_imageRep(image);
 }
 
+- (NSImage *)quickImage
+{
+	CGImageRef img = PXImage_quickImage(image);
+	
+	NSImage *im = [[NSImage alloc] initWithCGImage:img size:NSMakeSize(CGImageGetWidth(img), CGImageGetHeight(img))];
+	CGImageRelease(img);
+	
+	return im;
+}
+
 - (void)flipHorizontally
 {
 	PXImage_flipHorizontally(image);
