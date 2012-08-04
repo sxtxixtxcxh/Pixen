@@ -98,6 +98,8 @@ PXColor PXTileColorAtXY(PXTile *t, int xv, int yv, BOOL *outSuccess)
 	PXColor color;
 	memcpy(&color, data + startIndex, sizeof(unsigned char) * 4);
 	
+	color.info = 0;
+	
 	return color;
 }
 

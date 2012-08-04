@@ -7,7 +7,7 @@
 
 #import "PXColorArray.h"
 
-#define COLOR_BATCH_SIZE 64
+#define COLOR_BATCH_SIZE 1024
 
 struct PXColorArray {
 	PXColor *_colors;

@@ -61,7 +61,6 @@
 - (PXPalette *)newFrequencyPaletteForAllCels
 {
 	PXPalette *palette = [[PXPalette alloc] initWithoutBackgroundColor];
-	NSCountedSet *colors = [NSCountedSet set];
 	
 	CGFloat w = [self size].width;
 	CGFloat h = [self size].height;
@@ -75,14 +74,9 @@
 			for (CGFloat j = 0; j < h; j++)
 			{
 				PXColor color = [canvas mergedColorAtPoint:NSMakePoint(i, j)];
-				[colors addObject:PXColorToNSColor(color)];
+				[palette incrementCountForColor:color byAmount:1];
 			}
 		}
-	}
-	
-	for (NSColor *color in colors)
-	{
-		[palette incrementCountForColor:PXColorFromNSColor(color) byAmount:[colors countForObject:color]];
 	}
 	
 	return palette;

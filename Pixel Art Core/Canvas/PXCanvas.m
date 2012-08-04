@@ -219,24 +219,16 @@
 	CGFloat w = [firstLayer size].width;
 	CGFloat h = [firstLayer size].height;
 	
-	NSCountedSet *colors = [NSCountedSet set];
-	
 	for (PXLayer *current in layers)
 	{
 		for (CGFloat i = 0; i < w; i++)
 		{
 			for (CGFloat j = 0; j < h; j++)
 			{
-				//TODO: get rid of PXColor -> NSColor conversion
 				PXColor color = [current colorAtPoint:NSMakePoint(i, j)];
-				[colors addObject:PXColorToNSColor(color)];
+				[palette incrementCountForColor:color byAmount:1];
 			}
 		}
-	}
-	
-	for (NSColor *color in colors)
-	{
-		[palette incrementCountForColor:PXColorFromNSColor(color) byAmount:[colors countForObject:color]];
 	}
 	
 	return palette;
