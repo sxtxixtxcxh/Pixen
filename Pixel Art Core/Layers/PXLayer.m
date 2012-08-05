@@ -135,17 +135,12 @@
 	return PXImage_colorAtIndex(image, index);
 }
 
-- (PXColor)colorAtPoint:(NSPoint)pt
+- (PXColor)colorAtPoint:(NSPoint)point
 {
-	NSPoint point = pt;
-	
-	if (canvas)
-	{
-		if (point.x >= [self size].width || point.x < 0 ||
-			point.y >= [self size].height || point.y < 0) {
-			
-			return PXGetClearColor();
-		}
+	if (point.x >= [self size].width || point.x < 0 ||
+		point.y >= [self size].height || point.y < 0) {
+		
+		return PXGetClearColor();
 	}
 	
 	return PXImage_colorAtXY(image, point.x, point.y);
