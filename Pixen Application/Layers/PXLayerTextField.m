@@ -19,6 +19,9 @@
 	if ([theEvent clickCount] == 2 && !_isEditing) {
 		[self beginEditing];
 	}
+	else {
+		[super mouseDown:theEvent];
+	}
 }
 
 - (void)beginEditing {
