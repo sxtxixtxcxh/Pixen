@@ -13,4 +13,6 @@
 
 - (IBAction)updateCell:(id)sender;
 
+- (IBAction)restoreDefaults:(id)sender;
+
 @end

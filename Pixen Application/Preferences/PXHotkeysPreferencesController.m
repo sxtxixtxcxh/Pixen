@@ -9,13 +9,6 @@
 
 #import "PXToolSwitcher.h"
 
-@interface PXHotkeysPreferencesController ()
-
-- (NSString *)classNameForToolWithTag:(PXToolTag)tag;
-
-@end
-
-
 @implementation PXHotkeysPreferencesController
 
 @synthesize form = _form;
@@ -69,6 +62,19 @@
 	
 	[[NSUserDefaults standardUserDefaults] setObject:[cell stringValue]
 											  forKey:[self classNameForToolWithTag: (PXToolTag) [cell tag]]];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXUpdatedHotkeysNotificationName object:nil];
+}
+
+- (void)restoreDefaults:(id)sender
+{
+	for (NSCell *currentCell in [self.form cells])
+	{
+		NSString *class = [self classNameForToolWithTag: (PXToolTag) [currentCell tag]];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:class];
+		
+		[currentCell setStringValue:[[NSUserDefaults standardUserDefaults] stringForKey:class]];
+	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXUpdatedHotkeysNotificationName object:nil];
 }
