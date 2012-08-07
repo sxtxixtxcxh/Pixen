@@ -17,6 +17,11 @@
 
 @synthesize windowController = _windowController;
 
++ (BOOL)autosavesInPlace
+{
+	return YES;
+}
+
 - (void)initWindowController { }
 
 - (void)setWindowControllerData { }
