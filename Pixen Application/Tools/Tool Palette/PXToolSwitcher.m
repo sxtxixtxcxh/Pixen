@@ -53,6 +53,34 @@
 - (void)awakeFromNib
 {
 	[toolsMatrix setDoubleAction:@selector(toolDoubleClicked:)];
+	
+	[self refreshTooltips];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(refreshTooltips)
+												 name:PXUpdatedHotkeysNotificationName
+											   object:nil];
+}
+
+- (void)refreshTooltips
+{
+	NSUInteger n = 0;
+	
+	for (NSButtonCell *cell in [toolsMatrix cells]) {
+		PXTool *tool = [tools objectAtIndex:n];
+		
+		NSString *shortcut = [[NSUserDefaults standardUserDefaults] stringForKey:[tool className]];
+		NSString *tooltip = [NSString stringWithFormat:@"%@ (%@)", [tool name], shortcut];
+		
+		[toolsMatrix setToolTip:tooltip forCell:cell];
+		
+		n++;
+	}
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (id)init

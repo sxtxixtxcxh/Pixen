@@ -37,3 +37,5 @@ NSString *PXUnlockToolSwitcherNotificationName = @"PXUnlockToolSwitcher";
 NSString *PXLockToolSwitcherNotificationName = @"PXLockToolSwitcher";
 
 NSString *PXPresetsChangedNotificationName = @"PXPresetsChanged";
+
+NSString *PXUpdatedHotkeysNotificationName = @"PXUpdatedHotkeys";

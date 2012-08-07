@@ -69,6 +69,8 @@
 	
 	[[NSUserDefaults standardUserDefaults] setObject:[cell stringValue]
 											  forKey:[self classNameForToolWithTag: (PXToolTag) [cell tag]]];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXUpdatedHotkeysNotificationName object:nil];
 }
 
 @end
