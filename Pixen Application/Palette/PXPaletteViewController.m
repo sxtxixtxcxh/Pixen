@@ -28,6 +28,15 @@
 
 @implementation PXPaletteViewController
 
+#define HA 120
+#define HD 121
+#define SA 122
+#define SD 123
+#define BA 124
+#define BD 125
+
+void RGBtoHSV(PXColor c, CGFloat *h, CGFloat *s, CGFloat *v);
+
 @synthesize paletteSelector, addColorButton, removeColorButton, infoField, paletteView, delegate;
 
 - (id)init
@@ -96,6 +105,10 @@
 
 - (BOOL)validateMenuItem:(id)item
 {
+	if ([item tag] >= HA) {
+		return [paletteView palette].canSave;
+	}
+	
 	if ([item action] == @selector(renamePalette:)) {
 		return ([paletteView palette].canSave);
 	}
@@ -104,6 +117,90 @@
 	}
 	
 	return YES;
+}
+
+void RGBtoHSV(PXColor c, CGFloat *h, CGFloat *s, CGFloat *v)
+{
+	CGFloat r = c.r / 255.0f;
+	CGFloat g = c.g / 255.0f;
+	CGFloat b = c.b / 255.0f;
+	
+	CGFloat min, max, delta;
+	min = MIN(MIN(r, g), b);
+	max = MAX(MAX(r, g), b);
+	
+	*v = max;
+	
+	delta = max - min;
+	
+	if (max != 0)
+		*s = delta / max;
+	else {
+		*s = 0;
+		*h = -1;
+		return;
+	}
+	
+	if (r == max)
+		*h = (g - b) / delta;
+	else if (g == max)
+		*h = 2 + (b - r) / delta;
+	else
+		*h = 4 + (r - g) / delta;
+	
+	*h *= 60;
+	
+	if (*h < 0)
+		*h += 360;
+}
+
+- (IBAction)sortByColor:(id)sender
+{
+	[[paletteView palette] sortWithBlock:^int(PXColor *a, PXColor *b) {
+		
+		CGFloat hsv1[3];
+		CGFloat hsv2[3];
+		
+		RGBtoHSV(*a, hsv1, hsv1+1, hsv1+2);
+		RGBtoHSV(*b, hsv2, hsv2+1, hsv2+2);
+		
+		if ([sender tag] == HA) {
+			if (hsv1[0] == hsv2[0]) return 0;
+			else if (hsv1[0] < hsv2[0]) return -1;
+			else return 1;
+		}
+		else if ([sender tag] == HD) {
+			if (hsv1[0] == hsv2[0]) return 0;
+			else if (hsv1[0] < hsv2[0]) return 1;
+			else return -1;
+		}
+		else if ([sender tag] == SA) {
+			if (hsv1[1] == hsv2[1]) return 0;
+			else if (hsv1[1] < hsv2[1]) return -1;
+			else return 1;
+		}
+		else if ([sender tag] == SD) {
+			if (hsv1[1] == hsv2[1]) return 0;
+			else if (hsv1[1] < hsv2[1]) return 1;
+			else return -1;
+		}
+		else if ([sender tag] == BA) {
+			if (hsv1[2] == hsv2[2]) return 0;
+			else if (hsv1[2] < hsv2[2]) return -1;
+			else return 1;
+		}
+		else if ([sender tag] == BD) {
+			if (hsv1[2] == hsv2[2]) return 0;
+			else if (hsv1[2] < hsv2[2]) return 1;
+			else return -1;
+		}
+		
+		return 0;
+		
+	}];
+	
+	[[paletteView palette] save];
+	[paletteView reload];
 }
 
 - (IBAction)addColor:(id)sender

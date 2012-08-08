@@ -321,9 +321,21 @@ NSArray *CreateGrayList()
 	PXColorArraySetColorInfoAtIndex(_colors, currIndex, value);
 }
 
+- (void)sortWithBlock:(PXColorComparator)block
+{
+	PXColorArraySort(_colors, block);
+}
+
 - (void)sortByFrequency
 {
-	PXColorArraySortByInfo(_colors);
+	PXColorArraySort(_colors, ^int(PXColor *a, PXColor *b) {
+		if (a->info == b->info)
+			return 0;
+		else if (a->info < b->info)
+			return 1;
+		
+		return -1;
+	});
 }
 
 - (void)removeFile

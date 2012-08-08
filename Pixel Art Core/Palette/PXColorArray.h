@@ -10,6 +10,7 @@
 typedef struct PXColorArray *PXColorArrayRef;
 
 typedef void (^PXColorArrayEnumerationBlock)(PXColor);
+typedef int(^PXColorComparator)(PXColor *a, PXColor *b);
 
 PXColorArrayRef PXColorArrayCreate(void);
 
@@ -32,7 +33,7 @@ void PXColorArrayRemoveColorAtIndex(PXColorArrayRef self, NSUInteger index);
 
 void PXColorArrayMoveColor(PXColorArrayRef self, NSUInteger sourceIndex, NSUInteger targetIndex);
 
-void PXColorArraySortByInfo(PXColorArrayRef self);
+void PXColorArraySort(PXColorArrayRef self, PXColorComparator block);
 
 /* behavior is undefined if `index` is out-of-bounds */
 NSUInteger PXColorArrayColorInfoAtIndex(PXColorArrayRef self, NSUInteger index);

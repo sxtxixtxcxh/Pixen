@@ -37,6 +37,8 @@
 - (IBAction)newPalette:sender;
 - (IBAction)renamePalette:sender;
 
+- (IBAction)sortByColor:(id)sender;
+
 - (void)reloadData;
 - (void)reloadDataAndShow:(PXPalette *)palette;
 
