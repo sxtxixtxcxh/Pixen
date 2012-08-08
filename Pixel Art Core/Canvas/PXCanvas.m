@@ -210,6 +210,24 @@
 	return PXGetClearColor();
 }
 
++ (PXColor)mergedColorAtPoint:(NSPoint)aPoint withLayers:(NSArray *)layers
+{
+	PXColor currentColor = PXGetClearColor();
+	
+	for (PXLayer *layer in layers)
+	{
+		if ([layer visible] && [layer opacity] > 0)
+		{
+			PXColor layerColor = [layer colorAtPoint:aPoint];
+			layerColor.a *= ([layer opacity] / 100.0f);
+			
+			currentColor = PXColorBlendWithColor(currentColor, layerColor);
+		}
+	}
+	
+	return currentColor;
+}
+
 + (PXPalette *)frequencyPaletteForLayers:(NSArray *)layers
 {
 	PXPalette *palette = [[PXPalette alloc] initWithoutBackgroundColor];
@@ -219,15 +237,12 @@
 	CGFloat w = [firstLayer size].width;
 	CGFloat h = [firstLayer size].height;
 	
-	for (PXLayer *current in layers)
+	for (CGFloat i = 0; i < w; i++)
 	{
-		for (CGFloat i = 0; i < w; i++)
+		for (CGFloat j = 0; j < h; j++)
 		{
-			for (CGFloat j = 0; j < h; j++)
-			{
-				PXColor color = [current colorAtPoint:NSMakePoint(i, j)];
-				[palette incrementCountForColor:color byAmount:1];
-			}
+			PXColor color = [self mergedColorAtPoint:NSMakePoint(i, j) withLayers:layers];
+			[palette incrementCountForColor:color byAmount:1];
 		}
 	}
 	
