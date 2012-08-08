@@ -301,21 +301,6 @@ NSArray *CreateGrayList()
 	value += amount;
 	
 	PXColorArraySetColorInfoAtIndex(_colors, currIndex, value);
-	
-	NSUInteger finalIndex = NSNotFound;
-	
-	for (NSInteger n = (currIndex-1); n >= 0; n--) {
-		if (PXColorArrayColorInfoAtIndex(_colors, n) <= value) {
-			finalIndex = n;
-		}
-		else {
-			break;
-		}
-	}
-	
-	if (finalIndex != NSNotFound) {
-		PXColorArrayMoveColor(_colors, currIndex, finalIndex);
-	}
 }
 
 - (void)decrementCountForColor:(PXColor)color byAmount:(NSInteger)amount
@@ -334,21 +319,11 @@ NSArray *CreateGrayList()
 	}
 	
 	PXColorArraySetColorInfoAtIndex(_colors, currIndex, value);
-	
-	NSUInteger finalIndex = NSNotFound;
-	
-	for (NSInteger n = (currIndex+1); n < PXColorArrayCount(_colors); n++) {
-		if (value <= PXColorArrayColorInfoAtIndex(_colors, n)) {
-			finalIndex = n;
-		}
-		else {
-			break;
-		}
-	}
-	
-	if (finalIndex != NSNotFound) {
-		PXColorArrayMoveColor(_colors, currIndex, finalIndex);
-	}
+}
+
+- (void)sortByFrequency
+{
+	PXColorArraySortByInfo(_colors);
 }
 
 - (void)removeFile

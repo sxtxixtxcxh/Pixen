@@ -157,6 +157,23 @@ void PXColorArrayMoveColor(PXColorArrayRef self, NSUInteger sourceIndex, NSUInte
 	}
 }
 
+void PXColorArraySortByInfo(PXColorArrayRef self)
+{
+	qsort_b(self->_colors, self->_count, sizeof(PXColor), ^int(const void *a, const void *b) {
+		
+		PXColor *one = (PXColor *)a;
+		PXColor *two = (PXColor *)b;
+		
+		if (one->info == two->info)
+			return 0;
+		else if (one->info < two->info)
+			return 1;
+		
+		return -1;
+		
+	});
+}
+
 NSUInteger PXColorArrayColorInfoAtIndex(PXColorArrayRef self, NSUInteger index)
 {
 	return self->_colors[index].info;

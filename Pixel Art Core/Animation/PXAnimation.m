@@ -79,6 +79,8 @@
 		}
 	}
 	
+	[palette sortByFrequency];
+	
 	return palette;
 }
 

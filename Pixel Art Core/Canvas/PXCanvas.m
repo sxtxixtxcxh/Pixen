@@ -231,6 +231,8 @@
 		}
 	}
 	
+	[palette sortByFrequency];
+	
 	return palette;
 }
 

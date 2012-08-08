@@ -170,6 +170,8 @@
 			}
 		}
 		
+		[palette sortByFrequency];
+		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			
 			_frequencyPalette = palette;
@@ -215,6 +217,8 @@
 				
 			}];
 		}
+		
+		[_frequencyPalette sortByFrequency];
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			

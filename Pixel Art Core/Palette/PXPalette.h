@@ -53,6 +53,8 @@
 - (void)incrementCountForColor:(PXColor)color byAmount:(NSInteger)amount;
 - (void)decrementCountForColor:(PXColor)color byAmount:(NSInteger)amount;
 
+- (void)sortByFrequency;
+
 - (void)removeFile;
 - (void)save;
 
