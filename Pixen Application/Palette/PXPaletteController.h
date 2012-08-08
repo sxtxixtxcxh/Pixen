@@ -18,9 +18,8 @@ typedef enum {
 	PXPaletteMode _mode;
 	PXPalette *_frequencyPalette, *_recentPalette;
 	
-	//FIXME: evaluate thread-safety
-	dispatch_queue_t _frequencyQueue;
-	dispatch_queue_t _recentQueue;
+	NSOperationQueue *_frequencyQueue;
+	NSOperationQueue *_recentQueue;
 }
 
 @property (nonatomic, weak) IBOutlet NSProgressIndicator *progressIndicator;

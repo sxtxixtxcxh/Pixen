@@ -34,8 +34,13 @@
 {
 	self = [super initWithNibName:@"PXPaletteController" bundle:nil];
 	
-	_frequencyQueue = dispatch_queue_create("com.Pixen.queue.FrequencyPalette", 0);
-	_recentQueue = dispatch_queue_create("com.Pixen.queue.RecentPalette", 0);
+	_frequencyQueue = [NSOperationQueue new];
+	_recentQueue = [NSOperationQueue new];
+	
+	[_frequencyQueue setMaxConcurrentOperationCount:1];
+	[_recentQueue setMaxConcurrentOperationCount:1];
+	
+	[_frequencyQueue addObserver:self forKeyPath:@"operationCount" options:0 context:NULL];
 	
 	_frequencyPalette = [[PXPalette alloc] initWithoutBackgroundColor];
 	_recentPalette = [[PXPalette alloc] initWithoutBackgroundColor];
@@ -54,11 +59,15 @@
 	return self;
 }
 
+- (void)closedDocument:(NSNotification *)notification
+{
+	[_frequencyQueue cancelAllOperations];
+}
+
 - (void)dealloc
 {
+	[_frequencyQueue removeObserver:self forKeyPath:@"operationCount"];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	dispatch_release(_frequencyQueue);
-	dispatch_release(_recentQueue);
 }
 
 - (void)awakeFromNib
@@ -79,6 +88,11 @@
 		_document = document;
 		
 		[self refreshPalette:nil];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(closedDocument:)
+													 name:PXDocumentDidCloseNotificationName
+												   object:document];
 	}
 }
 
@@ -104,6 +118,20 @@
 	}
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if ([keyPath isEqualToString:@"operationCount"]) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+			if ([_frequencyQueue operationCount]) {
+				[_progressIndicator startAnimation:nil];
+			}
+			else {
+				[_progressIndicator stopAnimation:nil];
+			}
+		});
+	}
+}
+
 - (void)refreshPalette:(NSNotification *)note
 {
 	PXCanvas *canvas = [note object];
@@ -111,27 +139,50 @@
 	if (![_document containsCanvas:canvas])
 		return;
 	
-	[_progressIndicator startAnimation:nil];
+	[_frequencyQueue cancelAllOperations];
 	
 	NSArray *layers = [[canvas layers] copy];
 	
-	dispatch_async(_frequencyQueue, ^{
+	NSBlockOperation *op = [[NSBlockOperation alloc] init];
+	__weak NSBlockOperation *weakOp = op;
+	
+	[op addExecutionBlock:^{
 		
-		PXPalette *palette = [PXCanvas frequencyPaletteForLayers:layers];
+		PXPalette *palette = [[PXPalette alloc] initWithoutBackgroundColor];
 		
-		_frequencyPalette = palette;
+		PXLayer *firstLayer = [layers objectAtIndex:0];
+		
+		CGFloat w = [firstLayer size].width;
+		CGFloat h = [firstLayer size].height;
+		
+		for (PXLayer *current in layers)
+		{
+			for (CGFloat i = 0; i < w; i++)
+			{
+				if ([weakOp isCancelled])
+					return;
+				
+				for (CGFloat j = 0; j < h; j++)
+				{
+					PXColor color = [current colorAtPoint:NSMakePoint(i, j)];
+					[palette incrementCountForColor:color byAmount:1];
+				}
+			}
+		}
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
+			
+			_frequencyPalette = palette;
 			
 			if (_mode == PXPaletteModeFrequency) {
 				[_paletteView setPalette:_frequencyPalette];
 			}
 			
-			[_progressIndicator stopAnimation:nil];
-			
 		});
 		
-	});
+	}];
+	
+	[_frequencyQueue addOperation:op];
 }
 
 - (void)updatePalette:(NSNotification *)note
@@ -144,7 +195,7 @@
 	NSCountedSet *oldC = [[changes objectForKey:@"PXCanvasPaletteUpdateRemoved"] copy];
 	NSCountedSet *newC = [[changes objectForKey:@"PXCanvasPaletteUpdateAdded"] copy];
 	
-	dispatch_async(_frequencyQueue, ^{
+	[_frequencyQueue addOperationWithBlock:^{
 		
 		for (NSColor *old in oldC)
 		{
@@ -158,11 +209,11 @@
 			PXColor color = PXColorFromNSColor(new);
 			[_frequencyPalette incrementCountForColor:color byAmount:[newC countForObject:new]];
 			
-			dispatch_sync(_recentQueue, ^{
+			[_recentQueue addOperationWithBlock:^{
 				
 				[self addRecentColor:color];
 				
-			});
+			}];
 		}
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
@@ -171,7 +222,7 @@
 			
 		});
 		
-	});
+	}];
 }
 
 - (void)useColorAtIndex:(NSUInteger)index
