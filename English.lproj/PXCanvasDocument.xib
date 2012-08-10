@@ -124,7 +124,7 @@
 															<string key="NSExtension">NSView</string>
 														</object>
 													</array>
-													<string key="NSFrame">{{1, 1}, {399, 592}}</string>
+													<string key="NSFrameSize">{401, 594}</string>
 													<reference key="NSSuperview" ref="611315938"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="1005682494"/>
@@ -143,7 +143,7 @@
 												<object class="NSScroller" id="159475357">
 													<reference key="NSNextResponder" ref="611315938"/>
 													<int key="NSvFlags">256</int>
-													<string key="NSFrame">{{384, 1}, {16, 592}}</string>
+													<string key="NSFrame">{{385, 0}, {16, 594}}</string>
 													<reference key="NSSuperview" ref="611315938"/>
 													<reference key="NSWindow"/>
 													<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -155,7 +155,7 @@
 												<object class="NSScroller" id="728014243">
 													<reference key="NSNextResponder" ref="611315938"/>
 													<int key="NSvFlags">256</int>
-													<string key="NSFrame">{{1, 577}, {399, 16}}</string>
+													<string key="NSFrame">{{0, 578}, {401, 16}}</string>
 													<reference key="NSSuperview" ref="611315938"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="159475357"/>
@@ -170,7 +170,7 @@
 											<reference key="NSSuperview" ref="694173087"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="1060654567"/>
-											<int key="NSsFlags">133170</int>
+											<int key="NSsFlags">133168</int>
 											<reference key="NSVScroller" ref="159475357"/>
 											<reference key="NSHScroller" ref="728014243"/>
 											<reference key="NSContentView" ref="1060654567"/>
