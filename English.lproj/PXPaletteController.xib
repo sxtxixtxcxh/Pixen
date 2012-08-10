@@ -416,7 +416,7 @@
 					<object class="IBToolTipAttribute" key="NS.object.0">
 						<string key="name">ToolTip</string>
 						<reference key="object" ref="679747363"/>
-						<string key="toolTip">Most Used</string>
+						<string key="toolTip">Frequency Palette</string>
 					</object>
 				</object>
 				<string key="19.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -427,7 +427,7 @@
 					<object class="IBToolTipAttribute" key="NS.object.0">
 						<string key="name">ToolTip</string>
 						<reference key="object" ref="208761208"/>
-						<string key="toolTip">Most Recently Used</string>
+						<string key="toolTip">Recent Colors</string>
 					</object>
 				</object>
 				<string key="20.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
