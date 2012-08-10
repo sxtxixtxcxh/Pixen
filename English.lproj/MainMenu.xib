@@ -754,7 +754,7 @@
 								</object>
 								<object class="NSMenuItem" id="297930681">
 									<reference key="NSMenu" ref="522027000"/>
-									<string key="NSTitle">Alignment Crosshairs</string>
+									<string key="NSTitle">Alignment Crosshair</string>
 									<string key="NSKeyEquiv">a</string>
 									<int key="NSKeyEquivModMask">1310720</int>
 									<int key="NSMnemonicLoc">2147483647</int>

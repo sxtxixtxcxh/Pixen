@@ -360,8 +360,8 @@ NSString *palettesSubdirName = @"Palettes";
 	else if ([anItem action] == @selector(toggleAlignmentCrosshairs:))
 	{
 		BOOL showCrosshairs = [[NSUserDefaults standardUserDefaults] boolForKey:PXCrosshairEnabledKey];
-		[anItem setTitle:(showCrosshairs) ? NSLocalizedString(@"HIDE_ALIGNMENT_CROSSHAIRS", @"Hide Alignment Crosshairs") :
-		 NSLocalizedString(@"SHOW_ALIGNMENT_CROSSHAIRS", @"Show Alignment Crosshairs")];
+		[anItem setTitle:(showCrosshairs) ? NSLocalizedString(@"HIDE_ALIGNMENT_CROSSHAIRS", @"Hide Alignment Crosshair") :
+		 NSLocalizedString(@"SHOW_ALIGNMENT_CROSSHAIRS", @"Show Alignment Crosshair")];
 		return YES;
 	}
 	else if ([anItem action] == @selector(togglePreviousCelOverlay:))

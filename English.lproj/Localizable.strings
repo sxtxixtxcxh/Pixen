@@ -206,9 +206,9 @@
 "LASSO_ACTION" = "Selection";
 
 /* Show Alignment Crosshairs */
-"SHOW_ALIGNMENT_CROSSHAIRS" = "Show Alignment Crosshairs";
+"SHOW_ALIGNMENT_CROSSHAIRS" = "Show Alignment Crosshair";
 /* Hide Alignment Crosshairs */
-"HIDE_ALIGNMENT_CROSSHAIRS" = "Hide Alignment Crosshairs";
+"HIDE_ALIGNMENT_CROSSHAIRS" = "Hide Alignment Crosshair";
 
 /* Show Tool Preview */
 "SHOW_TOOL_PREVIEW" = "Show Tool Preview";
