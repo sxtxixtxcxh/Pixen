@@ -20,7 +20,7 @@
 @property (nonatomic, weak) IBOutlet NSTextField *statusField;
 @property (nonatomic, weak) IBOutlet NSProgressIndicator *progressIndicator;
 @property (nonatomic, weak) IBOutlet NSButton *cancelButton;
-@property (nonatomic, weak) IBOutlet NSWindow *window;
+@property (nonatomic, strong) IBOutlet NSWindow *window;
 
 // This method returns the singleton instance of the progress popup. Don't allocate your own; use this method.
 + (OSProgressPopup *)sharedProgressPopup;
