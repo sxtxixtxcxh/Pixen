@@ -62,6 +62,8 @@
 
 - (IBAction)dismiss:(id)sender
 {
+	[self.window makeFirstResponder:nil];
+	
 	[NSApp endSheet:[self window]];
 	[self.window orderOut:nil];
 }
