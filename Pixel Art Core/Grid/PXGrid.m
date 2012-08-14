@@ -69,7 +69,7 @@
 								  toPoint:NSMakePoint(i, dimensions.height)];
 	}
 	
-	for (CGFloat i = self.unitSize.height; i < dimensions.height + self.unitSize.height; i += self.unitSize.height)
+	for (CGFloat i = dimensions.height; i >= 0.0f; i -= self.unitSize.height)
 	{
 		[NSBezierPath strokeLineFromPoint:NSMakePoint(0.0f, i)
 								  toPoint:NSMakePoint(dimensions.width, i)];
