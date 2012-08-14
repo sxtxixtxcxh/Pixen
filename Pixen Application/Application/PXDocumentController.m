@@ -136,6 +136,11 @@ NSString *palettesSubdirName = @"Palettes";
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/Pixen/Pixen/wiki"]];
 }
 
+- (IBAction)displaySupport:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://pixen.uservoice.com/forums/171709-general"]];
+}
+
 - (void)checkForUpdates:(id)sender
 {
 #if GTK

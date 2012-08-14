@@ -1367,6 +1367,14 @@
 									<reference key="NSOnImage" ref="130733852"/>
 									<reference key="NSMixedImage" ref="295545801"/>
 								</object>
+								<object class="NSMenuItem" id="786815687">
+									<reference key="NSMenu" ref="726161506"/>
+									<string key="NSTitle">Support</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="130733852"/>
+									<reference key="NSMixedImage" ref="295545801"/>
+								</object>
 								<object class="NSMenuItem" id="183102929">
 									<reference key="NSMenu" ref="726161506"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -1379,7 +1387,7 @@
 								</object>
 								<object class="NSMenuItem" id="46941642">
 									<reference key="NSMenu" ref="726161506"/>
-									<string key="NSTitle">Discover Pixen</string>
+									<string key="NSTitle">Discover Pixen...</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -2057,14 +2065,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">displayHelp:</string>
-						<reference key="source" ref="199577436"/>
-						<reference key="destination" ref="259835555"/>
-					</object>
-					<int key="connectionID">538</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">fill:</string>
 						<reference key="source" ref="199577436"/>
 						<reference key="destination" ref="129644657"/>
@@ -2102,6 +2102,22 @@
 						<reference key="destination" ref="486890289"/>
 					</object>
 					<int key="connectionID">548</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">displaySupport:</string>
+						<reference key="source" ref="797232323"/>
+						<reference key="destination" ref="786815687"/>
+					</object>
+					<int key="connectionID">551</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">displayHelp:</string>
+						<reference key="source" ref="797232323"/>
+						<reference key="destination" ref="259835555"/>
+					</object>
+					<int key="connectionID">552</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2502,6 +2518,7 @@
 							<reference ref="46941642"/>
 							<reference ref="259835555"/>
 							<reference ref="183102929"/>
+							<reference ref="786815687"/>
 						</array>
 						<reference key="parent" ref="928172864"/>
 					</object>
@@ -3166,6 +3183,11 @@
 						<reference key="object" ref="183102929"/>
 						<reference key="parent" ref="726161506"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">550</int>
+						<reference key="object" ref="786815687"/>
+						<reference key="parent" ref="726161506"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -3312,6 +3334,7 @@
 				<string key="545.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="547.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="549.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="550.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3329,7 +3352,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">549</int>
+			<int key="maxID">552</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4068,6 +4091,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="checkForUpdates:">id</string>
 						<string key="displayHelp:">id</string>
+						<string key="displaySupport:">id</string>
 						<string key="newAnimationDocument:">id</string>
 						<string key="newFromClipboard:">id</string>
 					</dictionary>
@@ -4078,6 +4102,10 @@
 						</object>
 						<object class="IBActionInfo" key="displayHelp:">
 							<string key="name">displayHelp:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="displaySupport:">
+							<string key="name">displaySupport:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="newAnimationDocument:">

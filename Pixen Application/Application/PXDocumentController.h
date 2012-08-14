@@ -10,6 +10,7 @@
 }
 
 - (IBAction)displayHelp:(id)sender;
+- (IBAction)displaySupport:(id)sender;
 
 - (IBAction)newFromClipboard:sender;
 
