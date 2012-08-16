@@ -216,6 +216,7 @@
 									<bool key="NS.localized">YES</bool>
 									<bool key="NS.allowsfloats">YES</bool>
 								</object>
+								<string key="NSPlaceholderString">Width</string>
 								<reference key="NSControlView" ref="455233712"/>
 								<bool key="NSDrawsBackground">YES</bool>
 								<object class="NSColor" key="NSBackgroundColor" id="790902020">
