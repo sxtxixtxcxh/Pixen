@@ -42,23 +42,23 @@
 			colors = [NSArray arrayWithObjects:
 					  [NSColor colorWithCalibratedRed:0.58f green:0.86f blue:0.98f alpha:1.0f],
 					  [NSColor colorWithCalibratedRed:0.42f green:0.68f blue:0.90f alpha:1.0f],
-					  [NSColor colorWithCalibratedRed:0.64f green:0.80f blue:0.94f alpha:1.0f],
+					  [NSColor colorWithCalibratedRed:0.59f green:0.75f blue:0.92f alpha:1.0f],
 					  [NSColor colorWithCalibratedRed:0.56f green:0.70f blue:0.90f alpha:1.0f], nil];
 		}
 		else {
 			colors = [NSArray arrayWithObjects:
 					  [NSColor colorWithCalibratedRed:0.80f green:0.80f blue:0.80f alpha:1.0f],
 					  [NSColor colorWithCalibratedRed:0.70f green:0.70f blue:0.70f alpha:1.0f],
-					  [NSColor colorWithCalibratedRed:0.80f green:0.80f blue:0.80f alpha:1.0f],
-					  [NSColor colorWithCalibratedRed:0.77f green:0.77f blue:0.77f alpha:1.0f], nil];
+					  [NSColor colorWithCalibratedRed:0.77f green:0.77f blue:0.77f alpha:1.0f],
+					  [NSColor colorWithCalibratedRed:0.75f green:0.75f blue:0.75f alpha:1.0f], nil];
 		}
 	}
 	else {
 		colors = [NSArray arrayWithObjects:
 				  [NSColor colorWithCalibratedRed:0.95f green:0.95f blue:0.95f alpha:1.0f],
 				  [NSColor colorWithCalibratedRed:0.85f green:0.85f blue:0.85f alpha:1.0f],
-				  [NSColor colorWithCalibratedRed:0.95f green:0.95f blue:0.95f alpha:1.0f],
-				  [NSColor colorWithCalibratedRed:0.92f green:0.92f blue:0.92f alpha:1.0f], nil];
+				  [NSColor colorWithCalibratedRed:0.92f green:0.92f blue:0.92f alpha:1.0f],
+				  [NSColor colorWithCalibratedRed:0.90f green:0.90f blue:0.90f alpha:1.0f], nil];
 	}
 	
 	CGFloat locations[] = { 0.0f, 11.5f/23, 11.5f/23, 1.0f };
