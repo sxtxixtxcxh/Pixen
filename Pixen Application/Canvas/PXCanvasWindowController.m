@@ -96,6 +96,7 @@
 	[layerSplit addSubview:[layerController view]];
 	[self updateFrameSizes];
 	[self prepareToolbar];
+	
 	[[self window] setAcceptsMouseMovedEvents:YES];
 }
 
@@ -215,11 +216,6 @@
 	[canvasController updateCanvasSize];
 }
 
-- (void)mouseMoved:event
-{
-	[[canvasController view] mouseMoved:event];
-}
-
 - (void)flagsChanged:event
 {
 	[canvasController flagsChanged:event];
@@ -228,35 +224,6 @@
 - (void)rightMouseUp:event
 {
 	[canvasController rightMouseUp:event];
-}
-
-- (void)rightMouseDown:event
-{
-	if(NSPointInRect([event locationInWindow], [[canvasController view] convertRect:[[canvasController view] bounds] toView:nil])) {
-		[[canvasController view] rightMouseDown:event];
-	}
-}
-
-- (void)rightMouseDragged:event
-{
-	[[canvasController view] rightMouseDragged:event];
-}
-
-- (void)mouseUp:event
-{
-	[[canvasController view] mouseUp:event];
-}
-
-- (void)mouseDown:event
-{
-	if(NSPointInRect([event locationInWindow], [[canvasController view] convertRect:[[canvasController view] bounds] toView:nil])) {
-		[[canvasController view] mouseDown:event];
-	}
-}
-
-- (void)mouseDragged:event
-{
-	[[canvasController view] mouseDragged:event];
 }
 
 - (void)keyDown:event

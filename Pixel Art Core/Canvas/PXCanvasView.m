@@ -39,7 +39,9 @@ void PXDebugRect(NSRect r, float alpha)
 	NSRectFillUsingOperation(r, NSCompositeSourceOver);
 }
 
-@implementation PXCanvasView
+@implementation PXCanvasView {
+	NSTrackingArea *_trackingArea;
+}
 
 @synthesize canvas, zoomPercentage, delegate;
 @synthesize usesToolCursors = _usesToolCursors, updatesInfoPanel = _updatesInfoPanel;
@@ -200,6 +202,15 @@ void PXDebugRect(NSRect r, float alpha)
 	[self centerOn:[self convertFromCanvasToViewPoint:centeredPoint]];
 	[[self window] invalidateCursorRectsForView:self];
 	[self setNeedsDisplay:YES];
+	
+	if (_trackingArea)
+		[self removeTrackingArea:_trackingArea];
+	
+	_trackingArea = [[NSTrackingArea alloc] initWithRect:[self bounds]
+												 options:NSTrackingMouseMoved | NSTrackingActiveInActiveApp | NSTrackingActiveInKeyWindow
+												   owner:self userInfo:nil];
+	
+	[self addTrackingArea:_trackingArea];
 }
 
 - (void)setZoomPercentage:(float)percent
