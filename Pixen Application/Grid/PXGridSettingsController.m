@@ -66,14 +66,8 @@
 	
 	[NSApp endSheet:[self window]];
 	[self.window orderOut:nil];
-}
-
-- (void)windowWillClose:(NSNotification *)notification
-{
-	if ([self.colorWell isActive])
-	{
-		[[NSColorPanel sharedColorPanel] close];
-	}
+	
+	[self.colorWell deactivate];
 }
 
 @end

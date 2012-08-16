@@ -42,9 +42,6 @@
 {
 	[super windowWillClose:notification];
 	
-	if ([backWell isActive])
-		[[NSColorPanel sharedColorPanel] close];
-	
 	[backWell deactivate];
 }
 

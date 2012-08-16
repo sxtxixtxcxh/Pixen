@@ -28,6 +28,8 @@
 	PXInsertionView *_insertionView;
 }
 
+@property (nonatomic, assign) BOOL allowsFirstResponder;
+
 @property (nonatomic, assign) BOOL allowsColorSelection;
 @property (nonatomic, assign) BOOL allowsColorModification;
 @property (nonatomic, assign) NSControlSize controlSize;

@@ -72,13 +72,10 @@
 
 - (void)awakeFromNib
 {
+	_paletteView.allowsFirstResponder = NO;
 	_paletteView.allowsColorSelection = NO;
 	_paletteView.allowsColorModification = YES;
 	_paletteView.delegate = self;
-	
-	NSResponder *nextResponder = [_paletteView nextResponder];
-	[_paletteView setNextResponder:self];
-	[self setNextResponder:nextResponder];
 }
 
 - (void)setDocument:(PXDocument *)document
@@ -276,7 +273,7 @@
 	PXCanvas *canvas = [_document canvas];
 	
 	PXColor srcColor = [_frequencyPalette colorAtIndex:index];
-	PXColor destColor = PXColorFromNSColor([[sender color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]);
+	PXColor destColor = PXColorFromNSColor([[[sender object] color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]);
 	
 	[canvas replaceColor:srcColor withColor:destColor];
 	
@@ -299,6 +296,11 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(closedColorPanel:)
 												 name:NSWindowWillCloseNotification
+											   object:colorPanel];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(changeColor:)
+												 name:NSColorPanelColorDidChangeNotification
 											   object:colorPanel];
 	
 	[_paletteView selectColorAtIndex:index];

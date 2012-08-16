@@ -28,6 +28,8 @@ const CGFloat viewMargin = 1.0f;
 {
 	self = [super initWithFrame:frameRect];
 	if (self) {
+		_allowsFirstResponder = YES;
+		
 		_visibleViews = [NSMutableSet new];
 		_recycledViews = [NSMutableSet new];
 		
@@ -65,7 +67,7 @@ const CGFloat viewMargin = 1.0f;
 
 - (BOOL)acceptsFirstResponder
 {
-	return YES;
+	return _allowsFirstResponder;
 }
 
 - (void)dealloc
