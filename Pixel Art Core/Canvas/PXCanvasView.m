@@ -71,7 +71,6 @@ void PXDebugRect(NSRect r, float alpha)
 	if ( ! (self = [super initWithFrame:rect] ) ) 
 		return nil;
 	
-	drawsWrappedCanvases = YES;
 	acceptsFirstMouse = YES;
 	zoomPercentage = 100;
 	shouldDrawGrid = YES;
@@ -590,11 +589,6 @@ void PXDebugRect(NSRect r, float alpha)
 	{
 		[self drawSelectionMarqueeWithRect:rect offset:NSMakePoint(xCenter, yCenter)];
 	}
-}
-
-- (void)setDrawsWrappedCanvases:(BOOL)draws
-{
-	drawsWrappedCanvases = draws;
 }
 
 - (NSAffineTransform *)setupScaleTransform

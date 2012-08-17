@@ -22,7 +22,6 @@
 	BOOL shouldDrawMainBackground;
 	BOOL shouldDrawGrid;
 	
-	BOOL drawsWrappedCanvases;
 	BOOL drawsToolBeziers;
 	BOOL acceptsFirstMouse;
 	
@@ -58,7 +57,6 @@
 
 - (void)updateMousePosition:(NSPoint)locationInWindow dragging:(BOOL)dragging;
 
-- (void)setDrawsWrappedCanvases:(BOOL)drawsWrappedCanvases;
 - (void)setShouldDrawSelectionMarquee:(BOOL)drawsSelectionMarquee;
 - (void)setNeedsDisplayInCanvasRect:(NSRect)rect;
 - (void)sizeToCanvas;

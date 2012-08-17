@@ -569,7 +569,6 @@
 - (void)initializeWindow
 {
 	[view setCanvas:canvas];
-	[view setDrawsWrappedCanvases:NO];
 	[view setShouldDrawGrid:NO];
 	[self updateTrackingRectAssumingInside:NO];
 	[view resetCursorRects];
