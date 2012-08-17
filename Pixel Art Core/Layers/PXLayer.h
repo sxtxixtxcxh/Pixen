@@ -8,7 +8,7 @@
 #import "PXImage.h"
 #import "PXPalette.h"
 
-@class PXLayerController, PXCanvas;
+@class PXCanvas;
 
 @interface PXLayer : NSObject < NSCoding, NSCopying >
 {

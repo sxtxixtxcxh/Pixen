@@ -6,7 +6,6 @@
 //
 
 #import "PXLayer.h"
-#import "PXLayerController.h"
 #import "PXImage.h"
 #import "PXPalette.h"
 #import "PXCanvas.h"
