@@ -83,7 +83,6 @@ fromCanvasController:(PXCanvasController *)controller
 {
 	[super mouseDownAt:aPoint fromCanvasController:controller];
 	self.path = [NSBezierPath bezierPath];
-	self.wrappedPath = [NSBezierPath bezierPath];
 	_origin = aPoint;
 }
 
@@ -154,7 +153,6 @@ fromCanvasController:(PXCanvasController *)controller
 {
 	self.isClicking = NO;
 	self.path = nil;
-	self.wrappedPath = nil;
 	
 	NSPoint origin = [self transformOrigin:_origin withDrawingPoint:[self lockedPointFromUnlockedPoint:aPoint withOrigin:_origin]];
 	
@@ -179,7 +177,6 @@ fromCanvasController:(PXCanvasController *)controller
 	if (!NSEqualPoints(initialPoint, finalPoint)) 
     {
 		[self.path removeAllPoints];
-		[self.wrappedPath removeAllPoints];
 		[self drawFromPoint:origin 
 					toPoint:[self lockedPointFromUnlockedPoint:finalPoint withOrigin:origin]
 				   inCanvas:[controller canvas]];

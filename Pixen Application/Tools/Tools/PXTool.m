@@ -15,7 +15,7 @@
 
 @implementation PXTool
 
-@synthesize isClicking, path, wrappedPath, switcher, color, propertiesController;
+@synthesize isClicking, path, switcher, color, propertiesController;
 
 - (NSString *)name
 {
@@ -27,7 +27,6 @@
 	self = [super init];
 	if (self) {
 		path = [NSBezierPath bezierPath];
-		wrappedPath = [NSBezierPath bezierPath];
 		color = PXGetBlackColor();
 		initialLoad = YES;
 	}

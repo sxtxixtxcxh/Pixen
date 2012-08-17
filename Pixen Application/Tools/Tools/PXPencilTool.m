@@ -199,7 +199,6 @@ fromCanvasController:(PXCanvasController *)controller
 	if ([self shouldUseBezierDrawing] && !NSEqualPoints(movingOrigin, aPoint))
 	{	
 		self.path = [NSBezierPath bezierPath];
-		self.wrappedPath = [NSBezierPath bezierPath];
 		
 		movingOrigin = aPoint;
 		[self drawPixelAtPoint:aPoint inCanvas:[controller canvas]];

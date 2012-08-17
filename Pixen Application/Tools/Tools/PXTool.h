@@ -15,7 +15,6 @@
   @private
 	BOOL isClicking;
 	NSBezierPath *path;
-	NSBezierPath *wrappedPath;
 	PXToolPropertiesController *propertiesController;
 	PXColor color;
 	BOOL initialLoad;
@@ -23,7 +22,6 @@
 
 @property (nonatomic, assign) BOOL isClicking;
 @property (nonatomic, strong) NSBezierPath *path;
-@property (nonatomic, strong) NSBezierPath *wrappedPath;
 @property (nonatomic, weak) PXToolSwitcher *switcher;
 @property (nonatomic, assign) PXColor color;
 
