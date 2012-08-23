@@ -108,7 +108,7 @@
 	
 	if (modalSheet) [NSApp stopModal];
 	else {
-		NSString *message = [NSString stringWithFormat:@"%ld palettes were imported.", [[_openPanel URLs] count]];
+		NSString *message = [NSString stringWithFormat:@"%ld palette(s) were imported.", [[_openPanel URLs] count]];
 		NSRunAlertPanel(@"Success", message, @"OK", nil, nil);
 	}
 }
