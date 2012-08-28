@@ -62,11 +62,6 @@
 	[self.tableView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
 	[self.tableView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
 	[self.tableView setMenu:[self setupMenu]];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(tableViewSelectionDidChange:)
-												 name:NSTableViewSelectionDidChangeNotification
-											   object:self.tableView];
 }
 
 #pragma mark -
@@ -124,6 +119,11 @@
 				   selector:@selector(updatePreview:)
 					   name:PXCanvasChangedNotificationName
 					 object:_canvas];
+			
+			[nc addObserver:self
+				   selector:@selector(tableViewSelectionDidChange:)
+					   name:NSTableViewSelectionDidChangeNotification
+					 object:self.tableView];
 			
 			if (layerName) {
 				PXLayer *layer = [_canvas layerNamed:layerName];
