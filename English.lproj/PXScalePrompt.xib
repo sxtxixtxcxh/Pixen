@@ -472,7 +472,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="NSTextField" id="145775682">
 							<reference key="NSNextResponder" ref="561964196"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{130, 191}, {67, 22}}</string>
+							<string key="NSFrame">{{130, 190}, {67, 22}}</string>
 							<reference key="NSSuperview" ref="561964196"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="802942445"/>
@@ -492,7 +492,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="NSTextField" id="55662841">
 							<reference key="NSNextResponder" ref="561964196"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{17, 193}, {108, 17}}</string>
+							<string key="NSFrame">{{17, 192}, {108, 17}}</string>
 							<reference key="NSSuperview" ref="561964196"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="145775682"/>
@@ -511,7 +511,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="NSTextField" id="802942445">
 							<reference key="NSNextResponder" ref="561964196"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{210, 193}, {93, 17}}</string>
+							<string key="NSFrame">{{210, 192}, {93, 17}}</string>
 							<reference key="NSSuperview" ref="561964196"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="916193089"/>
@@ -530,7 +530,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="NSTextField" id="916193089">
 							<reference key="NSNextResponder" ref="561964196"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{308, 191}, {67, 22}}</string>
+							<string key="NSFrame">{{308, 190}, {67, 22}}</string>
 							<reference key="NSSuperview" ref="561964196"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="324074271"/>
@@ -971,15 +971,15 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<reference ref="992039511"/>
 							<reference ref="193662834"/>
 							<reference ref="234636888"/>
+							<reference ref="324074271"/>
 							<reference ref="234834643"/>
 							<reference ref="317736234"/>
+							<reference ref="240981247"/>
+							<reference ref="469720866"/>
+							<reference ref="145775682"/>
 							<reference ref="55662841"/>
 							<reference ref="802942445"/>
 							<reference ref="916193089"/>
-							<reference ref="240981247"/>
-							<reference ref="469720866"/>
-							<reference ref="324074271"/>
-							<reference ref="145775682"/>
 						</array>
 						<reference key="parent" ref="923625546"/>
 					</object>
