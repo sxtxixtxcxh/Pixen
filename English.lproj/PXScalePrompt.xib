@@ -403,7 +403,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="NSTextField" id="317736234">
 							<reference key="NSNextResponder" ref="561964196"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{130, 219}, {67, 22}}</string>
+							<string key="NSFrame">{{130, 220}, {67, 22}}</string>
 							<reference key="NSSuperview" ref="561964196"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="240981247"/>
@@ -569,7 +569,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="NSTextField" id="469720866">
 							<reference key="NSNextResponder" ref="561964196"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{308, 219}, {67, 22}}</string>
+							<string key="NSFrame">{{308, 220}, {67, 22}}</string>
 							<reference key="NSSuperview" ref="561964196"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="55662841"/>
@@ -592,7 +592,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="614776697"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{213, 129}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">NO</bool>
