@@ -141,6 +141,11 @@ NSString *palettesSubdirName = @"Palettes";
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://pixen.uservoice.com/forums/171709-general"]];
 }
 
+- (IBAction)purchase:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://itunes.apple.com/us/app/pixen/id525180431?mt=12"]];
+}
+
 - (void)checkForUpdates:(id)sender
 {
 #if GTK
@@ -340,6 +345,13 @@ NSString *palettesSubdirName = @"Palettes";
 - (BOOL)validateMenuItem:(NSMenuItem *)anItem
 {
 	if ([anItem action] == @selector(checkForUpdates:)) {
+#if GTK
+		[anItem setHidden:NO];
+#endif
+		
+		return YES;
+	}
+	else if ([anItem action] == @selector(purchase:)) {
 #if GTK
 		[anItem setHidden:NO];
 #endif
