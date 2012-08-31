@@ -165,7 +165,7 @@
 													<string key="NSClassName">NSView</string>
 												</object>
 											</array>
-											<string key="NSFrame">{{1, 0}, {839, 160}}</string>
+											<string key="NSFrameSize">{839, 160}</string>
 											<reference key="NSSuperview" ref="768165516"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="1065435040"/>

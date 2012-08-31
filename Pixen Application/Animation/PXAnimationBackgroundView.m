@@ -41,7 +41,6 @@
 	lowerRect.size.height /= 2.0f;
 	
 	[[NSColor whiteColor] set];
-	NSRectFill(NSMakeRect(NSMinX([self.filmStrip frame]) - 1.0f, 0.0f, 1.5f, NSHeight([self bounds])));
 	NSRectFill(NSMakeRect(NSMaxX([self.filmStrip frame]), 0.0f, 1.5f, NSHeight([self bounds])));
 }
 
