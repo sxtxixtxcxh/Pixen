@@ -138,7 +138,7 @@
 /* Nearest Neighbor Info */
 "NEAREST_NEIGHBOR_INFO" = "For every pixel in the new image, this algorithm finds the closest pixel in the current image and uses that color. This results in a lossy image if you're not scaling up by a power of two (2x, 4x, 8x, 16x, ...) This algorithm is ideal if you want a larger image that looks identical to the current image.";
 /* Scale2x Info */
-"SCALE2X_INFO" = "This is the scale2x algorithm described here: http://scale2x.sourceforge.net/algorithm.html.  It provides a larger, smoother image without introducing new colors.  This algorithm may only be used to scale up by powers of two, and works best for scaling up by 2x in both dimensions.";
+"SCALE2X_INFO" = "This algorithm provides a larger, smoother image without introducing new colors. This algorithm may only be used to scale up by powers of two, and it works best for scaling up by 2x in both dimensions.";
 
 /* --------------- TOOLS --------------- */
 
