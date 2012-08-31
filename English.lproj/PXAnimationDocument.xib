@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
-		<string key="IBDocument.AppKitVersion">1138.47</string>
-		<string key="IBDocument.HIToolboxVersion">569.00</string>
+		<int key="IBDocument.SystemTarget">1080</int>
+		<string key="IBDocument.SystemVersion">12B19</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
+		<string key="IBDocument.AppKitVersion">1187</string>
+		<string key="IBDocument.HIToolboxVersion">624.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2182</string>
+			<string key="NS.object.0">2549</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
-			<string>NSComboBoxCell</string>
-			<string>NSNumberFormatter</string>
-			<string>NSSplitView</string>
-			<string>NSScroller</string>
-			<string>NSScrollView</string>
 			<string>NSBox</string>
 			<string>NSComboBox</string>
+			<string>NSComboBoxCell</string>
 			<string>NSCustomObject</string>
 			<string>NSCustomView</string>
-			<string>NSView</string>
-			<string>NSWindowTemplate</string>
+			<string>NSNumberFormatter</string>
+			<string>NSScrollView</string>
+			<string>NSScroller</string>
+			<string>NSSplitView</string>
 			<string>NSStepper</string>
 			<string>NSStepperCell</string>
+			<string>NSView</string>
+			<string>NSWindowTemplate</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -110,6 +110,7 @@
 															<reference key="NSSuperview" ref="1065435040"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="490459967"/>
+															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 															<int key="NSsFlags">256</int>
 															<reference key="NSTarget" ref="1065435040"/>
 															<string key="NSAction">_doScroller:</string>
@@ -119,10 +120,11 @@
 														<object class="NSScroller" id="62125825">
 															<reference key="NSNextResponder" ref="1065435040"/>
 															<int key="NSvFlags">256</int>
-															<string key="NSFrame">{{0, 109}, {710, 11}}</string>
+															<string key="NSFrame">{{0, 106}, {710, 14}}</string>
 															<reference key="NSSuperview" ref="1065435040"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="189261300"/>
+															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 															<int key="NSsFlags">257</int>
 															<reference key="NSTarget" ref="1065435040"/>
 															<string key="NSAction">_doScroller:</string>
@@ -137,6 +139,9 @@
 													<reference key="NSVScroller" ref="801042305"/>
 													<reference key="NSHScroller" ref="62125825"/>
 													<reference key="NSContentView" ref="490459967"/>
+													<double key="NSMinMagnification">0.25</double>
+													<double key="NSMaxMagnification">4</double>
+													<double key="NSMagnification">1</double>
 												</object>
 												<object class="NSCustomView" id="189261300">
 													<reference key="NSNextResponder" ref="804211343"/>
@@ -264,9 +269,10 @@
 																<object class="NSScroller" id="159283463">
 																	<reference key="NSNextResponder" ref="837403884"/>
 																	<int key="NSvFlags">256</int>
-																	<string key="NSFrame">{{502, 1}, {15, 528}}</string>
+																	<string key="NSFrame">{{501, 1}, {16, 534}}</string>
 																	<reference key="NSSuperview" ref="837403884"/>
 																	<reference key="NSWindow"/>
+																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 																	<reference key="NSTarget" ref="837403884"/>
 																	<string key="NSAction">_doScroller:</string>
 																	<double key="NSCurValue">1</double>
@@ -275,10 +281,11 @@
 																<object class="NSScroller" id="188915958">
 																	<reference key="NSNextResponder" ref="837403884"/>
 																	<int key="NSvFlags">256</int>
-																	<string key="NSFrame">{{1, 520}, {510, 15}}</string>
+																	<string key="NSFrame">{{1, 519}, {516, 16}}</string>
 																	<reference key="NSSuperview" ref="837403884"/>
 																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="159283463"/>
+																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 																	<int key="NSsFlags">1</int>
 																	<reference key="NSTarget" ref="837403884"/>
 																	<string key="NSAction">_doScroller:</string>
@@ -293,6 +300,9 @@
 															<reference key="NSVScroller" ref="159283463"/>
 															<reference key="NSHScroller" ref="188915958"/>
 															<reference key="NSContentView" ref="321947866"/>
+															<double key="NSMinMagnification">0.25</double>
+															<double key="NSMaxMagnification">4</double>
+															<double key="NSMagnification">1</double>
 														</object>
 													</array>
 													<string key="NSFrame">{{291, 0}, {518, 536}}</string>
@@ -329,7 +339,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="251389474"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 900}}</string>
 				<string key="NSMinSize">{200, 108}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">Animation</string>
@@ -356,7 +366,7 @@
 										<reference key="NSWindow"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSStepperCell" key="NSCell" id="609207444">
-											<int key="NSCellFlags">917024</int>
+											<int key="NSCellFlags">786464</int>
 											<int key="NSCellFlags2">131072</int>
 											<reference key="NSControlView" ref="819878669"/>
 											<double key="NSValue">7</double>
@@ -364,6 +374,7 @@
 											<double key="NSIncrement">-1</double>
 											<bool key="NSAutorepeat">YES</bool>
 										</object>
+										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 									</object>
 									<object class="NSComboBox" id="566930861">
 										<reference key="NSNextResponder" ref="209945795"/>
@@ -374,7 +385,7 @@
 										<reference key="NSNextKeyView" ref="819878669"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSComboBoxCell" key="NSCell" id="224084874">
-											<int key="NSCellFlags">343014976</int>
+											<int key="NSCellFlags">342884416</int>
 											<int key="NSCellFlags2">4326400</int>
 											<object class="NSFont" key="NSSupport" id="26">
 												<string key="NSName">LucidaGrande</string>
@@ -467,13 +478,15 @@
 												<reference key="NSSuperview"/>
 												<reference key="NSWindow"/>
 												<bool key="NSEnabled">YES</bool>
+												<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+												<bool key="NSControlAllowsExpansionToolTips">YES</bool>
 												<array class="NSMutableArray" key="NSTableColumns">
 													<object class="NSTableColumn">
 														<double key="NSWidth">10</double>
 														<double key="NSMinWidth">10</double>
 														<double key="NSMaxWidth">1000</double>
 														<object class="NSTableHeaderCell" key="NSHeaderCell">
-															<int key="NSCellFlags">75628032</int>
+															<int key="NSCellFlags">75497472</int>
 															<int key="NSCellFlags2">0</int>
 															<object class="NSMutableString" key="NSContents">
 																<characters key="NS.bytes"/>
@@ -490,7 +503,7 @@
 															<reference key="NSTextColor" ref="180323968"/>
 														</object>
 														<object class="NSTextFieldCell" key="NSDataCell">
-															<int key="NSCellFlags">338820672</int>
+															<int key="NSCellFlags">338690112</int>
 															<int key="NSCellFlags2">1024</int>
 															<reference key="NSSupport" ref="26"/>
 															<reference key="NSFormatter" ref="583843110"/>
@@ -532,6 +545,7 @@
 												<int key="NSTableViewGroupRowStyle">1</int>
 											</object>
 										</object>
+										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 									</object>
 								</array>
 								<string key="NSFrameSize">{167, 28}</string>
@@ -546,7 +560,7 @@
 						<reference key="NSNextKeyView" ref="209945795"/>
 						<string key="NSOffsets">{0, 0}</string>
 						<object class="NSTextFieldCell" key="NSTitleCell">
-							<int key="NSCellFlags">67239424</int>
+							<int key="NSCellFlags">67108864</int>
 							<int key="NSCellFlags2">0</int>
 							<string key="NSContents">Title</string>
 							<object class="NSFont" key="NSSupport">
@@ -1231,6 +1245,7 @@
 						<string key="deleteLayer:">id</string>
 						<string key="duplicateDocument:">id</string>
 						<string key="duplicateLayer:">id</string>
+						<string key="fill:">id</string>
 						<string key="flipHorizontally:">id</string>
 						<string key="flipLayerHorizontally:">id</string>
 						<string key="flipLayerVertically:">id</string>
@@ -1257,6 +1272,7 @@
 						<string key="showBackgroundInfo:">id</string>
 						<string key="showGridSettingsPrompter:">id</string>
 						<string key="showPreviewWindow:">NSEvent</string>
+						<string key="toggleGrid:">id</string>
 						<string key="togglePreviewWindow:">id</string>
 						<string key="zoomIn:">id</string>
 						<string key="zoomOut:">id</string>
@@ -1308,6 +1324,10 @@
 						</object>
 						<object class="IBActionInfo" key="duplicateLayer:">
 							<string key="name">duplicateLayer:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="fill:">
+							<string key="name">fill:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="flipHorizontally:">
@@ -1413,6 +1433,10 @@
 						<object class="IBActionInfo" key="showPreviewWindow:">
 							<string key="name">showPreviewWindow:</string>
 							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="toggleGrid:">
+							<string key="name">toggleGrid:</string>
+							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="togglePreviewWindow:">
 							<string key="name">togglePreviewWindow:</string>
