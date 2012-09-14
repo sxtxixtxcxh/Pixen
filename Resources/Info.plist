@@ -332,11 +332,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.5.7b3</string>
+	<string>3.5.7</string>
 	<key>CFBundleSignature</key>
 	<string>PiXn</string>
 	<key>CFBundleVersion</key>
-	<string>3.5.23</string>
+	<string>3.5.40</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.graphics-design</string>
 	<key>LSMinimumSystemVersion</key>
