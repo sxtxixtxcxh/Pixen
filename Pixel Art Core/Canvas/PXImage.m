@@ -124,6 +124,14 @@ void PXTileSetAtXY(PXTile *t, int xv, int yv, PXColor color)
 	NSUInteger bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
 	NSUInteger startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y) * bytesPerRow + x * PXTileComponentsPerPixel;
 	
+	if (color.a < 255) {
+		CGFloat a = color.a / 255.0f;
+		
+		color.r = round(color.r * a);
+		color.g = round(color.g * a);
+		color.b = round(color.b * a);
+	}
+	
 	memcpy(data + startIndex, &color, 4);
 }
 
