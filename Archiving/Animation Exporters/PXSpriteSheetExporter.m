@@ -294,7 +294,7 @@ static NSString *const kSpriteSheetEntry = @"SpriteSheetEntry";
 
 - (NSDragOperation)tableView:(NSTableView *)tableView validateDrop:(id<NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)dropOperation
 {
-	if (dropOperation == NSTableViewDropOn || row == [[documentRepresentationsController arrangedObjects] count])
+	if (dropOperation == NSTableViewDropOn)
 		return NSDragOperationNone;
 	
 	return NSDragOperationGeneric;
@@ -306,6 +306,9 @@ static NSString *const kSpriteSheetEntry = @"SpriteSheetEntry";
 	NSData *rowData = [pboard dataForType:kSpriteSheetEntry];
 	NSIndexSet *rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
 	NSInteger dragRow = [rowIndexes firstIndex];
+	
+	if (row > dragRow)
+		row--;
 	
 	id dragObject = [documentRepresentationsController arrangedObjects][dragRow];
 	[documentRepresentationsController removeObjectAtArrangedObjectIndex:dragRow];
