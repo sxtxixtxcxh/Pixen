@@ -137,43 +137,47 @@ static NSString *const kSpriteSheetEntry = @"SpriteSheetEntry";
 	int padding = 0;
 	
 	NSMutableArray *animationSheets = [NSMutableArray array];
-	NSSize sheetSize = NSMakeSize(padding*2, padding*2);
+	__block NSSize sheetSize = NSMakeSize(padding*2, padding*2);
 	
-	for (NSDictionary *docRep in [documentRepresentationsController arrangedObjects])
-	{
-		PXDocument *document = [docRep objectForKey:@"document"];
-		
-		if ([document isKindOfClass:[PXAnimationDocument class]]) {
-			if ([[docRep objectForKey:@"included"] boolValue]) {
-				PXAnimation *animation = [ (PXAnimationDocument *) document animation];
-				
-				NSBitmapImageRep *spriteSheetRow = [animation spriteSheetWithCelMargin:interCelMargin];
-				
-				if ([spriteSheetRow size].width > sheetSize.width) {
-					sheetSize.width = [spriteSheetRow size].width;
-				}
-				
-				sheetSize.height += [spriteSheetRow size].height + interAnimationMargin;
-				
-				[animationSheets addObject:spriteSheetRow];
-			}
-		}
-		else if ([document isKindOfClass:[PXCanvasDocument class]]) {
-			if ([[docRep objectForKey:@"included"] boolValue]) {
-				PXCanvas *canvas = [ (PXCanvasDocument *) document canvas];
-				
-				NSBitmapImageRep *spriteSheetRow = [canvas imageRep];
-				
-				if ([spriteSheetRow size].width > sheetSize.width) {
-					sheetSize.width = [spriteSheetRow size].width;
-				}
-				
-				sheetSize.height += [spriteSheetRow size].height + interAnimationMargin;
-				
-				[animationSheets addObject:spriteSheetRow];
-			}
-		}
-	}
+	NSArray *reps = [documentRepresentationsController arrangedObjects];
+	
+	[reps enumerateObjectsWithOptions:NSEnumerationReverse
+						   usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+							   
+							   NSDictionary *docRep = obj;
+							   PXDocument *document = [docRep objectForKey:@"document"];
+							   
+							   if ([document isKindOfClass:[PXAnimationDocument class]]) {
+								   if ([[docRep objectForKey:@"included"] boolValue]) {
+									   PXAnimation *animation = [ (PXAnimationDocument *) document animation];
+									   
+									   NSBitmapImageRep *spriteSheetRow = [animation spriteSheetWithCelMargin:interCelMargin];
+									   
+									   if ([spriteSheetRow size].width > sheetSize.width) {
+										   sheetSize.width = [spriteSheetRow size].width;
+									   }
+									   
+									   sheetSize.height += [spriteSheetRow size].height + interAnimationMargin;
+									   
+									   [animationSheets addObject:spriteSheetRow];
+								   }
+							   }
+							   else if ([document isKindOfClass:[PXCanvasDocument class]]) {
+								   if ([[docRep objectForKey:@"included"] boolValue]) {
+									   PXCanvas *canvas = [ (PXCanvasDocument *) document canvas];
+									   
+									   NSBitmapImageRep *spriteSheetRow = [canvas imageRep];
+									   
+									   if ([spriteSheetRow size].width > sheetSize.width) {
+										   sheetSize.width = [spriteSheetRow size].width;
+									   }
+									   
+									   sheetSize.height += [spriteSheetRow size].height + interAnimationMargin;
+									   
+									   [animationSheets addObject:spriteSheetRow];
+								   }
+							   }
+						   }];
 	
 	if (NSEqualSizes(sheetSize, NSMakeSize(padding*2, padding*2)))
 		return nil;
