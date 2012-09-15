@@ -5,7 +5,7 @@
 //  Copyright 2005-2012 Pixen Project. All rights reserved.
 //
 
-@interface PXSpriteSheetExporter : NSWindowController
+@interface PXSpriteSheetExporter : NSWindowController < NSTableViewDataSource >
 {
   @private
 	BOOL closeOnEndSheet;

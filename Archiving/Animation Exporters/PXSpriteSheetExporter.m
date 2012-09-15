@@ -18,6 +18,8 @@
 
 @synthesize sheetImageView, documentRepresentationsController;
 
+static NSString *const kSpriteSheetEntry = @"SpriteSheetEntry";
+
 + (id)sharedSpriteSheetExporter
 {
 	static PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
@@ -246,6 +248,41 @@
 		[self savePanelDidEnd:savePanel returnCode:result];
 		
 	}];
+}
+
+- (BOOL)tableView:(NSTableView *)tableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard
+{
+	[tableView registerForDraggedTypes:@[ kSpriteSheetEntry ]];
+	
+	NSData *indexSetData = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
+	[pboard declareTypes:[NSArray arrayWithObject:kSpriteSheetEntry] owner:self];
+	[pboard setData:indexSetData forType:kSpriteSheetEntry];
+	
+	return YES;
+}
+
+- (NSDragOperation)tableView:(NSTableView *)tableView validateDrop:(id<NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)dropOperation
+{
+	if (dropOperation == NSTableViewDropOn || row == [[documentRepresentationsController arrangedObjects] count])
+		return NSDragOperationNone;
+	
+	return NSDragOperationGeneric;
+}
+
+- (BOOL)tableView:(NSTableView *)tableView acceptDrop:(id<NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)dropOperation
+{
+	NSPasteboard *pboard = [info draggingPasteboard];
+	NSData *rowData = [pboard dataForType:kSpriteSheetEntry];
+	NSIndexSet *rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
+	NSInteger dragRow = [rowIndexes firstIndex];
+	
+	id dragObject = [documentRepresentationsController arrangedObjects][dragRow];
+	[documentRepresentationsController removeObjectAtArrangedObjectIndex:dragRow];
+	[documentRepresentationsController insertObject:dragObject atArrangedObjectIndex:row];
+	
+	[self updatePreview:nil];
+	
+	return YES;
 }
 
 @end
