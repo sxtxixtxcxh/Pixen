@@ -50,9 +50,9 @@ static NSString *const kSpriteSheetEntry = @"SpriteSheetEntry";
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (NSDictionary *)findRepresentationForDocument:(PXDocument *)document
+- (NSMutableDictionary *)findRepresentationForDocument:(PXDocument *)document
 {
-	for (NSDictionary *rep in [documentRepresentationsController arrangedObjects])
+	for (NSMutableDictionary *rep in [documentRepresentationsController arrangedObjects])
 	{
 		if ([rep objectForKey:@"document"] == document)
 			return rep;
@@ -118,7 +118,9 @@ static NSString *const kSpriteSheetEntry = @"SpriteSheetEntry";
 	PXDocument *doc = [notification object];
 	
 	if ([doc isKindOfClass:[PXDocument class]]) {
-		[self recacheDocumentRepresentations];
+		NSMutableDictionary *rep = [self findRepresentationForDocument:doc];
+		rep[@"displayName"] = [doc displayName];
+		
 		[self updatePreview:nil];
 	}
 }
