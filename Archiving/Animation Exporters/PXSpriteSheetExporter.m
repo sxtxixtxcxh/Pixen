@@ -38,9 +38,9 @@ static NSString *const kSpriteSheetEntry = @"SpriteSheetEntry";
 	if (self) {
 		NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 		
-		[center addObserver:self selector:@selector(documentsChanged:) name:PXDocumentOpenedNotificationName object:nil];
-		[center addObserver:self selector:@selector(documentsChanged:) name:PXDocumentDidCloseNotificationName object:nil];
-		[center addObserver:self selector:@selector(documentsChanged:) name:PXDocumentChangedDisplayNameNotificationName object:nil];
+		[center addObserver:self selector:@selector(openedDocument:) name:PXDocumentOpenedNotificationName object:nil];
+		[center addObserver:self selector:@selector(closedDocument:) name:PXDocumentDidCloseNotificationName object:nil];
+		[center addObserver:self selector:@selector(changedDocument:) name:PXDocumentChangedDisplayNameNotificationName object:nil];
 	}
 	return self;
 }
@@ -61,6 +61,25 @@ static NSString *const kSpriteSheetEntry = @"SpriteSheetEntry";
 	return nil;
 }
 
+- (NSDictionary *)representationForDocument:(PXDocument *)doc
+{
+	BOOL included = NO;
+	
+	for (NSDictionary *oldRep in [documentRepresentationsController arrangedObjects])
+	{
+		if ([oldRep objectForKey:@"document"] == doc) {
+			included = [[oldRep objectForKey:@"included"] boolValue];
+			break;
+		}
+	}
+	
+	NSDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+						  doc, @"document", [doc displayName], @"displayName",
+						  [NSNumber numberWithBool:included], @"included", nil];
+	
+	return dict;
+}
+
 - (void)recacheDocumentRepresentations
 {
 	NSArray *oldRepresentations = [[documentRepresentationsController arrangedObjects] copy];
@@ -70,25 +89,31 @@ static NSString *const kSpriteSheetEntry = @"SpriteSheetEntry";
 	
 	for (PXDocument *doc in documents)
 	{
-		BOOL included = NO;
-		
-		for (NSDictionary *oldRep in oldRepresentations)
-		{
-			if ([oldRep objectForKey:@"document"] == doc) {
-				included = [[oldRep objectForKey:@"included"] boolValue];
-				break;
-			}
-		}
-		
-		NSDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-							  doc, @"document", [doc displayName], @"displayName",
-							  [NSNumber numberWithBool:included], @"included", nil];
-		
-		[documentRepresentationsController addObject:dict];
+		[documentRepresentationsController addObject:[self representationForDocument:doc]];
 	}
 }
 
-- (void)documentsChanged:(NSNotification *)notification
+- (void)openedDocument:(NSNotification *)notification
+{
+	PXDocument *doc = [notification object];
+	
+	if ([doc isKindOfClass:[PXDocument class]]) {
+		[documentRepresentationsController addObject:[self representationForDocument:doc]];
+		[self updatePreview:nil];
+	}
+}
+
+- (void)closedDocument:(NSNotification *)notification
+{
+	PXDocument *doc = [notification object];
+	
+	if ([doc isKindOfClass:[PXDocument class]]) {
+		[documentRepresentationsController removeObject:[self findRepresentationForDocument:doc]];
+		[self updatePreview:nil];
+	}
+}
+
+- (void)changedDocument:(NSNotification *)notification
 {
 	PXDocument *doc = [notification object];
 	
