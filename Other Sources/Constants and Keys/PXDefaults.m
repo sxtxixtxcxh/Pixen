@@ -29,7 +29,6 @@ NSString *PXDefaultNewDocumentBackgroundColor = @"PXDefaultNewDocumentBackground
 NSString *PXLeftToolPropertiesFrameKey = @"PXLeftToolPropertiesFrame";
 NSString *PXRightToolPropertiesFrameKey = @"PXRightToolPropertiesFrame";
 
-NSString *PXInfoPanelIsOpenKey = @"PXInfoPanelIsOpen";
 NSString *PXPaletteIsOpenKey = @"PXPaletteIsOpen";
 NSString *PXPreviewWindowIsOpenKey = @"PXPreviewWindowIsOpen";
 

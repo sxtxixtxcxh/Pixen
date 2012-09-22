@@ -7,7 +7,7 @@
 
 #import "PXColor.h"
 
-@interface PXInfoPanelController : NSWindowController
+@interface PXInfoPanelController : NSWindowController < NSWindowRestoration >
 
 @property (nonatomic, weak) IBOutlet NSTextField *cursorX;
 @property (nonatomic, weak) IBOutlet NSTextField *cursorY;
@@ -21,7 +21,7 @@
 
 @property (nonatomic, assign) NSPoint draggingOrigin;
 
-+ (id)sharedInfoPanelController;
++ (PXInfoPanelController *)sharedInfoPanelController;
 
 - (void)setCursorPosition:(NSPoint)point;
 - (void)setColorInfo:(PXColor)color;

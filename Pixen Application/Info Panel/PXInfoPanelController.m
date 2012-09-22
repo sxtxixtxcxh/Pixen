@@ -18,7 +18,7 @@
 @synthesize red = _red, green = _green, blue = _blue, alpha = _alpha, hex = _hex;
 @synthesize draggingOrigin = _draggingOrigin;
 
-+ (id)sharedInfoPanelController
++ (PXInfoPanelController *)sharedInfoPanelController
 {
 	static PXInfoPanelController *singleInstance = nil;
 	static dispatch_once_t onceToken;
@@ -40,9 +40,21 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
++ (void)restoreWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow *, NSError *))completionHandler {
+	
+	if ([identifier isEqualToString:@"InfoPanel"]) {
+		completionHandler([PXInfoPanelController sharedInfoPanelController].window, nil);
+	}
+	else {
+		completionHandler(nil, nil);
+	}
+}
+
 - (void)windowDidLoad
 {
 	[ (NSPanel *) self.window setBecomesKeyOnlyIfNeeded:YES];
+	
+	[[self window] setRestorationClass:[self class]];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(closedDocument:)

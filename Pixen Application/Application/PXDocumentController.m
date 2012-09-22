@@ -20,6 +20,7 @@
 #import "PXCanvasController.h"
 #import "PXCanvasDocument.h"
 #import "PXAnimationDocument.h"
+#import "PXInfoPanelController.h"
 #import "PXImageSizePrompter.h"
 #import "PXLayer.h"
 #import "PXCanvas.h"
@@ -184,10 +185,11 @@ NSString *palettesSubdirName = @"Palettes";
 	//TODO (could be cleaner) : Fabien
 	if (! [defaults boolForKey:PXHasRunBeforeKey] )
 	{
+		[[PXInfoPanelController sharedInfoPanelController] showWindow:nil];
+		
 		//id welcome = [[PXWelcomeController alloc] init];
 		[defaults setBool:YES forKey:@"PXActivateColorWellOnStartup"];
 		[defaults setBool:YES forKey:@"SUCheckAtStartup"];
-		[defaults setBool:YES forKey:PXInfoPanelIsOpenKey];
 		[defaults setBool:YES forKey:PXHasRunBeforeKey];
 		[defaults synchronize];
 		[[NSColorPanel sharedColorPanel] setMode:NSCustomPaletteModeColorPanel];

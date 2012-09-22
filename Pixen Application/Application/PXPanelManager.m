@@ -46,10 +46,6 @@ static PXPanelManager *sharedManager = nil;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	// Open some panels if the user have let them open the last time
 	
-	if ( [defaults boolForKey:PXInfoPanelIsOpenKey] ) {
-		[self showInfo:self];
-	}
-	
 	if ( [defaults boolForKey:PXPreviewWindowIsOpenKey] ) {
 		[self showPreviewPanel:self];
 	}
@@ -115,8 +111,6 @@ static PXPanelManager *sharedManager = nil;
 	
 	[defaults setObject:NSStringFromRect([self archivableRectForToolPropertiesWindow:window])
 				 forKey:PXRightToolPropertiesFrameKey];
-	
-	[defaults setBool:[[PXInfoPanelController sharedInfoPanelController] isVisible] forKey:PXInfoPanelIsOpenKey];
 	
 	// Popout color panels
 	NSMutableArray *archivedPalettePanels = [NSMutableArray array];
