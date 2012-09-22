@@ -33,7 +33,6 @@ extern NSString *PXPreviewWindowIsOpenKey;
 
 extern NSString *PXSelectedScaleAlgorithmKey;
 
-extern NSString *PXLayerDrawerWidthKey;
 extern NSString *PXPreviousCelOverlayEnabledKey;
 
 extern NSString *PXVersionKey;
