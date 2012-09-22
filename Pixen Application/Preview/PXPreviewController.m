@@ -303,6 +303,7 @@
 
 - (void)windowDidLoad
 {
+	[[self window] setRestorationClass:[self class]];
 	[[self window] setBackgroundColor:[NSColor lightGrayColor]];
 	[[self window] setMovableByWindowBackground:YES];
 	[view setUsesToolCursors:NO];
