@@ -36,7 +36,6 @@ NSString *PXRightToolPropertiesFrameKey = @"PXRightToolPropertiesFrame";
 
 NSString *PXInfoPanelIsOpenKey = @"PXInfoPanelIsOpen";
 NSString *PXPaletteIsOpenKey = @"PXPaletteIsOpen";
-NSString *PXNumericDrawingToolIsOpenKey = @"PXNumericDrawingToolIsOpen";
 NSString *PXPreviewWindowIsOpenKey = @"PXPreviewWindowIsOpen";
 
 NSString *PXSelectedScaleAlgorithmKey = @"PXSelectedScaleAlgorithm";

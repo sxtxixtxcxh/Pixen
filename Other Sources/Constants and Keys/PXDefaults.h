@@ -34,7 +34,6 @@ extern NSString *PXRightToolPropertiesFrameKey;
 
 extern NSString *PXInfoPanelIsOpenKey;
 extern NSString *PXPaletteIsOpenKey;
-extern NSString *PXNumericDrawingToolIsOpenKey;
 extern NSString *PXPreviewWindowIsOpenKey;
 
 extern NSString *PXSelectedScaleAlgorithmKey;
