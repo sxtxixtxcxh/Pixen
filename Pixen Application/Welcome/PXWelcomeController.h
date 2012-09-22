@@ -7,10 +7,10 @@
 
 #import <WebKit/WebKit.h>
 
-@interface PXWelcomeController : NSWindowController
+@interface PXWelcomeController : NSWindowController < NSWindowRestoration >
 
 @property (nonatomic, weak) IBOutlet WebView *webView;
 
-+ (id)sharedWelcomeController;
++ (PXWelcomeController *)sharedWelcomeController;
 
 @end
