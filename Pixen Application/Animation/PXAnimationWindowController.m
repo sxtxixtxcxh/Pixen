@@ -431,24 +431,34 @@
 											didEndSelector:@selector(exportSequencePrompterDidEnd:)];
 }
 
-- (void)exportToQuicktimePrompterDidEnd:(NSSavePanel *)panel 
-							 returnCode:(NSInteger)code 
+- (void)exportToQuicktimePrompterDidEnd:(NSSavePanel *)panel
+							 returnCode:(NSInteger)code
 							contextInfo:(void *)info
 {
 	if (code == NSFileHandlingPanelCancelButton)
 		return;
 	
-	[panel orderOut:self];
-	OSQTExporter *exporter = [[OSQTExporter alloc] init];
-	NSInteger celCount = [animation countOfCels];
-	NSInteger i;
-	for (i = 0; i < celCount; i++)
-	{
-		[exporter addImage:[[animation celAtIndex:i] displayImage] 
-				 forLength:[[animation celAtIndex:i] duration]];
+	NSURL *url = [panel URL];
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
+		[[NSFileManager defaultManager] removeItemAtURL:url error:nil];
 	}
 	
-	[exporter exportToPath:[[panel URL] path] parentWindow:[self window]];
+	OSQTExporter *exporter = [[OSQTExporter alloc] init];
+	
+	NSSize size = [[[animation celAtIndex:0] canvas] size];
+	
+	if (![exporter beginExportToURL:url size:size]) {
+		NSRunAlertPanel(@"Error", @"Could not export QuickTime movie.", @"OK", nil, nil);
+		return;
+	}
+	
+	for (NSInteger i = 0; i < [animation countOfCels]; i++) {
+		[exporter addImageRep:[[[animation celAtIndex:i] canvas] imageRep]
+					forLength:[[animation celAtIndex:i] duration]];
+	}
+	
+	[exporter finishExport];
 }
 
 - (IBAction)exportToQuicktime:sender
@@ -456,7 +466,7 @@
 	NSSavePanel *savePanel = [NSSavePanel savePanel];
 	[savePanel setCanCreateDirectories:YES];
 	[savePanel setNameFieldLabel:@"Export to:"];
-	[savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"mov"]];
+	[savePanel setAllowedFileTypes:@[ (__bridge NSString *) kUTTypeQuickTimeMovie]];
 	[savePanel setPrompt:@"Export"];
 	
 	[savePanel beginSheetModalForWindow:[self window]
