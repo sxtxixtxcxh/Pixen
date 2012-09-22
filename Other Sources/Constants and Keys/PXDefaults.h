@@ -25,8 +25,6 @@ extern NSString *PXDefaultNewDocumentHeight;
 extern NSString *PXDefaultNewDocumentBackgroundColor;
 
 extern NSString *PXLeftToolPropertiesFrameKey;
-
-extern NSString *PXRightToolPropertiesIsOpenKey;
 extern NSString *PXRightToolPropertiesFrameKey;
 
 extern NSString *PXInfoPanelIsOpenKey;

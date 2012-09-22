@@ -26,10 +26,7 @@ NSString *PXDefaultNewDocumentWidth = @"PXDefaultNewDocumentWidth";
 NSString *PXDefaultNewDocumentHeight = @"PXDefaultNewDocumentHeight";
 NSString *PXDefaultNewDocumentBackgroundColor = @"PXDefaultNewDocumentBackgroundColor";
 
-NSString *PXLeftToolPropertiesIsOpenKey = @"PXLeftToolPropertiesIsOpen";
 NSString *PXLeftToolPropertiesFrameKey = @"PXLeftToolPropertiesFrame";
-
-NSString *PXRightToolPropertiesIsOpenKey = @"PXRightToolPropertiesIsOpen";
 NSString *PXRightToolPropertiesFrameKey = @"PXRightToolPropertiesFrame";
 
 NSString *PXInfoPanelIsOpenKey = @"PXInfoPanelIsOpen";
