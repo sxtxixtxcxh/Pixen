@@ -45,9 +45,6 @@ static PXPanelManager *sharedManager = nil;
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	// Open some panels if the user have let them open the last time
-	if ( [defaults boolForKey:PXLeftToolPropertiesIsOpenKey] ) {
-		[self showLeftToolProperties:self];
-	}
 	if ( [defaults boolForKey:PXRightToolPropertiesIsOpenKey] ) {
 		[self showRightToolProperties:self];
 	}
@@ -114,7 +111,6 @@ static PXPanelManager *sharedManager = nil;
 	
 	NSWindow *window = [PXToolPropertiesManager leftToolPropertiesManager].window;
 	
-	[defaults setBool:[window isVisible] forKey:PXLeftToolPropertiesIsOpenKey];
 	[defaults setObject:NSStringFromRect([self archivableRectForToolPropertiesWindow:window])
 				 forKey:PXLeftToolPropertiesFrameKey];
 	

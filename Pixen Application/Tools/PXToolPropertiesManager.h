@@ -12,7 +12,7 @@ typedef enum {
 	PXToolPropertiesSideRight
 } PXToolPropertiesSide;
 
-@interface PXToolPropertiesManager : NSWindowController
+@interface PXToolPropertiesManager : NSWindowController < NSWindowRestoration >
 
 @property (nonatomic, readonly) PXToolPropertiesSide side;
 

@@ -62,6 +62,28 @@
 - (void)awakeFromNib
 {
 	[ (NSPanel *) self.window setBecomesKeyOnlyIfNeeded:YES];
+	
+	if (_side == PXToolPropertiesSideLeft) {
+		[[self window] setIdentifier:@"LeftToolProperties"];
+	}
+	else {
+		[[self window] setIdentifier:@"RightToolProperties"];
+	}
+	
+	[[self window] setRestorationClass:[self class]];
+}
+
++ (void)restoreWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow *, NSError *))completionHandler {
+	
+	if ([identifier isEqualToString:@"LeftToolProperties"]) {
+		completionHandler([PXToolPropertiesManager leftToolPropertiesManager].window, nil);
+	}
+	else if ([identifier isEqualToString:@"RightToolProperties"]) {
+		completionHandler([PXToolPropertiesManager rightToolPropertiesManager].window, nil);
+	}
+	else {
+		completionHandler(nil, nil);
+	}
 }
 
 - (void)dealloc
