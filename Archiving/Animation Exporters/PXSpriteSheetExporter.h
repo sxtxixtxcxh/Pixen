@@ -5,7 +5,7 @@
 //  Copyright 2005-2012 Pixen Project. All rights reserved.
 //
 
-@interface PXSpriteSheetExporter : NSWindowController < NSTableViewDataSource >
+@interface PXSpriteSheetExporter : NSWindowController < NSTableViewDataSource, NSWindowDelegate, NSWindowRestoration >
 {
   @private
 	BOOL closeOnEndSheet;
@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) IBOutlet NSArrayController *documentRepresentationsController;
 
-+ (id)sharedSpriteSheetExporter;
++ (PXSpriteSheetExporter *)sharedSpriteSheetExporter;
 
 - (IBAction)export:(id)sender;
 

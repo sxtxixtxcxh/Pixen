@@ -20,7 +20,7 @@
 
 static NSString *const kSpriteSheetEntry = @"SpriteSheetEntry";
 
-+ (id)sharedSpriteSheetExporter
++ (PXSpriteSheetExporter *)sharedSpriteSheetExporter
 {
 	static PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
 	static dispatch_once_t onceToken;
@@ -236,13 +236,26 @@ static NSString *const kSpriteSheetEntry = @"SpriteSheetEntry";
 
 - (void)windowDidLoad
 {
+	[[self window] setDelegate:self];
+	
 	[self recacheDocumentRepresentations];
+	
+	[[self window] setRestorationClass:[self class]];
 }
 
-- (void)showWindow:(id)sender
++ (void)restoreWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow *, NSError *))completionHandler {
+	
+	if ([identifier isEqualToString:@"SpriteSheetWindow"]) {
+		completionHandler([PXSpriteSheetExporter sharedSpriteSheetExporter].window, nil);
+	}
+	else {
+		completionHandler(nil, nil);
+	}
+}
+
+- (void)windowDidBecomeMain:(NSNotification *)notification
 {
-	[super showWindow:sender];
-	[self updatePreview:self];
+	[self updatePreview:nil];
 }
 
 - (void)savePanelDidEnd:(NSSavePanel *)sheet returnCode:(NSInteger)returnCode
