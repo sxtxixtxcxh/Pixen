@@ -5,7 +5,7 @@
 
 @class PXAnimation, PXCanvas, PXCanvasPreviewView, PXPreviewBezelView, PXPreviewControlView, PXBackgroundController, PXPreviewResizePrompter;
 
-@interface PXPreviewController : NSWindowController
+@interface PXPreviewController : NSWindowController < NSWindowRestoration >
 {
   @private
 	NSRect updateRect;
@@ -29,7 +29,7 @@
 @property (nonatomic, weak) PXAnimation *animation;
 @property (nonatomic, weak) PXCanvas *singleCanvas;
 
-+ (id)sharedPreviewController;
++ (PXPreviewController *)sharedPreviewController;
 
 - (BOOL)hasUsableCanvas;
 - (void)documentClosed:(NSNotification *)notification;

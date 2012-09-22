@@ -58,7 +58,7 @@
 	return canvas && !NSEqualSizes([canvas size], NSZeroSize);
 }
 
-- (id) init
+- (id)init
 {
 	if ( ! ( self = [super initWithWindowNibName:@"PXPreview"] ) ) 
 		return nil;
@@ -101,7 +101,17 @@
 	return self;
 }
 
-+ (id)sharedPreviewController
++ (void)restoreWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow *, NSError *))completionHandler {
+	
+	if ([identifier isEqualToString:@"PreviewPanel"]) {
+		completionHandler([PXPreviewController sharedPreviewController].window, nil);
+	}
+	else {
+		completionHandler(nil, nil);
+	}
+}
+
++ (PXPreviewController *)sharedPreviewController
 {
 	static PXPreviewController *instance = nil;
 	static dispatch_once_t onceToken;
@@ -228,11 +238,6 @@
 	[self setCanvas:aCanvas updateScale:YES];
 }
 
-- (void)windowWillClose:(NSNotification *)notification
-{
-	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:PXPreviewWindowIsOpenKey];
-}
-
 - (void)documentClosed:(NSNotification *)notification
 {
 	PXDocument *document = [notification object];
@@ -268,8 +273,6 @@
 - (void)dealloc
 {
 	[self pauseAnimation];
-	
-	[[NSUserDefaults standardUserDefaults] setBool:[self isVisible] forKey:PXPreviewWindowIsOpenKey];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -585,8 +588,6 @@
 	
 	PXDocument *document = [[NSDocumentController sharedDocumentController] currentDocument];
 	[self setCanvas:[document canvas] updateScale:YES];
-	
-	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:PXPreviewWindowIsOpenKey];
 }
 
 - (void)setCanvas:(PXCanvas *) aCanvas updateScale:(BOOL)updateScale

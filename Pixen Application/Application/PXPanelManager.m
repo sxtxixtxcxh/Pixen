@@ -44,11 +44,6 @@ static PXPanelManager *sharedManager = nil;
 - (void)restorePanelStates
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	// Open some panels if the user have let them open the last time
-	
-	if ( [defaults boolForKey:PXPreviewWindowIsOpenKey] ) {
-		[self showPreviewPanel:self];
-	}
 	
 	//Always display toolPanel
 	[self showToolPalette:self];
