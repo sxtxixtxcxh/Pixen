@@ -13,7 +13,7 @@ typedef enum {
 @class PXGeneralPreferencesController;
 @class PXHotkeysPreferencesController;
 
-@interface PXPreferencesController : NSWindowController
+@interface PXPreferencesController : NSWindowController < NSWindowRestoration >
 {
   @private
 	PXGeneralPreferencesController *_generalVC;
@@ -21,7 +21,7 @@ typedef enum {
 	PXPreferencesTab _selectedTab;
 }
 
-+ (id)sharedPreferencesController;
++ (PXPreferencesController *)sharedPreferencesController;
 
 - (IBAction)selectGeneralTab:(id)sender;
 - (IBAction)selectHotkeysTab:(id)sender;
