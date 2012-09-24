@@ -52,7 +52,7 @@ typedef enum {
 - (void)lock;
 - (void)unlock;
 
-- (void)useTool:aTool;
+- (void)useTool:(PXTool *)aTool;
 - (void)useToolTagged:(PXToolTag)tag;
 
 	//Actions methods
