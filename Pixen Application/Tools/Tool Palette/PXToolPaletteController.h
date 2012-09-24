@@ -3,10 +3,7 @@
 //  Pixen
 //
 
-@class PXToolSwitcher, PXCanvasController;
-
-@interface PXToolPaletteRightToolGradientView : NSImageView { }
-@end
+@class PXToolSwitcher, PXCanvasController, PXTool;
 
 @interface PXToolPaletteController: NSWindowController
 {
@@ -32,10 +29,8 @@
 - (void)enterFullScreenWithDuration:(NSTimeInterval)duration;
 - (void)exitFullScreenWithDuration:(NSTimeInterval)duration;
 
-	//Action method
 - (IBAction)disclosureClicked:(id)sender;
 
-	//Events methods
 - (void)keyDown:(NSEvent *)event fromCanvasController:(PXCanvasController *)cc;
 - (BOOL)keyWasDown:(NSUInteger)mask;
 - (BOOL)isMask:(NSUInteger)newMask upEventForModifierMask:(unsigned int)mask;
@@ -45,12 +40,8 @@
 - (void)rightMouseUp;
 - (BOOL)usingRightTool;
 
-	//Accessor methods
-- (id)leftTool;
-- (id)rightTool;
-- (id)currentTool;
-- (PXToolSwitcher *)leftSwitcher;
-- (PXToolSwitcher *)rightSwitcher;
-- (NSPanel *)toolPanel;
+- (PXTool *)leftTool;
+- (PXTool *)rightTool;
+- (PXTool *)currentTool;
 
 @end

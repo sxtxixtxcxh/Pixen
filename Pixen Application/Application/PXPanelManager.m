@@ -209,7 +209,7 @@ static PXPanelManager *sharedManager = nil;
 
 - (NSPanel *)toolPalettePanel
 {
-	return [[PXToolPaletteController sharedToolPaletteController] toolPanel];
+	return (NSPanel *) [[PXToolPaletteController sharedToolPaletteController] window];
 }
 
 - (IBAction)showLeftToolProperties:(id)sender

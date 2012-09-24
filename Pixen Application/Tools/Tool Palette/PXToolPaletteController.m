@@ -12,15 +12,6 @@
 @interface PXToolPaletteController (Private)
 - (void)_openRightToolSwitcher;
 - (void)_closeRightToolSwitcher;
-@end 
-
-@implementation PXToolPaletteRightToolGradientView
-
-- (BOOL)mouseDownCanMoveWindow
-{
-	return YES;
-}
-
 @end
 
 //
@@ -356,35 +347,20 @@ static NSString *const kRightToolColorKey = @"rightToolColor";
 //
 //Accessors methods
 //
--(id) leftTool
+-(PXTool *) leftTool
 {
 	return [leftSwitcher selectedTool];
 }
 
--(id) rightTool
+-(PXTool *) rightTool
 {
 	return [rightSwitcher selectedTool];
 }
 
--(id) currentTool
+-(PXTool *) currentTool
 {
 	PXToolSwitcher *currentSwitcher = [self usingRightTool] ? rightSwitcher : leftSwitcher;
 	return [currentSwitcher selectedTool];
-}
-
-- (PXToolSwitcher *) leftSwitcher
-{
-	return leftSwitcher;
-}
-
-- (PXToolSwitcher *) rightSwitcher
-{
-	return rightSwitcher;
-}
-
--(NSPanel *) toolPanel
-{
-	return (NSPanel *)[self window];
 }
 
 - (void)windowDidBecomeKey:(NSNotification *)notification
