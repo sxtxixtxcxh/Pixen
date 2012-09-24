@@ -31,6 +31,9 @@
 
 @synthesize leftSwitcher, rightSwitcher, minimalView, rightSwitchView, triangle, rightToolGradient;
 
+static NSString *const kLeftToolColorKey = @"leftToolColor";
+static NSString *const kRightToolColorKey = @"rightToolColor";
+
 - (void)_openRightToolSwitcher
 {
 	[minimalView setFrameOrigin:NSMakePoint(0, NSHeight([rightSwitchView frame]))];
@@ -74,6 +77,11 @@
 												 name:PXUnlockToolSwitcherNotificationName 
 											   object:nil];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(changedSwitcherColor:)
+												 name:PXToolColorDidChangeNotificationName
+											   object:nil];
+	
 	[[self window] setMovableByWindowBackground:YES];
 	[(NSPanel *)[self window] setBecomesKeyOnlyIfNeeded:YES];
 	
@@ -83,6 +91,27 @@
 - (BOOL)acceptsFirstResponder
 {
 	return YES;
+}
+
+- (void)changedSwitcherColor:(NSNotification *)note
+{
+	[self invalidateRestorableState];
+}
+
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+	[super encodeRestorableStateWithCoder:coder];
+	
+	[coder encodeObject:self.leftSwitcher.color forKey:kLeftToolColorKey];
+	[coder encodeObject:self.rightSwitcher.color forKey:kRightToolColorKey];
+}
+
+- (void)restoreStateWithCoder:(NSCoder *)coder
+{
+	[super restoreStateWithCoder:coder];
+	
+	self.leftSwitcher.color = [coder decodeObjectForKey:kLeftToolColorKey];
+	self.rightSwitcher.color = [coder decodeObjectForKey:kRightToolColorKey];
 }
 
 - (void)lock:(NSNotification *)aNotification
