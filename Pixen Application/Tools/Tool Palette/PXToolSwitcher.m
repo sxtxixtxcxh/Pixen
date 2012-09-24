@@ -18,7 +18,7 @@
 #import "PXLassoTool.h"
 #import "PXNotifications.h"
 
-  // a protocol interface + bundle loader would be better
+// a protocol interface + bundle loader would be better
 
 @implementation PXToolSwitcher
 
@@ -42,12 +42,12 @@
 
 - (void)lock
 {
-  _locked = YES;
+	_locked = YES;
 }
 
 - (void)unlock
 {
-  _locked = NO;
+	_locked = NO;
 }
 
 - (void)awakeFromNib
@@ -106,53 +106,53 @@
 
 - (id) selectedTool
 {
-  return _tool;
+	return _tool;
 }
 
 -(id) toolWithTag:(PXToolTag)tag
 {
-  return [tools objectAtIndex:tag];
+	return [tools objectAtIndex:tag];
 }
 
 - (PXToolTag)tagForTool:(id) aTool
 {
-  return (PXToolTag)[tools indexOfObject:aTool];
+	return (PXToolTag)[tools indexOfObject:aTool];
 }
 
 - (void)setIcon:(NSImage *)anImage forTool:(id)aTool
 {
-  [[toolsMatrix cellWithTag:[self tagForTool:aTool]] setImage:anImage];
+	[[toolsMatrix cellWithTag:[self tagForTool:aTool]] setImage:anImage];
 }
 
 - (void)useTool:(id) aTool
 {
-  [self useToolTagged:[self tagForTool:aTool]];
+	[self useToolTagged:[self tagForTool:aTool]];
 }
 
 - (void)useToolTagged:(PXToolTag)tag
 {
-	if ( _locked ) 
+	if ( _locked )
 		return;
-  
+	
 	_lastTool = _tool;
 	_tool = [self toolWithTag:tag];
 	[_tool clearBezier];
 	[toolsMatrix selectCellWithTag:tag];
-	[[NSNotificationCenter defaultCenter] postNotificationName:PXToolDidChangeNotificationName 
-                                                      object:self 
-                                                    userInfo:[NSDictionary dictionaryWithObjectsAndKeys:_tool, PXNewToolKey,nil]];
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXToolDidChangeNotificationName
+														object:self
+													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:_tool, PXNewToolKey,nil]];
 }
 
 - (void)requestToolChangeNotification
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:PXToolDidChangeNotificationName 
-                                                      object:self 
-                                                    userInfo:[NSDictionary dictionaryWithObjectsAndKeys:_tool, PXNewToolKey,nil]];
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXToolDidChangeNotificationName
+														object:self
+													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:_tool, PXNewToolKey,nil]];
 }
 
 - (NSColor *) color
 {
-  return _color;
+	return _color;
 }
 
 - (void)activateColorWell
@@ -183,7 +183,7 @@
 - (IBAction)toolClicked:(id)sender
 {
 	
-  [self useToolTagged:(PXToolTag)[[toolsMatrix selectedCell] tag]];
+	[self useToolTagged:(PXToolTag)[[toolsMatrix selectedCell] tag]];
 }
 
 - (IBAction)toolDoubleClicked:(id)sender
