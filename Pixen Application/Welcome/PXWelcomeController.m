@@ -11,6 +11,8 @@
 
 @synthesize webView = _webView;
 
+static NSString *const kLastPageURLKey = @"lastPageURL";
+
 + (PXWelcomeController *)sharedWelcomeController
 {
 	static PXWelcomeController *sharedWelcomeController = nil;
@@ -41,9 +43,33 @@
 	}
 }
 
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+	[super encodeRestorableStateWithCoder:coder];
+	
+	[coder encodeObject:[self.webView mainFrameURL] forKey:kLastPageURLKey];
+}
+
+- (void)restoreStateWithCoder:(NSCoder *)coder
+{
+	[super restoreStateWithCoder:coder];
+	
+	NSString *urlString = [coder decodeObjectForKey:kLastPageURLKey];
+	
+	if (urlString)
+		[[self.webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
+}
+
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
+{
+	[self invalidateRestorableState];
+}
+
 - (void)awakeFromNib
 {
 	[[self window] setRestorationClass:[self class]];
+	
+	[self.webView setFrameLoadDelegate:self];
 	
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"PixenIntro" ofType:nil];
 	path = [path stringByAppendingPathComponent:@"index.html"];
