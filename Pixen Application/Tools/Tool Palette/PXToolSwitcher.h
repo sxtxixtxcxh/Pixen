@@ -38,11 +38,11 @@ typedef enum {
 
 + (NSArray *)toolClasses;
 
-- (id)selectedTool;
+- (PXTool *)selectedTool;
 
-- (id)toolWithTag:(PXToolTag)tag;
-- (PXToolTag)tagForTool:(id)aTool;
-- (void)setIcon:(NSImage *)anImage forTool:(id)aTool;
+- (PXTool *)toolWithTag:(PXToolTag)tag;
+- (PXToolTag)tagForTool:(PXTool *)aTool;
+- (void)setIcon:(NSImage *)anImage forTool:(PXTool *)aTool;
 
 	//Manage color/colorWell
 - (NSColor *)color;

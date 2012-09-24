@@ -705,7 +705,8 @@ void PXDebugRect(NSRect r, float alpha)
 	
 	if ([canvas containsPoint:point])
 	{
-		PXColor currentColor = [[[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEyedropperToolTag] compositeColorAtPoint:point fromCanvas:canvas];
+		PXEyedropperTool *tool = (PXEyedropperTool *) [[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEyedropperToolTag];
+		PXColor currentColor = [tool compositeColorAtPoint:point fromCanvas:canvas];
 		[[PXInfoPanelController sharedInfoPanelController] setColorInfo:currentColor];
 	}
 	else {

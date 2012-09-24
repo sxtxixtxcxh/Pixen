@@ -104,27 +104,27 @@
 	return self;
 }
 
-- (id) selectedTool
+- (PXTool *) selectedTool
 {
 	return _tool;
 }
 
--(id) toolWithTag:(PXToolTag)tag
+-(PXTool *) toolWithTag:(PXToolTag)tag
 {
 	return [tools objectAtIndex:tag];
 }
 
-- (PXToolTag)tagForTool:(id) aTool
+- (PXToolTag)tagForTool:(PXTool *) aTool
 {
 	return (PXToolTag)[tools indexOfObject:aTool];
 }
 
-- (void)setIcon:(NSImage *)anImage forTool:(id)aTool
+- (void)setIcon:(NSImage *)anImage forTool:(PXTool *)aTool
 {
 	[[toolsMatrix cellWithTag:[self tagForTool:aTool]] setImage:anImage];
 }
 
-- (void)useTool:(id) aTool
+- (void)useTool:(PXTool *) aTool
 {
 	[self useToolTagged:[self tagForTool:aTool]];
 }
