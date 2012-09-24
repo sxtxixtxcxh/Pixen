@@ -5,6 +5,9 @@
 
 @class PXToolSwitcher, PXCanvasController, PXTool;
 
+@interface PXToolPaletteRightToolGradientView : NSImageView { }
+@end
+
 @interface PXToolPaletteController: NSWindowController
 {
   @private

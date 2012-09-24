@@ -14,6 +14,15 @@
 - (void)_closeRightToolSwitcher;
 @end
 
+@implementation PXToolPaletteRightToolGradientView
+
+- (BOOL)mouseDownCanMoveWindow
+{
+	return YES;
+}
+
+@end
+
 //
 // PXToolPaletteController implementation
 //
