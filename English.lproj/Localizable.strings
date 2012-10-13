@@ -215,27 +215,10 @@
 /* Hide Tool Preview */
 "HIDE_TOOL_PREVIEW" = "Hide Tool Preview";
 
-/* Add Cel */
-"ADD_CEL" = "Add Cel";
-
-/* Show Previous Cel Overlay */
-"SHOW_PREVIOUS_CEL_OVERLAY" = "Show Previous Cel Overlay";
-/* Hide Previous Cel Overlay */
-"HIDE_PREVIOUS_CEL_OVERLAY" = "Hide Previous Cel Overlay";
-
 /* Show Tiled View */
 "SHOW_TILED_VIEW" = "Show Tiled View";
 /* Hide Tool Preview */
 "HIDE_TILED_VIEW" = "Hide Tiled View";
-
-/* Copy Cel */
-"COPY_CEL" = "Copy Cel";
-/* Cut Cel */
-"CUT_CEL" = "Cut Cel";
-/* Duplicate Cel */
-"DUPLICATE_CEL" = "Duplicate Cel";
-/* Delete Cel */
-"DELETE_CEL" = "Delete Cel";
 
 /* Show large color swatches */
 "SHOW_LARGE_COLOR_SWATCHES" = "Show large color swatches";
