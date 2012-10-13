@@ -232,3 +232,13 @@
 
 /* About */
 "VERSION_STRING" = "Version %@";
+
+// new
+
+"ADD_FRAME" = "Add Frame";
+"HIDE_PREVIOUS_FRAME_OVERLAY" = "Hide Previous Frame Overlay";
+"SHOW_PREVIOUS_FRAME_OVERLAY" = "Show Previous Frame Overlay";
+"COPY_FRAME" = "Copy Frame";
+"CUT_FRAME" = "Cut Frame";
+"DUPLICATE_FRAME" = "Duplicate Frame";
+"DELETE_FRAME" = "Delete Frame";

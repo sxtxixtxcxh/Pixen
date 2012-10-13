@@ -213,7 +213,6 @@
 	}
 	[cels removeObjectAtIndex:removeIndex];
 	[[undoManager prepareWithInvocationTarget:self] moveCelFromIndex:[cels indexOfObject:cel] toIndex:removeIndex];
-	[undoManager setActionName:NSLocalizedString(@"Move Cel", @"Move Cel")];
 	[undoManager endUndoGrouping];
 	[self didChangeValueForKey:@"countOfCels"];
 }

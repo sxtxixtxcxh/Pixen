@@ -385,8 +385,10 @@ NSString *palettesSubdirName = @"Palettes";
 	}
 	else if ([anItem action] == @selector(togglePreviousCelOverlay:))
 	{
-		[anItem setTitle:([self showsPreviousCelOverlay]) ? NSLocalizedString(@"HIDE_PREVIOUS_CEL_OVERLAY", @"Hide Previous Cel Overlay") :
-		 NSLocalizedString(@"SHOW_PREVIOUS_CEL_OVERLAY", @"Show Previous Cel Overlay")];
+		[anItem setTitle:([self showsPreviousCelOverlay]) ?
+		 NSLocalizedString(@"HIDE_PREVIOUS_FRAME_OVERLAY", nil) :
+		 NSLocalizedString(@"SHOW_PREVIOUS_FRAME_OVERLAY", nil)];
+		
 		return YES;
 	}
 	else {

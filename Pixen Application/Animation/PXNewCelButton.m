@@ -43,7 +43,7 @@ const CGFloat PXPlusButtonPadding = 12.0f;
 		tempPoint.x += PXPlusButtonSize;
 		[_plusPath lineToPoint:tempPoint];
 		
-		[self setToolTip:NSLocalizedString(@"ADD_CEL", @"ADD_CEL")];
+		[self setToolTip:NSLocalizedString(@"ADD_FRAME", nil)];
 	}
 	return self;
 }

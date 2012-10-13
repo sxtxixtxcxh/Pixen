@@ -553,11 +553,11 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 		[self selectCelAtIndex:i byExtendingSelection:NO];
 		
 		NSMenu *menu = [[NSMenu alloc] init];
-		[menu addItemWithTitle:NSLocalizedString(@"COPY_CEL", @"Copy") action:@selector(copyCel:) keyEquivalent:@""];
-		[menu addItemWithTitle:NSLocalizedString(@"CUT_CEL", @"Cut") action:@selector(cutCel:) keyEquivalent:@""];
-		[menu addItemWithTitle:NSLocalizedString(@"DELETE_CEL", @"Delete") action:@selector(deleteCel:) keyEquivalent:@""];
+		[menu addItemWithTitle:NSLocalizedString(@"COPY_FRAME", nil) action:@selector(copyCel:) keyEquivalent:@""];
+		[menu addItemWithTitle:NSLocalizedString(@"CUT_FRAME", nil) action:@selector(cutCel:) keyEquivalent:@""];
+		[menu addItemWithTitle:NSLocalizedString(@"DELETE_FRAME", nil) action:@selector(deleteCel:) keyEquivalent:@""];
 		[menu addItem:[NSMenuItem separatorItem]];
-		[menu addItemWithTitle:NSLocalizedString(@"DUPLICATE_CEL", @"Duplicate") action:@selector(duplicateCel:) keyEquivalent:@""];
+		[menu addItemWithTitle:NSLocalizedString(@"DUPLICATE_FRAME", nil) action:@selector(duplicateCel:) keyEquivalent:@""];
 		return menu;
 	}
 	return nil;
