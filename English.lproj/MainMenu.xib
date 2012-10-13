@@ -1072,7 +1072,7 @@
 							<array class="NSMutableArray" key="NSMenuItems">
 								<object class="NSMenuItem" id="575938084">
 									<reference key="NSMenu" ref="686112092"/>
-									<string key="NSTitle">New Cel</string>
+									<string key="NSTitle">New Frame</string>
 									<string key="NSKeyEquiv">N</string>
 									<int key="NSKeyEquivModMask">1572864</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1081,7 +1081,7 @@
 								</object>
 								<object class="NSMenuItem" id="809520410">
 									<reference key="NSMenu" ref="686112092"/>
-									<string key="NSTitle">Delete Cel</string>
+									<string key="NSTitle">Delete Frame</string>
 									<string key="NSKeyEquiv">W</string>
 									<int key="NSKeyEquivModMask">1572864</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1101,7 +1101,7 @@
 								</object>
 								<object class="NSMenuItem" id="293771805">
 									<reference key="NSMenu" ref="686112092"/>
-									<string key="NSTitle">Copy Cel</string>
+									<string key="NSTitle">Copy Frame</string>
 									<string key="NSKeyEquiv">C</string>
 									<int key="NSKeyEquivModMask">1572864</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1110,7 +1110,7 @@
 								</object>
 								<object class="NSMenuItem" id="836817173">
 									<reference key="NSMenu" ref="686112092"/>
-									<string key="NSTitle">Cut Cel</string>
+									<string key="NSTitle">Cut Frame</string>
 									<string key="NSKeyEquiv">X</string>
 									<int key="NSKeyEquivModMask">1572864</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1119,7 +1119,7 @@
 								</object>
 								<object class="NSMenuItem" id="378042696">
 									<reference key="NSMenu" ref="686112092"/>
-									<string key="NSTitle">Paste Cel</string>
+									<string key="NSTitle">Paste Frame</string>
 									<string key="NSKeyEquiv">V</string>
 									<int key="NSKeyEquivModMask">1572864</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1128,7 +1128,7 @@
 								</object>
 								<object class="NSMenuItem" id="560070500">
 									<reference key="NSMenu" ref="686112092"/>
-									<string key="NSTitle">Duplicate Cel</string>
+									<string key="NSTitle">Duplicate Frame</string>
 									<string key="NSKeyEquiv">D</string>
 									<int key="NSKeyEquivModMask">1572864</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1148,7 +1148,7 @@
 								</object>
 								<object class="NSMenuItem" id="196630483">
 									<reference key="NSMenu" ref="686112092"/>
-									<string key="NSTitle">Select Previous Cel</string>
+									<string key="NSTitle">Select Previous Frame</string>
 									<string key="NSKeyEquiv"></string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1157,7 +1157,7 @@
 								</object>
 								<object class="NSMenuItem" id="795104253">
 									<reference key="NSMenu" ref="686112092"/>
-									<string key="NSTitle">Select Next Cel</string>
+									<string key="NSTitle">Select Next Frame</string>
 									<string key="NSKeyEquiv"></string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1166,7 +1166,7 @@
 								</object>
 								<object class="NSMenuItem" id="243569127">
 									<reference key="NSMenu" ref="686112092"/>
-									<string key="NSTitle">Show Previous Cel Overlay</string>
+									<string key="NSTitle">Show Previous Frame Overlay</string>
 									<string key="NSKeyEquiv">o</string>
 									<int key="NSKeyEquivModMask">1310720</int>
 									<int key="NSMnemonicLoc">2147483647</int>
