@@ -45,7 +45,7 @@
 			<object class="NSWindowTemplate" id="649134283">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{362, 153}, {696, 594}}</string>
+				<string key="NSWindowRect">{{362, 153}, {696, 618}}</string>
 				<int key="NSWTFlags">1886912512</int>
 				<string key="NSWindowTitle">Window</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -187,7 +187,7 @@
 									<string key="NSClassName">NSView</string>
 								</object>
 							</array>
-							<string key="NSFrameSize">{696, 594}</string>
+							<string key="NSFrame">{{0, 24}, {696, 594}}</string>
 							<reference key="NSSuperview" ref="464742240"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="247026473"/>
@@ -196,15 +196,17 @@
 							<string key="NSAutosaveName">SideCanvasSplitView</string>
 						</object>
 					</array>
-					<string key="NSFrameSize">{696, 594}</string>
+					<string key="NSFrameSize">{696, 618}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="128266224"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{200, 108}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName"/>
+				<bool key="NSAutorecalculatesContentBorderThicknessMinY">NO</bool>
+				<double key="NSContentBorderThicknessMinY">24</double>
 				<int key="NSWindowCollectionBehavior">128</int>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
