@@ -134,8 +134,10 @@
 
 	[[paletteController view] setFrameSize:[paletteSplit frame].size];
 	[[paletteController view] setFrameOrigin:NSZeroPoint];
-	[[canvasController scrollView] setFrameOrigin:NSZeroPoint];
-	[[canvasController scrollView] setFrameSize:[[self canvasSplit] frame].size];
+	[[canvasController scrollView] setFrameOrigin:NSMakePoint(0.0f, 26.0f)];
+	CGSize size = [[self canvasSplit] frame].size;
+	size.height -= 26.0f;
+	[[canvasController scrollView] setFrameSize:size];
 }
 
 - (void)dealloc
