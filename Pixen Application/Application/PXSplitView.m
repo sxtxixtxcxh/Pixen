@@ -11,7 +11,7 @@
 
 - (NSColor *)dividerColor
 {
-	return [NSColor colorWithDeviceWhite:0.4f alpha:1.0f];
+	return [NSColor colorWithDeviceWhite:0.5f alpha:1.0f];
 }
 
 @end
