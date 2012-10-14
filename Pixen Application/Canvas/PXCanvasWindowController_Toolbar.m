@@ -14,8 +14,6 @@
 NSString *PXBackgroundConfigurator = @"PXBackgroundConfigurator";
 NSString *PXPreview = @"PXPreview";
 NSString *PXToolProperties = @"PXToolProperties";
-NSString *PXZoomFit = @"PXZoomFit";
-NSString *PXZoom100 = @"PXZoom100";
 NSString *PXScale = @"PXScale";
 NSString *PXResize = @"PXResize";
 NSString *PXZoom = @"PXZoom";
@@ -56,20 +54,6 @@ NSString *PXZoom = @"PXZoom";
 		[item setAction:@selector(toggleLeftToolProperties:)];
 		[item setImage:[NSImage imageNamed:@"toolproperties"]];
 	}
-	else if ([itemIdentifier isEqualToString:PXZoomFit])
-	{		
-		[item setLabel:NSLocalizedString(@"ZOOM_FIT_LABEL", @"Zoom Fit Label")];
-		[item setToolTip:NSLocalizedString(@"ZOOM_FIT_TOOLTIP", @"Zoom Fit Tooltip")];
-		[item setAction:@selector(zoomToFit:)];
-		[item setImage:[NSImage imageNamed:@"zoomfit"]];
-	}
-	else if ([itemIdentifier isEqualToString:PXZoom100])
-	{
-		[item setLabel:NSLocalizedString(@"ZOOM_ACTUAL_LABEL", @"Zoom Actual Label")];
-		[item setToolTip:NSLocalizedString(@"ZOOM_ACTUAL_TOOLTIP", @"Zoom Actual Tooltip")];
-		[item setAction:@selector(zoomStandard:)];
-		[item setImage:[NSImage imageNamed:@"zoom100"]];
-	}
 	else if ([itemIdentifier isEqualToString:PXScale])
 	{
 		[item setLabel:NSLocalizedString(@"SCALE_LABEL", @"Scale Label")];
@@ -103,8 +87,7 @@ NSString *PXZoom = @"PXZoom";
 - (NSArray *) toolbarAllowedItemIdentifiers:(NSToolbar *) toolbar
 {
 	return [NSArray arrayWithObjects:PXBackgroundConfigurator,
-			PXPreview, PXZoom, 
-			PXZoomFit, PXZoom100,
+			PXPreview, PXZoom,
 			PXResize, PXScale,
 			NSToolbarCustomizeToolbarItemIdentifier, 
 			NSToolbarSpaceItemIdentifier,
