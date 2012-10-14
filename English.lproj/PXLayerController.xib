@@ -48,63 +48,6 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="NSButton" id="777095640">
-						<reference key="NSNextResponder" ref="273469827"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrameSize">{32, 24}</string>
-						<reference key="NSSuperview" ref="273469827"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="638677482"/>
-						<bool key="NSEnabled">YES</bool>
-						<object class="NSButtonCell" key="NSCell" id="183955926">
-							<int key="NSCellFlags">67108864</int>
-							<int key="NSCellFlags2">134217728</int>
-							<string key="NSContents"/>
-							<object class="NSFont" key="NSSupport" id="521457093">
-								<string key="NSName">LucidaGrande</string>
-								<double key="NSSize">10</double>
-								<int key="NSfFlags">2843</int>
-							</object>
-							<reference key="NSControlView" ref="777095640"/>
-							<int key="NSButtonFlags">-2042347520</int>
-							<int key="NSButtonFlags2">6</int>
-							<object class="NSCustomResource" key="NSNormalImage">
-								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">NSAddTemplate</string>
-							</object>
-							<string key="NSAlternateContents"/>
-							<string key="NSKeyEquivalent"/>
-							<int key="NSPeriodicDelay">400</int>
-							<int key="NSPeriodicInterval">75</int>
-						</object>
-						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-					</object>
-					<object class="NSButton" id="638677482">
-						<reference key="NSNextResponder" ref="273469827"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{30, 0}, {32, 24}}</string>
-						<reference key="NSSuperview" ref="273469827"/>
-						<reference key="NSWindow"/>
-						<bool key="NSEnabled">YES</bool>
-						<object class="NSButtonCell" key="NSCell" id="115292767">
-							<int key="NSCellFlags">603979776</int>
-							<int key="NSCellFlags2">134217728</int>
-							<string key="NSContents"/>
-							<reference key="NSSupport" ref="521457093"/>
-							<reference key="NSControlView" ref="638677482"/>
-							<int key="NSButtonFlags">-2042347520</int>
-							<int key="NSButtonFlags2">6</int>
-							<object class="NSCustomResource" key="NSNormalImage">
-								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">NSRemoveTemplate</string>
-							</object>
-							<string key="NSAlternateContents"/>
-							<string key="NSKeyEquivalent"/>
-							<int key="NSPeriodicDelay">400</int>
-							<int key="NSPeriodicInterval">75</int>
-						</object>
-						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-					</object>
 					<object class="NSScrollView" id="953635026">
 						<reference key="NSNextResponder" ref="273469827"/>
 						<int key="NSvFlags">274</int>
@@ -281,30 +224,6 @@
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">removeButton</string>
-						<reference key="source" ref="731948192"/>
-						<reference key="destination" ref="638677482"/>
-					</object>
-					<int key="connectionID">48</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">addLayer:</string>
-						<reference key="source" ref="731948192"/>
-						<reference key="destination" ref="777095640"/>
-					</object>
-					<int key="connectionID">50</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">removeLayer:</string>
-						<reference key="source" ref="731948192"/>
-						<reference key="destination" ref="638677482"/>
-					</object>
-					<int key="connectionID">51</int>
-				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">view</string>
@@ -587,38 +506,10 @@
 						<int key="objectID">22</int>
 						<reference key="object" ref="273469827"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="777095640"/>
-							<reference ref="638677482"/>
 							<reference ref="953635026"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">View</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">33</int>
-						<reference key="object" ref="777095640"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="183955926"/>
-						</array>
-						<reference key="parent" ref="273469827"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">35</int>
-						<reference key="object" ref="638677482"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="115292767"/>
-						</array>
-						<reference key="parent" ref="273469827"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">92</int>
-						<reference key="object" ref="183955926"/>
-						<reference key="parent" ref="777095640"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">93</int>
-						<reference key="object" ref="115292767"/>
-						<reference key="parent" ref="638677482"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">174</int>
@@ -773,10 +664,6 @@
 				<string key="213.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="214.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="22.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="33.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="35.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="93.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
@@ -875,10 +762,9 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NSAddTemplate">{8, 8}</string>
-			<string key="NSRemoveTemplate">{8, 8}</string>
-			<string key="NSSwitch">{15, 15}</string>
-		</dictionary>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NS.key.0">NSSwitch</string>
+			<string key="NS.object.0">{15, 15}</string>
+		</object>
 	</data>
 </archive>
