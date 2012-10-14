@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		6117816108ABA7F30098DCC4 /* PXAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6117815F08ABA7F30098DCC4 /* PXAnimationView.h */; };
 		6117816208ABA7F30098DCC4 /* PXAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6117816008ABA7F30098DCC4 /* PXAnimationView.m */; };
-		615C3B610D15038F00ACFA33 /* PXLayerPaneBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */; };
-		615C3B620D15038F00ACFA33 /* PXLayerPaneBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */; };
 		619DC353085BCD37007EF7F7 /* PXPreviewResizePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619DC351085BCD37007EF7F7 /* PXPreviewResizePrompt.xib */; };
 		61A22A070D20715100430CCD /* History.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A22A060D20715000430CCD /* History.tiff */; };
 		61A22A240D2073E500430CCD /* Frequency.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A22A230D2073E500430CCD /* Frequency.tiff */; };
@@ -230,7 +228,6 @@
 		C9ACC14C15C70AB300D157CB /* PXCanvasPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = EABD60B80CE986E3008A1B1E /* PXCanvasPreviewView.m */; };
 		C9ACC14D15C70AB300D157CB /* PXDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAB76750CEF54F300F2EF66 /* PXDocument.m */; };
 		C9ACC14E15C70AB300D157CB /* PXPaletteController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB6506E0D108D0F00274070 /* PXPaletteController.m */; };
-		C9ACC14F15C70AB300D157CB /* PXLayerPaneBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */; };
 		C9ACC15015C70AB300D157CB /* OSRectAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A22A850D2303EE00430CCD /* OSRectAdditions.m */; };
 		C9ACC15115C70AB300D157CB /* OSPlasticButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A22B910D2323B500430CCD /* OSPlasticButtonCell.m */; };
 		C9ACC15215C70AB300D157CB /* NSString+Comparison.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2EA41A10DB37E50065090C /* NSString+Comparison.m */; };
@@ -394,7 +391,6 @@
 		C9ACC1F115C70AB300D157CB /* PXCanvasPreviewView.h in Headers */ = {isa = PBXBuildFile; fileRef = EABD60B70CE986E3008A1B1E /* PXCanvasPreviewView.h */; };
 		C9ACC1F215C70AB300D157CB /* PXDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAB76740CEF54F300F2EF66 /* PXDocument.h */; };
 		C9ACC1F315C70AB300D157CB /* PXPaletteController.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB6506D0D108D0F00274070 /* PXPaletteController.h */; };
-		C9ACC1F415C70AB300D157CB /* PXLayerPaneBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */; };
 		C9ACC1F515C70AB300D157CB /* OSRectAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A22A840D2303EE00430CCD /* OSRectAdditions.h */; };
 		C9ACC1F615C70AB300D157CB /* OSPlasticButtonCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A22B900D2323B500430CCD /* OSPlasticButtonCell.h */; };
 		C9ACC1F715C70AB300D157CB /* NSString+Comparison.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2EA41910DB37E50065090C /* NSString+Comparison.h */; };
@@ -1004,8 +1000,6 @@
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		6117815F08ABA7F30098DCC4 /* PXAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PXAnimationView.h; sourceTree = "<group>"; };
 		6117816008ABA7F30098DCC4 /* PXAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PXAnimationView.m; sourceTree = "<group>"; };
-		615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerPaneBackgroundView.h; sourceTree = "<group>"; };
-		615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerPaneBackgroundView.m; sourceTree = "<group>"; };
 		619DC352085BCD37007EF7F7 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreviewResizePrompt.xib; sourceTree = "<group>"; };
 		61A22A060D20715000430CCD /* History.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = History.tiff; sourceTree = "<group>"; };
 		61A22A230D2073E500430CCD /* Frequency.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Frequency.tiff; sourceTree = "<group>"; };
@@ -1814,8 +1808,6 @@
 				C99E209C15B89E1600B8DDFF /* PXLayerCellView.m */,
 				EA31F96B0CE7CD9300EC481B /* PXLayerController.h */,
 				EA31F96C0CE7CD9300EC481B /* PXLayerController.m */,
-				615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */,
-				615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */,
 				C99E209715B8913C00B8DDFF /* PXLayerRowView.h */,
 				C99E209815B8913C00B8DDFF /* PXLayerRowView.m */,
 				C99E209315B88CEF00B8DDFF /* PXLayerTableView.h */,
@@ -2618,7 +2610,6 @@
 				C9ACC1F115C70AB300D157CB /* PXCanvasPreviewView.h in Headers */,
 				C9ACC1F215C70AB300D157CB /* PXDocument.h in Headers */,
 				C9ACC1F315C70AB300D157CB /* PXPaletteController.h in Headers */,
-				C9ACC1F415C70AB300D157CB /* PXLayerPaneBackgroundView.h in Headers */,
 				C9ACC1F515C70AB300D157CB /* OSRectAdditions.h in Headers */,
 				C9ACC1F615C70AB300D157CB /* OSPlasticButtonCell.h in Headers */,
 				C9ACC1F715C70AB300D157CB /* NSString+Comparison.h in Headers */,
@@ -2789,7 +2780,6 @@
 				EABD60B90CE986E3008A1B1E /* PXCanvasPreviewView.h in Headers */,
 				EAAB76760CEF54F300F2EF66 /* PXDocument.h in Headers */,
 				EAB6506F0D108D0F00274070 /* PXPaletteController.h in Headers */,
-				615C3B610D15038F00ACFA33 /* PXLayerPaneBackgroundView.h in Headers */,
 				61A22A860D2303EE00430CCD /* OSRectAdditions.h in Headers */,
 				61A22B920D2323B500430CCD /* OSPlasticButtonCell.h in Headers */,
 				EA2EA41B10DB37E50065090C /* NSString+Comparison.h in Headers */,
@@ -3338,7 +3328,6 @@
 				C9ACC14C15C70AB300D157CB /* PXCanvasPreviewView.m in Sources */,
 				C9ACC14D15C70AB300D157CB /* PXDocument.m in Sources */,
 				C9ACC14E15C70AB300D157CB /* PXPaletteController.m in Sources */,
-				C9ACC14F15C70AB300D157CB /* PXLayerPaneBackgroundView.m in Sources */,
 				C9ACC15015C70AB300D157CB /* OSRectAdditions.m in Sources */,
 				C9ACC15115C70AB300D157CB /* OSPlasticButtonCell.m in Sources */,
 				C9ACC15215C70AB300D157CB /* NSString+Comparison.m in Sources */,
@@ -3514,7 +3503,6 @@
 				EABD60BA0CE986E3008A1B1E /* PXCanvasPreviewView.m in Sources */,
 				EAAB76770CEF54F300F2EF66 /* PXDocument.m in Sources */,
 				EAB650700D108D0F00274070 /* PXPaletteController.m in Sources */,
-				615C3B620D15038F00ACFA33 /* PXLayerPaneBackgroundView.m in Sources */,
 				61A22A870D2303EE00430CCD /* OSRectAdditions.m in Sources */,
 				61A22B930D2323B500430CCD /* OSPlasticButtonCell.m in Sources */,
 				EA2EA41C10DB37E50065090C /* NSString+Comparison.m in Sources */,

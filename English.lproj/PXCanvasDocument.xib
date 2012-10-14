@@ -45,7 +45,7 @@
 			<object class="NSWindowTemplate" id="649134283">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{362, 153}, {696, 618}}</string>
+				<string key="NSWindowRect">{{362, 153}, {696, 620}}</string>
 				<int key="NSWTFlags">1886912512</int>
 				<string key="NSWindowTitle">Window</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -71,7 +71,7 @@
 												<object class="NSCustomView" id="393043584">
 													<reference key="NSNextResponder" ref="100867003"/>
 													<int key="NSvFlags">256</int>
-													<string key="NSFrameSize">{294, 259}</string>
+													<string key="NSFrameSize">{294, 268}</string>
 													<reference key="NSSuperview" ref="100867003"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="750000286"/>
@@ -80,14 +80,14 @@
 												<object class="NSCustomView" id="750000286">
 													<reference key="NSNextResponder" ref="100867003"/>
 													<int key="NSvFlags">256</int>
-													<string key="NSFrame">{{0, 269}, {294, 325}}</string>
+													<string key="NSFrame">{{0, 278}, {294, 342}}</string>
 													<reference key="NSSuperview" ref="100867003"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="694173087"/>
 													<string key="NSClassName">NSView</string>
 												</object>
 											</array>
-											<string key="NSFrameSize">{294, 594}</string>
+											<string key="NSFrameSize">{294, 620}</string>
 											<reference key="NSSuperview" ref="247026473"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="393043584"/>
@@ -95,7 +95,7 @@
 											<string key="NSAutosaveName">ColorLayersSplitView</string>
 										</object>
 									</array>
-									<string key="NSFrameSize">{294, 594}</string>
+									<string key="NSFrameSize">{294, 620}</string>
 									<reference key="NSSuperview" ref="128266224"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="100867003"/>
@@ -124,7 +124,7 @@
 															<string key="NSExtension">NSView</string>
 														</object>
 													</array>
-													<string key="NSFrameSize">{401, 594}</string>
+													<string key="NSFrameSize">{401, 620}</string>
 													<reference key="NSSuperview" ref="611315938"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="1005682494"/>
@@ -143,10 +143,9 @@
 												<object class="NSScroller" id="159475357">
 													<reference key="NSNextResponder" ref="611315938"/>
 													<int key="NSvFlags">256</int>
-													<string key="NSFrame">{{385, 0}, {16, 594}}</string>
+													<string key="NSFrame">{{385, 0}, {16, 620}}</string>
 													<reference key="NSSuperview" ref="611315938"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView"/>
 													<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 													<reference key="NSTarget" ref="611315938"/>
 													<string key="NSAction">_doScroller:</string>
@@ -156,7 +155,7 @@
 												<object class="NSScroller" id="728014243">
 													<reference key="NSNextResponder" ref="611315938"/>
 													<int key="NSvFlags">256</int>
-													<string key="NSFrame">{{0, 578}, {401, 16}}</string>
+													<string key="NSFrame">{{0, 604}, {401, 16}}</string>
 													<reference key="NSSuperview" ref="611315938"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="159475357"/>
@@ -167,7 +166,7 @@
 													<double key="NSPercent">0.89999997615814209</double>
 												</object>
 											</array>
-											<string key="NSFrameSize">{401, 594}</string>
+											<string key="NSFrameSize">{401, 620}</string>
 											<reference key="NSSuperview" ref="694173087"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="1060654567"/>
@@ -180,14 +179,14 @@
 											<double key="NSMagnification">1</double>
 										</object>
 									</array>
-									<string key="NSFrame">{{295, 0}, {401, 594}}</string>
+									<string key="NSFrame">{{295, 0}, {401, 620}}</string>
 									<reference key="NSSuperview" ref="128266224"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="611315938"/>
 									<string key="NSClassName">NSView</string>
 								</object>
 							</array>
-							<string key="NSFrame">{{0, 24}, {696, 594}}</string>
+							<string key="NSFrameSize">{696, 620}</string>
 							<reference key="NSSuperview" ref="464742240"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="247026473"/>
@@ -196,7 +195,7 @@
 							<string key="NSAutosaveName">SideCanvasSplitView</string>
 						</object>
 					</array>
-					<string key="NSFrameSize">{696, 618}</string>
+					<string key="NSFrameSize">{696, 620}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="128266224"/>
@@ -206,7 +205,7 @@
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName"/>
 				<bool key="NSAutorecalculatesContentBorderThicknessMinY">NO</bool>
-				<double key="NSContentBorderThicknessMinY">24</double>
+				<double key="NSContentBorderThicknessMinY">26</double>
 				<int key="NSWindowCollectionBehavior">128</int>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
@@ -228,7 +227,6 @@
 										<string key="NSFrame">{{117, 3}, {15, 22}}</string>
 										<reference key="NSSuperview" ref="35785786"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSStepperCell" key="NSCell" id="714381963">
 											<int key="NSCellFlags">786464</int>
