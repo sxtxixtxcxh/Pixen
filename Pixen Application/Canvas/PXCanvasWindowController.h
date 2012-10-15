@@ -16,10 +16,6 @@
 	PXCanvasController *__weak canvasController;
 	PXCanvas *__weak canvas;
 	
-	id __weak zoomPercentageBox;
-	id __weak zoomStepper;
-	NSView *zoomView;
-	
 	PXGridSettingsController *_gridSettingsController;
 	PXCanvasResizePrompter *_resizePrompter;
 	PXScaleController *scaleController;
@@ -29,9 +25,8 @@
 	NSToolbar *toolbar;
 }
 
-@property (nonatomic, weak) IBOutlet id zoomPercentageBox;
-@property (nonatomic, weak) IBOutlet id zoomStepper;
-@property (nonatomic, strong) IBOutlet NSView *zoomView;
+@property (nonatomic, weak) IBOutlet NSTextField *zoomLabel;
+@property (nonatomic, weak) IBOutlet NSSlider *zoomSlider;
 
 @property (nonatomic, weak) IBOutlet PXCanvasController *canvasController;
 

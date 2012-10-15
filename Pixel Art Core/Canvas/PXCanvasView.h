@@ -17,7 +17,6 @@
 	NSPoint marqueePatternOffset;
 	BOOL drawsSelectionMarquee;
 	
-	float zoomPercentage;
 	NSPoint centeredPoint;
 	BOOL shouldDrawMainBackground;
 	BOOL shouldDrawGrid;
@@ -34,7 +33,7 @@
 }
 
 @property (nonatomic, weak) PXCanvas *canvas;
-@property (nonatomic, assign) float zoomPercentage;
+@property (nonatomic, assign) int zoomPercentage;
 
 @property (nonatomic, assign) BOOL usesToolCursors;
 @property (nonatomic, assign) BOOL updatesInfoPanel;
@@ -44,10 +43,6 @@
 - (void)setCrosshair:aCrosshair;
 - (PXCrosshair *)crosshair;
 - (id) initWithFrame:(NSRect)rect;
-
-- (float)zoomPercentage;
-
-- (void)setZoomPercentage:(float)percent;
 
 - (NSPoint)convertFromCanvasToViewPoint:(NSPoint)point;
 - (NSRect)convertFromCanvasToViewRect:(NSRect)rect;

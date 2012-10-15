@@ -2,8 +2,7 @@
 //  PXCanvasWindowController_Zooming.m
 //  Pixen
 //
-//  Created by Joe Osborn on 2005.08.09.
-//  Copyright 2005 Pixen. All rights reserved.
+//  Copyright 2005-2012 Pixen Project. All rights reserved.
 //
 
 #import "PXCanvasWindowController_Zooming.h"
@@ -12,88 +11,33 @@
 #import "PXCanvasView.h"
 #import "PXCanvasController.h"
 
-@implementation PXCanvasWindowController(Zooming)
+@implementation PXCanvasWindowController (Zooming)
 
-- (void)prepareZoom
+- (void)zoomToPercent:(int)percent
 {
-	NSArray *itemsObjects = [NSArray arrayWithObjects:
-		[NSNumber numberWithInt:3000], 
-		[NSNumber numberWithInt:2000], 
-		[NSNumber numberWithInt:1000], 
-		[NSNumber numberWithInt:800], 
-		[NSNumber numberWithInt:500], 
-		[NSNumber numberWithInt:400],
-		[NSNumber numberWithInt:200], 
-		[NSNumber numberWithInt:100],
-		nil];
-	[zoomPercentageBox removeAllItems];
-	[zoomPercentageBox addItemsWithObjectValues:itemsObjects];
-	// If you're looking for arbitrarily hard-coded percentages, they're right here!
-	[zoomPercentageBox selectItemAtIndex:7];
-	[zoomStepper setIntValue:7];	
-}
-
-- (IBAction)zoomToFit:sender
-{
-	[self zoomToFit];
-}
-
-- (void)zoomToIndex:(float)index
-{
-	if (index < 0 || index >= [zoomPercentageBox numberOfItems]) {
-		NSBeep();
-		return;
-	}
+	[canvasController view].zoomPercentage = percent;
 	
-	[zoomPercentageBox selectItemAtIndex:index];
-	[zoomStepper setIntValue:index];
-	[[canvasController view] setZoomPercentage:[zoomPercentageBox intValue]];
-	[canvasController updateMousePosition:[[self window] mouseLocationOutsideOfEventStream]];
-}
-
-- (void)zoomToPercentage:(NSNumber *)percentage
-{
-	if( percentage == nil 
-		|| [percentage isEqual:[NSNumber numberWithInt:0]] 
-		|| [[[percentage description] lowercaseString] isEqualToString:PXInfinityDescription] 
-		|| [[[percentage description] lowercaseString] isEqualToString:PXNanDescription]) 
-	{ 
-		[self zoomToPercentage:[NSNumber numberWithFloat:100]]; 
-		return;
-	}
-	if([percentage intValue] > 10000)
-	{
-		[self zoomToIndex:0];
-		return;
-	}
-	// Kind of a HACK, could change if the description changes to display something other than inf or nan on such numbers.
-	//Probably not an issue, but I'll mark it so it's easy to find if it breaks later.
-	
-	if( ! [[zoomPercentageBox objectValues] containsObject:percentage])
-	{
-		NSMutableArray *values = [NSMutableArray arrayWithArray:[zoomPercentageBox objectValues]];
-		[values addObject:percentage];
-		[values sortUsingSelector:@selector(compare:)];
-		[zoomPercentageBox removeAllItems];
-		[zoomPercentageBox addItemsWithObjectValues:[[values reverseObjectEnumerator] allObjects]];
-	}
-	
-	[zoomPercentageBox selectItemWithObjectValue:percentage];
-	[self zoomToIndex:[zoomPercentageBox indexOfSelectedItem]];
+	[self.zoomLabel setStringValue:[NSString stringWithFormat:@"%d%%", percent]];
+	[self.zoomSlider setIntValue:percent];
 }
 
 - (void)zoomToFit
 {
-	if([canvas size].width <= 0 ||
-	   [canvas size].height <= 0)
-	{
+	if ([canvas size].width <= 0 || [canvas size].height <= 0)
 		return;
-	}
+	
 	NSRect contentFrame = [[[canvasController scrollView] contentView] frame];
-	float xRatio = NSWidth(contentFrame)/[canvas size].width;
-	float yRatio = NSHeight(contentFrame)/[canvas size].height;
-	float pct = (NSWidth(contentFrame) > [canvas size].width || NSHeight(contentFrame) > [canvas size].height) ? (floorf(xRatio < yRatio ? xRatio : yRatio))*100 : 100.0;
-	[self zoomToPercentage:[NSNumber numberWithFloat:MIN(pct, 10000)]];
+	
+	CGFloat xRatio = NSWidth(contentFrame) / [canvas size].width;
+	CGFloat yRatio = NSHeight(contentFrame) / [canvas size].height;
+	
+	int pct = 100;
+	
+	if ((NSWidth(contentFrame) > [canvas size].width || NSHeight(contentFrame) > [canvas size].height)) {
+		pct = floorf(xRatio < yRatio ? xRatio : yRatio) * 100;
+	}
+	
+	[self zoomToPercent:MIN(pct, 1000)];
 }
 
 - (void)canvasController:(PXCanvasController *)controller zoomInOnCanvasPoint:(NSPoint)point
@@ -108,39 +52,40 @@
 
 - (void)zoomToFitCanvasController:(PXCanvasController *)controller
 {
-	[self zoomToFit:self];	
+	[self zoomToFit:self];
 }
 
-- (IBAction)zoomIn: (id) sender
+- (IBAction)zoomIn:(id)sender
 {
-	[self zoomToIndex:[zoomStepper intValue]-1];
+	int currentZoom = [canvasController view].zoomPercentage;
+	
+	if (currentZoom < 1000)
+		[self zoomToPercent:(currentZoom + 100)];
 }
 
-- (IBAction)zoomOut: (id) sender
+- (IBAction)zoomOut:(id)sender
 {
-	[self zoomToIndex:[zoomStepper intValue]+1];
+	int currentZoom = [canvasController view].zoomPercentage;
+	
+	if (currentZoom > 100)
+		[self zoomToPercent:(currentZoom - 100)];
 }
 
-- (IBAction)zoomStandard: (id) sender
-{ 
-	[self zoomToIndex:[zoomPercentageBox indexOfItemWithObjectValue:[NSNumber numberWithInt:100]]];
-}
-
-- (IBAction)zoomPercentageChanged:sender
+- (IBAction)zoomStandard:(id)sender
 {
-	[self zoomToPercentage:[zoomPercentageBox objectValue]];
+	[self zoomToPercent:100];
 }
 
-- (IBAction)zoomStepperStepped:(id) sender
+- (IBAction)zoomToFit:(id)sender
 {
-	if([zoomStepper intValue] >= [zoomPercentageBox numberOfItems]) 
-	{ 
-		NSBeep();
-		[zoomStepper setIntValue: (int)[zoomPercentageBox numberOfItems]-1]; 
-		return; 
-	}
-	[self zoomToIndex:[zoomStepper intValue]];
+	[self zoomToFit];
 }
 
+- (IBAction)zoomSliderChanged:(id)sender
+{
+	int closestZoom = roundf([sender intValue] / 100.0f) * 100;
+	
+	[self zoomToPercent:closestZoom];
+}
 
 @end

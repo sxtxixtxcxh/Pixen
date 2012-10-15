@@ -16,7 +16,6 @@ NSString *PXPreview = @"PXPreview";
 NSString *PXToolProperties = @"PXToolProperties";
 NSString *PXScale = @"PXScale";
 NSString *PXResize = @"PXResize";
-NSString *PXZoom = @"PXZoom";
 
 - (void)prepareToolbar
 {
@@ -68,14 +67,6 @@ NSString *PXZoom = @"PXZoom";
 		[item setAction:@selector(resizeCanvas:)];
 		[item setImage:[NSImage imageNamed:@"resize"]];
 	}
-	else if ([itemIdentifier isEqualToString:PXZoom])
-	{
-		[item setLabel:NSLocalizedString(@"ZOOM_LABEL", @"Zoom Label")];
-		[item setToolTip:NSLocalizedString(@"ZOOM_TOOLTIP", @"Zoom Tooltip")];
-		[item setView:zoomView];
-		[item setMinSize:NSMakeSize(124,NSHeight([zoomView frame]))];
-		[item setMaxSize:NSMakeSize(124,NSHeight([zoomView frame]))];
-	}
 	[item setPaletteLabel:[item label]];
 	if(![item target])
 	{
@@ -87,7 +78,7 @@ NSString *PXZoom = @"PXZoom";
 - (NSArray *) toolbarAllowedItemIdentifiers:(NSToolbar *) toolbar
 {
 	return [NSArray arrayWithObjects:PXBackgroundConfigurator,
-			PXPreview, PXZoom,
+			PXPreview,
 			PXResize, PXScale,
 			NSToolbarCustomizeToolbarItemIdentifier, 
 			NSToolbarSpaceItemIdentifier,
@@ -100,7 +91,7 @@ NSString *PXZoom = @"PXZoom";
 {
 	return [NSArray arrayWithObjects:PXBackgroundConfigurator,
 			NSToolbarSeparatorItemIdentifier, PXPreview,
-			NSToolbarFlexibleSpaceItemIdentifier, PXZoom, nil];
+			NSToolbarFlexibleSpaceItemIdentifier, nil];
 }
 
 @end

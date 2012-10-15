@@ -17,6 +17,7 @@
 #import "PXCanvas_Modifying.h"
 #import "PXCanvas_Selection.h"
 #import "PXCanvasController.h"
+#import "PXCanvasView.h"
 #import "PXGridSettingsController.h"
 #import "PXScaleController.h"
 #import "PXPaletteExporter.h"
@@ -204,11 +205,11 @@
 		return [[self canvas] hasSelection] && [[[PXToolPaletteController sharedToolPaletteController] currentTool] supportsPatterns];
 	else if ([anItem action] == @selector(zoomOut:))
 	{
-		return ([zoomPercentageBox indexOfSelectedItem] < [zoomPercentageBox numberOfItems]-1);
+		return ([[canvasController view] zoomPercentage] > 100);
 	}
 	else if ([anItem action] == @selector(zoomIn:))
 	{
-		return ([zoomPercentageBox indexOfSelectedItem] > 0);
+		return ([[canvasController view] zoomPercentage] < 1000);
 	}
 	else if ([anItem action] == @selector(increaseOpacity:))
 	{

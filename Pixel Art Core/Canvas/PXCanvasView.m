@@ -43,7 +43,7 @@ void PXDebugRect(NSRect r, float alpha)
 	NSTrackingArea *_trackingArea;
 }
 
-@synthesize canvas, zoomPercentage, delegate;
+@synthesize canvas, zoomPercentage = _zoomPercentage, delegate;
 @synthesize usesToolCursors = _usesToolCursors, updatesInfoPanel = _updatesInfoPanel;
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)event
@@ -72,7 +72,7 @@ void PXDebugRect(NSRect r, float alpha)
 		return nil;
 	
 	acceptsFirstMouse = YES;
-	zoomPercentage = 100;
+	_zoomPercentage = 100;
 	shouldDrawGrid = YES;
 	shouldDrawMainBackground = YES;
 	trackingRect = -1;
@@ -212,14 +212,16 @@ void PXDebugRect(NSRect r, float alpha)
 	[self addTrackingArea:_trackingArea];
 }
 
-- (void)setZoomPercentage:(float)percent
+- (void)setZoomPercentage:(int)percent
 {
-	NSRect rect = [self visibleRect];
-	centeredPoint = [self convertFromViewToCanvasPoint:NSMakePoint(NSMinX(rect) + NSWidth(rect)/2, NSMinY(rect) + NSHeight(rect)/2)];
-	zoomPercentage = percent;
-	cachedMarqueePath = nil;
-	[self sizeToCanvas];
-	[self updateInfoPanelWithMousePosition:[self convertFromWindowToCanvasPoint:[[self window] mouseLocationOutsideOfEventStream]] dragging:NO];
+	if (_zoomPercentage != percent) {
+		NSRect rect = [self visibleRect];
+		centeredPoint = [self convertFromViewToCanvasPoint:NSMakePoint(NSMinX(rect) + NSWidth(rect)/2, NSMinY(rect) + NSHeight(rect)/2)];
+		_zoomPercentage = percent;
+		cachedMarqueePath = nil;
+		[self sizeToCanvas];
+		[self updateInfoPanelWithMousePosition:[self convertFromWindowToCanvasPoint:[[self window] mouseLocationOutsideOfEventStream]] dragging:NO];
+	}
 }
 
 - (BOOL)shouldDrawMainBackground
@@ -565,7 +567,7 @@ void PXDebugRect(NSRect r, float alpha)
 		//		gridRect.size.height += yCenter;
 		//		gridRect.size.width = ceilf(NSWidth(gridRect));
 		//		gridRect.size.height = ceilf(NSHeight(gridRect));
-		if ((zoomPercentage / 100.0f) * [[canvas grid] unitSize].width >= 4 && (zoomPercentage / 100.0f) * [[canvas grid] unitSize].height >= 4)
+		if ((_zoomPercentage / 100.0f) * [[canvas grid] unitSize].width >= 4 && (_zoomPercentage / 100.0f) * [[canvas grid] unitSize].height >= 4)
 		{
 			[[canvas grid] drawRect:gridRect];
 		}
@@ -577,7 +579,7 @@ void PXDebugRect(NSRect r, float alpha)
 	[transform concat];
 	
 	if ([[self window] isMainWindow]) {
-		[crosshair drawRect:gridRect withTool:currentTool tileOffset:NSMakePoint(xCenter, yCenter) scale:zoomPercentage/100.0f];
+		[crosshair drawRect:gridRect withTool:currentTool tileOffset:NSMakePoint(xCenter, yCenter) scale:_zoomPercentage/100.0f];
 	}
 	
 	[transform invert];
@@ -595,7 +597,7 @@ void PXDebugRect(NSRect r, float alpha)
 {
 	NSAffineTransform *transformation = [NSAffineTransform transform];
 	
-	[transformation scaleBy:zoomPercentage/100.0f];
+	[transformation scaleBy:_zoomPercentage/100.0f];
 	return transformation;	
 }
 
