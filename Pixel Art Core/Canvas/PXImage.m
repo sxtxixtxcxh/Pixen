@@ -98,6 +98,14 @@ PXColor PXTileColorAtXY(PXTile *t, int xv, int yv, BOOL *outSuccess)
 	PXColor color;
 	memcpy(&color, data + startIndex, sizeof(unsigned char) * 4);
 	
+	if (color.a < 255) {
+		CGFloat a = color.a / 255.0f;
+		
+		color.r = round(color.r / a);
+		color.g = round(color.g / a);
+		color.b = round(color.b / a);
+	}
+	
 	color.info = 0;
 	
 	return color;
