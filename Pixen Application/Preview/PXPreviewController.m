@@ -306,6 +306,7 @@
 	[[self window] setRestorationClass:[self class]];
 	[[self window] setBackgroundColor:[NSColor lightGrayColor]];
 	[[self window] setMovableByWindowBackground:YES];
+	[[self window] setDelegate:self];
 	[view setUsesToolCursors:NO];
 	[view setUpdatesInfoPanel:NO];
 	[view setCrosshair:nil];
@@ -314,6 +315,14 @@
 	[view setShouldDrawToolBeziers:NO];
 	[view setShouldDrawGrid:NO];
 	[view setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
+}
+
+- (void)windowWillClose:(NSNotification *)notification
+{
+	if ([notification object] == [self window]) {
+		if (_animation && _animationTimer)
+			[self stopAnimation];
+	}
 }
 
 - (void)updateViewPercentage
@@ -589,6 +598,9 @@
 	
 	PXDocument *document = [[NSDocumentController sharedDocumentController] currentDocument];
 	[self setCanvas:[document canvas] updateScale:YES];
+	
+	if (_animation && !_animationTimer)
+		[self playAnimation];
 }
 
 - (void)setCanvas:(PXCanvas *) aCanvas updateScale:(BOOL)updateScale

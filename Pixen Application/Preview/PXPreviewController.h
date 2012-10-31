@@ -5,7 +5,7 @@
 
 @class PXAnimation, PXCanvas, PXCanvasPreviewView, PXPreviewBezelView, PXPreviewControlView, PXBackgroundController, PXPreviewResizePrompter;
 
-@interface PXPreviewController : NSWindowController < NSWindowRestoration >
+@interface PXPreviewController : NSWindowController < NSWindowDelegate, NSWindowRestoration >
 {
   @private
 	NSRect updateRect;
