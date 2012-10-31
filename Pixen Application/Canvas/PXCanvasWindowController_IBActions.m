@@ -209,7 +209,7 @@
 	}
 	else if ([anItem action] == @selector(zoomIn:))
 	{
-		return ([[canvasController view] zoomPercentage] < 1000);
+		return ([[canvasController view] zoomPercentage] < 2000);
 	}
 	else if ([anItem action] == @selector(increaseOpacity:))
 	{

@@ -37,7 +37,7 @@
 		pct = floorf(xRatio < yRatio ? xRatio : yRatio) * 100;
 	}
 	
-	[self zoomToPercent:MIN(pct, 1000)];
+	[self zoomToPercent:MIN(pct, 2000)];
 }
 
 - (void)canvasController:(PXCanvasController *)controller zoomInOnCanvasPoint:(NSPoint)point
@@ -59,7 +59,7 @@
 {
 	int currentZoom = [canvasController view].zoomPercentage;
 	
-	if (currentZoom < 1000)
+	if (currentZoom < 2000)
 		[self zoomToPercent:(currentZoom + 100)];
 }
 
