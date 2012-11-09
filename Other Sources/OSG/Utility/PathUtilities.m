@@ -66,6 +66,12 @@ NSString *GetDescriptionForDocumentType(NSString *uti)
 	else if (UTTypeEqual(cfUTI, CFSTR("com.Pixen.pxan"))) {
 		return @"Pixen animation";
 	}
+	else if (UTTypeEqual(cfUTI, CFSTR("com.opensword.pxim"))) {
+		return @"Pixen image";
+	}
+	else if (UTTypeEqual(cfUTI, CFSTR("com.opensword.pxan"))) {
+		return @"Pixen animation";
+	}
 	else if (UTTypeEqual(cfUTI, CFSTR("com.compuserve.gif"))) {
 		return @"GIF image";
 	}
