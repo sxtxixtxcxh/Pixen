@@ -127,14 +127,9 @@
 			PXColor color = PXColorFromNSColor(new);
 			[_frequencyPalette incrementCountForColor:color byAmount:[plusColorsCopy countForObject:new]];
 			
-			/*
-			[_recentQueue addOperationWithBlock:^{
-				
-				[self addRecentColor:color];
-				
-			}];
-			 */
-#warning TODO: update recents
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"AddedRecentColor"
+																object:self
+															  userInfo:@{@"Color": new}];
 		}
 		
 		[_frequencyPalette sortByFrequency];

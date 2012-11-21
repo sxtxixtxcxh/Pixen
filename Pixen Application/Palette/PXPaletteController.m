@@ -66,8 +66,24 @@
 													 name:PXToggledFrequencyPaletteUpdationNotificationName
 												   object:_canvas];
 		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(addedRecentColor:)
+													 name:@"AddedRecentColor"
+												   object:_canvas];
+		
 		[_canvas refreshWholePalette];
 	}
+}
+
+- (void)addedRecentColor:(NSNotification *)note
+{
+	PXColor color = PXColorFromNSColor([note userInfo][@"Color"]);
+	
+	[_recentQueue addOperationWithBlock:^{
+		
+		[self addRecentColor:color];
+		
+	}];
 }
 
 - (void)refreshedPalette:(NSNotification *)note
