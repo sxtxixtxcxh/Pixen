@@ -34,7 +34,7 @@
 	int pct = 100;
 	
 	if ((NSWidth(contentFrame) > [canvas size].width || NSHeight(contentFrame) > [canvas size].height)) {
-		pct = floorf(xRatio < yRatio ? xRatio : yRatio) * 100;
+		pct = MAX(floorf(xRatio < yRatio ? xRatio : yRatio) * 100, 100);
 	}
 	
 	[self zoomToPercent:MIN(pct, 2000)];
