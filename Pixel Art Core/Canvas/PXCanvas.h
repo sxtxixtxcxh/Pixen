@@ -49,6 +49,7 @@ typedef BOOL *PXSelectionMask;
 
 @property (nonatomic, strong, readonly) NSArray *tempLayers;
 
+- (void)reallyRefreshWholePalette;
 - (void)refreshWholePalette;
 
 - (void)beginColorUpdates;

@@ -71,7 +71,7 @@
 													 name:@"AddedRecentColor"
 												   object:_canvas];
 		
-		[_canvas refreshWholePalette];
+		[_canvas reallyRefreshWholePalette];
 	}
 }
 
