@@ -11,6 +11,9 @@ extern NSString *PXCanvasRemovedLayerNotificationName;
 extern NSString *PXCanvasMovedLayerNotificationName;
 extern NSString *PXCanvasSetLayersNotificationName;
 
+extern NSString *PXUpdatedFrequencyPaletteNotificationName;
+extern NSString *PXToggledFrequencyPaletteUpdationNotificationName;
+
 extern NSString *PXCanvasSizeChangedNotificationName;
 extern NSString *PXCanvasChangedNotificationName;
 extern NSString *PXPatternChangedNotificationName;

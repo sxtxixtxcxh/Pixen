@@ -5,7 +5,7 @@
 //  Copyright 2005-2012 Pixen Project. All rights reserved.
 //
 
-@class PXDocument, PXPalette, PXPaletteView;
+@class PXCanvas, PXPalette, PXPaletteView;
 
 typedef enum {
 	PXPaletteModeRecent,
@@ -18,14 +18,13 @@ typedef enum {
 	PXPaletteMode _mode;
 	PXPalette *_frequencyPalette, *_recentPalette;
 	
-	NSOperationQueue *_frequencyQueue;
 	NSOperationQueue *_recentQueue;
 }
 
 @property (nonatomic, weak) IBOutlet NSProgressIndicator *progressIndicator;
 @property (nonatomic, weak) IBOutlet PXPaletteView *paletteView;
 
-@property (nonatomic, weak) PXDocument *document;
+@property (nonatomic, weak) PXCanvas *canvas;
 
 - (BOOL)isPaletteIndexKey:(NSEvent *)event;
 

@@ -16,57 +16,27 @@
 #import "PXToolPaletteController.h"
 #import "PXToolSwitcher.h"
 
-@interface PXPaletteController ()
-
-- (void)refreshPalette:(NSNotification *)note;
-- (void)updatePalette:(NSNotification *)note;
-
-@end
-
-
 @implementation PXPaletteController
 
 #define RECENT_LIMIT 32
 
-@synthesize document = _document, paletteView = _paletteView, progressIndicator = _progressIndicator;
+@synthesize canvas = _canvas, paletteView = _paletteView, progressIndicator = _progressIndicator;
 
 - (id)init
 {
 	self = [super initWithNibName:@"PXPaletteController" bundle:nil];
 	
-	_frequencyQueue = [NSOperationQueue new];
 	_recentQueue = [NSOperationQueue new];
-	
-	[_frequencyQueue setMaxConcurrentOperationCount:1];
 	[_recentQueue setMaxConcurrentOperationCount:1];
 	
-	[_frequencyQueue addObserver:self forKeyPath:@"operationCount" options:0 context:NULL];
-	
-	_frequencyPalette = [[PXPalette alloc] initWithoutBackgroundColor];
 	_recentPalette = [[PXPalette alloc] initWithoutBackgroundColor];
 	_mode = PXPaletteModeFrequency;
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(refreshPalette:)
-												 name:@"PXCanvasFrequencyPaletteRefresh"
-											   object:nil];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(updatePalette:)
-												 name:@"PXCanvasPaletteUpdate"
-											   object:nil];
 	
 	return self;
 }
 
-- (void)closedDocument:(NSNotification *)notification
-{
-	[_frequencyQueue cancelAllOperations];
-}
-
 - (void)dealloc
 {
-	[_frequencyQueue removeObserver:self forKeyPath:@"operationCount"];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -78,18 +48,43 @@
 	_paletteView.delegate = self;
 }
 
-- (void)setDocument:(PXDocument *)document
+- (void)setCanvas:(PXCanvas *)canvas
 {
-	if (_document != document)
+	if (_canvas != canvas)
 	{
-		_document = document;
+		_canvas = canvas;
 		
-		[self refreshPalette:nil];
+		[[NSNotificationCenter defaultCenter] removeObserver:self];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(closedDocument:)
-													 name:PXDocumentDidCloseNotificationName
-												   object:document];
+												 selector:@selector(refreshedPalette:)
+													 name:PXUpdatedFrequencyPaletteNotificationName
+												   object:_canvas];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(toggleProgress:)
+													 name:PXToggledFrequencyPaletteUpdationNotificationName
+												   object:_canvas];
+		
+		[_canvas refreshWholePalette];
+	}
+}
+
+- (void)refreshedPalette:(NSNotification *)note
+{
+	_frequencyPalette = [note userInfo][@"Palette"];
+	
+	if (_mode == PXPaletteModeFrequency)
+		[_paletteView setPalette:_frequencyPalette];
+}
+
+- (void)toggleProgress:(NSNotification *)note
+{
+	if ([[note userInfo][@"Value"] boolValue]) {
+		[_progressIndicator startAnimation:nil];
+	}
+	else {
+		[_progressIndicator stopAnimation:nil];
 	}
 }
 
@@ -113,117 +108,6 @@
 			[_recentPalette removeLastColor];
 		}
 	}
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-	if ([keyPath isEqualToString:@"operationCount"]) {
-		dispatch_async(dispatch_get_main_queue(), ^{
-			if ([_frequencyQueue operationCount]) {
-				[_progressIndicator startAnimation:nil];
-			}
-			else {
-				[_progressIndicator stopAnimation:nil];
-			}
-		});
-	}
-}
-
-- (void)refreshPalette:(NSNotification *)note
-{
-	PXCanvas *canvas = [note object];
-	
-	if (![_document containsCanvas:canvas])
-		return;
-	
-	[_frequencyQueue cancelAllOperations];
-	
-	NSArray *layers = [[canvas layers] copy];
-	
-	NSBlockOperation *op = [[NSBlockOperation alloc] init];
-	__weak NSBlockOperation *weakOp = op;
-	
-	[op addExecutionBlock:^{
-		
-		PXPalette *palette = [[PXPalette alloc] initWithoutBackgroundColor];
-		
-		PXLayer *firstLayer = [layers objectAtIndex:0];
-		
-		CGFloat w = [firstLayer size].width;
-		CGFloat h = [firstLayer size].height;
-		
-		for (PXLayer *current in layers)
-		{
-			for (CGFloat i = 0; i < w; i++)
-			{
-				if ([weakOp isCancelled])
-					return;
-				
-				for (CGFloat j = 0; j < h; j++)
-				{
-					PXColor color = [current colorAtPoint:NSMakePoint(i, j)];
-					[palette incrementCountForColor:color byAmount:1];
-				}
-			}
-		}
-		
-		[palette sortByFrequency];
-		
-		dispatch_async(dispatch_get_main_queue(), ^{
-			
-			_frequencyPalette = palette;
-			
-			if (_mode == PXPaletteModeFrequency) {
-				[_paletteView setPalette:_frequencyPalette];
-			}
-			
-		});
-		
-	}];
-	
-	[_frequencyQueue addOperation:op];
-}
-
-- (void)updatePalette:(NSNotification *)note
-{
-	if (![_document containsCanvas:[note object]])
-		return;
-	
-	NSDictionary *changes = [note userInfo];
-	
-	NSCountedSet *oldC = [[changes objectForKey:@"PXCanvasPaletteUpdateRemoved"] copy];
-	NSCountedSet *newC = [[changes objectForKey:@"PXCanvasPaletteUpdateAdded"] copy];
-	
-	[_frequencyQueue addOperationWithBlock:^{
-		
-		for (NSColor *old in oldC)
-		{
-			[_frequencyPalette decrementCountForColor:PXColorFromNSColor(old) byAmount:[oldC countForObject:old]];
-		}
-		
-		//can do 'recent palette' stuff here too. most draws will consist of one new and many old, so just consider the last 100 new?
-		
-		for (NSColor *new in newC)
-		{
-			PXColor color = PXColorFromNSColor(new);
-			[_frequencyPalette incrementCountForColor:color byAmount:[newC countForObject:new]];
-			
-			[_recentQueue addOperationWithBlock:^{
-				
-				[self addRecentColor:color];
-				
-			}];
-		}
-		
-		[_frequencyPalette sortByFrequency];
-		
-		dispatch_async(dispatch_get_main_queue(), ^{
-			
-			[_paletteView reload];
-			
-		});
-		
-	}];
 }
 
 - (void)useColorAtIndex:(NSUInteger)index
@@ -270,12 +154,10 @@
 	if (index == NSNotFound)
 		return;
 	
-	PXCanvas *canvas = [_document canvas];
-	
 	PXColor srcColor = [_frequencyPalette colorAtIndex:index];
 	PXColor destColor = PXColorFromNSColor([[[sender object] color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]);
 	
-	[canvas replaceColor:srcColor withColor:destColor];
+	[_canvas replaceColor:srcColor withColor:destColor];
 	
 	[_paletteView selectColorAtIndex:NSNotFound];
 }

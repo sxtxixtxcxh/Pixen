@@ -163,6 +163,7 @@
 	if (canvas != aCanvas) {
 		canvas = aCanvas;
 		[canvasController setCanvas:canvas];
+		[paletteController setCanvas:canvas];
 	}
 }
 
@@ -170,7 +171,6 @@
 {
 	[super setDocument:doc];
 	[canvasController setDocument:doc];
-	[paletteController setDocument:doc];
 }
 
 - (void)windowDidResignMain:note

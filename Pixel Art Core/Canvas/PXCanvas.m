@@ -12,7 +12,10 @@
 #import "PXLayer.h"
 #import "PXBackgroundConfig.h"
 
-@implementation PXCanvas
+@implementation PXCanvas {
+	NSOperationQueue *_frequencyQueue;
+	PXPalette *_frequencyPalette;
+}
 
 @synthesize tempLayers, grid;
 
@@ -34,6 +37,10 @@
 	_minusColors = [[NSCountedSet alloc] init];
 	_plusColors = [[NSCountedSet alloc] init];
 	
+	_frequencyQueue = [NSOperationQueue new];
+	[_frequencyQueue setMaxConcurrentOperationCount:1];
+	[_frequencyQueue addObserver:self forKeyPath:@"operationCount" options:0 context:NULL];
+	
 	layers = [[NSMutableArray alloc] initWithCapacity:23];
 	grid = [[PXGrid alloc] init];
 	bgConfig = [[PXBackgroundConfig alloc] init];
@@ -49,7 +56,21 @@
 	PXColorArrayRelease(_oldColors);
 	PXColorArrayRelease(_newColors);
 	
+	[_frequencyQueue cancelAllOperations];
+	[_frequencyQueue removeObserver:self forKeyPath:@"operationCount"];
+	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if ([keyPath isEqualToString:@"operationCount"]) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[[NSNotificationCenter defaultCenter] postNotificationName:PXToggledFrequencyPaletteUpdationNotificationName
+																object:self
+															  userInfo:@{@"Value" : @([_frequencyQueue operationCount]>0)}];
+		});
+	}
 }
 
 - (void)setUndoManager:(NSUndoManager *)manager
@@ -87,24 +108,108 @@
 	
 }
 
+- (void)updatePalette
+{
+	NSCountedSet *minusColorsCopy = [_minusColors copy];
+	NSCountedSet *plusColorsCopy = [_plusColors copy];
+	
+	[_frequencyQueue addOperationWithBlock:^{
+		
+		for (NSColor *old in minusColorsCopy)
+		{
+			[_frequencyPalette decrementCountForColor:PXColorFromNSColor(old) byAmount:[minusColorsCopy countForObject:old]];
+		}
+		
+		//can do 'recent palette' stuff here too. most draws will consist of one new and many old, so just consider the last 100 new?
+		
+		for (NSColor *new in plusColorsCopy)
+		{
+			PXColor color = PXColorFromNSColor(new);
+			[_frequencyPalette incrementCountForColor:color byAmount:[plusColorsCopy countForObject:new]];
+			
+			/*
+			[_recentQueue addOperationWithBlock:^{
+				
+				[self addRecentColor:color];
+				
+			}];
+			 */
+#warning TODO: update recents
+		}
+		
+		[_frequencyPalette sortByFrequency];
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[[NSNotificationCenter defaultCenter] postNotificationName:PXUpdatedFrequencyPaletteNotificationName
+																object:self
+															  userInfo:@{@"Palette": [_frequencyPalette copy]}];
+		});
+		
+	}];
+}
+
 - (void)endColorUpdates
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasPaletteUpdate"
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-																(id) _minusColors, @"PXCanvasPaletteUpdateRemoved",
-																(id) _plusColors, @"PXCanvasPaletteUpdateAdded", nil]];
+	[self updatePalette];
 	
 	[_minusColors removeAllObjects];
 	[_plusColors removeAllObjects];
 }
 
+- (void)refreshPalette
+{
+	[_frequencyQueue cancelAllOperations];
+	
+	NSArray *layersCopy = [[self layers] copy];
+	
+	NSBlockOperation *op = [[NSBlockOperation alloc] init];
+	__weak NSBlockOperation *weakOp = op;
+	
+	[op addExecutionBlock:^{
+		
+		PXPalette *palette = [[PXPalette alloc] initWithoutBackgroundColor];
+		
+		PXLayer *firstLayer = [layersCopy objectAtIndex:0];
+		
+		CGFloat w = [firstLayer size].width;
+		CGFloat h = [firstLayer size].height;
+		
+		for (PXLayer *current in layersCopy)
+		{
+			for (CGFloat i = 0; i < w; i++)
+			{
+				if ([weakOp isCancelled])
+					return;
+				
+				for (CGFloat j = 0; j < h; j++)
+				{
+					PXColor color = [current colorAtPoint:NSMakePoint(i, j)];
+					[palette incrementCountForColor:color byAmount:1];
+				}
+			}
+		}
+		
+		[palette sortByFrequency];
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			
+			_frequencyPalette = palette;
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:PXUpdatedFrequencyPaletteNotificationName
+																object:self
+															  userInfo:@{@"Palette": [palette copy]}];
+			
+		});
+		
+	}];
+	
+	[_frequencyQueue addOperation:op];
+}
+
 //FIXME: write a single-layer variant of reallyRefreshWholePalette:
 - (void)reallyRefreshWholePalette
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"PXCanvasFrequencyPaletteRefresh"
-														object:self
-													  userInfo:nil];
+	[self refreshPalette];
 	
 	frequencyPaletteDirty = NO;
 	

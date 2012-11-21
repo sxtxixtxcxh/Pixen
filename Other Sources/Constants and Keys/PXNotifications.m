@@ -13,6 +13,9 @@ NSString *PXCanvasRemovedLayerNotificationName = @"PXCanvasRemovedLayer";
 NSString *PXCanvasMovedLayerNotificationName = @"PXCanvasMovedLayer";
 NSString *PXCanvasSetLayersNotificationName = @"PXCanvasSetLayers";
 
+NSString *PXUpdatedFrequencyPaletteNotificationName = @"PXUpdatedFrequencyPalette";
+NSString *PXToggledFrequencyPaletteUpdationNotificationName = @"PXToggledFrequencyPaletteUpdation";
+
 NSString *PXCanvasSizeChangedNotificationName = @"PXCanvasSizeChanged";
 NSString *PXCanvasChangedNotificationName = @"PXCanvasChanged";
 NSString *PXPatternChangedNotificationName = @"PXPatternChanged";
