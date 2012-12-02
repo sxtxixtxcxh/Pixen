@@ -25,7 +25,6 @@
 
 - (BOOL)shiftKeyDown
 {
-	if (isDragging) { return NO; }
 	shiftDown = YES;
 	return YES;
 }
@@ -233,11 +232,33 @@ fromCanvasController:(PXCanvasController *)controller
 					  to:(NSPoint)finalPoint
     fromCanvasController:(PXCanvasController *)controller
 {
+    if (NSEqualPoints(initialPoint, finalPoint)) {
+        return;
+    }
 	if (!shiftDown) {
 		[controller setLastDrawnPoint:finalPoint];
 		[self drawLineFrom:initialPoint to:finalPoint inCanvas:[controller canvas]];
 		[self mouseMovedTo:finalPoint fromCanvasController:controller];
-	}
+	} else {
+        if (!isDragLocked) {
+            isDragLocked = YES;
+            lockPoint = initialPoint;
+            if (finalPoint.y != lockPoint.y) {
+                lockDirection = PXLockDirectionVertical;
+            } else {
+                lockDirection = PXLockDirectionHorizontal;
+            }
+        }
+        NSPoint nextPoint;
+        if (lockDirection == PXLockDirectionVertical) {
+            nextPoint = NSMakePoint(lockPoint.x, finalPoint.y);
+        } else {
+            nextPoint = NSMakePoint(finalPoint.x, lockPoint.y);
+        }
+        [controller setLastDrawnPoint:nextPoint];
+        [self drawLineFrom:lockPoint to:nextPoint inCanvas:[controller canvas]];
+        [self mouseMovedTo:nextPoint fromCanvasController:controller];
+    }
 	if (!NSEqualRects(changedRect, NSZeroRect))
 	{
 		[[controller canvas] changedInRect:changedRect];
@@ -252,6 +273,7 @@ fromCanvasController:(PXCanvasController *) controller
 	[[controller canvas] endColorUpdates];
 	[super mouseUpAt:aPoint fromCanvasController:controller];
 	isDragging = NO;
+    isDragLocked = NO;
 	shouldUseBezierDrawing = NO;
 	if (!NSEqualRects(changedRect, NSZeroRect))
 	{

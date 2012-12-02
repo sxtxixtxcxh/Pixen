@@ -9,11 +9,19 @@
 
 @class PXCanvas, PXLayer;
 
-@interface PXPencilTool : PXTool 
+typedef enum {
+    PXLockDirectionVertical,
+    PXLockDirectionHorizontal
+} PXLockDirection;
+
+@interface PXPencilTool : PXTool
 {
   @private
 	BOOL isDragging;
 	BOOL shiftDown;
+    BOOL isDragLocked;
+    PXLockDirection lockDirection;
+    NSPoint lockPoint;
 	NSRect changedRect, lastBezierBounds;
 	NSPoint movingOrigin;
   @public
