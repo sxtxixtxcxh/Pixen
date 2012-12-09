@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.SystemVersion">12C2034</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
@@ -11,6 +11,8 @@
 			<string key="NS.object.0">2844</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
+			<string>NSButton</string>
+			<string>NSButtonCell</string>
 			<string>NSCustomObject</string>
 			<string>NSCustomView</string>
 			<string>NSScrollView</string>
@@ -229,6 +231,34 @@
 													<reference key="NSNextResponder" ref="412890470"/>
 													<int key="NSvFlags">274</int>
 													<array class="NSMutableArray" key="NSSubviews">
+														<object class="NSButton" id="91609937">
+															<reference key="NSNextResponder" ref="908174226"/>
+															<int key="NSvFlags">294</int>
+															<string key="NSFrame">{{5, 4}, {353, 17}}</string>
+															<reference key="NSSuperview" ref="908174226"/>
+															<reference key="NSWindow"/>
+															<string key="NSReuseIdentifierKey">_NS:9</string>
+															<bool key="NSEnabled">YES</bool>
+															<object class="NSButtonCell" key="NSCell" id="414306471">
+																<int key="NSCellFlags">67108864</int>
+																<int key="NSCellFlags2">131072</int>
+																<string key="NSContents">Info</string>
+																<object class="NSFont" key="NSSupport" id="26">
+																	<string key="NSName">LucidaGrande</string>
+																	<double key="NSSize">11</double>
+																	<int key="NSfFlags">3100</int>
+																</object>
+																<string key="NSCellIdentifier">_NS:9</string>
+																<reference key="NSControlView" ref="91609937"/>
+																<int key="NSButtonFlags">-2038284288</int>
+																<int key="NSButtonFlags2">173</int>
+																<string key="NSAlternateContents"/>
+																<string key="NSKeyEquivalent"/>
+																<int key="NSPeriodicDelay">200</int>
+																<int key="NSPeriodicInterval">25</int>
+															</object>
+															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+														</object>
 														<object class="NSSlider" id="991250165">
 															<reference key="NSNextResponder" ref="908174226"/>
 															<int key="NSvFlags">289</int>
@@ -267,11 +297,7 @@
 																<int key="NSCellFlags">68157504</int>
 																<int key="NSCellFlags2">71435264</int>
 																<string key="NSContents">Zoom</string>
-																<object class="NSFont" key="NSSupport">
-																	<string key="NSName">LucidaGrande</string>
-																	<double key="NSSize">11</double>
-																	<int key="NSfFlags">3100</int>
-																</object>
+																<reference key="NSSupport" ref="26"/>
 																<string key="NSCellIdentifier">_NS:1535</string>
 																<reference key="NSControlView" ref="310961497"/>
 																<reference key="NSBackgroundColor" ref="173659690"/>
@@ -396,7 +422,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="251389474"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMinSize">{200, 108}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">Animation</string>
@@ -514,6 +540,22 @@
 						<reference key="destination" ref="991250165"/>
 					</object>
 					<int key="connectionID">348</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">infoButton</string>
+						<reference key="source" ref="794361026"/>
+						<reference key="destination" ref="91609937"/>
+					</object>
+					<int key="connectionID">351</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">nextInfoButtonTitle:</string>
+						<reference key="source" ref="794361026"/>
+						<reference key="destination" ref="91609937"/>
+					</object>
+					<int key="connectionID">353</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -710,6 +752,7 @@
 							<reference ref="837403884"/>
 							<reference ref="310961497"/>
 							<reference ref="991250165"/>
+							<reference ref="91609937"/>
 						</array>
 						<reference key="parent" ref="412890470"/>
 					</object>
@@ -839,6 +882,19 @@
 						<reference key="object" ref="35311632"/>
 						<reference key="parent" ref="310961497"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">349</int>
+						<reference key="object" ref="91609937"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="414306471"/>
+						</array>
+						<reference key="parent" ref="908174226"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">350</int>
+						<reference key="object" ref="414306471"/>
+						<reference key="parent" ref="91609937"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -874,6 +930,8 @@
 				<string key="343.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="344.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="345.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="349.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="350.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBWindowTemplateEditedContentRect">{{159, 201}, {809, 655}}</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -883,7 +941,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">348</int>
+			<int key="maxID">353</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -918,11 +976,33 @@
 					<string key="className">PXAnimationWindowController</string>
 					<string key="superclassName">PXCanvasWindowController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="copyCel:">id</string>
+						<string key="crop:">id</string>
+						<string key="cutCel:">id</string>
 						<string key="deleteCel:">id</string>
 						<string key="duplicateCel:">id</string>
+						<string key="exportToImageSequence:">id</string>
+						<string key="exportToQuicktime:">id</string>
 						<string key="newCel:">id</string>
+						<string key="pasteCel:">id</string>
+						<string key="scaleCanvas:">id</string>
+						<string key="selectNextCel:">id</string>
+						<string key="selectPreviousCel:">id</string>
+						<string key="toggleAutomaticPalette:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="copyCel:">
+							<string key="name">copyCel:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="crop:">
+							<string key="name">crop:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="cutCel:">
+							<string key="name">cutCel:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="deleteCel:">
 							<string key="name">deleteCel:</string>
 							<string key="candidateClassName">id</string>
@@ -931,8 +1011,36 @@
 							<string key="name">duplicateCel:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="exportToImageSequence:">
+							<string key="name">exportToImageSequence:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="exportToQuicktime:">
+							<string key="name">exportToQuicktime:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="newCel:">
 							<string key="name">newCel:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="pasteCel:">
+							<string key="name">pasteCel:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="scaleCanvas:">
+							<string key="name">scaleCanvas:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="selectNextCel:">
+							<string key="name">selectNextCel:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="selectPreviousCel:">
+							<string key="name">selectPreviousCel:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleAutomaticPalette:">
+							<string key="name">toggleAutomaticPalette:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
@@ -1002,6 +1110,7 @@
 						<string key="copy:">id</string>
 						<string key="copyLayer:">id</string>
 						<string key="copyMerged:">id</string>
+						<string key="createAnimationFromImage:">id</string>
 						<string key="crop:">id</string>
 						<string key="cut:">id</string>
 						<string key="cutLayer:">id</string>
@@ -1010,6 +1119,7 @@
 						<string key="deleteLayer:">id</string>
 						<string key="duplicateDocument:">id</string>
 						<string key="duplicateLayer:">id</string>
+						<string key="exportDocumentPalette:">id</string>
 						<string key="fill:">id</string>
 						<string key="flipHorizontally:">id</string>
 						<string key="flipLayerHorizontally:">id</string>
@@ -1019,6 +1129,7 @@
 						<string key="invertSelection:">id</string>
 						<string key="mergeDown:">id</string>
 						<string key="newLayer:">id</string>
+						<string key="nextInfoButtonTitle:">id</string>
 						<string key="nextLayer:">id</string>
 						<string key="paste:">id</string>
 						<string key="pasteIntoActiveLayer:">id</string>
@@ -1058,6 +1169,10 @@
 							<string key="name">copyMerged:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="createAnimationFromImage:">
+							<string key="name">createAnimationFromImage:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="crop:">
 							<string key="name">crop:</string>
 							<string key="candidateClassName">id</string>
@@ -1088,6 +1203,10 @@
 						</object>
 						<object class="IBActionInfo" key="duplicateLayer:">
 							<string key="name">duplicateLayer:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="exportDocumentPalette:">
+							<string key="name">exportDocumentPalette:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="fill:">
@@ -1124,6 +1243,10 @@
 						</object>
 						<object class="IBActionInfo" key="newLayer:">
 							<string key="name">newLayer:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="nextInfoButtonTitle:">
+							<string key="name">nextInfoButtonTitle:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="nextLayer:">
@@ -1230,6 +1353,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="canvasController">PXCanvasController</string>
 						<string key="canvasSplit">NSView</string>
+						<string key="infoButton">NSButton</string>
 						<string key="layerSplit">NSView</string>
 						<string key="paletteSplit">NSView</string>
 						<string key="sidebarSplit">NSView</string>
@@ -1245,6 +1369,10 @@
 						<object class="IBToOneOutletInfo" key="canvasSplit">
 							<string key="name">canvasSplit</string>
 							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="infoButton">
+							<string key="name">infoButton</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="layerSplit">
 							<string key="name">layerSplit</string>
