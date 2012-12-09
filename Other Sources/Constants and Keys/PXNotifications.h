@@ -16,6 +16,10 @@ extern NSString *PXToggledFrequencyPaletteUpdationNotificationName;
 
 extern NSString *PXCanvasSizeChangedNotificationName;
 extern NSString *PXCanvasChangedNotificationName;
+extern NSString *PXDraggingOriginChangedNotificationName;
+extern NSString *PXCursorPositionChangedNotificationName;
+extern NSString *PXCanvasColorChangedNotificationName;
+extern NSString *PXCanvasNoColorChangedNotificationName;
 extern NSString *PXPatternChangedNotificationName;
 extern NSString *PXCanvasSelectionStatusChangedNotificationName;
 extern NSString *PXSelectionMaskChangedNotificationName;

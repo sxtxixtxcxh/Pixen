@@ -10,6 +10,12 @@
 @class PXCanvasController, PXGridSettingsController, PXLayerController, PXPaletteController, PXScaleController;
 @class PXCanvas, PXCanvasView, PXBackground, PXDocument;
 
+enum PXCanvasInfoMode : NSUInteger {
+    PXCanvasInfoModeDimensions,
+    PXCanvasInfoModeDimensionsAndPosition,
+    PXCanvasInfoModeDimensionsAndPositionAndColor
+};
+
 @interface PXCanvasWindowController : NSWindowController < PXCanvasResizePrompterDelegate >
 {
   @private
@@ -27,6 +33,18 @@
 
 @property (nonatomic, weak) IBOutlet NSTextField *zoomLabel;
 @property (nonatomic, weak) IBOutlet NSSlider *zoomSlider;
+@property (nonatomic, weak) IBOutlet NSButton *infoButton;
+@property (nonatomic, assign) NSPoint draggingOrigin;
+@property (nonatomic, strong) NSString *width;
+@property (nonatomic, strong) NSString *height;
+@property (nonatomic, strong) NSString *cursorX;
+@property (nonatomic, strong) NSString *cursorY;
+@property (nonatomic, strong) NSString *red;
+@property (nonatomic, strong) NSString *green;
+@property (nonatomic, strong) NSString *blue;
+@property (nonatomic, strong) NSString *alpha;
+@property (nonatomic, strong) NSString *hex;
+@property (nonatomic, assign) enum PXCanvasInfoMode infoMode;
 
 @property (nonatomic, weak) IBOutlet PXCanvasController *canvasController;
 

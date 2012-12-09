@@ -17,7 +17,7 @@
 #import "PXToolSwitcher.h"
 #import "PXTool.h"
 #import "PXEyedropperTool.h"
-#import "PXInfoPanelController.h"
+#import "PXCanvasWindowController_Info.h"
 #import "PXGrid.h"
 #import "PXCrosshair.h"
 #import "PXCanvasDocument.h"
@@ -44,7 +44,7 @@ void PXDebugRect(NSRect r, float alpha)
 }
 
 @synthesize canvas, zoomPercentage = _zoomPercentage, delegate;
-@synthesize usesToolCursors = _usesToolCursors, updatesInfoPanel = _updatesInfoPanel;
+@synthesize usesToolCursors = _usesToolCursors, updatesInfoBar = _updatesInfoBar;
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)event
 {
@@ -77,7 +77,7 @@ void PXDebugRect(NSRect r, float alpha)
 	shouldDrawMainBackground = YES;
 	trackingRect = -1;
 	_usesToolCursors = YES;
-	_updatesInfoPanel = YES;
+	_updatesInfoBar = YES;
 	
 	crosshair = [[PXCrosshair alloc] init];
 	drawsSelectionMarquee = YES;
@@ -220,7 +220,7 @@ void PXDebugRect(NSRect r, float alpha)
 		_zoomPercentage = percent;
 		cachedMarqueePath = nil;
 		[self sizeToCanvas];
-		[self updateInfoPanelWithMousePosition:[self convertFromWindowToCanvasPoint:[[self window] mouseLocationOutsideOfEventStream]] dragging:NO];
+		[self updateInfoBarWithMousePosition:[self convertFromWindowToCanvasPoint:[[self window] mouseLocationOutsideOfEventStream]] dragging:NO];
 	}
 }
 
@@ -680,7 +680,7 @@ void PXDebugRect(NSRect r, float alpha)
 
 - (void)updateCrosshairs:(NSPoint)newLocation
 {
-	if (![crosshair shouldDraw]) 
+	if (![crosshair shouldDraw])
 	{ 
 		return; 
 	}
@@ -688,31 +688,34 @@ void PXDebugRect(NSRect r, float alpha)
 	[crosshair setCursorPosition:newLocation];
 }
 
-- (void)updateInfoPanelWithMousePosition:(NSPoint)point dragging:(BOOL)dragging
+- (void)updateInfoBarWithMousePosition:(NSPoint)point dragging:(BOOL)dragging
 {
-	if (!_updatesInfoPanel)
-		return;
-	
-	if (![[PXInfoPanelController sharedInfoPanelController] isVisible])
+	if (!_updatesInfoBar)
 		return;
 	
 	NSPoint cursorPoint = point;
 	cursorPoint.y = [canvas size].height - cursorPoint.y - 1;
 	
 	if (!dragging) {
-		[[PXInfoPanelController sharedInfoPanelController] setDraggingOrigin:cursorPoint];
+        [[NSNotificationCenter defaultCenter] postNotificationName:PXDraggingOriginChangedNotificationName
+                                                            object:self
+                                                          userInfo:@{@"draggingOrigin": [NSValue valueWithPoint:cursorPoint]}];
 	}
 	
-	[[PXInfoPanelController sharedInfoPanelController] setCursorPosition:cursorPoint];
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXCursorPositionChangedNotificationName
+                                                        object:self
+                                                      userInfo:@{@"cursorPoint": [NSValue valueWithPoint:cursorPoint]}];
 	
 	if ([canvas containsPoint:point])
 	{
 		PXEyedropperTool *tool = (PXEyedropperTool *) [[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEyedropperToolTag];
 		PXColor currentColor = [tool compositeColorAtPoint:point fromCanvas:canvas];
-		[[PXInfoPanelController sharedInfoPanelController] setColorInfo:currentColor];
+        [[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasColorChangedNotificationName
+                                                            object:self
+                                                          userInfo:@{@"currentColor": PXColorToNSColor(currentColor)}];
 	}
 	else {
-		[[PXInfoPanelController sharedInfoPanelController] setNoColorInfo];
+		[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasNoColorChangedNotificationName object:self];
 	}
 }
 
@@ -740,7 +743,7 @@ void PXDebugRect(NSRect r, float alpha)
 	{
 		[delegate mouseDown:event];
 	}
-	[self updateInfoPanelWithMousePosition:[self convertFromWindowToCanvasPoint:[event locationInWindow]] dragging:NO];	
+	[self updateInfoBarWithMousePosition:[self convertFromWindowToCanvasPoint:[event locationInWindow]] dragging:NO];
 }
 
 - (void)updateMousePosition:(NSPoint)locationInWindow dragging:(BOOL)dragging
@@ -748,7 +751,7 @@ void PXDebugRect(NSRect r, float alpha)
 	NSPoint coords = [self convertFromWindowToCanvasPoint:locationInWindow];
 	if (!NSEqualPoints(coords, lastMousePosition)) {
 		[self updateCrosshairs:coords];
-		[self updateInfoPanelWithMousePosition:coords dragging:dragging];
+		[self updateInfoBarWithMousePosition:coords dragging:dragging];
 		
 		if ([crosshair shouldDraw])
 		{

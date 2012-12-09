@@ -111,17 +111,23 @@
 
 /* Width */
 "WIDTH" = "Width";
+"WIDTH_ABBR" = "W";
 /* Height */
 "HEIGHT" = "Height";
+"HEIGHT_ABBR" = "H";
 
 /* Red */
 "RED" = "Red";
+"RED_ABBR" = "R";
 /* Green */
 "GREEN" = "Green";
+"GREEN_ABBR" = "G";
 /* Blue */
 "BLUE" = "Blue";
+"BLUE_ABBR" = "B";
 /* Alpha */
 "ALPHA" = "Alpha";
+"ALPHA_ABBR" = "A";
 
 /* Properties */
 "PROPERTIES" = "Properties";

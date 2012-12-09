@@ -18,6 +18,10 @@ NSString *PXToggledFrequencyPaletteUpdationNotificationName = @"PXToggledFrequen
 
 NSString *PXCanvasSizeChangedNotificationName = @"PXCanvasSizeChanged";
 NSString *PXCanvasChangedNotificationName = @"PXCanvasChanged";
+NSString *PXDraggingOriginChangedNotificationName = @"PXDraggingOriginChanged";
+NSString *PXCursorPositionChangedNotificationName = @"PXCursorPositionChanged";
+NSString *PXCanvasColorChangedNotificationName = @"PXCanvasColorChanged";
+NSString *PXCanvasNoColorChangedNotificationName = @"PXCanvasNoColorChanged";
 NSString *PXPatternChangedNotificationName = @"PXPatternChanged";
 NSString *PXCanvasSelectionStatusChangedNotificationName = @"PXCanvasSelectionStatusChanged";
 NSString *PXToolDidChangeNotificationName = @"PXToolDidChange";
