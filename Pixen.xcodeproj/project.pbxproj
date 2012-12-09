@@ -137,7 +137,6 @@
 		C9ACC0F115C70AB300D157CB /* PXCanvasResizePrompter.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9610CE7BF0900EC481B /* PXCanvasResizePrompter.m */; };
 		C9ACC0F215C70AB300D157CB /* PXLayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F96C0CE7CD9300EC481B /* PXLayerController.m */; };
 		C9ACC0F315C70AB300D157CB /* PXLayerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */; };
-		C9ACC0F415C70AB300D157CB /* PXInfoPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9750CE7CD9300EC481B /* PXInfoPanelController.m */; };
 		C9ACC0F515C70AB300D157CB /* PXPaletteSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F98A0CE7CE4800EC481B /* PXPaletteSelector.m */; };
 		C9ACC0F615C70AB300D157CB /* PXPaletteView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F98C0CE7CE4800EC481B /* PXPaletteView.m */; };
 		C9ACC0F715C70AB300D157CB /* PXColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9970CE7CE4800EC481B /* PXColorPicker.m */; };
@@ -304,7 +303,6 @@
 		C9ACC19A15C70AB300D157CB /* PXCanvasResizePrompter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9600CE7BF0900EC481B /* PXCanvasResizePrompter.h */; };
 		C9ACC19B15C70AB300D157CB /* PXLayerController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F96B0CE7CD9300EC481B /* PXLayerController.h */; };
 		C9ACC19C15C70AB300D157CB /* PXLayerTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */; };
-		C9ACC19D15C70AB300D157CB /* PXInfoPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */; };
 		C9ACC19E15C70AB300D157CB /* PXPaletteSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9890CE7CE4800EC481B /* PXPaletteSelector.h */; };
 		C9ACC19F15C70AB300D157CB /* PXPaletteView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F98B0CE7CE4800EC481B /* PXPaletteView.h */; };
 		C9ACC1A015C70AB300D157CB /* PXColorPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9960CE7CE4800EC481B /* PXColorPicker.h */; };
@@ -650,8 +648,6 @@
 		EA31F9770CE7CD9300EC481B /* PXLayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F96C0CE7CD9300EC481B /* PXLayerController.m */; };
 		EA31F97C0CE7CD9300EC481B /* PXLayerTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */; };
 		EA31F97D0CE7CD9300EC481B /* PXLayerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */; };
-		EA31F97E0CE7CD9300EC481B /* PXInfoPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */; };
-		EA31F97F0CE7CD9300EC481B /* PXInfoPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9750CE7CD9300EC481B /* PXInfoPanelController.m */; };
 		EA31F9AB0CE7CE4800EC481B /* PXPaletteSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9890CE7CE4800EC481B /* PXPaletteSelector.h */; };
 		EA31F9AC0CE7CE4800EC481B /* PXPaletteSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F98A0CE7CE4800EC481B /* PXPaletteSelector.m */; };
 		EA31F9AD0CE7CE4800EC481B /* PXPaletteView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F98B0CE7CE4800EC481B /* PXPaletteView.h */; };
@@ -1203,8 +1199,6 @@
 		EA31F96C0CE7CD9300EC481B /* PXLayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerController.m; sourceTree = "<group>"; };
 		EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerTextField.h; sourceTree = "<group>"; };
 		EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerTextField.m; sourceTree = "<group>"; };
-		EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXInfoPanelController.h; sourceTree = "<group>"; };
-		EA31F9750CE7CD9300EC481B /* PXInfoPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXInfoPanelController.m; sourceTree = "<group>"; };
 		EA31F9890CE7CE4800EC481B /* PXPaletteSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteSelector.h; sourceTree = "<group>"; };
 		EA31F98A0CE7CE4800EC481B /* PXPaletteSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPaletteSelector.m; sourceTree = "<group>"; };
 		EA31F98B0CE7CE4800EC481B /* PXPaletteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPaletteView.h; sourceTree = "<group>"; };
@@ -1566,7 +1560,6 @@
 				EA31F9210CE7BE6C00EC481B /* Canvas */,
 				EA31F9420CE7BE8200EC481B /* Grid */,
 				EA31F96A0CE7CD9300EC481B /* Layers */,
-				EA31F9730CE7CD9300EC481B /* Info Panel */,
 				EA31F9800CE7CE4800EC481B /* Palette */,
 				EA31F9FD0CE7D02C00EC481B /* Preview */,
 				EA31FA060CE7D02C00EC481B /* Scaling */,
@@ -1816,15 +1809,6 @@
 				EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */,
 			);
 			path = Layers;
-			sourceTree = "<group>";
-		};
-		EA31F9730CE7CD9300EC481B /* Info Panel */ = {
-			isa = PBXGroup;
-			children = (
-				EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */,
-				EA31F9750CE7CD9300EC481B /* PXInfoPanelController.m */,
-			);
-			path = "Info Panel";
 			sourceTree = "<group>";
 		};
 		EA31F9800CE7CE4800EC481B /* Palette */ = {
@@ -2523,7 +2507,6 @@
 				C9ACC19A15C70AB300D157CB /* PXCanvasResizePrompter.h in Headers */,
 				C9ACC19B15C70AB300D157CB /* PXLayerController.h in Headers */,
 				C9ACC19C15C70AB300D157CB /* PXLayerTextField.h in Headers */,
-				C9ACC19D15C70AB300D157CB /* PXInfoPanelController.h in Headers */,
 				C9ACC19E15C70AB300D157CB /* PXPaletteSelector.h in Headers */,
 				C9ACC19F15C70AB300D157CB /* PXPaletteView.h in Headers */,
 				C9ACC1A015C70AB300D157CB /* PXColorPicker.h in Headers */,
@@ -2693,7 +2676,6 @@
 				EA31F9660CE7BF0900EC481B /* PXCanvasResizePrompter.h in Headers */,
 				EA31F9760CE7CD9300EC481B /* PXLayerController.h in Headers */,
 				EA31F97C0CE7CD9300EC481B /* PXLayerTextField.h in Headers */,
-				EA31F97E0CE7CD9300EC481B /* PXInfoPanelController.h in Headers */,
 				EA31F9AB0CE7CE4800EC481B /* PXPaletteSelector.h in Headers */,
 				EA31F9AD0CE7CE4800EC481B /* PXPaletteView.h in Headers */,
 				EA31F9B10CE7CE4800EC481B /* PXColorPicker.h in Headers */,
@@ -3237,7 +3219,6 @@
 				C9ACC0F115C70AB300D157CB /* PXCanvasResizePrompter.m in Sources */,
 				C9ACC0F215C70AB300D157CB /* PXLayerController.m in Sources */,
 				C9ACC0F315C70AB300D157CB /* PXLayerTextField.m in Sources */,
-				C9ACC0F415C70AB300D157CB /* PXInfoPanelController.m in Sources */,
 				C9ACC0F515C70AB300D157CB /* PXPaletteSelector.m in Sources */,
 				C9ACC0F615C70AB300D157CB /* PXPaletteView.m in Sources */,
 				C9ACC0F715C70AB300D157CB /* PXColorPicker.m in Sources */,
@@ -3412,7 +3393,6 @@
 				EA31F9670CE7BF0900EC481B /* PXCanvasResizePrompter.m in Sources */,
 				EA31F9770CE7CD9300EC481B /* PXLayerController.m in Sources */,
 				EA31F97D0CE7CD9300EC481B /* PXLayerTextField.m in Sources */,
-				EA31F97F0CE7CD9300EC481B /* PXInfoPanelController.m in Sources */,
 				EA31F9AC0CE7CE4800EC481B /* PXPaletteSelector.m in Sources */,
 				EA31F9AE0CE7CE4800EC481B /* PXPaletteView.m in Sources */,
 				EA31F9B20CE7CE4800EC481B /* PXColorPicker.m in Sources */,
