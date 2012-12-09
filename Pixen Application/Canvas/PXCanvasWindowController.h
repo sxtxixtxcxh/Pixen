@@ -35,17 +35,17 @@ enum PXCanvasInfoMode : NSUInteger {
 @property (nonatomic, weak) IBOutlet NSSlider *zoomSlider;
 @property (nonatomic, weak) IBOutlet NSButton *infoButton;
 @property (nonatomic, assign) NSPoint draggingOrigin;
-@property (nonatomic) NSUInteger width;
-@property (nonatomic) NSUInteger height;
-@property (nonatomic) NSInteger cursorX;
-@property (nonatomic) NSInteger cursorY;
-@property (nonatomic) NSUInteger red;
-@property (nonatomic) NSUInteger green;
-@property (nonatomic) NSUInteger blue;
-@property (nonatomic) NSUInteger alpha;
-@property (nonatomic) NSString *hex;
-@property (nonatomic) BOOL pointerHasColor;
-@property (nonatomic) enum PXCanvasInfoMode infoMode;
+@property (nonatomic, assign) NSUInteger width;
+@property (nonatomic, assign) NSUInteger height;
+@property (nonatomic, assign) NSInteger cursorX;
+@property (nonatomic, assign) NSInteger cursorY;
+@property (nonatomic, assign) NSUInteger red;
+@property (nonatomic, assign) NSUInteger green;
+@property (nonatomic, assign) NSUInteger blue;
+@property (nonatomic, assign) NSUInteger alpha;
+@property (nonatomic, strong) NSString *hex;
+@property (nonatomic, assign) BOOL pointerHasColor;
+@property (nonatomic, assign) enum PXCanvasInfoMode infoMode;
 
 @property (nonatomic, weak) IBOutlet PXCanvasController *canvasController;
 
