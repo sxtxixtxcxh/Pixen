@@ -308,7 +308,7 @@
 	[[self window] setMovableByWindowBackground:YES];
 	[[self window] setDelegate:self];
 	[view setUsesToolCursors:NO];
-	[view setUpdatesInfoPanel:NO];
+	[view setUpdatesInfoBar:NO];
 	[view setCrosshair:nil];
 	[view setShouldDrawSelectionMarquee:NO];
 	[view setDelegate:bezelView]; // for mouse up

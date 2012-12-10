@@ -21,7 +21,6 @@
 - (NSPanel *)toolPalettePanel;
 
 - (IBAction)showPreferences:(id)sender;
-- (IBAction)showInfo:(id)sender;
 - (IBAction)showWelcome:(id)sender;
 - (IBAction)showAbout:(id)sender;
 - (IBAction)showToolPalette:(id)sender;

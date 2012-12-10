@@ -8,6 +8,7 @@
 #import "PXAnimationWindowController.h"
 #import "PXCanvasWindowController.h"
 #import "PXCanvasWindowController_Toolbar.h"
+#import "PXCanvasWindowController_Info.h"
 #import "PXCanvasWindowController_Zooming.h"
 #import "PXCanvasWindowController_IBActions.h"
 #import "PXCanvasController.h"
@@ -18,7 +19,6 @@
 #import "PXScaleController.h"
 #import "PXGridSettingsController.h"
 #import "PXCanvasDocument.h"
-#import "PXInfoPanelController.h"
 #import "PXPaletteController.h"
 #import "PXPreviewController.h"
 #import "PXToolPaletteController.h"
@@ -31,7 +31,8 @@
 
 @synthesize scaleController, canvasController, resizePrompter = _resizePrompter, canvas;
 @synthesize splitView, sidebarSplit, layerSplit, canvasSplit, paletteSplit;
-
+@synthesize width = _width, height = _height, cursorX = _cursorX, cursorY = _cursorY;
+@synthesize red = _red, green = _green, blue = _blue, alpha = _alpha, hex = _hex, draggingOrigin = _draggingOrigin;
 
 - (PXCanvasView *)view
 {
@@ -95,8 +96,27 @@
 	[layerSplit addSubview:[layerController view]];
 	[self updateFrameSizes];
 	[self prepareToolbar];
+    [self setInfoMode:PXCanvasInfoModeDimensionsAndPosition];
+    [self updateInfoButtonTitle];
 	
 	[[self window] setAcceptsMouseMovedEvents:YES];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(draggingOriginChanged:)
+												 name:PXDraggingOriginChangedNotificationName
+											   object:canvas];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(cursorPositionChanged:)
+												 name:PXCursorPositionChangedNotificationName
+											   object:canvas];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(canvasColorChanged:)
+												 name:PXCanvasColorChangedNotificationName
+											   object:canvas];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(canvasNoColorChanged:)
+												 name:PXCanvasNoColorChangedNotificationName
+											   object:canvas];
 }
 
 #pragma mark -
@@ -187,7 +207,7 @@
 	{
 		[canvasController activate];
 		[self updateFrameSizes];
-		[[PXInfoPanelController sharedInfoPanelController] setCanvasSize:[canvas size]];
+		[self setCanvasSize:[canvas size]];
 		
 		//FIXME: tight coupling
 		if ([self isKindOfClass:[PXAnimationWindowController class]]) {

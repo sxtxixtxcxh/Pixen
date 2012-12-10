@@ -11,7 +11,7 @@
 #import "PXToolPaletteController.h"
 #import "PXToolPropertiesManager.h"
 #import "PXPreferencesController.h"
-#import "PXInfoPanelController.h"
+#import "PXCanvasWindowController_Info.h"
 #import "PXPreviewController.h"
 #import "PXSpriteSheetExporter.h"
 #import "PXPalette.h"
@@ -235,11 +235,6 @@ static PXPanelManager *sharedManager = nil;
 - (IBAction)showPreferences: (id)sender
 {
 	[[PXPreferencesController sharedPreferencesController] showWindow:nil];
-}
-
-- (IBAction)showInfo:(id)sender
-{
-	[[PXInfoPanelController sharedInfoPanelController] showWindow:nil];
 }
 
 - (IBAction)showWelcome: (id)sender

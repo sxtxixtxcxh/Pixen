@@ -12,7 +12,7 @@
 #import "PXDocumentController.h"
 #import "PXBackgroundController.h"
 #import "PXToolPaletteController.h"
-#import "PXInfoPanelController.h"
+#import "PXCanvasWindowController_Info.h"
 #import "PXLayerController.h"
 #import "PXCanvas.h"
 #import "PXCanvas_Selection.h"
@@ -105,7 +105,7 @@
 
 - (void)canvasSizeDidChange:(NSNotification *) aNotification
 {
-	[[PXInfoPanelController sharedInfoPanelController] setCanvasSize:[canvas size]];
+	[delegate setCanvasSize:[canvas size]];
 	[view sizeToCanvas];
 	[self updatePreview];
 }
@@ -137,7 +137,7 @@
 		
 		if (canvas)
 		{
-			[[PXInfoPanelController sharedInfoPanelController] setCanvasSize:[canvas size]];
+			[delegate setCanvasSize:[canvas size]];
 			[canvas changed];
 		}
 	}
@@ -305,7 +305,7 @@
 
 - (void)updateCanvasSizeZoomingToFit:(BOOL)zooming
 {
-	[[PXInfoPanelController sharedInfoPanelController] setCanvasSize:[canvas size]];
+	[delegate setCanvasSize:[canvas size]];
 	
 	[view sizeToCanvas];
 	[self updatePreview];

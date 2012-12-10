@@ -27,7 +27,7 @@
 	NSTrackingRectTag trackingRect;
 	
 	NSPoint lastMousePosition;
-	BOOL _usesToolCursors, _updatesInfoPanel;
+	BOOL _usesToolCursors, _updatesInfoBar;
 	
 	BOOL erasing;
 }
@@ -36,7 +36,7 @@
 @property (nonatomic, assign) int zoomPercentage;
 
 @property (nonatomic, assign) BOOL usesToolCursors;
-@property (nonatomic, assign) BOOL updatesInfoPanel;
+@property (nonatomic, assign) BOOL updatesInfoBar;
 
 @property (nonatomic, weak) id delegate;
 
@@ -77,7 +77,7 @@
 - (void)setShouldDrawToolBeziers:(BOOL)newShouldDraw;
 
 - (void)updateCrosshairs:(NSPoint)newLocation;
-- (void)updateInfoPanelWithMousePosition:(NSPoint)point dragging:(BOOL)dragging;
+- (void)updateInfoBarWithMousePosition:(NSPoint)point dragging:(BOOL)dragging;
 
 - (PXBackground *)mainBackground;
 - (PXBackground *)alternateBackground;
