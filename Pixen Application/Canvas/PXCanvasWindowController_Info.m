@@ -98,6 +98,7 @@
 - (void)canvasNoColorChanged:(NSNotification *)notification
 {
 	[self setPointerHasColor:NO];
+	[self updateInfoButtonTitle];
 }
 
 @end
