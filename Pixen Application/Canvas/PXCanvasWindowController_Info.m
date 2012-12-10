@@ -11,103 +11,103 @@
 
 - (IBAction)nextInfoButtonTitle:(id)sender
 {
-    [self setInfoMode:[self infoMode] + 1];
-    if ([self infoMode] > 2) {
-        [self setInfoMode:0];
-    }
-
-    [self updateInfoButtonTitle];
+	[self setInfoMode:[self infoMode] + 1];
+	if ([self infoMode] > 2) {
+		[self setInfoMode:0];
+	}
+	
+	[self updateInfoButtonTitle];
 }
 
 - (void)updateInfoButtonTitle
 {
-    NSString *newInfoString = [NSString stringWithFormat:@"%@: %lu %@: %lu",
-                               NSLocalizedString(@"WIDTH_ABBR", @"Width"),
-                               [self width],
-                               NSLocalizedString(@"HEIGHT_ABBR", @"Height"),
-                               [self height]];
-
-    if ([self infoMode] == PXCanvasInfoModeDimensionsAndPosition || [self infoMode] == PXCanvasInfoModeDimensionsAndPositionAndColor) {
-        newInfoString = [newInfoString stringByAppendingFormat:@" X: %ld Y: %ld", [self cursorX], [self cursorY]];
-    }
-    if ([self infoMode] == PXCanvasInfoModeDimensionsAndPositionAndColor) {
-        if (![self pointerHasColor]) {
-            newInfoString = [newInfoString stringByAppendingFormat:@" %@: -- %@: -- %@: -- %@: -- %@: --",
-                             NSLocalizedString(@"RED_ABBR", @"Red"),
-                             NSLocalizedString(@"GREEN_ABBR", @"Green"),
-                             NSLocalizedString(@"BLUE_ABBR", @"Blue"),
-                             NSLocalizedString(@"ALPHA_ABBR", @"Alpha"),
-                             NSLocalizedString(@"Hex", @"Hex")];
-        } else {
-            newInfoString = [newInfoString stringByAppendingFormat:@" %@: %lu %@: %lu %@: %lu %@: %lu %@: %@",
-                             NSLocalizedString(@"RED_ABBR", @"Red"),
-                             [self red],
-                             NSLocalizedString(@"GREEN_ABBR", @"Green"),
-                             [self green],
-                             NSLocalizedString(@"BLUE_ABBR", @"Blue"),
-                             [self blue],
-                             NSLocalizedString(@"ALPHA_ABBR", @"Alpha"),
-                             [self alpha],
-                             NSLocalizedString(@"Hex", @"Hex"),
-                             [self hex]];
-        }
-    }
-
-    [[self infoButton] setTitle:newInfoString];
-    [[self infoButton] sizeToFit];
+	NSString *newInfoString = [NSString stringWithFormat:@"%@: %lu %@: %lu",
+							   NSLocalizedString(@"WIDTH_ABBR", @"Width"),
+							   [self width],
+							   NSLocalizedString(@"HEIGHT_ABBR", @"Height"),
+							   [self height]];
+	
+	if ([self infoMode] == PXCanvasInfoModeDimensionsAndPosition || [self infoMode] == PXCanvasInfoModeDimensionsAndPositionAndColor) {
+		newInfoString = [newInfoString stringByAppendingFormat:@" X: %ld Y: %ld", [self cursorX], [self cursorY]];
+	}
+	if ([self infoMode] == PXCanvasInfoModeDimensionsAndPositionAndColor) {
+		if (![self pointerHasColor]) {
+			newInfoString = [newInfoString stringByAppendingFormat:@" %@: -- %@: -- %@: -- %@: -- %@: --",
+							 NSLocalizedString(@"RED_ABBR", @"Red"),
+							 NSLocalizedString(@"GREEN_ABBR", @"Green"),
+							 NSLocalizedString(@"BLUE_ABBR", @"Blue"),
+							 NSLocalizedString(@"ALPHA_ABBR", @"Alpha"),
+							 NSLocalizedString(@"Hex", @"Hex")];
+		} else {
+			newInfoString = [newInfoString stringByAppendingFormat:@" %@: %lu %@: %lu %@: %lu %@: %lu %@: %@",
+							 NSLocalizedString(@"RED_ABBR", @"Red"),
+							 [self red],
+							 NSLocalizedString(@"GREEN_ABBR", @"Green"),
+							 [self green],
+							 NSLocalizedString(@"BLUE_ABBR", @"Blue"),
+							 [self blue],
+							 NSLocalizedString(@"ALPHA_ABBR", @"Alpha"),
+							 [self alpha],
+							 NSLocalizedString(@"Hex", @"Hex"),
+							 [self hex]];
+		}
+	}
+	
+	[[self infoButton] setTitle:newInfoString];
+	[[self infoButton] sizeToFit];
 }
 
 - (void)setCanvasSize:(NSSize)size
 {
 	[self setWidth:(int)(size.width)];
 	[self setHeight:(int)(size.height)];
-    [self updateInfoButtonTitle];
+	[self updateInfoButtonTitle];
 }
 
 - (void)draggingOriginChanged:(NSNotification *)notification
 {
-    [self setDraggingOrigin:[[[notification userInfo] valueForKey:@"draggingOrigin"] pointValue]];
-    [self updateInfoButtonTitle];
+	[self setDraggingOrigin:[[[notification userInfo] valueForKey:@"draggingOrigin"] pointValue]];
+	[self updateInfoButtonTitle];
 }
 
 - (void)cursorPositionChanged:(NSNotification *)notification
 {
-    NSPoint point = [[[notification userInfo] valueForKey:@"cursorPoint"] pointValue];
-    NSPoint difference = point;
-    difference.x -= [self draggingOrigin].x;
-    difference.y -= [self draggingOrigin].y;
-
-    if (difference.x > 0.1 || difference.x < -0.1) {
-        [self setCursorX:(int)(difference.x)];
-    }
-    else {
-        [self setCursorX:(int)(point.x)];
-    }
-
-    if (difference.y > 0.1 || difference.y < -0.1) {
-        [self setCursorY:(int)(difference.y)];
-    }
-    else {
-        [self setCursorY:(int)(point.y)];
-    }
-    [self updateInfoButtonTitle];
+	NSPoint point = [[[notification userInfo] valueForKey:@"cursorPoint"] pointValue];
+	NSPoint difference = point;
+	difference.x -= [self draggingOrigin].x;
+	difference.y -= [self draggingOrigin].y;
+	
+	if (difference.x > 0.1 || difference.x < -0.1) {
+		[self setCursorX:(int)(difference.x)];
+	}
+	else {
+		[self setCursorX:(int)(point.x)];
+	}
+	
+	if (difference.y > 0.1 || difference.y < -0.1) {
+		[self setCursorY:(int)(difference.y)];
+	}
+	else {
+		[self setCursorY:(int)(point.y)];
+	}
+	[self updateInfoButtonTitle];
 }
 
 - (void)canvasColorChanged:(NSNotification *)notification
 {
-    [self setPointerHasColor:YES];
-    PXColor color = PXColorFromNSColor([[notification userInfo] valueForKey:@"currentColor"]);
-    [self setRed:color.r];
+	[self setPointerHasColor:YES];
+	PXColor color = PXColorFromNSColor([[notification userInfo] valueForKey:@"currentColor"]);
+	[self setRed:color.r];
 	[self setGreen:color.g];
 	[self setBlue:color.b];
 	[self setAlpha:color.a];
 	[self setHex:[NSString stringWithFormat:@"#%02X%02X%02X", color.r, color.g, color.b]];
-    [self updateInfoButtonTitle];
+	[self updateInfoButtonTitle];
 }
 
 - (void)canvasNoColorChanged:(NSNotification *)notification
 {
-    [self setPointerHasColor:NO];
+	[self setPointerHasColor:NO];
 }
 
 @end
