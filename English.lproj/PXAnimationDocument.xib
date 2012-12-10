@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C2034</string>
+		<string key="IBDocument.SystemVersion">12C3006</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
@@ -976,33 +976,11 @@
 					<string key="className">PXAnimationWindowController</string>
 					<string key="superclassName">PXCanvasWindowController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="copyCel:">id</string>
-						<string key="crop:">id</string>
-						<string key="cutCel:">id</string>
 						<string key="deleteCel:">id</string>
 						<string key="duplicateCel:">id</string>
-						<string key="exportToImageSequence:">id</string>
-						<string key="exportToQuicktime:">id</string>
 						<string key="newCel:">id</string>
-						<string key="pasteCel:">id</string>
-						<string key="scaleCanvas:">id</string>
-						<string key="selectNextCel:">id</string>
-						<string key="selectPreviousCel:">id</string>
-						<string key="toggleAutomaticPalette:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="copyCel:">
-							<string key="name">copyCel:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="crop:">
-							<string key="name">crop:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="cutCel:">
-							<string key="name">cutCel:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="deleteCel:">
 							<string key="name">deleteCel:</string>
 							<string key="candidateClassName">id</string>
@@ -1011,36 +989,8 @@
 							<string key="name">duplicateCel:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="exportToImageSequence:">
-							<string key="name">exportToImageSequence:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="exportToQuicktime:">
-							<string key="name">exportToQuicktime:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="newCel:">
 							<string key="name">newCel:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="pasteCel:">
-							<string key="name">pasteCel:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="scaleCanvas:">
-							<string key="name">scaleCanvas:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectNextCel:">
-							<string key="name">selectNextCel:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectPreviousCel:">
-							<string key="name">selectPreviousCel:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="toggleAutomaticPalette:">
-							<string key="name">toggleAutomaticPalette:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
@@ -1110,7 +1060,6 @@
 						<string key="copy:">id</string>
 						<string key="copyLayer:">id</string>
 						<string key="copyMerged:">id</string>
-						<string key="createAnimationFromImage:">id</string>
 						<string key="crop:">id</string>
 						<string key="cut:">id</string>
 						<string key="cutLayer:">id</string>
@@ -1119,7 +1068,6 @@
 						<string key="deleteLayer:">id</string>
 						<string key="duplicateDocument:">id</string>
 						<string key="duplicateLayer:">id</string>
-						<string key="exportDocumentPalette:">id</string>
 						<string key="fill:">id</string>
 						<string key="flipHorizontally:">id</string>
 						<string key="flipLayerHorizontally:">id</string>
@@ -1129,7 +1077,6 @@
 						<string key="invertSelection:">id</string>
 						<string key="mergeDown:">id</string>
 						<string key="newLayer:">id</string>
-						<string key="nextInfoButtonTitle:">id</string>
 						<string key="nextLayer:">id</string>
 						<string key="paste:">id</string>
 						<string key="pasteIntoActiveLayer:">id</string>
@@ -1169,10 +1116,6 @@
 							<string key="name">copyMerged:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="createAnimationFromImage:">
-							<string key="name">createAnimationFromImage:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="crop:">
 							<string key="name">crop:</string>
 							<string key="candidateClassName">id</string>
@@ -1203,10 +1146,6 @@
 						</object>
 						<object class="IBActionInfo" key="duplicateLayer:">
 							<string key="name">duplicateLayer:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="exportDocumentPalette:">
-							<string key="name">exportDocumentPalette:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="fill:">
@@ -1243,10 +1182,6 @@
 						</object>
 						<object class="IBActionInfo" key="newLayer:">
 							<string key="name">newLayer:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="nextInfoButtonTitle:">
-							<string key="name">nextInfoButtonTitle:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="nextLayer:">
