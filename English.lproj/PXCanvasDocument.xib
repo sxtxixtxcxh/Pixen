@@ -107,7 +107,7 @@
 									<array class="NSMutableArray" key="NSSubviews">
 										<object class="NSButton" id="567138852">
 											<reference key="NSNextResponder" ref="694173087"/>
-											<int key="NSvFlags">294</int>
+											<int key="NSvFlags">290</int>
 											<string key="NSFrame">{{4, 4}, {212, 17}}</string>
 											<reference key="NSSuperview" ref="694173087"/>
 											<reference key="NSWindow"/>
@@ -117,7 +117,7 @@
 											<object class="NSButtonCell" key="NSCell" id="649843267">
 												<int key="NSCellFlags">67108864</int>
 												<int key="NSCellFlags2">131072</int>
-												<string key="NSContents">Recessed Button</string>
+												<string key="NSContents">Info</string>
 												<object class="NSFont" key="NSSupport" id="26">
 													<string key="NSName">LucidaGrande</string>
 													<double key="NSSize">11</double>
