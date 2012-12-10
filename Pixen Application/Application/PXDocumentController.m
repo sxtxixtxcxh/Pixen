@@ -17,7 +17,6 @@
 #import "PXPreferencesController.h"
 #import "PXCanvasWindowController.h"
 #import "PXCanvasWindowController_IBActions.h"
-#import "PXCanvasWindowController_Info.h"
 #import "PXCanvasController.h"
 #import "PXCanvasDocument.h"
 #import "PXAnimationDocument.h"

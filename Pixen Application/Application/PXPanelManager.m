@@ -11,7 +11,6 @@
 #import "PXToolPaletteController.h"
 #import "PXToolPropertiesManager.h"
 #import "PXPreferencesController.h"
-#import "PXCanvasWindowController_Info.h"
 #import "PXPreviewController.h"
 #import "PXSpriteSheetExporter.h"
 #import "PXPalette.h"

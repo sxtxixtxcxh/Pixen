@@ -8,7 +8,7 @@
 #import "PXCanvasWindowController.h"
 #import "PXColor.h"
 
-@interface PXCanvasWindowController (Info) < NSToolbarDelegate >
+@interface PXCanvasWindowController (Info)
 
 - (void)setCanvasSize:(NSSize)size;
 - (void)updateInfoButtonTitle;
