@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.SystemVersion">12C3006</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
@@ -877,6 +877,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="canvasController">PXCanvasController</string>
 						<string key="canvasSplit">NSView</string>
+						<string key="infoButton">NSButton</string>
 						<string key="layerSplit">NSView</string>
 						<string key="paletteSplit">NSView</string>
 						<string key="sidebarSplit">NSView</string>
@@ -892,6 +893,10 @@
 						<object class="IBToOneOutletInfo" key="canvasSplit">
 							<string key="name">canvasSplit</string>
 							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="infoButton">
+							<string key="name">infoButton</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="layerSplit">
 							<string key="name">layerSplit</string>
