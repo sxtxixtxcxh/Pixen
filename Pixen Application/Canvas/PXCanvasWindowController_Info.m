@@ -28,28 +28,18 @@
 							   [self height]];
 	
 	if ([self infoMode] == PXCanvasInfoModeDimensionsAndPosition || [self infoMode] == PXCanvasInfoModeDimensionsAndPositionAndColor) {
-		newInfoString = [newInfoString stringByAppendingFormat:@" X: %ld Y: %ld", [self cursorX], [self cursorY]];
+		newInfoString = [newInfoString stringByAppendingFormat:@"    X: %ld Y: %ld", [self cursorX], [self cursorY]];
 	}
 	if ([self infoMode] == PXCanvasInfoModeDimensionsAndPositionAndColor) {
 		if (![self pointerHasColor]) {
-			newInfoString = [newInfoString stringByAppendingFormat:@" %@: -- %@: -- %@: -- %@: -- %@: --",
-							 NSLocalizedString(@"RED_ABBR", @"Red"),
-							 NSLocalizedString(@"GREEN_ABBR", @"Green"),
-							 NSLocalizedString(@"BLUE_ABBR", @"Blue"),
-							 NSLocalizedString(@"ALPHA_ABBR", @"Alpha"),
-							 NSLocalizedString(@"Hex", @"Hex")];
+			newInfoString = [newInfoString stringByAppendingFormat:@"    --"];
 		} else {
-			newInfoString = [newInfoString stringByAppendingFormat:@" %@: %lu %@: %lu %@: %lu %@: %lu %@: %@",
-							 NSLocalizedString(@"RED_ABBR", @"Red"),
+			newInfoString = [newInfoString stringByAppendingFormat:@"    Hex: %@    RGBA: (%lu, %lu, %lu, %lu)",
+							 [self hex],
 							 [self red],
-							 NSLocalizedString(@"GREEN_ABBR", @"Green"),
 							 [self green],
-							 NSLocalizedString(@"BLUE_ABBR", @"Blue"),
 							 [self blue],
-							 NSLocalizedString(@"ALPHA_ABBR", @"Alpha"),
-							 [self alpha],
-							 NSLocalizedString(@"Hex", @"Hex"),
-							 [self hex]];
+							 [self alpha]];
 		}
 	}
 	
