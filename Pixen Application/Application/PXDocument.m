@@ -19,7 +19,7 @@
 
 + (BOOL)autosavesInPlace
 {
-	return YES;
+	return [[NSUserDefaults standardUserDefaults] boolForKey:PXEnableAutoSaveKey];
 }
 
 - (void)initWindowController { }

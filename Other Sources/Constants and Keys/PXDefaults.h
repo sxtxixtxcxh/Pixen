@@ -38,3 +38,5 @@ extern NSString *PXRightToolSwitcherIsOpenKey;
 
 extern NSString *PXColorPickerPaletteViewSizeKey;
 extern NSString *PXPalettePanelsKey;
+
+extern NSString *PXEnableAutoSaveKey;

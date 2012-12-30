@@ -40,3 +40,5 @@ NSString *PXRightToolSwitcherIsOpenKey = @"PXRightToolSwitcherIsOpen";
 
 NSString *PXColorPickerPaletteViewSizeKey = @"PXColorPickerPaletteViewSize";
 NSString *PXPalettePanelsKey = @"PXPalettePanels";
+
+NSString *PXEnableAutoSaveKey = @"PXEnableAutoSave";
