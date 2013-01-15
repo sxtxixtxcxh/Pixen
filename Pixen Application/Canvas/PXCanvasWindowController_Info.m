@@ -86,7 +86,12 @@
 - (void)canvasColorChanged:(NSNotification *)notification
 {
 	[self setPointerHasColor:YES];
-	PXColor color = PXColorFromNSColor([[notification userInfo] valueForKey:@"currentColor"]);
+	
+	PXColor color;
+	
+	NSData *colorData = [[notification userInfo] valueForKey:@"currentColor"];
+	[colorData getBytes:&color length:sizeof(color)];
+	
 	[self setRed:color.r];
 	[self setGreen:color.g];
 	[self setBlue:color.b];

@@ -709,10 +709,13 @@ void PXDebugRect(NSRect r, float alpha)
 	if ([canvas containsPoint:point])
 	{
 		PXEyedropperTool *tool = (PXEyedropperTool *) [[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] toolWithTag:PXEyedropperToolTag];
+		
 		PXColor currentColor = [tool compositeColorAtPoint:point fromCanvas:canvas];
+		NSData *data = [NSData dataWithBytes:&currentColor length:sizeof(currentColor)];
+		
         [[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasColorChangedNotificationName
                                                             object:self
-                                                          userInfo:@{@"currentColor": PXColorToNSColor(currentColor)}];
+                                                          userInfo:@{@"currentColor": data}];
 	}
 	else {
 		[[NSNotificationCenter defaultCenter] postNotificationName:PXCanvasNoColorChangedNotificationName object:self];
