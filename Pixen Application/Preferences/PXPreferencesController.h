@@ -13,7 +13,7 @@ typedef enum {
 @class PXGeneralPreferencesController;
 @class PXHotkeysPreferencesController;
 
-@interface PXPreferencesController : NSWindowController < NSWindowRestoration >
+@interface PXPreferencesController : NSWindowController
 {
   @private
 	PXGeneralPreferencesController *_generalVC;

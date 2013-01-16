@@ -31,19 +31,8 @@
 	return self;
 }
 
-+ (void)restoreWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow *, NSError *))completionHandler {
-	
-	if ([identifier isEqualToString:@"PreferencesWindow"]) {
-		completionHandler([PXPreferencesController sharedPreferencesController].window, nil);
-	}
-	else {
-		completionHandler(nil, nil);
-	}
-}
-
 - (void)awakeFromNib
 {
-	[[self window] setRestorationClass:[self class]];
 	[[[self window] toolbar] setSelectedItemIdentifier:@"General"];
 	[self selectGeneralTab:nil];
 }

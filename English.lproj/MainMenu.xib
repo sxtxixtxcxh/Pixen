@@ -761,6 +761,15 @@
 									<reference key="NSOnImage" ref="130733852"/>
 									<reference key="NSMixedImage" ref="295545801"/>
 								</object>
+								<object class="NSMenuItem" id="803955107">
+									<reference key="NSMenu" ref="522027000"/>
+									<string key="NSTitle">Info Bar</string>
+									<string key="NSKeyEquiv">i</string>
+									<int key="NSKeyEquivModMask">1310720</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="130733852"/>
+									<reference key="NSMixedImage" ref="295545801"/>
+								</object>
 								<object class="NSMenuItem" id="356721259">
 									<reference key="NSMenu" ref="522027000"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -2080,6 +2089,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleInfo:</string>
+						<reference key="source" ref="199577436"/>
+						<reference key="destination" ref="803955107"/>
+					</object>
+					<int key="connectionID">556</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">newFromClipboard:</string>
 						<reference key="source" ref="797232323"/>
 						<reference key="destination" ref="182028804"/>
@@ -2907,6 +2924,7 @@
 							<reference ref="297930681"/>
 							<reference ref="1005235490"/>
 							<reference ref="40087432"/>
+							<reference ref="803955107"/>
 						</array>
 						<reference key="parent" ref="470442987"/>
 					</object>
@@ -3187,6 +3205,11 @@
 						<reference key="object" ref="206228668"/>
 						<reference key="parent" ref="726161506"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">555</int>
+						<reference key="object" ref="803955107"/>
+						<reference key="parent" ref="522027000"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -3334,6 +3357,7 @@
 				<string key="549.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="550.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="553.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="555.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3351,7 +3375,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">554</int>
+			<int key="maxID">556</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3672,47 +3696,6 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">NSDocument</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="printDocument:">id</string>
-						<string key="revertDocumentToSaved:">id</string>
-						<string key="runPageLayout:">id</string>
-						<string key="saveDocument:">id</string>
-						<string key="saveDocumentAs:">id</string>
-						<string key="saveDocumentTo:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="printDocument:">
-							<string key="name">printDocument:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="revertDocumentToSaved:">
-							<string key="name">revertDocumentToSaved:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="runPageLayout:">
-							<string key="name">runPageLayout:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="saveDocument:">
-							<string key="name">saveDocument:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="saveDocumentAs:">
-							<string key="name">saveDocumentAs:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="saveDocumentTo:">
-							<string key="name">saveDocumentTo:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/NSDocument.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">PXAnimationWindowController</string>
 					<string key="superclassName">PXCanvasWindowController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
@@ -3836,6 +3819,7 @@
 						<string key="showGridSettingsPrompter:">id</string>
 						<string key="showPreviewWindow:">NSEvent</string>
 						<string key="toggleGrid:">id</string>
+						<string key="toggleInfo:">id</string>
 						<string key="togglePreviewWindow:">id</string>
 						<string key="zoomIn:">id</string>
 						<string key="zoomOut:">id</string>
@@ -4000,6 +3984,10 @@
 							<string key="name">toggleGrid:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="toggleInfo:">
+							<string key="name">toggleInfo:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="togglePreviewWindow:">
 							<string key="name">togglePreviewWindow:</string>
 							<string key="candidateClassName">id</string>
@@ -4028,7 +4016,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="canvasController">PXCanvasController</string>
 						<string key="canvasSplit">NSView</string>
-						<string key="infoButton">NSButton</string>
+						<string key="infoView">PXInfoView</string>
 						<string key="layerSplit">NSView</string>
 						<string key="paletteSplit">NSView</string>
 						<string key="sidebarSplit">NSView</string>
@@ -4045,9 +4033,9 @@
 							<string key="name">canvasSplit</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="infoButton">
-							<string key="name">infoButton</string>
-							<string key="candidateClassName">NSButton</string>
+						<object class="IBToOneOutletInfo" key="infoView">
+							<string key="name">infoView</string>
+							<string key="candidateClassName">PXInfoView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="layerSplit">
 							<string key="name">layerSplit</string>
@@ -4136,6 +4124,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/PXFilmStripView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PXInfoView</string>
+					<string key="superclassName">NSView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PXInfoView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

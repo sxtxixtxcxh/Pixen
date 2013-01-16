@@ -15,6 +15,8 @@ NSString *PXGridColorDataKey = @"PXGridColorData";
 NSString *PXCrosshairColorKey = @"PXCrosshairColor";
 NSString *PXCrosshairEnabledKey = @"PXCrosshairEnabled";
 
+NSString *PXShowInfoKey = @"PXShowInfo";
+
 NSString *PXCaresAboutPressureKey = @"PXCaresAboutPressure";
 
 NSString *PXCanvasDefaultMainBackgroundKey = @"PXDefaultCanvasMainBackground";

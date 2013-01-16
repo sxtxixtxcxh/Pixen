@@ -19,6 +19,7 @@
 #import "PXCanvasController.h"
 #import "PXCanvasView.h"
 #import "PXGridSettingsController.h"
+#import "PXInfoView.h"
 #import "PXScaleController.h"
 #import "PXPaletteExporter.h"
 #import "PXPalettePanel.h"
@@ -232,8 +233,34 @@
 		
 		return YES;
 	}
+	else if ([anItem action] == @selector(toggleInfo:))
+	{
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:PXShowInfoKey]) {
+			[anItem setTitle:@"Hide Info Bar"];
+		}
+		else {
+			[anItem setTitle:@"Show Info Bar"];
+		}
+		
+		return YES;
+	}
 	
 	return YES;
+}
+
+- (void)toggleInfo:(id)sender
+{
+	BOOL shows = [[NSUserDefaults standardUserDefaults] boolForKey:PXShowInfoKey];
+	shows = !shows;
+	
+	[[NSUserDefaults standardUserDefaults] setBool:shows forKey:PXShowInfoKey];
+	
+	if (shows) {
+		[self.infoView setHidden:NO];
+	}
+	else {
+		[self.infoView setHidden:YES];
+	}
 }
 
 - (IBAction)promoteSelection:(id) sender

@@ -20,6 +20,7 @@
 #import "PXGridSettingsController.h"
 #import "PXCanvasDocument.h"
 #import "PXPaletteController.h"
+#import "PXInfoView.h"
 #import "PXPreviewController.h"
 #import "PXToolPaletteController.h"
 
@@ -31,8 +32,7 @@
 
 @synthesize scaleController, canvasController, resizePrompter = _resizePrompter, canvas;
 @synthesize splitView, sidebarSplit, layerSplit, canvasSplit, paletteSplit;
-@synthesize width = _width, height = _height, cursorX = _cursorX, cursorY = _cursorY;
-@synthesize red = _red, green = _green, blue = _blue, alpha = _alpha, hex = _hex, draggingOrigin = _draggingOrigin;
+@synthesize draggingOrigin = _draggingOrigin;
 
 - (PXCanvasView *)view
 {
@@ -96,8 +96,6 @@
 	[layerSplit addSubview:[layerController view]];
 	[self updateFrameSizes];
 	[self prepareToolbar];
-    [self setInfoMode:PXCanvasInfoModeDimensionsAndPosition];
-    [self updateInfoButtonTitle];
 	
 	[[self window] setAcceptsMouseMovedEvents:YES];
 
@@ -117,6 +115,13 @@
 											 selector:@selector(canvasNoColorChanged:)
 												 name:PXCanvasNoColorChangedNotificationName
 											   object:canvas];
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:PXShowInfoKey]) {
+		[self.infoView setHidden:NO];
+	}
+	else {
+		[self.infoView setHidden:YES];
+	}
 }
 
 #pragma mark -

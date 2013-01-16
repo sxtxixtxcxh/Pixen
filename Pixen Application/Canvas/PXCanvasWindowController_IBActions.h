@@ -44,6 +44,8 @@
 - (IBAction)toggleGrid:(id)sender;
 - (IBAction)showGridSettingsPrompter:(id)sender;
 
+- (IBAction)toggleInfo:(id)sender;
+
 - (IBAction)selectAll:(id)sender;
 - (IBAction)selectNone:(id)sender;
 - (IBAction)invertSelection:(id)sender;

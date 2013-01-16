@@ -6,11 +6,9 @@
 //
 
 #import "PXCanvasWindowController.h"
-#import "PXColor.h"
 
 @interface PXCanvasWindowController (Info)
 
 - (void)setCanvasSize:(NSSize)size;
-- (void)updateInfoButtonTitle;
 
 @end

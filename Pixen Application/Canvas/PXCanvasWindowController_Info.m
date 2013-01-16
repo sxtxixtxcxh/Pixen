@@ -7,57 +7,19 @@
 
 #import "PXCanvasWindowController_Info.h"
 
+#import "PXInfoView.h"
+
 @implementation PXCanvasWindowController(Info)
-
-- (IBAction)nextInfoButtonTitle:(id)sender
-{
-	[self setInfoMode:[self infoMode] + 1];
-	if ([self infoMode] > 2) {
-		[self setInfoMode:0];
-	}
-	
-	[self updateInfoButtonTitle];
-}
-
-- (void)updateInfoButtonTitle
-{
-	NSString *newInfoString = [NSString stringWithFormat:@"%@: %lu %@: %lu",
-							   NSLocalizedString(@"WIDTH_ABBR", @"Width"),
-							   [self width],
-							   NSLocalizedString(@"HEIGHT_ABBR", @"Height"),
-							   [self height]];
-	
-	if ([self infoMode] == PXCanvasInfoModeDimensionsAndPosition || [self infoMode] == PXCanvasInfoModeDimensionsAndPositionAndColor) {
-		newInfoString = [newInfoString stringByAppendingFormat:@"    X: %ld Y: %ld", [self cursorX], [self cursorY]];
-	}
-	if ([self infoMode] == PXCanvasInfoModeDimensionsAndPositionAndColor) {
-		if (![self pointerHasColor]) {
-			newInfoString = [newInfoString stringByAppendingFormat:@"    --"];
-		} else {
-			newInfoString = [newInfoString stringByAppendingFormat:@"    Hex: %@    RGBA: (%lu, %lu, %lu, %lu)",
-							 [self hex],
-							 [self red],
-							 [self green],
-							 [self blue],
-							 [self alpha]];
-		}
-	}
-	
-	[[self infoButton] setTitle:newInfoString];
-	[[self infoButton] sizeToFit];
-}
 
 - (void)setCanvasSize:(NSSize)size
 {
-	[self setWidth:(int)(size.width)];
-	[self setHeight:(int)(size.height)];
-	[self updateInfoButtonTitle];
+	self.infoView.width = (int)(size.width);
+	self.infoView.height = (int)(size.height);
 }
 
 - (void)draggingOriginChanged:(NSNotification *)notification
 {
 	[self setDraggingOrigin:[[[notification userInfo] valueForKey:@"draggingOrigin"] pointValue]];
-	[self updateInfoButtonTitle];
 }
 
 - (void)cursorPositionChanged:(NSNotification *)notification
@@ -67,43 +29,36 @@
 	difference.x -= [self draggingOrigin].x;
 	difference.y -= [self draggingOrigin].y;
 	
-	if (difference.x > 0.1 || difference.x < -0.1) {
-		[self setCursorX:(int)(difference.x)];
-	}
-	else {
-		[self setCursorX:(int)(point.x)];
-	}
+//	if (difference.x > 0.1 || difference.x < -0.1) {
+//		self.infoView.cursorX = (int)(difference.x);
+//	}
+//	else {
+		self.infoView.cursorX = (int)(point.x);
+//	}
 	
-	if (difference.y > 0.1 || difference.y < -0.1) {
-		[self setCursorY:(int)(difference.y)];
-	}
-	else {
-		[self setCursorY:(int)(point.y)];
-	}
-	[self updateInfoButtonTitle];
+//	if (difference.y > 0.1 || difference.y < -0.1) {
+//		self.infoView.cursorY = (int)(difference.y);
+//	}
+//	else {
+		self.infoView.cursorY = (int)(point.y);
+//	}
 }
 
 - (void)canvasColorChanged:(NSNotification *)notification
 {
-	[self setPointerHasColor:YES];
+	self.infoView.hasColor = YES;
 	
 	PXColor color;
 	
 	NSData *colorData = [[notification userInfo] valueForKey:@"currentColor"];
 	[colorData getBytes:&color length:sizeof(color)];
 	
-	[self setRed:color.r];
-	[self setGreen:color.g];
-	[self setBlue:color.b];
-	[self setAlpha:color.a];
-	[self setHex:[NSString stringWithFormat:@"#%02X%02X%02X", color.r, color.g, color.b]];
-	[self updateInfoButtonTitle];
+	self.infoView.color = color;
 }
 
 - (void)canvasNoColorChanged:(NSNotification *)notification
 {
-	[self setPointerHasColor:NO];
-	[self updateInfoButtonTitle];
+	self.infoView.hasColor = NO;
 }
 
 @end

@@ -23,6 +23,14 @@
 		BF269FE6091307BF00B7A218 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BB8ED608FB58F9009C75A6 /* QTKit.framework */; };
 		C900F4BE1509882F00DC6702 /* PXToolPalette.xib in Resources */ = {isa = PBXBuildFile; fileRef = C900F4BC1509882F00DC6702 /* PXToolPalette.xib */; };
 		C903DADE14CBBD6800D82028 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = C903DADD14CBBD6800D82028 /* dsa_pub.pem */; };
+		C90C31B616A60C1300992E3D /* PXInfoView.h in Headers */ = {isa = PBXBuildFile; fileRef = C90C31B416A60C1300992E3D /* PXInfoView.h */; };
+		C90C31B716A60C1300992E3D /* PXInfoView.h in Headers */ = {isa = PBXBuildFile; fileRef = C90C31B416A60C1300992E3D /* PXInfoView.h */; };
+		C90C31B816A60C1300992E3D /* PXInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C90C31B516A60C1300992E3D /* PXInfoView.m */; };
+		C90C31B916A60C1300992E3D /* PXInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C90C31B516A60C1300992E3D /* PXInfoView.m */; };
+		C90C31BC16A705F000992E3D /* PXSeparatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = C90C31BA16A705F000992E3D /* PXSeparatorView.h */; };
+		C90C31BD16A705F000992E3D /* PXSeparatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = C90C31BA16A705F000992E3D /* PXSeparatorView.h */; };
+		C90C31BE16A705F000992E3D /* PXSeparatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C90C31BB16A705F000992E3D /* PXSeparatorView.m */; };
+		C90C31BF16A705F000992E3D /* PXSeparatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C90C31BB16A705F000992E3D /* PXSeparatorView.m */; };
 		C9104A5B14E38AAC00025103 /* NSWindowController+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = C9104A5914E38AAC00025103 /* NSWindowController+Additions.h */; };
 		C9104A5C14E38AAC00025103 /* NSWindowController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C9104A5A14E38AAC00025103 /* NSWindowController+Additions.m */; };
 		C912F26D13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib in Resources */ = {isa = PBXBuildFile; fileRef = C912F26B13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib */; };
@@ -1018,6 +1026,10 @@
 		BF1A538607ECD9200017A44E /* PXImage.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PXImage.m; sourceTree = "<group>"; };
 		C900F4BD1509882F00DC6702 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXToolPalette.xib; sourceTree = "<group>"; };
 		C903DADD14CBBD6800D82028 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		C90C31B416A60C1300992E3D /* PXInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXInfoView.h; path = Info/PXInfoView.h; sourceTree = "<group>"; };
+		C90C31B516A60C1300992E3D /* PXInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXInfoView.m; path = Info/PXInfoView.m; sourceTree = "<group>"; };
+		C90C31BA16A705F000992E3D /* PXSeparatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXSeparatorView.h; path = Info/PXSeparatorView.h; sourceTree = "<group>"; };
+		C90C31BB16A705F000992E3D /* PXSeparatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXSeparatorView.m; path = Info/PXSeparatorView.m; sourceTree = "<group>"; };
 		C9104A5914E38AAC00025103 /* NSWindowController+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindowController+Additions.h"; sourceTree = "<group>"; };
 		C9104A5A14E38AAC00025103 /* NSWindowController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindowController+Additions.m"; sourceTree = "<group>"; };
 		C912F26C13D5CDC100C0CF29 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXSpriteSheetExporter.xib; sourceTree = "<group>"; };
@@ -1562,6 +1574,7 @@
 				EA31F88E0CE7BDE800EC481B /* Crosshair */,
 				EA31F9140CE7BE6C00EC481B /* Animation */,
 				EA31F9210CE7BE6C00EC481B /* Canvas */,
+				C90C31B316A60BFD00992E3D /* Info */,
 				EA31F9420CE7BE8200EC481B /* Grid */,
 				EA31F96A0CE7CD9300EC481B /* Layers */,
 				EA31F9800CE7CE4800EC481B /* Palette */,
@@ -1588,6 +1601,17 @@
 				61A22B910D2323B500430CCD /* OSPlasticButtonCell.m */,
 			);
 			path = OSPlasticButtonCell;
+			sourceTree = "<group>";
+		};
+		C90C31B316A60BFD00992E3D /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				C90C31B416A60C1300992E3D /* PXInfoView.h */,
+				C90C31B516A60C1300992E3D /* PXInfoView.m */,
+				C90C31BA16A705F000992E3D /* PXSeparatorView.h */,
+				C90C31BB16A705F000992E3D /* PXSeparatorView.m */,
+			);
+			name = Info;
 			sourceTree = "<group>";
 		};
 		C969A18613D200B300F1C1FE /* Products */ = {
@@ -2629,6 +2653,8 @@
 				C9ACC21015C70AB300D157CB /* PXLayerTableView.h in Headers */,
 				C9ACC21115C70AB300D157CB /* PXLayerRowView.h in Headers */,
 				C9ACC21215C70AB300D157CB /* PXLayerCellView.h in Headers */,
+				C90C31B716A60C1300992E3D /* PXInfoView.h in Headers */,
+				C90C31BD16A705F000992E3D /* PXSeparatorView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2798,6 +2824,8 @@
 				C99E209515B88CEF00B8DDFF /* PXLayerTableView.h in Headers */,
 				C99E209915B8913C00B8DDFF /* PXLayerRowView.h in Headers */,
 				C99E209D15B89E1700B8DDFF /* PXLayerCellView.h in Headers */,
+				C90C31B616A60C1300992E3D /* PXInfoView.h in Headers */,
+				C90C31BC16A705F000992E3D /* PXSeparatorView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3346,6 +3374,8 @@
 				C9ACC16B15C70AB300D157CB /* PXLayerTableView.m in Sources */,
 				C9ACC16C15C70AB300D157CB /* PXLayerRowView.m in Sources */,
 				C9ACC16D15C70AB300D157CB /* PXLayerCellView.m in Sources */,
+				C90C31B916A60C1300992E3D /* PXInfoView.m in Sources */,
+				C90C31BF16A705F000992E3D /* PXSeparatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3521,6 +3551,8 @@
 				C99E209A15B8913C00B8DDFF /* PXLayerRowView.m in Sources */,
 				C99E209E15B89E1700B8DDFF /* PXLayerCellView.m in Sources */,
 				CAD543A61672A0EF00165B7E /* PXCanvasWindowController_Info.m in Sources */,
+				C90C31B816A60C1300992E3D /* PXInfoView.m in Sources */,
+				C90C31BE16A705F000992E3D /* PXSeparatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

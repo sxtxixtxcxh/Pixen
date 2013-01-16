@@ -13,6 +13,8 @@ extern NSString *PXGridColorDataKey;
 extern NSString *PXCrosshairColorKey;
 extern NSString *PXCrosshairEnabledKey;
 
+extern NSString *PXShowInfoKey;
+
 extern NSString *PXCaresAboutPressureKey;
 
 extern NSString *PXCanvasDefaultMainBackgroundKey;

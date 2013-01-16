@@ -8,13 +8,7 @@
 #import "PXCanvasResizePrompter.h"
 
 @class PXCanvasController, PXGridSettingsController, PXLayerController, PXPaletteController, PXScaleController;
-@class PXCanvas, PXCanvasView, PXBackground, PXDocument;
-
-enum PXCanvasInfoMode : NSUInteger {
-    PXCanvasInfoModeDimensions,
-    PXCanvasInfoModeDimensionsAndPosition,
-    PXCanvasInfoModeDimensionsAndPositionAndColor
-};
+@class PXCanvas, PXCanvasView, PXBackground, PXDocument, PXInfoView;
 
 @interface PXCanvasWindowController : NSWindowController < PXCanvasResizePrompterDelegate >
 {
@@ -33,19 +27,8 @@ enum PXCanvasInfoMode : NSUInteger {
 
 @property (nonatomic, weak) IBOutlet NSTextField *zoomLabel;
 @property (nonatomic, weak) IBOutlet NSSlider *zoomSlider;
-@property (nonatomic, weak) IBOutlet NSButton *infoButton;
+@property (nonatomic, weak) IBOutlet PXInfoView *infoView;
 @property (nonatomic, assign) NSPoint draggingOrigin;
-@property (nonatomic, assign) NSUInteger width;
-@property (nonatomic, assign) NSUInteger height;
-@property (nonatomic, assign) NSInteger cursorX;
-@property (nonatomic, assign) NSInteger cursorY;
-@property (nonatomic, assign) NSUInteger red;
-@property (nonatomic, assign) NSUInteger green;
-@property (nonatomic, assign) NSUInteger blue;
-@property (nonatomic, assign) NSUInteger alpha;
-@property (nonatomic, strong) NSString *hex;
-@property (nonatomic, assign) BOOL pointerHasColor;
-@property (nonatomic, assign) enum PXCanvasInfoMode infoMode;
 
 @property (nonatomic, weak) IBOutlet PXCanvasController *canvasController;
 
