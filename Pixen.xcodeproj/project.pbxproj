@@ -31,6 +31,7 @@
 		C90C31BD16A705F000992E3D /* PXSeparatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = C90C31BA16A705F000992E3D /* PXSeparatorView.h */; };
 		C90C31BE16A705F000992E3D /* PXSeparatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C90C31BB16A705F000992E3D /* PXSeparatorView.m */; };
 		C90C31BF16A705F000992E3D /* PXSeparatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C90C31BB16A705F000992E3D /* PXSeparatorView.m */; };
+		C90C31C016A71A1200992E3D /* PXCanvasWindowController_Info.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD543A51672A0EF00165B7E /* PXCanvasWindowController_Info.m */; };
 		C9104A5B14E38AAC00025103 /* NSWindowController+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = C9104A5914E38AAC00025103 /* NSWindowController+Additions.h */; };
 		C9104A5C14E38AAC00025103 /* NSWindowController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C9104A5A14E38AAC00025103 /* NSWindowController+Additions.m */; };
 		C912F26D13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib in Resources */ = {isa = PBXBuildFile; fileRef = C912F26B13D5CDC100C0CF29 /* PXSpriteSheetExporter.xib */; };
@@ -591,7 +592,6 @@
 		C9F7F16D142BE3D500AB8E37 /* UTType+NSString.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F7F16B142BE3D500AB8E37 /* UTType+NSString.m */; };
 		C9FD44E113FD70FC00CEE4FC /* PXPatternEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FD44DF13FD70FC00CEE4FC /* PXPatternEditor.xib */; };
 		C9FEE51B13AF81AF004FFC3C /* PXGridSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FEE51913AF81AF004FFC3C /* PXGridSettings.xib */; };
-		CAD543A41672A0E300165B7E /* PXCanvasWindowController_Info.h in Resources */ = {isa = PBXBuildFile; fileRef = CAD543A31672A0E300165B7E /* PXCanvasWindowController_Info.h */; };
 		CAD543A61672A0EF00165B7E /* PXCanvasWindowController_Info.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD543A51672A0EF00165B7E /* PXCanvasWindowController_Info.m */; };
 		D88FA9A113DD265000175A2F /* NSObject+AssociatedObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FA99F13DD265000175A2F /* NSObject+AssociatedObjects.h */; };
 		D88FA9A213DD265000175A2F /* NSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = D88FA9A013DD265000175A2F /* NSObject+AssociatedObjects.m */; };
@@ -3170,7 +3170,6 @@
 				C9C3B51C15C6FB6F00BA5E0B /* RegularSize@2x.png in Resources */,
 				C9C3B51D15C6FB6F00BA5E0B /* SmallSize.png in Resources */,
 				C9C3B51E15C6FB6F00BA5E0B /* SmallSize@2x.png in Resources */,
-				CAD543A41672A0E300165B7E /* PXCanvasWindowController_Info.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3376,6 +3375,7 @@
 				C9ACC16D15C70AB300D157CB /* PXLayerCellView.m in Sources */,
 				C90C31B916A60C1300992E3D /* PXInfoView.m in Sources */,
 				C90C31BF16A705F000992E3D /* PXSeparatorView.m in Sources */,
+				C90C31C016A71A1200992E3D /* PXCanvasWindowController_Info.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
