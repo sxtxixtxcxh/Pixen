@@ -522,8 +522,17 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	[[animationDocument animation] removeCel:[[animationDocument animation] celAtIndex:0]];
 	
+	NSArray *urls = [[openPanel URLs] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+		
+		NSURL *u1 = obj1;
+		NSURL *u2 = obj2;
+		
+		return [[u1 lastPathComponent] compare:[u2 lastPathComponent]];
+		
+	}];
+	
 	NSMutableArray *images = [[NSMutableArray alloc] initWithCapacity:[[openPanel URLs] count]];
-    for (NSURL *currentURL in [openPanel URLs])
+    for (NSURL *currentURL in urls)
 	{
 		[images addObject:[PXCanvas canvasWithContentsOfFile:[currentURL path]]];
 	}
