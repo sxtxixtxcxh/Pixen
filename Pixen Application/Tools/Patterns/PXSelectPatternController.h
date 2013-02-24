@@ -12,6 +12,7 @@
 @interface PXSelectPatternController : NSViewController
 
 @property (nonatomic, strong) IBOutlet NSArrayController *patternsController;
+@property (nonatomic, weak) IBOutlet NSCollectionView *collectionView;
 
 @property (nonatomic, weak) NSPopover *popover;
 

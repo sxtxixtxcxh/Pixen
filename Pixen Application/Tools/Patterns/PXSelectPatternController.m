@@ -27,7 +27,23 @@
 
 - (void)awakeFromNib
 {
+	[self.collectionView addObserver:self forKeyPath:@"selectionIndexes" options:0 context:NULL];
+	
 	[self reloadPatterns];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if ([keyPath isEqualToString:@"selectionIndexes"]) {
+		NSUInteger index = [[self.collectionView selectionIndexes] firstIndex];
+		
+		if (index != NSNotFound) {
+			PXPattern *pattern = [[patternsController arrangedObjects] objectAtIndex:index];
+			
+			[self.delegate selectPatternControllerDidChoosePattern:pattern];
+			[self.popover close];
+		}
+	}
 }
 
 - (void)reloadPatterns
@@ -51,11 +67,6 @@
 - (IBAction)closePopover:(id)sender
 {
 	[self.popover close];
-}
-
-- (void)patternItemWasDoubleClicked:(PXPatternItem *)item
-{
-	[delegate selectPatternControllerDidChoosePattern:[item representedObject]];
 }
 
 @end
