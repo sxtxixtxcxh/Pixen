@@ -13,7 +13,6 @@
 @implementation PXPatternEditorView
 
 @synthesize pattern = _pattern;
-@synthesize delegate = _delegate;
 
 #define SCALE_FACTOR 32.0f
 
@@ -43,8 +42,7 @@
 	NSPasteboard *pboard = [sender draggingPasteboard];
 	[self setPattern:[NSKeyedUnarchiver unarchiveObjectWithData:[pboard dataForType:PXPatternPboardType]]];
 	
-	if ([_delegate respondsToSelector:@selector(patternView:changedPattern:)])
-		[_delegate patternView:self changedPattern:_pattern];
+#warning TODO: trigger update
 	
 	return YES;
 }
@@ -75,8 +73,8 @@
 
 - (void)mouseUp:(NSEvent *)event
 {
-	if ([_delegate respondsToSelector:@selector(patternView:changedPattern:)])
-		[_delegate patternView:self changedPattern:_pattern];
+	[_pattern willChangeValueForKey:@"image"];
+	[_pattern didChangeValueForKey:@"image"];
 }
 
 - (void)mouseDown:(NSEvent *)event

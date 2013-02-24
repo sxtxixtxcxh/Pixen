@@ -30,8 +30,6 @@
 
 - (void)awakeFromNib
 {
-	[editorView setDelegate:self];
-	
 	SBCenteringClipView *clip = [[SBCenteringClipView alloc] initWithFrame:[[scrollView contentView] frame]];
 	[clip setBackgroundColor:[NSColor lightGrayColor]];
 	[clip setCopiesOnScroll:NO];
@@ -95,11 +93,6 @@
 - (id)init
 {
 	return [super initWithWindowNibName:@"PXPatternEditor"];
-}
-
-- (void)patternView:(PXPatternEditorView *)pv changedPattern:(PXPattern *)pattern
-{
-	
 }
 
 - (void)reloadPatterns
