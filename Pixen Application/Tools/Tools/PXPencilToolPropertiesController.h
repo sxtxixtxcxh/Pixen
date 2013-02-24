@@ -7,13 +7,12 @@
 
 #import "PXToolPropertiesController.h"
 
-@class PXPattern, PXPatternEditorController;
+@class PXPattern;
 
 @interface PXPencilToolPropertiesController : PXToolPropertiesController
 {
   @private
 	PXPattern *drawingPattern;
-	PXPatternEditorController *patternEditor;
 	int lineThickness;
 	NSString *toolName;
 }

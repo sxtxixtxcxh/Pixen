@@ -10,7 +10,11 @@
 #import "PXPattern.h"
 #import "PXCanvasController.h"
 #import "PXNotifications.h"
-#import "PXPatternEditorController.h"
+#import "PXSelectPatternController.h"
+
+@interface PXPencilToolPropertiesController () < PXSelectPatternControllerDelegate >
+@end
+
 
 @implementation PXPencilToolPropertiesController
 
@@ -30,14 +34,6 @@
 		[lineThicknessField setEnabled:NO];
 		[clearButton setEnabled:YES];
 	}
-}
-
-- (void)patternEditor:(id)editor finishedWithPattern:(PXPattern *)pattern
-{
-	if (pattern == nil)
-		return;
-	
-	[self setPattern:pattern];
 }
 
 - (NSSize)patternSize
@@ -78,14 +74,21 @@
 		[self setPattern:pattern];
 	}
 	
-	if (!patternEditor) {
-		patternEditor = [[PXPatternEditorController alloc] init];
-		patternEditor.delegate = self;
-		patternEditor.toolName = toolName;
-	}
+	PXSelectPatternController *selector = [PXSelectPatternController new];
+	selector.delegate = self;
 	
-	[patternEditor setPattern:drawingPattern];
-	[patternEditor showWindow:self];
+	NSPopover *popover = [[NSPopover alloc] init];
+	popover.contentViewController = selector;
+	
+	[popover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
+}
+
+- (void)selectPatternControllerDidChoosePattern:(PXPattern *)pattern
+{
+	if (pattern == nil)
+		return;
+	
+	[self setPattern:pattern];
 }
 
 - (void)awakeFromNib
