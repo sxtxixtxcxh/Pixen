@@ -30,6 +30,8 @@
 
 - (void)awakeFromNib
 {
+	[self.collectionView registerForDraggedTypes:@[ NSFilesPromisePboardType ]];
+	[self.collectionView setDraggingSourceOperationMask:NSDragOperationCopy forLocal:NO];
 	[self.collectionView addObserver:self forKeyPath:@"selectionIndexes" options:0 context:NULL];
 	
 	[editorView setDelegate:self];
@@ -189,13 +191,21 @@
 	[collectionView removeObserver:self forKeyPath:@"selectionIndexes"];
 }
 
-- (BOOL)collectionView:(NSCollectionView *)collectionView writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pasteboard
+- (NSArray *)collectionView:(NSCollectionView *)collectionView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropURL forDraggedItemsAtIndexes:(NSIndexSet *)indexes
 {
 	NSUInteger index = [indexes firstIndex];
 	PXPattern *pattern = [[patternsController arrangedObjects] objectAtIndex:index];
 	
-	[pasteboard declareTypes:[NSArray arrayWithObject:PXPatternPboardType] owner:self];
-	[pasteboard setData:[NSKeyedArchiver archivedDataWithRootObject:pattern] forType:PXPatternPboardType];
+	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:pattern];
+	[data writeToURL:[dropURL URLByAppendingPathComponent:@"Pattern.pxpattern"] atomically:YES];
+	
+	return [NSArray arrayWithObject:@"Pattern.pxpattern"];
+}
+
+- (BOOL)collectionView:(NSCollectionView *)collectionView writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pasteboard
+{
+	[pasteboard declareTypes:[NSArray arrayWithObjects:NSFilesPromisePboardType, nil] owner:self];
+	[pasteboard setPropertyList:@[ @"pxpattern" ] forType:NSFilesPromisePboardType];
 	
 	return YES;
 }
