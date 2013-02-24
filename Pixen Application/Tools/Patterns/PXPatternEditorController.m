@@ -135,6 +135,7 @@
 
 - (void)patternItemWasDoubleClicked:(PXPatternItem *)item
 {
+#warning TODO: single click
 	PXPattern *pattern = [item representedObject];
 	[self setPattern:pattern];
 }

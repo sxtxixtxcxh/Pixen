@@ -13,13 +13,4 @@
 
 @property (nonatomic, assign) BOOL selected;
 
-@property (nonatomic, unsafe_unretained) IBOutlet id delegate;
-
-@end
-
-
-@interface NSObject (PXClickableViewDelegate)
-
-- (void)viewDidReceiveDoubleClick:(NSView *)view;
-
 @end

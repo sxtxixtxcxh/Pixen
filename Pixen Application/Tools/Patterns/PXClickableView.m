@@ -9,18 +9,7 @@
 
 @implementation PXClickableView
 
-@synthesize selected = _selected, delegate = _delegate;
-
-- (void)mouseDown:(NSEvent *)theEvent
-{
-	if ([theEvent clickCount] > 1) {
-		if ([self.delegate respondsToSelector:@selector(viewDidReceiveDoubleClick:)])
-			[self.delegate viewDidReceiveDoubleClick:self];
-	}
-	else {
-		[super mouseDown:theEvent];
-	}
-}
+@synthesize selected = _selected;
 
 - (void)setSelected:(BOOL)selected
 {

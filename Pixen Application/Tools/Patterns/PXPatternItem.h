@@ -8,10 +8,3 @@
 @interface PXPatternItem : NSCollectionViewItem
 
 @end
-
-
-@interface NSObject (PXPatternItemDelegate)
-
-- (void)patternItemWasDoubleClicked:(PXPatternItem *)item;
-
-@end

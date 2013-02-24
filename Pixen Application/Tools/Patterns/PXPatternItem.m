@@ -11,12 +11,6 @@
 
 @implementation PXPatternItem
 
-- (void)viewDidReceiveDoubleClick:(NSView *)view
-{
-	if ([[[self collectionView] delegate] respondsToSelector:@selector(patternItemWasDoubleClicked:)])
-		[ (id) [[self collectionView] delegate] patternItemWasDoubleClicked:self];
-}
-
 - (void)setSelected:(BOOL)flag {
 	[super setSelected:flag];
 	
