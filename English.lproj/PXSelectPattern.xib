@@ -105,7 +105,7 @@
 								<array class="NSMutableArray" key="NSSubviews">
 									<object class="NSCollectionView" id="15732746">
 										<reference key="NSNextResponder" ref="327794405"/>
-										<int key="NSvFlags">274</int>
+										<int key="NSvFlags">4370</int>
 										<string key="NSFrameSize">{156, 184}</string>
 										<reference key="NSSuperview" ref="327794405"/>
 										<reference key="NSWindow"/>
