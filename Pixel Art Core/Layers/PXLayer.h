@@ -74,8 +74,6 @@
 - (void)flipVertically;
 - (void)rotateByDegrees:(int)degrees;
 
-- (void)rotateByDegrees:(int)degrees;
-
 - (void)applyImageRep:(NSBitmapImageRep *)imageRep;
 
 - (NSData *)colorData;
