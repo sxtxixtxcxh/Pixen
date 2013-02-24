@@ -10,6 +10,7 @@
 
 #import "PXPattern.h"
 #import "PXPatternItem.h"
+#import "PXPatternEditorController.h"
 #import "PathUtilities.h"
 
 @implementation PXSelectPatternController
@@ -72,6 +73,11 @@
 - (IBAction)closePopover:(id)sender
 {
 	[self.popover close];
+}
+
+- (IBAction)manage:(id)sender
+{
+	[[PXPatternEditorController sharedController] showWindow:nil];
 }
 
 @end
