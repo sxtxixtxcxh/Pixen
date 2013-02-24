@@ -16,7 +16,9 @@
 @end
 
 
-@implementation PXPencilToolPropertiesController
+@implementation PXPencilToolPropertiesController {
+	NSPopover *_popover;
+}
 
 @synthesize lineThicknessField, patternButton, clearButton;
 @synthesize lineThickness, pattern = drawingPattern, toolName;
@@ -60,16 +62,21 @@
 
 - (IBAction)showPatterns:(id)sender
 {
+	if (_popover) {
+		[_popover close];
+		_popover = nil;
+	}
+	
 	PXSelectPatternController *selector = [PXSelectPatternController new];
 	selector.delegate = self;
 	
-	NSPopover *popover = [[NSPopover alloc] init];
-	popover.contentViewController = selector;
-	popover.behavior = NSPopoverBehaviorApplicationDefined;
+	_popover = [[NSPopover alloc] init];
+	_popover.contentViewController = selector;
+	_popover.behavior = NSPopoverBehaviorApplicationDefined;
 	
-	selector.popover = popover;
+	selector.popover = _popover;
 	
-	[popover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
+	[_popover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
 }
 
 - (void)selectPatternControllerDidChoosePattern:(PXPattern *)pattern
