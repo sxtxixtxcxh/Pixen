@@ -28,6 +28,7 @@
 - (IBAction)showRightToolProperties:(id)sender;
 - (IBAction)showPreviewPanel:(id)sender;
 - (IBAction)showSpriteSheetExporter:(id)sender;
+- (IBAction)showPatternEditor:(id)sender;
 
 - (IBAction)toggleLeftToolProperties:(id)sender;
 - (IBAction)toggleRightToolProperties:(id)sender;

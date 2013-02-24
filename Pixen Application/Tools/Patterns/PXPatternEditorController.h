@@ -14,7 +14,8 @@
 @property (nonatomic, strong) IBOutlet NSArrayController *patternsController;
 @property (nonatomic, weak) IBOutlet NSScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet PXPatternEditorView *editorView;
-@property (nonatomic, weak) IBOutlet NSTextField *promptField;
+
++ (id)sharedController;
 
 - (void)setPattern:(PXPattern *)pattern;
 

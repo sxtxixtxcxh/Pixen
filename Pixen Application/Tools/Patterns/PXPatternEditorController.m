@@ -14,12 +14,23 @@
 
 @implementation PXPatternEditorController
 
-@synthesize patternsController, scrollView, editorView, promptField;
+@synthesize patternsController, scrollView, editorView;
+
++ (id)sharedController
+{
+	static PXPatternEditorController *sharedInstance;
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		sharedInstance = [[PXPatternEditorController alloc] init];
+	});
+	
+	return sharedInstance;
+}
 
 - (void)awakeFromNib
 {
 	[editorView setDelegate:self];
-	[[promptField cell] setBackgroundStyle:NSBackgroundStyleRaised];
 	
 	SBCenteringClipView *clip = [[SBCenteringClipView alloc] initWithFrame:[[scrollView contentView] frame]];
 	[clip setBackgroundColor:[NSColor lightGrayColor]];

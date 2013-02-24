@@ -13,6 +13,7 @@
 #import "PXPreferencesController.h"
 #import "PXPreviewController.h"
 #import "PXSpriteSheetExporter.h"
+#import "PXPatternEditorController.h"
 #import "PXPalette.h"
 #import "PXPaletteView.h"
 #import "PXPalettePanel.h"
@@ -255,6 +256,11 @@ static PXPanelManager *sharedManager = nil;
 - (IBAction)showSpriteSheetExporter: (id)sender
 {
 	[[PXSpriteSheetExporter sharedSpriteSheetExporter] showWindow:nil];
+}
+
+- (IBAction)showPatternEditor:(id)sender
+{
+	[[PXPatternEditorController sharedController] showWindow:nil];
 }
 
 - (IBAction)showPreviewPanel:(id)sender
