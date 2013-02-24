@@ -15,7 +15,6 @@
 @implementation PXPatternEditorController
 
 @synthesize patternsController, scrollView, editorView, promptField;
-@synthesize toolName, patternFileName, delegate;
 
 - (void)awakeFromNib
 {
@@ -29,8 +28,6 @@
 	[(NSScrollView *)scrollView setContentView:clip];
 	
 	[scrollView setDocumentView:editorView];
-	
-	[[self window] setTitle:[NSLocalizedString(@"Pattern Editor: ", @"Pattern Editor:") stringByAppendingString:toolName]];
 	
 	[self reloadPatterns];
 }
@@ -65,9 +62,6 @@
 {
 	PXPattern *pattern = [_pattern copy];
 	[self addPattern:pattern];
-	
-	if ([delegate respondsToSelector:@selector(patternEditor:finishedWithPattern:)])
-		[delegate patternEditor:self finishedWithPattern:pattern];
 }
 
 - (void)deleteSheetDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:contextInfo
@@ -87,8 +81,6 @@
 												 selector:@selector(patternsChanged:)
 													 name:PXPatternsChangedNotificationName
 												   object:nil];
-		
-		[self setPatternFileName:GetPixenPatternFile()];
 	}
 	return self;
 }
@@ -96,15 +88,14 @@
 - (void)patternView:(PXPatternEditorView *)pv changedPattern:(PXPattern *)pattern
 {
 	[self setPattern:pattern];
-	
-	if ([delegate respondsToSelector:@selector(patternEditor:finishedWithPattern:)])
-		[delegate patternEditor:self finishedWithPattern:pattern];
 }
 
 - (void)reloadPatterns
 {
-	BOOL isDirectory;
+	BOOL isDirectory = NO;
+	
 	NSFileManager *fileManager = [NSFileManager defaultManager];
+	NSString *patternFileName = GetPixenPatternFile();
 	
 	if (![fileManager fileExistsAtPath:patternFileName isDirectory:&isDirectory] || isDirectory)
 		return;
@@ -146,9 +137,6 @@
 {
 	PXPattern *pattern = [item representedObject];
 	[self setPattern:pattern];
-	
-	if ([delegate respondsToSelector:@selector(patternEditor:finishedWithPattern:)])
-		[delegate patternEditor:self finishedWithPattern:pattern];
 }
 
 - (void)addPattern:(PXPattern *)pattern
@@ -160,7 +148,7 @@
 													  userInfo:nil];
 	
 	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects]
-								toFile:patternFileName];
+								toFile:GetPixenPatternFile()];
 }
 
 - (void)removePattern:(PXPattern *)pattern
@@ -172,7 +160,7 @@
 													  userInfo:nil];
 	
 	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects]
-								toFile:patternFileName];
+								toFile:GetPixenPatternFile()];
 }
 
 - (void)dealloc
