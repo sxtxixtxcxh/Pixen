@@ -45,7 +45,7 @@
 					<object class="NSButton" id="519559112">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">289</int>
-						<string key="NSFrame">{{90, 10}, {115, 28}}</string>
+						<string key="NSFrame">{{50, 6}, {115, 28}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -72,7 +72,7 @@
 					</object>
 					<object class="NSScrollView" id="54811224">
 						<reference key="NSNextResponder" ref="1005"/>
-						<int key="NSvFlags">274</int>
+						<int key="NSvFlags">4370</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="NSClipView" id="327794405">
 								<reference key="NSNextResponder" ref="54811224"/>
@@ -81,7 +81,7 @@
 									<object class="NSCollectionView" id="15732746">
 										<reference key="NSNextResponder" ref="327794405"/>
 										<int key="NSvFlags">274</int>
-										<string key="NSFrameSize">{184, 174}</string>
+										<string key="NSFrameSize">{156, 184}</string>
 										<reference key="NSSuperview" ref="327794405"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="1003614341"/>
@@ -101,7 +101,7 @@
 										<int key="NSDraggingSourceMaskForNonLocal">0</int>
 									</object>
 								</array>
-								<string key="NSFrameSize">{184, 174}</string>
+								<string key="NSFrameSize">{156, 184}</string>
 								<reference key="NSSuperview" ref="54811224"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="15732746"/>
@@ -135,7 +135,7 @@
 							<object class="NSScroller" id="519779382">
 								<reference key="NSNextResponder" ref="54811224"/>
 								<int key="NSvFlags">-2147483392</int>
-								<string key="NSFrame">{{1, 144}, {233, 15}}</string>
+								<string key="NSFrame">{{-100, -100}, {233, 15}}</string>
 								<reference key="NSSuperview" ref="54811224"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="519559112"/>
@@ -147,12 +147,12 @@
 								<double key="NSPercent">0.63157892227172852</double>
 							</object>
 						</array>
-						<string key="NSFrame">{{16, 42}, {184, 174}}</string>
+						<string key="NSFrame">{{10, 38}, {156, 184}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="327794405"/>
 						<string key="NSReuseIdentifierKey">_NS:76</string>
-						<int key="NSsFlags">133680</int>
+						<int key="NSsFlags">133648</int>
 						<reference key="NSVScroller" ref="1003614341"/>
 						<reference key="NSHScroller" ref="519779382"/>
 						<reference key="NSContentView" ref="327794405"/>
@@ -161,7 +161,7 @@
 						<double key="NSMagnification">1</double>
 					</object>
 				</array>
-				<string key="NSFrameSize">{216, 232}</string>
+				<string key="NSFrameSize">{176, 232}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="54811224"/>
@@ -254,8 +254,8 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="1005"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="519559112"/>
 							<reference ref="54811224"/>
+							<reference ref="519559112"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
