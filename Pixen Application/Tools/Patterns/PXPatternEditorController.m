@@ -14,7 +14,7 @@
 
 @implementation PXPatternEditorController
 
-@synthesize patternsController, scrollView, editorView;
+@synthesize patternsController, collectionView, scrollView, editorView;
 
 + (id)sharedController
 {
@@ -30,6 +30,8 @@
 
 - (void)awakeFromNib
 {
+	[self.collectionView addObserver:self forKeyPath:@"selectionIndexes" options:0 context:NULL];
+	
 	SBCenteringClipView *clip = [[SBCenteringClipView alloc] initWithFrame:[[scrollView contentView] frame]];
 	[clip setBackgroundColor:[NSColor lightGrayColor]];
 	[clip setCopiesOnScroll:NO];
@@ -133,11 +135,16 @@
 						contextInfo:nil];
 }
 
-- (void)patternItemWasDoubleClicked:(PXPatternItem *)item
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-#warning TODO: single click
-	PXPattern *pattern = [item representedObject];
-	[self setPattern:pattern];
+	if ([keyPath isEqualToString:@"selectionIndexes"]) {
+		NSUInteger index = [[self.collectionView selectionIndexes] firstIndex];
+		
+		if (index != NSNotFound) {
+			PXPattern *pattern = [[patternsController arrangedObjects] objectAtIndex:index];
+			[self setPattern:pattern];
+		}
+	}
 }
 
 - (void)addPattern:(PXPattern *)pattern
@@ -167,6 +174,7 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[collectionView removeObserver:self forKeyPath:@"selectionIndexes"];
 }
 
 - (BOOL)collectionView:(NSCollectionView *)collectionView writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pasteboard

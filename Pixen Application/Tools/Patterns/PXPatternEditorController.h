@@ -12,6 +12,8 @@
 }
 
 @property (nonatomic, strong) IBOutlet NSArrayController *patternsController;
+
+@property (nonatomic, weak) IBOutlet NSCollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet NSScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet PXPatternEditorView *editorView;
 
