@@ -16,4 +16,13 @@
 
 @property (nonatomic, weak) PXPattern *pattern;
 
+@property (nonatomic, unsafe_unretained) id delegate;
+
+@end
+
+
+@interface NSObject (PXPatternEditorViewDelegate)
+
+- (void)patternView:(PXPatternEditorView *)pv changedPattern:(PXPattern *)pattern;
+
 @end

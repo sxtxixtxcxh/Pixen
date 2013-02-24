@@ -32,6 +32,8 @@
 {
 	[self.collectionView addObserver:self forKeyPath:@"selectionIndexes" options:0 context:NULL];
 	
+	[editorView setDelegate:self];
+	
 	SBCenteringClipView *clip = [[SBCenteringClipView alloc] initWithFrame:[[scrollView contentView] frame]];
 	[clip setBackgroundColor:[NSColor lightGrayColor]];
 	[clip setCopiesOnScroll:NO];
@@ -95,6 +97,16 @@
 - (id)init
 {
 	return [super initWithWindowNibName:@"PXPatternEditor"];
+}
+
+- (void)patternView:(PXPatternEditorView *)pv changedPattern:(PXPattern *)pattern
+{
+	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects]
+								toFile:GetPixenPatternFile()];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXPatternsChangedNotificationName
+														object:self
+													  userInfo:nil];
 }
 
 - (void)reloadPatterns
