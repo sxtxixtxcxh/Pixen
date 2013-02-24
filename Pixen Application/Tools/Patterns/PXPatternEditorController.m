@@ -71,7 +71,17 @@
 
 - (IBAction)newPattern:(id)sender
 {
-	PXPattern *pattern = [_pattern copy];
+	int line = 4;
+	
+	PXPattern *pattern = [[PXPattern alloc] init];
+	[pattern setSize:NSMakeSize(line, line)];
+	
+	for (int x=0; x<line; x++) {
+		for (int y=0; y<line; y++) {
+			[pattern addPoint:NSMakePoint(x, y)];
+		}
+	}
+	
 	[self addPattern:pattern];
 }
 
@@ -86,14 +96,7 @@
 
 - (id)init
 {
-	self = [super initWithWindowNibName:@"PXPatternEditor"];
-	if (self) {
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(patternsChanged:)
-													 name:PXPatternsChangedNotificationName
-												   object:nil];
-	}
-	return self;
+	return [super initWithWindowNibName:@"PXPatternEditor"];
 }
 
 - (void)patternView:(PXPatternEditorView *)pv changedPattern:(PXPattern *)pattern
@@ -139,11 +142,6 @@
 						contextInfo:nil];
 }
 
-- (void)patternsChanged:(NSNotification *)notification
-{
-	
-}
-
 - (void)patternItemWasDoubleClicked:(PXPatternItem *)item
 {
 	PXPattern *pattern = [item representedObject];
@@ -154,24 +152,24 @@
 {
 	[patternsController addObject:pattern];
 	
+	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects]
+								toFile:GetPixenPatternFile()];
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXPatternsChangedNotificationName
 														object:self
 													  userInfo:nil];
-	
-	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects]
-								toFile:GetPixenPatternFile()];
 }
 
 - (void)removePattern:(PXPattern *)pattern
 {
 	[patternsController removeObject:pattern];
 	
+	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects]
+								toFile:GetPixenPatternFile()];
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXPatternsChangedNotificationName
 														object:self
 													  userInfo:nil];
-	
-	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects]
-								toFile:GetPixenPatternFile()];
 }
 
 - (void)dealloc

@@ -60,20 +60,6 @@
 
 - (IBAction)showPatterns:(id)sender
 {
-//	if (drawingPattern == nil) {
-//		PXPattern *pattern = [[PXPattern alloc] init];
-//		[pattern setSize:NSMakeSize([self lineThickness], [self lineThickness])];
-//		
-//		int x, y;
-//		for (x=0; x<[self lineThickness]; x++) {
-//			for (y=0; y<[self lineThickness]; y++) {
-//				[pattern addPoint:NSMakePoint(x, y)];
-//			}
-//		}
-//		
-//		[self setPattern:pattern];
-//	}
-	
 	PXSelectPatternController *selector = [PXSelectPatternController new];
 	selector.delegate = self;
 	

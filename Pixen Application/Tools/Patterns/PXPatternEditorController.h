@@ -17,13 +17,4 @@
 
 + (id)sharedController;
 
-- (void)setPattern:(PXPattern *)pattern;
-
-- (IBAction)newPattern:(id)sender;
-
-- (void)reloadPatterns;
-
-- (void)addPattern:(PXPattern *)pattern;
-- (void)removePattern:(PXPattern *)pattern;
-
 @end
