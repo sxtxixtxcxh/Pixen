@@ -14,7 +14,7 @@
 
 @implementation PXSelectPatternController
 
-@synthesize patternsController, popover, delegate;
+@synthesize patternsController, collectionView, popover, delegate;
 
 - (id)init
 {
@@ -23,6 +23,11 @@
 		
 	}
 	return self;
+}
+
+- (void)dealloc
+{
+	[collectionView removeObserver:self forKeyPath:@"selectionIndexes"];
 }
 
 - (void)awakeFromNib
