@@ -48,8 +48,6 @@
 	if (pattern == _pattern)
 		return;
 	
-	[self loadWindow];
-	
 	_pattern = [pattern copy];
 	
 	NSSize patternSize = [_pattern size];
@@ -101,7 +99,7 @@
 
 - (void)patternView:(PXPatternEditorView *)pv changedPattern:(PXPattern *)pattern
 {
-	[self setPattern:pattern];
+	
 }
 
 - (void)reloadPatterns
