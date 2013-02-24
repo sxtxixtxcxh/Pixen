@@ -13,6 +13,8 @@
 
 @property (nonatomic, strong) IBOutlet NSArrayController *patternsController;
 
+@property (nonatomic, weak) NSPopover *popover;
+
 @property (nonatomic, weak) id < PXSelectPatternControllerDelegate > delegate;
 
 @end

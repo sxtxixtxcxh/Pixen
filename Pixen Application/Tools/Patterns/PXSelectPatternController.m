@@ -14,7 +14,7 @@
 
 @implementation PXSelectPatternController
 
-@synthesize patternsController, delegate;
+@synthesize patternsController, popover, delegate;
 
 - (id)init
 {
@@ -46,6 +46,11 @@
 	
 	if (p)
 		[patternsController addObjects:p];
+}
+
+- (IBAction)closePopover:(id)sender
+{
+	[self.popover close];
 }
 
 - (void)patternItemWasDoubleClicked:(PXPatternItem *)item

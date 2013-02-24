@@ -79,6 +79,9 @@
 	
 	NSPopover *popover = [[NSPopover alloc] init];
 	popover.contentViewController = selector;
+	popover.behavior = NSPopoverBehaviorApplicationDefined;
+	
+	selector.popover = popover;
 	
 	[popover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
 }
