@@ -45,7 +45,7 @@
 					<object class="NSButton" id="519559112">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">289</int>
-						<string key="NSFrame">{{50, 6}, {115, 28}}</string>
+						<string key="NSFrame">{{40, 6}, {125, 28}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -53,7 +53,7 @@
 						<object class="NSButtonCell" key="NSCell" id="643610097">
 							<int key="NSCellFlags">67108864</int>
 							<int key="NSCellFlags2">134348800</int>
-							<string key="NSContents">Manage Patterns</string>
+							<string key="NSContents">Manage Patterns...</string>
 							<object class="NSFont" key="NSSupport">
 								<string key="NSName">LucidaGrande</string>
 								<double key="NSSize">11</double>
@@ -84,7 +84,7 @@
 										<string key="NSFrameSize">{156, 184}</string>
 										<reference key="NSSuperview" ref="327794405"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="1003614341"/>
+										<reference key="NSNextKeyView" ref="519779382"/>
 										<string key="NSReuseIdentifierKey">_NS:80</string>
 										<string key="NSMinGridSize">{0, 0}</string>
 										<string key="NSMaxGridSize">{0, 0}</string>
@@ -124,7 +124,7 @@
 								<string key="NSFrame">{{234, 1}, {15, 143}}</string>
 								<reference key="NSSuperview" ref="54811224"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="519779382"/>
+								<reference key="NSNextKeyView" ref="519559112"/>
 								<string key="NSReuseIdentifierKey">_NS:82</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								<reference key="NSTarget" ref="54811224"/>
@@ -138,7 +138,7 @@
 								<string key="NSFrame">{{-100, -100}, {233, 15}}</string>
 								<reference key="NSSuperview" ref="54811224"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="519559112"/>
+								<reference key="NSNextKeyView" ref="327794405"/>
 								<string key="NSReuseIdentifierKey">_NS:91</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								<int key="NSsFlags">1</int>
