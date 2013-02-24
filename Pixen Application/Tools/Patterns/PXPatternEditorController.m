@@ -48,7 +48,7 @@
 	if (pattern == _pattern)
 		return;
 	
-	_pattern = [pattern copy];
+	_pattern = pattern;
 	
 	NSSize patternSize = [_pattern size];
 	
