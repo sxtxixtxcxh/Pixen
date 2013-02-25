@@ -28,31 +28,6 @@
 	return self;
 }
 
-- (void)awakeFromNib
-{
-	[self registerForDraggedTypes:[NSArray arrayWithObject:PXPatternPboardType]];
-}
-
-- (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
-{
-	return NSDragOperationCopy;
-}
-
-- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
-{
-	NSPasteboard *pboard = [sender draggingPasteboard];
-	[self setPattern:[NSKeyedUnarchiver unarchiveObjectWithData:[pboard dataForType:PXPatternPboardType]]];
-	
-	[_pattern willChangeValueForKey:@"image"];
-	
-	if ([_delegate respondsToSelector:@selector(patternView:changedPattern:)])
-		[_delegate patternView:self changedPattern:_pattern];
-	
-	[_pattern didChangeValueForKey:@"image"];
-	
-	return YES;
-}
-
 - (void)drawRect:(NSRect)rect
 {
 	if (_pattern == nil)
