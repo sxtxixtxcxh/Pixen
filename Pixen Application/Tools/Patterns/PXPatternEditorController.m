@@ -177,6 +177,9 @@
 			PXPattern *pattern = [[_patternsController arrangedObjects] objectAtIndex:index];
 			[self setPattern:pattern];
 		}
+		else {
+			[self setPattern:nil];
+		}
 	}
 }
 
