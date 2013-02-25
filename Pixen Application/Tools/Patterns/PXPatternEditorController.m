@@ -33,7 +33,7 @@
 
 - (void)awakeFromNib
 {
-	[self.collectionView registerForDraggedTypes:@[ NSFilesPromisePboardType ]];
+	[self.collectionView registerForDraggedTypes:@[ NSFilenamesPboardType ]];
 	[self.collectionView setDraggingSourceOperationMask:NSDragOperationCopy forLocal:NO];
 	[self.collectionView addObserver:self forKeyPath:@"selectionIndexes" options:0 context:NULL];
 	
@@ -241,6 +241,39 @@
 	[pasteboard setPropertyList:@[ PXPatternSuffix ] forType:NSFilesPromisePboardType];
 	
 	return YES;
+}
+
+- (BOOL)collectionView:(NSCollectionView *)collectionView acceptDrop:(id<NSDraggingInfo>)draggingInfo index:(NSInteger)index dropOperation:(NSCollectionViewDropOperation)dropOperation
+{
+	
+	NSPasteboard *pboard = [draggingInfo draggingPasteboard];
+	NSArray *files = [pboard propertyListForType:NSFilenamesPboardType];
+	
+	for (NSString *path in files) {
+		if ([[path pathExtension] isEqualToString:PXPatternSuffix]) {
+			PXPattern *pattern = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+			
+			if (!pattern || ![pattern isKindOfClass:[PXPattern class]])
+				continue;
+			
+			[self addPattern:pattern];
+		}
+	}
+	
+	return YES;
+}
+
+- (NSDragOperation)collectionView:(NSCollectionView *)collectionView validateDrop:(id<NSDraggingInfo>)draggingInfo proposedIndex:(NSInteger *)proposedDropIndex dropOperation:(NSCollectionViewDropOperation *)proposedDropOperation
+{
+	NSPasteboard *pboard = [draggingInfo draggingPasteboard];
+	NSArray *files = [pboard propertyListForType:NSFilenamesPboardType];
+	
+	for (NSString *path in files) {
+		if ([[path pathExtension] isEqualToString:PXPatternSuffix])
+			return NSDragOperationCopy;
+	}
+	
+	return NSDragOperationNone;
 }
 
 @end
