@@ -234,7 +234,7 @@
 - (BOOL)collectionView:(NSCollectionView *)collectionView writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pasteboard
 {
 	[pasteboard declareTypes:[NSArray arrayWithObjects:NSFilesPromisePboardType, nil] owner:self];
-	[pasteboard setPropertyList:@[ @"pxpattern" ] forType:NSFilesPromisePboardType];
+	[pasteboard setPropertyList:@[ PXPatternSuffix ] forType:NSFilesPromisePboardType];
 	
 	return YES;
 }
