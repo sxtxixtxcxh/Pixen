@@ -413,15 +413,6 @@
 									<reference key="NSOnImage" ref="130733852"/>
 									<reference key="NSMixedImage" ref="295545801"/>
 								</object>
-								<object class="NSMenuItem" id="27874331">
-									<reference key="NSMenu" ref="644071420"/>
-									<string key="NSTitle">Set Pattern to Selection</string>
-									<string key="NSKeyEquiv"/>
-									<int key="NSKeyEquivModMask">1048576</int>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="130733852"/>
-									<reference key="NSMixedImage" ref="295545801"/>
-								</object>
 								<object class="NSMenuItem" id="351490431">
 									<reference key="NSMenu" ref="644071420"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -528,6 +519,15 @@
 									<bool key="NSIsDisabled">YES</bool>
 									<bool key="NSIsSeparator">YES</bool>
 									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="130733852"/>
+									<reference key="NSMixedImage" ref="295545801"/>
+								</object>
+								<object class="NSMenuItem" id="27874331">
+									<reference key="NSMenu" ref="644071420"/>
+									<string key="NSTitle">Add Pattern from Selection</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -2590,10 +2590,10 @@
 							<reference ref="458402486"/>
 							<reference ref="608961187"/>
 							<reference ref="10140717"/>
-							<reference ref="27874331"/>
 							<reference ref="736307709"/>
 							<reference ref="588029433"/>
 							<reference ref="789941198"/>
+							<reference ref="27874331"/>
 							<reference ref="129644657"/>
 						</array>
 						<reference key="parent" ref="993977698"/>

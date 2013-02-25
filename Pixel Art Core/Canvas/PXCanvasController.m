@@ -27,6 +27,7 @@
 #import "PXCanvasDocument.h"
 #import "PXPattern.h"
 #import "PXToolSwitcher.h"
+#import "PXPatternEditorController.h"
 
 @implementation PXCanvasController
 
@@ -245,21 +246,22 @@
 
 - (void)setPatternToSelection
 {
-	if (![canvas hasSelection]) { return; }
-	PXTool *currentTool = [[PXToolPaletteController sharedToolPaletteController] currentTool];
-	if (![currentTool supportsPatterns]) { return; }
+	if (![canvas hasSelection])
+		return;
+	
 	NSRect selectedRect = [canvas selectedRect];
 	NSRect patternRect = NSZeroRect;
-	int i, j;
+	
 	// on the first pass, figure out how big the pattern's going to be.
 	// we have to do this instead of just using selectedRect.size because
 	// if the outer pixels of the selection are < .5 opacity, they wouldn't
 	// be included in the pattern, and so it would be too big.
-	for (i = NSMinX(selectedRect); i < NSMaxX(selectedRect); i++)
+	for (int i = NSMinX(selectedRect); i < NSMaxX(selectedRect); i++)
 	{
-		for (j = NSMinY(selectedRect); j < NSMaxY(selectedRect); j++)
+		for (int j = NSMinY(selectedRect); j < NSMaxY(selectedRect); j++)
 		{
 			NSPoint point = NSMakePoint(i, j);
+			
 			if ([canvas pointIsSelected:point] && [canvas colorAtPoint:point].a > 127)
 			{
 				NSRect newRect = NSMakeRect(i - NSMinX(selectedRect), j - NSMinY(selectedRect), 1, 1);
@@ -267,24 +269,34 @@
 			}
 		}
 	}
-//FIXME: undo goes here?
+	
 	PXPattern *pattern = [[PXPattern alloc] init];
 	[pattern setSize:patternRect.size];
+	
 	// now we loop through again and actually set the points
-	for (i = NSMinX(selectedRect); i < NSMaxX(selectedRect); i++)
+	for (int i = NSMinX(selectedRect); i < NSMaxX(selectedRect); i++)
 	{
-		for (j = NSMinY(selectedRect); j < NSMaxY(selectedRect); j++)
+		for (int j = NSMinY(selectedRect); j < NSMaxY(selectedRect); j++)
 		{
 			NSPoint point = NSMakePoint(i, j);
+			
 			if ([canvas pointIsSelected:point] && [canvas colorAtPoint:point].a > 127)
 			{
 				[pattern addPoint:NSMakePoint(i - NSMinX(selectedRect) - NSMinX(patternRect), j - NSMinY(selectedRect) - NSMinY(patternRect))];
 			}
 		}
 	}
+	
 	[canvas deselect];
-	[currentTool setPattern:pattern];
 	[canvas changedInRect:NSInsetRect([canvas selectedRect], -2, -2)];
+	
+	[[PXPatternEditorController sharedController] addPattern:pattern];
+	
+	PXTool *currentTool = [[PXToolPaletteController sharedToolPaletteController] currentTool];
+	
+	if ([currentTool supportsPatterns]) {
+		[currentTool setPattern:pattern];
+	}
 }
 
 - (void)backgroundChanged:(id)changed

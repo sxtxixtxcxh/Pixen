@@ -203,7 +203,7 @@
 		return [[board types] containsObject:PXLayerPboardType];
 	}
 	else if ([anItem action] == @selector(setPatternToSelection:))
-		return [[self canvas] hasSelection] && [[[PXToolPaletteController sharedToolPaletteController] currentTool] supportsPatterns];
+		return [[self canvas] hasSelection];
 	else if ([anItem action] == @selector(zoomOut:))
 	{
 		return ([[canvasController view] zoomPercentage] > 100);
