@@ -34,6 +34,7 @@
 #import "PXCel.h"
 #import "PXAnimation.h"
 #import "PXPaletteImporter.h"
+#import "PXPatternEditorController.h"
 
 #import "PXCanvas_ImportingExporting.h"
 
@@ -248,10 +249,16 @@ NSString *palettesSubdirName = @"Palettes";
 		if (result == NSAlertDefaultReturn)
 		{
 			NSString *patternArchiveFilename = GetPixenPatternFile();
-			NSArray *patterns = [[NSKeyedUnarchiver unarchiveObjectWithFile:patternArchiveFilename] arrayByAddingObject:[NSKeyedUnarchiver unarchiveObjectWithFile:filename]];
-			[NSKeyedArchiver archiveRootObject:patterns toFile:patternArchiveFilename];
-			[[NSNotificationCenter defaultCenter] postNotificationName:PXPatternsChangedNotificationName object:self userInfo:[NSDictionary dictionaryWithObject:patterns forKey:@"patterns"]];
+			
+			PXPattern *pattern = [NSKeyedUnarchiver unarchiveObjectWithFile:filename];
+			
+			if (!pattern)
+				return NO;
+			
+			[[PXPatternEditorController sharedController] addPattern:pattern];
 		}
+		
+		return YES;
 	}
 	
 	NSString *ext = [filename pathExtension];

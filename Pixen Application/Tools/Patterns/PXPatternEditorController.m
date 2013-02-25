@@ -51,9 +51,10 @@
 	[self.collectionView bind:@"selectionIndexes" toObject:[self patternsController] withKeyPath:@"selectionIndexes" options:nil];
 }
 
-- (NSArrayController *)patternsController {
+- (NSArrayController *)patternsController
+{
 	if (!_loadedPatterns) {
-		[self performSelector:@selector(reloadPatterns) withObject:nil afterDelay:0.0];
+		[self reloadPatterns];
 	}
 	
 	return _patternsController;
@@ -181,7 +182,7 @@
 
 - (void)addPattern:(PXPattern *)pattern
 {
-	[_patternsController addObject:pattern];
+	[[self patternsController] addObject:pattern];
 	
 	[NSKeyedArchiver archiveRootObject:[_patternsController arrangedObjects]
 								toFile:GetPixenPatternFile()];

@@ -19,4 +19,6 @@
 
 - (NSArrayController *)patternsController;
 
+- (void)addPattern:(PXPattern *)pattern;
+
 @end
