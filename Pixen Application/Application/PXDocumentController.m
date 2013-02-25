@@ -248,8 +248,6 @@ NSString *palettesSubdirName = @"Palettes";
 		
 		if (result == NSAlertDefaultReturn)
 		{
-			NSString *patternArchiveFilename = GetPixenPatternFile();
-			
 			PXPattern *pattern = [NSKeyedUnarchiver unarchiveObjectWithFile:filename];
 			
 			if (!pattern)
