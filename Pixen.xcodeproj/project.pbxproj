@@ -83,6 +83,12 @@
 		C98182C414F0212C0052616F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C98182C314F0212C0052616F /* SenTestingKit.framework */; };
 		C98182D014F0212C0052616F /* PaletteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C98182CF14F0212C0052616F /* PaletteTests.m */; };
 		C98182D514F022B00052616F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		C982819516DBD71E00CD6831 /* PXPatternSizeWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C982819316DBD71E00CD6831 /* PXPatternSizeWindow.xib */; };
+		C982819616DBD71E00CD6831 /* PXPatternSizeWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C982819316DBD71E00CD6831 /* PXPatternSizeWindow.xib */; };
+		C982819916DBD7B200CD6831 /* PXPatternSizeController.h in Headers */ = {isa = PBXBuildFile; fileRef = C982819716DBD7B200CD6831 /* PXPatternSizeController.h */; };
+		C982819A16DBD7B200CD6831 /* PXPatternSizeController.h in Headers */ = {isa = PBXBuildFile; fileRef = C982819716DBD7B200CD6831 /* PXPatternSizeController.h */; };
+		C982819B16DBD7B200CD6831 /* PXPatternSizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C982819816DBD7B200CD6831 /* PXPatternSizeController.m */; };
+		C982819C16DBD7B200CD6831 /* PXPatternSizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C982819816DBD7B200CD6831 /* PXPatternSizeController.m */; };
 		C984251213AFC142000072C5 /* PXPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = C984251013AFC142000072C5 /* PXPreview.xib */; };
 		C985C89914C119DF0091EF22 /* PXCanvasResizePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = C985C89714C119DF0091EF22 /* PXCanvasResizePrompt.xib */; };
 		C989DF9A15386C3400B055D5 /* GPLWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = C989DF9815386C3400B055D5 /* GPLWriter.h */; };
@@ -1086,6 +1092,9 @@
 		C98182CE14F0212C0052616F /* PaletteTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaletteTests.h; sourceTree = "<group>"; };
 		C98182CF14F0212C0052616F /* PaletteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaletteTests.m; sourceTree = "<group>"; };
 		C98182D114F0212C0052616F /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		C982819416DBD71E00CD6831 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPatternSizeWindow.xib; sourceTree = "<group>"; };
+		C982819716DBD7B200CD6831 /* PXPatternSizeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPatternSizeController.h; sourceTree = "<group>"; };
+		C982819816DBD7B200CD6831 /* PXPatternSizeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPatternSizeController.m; sourceTree = "<group>"; };
 		C984251113AFC142000072C5 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXPreview.xib; sourceTree = "<group>"; };
 		C985C89814C119DF0091EF22 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PXCanvasResizePrompt.xib; sourceTree = "<group>"; };
 		C989DF9815386C3400B055D5 /* GPLWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPLWriter.h; sourceTree = "<group>"; };
@@ -1954,6 +1963,8 @@
 				EA31FA400CE7D1A700EC481B /* PXPatternEditorView.m */,
 				C9ADD4A41400821300257E38 /* PXPatternItem.h */,
 				C9ADD4A51400821300257E38 /* PXPatternItem.m */,
+				C982819716DBD7B200CD6831 /* PXPatternSizeController.h */,
+				C982819816DBD7B200CD6831 /* PXPatternSizeController.m */,
 				C9606B3316D9C9CC0080ABF8 /* PXSelectPatternController.h */,
 				C9606B3416D9C9CC0080ABF8 /* PXSelectPatternController.m */,
 			);
@@ -2354,6 +2365,7 @@
 				EAE126CF054F41A9001208D9 /* PXImageBackgroundConfigurator.nib */,
 				C900F4BC1509882F00DC6702 /* PXToolPalette.xib */,
 				C9ECD4D4150BECB6001F686C /* PXAbout.xib */,
+				C982819316DBD71E00CD6831 /* PXPatternSizeWindow.xib */,
 			);
 			name = NIBs;
 			sourceTree = "<group>";
@@ -2668,6 +2680,7 @@
 				C90C31B716A60C1300992E3D /* PXInfoView.h in Headers */,
 				C90C31BD16A705F000992E3D /* PXSeparatorView.h in Headers */,
 				C9606B3616D9C9CC0080ABF8 /* PXSelectPatternController.h in Headers */,
+				C982819A16DBD7B200CD6831 /* PXPatternSizeController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2840,6 +2853,7 @@
 				C90C31B616A60C1300992E3D /* PXInfoView.h in Headers */,
 				C90C31BC16A705F000992E3D /* PXSeparatorView.h in Headers */,
 				C9606B3516D9C9CC0080ABF8 /* PXSelectPatternController.h in Headers */,
+				C982819916DBD7B200CD6831 /* PXPatternSizeController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3072,6 +3086,7 @@
 				C9ACC28315C70AB300D157CB /* SmallSize.png in Resources */,
 				C9ACC28415C70AB300D157CB /* SmallSize@2x.png in Resources */,
 				C9606B3C16D9CA0D0080ABF8 /* PXSelectPattern.xib in Resources */,
+				C982819616DBD71E00CD6831 /* PXPatternSizeWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3186,6 +3201,7 @@
 				C9C3B51D15C6FB6F00BA5E0B /* SmallSize.png in Resources */,
 				C9C3B51E15C6FB6F00BA5E0B /* SmallSize@2x.png in Resources */,
 				C9606B3B16D9CA0D0080ABF8 /* PXSelectPattern.xib in Resources */,
+				C982819516DBD71E00CD6831 /* PXPatternSizeWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3393,6 +3409,7 @@
 				C90C31BF16A705F000992E3D /* PXSeparatorView.m in Sources */,
 				C90C31C016A71A1200992E3D /* PXCanvasWindowController_Info.m in Sources */,
 				C9606B3816D9C9CC0080ABF8 /* PXSelectPatternController.m in Sources */,
+				C982819C16DBD7B200CD6831 /* PXPatternSizeController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3571,6 +3588,7 @@
 				C90C31B816A60C1300992E3D /* PXInfoView.m in Sources */,
 				C90C31BE16A705F000992E3D /* PXSeparatorView.m in Sources */,
 				C9606B3716D9C9CC0080ABF8 /* PXSelectPatternController.m in Sources */,
+				C982819B16DBD7B200CD6831 /* PXPatternSizeController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3756,6 +3774,14 @@
 				C9799FBA13AD745500E261EE /* English */,
 			);
 			name = PXEyedropperToolPropertiesView.xib;
+			sourceTree = "<group>";
+		};
+		C982819316DBD71E00CD6831 /* PXPatternSizeWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C982819416DBD71E00CD6831 /* English */,
+			);
+			name = PXPatternSizeWindow.xib;
 			sourceTree = "<group>";
 		};
 		C984251013AFC142000072C5 /* PXPreview.xib */ = {

@@ -10,6 +10,7 @@
 #import "PXPattern.h"
 #import "PXPatternEditorView.h"
 #import "PXPatternItem.h"
+#import "PXPatternSizeController.h"
 #import "SBCenteringClipView.h"
 
 @implementation PXPatternEditorController {
@@ -84,20 +85,29 @@
 	}
 }
 
-- (IBAction)newPattern:(id)sender
+- (void)newPatternImpl
 {
-	int line = 4;
+	PXPatternSizeController *controller = [PXPatternSizeController new];
+	[controller runSheetModalForParentWindow:[self window]];
+	
+	int w = [controller width];
+	int h = [controller height];
 	
 	PXPattern *pattern = [[PXPattern alloc] init];
-	[pattern setSize:NSMakeSize(line, line)];
+	[pattern setSize:NSMakeSize(w, h)];
 	
-	for (int x=0; x<line; x++) {
-		for (int y=0; y<line; y++) {
+	for (int x=0; x<w; x++) {
+		for (int y=0; y<h; y++) {
 			[pattern addPoint:NSMakePoint(x, y)];
 		}
 	}
 	
 	[self addPattern:pattern];
+}
+
+- (IBAction)newPattern:(id)sender
+{
+	[self performSelector:@selector(newPatternImpl) withObject:nil afterDelay:0.0];
 }
 
 - (void)deleteSheetDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:contextInfo
