@@ -288,7 +288,6 @@
 	}
 	
 	[canvas deselect];
-	[canvas changedInRect:NSInsetRect([canvas selectedRect], -2, -2)];
 	
 	[[PXPatternEditorController sharedController] addPattern:pattern];
 	
