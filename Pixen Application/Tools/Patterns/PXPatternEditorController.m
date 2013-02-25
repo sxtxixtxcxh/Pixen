@@ -12,9 +12,12 @@
 #import "PXPatternItem.h"
 #import "SBCenteringClipView.h"
 
-@implementation PXPatternEditorController
+@implementation PXPatternEditorController {
+	NSArrayController *_patternsController;
+	BOOL _loadedPatterns;
+}
 
-@synthesize patternsController, collectionView, scrollView, editorView;
+@synthesize collectionView, scrollView, editorView;
 
 + (id)sharedController
 {
@@ -44,7 +47,15 @@
 	
 	[scrollView setDocumentView:editorView];
 	
-	[self reloadPatterns];
+	[self.collectionView bind:@"content" toObject:[self patternsController] withKeyPath:@"arrangedObjects" options:nil];
+}
+
+- (NSArrayController *)patternsController {
+	if (!_loadedPatterns) {
+		[self performSelector:@selector(reloadPatterns) withObject:nil afterDelay:0.0];
+	}
+	
+	return _patternsController;
 }
 
 - (void)setPattern:(PXPattern *)pattern
@@ -91,19 +102,23 @@
 {
 	if (returnCode == NSAlertFirstButtonReturn)
 	{
-		PXPattern *selectedPattern = [[patternsController selectedObjects] objectAtIndex:0];
+		PXPattern *selectedPattern = [[_patternsController selectedObjects] objectAtIndex:0];
 		[self removePattern:selectedPattern];
 	}
 }
 
 - (id)init
 {
-	return [super initWithWindowNibName:@"PXPatternEditor"];
+	self = [super initWithWindowNibName:@"PXPatternEditor"];
+	if (self) {
+		_patternsController = [[NSArrayController alloc] init];
+	}
+	return self;
 }
 
 - (void)patternView:(PXPatternEditorView *)pv changedPattern:(PXPattern *)pattern
 {
-	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects]
+	[NSKeyedArchiver archiveRootObject:[_patternsController arrangedObjects]
 								toFile:GetPixenPatternFile()];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXPatternsChangedNotificationName
@@ -121,17 +136,19 @@
 	if (![fileManager fileExistsAtPath:patternFileName isDirectory:&isDirectory] || isDirectory)
 		return;
 	
-	[patternsController removeObjects:[patternsController arrangedObjects]];
+	[_patternsController removeObjects:[_patternsController arrangedObjects]];
 	
 	NSArray *p = [NSKeyedUnarchiver unarchiveObjectWithFile:patternFileName];
 	
 	if (p)
-		[patternsController addObjects:p];
+		[_patternsController addObjects:p];
+	
+	_loadedPatterns = YES;
 }
 
 - (void)deleteKeyPressedInCollectionView:(NSCollectionView *)view
 {
-	if ([patternsController selectionIndex] == NSNotFound)
+	if ([_patternsController selectionIndex] == NSNotFound)
 		return;
 	
 	NSAlert *alert = [[NSAlert alloc] init];
@@ -155,7 +172,7 @@
 		NSUInteger index = [[self.collectionView selectionIndexes] firstIndex];
 		
 		if (index != NSNotFound) {
-			PXPattern *pattern = [[patternsController arrangedObjects] objectAtIndex:index];
+			PXPattern *pattern = [[_patternsController arrangedObjects] objectAtIndex:index];
 			[self setPattern:pattern];
 		}
 	}
@@ -163,9 +180,9 @@
 
 - (void)addPattern:(PXPattern *)pattern
 {
-	[patternsController addObject:pattern];
+	[_patternsController addObject:pattern];
 	
-	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects]
+	[NSKeyedArchiver archiveRootObject:[_patternsController arrangedObjects]
 								toFile:GetPixenPatternFile()];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXPatternsChangedNotificationName
@@ -175,9 +192,9 @@
 
 - (void)removePattern:(PXPattern *)pattern
 {
-	[patternsController removeObject:pattern];
+	[_patternsController removeObject:pattern];
 	
-	[NSKeyedArchiver archiveRootObject:[patternsController arrangedObjects]
+	[NSKeyedArchiver archiveRootObject:[_patternsController arrangedObjects]
 								toFile:GetPixenPatternFile()];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXPatternsChangedNotificationName
@@ -194,7 +211,7 @@
 - (NSArray *)collectionView:(NSCollectionView *)collectionView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropURL forDraggedItemsAtIndexes:(NSIndexSet *)indexes
 {
 	NSUInteger index = [indexes firstIndex];
-	PXPattern *pattern = [[patternsController arrangedObjects] objectAtIndex:index];
+	PXPattern *pattern = [[_patternsController arrangedObjects] objectAtIndex:index];
 	
 	NSString *dir = [dropURL path];
 	NSString *name = @"Pattern.pxpattern";

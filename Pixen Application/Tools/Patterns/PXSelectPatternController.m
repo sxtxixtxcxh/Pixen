@@ -15,7 +15,7 @@
 
 @implementation PXSelectPatternController
 
-@synthesize patternsController, collectionView, popover, delegate;
+@synthesize collectionView, popover, delegate;
 
 - (id)init
 {
@@ -34,8 +34,7 @@
 - (void)awakeFromNib
 {
 	[self.collectionView addObserver:self forKeyPath:@"selectionIndexes" options:0 context:NULL];
-	
-	[self reloadPatterns];
+	[self.collectionView bind:@"content" toObject:[[PXPatternEditorController sharedController] patternsController] withKeyPath:@"arrangedObjects" options:nil];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -44,30 +43,12 @@
 		NSUInteger index = [[self.collectionView selectionIndexes] firstIndex];
 		
 		if (index != NSNotFound) {
-			PXPattern *pattern = [[patternsController arrangedObjects] objectAtIndex:index];
+			PXPattern *pattern = [[[[PXPatternEditorController sharedController] patternsController] arrangedObjects] objectAtIndex:index];
 			
 			[self.delegate selectPatternControllerDidChoosePattern:pattern];
 			[self.popover close];
 		}
 	}
-}
-
-- (void)reloadPatterns
-{
-	BOOL isDirectory = NO;
-	
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	NSString *patternFileName = GetPixenPatternFile();
-	
-	if (![fileManager fileExistsAtPath:patternFileName isDirectory:&isDirectory] || isDirectory)
-		return;
-	
-	[patternsController removeObjects:[patternsController arrangedObjects]];
-	
-	NSArray *p = [NSKeyedUnarchiver unarchiveObjectWithFile:patternFileName];
-	
-	if (p)
-		[patternsController addObjects:p];
 }
 
 - (IBAction)closePopover:(id)sender
