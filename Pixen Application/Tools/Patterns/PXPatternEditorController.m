@@ -48,6 +48,7 @@
 	[scrollView setDocumentView:editorView];
 	
 	[self.collectionView bind:@"content" toObject:[self patternsController] withKeyPath:@"arrangedObjects" options:nil];
+	[self.collectionView bind:@"selectionIndexes" toObject:[self patternsController] withKeyPath:@"selectionIndexes" options:nil];
 }
 
 - (NSArrayController *)patternsController {
