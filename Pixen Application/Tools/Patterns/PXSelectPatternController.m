@@ -15,7 +15,7 @@
 
 @implementation PXSelectPatternController
 
-@synthesize collectionView, popover, delegate;
+@synthesize collectionView, noPatternsLabel, popover, delegate;
 
 - (id)init
 {
@@ -29,11 +29,14 @@
 - (void)dealloc
 {
 	[collectionView removeObserver:self forKeyPath:@"selectionIndexes"];
+	[collectionView removeObserver:self forKeyPath:@"content"];
 }
 
 - (void)awakeFromNib
 {
 	[self.collectionView addObserver:self forKeyPath:@"selectionIndexes" options:0 context:NULL];
+	[self.collectionView addObserver:self forKeyPath:@"content" options:0 context:NULL];
+	
 	[self.collectionView bind:@"content" toObject:[[PXPatternEditorController sharedController] patternsController] withKeyPath:@"arrangedObjects" options:nil];
 }
 
@@ -47,6 +50,14 @@
 			
 			[self.delegate selectPatternControllerDidChoosePattern:pattern];
 			[self.popover close];
+		}
+	}
+	else if ([keyPath isEqualToString:@"content"]) {
+		if ([[self.collectionView content] count]) {
+			[self.noPatternsLabel setHidden:YES];
+		}
+		else {
+			[self.noPatternsLabel setHidden:NO];
 		}
 	}
 }
