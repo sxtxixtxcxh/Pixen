@@ -196,10 +196,21 @@
 	NSUInteger index = [indexes firstIndex];
 	PXPattern *pattern = [[patternsController arrangedObjects] objectAtIndex:index];
 	
-	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:pattern];
-	[data writeToURL:[dropURL URLByAppendingPathComponent:@"Pattern.pxpattern"] atomically:YES];
+	NSString *dir = [dropURL path];
+	NSString *name = @"Pattern.pxpattern";
 	
-	return [NSArray arrayWithObject:@"Pattern.pxpattern"];
+	int i = 2;
+	
+	while ([[NSFileManager defaultManager] fileExistsAtPath:[dir stringByAppendingPathComponent:name]])
+	{
+		name = [NSString stringWithFormat:@"Pattern %d.pxpattern", i];
+		i++;
+	}
+	
+	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:pattern];
+	[data writeToURL:[dropURL URLByAppendingPathComponent:name] atomically:YES];
+	
+	return [NSArray arrayWithObject:name];
 }
 
 - (BOOL)collectionView:(NSCollectionView *)collectionView writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pasteboard
