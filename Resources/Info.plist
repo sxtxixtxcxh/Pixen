@@ -251,6 +251,8 @@
 			<string>Pixen Pattern</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>PixenPattern</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
