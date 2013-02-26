@@ -158,7 +158,16 @@
 	_loadedPatterns = YES;
 }
 
-- (void)deleteKeyPressedInCollectionView:(NSCollectionView *)view
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	if ([menuItem action] == @selector(deletePattern:)) {
+		return [_patternsController selectionIndex] != NSNotFound;
+	}
+	
+	return NO;
+}
+
+- (IBAction)deletePattern:(id)sender
 {
 	if ([_patternsController selectionIndex] == NSNotFound)
 		return;
@@ -176,6 +185,11 @@
 					  modalDelegate:self
 					 didEndSelector:@selector(deleteSheetDidEnd:returnCode:contextInfo:)
 						contextInfo:nil];
+}
+
+- (void)deleteKeyPressedInCollectionView:(NSCollectionView *)view
+{
+	[self deletePattern:view];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
