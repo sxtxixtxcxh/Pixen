@@ -16,7 +16,7 @@
 
 @property (nonatomic, weak) NSPopover *popover;
 
-@property (nonatomic, weak) id < PXSelectPatternControllerDelegate > delegate;
+@property (nonatomic, unsafe_unretained) id < PXSelectPatternControllerDelegate > delegate;
 
 @end
 
