@@ -42,7 +42,7 @@
 	NSSize patternSize = [self size];
 	NSSize maxSize = NSMakeSize(64, 64);
 	
-	float scale;
+	CGFloat scale;
 	
 	if (maxSize.height / patternSize.height < maxSize.width / patternSize.width) {
 		scale = maxSize.height / patternSize.height;
@@ -51,7 +51,10 @@
 		scale = maxSize.width / patternSize.width;
 	}
 	
-	NSRect imageRect = NSMakeRect(0.0f, 0.0f, 66.0f, 66.0f);
+	CGFloat w = patternSize.width * scale + 2.0f;
+	CGFloat h = patternSize.height * scale + 2.0f;
+	
+	NSRect imageRect = NSMakeRect(0.0f, 0.0f, w, h);
 	
 	NSImage *image = [[NSImage alloc] initWithSize:imageRect.size];
 	[image lockFocus];
