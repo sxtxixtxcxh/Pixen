@@ -11,6 +11,16 @@
 
 @synthesize selected = _selected;
 
+- (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
+{
+	return YES;
+}
+
+- (NSView *)hitTest:(NSPoint)aPoint
+{
+	return self;
+}
+
 - (void)setSelected:(BOOL)selected
 {
 	if (_selected != selected) {
