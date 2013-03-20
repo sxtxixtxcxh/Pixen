@@ -9,7 +9,6 @@
 #import "PXWelcomeController.h"
 #import "PXAboutWindowController.h"
 #import "PXToolPaletteController.h"
-#import "PXToolPropertiesManager.h"
 #import "PXPreferencesController.h"
 #import "PXPreviewController.h"
 #import "PXSpriteSheetExporter.h"
@@ -96,16 +95,6 @@ static PXPanelManager *sharedManager = nil;
 - (void)archivePanelStates
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	NSWindow *window = [PXToolPropertiesManager leftToolPropertiesManager].window;
-	
-	[defaults setObject:NSStringFromRect([self archivableRectForToolPropertiesWindow:window])
-				 forKey:PXLeftToolPropertiesFrameKey];
-	
-	window = [PXToolPropertiesManager rightToolPropertiesManager].window;
-	
-	[defaults setObject:NSStringFromRect([self archivableRectForToolPropertiesWindow:window])
-				 forKey:PXRightToolPropertiesFrameKey];
 	
 	// Popout color panels
 	NSMutableArray *archivedPalettePanels = [NSMutableArray array];
@@ -210,26 +199,6 @@ static PXPanelManager *sharedManager = nil;
 - (NSPanel *)toolPalettePanel
 {
 	return (NSPanel *) [[PXToolPaletteController sharedToolPaletteController] window];
-}
-
-- (IBAction)showLeftToolProperties:(id)sender
-{
-	[[PXToolPropertiesManager leftToolPropertiesManager] showWindow:nil];
-}
-
-- (IBAction)toggleLeftToolProperties:(id)sender
-{
-	[[PXToolPropertiesManager leftToolPropertiesManager] toggleWindow];
-}
-
-- (IBAction)showRightToolProperties:(id)sender
-{
-	[[PXToolPropertiesManager rightToolPropertiesManager] showWindow:nil];
-}
-
-- (IBAction)toggleRightToolProperties:(id)sender
-{
-	[[PXToolPropertiesManager rightToolPropertiesManager] toggleWindow];
 }
 
 - (IBAction)showPreferences: (id)sender

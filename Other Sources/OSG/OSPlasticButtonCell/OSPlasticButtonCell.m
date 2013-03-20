@@ -14,12 +14,12 @@
 {
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(redraw:)
-												 name:NSWindowDidBecomeKeyNotification
+												 name:NSWindowDidBecomeMainNotification
 											   object:[[self controlView] window]];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(redraw:)
-												 name:NSWindowDidResignKeyNotification
+												 name:NSWindowDidResignMainNotification
 											   object:[[self controlView] window]];
 }
 
@@ -38,7 +38,7 @@
 	NSArray *colors = nil;
 	
 	if ([self isHighlighted] || [self state] == NSOnState) {
-		if ([[view window] isKeyWindow]) {
+		if ([[view window] isMainWindow]) {
 			colors = [NSArray arrayWithObjects:
 					  [NSColor colorWithCalibratedRed:0.58f green:0.86f blue:0.98f alpha:1.0f],
 					  [NSColor colorWithCalibratedRed:0.42f green:0.68f blue:0.90f alpha:1.0f],

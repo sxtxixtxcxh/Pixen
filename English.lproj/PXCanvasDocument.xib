@@ -15,6 +15,8 @@
 			<string>NSCustomView</string>
 			<string>NSScrollView</string>
 			<string>NSScroller</string>
+			<string>NSSegmentedCell</string>
+			<string>NSSegmentedControl</string>
 			<string>NSSlider</string>
 			<string>NSSliderCell</string>
 			<string>NSSplitView</string>
@@ -43,7 +45,7 @@
 			<object class="NSWindowTemplate" id="649134283">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{362, 153}, {696, 620}}</string>
+				<string key="NSWindowRect">{{362, 153}, {696, 649}}</string>
 				<int key="NSWTFlags">1886912512</int>
 				<string key="NSWindowTitle">Window</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -54,6 +56,67 @@
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
+						<object class="NSCustomView" id="453677050">
+							<reference key="NSNextResponder" ref="464742240"/>
+							<int key="NSvFlags">266</int>
+							<array class="NSMutableArray" key="NSSubviews">
+								<object class="NSCustomView" id="1009810930">
+									<reference key="NSNextResponder" ref="453677050"/>
+									<int key="NSvFlags">268</int>
+									<string key="NSFrame">{{76, 8}, {1, 14}}</string>
+									<reference key="NSSuperview" ref="453677050"/>
+									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView" ref="128266224"/>
+									<string key="NSReuseIdentifierKey">_NS:9</string>
+									<string key="NSClassName">PXSeparatorView</string>
+								</object>
+								<object class="NSSegmentedControl" id="310564861">
+									<reference key="NSNextResponder" ref="453677050"/>
+									<int key="NSvFlags">268</int>
+									<string key="NSFrame">{{12, 6}, {51, 17}}</string>
+									<reference key="NSSuperview" ref="453677050"/>
+									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView" ref="1009810930"/>
+									<string key="NSReuseIdentifierKey">_NS:9</string>
+									<bool key="NSEnabled">YES</bool>
+									<object class="NSSegmentedCell" key="NSCell" id="523568285">
+										<int key="NSCellFlags">67108864</int>
+										<int key="NSCellFlags2">262144</int>
+										<object class="NSFont" key="NSSupport">
+											<string key="NSName">LucidaGrande</string>
+											<double key="NSSize">9</double>
+											<int key="NSfFlags">3614</int>
+										</object>
+										<string key="NSCellIdentifier">_NS:9</string>
+										<reference key="NSControlView" ref="310564861"/>
+										<array class="NSMutableArray" key="NSSegmentImages">
+											<object class="NSSegmentItem">
+												<double key="NSSegmentItemWidth">24</double>
+												<string key="NSSegmentItemLabel">L</string>
+												<string key="NSSegmentItemTooltip">Left Tool Properties</string>
+												<bool key="NSSegmentItemSelected">YES</bool>
+												<int key="NSSegmentItemImageScaling">0</int>
+											</object>
+											<object class="NSSegmentItem">
+												<double key="NSSegmentItemWidth">24</double>
+												<string key="NSSegmentItemLabel">R</string>
+												<string key="NSSegmentItemTooltip">Right Tool Properties</string>
+												<int key="NSSegmentItemTag">1</int>
+												<int key="NSSegmentItemImageScaling">0</int>
+											</object>
+										</array>
+										<int key="NSSegmentStyle">4</int>
+									</object>
+									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+								</object>
+							</array>
+							<string key="NSFrame">{{0, 620}, {696, 29}}</string>
+							<reference key="NSSuperview" ref="464742240"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="310564861"/>
+							<string key="NSReuseIdentifierKey">_NS:9</string>
+							<string key="NSClassName">PXPropertiesBar</string>
+						</object>
 						<object class="NSSplitView" id="128266224">
 							<reference key="NSNextResponder" ref="464742240"/>
 							<int key="NSvFlags">274</int>
@@ -119,6 +182,7 @@
 											<string key="NSFrame">{{267, 7}, {120, 12}}</string>
 											<reference key="NSSuperview" ref="694173087"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSSliderCell" key="NSCell" id="737515871">
@@ -270,12 +334,12 @@
 							<string key="NSAutosaveName">SideCanvasSplitView</string>
 						</object>
 					</array>
-					<string key="NSFrameSize">{696, 620}</string>
+					<string key="NSFrameSize">{696, 649}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
-					<reference key="NSNextKeyView" ref="128266224"/>
+					<reference key="NSNextKeyView" ref="453677050"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMinSize">{200, 108}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName"/>
@@ -377,6 +441,30 @@
 						<reference key="destination" ref="825656697"/>
 					</object>
 					<int key="connectionID">239</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">propertiesBar</string>
+						<reference key="source" ref="772614320"/>
+						<reference key="destination" ref="453677050"/>
+					</object>
+					<int key="connectionID">241</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">lrPropertiesSelector</string>
+						<reference key="source" ref="772614320"/>
+						<reference key="destination" ref="310564861"/>
+					</object>
+					<int key="connectionID">244</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">changedPropertiesBarDirection:</string>
+						<reference key="source" ref="772614320"/>
+						<reference key="destination" ref="310564861"/>
+					</object>
+					<int key="connectionID">245</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -483,6 +571,7 @@
 						<reference key="object" ref="464742240"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="128266224"/>
+							<reference ref="453677050"/>
 						</array>
 						<reference key="parent" ref="649134283"/>
 					</object>
@@ -595,6 +684,33 @@
 						<reference key="object" ref="825656697"/>
 						<reference key="parent" ref="694173087"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">240</int>
+						<reference key="object" ref="453677050"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="310564861"/>
+							<reference ref="1009810930"/>
+						</array>
+						<reference key="parent" ref="464742240"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">242</int>
+						<reference key="object" ref="310564861"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="523568285"/>
+						</array>
+						<reference key="parent" ref="453677050"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">243</int>
+						<reference key="object" ref="523568285"/>
+						<reference key="parent" ref="310564861"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">246</int>
+						<reference key="object" ref="1009810930"/>
+						<reference key="parent" ref="453677050"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -619,6 +735,11 @@
 				<string key="230.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="231.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="238.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="240.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="242.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<integer value="0" key="243.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
+				<string key="243.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="246.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBWindowTemplateEditedContentRect">{{386, 240}, {696, 594}}</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -628,7 +749,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">239</int>
+			<int key="maxID">246</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -671,6 +792,7 @@
 					<string key="className">PXCanvasWindowController</string>
 					<string key="superclassName">NSWindowController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="changedPropertiesBarDirection:">id</string>
 						<string key="copy:">id</string>
 						<string key="copyLayer:">id</string>
 						<string key="copyMerged:">id</string>
@@ -719,6 +841,10 @@
 						<string key="zoomToFit:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="changedPropertiesBarDirection:">
+							<string key="name">changedPropertiesBarDirection:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="copy:">
 							<string key="name">copy:</string>
 							<string key="candidateClassName">id</string>
@@ -909,7 +1035,9 @@
 						<string key="canvasSplit">NSView</string>
 						<string key="infoView">PXInfoView</string>
 						<string key="layerSplit">NSView</string>
+						<string key="lrPropertiesSelector">NSSegmentedControl</string>
 						<string key="paletteSplit">NSView</string>
+						<string key="propertiesBar">NSView</string>
 						<string key="sidebarSplit">NSView</string>
 						<string key="splitView">NSSplitView</string>
 						<string key="zoomLabel">NSTextField</string>
@@ -932,8 +1060,16 @@
 							<string key="name">layerSplit</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="lrPropertiesSelector">
+							<string key="name">lrPropertiesSelector</string>
+							<string key="candidateClassName">NSSegmentedControl</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="paletteSplit">
 							<string key="name">paletteSplit</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="propertiesBar">
+							<string key="name">propertiesBar</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="sidebarSplit">
@@ -964,6 +1100,22 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/PXInfoView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PXPropertiesBar</string>
+					<string key="superclassName">NSView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PXPropertiesBar.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PXSeparatorView</string>
+					<string key="superclassName">NSView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PXSeparatorView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

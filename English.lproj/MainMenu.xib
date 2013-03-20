@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">12C3012</string>
+		<int key="IBDocument.SystemTarget">1080</int>
+		<string key="IBDocument.SystemVersion">12D78</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">3084</string>
@@ -1294,7 +1294,7 @@
 								</object>
 								<object class="NSMenuItem" id="757158459">
 									<reference key="NSMenu" ref="1033765132"/>
-									<string key="NSTitle">Tool Properties</string>
+									<string key="NSTitle">Left Tool Properties</string>
 									<string key="NSKeyEquiv">t</string>
 									<int key="NSKeyEquivModMask">1572864</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1306,6 +1306,16 @@
 									<string key="NSTitle">Right Tool Properties</string>
 									<string key="NSKeyEquiv">T</string>
 									<int key="NSKeyEquivModMask">1572864</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="130733852"/>
+									<reference key="NSMixedImage" ref="295545801"/>
+								</object>
+								<object class="NSMenuItem" id="144070311">
+									<reference key="NSMenu" ref="1033765132"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="130733852"/>
 									<reference key="NSMixedImage" ref="295545801"/>
@@ -2105,6 +2115,22 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">selectLeftToolProperties:</string>
+						<reference key="source" ref="199577436"/>
+						<reference key="destination" ref="757158459"/>
+					</object>
+					<int key="connectionID">560</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">selectRightToolProperties:</string>
+						<reference key="source" ref="199577436"/>
+						<reference key="destination" ref="1059327666"/>
+					</object>
+					<int key="connectionID">561</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">newFromClipboard:</string>
 						<reference key="source" ref="797232323"/>
 						<reference key="destination" ref="182028804"/>
@@ -2150,22 +2176,6 @@
 						<reference key="destination" ref="206228668"/>
 					</object>
 					<int key="connectionID">554</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">showRightToolProperties:</string>
-						<reference key="source" ref="1033667961"/>
-						<reference key="destination" ref="1059327666"/>
-					</object>
-					<int key="connectionID">381</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">showLeftToolProperties:</string>
-						<reference key="source" ref="1033667961"/>
-						<reference key="destination" ref="757158459"/>
-					</object>
-					<int key="connectionID">382</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2281,6 +2291,7 @@
 							<reference ref="957661468"/>
 							<reference ref="971851841"/>
 							<reference ref="616745233"/>
+							<reference ref="144070311"/>
 						</array>
 						<reference key="parent" ref="647342068"/>
 					</object>
@@ -3232,6 +3243,11 @@
 						<reference key="object" ref="616745233"/>
 						<reference key="parent" ref="1033765132"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">559</int>
+						<reference key="object" ref="144070311"/>
+						<reference key="parent" ref="1033765132"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -3381,6 +3397,7 @@
 				<string key="553.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="555.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="557.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="559.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3398,7 +3415,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">558</int>
+			<int key="maxID">561</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3803,9 +3820,11 @@
 					<string key="className">PXCanvasWindowController</string>
 					<string key="superclassName">NSWindowController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="changedPropertiesBarDirection:">id</string>
 						<string key="copy:">id</string>
 						<string key="copyLayer:">id</string>
 						<string key="copyMerged:">id</string>
+						<string key="createAnimationFromImage:">id</string>
 						<string key="crop:">id</string>
 						<string key="cut:">id</string>
 						<string key="cutLayer:">id</string>
@@ -3814,6 +3833,7 @@
 						<string key="deleteLayer:">id</string>
 						<string key="duplicateDocument:">id</string>
 						<string key="duplicateLayer:">id</string>
+						<string key="exportDocumentPalette:">id</string>
 						<string key="fill:">id</string>
 						<string key="flipHorizontally:">id</string>
 						<string key="flipLayerHorizontally:">id</string>
@@ -3836,7 +3856,9 @@
 						<string key="rotateCounterclockwise:">id</string>
 						<string key="scaleCanvas:">id</string>
 						<string key="selectAll:">id</string>
+						<string key="selectLeftToolProperties:">id</string>
 						<string key="selectNone:">id</string>
+						<string key="selectRightToolProperties:">id</string>
 						<string key="setPatternToSelection:">id</string>
 						<string key="showBackgroundInfo:">id</string>
 						<string key="showGridSettingsPrompter:">id</string>
@@ -3851,6 +3873,10 @@
 						<string key="zoomToFit:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="changedPropertiesBarDirection:">
+							<string key="name">changedPropertiesBarDirection:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="copy:">
 							<string key="name">copy:</string>
 							<string key="candidateClassName">id</string>
@@ -3861,6 +3887,10 @@
 						</object>
 						<object class="IBActionInfo" key="copyMerged:">
 							<string key="name">copyMerged:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="createAnimationFromImage:">
+							<string key="name">createAnimationFromImage:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="crop:">
@@ -3893,6 +3923,10 @@
 						</object>
 						<object class="IBActionInfo" key="duplicateLayer:">
 							<string key="name">duplicateLayer:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="exportDocumentPalette:">
+							<string key="name">exportDocumentPalette:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="fill:">
@@ -3983,8 +4017,16 @@
 							<string key="name">selectAll:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="selectLeftToolProperties:">
+							<string key="name">selectLeftToolProperties:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="selectNone:">
 							<string key="name">selectNone:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="selectRightToolProperties:">
+							<string key="name">selectRightToolProperties:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="setPatternToSelection:">
@@ -4041,7 +4083,9 @@
 						<string key="canvasSplit">NSView</string>
 						<string key="infoView">PXInfoView</string>
 						<string key="layerSplit">NSView</string>
+						<string key="lrPropertiesSelector">NSSegmentedControl</string>
 						<string key="paletteSplit">NSView</string>
+						<string key="propertiesBar">NSView</string>
 						<string key="sidebarSplit">NSView</string>
 						<string key="splitView">NSSplitView</string>
 						<string key="zoomLabel">NSTextField</string>
@@ -4064,8 +4108,16 @@
 							<string key="name">layerSplit</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="lrPropertiesSelector">
+							<string key="name">lrPropertiesSelector</string>
+							<string key="candidateClassName">NSSegmentedControl</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="paletteSplit">
 							<string key="name">paletteSplit</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="propertiesBar">
+							<string key="name">propertiesBar</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="sidebarSplit">
@@ -4162,24 +4214,16 @@
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="showAbout:">id</string>
-						<string key="showLeftToolProperties:">id</string>
 						<string key="showPatternEditor:">id</string>
 						<string key="showPreferences:">id</string>
 						<string key="showPreviewPanel:">id</string>
-						<string key="showRightToolProperties:">id</string>
 						<string key="showSpriteSheetExporter:">id</string>
 						<string key="showToolPalette:">id</string>
 						<string key="showWelcome:">id</string>
-						<string key="toggleLeftToolProperties:">id</string>
-						<string key="toggleRightToolProperties:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="showAbout:">
 							<string key="name">showAbout:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showLeftToolProperties:">
-							<string key="name">showLeftToolProperties:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showPatternEditor:">
@@ -4194,10 +4238,6 @@
 							<string key="name">showPreviewPanel:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="showRightToolProperties:">
-							<string key="name">showRightToolProperties:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="showSpriteSheetExporter:">
 							<string key="name">showSpriteSheetExporter:</string>
 							<string key="candidateClassName">id</string>
@@ -4210,14 +4250,6 @@
 							<string key="name">showWelcome:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="toggleLeftToolProperties:">
-							<string key="name">toggleLeftToolProperties:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="toggleRightToolProperties:">
-							<string key="name">toggleRightToolProperties:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
@@ -4228,10 +4260,6 @@
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
-			<real value="1070" key="NS.object.0"/>
-		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">

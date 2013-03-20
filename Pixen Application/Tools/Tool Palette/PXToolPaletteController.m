@@ -149,12 +149,12 @@ static NSString *const kRightToolColorKey = @"rightToolColor";
 
 - (void)leftToolDoubleClicked:notification
 {
-	[[PXPanelManager sharedManager] toggleLeftToolProperties:nil];
+//	[[PXPanelManager sharedManager] toggleLeftToolProperties:nil];
 }
 
 - (void)rightToolDoubleClicked:notification
 {
-	[[PXPanelManager sharedManager] toggleRightToolProperties:nil];
+//	[[PXPanelManager sharedManager] toggleRightToolProperties:nil];
 }
 
 -(void) awakeFromNib
@@ -163,6 +163,9 @@ static NSString *const kRightToolColorKey = @"rightToolColor";
 	[[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
 	[[NSColorPanel sharedColorPanel] setColor:[[NSColor blackColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace]];
 	//[(NSPanel *)[self window] setBecomesKeyOnlyIfNeeded:YES];
+	
+	[leftSwitcher setTag:0];
+	[rightSwitcher setTag:1];
 	
 	[leftSwitcher useToolTagged:PXPencilToolTag];
 	[rightSwitcher useToolTagged:PXEraserToolTag];
@@ -232,7 +235,7 @@ static NSString *const kRightToolColorKey = @"rightToolColor";
 
 - (void)toolChanged
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:PXToolDidChangeNotificationName object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXToolDidChangeNotificationName object:(rightMouseDown || controlKeyDown) ? rightSwitcher : leftSwitcher];
 }
 
 - (BOOL)usingRightTool

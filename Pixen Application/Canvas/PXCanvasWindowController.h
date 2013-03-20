@@ -25,6 +25,14 @@
 	NSToolbar *toolbar;
 }
 
+@property (nonatomic, weak) IBOutlet NSView *propertiesBar;
+@property (nonatomic, weak) IBOutlet NSSegmentedControl *lrPropertiesSelector;
+
+- (IBAction)changedPropertiesBarDirection:(id)sender;
+
+- (IBAction)selectLeftToolProperties:(id)sender;
+- (IBAction)selectRightToolProperties:(id)sender;
+
 @property (nonatomic, weak) IBOutlet NSTextField *zoomLabel;
 @property (nonatomic, weak) IBOutlet NSSlider *zoomSlider;
 @property (nonatomic, weak) IBOutlet PXInfoView *infoView;

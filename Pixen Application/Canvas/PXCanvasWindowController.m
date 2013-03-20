@@ -23,12 +23,17 @@
 #import "PXInfoView.h"
 #import "PXPreviewController.h"
 #import "PXToolPaletteController.h"
+#import "PXToolSwitcher.h"
+#import "PXTool.h"
+#import "PXToolPropertiesController.h"
 
 //Taken from a man calling himself "BROCK BRANDENBERG" 
 //who is here to save the day.
 #import "SBCenteringClipView.h"
 
-@implementation PXCanvasWindowController
+@implementation PXCanvasWindowController {
+	PXToolPropertiesController *_propertiesController;
+}
 
 @synthesize scaleController, canvasController, resizePrompter = _resizePrompter, canvas;
 @synthesize splitView, sidebarSplit, layerSplit, canvasSplit, paletteSplit;
@@ -39,7 +44,7 @@
 	return [canvasController view];
 }
 
-- (id) initWithWindowNibName:name
+- (id)initWithWindowNibName:(NSString *)name
 {
 	if (! ( self = [super initWithWindowNibName:name] ) ) 
 		return nil;
@@ -122,6 +127,77 @@
 	else {
 		[self.infoView setHidden:YES];
 	}
+	
+	[self setupPropertiesBar];
+}
+
+#pragma mark -
+#pragma mark Properties Bar
+
+- (void)setupPropertiesBar
+{
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(toolDidChange:)
+												 name:PXToolDidChangeNotificationName
+											   object:nil];
+	
+	[[PXToolPaletteController sharedToolPaletteController].leftSwitcher requestToolChangeNotification];
+}
+
+- (void)toolDidChange:(NSNotification *)notification
+{
+	PXToolSwitcher *switcher = [notification object];
+	
+	if (switcher.tag != self.lrPropertiesSelector.selectedSegment)
+		return;
+	
+	PXTool *tool = [[notification userInfo] objectForKey:PXNewToolKey];
+	PXToolPropertiesController *controller = [tool propertiesController];
+	
+	if (!controller) {
+		self.propertiesController = [PXToolPropertiesController new];
+	}
+	else {
+		self.propertiesController = controller;
+	}
+}
+
+- (void)setPropertiesController:(PXToolPropertiesController *)controller
+{
+	if (_propertiesController != controller)
+	{
+		[_propertiesController.view removeFromSuperview];
+		
+		_propertiesController = controller;
+		
+		if (controller)
+		{
+			[self.propertiesBar addSubview:_propertiesController.view];
+			[_propertiesController.view setFrameOrigin:NSMakePoint(78.0f, 1.0f)];
+		}
+	}
+}
+
+- (IBAction)changedPropertiesBarDirection:(id)sender
+{
+	if (self.lrPropertiesSelector.selectedSegment == 0) {
+		[[PXToolPaletteController sharedToolPaletteController].leftSwitcher requestToolChangeNotification];
+	}
+	else {
+		[[PXToolPaletteController sharedToolPaletteController].rightSwitcher requestToolChangeNotification];
+	}
+}
+
+- (IBAction)selectLeftToolProperties:(id)sender
+{
+	[self.lrPropertiesSelector setSelectedSegment:0];
+	[self changedPropertiesBarDirection:nil];
+}
+
+- (IBAction)selectRightToolProperties:(id)sender
+{
+	[self.lrPropertiesSelector setSelectedSegment:1];
+	[self changedPropertiesBarDirection:nil];
 }
 
 #pragma mark -

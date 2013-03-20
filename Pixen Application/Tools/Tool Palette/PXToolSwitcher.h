@@ -36,6 +36,8 @@ typedef enum {
 @property (nonatomic, weak) IBOutlet NSMatrix *toolsMatrix;
 @property (nonatomic, weak) IBOutlet NSColorWell *colorWell;
 
+@property (nonatomic, assign) NSInteger tag;
+
 + (NSArray *)toolClasses;
 
 - (PXTool *)selectedTool;
