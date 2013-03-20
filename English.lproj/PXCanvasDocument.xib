@@ -182,7 +182,6 @@
 											<string key="NSFrame">{{267, 7}, {120, 12}}</string>
 											<reference key="NSSuperview" ref="694173087"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSSliderCell" key="NSCell" id="737515871">
@@ -731,6 +730,20 @@
 				<string key="213.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="214.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="227.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<object class="NSMutableDictionary" key="228.IBAttributePlaceholdersKey">
+					<string key="NS.key.0">IBUserDefinedRuntimeAttributesPlaceholderName</string>
+					<object class="IBUserDefinedRuntimeAttributesPlaceholder" key="NS.object.0">
+						<string key="name">IBUserDefinedRuntimeAttributesPlaceholderName</string>
+						<reference key="object" ref="476370057"/>
+						<array key="userDefinedRuntimeAttributes">
+							<object class="IBUserDefinedRuntimeAttribute">
+								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.number</string>
+								<string key="keyPath">backgroundStyle</string>
+								<integer value="2" key="value"/>
+							</object>
+						</array>
+					</object>
+				</object>
 				<string key="228.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="230.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="231.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -826,7 +839,9 @@
 						<string key="rotateCounterclockwise:">id</string>
 						<string key="scaleCanvas:">id</string>
 						<string key="selectAll:">id</string>
+						<string key="selectLeftToolProperties:">id</string>
 						<string key="selectNone:">id</string>
+						<string key="selectRightToolProperties:">id</string>
 						<string key="setPatternToSelection:">id</string>
 						<string key="showBackgroundInfo:">id</string>
 						<string key="showGridSettingsPrompter:">id</string>
@@ -977,8 +992,16 @@
 							<string key="name">selectAll:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="selectLeftToolProperties:">
+							<string key="name">selectLeftToolProperties:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="selectNone:">
 							<string key="name">selectNone:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="selectRightToolProperties:">
+							<string key="name">selectRightToolProperties:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="setPatternToSelection:">
