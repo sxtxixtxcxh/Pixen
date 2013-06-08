@@ -10,8 +10,7 @@ Welcome to Pixen, a free, open source pixel art editor for Mac OS X!
 Compiling the Tip-of-Tree Build
 -------------------------------
 
-Mac OS X 10.6+ and Xcode 3.2+ are required to compile Pixen.
-We recommend Xcode 4, which is available for free on the Mac App Store for OS X 10.7 "Lion" users.
+Mac OS X 10.8 and Xcode 4.6 are recommended to compile Pixen.
 
 1. Open Terminal (found in the "Utilities" folder inside your "Applications" folder) and `cd` into a folder in which you'd like to place Pixen's source tree. For example: `cd ~/Desktop`.
 2. Issue the following command to pull the latest source code to Pixen: `git clone git://github.com/Pixen/Pixen.git`
