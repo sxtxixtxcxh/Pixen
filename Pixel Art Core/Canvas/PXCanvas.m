@@ -305,6 +305,68 @@
 	[[self undoManager] endUndoGrouping];
 }
 
+- (NSUInteger)countOfLayers
+{
+	return [layers count];
+}
+
+- (NSUInteger)countOfVisibleLayers
+{
+    int visibleLayers = 0;
+    for (PXLayer *layer in layers) {
+        if (!layer.visible) continue;
+        visibleLayers++;
+    }
+	return visibleLayers;
+}
+
+
+- (NSBitmapImageRep *)spriteSheetWithCelMargin:(int)margin
+{
+    
+	int fullWidth = [self countOfVisibleLayers]*[self size].width + ([self countOfVisibleLayers] - 1)*margin;
+	int width = fullWidth; //could change this if multirow sheets were desirable.  they're not.
+	int cellsHigh = (int)(ceilf((float)fullWidth/(float)width));
+	NSSize imageSize = NSMakeSize(MIN(fullWidth, width), cellsHigh*[self size].height + (cellsHigh - 1)*margin);
+	
+	NSBitmapImageRep *spriteSheet = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+																			pixelsWide:imageSize.width
+																			pixelsHigh:imageSize.height
+																		 bitsPerSample:8
+																	   samplesPerPixel:4
+																			  hasAlpha:YES
+																			  isPlanar:NO
+																		colorSpaceName:NSCalibratedRGBColorSpace
+																		   bytesPerRow:0
+																		  bitsPerPixel:32];
+	
+	NSPoint compositePoint = NSMakePoint(0, imageSize.height - [self size].height);
+	
+	[NSGraphicsContext saveGraphicsState];
+	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithBitmapImageRep:spriteSheet]];
+	
+	for (PXLayer *layer in layers) {
+        if (!layer.visible) continue;
+		[[layer imageRep] drawInRect:NSMakeRect(compositePoint.x, compositePoint.y, [layer size].width, [layer size].height)
+								 fromRect:NSZeroRect
+								operation:NSCompositeSourceOver
+								 fraction:1.0f
+						   respectFlipped:NO
+									hints:nil];
+		
+		compositePoint.x += [layer size].width + margin;
+		
+		if (compositePoint.x + [layer size].width > imageSize.width) {
+			compositePoint.x = 0;
+			compositePoint.y += [layer size].height + margin;
+		}
+	}
+	
+	[NSGraphicsContext restoreGraphicsState];
+	
+	return spriteSheet;
+}
+
 - (PXColor)eraseColor
 {
 	return PXGetClearColor();

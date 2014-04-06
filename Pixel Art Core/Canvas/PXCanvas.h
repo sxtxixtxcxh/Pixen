@@ -51,6 +51,9 @@ typedef BOOL *PXSelectionMask;
 
 - (void)reallyRefreshWholePalette;
 - (void)refreshWholePalette;
+- (NSBitmapImageRep *)spriteSheetWithCelMargin:(int)margin;
+- (NSUInteger)countOfLayers;
+- (NSUInteger)countOfVisibleLayers;
 
 - (void)beginColorUpdates;
 - (void)endColorUpdates;

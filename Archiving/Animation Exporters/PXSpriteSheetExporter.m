@@ -166,7 +166,7 @@ static NSString *const kSpriteSheetEntry = @"SpriteSheetEntry";
 								   if ([[docRep objectForKey:@"included"] boolValue]) {
 									   PXCanvas *canvas = [ (PXCanvasDocument *) document canvas];
 									   
-									   NSBitmapImageRep *spriteSheetRow = [canvas imageRep];
+									   NSBitmapImageRep *spriteSheetRow = [canvas spriteSheetWithCelMargin:interCelMargin];
 									   
 									   if ([spriteSheetRow size].width > sheetSize.width) {
 										   sheetSize.width = [spriteSheetRow size].width;
