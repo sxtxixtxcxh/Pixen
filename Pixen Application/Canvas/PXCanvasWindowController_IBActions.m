@@ -309,6 +309,11 @@
 	[[canvasController layerController] duplicateSelectedLayer];
 }
 
+- (IBAction)toggleVisiblity:(id) sender
+{
+	[[canvasController layerController] toggleVisibility];
+}
+
 - (IBAction)nextLayer:(id) sender
 {
 	[[canvasController layerController] selectNextLayer];

@@ -2929,7 +2929,13 @@
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0460;
+				TargetAttributes = {
+					EAF6940806A9AE0B0019D8D7 = {
+						DevelopmentTeam = 25AXFF6AVL;
+					};
+				};
 			};
 			buildConfigurationList = 616BAEA908553EFB004CF172 /* Build configuration list for PBXProject "Pixen" */;
 			compatibilityVersion = "Xcode 3.2";

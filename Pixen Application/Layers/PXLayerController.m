@@ -240,6 +240,12 @@
 	[item setAction:@selector(duplicateSelectedLayer)];
 	[item setTarget:self];
 	[menu addItem:item];
+    
+    item = [[NSMenuItem alloc] init];
+	[item setTitle:NSLocalizedString(@"Toggle Visibility", @"Toggle Visibility")];
+	[item setAction:@selector(toggleVisibility)];
+	[item setTarget:self];
+	[menu addItem:item];
 	
 	item = [[NSMenuItem alloc] init];
 	[item setTitle:NSLocalizedString(@"Merge Down", @"Merge Down")];
@@ -260,6 +266,7 @@
 	[item setAction:@selector(copySelectedLayer)];
 	[item setTarget:self];
 	[menu addItem:item];
+
 	
 	NSMenu *subMenu = [[NSMenu alloc] initWithTitle:NSLocalizedString(@"Transform Layer", @"Transform Layer")];
 	
@@ -302,7 +309,7 @@
 	[item setAction:@selector(rotateLayer180)];
 	[item setTarget:self];
 	[subMenu addItem:item];
-	
+    
 	return menu;
 }
 
@@ -485,6 +492,17 @@
 {
 	NSUInteger index = [self invertLayerIndex:[self selectionIndex]];
 	[_canvas duplicateLayerAtIndex:index];
+}
+
+#pragma mark -
+#pragma mark Visibility
+
+- (void)toggleVisibility
+{
+	NSUInteger index = [self invertLayerIndex:[self selectionIndex]];
+    PXLayer *layer = [[_canvas layers] objectAtIndex:index];
+    NSLog(@"%n", layer.name);
+	[_canvas toggleVisibility:layer];
 }
 
 #pragma mark -

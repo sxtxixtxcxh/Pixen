@@ -49,9 +49,10 @@
 - (PXColor)colorAtIndex:(unsigned int)index;
 - (PXColor)colorAtPoint:(NSPoint)aPoint;
 
+- (void)setVisible:(BOOL)state;
+
 - (void)setColor:(PXColor)color atPoint:(NSPoint)aPoint;
 - (void)setColor:(PXColor)color atIndex:(unsigned int)index;
-
 - (void)moveToPoint:(NSPoint)newOrigin;
 - (void)translateXBy:(float)amountX yBy:(float)amountY;
 - (void)finalizeMotion;

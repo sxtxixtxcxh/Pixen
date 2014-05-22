@@ -270,6 +270,12 @@
 	} [self endUndoGrouping];
 }
 
+- (void)toggleVisibility:(PXLayer *)layer
+{
+    NSLog(@"%@: %hhd", layer, layer.visible);
+    [layer setVisible:!layer.visible];
+}
+
 - (void)flipLayerHorizontally:aLayer
 {
 	[self beginUndoGrouping]; {

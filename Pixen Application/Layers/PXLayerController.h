@@ -35,6 +35,7 @@
 - (void)pasteLayer;
 
 - (void)duplicateSelectedLayer;
+- (void)toggleVisibility;
 
 - (void)mergeDownSelectedLayer;
 

@@ -113,6 +113,7 @@
 
 - (void)setVisible:(BOOL)state
 {
+    
 	if (_visible != state) {
 		NSUndoManager *um = [[self canvas] undoManager];
 		[um beginUndoGrouping];
@@ -123,6 +124,7 @@
 		
 		[[self canvas] changed];
 	}
+
 }
 
 - (PXColor)colorAtIndex:(unsigned int)index
